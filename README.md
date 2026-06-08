@@ -2,7 +2,7 @@
 
 Automatycznie odświeżany katalog modeli embeddingowych z Hugging Face Hub, przeznaczonych do lokalnego wnioskowania przez **transformers.js**.
 
-Dane są aktualizowane codziennie przez GitHub Actions i commitowane bezpośrednio do repozytorium — bez serwera, bez bazy danych. Wystarczy sklonować repo i czytać pliki JSON/YAML.
+Dane są aktualizowane codziennie przez GitHub Actions i commitowane bezpośrednio do repozytorium — bez serwera, bez bazy danych. Wystarczy sklonować repo i czytać pliki.
 
 ---
 
@@ -12,21 +12,27 @@ Dane są aktualizowane codziennie przez GitHub Actions i commitowane bezpośredn
 hf-embedding-catalog/
 ├── fetch_catalog.py          # skrypt pobierający dane z HF API
 ├── requirements.txt          # requests>=2.31.0, pyyaml>=6.0
-├── catalog.json              # indeks wszystkich modeli (JSON, posortowany wg downloads)
-├── catalog.yaml              # indeks wszystkich modeli (YAML, to samo co catalog.json)
+├── catalog.json              # indeks wszystkich modeli (JSONL, jeden rekord per linia)
+├── catalog.yaml              # indeks wszystkich modeli (YAML, czytelny dla człowieka)
 ├── data/
 │   └── <org>/
 │       └── <model>/
-│           ├── model.json    # pełne metadane jednego modelu (primary)
+│           ├── model.json    # pełne metadane jednego modelu (kompaktowy JSON, jedna linia)
 │           └── model.yaml    # to samo co model.json, format YAML
 └── .github/
     └── workflows/
         └── update-catalog.yml
 ```
 
+> **`.gitignore`** — `data/` i `catalog.*` są ignorowane lokalnie (ochrona przed przypadkowym `git add .`). GitHub Actions używa `git add --force`, więc pliki i tak trafiają do repozytorium.
+
 ### `catalog.json` / `catalog.yaml`
 
-Płaski indeks wszystkich pobranych modeli, posortowany malejąco wg `downloads`. Zawiera skrócony zestaw pól — wystarczający do przeglądania i filtrowania bez ładowania osobnych plików.
+Płaski indeks wszystkich pobranych modeli, posortowany malejąco wg `downloads`.
+
+`catalog.json` jest w formacie **JSONL** — każda linia to osobny obiekt JSON. `catalog.yaml` zawiera te same dane w czytelnym formacie YAML.
+
+Zawiera skrócony zestaw pól — wystarczający do przeglądania i filtrowania bez ładowania osobnych plików.
 
 | Pole | Opis |
 |---|---|
@@ -57,7 +63,7 @@ Płaski indeks wszystkich pobranych modeli, posortowany malejąco wg `downloads`
 
 ### `data/<org>/<model>/model.json`
 
-Pełne surowe metadane z HF API, wzbogacone o kilka pól obliczanych lokalnie. Przykład (`sentence-transformers/all-MiniLM-L6-v2`):
+Pełne surowe metadane z HF API, wzbogacone o kilka pól obliczanych lokalnie. Zapisywany jako **kompaktowy JSON w jednej linii**. Przykład (`sentence-transformers/all-MiniLM-L6-v2`) w czytelniejszym formacie YAML (`model.yaml`):
 
 ```yaml
 id: sentence-transformers/all-MiniLM-L6-v2
@@ -184,6 +190,8 @@ Można go uruchomić ręcznie z poziomu zakładki **Actions** z opcjonalnymi par
 
 Wymagane: sekret repozytorium `HF_TOKEN` z tokenem Hugging Face.
 
+Actions używa `git add --force`, żeby ominąć `.gitignore` i wypchnąć `data/` oraz `catalog.*` do repozytorium.
+
 ---
 
 ## Jakie modele są katalogowane
@@ -193,7 +201,7 @@ Skrypt filtruje modele po:
 - **library:** `transformers.js` — modele przygotowane do lokalnego wnioskowania w przeglądarce / Node.js
 - **pipeline_tag:** `sentence-similarity` i `feature-extraction` — dwa tagi obejmujące modele embeddingowe na HF Hub
 
-Modele są sortowane malejąco wg liczby pobrań. Każdy model jest pobierany w 4 zapytaniach HTTP:
+Modele są sortowane malejąco wg liczby pobrań. Globalny limit zapytań HTTP wynosi **10 req/s** (wszystkie wątki razem). Każdy model jest pobierany w 4 zapytaniach:
 1. `GET /api/models/<id>?full=true` — kompletny rekord bazowy
 2. `GET /api/models/<id>?expand=safetensors&expand=cardData&...` — dodatkowe pola
 3. `GET /api/models/<id>/tree/main?recursive=true` — drzewo plików z prawdziwymi rozmiarami
@@ -208,8 +216,9 @@ Modele są sortowane malejąco wg liczby pobrań. Każdy model jest pobierany w 
 ```python
 import json
 
+# catalog.json jest w formacie JSONL — jedna linia = jeden model
 with open("catalog.json") as f:
-    catalog = json.load(f)
+    catalog = [json.loads(line) for line in f if line.strip()]
 
 results = [
     m for m in catalog
