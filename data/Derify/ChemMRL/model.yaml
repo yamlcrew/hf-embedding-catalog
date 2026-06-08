@@ -1,0 +1,268 @@
+_id: 68fd8bde8d91c9552f982999
+id: Derify/ChemMRL
+private: false
+pipeline_tag: sentence-similarity
+library_name: sentence-transformers
+tags:
+- sentence-transformers
+- safetensors
+- modchembert
+- cheminformatics
+- smiles
+- molecular-similarity
+- feature-extraction
+- dense
+- generated_from_trainer
+- dataset_size:19381001
+- loss:Matryoshka2dLoss
+- loss:MatryoshkaLoss
+- loss:TanimotoSentLoss
+- sentence-similarity
+- custom_code
+- dataset:Derify/pubchem_10m_genmol_similarity
+- arxiv:1908.10084
+- arxiv:2402.14776
+- arxiv:2205.13147
+- base_model:Derify/ModChemBERT-IR-BASE
+- base_model:finetune:Derify/ModChemBERT-IR-BASE
+- license:apache-2.0
+- model-index
+- co2_eq_emissions
+- endpoints_compatible
+- region:us
+downloads: 802
+likes: 0
+modelId: Derify/ChemMRL
+author: Derify
+sha: 22d189222c336bc86ca93b870fe8580e1eeeeaba
+lastModified: '2025-12-26T01:42:31.000Z'
+gated: false
+disabled: false
+widgetData:
+- source_sentence: COC(=O)c1sc(-c2ccc(C)cc2)c2c1NC(=O)C2(c1ccccc1)c1ccccc1
+  sentences:
+  - COC(=O)c1sc(Nc2ccc(Br)cn2)c2c1NC(=O)C2(c1ccccc1)c1ccccc1
+  - CC[NH+]1CCOC(C(NN)c2ccccc2Br)C1
+  - CC([NH2+]C(C)c1ccccc1)C(=O)P(C)C(C)(C)C
+- source_sentence: O=C(C=Cc1ccccc1)CC(=O)c1ccccc1O
+  sentences:
+  - COCCN(NCc1c(C)n(C(C)=O)c2ccc(OC)cc12)c1nccs1
+  - CCN(CCC(N)=O)C(=O)c1ccc(=O)[nH]n1
+  - N=CCC(=Cc1ccccc1)C(=O)COc1ccccc1O
+- source_sentence: COc1cccc(-c2sc3ccccc3c2C#N)c1
+  sentences:
+  - COCC(C)(C)c1cnnn1CCCI
+  - N#Cc1c(-c2cccc(CN)c2)sc2ccccc12
+  - COc1ccccc1NC(=O)c1cc(NCc2ccco2)cc[nH+]1
+- source_sentence: Nc1nc(-c2ccccc2)c2nc(N)c(N)nc2n1
+  sentences:
+  - CC(C)CC1NC(=O)C(Cc2ccccc2)NC(=O)c2ccc(cc2)CN(C(=O)CC2CCOCC2)CCCCNC(=O)C(C)NC1=O
+  - O=Nc1cccc(OCCC(F)F)c1
+  - CCCCNCc1nc(N)nc2nc(N)c(N)nc12
+- source_sentence: OCCCc1cc(F)cc(F)c1
+  sentences:
+  - CCC(C)C(=O)C1(C(NN)C(C)C)CCCC1
+  - Cc1[nH]c2c(C(N)=O)ccc(C(=O)N3CCCCC3)c2c1C
+  - Fc1cc(F)cc(-n2cc[o+]n2)c1
+model-index:
+- name: 'ChemMRL: SMILES Matryoshka Representation Learning Embedding Transformer'
+  results:
+  - task:
+      type: semantic-similarity
+      name: Semantic Similarity
+    dataset:
+      name: pubchem 10m genmol similarity (validation)
+      type: pubchem_10m_genmol_similarity_validation
+    metrics:
+    - type: spearman
+      value: 0.989142152637452
+      name: Spearman
+      verified: false
+  - task:
+      type: semantic-similarity
+      name: Semantic Similarity
+    dataset:
+      name: pubchem 10m genmol similarity (test)
+      type: pubchem_10m_genmol_similarity_test
+    metrics:
+    - type: spearman
+      value: 0.9891625268496924
+      name: Spearman
+      verified: false
+config:
+  architectures:
+  - ModChemBertModel
+  auto_map:
+    AutoConfig: configuration_modchembert.ModChemBertConfig
+    AutoModel: modeling_modchembert.ModChemBertModel
+    AutoModelForMaskedLM: modeling_modchembert.ModChemBertForMaskedLM
+    AutoModelForSequenceClassification: modeling_modchembert.ModChemBertForSequenceClassification
+  model_type: modchembert
+  tokenizer_config:
+    cls_token: '[CLS]'
+    mask_token: '[MASK]'
+    pad_token: '[PAD]'
+    sep_token: '[SEP]'
+    unk_token: '[UNK]'
+cardData:
+  license: apache-2.0
+  tags:
+  - sentence-transformers
+  - modchembert
+  - cheminformatics
+  - smiles
+  - molecular-similarity
+  - feature-extraction
+  - dense
+  - generated_from_trainer
+  - dataset_size:19381001
+  - loss:Matryoshka2dLoss
+  - loss:MatryoshkaLoss
+  - loss:TanimotoSentLoss
+  base_model: Derify/ModChemBERT-IR-BASE
+  widget:
+  - source_sentence: COC(=O)c1sc(-c2ccc(C)cc2)c2c1NC(=O)C2(c1ccccc1)c1ccccc1
+    sentences:
+    - COC(=O)c1sc(Nc2ccc(Br)cn2)c2c1NC(=O)C2(c1ccccc1)c1ccccc1
+    - CC[NH+]1CCOC(C(NN)c2ccccc2Br)C1
+    - CC([NH2+]C(C)c1ccccc1)C(=O)P(C)C(C)(C)C
+  - source_sentence: O=C(C=Cc1ccccc1)CC(=O)c1ccccc1O
+    sentences:
+    - COCCN(NCc1c(C)n(C(C)=O)c2ccc(OC)cc12)c1nccs1
+    - CCN(CCC(N)=O)C(=O)c1ccc(=O)[nH]n1
+    - N=CCC(=Cc1ccccc1)C(=O)COc1ccccc1O
+  - source_sentence: COc1cccc(-c2sc3ccccc3c2C#N)c1
+    sentences:
+    - COCC(C)(C)c1cnnn1CCCI
+    - N#Cc1c(-c2cccc(CN)c2)sc2ccccc12
+    - COc1ccccc1NC(=O)c1cc(NCc2ccco2)cc[nH+]1
+  - source_sentence: Nc1nc(-c2ccccc2)c2nc(N)c(N)nc2n1
+    sentences:
+    - CC(C)CC1NC(=O)C(Cc2ccccc2)NC(=O)c2ccc(cc2)CN(C(=O)CC2CCOCC2)CCCCNC(=O)C(C)NC1=O
+    - O=Nc1cccc(OCCC(F)F)c1
+    - CCCCNCc1nc(N)nc2nc(N)c(N)nc12
+  - source_sentence: OCCCc1cc(F)cc(F)c1
+    sentences:
+    - CCC(C)C(=O)C1(C(NN)C(C)C)CCCC1
+    - Cc1[nH]c2c(C(N)=O)ccc(C(=O)N3CCCCC3)c2c1C
+    - Fc1cc(F)cc(-n2cc[o+]n2)c1
+  datasets:
+  - Derify/pubchem_10m_genmol_similarity
+  pipeline_tag: sentence-similarity
+  library_name: sentence-transformers
+  metrics:
+  - spearman
+  co2_eq_emissions:
+    emissions: 6350.153020081601
+    energy_consumed: 30.935740629629628
+    source: codecarbon
+    training_type: fine-tuning
+    on_cloud: false
+    cpu_model: AMD Ryzen 7 3700X 8-Core Processor
+    ram_total_size: 62.69887161254883
+    hours_used: 116.388
+    hardware_used: 2 x NVIDIA GeForce RTX 3090
+  model-index:
+  - name: 'ChemMRL: SMILES Matryoshka Representation Learning Embedding Transformer'
+    results:
+    - task:
+        type: semantic-similarity
+        name: Semantic Similarity
+      dataset:
+        name: pubchem 10m genmol similarity (validation)
+        type: pubchem_10m_genmol_similarity_validation
+      metrics:
+      - type: spearman
+        value: 0.989142152637452
+        name: Spearman
+        verified: false
+    - task:
+        type: semantic-similarity
+        name: Semantic Similarity
+      dataset:
+        name: pubchem 10m genmol similarity (test)
+        type: pubchem_10m_genmol_similarity_test
+      metrics:
+      - type: spearman
+        value: 0.9891625268496924
+        name: Spearman
+        verified: false
+siblings:
+- rfilename: .gitattributes
+- rfilename: 1_Pooling/config.json
+- rfilename: README.md
+- rfilename: config.json
+- rfilename: config_chem_mrl.json
+- rfilename: config_sentence_transformers.json
+- rfilename: configuration_modchembert.py
+- rfilename: model.safetensors
+- rfilename: modeling_modchembert.py
+- rfilename: modules.json
+- rfilename: sentence_bert_config.json
+- rfilename: similarity_evaluation_pubchem_10m_genmol_similarity_float32_results.csv
+- rfilename: special_tokens_map.json
+- rfilename: tokenizer.json
+- rfilename: tokenizer_config.json
+spaces: []
+createdAt: '2025-10-26T02:47:58.000Z'
+safetensors:
+  parameters:
+    BF16: 198548480
+  total: 198548480
+usedStorage: 397110232
+downloadsAllTime: 24076
+inferenceProviderMapping: {}
+configJson:
+  architectures:
+  - ModChemBertModel
+  attention_bias: false
+  attention_dropout: 0.1
+  auto_map:
+    AutoConfig: configuration_modchembert.ModChemBertConfig
+    AutoModel: modeling_modchembert.ModChemBertModel
+    AutoModelForMaskedLM: modeling_modchembert.ModChemBertForMaskedLM
+    AutoModelForSequenceClassification: modeling_modchembert.ModChemBertForSequenceClassification
+  bos_token_id: 0
+  classifier_activation: gelu
+  classifier_bias: false
+  classifier_dropout: 0.0
+  classifier_pooling: max_seq_mha
+  classifier_pooling_attention_dropout: 0.1
+  classifier_pooling_last_k: 5
+  classifier_pooling_num_attention_heads: 4
+  cls_token_id: 0
+  decoder_bias: true
+  deterministic_flash_attn: false
+  dtype: bfloat16
+  embedding_dropout: 0.1
+  eos_token_id: 1
+  global_attn_every_n_layers: 3
+  global_rope_theta: 160000.0
+  hidden_activation: gelu
+  hidden_size: 1024
+  initializer_cutoff_factor: 2.0
+  initializer_range: 0.02
+  intermediate_size: 1536
+  layer_norm_eps: 1.0e-05
+  local_attention: 8
+  local_rope_theta: 10000.0
+  max_position_embeddings: 512
+  mlp_bias: false
+  mlp_dropout: 0.1
+  model_type: modchembert
+  norm_bias: false
+  norm_eps: 1.0e-05
+  num_attention_heads: 16
+  num_hidden_layers: 22
+  pad_token_id: 2
+  position_embedding_type: absolute
+  repad_logits_with_grad: false
+  sep_token_id: 1
+  sparse_pred_ignore_index: -100
+  sparse_prediction: false
+  transformers_version: 4.57.1
+  vocab_size: 2362
+onnxFiles: {}
+safetensorsSizeMb: 397.1
+approxSizeMb: 397.1
+fetchedAt: '2026-06-08T13:32:59.000Z'

@@ -1,0 +1,197 @@
+_id: 6a1934a0779cf2ca89cd58cb
+id: sivanravid/biomed.rna.llama.47m.wced.multitask.v1.vllm
+private: false
+pipeline_tag: feature-extraction
+library_name: biomed-multi-omic
+tags:
+- biomed-multi-omic
+- safetensors
+- scllama
+- Biology
+- RNA
+- feature-extraction
+- dataset:CELLxGENE
+- arxiv:2506.14861
+- license:apache-2.0
+- region:us
+downloads: 464
+likes: 0
+modelId: sivanravid/biomed.rna.llama.47m.wced.multitask.v1.vllm
+author: sivanravid
+sha: 046553f0e83847a44139da9eea82f9851c2d5f32
+lastModified: '2026-06-07T08:06:21.000Z'
+gated: false
+disabled: false
+model-index: null
+config:
+  model_type: scllama
+  architectures:
+  - BiomedRnaForSequenceEmbedding
+cardData:
+  datasets:
+  - CELLxGENE
+  library_name: biomed-multi-omic
+  license: apache-2.0
+  pipeline_tag: feature-extraction
+  tags:
+  - Biology
+  - RNA
+siblings:
+- rfilename: .gitattributes
+- rfilename: README.md
+- rfilename: checkpoint_metadata.json
+- rfilename: config.json
+- rfilename: model.safetensors
+- rfilename: tokenizers/expressions/special_tokens_map.json
+- rfilename: tokenizers/expressions/tokenizer.json
+- rfilename: tokenizers/expressions/tokenizer_config.json
+- rfilename: tokenizers/expressions/vocab.json
+- rfilename: tokenizers/genes/special_tokens_map.json
+- rfilename: tokenizers/genes/tokenizer.json
+- rfilename: tokenizers/genes/tokenizer_config.json
+- rfilename: tokenizers/genes/vocab.json
+- rfilename: tokenizers/label_expressions/special_tokens_map.json
+- rfilename: tokenizers/label_expressions/tokenizer.json
+- rfilename: tokenizers/label_expressions/tokenizer_config.json
+- rfilename: tokenizers/label_expressions/vocab.json
+- rfilename: tokenizers/perturbations/special_tokens_map.json
+- rfilename: tokenizers/perturbations/tokenizer.json
+- rfilename: tokenizers/perturbations/tokenizer_config.json
+- rfilename: tokenizers/perturbations/vocab.json
+spaces: []
+createdAt: '2026-05-29T06:39:28.000Z'
+safetensors:
+  parameters:
+    F32: 47217131
+  total: 47217131
+usedStorage: 188881444
+downloadsAllTime: 464
+inferenceProviderMapping: {}
+configJson:
+  attention: flex
+  checkpoint: null
+  classifier_pooling: cls
+  fields:
+  - datastore_config: null
+    decode_modes: null
+    encoder_kwargs: null
+    field_name: genes
+    is_input: true
+    is_masked: false
+    num_special_tokens: 36
+    pretrained_embedding: null
+    tokenization_strategy: tokenize
+    vocab_size: 19321
+    vocab_update_strategy: static
+  - datastore_config: null
+    decode_modes:
+      wced:
+        logit_outputs:
+        - mse
+        - is_zero_bce
+        vocab_field: genes
+    encoder_kwargs:
+      basis_scale: 0.01
+      kind: scale_adapt
+      n_sin_basis: 48
+      trainable: false
+      zero_as_special_token: true
+    field_name: expressions
+    is_input: true
+    is_masked: true
+    num_special_tokens: 36
+    pretrained_embedding: null
+    tokenization_strategy: continuous_value_encoder
+    vocab_size: 86
+    vocab_update_strategy: static
+  flex_attention: true
+  hidden_act: gelu
+  hidden_dropout_prob: 0.0
+  hidden_size: 384
+  initializer_range: 0.02
+  label_columns:
+  - classifier_depth: 1
+    decode_from: 1
+    gradient_reversal_coefficient: null
+    is_bio_context_for_datastore: false
+    is_multilabel: false
+    is_regression_label: false
+    is_stratification_label: false
+    label_column_name: cell_type_ontology_term_id
+    label_ontology: celltypeont
+    multilabel_str_sep: '|'
+    n_unique_values: 479
+    silent_label_values: null
+    task_group: null
+  - classifier_depth: 1
+    decode_from: 2
+    gradient_reversal_coefficient: null
+    is_bio_context_for_datastore: false
+    is_multilabel: false
+    is_regression_label: false
+    is_stratification_label: false
+    label_column_name: tissue
+    label_ontology: null
+    multilabel_str_sep: '|'
+    n_unique_values: 365
+    silent_label_values: null
+    task_group: null
+  - classifier_depth: 1
+    decode_from: 2
+    gradient_reversal_coefficient: null
+    is_bio_context_for_datastore: false
+    is_multilabel: false
+    is_regression_label: false
+    is_stratification_label: false
+    label_column_name: tissue_general
+    label_ontology: null
+    multilabel_str_sep: '|'
+    n_unique_values: 67
+    silent_label_values: null
+    task_group: null
+  - classifier_depth: 1
+    decode_from: 3
+    gradient_reversal_coefficient: null
+    is_bio_context_for_datastore: false
+    is_multilabel: false
+    is_regression_label: false
+    is_stratification_label: false
+    label_column_name: donor_id
+    label_ontology: null
+    multilabel_str_sep: '|'
+    n_unique_values: 7735
+    silent_label_values: null
+    task_group: null
+  - classifier_depth: 1
+    decode_from: 4
+    gradient_reversal_coefficient: null
+    is_bio_context_for_datastore: false
+    is_multilabel: false
+    is_regression_label: false
+    is_stratification_label: false
+    label_column_name: sex
+    label_ontology: null
+    multilabel_str_sep: '|'
+    n_unique_values: 3
+    silent_label_values: null
+    task_group: null
+  layer_norm_eps: 1.0e-12
+  max_position_embeddings: 512
+  model_type: scllama
+  num_attention_heads: 12
+  num_hidden_layers: 12
+  num_memory_tokens: 0
+  pad_token_id: 2
+  position_embedding_type: null
+  transformers_version: 4.57.6
+  use_cache: false
+  architectures:
+  - BiomedRnaForSequenceEmbedding
+  is_encoder_decoder: false
+  is_decoder: false
+  add_cross_attention: false
+  vocab_size: 19321
+onnxFiles: {}
+safetensorsSizeMb: 188.9
+approxSizeMb: 188.9
+fetchedAt: '2026-06-08T13:32:59.000Z'

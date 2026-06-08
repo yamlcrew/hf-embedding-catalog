@@ -1,0 +1,120 @@
+_id: 67ce06adad90ebb28c8bb875
+id: mradermacher/gme-Qwen2-VL-7B-Instruct-i1-GGUF
+private: false
+pipeline_tag: sentence-similarity
+library_name: transformers
+tags:
+- transformers
+- gguf
+- mteb
+- sentence-transformers
+- Qwen2-VL
+- sentence-similarity
+- vidore
+- en
+- zh
+- base_model:Alibaba-NLP/gme-Qwen2-VL-7B-Instruct
+- base_model:quantized:Alibaba-NLP/gme-Qwen2-VL-7B-Instruct
+- license:apache-2.0
+- endpoints_compatible
+- region:us
+- imatrix
+- conversational
+downloads: 293
+likes: 0
+modelId: mradermacher/gme-Qwen2-VL-7B-Instruct-i1-GGUF
+author: mradermacher
+sha: c8c694f124ce2ea7f4667f863406ea9fd5b3cb9d
+lastModified: '2025-07-11T10:29:24.000Z'
+gated: false
+disabled: false
+widgetData:
+- source_sentence: That is a happy person
+  sentences:
+  - That is a happy dog
+  - That is a very happy person
+  - Today is a sunny day
+model-index: null
+config: {}
+cardData:
+  base_model: Alibaba-NLP/gme-Qwen2-VL-7B-Instruct
+  language:
+  - en
+  - zh
+  library_name: transformers
+  license: apache-2.0
+  mradermacher:
+    readme_rev: 1
+  quantized_by: mradermacher
+  tags:
+  - mteb
+  - sentence-transformers
+  - transformers
+  - Qwen2-VL
+  - sentence-similarity
+  - vidore
+transformersInfo:
+  auto_model: AutoModel
+gguf:
+  total: 7615616512
+  architecture: qwen2vl
+  context_length: 32768
+  quantize_imatrix_file: gme-Qwen2-VL-7B-Instruct-i1-GGUF/imatrix.dat
+  chat_template: '{% set image_count = namespace(value=0) %}{% set video_count = namespace(value=0) %}{% for message in messages
+    %}{% if loop.first and message[''role''] != ''system'' %}<|im_start|>system
+
+    You are a helpful assistant.<|im_end|>
+
+    {% endif %}<|im_start|>{{ message[''role''] }}
+
+    {% if message[''content''] is string %}{{ message[''content''] }}<|im_end|>
+
+    {% else %}{% for content in message[''content''] %}{% if content[''type''] == ''image'' or ''image'' in content or ''image_url''
+    in content %}{% set image_count.value = image_count.value + 1 %}{% if add_vision_id %}Picture {{ image_count.value }}:
+    {% endif %}<|vision_start|><|image_pad|><|vision_end|>{% elif content[''type''] == ''video'' or ''video'' in content %}{%
+    set video_count.value = video_count.value + 1 %}{% if add_vision_id %}Video {{ video_count.value }}: {% endif %}<|vision_start|><|video_pad|><|vision_end|>{%
+    elif ''text'' in content %}{{ content[''text''] }}{% endif %}{% endfor %}<|im_end|>
+
+    {% endif %}{% endfor %}{% if add_generation_prompt %}<|im_start|>assistant
+
+    {% endif %}'
+  bos_token: <|endoftext|>
+  eos_token: <|im_end|>
+  totalFileSize: 2042195648
+siblings:
+- rfilename: .gitattributes
+- rfilename: README.md
+- rfilename: gme-Qwen2-VL-7B-Instruct.i1-IQ1_M.gguf
+- rfilename: gme-Qwen2-VL-7B-Instruct.i1-IQ1_S.gguf
+- rfilename: gme-Qwen2-VL-7B-Instruct.i1-IQ2_M.gguf
+- rfilename: gme-Qwen2-VL-7B-Instruct.i1-IQ2_S.gguf
+- rfilename: gme-Qwen2-VL-7B-Instruct.i1-IQ2_XS.gguf
+- rfilename: gme-Qwen2-VL-7B-Instruct.i1-IQ2_XXS.gguf
+- rfilename: gme-Qwen2-VL-7B-Instruct.i1-IQ3_M.gguf
+- rfilename: gme-Qwen2-VL-7B-Instruct.i1-IQ3_S.gguf
+- rfilename: gme-Qwen2-VL-7B-Instruct.i1-IQ3_XS.gguf
+- rfilename: gme-Qwen2-VL-7B-Instruct.i1-IQ3_XXS.gguf
+- rfilename: gme-Qwen2-VL-7B-Instruct.i1-IQ4_NL.gguf
+- rfilename: gme-Qwen2-VL-7B-Instruct.i1-IQ4_XS.gguf
+- rfilename: gme-Qwen2-VL-7B-Instruct.i1-Q2_K.gguf
+- rfilename: gme-Qwen2-VL-7B-Instruct.i1-Q2_K_S.gguf
+- rfilename: gme-Qwen2-VL-7B-Instruct.i1-Q3_K_L.gguf
+- rfilename: gme-Qwen2-VL-7B-Instruct.i1-Q3_K_M.gguf
+- rfilename: gme-Qwen2-VL-7B-Instruct.i1-Q3_K_S.gguf
+- rfilename: gme-Qwen2-VL-7B-Instruct.i1-Q4_0.gguf
+- rfilename: gme-Qwen2-VL-7B-Instruct.i1-Q4_1.gguf
+- rfilename: gme-Qwen2-VL-7B-Instruct.i1-Q4_K_M.gguf
+- rfilename: gme-Qwen2-VL-7B-Instruct.i1-Q4_K_S.gguf
+- rfilename: gme-Qwen2-VL-7B-Instruct.i1-Q5_K_M.gguf
+- rfilename: gme-Qwen2-VL-7B-Instruct.i1-Q5_K_S.gguf
+- rfilename: gme-Qwen2-VL-7B-Instruct.i1-Q6_K.gguf
+spaces: []
+createdAt: '2025-03-09T21:22:53.000Z'
+usedStorage: 88965880320
+downloadsAllTime: 7725
+inferenceProviderMapping: {}
+configJson: null
+onnxFiles: {}
+safetensorsSizeMb: 0.0
+approxSizeMb: 0.0
+fetchedAt: '2026-06-08T13:32:59.000Z'

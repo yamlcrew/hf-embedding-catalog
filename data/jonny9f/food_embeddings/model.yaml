@@ -1,0 +1,192 @@
+_id: 678bc651667ed11abcbed189
+id: jonny9f/food_embeddings
+private: false
+pipeline_tag: sentence-similarity
+library_name: sentence-transformers
+tags:
+- sentence-transformers
+- safetensors
+- mpnet
+- sentence-similarity
+- feature-extraction
+- generated_from_trainer
+- dataset_size:1200000
+- loss:CosineSimilarityLoss
+- arxiv:1908.10084
+- base_model:sentence-transformers/all-mpnet-base-v2
+- base_model:finetune:sentence-transformers/all-mpnet-base-v2
+- model-index
+- text-embeddings-inference
+- endpoints_compatible
+- region:us
+downloads: 1025
+likes: 0
+modelId: jonny9f/food_embeddings
+author: jonny9f
+sha: 22a0d4baf72c28befd85b6ac021a321831f23995
+lastModified: '2025-03-22T09:58:05.000Z'
+gated: false
+disabled: false
+widgetData:
+- source_sentence: Mutton, roasted
+  sentences:
+  - Imagine Creamy Butternut Squash Soup
+  - Perrier Water, bottled
+  - Crackers, whole-wheat
+- source_sentence: Beef Chuck Mock Tender Steak, lean and fat raw
+  sentences:
+  - Lamb, Australian leg roasted, bone-in
+  - Chicken wing, meat and skin, cooked fried flour
+  - Peaches, canned in heavy syrup
+- source_sentence: Squash, zucchini baby raw
+  sentences:
+  - Dandelion greens, cooked with salt
+  - Beets, pickled canned
+  - Cod, Atlantic canned
+- source_sentence: Veggie Meatballs
+  sentences:
+  - Salt, iodized
+  - Sweet and Sour Sauce, ready-to-serve
+  - Salt pork, raw
+- source_sentence: Beef Top Round, lean raw
+  sentences:
+  - Ravioli, meat-filled with tomato or meat sauce canned
+  - Pasta Sauce, spaghetti/marinara ready-to-serve
+  - Luncheon Slices, meatless
+model-index:
+- name: SentenceTransformer based on sentence-transformers/all-mpnet-base-v2
+  results:
+  - task:
+      type: semantic-similarity
+      name: Semantic Similarity
+    dataset:
+      name: validation
+      type: validation
+    metrics:
+    - type: pearson_cosine
+      value: 0.9913128359649296
+      name: Pearson Cosine
+      verified: false
+    - type: spearman_cosine
+      value: 0.9868170667730207
+      name: Spearman Cosine
+      verified: false
+config:
+  architectures:
+  - MPNetModel
+  model_type: mpnet
+  tokenizer_config:
+    bos_token: <s>
+    cls_token: <s>
+    eos_token: </s>
+    mask_token: <mask>
+    pad_token: <pad>
+    sep_token: </s>
+    unk_token: '[UNK]'
+cardData:
+  tags:
+  - sentence-transformers
+  - sentence-similarity
+  - feature-extraction
+  - generated_from_trainer
+  - dataset_size:1200000
+  - loss:CosineSimilarityLoss
+  base_model: sentence-transformers/all-mpnet-base-v2
+  widget:
+  - source_sentence: Mutton, roasted
+    sentences:
+    - Imagine Creamy Butternut Squash Soup
+    - Perrier Water, bottled
+    - Crackers, whole-wheat
+  - source_sentence: Beef Chuck Mock Tender Steak, lean and fat raw
+    sentences:
+    - Lamb, Australian leg roasted, bone-in
+    - Chicken wing, meat and skin, cooked fried flour
+    - Peaches, canned in heavy syrup
+  - source_sentence: Squash, zucchini baby raw
+    sentences:
+    - Dandelion greens, cooked with salt
+    - Beets, pickled canned
+    - Cod, Atlantic canned
+  - source_sentence: Veggie Meatballs
+    sentences:
+    - Salt, iodized
+    - Sweet and Sour Sauce, ready-to-serve
+    - Salt pork, raw
+  - source_sentence: Beef Top Round, lean raw
+    sentences:
+    - Ravioli, meat-filled with tomato or meat sauce canned
+    - Pasta Sauce, spaghetti/marinara ready-to-serve
+    - Luncheon Slices, meatless
+  pipeline_tag: sentence-similarity
+  library_name: sentence-transformers
+  metrics:
+  - pearson_cosine
+  - spearman_cosine
+  model-index:
+  - name: SentenceTransformer based on sentence-transformers/all-mpnet-base-v2
+    results:
+    - task:
+        type: semantic-similarity
+        name: Semantic Similarity
+      dataset:
+        name: validation
+        type: validation
+      metrics:
+      - type: pearson_cosine
+        value: 0.9913128359649296
+        name: Pearson Cosine
+        verified: false
+      - type: spearman_cosine
+        value: 0.9868170667730207
+        name: Spearman Cosine
+        verified: false
+  new_version: jonny9f/food_embeddings2
+siblings:
+- rfilename: .gitattributes
+- rfilename: 1_Pooling/config.json
+- rfilename: README.md
+- rfilename: config.json
+- rfilename: config_sentence_transformers.json
+- rfilename: model.safetensors
+- rfilename: modules.json
+- rfilename: sentence_bert_config.json
+- rfilename: special_tokens_map.json
+- rfilename: tokenizer.json
+- rfilename: tokenizer_config.json
+- rfilename: vocab.txt
+spaces: []
+createdAt: '2025-01-18T15:18:41.000Z'
+safetensors:
+  parameters:
+    F32: 109486464
+  total: 109486464
+usedStorage: 437967672
+downloadsAllTime: 19297
+inferenceProviderMapping: {}
+configJson:
+  _name_or_path: fine_tuned_mpnet_food_embeddings
+  architectures:
+  - MPNetModel
+  attention_probs_dropout_prob: 0.1
+  bos_token_id: 0
+  eos_token_id: 2
+  hidden_act: gelu
+  hidden_dropout_prob: 0.1
+  hidden_size: 768
+  initializer_range: 0.02
+  intermediate_size: 3072
+  layer_norm_eps: 1.0e-05
+  max_position_embeddings: 514
+  model_type: mpnet
+  num_attention_heads: 12
+  num_hidden_layers: 12
+  pad_token_id: 1
+  relative_attention_num_buckets: 32
+  torch_dtype: float32
+  transformers_version: 4.48.0
+  vocab_size: 30527
+onnxFiles: {}
+safetensorsSizeMb: 438.0
+approxSizeMb: 437.9
+fetchedAt: '2026-06-08T13:32:59.000Z'

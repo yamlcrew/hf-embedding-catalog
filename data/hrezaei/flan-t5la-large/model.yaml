@@ -1,0 +1,162 @@
+_id: 6901ea0b1e56d5c452b7b7af
+id: hrezaei/flan-t5la-large
+private: false
+pipeline_tag: feature-extraction
+library_name: transformers
+tags:
+- transformers
+- tensorboard
+- safetensors
+- t5la_adapter
+- feature-extraction
+- generated_from_trainer
+- custom_code
+- dataset:HuggingFaceFW/fineweb
+- base_model:hrezaei/flan-t5la-large
+- base_model:finetune:hrezaei/flan-t5la-large
+- model-index
+- region:us
+downloads: 414
+likes: 0
+modelId: hrezaei/flan-t5la-large
+author: hrezaei
+sha: c09fbce115b734b648f15acebe8cf4edf6a998ef
+lastModified: '2025-11-11T23:17:58.000Z'
+gated: false
+disabled: false
+model-index:
+- name: flan-t5la-large
+  results:
+  - task:
+      name: Causal Language Modeling
+      type: text-generation
+    dataset:
+      name: HuggingFaceFW/fineweb sample-350BT
+      type: HuggingFaceFW/fineweb
+      config: default
+      split: train
+      args: sample-350BT
+    metrics:
+    - name: Accuracy
+      type: accuracy
+      value: 0.00254853228962818
+      verified: false
+config:
+  architectures:
+  - T5LaAdapterForConditionalGeneration
+  auto_map:
+    AutoConfig: t5la_adapter.T5LaAdapterConfig
+    AutoModel: t5la_adapter.T5LaAdapterForConditionalGeneration
+    AutoModelForSeq2SeqLM: t5la_adapter.T5LaAdapterForConditionalGeneration
+  model_type: t5la_adapter
+  tokenizer_config:
+    eos_token: </s>
+    pad_token: <pad>
+    unk_token: <unk>
+cardData:
+  library_name: transformers
+  base_model: hrezaei/flan-t5la-large
+  tags:
+  - generated_from_trainer
+  datasets:
+  - HuggingFaceFW/fineweb
+  metrics:
+  - accuracy
+  model-index:
+  - name: flan-t5la-large
+    results:
+    - task:
+        name: Causal Language Modeling
+        type: text-generation
+      dataset:
+        name: HuggingFaceFW/fineweb sample-350BT
+        type: HuggingFaceFW/fineweb
+        config: default
+        split: train
+        args: sample-350BT
+      metrics:
+      - name: Accuracy
+        type: accuracy
+        value: 0.00254853228962818
+        verified: false
+transformersInfo:
+  auto_model: AutoModel
+  custom_class: t5la_adapter.T5LaAdapterForConditionalGeneration
+  pipeline_tag: feature-extraction
+siblings:
+- rfilename: .gitattributes
+- rfilename: README.md
+- rfilename: all_results.json
+- rfilename: config.json
+- rfilename: emissions.csv
+- rfilename: eval_results.json
+- rfilename: generation_config.json
+- rfilename: model.safetensors
+- rfilename: runs/Nov03_14-05-13_gpu22.viking2.yor.alces.network/events.out.tfevents.1762178767.gpu22.viking2.yor.alces.network.2498974.0
+- rfilename: runs/Nov05_21-53-48_gpu06.viking2.yor.alces.network/events.out.tfevents.1762380064.gpu06.viking2.yor.alces.network.81342.0
+- rfilename: runs/Nov06_06-01-47_gpu05.viking2.yor.alces.network/events.out.tfevents.1762409192.gpu05.viking2.yor.alces.network.463427.0
+- rfilename: runs/Nov06_06-53-41_gpu05.viking2.yor.alces.network/events.out.tfevents.1762412063.gpu05.viking2.yor.alces.network.474604.0
+- rfilename: runs/Nov09_12-25-19_gpu24.viking2.yor.alces.network/events.out.tfevents.1762691551.gpu24.viking2.yor.alces.network.1320364.0
+- rfilename: runs/Nov11_13-16-32_gpu22.viking2.yor.alces.network/events.out.tfevents.1762867392.gpu22.viking2.yor.alces.network.157277.0
+- rfilename: runs/Nov11_13-16-32_gpu22.viking2.yor.alces.network/events.out.tfevents.1762903058.gpu22.viking2.yor.alces.network.157277.1
+- rfilename: special_tokens_map.json
+- rfilename: spiece.model
+- rfilename: t5la_adapter.py
+- rfilename: tokenizer.json
+- rfilename: tokenizer_config.json
+- rfilename: train_results.json
+- rfilename: trainer_state.json
+- rfilename: training_args.bin
+spaces: []
+createdAt: '2025-10-29T10:18:51.000Z'
+safetensors:
+  parameters:
+    F32: 816049152
+  total: 816049152
+usedStorage: 133838759991
+downloadsAllTime: 2054
+inferenceProviderMapping: {}
+configJson:
+  architectures:
+  - T5LaAdapterForConditionalGeneration
+  auto_map:
+    AutoConfig: t5la_adapter.T5LaAdapterConfig
+    AutoModel: t5la_adapter.T5LaAdapterForConditionalGeneration
+    AutoModelForSeq2SeqLM: t5la_adapter.T5LaAdapterForConditionalGeneration
+    AutoTokenizer:
+    - transformers.T5TokenizerFast
+    - transformers.T5Tokenizer
+  classifier_dropout: 0.0
+  d_ff: 2816
+  d_kv: 64
+  d_model: 1024
+  decoder_start_token_id: 0
+  dense_act_fn: gelu_new
+  dropout_rate: 0.1
+  dtype: float32
+  eos_token_id: 1
+  feed_forward_proj: gated-gelu
+  freeze_base: true
+  initializer_factor: 1.0
+  is_encoder_decoder: true
+  is_gated_act: true
+  layer_norm_epsilon: 1.0e-06
+  lookahead_size: 1
+  lookahead_type: la
+  model_type: t5la_adapter
+  n_positions: 512
+  num_decoder_layers: 24
+  num_heads: 16
+  num_layers: 24
+  output_past: true
+  pad_token_id: 0
+  relative_attention_max_distance: 128
+  relative_attention_num_buckets: 32
+  tie_word_embeddings: false
+  transformers_version: 4.57.0.dev0
+  use_cache: true
+  vocab_size: 32128
+onnxFiles: {}
+safetensorsSizeMb: 3264.3
+approxSizeMb: 3264.2
+fetchedAt: '2026-06-08T13:32:59.000Z'

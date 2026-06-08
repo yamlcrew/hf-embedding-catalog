@@ -1,0 +1,182 @@
+_id: 66ba16d02c00b94445de7531
+id: s2593817/sft-sql-embedding
+private: false
+pipeline_tag: sentence-similarity
+library_name: sentence-transformers
+tags:
+- sentence-transformers
+- safetensors
+- mpnet
+- sentence-similarity
+- feature-extraction
+- generated_from_trainer
+- dataset_size:300000
+- loss:CoSENTLoss
+- arxiv:1908.10084
+- base_model:sentence-transformers/all-mpnet-base-v2
+- base_model:finetune:sentence-transformers/all-mpnet-base-v2
+- text-embeddings-inference
+- endpoints_compatible
+- deploy:azure
+- region:us
+downloads: 19285
+likes: 4
+modelId: s2593817/sft-sql-embedding
+author: s2593817
+sha: c89964f560f060f20de7c731dc274b0bc77d785a
+lastModified: '2024-08-12T14:10:27.000Z'
+gated: false
+disabled: false
+widgetData:
+- source_sentence: SELECT DISTINCT count(alias3.col1) , alias1.col2 FROM table1 AS alias1 JOIN table2 AS alias2 ON alias1.col2
+    = alias2.col2 JOIN table3 AS alias3 ON alias1.col1 = alias3.col1 WHERE alias2.col3 = str AND alias3.year = num GROUP BY
+    alias1.col2
+  sentences:
+  - SELECT col1 , avg(col2) FROM table1 WHERE col3 LIKE str GROUP BY col1
+  - SELECT col1 , col2 FROM table1 WHERE col3 LIKE str GROUP BY col1 ORDER BY count(*) DESC LIMIT num
+  - SELECT col1 , avg(col2) FROM table1 GROUP BY col1 ORDER BY avg(col2)
+- source_sentence: SELECT alias2.year FROM table1 AS alias1 JOIN table2 AS alias2 ON alias1.col1 = alias2.col2 WHERE alias1.alias1
+    = str
+  sentences:
+  - SELECT alias1.col1 , alias2.col2 FROM table1 AS alias1 JOIN table2 AS alias2 ON alias1.col3 = alias2.col3
+  - SELECT DISTINCT alias1.col1 FROM table1 AS alias1 JOIN table2 AS alias2 ON alias2.col2 = alias1.col3 JOIN table3 AS alias3
+    ON alias2.col4 = alias3.col3 WHERE alias3.col5 > num
+  - SELECT col1 FROM table1 ORDER BY col2 LIMIT num
+- source_sentence: SELECT DISTINCT count(alias2.col1) FROM table1 AS alias1 JOIN table2 AS alias2 ON alias1.col2 = alias2.col2
+    WHERE alias1.col3 = str
+  sentences:
+  - SELECT alias3.col1 FROM table1 AS alias1 JOIN table2 AS alias2 ON alias1.col2 = alias2.col2 JOIN table3 AS alias3 ON alias2.col3
+    = alias3.col3 WHERE alias1.col4 = str AND alias1.col5 = str
+  - SELECT count(DISTINCT col1) FROM table1 WHERE col1 NOT IN ( SELECT col2 FROM table2 )
+  - SELECT count(*) FROM table1 WHERE col1 = str AND col2 < num
+- source_sentence: SELECT alias1.col1 FROM table1 AS alias1 JOIN table2 AS alias2 ON alias1.col2 = alias2.col2 WHERE alias2.col3
+    LIKE str
+  sentences:
+  - SELECT col1 FROM table1 ORDER BY col2 DESC
+  - SELECT col1 FROM table1 WHERE col2 NOT IN (SELECT col2 FROM table2)
+  - SELECT alias1.col1 , alias1.col2 , alias1.col3 FROM table1 AS alias1 JOIN table2 AS alias2 ON alias1.col4 = alias2.col5
+    ORDER BY alias2.col6 LIMIT num
+- source_sentence: SELECT alias1.col1 FROM table1 AS alias1 JOIN table2 AS alias2 ON alias1.col2 = alias2.col2 JOIN table3
+    AS alias3 ON alias2.col3 = alias3.col3 WHERE alias3.col4 = str INTERSECT SELECT alias1.col1 FROM table1 AS alias1 JOIN
+    table2 AS alias2 ON alias1.col2 = alias2.col2 JOIN table3 AS alias3 ON alias2.col3 = alias3.col3 WHERE alias3.col4 = str
+  sentences:
+  - SELECT count(*) FROM table1
+  - SELECT count(DISTINCT col1) FROM table1
+  - SELECT count(col1) FROM table1 WHERE col2 = num
+model-index: null
+config:
+  architectures:
+  - MPNetModel
+  model_type: mpnet
+  tokenizer_config:
+    bos_token: <s>
+    cls_token: <s>
+    eos_token: </s>
+    mask_token: <mask>
+    pad_token: <pad>
+    sep_token: </s>
+    unk_token: '[UNK]'
+cardData:
+  base_model: sentence-transformers/all-mpnet-base-v2
+  datasets: []
+  language: []
+  library_name: sentence-transformers
+  pipeline_tag: sentence-similarity
+  tags:
+  - sentence-transformers
+  - sentence-similarity
+  - feature-extraction
+  - generated_from_trainer
+  - dataset_size:300000
+  - loss:CoSENTLoss
+  widget:
+  - source_sentence: SELECT DISTINCT count(alias3.col1) , alias1.col2 FROM table1 AS alias1 JOIN table2 AS alias2 ON alias1.col2
+      = alias2.col2 JOIN table3 AS alias3 ON alias1.col1 = alias3.col1 WHERE alias2.col3 = str AND alias3.year = num GROUP
+      BY alias1.col2
+    sentences:
+    - SELECT col1 , avg(col2) FROM table1 WHERE col3 LIKE str GROUP BY col1
+    - SELECT col1 , col2 FROM table1 WHERE col3 LIKE str GROUP BY col1 ORDER BY count(*) DESC LIMIT num
+    - SELECT col1 , avg(col2) FROM table1 GROUP BY col1 ORDER BY avg(col2)
+  - source_sentence: SELECT alias2.year FROM table1 AS alias1 JOIN table2 AS alias2 ON alias1.col1 = alias2.col2 WHERE alias1.alias1
+      = str
+    sentences:
+    - SELECT alias1.col1 , alias2.col2 FROM table1 AS alias1 JOIN table2 AS alias2 ON alias1.col3 = alias2.col3
+    - SELECT DISTINCT alias1.col1 FROM table1 AS alias1 JOIN table2 AS alias2 ON alias2.col2 = alias1.col3 JOIN table3 AS
+      alias3 ON alias2.col4 = alias3.col3 WHERE alias3.col5 > num
+    - SELECT col1 FROM table1 ORDER BY col2 LIMIT num
+  - source_sentence: SELECT DISTINCT count(alias2.col1) FROM table1 AS alias1 JOIN table2 AS alias2 ON alias1.col2 = alias2.col2
+      WHERE alias1.col3 = str
+    sentences:
+    - SELECT alias3.col1 FROM table1 AS alias1 JOIN table2 AS alias2 ON alias1.col2 = alias2.col2 JOIN table3 AS alias3 ON
+      alias2.col3 = alias3.col3 WHERE alias1.col4 = str AND alias1.col5 = str
+    - SELECT count(DISTINCT col1) FROM table1 WHERE col1 NOT IN ( SELECT col2 FROM table2 )
+    - SELECT count(*) FROM table1 WHERE col1 = str AND col2 < num
+  - source_sentence: SELECT alias1.col1 FROM table1 AS alias1 JOIN table2 AS alias2 ON alias1.col2 = alias2.col2 WHERE alias2.col3
+      LIKE str
+    sentences:
+    - SELECT col1 FROM table1 ORDER BY col2 DESC
+    - SELECT col1 FROM table1 WHERE col2 NOT IN (SELECT col2 FROM table2)
+    - SELECT alias1.col1 , alias1.col2 , alias1.col3 FROM table1 AS alias1 JOIN table2 AS alias2 ON alias1.col4 = alias2.col5
+      ORDER BY alias2.col6 LIMIT num
+  - source_sentence: SELECT alias1.col1 FROM table1 AS alias1 JOIN table2 AS alias2 ON alias1.col2 = alias2.col2 JOIN table3
+      AS alias3 ON alias2.col3 = alias3.col3 WHERE alias3.col4 = str INTERSECT SELECT alias1.col1 FROM table1 AS alias1 JOIN
+      table2 AS alias2 ON alias1.col2 = alias2.col2 JOIN table3 AS alias3 ON alias2.col3 = alias3.col3 WHERE alias3.col4 =
+      str
+    sentences:
+    - SELECT count(*) FROM table1
+    - SELECT count(DISTINCT col1) FROM table1
+    - SELECT count(col1) FROM table1 WHERE col2 = num
+siblings:
+- rfilename: .gitattributes
+- rfilename: 1_Pooling/config.json
+- rfilename: README.md
+- rfilename: config.json
+- rfilename: config_sentence_transformers.json
+- rfilename: model.safetensors
+- rfilename: modules.json
+- rfilename: sentence_bert_config.json
+- rfilename: special_tokens_map.json
+- rfilename: tokenizer.json
+- rfilename: tokenizer_config.json
+- rfilename: vocab.txt
+spaces: []
+createdAt: '2024-08-12T14:06:08.000Z'
+safetensors:
+  parameters:
+    F32: 109486464
+  total: 109486464
+inference: warm
+usedStorage: 437967672
+downloadsAllTime: 147422
+inferenceProviderMapping:
+  hf-inference:
+    status: live
+    providerId: s2593817/sft-sql-embedding
+    task: sentence-similarity
+    isModelAuthor: false
+configJson:
+  _name_or_path: models/sft-sql-embedding
+  architectures:
+  - MPNetModel
+  attention_probs_dropout_prob: 0.1
+  bos_token_id: 0
+  eos_token_id: 2
+  hidden_act: gelu
+  hidden_dropout_prob: 0.1
+  hidden_size: 768
+  initializer_range: 0.02
+  intermediate_size: 3072
+  layer_norm_eps: 1.0e-05
+  max_position_embeddings: 514
+  model_type: mpnet
+  num_attention_heads: 12
+  num_hidden_layers: 12
+  pad_token_id: 1
+  relative_attention_num_buckets: 32
+  torch_dtype: float32
+  transformers_version: 4.41.2
+  vocab_size: 30527
+onnxFiles: {}
+safetensorsSizeMb: 438.0
+approxSizeMb: 437.9
+fetchedAt: '2026-06-08T13:32:59.000Z'

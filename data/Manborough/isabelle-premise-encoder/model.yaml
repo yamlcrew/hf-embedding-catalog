@@ -1,0 +1,200 @@
+_id: 6a10459393defbf011da4c6a
+id: Manborough/isabelle-premise-encoder
+private: false
+pipeline_tag: sentence-similarity
+library_name: sentence-transformers
+tags:
+- sentence-transformers
+- safetensors
+- bert
+- sentence-similarity
+- feature-extraction
+- generated_from_trainer
+- dataset_size:500
+- loss:MultipleNegativesRankingLoss
+- arxiv:1908.10084
+- arxiv:1807.03748
+- base_model:sentence-transformers/all-MiniLM-L6-v2
+- base_model:finetune:sentence-transformers/all-MiniLM-L6-v2
+- text-embeddings-inference
+- endpoints_compatible
+- region:us
+downloads: 485
+likes: 0
+modelId: Manborough/isabelle-premise-encoder
+author: Manborough
+sha: 29bba3312dfc2960d928d0498a62072976c31c8b
+lastModified: '2026-05-23T04:43:00.000Z'
+gated: false
+disabled: false
+mask_token: '[MASK]'
+widgetData:
+- source_sentence: "theorem ptyping_match:\n  \"\\<turnstile> p : T \\<Rightarrow> \\<Delta> \\<Longrightarrow> [] \\<turnstile>\
+    \ t : T \\<Longrightarrow> t \\<in> value \\<Longrightarrow>\n    \\<exists>ts. \\<turnstile> p \\<rhd> t \\<Rightarrow>\
+    \ ts\"\n  \"\\<turnstile> fps [:] fTs \\<Rightarrow> \\<Delta> \\<Longrightarrow> [] \\<turnstile> fs [:] fTs \\<Longrightarrow>\n\
+    \    \\<forall>(l, t) \\<in> set fs. t \\<in> value \\<Longrightarrow> \\<exists>us. \\<turnstile> fps [\\<rhd>] fs \\\
+    <Rightarrow> us\""
+  sentences:
+  - ' cases: fixes a1 :: "pat"   and a2 :: "trm"   and a3 :: "trm list" assumes "\<turnstile> a1 \<rhd> a2 \<Rightarrow> a3"
+    obtains T :: "POPLmarkRecord.type" and t :: "trm" where "a1 = PVar T" and "a2 = t" and "a3 = [t]"   | fps :: "(char list
+    \<times> pat) list" and fs :: "(char list \<times> trm) list" and ts :: "trm list" where "a1 = PRcd fps" and "a2 = Rcd
+    fs" and "a3 = ts" and "\<turnstile> fps [\<rhd>] fs \<Rightarrow> ts"'
+  - ' less_le_not_le: fixes less_eq :: "''a \<Rightarrow> ''a \<Rightarrow> bool"   and less :: "''a \<Rightarrow> ''a \<Rightarrow>
+    bool"   and x :: "''a"   and y :: "''a" assumes "class.preorder less_eq less" shows "less x y = (less_eq x y \<and> \<not>
+    less_eq y x)"'
+  - ' UnE: fixes c :: "''b"   and A :: "''b set"   and B :: "''b set" assumes "c \<in> A \<union> B" obtains "c \<in> A"   |
+    "c \<in> B"'
+- source_sentence: "lemma (in infinite_coin_toss_space) nat_filtration_borel_measurable_singleton:\n  fixes f::\"bool stream\
+    \ \\<Rightarrow> 'b::{t2_space}\"\n  assumes \"f\\<in> borel_measurable (nat_filtration n)\"\n  shows \"f -`{f x} \\<in>\
+    \ sets (nat_filtration n)\""
+  sentences:
+  - ' size_3: shows "length [] = 0"'
+  - ' Un_subset_iff: fixes A :: "''a set"   and B :: "''a set"   and C :: "''a set" shows "(A \<union> B \<subseteq> C) =
+    (A \<subseteq> C \<and> B \<subseteq> C)"'
+  - ' vimage_eq: fixes a :: "''b"   and f :: "''b \<Rightarrow> ''c"   and B :: "''c set" shows "(a \<in> f -` B) = (f a \<in>
+    B)"'
+- source_sentence: "lemma subst_psubst: \"\\<lbrakk> closed_env \\<rho>; FV v = {} \\<rbrakk> \\<Longrightarrow> \n    subst\
+    \ x v (psubst ((x, EVar x) # \\<rho>) e) = psubst ((x, v) # \\<rho>) e\""
+  sentences:
+  - ' at_within_def: fixes "open" :: "''e set \<Rightarrow> bool"   and a :: "''e"   and s :: "''e set" assumes "class.topological_space
+    open" shows "topological_space.at_within open a s = inf (topological_space.nhds open a) (principal (s - {a}))"'
+  - ' psubst_change: fixes \<rho> :: "(nat \<times> exp) list"   and \<rho>'' :: "(nat \<times> exp) list"   and e :: "exp"
+    assumes "equiv_env \<rho> \<rho>''" shows "psubst \<rho> e = psubst \<rho>'' e"'
+  - ' edges_of_walk_in_E: fixes xs :: "''a list" assumes "walk xs" shows "edges_of_walk xs \<subseteq> E"'
+- source_sentence: 'interpretation real_euclid: tarski_first5 real_euclid_C real_euclid_B'
+  sentences:
+  - ' weakly_fair_def2: fixes enabled :: "(nat \<Rightarrow> ''b) \<Rightarrow> bool"   and taken :: "(nat \<Rightarrow> ''b)
+    \<Rightarrow> bool" shows "weakly_fair enabled taken = \<box>(\<lambda>s. \<not> (\<box>(\<lambda>s. enabled s \<and>
+    \<not> taken s)) s)"'
+  - ' add_diff_eq: fixes minus :: "''b \<Rightarrow> ''b \<Rightarrow> ''b"   and plus :: "''b \<Rightarrow> ''b \<Rightarrow>
+    ''b"   and zero :: "''b"   and uminus :: "''b \<Rightarrow> ''b"   and a :: "''b"   and b :: "''b"   and c :: "''b" assumes
+    "class.group_add minus plus zero uminus" shows "plus a (minus b c) = minus (plus a b) c"'
+  - ' bottom_exists: shows "\<exists>x. least L x (carrier L)"'
+- source_sentence: "lemma normal_mult: \n  fixes f g::\"real poly\"\n  assumes hf: \"normal_poly f\" and hg: \"normal_poly\
+    \ g\"\n  defines \"df \\<equiv> degree f\" and \"dg \\<equiv> degree g\"\n  shows \"normal_poly (f*g)\""
+  sentences:
+  - ' pCons_0_as_mult: fixes p :: "''a poly" shows "pCons (0::''a) p = [:0::''a, 1::''a:] * p"'
+  - ' less_Nil_2: fixes xs :: "''a list" shows "[] < xs"'
+  - ' subprob_space_measure_pmf: fixes x :: "''a pmf" shows "subprob_space (measure_pmf x)"'
+model-index: null
+config:
+  architectures:
+  - BertModel
+  model_type: bert
+  tokenizer_config:
+    cls_token: '[CLS]'
+    mask_token: '[MASK]'
+    pad_token: '[PAD]'
+    sep_token: '[SEP]'
+    unk_token: '[UNK]'
+cardData:
+  tags:
+  - sentence-transformers
+  - sentence-similarity
+  - feature-extraction
+  - generated_from_trainer
+  - dataset_size:500
+  - loss:MultipleNegativesRankingLoss
+  base_model: sentence-transformers/all-MiniLM-L6-v2
+  widget:
+  - source_sentence: "theorem ptyping_match:\n  \"\\<turnstile> p : T \\<Rightarrow> \\<Delta> \\<Longrightarrow> [] \\<turnstile>\
+      \ t : T \\<Longrightarrow> t \\<in> value \\<Longrightarrow>\n    \\<exists>ts. \\<turnstile> p \\<rhd> t \\<Rightarrow>\
+      \ ts\"\n  \"\\<turnstile> fps [:] fTs \\<Rightarrow> \\<Delta> \\<Longrightarrow> [] \\<turnstile> fs [:] fTs \\<Longrightarrow>\n\
+      \    \\<forall>(l, t) \\<in> set fs. t \\<in> value \\<Longrightarrow> \\<exists>us. \\<turnstile> fps [\\<rhd>] fs\
+      \ \\<Rightarrow> us\""
+    sentences:
+    - ' cases: fixes a1 :: "pat"   and a2 :: "trm"   and a3 :: "trm list" assumes "\<turnstile> a1 \<rhd> a2 \<Rightarrow>
+      a3" obtains T :: "POPLmarkRecord.type" and t :: "trm" where "a1 = PVar T" and "a2 = t" and "a3 = [t]"   | fps :: "(char
+      list \<times> pat) list" and fs :: "(char list \<times> trm) list" and ts :: "trm list" where "a1 = PRcd fps" and "a2
+      = Rcd fs" and "a3 = ts" and "\<turnstile> fps [\<rhd>] fs \<Rightarrow> ts"'
+    - ' less_le_not_le: fixes less_eq :: "''a \<Rightarrow> ''a \<Rightarrow> bool"   and less :: "''a \<Rightarrow> ''a \<Rightarrow>
+      bool"   and x :: "''a"   and y :: "''a" assumes "class.preorder less_eq less" shows "less x y = (less_eq x y \<and>
+      \<not> less_eq y x)"'
+    - ' UnE: fixes c :: "''b"   and A :: "''b set"   and B :: "''b set" assumes "c \<in> A \<union> B" obtains "c \<in> A"   |
+      "c \<in> B"'
+  - source_sentence: "lemma (in infinite_coin_toss_space) nat_filtration_borel_measurable_singleton:\n  fixes f::\"bool stream\
+      \ \\<Rightarrow> 'b::{t2_space}\"\n  assumes \"f\\<in> borel_measurable (nat_filtration n)\"\n  shows \"f -`{f x} \\\
+      <in> sets (nat_filtration n)\""
+    sentences:
+    - ' size_3: shows "length [] = 0"'
+    - ' Un_subset_iff: fixes A :: "''a set"   and B :: "''a set"   and C :: "''a set" shows "(A \<union> B \<subseteq> C)
+      = (A \<subseteq> C \<and> B \<subseteq> C)"'
+    - ' vimage_eq: fixes a :: "''b"   and f :: "''b \<Rightarrow> ''c"   and B :: "''c set" shows "(a \<in> f -` B) = (f a
+      \<in> B)"'
+  - source_sentence: "lemma subst_psubst: \"\\<lbrakk> closed_env \\<rho>; FV v = {} \\<rbrakk> \\<Longrightarrow> \n    subst\
+      \ x v (psubst ((x, EVar x) # \\<rho>) e) = psubst ((x, v) # \\<rho>) e\""
+    sentences:
+    - ' at_within_def: fixes "open" :: "''e set \<Rightarrow> bool"   and a :: "''e"   and s :: "''e set" assumes "class.topological_space
+      open" shows "topological_space.at_within open a s = inf (topological_space.nhds open a) (principal (s - {a}))"'
+    - ' psubst_change: fixes \<rho> :: "(nat \<times> exp) list"   and \<rho>'' :: "(nat \<times> exp) list"   and e :: "exp"
+      assumes "equiv_env \<rho> \<rho>''" shows "psubst \<rho> e = psubst \<rho>'' e"'
+    - ' edges_of_walk_in_E: fixes xs :: "''a list" assumes "walk xs" shows "edges_of_walk xs \<subseteq> E"'
+  - source_sentence: 'interpretation real_euclid: tarski_first5 real_euclid_C real_euclid_B'
+    sentences:
+    - ' weakly_fair_def2: fixes enabled :: "(nat \<Rightarrow> ''b) \<Rightarrow> bool"   and taken :: "(nat \<Rightarrow>
+      ''b) \<Rightarrow> bool" shows "weakly_fair enabled taken = \<box>(\<lambda>s. \<not> (\<box>(\<lambda>s. enabled s
+      \<and> \<not> taken s)) s)"'
+    - ' add_diff_eq: fixes minus :: "''b \<Rightarrow> ''b \<Rightarrow> ''b"   and plus :: "''b \<Rightarrow> ''b \<Rightarrow>
+      ''b"   and zero :: "''b"   and uminus :: "''b \<Rightarrow> ''b"   and a :: "''b"   and b :: "''b"   and c :: "''b"
+      assumes "class.group_add minus plus zero uminus" shows "plus a (minus b c) = minus (plus a b) c"'
+    - ' bottom_exists: shows "\<exists>x. least L x (carrier L)"'
+  - source_sentence: "lemma normal_mult: \n  fixes f g::\"real poly\"\n  assumes hf: \"normal_poly f\" and hg: \"normal_poly\
+      \ g\"\n  defines \"df \\<equiv> degree f\" and \"dg \\<equiv> degree g\"\n  shows \"normal_poly (f*g)\""
+    sentences:
+    - ' pCons_0_as_mult: fixes p :: "''a poly" shows "pCons (0::''a) p = [:0::''a, 1::''a:] * p"'
+    - ' less_Nil_2: fixes xs :: "''a list" shows "[] < xs"'
+    - ' subprob_space_measure_pmf: fixes x :: "''a pmf" shows "subprob_space (measure_pmf x)"'
+  pipeline_tag: sentence-similarity
+  library_name: sentence-transformers
+siblings:
+- rfilename: .gitattributes
+- rfilename: 1_Pooling/config.json
+- rfilename: README.md
+- rfilename: config.json
+- rfilename: config_sentence_transformers.json
+- rfilename: model.safetensors
+- rfilename: modules.json
+- rfilename: sentence_bert_config.json
+- rfilename: tokenizer.json
+- rfilename: tokenizer_config.json
+spaces: []
+createdAt: '2026-05-22T12:01:23.000Z'
+safetensors:
+  parameters:
+    F32: 22713216
+  total: 22713216
+usedStorage: 272592576
+downloadsAllTime: 485
+inferenceProviderMapping: {}
+configJson:
+  add_cross_attention: false
+  architectures:
+  - BertModel
+  attention_probs_dropout_prob: 0.1
+  bos_token_id: null
+  classifier_dropout: null
+  dtype: float32
+  eos_token_id: null
+  gradient_checkpointing: false
+  hidden_act: gelu
+  hidden_dropout_prob: 0.1
+  hidden_size: 384
+  initializer_range: 0.02
+  intermediate_size: 1536
+  is_decoder: false
+  layer_norm_eps: 1.0e-12
+  max_position_embeddings: 512
+  model_type: bert
+  num_attention_heads: 12
+  num_hidden_layers: 6
+  pad_token_id: 0
+  position_embedding_type: absolute
+  tie_word_embeddings: true
+  transformers_version: 5.9.0
+  type_vocab_size: 2
+  use_cache: false
+  vocab_size: 30522
+onnxFiles: {}
+safetensorsSizeMb: 90.9
+approxSizeMb: 90.9
+fetchedAt: '2026-06-08T13:32:59.000Z'

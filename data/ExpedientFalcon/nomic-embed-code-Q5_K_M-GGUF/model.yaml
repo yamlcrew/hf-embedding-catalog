@@ -1,0 +1,102 @@
+_id: 6889a341090720391db29737
+id: ExpedientFalcon/nomic-embed-code-Q5_K_M-GGUF
+private: false
+pipeline_tag: sentence-similarity
+library_name: sentence-transformers
+tags:
+- sentence-transformers
+- gguf
+- sentence-similarity
+- feature-extraction
+- llama-cpp
+- gguf-my-repo
+- dataset:nomic-ai/cornstack-python-v1
+- dataset:nomic-ai/cornstack-javascript-v1
+- dataset:nomic-ai/cornstack-java-v1
+- dataset:nomic-ai/cornstack-go-v1
+- dataset:nomic-ai/cornstack-php-v1
+- dataset:nomic-ai/cornstack-ruby-v1
+- base_model:nomic-ai/nomic-embed-code
+- base_model:quantized:nomic-ai/nomic-embed-code
+- license:apache-2.0
+- endpoints_compatible
+- region:us
+- conversational
+downloads: 1083
+likes: 0
+modelId: ExpedientFalcon/nomic-embed-code-Q5_K_M-GGUF
+author: ExpedientFalcon
+sha: 47b0eed9f3704159f2ea8c33ff3254bb46fe3f9c
+lastModified: '2025-07-30T04:45:07.000Z'
+gated: false
+disabled: false
+widgetData:
+- source_sentence: That is a happy person
+  sentences:
+  - That is a happy dog
+  - That is a very happy person
+  - Today is a sunny day
+model-index: null
+config: {}
+cardData:
+  library_name: sentence-transformers
+  pipeline_tag: sentence-similarity
+  tags:
+  - sentence-transformers
+  - sentence-similarity
+  - feature-extraction
+  - llama-cpp
+  - gguf-my-repo
+  license: apache-2.0
+  datasets:
+  - nomic-ai/cornstack-python-v1
+  - nomic-ai/cornstack-javascript-v1
+  - nomic-ai/cornstack-java-v1
+  - nomic-ai/cornstack-go-v1
+  - nomic-ai/cornstack-php-v1
+  - nomic-ai/cornstack-ruby-v1
+  base_model: nomic-ai/nomic-embed-code
+gguf:
+  total: 7070619136
+  architecture: qwen2
+  context_length: 32768
+  chat_template: "{%- if tools %}\n    {{- '<|im_start|>system\\n' }}\n    {%- if messages[0]['role'] == 'system' %}\n   \
+    \     {{- messages[0]['content'] }}\n    {%- else %}\n        {{- 'You are Qwen, created by Alibaba Cloud. You are a helpful\
+    \ assistant.' }}\n    {%- endif %}\n    {{- \"\\n\\n# Tools\\n\\nYou may call one or more functions to assist with the\
+    \ user query.\\n\\nYou are provided with function signatures within <tools></tools> XML tags:\\n<tools>\" }}\n    {%-\
+    \ for tool in tools %}\n        {{- \"\\n\" }}\n        {{- tool | tojson }}\n    {%- endfor %}\n    {{- \"\\n</tools>\\\
+    n\\nFor each function call, return a json object with function name and arguments within <tool_call></tool_call> XML tags:\\\
+    n<tool_call>\\n{\\\"name\\\": <function-name>, \\\"arguments\\\": <args-json-object>}\\n</tool_call><|im_end|>\\n\" }}\n\
+    {%- else %}\n    {%- if messages[0]['role'] == 'system' %}\n        {{- '<|im_start|>system\\n' + messages[0]['content']\
+    \ + '<|im_end|>\\n' }}\n    {%- else %}\n        {{- '<|im_start|>system\\nYou are Qwen, created by Alibaba Cloud. You\
+    \ are a helpful assistant.<|im_end|>\\n' }}\n    {%- endif %}\n{%- endif %}\n{%- for message in messages %}\n    {%- if\
+    \ (message.role == \"user\") or (message.role == \"system\" and not loop.first) or (message.role == \"assistant\" and\
+    \ not message.tool_calls) %}\n        {{- '<|im_start|>' + message.role + '\\n' + message.content + '<|im_end|>' + '\\\
+    n' }}\n    {%- elif message.role == \"assistant\" %}\n        {{- '<|im_start|>' + message.role }}\n        {%- if message.content\
+    \ %}\n            {{- '\\n' + message.content }}\n        {%- endif %}\n        {%- for tool_call in message.tool_calls\
+    \ %}\n            {%- if tool_call.function is defined %}\n                {%- set tool_call = tool_call.function %}\n\
+    \            {%- endif %}\n            {{- '\\n<tool_call>\\n{\"name\": \"' }}\n            {{- tool_call.name }}\n  \
+    \          {{- '\", \"arguments\": ' }}\n            {{- tool_call.arguments | tojson }}\n            {{- '}\\n</tool_call>'\
+    \ }}\n        {%- endfor %}\n        {{- '<|im_end|>\\n' }}\n    {%- elif message.role == \"tool\" %}\n        {%- if\
+    \ (loop.index0 == 0) or (messages[loop.index0 - 1].role != \"tool\") %}\n            {{- '<|im_start|>user' }}\n     \
+    \   {%- endif %}\n        {{- '\\n<tool_response>\\n' }}\n        {{- message.content }}\n        {{- '\\n</tool_response>'\
+    \ }}\n        {%- if loop.last or (messages[loop.index0 + 1].role != \"tool\") %}\n            {{- '<|im_end|>\\n' }}\n\
+    \        {%- endif %}\n    {%- endif %}\n{%- endfor %}\n{%- if add_generation_prompt %}\n    {{- '<|im_start|>assistant\\\
+    n' }}\n{%- endif %}\n"
+  bos_token: <|endoftext|>
+  eos_token: <|im_end|>
+  totalFileSize: 5070147392
+siblings:
+- rfilename: .gitattributes
+- rfilename: README.md
+- rfilename: nomic-embed-code-q5_k_m.gguf
+spaces: []
+createdAt: '2025-07-30T04:44:49.000Z'
+usedStorage: 5070147392
+downloadsAllTime: 1233
+inferenceProviderMapping: {}
+configJson: null
+onnxFiles: {}
+safetensorsSizeMb: 0.0
+approxSizeMb: 0.0
+fetchedAt: '2026-06-08T13:32:59.000Z'

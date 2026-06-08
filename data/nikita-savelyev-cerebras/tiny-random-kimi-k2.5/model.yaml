@@ -1,0 +1,260 @@
+_id: 69d776afef684e714d16882d
+id: nikita-savelyev-cerebras/tiny-random-kimi-k2.5
+private: false
+pipeline_tag: feature-extraction
+library_name: transformers
+tags:
+- transformers
+- safetensors
+- kimi_k25
+- feature-extraction
+- custom_code
+- base_model:moonshotai/Kimi-K2.5
+- base_model:finetune:moonshotai/Kimi-K2.5
+- region:us
+downloads: 296
+likes: 0
+modelId: nikita-savelyev-cerebras/tiny-random-kimi-k2.5
+author: nikita-savelyev-cerebras
+sha: 296f5ce879e6aabe24eb5aec8a3c760cc98066e4
+lastModified: '2026-04-09T09:51:44.000Z'
+gated: false
+disabled: false
+model-index: null
+config:
+  architectures:
+  - KimiK25ForConditionalGeneration
+  auto_map:
+    AutoConfig: configuration_kimi_k25.KimiK25Config
+    AutoModel: modeling_kimi_k25.KimiK25ForConditionalGeneration
+    AutoModelForCausalLM: modeling_kimi_k25.KimiK25ForConditionalGeneration
+  model_type: kimi_k25
+  tokenizer_config:
+    bos_token: '[BOS]'
+    eos_token: '[EOS]'
+    pad_token: '[PAD]'
+    unk_token: '[UNK]'
+  chat_template_jinja: "{%- macro render_content(msg) -%}\n    {%- set c = msg.get('content') -%}\n    {%- if c is string\
+    \ -%}\n      {{ c }}\n    {%- elif c is not none -%}\n      {% for content in c -%}\n        {% if content['type'] ==\
+    \ 'image' or content['type'] == 'image_url' -%}\n          <|media_begin|>image<|media_content|><|media_pad|><|media_end|>\n\
+    \        {% elif content['type'] == 'video' or content['type']== 'video_url'-%}\n          <|kimi_k25_video_placeholder|>\n\
+    \        {% else -%}\n          {{ content['text'] }}\n        {%- endif -%}\n      {%- endfor -%}\n    {%- endif -%}\n\
+    {%- endmacro -%}\n\n{% macro set_roles(message) -%}\n  {%- set role_name =  message.get('name') or  message['role'] -%}\n\
+    \  {%- if message['role'] == 'user' -%}\n    <|im_user|>{{role_name}}<|im_middle|>\n  {%- elif message['role'] == 'assistant'\
+    \ -%}\n    <|im_assistant|>{{role_name}}<|im_middle|>\n  {%- else -%}\n    <|im_system|>{{role_name}}<|im_middle|>\n \
+    \ {%- endif -%}\n{%- endmacro -%}\n\n\n{%- macro render_toolcalls(message) -%}\n  <|tool_calls_section_begin|>\n  {%-\
+    \ for tool_call in message['tool_calls'] -%}\n    {%- set formatted_id = tool_call['id'] -%}\n    <|tool_call_begin|>{{\
+    \ formatted_id }}<|tool_call_argument_begin|>{% if tool_call['function']['arguments'] is string %}{{ tool_call['function']['arguments']\
+    \ }}{% else %}{{ tool_call['function']['arguments'] | tojson }}{% endif %}<|tool_call_end|>\n  {%- endfor -%}\n  <|tool_calls_section_end|>\n\
+    {%- endmacro -%}\n\n\n{# Find last non-tool-call assisitant message #}\n{%- set ns = namespace(last_non_tool_call_assistant_msg=-1)\
+    \ -%}\n{%- for idx in range(messages|length-1, -1, -1) -%}\n    {%- if messages[idx]['role'] == 'assistant' and not messages[idx].get('tool_calls')\
+    \ -%}\n        {%- set ns.last_non_tool_call_assistant_msg = idx -%}\n        {%- break -%}\n    {%- endif -%}\n{%- endfor\
+    \ -%}\n\n{# split all messages into history & suffix, reasoning_content in suffix should be reserved.#}\n{%- set hist_msgs\
+    \ = messages[:ns.last_non_tool_call_assistant_msg+1] -%}\n{%- set suffix_msgs = messages[ns.last_non_tool_call_assistant_msg+1:]\
+    \ -%}\n\n{%- if tools -%}\n  {%- if tools_ts_str -%}\n    <|im_system|>tool_declare<|im_middle|>{{ tools_ts_str }}<|im_end|>\n\
+    \  {%- else -%}\n    <|im_system|>tool_declare<|im_middle|>{{ tools | tojson(separators=(',', ':')) }}<|im_end|>\n  {%-\
+    \ endif -%}\n{%- endif -%}\n  \n{%- for message in hist_msgs -%}\n  {{set_roles(message)}}\n  {%- if message['role'] ==\
+    \ 'assistant' -%}\n    <think></think>{{render_content(message)}}\n    {%- if message.get('tool_calls') -%}\n      {{render_toolcalls(message)}}\n\
+    \    {%- endif -%}\n  {%- elif message['role'] == 'tool' -%}\n    {%- set tool_call_id = message.tool_call_id -%}\n  \
+    \  ## Return of {{ tool_call_id }}\n{{render_content(message)}}\n  {%- elif message['content'] is not none -%}\n    {{render_content(message)}}\n\
+    \  {%- endif -%}\n  <|im_end|>\n{%- endfor -%}\n\n{%- for message in suffix_msgs -%}\n  {{set_roles(message)}}\n  {%-\
+    \ if message['role'] == 'assistant' -%}\n    {%- if thinking is defined and thinking is false -%}\n    <think></think>{{render_content(message)}}\n\
+    \    {%- else -%}\n    {%- set rc = message.get('reasoning_content', '') -%}\n    <think>{{rc}}</think>{{render_content(message)}}\n\
+    \    {%- endif -%}\n    {%- if message.get('tool_calls') -%}\n     {{render_toolcalls(message)}}\n    {%- endif -%}\n\
+    \  {%- elif message['role'] == 'tool' -%}\n    {%- set tool_call_id = message.tool_call_id -%}\n    ## Return of {{ tool_call_id\
+    \ }}\n{{render_content(message)}}\n  {%- elif message['content'] is not none -%}\n    {{render_content(message)}}\n  {%-\
+    \ endif -%}\n  <|im_end|>\n{%- endfor -%}\n\n\n{%- if add_generation_prompt -%}\n  <|im_assistant|>assistant<|im_middle|>\n\
+    \  {%- if thinking is defined and thinking is false -%}\n  <think></think>\n  {%- else -%}\n  <think>\n  {%- endif -%}\n\
+    {%- endif -%}"
+cardData:
+  library_name: transformers
+  base_model:
+  - moonshotai/Kimi-K2.5
+transformersInfo:
+  auto_model: AutoModel
+  custom_class: modeling_kimi_k25.KimiK25ForConditionalGeneration
+  pipeline_tag: feature-extraction
+siblings:
+- rfilename: .gitattributes
+- rfilename: README.md
+- rfilename: chat_template.jinja
+- rfilename: config.json
+- rfilename: configuration_deepseek.py
+- rfilename: configuration_kimi_k25.py
+- rfilename: generation_config.json
+- rfilename: kimi_k25_processor.py
+- rfilename: kimi_k25_vision_processing.py
+- rfilename: media_utils.py
+- rfilename: model.safetensors
+- rfilename: modeling_deepseek.py
+- rfilename: modeling_kimi_k25.py
+- rfilename: preprocessor_config.json
+- rfilename: tiktoken.model
+- rfilename: tokenization_kimi.py
+- rfilename: tokenizer_config.json
+- rfilename: tool_declaration_ts.py
+spaces: []
+createdAt: '2026-04-09T09:51:43.000Z'
+safetensors:
+  parameters:
+    BF16: 3235152
+  total: 3235152
+usedStorage: 9285166
+downloadsAllTime: 696
+inferenceProviderMapping: {}
+configJson:
+  architectures:
+  - KimiK25ForConditionalGeneration
+  auto_map:
+    AutoConfig: configuration_kimi_k25.KimiK25Config
+    AutoModel: modeling_kimi_k25.KimiK25ForConditionalGeneration
+    AutoModelForCausalLM: modeling_kimi_k25.KimiK25ForConditionalGeneration
+  bos_token_id: 163584
+  dtype: bfloat16
+  eos_token_id: 163585
+  ignore_index: -100
+  media_placeholder_token_id: 163605
+  model_type: kimi_k25
+  pad_token_id: 163839
+  text_config:
+    _name_or_path: ''
+    add_cross_attention: false
+    architectures:
+    - DeepseekV3ForCausalLM
+    attention_bias: false
+    attention_dropout: 0.0
+    auto_map:
+      AutoConfig: configuration_deepseek.DeepseekV3Config
+      AutoModel: modeling_deepseek.DeepseekV3Model
+      AutoModelForCausalLM: modeling_deepseek.DeepseekV3ForCausalLM
+    aux_loss_alpha: 0.001
+    bad_words_ids: null
+    begin_suppress_tokens: null
+    bos_token_id: 163584
+    chunk_size_feed_forward: 0
+    cross_attention_hidden_size: null
+    decoder_start_token_id: null
+    diversity_penalty: 0.0
+    do_sample: false
+    dtype: bfloat16
+    early_stopping: false
+    encoder_no_repeat_ngram_size: 0
+    eos_token_id: 163585
+    ep_size: 1
+    exponential_decay_length_penalty: null
+    finetuning_task: null
+    first_k_dense_replace: 1
+    forced_bos_token_id: null
+    forced_eos_token_id: null
+    head_dim: 192
+    hidden_act: silu
+    hidden_size: 8
+    id2label:
+      '0': LABEL_0
+      '1': LABEL_1
+    initializer_range: 0.02
+    intermediate_size: 64
+    is_decoder: false
+    is_encoder_decoder: false
+    kv_lora_rank: 384
+    label2id:
+      LABEL_0: 0
+      LABEL_1: 1
+    length_penalty: 1.0
+    max_length: 20
+    max_position_embeddings: 262144
+    min_length: 0
+    model_type: deepseek_v3
+    moe_intermediate_size: 64
+    moe_layer_freq: 1
+    n_group: 1
+    n_routed_experts: 32
+    n_shared_experts: 1
+    no_repeat_ngram_size: 0
+    norm_topk_prob: true
+    num_attention_heads: 1
+    num_beam_groups: 1
+    num_beams: 1
+    num_experts_per_tok: 8
+    num_hidden_layers: 2
+    num_key_value_heads: 1
+    num_nextn_predict_layers: 0
+    num_return_sequences: 1
+    output_attentions: false
+    output_hidden_states: false
+    output_scores: false
+    pad_token_id: 163839
+    prefix: null
+    pretraining_tp: 1
+    problem_type: null
+    pruned_heads: {}
+    q_lora_rank: 32
+    qk_head_dim: 256
+    qk_nope_head_dim: 64
+    qk_rope_head_dim: 192
+    remove_invalid_values: false
+    repetition_penalty: 1.0
+    return_dict: true
+    return_dict_in_generate: false
+    rms_norm_eps: 1.0e-05
+    rope_interleave: true
+    rope_scaling:
+      beta_fast: 32.0
+      beta_slow: 1.0
+      factor: 64.0
+      mscale: 1.0
+      mscale_all_dim: 1.0
+      original_max_position_embeddings: 4096
+      rope_type: yarn
+      type: yarn
+    rope_theta: 50000.0
+    routed_scaling_factor: 2.827
+    scoring_func: sigmoid
+    sep_token_id: null
+    seq_aux: true
+    suppress_tokens: null
+    task_specific_params: null
+    temperature: 1.0
+    tf_legacy_loss: false
+    tie_encoder_decoder: false
+    tie_word_embeddings: false
+    tokenizer_class: null
+    top_k: 50
+    top_p: 1.0
+    topk_group: 1
+    topk_method: noaux_tc
+    torchscript: false
+    typical_p: 1.0
+    use_bfloat16: false
+    use_cache: true
+    v_head_dim: 64
+    vocab_size: 163840
+  tie_word_embeddings: false
+  transformers_version: 4.56.2
+  use_unified_vision_chunk: true
+  video_placeholder: <|kimi_k25_video_placeholder|>
+  vision_config:
+    init_pos_emb_height: 64
+    init_pos_emb_time: 4
+    init_pos_emb_width: 64
+    merge_kernel_size:
+    - 2
+    - 2
+    merge_type: sd2_tpool
+    mm_hidden_size: 64
+    mm_projector_type: patchmerger
+    model_type: ''
+    patch_size: 14
+    pos_emb_type: divided_fixed
+    projector_hidden_act: gelu
+    projector_ln_eps: 1.0e-05
+    text_hidden_size: 8
+    video_attn_type: spatial_temporal
+    vt_hidden_size: 64
+    vt_intermediate_size: 128
+    vt_num_attention_heads: 2
+    vt_num_hidden_layers: 2
+onnxFiles: {}
+safetensorsSizeMb: 6.5
+approxSizeMb: 6.5
+fetchedAt: '2026-06-08T13:32:59.000Z'

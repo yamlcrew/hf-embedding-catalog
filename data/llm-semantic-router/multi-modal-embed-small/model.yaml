@@ -1,0 +1,184 @@
+_id: 6983e4394c7bcf70bc912252
+id: llm-semantic-router/multi-modal-embed-small
+private: false
+pipeline_tag: sentence-similarity
+library_name: transformers
+tags:
+- transformers
+- onnx
+- safetensors
+- sentence-transformers
+- multimodal
+- embeddings
+- image-text
+- audio-text
+- retrieval
+- 2DMSE
+- matryoshka
+- sentence-similarity
+- en
+- license:apache-2.0
+- model-index
+- endpoints_compatible
+- region:us
+downloads: 1635
+likes: 18
+modelId: llm-semantic-router/multi-modal-embed-small
+author: llm-semantic-router
+sha: fdf8e01b7b0f3a69ac1ac8e2a64dcb1ede177ba4
+lastModified: '2026-05-12T13:37:19.000Z'
+gated: false
+disabled: false
+widgetData:
+- source_sentence: That is a happy person
+  sentences:
+  - That is a happy dog
+  - That is a very happy person
+  - Today is a sunny day
+model-index:
+- name: multi-modal-embed-small
+  results:
+  - task:
+      type: image-text-retrieval
+    dataset:
+      name: COCO
+      type: coco
+    metrics:
+    - name: Image-to-Text R@1
+      type: recall_at_1
+      value: 41.88
+      verified: false
+    - name: Image-to-Text R@5
+      type: recall_at_5
+      value: 71.64
+      verified: false
+    - name: Image-to-Text R@10
+      type: recall_at_10
+      value: 82.16
+      verified: false
+  - task:
+      type: audio-text-retrieval
+    dataset:
+      name: LibriSpeech
+      type: librispeech
+    metrics:
+    - name: Audio-to-Text R@1
+      type: recall_at_1
+      value: 36.38
+      verified: false
+    - name: Audio-to-Text R@5
+      type: recall_at_5
+      value: 68.22
+      verified: false
+    - name: Audio-to-Text R@10
+      type: recall_at_10
+      value: 79.52
+      verified: false
+config:
+  tokenizer_config:
+    cls_token: '[CLS]'
+    mask_token: '[MASK]'
+    pad_token: '[PAD]'
+    sep_token: '[SEP]'
+    unk_token: '[UNK]'
+cardData:
+  license: apache-2.0
+  language:
+  - en
+  library_name: transformers
+  tags:
+  - sentence-transformers
+  - multimodal
+  - embeddings
+  - image-text
+  - audio-text
+  - retrieval
+  - 2DMSE
+  - matryoshka
+  pipeline_tag: sentence-similarity
+  model-index:
+  - name: multi-modal-embed-small
+    results:
+    - task:
+        type: image-text-retrieval
+      dataset:
+        name: COCO
+        type: coco
+      metrics:
+      - name: Image-to-Text R@1
+        type: recall_at_1
+        value: 41.88
+        verified: false
+      - name: Image-to-Text R@5
+        type: recall_at_5
+        value: 71.64
+        verified: false
+      - name: Image-to-Text R@10
+        type: recall_at_10
+        value: 82.16
+        verified: false
+    - task:
+        type: audio-text-retrieval
+      dataset:
+        name: LibriSpeech
+        type: librispeech
+      metrics:
+      - name: Audio-to-Text R@1
+        type: recall_at_1
+        value: 36.38
+        verified: false
+      - name: Audio-to-Text R@5
+        type: recall_at_5
+        value: 68.22
+        verified: false
+      - name: Audio-to-Text R@10
+        type: recall_at_10
+        value: 79.52
+        verified: false
+transformersInfo:
+  auto_model: AutoModel
+siblings:
+- rfilename: .gitattributes
+- rfilename: README.md
+- rfilename: config.json
+- rfilename: model.pt
+- rfilename: model.safetensors
+- rfilename: onnx/audio_encoder.onnx
+- rfilename: onnx/config.json
+- rfilename: onnx/image_encoder.onnx
+- rfilename: onnx/image_encoder.onnx.data
+- rfilename: onnx/special_tokens_map.json
+- rfilename: onnx/text_encoder.onnx
+- rfilename: onnx/text_encoder.onnx.data
+- rfilename: onnx/tokenizer.json
+- rfilename: onnx/tokenizer_config.json
+- rfilename: onnx/vocab.txt
+- rfilename: special_tokens_map.json
+- rfilename: tokenizer.json
+- rfilename: tokenizer_config.json
+spaces: []
+createdAt: '2026-02-05T00:28:41.000Z'
+safetensors:
+  parameters:
+    F32: 337551362
+  total: 337551362
+usedStorage: 5154137853
+downloadsAllTime: 4526
+inferenceProviderMapping:
+  hf-inference:
+    status: error
+    providerId: llm-semantic-router/multi-modal-embed-small
+    task: sentence-similarity
+    isModelAuthor: false
+configJson:
+  output_dim: 384
+  text_encoder_name: sentence-transformers/all-MiniLM-L6-v2
+  image_encoder_name: google/siglip-base-patch16-512
+  audio_encoder_name: openai/whisper-tiny
+  fusion_type: transformer
+  num_fusion_layers: 2
+  enable_layer_outputs: true
+onnxFiles: {}
+safetensorsSizeMb: 0.0
+approxSizeMb: 1350.2
+fetchedAt: '2026-06-08T13:32:59.000Z'

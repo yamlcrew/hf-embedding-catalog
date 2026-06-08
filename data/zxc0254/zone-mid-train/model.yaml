@@ -1,0 +1,1028 @@
+_id: 699169cfb5d3127126a11530
+id: zxc0254/zone-mid-train
+private: false
+pipeline_tag: sentence-similarity
+library_name: sentence-transformers
+tags:
+- sentence-transformers
+- safetensors
+- sentence-similarity
+- feature-extraction
+- dense
+- generated_from_trainer
+- dataset_size:430
+- loss:CachedMultipleNegativesRankingLoss
+- arxiv:1908.10084
+- arxiv:2101.06983
+- base_model:google-bert/bert-base-multilingual-cased
+- base_model:finetune:google-bert/bert-base-multilingual-cased
+- endpoints_compatible
+- region:us
+downloads: 342
+likes: 0
+modelId: zxc0254/zone-mid-train
+author: zxc0254
+sha: 6f804c2fcc2b3d14dd898e6392df941ec5c451f0
+lastModified: '2026-02-19T10:57:44.000Z'
+gated: false
+disabled: false
+widgetData:
+- source_sentence: Develop a Python function that performs sentiment analysis using not just the DistilBERT model but also
+    implements other transformers models from the HuggingFace library for comparison. The function should handle a csv dataset
+    with multiple text columns. The sentiment analysis should also be capable of handling and analyzing data in multiple languages.
+  sentences:
+  - "Here is a general guideline to solve the above problem using python. Please note that without specifics, it's difficult\
+    \ place specific instances for the implementation. However, you can customize this as per your requirements.\n\n```python\n\
+    \nimport pandas as pd\nfrom transformers import pipeline, AutoTokenizer, AutoModelForSequenceClassification, TFAutoModelForSequenceClassification\n\
+    \ndef sentiment_analysis(text_data, model_type, use_cuda=True):\n    # Checks whether to run the model on a GPU or not\n\
+    \    cpu = -1 if use_cuda and torch.cuda.is_available() else 0\n    \n    if model_type: \n        model = AutoModelForSequenceClassification.from_pretrained(model_type)\n\
+    \        tokenizer = AutoTokenizer.from_pretrained(model_type)\n    else: \n        # DistilBert is the default model\n\
+    \        model = TFAutoModelForSequenceClassification.from_pretrained(\"distilbert-base-uncased-finetuned-sst-2-english\"\
+    )\n        tokenizer = AutoTokenizer.from_pretrained(\"distilbert-base-uncased-finetuned-sst-2-english\")\n        \n\
+    \    nlp_model = pipeline('sentiment-analysis', model=model, tokenizer=tokenizer, device=cpu)\n    return nlp_model(text_data)\n\
+    \ndef analyze_sentiment(csv_file_path, text_columns, model_type=None):\n    df = pd.read_csv(csv_file_path)\n    result_dict\
+    \ = {}\n    for column in text_columns:\n        text_data = df[column].tolist()\n        result_dict[column] = sentiment_analysis(text_data,\
+    \ model_type)\n    return result_dict\n\n# Example usage\ncsv_file_path = \"your_csv_file_path.csv\"\ntext_columns = ['col1',\
+    \ 'col2', 'col3']\nmodel_type = \"bert-base-uncased\"\nanalyze_sentiment(csv_file_path, text_columns, model_type)\n```\n\
+    \nPlease note that to compare the different model's performances, you will want to additionally compute and compare metrics\
+    \ on a shared validation set. This function just runs sentiment analysis with the specified models and does not inherently\
+    \ compare their performances.\n\nThis function uses HuggingFace's `pipeline` function to create the sentiment analysis\
+    \ pipeline, which supports different transformer models such as DistilBERT, BERT, GPT-2, etc. You can adjust the function\
+    \ parameters to use a different model. Note that if the model type is not specified, the default model is DistilBERT.\n\
+    \nThe given script is Assuming the dataset is in English. If you want to analyze text in a different language, ensure\
+    \ to use models that support that specific language. Also ensure that you have the necessary resources since these models\
+    \ can be resource-intensive, particularly when processing large amounts of text data."
+  - "\nWe divide P(x) by Q(x) via polynomial long division.  At each step we match the leading term of the current dividend\
+    \ with 3x^3, subtract the product, and bring down lower terms.  Continuing until the remainder has degree < 3, we find\
+    \ the final remainder\n  S(x) = −2x² + 3x + 3.\nHence the integer coefficients are s₀ = 3, s₁ = 3, s₂ = −2.\n\nAnswer:\
+    \ \n3 3 -2\n"
+  - "Let's analyze each pair of compounds step by step to determine which has the higher property value based on molecular\
+    \ structure and intermolecular forces:\n\n---\n\n### (a) **Melting Point: Hexylamine or Dipropyl Ether**  \n- **Hexylamine**\
+    \ is a primary amine (R–NH₂), which can **form hydrogen bonds** (both donating and accepting H-bonds due to its -NH₂ group).\
+    \  \n- **Dipropyl ether** has an oxygen in the ether group (R–O–R'), but **no hydrogen bonded directly to oxygen**, so\
+    \ it cannot act as a hydrogen bond donor. It can only weakly accept H-bonds from other molecules.  \n- **Conclusion**:\
+    \ Hexylamine has stronger intermolecular forces (H-bonding) → **higher melting point** than dipropyl ether.  \n\n---\n\
+    \n### (b) **Solubility in Water: Methylamine or Octylamine**  \n- **Methylamine** (CH₃NH₂) has a **small hydrocarbon chain**\
+    \ and a polar -NH₂ group. The polarity and hydrogen bonding capability dominate, promoting solubility in water.  \n- **Octylamine**\
+    \ ((C₈H₁₇)NH₂) has a **long hydrocarbon chain** that is nonpolar. The hydrophobic effect outweighs the polar -NH₂ group,\
+    \ reducing solubility in water.  \n- **Conclusion**: Methylamine is **more soluble in water** due to its smaller hydrophobic\
+    \ region.  \n\n---\n\n### (c) **Solubility in Hexane: Methylamine or Octylamine**  \n- **Methylamine**: The -NH₂ group\
+    \ is polar, which reduces solubility in nonpolar hexane.  \n- **Octylamine**: The longer hydrocarbon chain (–C₈H₁₇) is\
+    \ **nonpolar and hydrophobic**, aligning better with hexane's nonpolar solvent.  \n- **Conclusion**: Octylamine is **more\
+    \ soluble in hexane** due to its greater hydrophobic character.  \n\n---\n\n### (d) **Boiling Point: Nonylamine or 1,8-Octanediamine**\
+    \  \n- **Nonylamine** (R–NH₂, R = nonyl group) is a primary amine with a **long chain (9 carbons)**. It can form H-bonds\
+    \ but only has **one -NH₂ group per molecule**.  \n- **1,8-Octanediamine** (NH₂-(CH₂)₆-NH₂) has **two -NH₂ groups** per\
+    \ molecule, allowing it to **form more hydrogen bonds intermolecularly**. The dipolar amine structure also enhances H-bonding\
+    \ capacity.  \n- **Conclusion**: 1,8-Octanediamine has **stronger intermolecular forces** due to dual H-bonding sites\
+    \ → **higher boiling point** than nonylamine.  \n\n---\n\n### Final Answers:  \n(a) **Hexylamine** has a higher melting\
+    \ point.  \n(b) **Methylamine** has higher solubility in water.  \n(c) **Octylamine** has higher solubility in hexane.\
+    \  \n(d) **1,8-Octanediamine** has a higher boiling point.  \n\nThese conclusions stem from evaluating intermolecular\
+    \ forces (H-bonding), molecular size, and polarity/solubility preferences."
+- source_sentence: "This is a logic puzzle. There are 5 houses (numbered 1 on the left, 5 on the right), from the perspective\
+    \ of someone standing across the street from them. Each has a different person in them. They have different characteristics:\n\
+    \ - Each person has a unique name: `david`, `bob`, `arnold`, `carol`, `alice`\n - Each person has a favorite drink: `milk`,\
+    \ `boba tea`, `root beer`, `coffee`, `water`\n - Each mother is accompanied by their child: `alice`, `bella`, `billy`,\
+    \ `fred`, `timothy`\n - Everyone has a favorite smoothie: `dragonfruit`, `lemon`, `darkness`, `butterscotch`, `desert`\n\
+    \ - Each person has a favorite color: `white`, `yellow`, `purple`, `brown`, `blue`\n\n\n## Clues:\n1. The boba tea drinker\
+    \ is in the second house.\n2. The Dragonfruit smoothie lover is the root beer lover.\n3. The boba tea drinker is the person\
+    \ who is the mother of Timothy.\n4. The person who loves blue is in the third house.\n5. Arnold is the person who loves\
+    \ purple.\n6. The Dragonfruit smoothie lover is Bob.\n7. Carol is directly left of the person who loves purple.\n8. David\
+    \ is the person who loves yellow.\n9. The coffee drinker is the person's child is named Fred.\n10. The Butterscotch smoothie\
+    \ drinker is the one who only drinks water.\n11. The Desert smoothie lover and the person who loves purple are next to\
+    \ each other.\n12. The person who is the mother of Billy is the person who loves purple.\n13. The person who loves brown\
+    \ is directly left of the Darkness smoothie drinker.\n14. The Lemon smoothie lover is the person's child is named Alice.\n\
+    15. The person's child is named Bella is the person who loves blue.\n\nWhat is Name of the person who lives in House 1?\
+    \ Provide only the name of the person as your final answer."
+  sentences:
+  - 'Movie A, The Lord of the Rings: The Two Towers (Widescreen Edition) (2002), is a 2003 fantasy film directed by Peter
+    Jackson and starring Elijah Wood. It has a runtime of 179 minutes and a cost of $4.00. Movie B, The Hobbit: The Desolation
+    of Smaug, is a 2013 fantasy film directed by Peter Jackson and starring Ian McKellen, Bret McKenzie, Martin Freeman (II),
+    Richard Armitage, Andy Serkis, and Benedict Cumberbatch. It has a runtime of 2 hr. 41 min. and a Rotten Tomatoes score
+    of 74 and an audience rating of 85. Both movies are directed by Peter Jackson, but they are different films with different
+    casts, runtimes, and reviews. Therefore, the final answer is {"answer": "No"}.'
+  - '
+
+
+    david'
+  - '
+
+    We want S = ∑_{i=1}^{38} gcd(i,38).  Use the standard divisor–totient identity:
+
+    For any n, ∑_{i=1}^n gcd(i,n) = ∑_{d|n} d·φ(n/d).
+
+
+    Here n = 38 = 2·19. Its divisors are 1, 2, 19, 38.
+
+
+    Compute Euler’s totient for the quotients:
+
+    φ(38) = φ(2·19) = φ(2)·φ(19) = 1·18 = 18
+
+    φ(19) = 18
+
+    φ(2) = 1
+
+    φ(1) = 1
+
+
+    Now sum:
+
+    d=1: 1·φ(38/1)=1·φ(38)=1·18=18
+
+    d=2: 2·φ(38/2)=2·φ(19)=2·18=36
+
+    d=19: 19·φ(38/19)=19·φ(2)=19·1=19
+
+    d=38: 38·φ(38/38)=38·φ(1)=38·1=38
+
+
+    Total S = 18 + 36 + 19 + 38 = 111.
+
+
+    Answer: 111'
+- source_sentence: 'Help rewrite and fix following: The story starts in a clandestine martial arts stage between two hated
+    rivals who are on the verge of their limit after a high display of combat. The fighters are Kareen and Mishaali, Kolkatan
+    and Hyderabadi respectively, two Indian rivals, currently residing in California, who are considered the best fighters
+    in India. Both women have had multiple matches, official and privately, to prove their superiority over the other as India’s
+    top female fighter, both women having many wins over the others.
+
+    They have never gotten along and probably never will.
+
+    Both women have been married before but eventually seperated due to family problems which their rivalry had a part in.
+    At their current 45 years of age both women are still at the peak of their physical prowess, equally strong, voluptuous,
+    attractive and fit. Their fighting skills just as flawless as ever. However, they are very much aware that their life
+    as fighters, their passionate sport, is very much near its end. Both women longed for a partner who can continue to support
+    them financially and also keep them happy and interested, they longed for a last chance at true love.
+
+
+    During the fight night in which both women had knocked down eacb other after giving each other a powerful punch, they
+    collapsed on the steel cage, seemingly beaten and unable to continue. During the fight, both women''s wanted man had witnessed
+    their epic fight, they just didn''t know it yet. The fight had officially been called draw despite both women getting
+    back to their feet and willing to continue fighting.
+
+
+    The man of interest was a successfull business owner, he had entered to watch the fight and decide who would suit him
+    to represent him against a rival company''s manager''s championess. He was highly impressed with both women''s skills
+    and determination to beat the other, but the draw left him undecided as to who would represent him, both were very good
+    choice, but he needed the better fighter to represent him.
+
+
+
+    After the fight, he came to both women''s managers in private seperately to tell them that he was interested in hiring
+    the other. Both managers were glad to hear about the business man''s offer, they knew it was good money. However, since
+    they were met seperately, neither was aware that the other fighter''s rival was booked for an appointment to meet with
+    him. Had both managers known the business was arranging to meet with them together, they would not have agreed for the
+    safety of their fighter. After all, Kareen and Mishaali hated each other passionately.'
+  sentences:
+  - "Here’s a revised and improved version of your narrative, focusing on clarity, flow, and language polish:\n\n---\n\nThe\
+    \ story opens in a secret martial arts arena, where two bitter rivals—Kareen from Kolkata and Mishaali from Hyderabad—clash\
+    \ in a fierce, high-stakes duel. Both women, now residing in California, are hailed as India's finest female fighters.\
+    \ Their long-standing rivalry has spanned numerous official bouts and private showdowns, each determined to prove herself\
+    \ India's undisputed champion. Over the years, both have notched multiple victories over one another, but true dominance\
+    \ remains elusive.  \n\nKareen and Mishaali have never been friends, and their animosity only deepened with time. Both\
+    \ have been married and since separated—family discord, compounded by their relentless rivalry, playing a key role in\
+    \ their breakups. Now at 45, the women remain in peak physical condition: strong, attractive, voluptuous, and fit, their\
+    \ skills as sharp as ever. Yet, they're acutely aware that the twilight of their fighting careers looms near. Each yearns\
+    \ for a partner who can offer financial support and genuine companionship—a last shot at real love.\n\nOn fight night,\
+    \ after a brutal exchange culminating in simultaneous knockdowns, both women collapsed against the steel cage, exhausted\
+    \ and battered. Unbeknownst to them, the man both secretly desire watched their epic battle unfold. The match was declared\
+    \ a draw when neither fighter could continue, despite both struggling to their feet and demanding to fight on.\n\nThe\
+    \ mysterious spectator—a successful businessman—had come to scout for a representative to challenge a rival company manager’s\
+    \ champion fighter. Astonished by Kareen's and Mishaali’s resolve and skill, he found himself unable to choose between\
+    \ them. Both were impressive; yet, he needed a single representative—the superior fighter.\n\nAfter the match, the businessman\
+    \ privately approached each woman’s manager, expressing interest in hiring their fighter. Both managers were delighted\
+    \ at the lucrative opportunity, unaware that their rival counterpart had received the same invitation. If they’d known\
+    \ both Kareen and Mishaali had been summoned, they would have hesitated, fearing another explosive encounter between the\
+    \ bitter rivals.\n\n---\n\nLet me know if you’d like it to be more concise or need help with further edits!"
+  - "Звісно! Вам потрібно приймати дані з форми, перевіряти, вставляти їх у таблиці **Клієнти**, **Тури** і **Замовлення**.\
+    \  \nЯ наведу приклад простого PHP сценарію (`book_tour.php`), що показує основну логіку вставки (без складної валідації\
+    \ й захисту, лише базове).\n\n**ВАЖЛИВО!**  \n- Замість `YOUR_DB_USERNAME`, `YOUR_DB_PASSWORD` і т.д. підставте свої реальні\
+    \ параметри.\n- В ідеалі тут варто робити нормалізацію, захист від SQL-ін'єкцій (Prepared Statements) та обробку колізій\
+    \ і помилок.\n- Extra: Поля типу \"Країни\", \"Вид подорожі\", \"Хостел\", \"Транспорт\" у вашій формі - текстові, а в\
+    \ БД вони повинні бути *id* (тут показано простий підхід, як з цим працювати; розгляньте заміну інпутів форми на select\
+    \ з конкретними значеннями із БД для production).\n\n---\n\n### PHP: `book_tour.php`\n\n```php\n<?php\n// 1. connect\n\
+    $mysqli = new mysqli(\"localhost\", \"YOUR_DB_USERNAME\", \"YOUR_DB_PASSWORD\", \"YOUR_DB_NAME\");\nif ($mysqli->connect_errno)\
+    \ {\n    die(\"Не вдалося підключитися до MySQL: \" . $mysqli->connect_error);\n}\n\n// 2. sanitize inputs\n$fullName\
+    \ = $mysqli->real_escape_string($_POST['fullName']);\n$phone = $mysqli->real_escape_string($_POST['phone']);\n$email =\
+    \ $mysqli->real_escape_string($_POST['email']);\n$departureDate = $mysqli->real_escape_string($_POST['departureDate']);\n\
+    $returnDate = $mysqli->real_escape_string($_POST['returnDate']);\n$departureCity = $mysqli->real_escape_string($_POST['departureCity']);\n\
+    $children = $mysqli->real_escape_string($_POST['children']);\n$food = $mysqli->real_escape_string($_POST['food']);\n\n\
+    $countryName = $mysqli->real_escape_string($_POST['countries']); // Тут краще select!\n$travelType = $mysqli->real_escape_string($_POST['travelType']);\
+    \ // Тут краще select!\n$hostelName = $mysqli->real_escape_string($_POST['hostel']); // select!\n$transportName = $mysqli->real_escape_string($_POST['transport']);\
+    \ // select!\n\n// 3. Перевірити/додати країну\n$countryId = null;\n$res = $mysqli->query(\"SELECT id_Країни FROM `Країни`\
+    \ WHERE `Країни` = '$countryName'\");\nif ($row = $res->fetch_assoc()) {\n    $countryId = $row['id_Країни'];\n} else\
+    \ {\n    $mysqli->query(\"INSERT INTO `Країни` (`Країни`) VALUES ('$countryName')\");\n    $countryId = $mysqli->insert_id;\n\
+    }\n\n// 4. Перевірити/додати вид туру\n$typeId = null;\n$res = $mysqli->query(\"SELECT id_Вид FROM `Вид тур` WHERE `Вид\
+    \ тура` = '$travelType'\");\nif ($row = $res->fetch_assoc()) {\n    $typeId = $row['id_Вид'];\n} else {\n    $mysqli->query(\"\
+    INSERT INTO `Вид тур` (`Вид тура`) VALUES ('$travelType')\");\n    $typeId = $mysqli->insert_id;\n}\n\n// 5. Перевірити/додати\
+    \ хостел\n$hostelId = null;\n$res = $mysqli->query(\"SELECT id_Хостел FROM `Хостел` WHERE `Назва` = '$hostelName'\");\n\
+    if ($row = $res->fetch_assoc()) {\n    $hostelId = $row['id_Хостел'];\n} else {\n    $mysqli->query(\"INSERT INTO `Хостел`\
+    \ (`Назва`, `Адрес`, `рейтинг`) VALUES ('$hostelName', '', 0)\");\n    $hostelId = $mysqli->insert_id;\n}\n\n// 6. Перевірити/додати\
+    \ транспорт\n$transportId = null;\n$res = $mysqli->query(\"SELECT id_Транспорт FROM `Транспорт` WHERE `транспорт` = '$transportName'\"\
+    );\nif ($row = $res->fetch_assoc()) {\n    $transportId = $row['id_Транспорт'];\n} else {\n    $mysqli->query(\"INSERT\
+    \ INTO `Транспорт` (`транспорт`) VALUES ('$transportName')\");\n    $transportId = $mysqli->insert_id;\n}\n\n// 7. Додати\
+    \ тур\n$mysqli->query(\"INSERT INTO `Тури` (\n    `Дата відправлення`, `Дата К`, `Місто відправлення`, `Діти`, `Харчування`,\
+    \ \n    `Країни`, `Вид тура`, `Хостел`, `Транспорт`\n) VALUES (\n    '$departureDate', '$returnDate', '$departureCity',\
+    \ '$children', '$food', \n    '$countryId', '$typeId', '$hostelId', '$transportId'\n)\");\n$tourId = $mysqli->insert_id;\n\
+    \n// 8. Додати клієнта (перевірити, чи вже є)\n$res = $mysqli->query(\"SELECT id_Клієнт FROM `Клієнти` WHERE `ПІБ` = '$fullName'\
+    \ AND `Пошта` = '$email'\");\nif ($row = $res->fetch_assoc()) {\n    $clientId = $row['id_Клієнт'];\n} else {\n    $mysqli->query(\"\
+    INSERT INTO `Клієнти` (`ПІБ`, `Контактні дані`, `Пошта`)\n        VALUES ('$fullName', '$phone', '$email')\");\n    $clientId\
+    \ = $mysqli->insert_id;\n}\n\n// 9. Додати замовлення (припустимо, що оператор id = 1)\n$status = \"очікує підтвердження\"\
+    ;\n$operatorId = 1; // Або логін/сесія (manual set!)\n$date = date(\"Y-m-d\");\n$mysqli->query(\"INSERT INTO `Замовлення`\
+    \ (`Дата`, `Тури`, `Статус`, `Оператор`, `Клієнт`)\n                VALUES ('$date', '$tourId', '$status', '$operatorId',\
+    \ '$clientId')\");\n\n// 10. Done\necho \"<h2>Ваше замовлення прийнято!</h2>\";\n$mysqli->close();\n```\n\n---\n\n###\
+    \ ЯК ПІДКЛЮЧИТИ:\n\n1. В формі змініть  \n   ```\n   <form class=\"book-form\" action=\"book_tour.php\" method=\"post\"\
+    >\n   ```\n2. В `book_tour.php`, вкажіть свої доступи до БД.\n3. Форма буде додавати дані відповідно до вашої структури.\n\
+    \n---\n\n> **Рекомендовано:**  \n> - поля \"Країни\", \"Вид подорожі\", \"Хостел\", \"Транспорт\" винести у `<select>`\
+    \ і наповнювати їх із БД, а не редагувати руками!  \n> - використовувати підготовлені запити (mysqli або PDO Prepared\
+    \ Statements);  \n> - додати захист від ботів/спаму (капча і т.д.).  \n> - сховати операторів авторизацією/сесіями, не\
+    \ hardcode.\n\n**Якщо треба показати приклад select-ів або кращу безпеку - пиши!**"
+  - "To find out how much confidence Emma will gain after 4 weeks, we can follow these steps:\n\n1. **Determine the number\
+    \ of events per week:**\n   - Emma plans to hold 3 events each week.\n\n2. **Calculate the total number of events over\
+    \ 4 weeks:**\n   - Since there are 4 weeks, the total number of events is given by:\n     \\[\n     3 \\text{ events/week}\
+    \ \\times 4 \\text{ weeks} = 12 \\text{ events}\n     \\]\n\n3. **Calculate the confidence gained per event:**\n   - Each\
+    \ event boosts her confidence by 5 percentage points.\n\n4. **Calculate the total confidence gained after all events:**\n\
+    \   - The total confidence gained after 12 events is:\n     \\[\n     12 \\text{ events} \\times 5 \\text{ percentage\
+    \ points/event} = 60 \\text{ percentage points}\n     \\]\n\nTherefore, after 4 weeks, Emma will gain a total of 60 percentage\
+    \ points in confidence.\n\n#### 60"
+- source_sentence: You are a helpful function-calling AI assistant. You are provided with function signatures within <functions></functions>
+    XML tags. You may call one or more functions to assist with the user query. Output any function calls within <function_calls></function_calls>
+    XML tags. Don't make assumptions about what values to plug into functions.
+  sentences:
+  - 'Let''s solve the given problem step-by-step.
+
+
+    ### Part 1: Maximizing the Magnitude of **R**
+
+
+    Given:
+
+    - **P** = [0.8, 0.6, 0.9]
+
+    - **F** = [0.7, 0.8, 0.75]
+
+    - α and β are non-negative weights such that α + β = 1
+
+    - **R** = α**P** + β**F**
+
+
+    We need to maximize the magnitude of **R** (i.e., ||**R**||).
+
+
+    First, let''s calculate **R** in terms of α and β:
+
+    \[ \mathbf{R} = \alpha \mathbf{P} + \beta \mathbf{F} \]
+
+
+    Since α + β = 1, we can write β as (1 - α):
+
+    \[ \mathbf{R} = \alpha \mathbf{P} + (1 - \alpha) \mathbf{F} \]
+
+
+    Substituting the vectors **P** and **F**:
+
+    \[ \mathbf{R} = \alpha [0.8, 0.6, 0.9] + (1 - \alpha) [0.7, 0.8, 0.75] \]
+
+
+    Distributing α and (1 - α):
+
+    \[ \mathbf{R} = [0.8\alpha + 0.7(1 - \alpha), 0.6\alpha + 0.8(1 - \alpha), 0.9\alpha + 0.75(1 - \alpha)] \]
+
+    \[ \mathbf{R} = [0.8\alpha + 0.7 - 0.7\alpha, 0.6\alpha + 0.8 - 0.8\alpha, 0.9\alpha + 0.75 - 0.75\alpha] \]
+
+    \[ \mathbf{R} = [0.1\alpha + 0.7, -0.2\alpha + 0.8, 0.15\alpha + 0.75] \]
+
+
+    To find the magnitude of **R**:
+
+    \[ ||\mathbf{R}|| = \sqrt{(0.1\alpha + 0.7)^2 + (-0.2\alpha + 0.8)^2 + (0.15\alpha + 0.75)^2} \]
+
+
+    We need to maximize this magnitude. Let''s differentiate ||**R**|| with respect to α and set the derivative to 0 to find
+    the critical points.
+
+
+    Let:
+
+    \[ f(\alpha) = (0.1\alpha + 0.7)^2 + (-0.2\alpha + 0.8)^2 + (0.15\alpha + 0.75)^2 \]
+
+
+    Differentiate f(α) with respect to α:
+
+    \[ f''(\alpha) = 2(0.1\alpha + 0.7)(0.1) + 2(-0.2\alpha + 0.8)(-0.2) + 2(0.15\alpha + 0.75)(0.15) \]
+
+    \[ f''(\alpha) = 2 [0.01\alpha + 0.07 - 0.04\alpha + 0.16 + 0.0225\alpha + 0.1125] \]
+
+    \[ f''(\alpha) = 2 [(-0.01 + 0.0225 + 0.01)\alpha + (0.07 + 0.16 + 0.1125)] \]
+
+    \[ f''(\alpha) = 2 [0.0225\alpha + 0.3425] \]
+
+
+    Set f''(\alpha) = 0 for maximization:
+
+    \[ 0.0225\alpha + 0.3425 = 0 \]
+
+    \[ 0.0225\alpha = -0.3425 \]
+
+    \[ \alpha = -\frac{0.3425}{0.0225} \approx -15.22 \]
+
+
+    However, this value of α is not valid since α and β must be non-negative and α + β = 1 where both α and β are in the range
+    [0, 1].
+
+
+    Therefore, we test boundary values:
+
+    - When α = 0, β = 1: \(\mathbf{R} = \mathbf{F} = [0.7, 0.8, 0.75]\)
+
+    - When α = 1, β = 0: \(\mathbf{R} = \mathbf{P} = [0.8, 0.6, 0.9]\)
+
+
+    Calculate magnitudes:
+
+    \[ ||\mathbf{R}|| \text{ for } \mathbf{F} = \sqrt{0.7^2 + 0.8^2 + 0.75^2} = \sqrt{0.49 + 0.64 + 0.5625} = \sqrt{1.6925}
+    \approx 1.30 \]
+
+
+    \[ ||\mathbf{R}|| \text{ for } \mathbf{P} = \sqrt{0.8^2 + 0.6^2 + 0.9^2} = \sqrt{0.64 + 0.36 + 0.81} = \sqrt{1.81} \approx
+    1.345 \]
+
+
+    The maximum magnitude occurs at α = 1, β = 0.
+
+
+    ### Part 2: Probability of Exceeding μ + 0.2σ
+
+
+    Given:
+
+    - μ = ||**R**|| = 1.345 (from Part 1)
+
+    - σ = 0.1μ = 0.1 * 1.345 = 0.1345
+
+
+    We need to find the probability that the match performance score M exceeds μ + 0.2σ:
+
+    \[ P(M > \mu + 0.2\sigma) = P\left(M > 1.345 + 0.2 \times 0.1345\right) \]
+
+    \[ P(M > 1.345 + 0.0269) = P(M > 1.3719) \]
+
+
+    Standardize the normal variable:
+
+    \[ Z = \frac{M - \mu}{\sigma} \]
+
+    \[ Z = \frac{1.3719 - 1.345}{0.1345} \]
+
+    \[ Z = \frac{0.0269}{0.1345} \approx 0.2 \]
+
+
+    Using the standard normal distribution table, find:
+
+    \[ P(Z > 0.2) \]
+
+
+    From the standard normal distribution table:
+
+    \[ P(Z > 0.2) = 1 - P(Z \leq 0.2) \]
+
+    \[ P(Z \leq 0.2) \approx 0.5793 \]
+
+    \[ P(Z > 0.2) \approx 1 - 0.5793 = 0.4207 \]
+
+
+    Final Answer: The final answer is \(0.4207\). I hope it is correct.'
+  - '
+
+    We need to integrate F''(x) = (2*x**2*exp(x**2) - 1)/x.
+
+
+    Split the integrand:
+
+    (2*x**2*exp(x**2) - 1)/x = 2*x*exp(x**2) - 1/x.
+
+
+    Integrate term by term:
+
+    ∫2*x*exp(x**2) dx = exp(x**2)  (since derivative of x**2 is 2*x),
+
+    ∫1/x dx = log(x).
+
+
+    Thus an antiderivative is F(x) = exp(x**2) - log(x) + C.
+
+    We drop the constant for a particular antiderivative.
+
+
+    Answer: exp(x**2) - log(x)'
+  - Show me all the weed strains that are easy to grow.
+- source_sentence: 'Write a concise summary of the following. Be sure to preserve important details: The possibilities here
+    are endless. Magic and technology are often what authors of genre fiction think of first when they think about worldbuilding,
+    and they can be the most fun parts of worldbuilding. When you’re thinking about magic and technology, you can bend rules
+    liberally:'
+  sentences:
+  - Magic and technology are central and often the most enjoyable elements of worldbuilding in genre fiction, offering limitless
+    creative possibilities. Authors can freely bend rules when developing these aspects.
+  - 'Natsuki: (sniffling and grinning) “Look at her! She’s so tiny and cute… Sayori, you did amazing. I can’t believe we all
+    just… delivered a baby together.”
+
+
+    Yuri: (clasping her hands, still trembling with adrenaline) “Yes… Sayori, you were incredibly brave. And Sachiko is beautiful.
+    She’s so precious.”
+
+
+    Monika: (letting out a deep breath, trying to steady her nerves) “I’m so proud of all of us. Sayori, you were so strong,
+    and everyone worked together perfectly. I’m just… so relieved Sachiko is here, safe and healthy.”
+
+
+    MC: (still kneeling at Sayori’s side, brushing Sayori’s hair back gently) “You’re so strong, Sayori. I love you… both
+    of you.”
+
+
+    Sayori: (smiling through tears at her friends and husband, cradling Sachiko) “Thank you, everyone… I don’t know what I
+    would have done without you. Sachiko already has the best family and friends in the world.”
+
+
+    (Sachiko’s cries quiet as she nestles into Sayori’s arms.)
+
+
+    Monika: (softly) “Just rest, Sayori. The paramedics should be here any second to check on you and the baby. Until then,
+    we’ll all be right here.”
+
+
+    Natsuki: (wiping her face with her sleeve) “If you ever need anything, Sayori, just say the word. I’ll bring you cupcakes
+    every day, I promise!”
+
+
+    Yuri: (smiling warmly) “And I’ll read Sachiko as many stories as she’d like. Anything to help.”
+
+
+    Sayori: (laughs weakly) “She’s so lucky to have all of you. And so am I.”
+
+
+    (The clubroom, once bustling with panic and activity, falls into a peaceful silence as everyone gathers around Sayori
+    and baby Sachiko, overwhelmed by love and relief.)
+
+
+    MC: (quietly) “Welcome to the world, Sachiko. You’re already so loved.”
+
+
+    (The sound of approaching sirens echoes faintly outside, but for a moment, the Literature Club just sits together, basking
+    in the miracle they helped deliver.)
+
+
+    **END SCENE**'
+  - "**Lista de 20 palabras holandesas:**  \n1. Hond (perro)  \n2. Bloemen (flores)  \n3. Regen (lluvia)  \n4. Fiets (bicicleta)\
+    \  \n5. Appel (manzana)  \n6. Vuurwerk (fuegos artificiales)  \n7. Kat (gato)  \n8. Boom (árbol)  \n9. Sneeuw (nieve)\
+    \  \n10. Zon (sol)  \n11. Muziek (música)  \n12. Dansen (baile)  \n13. Boek (libro)  \n14. Vis (pescado)  \n15. Wind (viento)\
+    \  \n16. Maan (luna)  \n17. Boot (bote)  \n18. Lachen (reírse)  \n19. Schaatsen (patinar)  \n20. Nacht (noche)  \n\n---\n\
+    \n### Historia 1: *Een Koud Nachtschaatsen*  \n*Bij een donkere sneeuwnacht skate ik over het ijs van de meer. De maan\
+    \ schijnt zwak door de wolken, en de wind voelt ijzig op mijn wangen. Mijn hond, Pip, loopt naast me, zijn sporen in de\
+    \ schone sneeuw. Plotseling hoor ik een lachecho van een groepje vrienden die langs een boom groepen dansen, terwijl ze\
+    \ een boek over winteravonturen delen. \"Laten we stoppen!\" roept mijn vriend. Samen vieren we de stilte van de nacht,\
+    \ genietend van hete appels en heet thee...*  \n\n**Traducción al español:**  \n*En una noche oscura y nevada, patino\
+    \ sobre el hielo de un lago. La luna brilla débilmente entre las nubes, y el viento cortante goltea mis mejillas. Mi perro,\
+    \ Pip, camina a mi lado, dejando huellas en la nieve. De repente, escucho risas de un grupo de amigos junto a un árbol\
+    \ bailando en círculo, compartiendo un libro sobre aventuras invernales. ¡\"Detengámonos!\" grita un amigo. Celebramos\
+    \ el silencio de la noche con manzanas calientes y té caliente...*  \n\n---\n\n### Historia 2: *Regen en Bloemen*  \n\
+    *De regen kletterde op het dak, maar ik zat rustig in een rood stoel, lezend een boek met prachtige photo's van bloemen.\
+    \ Opeens hield de storm op, en er stak een zachte wind vanuit het noorden. Ik pakte mijn fiets enreed door een park vol\
+    \ pionussen en appelbomen. Toen ik een roze boom zag vol witte bloemen, stopte ik. Een kat zat onder de boom te slapen.\
+    \ 'Wat een schitterende dag!' dacht ik. Het was alsof de wereld nieuw was geboren...*  \n\n**Traducción al español:**\
+    \  \n*La lluvia golpeaba el techo, pero yo estaba tranquilo en una silla roja leyendo un libro con bellas fotos de flores.\
+    \ De pronto, la tormenta cesó y un suave viento soplando del norte. Tomé mi bicicleta y recorrí un parque lleno de nidos\
+    \ y manzanos. Al ver un árbol rosao con flores blancas, me detuve. Un gato dormía bajo él. \"¡Qué hermoso día!\" pensé.\
+    \ Como si el mundo se hubiera renacido...*  \n\n---\n\n### Historia 3: *Vuurwerk Avond op het Kanaal*  \n*Zaterdagavond,\
+    \ en de booten licht krioelden over het gracht. Muziek en lachen van een festival vulde de lucht. Toeristen dansten op\
+    \ een pier terwijl vuurwerk boven de zonsondergang ontplofte. Ik kocht visstokjes en vulde mijn boeket met bloemen van\
+    \ een straatveiling. Toen een zwarte kat vlak voor een vuurtoren kwam, glimlachte ik. \"Wat een avond!\" fluisterde ik\
+    \ terwijl de wind de geur van zout en papier rook.*  \n\n**Traducción al español:**  \n*Una noche sábado, los botes iluminados\
+    \ bullían por el canal. Música y risas de un festival llenaban el aire. Turistas bailaban en un muelle al ritmo de fuegos\
+    \ artificiales que estallaban sobre el atardecer. Compré brochetas de pescado y adquirí flores en un mercado callejero.\
+    \ Cuando un gato negro apareció cerca de un faro, sonreí. \"¡Qué noche!\" susurré, oliendo el viento a sal y papel...*\
+    \  \n\n---  \nLas historias incluyen todas las palabras en contexto, difieren en tema/estructura y se tradujeron con fidelidad."
+model-index: null
+config:
+  tokenizer_config:
+    cls_token: '[CLS]'
+    mask_token: '[MASK]'
+    pad_token: '[PAD]'
+    sep_token: '[SEP]'
+    unk_token: '[UNK]'
+cardData:
+  tags:
+  - sentence-transformers
+  - sentence-similarity
+  - feature-extraction
+  - dense
+  - generated_from_trainer
+  - dataset_size:430
+  - loss:CachedMultipleNegativesRankingLoss
+  base_model: google-bert/bert-base-multilingual-cased
+  widget:
+  - source_sentence: Develop a Python function that performs sentiment analysis using not just the DistilBERT model but also
+      implements other transformers models from the HuggingFace library for comparison. The function should handle a csv dataset
+      with multiple text columns. The sentiment analysis should also be capable of handling and analyzing data in multiple
+      languages.
+    sentences:
+    - "Here is a general guideline to solve the above problem using python. Please note that without specifics, it's difficult\
+      \ place specific instances for the implementation. However, you can customize this as per your requirements.\n\n```python\n\
+      \nimport pandas as pd\nfrom transformers import pipeline, AutoTokenizer, AutoModelForSequenceClassification, TFAutoModelForSequenceClassification\n\
+      \ndef sentiment_analysis(text_data, model_type, use_cuda=True):\n    # Checks whether to run the model on a GPU or not\n\
+      \    cpu = -1 if use_cuda and torch.cuda.is_available() else 0\n    \n    if model_type: \n        model = AutoModelForSequenceClassification.from_pretrained(model_type)\n\
+      \        tokenizer = AutoTokenizer.from_pretrained(model_type)\n    else: \n        # DistilBert is the default model\n\
+      \        model = TFAutoModelForSequenceClassification.from_pretrained(\"distilbert-base-uncased-finetuned-sst-2-english\"\
+      )\n        tokenizer = AutoTokenizer.from_pretrained(\"distilbert-base-uncased-finetuned-sst-2-english\")\n        \n\
+      \    nlp_model = pipeline('sentiment-analysis', model=model, tokenizer=tokenizer, device=cpu)\n    return nlp_model(text_data)\n\
+      \ndef analyze_sentiment(csv_file_path, text_columns, model_type=None):\n    df = pd.read_csv(csv_file_path)\n    result_dict\
+      \ = {}\n    for column in text_columns:\n        text_data = df[column].tolist()\n        result_dict[column] = sentiment_analysis(text_data,\
+      \ model_type)\n    return result_dict\n\n# Example usage\ncsv_file_path = \"your_csv_file_path.csv\"\ntext_columns =\
+      \ ['col1', 'col2', 'col3']\nmodel_type = \"bert-base-uncased\"\nanalyze_sentiment(csv_file_path, text_columns, model_type)\n\
+      ```\n\nPlease note that to compare the different model's performances, you will want to additionally compute and compare\
+      \ metrics on a shared validation set. This function just runs sentiment analysis with the specified models and does\
+      \ not inherently compare their performances.\n\nThis function uses HuggingFace's `pipeline` function to create the sentiment\
+      \ analysis pipeline, which supports different transformer models such as DistilBERT, BERT, GPT-2, etc. You can adjust\
+      \ the function parameters to use a different model. Note that if the model type is not specified, the default model\
+      \ is DistilBERT.\n\nThe given script is Assuming the dataset is in English. If you want to analyze text in a different\
+      \ language, ensure to use models that support that specific language. Also ensure that you have the necessary resources\
+      \ since these models can be resource-intensive, particularly when processing large amounts of text data."
+    - "\nWe divide P(x) by Q(x) via polynomial long division.  At each step we match the leading term of the current dividend\
+      \ with 3x^3, subtract the product, and bring down lower terms.  Continuing until the remainder has degree < 3, we find\
+      \ the final remainder\n  S(x) = −2x² + 3x + 3.\nHence the integer coefficients are s₀ = 3, s₁ = 3, s₂ = −2.\n\nAnswer:\
+      \ \n3 3 -2\n"
+    - "Let's analyze each pair of compounds step by step to determine which has the higher property value based on molecular\
+      \ structure and intermolecular forces:\n\n---\n\n### (a) **Melting Point: Hexylamine or Dipropyl Ether**  \n- **Hexylamine**\
+      \ is a primary amine (R–NH₂), which can **form hydrogen bonds** (both donating and accepting H-bonds due to its -NH₂\
+      \ group).  \n- **Dipropyl ether** has an oxygen in the ether group (R–O–R'), but **no hydrogen bonded directly to oxygen**,\
+      \ so it cannot act as a hydrogen bond donor. It can only weakly accept H-bonds from other molecules.  \n- **Conclusion**:\
+      \ Hexylamine has stronger intermolecular forces (H-bonding) → **higher melting point** than dipropyl ether.  \n\n---\n\
+      \n### (b) **Solubility in Water: Methylamine or Octylamine**  \n- **Methylamine** (CH₃NH₂) has a **small hydrocarbon\
+      \ chain** and a polar -NH₂ group. The polarity and hydrogen bonding capability dominate, promoting solubility in water.\
+      \  \n- **Octylamine** ((C₈H₁₇)NH₂) has a **long hydrocarbon chain** that is nonpolar. The hydrophobic effect outweighs\
+      \ the polar -NH₂ group, reducing solubility in water.  \n- **Conclusion**: Methylamine is **more soluble in water**\
+      \ due to its smaller hydrophobic region.  \n\n---\n\n### (c) **Solubility in Hexane: Methylamine or Octylamine**  \n\
+      - **Methylamine**: The -NH₂ group is polar, which reduces solubility in nonpolar hexane.  \n- **Octylamine**: The longer\
+      \ hydrocarbon chain (–C₈H₁₇) is **nonpolar and hydrophobic**, aligning better with hexane's nonpolar solvent.  \n- **Conclusion**:\
+      \ Octylamine is **more soluble in hexane** due to its greater hydrophobic character.  \n\n---\n\n### (d) **Boiling Point:\
+      \ Nonylamine or 1,8-Octanediamine**  \n- **Nonylamine** (R–NH₂, R = nonyl group) is a primary amine with a **long chain\
+      \ (9 carbons)**. It can form H-bonds but only has **one -NH₂ group per molecule**.  \n- **1,8-Octanediamine** (NH₂-(CH₂)₆-NH₂)\
+      \ has **two -NH₂ groups** per molecule, allowing it to **form more hydrogen bonds intermolecularly**. The dipolar amine\
+      \ structure also enhances H-bonding capacity.  \n- **Conclusion**: 1,8-Octanediamine has **stronger intermolecular forces**\
+      \ due to dual H-bonding sites → **higher boiling point** than nonylamine.  \n\n---\n\n### Final Answers:  \n(a) **Hexylamine**\
+      \ has a higher melting point.  \n(b) **Methylamine** has higher solubility in water.  \n(c) **Octylamine** has higher\
+      \ solubility in hexane.  \n(d) **1,8-Octanediamine** has a higher boiling point.  \n\nThese conclusions stem from evaluating\
+      \ intermolecular forces (H-bonding), molecular size, and polarity/solubility preferences."
+  - source_sentence: "This is a logic puzzle. There are 5 houses (numbered 1 on the left, 5 on the right), from the perspective\
+      \ of someone standing across the street from them. Each has a different person in them. They have different characteristics:\n\
+      \ - Each person has a unique name: `david`, `bob`, `arnold`, `carol`, `alice`\n - Each person has a favorite drink:\
+      \ `milk`, `boba tea`, `root beer`, `coffee`, `water`\n - Each mother is accompanied by their child: `alice`, `bella`,\
+      \ `billy`, `fred`, `timothy`\n - Everyone has a favorite smoothie: `dragonfruit`, `lemon`, `darkness`, `butterscotch`,\
+      \ `desert`\n - Each person has a favorite color: `white`, `yellow`, `purple`, `brown`, `blue`\n\n\n## Clues:\n1. The\
+      \ boba tea drinker is in the second house.\n2. The Dragonfruit smoothie lover is the root beer lover.\n3. The boba tea\
+      \ drinker is the person who is the mother of Timothy.\n4. The person who loves blue is in the third house.\n5. Arnold\
+      \ is the person who loves purple.\n6. The Dragonfruit smoothie lover is Bob.\n7. Carol is directly left of the person\
+      \ who loves purple.\n8. David is the person who loves yellow.\n9. The coffee drinker is the person's child is named\
+      \ Fred.\n10. The Butterscotch smoothie drinker is the one who only drinks water.\n11. The Desert smoothie lover and\
+      \ the person who loves purple are next to each other.\n12. The person who is the mother of Billy is the person who loves\
+      \ purple.\n13. The person who loves brown is directly left of the Darkness smoothie drinker.\n14. The Lemon smoothie\
+      \ lover is the person's child is named Alice.\n15. The person's child is named Bella is the person who loves blue.\n\
+      \nWhat is Name of the person who lives in House 1? Provide only the name of the person as your final answer."
+    sentences:
+    - 'Movie A, The Lord of the Rings: The Two Towers (Widescreen Edition) (2002), is a 2003 fantasy film directed by Peter
+      Jackson and starring Elijah Wood. It has a runtime of 179 minutes and a cost of $4.00. Movie B, The Hobbit: The Desolation
+      of Smaug, is a 2013 fantasy film directed by Peter Jackson and starring Ian McKellen, Bret McKenzie, Martin Freeman
+      (II), Richard Armitage, Andy Serkis, and Benedict Cumberbatch. It has a runtime of 2 hr. 41 min. and a Rotten Tomatoes
+      score of 74 and an audience rating of 85. Both movies are directed by Peter Jackson, but they are different films with
+      different casts, runtimes, and reviews. Therefore, the final answer is {"answer": "No"}.'
+    - '
+
+
+      david'
+    - '
+
+      We want S = ∑_{i=1}^{38} gcd(i,38).  Use the standard divisor–totient identity:
+
+      For any n, ∑_{i=1}^n gcd(i,n) = ∑_{d|n} d·φ(n/d).
+
+
+      Here n = 38 = 2·19. Its divisors are 1, 2, 19, 38.
+
+
+      Compute Euler’s totient for the quotients:
+
+      φ(38) = φ(2·19) = φ(2)·φ(19) = 1·18 = 18
+
+      φ(19) = 18
+
+      φ(2) = 1
+
+      φ(1) = 1
+
+
+      Now sum:
+
+      d=1: 1·φ(38/1)=1·φ(38)=1·18=18
+
+      d=2: 2·φ(38/2)=2·φ(19)=2·18=36
+
+      d=19: 19·φ(38/19)=19·φ(2)=19·1=19
+
+      d=38: 38·φ(38/38)=38·φ(1)=38·1=38
+
+
+      Total S = 18 + 36 + 19 + 38 = 111.
+
+
+      Answer: 111'
+  - source_sentence: 'Help rewrite and fix following: The story starts in a clandestine martial arts stage between two hated
+      rivals who are on the verge of their limit after a high display of combat. The fighters are Kareen and Mishaali, Kolkatan
+      and Hyderabadi respectively, two Indian rivals, currently residing in California, who are considered the best fighters
+      in India. Both women have had multiple matches, official and privately, to prove their superiority over the other as
+      India’s top female fighter, both women having many wins over the others.
+
+      They have never gotten along and probably never will.
+
+      Both women have been married before but eventually seperated due to family problems which their rivalry had a part in.
+      At their current 45 years of age both women are still at the peak of their physical prowess, equally strong, voluptuous,
+      attractive and fit. Their fighting skills just as flawless as ever. However, they are very much aware that their life
+      as fighters, their passionate sport, is very much near its end. Both women longed for a partner who can continue to
+      support them financially and also keep them happy and interested, they longed for a last chance at true love.
+
+
+      During the fight night in which both women had knocked down eacb other after giving each other a powerful punch, they
+      collapsed on the steel cage, seemingly beaten and unable to continue. During the fight, both women''s wanted man had
+      witnessed their epic fight, they just didn''t know it yet. The fight had officially been called draw despite both women
+      getting back to their feet and willing to continue fighting.
+
+
+      The man of interest was a successfull business owner, he had entered to watch the fight and decide who would suit him
+      to represent him against a rival company''s manager''s championess. He was highly impressed with both women''s skills
+      and determination to beat the other, but the draw left him undecided as to who would represent him, both were very good
+      choice, but he needed the better fighter to represent him.
+
+
+
+      After the fight, he came to both women''s managers in private seperately to tell them that he was interested in hiring
+      the other. Both managers were glad to hear about the business man''s offer, they knew it was good money. However, since
+      they were met seperately, neither was aware that the other fighter''s rival was booked for an appointment to meet with
+      him. Had both managers known the business was arranging to meet with them together, they would not have agreed for the
+      safety of their fighter. After all, Kareen and Mishaali hated each other passionately.'
+    sentences:
+    - "Here’s a revised and improved version of your narrative, focusing on clarity, flow, and language polish:\n\n---\n\n\
+      The story opens in a secret martial arts arena, where two bitter rivals—Kareen from Kolkata and Mishaali from Hyderabad—clash\
+      \ in a fierce, high-stakes duel. Both women, now residing in California, are hailed as India's finest female fighters.\
+      \ Their long-standing rivalry has spanned numerous official bouts and private showdowns, each determined to prove herself\
+      \ India's undisputed champion. Over the years, both have notched multiple victories over one another, but true dominance\
+      \ remains elusive.  \n\nKareen and Mishaali have never been friends, and their animosity only deepened with time. Both\
+      \ have been married and since separated—family discord, compounded by their relentless rivalry, playing a key role in\
+      \ their breakups. Now at 45, the women remain in peak physical condition: strong, attractive, voluptuous, and fit, their\
+      \ skills as sharp as ever. Yet, they're acutely aware that the twilight of their fighting careers looms near. Each yearns\
+      \ for a partner who can offer financial support and genuine companionship—a last shot at real love.\n\nOn fight night,\
+      \ after a brutal exchange culminating in simultaneous knockdowns, both women collapsed against the steel cage, exhausted\
+      \ and battered. Unbeknownst to them, the man both secretly desire watched their epic battle unfold. The match was declared\
+      \ a draw when neither fighter could continue, despite both struggling to their feet and demanding to fight on.\n\nThe\
+      \ mysterious spectator—a successful businessman—had come to scout for a representative to challenge a rival company\
+      \ manager’s champion fighter. Astonished by Kareen's and Mishaali’s resolve and skill, he found himself unable to choose\
+      \ between them. Both were impressive; yet, he needed a single representative—the superior fighter.\n\nAfter the match,\
+      \ the businessman privately approached each woman’s manager, expressing interest in hiring their fighter. Both managers\
+      \ were delighted at the lucrative opportunity, unaware that their rival counterpart had received the same invitation.\
+      \ If they’d known both Kareen and Mishaali had been summoned, they would have hesitated, fearing another explosive encounter\
+      \ between the bitter rivals.\n\n---\n\nLet me know if you’d like it to be more concise or need help with further edits!"
+    - "Звісно! Вам потрібно приймати дані з форми, перевіряти, вставляти їх у таблиці **Клієнти**, **Тури** і **Замовлення**.\
+      \  \nЯ наведу приклад простого PHP сценарію (`book_tour.php`), що показує основну логіку вставки (без складної валідації\
+      \ й захисту, лише базове).\n\n**ВАЖЛИВО!**  \n- Замість `YOUR_DB_USERNAME`, `YOUR_DB_PASSWORD` і т.д. підставте свої\
+      \ реальні параметри.\n- В ідеалі тут варто робити нормалізацію, захист від SQL-ін'єкцій (Prepared Statements) та обробку\
+      \ колізій і помилок.\n- Extra: Поля типу \"Країни\", \"Вид подорожі\", \"Хостел\", \"Транспорт\" у вашій формі - текстові,\
+      \ а в БД вони повинні бути *id* (тут показано простий підхід, як з цим працювати; розгляньте заміну інпутів форми на\
+      \ select з конкретними значеннями із БД для production).\n\n---\n\n### PHP: `book_tour.php`\n\n```php\n<?php\n// 1.\
+      \ connect\n$mysqli = new mysqli(\"localhost\", \"YOUR_DB_USERNAME\", \"YOUR_DB_PASSWORD\", \"YOUR_DB_NAME\");\nif ($mysqli->connect_errno)\
+      \ {\n    die(\"Не вдалося підключитися до MySQL: \" . $mysqli->connect_error);\n}\n\n// 2. sanitize inputs\n$fullName\
+      \ = $mysqli->real_escape_string($_POST['fullName']);\n$phone = $mysqli->real_escape_string($_POST['phone']);\n$email\
+      \ = $mysqli->real_escape_string($_POST['email']);\n$departureDate = $mysqli->real_escape_string($_POST['departureDate']);\n\
+      $returnDate = $mysqli->real_escape_string($_POST['returnDate']);\n$departureCity = $mysqli->real_escape_string($_POST['departureCity']);\n\
+      $children = $mysqli->real_escape_string($_POST['children']);\n$food = $mysqli->real_escape_string($_POST['food']);\n\
+      \n$countryName = $mysqli->real_escape_string($_POST['countries']); // Тут краще select!\n$travelType = $mysqli->real_escape_string($_POST['travelType']);\
+      \ // Тут краще select!\n$hostelName = $mysqli->real_escape_string($_POST['hostel']); // select!\n$transportName = $mysqli->real_escape_string($_POST['transport']);\
+      \ // select!\n\n// 3. Перевірити/додати країну\n$countryId = null;\n$res = $mysqli->query(\"SELECT id_Країни FROM `Країни`\
+      \ WHERE `Країни` = '$countryName'\");\nif ($row = $res->fetch_assoc()) {\n    $countryId = $row['id_Країни'];\n} else\
+      \ {\n    $mysqli->query(\"INSERT INTO `Країни` (`Країни`) VALUES ('$countryName')\");\n    $countryId = $mysqli->insert_id;\n\
+      }\n\n// 4. Перевірити/додати вид туру\n$typeId = null;\n$res = $mysqli->query(\"SELECT id_Вид FROM `Вид тур` WHERE `Вид\
+      \ тура` = '$travelType'\");\nif ($row = $res->fetch_assoc()) {\n    $typeId = $row['id_Вид'];\n} else {\n    $mysqli->query(\"\
+      INSERT INTO `Вид тур` (`Вид тура`) VALUES ('$travelType')\");\n    $typeId = $mysqli->insert_id;\n}\n\n// 5. Перевірити/додати\
+      \ хостел\n$hostelId = null;\n$res = $mysqli->query(\"SELECT id_Хостел FROM `Хостел` WHERE `Назва` = '$hostelName'\"\
+      );\nif ($row = $res->fetch_assoc()) {\n    $hostelId = $row['id_Хостел'];\n} else {\n    $mysqli->query(\"INSERT INTO\
+      \ `Хостел` (`Назва`, `Адрес`, `рейтинг`) VALUES ('$hostelName', '', 0)\");\n    $hostelId = $mysqli->insert_id;\n}\n\
+      \n// 6. Перевірити/додати транспорт\n$transportId = null;\n$res = $mysqli->query(\"SELECT id_Транспорт FROM `Транспорт`\
+      \ WHERE `транспорт` = '$transportName'\");\nif ($row = $res->fetch_assoc()) {\n    $transportId = $row['id_Транспорт'];\n\
+      } else {\n    $mysqli->query(\"INSERT INTO `Транспорт` (`транспорт`) VALUES ('$transportName')\");\n    $transportId\
+      \ = $mysqli->insert_id;\n}\n\n// 7. Додати тур\n$mysqli->query(\"INSERT INTO `Тури` (\n    `Дата відправлення`, `Дата\
+      \ К`, `Місто відправлення`, `Діти`, `Харчування`, \n    `Країни`, `Вид тура`, `Хостел`, `Транспорт`\n) VALUES (\n  \
+      \  '$departureDate', '$returnDate', '$departureCity', '$children', '$food', \n    '$countryId', '$typeId', '$hostelId',\
+      \ '$transportId'\n)\");\n$tourId = $mysqli->insert_id;\n\n// 8. Додати клієнта (перевірити, чи вже є)\n$res = $mysqli->query(\"\
+      SELECT id_Клієнт FROM `Клієнти` WHERE `ПІБ` = '$fullName' AND `Пошта` = '$email'\");\nif ($row = $res->fetch_assoc())\
+      \ {\n    $clientId = $row['id_Клієнт'];\n} else {\n    $mysqli->query(\"INSERT INTO `Клієнти` (`ПІБ`, `Контактні дані`,\
+      \ `Пошта`)\n        VALUES ('$fullName', '$phone', '$email')\");\n    $clientId = $mysqli->insert_id;\n}\n\n// 9. Додати\
+      \ замовлення (припустимо, що оператор id = 1)\n$status = \"очікує підтвердження\";\n$operatorId = 1; // Або логін/сесія\
+      \ (manual set!)\n$date = date(\"Y-m-d\");\n$mysqli->query(\"INSERT INTO `Замовлення` (`Дата`, `Тури`, `Статус`, `Оператор`,\
+      \ `Клієнт`)\n                VALUES ('$date', '$tourId', '$status', '$operatorId', '$clientId')\");\n\n// 10. Done\n\
+      echo \"<h2>Ваше замовлення прийнято!</h2>\";\n$mysqli->close();\n```\n\n---\n\n### ЯК ПІДКЛЮЧИТИ:\n\n1. В формі змініть\
+      \  \n   ```\n   <form class=\"book-form\" action=\"book_tour.php\" method=\"post\">\n   ```\n2. В `book_tour.php`, вкажіть\
+      \ свої доступи до БД.\n3. Форма буде додавати дані відповідно до вашої структури.\n\n---\n\n> **Рекомендовано:**  \n\
+      > - поля \"Країни\", \"Вид подорожі\", \"Хостел\", \"Транспорт\" винести у `<select>` і наповнювати їх із БД, а не редагувати\
+      \ руками!  \n> - використовувати підготовлені запити (mysqli або PDO Prepared Statements);  \n> - додати захист від\
+      \ ботів/спаму (капча і т.д.).  \n> - сховати операторів авторизацією/сесіями, не hardcode.\n\n**Якщо треба показати\
+      \ приклад select-ів або кращу безпеку - пиши!**"
+    - "To find out how much confidence Emma will gain after 4 weeks, we can follow these steps:\n\n1. **Determine the number\
+      \ of events per week:**\n   - Emma plans to hold 3 events each week.\n\n2. **Calculate the total number of events over\
+      \ 4 weeks:**\n   - Since there are 4 weeks, the total number of events is given by:\n     \\[\n     3 \\text{ events/week}\
+      \ \\times 4 \\text{ weeks} = 12 \\text{ events}\n     \\]\n\n3. **Calculate the confidence gained per event:**\n   -\
+      \ Each event boosts her confidence by 5 percentage points.\n\n4. **Calculate the total confidence gained after all events:**\n\
+      \   - The total confidence gained after 12 events is:\n     \\[\n     12 \\text{ events} \\times 5 \\text{ percentage\
+      \ points/event} = 60 \\text{ percentage points}\n     \\]\n\nTherefore, after 4 weeks, Emma will gain a total of 60\
+      \ percentage points in confidence.\n\n#### 60"
+  - source_sentence: You are a helpful function-calling AI assistant. You are provided with function signatures within <functions></functions>
+      XML tags. You may call one or more functions to assist with the user query. Output any function calls within <function_calls></function_calls>
+      XML tags. Don't make assumptions about what values to plug into functions.
+    sentences:
+    - 'Let''s solve the given problem step-by-step.
+
+
+      ### Part 1: Maximizing the Magnitude of **R**
+
+
+      Given:
+
+      - **P** = [0.8, 0.6, 0.9]
+
+      - **F** = [0.7, 0.8, 0.75]
+
+      - α and β are non-negative weights such that α + β = 1
+
+      - **R** = α**P** + β**F**
+
+
+      We need to maximize the magnitude of **R** (i.e., ||**R**||).
+
+
+      First, let''s calculate **R** in terms of α and β:
+
+      \[ \mathbf{R} = \alpha \mathbf{P} + \beta \mathbf{F} \]
+
+
+      Since α + β = 1, we can write β as (1 - α):
+
+      \[ \mathbf{R} = \alpha \mathbf{P} + (1 - \alpha) \mathbf{F} \]
+
+
+      Substituting the vectors **P** and **F**:
+
+      \[ \mathbf{R} = \alpha [0.8, 0.6, 0.9] + (1 - \alpha) [0.7, 0.8, 0.75] \]
+
+
+      Distributing α and (1 - α):
+
+      \[ \mathbf{R} = [0.8\alpha + 0.7(1 - \alpha), 0.6\alpha + 0.8(1 - \alpha), 0.9\alpha + 0.75(1 - \alpha)] \]
+
+      \[ \mathbf{R} = [0.8\alpha + 0.7 - 0.7\alpha, 0.6\alpha + 0.8 - 0.8\alpha, 0.9\alpha + 0.75 - 0.75\alpha] \]
+
+      \[ \mathbf{R} = [0.1\alpha + 0.7, -0.2\alpha + 0.8, 0.15\alpha + 0.75] \]
+
+
+      To find the magnitude of **R**:
+
+      \[ ||\mathbf{R}|| = \sqrt{(0.1\alpha + 0.7)^2 + (-0.2\alpha + 0.8)^2 + (0.15\alpha + 0.75)^2} \]
+
+
+      We need to maximize this magnitude. Let''s differentiate ||**R**|| with respect to α and set the derivative to 0 to
+      find the critical points.
+
+
+      Let:
+
+      \[ f(\alpha) = (0.1\alpha + 0.7)^2 + (-0.2\alpha + 0.8)^2 + (0.15\alpha + 0.75)^2 \]
+
+
+      Differentiate f(α) with respect to α:
+
+      \[ f''(\alpha) = 2(0.1\alpha + 0.7)(0.1) + 2(-0.2\alpha + 0.8)(-0.2) + 2(0.15\alpha + 0.75)(0.15) \]
+
+      \[ f''(\alpha) = 2 [0.01\alpha + 0.07 - 0.04\alpha + 0.16 + 0.0225\alpha + 0.1125] \]
+
+      \[ f''(\alpha) = 2 [(-0.01 + 0.0225 + 0.01)\alpha + (0.07 + 0.16 + 0.1125)] \]
+
+      \[ f''(\alpha) = 2 [0.0225\alpha + 0.3425] \]
+
+
+      Set f''(\alpha) = 0 for maximization:
+
+      \[ 0.0225\alpha + 0.3425 = 0 \]
+
+      \[ 0.0225\alpha = -0.3425 \]
+
+      \[ \alpha = -\frac{0.3425}{0.0225} \approx -15.22 \]
+
+
+      However, this value of α is not valid since α and β must be non-negative and α + β = 1 where both α and β are in the
+      range [0, 1].
+
+
+      Therefore, we test boundary values:
+
+      - When α = 0, β = 1: \(\mathbf{R} = \mathbf{F} = [0.7, 0.8, 0.75]\)
+
+      - When α = 1, β = 0: \(\mathbf{R} = \mathbf{P} = [0.8, 0.6, 0.9]\)
+
+
+      Calculate magnitudes:
+
+      \[ ||\mathbf{R}|| \text{ for } \mathbf{F} = \sqrt{0.7^2 + 0.8^2 + 0.75^2} = \sqrt{0.49 + 0.64 + 0.5625} = \sqrt{1.6925}
+      \approx 1.30 \]
+
+
+      \[ ||\mathbf{R}|| \text{ for } \mathbf{P} = \sqrt{0.8^2 + 0.6^2 + 0.9^2} = \sqrt{0.64 + 0.36 + 0.81} = \sqrt{1.81} \approx
+      1.345 \]
+
+
+      The maximum magnitude occurs at α = 1, β = 0.
+
+
+      ### Part 2: Probability of Exceeding μ + 0.2σ
+
+
+      Given:
+
+      - μ = ||**R**|| = 1.345 (from Part 1)
+
+      - σ = 0.1μ = 0.1 * 1.345 = 0.1345
+
+
+      We need to find the probability that the match performance score M exceeds μ + 0.2σ:
+
+      \[ P(M > \mu + 0.2\sigma) = P\left(M > 1.345 + 0.2 \times 0.1345\right) \]
+
+      \[ P(M > 1.345 + 0.0269) = P(M > 1.3719) \]
+
+
+      Standardize the normal variable:
+
+      \[ Z = \frac{M - \mu}{\sigma} \]
+
+      \[ Z = \frac{1.3719 - 1.345}{0.1345} \]
+
+      \[ Z = \frac{0.0269}{0.1345} \approx 0.2 \]
+
+
+      Using the standard normal distribution table, find:
+
+      \[ P(Z > 0.2) \]
+
+
+      From the standard normal distribution table:
+
+      \[ P(Z > 0.2) = 1 - P(Z \leq 0.2) \]
+
+      \[ P(Z \leq 0.2) \approx 0.5793 \]
+
+      \[ P(Z > 0.2) \approx 1 - 0.5793 = 0.4207 \]
+
+
+      Final Answer: The final answer is \(0.4207\). I hope it is correct.'
+    - '
+
+      We need to integrate F''(x) = (2*x**2*exp(x**2) - 1)/x.
+
+
+      Split the integrand:
+
+      (2*x**2*exp(x**2) - 1)/x = 2*x*exp(x**2) - 1/x.
+
+
+      Integrate term by term:
+
+      ∫2*x*exp(x**2) dx = exp(x**2)  (since derivative of x**2 is 2*x),
+
+      ∫1/x dx = log(x).
+
+
+      Thus an antiderivative is F(x) = exp(x**2) - log(x) + C.
+
+      We drop the constant for a particular antiderivative.
+
+
+      Answer: exp(x**2) - log(x)'
+    - Show me all the weed strains that are easy to grow.
+  - source_sentence: 'Write a concise summary of the following. Be sure to preserve important details: The possibilities here
+      are endless. Magic and technology are often what authors of genre fiction think of first when they think about worldbuilding,
+      and they can be the most fun parts of worldbuilding. When you’re thinking about magic and technology, you can bend rules
+      liberally:'
+    sentences:
+    - Magic and technology are central and often the most enjoyable elements of worldbuilding in genre fiction, offering limitless
+      creative possibilities. Authors can freely bend rules when developing these aspects.
+    - 'Natsuki: (sniffling and grinning) “Look at her! She’s so tiny and cute… Sayori, you did amazing. I can’t believe we
+      all just… delivered a baby together.”
+
+
+      Yuri: (clasping her hands, still trembling with adrenaline) “Yes… Sayori, you were incredibly brave. And Sachiko is
+      beautiful. She’s so precious.”
+
+
+      Monika: (letting out a deep breath, trying to steady her nerves) “I’m so proud of all of us. Sayori, you were so strong,
+      and everyone worked together perfectly. I’m just… so relieved Sachiko is here, safe and healthy.”
+
+
+      MC: (still kneeling at Sayori’s side, brushing Sayori’s hair back gently) “You’re so strong, Sayori. I love you… both
+      of you.”
+
+
+      Sayori: (smiling through tears at her friends and husband, cradling Sachiko) “Thank you, everyone… I don’t know what
+      I would have done without you. Sachiko already has the best family and friends in the world.”
+
+
+      (Sachiko’s cries quiet as she nestles into Sayori’s arms.)
+
+
+      Monika: (softly) “Just rest, Sayori. The paramedics should be here any second to check on you and the baby. Until then,
+      we’ll all be right here.”
+
+
+      Natsuki: (wiping her face with her sleeve) “If you ever need anything, Sayori, just say the word. I’ll bring you cupcakes
+      every day, I promise!”
+
+
+      Yuri: (smiling warmly) “And I’ll read Sachiko as many stories as she’d like. Anything to help.”
+
+
+      Sayori: (laughs weakly) “She’s so lucky to have all of you. And so am I.”
+
+
+      (The clubroom, once bustling with panic and activity, falls into a peaceful silence as everyone gathers around Sayori
+      and baby Sachiko, overwhelmed by love and relief.)
+
+
+      MC: (quietly) “Welcome to the world, Sachiko. You’re already so loved.”
+
+
+      (The sound of approaching sirens echoes faintly outside, but for a moment, the Literature Club just sits together, basking
+      in the miracle they helped deliver.)
+
+
+      **END SCENE**'
+    - "**Lista de 20 palabras holandesas:**  \n1. Hond (perro)  \n2. Bloemen (flores)  \n3. Regen (lluvia)  \n4. Fiets (bicicleta)\
+      \  \n5. Appel (manzana)  \n6. Vuurwerk (fuegos artificiales)  \n7. Kat (gato)  \n8. Boom (árbol)  \n9. Sneeuw (nieve)\
+      \  \n10. Zon (sol)  \n11. Muziek (música)  \n12. Dansen (baile)  \n13. Boek (libro)  \n14. Vis (pescado)  \n15. Wind\
+      \ (viento)  \n16. Maan (luna)  \n17. Boot (bote)  \n18. Lachen (reírse)  \n19. Schaatsen (patinar)  \n20. Nacht (noche)\
+      \  \n\n---\n\n### Historia 1: *Een Koud Nachtschaatsen*  \n*Bij een donkere sneeuwnacht skate ik over het ijs van de\
+      \ meer. De maan schijnt zwak door de wolken, en de wind voelt ijzig op mijn wangen. Mijn hond, Pip, loopt naast me,\
+      \ zijn sporen in de schone sneeuw. Plotseling hoor ik een lachecho van een groepje vrienden die langs een boom groepen\
+      \ dansen, terwijl ze een boek over winteravonturen delen. \"Laten we stoppen!\" roept mijn vriend. Samen vieren we de\
+      \ stilte van de nacht, genietend van hete appels en heet thee...*  \n\n**Traducción al español:**  \n*En una noche oscura\
+      \ y nevada, patino sobre el hielo de un lago. La luna brilla débilmente entre las nubes, y el viento cortante goltea\
+      \ mis mejillas. Mi perro, Pip, camina a mi lado, dejando huellas en la nieve. De repente, escucho risas de un grupo\
+      \ de amigos junto a un árbol bailando en círculo, compartiendo un libro sobre aventuras invernales. ¡\"Detengámonos!\"\
+      \ grita un amigo. Celebramos el silencio de la noche con manzanas calientes y té caliente...*  \n\n---\n\n### Historia\
+      \ 2: *Regen en Bloemen*  \n*De regen kletterde op het dak, maar ik zat rustig in een rood stoel, lezend een boek met\
+      \ prachtige photo's van bloemen. Opeens hield de storm op, en er stak een zachte wind vanuit het noorden. Ik pakte mijn\
+      \ fiets enreed door een park vol pionussen en appelbomen. Toen ik een roze boom zag vol witte bloemen, stopte ik. Een\
+      \ kat zat onder de boom te slapen. 'Wat een schitterende dag!' dacht ik. Het was alsof de wereld nieuw was geboren...*\
+      \  \n\n**Traducción al español:**  \n*La lluvia golpeaba el techo, pero yo estaba tranquilo en una silla roja leyendo\
+      \ un libro con bellas fotos de flores. De pronto, la tormenta cesó y un suave viento soplando del norte. Tomé mi bicicleta\
+      \ y recorrí un parque lleno de nidos y manzanos. Al ver un árbol rosao con flores blancas, me detuve. Un gato dormía\
+      \ bajo él. \"¡Qué hermoso día!\" pensé. Como si el mundo se hubiera renacido...*  \n\n---\n\n### Historia 3: *Vuurwerk\
+      \ Avond op het Kanaal*  \n*Zaterdagavond, en de booten licht krioelden over het gracht. Muziek en lachen van een festival\
+      \ vulde de lucht. Toeristen dansten op een pier terwijl vuurwerk boven de zonsondergang ontplofte. Ik kocht visstokjes\
+      \ en vulde mijn boeket met bloemen van een straatveiling. Toen een zwarte kat vlak voor een vuurtoren kwam, glimlachte\
+      \ ik. \"Wat een avond!\" fluisterde ik terwijl de wind de geur van zout en papier rook.*  \n\n**Traducción al español:**\
+      \  \n*Una noche sábado, los botes iluminados bullían por el canal. Música y risas de un festival llenaban el aire. Turistas\
+      \ bailaban en un muelle al ritmo de fuegos artificiales que estallaban sobre el atardecer. Compré brochetas de pescado\
+      \ y adquirí flores en un mercado callejero. Cuando un gato negro apareció cerca de un faro, sonreí. \"¡Qué noche!\"\
+      \ susurré, oliendo el viento a sal y papel...*  \n\n---  \nLas historias incluyen todas las palabras en contexto, difieren\
+      \ en tema/estructura y se tradujeron con fidelidad."
+  pipeline_tag: sentence-similarity
+  library_name: sentence-transformers
+siblings:
+- rfilename: .gitattributes
+- rfilename: 1_Pooling/config.json
+- rfilename: README.md
+- rfilename: adapter_config.json
+- rfilename: adapter_model.bin
+- rfilename: adapter_model.safetensors
+- rfilename: config_sentence_transformers.json
+- rfilename: merges.txt
+- rfilename: modules.json
+- rfilename: sentence_bert_config.json
+- rfilename: special_tokens_map.json
+- rfilename: tokenizer.json
+- rfilename: tokenizer_config.json
+- rfilename: training_args.bin
+- rfilename: vocab.json
+- rfilename: vocab.txt
+spaces: []
+createdAt: '2026-02-15T06:38:07.000Z'
+usedStorage: 3385084268
+downloadsAllTime: 342
+inferenceProviderMapping: {}
+configJson: null
+onnxFiles: {}
+safetensorsSizeMb: 8.9
+approxSizeMb: 0.0
+fetchedAt: '2026-06-08T13:32:59.000Z'

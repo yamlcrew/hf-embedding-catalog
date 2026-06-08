@@ -1,0 +1,141 @@
+_id: 6716c1539a01a6f482c683db
+id: recursionpharma/OpenPhenom
+private: false
+pipeline_tag: feature-extraction
+library_name: transformers
+tags:
+- transformers
+- safetensors
+- MAE
+- feature-extraction
+- custom_code
+- region:us
+downloads: 4189
+likes: 21
+modelId: recursionpharma/OpenPhenom
+author: recursionpharma
+sha: 0f92333685f6e9f031b804c70fe246f9b05ae90d
+lastModified: '2026-03-04T20:37:36.000Z'
+gated: false
+disabled: false
+model-index: null
+config:
+  auto_map:
+    AutoModel: huggingface_mae.MAEModel
+    AutoConfig: huggingface_mae.MAEConfig
+  architectures:
+  - MAEModel
+  model_type: MAE
+cardData:
+  library_name: transformers
+  tags: []
+transformersInfo:
+  auto_model: AutoModel
+  custom_class: huggingface_mae.MAEModel
+  pipeline_tag: feature-extraction
+siblings:
+- rfilename: .gitattributes
+- rfilename: .gitignore
+- rfilename: LICENSE
+- rfilename: README.md
+- rfilename: RxRx3-core_inference.ipynb
+- rfilename: __init__.py
+- rfilename: config.json
+- rfilename: config.yaml
+- rfilename: generate_reconstructions.ipynb
+- rfilename: huggingface_mae.py
+- rfilename: loss.py
+- rfilename: mae_modules.py
+- rfilename: mae_utils.py
+- rfilename: masking.py
+- rfilename: model.safetensors
+- rfilename: normalizer.py
+- rfilename: pyproject.toml
+- rfilename: sample/AA41_s1_1.jp2
+- rfilename: sample/AA41_s1_2.jp2
+- rfilename: sample/AA41_s1_3.jp2
+- rfilename: sample/AA41_s1_4.jp2
+- rfilename: sample/AA41_s1_5.jp2
+- rfilename: sample/AA41_s1_6.jp2
+- rfilename: test_huggingface_mae.py
+- rfilename: vit.py
+- rfilename: vit_encoder.py
+spaces: []
+createdAt: '2024-10-21T21:02:11.000Z'
+usedStorage: 1767181682
+downloadsAllTime: 151110
+inferenceProviderMapping: {}
+configJson:
+  _attn_implementation_autoset: true
+  auto_map:
+    AutoModel: huggingface_mae.MAEModel
+    AutoConfig: huggingface_mae.MAEConfig
+  apply_loss_unmasked: false
+  architectures:
+  - MAEModel
+  crop_size: -1
+  decoder:
+    _target_: mae_modules.CAMAEDecoder
+    depth: 8
+    embed_dim: 512
+    mlp_ratio: 4
+    norm_layer:
+      _partial_: true
+      _target_: torch.nn.LayerNorm
+      eps: 1.0e-06
+    num_heads: 16
+    num_modalities: 6
+    qkv_bias: true
+    tokens_per_modality: 256
+  encoder:
+    _target_: mae_modules.MAEEncoder
+    channel_agnostic: true
+    max_in_chans: 11
+    vit_backbone:
+      _target_: vit.sincos_positional_encoding_vit
+      vit_backbone:
+        _target_: vit.vit_small_patch16_256
+        global_pool: avg
+  fourier_loss:
+    _target_: loss.FourierLoss
+    num_multimodal_modalities: 6
+  fourier_loss_weight: 0.0
+  input_norm:
+    _args_:
+    - _target_: normalizer.Normalizer
+    - _target_: torch.nn.InstanceNorm2d
+      affine: false
+      num_features: null
+      track_running_stats: false
+    _target_: torch.nn.Sequential
+  layernorm_unfreeze: true
+  loss:
+    _target_: torch.nn.MSELoss
+    reduction: none
+  lr_scheduler:
+    _partial_: true
+    _target_: torch.optim.lr_scheduler.OneCycleLR
+    anneal_strategy: cos
+    max_lr: 0.0001
+    pct_start: 0.1
+  mask_fourier_loss: true
+  mask_ratio: 0.0
+  model_type: MAE
+  norm_pix_loss: false
+  num_blocks_to_freeze: 0
+  optimizer:
+    _partial_: true
+    _target_: timm.optim.lion.Lion
+    betas:
+    - 0.9
+    - 0.95
+    lr: 0.0001
+    weight_decay: 0.05
+  torch_dtype: float32
+  transformers_version: 4.46.1
+  trim_encoder_blocks: null
+  use_MAE_weight_init: false
+onnxFiles: {}
+safetensorsSizeMb: 712.4
+approxSizeMb: 0.0
+fetchedAt: '2026-06-08T13:32:59.000Z'

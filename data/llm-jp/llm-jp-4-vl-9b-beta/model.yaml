@@ -1,0 +1,173 @@
+_id: 69c7b82dfca01f4372361ca6
+id: llm-jp/llm-jp-4-vl-9b-beta
+private: false
+pipeline_tag: feature-extraction
+library_name: transformers
+tags:
+- transformers
+- safetensors
+- llmjpvl
+- feature-extraction
+- custom_code
+- en
+- ja
+- dataset:llm-jp/Jagle
+- dataset:HuggingFaceM4/FineVision
+- arxiv:2504.10479
+- arxiv:2604.02048
+- arxiv:2604.00909
+- base_model:llm-jp/llm-jp-4-8b-instruct
+- base_model:finetune:llm-jp/llm-jp-4-8b-instruct
+- license:apache-2.0
+- region:us
+downloads: 736
+likes: 13
+modelId: llm-jp/llm-jp-4-vl-9b-beta
+author: llm-jp
+sha: 783c4a9164fc7395a6f7029a25434fff2a346992
+lastModified: '2026-05-12T01:09:04.000Z'
+gated: false
+disabled: false
+model-index: null
+config:
+  architectures:
+  - LLMjpVLModel
+  auto_map:
+    AutoConfig: configuration_llmjpvl.LLMjpVLConfig
+    AutoModel: modeling_llmjpvl.LLMjpVLModel
+    AutoProcessor: processing_llmjpvl.LLMjpVLProcessor
+  model_type: llmjpvl
+  tokenizer_config:
+    bos_token: <|startoftext|>
+    cls_token: <|cls|>
+    eos_token: <|return|>
+    mask_token: <|mask|>
+    pad_token: <|endoftext|>
+    sep_token: <|sep|>
+    unk_token: <|unk|>
+  chat_template_jinja: '{%- set ns = namespace(system_message=''You are LLM-jp-VL, a Multimodal LLM trained by LLM-jp.'',
+    last_assistant_idx=-1) -%}{%- for message in messages -%}{%- if message[''role''] == ''system'' -%}{%- set ns.system_message
+    = message[''content''] -%}{%- elif message[''role''] == ''assistant'' -%}{%- set ns.last_assistant_idx = loop.index0 -%}{%-
+    endif -%}{%- endfor -%}<|start|>system<|message|>{{ ns.system_message }}<|end|>{%- for message in messages -%}{%- if message[''role'']
+    == ''user'' -%}<|start|>user<|message|>{{ message[''content''] }}<|end|>{%- elif message[''role''] == ''assistant'' -%}{%-
+    if not add_generation_prompt and loop.index0 == ns.last_assistant_idx -%}<|start|>assistant<|channel|>final<|message|>{{
+    message[''content''] }}<|return|>{%- else -%}<|start|>assistant<|channel|>final<|message|>{{ message[''content''] }}<|end|>{%-
+    endif -%}{%- endif -%}{%- endfor -%}{%- if add_generation_prompt -%}<|start|>assistant{%- endif -%}'
+cardData:
+  library_name: transformers
+  datasets:
+  - llm-jp/Jagle
+  - HuggingFaceM4/FineVision
+  language:
+  - en
+  - ja
+  base_model:
+  - llm-jp/llm-jp-4-8b-instruct
+  license: apache-2.0
+transformersInfo:
+  auto_model: AutoModel
+  custom_class: modeling_llmjpvl.LLMjpVLModel
+  pipeline_tag: feature-extraction
+siblings:
+- rfilename: .gitattributes
+- rfilename: LICENSE
+- rfilename: README.md
+- rfilename: architecture.png
+- rfilename: benchmark_results_en.png
+- rfilename: benchmark_results_ja.png
+- rfilename: chat_template.jinja
+- rfilename: config.json
+- rfilename: configuration_llmjpvl.py
+- rfilename: constants.py
+- rfilename: generation_config.json
+- rfilename: model-00001-of-00004.safetensors
+- rfilename: model-00002-of-00004.safetensors
+- rfilename: model-00003-of-00004.safetensors
+- rfilename: model-00004-of-00004.safetensors
+- rfilename: model.safetensors.index.json
+- rfilename: modeling_llmjpvl.py
+- rfilename: preprocessor_config.json
+- rfilename: processing_llmjpvl.py
+- rfilename: processor_config.json
+- rfilename: special_tokens_map.json
+- rfilename: tokenizer.json
+- rfilename: tokenizer_config.json
+- rfilename: training_curve_avg.png
+spaces:
+- hayas/llm-jp-4-vl-9b-beta
+createdAt: '2026-03-28T11:14:53.000Z'
+safetensors:
+  parameters:
+    BF16: 9054642624
+  total: 9054642624
+usedStorage: 18123775033
+downloadsAllTime: 4406
+inferenceProviderMapping: {}
+configJson:
+  architectures:
+  - LLMjpVLModel
+  auto_map:
+    AutoConfig: configuration_llmjpvl.LLMjpVLConfig
+    AutoModel: modeling_llmjpvl.LLMjpVLModel
+    AutoProcessor: processing_llmjpvl.LLMjpVLProcessor
+  downsample_ratio: 0.5
+  dtype: bfloat16
+  dynamic_image_size: true
+  force_image_size: 512
+  img_context_token_id: 14
+  llm_config:
+    _name_or_path: llm-jp-4-8b-instruct
+    architectures:
+    - LlamaForCausalLM
+    attention_bias: false
+    attention_dropout: 0.0
+    dtype: bfloat16
+    head_dim: 128
+    hidden_act: silu
+    hidden_size: 4096
+    initializer_range: 0.02
+    intermediate_size: 14336
+    max_position_embeddings: 65536
+    mlp_bias: false
+    model_type: llama
+    num_attention_heads: 32
+    num_hidden_layers: 32
+    num_key_value_heads: 8
+    pretraining_tp: 1
+    rms_norm_eps: 1.0e-06
+    rope_scaling: null
+    rope_theta: 500000
+    use_cache: false
+    vocab_size: 196608
+  max_dynamic_patch: 12
+  min_dynamic_patch: 1
+  model_type: llmjpvl
+  output_attentions: false
+  pad2square: false
+  ps_version: v2
+  select_layer: -1
+  template: llmjp4_harmony
+  tie_word_embeddings: false
+  transformers_version: null
+  use_backbone_lora: 0
+  use_llm_lora: 0
+  use_thumbnail: true
+  vision_config:
+    _name_or_path: google/siglip2-so400m-patch16-512
+    attention_dropout: 0.0
+    dtype: bfloat16
+    hidden_act: gelu_pytorch_tanh
+    hidden_size: 1152
+    image_size: 512
+    intermediate_size: 4304
+    layer_norm_eps: 1.0e-06
+    model_type: siglip_vision_model
+    num_attention_heads: 16
+    num_channels: 3
+    num_hidden_layers: 27
+    patch_size: 16
+    use_flash_attn: false
+onnxFiles: {}
+safetensorsSizeMb: 18109.4
+approxSizeMb: 18109.3
+fetchedAt: '2026-06-08T13:32:59.000Z'

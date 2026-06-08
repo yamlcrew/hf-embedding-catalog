@@ -1,0 +1,122 @@
+_id: 695c3cc9f7fa80c597bcaabf
+id: LiquidAI/LFM2-ColBERT-350M-GGUF
+private: false
+pipeline_tag: sentence-similarity
+library_name: sentence-transformers
+tags:
+- sentence-transformers
+- gguf
+- liquid
+- lfm2
+- edge
+- ColBERT
+- PyLate
+- sentence-similarity
+- feature-extraction
+- llama.cpp
+- en
+- ar
+- zh
+- fr
+- de
+- ja
+- ko
+- es
+- base_model:LiquidAI/LFM2-ColBERT-350M
+- base_model:quantized:LiquidAI/LFM2-ColBERT-350M
+- license:other
+- endpoints_compatible
+- region:us
+- conversational
+downloads: 5911
+likes: 15
+modelId: LiquidAI/LFM2-ColBERT-350M-GGUF
+author: LiquidAI
+sha: a799c05750fa5786d0d5f47b1b5df05fe5a4a6b2
+lastModified: '2026-01-05T22:56:07.000Z'
+gated: false
+disabled: false
+widgetData:
+- source_sentence: That is a happy person
+  sentences:
+  - That is a happy dog
+  - That is a very happy person
+  - Today is a sunny day
+model-index: null
+config: {}
+cardData:
+  language:
+  - en
+  - ar
+  - zh
+  - fr
+  - de
+  - ja
+  - ko
+  - es
+  tags:
+  - liquid
+  - lfm2
+  - edge
+  - ColBERT
+  - PyLate
+  - sentence-transformers
+  - sentence-similarity
+  - feature-extraction
+  - llama.cpp
+  - gguf
+  pipeline_tag: sentence-similarity
+  license: other
+  license_name: lfm1.0
+  license_link: LICENSE
+  base_model:
+  - LiquidAI/LFM2-ColBERT-350M
+gguf:
+  total: 353453824
+  architecture: lfm2
+  context_length: 128000
+  chat_template: '{{- bos_token -}}{%- set system_prompt = "" -%}{%- set ns = namespace(system_prompt="") -%}{%- if messages[0]["role"]
+    == "system" -%} {%- set ns.system_prompt = messages[0]["content"] -%} {%- set messages = messages[1:] -%}{%- endif -%}{%-
+    if tools -%} {%- set ns.system_prompt = ns.system_prompt + ("
+
+    " if ns.system_prompt else "") + "List of tools: <|tool_list_start|>[" -%} {%- for tool in tools -%} {%- if tool is not
+    string -%} {%- set tool = tool | tojson -%} {%- endif -%} {%- set ns.system_prompt = ns.system_prompt + tool -%} {%- if
+    not loop.last -%} {%- set ns.system_prompt = ns.system_prompt + ", " -%} {%- endif -%} {%- endfor -%} {%- set ns.system_prompt
+    = ns.system_prompt + "]<|tool_list_end|>" -%}{%- endif -%}{%- if ns.system_prompt -%} {{- "<|im_start|>system
+
+    " + ns.system_prompt + "<|im_end|>
+
+    " -}}{%- endif -%}{%- for message in messages -%} {{- "<|im_start|>" + message["role"] + "
+
+    " -}} {%- set content = message["content"] -%} {%- if content is not string -%} {%- set content = content | tojson -%}
+    {%- endif -%} {%- if message["role"] == "tool" -%} {%- set content = "<|tool_response_start|>" + content + "<|tool_response_end|>"
+    -%} {%- endif -%} {{- content + "<|im_end|>
+
+    " -}}{%- endfor -%}{%- if add_generation_prompt -%} {{- "<|im_start|>assistant
+
+    " -}}{%- endif -%}'
+  bos_token: <|startoftext|>
+  eos_token: <|im_end|>
+  totalFileSize: 709398336
+siblings:
+- rfilename: .gitattributes
+- rfilename: LFM2-ColBERT-350M-BF16.gguf
+- rfilename: LFM2-ColBERT-350M-F16.gguf
+- rfilename: LFM2-ColBERT-350M-Q4_0.gguf
+- rfilename: LFM2-ColBERT-350M-Q4_K_M.gguf
+- rfilename: LFM2-ColBERT-350M-Q5_K_M.gguf
+- rfilename: LFM2-ColBERT-350M-Q6_K.gguf
+- rfilename: LFM2-ColBERT-350M-Q8_0.gguf
+- rfilename: LICENSE
+- rfilename: README.md
+- rfilename: colbert-rerank.py
+spaces: []
+createdAt: '2026-01-05T22:35:53.000Z'
+usedStorage: 2795702208
+downloadsAllTime: 8017
+inferenceProviderMapping: {}
+configJson: null
+onnxFiles: {}
+safetensorsSizeMb: 0.0
+approxSizeMb: 0.0
+fetchedAt: '2026-06-08T13:32:59.000Z'

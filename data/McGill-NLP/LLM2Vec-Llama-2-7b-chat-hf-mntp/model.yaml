@@ -1,0 +1,157 @@
+_id: 660e2d5111da1513259158e2
+id: McGill-NLP/LLM2Vec-Llama-2-7b-chat-hf-mntp
+private: false
+pipeline_tag: sentence-similarity
+library_name: transformers
+tags:
+- transformers
+- safetensors
+- llama
+- feature-extraction
+- text-embedding
+- embeddings
+- information-retrieval
+- beir
+- text-classification
+- language-model
+- text-clustering
+- text-semantic-similarity
+- text-evaluation
+- text-reranking
+- sentence-similarity
+- Sentence Similarity
+- natural_questions
+- ms_marco
+- fever
+- hotpot_qa
+- mteb
+- custom_code
+- en
+- arxiv:2404.05961
+- license:mit
+- text-embeddings-inference
+- endpoints_compatible
+- region:us
+downloads: 162
+likes: 0
+modelId: McGill-NLP/LLM2Vec-Llama-2-7b-chat-hf-mntp
+author: McGill-NLP
+sha: e880081db2221072d2365a1897f6e2bdf8723d7b
+lastModified: '2025-12-02T04:40:01.000Z'
+gated: false
+disabled: false
+widgetData:
+- source_sentence: That is a happy person
+  sentences:
+  - That is a happy dog
+  - That is a very happy person
+  - Today is a sunny day
+model-index: null
+config:
+  architectures:
+  - LlamaEncoderModel
+  auto_map:
+    AutoModel: McGill-NLP/LLM2Vec-Llama-2-7b-chat-hf-mntp--modeling_llama_encoder.LlamaEncoderModel
+  model_type: llama
+  tokenizer_config:
+    bos_token: <s>
+    chat_template: '{% if messages[0][''role''] == ''system'' %}{% set loop_messages = messages[1:] %}{% set system_message
+      = messages[0][''content''] %}{% else %}{% set loop_messages = messages %}{% set system_message = false %}{% endif %}{%
+      for message in loop_messages %}{% if (message[''role''] == ''user'') != (loop.index0 % 2 == 0) %}{{ raise_exception(''Conversation
+      roles must alternate user/assistant/user/assistant/...'') }}{% endif %}{% if loop.index0 == 0 and system_message !=
+      false %}{% set content = ''<<SYS>>\n'' + system_message + ''\n<</SYS>>\n\n'' + message[''content''] %}{% else %}{% set
+      content = message[''content''] %}{% endif %}{% if message[''role''] == ''user'' %}{{ bos_token + ''[INST] '' + content.strip()
+      + '' [/INST]'' }}{% elif message[''role''] == ''assistant'' %}{{ '' ''  + content.strip() + '' '' + eos_token }}{% endif
+      %}{% endfor %}'
+    eos_token: </s>
+    pad_token: </s>
+    unk_token: <unk>
+    use_default_system_prompt: false
+cardData:
+  library_name: transformers
+  license: mit
+  language:
+  - en
+  pipeline_tag: sentence-similarity
+  tags:
+  - text-embedding
+  - embeddings
+  - information-retrieval
+  - beir
+  - text-classification
+  - language-model
+  - text-clustering
+  - text-semantic-similarity
+  - text-evaluation
+  - text-reranking
+  - feature-extraction
+  - sentence-similarity
+  - Sentence Similarity
+  - natural_questions
+  - ms_marco
+  - fever
+  - hotpot_qa
+  - mteb
+transformersInfo:
+  auto_model: AutoModel
+  custom_class: McGill-NLP/LLM2Vec-Llama-2-7b-chat-hf-mntp--modeling_llama_encoder.LlamaEncoderModel
+  pipeline_tag: feature-extraction
+  processor: AutoTokenizer
+siblings:
+- rfilename: .gitattributes
+- rfilename: README.md
+- rfilename: adapter_config.json
+- rfilename: adapter_model.safetensors
+- rfilename: attn_mask_utils.py
+- rfilename: config.json
+- rfilename: modeling_llama_encoder.py
+- rfilename: special_tokens_map.json
+- rfilename: tokenizer.json
+- rfilename: tokenizer.model
+- rfilename: tokenizer_config.json
+spaces:
+- mteb/leaderboard_legacy
+- SmileXing/leaderboard
+- sq66/leaderboard_legacy
+- q275343119/leaderboard
+- Chengyanci/11
+- yanciyuyu/1
+- n8n-1/8
+- reader-1/1
+- lake-synctv/leaderboard
+- shiwan7788/leaderboard-uni
+- hhyz/Leaderboard
+createdAt: '2024-04-04T04:32:17.000Z'
+usedStorage: 80511051
+downloadsAllTime: 16606
+inferenceProviderMapping: {}
+configJson:
+  _name_or_path: meta-llama/Llama-2-7b-chat-hf
+  architectures:
+  - LlamaEncoderModel
+  attention_dropout: 0.0
+  auto_map:
+    AutoModel: McGill-NLP/LLM2Vec-Llama-2-7b-chat-hf-mntp--modeling_llama_encoder.LlamaEncoderModel
+  bos_token_id: 1
+  eos_token_id: 2
+  hidden_act: silu
+  hidden_size: 4096
+  initializer_range: 0.02
+  intermediate_size: 11008
+  max_position_embeddings: 4096
+  model_type: llama
+  num_attention_heads: 32
+  num_hidden_layers: 32
+  num_key_value_heads: 32
+  pretraining_tp: 1
+  rms_norm_eps: 1.0e-05
+  rope_scaling: null
+  tie_word_embeddings: false
+  torch_dtype: bfloat16
+  transformers_version: 4.38.1
+  use_cache: true
+  vocab_size: 32000
+onnxFiles: {}
+safetensorsSizeMb: 80.0
+approxSizeMb: 0.0
+fetchedAt: '2026-06-08T13:32:59.000Z'

@@ -1,0 +1,87 @@
+_id: 69df36b515af821c90e13cac
+id: asterisk-labs/betaearth-segformer-film-robust
+private: false
+pipeline_tag: feature-extraction
+library_name: betaearth
+tags:
+- betaearth
+- earth-observation
+- remote-sensing
+- sentinel-2
+- sentinel-1
+- embeddings
+- model-distillation
+- geospatial
+- feature-extraction
+- dataset:Major-TOM/Core-S2-L1C
+- dataset:Major-TOM/Core-S2-L2A
+- dataset:Major-TOM/Core-S1-RTC
+- dataset:Major-TOM/Core-AlphaEarth-Embeddings
+- license:cc-by-4.0
+- region:us
+downloads: 638
+likes: 1
+modelId: asterisk-labs/betaearth-segformer-film-robust
+author: asterisk-labs
+sha: 0e5a13e88c3e6dba87d218b8caed4b99141c50e0
+lastModified: '2026-04-15T07:16:35.000Z'
+gated: false
+disabled: false
+model-index: null
+config: {}
+cardData:
+  license: cc-by-4.0
+  tags:
+  - earth-observation
+  - remote-sensing
+  - sentinel-2
+  - sentinel-1
+  - embeddings
+  - model-distillation
+  - geospatial
+  datasets:
+  - Major-TOM/Core-S2-L1C
+  - Major-TOM/Core-S2-L2A
+  - Major-TOM/Core-S1-RTC
+  - Major-TOM/Core-AlphaEarth-Embeddings
+  library_name: betaearth
+  pipeline_tag: feature-extraction
+siblings:
+- rfilename: .gitattributes
+- rfilename: README.md
+- rfilename: config.json
+- rfilename: model.pt
+spaces: []
+createdAt: '2026-04-15T06:56:53.000Z'
+usedStorage: 419754985
+downloadsAllTime: 1298
+inferenceProviderMapping: {}
+configJson:
+  architecture: segformer_film
+  encoder_name: mit_b2
+  embed_dim: 64
+  fusion_dim: 256
+  time_embed_dim: 128
+  modalities:
+  - s2_l1c
+  - s2_l2a
+  - s1_rtc
+  - cop_dem
+  training:
+    strategy: curriculum_dropout
+    epochs: 20
+    wandb_run: r4ctfspm
+    base_checkpoint: reinit_fusion (0.886 test cos sim)
+  results:
+    val_cosine_sim_all: 0.878
+    val_l1c_only: 0.806
+    val_l2a_only: 0.755
+    val_s1_only: 0.712
+    val_dem_only: 0.609
+    val_l1c_dem: 0.85
+    val_l2a_dem: 0.823
+    val_s2_both: 0.818
+onnxFiles: {}
+safetensorsSizeMb: 0.0
+approxSizeMb: 0.0
+fetchedAt: '2026-06-08T13:32:59.000Z'

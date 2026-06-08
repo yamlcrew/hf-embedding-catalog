@@ -1,0 +1,196 @@
+_id: 646bd751f85ebf65c53e11f2
+id: antoinelouis/biencoder-distilcamembert-mmarcoFR
+private: false
+pipeline_tag: sentence-similarity
+library_name: sentence-transformers
+tags:
+- sentence-transformers
+- pytorch
+- safetensors
+- camembert
+- passage-retrieval
+- sentence-similarity
+- fr
+- dataset:unicamp-dl/mmarco
+- base_model:cmarkea/distilcamembert-base
+- base_model:finetune:cmarkea/distilcamembert-base
+- license:mit
+- model-index
+- text-embeddings-inference
+- endpoints_compatible
+- region:us
+downloads: 325
+likes: 2
+modelId: antoinelouis/biencoder-distilcamembert-mmarcoFR
+author: antoinelouis
+sha: 8a018519b7bfe3e07c41e70817f5f2d71298ebae
+lastModified: '2024-03-26T14:21:24.000Z'
+gated: false
+disabled: false
+mask_token: <mask>
+widgetData:
+- source_sentence: C'est une personne heureuse
+  sentences:
+  - C'est un chien heureux
+  - C'est une personne très heureuse
+  - Aujourd'hui est une journée ensoleillée
+model-index:
+- name: biencoder-distilcamembert-mmarcoFR
+  results:
+  - task:
+      type: sentence-similarity
+      name: Passage Retrieval
+    dataset:
+      type: unicamp-dl/mmarco
+      name: mMARCO-fr
+      config: french
+      split: validation
+      revision: None
+    metrics:
+    - type: recall_at_500
+      name: Recall@500
+      value: 87.9
+      verified: false
+    - type: recall_at_100
+      name: Recall@100
+      value: 76.4
+      verified: false
+    - type: recall_at_10
+      name: Recall@10
+      value: 49.2
+      verified: false
+    - type: map_at_10
+      name: MAP@10
+      value: 26.2
+      verified: false
+    - type: ndcg_at_10
+      name: nDCG@10
+      value: 31.9
+      verified: false
+    - type: mrr_at_10
+      name: MRR@10
+      value: 26.8
+      verified: false
+config:
+  architectures:
+  - CamembertModel
+  model_type: camembert
+  tokenizer_config:
+    bos_token: <s>
+    cls_token: <s>
+    eos_token: </s>
+    mask_token:
+      __type: AddedToken
+      content: <mask>
+      lstrip: true
+      normalized: true
+      rstrip: false
+      single_word: false
+    pad_token: <pad>
+    sep_token: </s>
+    unk_token: <unk>
+cardData:
+  pipeline_tag: sentence-similarity
+  language: fr
+  license: mit
+  datasets:
+  - unicamp-dl/mmarco
+  metrics:
+  - recall
+  tags:
+  - passage-retrieval
+  library_name: sentence-transformers
+  base_model: cmarkea/distilcamembert-base
+  model-index:
+  - name: biencoder-distilcamembert-mmarcoFR
+    results:
+    - task:
+        type: sentence-similarity
+        name: Passage Retrieval
+      dataset:
+        type: unicamp-dl/mmarco
+        name: mMARCO-fr
+        config: french
+        split: validation
+        revision: None
+      metrics:
+      - type: recall_at_500
+        name: Recall@500
+        value: 87.9
+        verified: false
+      - type: recall_at_100
+        name: Recall@100
+        value: 76.4
+        verified: false
+      - type: recall_at_10
+        name: Recall@10
+        value: 49.2
+        verified: false
+      - type: map_at_10
+        name: MAP@10
+        value: 26.2
+        verified: false
+      - type: ndcg_at_10
+        name: nDCG@10
+        value: 31.9
+        verified: false
+      - type: mrr_at_10
+        name: MRR@10
+        value: 26.8
+        verified: false
+siblings:
+- rfilename: .gitattributes
+- rfilename: 1_Pooling/config.json
+- rfilename: README.md
+- rfilename: config.json
+- rfilename: config_sentence_transformers.json
+- rfilename: dev_scores.csv
+- rfilename: model.safetensors
+- rfilename: modules.json
+- rfilename: pytorch_model.bin
+- rfilename: sentence_bert_config.json
+- rfilename: sentencepiece.bpe.model
+- rfilename: special_tokens_map.json
+- rfilename: tokenizer.json
+- rfilename: tokenizer_config.json
+spaces:
+- antoinelouis/decouvrir
+createdAt: '2023-05-22T20:57:53.000Z'
+safetensors:
+  parameters:
+    I64: 514
+    F32: 68094720
+  total: 68095234
+usedStorage: 545623093
+downloadsAllTime: 19304
+inferenceProviderMapping: {}
+configJson:
+  _name_or_path: cmarkea/distilcamembert-base
+  architectures:
+  - CamembertModel
+  attention_probs_dropout_prob: 0.1
+  bos_token_id: 0
+  classifier_dropout: null
+  eos_token_id: 2
+  gradient_checkpointing: false
+  hidden_act: gelu
+  hidden_dropout_prob: 0.1
+  hidden_size: 768
+  initializer_range: 0.02
+  intermediate_size: 3072
+  layer_norm_eps: 1.0e-05
+  max_position_embeddings: 514
+  model_type: camembert
+  num_attention_heads: 12
+  num_hidden_layers: 6
+  pad_token_id: 1
+  position_embedding_type: absolute
+  torch_dtype: float32
+  transformers_version: 4.28.1
+  type_vocab_size: 1
+  use_cache: true
+  vocab_size: 32005
+onnxFiles: {}
+safetensorsSizeMb: 272.4
+approxSizeMb: 272.4
+fetchedAt: '2026-06-08T13:32:59.000Z'

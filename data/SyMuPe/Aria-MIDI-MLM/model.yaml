@@ -1,0 +1,127 @@
+_id: 69efb0ed4d474b53d58e67c8
+id: SyMuPe/Aria-MIDI-MLM
+private: false
+pipeline_tag: feature-extraction
+library_name: symupe
+tags:
+- symupe
+- safetensors
+- music
+- piano
+- midi
+- pre-training
+- transformer
+- MLM
+- feature-extraction
+- dataset:loubb/aria-midi
+- arxiv:2605.06627
+- license:cc-by-nc-sa-4.0
+- region:us
+downloads: 278
+likes: 0
+modelId: SyMuPe/Aria-MIDI-MLM
+author: SyMuPe
+sha: 08158b9967e602e9f1ea470d379e290ca499ff1e
+lastModified: '2026-05-08T18:26:32.000Z'
+gated: false
+disabled: false
+model-index: null
+config: {}
+cardData:
+  library_name: symupe
+  license: cc-by-nc-sa-4.0
+  datasets:
+  - loubb/aria-midi
+  pipeline_tag: feature-extraction
+  tags:
+  - music
+  - piano
+  - midi
+  - pre-training
+  - transformer
+  - MLM
+siblings:
+- rfilename: .gitattributes
+- rfilename: README.md
+- rfilename: config.json
+- rfilename: model.safetensors
+- rfilename: tokenizer.json
+spaces: []
+createdAt: '2026-04-27T18:54:37.000Z'
+safetensors:
+  parameters:
+    F32: 82405377
+  total: 82405377
+usedStorage: 329638932
+downloadsAllTime: 326
+inferenceProviderMapping: {}
+configJson:
+  _name_: MusicTransformer
+  _model_version_: 1.0.0
+  _symupe_version_: 1.1.0
+  dim: 768
+  mode: mlm
+  transformer:
+    token_embeddings:
+      _target_: simple
+      emb_dims: 128
+      mode: cat
+      emb_norm: true
+      discrete: false
+      sinusoidal: true
+      sinusoidal_learned: true
+      project_bias: false
+      embedding_kwargs:
+        depth: 0
+        log_inv_freq: true
+        with_positions: false
+      tie_keys: null
+      special_tokens:
+        PAD_None: 0
+        MASK_None: 1
+        BOS_None: 2
+        EOS_None: 3
+        IGNORE_None: 4
+        EOD_None: 5
+        Bar_Line: 6
+        Pedal_On: 7
+        Pedal_Off: 8
+    emb_norm: false
+    emb_dropout: 0.0
+    use_abs_pos_emb: false
+    project_bias: false
+    transformer:
+      _target_: encoder
+      depth: 12
+      memory_tokens: 4
+      final_norm_bias: false
+      attention:
+        _target_: global
+        heads: 12
+        head_dim: 64
+        one_kv_head: true
+        dropout: 0.05
+        rotary_pos_emb: true
+        rotary_emb_base: 1024
+        alibi_pos_bias: false
+        alibi_learned: true
+        alibi_heads: 8
+      feed_forward:
+        mult: 3
+        glu: true
+        swish: true
+        dropout: 0.05
+    lm_head:
+      _target_: lm
+  num_tokens:
+    Pitch: 97
+    TimeShift: 595
+    Velocity: 42
+    TimeDurationSustain: 560
+    TimePosition: 2409
+  context_num_tokens: null
+  score_num_tokens: null
+onnxFiles: {}
+safetensorsSizeMb: 329.6
+approxSizeMb: 329.6
+fetchedAt: '2026-06-08T13:32:59.000Z'
