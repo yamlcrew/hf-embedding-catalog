@@ -41,6 +41,15 @@ import json
 import requests
 import yaml
 
+# Make stdout/stderr UTF-8 so box-drawing / em-dash / arrow characters in log
+# messages never raise UnicodeEncodeError on legacy code pages (e.g. Windows
+# cp1250). errors="replace" guarantees a print can never crash the run.
+for _stream in (sys.stdout, sys.stderr):
+    try:
+        _stream.reconfigure(encoding="utf-8", errors="replace")
+    except Exception:
+        pass
+
 # Set by Ctrl+C — workers check this instead of sleeping unconditionally.
 _ABORT = threading.Event()
 
@@ -52,6 +61,11 @@ _YAML_POOL = ThreadPoolExecutor(max_workers=2, thread_name_prefix="yaml")
 _RATE_LOCK = threading.Lock()
 _RATE_LAST: list[float] = [0.0]  # mutable so inner function can update it
 
+# Runtime deadline (epoch seconds, 0 = no limit). A watchdog thread sets _ABORT
+# when reached so the run stops gracefully, writes the catalog, and exits 0
+# BEFORE the CI job is hard-killed at its timeout-minutes.
+_DEADLINE: list[float] = [0.0]
+
 
 def _rate_wait() -> None:
     """Block until the global rate window has elapsed, then mark the slot used."""
@@ -62,6 +76,29 @@ def _rate_wait() -> None:
             if _ABORT.wait(timeout=gap):
                 raise RuntimeError("Aborted")
         _RATE_LAST[0] = time.time()
+
+
+def _start_deadline_watchdog(minutes: float) -> None:
+    """Arm a background timer that sets _ABORT after `minutes`, so the run
+    stops gracefully and the catalog still gets written + committed."""
+    if minutes <= 0:
+        return
+    _DEADLINE[0] = time.time() + minutes * 60.0
+
+    def _watch() -> None:
+        remaining = _DEADLINE[0] - time.time()
+        # Wait until the deadline OR an earlier Ctrl+C abort wakes us.
+        if remaining > 0 and _ABORT.wait(timeout=remaining):
+            return  # already aborted by Ctrl+C — nothing to do
+        # Set the flag FIRST so a failing print() can never block the abort.
+        _ABORT.set()
+        try:
+            print(f"\n[catalog] runtime budget of {minutes:.0f} min reached -- "
+                  f"stopping gracefully and writing catalog", flush=True)
+        except Exception:
+            pass
+
+    threading.Thread(target=_watch, daemon=True, name="deadline").start()
 
 # ── config ────────────────────────────────────────────────────────────────────
 
@@ -416,6 +453,9 @@ def process_tag(tag: str, max_models: int, seen: set, fetched_at: str,
     new_ids: list[str] = []
 
     while url:
+        if _ABORT.is_set():
+            print(f"  [{tag}] listing stopped at {listed} models (deadline/abort)", flush=True)
+            break
         resp = hf_get(url, timeout=30)
         batch = resp.json()
         if not isinstance(batch, list) or not batch:
@@ -467,10 +507,14 @@ def process_tag(tag: str, max_models: int, seen: set, fetched_at: str,
 
     fetched = errors = 0
     done_count = 0
+    aborted = False
     pool = ThreadPoolExecutor(max_workers=FETCH_CONCURRENCY)
     futures = {pool.submit(_fetch_and_save, mid, fetched_at): mid for mid in to_fetch}
     try:
         for future in as_completed(futures):
+            if _ABORT.is_set():           # deadline reached — stop reading results
+                aborted = True
+                break
             mid = futures[future]
             done_count += 1
             try:
@@ -484,6 +528,9 @@ def process_tag(tag: str, max_models: int, seen: set, fetched_at: str,
                     _write_catalog()
                     print(f"  [catalog] rebuilt after {fetched} fetches", flush=True)
             except Exception as e:
+                if _ABORT.is_set():       # in-flight worker raised "Aborted" — not a real error
+                    aborted = True
+                    break
                 errors += 1
                 print(f"  [{done_count}/{len(to_fetch)}] ERROR {mid}: {e}",
                       file=sys.stderr, flush=True)
@@ -493,6 +540,10 @@ def process_tag(tag: str, max_models: int, seen: set, fetched_at: str,
         _ABORT.set()
         pool.shutdown(wait=False, cancel_futures=True)
         raise
+
+    if aborted or _ABORT.is_set():
+        print(f"  [{tag}] stopped early — {fetched} fetched before deadline", flush=True)
+        pool.shutdown(wait=False, cancel_futures=True)
     else:
         pool.shutdown(wait=True)
 
@@ -511,9 +562,18 @@ def main():
                         help=f"Max models to list per tag (default {DEFAULT_MAX_LIST})")
     parser.add_argument("--limit",     type=int, default=0,
                         help="Max stale models to (re)fetch per run (default: all stale)")
+    parser.add_argument("--max-runtime-min", type=float,
+                        default=float(os.environ.get("MAX_RUNTIME_MIN", "0")),
+                        help="Stop gracefully after N minutes, write catalog, exit 0 "
+                             "(0 = no limit; env: MAX_RUNTIME_MIN)")
     args = parser.parse_args()
 
     max_list = 0 if args.all else args.max_list
+
+    if args.max_runtime_min > 0:
+        print(f"[catalog] Runtime budget: {args.max_runtime_min:.0f} min "
+              f"(will stop + write catalog before then)")
+        _start_deadline_watchdog(args.max_runtime_min)
 
     if HF_TOKEN:
         print(f"[catalog] HF_TOKEN present ({HF_TOKEN[:8]}...)")
@@ -526,6 +586,8 @@ def main():
 
     try:
         for tag in PIPELINE_TAGS:
+            if _ABORT.is_set():
+                break
             print(f"\n[catalog] === pipeline_tag={tag}"
                   + (f" (top {max_list})" if max_list else " (all)") + " ===")
             f, e, ids = process_tag(
@@ -537,6 +599,9 @@ def main():
             print(f"  [{tag}] done: {len(ids)} new models listed, "
                   f"{f} fetched, {e} errors")
 
+            if _ABORT.is_set():
+                print(f"\n[catalog] runtime budget reached — stopping after {tag}", flush=True)
+                break
             if args.limit > 0 and total_fetched >= args.limit:
                 print(f"\n[catalog] --limit {args.limit} reached, stopping")
                 break

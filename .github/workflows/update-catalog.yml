@@ -41,6 +41,11 @@ jobs:
       - name: Run catalog fetch
         env:
           HF_TOKEN: ${{ secrets.HF_TOKEN }}
+          # Stop the fetch gracefully at 100 min so the remaining ~20 min of the
+          # 120-min job budget is left for writing the catalog + commit + push.
+          # Without this the runner hard-kills Python at the job timeout and the
+          # whole run's work is lost (no catalog written, nothing committed).
+          MAX_RUNTIME_MIN: "100"
         run: |
           MAX_LIST="${{ github.event.inputs.max_list || '0' }}"
           LIMIT="${{ github.event.inputs.limit || '0' }}"
