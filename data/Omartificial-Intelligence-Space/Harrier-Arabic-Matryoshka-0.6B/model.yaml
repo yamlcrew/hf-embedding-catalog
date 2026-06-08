@@ -1,0 +1,181 @@
+_id: 69f1e631c486dd31459eca23
+id: Omartificial-Intelligence-Space/Harrier-Arabic-Matryoshka-0.6B
+private: false
+pipeline_tag: sentence-similarity
+library_name: sentence-transformers
+tags:
+- sentence-transformers
+- safetensors
+- qwen3
+- sentence-similarity
+- feature-extraction
+- matryoshka
+- arabic
+- mteb
+- ar
+- multilingual
+- arxiv:2205.13147
+- base_model:microsoft/harrier-oss-v1-0.6b
+- base_model:finetune:microsoft/harrier-oss-v1-0.6b
+- text-embeddings-inference
+- endpoints_compatible
+- region:us
+downloads: 30
+likes: 5
+modelId: Omartificial-Intelligence-Space/Harrier-Arabic-Matryoshka-0.6B
+author: Omartificial-Intelligence-Space
+sha: 397a969cf4db4b9bcda254e857823d87077b7e6f
+lastModified: '2026-04-29T18:26:03.000Z'
+gated: false
+disabled: false
+widgetData:
+- source_sentence: هذا شخص سعيد
+  sentences:
+  - هذا كلب سعيد
+  - هذا شخص سعيد جدا
+  - اليوم هو يوم مشمس
+model-index: null
+config:
+  architectures:
+  - Qwen3Model
+  model_type: qwen3
+  tokenizer_config:
+    bos_token: null
+    eos_token: <|im_end|>
+    pad_token: <|endoftext|>
+    unk_token: null
+  chat_template_jinja: "{%- if tools %}\r\n    {{- '<|im_start|>system\\n' }}\r\n    {%- if messages[0].role == 'system' %}\r\
+    \n        {{- messages[0].content + '\\n\\n' }}\r\n    {%- endif %}\r\n    {{- \"# Tools\\n\\nYou may call one or more\
+    \ functions to assist with the user query.\\n\\nYou are provided with function signatures within <tools></tools> XML tags:\\\
+    n<tools>\" }}\r\n    {%- for tool in tools %}\r\n        {{- \"\\n\" }}\r\n        {{- tool | tojson }}\r\n    {%- endfor\
+    \ %}\r\n    {{- \"\\n</tools>\\n\\nFor each function call, return a json object with function name and arguments within\
+    \ <tool_call></tool_call> XML tags:\\n<tool_call>\\n{\\\"name\\\": <function-name>, \\\"arguments\\\": <args-json-object>}\\\
+    n</tool_call><|im_end|>\\n\" }}\r\n{%- else %}\r\n    {%- if messages[0].role == 'system' %}\r\n        {{- '<|im_start|>system\\\
+    n' + messages[0].content + '<|im_end|>\\n' }}\r\n    {%- endif %}\r\n{%- endif %}\r\n{%- set ns = namespace(multi_step_tool=true,\
+    \ last_query_index=messages|length - 1) %}\r\n{%- for message in messages[::-1] %}\r\n    {%- set index = (messages|length\
+    \ - 1) - loop.index0 %}\r\n    {%- if ns.multi_step_tool and message.role == \"user\" and not(message.content.startswith('<tool_response>')\
+    \ and message.content.endswith('</tool_response>')) %}\r\n        {%- set ns.multi_step_tool = false %}\r\n        {%-\
+    \ set ns.last_query_index = index %}\r\n    {%- endif %}\r\n{%- endfor %}\r\n{%- for message in messages %}\r\n    {%-\
+    \ if (message.role == \"user\") or (message.role == \"system\" and not loop.first) %}\r\n        {{- '<|im_start|>' +\
+    \ message.role + '\\n' + message.content + '<|im_end|>' + '\\n' }}\r\n    {%- elif message.role == \"assistant\" %}\r\n\
+    \        {%- set content = message.content %}\r\n        {%- set reasoning_content = '' %}\r\n        {%- if message.reasoning_content\
+    \ is defined and message.reasoning_content is not none %}\r\n            {%- set reasoning_content = message.reasoning_content\
+    \ %}\r\n        {%- else %}\r\n            {%- if '</think>' in message.content %}\r\n                {%- set content\
+    \ = message.content.split('</think>')[-1].lstrip('\\n') %}\r\n                {%- set reasoning_content = message.content.split('</think>')[0].rstrip('\\\
+    n').split('<think>')[-1].lstrip('\\n') %}\r\n            {%- endif %}\r\n        {%- endif %}\r\n        {%- if loop.index0\
+    \ > ns.last_query_index %}\r\n            {%- if loop.last or (not loop.last and reasoning_content) %}\r\n           \
+    \     {{- '<|im_start|>' + message.role + '\\n<think>\\n' + reasoning_content.strip('\\n') + '\\n</think>\\n\\n' + content.lstrip('\\\
+    n') }}\r\n            {%- else %}\r\n                {{- '<|im_start|>' + message.role + '\\n' + content }}\r\n      \
+    \      {%- endif %}\r\n        {%- else %}\r\n            {{- '<|im_start|>' + message.role + '\\n' + content }}\r\n \
+    \       {%- endif %}\r\n        {%- if message.tool_calls %}\r\n            {%- for tool_call in message.tool_calls %}\r\
+    \n                {%- if (loop.first and content) or (not loop.first) %}\r\n                    {{- '\\n' }}\r\n     \
+    \           {%- endif %}\r\n                {%- if tool_call.function %}\r\n                    {%- set tool_call = tool_call.function\
+    \ %}\r\n                {%- endif %}\r\n                {{- '<tool_call>\\n{\"name\": \"' }}\r\n                {{- tool_call.name\
+    \ }}\r\n                {{- '\", \"arguments\": ' }}\r\n                {%- if tool_call.arguments is string %}\r\n  \
+    \                  {{- tool_call.arguments }}\r\n                {%- else %}\r\n                    {{- tool_call.arguments\
+    \ | tojson }}\r\n                {%- endif %}\r\n                {{- '}\\n</tool_call>' }}\r\n            {%- endfor %}\r\
+    \n        {%- endif %}\r\n        {{- '<|im_end|>\\n' }}\r\n    {%- elif message.role == \"tool\" %}\r\n        {%- if\
+    \ loop.first or (messages[loop.index0 - 1].role != \"tool\") %}\r\n            {{- '<|im_start|>user' }}\r\n        {%-\
+    \ endif %}\r\n        {{- '\\n<tool_response>\\n' }}\r\n        {{- message.content }}\r\n        {{- '\\n</tool_response>'\
+    \ }}\r\n        {%- if loop.last or (messages[loop.index0 + 1].role != \"tool\") %}\r\n            {{- '<|im_end|>\\n'\
+    \ }}\r\n        {%- endif %}\r\n    {%- endif %}\r\n{%- endfor %}\r\n{%- if add_generation_prompt %}\r\n    {{- '<|im_start|>assistant\\\
+    n' }}\r\n    {%- if enable_thinking is defined and enable_thinking is false %}\r\n        {{- '<think>\\n\\n</think>\\\
+    n\\n' }}\r\n    {%- endif %}\r\n{%- endif %}"
+cardData:
+  language:
+  - ar
+  - multilingual
+  library_name: sentence-transformers
+  tags:
+  - sentence-transformers
+  - sentence-similarity
+  - feature-extraction
+  - matryoshka
+  - arabic
+  - mteb
+  base_model: microsoft/harrier-oss-v1-0.6b
+  pipeline_tag: sentence-similarity
+siblings:
+- rfilename: .gitattributes
+- rfilename: 1_Pooling/config.json
+- rfilename: README.md
+- rfilename: chat_template.jinja
+- rfilename: config.json
+- rfilename: config_sentence_transformers.json
+- rfilename: model.safetensors
+- rfilename: modules.json
+- rfilename: sentence_bert_config.json
+- rfilename: tokenizer.json
+- rfilename: tokenizer_config.json
+spaces: []
+createdAt: '2026-04-29T11:06:25.000Z'
+safetensors:
+  parameters:
+    BF16: 596049920
+  total: 596049920
+usedStorage: 1203557199
+downloadsAllTime: 213
+inferenceProviderMapping: {}
+configJson:
+  architectures:
+  - Qwen3Model
+  attention_bias: false
+  attention_dropout: 0.0
+  bos_token_id: null
+  dtype: bfloat16
+  eos_token_id: 151645
+  head_dim: 128
+  hidden_act: silu
+  hidden_size: 1024
+  initializer_range: 0.02
+  intermediate_size: 3072
+  layer_types:
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  max_position_embeddings: 32768
+  max_window_layers: 28
+  model_type: qwen3
+  num_attention_heads: 16
+  num_hidden_layers: 28
+  num_key_value_heads: 8
+  pad_token_id: 151643
+  rms_norm_eps: 1.0e-06
+  rope_parameters:
+    rope_theta: 1000000
+    rope_type: default
+  sliding_window: null
+  tie_word_embeddings: true
+  transformers_version: 5.6.2
+  use_cache: false
+  use_sliding_window: false
+  vocab_size: 151936
+onnxFiles: {}
+safetensorsSizeMb: 1192.1
+approxSizeMb: 1192.1
+fetchedAt: '2026-06-08T16:42:43.000Z'

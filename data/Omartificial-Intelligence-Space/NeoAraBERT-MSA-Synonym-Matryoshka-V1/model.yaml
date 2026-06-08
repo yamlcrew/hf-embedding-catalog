@@ -1,0 +1,224 @@
+_id: 69fc9a0ac30a31098a6d9dd6
+id: Omartificial-Intelligence-Space/NeoAraBERT-MSA-Synonym-Matryoshka-V1
+private: false
+pipeline_tag: sentence-similarity
+library_name: transformers
+tags:
+- transformers
+- safetensors
+- neobert
+- feature-extraction
+- sentence-transformers
+- sentence-similarity
+- arabic
+- arabic-embeddings
+- neoarabert
+- matryoshka
+- synonym
+- muradif
+- semantic-textual-similarity
+- sts
+- mnr
+- diacritics-aware
+- classical-arabic
+- custom_code
+- ar
+- base_model:U4RASD/NeoAraBERT_MSA
+- base_model:finetune:U4RASD/NeoAraBERT_MSA
+- license:cc-by-sa-4.0
+- model-index
+- region:us
+downloads: 83
+likes: 2
+modelId: Omartificial-Intelligence-Space/NeoAraBERT-MSA-Synonym-Matryoshka-V1
+author: Omartificial-Intelligence-Space
+sha: fcf7d788a871d03c099fde19168b8e68ecce15de
+lastModified: '2026-05-10T09:48:43.000Z'
+gated: false
+disabled: false
+widgetData:
+- source_sentence: هذا شخص سعيد
+  sentences:
+  - هذا كلب سعيد
+  - هذا شخص سعيد جدا
+  - اليوم هو يوم مشمس
+model-index:
+- name: NeoAraBERT-MSA-Synonym-Matryoshka-V1
+  results:
+  - task:
+      type: STS
+      name: Semantic Textual Similarity
+    dataset:
+      type: mteb/sts17-crosslingual-sts
+      name: STS17 (ar-ar)
+      config: ar-ar
+    metrics:
+    - type: cosine_spearman
+      value: 69.34
+      name: Spearman x 100
+      verified: false
+  - task:
+      type: STS
+      name: Semantic Textual Similarity
+    dataset:
+      type: mteb/sts22-crosslingual-sts
+      name: STS22-v2 (ar)
+      config: ar
+    metrics:
+    - type: cosine_spearman
+      value: 45.83
+      name: Spearman x 100
+      verified: false
+  - task:
+      type: SentenceSimilarity
+      name: Synonym Disambiguation in Context (held-out synsets)
+    dataset:
+      type: U4RASD/Muradif
+      name: Muradif (held-out 30% of anchor synsets)
+      split: test
+    metrics:
+    - type: accuracy
+      value: 80.09
+      name: Accuracy (%) on unseen synsets
+      verified: false
+    - type: mean_margin
+      value: 0.102
+      name: Mean cosine margin
+      verified: false
+config:
+  architectures:
+  - NeoBERT
+  auto_map:
+    AutoConfig: model.NeoBERTConfig
+    AutoModel: model.NeoBERT
+    AutoModelForMaskedLM: model.NeoBERTLMHead
+    AutoModelForSequenceClassification: model.NeoBERTForSequenceClassification
+  model_type: neobert
+  tokenizer_config:
+    bos_token: <s>
+    cls_token: '[CLS]'
+    eos_token: </s>
+    mask_token: '[MASK]'
+    pad_token: '[PAD]'
+    sep_token: '[SEP]'
+    unk_token: '[UNK]'
+cardData:
+  license: cc-by-sa-4.0
+  language:
+  - ar
+  base_model: U4RASD/NeoAraBERT_MSA
+  tags:
+  - sentence-transformers
+  - sentence-similarity
+  - arabic
+  - arabic-embeddings
+  - neoarabert
+  - neobert
+  - matryoshka
+  - synonym
+  - muradif
+  - semantic-textual-similarity
+  - sts
+  - mnr
+  - diacritics-aware
+  - classical-arabic
+  - custom_code
+  pipeline_tag: sentence-similarity
+  library_name: transformers
+  metrics:
+  - spearmanr
+  - accuracy
+  model-index:
+  - name: NeoAraBERT-MSA-Synonym-Matryoshka-V1
+    results:
+    - task:
+        type: STS
+        name: Semantic Textual Similarity
+      dataset:
+        type: mteb/sts17-crosslingual-sts
+        name: STS17 (ar-ar)
+        config: ar-ar
+      metrics:
+      - type: cosine_spearman
+        value: 69.34
+        name: Spearman x 100
+        verified: false
+    - task:
+        type: STS
+        name: Semantic Textual Similarity
+      dataset:
+        type: mteb/sts22-crosslingual-sts
+        name: STS22-v2 (ar)
+        config: ar
+      metrics:
+      - type: cosine_spearman
+        value: 45.83
+        name: Spearman x 100
+        verified: false
+    - task:
+        type: SentenceSimilarity
+        name: Synonym Disambiguation in Context (held-out synsets)
+      dataset:
+        type: U4RASD/Muradif
+        name: Muradif (held-out 30% of anchor synsets)
+        split: test
+      metrics:
+      - type: accuracy
+        value: 80.09
+        name: Accuracy (%) on unseen synsets
+        verified: false
+      - type: mean_margin
+        value: 0.102
+        name: Mean cosine margin
+        verified: false
+transformersInfo:
+  auto_model: AutoModel
+  custom_class: model.NeoBERT
+  pipeline_tag: feature-extraction
+siblings:
+- rfilename: .gitattributes
+- rfilename: README.md
+- rfilename: config.json
+- rfilename: model.py
+- rfilename: model.safetensors
+- rfilename: rotary.py
+- rfilename: tokenizer.json
+- rfilename: tokenizer.py
+- rfilename: tokenizer_config.json
+spaces: []
+createdAt: '2026-05-07T13:56:26.000Z'
+safetensors:
+  parameters:
+    F32: 248144640
+  total: 248144640
+usedStorage: 992597168
+downloadsAllTime: 83
+inferenceProviderMapping: {}
+configJson:
+  architectures:
+  - NeoBERT
+  auto_map:
+    AutoConfig: model.NeoBERTConfig
+    AutoModel: model.NeoBERT
+    AutoModelForMaskedLM: model.NeoBERTLMHead
+    AutoModelForSequenceClassification: model.NeoBERTForSequenceClassification
+  classifier_init_range: 0.02
+  decoder_init_range: 0.02
+  dim_head: 64
+  dtype: float32
+  embedding_init_range: 0.02
+  hidden_size: 768
+  intermediate_size: 3072
+  max_length: 1024
+  model_type: neobert
+  norm_eps: 1.0e-05
+  num_attention_heads: 12
+  num_hidden_layers: 28
+  pad_token_id: 0
+  transformers_version: 5.6.2
+  trust_remote_code: true
+  vocab_size: 65000
+onnxFiles: {}
+safetensorsSizeMb: 992.6
+approxSizeMb: 992.6
+fetchedAt: '2026-06-08T16:42:43.000Z'

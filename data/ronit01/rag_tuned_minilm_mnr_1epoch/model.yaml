@@ -1,0 +1,504 @@
+_id: 69f4e9d5d8a1d6a0ef9a274f
+id: ronit01/rag_tuned_minilm_mnr_1epoch
+private: false
+pipeline_tag: sentence-similarity
+library_name: sentence-transformers
+tags:
+- sentence-transformers
+- safetensors
+- bert
+- sentence-similarity
+- feature-extraction
+- generated_from_trainer
+- dataset_size:46
+- loss:MultipleNegativesRankingLoss
+- arxiv:1908.10084
+- arxiv:1807.03748
+- base_model:sentence-transformers/all-MiniLM-L6-v2
+- base_model:finetune:sentence-transformers/all-MiniLM-L6-v2
+- text-embeddings-inference
+- endpoints_compatible
+- region:us
+downloads: 7
+likes: 0
+modelId: ronit01/rag_tuned_minilm_mnr_1epoch
+author: ronit01
+sha: 306ec2259c72b53ead4c01154eb909841ad8e0a1
+lastModified: '2026-05-01T17:58:52.000Z'
+gated: false
+disabled: false
+mask_token: '[MASK]'
+widgetData:
+- source_sentence: How do you select specific GPUs for RapidFire AI to use, and how do you resolve port conflicts when starting
+    the server?
+  sentences:
+  - "Task, Dataset, and Prompt\n-------\n\nThis tutorial shows Supervised Fine-Tuning (SFT) for creating a customer support\
+    \ Q&A chatbot.\n\nIt uses the \"Bitext customer support\" dataset; \n`see its details on Hugging Face <https://huggingface.co/datasets/bitext/Bitext-customer-support-llm-chatbot-training-dataset>`__.\
+    \ \nWe use a sample of 5,000 training examples and 200 evaluation examples for tractable demo runtimes.\n\nThe prompt\
+    \ format includes a system message defining the assistant as \"helpful and friendly customer \nsupport\" with user instructions\
+    \ and assistant responses\n\n\nModel, Adapter, and Trainer Knobs\n-------\n\nWe compare 2 base model architectures: Llama-3.1-8B-Instruct\
+    \ and Mistral-7B-Instruct-v0.3. \nThe lite version uses only one: TinyLlama-1.1B-Chat-v1.0.\n\nThere are 2 different LoRA\
+    \ adapter configurations: a low-capacity adapter (rank 16; 8 for lite) targeting \nonly 2 modules and a high-capacity\
+    \ adapter (rank 128; 32 for lite) targeting 4 modules.\n\nAll other knobs are fixed across all configs. Thus, there are\
+    \ a total of 4 combinations, \nall launched with a simple grid search."
+  - "Port conflicts (services already running)\n----------------------------------------\n\nIf you encounter port conflicts,\
+    \ you can kill existing processes.\n\n.. code-block:: bash\n\n   lsof -t -i:8852 | xargs kill -9  # mlflow\n   lsof -t\
+    \ -i:8851 | xargs kill -9  # dispatcher\n   lsof -t -i:8853 | xargs kill -9  # frontend server\n\nSelect specific GPU(s)\
+    \ to use\n-----------------------------\n\nSet the ``CUDA_VISIBLE_DEVICES`` environment variable BEFORE running ``rapidfireai\
+    \ start`` to control which GPU(s) RapidFire can see and use.\n\n.. code-block:: bash\n\n   export CUDA_VISIBLE_DEVICES=2\
+    \   # use GPU index 2 only\n   rapidfireai start\n\nMultiple GPUs (example: GPUs 0 and 2):\n\n.. code-block:: bash\n\n\
+    \   export CUDA_VISIBLE_DEVICES=0,2\n   rapidfireai start\n\nFrom a Python script (set before importing/starting RapidFire):\n\
+    \n.. code-block:: python\n\n   import os\n   os.environ[\"CUDA_VISIBLE_DEVICES\"] = \"2\"\n   # then start your RapidFire\
+    \ workflow\n"
+  - "RapidFire AI offers a browser-based dashboard to automatically visualize all ML metrics and lets \nyou control runs on\
+    \ the fly from there. \nOur current default dashboard is a fork of the popular OSS tool `MLflow <https://mlflow.org/>`__,\
+    \ \nand it inherits much of MLflow's native features.\nThe dashboard URI is printed when the rapidfireai server is started;\
+    \ open it in a browser. \n\nAs of this writing, apart from MLflow, RapidFire AI also supports \n`TensorBoard  <https://www.tensorflow.org/tensorboard>`__\n\
+    and `Trackio <https://huggingface.co/docs/trackio/en/index>`__\nfor logging metrics plots. \nSpecify any one, two, or\
+    \ all three dashboards to use with the following server start argument. \n\n.. code-block:: bash\n\n   rapidfireai start\
+    \ --tracking-backends [mlflow | tensorboard | trackio]\n\nAlternatively, set the dashboard using its environment variable\
+    \ as below in your python code/notebook:\n\n.. code-block:: python\n\n   os.environ[\"RF_MLFLOW_ENABLED\"] = \"true\"\n\
+    \   os.environ[\"RF_TENSORBOARD_ENABLED\"] = \"true\"\n   os.environ[\"RF_TRACKIO_ENABLED\"] = \"true\"\n\nSupport for\
+    \ other popular dashboards such as Weights & Biases and CometML is coming soon. \nThe rest of this section explains the\
+    \ new features of our MLflow-fork dashboard.\nNote that these new features are not yet available on the other dashboards."
+- source_sentence: How does the Finite Population Correction (FPC) factor work in RapidFire AI's online aggregation for evals,
+    and why is it relevant given how data points are assigned to shards?
+  sentences:
+  - "**online_strategy_kwargs** : dict[str, Any], optional\n\tParameters for evals online aggregation strategy. The dictionary\
+    \ must include the following keys:\n\t\n\t* :code:`\"strategy_name\"` (str) - Must be :code:`\"normal\"`, :code:`\"wilson\"\
+    `, or :code:`\"hoeffding\"`.\n\t* :code:`\"confidence_level\"` (float) - Confidence level for confidence intervals on\
+    \ metrics. Must be in [0,1]. Default is 0.95 (95%).\n\t* :code:`\"use_fpc\"` (bool) - Whether to apply finite population\
+    \ correction. Default is :code:`True`."
+  - "We currently support two common knob set generators: :func:`List()` for a discrete \nset of values and :func:`Range()`\
+    \ for sampling from a continuous value interval.\n\n\n.. py:function:: List(values: List[Any])\n\n\t:param values: List\
+    \ of discrete values for a knob; all values must be the same python data type.\n\t:type values: List[Any]\n\n\n.. py:function::\
+    \ Range(start: int | float, end: int | float, dtype: str = \"int\" | \"float\")\n\n\t:param start: Lower bound of range\
+    \ interval.\n\t:type start: int | float\n\n\t:param end: Upper bound of range interval.\n\t:type end: int | float\n\n\t\
+    :param dtype: Data type of value to be sampled, either :code:`\"int\"` or :code:`\"float\"`.\n\t:type dtype: str\n\n\n\
+    **Notes:**\n\nAs of this writing, :func:`Range()` performs uniform sampling within the given interval. \nWe plan to continue\
+    \ expanding this API and add more functionality on this front based on feedback."
+  - "The crux of RapidFire AI's difference is in its *adaptive execution engine*: it enables \"interruptible\"\nexecution\
+    \ of configurations across GPUs/CPUs. To do so, it first shards the training and/or evaluation \ndataset randomly into\
+    \ \"chunks\" (also called \"shards\").\nThen instead of waiting for a run to see the whole dataset for all epochs (for\
+    \ SFT/RFT) or for full \neval metrics calculation (for RAG evals), RapidFire AI schedules all runs on *one shard at a\
+    \ time*, \nand then cycles through all shards.\n\nSuppose you have only 1 GPU, say an A100 or H100, and you want to run\
+    \ SFT on a Llama model. \nCurrent tools force you to run one config after another *sequentially* as shown in the (simplified)\
+    \ illustration below. \nIn contrast, by operating on shards, RapidFire AI offers a far more concurrent learning experience\
+    \ by \nautomatically *swapping* adapters (and base models, if needed) across GPU(s) and DRAM. \nIt does this via efficient\
+    \ shared memory-based caching mechanisms that can spill to disk when needed.\n\n.. image:: /images/gantt-1gpu.png\n  \
+    \ :width: 800px\n\nIn the above figure, all 3 model configs are shown for 1 epoch. RapidFire AI is set to use 4 chunks.\n\
+    So, before model config 3 (M3) even starts in the sequential approach, RapidFire AI already shows you \nthe learning behaviors\
+    \ of all 3 configs on the first 2-3 chunks. \nThe overhead of swapping, represented by the thin gray box, is minimal,\
+    \ less than 5% of the runtime,\nas per our measurements--thanks to our new efficient memory management techniques.\n\n\
+    For inference evals for RAG/context engineering, such sharded execution means RapidFire AI surfaces eval metrics \nsooner\
+    \ based on a statistical technique known as *online aggregation* from the database systems literature.\nBasically, see\
+    \ estimated values and confidence intervals for all eval metrics in real time as the shards \nget processed, ultimately\
+    \ converging to the exact metrics on the full dataset."
+- source_sentence: What user-provided functions can be included in an eval config for run_evals(), and which are mandatory
+    vs. optional?
+  sentences:
+  - "API: User-Provided Functions for Run Evals\n===============\n\nUsers can provide the following custom functions as part\
+    \ of their eval config to be used in :func:`run_evals()`.\nNote that each leaf config can have its own set of functions\
+    \ for all of these.\n\n\nPreprocess Function\n-------------------\n\nMandatory user-provided function to prepare the inputs\
+    \ to be given to the generator model. \nIt is invoked for each batch during the evaluation process before generation.\n\
+    Pass it directly to the :code:`preprocess_fn` key in your eval config dictionary.\n\nThe system injects into this function\
+    \ the batch data, as well as the RAG spec and \nthe prompt manager of an individual leaf config.\n\n\n.. py:function::\
+    \ preprocess_fn(batch: dict[str, list], rag: RFLangChainRagSpec, prompt_manager: RFPromptManager) -> dict[str, list]\n\
+    \n   :param batch: Dictionary with a batch of examples with dataset field names as keys and lists as values"
+  - "When using only closed model APIs such as OpenAI, RapidFire AI's scheduler automatically \noptimizes how CPU cores and\
+    \ the token rate limits are apportioned across configs. \nThis will help avoid wastage of token spend on unproductive\
+    \ RAG configs and help you \nredirect the spend to more productive RAG configs in real time."
+  - "Create Model Function\n------\n\nMandatory user-provided function to create HuggingFace model and tokenizer objects based\
+    \ on the  \nmodel type(s) and name(s) given in the :code:`RFModelConfig` and multi-config specification. \nAlso read :doc:`the\
+    \ LoRA and Model Configs page</models>`.\nA model can be imported from the Hugging Face model hub or read from a local\
+    \ checkpoint file. \n\nIt is passed to :func:`run_fit()` directly. Also read :doc:`the Experiment page</experiment>`.\n\
+    \nThis function is invoked when a trainer object is created for each run. \n\n\n.. py:function:: create_model_fn(model_config:\
+    \ Dict[str, Any]) -> Tuple[transformers.PreTrainedModel, transformers.PreTrainedTokenizer]\n\n  :param model_config: Dictionary\
+    \ injected by RapidFire AI into this user-defined function with all key-value pairs for one model config output by the\
+    \ config-group generator.\n  :type model_config: Dict[str, Any]\n\n  :return: Tuple containing the initialized Hugging\
+    \ Face model (e.g., ``AutoModelForCausalLM``, ``AutoModelForSequenceClassification``) and tokenizer (e.g., ``AutoTokenizer``,\
+    \ ``PreTrainedTokenizer``) objects\n  :rtype: Tuple[transformers.PreTrainedModel, transformers.PreTrainedTokenizer]\n\n\
+    \n**Example:**\n\n.. code-block:: python\n\n\t# From the SFT tutorial notebook\n\tdef sample_create_model(model_config):\n\
+    \    \t\"\"\"Function to create model object for any given config; must return tuple of (model, tokenizer)\"\"\"\n\t\t\
+    from transformers import AutoModelForCausalLM, AutoTokenizer, AutoModelForSeq2SeqLM, AutoModelForMaskedLM\n\t\t\n\t\t\
+    model_name = model_config[\"model_name\"]\n\t\tmodel_type = model_config[\"model_type\"]\n\t\tmodel_kwargs = model_config[\"\
+    model_kwargs\"]\n\t\t\n\t\tif model_type == \"causal_lm\":\n\t\t\tmodel = AutoModelForCausalLM.from_pretrained(model_name,\
+    \ **model_kwargs)\n\t\telif model_type == \"seq2seq_lm\":\n\t\t\tmodel = AutoModelForSeq2SeqLM.from_pretrained(model_name,\
+    \ **model_kwargs)\n\t\telif model_type == \"masked_lm\":\n\t\t\tmodel = AutoModelForMaskedLM.from_pretrained(model_name,\
+    \ **model_kwargs)\n\t\telif model_type == \"custom\":\n            # Handle custom model loading logic, e.g., loading\
+    \ your own checkpoints\n            # model = ... \n\t\t\tpass\n\t\telse:\n\t\t\t# Default to causal LM\n\t\t\tmodel =\
+    \ AutoModelForCausalLM.from_pretrained(model_name, **model_kwargs)\n\n\t\ttokenizer = AutoTokenizer.from_pretrained(model_name)\n\
+    \n\t\treturn (model,tokenizer)"
+- source_sentence: How do I set up RapidFire AI for RAG evaluation on a machine without GPUs?
+  sentences:
+  - "Postprocess Function\n--------------------\n\nOptional user-provided function to postprocess a batch of examples and\
+    \ their respective generated outputs, \nwhich is injected into this function by the system. \nThis is useful for, say,\
+    \ extracting structured information from generations, adding ground truth data, \nor performing any transformations needed\
+    \ before computing metrics.\n\nIt is invoked for each batch during the evaluation process after generation and before\
+    \ metric computation.\nPass it directly to the :code:`postprocess_fn` key in your eval config dictionary.\n\n\n.. py:function::\
+    \ postprocess_fn(batch: dict[str, list]) -> dict[str, list]\n\n   :param batch: Dictionary containing a batch of examples,\
+    \ including their respective generated outputs under the reserved key :code:`\"generated_text\"`.\n   :type batch: dict[str,\
+    \ list]\n\n   :return: Dictionary containing the postprocessed batch with any new or modified keys\n   :rtype: dict[str,\
+    \ list]\n"
+  - "RapidFire AI supports both self-hosted open LLMs and closed model LLM APIs as the generator. \nAs of this writing, it\
+    \ wraps around the model config of vLLM for the former and the OpenAI API for the latter. \nWe plan to expand support\
+    \ for more generator plugins, including Gemini and Claude APIs, based on feedback. \n\n\nRFvLLMModelConfig\n------\n\n\
+    This is a wrapper around vLLM's :class:`config` and :class:`SamplingParams` classes. \nThe full list of their arguments\
+    \ are available on `this page <https://docs.vllm.ai/en/latest/api/vllm/config/index.html>`__ \nand `this page <https://docs.vllm.ai/en/v0.6.4/dev/sampling_params.html>`__,\
+    \ respectively.\n\nThe difference here is that the individual arguments (knobs) can be :class:`List` valued or \n:class:`Range`\
+    \ valued in an :class:`RFvLLMModelConfig`. \nThat is how you can specify a base set of knob combinations from which a\
+    \ config group can \nbe produced. Also read :doc:`the Multi-Config Specification page</configs>`."
+  - "Note that if you plan to use only OpenAI APIs and not self-hosted models (for embedding or generation), you do NOT need\
+    \ GPUs on your machine. \nBut you must provide a valid OpenAI API key via a config argument as shown in the GSM8K and\
+    \ SciFact tutorial notebooks.\n\n\nStep 1: Install dependencies and package\n-----------------------\n\nObtain the RapidFire\
+    \ AI OSS package from pypi (includes all dependencies) and ensure it is installed correctly.\n\n.. important::\n\n  Requires\
+    \ Python 3.12+. Ensure that ``python3`` resolves to Python 3.12 before creating the venv.\n\n.. code-block:: bash\n\n\
+    \   python3 --version  # must be 3.12.x\n   python3 -m venv .venv\n   source .venv/bin/activate\n\n   pip install rapidfireai\n\
+    \n   rapidfireai --version\n   # Verify it prints the following:\n   # RapidFire AI 0..14.0\n\n   # Due to current issue:\
+    \ https://github.com/huggingface/xet-core/issues/527\n   pip uninstall -y hf-xet\n\n\nThe tutorial notebooks for RAG evals\
+    \ do not use any gated models from Hugging Face.\nIf you want to access gated models, provide your Hugging Face account\
+    \ token.\nFor more details on that, :doc:`see Step 1 here</walkthroughft>`.\n\n\nStep 2: Initialize and start RapidFire\
+    \ AI server\n------------\n\nRun the following commands to initialize rapidfireai to use the correct dependencies for\
+    \ RAG evals:\n\n.. code-block:: bash\n\n   rapidfireai init --evals\n   # It will install specific dependencies and initialize\
+    \ rapidfireai for RAG evals\n\n\n.. note::\n  You need to run init **only once** for a new venv or when switching GPU(s)\
+    \ on your machine. You do NOT need to run it after a reboot or for a new terminal tab.\n\n\nNext start RapidFire AI services:\
+    \ the frontend with the ML metrics dashboard and the API server. \nThe frontend URL shown below can be opened on your\
+    \ local browser.\n\n.. code-block:: bash\n\n   rapidfireai start\n   # It should print about 50 lines, including the following:\n\
+    \   # ...\n   # RapidFire Frontend is ready\n   # Open your browser and navigate to: http://0.0.0.0:8853\n   # ...\n \
+    \  # Press Ctrl+C to stop all services\n\n.. important::\n\n  Do NOT proceed until the start is successful with \"Available\
+    \ endpoints\" printed as above. Leave this terminal running while you work through the tutorial notebooks. \n\n\nIf you\
+    \ close the terminal in which you started rapidfireai or if you rebooted your machine, \njust start rapidfireai again\
+    \ with the above command.\n\nIf the start command fails for whatever reason, wait for half a minute and rerun it.\nFor\
+    \ diagnostics and common fixes (including Linux/macOS and Windows steps), see :doc:`Troubleshooting </troubleshooting>`.\n\
+    \n.. note::\n  For RAG/context engineering experiments with :func:`run_evals()`, starting the server is **optional** and\
+    \ only needed if you want to see results on the ML metrics dashboard too. Just as results are shown in an in-notebook\
+    \ table too, IC Ops panel can be displayed in the notebook too, as illustrated below (Steps 5 and 6)."
+- source_sentence: How do the Stop and Delete IC Ops compare in terms of their effects on a run's state, visibility on the
+    dashboard, resource usage, artifact preservation, and what further IC Ops can be performed on the run afterward?
+  sentences:
+  - "RFOpenAIAPIModelConfig\n------\n\nThis is a wrapper around OpenAI's API client config and chat completion parameters.\
+    \ \nThe full list of their arguments are available on `this page <https://platform.openai.com/docs/api-reference/chat/create>`__.\n\
+    \nThe difference here is that the individual arguments (knobs) can be :class:`List` valued or \n:class:`Range` valued\
+    \ in an :class:`RFOpenAIAPIModelConfig`. \nThat is how you can specify a base set of knob combinations from which a config\
+    \ group can \nbe produced. Also read :doc:`the Multi-Config Specification page</configs>`.\n\n.. py:class:: RFOpenAIAPIModelConfig\n\
+    \n  :param client_config: A dictionary necessary for initializing the AsyncOpenAI client. All knobs given in this dictionary\
+    \ are simply passed to the AsyncOpenAI client as is. We recommend listing at least the following knobs.\n  \n    * :code:`\"\
+    api_key\"`: Your OpenAI API key for authentication. Note that we are NOT able to provide a publicly visible API key.\n\
+    \    * :code:`\"max_retries\"`: Maximum number of retry attempts for failed API calls. Default is 2.\n    * :code:`\"\
+    timeout\"`: Request timeout in seconds. Optional.\n    \n  :type client_config: dict[str, Any]\n\n  :param model_config:\
+    \ A dictionary to control the chat completion behavior with OpenAI's Chat Completions API. All knobs given in this dictionary\
+    \ are simply passed to the OpenAI API as is. The API will use its defaults for unspecified knobs. We recommend listing\
+    \ at least the following knobs.\n\n    * :code:`\"model\"`: Name of the OpenAI model to use, e.g., \"gpt-5-mini\".\n \
+    \   * :code:`\"temperature\"`: What sampling temperature to use, between 0 and 2. Higher values like 0.8 will make the\
+    \ output more random, while lower values like 0.2 will make it more focused and deterministic. OpenAI recommends altering\
+    \ this or :code:`\"top_p\"` but not both.\n    * :code:`\"max_completion_tokens\"`: Upper bound for the number of tokens\
+    \ that can be generated for a completion, including visible output tokens and reasoning tokens.\n    * :code:`\"reasoning_effort\"\
+    `: Constrains effort for reasoning models. Currently supported values are \"minimal\", \"low\", \"medium\", and \"high\"\
+    . Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response. The gpt-5-pro\
+    \ model defaults to (and only supports) \"high\" reasoning effort.\n\t* :code:`\"top_p\"`: Alternative to temperature-based\
+    \ sampling called nucleus sampling. The model considers the results of the tokens with top_p probability mass. So 0.1\
+    \ means only the tokens comprising the top 10% probability mass are considered. OpenAI recommends altering this or :code:`\"\
+    temperature\"` but not both.\n\n  :type model_config: dict[str, Any]\n\n  :param rpm_limit: Rate limit for requests per\
+    \ minute to the OpenAI API. Used for throttling to avoid exceeding Open AI API quotas. Check the rate limit published\
+    \ by Open AI for details on your tier and the latest per-model limits on `this page <https://platform.openai.com/docs/guides/rate-limits>`__.\n\
+    \  :type rpm_limit: int\n\n  :param tpm_limit: Rate limit for tokens per minute to the OpenAI API. Used for throttling\
+    \ to avoid exceeding API quotas. See the rate limit page above for details.\n  :type tpm_limit: int\n\n  :param rag: An\
+    \ instance of a RapidFire AI RAG pipeline spec. Also read :doc:`the API: RFLangChainRagSpec page </ragspecs>`.\n  :type\
+    \ rag: RFLangChainRagSpec\n\n  :param prompt_manager: An instance of a RapidFire AI PromptManager. Also read :doc:`the\
+    \ API: Prompt Manager and Other Eval Config Knobs page </promptothers>`.\n  :type prompt_manager: PromptManager\n\n  ..\
+    \ seealso::\n     - `OpenAI Chat Completions API Reference <https://platform.openai.com/docs/api-reference/chat/create>`_\n\
+    \     - `OpenAI Python Client Documentation <https://github.com/openai/openai-python>`_\n     - :doc:`API: RFLangChainRagSpec\
+    \ </ragspecs>`\n     - :doc:`API: Prompt Manager and Other Eval Config Knobs page </promptothers>`\n\n\n**Example:**\n\
+    \n.. code-block:: python\n\n\t# Based on GSM8K chatbot tutorial notebook; specify your OPENAI_API_KEY beforehand\n\topenai_config1\
+    \ = RFOpenAIAPIModelConfig(\n\t\tclient_config={\"api_key\": OPENAI_API_KEY, \"max_retries\": 2},\n\t\tmodel_config={\n\
+    \t\t\t\"model\": \"gpt-5-mini\",\n\t\t\t\"max_completion_tokens\": 1024,\n\t\t\t\"reasoning_effort\": \"medium\", \n\t\
+    \t},\n\t\trpm_limit=500,\n\t\ttpm_limit=500_000,\n\t\trag=None,\n\t\tprompt_manager=fewshot_prompt_manager,\n\t)\t"
+  - "Why Not Just Downsample Data?\n------------\n\nAt first glance, one might consider running multi-config comparisons by\
+    \ downsampling data for \nquick estimates, then running promising configs on full data. While common, this approach is\
+    \ \noften misleading and cumbersome.\n\nA single downsample introduces variance from one static snapshot, potentially\
+    \ leading to wrong \nconclusions, especially with overfitting-prone LLMs/DL models. It requires manual checkpoint \nmanagement,\
+    \ adding tedious file work. You also do not get dynamic control (stop, resume, clone-modify),\nor you must reimplement\
+    \ such tricky operations, taking time away from your AI application work.\n\nRapidFire AI takes such practical heuristics\
+    \ to their logical conclusion with shard-based \nadaptive multi-config execution with dynamic experiment control. This\
+    \ offers you maximum power \nand flexibility for AI development without extra DevOps grunt work, i.e., *rapid experimentation*.\n\
+    \nThe above said, note that downsampling is *complementary* to rapid experimentation--feel free \ndo both! The adaptive\
+    \ execution can operate on your downsampled dataset all the same."
+  - "Delete\n----\n\nThis IC Op earmarks the run to be deleted from the next chunk onward. \nOn the chart, you will see its\
+    \ curves vanish almost immediately. \nYou cannot do any further IC Ops on a deleted run because it will not be visible.\
+    \ \nNote that although a deleted run vanishes from the plots, its model checkpoints are still part of \nthe artifacts\
+    \ of that experiment so that you have post-hoc audibility.\n"
+model-index: null
+config:
+  architectures:
+  - BertModel
+  model_type: bert
+  tokenizer_config:
+    cls_token: '[CLS]'
+    mask_token: '[MASK]'
+    pad_token: '[PAD]'
+    sep_token: '[SEP]'
+    unk_token: '[UNK]'
+cardData:
+  tags:
+  - sentence-transformers
+  - sentence-similarity
+  - feature-extraction
+  - generated_from_trainer
+  - dataset_size:46
+  - loss:MultipleNegativesRankingLoss
+  base_model: sentence-transformers/all-MiniLM-L6-v2
+  widget:
+  - source_sentence: How do you select specific GPUs for RapidFire AI to use, and how do you resolve port conflicts when starting
+      the server?
+    sentences:
+    - "Task, Dataset, and Prompt\n-------\n\nThis tutorial shows Supervised Fine-Tuning (SFT) for creating a customer support\
+      \ Q&A chatbot.\n\nIt uses the \"Bitext customer support\" dataset; \n`see its details on Hugging Face <https://huggingface.co/datasets/bitext/Bitext-customer-support-llm-chatbot-training-dataset>`__.\
+      \ \nWe use a sample of 5,000 training examples and 200 evaluation examples for tractable demo runtimes.\n\nThe prompt\
+      \ format includes a system message defining the assistant as \"helpful and friendly customer \nsupport\" with user instructions\
+      \ and assistant responses\n\n\nModel, Adapter, and Trainer Knobs\n-------\n\nWe compare 2 base model architectures:\
+      \ Llama-3.1-8B-Instruct and Mistral-7B-Instruct-v0.3. \nThe lite version uses only one: TinyLlama-1.1B-Chat-v1.0.\n\n\
+      There are 2 different LoRA adapter configurations: a low-capacity adapter (rank 16; 8 for lite) targeting \nonly 2 modules\
+      \ and a high-capacity adapter (rank 128; 32 for lite) targeting 4 modules.\n\nAll other knobs are fixed across all configs.\
+      \ Thus, there are a total of 4 combinations, \nall launched with a simple grid search."
+    - "Port conflicts (services already running)\n----------------------------------------\n\nIf you encounter port conflicts,\
+      \ you can kill existing processes.\n\n.. code-block:: bash\n\n   lsof -t -i:8852 | xargs kill -9  # mlflow\n   lsof\
+      \ -t -i:8851 | xargs kill -9  # dispatcher\n   lsof -t -i:8853 | xargs kill -9  # frontend server\n\nSelect specific\
+      \ GPU(s) to use\n-----------------------------\n\nSet the ``CUDA_VISIBLE_DEVICES`` environment variable BEFORE running\
+      \ ``rapidfireai start`` to control which GPU(s) RapidFire can see and use.\n\n.. code-block:: bash\n\n   export CUDA_VISIBLE_DEVICES=2\
+      \   # use GPU index 2 only\n   rapidfireai start\n\nMultiple GPUs (example: GPUs 0 and 2):\n\n.. code-block:: bash\n\
+      \n   export CUDA_VISIBLE_DEVICES=0,2\n   rapidfireai start\n\nFrom a Python script (set before importing/starting RapidFire):\n\
+      \n.. code-block:: python\n\n   import os\n   os.environ[\"CUDA_VISIBLE_DEVICES\"] = \"2\"\n   # then start your RapidFire\
+      \ workflow\n"
+    - "RapidFire AI offers a browser-based dashboard to automatically visualize all ML metrics and lets \nyou control runs\
+      \ on the fly from there. \nOur current default dashboard is a fork of the popular OSS tool `MLflow <https://mlflow.org/>`__,\
+      \ \nand it inherits much of MLflow's native features.\nThe dashboard URI is printed when the rapidfireai server is started;\
+      \ open it in a browser. \n\nAs of this writing, apart from MLflow, RapidFire AI also supports \n`TensorBoard  <https://www.tensorflow.org/tensorboard>`__\n\
+      and `Trackio <https://huggingface.co/docs/trackio/en/index>`__\nfor logging metrics plots. \nSpecify any one, two, or\
+      \ all three dashboards to use with the following server start argument. \n\n.. code-block:: bash\n\n   rapidfireai start\
+      \ --tracking-backends [mlflow | tensorboard | trackio]\n\nAlternatively, set the dashboard using its environment variable\
+      \ as below in your python code/notebook:\n\n.. code-block:: python\n\n   os.environ[\"RF_MLFLOW_ENABLED\"] = \"true\"\
+      \n   os.environ[\"RF_TENSORBOARD_ENABLED\"] = \"true\"\n   os.environ[\"RF_TRACKIO_ENABLED\"] = \"true\"\n\nSupport\
+      \ for other popular dashboards such as Weights & Biases and CometML is coming soon. \nThe rest of this section explains\
+      \ the new features of our MLflow-fork dashboard.\nNote that these new features are not yet available on the other dashboards."
+  - source_sentence: How does the Finite Population Correction (FPC) factor work in RapidFire AI's online aggregation for
+      evals, and why is it relevant given how data points are assigned to shards?
+    sentences:
+    - "**online_strategy_kwargs** : dict[str, Any], optional\n\tParameters for evals online aggregation strategy. The dictionary\
+      \ must include the following keys:\n\t\n\t* :code:`\"strategy_name\"` (str) - Must be :code:`\"normal\"`, :code:`\"\
+      wilson\"`, or :code:`\"hoeffding\"`.\n\t* :code:`\"confidence_level\"` (float) - Confidence level for confidence intervals\
+      \ on metrics. Must be in [0,1]. Default is 0.95 (95%).\n\t* :code:`\"use_fpc\"` (bool) - Whether to apply finite population\
+      \ correction. Default is :code:`True`."
+    - "We currently support two common knob set generators: :func:`List()` for a discrete \nset of values and :func:`Range()`\
+      \ for sampling from a continuous value interval.\n\n\n.. py:function:: List(values: List[Any])\n\n\t:param values: List\
+      \ of discrete values for a knob; all values must be the same python data type.\n\t:type values: List[Any]\n\n\n.. py:function::\
+      \ Range(start: int | float, end: int | float, dtype: str = \"int\" | \"float\")\n\n\t:param start: Lower bound of range\
+      \ interval.\n\t:type start: int | float\n\n\t:param end: Upper bound of range interval.\n\t:type end: int | float\n\n\
+      \t:param dtype: Data type of value to be sampled, either :code:`\"int\"` or :code:`\"float\"`.\n\t:type dtype: str\n\
+      \n\n**Notes:**\n\nAs of this writing, :func:`Range()` performs uniform sampling within the given interval. \nWe plan\
+      \ to continue expanding this API and add more functionality on this front based on feedback."
+    - "The crux of RapidFire AI's difference is in its *adaptive execution engine*: it enables \"interruptible\"\nexecution\
+      \ of configurations across GPUs/CPUs. To do so, it first shards the training and/or evaluation \ndataset randomly into\
+      \ \"chunks\" (also called \"shards\").\nThen instead of waiting for a run to see the whole dataset for all epochs (for\
+      \ SFT/RFT) or for full \neval metrics calculation (for RAG evals), RapidFire AI schedules all runs on *one shard at\
+      \ a time*, \nand then cycles through all shards.\n\nSuppose you have only 1 GPU, say an A100 or H100, and you want to\
+      \ run SFT on a Llama model. \nCurrent tools force you to run one config after another *sequentially* as shown in the\
+      \ (simplified) illustration below. \nIn contrast, by operating on shards, RapidFire AI offers a far more concurrent\
+      \ learning experience by \nautomatically *swapping* adapters (and base models, if needed) across GPU(s) and DRAM. \n\
+      It does this via efficient shared memory-based caching mechanisms that can spill to disk when needed.\n\n.. image::\
+      \ /images/gantt-1gpu.png\n   :width: 800px\n\nIn the above figure, all 3 model configs are shown for 1 epoch. RapidFire\
+      \ AI is set to use 4 chunks.\nSo, before model config 3 (M3) even starts in the sequential approach, RapidFire AI already\
+      \ shows you \nthe learning behaviors of all 3 configs on the first 2-3 chunks. \nThe overhead of swapping, represented\
+      \ by the thin gray box, is minimal, less than 5% of the runtime,\nas per our measurements--thanks to our new efficient\
+      \ memory management techniques.\n\nFor inference evals for RAG/context engineering, such sharded execution means RapidFire\
+      \ AI surfaces eval metrics \nsooner based on a statistical technique known as *online aggregation* from the database\
+      \ systems literature.\nBasically, see estimated values and confidence intervals for all eval metrics in real time as\
+      \ the shards \nget processed, ultimately converging to the exact metrics on the full dataset."
+  - source_sentence: What user-provided functions can be included in an eval config for run_evals(), and which are mandatory
+      vs. optional?
+    sentences:
+    - "API: User-Provided Functions for Run Evals\n===============\n\nUsers can provide the following custom functions as\
+      \ part of their eval config to be used in :func:`run_evals()`.\nNote that each leaf config can have its own set of functions\
+      \ for all of these.\n\n\nPreprocess Function\n-------------------\n\nMandatory user-provided function to prepare the\
+      \ inputs to be given to the generator model. \nIt is invoked for each batch during the evaluation process before generation.\n\
+      Pass it directly to the :code:`preprocess_fn` key in your eval config dictionary.\n\nThe system injects into this function\
+      \ the batch data, as well as the RAG spec and \nthe prompt manager of an individual leaf config.\n\n\n.. py:function::\
+      \ preprocess_fn(batch: dict[str, list], rag: RFLangChainRagSpec, prompt_manager: RFPromptManager) -> dict[str, list]\n\
+      \n   :param batch: Dictionary with a batch of examples with dataset field names as keys and lists as values"
+    - "When using only closed model APIs such as OpenAI, RapidFire AI's scheduler automatically \noptimizes how CPU cores\
+      \ and the token rate limits are apportioned across configs. \nThis will help avoid wastage of token spend on unproductive\
+      \ RAG configs and help you \nredirect the spend to more productive RAG configs in real time."
+    - "Create Model Function\n------\n\nMandatory user-provided function to create HuggingFace model and tokenizer objects\
+      \ based on the  \nmodel type(s) and name(s) given in the :code:`RFModelConfig` and multi-config specification. \nAlso\
+      \ read :doc:`the LoRA and Model Configs page</models>`.\nA model can be imported from the Hugging Face model hub or\
+      \ read from a local checkpoint file. \n\nIt is passed to :func:`run_fit()` directly. Also read :doc:`the Experiment\
+      \ page</experiment>`.\n\nThis function is invoked when a trainer object is created for each run. \n\n\n.. py:function::\
+      \ create_model_fn(model_config: Dict[str, Any]) -> Tuple[transformers.PreTrainedModel, transformers.PreTrainedTokenizer]\n\
+      \n  :param model_config: Dictionary injected by RapidFire AI into this user-defined function with all key-value pairs\
+      \ for one model config output by the config-group generator.\n  :type model_config: Dict[str, Any]\n\n  :return: Tuple\
+      \ containing the initialized Hugging Face model (e.g., ``AutoModelForCausalLM``, ``AutoModelForSequenceClassification``)\
+      \ and tokenizer (e.g., ``AutoTokenizer``, ``PreTrainedTokenizer``) objects\n  :rtype: Tuple[transformers.PreTrainedModel,\
+      \ transformers.PreTrainedTokenizer]\n\n\n**Example:**\n\n.. code-block:: python\n\n\t# From the SFT tutorial notebook\n\
+      \tdef sample_create_model(model_config):\n    \t\"\"\"Function to create model object for any given config; must return\
+      \ tuple of (model, tokenizer)\"\"\"\n\t\tfrom transformers import AutoModelForCausalLM, AutoTokenizer, AutoModelForSeq2SeqLM,\
+      \ AutoModelForMaskedLM\n\t\t\n\t\tmodel_name = model_config[\"model_name\"]\n\t\tmodel_type = model_config[\"model_type\"\
+      ]\n\t\tmodel_kwargs = model_config[\"model_kwargs\"]\n\t\t\n\t\tif model_type == \"causal_lm\":\n\t\t\tmodel = AutoModelForCausalLM.from_pretrained(model_name,\
+      \ **model_kwargs)\n\t\telif model_type == \"seq2seq_lm\":\n\t\t\tmodel = AutoModelForSeq2SeqLM.from_pretrained(model_name,\
+      \ **model_kwargs)\n\t\telif model_type == \"masked_lm\":\n\t\t\tmodel = AutoModelForMaskedLM.from_pretrained(model_name,\
+      \ **model_kwargs)\n\t\telif model_type == \"custom\":\n            # Handle custom model loading logic, e.g., loading\
+      \ your own checkpoints\n            # model = ... \n\t\t\tpass\n\t\telse:\n\t\t\t# Default to causal LM\n\t\t\tmodel\
+      \ = AutoModelForCausalLM.from_pretrained(model_name, **model_kwargs)\n\n\t\ttokenizer = AutoTokenizer.from_pretrained(model_name)\n\
+      \n\t\treturn (model,tokenizer)"
+  - source_sentence: How do I set up RapidFire AI for RAG evaluation on a machine without GPUs?
+    sentences:
+    - "Postprocess Function\n--------------------\n\nOptional user-provided function to postprocess a batch of examples and\
+      \ their respective generated outputs, \nwhich is injected into this function by the system. \nThis is useful for, say,\
+      \ extracting structured information from generations, adding ground truth data, \nor performing any transformations\
+      \ needed before computing metrics.\n\nIt is invoked for each batch during the evaluation process after generation and\
+      \ before metric computation.\nPass it directly to the :code:`postprocess_fn` key in your eval config dictionary.\n\n\
+      \n.. py:function:: postprocess_fn(batch: dict[str, list]) -> dict[str, list]\n\n   :param batch: Dictionary containing\
+      \ a batch of examples, including their respective generated outputs under the reserved key :code:`\"generated_text\"\
+      `.\n   :type batch: dict[str, list]\n\n   :return: Dictionary containing the postprocessed batch with any new or modified\
+      \ keys\n   :rtype: dict[str, list]\n"
+    - "RapidFire AI supports both self-hosted open LLMs and closed model LLM APIs as the generator. \nAs of this writing,\
+      \ it wraps around the model config of vLLM for the former and the OpenAI API for the latter. \nWe plan to expand support\
+      \ for more generator plugins, including Gemini and Claude APIs, based on feedback. \n\n\nRFvLLMModelConfig\n------\n\
+      \nThis is a wrapper around vLLM's :class:`config` and :class:`SamplingParams` classes. \nThe full list of their arguments\
+      \ are available on `this page <https://docs.vllm.ai/en/latest/api/vllm/config/index.html>`__ \nand `this page <https://docs.vllm.ai/en/v0.6.4/dev/sampling_params.html>`__,\
+      \ respectively.\n\nThe difference here is that the individual arguments (knobs) can be :class:`List` valued or \n:class:`Range`\
+      \ valued in an :class:`RFvLLMModelConfig`. \nThat is how you can specify a base set of knob combinations from which\
+      \ a config group can \nbe produced. Also read :doc:`the Multi-Config Specification page</configs>`."
+    - "Note that if you plan to use only OpenAI APIs and not self-hosted models (for embedding or generation), you do NOT\
+      \ need GPUs on your machine. \nBut you must provide a valid OpenAI API key via a config argument as shown in the GSM8K\
+      \ and SciFact tutorial notebooks.\n\n\nStep 1: Install dependencies and package\n-----------------------\n\nObtain the\
+      \ RapidFire AI OSS package from pypi (includes all dependencies) and ensure it is installed correctly.\n\n.. important::\n\
+      \n  Requires Python 3.12+. Ensure that ``python3`` resolves to Python 3.12 before creating the venv.\n\n.. code-block::\
+      \ bash\n\n   python3 --version  # must be 3.12.x\n   python3 -m venv .venv\n   source .venv/bin/activate\n\n   pip install\
+      \ rapidfireai\n\n   rapidfireai --version\n   # Verify it prints the following:\n   # RapidFire AI 0..14.0\n\n   # Due\
+      \ to current issue: https://github.com/huggingface/xet-core/issues/527\n   pip uninstall -y hf-xet\n\n\nThe tutorial\
+      \ notebooks for RAG evals do not use any gated models from Hugging Face.\nIf you want to access gated models, provide\
+      \ your Hugging Face account token.\nFor more details on that, :doc:`see Step 1 here</walkthroughft>`.\n\n\nStep 2: Initialize\
+      \ and start RapidFire AI server\n------------\n\nRun the following commands to initialize rapidfireai to use the correct\
+      \ dependencies for RAG evals:\n\n.. code-block:: bash\n\n   rapidfireai init --evals\n   # It will install specific\
+      \ dependencies and initialize rapidfireai for RAG evals\n\n\n.. note::\n  You need to run init **only once** for a new\
+      \ venv or when switching GPU(s) on your machine. You do NOT need to run it after a reboot or for a new terminal tab.\n\
+      \n\nNext start RapidFire AI services: the frontend with the ML metrics dashboard and the API server. \nThe frontend\
+      \ URL shown below can be opened on your local browser.\n\n.. code-block:: bash\n\n   rapidfireai start\n   # It should\
+      \ print about 50 lines, including the following:\n   # ...\n   # RapidFire Frontend is ready\n   # Open your browser\
+      \ and navigate to: http://0.0.0.0:8853\n   # ...\n   # Press Ctrl+C to stop all services\n\n.. important::\n\n  Do NOT\
+      \ proceed until the start is successful with \"Available endpoints\" printed as above. Leave this terminal running while\
+      \ you work through the tutorial notebooks. \n\n\nIf you close the terminal in which you started rapidfireai or if you\
+      \ rebooted your machine, \njust start rapidfireai again with the above command.\n\nIf the start command fails for whatever\
+      \ reason, wait for half a minute and rerun it.\nFor diagnostics and common fixes (including Linux/macOS and Windows\
+      \ steps), see :doc:`Troubleshooting </troubleshooting>`.\n\n.. note::\n  For RAG/context engineering experiments with\
+      \ :func:`run_evals()`, starting the server is **optional** and only needed if you want to see results on the ML metrics\
+      \ dashboard too. Just as results are shown in an in-notebook table too, IC Ops panel can be displayed in the notebook\
+      \ too, as illustrated below (Steps 5 and 6)."
+  - source_sentence: How do the Stop and Delete IC Ops compare in terms of their effects on a run's state, visibility on the
+      dashboard, resource usage, artifact preservation, and what further IC Ops can be performed on the run afterward?
+    sentences:
+    - "RFOpenAIAPIModelConfig\n------\n\nThis is a wrapper around OpenAI's API client config and chat completion parameters.\
+      \ \nThe full list of their arguments are available on `this page <https://platform.openai.com/docs/api-reference/chat/create>`__.\n\
+      \nThe difference here is that the individual arguments (knobs) can be :class:`List` valued or \n:class:`Range` valued\
+      \ in an :class:`RFOpenAIAPIModelConfig`. \nThat is how you can specify a base set of knob combinations from which a\
+      \ config group can \nbe produced. Also read :doc:`the Multi-Config Specification page</configs>`.\n\n.. py:class:: RFOpenAIAPIModelConfig\n\
+      \n  :param client_config: A dictionary necessary for initializing the AsyncOpenAI client. All knobs given in this dictionary\
+      \ are simply passed to the AsyncOpenAI client as is. We recommend listing at least the following knobs.\n  \n    * :code:`\"\
+      api_key\"`: Your OpenAI API key for authentication. Note that we are NOT able to provide a publicly visible API key.\n\
+      \    * :code:`\"max_retries\"`: Maximum number of retry attempts for failed API calls. Default is 2.\n    * :code:`\"\
+      timeout\"`: Request timeout in seconds. Optional.\n    \n  :type client_config: dict[str, Any]\n\n  :param model_config:\
+      \ A dictionary to control the chat completion behavior with OpenAI's Chat Completions API. All knobs given in this dictionary\
+      \ are simply passed to the OpenAI API as is. The API will use its defaults for unspecified knobs. We recommend listing\
+      \ at least the following knobs.\n\n    * :code:`\"model\"`: Name of the OpenAI model to use, e.g., \"gpt-5-mini\".\n\
+      \    * :code:`\"temperature\"`: What sampling temperature to use, between 0 and 2. Higher values like 0.8 will make\
+      \ the output more random, while lower values like 0.2 will make it more focused and deterministic. OpenAI recommends\
+      \ altering this or :code:`\"top_p\"` but not both.\n    * :code:`\"max_completion_tokens\"`: Upper bound for the number\
+      \ of tokens that can be generated for a completion, including visible output tokens and reasoning tokens.\n    * :code:`\"\
+      reasoning_effort\"`: Constrains effort for reasoning models. Currently supported values are \"minimal\", \"low\", \"\
+      medium\", and \"high\". Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning\
+      \ in a response. The gpt-5-pro model defaults to (and only supports) \"high\" reasoning effort.\n\t* :code:`\"top_p\"\
+      `: Alternative to temperature-based sampling called nucleus sampling. The model considers the results of the tokens\
+      \ with top_p probability mass. So 0.1 means only the tokens comprising the top 10% probability mass are considered.\
+      \ OpenAI recommends altering this or :code:`\"temperature\"` but not both.\n\n  :type model_config: dict[str, Any]\n\
+      \n  :param rpm_limit: Rate limit for requests per minute to the OpenAI API. Used for throttling to avoid exceeding Open\
+      \ AI API quotas. Check the rate limit published by Open AI for details on your tier and the latest per-model limits\
+      \ on `this page <https://platform.openai.com/docs/guides/rate-limits>`__.\n  :type rpm_limit: int\n\n  :param tpm_limit:\
+      \ Rate limit for tokens per minute to the OpenAI API. Used for throttling to avoid exceeding API quotas. See the rate\
+      \ limit page above for details.\n  :type tpm_limit: int\n\n  :param rag: An instance of a RapidFire AI RAG pipeline\
+      \ spec. Also read :doc:`the API: RFLangChainRagSpec page </ragspecs>`.\n  :type rag: RFLangChainRagSpec\n\n  :param\
+      \ prompt_manager: An instance of a RapidFire AI PromptManager. Also read :doc:`the API: Prompt Manager and Other Eval\
+      \ Config Knobs page </promptothers>`.\n  :type prompt_manager: PromptManager\n\n  .. seealso::\n     - `OpenAI Chat\
+      \ Completions API Reference <https://platform.openai.com/docs/api-reference/chat/create>`_\n     - `OpenAI Python Client\
+      \ Documentation <https://github.com/openai/openai-python>`_\n     - :doc:`API: RFLangChainRagSpec </ragspecs>`\n   \
+      \  - :doc:`API: Prompt Manager and Other Eval Config Knobs page </promptothers>`\n\n\n**Example:**\n\n.. code-block::\
+      \ python\n\n\t# Based on GSM8K chatbot tutorial notebook; specify your OPENAI_API_KEY beforehand\n\topenai_config1 =\
+      \ RFOpenAIAPIModelConfig(\n\t\tclient_config={\"api_key\": OPENAI_API_KEY, \"max_retries\": 2},\n\t\tmodel_config={\n\
+      \t\t\t\"model\": \"gpt-5-mini\",\n\t\t\t\"max_completion_tokens\": 1024,\n\t\t\t\"reasoning_effort\": \"medium\", \n\
+      \t\t},\n\t\trpm_limit=500,\n\t\ttpm_limit=500_000,\n\t\trag=None,\n\t\tprompt_manager=fewshot_prompt_manager,\n\t)\t"
+    - "Why Not Just Downsample Data?\n------------\n\nAt first glance, one might consider running multi-config comparisons\
+      \ by downsampling data for \nquick estimates, then running promising configs on full data. While common, this approach\
+      \ is \noften misleading and cumbersome.\n\nA single downsample introduces variance from one static snapshot, potentially\
+      \ leading to wrong \nconclusions, especially with overfitting-prone LLMs/DL models. It requires manual checkpoint \n\
+      management, adding tedious file work. You also do not get dynamic control (stop, resume, clone-modify),\nor you must\
+      \ reimplement such tricky operations, taking time away from your AI application work.\n\nRapidFire AI takes such practical\
+      \ heuristics to their logical conclusion with shard-based \nadaptive multi-config execution with dynamic experiment\
+      \ control. This offers you maximum power \nand flexibility for AI development without extra DevOps grunt work, i.e.,\
+      \ *rapid experimentation*.\n\nThe above said, note that downsampling is *complementary* to rapid experimentation--feel\
+      \ free \ndo both! The adaptive execution can operate on your downsampled dataset all the same."
+    - "Delete\n----\n\nThis IC Op earmarks the run to be deleted from the next chunk onward. \nOn the chart, you will see\
+      \ its curves vanish almost immediately. \nYou cannot do any further IC Ops on a deleted run because it will not be visible.\
+      \ \nNote that although a deleted run vanishes from the plots, its model checkpoints are still part of \nthe artifacts\
+      \ of that experiment so that you have post-hoc audibility.\n"
+  pipeline_tag: sentence-similarity
+  library_name: sentence-transformers
+siblings:
+- rfilename: .gitattributes
+- rfilename: 1_Pooling/config.json
+- rfilename: README.md
+- rfilename: config.json
+- rfilename: config_sentence_transformers.json
+- rfilename: model.safetensors
+- rfilename: modules.json
+- rfilename: sentence_bert_config.json
+- rfilename: tokenizer.json
+- rfilename: tokenizer_config.json
+spaces: []
+createdAt: '2026-05-01T17:58:45.000Z'
+safetensors:
+  parameters:
+    F32: 22713216
+  total: 22713216
+usedStorage: 90864176
+downloadsAllTime: 43
+inferenceProviderMapping: {}
+configJson:
+  add_cross_attention: false
+  architectures:
+  - BertModel
+  attention_probs_dropout_prob: 0.1
+  bos_token_id: null
+  classifier_dropout: null
+  dtype: float32
+  eos_token_id: null
+  gradient_checkpointing: false
+  hidden_act: gelu
+  hidden_dropout_prob: 0.1
+  hidden_size: 384
+  initializer_range: 0.02
+  intermediate_size: 1536
+  is_decoder: false
+  layer_norm_eps: 1.0e-12
+  max_position_embeddings: 512
+  model_type: bert
+  num_attention_heads: 12
+  num_hidden_layers: 6
+  pad_token_id: 0
+  position_embedding_type: absolute
+  tie_word_embeddings: true
+  transformers_version: 5.0.0
+  type_vocab_size: 2
+  use_cache: true
+  vocab_size: 30522
+onnxFiles: {}
+safetensorsSizeMb: 90.9
+approxSizeMb: 90.9
+fetchedAt: '2026-06-08T16:42:43.000Z'

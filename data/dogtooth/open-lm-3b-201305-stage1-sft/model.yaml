@@ -1,0 +1,132 @@
+_id: 6a01f92ebf0949325e49a4a4
+id: dogtooth/open-lm-3b-201305-stage1-sft
+private: false
+pipeline_tag: feature-extraction
+library_name: transformers
+tags:
+- transformers
+- safetensors
+- open_lm
+- feature-extraction
+- llama-factory
+- full
+- generated_from_trainer
+- custom_code
+- base_model:dogtooth/open-lm-3b-201305
+- base_model:finetune:dogtooth/open-lm-3b-201305
+- license:other
+- region:us
+downloads: 95
+likes: 0
+modelId: dogtooth/open-lm-3b-201305-stage1-sft
+author: dogtooth
+sha: 5a53f3ca8b352d41738612bb40e4a6472e00be80
+lastModified: '2026-05-11T15:47:32.000Z'
+gated: false
+disabled: false
+model-index:
+- name: openlm_3b_201305_stage1_sft
+  results: []
+config:
+  architectures:
+  - OpenLMForCausalLM
+  auto_map:
+    AutoConfig: modeling_open_lm_hf.OpenLMConfig
+    AutoModel: modeling_open_lm_hf.OpenLMForCausalLM
+    AutoModelForCausalLM: modeling_open_lm_hf.OpenLMForCausalLM
+  model_type: open_lm
+  tokenizer_config:
+    bos_token: <|endoftext|>
+    eos_token: <|endoftext|>
+    pad_token: <|endoftext|>
+    unk_token: <|endoftext|>
+  chat_template_jinja: '{% if messages[0][''role''] == ''system'' %}{% set loop_messages = messages[1:] %}{% set system_message
+    = messages[0][''content''] %}{% else %}{% set loop_messages = messages %}{% endif %}{% if system_message is defined %}{{
+    ''System: '' + system_message + ''<|endoftext|>'' + ''
+
+    '' }}{% endif %}{% for message in loop_messages %}{% set content = message[''content''] %}{% if message[''role''] == ''user''
+    %}{{ ''Human: '' + content + ''<|endoftext|>'' + ''
+
+    Assistant:'' }}{% elif message[''role''] == ''assistant'' %}{{ content + ''<|endoftext|>'' + ''
+
+    '' }}{% endif %}{% endfor %}'
+cardData:
+  library_name: transformers
+  license: other
+  base_model: dogtooth/open-lm-3b-201305
+  tags:
+  - llama-factory
+  - full
+  - generated_from_trainer
+  model-index:
+  - name: openlm_3b_201305_stage1_sft
+    results: []
+transformersInfo:
+  auto_model: AutoModel
+  custom_class: modeling_open_lm_hf.OpenLMForCausalLM
+  pipeline_tag: feature-extraction
+siblings:
+- rfilename: .gitattributes
+- rfilename: README.md
+- rfilename: all_results.json
+- rfilename: chat_template.jinja
+- rfilename: config.json
+- rfilename: generation_config.json
+- rfilename: model-00001-of-00002.safetensors
+- rfilename: model-00002-of-00002.safetensors
+- rfilename: model.safetensors.index.json
+- rfilename: modeling_open_lm_hf.py
+- rfilename: special_tokens_map.json
+- rfilename: tokenizer.json
+- rfilename: tokenizer_config.json
+- rfilename: train_results.json
+- rfilename: trainer_log.jsonl
+- rfilename: trainer_state.json
+- rfilename: training_args.bin
+- rfilename: training_loss.png
+spaces: []
+createdAt: '2026-05-11T15:43:42.000Z'
+safetensors:
+  parameters:
+    BF16: 2796096000
+  total: 2796096000
+usedStorage: 5592240536
+downloadsAllTime: 95
+inferenceProviderMapping: {}
+configJson:
+  architectures:
+  - OpenLMForCausalLM
+  attention_bias: false
+  attention_dropout: 0.0
+  auto_map:
+    AutoConfig: modeling_open_lm_hf.OpenLMConfig
+    AutoModel: modeling_open_lm_hf.OpenLMForCausalLM
+    AutoModelForCausalLM: modeling_open_lm_hf.OpenLMForCausalLM
+  bos_token_id: 0
+  dtype: bfloat16
+  eos_token_id: 0
+  head_dim: 80
+  hidden_act: silu
+  hidden_size: 2560
+  initializer_range: 0.02
+  intermediate_size: 6912
+  max_position_embeddings: 2048
+  mlp_bias: false
+  model_type: open_lm
+  num_attention_heads: 32
+  num_hidden_layers: 32
+  num_key_value_heads: 32
+  pad_token_id: 0
+  pretraining_tp: 1
+  qk_norm: true
+  rms_norm_eps: 1.0e-05
+  rope_scaling: null
+  rope_theta: 10000.0
+  tie_word_embeddings: false
+  transformers_version: 4.57.1
+  use_cache: false
+  vocab_size: 50432
+onnxFiles: {}
+safetensorsSizeMb: 5592.2
+approxSizeMb: 5592.2
+fetchedAt: '2026-06-08T16:42:43.000Z'

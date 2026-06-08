@@ -1,0 +1,1278 @@
+_id: 671b4f535f7cde5ac3258c00
+id: zenml/finetuned-snowflake-arctic-embed-m-v1.5
+private: false
+pipeline_tag: sentence-similarity
+library_name: sentence-transformers
+tags:
+- sentence-transformers
+- safetensors
+- bert
+- sentence-similarity
+- feature-extraction
+- generated_from_trainer
+- dataset_size:36
+- loss:MatryoshkaLoss
+- loss:MultipleNegativesRankingLoss
+- en
+- arxiv:1908.10084
+- arxiv:2205.13147
+- arxiv:1705.00652
+- base_model:Snowflake/snowflake-arctic-embed-m-v1.5
+- base_model:finetune:Snowflake/snowflake-arctic-embed-m-v1.5
+- license:apache-2.0
+- model-index
+- text-embeddings-inference
+- endpoints_compatible
+- region:us
+downloads: 9
+likes: 1
+modelId: zenml/finetuned-snowflake-arctic-embed-m-v1.5
+author: zenml
+sha: ec7b9247ade0db184332172389255aab0baf8d88
+lastModified: '2024-12-12T10:37:36.000Z'
+gated: false
+disabled: false
+mask_token: '[MASK]'
+widgetData:
+- source_sentence: How can I connect a GCP Image Builder to resources using ZenML?
+  sentences:
+  - "_run.steps[step_name]\n    whylogs_step.visualize()if __name__ == \"__main__\":\n    visualize_statistics(\"data_loader\"\
+    )\n    visualize_statistics(\"train_data_profiler\", \"test_data_profiler\")\n\nPreviousEvidentlyNextDevelop a custom\
+    \ data validator\n\nLast updated 1 month ago"
+  - 'Implement a custom integration
+
+
+    Creating an external integration and contributing to ZenML
+
+
+    PreviousContribute to ZenMLNextOverview
+
+
+    Last updated 4 months ago'
+  - "--connector <CONNECTOR_ID>\n\nExample Command Output$ zenml image-builder connect gcp-image-builder --connector gcp-generic\n\
+    Successfully connected image builder `gcp-image-builder` to the following resources:\n┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━━┓\n\
+    ┃             CONNECTOR ID             │ CONNECTOR NAME │ CONNECTOR TYPE │ RESOURCE TYPE  │ RESOURCE NAMES ┃\n┠──────────────────────────────────────┼────────────────┼────────────────┼────────────────┼────────────────┨\n\
+    ┃ bfdb657d-d808-47e7-9974-9ba6e4919d83 │ gcp-generic    │ \U0001F535 gcp         │ \U0001F535 gcp-generic │ zenml-core\
+    \     ┃\n┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━━┛\n\
+    \nAs a final step, you can use the GCP Image Builder in a ZenML Stack:\n\n# Register and set a stack with the new image\
+    \ builder\nzenml stack register <STACK_NAME> -i <IMAGE_BUILDER_NAME> ... --set\n\nWhen you register the GCP Image Builder,\
+    \ you can generate a GCP Service Account Key, save it to a local file and then reference it in the Image Builder configuration.\n\
+    \nThis method has the advantage that you don't need to install and configure the GCP CLI on your host, but it's still\
+    \ not as secure as using a GCP Service Connector and the stack component configuration is not portable to other hosts.\n\
+    \nFor this method, you need to create a user-managed GCP service account, and grant it privileges to access the Cloud\
+    \ Build API and to run Cloud Builder jobs (e.g. the Cloud Build Editor IAM role.\n\nWith the service account key downloaded\
+    \ to a local file, you can register the GCP Image Builder as follows:\n\nzenml image-builder register <IMAGE_BUILDER_NAME>\
+    \ \\\n    --flavor=gcp \\\n    --project=<GCP_PROJECT_ID> \\\n    --service_account_path=<PATH_TO_SERVICE_ACCOUNT_KEY>\
+    \ \\\n    --cloud_builder_image=<BUILDER_IMAGE_NAME> \\\n    --network=<DOCKER_NETWORK> \\\n    --build_timeout=<BUILD_TIMEOUT_IN_SECONDS>"
+- source_sentence: How do I register and activate a ZenML stack with a new GCP Image Builder while ensuring proper authentication?
+  sentences:
+  - "oad the returned whylogs profile to WhyLabs, e.g.:import pandas as pd\nfrom whylogs.core import DatasetProfileView\n\
+    import whylogs as why\nfrom zenml import step\nfrom zenml.integrations.whylogs.flavors.whylogs_data_validator_flavor import\
+    \ (\n    WhylogsDataValidatorSettings,\n)\n\nwhylogs_settings = WhylogsDataValidatorSettings(\n    enable_whylabs=True,\
+    \ dataset_id=\"<WHYLABS_DATASET_ID>\"\n)\n\n@step(\n    settings={\n        \"data_validator\": whylogs_settings\n   \
+    \ }\n)\ndef data_profiler(\n        dataset: pd.DataFrame,\n) -> DatasetProfileView:\n    \"\"\"Custom data profiler step\
+    \ with whylogs\n\nArgs:\n        dataset: a Pandas DataFrame\n\nReturns:\n        Whylogs Profile generated for the dataset\n\
+    \    \"\"\"\n\n# validation pre-processing (e.g. dataset preparation) can take place here\n\nresults = why.log(dataset)\n\
+    \    profile = results.profile()\n\n# validation post-processing (e.g. interpret results, take actions) can happen here\n\
+    \nreturn profile.view()\n\nVisualizing whylogs Profiles\n\nYou can view visualizations of the whylogs profiles generated\
+    \ by your pipeline steps directly in the ZenML dashboard by clicking on the respective artifact in the pipeline run DAG.\n\
+    \nAlternatively, if you are running inside a Jupyter notebook, you can load and render the whylogs profiles using the\
+    \ artifact.visualize() method, e.g.:\n\nfrom zenml.client import Client\n\ndef visualize_statistics(\n    step_name: str,\
+    \ reference_step_name: Optional[str] = None\n) -> None:\n    \"\"\"Helper function to visualize whylogs statistics from\
+    \ step artifacts.\n\nArgs:\n        step_name: step that generated and returned a whylogs profile\n        reference_step_name:\
+    \ an optional second step that generated a whylogs\n            profile to use for data drift visualization where two\
+    \ whylogs\n            profiles are required.\n    \"\"\"\n    pipe = Client().get_pipeline(pipeline=\"data_profiling_pipeline\"\
+    )\n    whylogs_step = pipe.last_run.steps[step_name]\n    whylogs_step.visualize()"
+  - "ogsDataValidatorSettings,\n)\nfrom zenml import step@step(\n    settings={\n        \"data_validator\": WhylogsDataValidatorSettings(\n\
+    \            enable_whylabs=True, dataset_id=\"model-1\"\n        )\n    }\n)\ndef data_loader() -> Tuple[\n    Annotated[pd.DataFrame,\
+    \ \"data\"],\n    Annotated[DatasetProfileView, \"profile\"]\n]:\n    \"\"\"Load the diabetes dataset.\"\"\"\n    X, y\
+    \ = datasets.load_diabetes(return_X_y=True, as_frame=True)\n\n# merge X and y together\n    df = pd.merge(X, y, left_index=True,\
+    \ right_index=True)\n\nprofile = why.log(pandas=df).profile().view()\n    return df, profile\n\nHow do you use it?\n\n\
+    Whylogs's profiling functions take in a pandas.DataFrame dataset generate a DatasetProfileView object containing all the\
+    \ relevant information extracted from the dataset.\n\nThere are three ways you can use whylogs in your ZenML pipelines\
+    \ that allow different levels of flexibility:\n\ninstantiate, configure and insert the standard WhylogsProfilerStep shipped\
+    \ with ZenML into your pipelines. This is the easiest way and the recommended approach, but can only be customized through\
+    \ the supported step configuration parameters.\n\ncall the data validation methods provided by the whylogs Data Validator\
+    \ in your custom step implementation. This method allows for more flexibility concerning what can happen in the pipeline\
+    \ step, but you are still limited to the functionality implemented in the Data Validator.\n\nuse the whylogs library directly\
+    \ in your custom step implementation. This gives you complete freedom in how you are using whylogs's features.\n\nYou\
+    \ can visualize whylogs profiles in Jupyter notebooks or view them directly in the ZenML dashboard.\n\nThe whylogs standard\
+    \ step"
+  - " build to finish. More information: Build Timeout.We can register the image builder and use it in our active stack:\n\
+    \nzenml image-builder register <IMAGE_BUILDER_NAME> \\\n    --flavor=gcp \\\n    --cloud_builder_image=<BUILDER_IMAGE_NAME>\
+    \ \\\n    --network=<DOCKER_NETWORK> \\\n    --build_timeout=<BUILD_TIMEOUT_IN_SECONDS>\n\n# Register and activate a stack\
+    \ with the new image builder\nzenml stack register <STACK_NAME> -i <IMAGE_BUILDER_NAME> ... --set\n\nYou also need to\
+    \ set up authentication required to access the Cloud Build GCP services.\n\nAuthentication Methods\n\nIntegrating and\
+    \ using a GCP Image Builder in your pipelines is not possible without employing some form of authentication. If you're\
+    \ looking for a quick way to get started locally, you can use the Local Authentication method. However, the recommended\
+    \ way to authenticate to the GCP cloud platform is through a GCP Service Connector. This is particularly useful if you\
+    \ are configuring ZenML stacks that combine the GCP Image Builder with other remote stack components also running in GCP.\n\
+    \nThis method uses the implicit GCP authentication available in the environment where the ZenML code is running. On your\
+    \ local machine, this is the quickest way to configure a GCP Image Builder. You don't need to supply credentials explicitly\
+    \ when you register the GCP Image Builder, as it leverages the local credentials and configuration that the Google Cloud\
+    \ CLI stores on your local machine. However, you will need to install and set up the Google Cloud CLI on your machine\
+    \ as a prerequisite, as covered in the Google Cloud documentation , before you register the GCP Image Builder.\n\nStacks\
+    \ using the GCP Image Builder set up with local authentication are not portable across environments. To make ZenML pipelines\
+    \ fully portable, it is recommended to use a GCP Service Connector to authenticate your GCP Image Builder to the GCP cloud\
+    \ platform."
+- source_sentence: How can I register and set a stack with a new image builder using ZenML?
+  sentences:
+  - 'ZenML - Bridging the gap between ML & Ops
+
+
+    Legacy Docs
+
+
+    Bleeding EdgeLegacy Docs0.67.0
+
+
+    🧙‍♂️Find older version our docs
+
+
+    Powered by GitBook'
+  - "> \\\n    --build_timeout=<BUILD_TIMEOUT_IN_SECONDS># Register and set a stack with the new image builder\nzenml stack\
+    \ register <STACK_NAME> -i <IMAGE_BUILDER_NAME> ... --set\n\nCaveats\n\nAs described in this Google Cloud Build documentation\
+    \ page, Google Cloud Build uses containers to execute the build steps which are automatically attached to a network called\
+    \ cloudbuild that provides some Application Default Credentials (ADC), that allow the container to be authenticated and\
+    \ therefore use other GCP services.\n\nBy default, the GCP Image Builder is executing the build command of the ZenML Pipeline\
+    \ Docker image with the option --network=cloudbuild, so the ADC provided by the cloudbuild network can also be used in\
+    \ the build. This is useful if you want to install a private dependency from a GCP Artifact Registry, but you will also\
+    \ need to use a custom base parent image with the keyrings.google-artifactregistry-auth installed, so pip can connect\
+    \ and authenticate in the private artifact registry to download the dependency.\n\nFROM zenmldocker/zenml:latest\n\nRUN\
+    \ pip install keyrings.google-artifactregistry-auth\n\nThe above Dockerfile uses zenmldocker/zenml:latest as a base image,\
+    \ but is recommended to change the tag to specify the ZenML version and Python version like 0.33.0-py3.10.\n\nPreviousKaniko\
+    \ Image BuilderNextDevelop a Custom Image Builder\n\nLast updated 21 days ago"
+  - "res Spark to handle the resource configuration.\"\"\"def _backend_configuration(\n            self,\n            spark_config:\
+    \ SparkConf,\n            step_config: \"StepConfiguration\",\n    ) -> None:\n        \"\"\"Configures Spark to handle\
+    \ backends like YARN, Mesos or Kubernetes.\"\"\"\n\ndef _io_configuration(\n            self,\n            spark_config:\
+    \ SparkConf\n    ) -> None:\n        \"\"\"Configures Spark to handle different input/output sources.\"\"\"\n\ndef _additional_configuration(\n\
+    \            self,\n            spark_config: SparkConf\n    ) -> None:\n        \"\"\"Appends the user-defined configuration\
+    \ parameters.\"\"\"\n\ndef _launch_spark_job(\n            self,\n            spark_config: SparkConf,\n            entrypoint_command:\
+    \ List[str]\n    ) -> None:\n        \"\"\"Generates and executes a spark-submit command.\"\"\"\n\ndef launch(\n     \
+    \       self,\n            info: \"StepRunInfo\",\n            entrypoint_command: List[str],\n    ) -> None:\n      \
+    \  \"\"\"Launches the step on Spark.\"\"\"\n\nUnder the base configuration, you will see the main configuration parameters:\n\
+    \nmaster is the master URL for the cluster where Spark will run. You might see different schemes for this URL with varying\
+    \ cluster managers such as Mesos, YARN, or Kubernetes.\n\ndeploy_mode can either be 'cluster' (default) or 'client' and\
+    \ it decides where the driver node of the application will run.\n\nsubmit_args is the JSON string of a dictionary, which\
+    \ will be used to define additional parameters if required ( Spark has a wide variety of parameters, thus including them\
+    \ all in a single class was deemed unnecessary.).\n\nIn addition to this configuration, the launch method of the step\
+    \ operator gets additional configuration parameters from the DockerSettings and ResourceSettings. As a result, the overall\
+    \ configuration happens in 4 base methods:\n\n_resource_configuration translates the ZenML ResourceSettings object to\
+    \ Spark's own resource configuration.\n\n_backend_configuration is responsible for cluster-manager-specific configuration."
+- source_sentence: How can I install ZenML with support for a local dashboard, and what precautions should I take when installing
+    on a Mac with Apple Silicon?
+  sentences:
+  - ' visit our PyPi package page.
+
+
+    Running with Dockerzenml is also available as a Docker image hosted publicly on DockerHub. Use the following command to
+    get started in a bash environment with zenml available:
+
+
+    docker run -it zenmldocker/zenml /bin/bash
+
+
+    If you would like to run the ZenML server with Docker:
+
+
+    docker run -it -d -p 8080:8080 zenmldocker/zenml-server
+
+
+    Deploying the server
+
+
+    Though ZenML can run entirely as a pip package on a local system, complete with the dashboard. You can do this easily:
+
+
+    pip install "zenml[server]"
+
+    zenml up  # opens the dashboard locally
+
+
+    However, advanced ZenML features are dependent on a centrally-deployed ZenML server accessible to other MLOps stack components.
+    You can read more about it here.
+
+
+    For the deployment of ZenML, you have the option to either self-host it or register for a free ZenML Pro account.
+
+
+    PreviousIntroductionNextCore concepts
+
+
+    Last updated 20 days ago'
+  - 'Evaluation and metrics
+
+
+    Track how your RAG pipeline improves using evaluation and metrics.
+
+
+    PreviousBasic RAG inference pipelineNextEvaluation in 65 lines of code
+
+
+    Last updated 4 months ago'
+  - '🧙Installation
+
+
+    Installing ZenML and getting started.
+
+
+    ZenML is a Python package that can be installed directly via pip:
+
+
+    pip install zenml
+
+
+    Note that ZenML currently supports Python 3.8, 3.9, 3.10, and 3.11. Please make sure that you are using a supported Python
+    version.
+
+
+    Install with the dashboard
+
+
+    ZenML comes bundled with a web dashboard that lives inside a sister repository. In order to get access to the dashboard
+    locally, you need to launch the ZenML Server and Dashboard locally. For this, you need to install the optional dependencies
+    for the ZenML Server:
+
+
+    pip install "zenml[server]"
+
+
+    We highly encourage you to install ZenML in a virtual environment. At ZenML, We like to use virtualenvwrapper or pyenv-virtualenv
+    to manage our Python virtual environments.
+
+
+    Installing onto MacOS with Apple Silicon (M1, M2)
+
+
+    A change in how forking works on Macs running on Apple Silicon means that you should set the following environment variable
+    which will ensure that your connections to the server remain unbroken:
+
+
+    export OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES
+
+
+    You can read more about this here. This environment variable is needed if you are working with a local server on your
+    Mac, but if you''re just using ZenML as a client / CLI and connecting to a deployed server then you don''t need to set
+    it.
+
+
+    Nightly builds
+
+
+    ZenML also publishes nightly builds under the zenml-nightly package name. These are built from the latest develop branch
+    (to which work ready for release is published) and are not guaranteed to be stable. To install the nightly build, run:
+
+
+    pip install zenml-nightly
+
+
+    Verifying installations
+
+
+    Once the installation is completed, you can check whether the installation was successful either through Bash:
+
+
+    zenml version
+
+
+    or through Python:
+
+
+    import zenml
+
+
+    print(zenml.__version__)
+
+
+    If you would like to learn more about the current release, please visit our PyPi package page.
+
+
+    Running with Docker'
+- source_sentence: How does the KubernetesSparkStepOperator utilize the PipelineDockerImageBuilder class to manage Docker
+    images for Spark jobs on Kubernetes?
+  sentences:
+  - 'ZenML - Bridging the gap between ML & Ops
+
+
+    Legacy Docs
+
+
+    Bleeding EdgeLegacy Docs0.67.0
+
+
+    🧙‍♂️Find older version our docs
+
+
+    Powered by GitBook'
+  - "nsible for cluster-manager-specific configuration._io_configuration is a critical method. Even though we have materializers,\
+    \ Spark might require additional packages and configuration to work with a specific filesystem. This method is used as\
+    \ an interface to provide this configuration.\n\n_additional_configuration takes the submit_args, converts, and appends\
+    \ them to the overall configuration.\n\nOnce the configuration is completed, _launch_spark_job comes into play. This takes\
+    \ the completed configuration and runs a Spark job on the given master URL with the specified deploy_mode. By default,\
+    \ this is achieved by creating and executing a spark-submit command.\n\nWarning\n\nIn its first iteration, the pre-configuration\
+    \ with _io_configuration method is only effective when it is paired with an S3ArtifactStore (which has an authentication\
+    \ secret). When used with other artifact store flavors, you might be required to provide additional configuration through\
+    \ the submit_args.\n\nStack Component: KubernetesSparkStepOperator\n\nThe KubernetesSparkStepOperator is implemented by\
+    \ subclassing the base SparkStepOperator and uses the PipelineDockerImageBuilder class to build and push the required\
+    \ Docker images.\n\nfrom typing import Optional\n\nfrom zenml.integrations.spark.step_operators.spark_step_operator import\
+    \ (\n    SparkStepOperatorConfig\n)\n\nclass KubernetesSparkStepOperatorConfig(SparkStepOperatorConfig):\n    \"\"\"Config\
+    \ for the Kubernetes Spark step operator.\"\"\"\n\nnamespace: Optional[str] = None\n    service_account: Optional[str]\
+    \ = None\n\nfrom pyspark.conf import SparkConf\n\nfrom zenml.utils.pipeline_docker_image_builder import PipelineDockerImageBuilder\n\
+    from zenml.integrations.spark.step_operators.spark_step_operator import (\n    SparkStepOperator\n)\n\nclass KubernetesSparkStepOperator(SparkStepOperator):\n\
+    \    \"\"\"Step operator which runs Steps with Spark on Kubernetes.\"\"\""
+  - "ngs/python/Dockerfile -u 0 build\n\nConfiguring RBACAdditionally, you may need to create the several resources in Kubernetes\
+    \ in order to give Spark access to edit/manage your driver executor pods.\n\nTo do so, create a file called rbac.yaml\
+    \ with the following content:\n\napiVersion: v1\nkind: Namespace\nmetadata:\n  name: spark-namespace\n---\napiVersion:\
+    \ v1\nkind: ServiceAccount\nmetadata:\n  name: spark-service-account\n  namespace: spark-namespace\n---\napiVersion: rbac.authorization.k8s.io/v1\n\
+    kind: ClusterRoleBinding\nmetadata:\n  name: spark-role\n  namespace: spark-namespace\nsubjects:\n  - kind: ServiceAccount\n\
+    \    name: spark-service-account\n    namespace: spark-namespace\nroleRef:\n  kind: ClusterRole\n  name: edit\n  apiGroup:\
+    \ rbac.authorization.k8s.io\n---\n\nAnd then execute the following command to create the resources:\n\naws eks --region=$REGION\
+    \ update-kubeconfig --name=$EKS_CLUSTER_NAME\n\nkubectl create -f rbac.yaml\n\nLastly, note down the namespace and the\
+    \ name of the service account since you will need them when registering the stack component in the next step.\n\nHow to\
+    \ use it\n\nTo use the KubernetesSparkStepOperator, you need:\n\nthe ZenML spark integration. If you haven't installed\
+    \ it already, run\n\nzenml integration install spark\n\nDocker installed and running.\n\nA remote artifact store as part\
+    \ of your stack.\n\nA remote container registry as part of your stack.\n\nA Kubernetes cluster deployed.\n\nWe can then\
+    \ register the step operator and use it in our active stack:\n\nzenml step-operator register spark_step_operator \\\n\t\
+    --flavor=spark-kubernetes \\\n\t--master=k8s://$EKS_API_SERVER_ENDPOINT \\\n\t--namespace=<SPARK_KUBERNETES_NAMESPACE>\
+    \ \\\n\t--service_account=<SPARK_KUBERNETES_SERVICE_ACCOUNT>\n\n# Register the stack\nzenml stack register spark_stack\
+    \ \\\n    -o default \\\n    -s spark_step_operator \\\n    -a spark_artifact_store \\\n    -c spark_container_registry\
+    \ \\\n    -i local_builder \\\n    --set"
+model-index:
+- name: zenml/finetuned-snowflake-arctic-embed-m-v1.5
+  results:
+  - task:
+      type: information-retrieval
+      name: Information Retrieval
+    dataset:
+      name: dim 384
+      type: dim_384
+    metrics:
+    - type: cosine_accuracy@1
+      value: 0.75
+      name: Cosine Accuracy@1
+      verified: false
+    - type: cosine_accuracy@3
+      value: 1
+      name: Cosine Accuracy@3
+      verified: false
+    - type: cosine_accuracy@5
+      value: 1
+      name: Cosine Accuracy@5
+      verified: false
+    - type: cosine_accuracy@10
+      value: 1
+      name: Cosine Accuracy@10
+      verified: false
+    - type: cosine_precision@1
+      value: 0.75
+      name: Cosine Precision@1
+      verified: false
+    - type: cosine_precision@3
+      value: 0.3333333333333333
+      name: Cosine Precision@3
+      verified: false
+    - type: cosine_precision@5
+      value: 0.2
+      name: Cosine Precision@5
+      verified: false
+    - type: cosine_precision@10
+      value: 0.1
+      name: Cosine Precision@10
+      verified: false
+    - type: cosine_recall@1
+      value: 0.75
+      name: Cosine Recall@1
+      verified: false
+    - type: cosine_recall@3
+      value: 1
+      name: Cosine Recall@3
+      verified: false
+    - type: cosine_recall@5
+      value: 1
+      name: Cosine Recall@5
+      verified: false
+    - type: cosine_recall@10
+      value: 1
+      name: Cosine Recall@10
+      verified: false
+    - type: cosine_ndcg@10
+      value: 0.875
+      name: Cosine Ndcg@10
+      verified: false
+    - type: cosine_mrr@10
+      value: 0.8333333333333334
+      name: Cosine Mrr@10
+      verified: false
+    - type: cosine_map@100
+      value: 0.8333333333333334
+      name: Cosine Map@100
+      verified: false
+  - task:
+      type: information-retrieval
+      name: Information Retrieval
+    dataset:
+      name: dim 256
+      type: dim_256
+    metrics:
+    - type: cosine_accuracy@1
+      value: 0.75
+      name: Cosine Accuracy@1
+      verified: false
+    - type: cosine_accuracy@3
+      value: 0.75
+      name: Cosine Accuracy@3
+      verified: false
+    - type: cosine_accuracy@5
+      value: 1
+      name: Cosine Accuracy@5
+      verified: false
+    - type: cosine_accuracy@10
+      value: 1
+      name: Cosine Accuracy@10
+      verified: false
+    - type: cosine_precision@1
+      value: 0.75
+      name: Cosine Precision@1
+      verified: false
+    - type: cosine_precision@3
+      value: 0.25
+      name: Cosine Precision@3
+      verified: false
+    - type: cosine_precision@5
+      value: 0.2
+      name: Cosine Precision@5
+      verified: false
+    - type: cosine_precision@10
+      value: 0.1
+      name: Cosine Precision@10
+      verified: false
+    - type: cosine_recall@1
+      value: 0.75
+      name: Cosine Recall@1
+      verified: false
+    - type: cosine_recall@3
+      value: 0.75
+      name: Cosine Recall@3
+      verified: false
+    - type: cosine_recall@5
+      value: 1
+      name: Cosine Recall@5
+      verified: false
+    - type: cosine_recall@10
+      value: 1
+      name: Cosine Recall@10
+      verified: false
+    - type: cosine_ndcg@10
+      value: 0.8576691395183482
+      name: Cosine Ndcg@10
+      verified: false
+    - type: cosine_mrr@10
+      value: 0.8125
+      name: Cosine Mrr@10
+      verified: false
+    - type: cosine_map@100
+      value: 0.8125
+      name: Cosine Map@100
+      verified: false
+  - task:
+      type: information-retrieval
+      name: Information Retrieval
+    dataset:
+      name: dim 128
+      type: dim_128
+    metrics:
+    - type: cosine_accuracy@1
+      value: 0.75
+      name: Cosine Accuracy@1
+      verified: false
+    - type: cosine_accuracy@3
+      value: 0.75
+      name: Cosine Accuracy@3
+      verified: false
+    - type: cosine_accuracy@5
+      value: 1
+      name: Cosine Accuracy@5
+      verified: false
+    - type: cosine_accuracy@10
+      value: 1
+      name: Cosine Accuracy@10
+      verified: false
+    - type: cosine_precision@1
+      value: 0.75
+      name: Cosine Precision@1
+      verified: false
+    - type: cosine_precision@3
+      value: 0.25
+      name: Cosine Precision@3
+      verified: false
+    - type: cosine_precision@5
+      value: 0.2
+      name: Cosine Precision@5
+      verified: false
+    - type: cosine_precision@10
+      value: 0.1
+      name: Cosine Precision@10
+      verified: false
+    - type: cosine_recall@1
+      value: 0.75
+      name: Cosine Recall@1
+      verified: false
+    - type: cosine_recall@3
+      value: 0.75
+      name: Cosine Recall@3
+      verified: false
+    - type: cosine_recall@5
+      value: 1
+      name: Cosine Recall@5
+      verified: false
+    - type: cosine_recall@10
+      value: 1
+      name: Cosine Recall@10
+      verified: false
+    - type: cosine_ndcg@10
+      value: 0.8576691395183482
+      name: Cosine Ndcg@10
+      verified: false
+    - type: cosine_mrr@10
+      value: 0.8125
+      name: Cosine Mrr@10
+      verified: false
+    - type: cosine_map@100
+      value: 0.8125
+      name: Cosine Map@100
+      verified: false
+  - task:
+      type: information-retrieval
+      name: Information Retrieval
+    dataset:
+      name: dim 64
+      type: dim_64
+    metrics:
+    - type: cosine_accuracy@1
+      value: 0.75
+      name: Cosine Accuracy@1
+      verified: false
+    - type: cosine_accuracy@3
+      value: 1
+      name: Cosine Accuracy@3
+      verified: false
+    - type: cosine_accuracy@5
+      value: 1
+      name: Cosine Accuracy@5
+      verified: false
+    - type: cosine_accuracy@10
+      value: 1
+      name: Cosine Accuracy@10
+      verified: false
+    - type: cosine_precision@1
+      value: 0.75
+      name: Cosine Precision@1
+      verified: false
+    - type: cosine_precision@3
+      value: 0.3333333333333333
+      name: Cosine Precision@3
+      verified: false
+    - type: cosine_precision@5
+      value: 0.2
+      name: Cosine Precision@5
+      verified: false
+    - type: cosine_precision@10
+      value: 0.1
+      name: Cosine Precision@10
+      verified: false
+    - type: cosine_recall@1
+      value: 0.75
+      name: Cosine Recall@1
+      verified: false
+    - type: cosine_recall@3
+      value: 1
+      name: Cosine Recall@3
+      verified: false
+    - type: cosine_recall@5
+      value: 1
+      name: Cosine Recall@5
+      verified: false
+    - type: cosine_recall@10
+      value: 1
+      name: Cosine Recall@10
+      verified: false
+    - type: cosine_ndcg@10
+      value: 0.875
+      name: Cosine Ndcg@10
+      verified: false
+    - type: cosine_mrr@10
+      value: 0.8333333333333334
+      name: Cosine Mrr@10
+      verified: false
+    - type: cosine_map@100
+      value: 0.8333333333333334
+      name: Cosine Map@100
+      verified: false
+config:
+  architectures:
+  - BertModel
+  model_type: bert
+  tokenizer_config:
+    cls_token: '[CLS]'
+    mask_token: '[MASK]'
+    pad_token: '[PAD]'
+    sep_token: '[SEP]'
+    unk_token: '[UNK]'
+cardData:
+  language:
+  - en
+  license: apache-2.0
+  tags:
+  - sentence-transformers
+  - sentence-similarity
+  - feature-extraction
+  - generated_from_trainer
+  - dataset_size:36
+  - loss:MatryoshkaLoss
+  - loss:MultipleNegativesRankingLoss
+  base_model: Snowflake/snowflake-arctic-embed-m-v1.5
+  widget:
+  - source_sentence: How can I connect a GCP Image Builder to resources using ZenML?
+    sentences:
+    - "_run.steps[step_name]\n    whylogs_step.visualize()if __name__ == \"__main__\":\n    visualize_statistics(\"data_loader\"\
+      )\n    visualize_statistics(\"train_data_profiler\", \"test_data_profiler\")\n\nPreviousEvidentlyNextDevelop a custom\
+      \ data validator\n\nLast updated 1 month ago"
+    - 'Implement a custom integration
+
+
+      Creating an external integration and contributing to ZenML
+
+
+      PreviousContribute to ZenMLNextOverview
+
+
+      Last updated 4 months ago'
+    - "--connector <CONNECTOR_ID>\n\nExample Command Output$ zenml image-builder connect gcp-image-builder --connector gcp-generic\n\
+      Successfully connected image builder `gcp-image-builder` to the following resources:\n┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━━┓\n\
+      ┃             CONNECTOR ID             │ CONNECTOR NAME │ CONNECTOR TYPE │ RESOURCE TYPE  │ RESOURCE NAMES ┃\n┠──────────────────────────────────────┼────────────────┼────────────────┼────────────────┼────────────────┨\n\
+      ┃ bfdb657d-d808-47e7-9974-9ba6e4919d83 │ gcp-generic    │ \U0001F535 gcp         │ \U0001F535 gcp-generic │ zenml-core\
+      \     ┃\n┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━━┛\n\
+      \nAs a final step, you can use the GCP Image Builder in a ZenML Stack:\n\n# Register and set a stack with the new image\
+      \ builder\nzenml stack register <STACK_NAME> -i <IMAGE_BUILDER_NAME> ... --set\n\nWhen you register the GCP Image Builder,\
+      \ you can generate a GCP Service Account Key, save it to a local file and then reference it in the Image Builder configuration.\n\
+      \nThis method has the advantage that you don't need to install and configure the GCP CLI on your host, but it's still\
+      \ not as secure as using a GCP Service Connector and the stack component configuration is not portable to other hosts.\n\
+      \nFor this method, you need to create a user-managed GCP service account, and grant it privileges to access the Cloud\
+      \ Build API and to run Cloud Builder jobs (e.g. the Cloud Build Editor IAM role.\n\nWith the service account key downloaded\
+      \ to a local file, you can register the GCP Image Builder as follows:\n\nzenml image-builder register <IMAGE_BUILDER_NAME>\
+      \ \\\n    --flavor=gcp \\\n    --project=<GCP_PROJECT_ID> \\\n    --service_account_path=<PATH_TO_SERVICE_ACCOUNT_KEY>\
+      \ \\\n    --cloud_builder_image=<BUILDER_IMAGE_NAME> \\\n    --network=<DOCKER_NETWORK> \\\n    --build_timeout=<BUILD_TIMEOUT_IN_SECONDS>"
+  - source_sentence: How do I register and activate a ZenML stack with a new GCP Image Builder while ensuring proper authentication?
+    sentences:
+    - "oad the returned whylogs profile to WhyLabs, e.g.:import pandas as pd\nfrom whylogs.core import DatasetProfileView\n\
+      import whylogs as why\nfrom zenml import step\nfrom zenml.integrations.whylogs.flavors.whylogs_data_validator_flavor\
+      \ import (\n    WhylogsDataValidatorSettings,\n)\n\nwhylogs_settings = WhylogsDataValidatorSettings(\n    enable_whylabs=True,\
+      \ dataset_id=\"<WHYLABS_DATASET_ID>\"\n)\n\n@step(\n    settings={\n        \"data_validator\": whylogs_settings\n \
+      \   }\n)\ndef data_profiler(\n        dataset: pd.DataFrame,\n) -> DatasetProfileView:\n    \"\"\"Custom data profiler\
+      \ step with whylogs\n\nArgs:\n        dataset: a Pandas DataFrame\n\nReturns:\n        Whylogs Profile generated for\
+      \ the dataset\n    \"\"\"\n\n# validation pre-processing (e.g. dataset preparation) can take place here\n\nresults =\
+      \ why.log(dataset)\n    profile = results.profile()\n\n# validation post-processing (e.g. interpret results, take actions)\
+      \ can happen here\n\nreturn profile.view()\n\nVisualizing whylogs Profiles\n\nYou can view visualizations of the whylogs\
+      \ profiles generated by your pipeline steps directly in the ZenML dashboard by clicking on the respective artifact in\
+      \ the pipeline run DAG.\n\nAlternatively, if you are running inside a Jupyter notebook, you can load and render the\
+      \ whylogs profiles using the artifact.visualize() method, e.g.:\n\nfrom zenml.client import Client\n\ndef visualize_statistics(\n\
+      \    step_name: str, reference_step_name: Optional[str] = None\n) -> None:\n    \"\"\"Helper function to visualize whylogs\
+      \ statistics from step artifacts.\n\nArgs:\n        step_name: step that generated and returned a whylogs profile\n\
+      \        reference_step_name: an optional second step that generated a whylogs\n            profile to use for data\
+      \ drift visualization where two whylogs\n            profiles are required.\n    \"\"\"\n    pipe = Client().get_pipeline(pipeline=\"\
+      data_profiling_pipeline\")\n    whylogs_step = pipe.last_run.steps[step_name]\n    whylogs_step.visualize()"
+    - "ogsDataValidatorSettings,\n)\nfrom zenml import step@step(\n    settings={\n        \"data_validator\": WhylogsDataValidatorSettings(\n\
+      \            enable_whylabs=True, dataset_id=\"model-1\"\n        )\n    }\n)\ndef data_loader() -> Tuple[\n    Annotated[pd.DataFrame,\
+      \ \"data\"],\n    Annotated[DatasetProfileView, \"profile\"]\n]:\n    \"\"\"Load the diabetes dataset.\"\"\"\n    X,\
+      \ y = datasets.load_diabetes(return_X_y=True, as_frame=True)\n\n# merge X and y together\n    df = pd.merge(X, y, left_index=True,\
+      \ right_index=True)\n\nprofile = why.log(pandas=df).profile().view()\n    return df, profile\n\nHow do you use it?\n\
+      \nWhylogs's profiling functions take in a pandas.DataFrame dataset generate a DatasetProfileView object containing all\
+      \ the relevant information extracted from the dataset.\n\nThere are three ways you can use whylogs in your ZenML pipelines\
+      \ that allow different levels of flexibility:\n\ninstantiate, configure and insert the standard WhylogsProfilerStep\
+      \ shipped with ZenML into your pipelines. This is the easiest way and the recommended approach, but can only be customized\
+      \ through the supported step configuration parameters.\n\ncall the data validation methods provided by the whylogs Data\
+      \ Validator in your custom step implementation. This method allows for more flexibility concerning what can happen in\
+      \ the pipeline step, but you are still limited to the functionality implemented in the Data Validator.\n\nuse the whylogs\
+      \ library directly in your custom step implementation. This gives you complete freedom in how you are using whylogs's\
+      \ features.\n\nYou can visualize whylogs profiles in Jupyter notebooks or view them directly in the ZenML dashboard.\n\
+      \nThe whylogs standard step"
+    - " build to finish. More information: Build Timeout.We can register the image builder and use it in our active stack:\n\
+      \nzenml image-builder register <IMAGE_BUILDER_NAME> \\\n    --flavor=gcp \\\n    --cloud_builder_image=<BUILDER_IMAGE_NAME>\
+      \ \\\n    --network=<DOCKER_NETWORK> \\\n    --build_timeout=<BUILD_TIMEOUT_IN_SECONDS>\n\n# Register and activate a\
+      \ stack with the new image builder\nzenml stack register <STACK_NAME> -i <IMAGE_BUILDER_NAME> ... --set\n\nYou also\
+      \ need to set up authentication required to access the Cloud Build GCP services.\n\nAuthentication Methods\n\nIntegrating\
+      \ and using a GCP Image Builder in your pipelines is not possible without employing some form of authentication. If\
+      \ you're looking for a quick way to get started locally, you can use the Local Authentication method. However, the recommended\
+      \ way to authenticate to the GCP cloud platform is through a GCP Service Connector. This is particularly useful if you\
+      \ are configuring ZenML stacks that combine the GCP Image Builder with other remote stack components also running in\
+      \ GCP.\n\nThis method uses the implicit GCP authentication available in the environment where the ZenML code is running.\
+      \ On your local machine, this is the quickest way to configure a GCP Image Builder. You don't need to supply credentials\
+      \ explicitly when you register the GCP Image Builder, as it leverages the local credentials and configuration that the\
+      \ Google Cloud CLI stores on your local machine. However, you will need to install and set up the Google Cloud CLI on\
+      \ your machine as a prerequisite, as covered in the Google Cloud documentation , before you register the GCP Image Builder.\n\
+      \nStacks using the GCP Image Builder set up with local authentication are not portable across environments. To make\
+      \ ZenML pipelines fully portable, it is recommended to use a GCP Service Connector to authenticate your GCP Image Builder\
+      \ to the GCP cloud platform."
+  - source_sentence: How can I register and set a stack with a new image builder using ZenML?
+    sentences:
+    - 'ZenML - Bridging the gap between ML & Ops
+
+
+      Legacy Docs
+
+
+      Bleeding EdgeLegacy Docs0.67.0
+
+
+      🧙‍♂️Find older version our docs
+
+
+      Powered by GitBook'
+    - "> \\\n    --build_timeout=<BUILD_TIMEOUT_IN_SECONDS># Register and set a stack with the new image builder\nzenml stack\
+      \ register <STACK_NAME> -i <IMAGE_BUILDER_NAME> ... --set\n\nCaveats\n\nAs described in this Google Cloud Build documentation\
+      \ page, Google Cloud Build uses containers to execute the build steps which are automatically attached to a network\
+      \ called cloudbuild that provides some Application Default Credentials (ADC), that allow the container to be authenticated\
+      \ and therefore use other GCP services.\n\nBy default, the GCP Image Builder is executing the build command of the ZenML\
+      \ Pipeline Docker image with the option --network=cloudbuild, so the ADC provided by the cloudbuild network can also\
+      \ be used in the build. This is useful if you want to install a private dependency from a GCP Artifact Registry, but\
+      \ you will also need to use a custom base parent image with the keyrings.google-artifactregistry-auth installed, so\
+      \ pip can connect and authenticate in the private artifact registry to download the dependency.\n\nFROM zenmldocker/zenml:latest\n\
+      \nRUN pip install keyrings.google-artifactregistry-auth\n\nThe above Dockerfile uses zenmldocker/zenml:latest as a base\
+      \ image, but is recommended to change the tag to specify the ZenML version and Python version like 0.33.0-py3.10.\n\n\
+      PreviousKaniko Image BuilderNextDevelop a Custom Image Builder\n\nLast updated 21 days ago"
+    - "res Spark to handle the resource configuration.\"\"\"def _backend_configuration(\n            self,\n            spark_config:\
+      \ SparkConf,\n            step_config: \"StepConfiguration\",\n    ) -> None:\n        \"\"\"Configures Spark to handle\
+      \ backends like YARN, Mesos or Kubernetes.\"\"\"\n\ndef _io_configuration(\n            self,\n            spark_config:\
+      \ SparkConf\n    ) -> None:\n        \"\"\"Configures Spark to handle different input/output sources.\"\"\"\n\ndef _additional_configuration(\n\
+      \            self,\n            spark_config: SparkConf\n    ) -> None:\n        \"\"\"Appends the user-defined configuration\
+      \ parameters.\"\"\"\n\ndef _launch_spark_job(\n            self,\n            spark_config: SparkConf,\n           \
+      \ entrypoint_command: List[str]\n    ) -> None:\n        \"\"\"Generates and executes a spark-submit command.\"\"\"\n\
+      \ndef launch(\n            self,\n            info: \"StepRunInfo\",\n            entrypoint_command: List[str],\n \
+      \   ) -> None:\n        \"\"\"Launches the step on Spark.\"\"\"\n\nUnder the base configuration, you will see the main\
+      \ configuration parameters:\n\nmaster is the master URL for the cluster where Spark will run. You might see different\
+      \ schemes for this URL with varying cluster managers such as Mesos, YARN, or Kubernetes.\n\ndeploy_mode can either be\
+      \ 'cluster' (default) or 'client' and it decides where the driver node of the application will run.\n\nsubmit_args is\
+      \ the JSON string of a dictionary, which will be used to define additional parameters if required ( Spark has a wide\
+      \ variety of parameters, thus including them all in a single class was deemed unnecessary.).\n\nIn addition to this\
+      \ configuration, the launch method of the step operator gets additional configuration parameters from the DockerSettings\
+      \ and ResourceSettings. As a result, the overall configuration happens in 4 base methods:\n\n_resource_configuration\
+      \ translates the ZenML ResourceSettings object to Spark's own resource configuration.\n\n_backend_configuration is responsible\
+      \ for cluster-manager-specific configuration."
+  - source_sentence: How can I install ZenML with support for a local dashboard, and what precautions should I take when installing
+      on a Mac with Apple Silicon?
+    sentences:
+    - ' visit our PyPi package page.
+
+
+      Running with Dockerzenml is also available as a Docker image hosted publicly on DockerHub. Use the following command
+      to get started in a bash environment with zenml available:
+
+
+      docker run -it zenmldocker/zenml /bin/bash
+
+
+      If you would like to run the ZenML server with Docker:
+
+
+      docker run -it -d -p 8080:8080 zenmldocker/zenml-server
+
+
+      Deploying the server
+
+
+      Though ZenML can run entirely as a pip package on a local system, complete with the dashboard. You can do this easily:
+
+
+      pip install "zenml[server]"
+
+      zenml up  # opens the dashboard locally
+
+
+      However, advanced ZenML features are dependent on a centrally-deployed ZenML server accessible to other MLOps stack
+      components. You can read more about it here.
+
+
+      For the deployment of ZenML, you have the option to either self-host it or register for a free ZenML Pro account.
+
+
+      PreviousIntroductionNextCore concepts
+
+
+      Last updated 20 days ago'
+    - 'Evaluation and metrics
+
+
+      Track how your RAG pipeline improves using evaluation and metrics.
+
+
+      PreviousBasic RAG inference pipelineNextEvaluation in 65 lines of code
+
+
+      Last updated 4 months ago'
+    - '🧙Installation
+
+
+      Installing ZenML and getting started.
+
+
+      ZenML is a Python package that can be installed directly via pip:
+
+
+      pip install zenml
+
+
+      Note that ZenML currently supports Python 3.8, 3.9, 3.10, and 3.11. Please make sure that you are using a supported
+      Python version.
+
+
+      Install with the dashboard
+
+
+      ZenML comes bundled with a web dashboard that lives inside a sister repository. In order to get access to the dashboard
+      locally, you need to launch the ZenML Server and Dashboard locally. For this, you need to install the optional dependencies
+      for the ZenML Server:
+
+
+      pip install "zenml[server]"
+
+
+      We highly encourage you to install ZenML in a virtual environment. At ZenML, We like to use virtualenvwrapper or pyenv-virtualenv
+      to manage our Python virtual environments.
+
+
+      Installing onto MacOS with Apple Silicon (M1, M2)
+
+
+      A change in how forking works on Macs running on Apple Silicon means that you should set the following environment variable
+      which will ensure that your connections to the server remain unbroken:
+
+
+      export OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES
+
+
+      You can read more about this here. This environment variable is needed if you are working with a local server on your
+      Mac, but if you''re just using ZenML as a client / CLI and connecting to a deployed server then you don''t need to set
+      it.
+
+
+      Nightly builds
+
+
+      ZenML also publishes nightly builds under the zenml-nightly package name. These are built from the latest develop branch
+      (to which work ready for release is published) and are not guaranteed to be stable. To install the nightly build, run:
+
+
+      pip install zenml-nightly
+
+
+      Verifying installations
+
+
+      Once the installation is completed, you can check whether the installation was successful either through Bash:
+
+
+      zenml version
+
+
+      or through Python:
+
+
+      import zenml
+
+
+      print(zenml.__version__)
+
+
+      If you would like to learn more about the current release, please visit our PyPi package page.
+
+
+      Running with Docker'
+  - source_sentence: How does the KubernetesSparkStepOperator utilize the PipelineDockerImageBuilder class to manage Docker
+      images for Spark jobs on Kubernetes?
+    sentences:
+    - 'ZenML - Bridging the gap between ML & Ops
+
+
+      Legacy Docs
+
+
+      Bleeding EdgeLegacy Docs0.67.0
+
+
+      🧙‍♂️Find older version our docs
+
+
+      Powered by GitBook'
+    - "nsible for cluster-manager-specific configuration._io_configuration is a critical method. Even though we have materializers,\
+      \ Spark might require additional packages and configuration to work with a specific filesystem. This method is used\
+      \ as an interface to provide this configuration.\n\n_additional_configuration takes the submit_args, converts, and appends\
+      \ them to the overall configuration.\n\nOnce the configuration is completed, _launch_spark_job comes into play. This\
+      \ takes the completed configuration and runs a Spark job on the given master URL with the specified deploy_mode. By\
+      \ default, this is achieved by creating and executing a spark-submit command.\n\nWarning\n\nIn its first iteration,\
+      \ the pre-configuration with _io_configuration method is only effective when it is paired with an S3ArtifactStore (which\
+      \ has an authentication secret). When used with other artifact store flavors, you might be required to provide additional\
+      \ configuration through the submit_args.\n\nStack Component: KubernetesSparkStepOperator\n\nThe KubernetesSparkStepOperator\
+      \ is implemented by subclassing the base SparkStepOperator and uses the PipelineDockerImageBuilder class to build and\
+      \ push the required Docker images.\n\nfrom typing import Optional\n\nfrom zenml.integrations.spark.step_operators.spark_step_operator\
+      \ import (\n    SparkStepOperatorConfig\n)\n\nclass KubernetesSparkStepOperatorConfig(SparkStepOperatorConfig):\n  \
+      \  \"\"\"Config for the Kubernetes Spark step operator.\"\"\"\n\nnamespace: Optional[str] = None\n    service_account:\
+      \ Optional[str] = None\n\nfrom pyspark.conf import SparkConf\n\nfrom zenml.utils.pipeline_docker_image_builder import\
+      \ PipelineDockerImageBuilder\nfrom zenml.integrations.spark.step_operators.spark_step_operator import (\n    SparkStepOperator\n\
+      )\n\nclass KubernetesSparkStepOperator(SparkStepOperator):\n    \"\"\"Step operator which runs Steps with Spark on Kubernetes.\"\
+      \"\""
+    - "ngs/python/Dockerfile -u 0 build\n\nConfiguring RBACAdditionally, you may need to create the several resources in Kubernetes\
+      \ in order to give Spark access to edit/manage your driver executor pods.\n\nTo do so, create a file called rbac.yaml\
+      \ with the following content:\n\napiVersion: v1\nkind: Namespace\nmetadata:\n  name: spark-namespace\n---\napiVersion:\
+      \ v1\nkind: ServiceAccount\nmetadata:\n  name: spark-service-account\n  namespace: spark-namespace\n---\napiVersion:\
+      \ rbac.authorization.k8s.io/v1\nkind: ClusterRoleBinding\nmetadata:\n  name: spark-role\n  namespace: spark-namespace\n\
+      subjects:\n  - kind: ServiceAccount\n    name: spark-service-account\n    namespace: spark-namespace\nroleRef:\n  kind:\
+      \ ClusterRole\n  name: edit\n  apiGroup: rbac.authorization.k8s.io\n---\n\nAnd then execute the following command to\
+      \ create the resources:\n\naws eks --region=$REGION update-kubeconfig --name=$EKS_CLUSTER_NAME\n\nkubectl create -f\
+      \ rbac.yaml\n\nLastly, note down the namespace and the name of the service account since you will need them when registering\
+      \ the stack component in the next step.\n\nHow to use it\n\nTo use the KubernetesSparkStepOperator, you need:\n\nthe\
+      \ ZenML spark integration. If you haven't installed it already, run\n\nzenml integration install spark\n\nDocker installed\
+      \ and running.\n\nA remote artifact store as part of your stack.\n\nA remote container registry as part of your stack.\n\
+      \nA Kubernetes cluster deployed.\n\nWe can then register the step operator and use it in our active stack:\n\nzenml\
+      \ step-operator register spark_step_operator \\\n\t--flavor=spark-kubernetes \\\n\t--master=k8s://$EKS_API_SERVER_ENDPOINT\
+      \ \\\n\t--namespace=<SPARK_KUBERNETES_NAMESPACE> \\\n\t--service_account=<SPARK_KUBERNETES_SERVICE_ACCOUNT>\n\n# Register\
+      \ the stack\nzenml stack register spark_stack \\\n    -o default \\\n    -s spark_step_operator \\\n    -a spark_artifact_store\
+      \ \\\n    -c spark_container_registry \\\n    -i local_builder \\\n    --set"
+  pipeline_tag: sentence-similarity
+  library_name: sentence-transformers
+  metrics:
+  - cosine_accuracy@1
+  - cosine_accuracy@3
+  - cosine_accuracy@5
+  - cosine_accuracy@10
+  - cosine_precision@1
+  - cosine_precision@3
+  - cosine_precision@5
+  - cosine_precision@10
+  - cosine_recall@1
+  - cosine_recall@3
+  - cosine_recall@5
+  - cosine_recall@10
+  - cosine_ndcg@10
+  - cosine_mrr@10
+  - cosine_map@100
+  model-index:
+  - name: zenml/finetuned-snowflake-arctic-embed-m-v1.5
+    results:
+    - task:
+        type: information-retrieval
+        name: Information Retrieval
+      dataset:
+        name: dim 384
+        type: dim_384
+      metrics:
+      - type: cosine_accuracy@1
+        value: 0.75
+        name: Cosine Accuracy@1
+        verified: false
+      - type: cosine_accuracy@3
+        value: 1
+        name: Cosine Accuracy@3
+        verified: false
+      - type: cosine_accuracy@5
+        value: 1
+        name: Cosine Accuracy@5
+        verified: false
+      - type: cosine_accuracy@10
+        value: 1
+        name: Cosine Accuracy@10
+        verified: false
+      - type: cosine_precision@1
+        value: 0.75
+        name: Cosine Precision@1
+        verified: false
+      - type: cosine_precision@3
+        value: 0.3333333333333333
+        name: Cosine Precision@3
+        verified: false
+      - type: cosine_precision@5
+        value: 0.2
+        name: Cosine Precision@5
+        verified: false
+      - type: cosine_precision@10
+        value: 0.1
+        name: Cosine Precision@10
+        verified: false
+      - type: cosine_recall@1
+        value: 0.75
+        name: Cosine Recall@1
+        verified: false
+      - type: cosine_recall@3
+        value: 1
+        name: Cosine Recall@3
+        verified: false
+      - type: cosine_recall@5
+        value: 1
+        name: Cosine Recall@5
+        verified: false
+      - type: cosine_recall@10
+        value: 1
+        name: Cosine Recall@10
+        verified: false
+      - type: cosine_ndcg@10
+        value: 0.875
+        name: Cosine Ndcg@10
+        verified: false
+      - type: cosine_mrr@10
+        value: 0.8333333333333334
+        name: Cosine Mrr@10
+        verified: false
+      - type: cosine_map@100
+        value: 0.8333333333333334
+        name: Cosine Map@100
+        verified: false
+    - task:
+        type: information-retrieval
+        name: Information Retrieval
+      dataset:
+        name: dim 256
+        type: dim_256
+      metrics:
+      - type: cosine_accuracy@1
+        value: 0.75
+        name: Cosine Accuracy@1
+        verified: false
+      - type: cosine_accuracy@3
+        value: 0.75
+        name: Cosine Accuracy@3
+        verified: false
+      - type: cosine_accuracy@5
+        value: 1
+        name: Cosine Accuracy@5
+        verified: false
+      - type: cosine_accuracy@10
+        value: 1
+        name: Cosine Accuracy@10
+        verified: false
+      - type: cosine_precision@1
+        value: 0.75
+        name: Cosine Precision@1
+        verified: false
+      - type: cosine_precision@3
+        value: 0.25
+        name: Cosine Precision@3
+        verified: false
+      - type: cosine_precision@5
+        value: 0.2
+        name: Cosine Precision@5
+        verified: false
+      - type: cosine_precision@10
+        value: 0.1
+        name: Cosine Precision@10
+        verified: false
+      - type: cosine_recall@1
+        value: 0.75
+        name: Cosine Recall@1
+        verified: false
+      - type: cosine_recall@3
+        value: 0.75
+        name: Cosine Recall@3
+        verified: false
+      - type: cosine_recall@5
+        value: 1
+        name: Cosine Recall@5
+        verified: false
+      - type: cosine_recall@10
+        value: 1
+        name: Cosine Recall@10
+        verified: false
+      - type: cosine_ndcg@10
+        value: 0.8576691395183482
+        name: Cosine Ndcg@10
+        verified: false
+      - type: cosine_mrr@10
+        value: 0.8125
+        name: Cosine Mrr@10
+        verified: false
+      - type: cosine_map@100
+        value: 0.8125
+        name: Cosine Map@100
+        verified: false
+    - task:
+        type: information-retrieval
+        name: Information Retrieval
+      dataset:
+        name: dim 128
+        type: dim_128
+      metrics:
+      - type: cosine_accuracy@1
+        value: 0.75
+        name: Cosine Accuracy@1
+        verified: false
+      - type: cosine_accuracy@3
+        value: 0.75
+        name: Cosine Accuracy@3
+        verified: false
+      - type: cosine_accuracy@5
+        value: 1
+        name: Cosine Accuracy@5
+        verified: false
+      - type: cosine_accuracy@10
+        value: 1
+        name: Cosine Accuracy@10
+        verified: false
+      - type: cosine_precision@1
+        value: 0.75
+        name: Cosine Precision@1
+        verified: false
+      - type: cosine_precision@3
+        value: 0.25
+        name: Cosine Precision@3
+        verified: false
+      - type: cosine_precision@5
+        value: 0.2
+        name: Cosine Precision@5
+        verified: false
+      - type: cosine_precision@10
+        value: 0.1
+        name: Cosine Precision@10
+        verified: false
+      - type: cosine_recall@1
+        value: 0.75
+        name: Cosine Recall@1
+        verified: false
+      - type: cosine_recall@3
+        value: 0.75
+        name: Cosine Recall@3
+        verified: false
+      - type: cosine_recall@5
+        value: 1
+        name: Cosine Recall@5
+        verified: false
+      - type: cosine_recall@10
+        value: 1
+        name: Cosine Recall@10
+        verified: false
+      - type: cosine_ndcg@10
+        value: 0.8576691395183482
+        name: Cosine Ndcg@10
+        verified: false
+      - type: cosine_mrr@10
+        value: 0.8125
+        name: Cosine Mrr@10
+        verified: false
+      - type: cosine_map@100
+        value: 0.8125
+        name: Cosine Map@100
+        verified: false
+    - task:
+        type: information-retrieval
+        name: Information Retrieval
+      dataset:
+        name: dim 64
+        type: dim_64
+      metrics:
+      - type: cosine_accuracy@1
+        value: 0.75
+        name: Cosine Accuracy@1
+        verified: false
+      - type: cosine_accuracy@3
+        value: 1
+        name: Cosine Accuracy@3
+        verified: false
+      - type: cosine_accuracy@5
+        value: 1
+        name: Cosine Accuracy@5
+        verified: false
+      - type: cosine_accuracy@10
+        value: 1
+        name: Cosine Accuracy@10
+        verified: false
+      - type: cosine_precision@1
+        value: 0.75
+        name: Cosine Precision@1
+        verified: false
+      - type: cosine_precision@3
+        value: 0.3333333333333333
+        name: Cosine Precision@3
+        verified: false
+      - type: cosine_precision@5
+        value: 0.2
+        name: Cosine Precision@5
+        verified: false
+      - type: cosine_precision@10
+        value: 0.1
+        name: Cosine Precision@10
+        verified: false
+      - type: cosine_recall@1
+        value: 0.75
+        name: Cosine Recall@1
+        verified: false
+      - type: cosine_recall@3
+        value: 1
+        name: Cosine Recall@3
+        verified: false
+      - type: cosine_recall@5
+        value: 1
+        name: Cosine Recall@5
+        verified: false
+      - type: cosine_recall@10
+        value: 1
+        name: Cosine Recall@10
+        verified: false
+      - type: cosine_ndcg@10
+        value: 0.875
+        name: Cosine Ndcg@10
+        verified: false
+      - type: cosine_mrr@10
+        value: 0.8333333333333334
+        name: Cosine Mrr@10
+        verified: false
+      - type: cosine_map@100
+        value: 0.8333333333333334
+        name: Cosine Map@100
+        verified: false
+siblings:
+- rfilename: .gitattributes
+- rfilename: 1_Pooling/config.json
+- rfilename: README.md
+- rfilename: config.json
+- rfilename: config_sentence_transformers.json
+- rfilename: model.safetensors
+- rfilename: modules.json
+- rfilename: sentence_bert_config.json
+- rfilename: special_tokens_map.json
+- rfilename: tokenizer.json
+- rfilename: tokenizer_config.json
+- rfilename: vocab.txt
+spaces: []
+createdAt: '2024-10-25T07:57:07.000Z'
+safetensors:
+  parameters:
+    F32: 108891648
+  total: 108891648
+usedStorage: 1742355104
+downloadsAllTime: 240
+inferenceProviderMapping: {}
+configJson:
+  _name_or_path: Snowflake/snowflake-arctic-embed-m-v1.5
+  architectures:
+  - BertModel
+  attention_probs_dropout_prob: 0.1
+  classifier_dropout: null
+  gradient_checkpointing: false
+  hidden_act: gelu
+  hidden_dropout_prob: 0.1
+  hidden_size: 768
+  initializer_range: 0.02
+  intermediate_size: 3072
+  layer_norm_eps: 1.0e-12
+  max_position_embeddings: 512
+  model_type: bert
+  num_attention_heads: 12
+  num_hidden_layers: 12
+  pad_token_id: 0
+  position_embedding_type: absolute
+  torch_dtype: float32
+  transformers_version: 4.43.1
+  type_vocab_size: 2
+  use_cache: true
+  vocab_size: 30522
+onnxFiles: {}
+safetensorsSizeMb: 435.6
+approxSizeMb: 435.6
+fetchedAt: '2026-06-08T16:42:43.000Z'

@@ -1,0 +1,191 @@
+_id: 6a0ec412e087daa3e95c2e0e
+id: DChak2000/qwen3-8b-coliee-trace-align
+private: false
+pipeline_tag: sentence-similarity
+library_name: sentence-transformers
+tags:
+- sentence-transformers
+- safetensors
+- qwen3
+- sentence-similarity
+- feature-extraction
+- generated_from_trainer
+- dataset_size:8132
+- loss:CosineSimilarityLoss
+- arxiv:1908.10084
+- base_model:Qwen/Qwen3-Embedding-8B
+- base_model:finetune:Qwen/Qwen3-Embedding-8B
+- text-embeddings-inference
+- endpoints_compatible
+- region:us
+downloads: 53
+likes: 0
+modelId: DChak2000/qwen3-8b-coliee-trace-align
+author: DChak2000
+sha: e44051625cdb60281dbcde83c8652a5494d5e0f2
+lastModified: '2026-05-22T09:37:31.000Z'
+gated: false
+disabled: false
+widgetData:
+- source_sentence: The lessor may not assert the cancellation by agreement of the lease against the sublessee.
+  sentences:
+  - APPLY_MUTATIS_MUTANDIS(ART442_444, case)
+  - NOT ASSERT(lessor, cancellation_by_agreement, sublessee)
+  - OR(ASSIGNABLE(claim), NOT ASSIGNABLE(claim) IF NATURE_NOT_PERMIT(claim))
+- source_sentence: Article 587 applies to this case.
+  sentences:
+  - QUERY(Article_587)
+  - TRANSFER(mandatary, mandator, rights)
+  - ENGAGE(manager, benevolent_intervention, principal_business)
+- source_sentence: The seller may cure the non-conformity by repairing the subject matter, delivering a substitute, or delivering
+    the replenishment.
+  sentences:
+  - OPEN_POSSESSION(person, movable)
+  - METHOD(CURE, OR(REPAIR(subject_matter), DELIVER(substitute), DELIVER(replenishment)))
+  - DEEM(counterparty, NOT condition_fulfilled)
+- source_sentence: The entity is involved in charity.
+  sentences:
+  - LESS_THAN(profits, rent)
+  - AND(OR3, P4, P6)
+  - REQUIRE_PERMISSION(entity, competent_government_agency)
+- source_sentence: The person is deemed to have died when the danger had passed.
+  sentences:
+  - OR(NOT EXERCISE(right, three_years_from(KNOW(victim_or_legal_rep, damage_and_perpetrator))), NOT EXERCISE(right, twenty_years_from(tortious_act)))
+  - AND(SUBJECT_TO(person, declaration_disappearance_para1), DEEMED_DIED(person, time_period_end))
+  - REQUEST(public_prosecutor, curatorship)
+model-index: null
+config:
+  architectures:
+  - Qwen3Model
+  model_type: qwen3
+  tokenizer_config:
+    bos_token: null
+    eos_token: <|im_end|>
+    pad_token: <|endoftext|>
+    unk_token: null
+  chat_template_jinja: "{%- if tools %}\n    {{- '<|im_start|>system\\n' }}\n    {%- if messages[0]['role'] == 'system' %}\n\
+    \        {{- messages[0]['content'] }}\n    {%- else %}\n        {{- 'You are a helpful assistant.' }}\n    {%- endif\
+    \ %}\n    {{- \"\\n\\n# Tools\\n\\nYou may call one or more functions to assist with the user query.\\n\\nYou are provided\
+    \ with function signatures within <tools></tools> XML tags:\\n<tools>\" }}\n    {%- for tool in tools %}\n        {{-\
+    \ \"\\n\" }}\n        {{- tool | tojson }}\n    {%- endfor %}\n    {{- \"\\n</tools>\\n\\nFor each function call, return\
+    \ a json object with function name and arguments within <tool_call></tool_call> XML tags:\\n<tool_call>\\n{\\\"name\\\"\
+    : <function-name>, \\\"arguments\\\": <args-json-object>}\\n</tool_call><|im_end|>\\n\" }}\n{%- else %}\n    {%- if messages[0]['role']\
+    \ == 'system' %}\n        {{- '<|im_start|>system\\n' + messages[0]['content'] + '<|im_end|>\\n' }}\n    {%- else %}\n\
+    \        {{- '<|im_start|>system\\nYou are a helpful assistant.<|im_end|>\\n' }}\n    {%- endif %}\n{%- endif %}\n{%-\
+    \ for message in messages %}\n    {%- if (message.role == \"user\") or (message.role == \"system\" and not loop.first)\
+    \ or (message.role == \"assistant\" and not message.tool_calls) %}\n        {{- '<|im_start|>' + message.role + '\\n'\
+    \ + message.content + '<|im_end|>' + '\\n' }}\n    {%- elif message.role == \"assistant\" %}\n        {{- '<|im_start|>'\
+    \ + message.role }}\n        {%- if message.content %}\n            {{- '\\n' + message.content }}\n        {%- endif\
+    \ %}\n        {%- for tool_call in message.tool_calls %}\n            {%- if tool_call.function is defined %}\n      \
+    \          {%- set tool_call = tool_call.function %}\n            {%- endif %}\n            {{- '\\n<tool_call>\\n{\"\
+    name\": \"' }}\n            {{- tool_call.name }}\n            {{- '\", \"arguments\": ' }}\n            {{- tool_call.arguments\
+    \ | tojson }}\n            {{- '}\\n</tool_call>' }}\n        {%- endfor %}\n        {{- '<|im_end|>\\n' }}\n    {%- elif\
+    \ message.role == \"tool\" %}\n        {%- if (loop.index0 == 0) or (messages[loop.index0 - 1].role != \"tool\") %}\n\
+    \            {{- '<|im_start|>user' }}\n        {%- endif %}\n        {{- '\\n<tool_response>\\n' }}\n        {{- message.content\
+    \ }}\n        {{- '\\n</tool_response>' }}\n        {%- if loop.last or (messages[loop.index0 + 1].role != \"tool\") %}\n\
+    \            {{- '<|im_end|>\\n' }}\n        {%- endif %}\n    {%- endif %}\n{%- endfor %}\n{%- if add_generation_prompt\
+    \ %}\n    {{- '<|im_start|>assistant\\n' }}\n{%- endif %}\n"
+cardData:
+  tags:
+  - sentence-transformers
+  - sentence-similarity
+  - feature-extraction
+  - generated_from_trainer
+  - dataset_size:8132
+  - loss:CosineSimilarityLoss
+  base_model: Qwen/Qwen3-Embedding-8B
+  widget:
+  - source_sentence: The lessor may not assert the cancellation by agreement of the lease against the sublessee.
+    sentences:
+    - APPLY_MUTATIS_MUTANDIS(ART442_444, case)
+    - NOT ASSERT(lessor, cancellation_by_agreement, sublessee)
+    - OR(ASSIGNABLE(claim), NOT ASSIGNABLE(claim) IF NATURE_NOT_PERMIT(claim))
+  - source_sentence: Article 587 applies to this case.
+    sentences:
+    - QUERY(Article_587)
+    - TRANSFER(mandatary, mandator, rights)
+    - ENGAGE(manager, benevolent_intervention, principal_business)
+  - source_sentence: The seller may cure the non-conformity by repairing the subject matter, delivering a substitute, or delivering
+      the replenishment.
+    sentences:
+    - OPEN_POSSESSION(person, movable)
+    - METHOD(CURE, OR(REPAIR(subject_matter), DELIVER(substitute), DELIVER(replenishment)))
+    - DEEM(counterparty, NOT condition_fulfilled)
+  - source_sentence: The entity is involved in charity.
+    sentences:
+    - LESS_THAN(profits, rent)
+    - AND(OR3, P4, P6)
+    - REQUIRE_PERMISSION(entity, competent_government_agency)
+  - source_sentence: The person is deemed to have died when the danger had passed.
+    sentences:
+    - OR(NOT EXERCISE(right, three_years_from(KNOW(victim_or_legal_rep, damage_and_perpetrator))), NOT EXERCISE(right, twenty_years_from(tortious_act)))
+    - AND(SUBJECT_TO(person, declaration_disappearance_para1), DEEMED_DIED(person, time_period_end))
+    - REQUEST(public_prosecutor, curatorship)
+  pipeline_tag: sentence-similarity
+  library_name: sentence-transformers
+siblings:
+- rfilename: .gitattributes
+- rfilename: 1_Pooling/config.json
+- rfilename: README.md
+- rfilename: adapter_config.json
+- rfilename: adapter_model.safetensors
+- rfilename: added_tokens.json
+- rfilename: chat_template.jinja
+- rfilename: config.json
+- rfilename: config_sentence_transformers.json
+- rfilename: merges.txt
+- rfilename: model-00001-of-00007.safetensors
+- rfilename: model-00002-of-00007.safetensors
+- rfilename: model-00003-of-00007.safetensors
+- rfilename: model-00004-of-00007.safetensors
+- rfilename: model-00005-of-00007.safetensors
+- rfilename: model-00006-of-00007.safetensors
+- rfilename: model-00007-of-00007.safetensors
+- rfilename: model.safetensors.index.json
+- rfilename: modules.json
+- rfilename: sentence_bert_config.json
+- rfilename: special_tokens_map.json
+- rfilename: tokenizer.json
+- rfilename: tokenizer_config.json
+- rfilename: vocab.json
+spaces: []
+createdAt: '2026-05-21T08:36:34.000Z'
+safetensors:
+  parameters:
+    F32: 7582630912
+  total: 7582630912
+usedStorage: 60734010047
+downloadsAllTime: 53
+inferenceProviderMapping: {}
+configJson:
+  architectures:
+  - Qwen3Model
+  attention_bias: false
+  attention_dropout: 0.0
+  bos_token_id: 151643
+  eos_token_id: 151645
+  head_dim: 128
+  hidden_act: silu
+  hidden_size: 4096
+  initializer_range: 0.02
+  intermediate_size: 12288
+  max_position_embeddings: 40960
+  max_window_layers: 36
+  model_type: qwen3
+  num_attention_heads: 32
+  num_hidden_layers: 36
+  num_key_value_heads: 8
+  rms_norm_eps: 1.0e-06
+  rope_scaling: null
+  rope_theta: 1000000
+  sliding_window: null
+  tie_word_embeddings: false
+  torch_dtype: float32
+  transformers_version: 4.52.4
+  use_cache: true
+  use_sliding_window: false
+  vocab_size: 151665
+onnxFiles: {}
+safetensorsSizeMb: 30392.0
+approxSizeMb: 30330.5
+fetchedAt: '2026-06-08T16:42:43.000Z'

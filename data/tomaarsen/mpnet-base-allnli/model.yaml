@@ -1,0 +1,389 @@
+_id: 666058fa4e7a0d8e403f058c
+id: tomaarsen/mpnet-base-allnli
+private: false
+pipeline_tag: sentence-similarity
+library_name: sentence-transformers
+tags:
+- sentence-transformers
+- tensorboard
+- safetensors
+- mpnet
+- sentence-similarity
+- feature-extraction
+- generated_with_trainer
+- dataset_size:100K<n<1M
+- loss:SoftmaxLoss
+- loss:CosineSimilarityLoss
+- en
+- dataset:nyu-mll/multi_nli
+- dataset:stanfordnlp/snli
+- dataset:mteb/stsbenchmark-sts
+- arxiv:1908.10084
+- base_model:microsoft/mpnet-base
+- base_model:finetune:microsoft/mpnet-base
+- license:apache-2.0
+- model-index
+- co2_eq_emissions
+- text-embeddings-inference
+- endpoints_compatible
+- region:us
+downloads: 8
+likes: 0
+modelId: tomaarsen/mpnet-base-allnli
+author: tomaarsen
+sha: 9102dbbd7adfa479649ec94bbc186352cb002205
+lastModified: '2024-06-05T12:59:59.000Z'
+gated: false
+disabled: false
+widgetData:
+- source_sentence: A taxi SUV drives past an urban construction site, as a man walks down the street in the other direction.
+  sentences:
+  - The woman is walking down the street with high heels.
+  - A man is reading documents in a binder.
+  - A man is chasing an SUV that is going in the same direction as him.
+- source_sentence: Young man running towards a tennis court while another is waiting in the other side of the net.
+  sentences:
+  - The person is cooking a hamburger.
+  - A young man is running to grab a tennis ball.
+  - A woman is dancing near a fire.
+- source_sentence: An asian woman sitting outside an outdoor market stall.
+  sentences:
+  - There are three workers
+  - A woman sits outdoors.
+  - Five women sit at a table.
+- source_sentence: All the same methods of analysis that are used with spoken languages apply successfully to signed languages.
+  sentences:
+  - One idea that's been going around at least since the 80s is that you can distinguish between Holds and Moves.
+  - You only need two-dimensional trigonometry if you know the distances to the two stars and their angular separation.
+  - A woman driving a car is talking to the man seated beside her.
+- source_sentence: Rouen is the ancient center of Normandy's thriving textile industry, and the place of Joan of Arc's martyrdom
+    ' a national symbol of resistance to tyranny.
+  sentences:
+  - The islands are part of France now instead of just colonies.
+  - Joan of Arc sacrificed her life at Rouen, which became an enduring symbol of opposition to tyranny.
+  - I don't know how cold it got last night.
+model-index:
+- name: SentenceTransformer based on microsoft/mpnet-base
+  results:
+  - task:
+      type: semantic-similarity
+      name: Semantic Similarity
+    dataset:
+      name: sts dev
+      type: sts-dev
+    metrics:
+    - type: pearson_cosine
+      value: 0.8344104750902503
+      name: Pearson Cosine
+      verified: false
+    - type: spearman_cosine
+      value: 0.8294923795333993
+      name: Spearman Cosine
+      verified: false
+    - type: pearson_manhattan
+      value: 0.8316959259914674
+      name: Pearson Manhattan
+      verified: false
+    - type: spearman_manhattan
+      value: 0.8331844817222047
+      name: Spearman Manhattan
+      verified: false
+    - type: pearson_euclidean
+      value: 0.8272941934077804
+      name: Pearson Euclidean
+      verified: false
+    - type: spearman_euclidean
+      value: 0.8294923795333993
+      name: Spearman Euclidean
+      verified: false
+    - type: pearson_dot
+      value: 0.8344104825648291
+      name: Pearson Dot
+      verified: false
+    - type: spearman_dot
+      value: 0.8294923795333993
+      name: Spearman Dot
+      verified: false
+    - type: pearson_max
+      value: 0.8344104825648291
+      name: Pearson Max
+      verified: false
+    - type: spearman_max
+      value: 0.8331844817222047
+      name: Spearman Max
+      verified: false
+  - task:
+      type: semantic-similarity
+      name: Semantic Similarity
+    dataset:
+      name: sts test
+      type: sts-test
+    metrics:
+    - type: pearson_cosine
+      value: 0.7776062173443514
+      name: Pearson Cosine
+      verified: false
+    - type: spearman_cosine
+      value: 0.7642518713703523
+      name: Spearman Cosine
+      verified: false
+    - type: pearson_manhattan
+      value: 0.7788269653910183
+      name: Pearson Manhattan
+      verified: false
+    - type: spearman_manhattan
+      value: 0.7659203139768728
+      name: Spearman Manhattan
+      verified: false
+    - type: pearson_euclidean
+      value: 0.7763456809736229
+      name: Pearson Euclidean
+      verified: false
+    - type: spearman_euclidean
+      value: 0.7642518713703523
+      name: Spearman Euclidean
+      verified: false
+    - type: pearson_dot
+      value: 0.7776062158976489
+      name: Pearson Dot
+      verified: false
+    - type: spearman_dot
+      value: 0.7642518713703523
+      name: Spearman Dot
+      verified: false
+    - type: pearson_max
+      value: 0.7788269653910183
+      name: Pearson Max
+      verified: false
+    - type: spearman_max
+      value: 0.7659203139768728
+      name: Spearman Max
+      verified: false
+config:
+  architectures:
+  - MPNetModel
+  model_type: mpnet
+  tokenizer_config:
+    bos_token: <s>
+    cls_token: <s>
+    eos_token: </s>
+    mask_token: <mask>
+    pad_token: <pad>
+    sep_token: </s>
+    unk_token: '[UNK]'
+cardData:
+  language:
+  - en
+  license: apache-2.0
+  library_name: sentence-transformers
+  tags:
+  - sentence-transformers
+  - sentence-similarity
+  - feature-extraction
+  - generated_with_trainer
+  - dataset_size:100K<n<1M
+  - loss:SoftmaxLoss
+  - loss:CosineSimilarityLoss
+  base_model: microsoft/mpnet-base
+  datasets:
+  - nyu-mll/multi_nli
+  - stanfordnlp/snli
+  - mteb/stsbenchmark-sts
+  metrics:
+  - pearson_cosine
+  - spearman_cosine
+  - pearson_manhattan
+  - spearman_manhattan
+  - pearson_euclidean
+  - spearman_euclidean
+  - pearson_dot
+  - spearman_dot
+  - pearson_max
+  - spearman_max
+  widget:
+  - source_sentence: A taxi SUV drives past an urban construction site, as a man walks down the street in the other direction.
+    sentences:
+    - The woman is walking down the street with high heels.
+    - A man is reading documents in a binder.
+    - A man is chasing an SUV that is going in the same direction as him.
+  - source_sentence: Young man running towards a tennis court while another is waiting in the other side of the net.
+    sentences:
+    - The person is cooking a hamburger.
+    - A young man is running to grab a tennis ball.
+    - A woman is dancing near a fire.
+  - source_sentence: An asian woman sitting outside an outdoor market stall.
+    sentences:
+    - There are three workers
+    - A woman sits outdoors.
+    - Five women sit at a table.
+  - source_sentence: All the same methods of analysis that are used with spoken languages apply successfully to signed languages.
+    sentences:
+    - One idea that's been going around at least since the 80s is that you can distinguish between Holds and Moves.
+    - You only need two-dimensional trigonometry if you know the distances to the two stars and their angular separation.
+    - A woman driving a car is talking to the man seated beside her.
+  - source_sentence: Rouen is the ancient center of Normandy's thriving textile industry, and the place of Joan of Arc's martyrdom
+      ' a national symbol of resistance to tyranny.
+    sentences:
+    - The islands are part of France now instead of just colonies.
+    - Joan of Arc sacrificed her life at Rouen, which became an enduring symbol of opposition to tyranny.
+    - I don't know how cold it got last night.
+  pipeline_tag: sentence-similarity
+  co2_eq_emissions:
+    emissions: 6.863209894681815
+    energy_consumed: 0.017656739339344318
+    source: codecarbon
+    training_type: fine-tuning
+    on_cloud: false
+    cpu_model: 13th Gen Intel(R) Core(TM) i7-13700K
+    ram_total_size: 31.777088165283203
+    hours_used: 0.068
+    hardware_used: 1 x NVIDIA GeForce RTX 3090
+  model-index:
+  - name: SentenceTransformer based on microsoft/mpnet-base
+    results:
+    - task:
+        type: semantic-similarity
+        name: Semantic Similarity
+      dataset:
+        name: sts dev
+        type: sts-dev
+      metrics:
+      - type: pearson_cosine
+        value: 0.8344104750902503
+        name: Pearson Cosine
+        verified: false
+      - type: spearman_cosine
+        value: 0.8294923795333993
+        name: Spearman Cosine
+        verified: false
+      - type: pearson_manhattan
+        value: 0.8316959259914674
+        name: Pearson Manhattan
+        verified: false
+      - type: spearman_manhattan
+        value: 0.8331844817222047
+        name: Spearman Manhattan
+        verified: false
+      - type: pearson_euclidean
+        value: 0.8272941934077804
+        name: Pearson Euclidean
+        verified: false
+      - type: spearman_euclidean
+        value: 0.8294923795333993
+        name: Spearman Euclidean
+        verified: false
+      - type: pearson_dot
+        value: 0.8344104825648291
+        name: Pearson Dot
+        verified: false
+      - type: spearman_dot
+        value: 0.8294923795333993
+        name: Spearman Dot
+        verified: false
+      - type: pearson_max
+        value: 0.8344104825648291
+        name: Pearson Max
+        verified: false
+      - type: spearman_max
+        value: 0.8331844817222047
+        name: Spearman Max
+        verified: false
+    - task:
+        type: semantic-similarity
+        name: Semantic Similarity
+      dataset:
+        name: sts test
+        type: sts-test
+      metrics:
+      - type: pearson_cosine
+        value: 0.7776062173443514
+        name: Pearson Cosine
+        verified: false
+      - type: spearman_cosine
+        value: 0.7642518713703523
+        name: Spearman Cosine
+        verified: false
+      - type: pearson_manhattan
+        value: 0.7788269653910183
+        name: Pearson Manhattan
+        verified: false
+      - type: spearman_manhattan
+        value: 0.7659203139768728
+        name: Spearman Manhattan
+        verified: false
+      - type: pearson_euclidean
+        value: 0.7763456809736229
+        name: Pearson Euclidean
+        verified: false
+      - type: spearman_euclidean
+        value: 0.7642518713703523
+        name: Spearman Euclidean
+        verified: false
+      - type: pearson_dot
+        value: 0.7776062158976489
+        name: Pearson Dot
+        verified: false
+      - type: spearman_dot
+        value: 0.7642518713703523
+        name: Spearman Dot
+        verified: false
+      - type: pearson_max
+        value: 0.7788269653910183
+        name: Pearson Max
+        verified: false
+      - type: spearman_max
+        value: 0.7659203139768728
+        name: Spearman Max
+        verified: false
+siblings:
+- rfilename: .gitattributes
+- rfilename: 1_Pooling/config.json
+- rfilename: README.md
+- rfilename: config.json
+- rfilename: config_sentence_transformers.json
+- rfilename: model.safetensors
+- rfilename: modules.json
+- rfilename: runs/Jun05_13-21-55_Tom/events.out.tfevents.1717586522.Tom.11064.0
+- rfilename: runs/Jun05_13-58-55_Tom/events.out.tfevents.1717588742.Tom.10892.0
+- rfilename: runs/Jun05_14-24-25_Tom/events.out.tfevents.1717590271.Tom.22032.0
+- rfilename: sentence_bert_config.json
+- rfilename: special_tokens_map.json
+- rfilename: tokenizer.json
+- rfilename: tokenizer_config.json
+- rfilename: training_args.bin
+- rfilename: vocab.txt
+spaces: []
+createdAt: '2024-06-05T12:24:26.000Z'
+safetensors:
+  parameters:
+    F32: 109486464
+  total: 109486464
+usedStorage: 2189968034
+downloadsAllTime: 239
+inferenceProviderMapping: {}
+configJson:
+  _name_or_path: microsoft/mpnet-base
+  architectures:
+  - MPNetModel
+  attention_probs_dropout_prob: 0.1
+  bos_token_id: 0
+  eos_token_id: 2
+  hidden_act: gelu
+  hidden_dropout_prob: 0.1
+  hidden_size: 768
+  initializer_range: 0.02
+  intermediate_size: 3072
+  layer_norm_eps: 1.0e-05
+  max_position_embeddings: 514
+  model_type: mpnet
+  num_attention_heads: 12
+  num_hidden_layers: 12
+  pad_token_id: 1
+  relative_attention_num_buckets: 32
+  torch_dtype: float32
+  transformers_version: 4.41.2
+  vocab_size: 30527
+onnxFiles: {}
+safetensorsSizeMb: 438.0
+approxSizeMb: 437.9
+fetchedAt: '2026-06-08T16:42:43.000Z'

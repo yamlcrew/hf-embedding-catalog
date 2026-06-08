@@ -1,0 +1,142 @@
+_id: 69f7d0786b25a0111f428a21
+id: llm-semantic-router/multi-modal-embed-large
+private: false
+pipeline_tag: sentence-similarity
+library_name: pytorch
+tags:
+- pytorch
+- sentence-transformers
+- multimodal
+- embeddings
+- retrieval
+- image-text
+- audio-text
+- text-image-audio
+- tri-encoder
+- semantic-router
+- sentence-similarity
+- license:apache-2.0
+- model-index
+- region:us
+downloads: 13
+likes: 1
+modelId: llm-semantic-router/multi-modal-embed-large
+author: llm-semantic-router
+sha: e21cde3ccc414c56f504b322662f42c603a939ee
+lastModified: '2026-05-03T22:47:40.000Z'
+gated: false
+disabled: false
+widgetData:
+- source_sentence: That is a happy person
+  sentences:
+  - That is a happy dog
+  - That is a very happy person
+  - Today is a sunny day
+model-index:
+- name: multi-modal-embed-large
+  results:
+  - task:
+      type: sentence-similarity
+    dataset:
+      name: Internal cached validation set
+      type: cached_retrieval_validation
+    metrics:
+    - name: Eval loss
+      type: eval_loss
+      value: 0.389702
+      verified: false
+    - name: Eval top1
+      type: eval_top1
+      value: 0.861707
+      verified: false
+config: {}
+cardData:
+  license: apache-2.0
+  library_name: pytorch
+  pipeline_tag: sentence-similarity
+  tags:
+  - sentence-transformers
+  - multimodal
+  - embeddings
+  - retrieval
+  - image-text
+  - audio-text
+  - text-image-audio
+  - tri-encoder
+  - semantic-router
+  - pytorch
+  model-index:
+  - name: multi-modal-embed-large
+    results:
+    - task:
+        type: sentence-similarity
+      dataset:
+        name: Internal cached validation set
+        type: cached_retrieval_validation
+      metrics:
+      - name: Eval loss
+        type: eval_loss
+        value: 0.389702
+        verified: false
+      - name: Eval top1
+        type: eval_top1
+        value: 0.861707
+        verified: false
+siblings:
+- rfilename: .gitattributes
+- rfilename: README.md
+- rfilename: config.json
+- rfilename: model.pt
+- rfilename: src/hf_st_mm/__init__.py
+- rfilename: src/hf_st_mm/__pycache__/__init__.cpython-312.pyc
+- rfilename: src/hf_st_mm/__pycache__/data.cpython-312.pyc
+- rfilename: src/hf_st_mm/__pycache__/model.cpython-312.pyc
+- rfilename: src/hf_st_mm/data.py
+- rfilename: src/hf_st_mm/model.py
+spaces: []
+createdAt: '2026-05-03T22:47:20.000Z'
+usedStorage: 9997568085
+downloadsAllTime: 37
+inferenceProviderMapping: {}
+configJson:
+  seed: 42
+  output_dir: /scratch/hf_st_mm_outputs/server_datacenter_8gpu_tri_encoder
+  model:
+    text_encoder_name: llm-semantic-router/mmbert-embed-32k-2d-matryoshka
+    image_encoder_name: google/siglip2-so400m-patch14-384
+    audio_encoder_name: openai/whisper-medium
+    embedding_dim: 768
+    max_text_length: 32768
+  training:
+    epochs: 10
+    batch_size: 12
+    grad_accum_steps: 8
+    num_workers: 4
+    prefetch_factor: 4
+    shard_prefetch: 2
+    shard_cache_limit: 4
+    sequential_shard_loading: true
+    shuffle: false
+    modality_homogeneous_batches: false
+    learning_rate: 1.0e-05
+    weight_decay: 0.01
+    warmup_ratio: 0.1
+    max_grad_norm: 1.0
+    mixed_precision: bf16
+    log_every: 10
+    save_every: 2000
+    hard_negative_ratio: 0.5
+  loss:
+    type: cached_mnrl
+    scale: 20.0
+  data:
+    cache_dir: /scratch/2dmse-data/server_full_datacenter_cache/train
+  validation:
+    cache_dir: /scratch/2dmse-data/server_full_datacenter_cache/val
+    num_workers: 2
+    shard_prefetch: 1
+    shard_cache_limit: 2
+onnxFiles: {}
+safetensorsSizeMb: 0.0
+approxSizeMb: 0.0
+fetchedAt: '2026-06-08T16:42:43.000Z'

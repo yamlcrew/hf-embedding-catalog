@@ -1,0 +1,1413 @@
+_id: 6977e8ef2e35339a2c28dd67
+id: anaghaj111/codebert-base-code-embed-mrl-langchain-langgraph
+private: false
+pipeline_tag: sentence-similarity
+library_name: sentence-transformers
+tags:
+- sentence-transformers
+- safetensors
+- roberta
+- sentence-similarity
+- feature-extraction
+- dense
+- generated_from_trainer
+- dataset_size:180
+- loss:MatryoshkaLoss
+- loss:MultipleNegativesRankingLoss
+- en
+- arxiv:1908.10084
+- arxiv:2205.13147
+- arxiv:1705.00652
+- base_model:shubharuidas/codebert-embed-base-dense-retriever
+- base_model:finetune:shubharuidas/codebert-embed-base-dense-retriever
+- license:apache-2.0
+- model-index
+- text-embeddings-inference
+- endpoints_compatible
+- region:us
+downloads: 13
+likes: 0
+modelId: anaghaj111/codebert-base-code-embed-mrl-langchain-langgraph
+author: anaghaj111
+sha: 603f6472d68597f4b152e34b47e988487164503f
+lastModified: '2026-02-03T23:34:20.000Z'
+gated: false
+disabled: false
+mask_token: <mask>
+widgetData:
+- source_sentence: Explain the __init__ logic
+  sentences:
+  - "async def test_handler_with_async_execution() -> None:\n    \"\"\"Test handler works correctly with async tool execution.\"\
+    \"\"\n\n    @tool\n    def async_add(a: int, b: int) -> int:\n        \"\"\"Async add two numbers.\"\"\"\n        return\
+    \ a + b\n\n    def modifying_handler(\n        request: ToolCallRequest,\n        execute: Callable[[ToolCallRequest],\
+    \ ToolMessage | Command],\n    ) -> ToolMessage | Command:\n        \"\"\"Handler that modifies arguments.\"\"\"\n   \
+    \     # Add 10 to both arguments using override method\n        modified_call = {\n            **request.tool_call,\n\
+    \            \"args\": {\n                **request.tool_call[\"args\"],\n                \"a\": request.tool_call[\"\
+    args\"][\"a\"] + 10,\n                \"b\": request.tool_call[\"args\"][\"b\"] + 10,\n            },\n        }\n   \
+    \     modified_request = request.override(tool_call=modified_call)\n        return execute(modified_request)\n\n    tool_node\
+    \ = ToolNode([async_add], wrap_tool_call=modifying_handler)\n\n    result = await tool_node.ainvoke(\n        {\n    \
+    \        \"messages\": [\n                AIMessage(\n                    \"adding\",\n                    tool_calls=[\n\
+    \                        {\n                            \"name\": \"async_add\",\n                            \"args\"\
+    : {\"a\": 1, \"b\": 2},\n                            \"id\": \"call_13\",\n                        }\n               \
+    \     ],\n                )\n            ]\n        },\n        config=_create_config_with_runtime(),\n    )\n\n    tool_message\
+    \ = result[\"messages\"][-1]\n    assert isinstance(tool_message, ToolMessage)\n    # Original: 1 + 2 = 3, with modifications:\
+    \ 11 + 12 = 23\n    assert tool_message.content == \"23\""
+  - "def __init__(self) -> None:\n        self.loads: set[str] = set()\n        self.stores: set[str] = set()"
+  - "class InternalServerError(APIStatusError):\n    pass"
+- source_sentence: Explain the async _load_checkpoint_tuple logic
+  sentences:
+  - 'def task(__func_or_none__: Callable[P, Awaitable[T]]) -> _TaskFunction[P, T]: ...'
+  - "class State(BaseModel):\n        query: str\n        inner: InnerObject\n        answer: str | None = None\n        docs:\
+    \ Annotated[list[str], sorted_add]"
+  - "async def _load_checkpoint_tuple(self, value: DictRow) -> CheckpointTuple:\n        \"\"\"\n        Convert a database\
+    \ row into a CheckpointTuple object.\n\n        Args:\n            value: A row from the database containing checkpoint\
+    \ data.\n\n        Returns:\n            CheckpointTuple: A structured representation of the checkpoint,\n           \
+    \ including its configuration, metadata, parent checkpoint (if any),\n            and pending writes.\n        \"\"\"\n\
+    \        return CheckpointTuple(\n            {\n                \"configurable\": {\n                    \"thread_id\"\
+    : value[\"thread_id\"],\n                    \"checkpoint_ns\": value[\"checkpoint_ns\"],\n                    \"checkpoint_id\"\
+    : value[\"checkpoint_id\"],\n                }\n            },\n            {\n                **value[\"checkpoint\"\
+    ],\n                \"channel_values\": {\n                    **(value[\"checkpoint\"].get(\"channel_values\") or {}),\n\
+    \                    **self._load_blobs(value[\"channel_values\"]),\n                },\n            },\n            value[\"\
+    metadata\"],\n            (\n                {\n                    \"configurable\": {\n                        \"thread_id\"\
+    : value[\"thread_id\"],\n                        \"checkpoint_ns\": value[\"checkpoint_ns\"],\n                      \
+    \  \"checkpoint_id\": value[\"parent_checkpoint_id\"],\n                    }\n                }\n                if value[\"\
+    parent_checkpoint_id\"]\n                else None\n            ),\n            await asyncio.to_thread(self._load_writes,\
+    \ value[\"pending_writes\"]),\n        )"
+- source_sentence: Explain the flattened_runs logic
+  sentences:
+  - "class ChannelWrite(RunnableCallable):\n    \"\"\"Implements the logic for sending writes to CONFIG_KEY_SEND.\n    Can\
+    \ be used as a runnable or as a static method to call imperatively.\"\"\"\n\n    writes: list[ChannelWriteEntry | ChannelWriteTupleEntry\
+    \ | Send]\n    \"\"\"Sequence of write entries or Send objects to write.\"\"\"\n\n    def __init__(\n        self,\n \
+    \       writes: Sequence[ChannelWriteEntry | ChannelWriteTupleEntry | Send],\n        *,\n        tags: Sequence[str]\
+    \ | None = None,\n    ):\n        super().__init__(\n            func=self._write,\n            afunc=self._awrite,\n\
+    \            name=None,\n            tags=tags,\n            trace=False,\n        )\n        self.writes = cast(\n  \
+    \          list[ChannelWriteEntry | ChannelWriteTupleEntry | Send], writes\n        )\n\n    def get_name(self, suffix:\
+    \ str | None = None, *, name: str | None = None) -> str:\n        if not name:\n            name = f\"ChannelWrite<{','.join(w.channel\
+    \ if isinstance(w, ChannelWriteEntry) else '...' if isinstance(w, ChannelWriteTupleEntry) else w.node for w in self.writes)}>\"\
+    \n        return super().get_name(suffix, name=name)\n\n    def _write(self, input: Any, config: RunnableConfig) -> None:\n\
+    \        writes = [\n            ChannelWriteEntry(write.channel, input, write.skip_none, write.mapper)\n            if\
+    \ isinstance(write, ChannelWriteEntry) and write.value is PASSTHROUGH\n            else ChannelWriteTupleEntry(write.mapper,\
+    \ input)\n            if isinstance(write, ChannelWriteTupleEntry) and write.value is PASSTHROUGH\n            else write\n\
+    \            for write in self.writes\n        ]\n        self.do_write(\n            config,\n            writes,\n \
+    \       )\n        return input\n\n    async def _awrite(self, input: Any, config: RunnableConfig) -> None:\n        writes\
+    \ = [\n            ChannelWriteEntry(write.channel, input, write.skip_none, write.mapper)\n            if isinstance(write,\
+    \ ChannelWriteEntry) and write.value is PASSTHROUGH\n            else ChannelWriteTupleEntry(write.mapper, input)\n  \
+    \          if isinstance(write, ChannelWriteTupleEntry) and write.value is PASSTHROUGH\n            else write\n     \
+    \       for write in self.writes\n        ]\n        self.do_write(\n            config,\n            writes,\n      \
+    \  )\n        return input\n\n    @staticmethod\n    def do_write(\n        config: RunnableConfig,\n        writes: Sequence[ChannelWriteEntry\
+    \ | ChannelWriteTupleEntry | Send],\n        allow_passthrough: bool = True,\n    ) -> None:\n        # validate\n   \
+    \     for w in writes:\n            if isinstance(w, ChannelWriteEntry):\n                if w.channel == TASKS:\n   \
+    \                 raise InvalidUpdateError(\n                        \"Cannot write to the reserved channel TASKS\"\n\
+    \                    )\n                if w.value is PASSTHROUGH and not allow_passthrough:\n                    raise\
+    \ InvalidUpdateError(\"PASSTHROUGH value must be replaced\")\n            if isinstance(w, ChannelWriteTupleEntry):\n\
+    \                if w.value is PASSTHROUGH and not allow_passthrough:\n                    raise InvalidUpdateError(\"\
+    PASSTHROUGH value must be replaced\")\n        # if we want to persist writes found before hitting a ParentCommand\n \
+    \       # can move this to a finally block\n        write: TYPE_SEND = config[CONF][CONFIG_KEY_SEND]\n        write(_assemble_writes(writes))\n\
+    \n    @staticmethod\n    def is_writer(runnable: Runnable) -> bool:\n        \"\"\"Used by PregelNode to distinguish between\
+    \ writers and other runnables.\"\"\"\n        return (\n            isinstance(runnable, ChannelWrite)\n            or\
+    \ getattr(runnable, \"_is_channel_writer\", MISSING) is not MISSING\n        )\n\n    @staticmethod\n    def get_static_writes(\n\
+    \        runnable: Runnable,\n    ) -> Sequence[tuple[str, Any, str | None]] | None:\n        \"\"\"Used to get conditional\
+    \ writes a writer declares for static analysis.\"\"\"\n        if isinstance(runnable, ChannelWrite):\n            return\
+    \ [\n                w\n                for entry in runnable.writes\n                if isinstance(entry, ChannelWriteTupleEntry)\
+    \ and entry.static\n                for w in entry.static\n            ] or None\n        elif writes := getattr(runnable,\
+    \ \"_is_channel_writer\", MISSING):\n            if writes is not MISSING:\n                writes = cast(\n         \
+    \           Sequence[tuple[ChannelWriteEntry | Send, str | None]],\n                    writes,\n                )\n \
+    \               entries = [e for e, _ in writes]\n                labels = [la for _, la in writes]\n                return\
+    \ [(*t, la) for t, la in zip(_assemble_writes(entries), labels)]\n\n    @staticmethod\n    def register_writer(\n    \
+    \    runnable: R,\n        static: Sequence[tuple[ChannelWriteEntry | Send, str | None]] | None = None,\n    ) -> R:\n\
+    \        \"\"\"Used to mark a runnable as a writer, so that it can be detected by is_writer.\n        Instances of ChannelWrite\
+    \ are automatically marked as writers.\n        Optionally, a list of declared writes can be passed for static analysis.\"\
+    \"\"\n        # using object.__setattr__ to work around objects that override __setattr__\n        # eg. pydantic models\
+    \ and dataclasses\n        object.__setattr__(runnable, \"_is_channel_writer\", static)\n        return runnable"
+  - "def test_double_interrupt_subgraph(sync_checkpointer: BaseCheckpointSaver) -> None:\n    class AgentState(TypedDict):\n\
+    \        input: str\n\n    def node_1(state: AgentState):\n        result = interrupt(\"interrupt node 1\")\n        return\
+    \ {\"input\": result}\n\n    def node_2(state: AgentState):\n        result = interrupt(\"interrupt node 2\")\n      \
+    \  return {\"input\": result}\n\n    subgraph_builder = (\n        StateGraph(AgentState)\n        .add_node(\"node_1\"\
+    , node_1)\n        .add_node(\"node_2\", node_2)\n        .add_edge(START, \"node_1\")\n        .add_edge(\"node_1\",\
+    \ \"node_2\")\n        .add_edge(\"node_2\", END)\n    )\n\n    # invoke the sub graph\n    subgraph = subgraph_builder.compile(checkpointer=sync_checkpointer)\n\
+    \    thread = {\"configurable\": {\"thread_id\": str(uuid.uuid4())}}\n    assert [c for c in subgraph.stream({\"input\"\
+    : \"test\"}, thread)] == [\n        {\n            \"__interrupt__\": (\n                Interrupt(\n                \
+    \    value=\"interrupt node 1\",\n                    id=AnyStr(),\n                ),\n            )\n        },\n  \
+    \  ]\n    # resume from the first interrupt\n    assert [c for c in subgraph.stream(Command(resume=\"123\"), thread)]\
+    \ == [\n        {\n            \"node_1\": {\"input\": \"123\"},\n        },\n        {\n            \"__interrupt__\"\
+    : (\n                Interrupt(\n                    value=\"interrupt node 2\",\n                    id=AnyStr(),\n \
+    \               ),\n            )\n        },\n    ]\n    # resume from the second interrupt\n    assert [c for c in subgraph.stream(Command(resume=\"\
+    123\"), thread)] == [\n        {\n            \"node_2\": {\"input\": \"123\"},\n        },\n    ]\n\n    subgraph = subgraph_builder.compile()\n\
+    \n    def invoke_sub_agent(state: AgentState):\n        return subgraph.invoke(state)\n\n    thread = {\"configurable\"\
+    : {\"thread_id\": str(uuid.uuid4())}}\n    parent_agent = (\n        StateGraph(AgentState)\n        .add_node(\"invoke_sub_agent\"\
+    , invoke_sub_agent)\n        .add_edge(START, \"invoke_sub_agent\")\n        .add_edge(\"invoke_sub_agent\", END)\n  \
+    \      .compile(checkpointer=sync_checkpointer)\n    )\n\n    assert [c for c in parent_agent.stream({\"input\": \"test\"\
+    }, thread)] == [\n        {\n            \"__interrupt__\": (\n                Interrupt(\n                    value=\"\
+    interrupt node 1\",\n                    id=AnyStr(),\n                ),\n            )\n        },\n    ]\n\n    # resume\
+    \ from the first interrupt\n    assert [c for c in parent_agent.stream(Command(resume=True), thread)] == [\n        {\n\
+    \            \"__interrupt__\": (\n                Interrupt(\n                    value=\"interrupt node 2\",\n     \
+    \               id=AnyStr(),\n                ),\n            )\n        }\n    ]\n\n    # resume from 2nd interrupt\n\
+    \    assert [c for c in parent_agent.stream(Command(resume=True), thread)] == [\n        {\n            \"invoke_sub_agent\"\
+    : {\"input\": True},\n        },\n    ]"
+  - "def flattened_runs(self) -> list[Run]:\n        q = [] + self.runs\n        result = []\n        while q:\n         \
+    \   parent = q.pop()\n            result.append(parent)\n            if parent.child_runs:\n                q.extend(parent.child_runs)\n\
+    \        return result"
+- source_sentence: Explain the SubGraphState logic
+  sentences:
+  - "class Cron(TypedDict):\n    \"\"\"Represents a scheduled task.\"\"\"\n\n    cron_id: str\n    \"\"\"The ID of the cron.\"\
+    \"\"\n    assistant_id: str\n    \"\"\"The ID of the assistant.\"\"\"\n    thread_id: str | None\n    \"\"\"The ID of\
+    \ the thread.\"\"\"\n    on_run_completed: OnCompletionBehavior | None\n    \"\"\"What to do with the thread after the\
+    \ run completes. Only applicable for stateless crons.\"\"\"\n    end_time: datetime | None\n    \"\"\"The end date to\
+    \ stop running the cron.\"\"\"\n    schedule: str\n    \"\"\"The schedule to run, cron format.\"\"\"\n    created_at:\
+    \ datetime\n    \"\"\"The time the cron was created.\"\"\"\n    updated_at: datetime\n    \"\"\"The last time the cron\
+    \ was updated.\"\"\"\n    payload: dict\n    \"\"\"The run payload to use for creating new run.\"\"\"\n    user_id: str\
+    \ | None\n    \"\"\"The user ID of the cron.\"\"\"\n    next_run_date: datetime | None\n    \"\"\"The next run date of\
+    \ the cron.\"\"\"\n    metadata: dict\n    \"\"\"The metadata of the cron.\"\"\""
+  - "class SubGraphState(MessagesState):\n        city: str"
+  - "def task_path_str(tup: str | int | tuple) -> str:\n    \"\"\"Generate a string representation of the task path.\"\"\"\
+    \n    return (\n        f\"~{', '.join(task_path_str(x) for x in tup)}\"\n        if isinstance(tup, (tuple, list))\n\
+    \        else f\"{tup:010d}\"\n        if isinstance(tup, int)\n        else str(tup)\n    )"
+- source_sentence: Best practices for test_list_namespaces_operations
+  sentences:
+  - "def test_doubly_nested_graph_state(\n    sync_checkpointer: BaseCheckpointSaver,\n) -> None:\n    class State(TypedDict):\n\
+    \        my_key: str\n\n    class ChildState(TypedDict):\n        my_key: str\n\n    class GrandChildState(TypedDict):\n\
+    \        my_key: str\n\n    def grandchild_1(state: ChildState):\n        return {\"my_key\": state[\"my_key\"] + \" here\"\
+    }\n\n    def grandchild_2(state: ChildState):\n        return {\n            \"my_key\": state[\"my_key\"] + \" and there\"\
+    ,\n        }\n\n    grandchild = StateGraph(GrandChildState)\n    grandchild.add_node(\"grandchild_1\", grandchild_1)\n\
+    \    grandchild.add_node(\"grandchild_2\", grandchild_2)\n    grandchild.add_edge(\"grandchild_1\", \"grandchild_2\")\n\
+    \    grandchild.set_entry_point(\"grandchild_1\")\n    grandchild.set_finish_point(\"grandchild_2\")\n\n    child = StateGraph(ChildState)\n\
+    \    child.add_node(\n        \"child_1\",\n        grandchild.compile(interrupt_before=[\"grandchild_2\"]),\n    )\n\
+    \    child.set_entry_point(\"child_1\")\n    child.set_finish_point(\"child_1\")\n\n    def parent_1(state: State):\n\
+    \        return {\"my_key\": \"hi \" + state[\"my_key\"]}\n\n    def parent_2(state: State):\n        return {\"my_key\"\
+    : state[\"my_key\"] + \" and back again\"}\n\n    graph = StateGraph(State)\n    graph.add_node(\"parent_1\", parent_1)\n\
+    \    graph.add_node(\"child\", child.compile())\n    graph.add_node(\"parent_2\", parent_2)\n    graph.set_entry_point(\"\
+    parent_1\")\n    graph.add_edge(\"parent_1\", \"child\")\n    graph.add_edge(\"child\", \"parent_2\")\n    graph.set_finish_point(\"\
+    parent_2\")\n\n    app = graph.compile(checkpointer=sync_checkpointer)\n\n    # test invoke w/ nested interrupt\n    config\
+    \ = {\"configurable\": {\"thread_id\": \"1\"}}\n    assert [\n        c\n        for c in app.stream(\n            {\"\
+    my_key\": \"my value\"}, config, subgraphs=True, durability=\"exit\"\n        )\n    ] == [\n        ((), {\"parent_1\"\
+    : {\"my_key\": \"hi my value\"}}),\n        (\n            (AnyStr(\"child:\"), AnyStr(\"child_1:\")),\n            {\"\
+    grandchild_1\": {\"my_key\": \"hi my value here\"}},\n        ),\n        ((), {\"__interrupt__\": ()}),\n    ]\n    #\
+    \ get state without subgraphs\n    outer_state = app.get_state(config)\n    assert outer_state == StateSnapshot(\n   \
+    \     values={\"my_key\": \"hi my value\"},\n        tasks=(\n            PregelTask(\n                AnyStr(),\n   \
+    \             \"child\",\n                (PULL, \"child\"),\n                state={\n                    \"configurable\"\
+    : {\n                        \"thread_id\": \"1\",\n                        \"checkpoint_ns\": AnyStr(\"child\"),\n  \
+    \                  }\n                },\n            ),\n        ),\n        next=(\"child\",),\n        config={\n \
+    \           \"configurable\": {\n                \"thread_id\": \"1\",\n                \"checkpoint_ns\": \"\",\n   \
+    \             \"checkpoint_id\": AnyStr(),\n            }\n        },\n        metadata={\n            \"parents\": {},\n\
+    \            \"source\": \"loop\",\n            \"step\": 1,\n        },\n        created_at=AnyStr(),\n        parent_config=None,\n\
+    \        interrupts=(),\n    )\n    child_state = app.get_state(outer_state.tasks[0].state)\n    assert child_state ==\
+    \ StateSnapshot(\n        values={\"my_key\": \"hi my value\"},\n        tasks=(\n            PregelTask(\n          \
+    \      AnyStr(),\n                \"child_1\",\n                (PULL, \"child_1\"),\n                state={\n      \
+    \              \"configurable\": {\n                        \"thread_id\": \"1\",\n                        \"checkpoint_ns\"\
+    : AnyStr(),\n                    }\n                },\n            ),\n        ),\n        next=(\"child_1\",),\n   \
+    \     config={\n            \"configurable\": {\n                \"thread_id\": \"1\",\n                \"checkpoint_ns\"\
+    : AnyStr(\"child:\"),\n                \"checkpoint_id\": AnyStr(),\n                \"checkpoint_map\": AnyDict(\n  \
+    \                  {\n                        \"\": AnyStr(),\n                        AnyStr(\"child:\"): AnyStr(),\n\
+    \                    }\n                ),\n            }\n        },\n        metadata={\n            \"parents\": {\"\
+    \": AnyStr()},\n            \"source\": \"loop\",\n            \"step\": 0,\n        },\n        created_at=AnyStr(),\n\
+    \        parent_config=None,\n        interrupts=(),\n    )\n    grandchild_state = app.get_state(child_state.tasks[0].state)\n\
+    \    assert grandchild_state == StateSnapshot(\n        values={\"my_key\": \"hi my value here\"},\n        tasks=(\n\
+    \            PregelTask(\n                AnyStr(),\n                \"grandchild_2\",\n                (PULL, \"grandchild_2\"\
+    ),\n            ),\n        ),\n        next=(\"grandchild_2\",),\n        config={\n            \"configurable\": {\n\
+    \                \"thread_id\": \"1\",\n                \"checkpoint_ns\": AnyStr(),\n                \"checkpoint_id\"\
+    : AnyStr(),\n                \"checkpoint_map\": AnyDict(\n                    {\n                        \"\": AnyStr(),\n\
+    \                        AnyStr(\"child:\"): AnyStr(),\n                        AnyStr(re.compile(r\"child:.+|child1:\"\
+    )): AnyStr(),\n                    }\n                ),\n            }\n        },\n        metadata={\n            \"\
+    parents\": AnyDict(\n                {\n                    \"\": AnyStr(),\n                    AnyStr(\"child:\"): AnyStr(),\n\
+    \                }\n            ),\n            \"source\": \"loop\",\n            \"step\": 1,\n        },\n        created_at=AnyStr(),\n\
+    \        parent_config=None,\n        interrupts=(),\n    )\n    # get state with subgraphs\n    assert app.get_state(config,\
+    \ subgraphs=True) == StateSnapshot(\n        values={\"my_key\": \"hi my value\"},\n        tasks=(\n            PregelTask(\n\
+    \                AnyStr(),\n                \"child\",\n                (PULL, \"child\"),\n                state=StateSnapshot(\n\
+    \                    values={\"my_key\": \"hi my value\"},\n                    tasks=(\n                        PregelTask(\n\
+    \                            AnyStr(),\n                            \"child_1\",\n                            (PULL, \"\
+    child_1\"),\n                            state=StateSnapshot(\n                                values={\"my_key\": \"\
+    hi my value here\"},\n                                tasks=(\n                                    PregelTask(\n     \
+    \                                   AnyStr(),\n                                        \"grandchild_2\",\n           \
+    \                             (PULL, \"grandchild_2\"),\n                                    ),\n                    \
+    \            ),\n                                next=(\"grandchild_2\",),\n                                config={\n\
+    \                                    \"configurable\": {\n                                        \"thread_id\": \"1\"\
+    ,\n                                        \"checkpoint_ns\": AnyStr(),\n                                        \"checkpoint_id\"\
+    : AnyStr(),\n                                        \"checkpoint_map\": AnyDict(\n                                  \
+    \          {\n                                                \"\": AnyStr(),\n                                      \
+    \          AnyStr(\"child:\"): AnyStr(),\n                                                AnyStr(\n                  \
+    \                                  re.compile(r\"child:.+|child1:\")\n                                               \
+    \ ): AnyStr(),\n                                            }\n                                        ),\n          \
+    \                          }\n                                },\n                                metadata={\n       \
+    \                             \"parents\": AnyDict(\n                                        {\n                     \
+    \                       \"\": AnyStr(),\n                                            AnyStr(\"child:\"): AnyStr(),\n \
+    \                                       }\n                                    ),\n                                  \
+    \  \"source\": \"loop\",\n                                    \"step\": 1,\n                                },\n     \
+    \                           created_at=AnyStr(),\n                                parent_config=None,\n              \
+    \                  interrupts=(),\n                            ),\n                        ),\n                    ),\n\
+    \                    next=(\"child_1\",),\n                    config={\n                        \"configurable\": {\n\
+    \                            \"thread_id\": \"1\",\n                            \"checkpoint_ns\": AnyStr(\"child:\"),\n\
+    \                            \"checkpoint_id\": AnyStr(),\n                            \"checkpoint_map\": AnyDict(\n\
+    \                                {\"\": AnyStr(), AnyStr(\"child:\"): AnyStr()}\n                            ),\n    \
+    \                    }\n                    },\n                    metadata={\n                        \"parents\": {\"\
+    \": AnyStr()},\n                        \"source\": \"loop\",\n                        \"step\": 0,\n                \
+    \    },\n                    created_at=AnyStr(),\n                    parent_config=None,\n                    interrupts=(),\n\
+    \                ),\n            ),\n        ),\n        next=(\"child\",),\n        config={\n            \"configurable\"\
+    : {\n                \"thread_id\": \"1\",\n                \"checkpoint_ns\": \"\",\n                \"checkpoint_id\"\
+    : AnyStr(),\n            }\n        },\n        metadata={\n            \"parents\": {},\n            \"source\": \"loop\"\
+    ,\n            \"step\": 1,\n        },\n        created_at=AnyStr(),\n        parent_config=None,\n        interrupts=(),\n\
+    \    )\n    # # resume\n    assert [c for c in app.stream(None, config, subgraphs=True, durability=\"exit\")] == [\n \
+    \       (\n            (AnyStr(\"child:\"), AnyStr(\"child_1:\")),\n            {\"grandchild_2\": {\"my_key\": \"hi my\
+    \ value here and there\"}},\n        ),\n        ((AnyStr(\"child:\"),), {\"child_1\": {\"my_key\": \"hi my value here\
+    \ and there\"}}),\n        ((), {\"child\": {\"my_key\": \"hi my value here and there\"}}),\n        ((), {\"parent_2\"\
+    : {\"my_key\": \"hi my value here and there and back again\"}}),\n    ]\n    # get state with and without subgraphs\n\
+    \    assert (\n        app.get_state(config)\n        == app.get_state(config, subgraphs=True)\n        == StateSnapshot(\n\
+    \            values={\"my_key\": \"hi my value here and there and back again\"},\n            tasks=(),\n            next=(),\n\
+    \            config={\n                \"configurable\": {\n                    \"thread_id\": \"1\",\n              \
+    \      \"checkpoint_ns\": \"\",\n                    \"checkpoint_id\": AnyStr(),\n                }\n            },\n\
+    \            metadata={\n                \"parents\": {},\n                \"source\": \"loop\",\n                \"step\"\
+    : 3,\n            },\n            created_at=AnyStr(),\n            parent_config=(\n                {\n             \
+    \       \"configurable\": {\n                        \"thread_id\": \"1\",\n                        \"checkpoint_ns\"\
+    : \"\",\n                        \"checkpoint_id\": AnyStr(),\n                    }\n                }\n            ),\n\
+    \            interrupts=(),\n        )\n    )\n\n    # get outer graph history\n    outer_history = list(app.get_state_history(config))\n\
+    \    assert outer_history == [\n        StateSnapshot(\n            values={\"my_key\": \"hi my value here and there and\
+    \ back again\"},\n            tasks=(),\n            next=(),\n            config={\n                \"configurable\"\
+    : {\n                    \"thread_id\": \"1\",\n                    \"checkpoint_ns\": \"\",\n                    \"checkpoint_id\"\
+    : AnyStr(),\n                }\n            },\n            metadata={\n                \"parents\": {},\n           \
+    \     \"source\": \"loop\",\n                \"step\": 3,\n            },\n            created_at=AnyStr(),\n        \
+    \    parent_config={\n                \"configurable\": {\n                    \"thread_id\": \"1\",\n               \
+    \     \"checkpoint_ns\": \"\",\n                    \"checkpoint_id\": AnyStr(),\n                }\n            },\n\
+    \            interrupts=(),\n        ),\n        StateSnapshot(\n            values={\"my_key\": \"hi my value\"},\n \
+    \           tasks=(\n                PregelTask(\n                    AnyStr(),\n                    \"child\",\n    \
+    \                (PULL, \"child\"),\n                    state={\n                        \"configurable\": {\n      \
+    \                      \"thread_id\": \"1\",\n                            \"checkpoint_ns\": AnyStr(\"child\"),\n    \
+    \                    }\n                    },\n                    result=None,\n                ),\n            ),\n\
+    \            next=(\"child\",),\n            config={\n                \"configurable\": {\n                    \"thread_id\"\
+    : \"1\",\n                    \"checkpoint_ns\": \"\",\n                    \"checkpoint_id\": AnyStr(),\n           \
+    \     }\n            },\n            metadata={\n                \"parents\": {},\n                \"source\": \"loop\"\
+    ,\n                \"step\": 1,\n            },\n            created_at=AnyStr(),\n            parent_config=None,\n \
+    \           interrupts=(),\n        ),\n    ]\n    # get child graph history\n    child_history = list(app.get_state_history(outer_history[1].tasks[0].state))\n\
+    \    assert child_history == [\n        StateSnapshot(\n            values={\"my_key\": \"hi my value\"},\n          \
+    \  next=(\"child_1\",),\n            config={\n                \"configurable\": {\n                    \"thread_id\"\
+    : \"1\",\n                    \"checkpoint_ns\": AnyStr(\"child:\"),\n                    \"checkpoint_id\": AnyStr(),\n\
+    \                    \"checkpoint_map\": AnyDict(\n                        {\"\": AnyStr(), AnyStr(\"child:\"): AnyStr()}\n\
+    \                    ),\n                }\n            },\n            metadata={\n                \"source\": \"loop\"\
+    ,\n                \"step\": 0,\n                \"parents\": {\"\": AnyStr()},\n            },\n            created_at=AnyStr(),\n\
+    \            parent_config=None,\n            tasks=(\n                PregelTask(\n                    id=AnyStr(),\n\
+    \                    name=\"child_1\",\n                    path=(PULL, \"child_1\"),\n                    state={\n \
+    \                       \"configurable\": {\n                            \"thread_id\": \"1\",\n                     \
+    \       \"checkpoint_ns\": AnyStr(\"child:\"),\n                        }\n                    },\n                  \
+    \  result=None,\n                ),\n            ),\n            interrupts=(),\n        ),\n    ]\n    # get grandchild\
+    \ graph history\n    grandchild_history = list(app.get_state_history(child_history[0].tasks[0].state))\n    assert grandchild_history\
+    \ == [\n        StateSnapshot(\n            values={\"my_key\": \"hi my value here\"},\n            next=(\"grandchild_2\"\
+    ,),\n            config={\n                \"configurable\": {\n                    \"thread_id\": \"1\",\n          \
+    \          \"checkpoint_ns\": AnyStr(),\n                    \"checkpoint_id\": AnyStr(),\n                    \"checkpoint_map\"\
+    : AnyDict(\n                        {\n                            \"\": AnyStr(),\n                            AnyStr(\"\
+    child:\"): AnyStr(),\n                            AnyStr(re.compile(r\"child:.+|child1:\")): AnyStr(),\n             \
+    \           }\n                    ),\n                }\n            },\n            metadata={\n                \"source\"\
+    : \"loop\",\n                \"step\": 1,\n                \"parents\": AnyDict(\n                    {\n            \
+    \            \"\": AnyStr(),\n                        AnyStr(\"child:\"): AnyStr(),\n                    }\n         \
+    \       ),\n            },\n            created_at=AnyStr(),\n            parent_config=None,\n            tasks=(\n \
+    \               PregelTask(\n                    id=AnyStr(),\n                    name=\"grandchild_2\",\n          \
+    \          path=(PULL, \"grandchild_2\"),\n                    result=None,\n                ),\n            ),\n    \
+    \        interrupts=(),\n        ),\n    ]"
+  - "def _msgpack_enc(data: Any) -> bytes:\n    return ormsgpack.packb(data, default=_msgpack_default, option=_option)"
+  - "def test_list_namespaces_operations(\n    fake_embeddings: CharacterEmbeddings,\n) -> None:\n    \"\"\"Test list namespaces\
+    \ functionality with various filters.\"\"\"\n    with create_vector_store(\n        fake_embeddings, text_fields=[\"key0\"\
+    , \"key1\", \"key3\"]\n    ) as store:\n        test_pref = str(uuid.uuid4())\n        test_namespaces = [\n         \
+    \   (test_pref, \"test\", \"documents\", \"public\", test_pref),\n            (test_pref, \"test\", \"documents\", \"\
+    private\", test_pref),\n            (test_pref, \"test\", \"images\", \"public\", test_pref),\n            (test_pref,\
+    \ \"test\", \"images\", \"private\", test_pref),\n            (test_pref, \"prod\", \"documents\", \"public\", test_pref),\n\
+    \            (test_pref, \"prod\", \"documents\", \"some\", \"nesting\", \"public\", test_pref),\n            (test_pref,\
+    \ \"prod\", \"documents\", \"private\", test_pref),\n        ]\n\n        # Add test data\n        for namespace in test_namespaces:\n\
+    \            store.put(namespace, \"dummy\", {\"content\": \"dummy\"})\n\n        # Test prefix filtering\n        prefix_result\
+    \ = store.list_namespaces(prefix=(test_pref, \"test\"))\n        assert len(prefix_result) == 4\n        assert all(ns[1]\
+    \ == \"test\" for ns in prefix_result)\n\n        # Test specific prefix\n        specific_prefix_result = store.list_namespaces(\n\
+    \            prefix=(test_pref, \"test\", \"documents\")\n        )\n        assert len(specific_prefix_result) == 2\n\
+    \        assert all(ns[1:3] == (\"test\", \"documents\") for ns in specific_prefix_result)\n\n        # Test suffix filtering\n\
+    \        suffix_result = store.list_namespaces(suffix=(\"public\", test_pref))\n        assert len(suffix_result) == 4\n\
+    \        assert all(ns[-2] == \"public\" for ns in suffix_result)\n\n        # Test combined prefix and suffix\n     \
+    \   prefix_suffix_result = store.list_namespaces(\n            prefix=(test_pref, \"test\"), suffix=(\"public\", test_pref)\n\
+    \        )\n        assert len(prefix_suffix_result) == 2\n        assert all(\n            ns[1] == \"test\" and ns[-2]\
+    \ == \"public\" for ns in prefix_suffix_result\n        )\n\n        # Test wildcard in prefix\n        wildcard_prefix_result\
+    \ = store.list_namespaces(\n            prefix=(test_pref, \"*\", \"documents\")\n        )\n        assert len(wildcard_prefix_result)\
+    \ == 5\n        assert all(ns[2] == \"documents\" for ns in wildcard_prefix_result)\n\n        # Test wildcard in suffix\n\
+    \        wildcard_suffix_result = store.list_namespaces(\n            suffix=(\"*\", \"public\", test_pref)\n        )\n\
+    \        assert len(wildcard_suffix_result) == 4\n        assert all(ns[-2] == \"public\" for ns in wildcard_suffix_result)\n\
+    \n        wildcard_single = store.list_namespaces(\n            suffix=(\"some\", \"*\", \"public\", test_pref)\n    \
+    \    )\n        assert len(wildcard_single) == 1\n        assert wildcard_single[0] == (\n            test_pref,\n   \
+    \         \"prod\",\n            \"documents\",\n            \"some\",\n            \"nesting\",\n            \"public\"\
+    ,\n            test_pref,\n        )\n\n        # Test max depth\n        max_depth_result = store.list_namespaces(max_depth=3)\n\
+    \        assert all(len(ns) <= 3 for ns in max_depth_result)\n\n        max_depth_result = store.list_namespaces(\n  \
+    \          max_depth=4, prefix=(test_pref, \"*\", \"documents\")\n        )\n        assert len(set(res for res in max_depth_result))\
+    \ == len(max_depth_result) == 5\n\n        # Test pagination\n        limit_result = store.list_namespaces(prefix=(test_pref,),\
+    \ limit=3)\n        assert len(limit_result) == 3\n\n        offset_result = store.list_namespaces(prefix=(test_pref,),\
+    \ offset=3)\n        assert len(offset_result) == len(test_namespaces) - 3\n\n        empty_prefix_result = store.list_namespaces(prefix=(test_pref,))\n\
+    \        assert len(empty_prefix_result) == len(test_namespaces)\n        assert set(empty_prefix_result) == set(test_namespaces)\n\
+    \n        # Clean up\n        for namespace in test_namespaces:\n            store.delete(namespace, \"dummy\")"
+model-index:
+- name: codeBert dense retriever
+  results:
+  - task:
+      type: information-retrieval
+      name: Information Retrieval
+    dataset:
+      name: dim 768
+      type: dim_768
+    metrics:
+    - type: cosine_accuracy@1
+      value: 0.9
+      name: Cosine Accuracy@1
+      verified: false
+    - type: cosine_accuracy@3
+      value: 0.9
+      name: Cosine Accuracy@3
+      verified: false
+    - type: cosine_accuracy@5
+      value: 1
+      name: Cosine Accuracy@5
+      verified: false
+    - type: cosine_accuracy@10
+      value: 1
+      name: Cosine Accuracy@10
+      verified: false
+    - type: cosine_precision@1
+      value: 0.9
+      name: Cosine Precision@1
+      verified: false
+    - type: cosine_precision@3
+      value: 0.29999999999999993
+      name: Cosine Precision@3
+      verified: false
+    - type: cosine_precision@5
+      value: 0.20000000000000004
+      name: Cosine Precision@5
+      verified: false
+    - type: cosine_precision@10
+      value: 0.10000000000000002
+      name: Cosine Precision@10
+      verified: false
+    - type: cosine_recall@1
+      value: 0.9
+      name: Cosine Recall@1
+      verified: false
+    - type: cosine_recall@3
+      value: 0.9
+      name: Cosine Recall@3
+      verified: false
+    - type: cosine_recall@5
+      value: 1
+      name: Cosine Recall@5
+      verified: false
+    - type: cosine_recall@10
+      value: 1
+      name: Cosine Recall@10
+      verified: false
+    - type: cosine_ndcg@10
+      value: 0.9408764682653967
+      name: Cosine Ndcg@10
+      verified: false
+    - type: cosine_mrr@10
+      value: 0.9225
+      name: Cosine Mrr@10
+      verified: false
+    - type: cosine_map@100
+      value: 0.9225
+      name: Cosine Map@100
+      verified: false
+  - task:
+      type: information-retrieval
+      name: Information Retrieval
+    dataset:
+      name: dim 512
+      type: dim_512
+    metrics:
+    - type: cosine_accuracy@1
+      value: 0.9
+      name: Cosine Accuracy@1
+      verified: false
+    - type: cosine_accuracy@3
+      value: 0.9
+      name: Cosine Accuracy@3
+      verified: false
+    - type: cosine_accuracy@5
+      value: 1
+      name: Cosine Accuracy@5
+      verified: false
+    - type: cosine_accuracy@10
+      value: 1
+      name: Cosine Accuracy@10
+      verified: false
+    - type: cosine_precision@1
+      value: 0.9
+      name: Cosine Precision@1
+      verified: false
+    - type: cosine_precision@3
+      value: 0.29999999999999993
+      name: Cosine Precision@3
+      verified: false
+    - type: cosine_precision@5
+      value: 0.20000000000000004
+      name: Cosine Precision@5
+      verified: false
+    - type: cosine_precision@10
+      value: 0.10000000000000002
+      name: Cosine Precision@10
+      verified: false
+    - type: cosine_recall@1
+      value: 0.9
+      name: Cosine Recall@1
+      verified: false
+    - type: cosine_recall@3
+      value: 0.9
+      name: Cosine Recall@3
+      verified: false
+    - type: cosine_recall@5
+      value: 1
+      name: Cosine Recall@5
+      verified: false
+    - type: cosine_recall@10
+      value: 1
+      name: Cosine Recall@10
+      verified: false
+    - type: cosine_ndcg@10
+      value: 0.9408764682653967
+      name: Cosine Ndcg@10
+      verified: false
+    - type: cosine_mrr@10
+      value: 0.9225
+      name: Cosine Mrr@10
+      verified: false
+    - type: cosine_map@100
+      value: 0.9225
+      name: Cosine Map@100
+      verified: false
+  - task:
+      type: information-retrieval
+      name: Information Retrieval
+    dataset:
+      name: dim 256
+      type: dim_256
+    metrics:
+    - type: cosine_accuracy@1
+      value: 0.9
+      name: Cosine Accuracy@1
+      verified: false
+    - type: cosine_accuracy@3
+      value: 0.9
+      name: Cosine Accuracy@3
+      verified: false
+    - type: cosine_accuracy@5
+      value: 1
+      name: Cosine Accuracy@5
+      verified: false
+    - type: cosine_accuracy@10
+      value: 1
+      name: Cosine Accuracy@10
+      verified: false
+    - type: cosine_precision@1
+      value: 0.9
+      name: Cosine Precision@1
+      verified: false
+    - type: cosine_precision@3
+      value: 0.29999999999999993
+      name: Cosine Precision@3
+      verified: false
+    - type: cosine_precision@5
+      value: 0.20000000000000004
+      name: Cosine Precision@5
+      verified: false
+    - type: cosine_precision@10
+      value: 0.10000000000000002
+      name: Cosine Precision@10
+      verified: false
+    - type: cosine_recall@1
+      value: 0.9
+      name: Cosine Recall@1
+      verified: false
+    - type: cosine_recall@3
+      value: 0.9
+      name: Cosine Recall@3
+      verified: false
+    - type: cosine_recall@5
+      value: 1
+      name: Cosine Recall@5
+      verified: false
+    - type: cosine_recall@10
+      value: 1
+      name: Cosine Recall@10
+      verified: false
+    - type: cosine_ndcg@10
+      value: 0.9408764682653967
+      name: Cosine Ndcg@10
+      verified: false
+    - type: cosine_mrr@10
+      value: 0.9225
+      name: Cosine Mrr@10
+      verified: false
+    - type: cosine_map@100
+      value: 0.9225
+      name: Cosine Map@100
+      verified: false
+  - task:
+      type: information-retrieval
+      name: Information Retrieval
+    dataset:
+      name: dim 128
+      type: dim_128
+    metrics:
+    - type: cosine_accuracy@1
+      value: 0.85
+      name: Cosine Accuracy@1
+      verified: false
+    - type: cosine_accuracy@3
+      value: 0.9
+      name: Cosine Accuracy@3
+      verified: false
+    - type: cosine_accuracy@5
+      value: 0.95
+      name: Cosine Accuracy@5
+      verified: false
+    - type: cosine_accuracy@10
+      value: 0.95
+      name: Cosine Accuracy@10
+      verified: false
+    - type: cosine_precision@1
+      value: 0.85
+      name: Cosine Precision@1
+      verified: false
+    - type: cosine_precision@3
+      value: 0.29999999999999993
+      name: Cosine Precision@3
+      verified: false
+    - type: cosine_precision@5
+      value: 0.19000000000000003
+      name: Cosine Precision@5
+      verified: false
+    - type: cosine_precision@10
+      value: 0.09500000000000001
+      name: Cosine Precision@10
+      verified: false
+    - type: cosine_recall@1
+      value: 0.85
+      name: Cosine Recall@1
+      verified: false
+    - type: cosine_recall@3
+      value: 0.9
+      name: Cosine Recall@3
+      verified: false
+    - type: cosine_recall@5
+      value: 0.95
+      name: Cosine Recall@5
+      verified: false
+    - type: cosine_recall@10
+      value: 0.95
+      name: Cosine Recall@10
+      verified: false
+    - type: cosine_ndcg@10
+      value: 0.894342640361727
+      name: Cosine Ndcg@10
+      verified: false
+    - type: cosine_mrr@10
+      value: 0.8766666666666666
+      name: Cosine Mrr@10
+      verified: false
+    - type: cosine_map@100
+      value: 0.8799999999999999
+      name: Cosine Map@100
+      verified: false
+  - task:
+      type: information-retrieval
+      name: Information Retrieval
+    dataset:
+      name: dim 64
+      type: dim_64
+    metrics:
+    - type: cosine_accuracy@1
+      value: 0.85
+      name: Cosine Accuracy@1
+      verified: false
+    - type: cosine_accuracy@3
+      value: 0.9
+      name: Cosine Accuracy@3
+      verified: false
+    - type: cosine_accuracy@5
+      value: 0.9
+      name: Cosine Accuracy@5
+      verified: false
+    - type: cosine_accuracy@10
+      value: 1
+      name: Cosine Accuracy@10
+      verified: false
+    - type: cosine_precision@1
+      value: 0.85
+      name: Cosine Precision@1
+      verified: false
+    - type: cosine_precision@3
+      value: 0.29999999999999993
+      name: Cosine Precision@3
+      verified: false
+    - type: cosine_precision@5
+      value: 0.18000000000000005
+      name: Cosine Precision@5
+      verified: false
+    - type: cosine_precision@10
+      value: 0.10000000000000002
+      name: Cosine Precision@10
+      verified: false
+    - type: cosine_recall@1
+      value: 0.85
+      name: Cosine Recall@1
+      verified: false
+    - type: cosine_recall@3
+      value: 0.9
+      name: Cosine Recall@3
+      verified: false
+    - type: cosine_recall@5
+      value: 0.9
+      name: Cosine Recall@5
+      verified: false
+    - type: cosine_recall@10
+      value: 1
+      name: Cosine Recall@10
+      verified: false
+    - type: cosine_ndcg@10
+      value: 0.9074399105059531
+      name: Cosine Ndcg@10
+      verified: false
+    - type: cosine_mrr@10
+      value: 0.8800595238095237
+      name: Cosine Mrr@10
+      verified: false
+    - type: cosine_map@100
+      value: 0.8800595238095237
+      name: Cosine Map@100
+      verified: false
+config:
+  architectures:
+  - RobertaModel
+  model_type: roberta
+  tokenizer_config:
+    bos_token: <s>
+    cls_token: <s>
+    eos_token: </s>
+    mask_token: <mask>
+    pad_token: <pad>
+    sep_token: </s>
+    unk_token: <unk>
+cardData:
+  language:
+  - en
+  license: apache-2.0
+  tags:
+  - sentence-transformers
+  - sentence-similarity
+  - feature-extraction
+  - dense
+  - generated_from_trainer
+  - dataset_size:180
+  - loss:MatryoshkaLoss
+  - loss:MultipleNegativesRankingLoss
+  base_model: shubharuidas/codebert-embed-base-dense-retriever
+  widget:
+  - source_sentence: Explain the __init__ logic
+    sentences:
+    - "async def test_handler_with_async_execution() -> None:\n    \"\"\"Test handler works correctly with async tool execution.\"\
+      \"\"\n\n    @tool\n    def async_add(a: int, b: int) -> int:\n        \"\"\"Async add two numbers.\"\"\"\n        return\
+      \ a + b\n\n    def modifying_handler(\n        request: ToolCallRequest,\n        execute: Callable[[ToolCallRequest],\
+      \ ToolMessage | Command],\n    ) -> ToolMessage | Command:\n        \"\"\"Handler that modifies arguments.\"\"\"\n \
+      \       # Add 10 to both arguments using override method\n        modified_call = {\n            **request.tool_call,\n\
+      \            \"args\": {\n                **request.tool_call[\"args\"],\n                \"a\": request.tool_call[\"\
+      args\"][\"a\"] + 10,\n                \"b\": request.tool_call[\"args\"][\"b\"] + 10,\n            },\n        }\n \
+      \       modified_request = request.override(tool_call=modified_call)\n        return execute(modified_request)\n\n \
+      \   tool_node = ToolNode([async_add], wrap_tool_call=modifying_handler)\n\n    result = await tool_node.ainvoke(\n \
+      \       {\n            \"messages\": [\n                AIMessage(\n                    \"adding\",\n              \
+      \      tool_calls=[\n                        {\n                            \"name\": \"async_add\",\n             \
+      \               \"args\": {\"a\": 1, \"b\": 2},\n                            \"id\": \"call_13\",\n                \
+      \        }\n                    ],\n                )\n            ]\n        },\n        config=_create_config_with_runtime(),\n\
+      \    )\n\n    tool_message = result[\"messages\"][-1]\n    assert isinstance(tool_message, ToolMessage)\n    # Original:\
+      \ 1 + 2 = 3, with modifications: 11 + 12 = 23\n    assert tool_message.content == \"23\""
+    - "def __init__(self) -> None:\n        self.loads: set[str] = set()\n        self.stores: set[str] = set()"
+    - "class InternalServerError(APIStatusError):\n    pass"
+  - source_sentence: Explain the async _load_checkpoint_tuple logic
+    sentences:
+    - 'def task(__func_or_none__: Callable[P, Awaitable[T]]) -> _TaskFunction[P, T]: ...'
+    - "class State(BaseModel):\n        query: str\n        inner: InnerObject\n        answer: str | None = None\n      \
+      \  docs: Annotated[list[str], sorted_add]"
+    - "async def _load_checkpoint_tuple(self, value: DictRow) -> CheckpointTuple:\n        \"\"\"\n        Convert a database\
+      \ row into a CheckpointTuple object.\n\n        Args:\n            value: A row from the database containing checkpoint\
+      \ data.\n\n        Returns:\n            CheckpointTuple: A structured representation of the checkpoint,\n         \
+      \   including its configuration, metadata, parent checkpoint (if any),\n            and pending writes.\n        \"\"\
+      \"\n        return CheckpointTuple(\n            {\n                \"configurable\": {\n                    \"thread_id\"\
+      : value[\"thread_id\"],\n                    \"checkpoint_ns\": value[\"checkpoint_ns\"],\n                    \"checkpoint_id\"\
+      : value[\"checkpoint_id\"],\n                }\n            },\n            {\n                **value[\"checkpoint\"\
+      ],\n                \"channel_values\": {\n                    **(value[\"checkpoint\"].get(\"channel_values\") or {}),\n\
+      \                    **self._load_blobs(value[\"channel_values\"]),\n                },\n            },\n          \
+      \  value[\"metadata\"],\n            (\n                {\n                    \"configurable\": {\n               \
+      \         \"thread_id\": value[\"thread_id\"],\n                        \"checkpoint_ns\": value[\"checkpoint_ns\"],\n\
+      \                        \"checkpoint_id\": value[\"parent_checkpoint_id\"],\n                    }\n              \
+      \  }\n                if value[\"parent_checkpoint_id\"]\n                else None\n            ),\n            await\
+      \ asyncio.to_thread(self._load_writes, value[\"pending_writes\"]),\n        )"
+  - source_sentence: Explain the flattened_runs logic
+    sentences:
+    - "class ChannelWrite(RunnableCallable):\n    \"\"\"Implements the logic for sending writes to CONFIG_KEY_SEND.\n    Can\
+      \ be used as a runnable or as a static method to call imperatively.\"\"\"\n\n    writes: list[ChannelWriteEntry | ChannelWriteTupleEntry\
+      \ | Send]\n    \"\"\"Sequence of write entries or Send objects to write.\"\"\"\n\n    def __init__(\n        self,\n\
+      \        writes: Sequence[ChannelWriteEntry | ChannelWriteTupleEntry | Send],\n        *,\n        tags: Sequence[str]\
+      \ | None = None,\n    ):\n        super().__init__(\n            func=self._write,\n            afunc=self._awrite,\n\
+      \            name=None,\n            tags=tags,\n            trace=False,\n        )\n        self.writes = cast(\n\
+      \            list[ChannelWriteEntry | ChannelWriteTupleEntry | Send], writes\n        )\n\n    def get_name(self, suffix:\
+      \ str | None = None, *, name: str | None = None) -> str:\n        if not name:\n            name = f\"ChannelWrite<{','.join(w.channel\
+      \ if isinstance(w, ChannelWriteEntry) else '...' if isinstance(w, ChannelWriteTupleEntry) else w.node for w in self.writes)}>\"\
+      \n        return super().get_name(suffix, name=name)\n\n    def _write(self, input: Any, config: RunnableConfig) ->\
+      \ None:\n        writes = [\n            ChannelWriteEntry(write.channel, input, write.skip_none, write.mapper)\n  \
+      \          if isinstance(write, ChannelWriteEntry) and write.value is PASSTHROUGH\n            else ChannelWriteTupleEntry(write.mapper,\
+      \ input)\n            if isinstance(write, ChannelWriteTupleEntry) and write.value is PASSTHROUGH\n            else\
+      \ write\n            for write in self.writes\n        ]\n        self.do_write(\n            config,\n            writes,\n\
+      \        )\n        return input\n\n    async def _awrite(self, input: Any, config: RunnableConfig) -> None:\n     \
+      \   writes = [\n            ChannelWriteEntry(write.channel, input, write.skip_none, write.mapper)\n            if isinstance(write,\
+      \ ChannelWriteEntry) and write.value is PASSTHROUGH\n            else ChannelWriteTupleEntry(write.mapper, input)\n\
+      \            if isinstance(write, ChannelWriteTupleEntry) and write.value is PASSTHROUGH\n            else write\n \
+      \           for write in self.writes\n        ]\n        self.do_write(\n            config,\n            writes,\n\
+      \        )\n        return input\n\n    @staticmethod\n    def do_write(\n        config: RunnableConfig,\n        writes:\
+      \ Sequence[ChannelWriteEntry | ChannelWriteTupleEntry | Send],\n        allow_passthrough: bool = True,\n    ) -> None:\n\
+      \        # validate\n        for w in writes:\n            if isinstance(w, ChannelWriteEntry):\n                if\
+      \ w.channel == TASKS:\n                    raise InvalidUpdateError(\n                        \"Cannot write to the\
+      \ reserved channel TASKS\"\n                    )\n                if w.value is PASSTHROUGH and not allow_passthrough:\n\
+      \                    raise InvalidUpdateError(\"PASSTHROUGH value must be replaced\")\n            if isinstance(w,\
+      \ ChannelWriteTupleEntry):\n                if w.value is PASSTHROUGH and not allow_passthrough:\n                 \
+      \   raise InvalidUpdateError(\"PASSTHROUGH value must be replaced\")\n        # if we want to persist writes found before\
+      \ hitting a ParentCommand\n        # can move this to a finally block\n        write: TYPE_SEND = config[CONF][CONFIG_KEY_SEND]\n\
+      \        write(_assemble_writes(writes))\n\n    @staticmethod\n    def is_writer(runnable: Runnable) -> bool:\n    \
+      \    \"\"\"Used by PregelNode to distinguish between writers and other runnables.\"\"\"\n        return (\n        \
+      \    isinstance(runnable, ChannelWrite)\n            or getattr(runnable, \"_is_channel_writer\", MISSING) is not MISSING\n\
+      \        )\n\n    @staticmethod\n    def get_static_writes(\n        runnable: Runnable,\n    ) -> Sequence[tuple[str,\
+      \ Any, str | None]] | None:\n        \"\"\"Used to get conditional writes a writer declares for static analysis.\"\"\
+      \"\n        if isinstance(runnable, ChannelWrite):\n            return [\n                w\n                for entry\
+      \ in runnable.writes\n                if isinstance(entry, ChannelWriteTupleEntry) and entry.static\n              \
+      \  for w in entry.static\n            ] or None\n        elif writes := getattr(runnable, \"_is_channel_writer\", MISSING):\n\
+      \            if writes is not MISSING:\n                writes = cast(\n                    Sequence[tuple[ChannelWriteEntry\
+      \ | Send, str | None]],\n                    writes,\n                )\n                entries = [e for e, _ in writes]\n\
+      \                labels = [la for _, la in writes]\n                return [(*t, la) for t, la in zip(_assemble_writes(entries),\
+      \ labels)]\n\n    @staticmethod\n    def register_writer(\n        runnable: R,\n        static: Sequence[tuple[ChannelWriteEntry\
+      \ | Send, str | None]] | None = None,\n    ) -> R:\n        \"\"\"Used to mark a runnable as a writer, so that it can\
+      \ be detected by is_writer.\n        Instances of ChannelWrite are automatically marked as writers.\n        Optionally,\
+      \ a list of declared writes can be passed for static analysis.\"\"\"\n        # using object.__setattr__ to work around\
+      \ objects that override __setattr__\n        # eg. pydantic models and dataclasses\n        object.__setattr__(runnable,\
+      \ \"_is_channel_writer\", static)\n        return runnable"
+    - "def test_double_interrupt_subgraph(sync_checkpointer: BaseCheckpointSaver) -> None:\n    class AgentState(TypedDict):\n\
+      \        input: str\n\n    def node_1(state: AgentState):\n        result = interrupt(\"interrupt node 1\")\n      \
+      \  return {\"input\": result}\n\n    def node_2(state: AgentState):\n        result = interrupt(\"interrupt node 2\"\
+      )\n        return {\"input\": result}\n\n    subgraph_builder = (\n        StateGraph(AgentState)\n        .add_node(\"\
+      node_1\", node_1)\n        .add_node(\"node_2\", node_2)\n        .add_edge(START, \"node_1\")\n        .add_edge(\"\
+      node_1\", \"node_2\")\n        .add_edge(\"node_2\", END)\n    )\n\n    # invoke the sub graph\n    subgraph = subgraph_builder.compile(checkpointer=sync_checkpointer)\n\
+      \    thread = {\"configurable\": {\"thread_id\": str(uuid.uuid4())}}\n    assert [c for c in subgraph.stream({\"input\"\
+      : \"test\"}, thread)] == [\n        {\n            \"__interrupt__\": (\n                Interrupt(\n              \
+      \      value=\"interrupt node 1\",\n                    id=AnyStr(),\n                ),\n            )\n        },\n\
+      \    ]\n    # resume from the first interrupt\n    assert [c for c in subgraph.stream(Command(resume=\"123\"), thread)]\
+      \ == [\n        {\n            \"node_1\": {\"input\": \"123\"},\n        },\n        {\n            \"__interrupt__\"\
+      : (\n                Interrupt(\n                    value=\"interrupt node 2\",\n                    id=AnyStr(),\n\
+      \                ),\n            )\n        },\n    ]\n    # resume from the second interrupt\n    assert [c for c in\
+      \ subgraph.stream(Command(resume=\"123\"), thread)] == [\n        {\n            \"node_2\": {\"input\": \"123\"},\n\
+      \        },\n    ]\n\n    subgraph = subgraph_builder.compile()\n\n    def invoke_sub_agent(state: AgentState):\n  \
+      \      return subgraph.invoke(state)\n\n    thread = {\"configurable\": {\"thread_id\": str(uuid.uuid4())}}\n    parent_agent\
+      \ = (\n        StateGraph(AgentState)\n        .add_node(\"invoke_sub_agent\", invoke_sub_agent)\n        .add_edge(START,\
+      \ \"invoke_sub_agent\")\n        .add_edge(\"invoke_sub_agent\", END)\n        .compile(checkpointer=sync_checkpointer)\n\
+      \    )\n\n    assert [c for c in parent_agent.stream({\"input\": \"test\"}, thread)] == [\n        {\n            \"\
+      __interrupt__\": (\n                Interrupt(\n                    value=\"interrupt node 1\",\n                  \
+      \  id=AnyStr(),\n                ),\n            )\n        },\n    ]\n\n    # resume from the first interrupt\n   \
+      \ assert [c for c in parent_agent.stream(Command(resume=True), thread)] == [\n        {\n            \"__interrupt__\"\
+      : (\n                Interrupt(\n                    value=\"interrupt node 2\",\n                    id=AnyStr(),\n\
+      \                ),\n            )\n        }\n    ]\n\n    # resume from 2nd interrupt\n    assert [c for c in parent_agent.stream(Command(resume=True),\
+      \ thread)] == [\n        {\n            \"invoke_sub_agent\": {\"input\": True},\n        },\n    ]"
+    - "def flattened_runs(self) -> list[Run]:\n        q = [] + self.runs\n        result = []\n        while q:\n       \
+      \     parent = q.pop()\n            result.append(parent)\n            if parent.child_runs:\n                q.extend(parent.child_runs)\n\
+      \        return result"
+  - source_sentence: Explain the SubGraphState logic
+    sentences:
+    - "class Cron(TypedDict):\n    \"\"\"Represents a scheduled task.\"\"\"\n\n    cron_id: str\n    \"\"\"The ID of the cron.\"\
+      \"\"\n    assistant_id: str\n    \"\"\"The ID of the assistant.\"\"\"\n    thread_id: str | None\n    \"\"\"The ID of\
+      \ the thread.\"\"\"\n    on_run_completed: OnCompletionBehavior | None\n    \"\"\"What to do with the thread after the\
+      \ run completes. Only applicable for stateless crons.\"\"\"\n    end_time: datetime | None\n    \"\"\"The end date to\
+      \ stop running the cron.\"\"\"\n    schedule: str\n    \"\"\"The schedule to run, cron format.\"\"\"\n    created_at:\
+      \ datetime\n    \"\"\"The time the cron was created.\"\"\"\n    updated_at: datetime\n    \"\"\"The last time the cron\
+      \ was updated.\"\"\"\n    payload: dict\n    \"\"\"The run payload to use for creating new run.\"\"\"\n    user_id:\
+      \ str | None\n    \"\"\"The user ID of the cron.\"\"\"\n    next_run_date: datetime | None\n    \"\"\"The next run date\
+      \ of the cron.\"\"\"\n    metadata: dict\n    \"\"\"The metadata of the cron.\"\"\""
+    - "class SubGraphState(MessagesState):\n        city: str"
+    - "def task_path_str(tup: str | int | tuple) -> str:\n    \"\"\"Generate a string representation of the task path.\"\"\
+      \"\n    return (\n        f\"~{', '.join(task_path_str(x) for x in tup)}\"\n        if isinstance(tup, (tuple, list))\n\
+      \        else f\"{tup:010d}\"\n        if isinstance(tup, int)\n        else str(tup)\n    )"
+  - source_sentence: Best practices for test_list_namespaces_operations
+    sentences:
+    - "def test_doubly_nested_graph_state(\n    sync_checkpointer: BaseCheckpointSaver,\n) -> None:\n    class State(TypedDict):\n\
+      \        my_key: str\n\n    class ChildState(TypedDict):\n        my_key: str\n\n    class GrandChildState(TypedDict):\n\
+      \        my_key: str\n\n    def grandchild_1(state: ChildState):\n        return {\"my_key\": state[\"my_key\"] + \"\
+      \ here\"}\n\n    def grandchild_2(state: ChildState):\n        return {\n            \"my_key\": state[\"my_key\"] +\
+      \ \" and there\",\n        }\n\n    grandchild = StateGraph(GrandChildState)\n    grandchild.add_node(\"grandchild_1\"\
+      , grandchild_1)\n    grandchild.add_node(\"grandchild_2\", grandchild_2)\n    grandchild.add_edge(\"grandchild_1\",\
+      \ \"grandchild_2\")\n    grandchild.set_entry_point(\"grandchild_1\")\n    grandchild.set_finish_point(\"grandchild_2\"\
+      )\n\n    child = StateGraph(ChildState)\n    child.add_node(\n        \"child_1\",\n        grandchild.compile(interrupt_before=[\"\
+      grandchild_2\"]),\n    )\n    child.set_entry_point(\"child_1\")\n    child.set_finish_point(\"child_1\")\n\n    def\
+      \ parent_1(state: State):\n        return {\"my_key\": \"hi \" + state[\"my_key\"]}\n\n    def parent_2(state: State):\n\
+      \        return {\"my_key\": state[\"my_key\"] + \" and back again\"}\n\n    graph = StateGraph(State)\n    graph.add_node(\"\
+      parent_1\", parent_1)\n    graph.add_node(\"child\", child.compile())\n    graph.add_node(\"parent_2\", parent_2)\n\
+      \    graph.set_entry_point(\"parent_1\")\n    graph.add_edge(\"parent_1\", \"child\")\n    graph.add_edge(\"child\"\
+      , \"parent_2\")\n    graph.set_finish_point(\"parent_2\")\n\n    app = graph.compile(checkpointer=sync_checkpointer)\n\
+      \n    # test invoke w/ nested interrupt\n    config = {\"configurable\": {\"thread_id\": \"1\"}}\n    assert [\n   \
+      \     c\n        for c in app.stream(\n            {\"my_key\": \"my value\"}, config, subgraphs=True, durability=\"\
+      exit\"\n        )\n    ] == [\n        ((), {\"parent_1\": {\"my_key\": \"hi my value\"}}),\n        (\n           \
+      \ (AnyStr(\"child:\"), AnyStr(\"child_1:\")),\n            {\"grandchild_1\": {\"my_key\": \"hi my value here\"}},\n\
+      \        ),\n        ((), {\"__interrupt__\": ()}),\n    ]\n    # get state without subgraphs\n    outer_state = app.get_state(config)\n\
+      \    assert outer_state == StateSnapshot(\n        values={\"my_key\": \"hi my value\"},\n        tasks=(\n        \
+      \    PregelTask(\n                AnyStr(),\n                \"child\",\n                (PULL, \"child\"),\n      \
+      \          state={\n                    \"configurable\": {\n                        \"thread_id\": \"1\",\n       \
+      \                 \"checkpoint_ns\": AnyStr(\"child\"),\n                    }\n                },\n            ),\n\
+      \        ),\n        next=(\"child\",),\n        config={\n            \"configurable\": {\n                \"thread_id\"\
+      : \"1\",\n                \"checkpoint_ns\": \"\",\n                \"checkpoint_id\": AnyStr(),\n            }\n  \
+      \      },\n        metadata={\n            \"parents\": {},\n            \"source\": \"loop\",\n            \"step\"\
+      : 1,\n        },\n        created_at=AnyStr(),\n        parent_config=None,\n        interrupts=(),\n    )\n    child_state\
+      \ = app.get_state(outer_state.tasks[0].state)\n    assert child_state == StateSnapshot(\n        values={\"my_key\"\
+      : \"hi my value\"},\n        tasks=(\n            PregelTask(\n                AnyStr(),\n                \"child_1\"\
+      ,\n                (PULL, \"child_1\"),\n                state={\n                    \"configurable\": {\n        \
+      \                \"thread_id\": \"1\",\n                        \"checkpoint_ns\": AnyStr(),\n                    }\n\
+      \                },\n            ),\n        ),\n        next=(\"child_1\",),\n        config={\n            \"configurable\"\
+      : {\n                \"thread_id\": \"1\",\n                \"checkpoint_ns\": AnyStr(\"child:\"),\n               \
+      \ \"checkpoint_id\": AnyStr(),\n                \"checkpoint_map\": AnyDict(\n                    {\n              \
+      \          \"\": AnyStr(),\n                        AnyStr(\"child:\"): AnyStr(),\n                    }\n         \
+      \       ),\n            }\n        },\n        metadata={\n            \"parents\": {\"\": AnyStr()},\n            \"\
+      source\": \"loop\",\n            \"step\": 0,\n        },\n        created_at=AnyStr(),\n        parent_config=None,\n\
+      \        interrupts=(),\n    )\n    grandchild_state = app.get_state(child_state.tasks[0].state)\n    assert grandchild_state\
+      \ == StateSnapshot(\n        values={\"my_key\": \"hi my value here\"},\n        tasks=(\n            PregelTask(\n\
+      \                AnyStr(),\n                \"grandchild_2\",\n                (PULL, \"grandchild_2\"),\n         \
+      \   ),\n        ),\n        next=(\"grandchild_2\",),\n        config={\n            \"configurable\": {\n         \
+      \       \"thread_id\": \"1\",\n                \"checkpoint_ns\": AnyStr(),\n                \"checkpoint_id\": AnyStr(),\n\
+      \                \"checkpoint_map\": AnyDict(\n                    {\n                        \"\": AnyStr(),\n    \
+      \                    AnyStr(\"child:\"): AnyStr(),\n                        AnyStr(re.compile(r\"child:.+|child1:\"\
+      )): AnyStr(),\n                    }\n                ),\n            }\n        },\n        metadata={\n          \
+      \  \"parents\": AnyDict(\n                {\n                    \"\": AnyStr(),\n                    AnyStr(\"child:\"\
+      ): AnyStr(),\n                }\n            ),\n            \"source\": \"loop\",\n            \"step\": 1,\n     \
+      \   },\n        created_at=AnyStr(),\n        parent_config=None,\n        interrupts=(),\n    )\n    # get state with\
+      \ subgraphs\n    assert app.get_state(config, subgraphs=True) == StateSnapshot(\n        values={\"my_key\": \"hi my\
+      \ value\"},\n        tasks=(\n            PregelTask(\n                AnyStr(),\n                \"child\",\n     \
+      \           (PULL, \"child\"),\n                state=StateSnapshot(\n                    values={\"my_key\": \"hi my\
+      \ value\"},\n                    tasks=(\n                        PregelTask(\n                            AnyStr(),\n\
+      \                            \"child_1\",\n                            (PULL, \"child_1\"),\n                      \
+      \      state=StateSnapshot(\n                                values={\"my_key\": \"hi my value here\"},\n          \
+      \                      tasks=(\n                                    PregelTask(\n                                  \
+      \      AnyStr(),\n                                        \"grandchild_2\",\n                                      \
+      \  (PULL, \"grandchild_2\"),\n                                    ),\n                                ),\n         \
+      \                       next=(\"grandchild_2\",),\n                                config={\n                      \
+      \              \"configurable\": {\n                                        \"thread_id\": \"1\",\n                \
+      \                        \"checkpoint_ns\": AnyStr(),\n                                        \"checkpoint_id\": AnyStr(),\n\
+      \                                        \"checkpoint_map\": AnyDict(\n                                            {\n\
+      \                                                \"\": AnyStr(),\n                                                AnyStr(\"\
+      child:\"): AnyStr(),\n                                                AnyStr(\n                                    \
+      \                re.compile(r\"child:.+|child1:\")\n                                                ): AnyStr(),\n \
+      \                                           }\n                                        ),\n                        \
+      \            }\n                                },\n                                metadata={\n                   \
+      \                 \"parents\": AnyDict(\n                                        {\n                               \
+      \             \"\": AnyStr(),\n                                            AnyStr(\"child:\"): AnyStr(),\n         \
+      \                               }\n                                    ),\n                                    \"source\"\
+      : \"loop\",\n                                    \"step\": 1,\n                                },\n                \
+      \                created_at=AnyStr(),\n                                parent_config=None,\n                       \
+      \         interrupts=(),\n                            ),\n                        ),\n                    ),\n     \
+      \               next=(\"child_1\",),\n                    config={\n                        \"configurable\": {\n  \
+      \                          \"thread_id\": \"1\",\n                            \"checkpoint_ns\": AnyStr(\"child:\"),\n\
+      \                            \"checkpoint_id\": AnyStr(),\n                            \"checkpoint_map\": AnyDict(\n\
+      \                                {\"\": AnyStr(), AnyStr(\"child:\"): AnyStr()}\n                            ),\n  \
+      \                      }\n                    },\n                    metadata={\n                        \"parents\"\
+      : {\"\": AnyStr()},\n                        \"source\": \"loop\",\n                        \"step\": 0,\n         \
+      \           },\n                    created_at=AnyStr(),\n                    parent_config=None,\n                \
+      \    interrupts=(),\n                ),\n            ),\n        ),\n        next=(\"child\",),\n        config={\n\
+      \            \"configurable\": {\n                \"thread_id\": \"1\",\n                \"checkpoint_ns\": \"\",\n\
+      \                \"checkpoint_id\": AnyStr(),\n            }\n        },\n        metadata={\n            \"parents\"\
+      : {},\n            \"source\": \"loop\",\n            \"step\": 1,\n        },\n        created_at=AnyStr(),\n     \
+      \   parent_config=None,\n        interrupts=(),\n    )\n    # # resume\n    assert [c for c in app.stream(None, config,\
+      \ subgraphs=True, durability=\"exit\")] == [\n        (\n            (AnyStr(\"child:\"), AnyStr(\"child_1:\")),\n \
+      \           {\"grandchild_2\": {\"my_key\": \"hi my value here and there\"}},\n        ),\n        ((AnyStr(\"child:\"\
+      ),), {\"child_1\": {\"my_key\": \"hi my value here and there\"}}),\n        ((), {\"child\": {\"my_key\": \"hi my value\
+      \ here and there\"}}),\n        ((), {\"parent_2\": {\"my_key\": \"hi my value here and there and back again\"}}),\n\
+      \    ]\n    # get state with and without subgraphs\n    assert (\n        app.get_state(config)\n        == app.get_state(config,\
+      \ subgraphs=True)\n        == StateSnapshot(\n            values={\"my_key\": \"hi my value here and there and back\
+      \ again\"},\n            tasks=(),\n            next=(),\n            config={\n                \"configurable\": {\n\
+      \                    \"thread_id\": \"1\",\n                    \"checkpoint_ns\": \"\",\n                    \"checkpoint_id\"\
+      : AnyStr(),\n                }\n            },\n            metadata={\n                \"parents\": {},\n         \
+      \       \"source\": \"loop\",\n                \"step\": 3,\n            },\n            created_at=AnyStr(),\n    \
+      \        parent_config=(\n                {\n                    \"configurable\": {\n                        \"thread_id\"\
+      : \"1\",\n                        \"checkpoint_ns\": \"\",\n                        \"checkpoint_id\": AnyStr(),\n \
+      \                   }\n                }\n            ),\n            interrupts=(),\n        )\n    )\n\n    # get\
+      \ outer graph history\n    outer_history = list(app.get_state_history(config))\n    assert outer_history == [\n    \
+      \    StateSnapshot(\n            values={\"my_key\": \"hi my value here and there and back again\"},\n            tasks=(),\n\
+      \            next=(),\n            config={\n                \"configurable\": {\n                    \"thread_id\"\
+      : \"1\",\n                    \"checkpoint_ns\": \"\",\n                    \"checkpoint_id\": AnyStr(),\n         \
+      \       }\n            },\n            metadata={\n                \"parents\": {},\n                \"source\": \"\
+      loop\",\n                \"step\": 3,\n            },\n            created_at=AnyStr(),\n            parent_config={\n\
+      \                \"configurable\": {\n                    \"thread_id\": \"1\",\n                    \"checkpoint_ns\"\
+      : \"\",\n                    \"checkpoint_id\": AnyStr(),\n                }\n            },\n            interrupts=(),\n\
+      \        ),\n        StateSnapshot(\n            values={\"my_key\": \"hi my value\"},\n            tasks=(\n      \
+      \          PregelTask(\n                    AnyStr(),\n                    \"child\",\n                    (PULL, \"\
+      child\"),\n                    state={\n                        \"configurable\": {\n                            \"\
+      thread_id\": \"1\",\n                            \"checkpoint_ns\": AnyStr(\"child\"),\n                        }\n\
+      \                    },\n                    result=None,\n                ),\n            ),\n            next=(\"\
+      child\",),\n            config={\n                \"configurable\": {\n                    \"thread_id\": \"1\",\n \
+      \                   \"checkpoint_ns\": \"\",\n                    \"checkpoint_id\": AnyStr(),\n                }\n\
+      \            },\n            metadata={\n                \"parents\": {},\n                \"source\": \"loop\",\n \
+      \               \"step\": 1,\n            },\n            created_at=AnyStr(),\n            parent_config=None,\n  \
+      \          interrupts=(),\n        ),\n    ]\n    # get child graph history\n    child_history = list(app.get_state_history(outer_history[1].tasks[0].state))\n\
+      \    assert child_history == [\n        StateSnapshot(\n            values={\"my_key\": \"hi my value\"},\n        \
+      \    next=(\"child_1\",),\n            config={\n                \"configurable\": {\n                    \"thread_id\"\
+      : \"1\",\n                    \"checkpoint_ns\": AnyStr(\"child:\"),\n                    \"checkpoint_id\": AnyStr(),\n\
+      \                    \"checkpoint_map\": AnyDict(\n                        {\"\": AnyStr(), AnyStr(\"child:\"): AnyStr()}\n\
+      \                    ),\n                }\n            },\n            metadata={\n                \"source\": \"loop\"\
+      ,\n                \"step\": 0,\n                \"parents\": {\"\": AnyStr()},\n            },\n            created_at=AnyStr(),\n\
+      \            parent_config=None,\n            tasks=(\n                PregelTask(\n                    id=AnyStr(),\n\
+      \                    name=\"child_1\",\n                    path=(PULL, \"child_1\"),\n                    state={\n\
+      \                        \"configurable\": {\n                            \"thread_id\": \"1\",\n                  \
+      \          \"checkpoint_ns\": AnyStr(\"child:\"),\n                        }\n                    },\n             \
+      \       result=None,\n                ),\n            ),\n            interrupts=(),\n        ),\n    ]\n    # get grandchild\
+      \ graph history\n    grandchild_history = list(app.get_state_history(child_history[0].tasks[0].state))\n    assert grandchild_history\
+      \ == [\n        StateSnapshot(\n            values={\"my_key\": \"hi my value here\"},\n            next=(\"grandchild_2\"\
+      ,),\n            config={\n                \"configurable\": {\n                    \"thread_id\": \"1\",\n        \
+      \            \"checkpoint_ns\": AnyStr(),\n                    \"checkpoint_id\": AnyStr(),\n                    \"\
+      checkpoint_map\": AnyDict(\n                        {\n                            \"\": AnyStr(),\n               \
+      \             AnyStr(\"child:\"): AnyStr(),\n                            AnyStr(re.compile(r\"child:.+|child1:\")):\
+      \ AnyStr(),\n                        }\n                    ),\n                }\n            },\n            metadata={\n\
+      \                \"source\": \"loop\",\n                \"step\": 1,\n                \"parents\": AnyDict(\n      \
+      \              {\n                        \"\": AnyStr(),\n                        AnyStr(\"child:\"): AnyStr(),\n \
+      \                   }\n                ),\n            },\n            created_at=AnyStr(),\n            parent_config=None,\n\
+      \            tasks=(\n                PregelTask(\n                    id=AnyStr(),\n                    name=\"grandchild_2\"\
+      ,\n                    path=(PULL, \"grandchild_2\"),\n                    result=None,\n                ),\n      \
+      \      ),\n            interrupts=(),\n        ),\n    ]"
+    - "def _msgpack_enc(data: Any) -> bytes:\n    return ormsgpack.packb(data, default=_msgpack_default, option=_option)"
+    - "def test_list_namespaces_operations(\n    fake_embeddings: CharacterEmbeddings,\n) -> None:\n    \"\"\"Test list namespaces\
+      \ functionality with various filters.\"\"\"\n    with create_vector_store(\n        fake_embeddings, text_fields=[\"\
+      key0\", \"key1\", \"key3\"]\n    ) as store:\n        test_pref = str(uuid.uuid4())\n        test_namespaces = [\n \
+      \           (test_pref, \"test\", \"documents\", \"public\", test_pref),\n            (test_pref, \"test\", \"documents\"\
+      , \"private\", test_pref),\n            (test_pref, \"test\", \"images\", \"public\", test_pref),\n            (test_pref,\
+      \ \"test\", \"images\", \"private\", test_pref),\n            (test_pref, \"prod\", \"documents\", \"public\", test_pref),\n\
+      \            (test_pref, \"prod\", \"documents\", \"some\", \"nesting\", \"public\", test_pref),\n            (test_pref,\
+      \ \"prod\", \"documents\", \"private\", test_pref),\n        ]\n\n        # Add test data\n        for namespace in\
+      \ test_namespaces:\n            store.put(namespace, \"dummy\", {\"content\": \"dummy\"})\n\n        # Test prefix filtering\n\
+      \        prefix_result = store.list_namespaces(prefix=(test_pref, \"test\"))\n        assert len(prefix_result) == 4\n\
+      \        assert all(ns[1] == \"test\" for ns in prefix_result)\n\n        # Test specific prefix\n        specific_prefix_result\
+      \ = store.list_namespaces(\n            prefix=(test_pref, \"test\", \"documents\")\n        )\n        assert len(specific_prefix_result)\
+      \ == 2\n        assert all(ns[1:3] == (\"test\", \"documents\") for ns in specific_prefix_result)\n\n        # Test\
+      \ suffix filtering\n        suffix_result = store.list_namespaces(suffix=(\"public\", test_pref))\n        assert len(suffix_result)\
+      \ == 4\n        assert all(ns[-2] == \"public\" for ns in suffix_result)\n\n        # Test combined prefix and suffix\n\
+      \        prefix_suffix_result = store.list_namespaces(\n            prefix=(test_pref, \"test\"), suffix=(\"public\"\
+      , test_pref)\n        )\n        assert len(prefix_suffix_result) == 2\n        assert all(\n            ns[1] == \"\
+      test\" and ns[-2] == \"public\" for ns in prefix_suffix_result\n        )\n\n        # Test wildcard in prefix\n   \
+      \     wildcard_prefix_result = store.list_namespaces(\n            prefix=(test_pref, \"*\", \"documents\")\n      \
+      \  )\n        assert len(wildcard_prefix_result) == 5\n        assert all(ns[2] == \"documents\" for ns in wildcard_prefix_result)\n\
+      \n        # Test wildcard in suffix\n        wildcard_suffix_result = store.list_namespaces(\n            suffix=(\"\
+      *\", \"public\", test_pref)\n        )\n        assert len(wildcard_suffix_result) == 4\n        assert all(ns[-2] ==\
+      \ \"public\" for ns in wildcard_suffix_result)\n\n        wildcard_single = store.list_namespaces(\n            suffix=(\"\
+      some\", \"*\", \"public\", test_pref)\n        )\n        assert len(wildcard_single) == 1\n        assert wildcard_single[0]\
+      \ == (\n            test_pref,\n            \"prod\",\n            \"documents\",\n            \"some\",\n         \
+      \   \"nesting\",\n            \"public\",\n            test_pref,\n        )\n\n        # Test max depth\n        max_depth_result\
+      \ = store.list_namespaces(max_depth=3)\n        assert all(len(ns) <= 3 for ns in max_depth_result)\n\n        max_depth_result\
+      \ = store.list_namespaces(\n            max_depth=4, prefix=(test_pref, \"*\", \"documents\")\n        )\n        assert\
+      \ len(set(res for res in max_depth_result)) == len(max_depth_result) == 5\n\n        # Test pagination\n        limit_result\
+      \ = store.list_namespaces(prefix=(test_pref,), limit=3)\n        assert len(limit_result) == 3\n\n        offset_result\
+      \ = store.list_namespaces(prefix=(test_pref,), offset=3)\n        assert len(offset_result) == len(test_namespaces)\
+      \ - 3\n\n        empty_prefix_result = store.list_namespaces(prefix=(test_pref,))\n        assert len(empty_prefix_result)\
+      \ == len(test_namespaces)\n        assert set(empty_prefix_result) == set(test_namespaces)\n\n        # Clean up\n \
+      \       for namespace in test_namespaces:\n            store.delete(namespace, \"dummy\")"
+  pipeline_tag: sentence-similarity
+  library_name: sentence-transformers
+  metrics:
+  - cosine_accuracy@1
+  - cosine_accuracy@3
+  - cosine_accuracy@5
+  - cosine_accuracy@10
+  - cosine_precision@1
+  - cosine_precision@3
+  - cosine_precision@5
+  - cosine_precision@10
+  - cosine_recall@1
+  - cosine_recall@3
+  - cosine_recall@5
+  - cosine_recall@10
+  - cosine_ndcg@10
+  - cosine_mrr@10
+  - cosine_map@100
+  model-index:
+  - name: codeBert dense retriever
+    results:
+    - task:
+        type: information-retrieval
+        name: Information Retrieval
+      dataset:
+        name: dim 768
+        type: dim_768
+      metrics:
+      - type: cosine_accuracy@1
+        value: 0.9
+        name: Cosine Accuracy@1
+        verified: false
+      - type: cosine_accuracy@3
+        value: 0.9
+        name: Cosine Accuracy@3
+        verified: false
+      - type: cosine_accuracy@5
+        value: 1
+        name: Cosine Accuracy@5
+        verified: false
+      - type: cosine_accuracy@10
+        value: 1
+        name: Cosine Accuracy@10
+        verified: false
+      - type: cosine_precision@1
+        value: 0.9
+        name: Cosine Precision@1
+        verified: false
+      - type: cosine_precision@3
+        value: 0.29999999999999993
+        name: Cosine Precision@3
+        verified: false
+      - type: cosine_precision@5
+        value: 0.20000000000000004
+        name: Cosine Precision@5
+        verified: false
+      - type: cosine_precision@10
+        value: 0.10000000000000002
+        name: Cosine Precision@10
+        verified: false
+      - type: cosine_recall@1
+        value: 0.9
+        name: Cosine Recall@1
+        verified: false
+      - type: cosine_recall@3
+        value: 0.9
+        name: Cosine Recall@3
+        verified: false
+      - type: cosine_recall@5
+        value: 1
+        name: Cosine Recall@5
+        verified: false
+      - type: cosine_recall@10
+        value: 1
+        name: Cosine Recall@10
+        verified: false
+      - type: cosine_ndcg@10
+        value: 0.9408764682653967
+        name: Cosine Ndcg@10
+        verified: false
+      - type: cosine_mrr@10
+        value: 0.9225
+        name: Cosine Mrr@10
+        verified: false
+      - type: cosine_map@100
+        value: 0.9225
+        name: Cosine Map@100
+        verified: false
+    - task:
+        type: information-retrieval
+        name: Information Retrieval
+      dataset:
+        name: dim 512
+        type: dim_512
+      metrics:
+      - type: cosine_accuracy@1
+        value: 0.9
+        name: Cosine Accuracy@1
+        verified: false
+      - type: cosine_accuracy@3
+        value: 0.9
+        name: Cosine Accuracy@3
+        verified: false
+      - type: cosine_accuracy@5
+        value: 1
+        name: Cosine Accuracy@5
+        verified: false
+      - type: cosine_accuracy@10
+        value: 1
+        name: Cosine Accuracy@10
+        verified: false
+      - type: cosine_precision@1
+        value: 0.9
+        name: Cosine Precision@1
+        verified: false
+      - type: cosine_precision@3
+        value: 0.29999999999999993
+        name: Cosine Precision@3
+        verified: false
+      - type: cosine_precision@5
+        value: 0.20000000000000004
+        name: Cosine Precision@5
+        verified: false
+      - type: cosine_precision@10
+        value: 0.10000000000000002
+        name: Cosine Precision@10
+        verified: false
+      - type: cosine_recall@1
+        value: 0.9
+        name: Cosine Recall@1
+        verified: false
+      - type: cosine_recall@3
+        value: 0.9
+        name: Cosine Recall@3
+        verified: false
+      - type: cosine_recall@5
+        value: 1
+        name: Cosine Recall@5
+        verified: false
+      - type: cosine_recall@10
+        value: 1
+        name: Cosine Recall@10
+        verified: false
+      - type: cosine_ndcg@10
+        value: 0.9408764682653967
+        name: Cosine Ndcg@10
+        verified: false
+      - type: cosine_mrr@10
+        value: 0.9225
+        name: Cosine Mrr@10
+        verified: false
+      - type: cosine_map@100
+        value: 0.9225
+        name: Cosine Map@100
+        verified: false
+    - task:
+        type: information-retrieval
+        name: Information Retrieval
+      dataset:
+        name: dim 256
+        type: dim_256
+      metrics:
+      - type: cosine_accuracy@1
+        value: 0.9
+        name: Cosine Accuracy@1
+        verified: false
+      - type: cosine_accuracy@3
+        value: 0.9
+        name: Cosine Accuracy@3
+        verified: false
+      - type: cosine_accuracy@5
+        value: 1
+        name: Cosine Accuracy@5
+        verified: false
+      - type: cosine_accuracy@10
+        value: 1
+        name: Cosine Accuracy@10
+        verified: false
+      - type: cosine_precision@1
+        value: 0.9
+        name: Cosine Precision@1
+        verified: false
+      - type: cosine_precision@3
+        value: 0.29999999999999993
+        name: Cosine Precision@3
+        verified: false
+      - type: cosine_precision@5
+        value: 0.20000000000000004
+        name: Cosine Precision@5
+        verified: false
+      - type: cosine_precision@10
+        value: 0.10000000000000002
+        name: Cosine Precision@10
+        verified: false
+      - type: cosine_recall@1
+        value: 0.9
+        name: Cosine Recall@1
+        verified: false
+      - type: cosine_recall@3
+        value: 0.9
+        name: Cosine Recall@3
+        verified: false
+      - type: cosine_recall@5
+        value: 1
+        name: Cosine Recall@5
+        verified: false
+      - type: cosine_recall@10
+        value: 1
+        name: Cosine Recall@10
+        verified: false
+      - type: cosine_ndcg@10
+        value: 0.9408764682653967
+        name: Cosine Ndcg@10
+        verified: false
+      - type: cosine_mrr@10
+        value: 0.9225
+        name: Cosine Mrr@10
+        verified: false
+      - type: cosine_map@100
+        value: 0.9225
+        name: Cosine Map@100
+        verified: false
+    - task:
+        type: information-retrieval
+        name: Information Retrieval
+      dataset:
+        name: dim 128
+        type: dim_128
+      metrics:
+      - type: cosine_accuracy@1
+        value: 0.85
+        name: Cosine Accuracy@1
+        verified: false
+      - type: cosine_accuracy@3
+        value: 0.9
+        name: Cosine Accuracy@3
+        verified: false
+      - type: cosine_accuracy@5
+        value: 0.95
+        name: Cosine Accuracy@5
+        verified: false
+      - type: cosine_accuracy@10
+        value: 0.95
+        name: Cosine Accuracy@10
+        verified: false
+      - type: cosine_precision@1
+        value: 0.85
+        name: Cosine Precision@1
+        verified: false
+      - type: cosine_precision@3
+        value: 0.29999999999999993
+        name: Cosine Precision@3
+        verified: false
+      - type: cosine_precision@5
+        value: 0.19000000000000003
+        name: Cosine Precision@5
+        verified: false
+      - type: cosine_precision@10
+        value: 0.09500000000000001
+        name: Cosine Precision@10
+        verified: false
+      - type: cosine_recall@1
+        value: 0.85
+        name: Cosine Recall@1
+        verified: false
+      - type: cosine_recall@3
+        value: 0.9
+        name: Cosine Recall@3
+        verified: false
+      - type: cosine_recall@5
+        value: 0.95
+        name: Cosine Recall@5
+        verified: false
+      - type: cosine_recall@10
+        value: 0.95
+        name: Cosine Recall@10
+        verified: false
+      - type: cosine_ndcg@10
+        value: 0.894342640361727
+        name: Cosine Ndcg@10
+        verified: false
+      - type: cosine_mrr@10
+        value: 0.8766666666666666
+        name: Cosine Mrr@10
+        verified: false
+      - type: cosine_map@100
+        value: 0.8799999999999999
+        name: Cosine Map@100
+        verified: false
+    - task:
+        type: information-retrieval
+        name: Information Retrieval
+      dataset:
+        name: dim 64
+        type: dim_64
+      metrics:
+      - type: cosine_accuracy@1
+        value: 0.85
+        name: Cosine Accuracy@1
+        verified: false
+      - type: cosine_accuracy@3
+        value: 0.9
+        name: Cosine Accuracy@3
+        verified: false
+      - type: cosine_accuracy@5
+        value: 0.9
+        name: Cosine Accuracy@5
+        verified: false
+      - type: cosine_accuracy@10
+        value: 1
+        name: Cosine Accuracy@10
+        verified: false
+      - type: cosine_precision@1
+        value: 0.85
+        name: Cosine Precision@1
+        verified: false
+      - type: cosine_precision@3
+        value: 0.29999999999999993
+        name: Cosine Precision@3
+        verified: false
+      - type: cosine_precision@5
+        value: 0.18000000000000005
+        name: Cosine Precision@5
+        verified: false
+      - type: cosine_precision@10
+        value: 0.10000000000000002
+        name: Cosine Precision@10
+        verified: false
+      - type: cosine_recall@1
+        value: 0.85
+        name: Cosine Recall@1
+        verified: false
+      - type: cosine_recall@3
+        value: 0.9
+        name: Cosine Recall@3
+        verified: false
+      - type: cosine_recall@5
+        value: 0.9
+        name: Cosine Recall@5
+        verified: false
+      - type: cosine_recall@10
+        value: 1
+        name: Cosine Recall@10
+        verified: false
+      - type: cosine_ndcg@10
+        value: 0.9074399105059531
+        name: Cosine Ndcg@10
+        verified: false
+      - type: cosine_mrr@10
+        value: 0.8800595238095237
+        name: Cosine Mrr@10
+        verified: false
+      - type: cosine_map@100
+        value: 0.8800595238095237
+        name: Cosine Map@100
+        verified: false
+siblings:
+- rfilename: .gitattributes
+- rfilename: 1_Pooling/config.json
+- rfilename: README.md
+- rfilename: config.json
+- rfilename: config_sentence_transformers.json
+- rfilename: merges.txt
+- rfilename: model.safetensors
+- rfilename: modules.json
+- rfilename: sentence_bert_config.json
+- rfilename: special_tokens_map.json
+- rfilename: tokenizer.json
+- rfilename: tokenizer_config.json
+- rfilename: vocab.json
+spaces: []
+createdAt: '2026-01-26T22:21:35.000Z'
+safetensors:
+  parameters:
+    F32: 124645632
+  total: 124645632
+usedStorage: 997209784
+downloadsAllTime: 89
+inferenceProviderMapping: {}
+configJson:
+  architectures:
+  - RobertaModel
+  attention_probs_dropout_prob: 0.1
+  bos_token_id: 0
+  classifier_dropout: null
+  dtype: float32
+  eos_token_id: 2
+  hidden_act: gelu
+  hidden_dropout_prob: 0.1
+  hidden_size: 768
+  initializer_range: 0.02
+  intermediate_size: 3072
+  layer_norm_eps: 1.0e-05
+  max_position_embeddings: 514
+  model_type: roberta
+  num_attention_heads: 12
+  num_hidden_layers: 12
+  output_past: true
+  pad_token_id: 1
+  position_embedding_type: absolute
+  transformers_version: 4.57.3
+  type_vocab_size: 1
+  use_cache: true
+  vocab_size: 50265
+onnxFiles: {}
+safetensorsSizeMb: 498.6
+approxSizeMb: 498.6
+fetchedAt: '2026-06-08T16:42:43.000Z'

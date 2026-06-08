@@ -1,0 +1,222 @@
+_id: 69f7efab1d17ce25dac7f534
+id: anonymous-ed-benchmark/SKILLRET-Embedding-8B
+private: false
+pipeline_tag: sentence-similarity
+library_name: sentence-transformers
+tags:
+- sentence-transformers
+- safetensors
+- qwen3
+- sentence-similarity
+- feature-extraction
+- skill-retrieval
+- embedding
+- en
+- dataset:anonymous-ed-benchmark/skillret-benchmark
+- license:apache-2.0
+- model-index
+- text-embeddings-inference
+- endpoints_compatible
+- region:us
+downloads: 8
+likes: 0
+modelId: anonymous-ed-benchmark/SKILLRET-Embedding-8B
+author: anonymous-ed-benchmark
+sha: aad40002598870ed76c9827a4ccefb4dc4e827b2
+lastModified: '2026-05-04T03:33:28.000Z'
+gated: false
+disabled: false
+widgetData:
+- source_sentence: That is a happy person
+  sentences:
+  - That is a happy dog
+  - That is a very happy person
+  - Today is a sunny day
+model-index:
+- name: SkillRet-Embedding-8B
+  results:
+  - task:
+      type: information-retrieval
+      name: Skill Retrieval
+    dataset:
+      type: anonymous-ed-benchmark/skillret-benchmark
+      name: SkillRet Benchmark (test)
+      split: test
+    metrics:
+    - type: ndcg_at_5
+      value: 0.8123
+      name: NDCG@5
+      verified: false
+    - type: ndcg_at_10
+      value: 0.8345
+      name: NDCG@10
+      verified: false
+    - type: recall_at_10
+      value: 0.9123
+      name: Recall@10
+      verified: false
+config:
+  architectures:
+  - Qwen3Model
+  model_type: qwen3
+  tokenizer_config:
+    bos_token: null
+    eos_token: <|im_end|>
+    pad_token: <|endoftext|>
+    unk_token: null
+  chat_template_jinja: "{%- if tools %}\n    {{- '<|im_start|>system\\n' }}\n    {%- if messages[0]['role'] == 'system' %}\n\
+    \        {{- messages[0]['content'] }}\n    {%- else %}\n        {{- 'You are a helpful assistant.' }}\n    {%- endif\
+    \ %}\n    {{- \"\\n\\n# Tools\\n\\nYou may call one or more functions to assist with the user query.\\n\\nYou are provided\
+    \ with function signatures within <tools></tools> XML tags:\\n<tools>\" }}\n    {%- for tool in tools %}\n        {{-\
+    \ \"\\n\" }}\n        {{- tool | tojson }}\n    {%- endfor %}\n    {{- \"\\n</tools>\\n\\nFor each function call, return\
+    \ a json object with function name and arguments within <tool_call></tool_call> XML tags:\\n<tool_call>\\n{\\\"name\\\"\
+    : <function-name>, \\\"arguments\\\": <args-json-object>}\\n</tool_call><|im_end|>\\n\" }}\n{%- else %}\n    {%- if messages[0]['role']\
+    \ == 'system' %}\n        {{- '<|im_start|>system\\n' + messages[0]['content'] + '<|im_end|>\\n' }}\n    {%- else %}\n\
+    \        {{- '<|im_start|>system\\nYou are a helpful assistant.<|im_end|>\\n' }}\n    {%- endif %}\n{%- endif %}\n{%-\
+    \ for message in messages %}\n    {%- if (message.role == \"user\") or (message.role == \"system\" and not loop.first)\
+    \ or (message.role == \"assistant\" and not message.tool_calls) %}\n        {{- '<|im_start|>' + message.role + '\\n'\
+    \ + message.content + '<|im_end|>' + '\\n' }}\n    {%- elif message.role == \"assistant\" %}\n        {{- '<|im_start|>'\
+    \ + message.role }}\n        {%- if message.content %}\n            {{- '\\n' + message.content }}\n        {%- endif\
+    \ %}\n        {%- for tool_call in message.tool_calls %}\n            {%- if tool_call.function is defined %}\n      \
+    \          {%- set tool_call = tool_call.function %}\n            {%- endif %}\n            {{- '\\n<tool_call>\\n{\"\
+    name\": \"' }}\n            {{- tool_call.name }}\n            {{- '\", \"arguments\": ' }}\n            {{- tool_call.arguments\
+    \ | tojson }}\n            {{- '}\\n</tool_call>' }}\n        {%- endfor %}\n        {{- '<|im_end|>\\n' }}\n    {%- elif\
+    \ message.role == \"tool\" %}\n        {%- if (loop.index0 == 0) or (messages[loop.index0 - 1].role != \"tool\") %}\n\
+    \            {{- '<|im_start|>user' }}\n        {%- endif %}\n        {{- '\\n<tool_response>\\n' }}\n        {{- message.content\
+    \ }}\n        {{- '\\n</tool_response>' }}\n        {%- if loop.last or (messages[loop.index0 + 1].role != \"tool\") %}\n\
+    \            {{- '<|im_end|>\\n' }}\n        {%- endif %}\n    {%- endif %}\n{%- endfor %}\n{%- if add_generation_prompt\
+    \ %}\n    {{- '<|im_start|>assistant\\n' }}\n{%- endif %}\n"
+cardData:
+  license: apache-2.0
+  tags:
+  - sentence-transformers
+  - sentence-similarity
+  - feature-extraction
+  - skill-retrieval
+  - embedding
+  language:
+  - en
+  datasets:
+  - anonymous-ed-benchmark/skillret-benchmark
+  library_name: sentence-transformers
+  pipeline_tag: sentence-similarity
+  model-index:
+  - name: SkillRet-Embedding-8B
+    results:
+    - task:
+        type: information-retrieval
+        name: Skill Retrieval
+      dataset:
+        type: anonymous-ed-benchmark/skillret-benchmark
+        name: SkillRet Benchmark (test)
+        split: test
+      metrics:
+      - type: ndcg_at_5
+        value: 0.8123
+        name: NDCG@5
+        verified: false
+      - type: ndcg_at_10
+        value: 0.8345
+        name: NDCG@10
+        verified: false
+      - type: recall_at_10
+        value: 0.9123
+        name: Recall@10
+        verified: false
+siblings:
+- rfilename: .gitattributes
+- rfilename: 1_Pooling/config.json
+- rfilename: README.md
+- rfilename: chat_template.jinja
+- rfilename: config.json
+- rfilename: config_sentence_transformers.json
+- rfilename: model-00001-of-00004.safetensors
+- rfilename: model-00002-of-00004.safetensors
+- rfilename: model-00003-of-00004.safetensors
+- rfilename: model-00004-of-00004.safetensors
+- rfilename: model.safetensors.index.json
+- rfilename: modules.json
+- rfilename: sentence_bert_config.json
+- rfilename: tokenizer.json
+- rfilename: tokenizer_config.json
+spaces: []
+createdAt: '2026-05-04T01:00:27.000Z'
+safetensors:
+  parameters:
+    BF16: 7567295488
+  total: 7567295488
+usedStorage: 15146057754
+downloadsAllTime: 28
+inferenceProviderMapping: {}
+configJson:
+  architectures:
+  - Qwen3Model
+  attention_bias: false
+  attention_dropout: 0.0
+  bos_token_id: 151643
+  dtype: bfloat16
+  eos_token_id: 151645
+  head_dim: 128
+  hidden_act: silu
+  hidden_size: 4096
+  initializer_range: 0.02
+  intermediate_size: 12288
+  layer_types:
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  max_position_embeddings: 40960
+  max_window_layers: 36
+  model_type: qwen3
+  num_attention_heads: 32
+  num_hidden_layers: 36
+  num_key_value_heads: 8
+  pad_token_id: null
+  rms_norm_eps: 1.0e-06
+  rope_parameters:
+    rope_theta: 1000000
+    rope_type: default
+  sliding_window: null
+  tie_word_embeddings: false
+  transformers_version: 5.5.4
+  use_cache: true
+  use_sliding_window: false
+  vocab_size: 151665
+  rope_theta: 1000000
+onnxFiles: {}
+safetensorsSizeMb: 15134.6
+approxSizeMb: 15134.6
+fetchedAt: '2026-06-08T16:42:43.000Z'

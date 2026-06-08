@@ -1,0 +1,202 @@
+_id: 68a3b856e89a604915c4cfa0
+id: Derify/ChemMRL-beta
+private: false
+pipeline_tag: sentence-similarity
+library_name: sentence-transformers
+tags:
+- sentence-transformers
+- safetensors
+- roberta
+- molecular-similarity
+- feature-extraction
+- dense
+- generated_from_trainer
+- loss:Matryoshka2dLoss
+- loss:MatryoshkaLoss
+- loss:TanimotoSentLoss
+- sentence-similarity
+- dataset:Derify/pubchem_10m_genmol_similarity
+- arxiv:1908.10084
+- arxiv:2402.14776
+- arxiv:2205.13147
+- base_model:Derify/ChemBERTa-druglike
+- base_model:finetune:Derify/ChemBERTa-druglike
+- license:apache-2.0
+- model-index
+- text-embeddings-inference
+- endpoints_compatible
+- region:us
+downloads: 10
+likes: 0
+modelId: Derify/ChemMRL-beta
+author: Derify
+sha: 8e083271c2845ef521d7bfc09212ee389caab3e6
+lastModified: '2025-10-26T02:49:08.000Z'
+gated: false
+disabled: false
+mask_token: <mask>
+widgetData:
+- source_sentence: CC1CCc2c(N)nc(C3CCCC3)n2C1
+  sentences:
+  - CC1CCc2c(N)nc(OC3CC3)n2C1
+  - CN1CC[NH+](C[C@H](O)C2CC2)C2(CCCCC2)C1
+  - Cc1c(F)cc(CNCC2CCC(C3CCC(C)CO3)CO2)cc1F
+- source_sentence: CC(CCCO)NC(=O)CNc1ccccc1
+  sentences:
+  - CC(CCCO)N[C@H]1CCCN(Nc2ccccc2)[C@H]1C
+  - Cc1ccc(OC2=NCCO2)nc1
+  - Cc1ccccc1C#Cc1ccccc1N(O)c1ccccc1
+- source_sentence: CCCCCCCc1ccc(CC=N[NH+]=C(N)N)cc1
+  sentences:
+  - COCC1(N2CCN(C)CC2)CCC[NH+]1Cc1cnc(N(C)C)nc1
+  - Cc1ccc(N=C(c2ccccc2)c2ccc(-n3ccnn3)cc2)cc1
+  - CCCCCCCc1cncc(CC=N[NH+]=C(N)N)c1
+- source_sentence: CC(=CCCS(=O)(=O)[O-])C(=O)OCCCS(=O)(=O)[O-]
+  sentences:
+  - CC(=CCCS(=O)(=O)[O-])C(=O)OCCCS(=O)(=O)[O-]
+  - CCCCCOc1ccc(NC(=S)NC=O)cc1
+  - CCC(=O)N1CCCC(NC(=O)c2ccc(S(=O)(=O)N(C)C)cc2)C1
+- source_sentence: Clc1nccc(C#CCCc2nc3ccccc3o2)n1
+  sentences:
+  - O=Cc1nc2ccccc2o1
+  - O=C([O-])COc1ccc(CCCS(=O)(=O)c2ccc(Cl)cc2)cc1NC(=O)c1cccc(C=Cc2nc3ccccc3s2)c1
+  - O[C@H]1CN(C(Cc2ccccc2)c2ccccc2)C[C@@H]1Cc1cnc[nH]1
+model-index:
+- name: 'ChemMRL: SMILES Matryoshka Representation Learning Embedding Transformer'
+  results:
+  - task:
+      type: semantic-similarity
+      name: Semantic Similarity
+    dataset:
+      name: pubchem 10m genmol similarity
+      type: pubchem_10m_genmol_similarity
+    metrics:
+    - type: spearman
+      value: 0.9932120589500998
+      name: Spearman
+      verified: false
+config:
+  architectures:
+  - RobertaModel
+  model_type: roberta
+  tokenizer_config:
+    bos_token: <s>
+    cls_token: <s>
+    eos_token: </s>
+    mask_token: <mask>
+    pad_token: <pad>
+    sep_token: </s>
+    unk_token: <unk>
+cardData:
+  license: apache-2.0
+  tags:
+  - sentence-transformers
+  - molecular-similarity
+  - feature-extraction
+  - dense
+  - generated_from_trainer
+  - loss:Matryoshka2dLoss
+  - loss:MatryoshkaLoss
+  - loss:TanimotoSentLoss
+  base_model: Derify/ChemBERTa-druglike
+  widget:
+  - source_sentence: CC1CCc2c(N)nc(C3CCCC3)n2C1
+    sentences:
+    - CC1CCc2c(N)nc(OC3CC3)n2C1
+    - CN1CC[NH+](C[C@H](O)C2CC2)C2(CCCCC2)C1
+    - Cc1c(F)cc(CNCC2CCC(C3CCC(C)CO3)CO2)cc1F
+  - source_sentence: CC(CCCO)NC(=O)CNc1ccccc1
+    sentences:
+    - CC(CCCO)N[C@H]1CCCN(Nc2ccccc2)[C@H]1C
+    - Cc1ccc(OC2=NCCO2)nc1
+    - Cc1ccccc1C#Cc1ccccc1N(O)c1ccccc1
+  - source_sentence: CCCCCCCc1ccc(CC=N[NH+]=C(N)N)cc1
+    sentences:
+    - COCC1(N2CCN(C)CC2)CCC[NH+]1Cc1cnc(N(C)C)nc1
+    - Cc1ccc(N=C(c2ccccc2)c2ccc(-n3ccnn3)cc2)cc1
+    - CCCCCCCc1cncc(CC=N[NH+]=C(N)N)c1
+  - source_sentence: CC(=CCCS(=O)(=O)[O-])C(=O)OCCCS(=O)(=O)[O-]
+    sentences:
+    - CC(=CCCS(=O)(=O)[O-])C(=O)OCCCS(=O)(=O)[O-]
+    - CCCCCOc1ccc(NC(=S)NC=O)cc1
+    - CCC(=O)N1CCCC(NC(=O)c2ccc(S(=O)(=O)N(C)C)cc2)C1
+  - source_sentence: Clc1nccc(C#CCCc2nc3ccccc3o2)n1
+    sentences:
+    - O=Cc1nc2ccccc2o1
+    - O=C([O-])COc1ccc(CCCS(=O)(=O)c2ccc(Cl)cc2)cc1NC(=O)c1cccc(C=Cc2nc3ccccc3s2)c1
+    - O[C@H]1CN(C(Cc2ccccc2)c2ccccc2)C[C@@H]1Cc1cnc[nH]1
+  datasets:
+  - Derify/pubchem_10m_genmol_similarity
+  pipeline_tag: sentence-similarity
+  library_name: sentence-transformers
+  metrics:
+  - spearman
+  model-index:
+  - name: 'ChemMRL: SMILES Matryoshka Representation Learning Embedding Transformer'
+    results:
+    - task:
+        type: semantic-similarity
+        name: Semantic Similarity
+      dataset:
+        name: pubchem 10m genmol similarity
+        type: pubchem_10m_genmol_similarity
+      metrics:
+      - type: spearman
+        value: 0.9932120589500998
+        name: Spearman
+        verified: false
+  new_version: Derify/ChemMRL
+siblings:
+- rfilename: .gitattributes
+- rfilename: 1_Pooling/config.json
+- rfilename: README.md
+- rfilename: config.json
+- rfilename: config_chem_mrl.json
+- rfilename: config_sentence_transformers.json
+- rfilename: merges.txt
+- rfilename: model.safetensors
+- rfilename: modules.json
+- rfilename: sentence_bert_config.json
+- rfilename: similarity_evaluation_pubchem_10m_genmol_similarity_float32_results.csv
+- rfilename: special_tokens_map.json
+- rfilename: tokenizer.json
+- rfilename: tokenizer_config.json
+- rfilename: vocab.json
+spaces:
+- Derify/chem-mrl-demo
+createdAt: '2025-08-18T23:33:42.000Z'
+safetensors:
+  parameters:
+    F32: 152935424
+  total: 152935424
+usedStorage: 611764232
+downloadsAllTime: 7045
+inferenceProviderMapping: {}
+configJson:
+  architectures:
+  - RobertaModel
+  attention_probs_dropout_prob: 0.1
+  bos_token_id: 0
+  classifier_dropout: null
+  eos_token_id: 2
+  hidden_act: gelu
+  hidden_dropout_prob: 0.1
+  hidden_size: 1024
+  initializer_range: 0.02
+  intermediate_size: 4096
+  layer_norm_eps: 1.0e-12
+  max_position_embeddings: 130
+  model_type: roberta
+  num_attention_heads: 8
+  num_hidden_layers: 12
+  pad_token_id: 1
+  position_embedding_type: absolute
+  torch_dtype: float32
+  transformers_version: 4.53.3
+  type_vocab_size: 1
+  use_cache: false
+  vocab_size: 581
+onnxFiles: {}
+safetensorsSizeMb: 611.8
+approxSizeMb: 611.7
+fetchedAt: '2026-06-08T16:42:43.000Z'

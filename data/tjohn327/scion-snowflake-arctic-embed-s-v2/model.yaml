@@ -1,0 +1,4162 @@
+_id: 67d72304de70b91cc5d18542
+id: tjohn327/scion-snowflake-arctic-embed-s-v2
+private: false
+pipeline_tag: sentence-similarity
+library_name: sentence-transformers
+tags:
+- sentence-transformers
+- safetensors
+- bert
+- sentence-similarity
+- feature-extraction
+- generated_from_trainer
+- dataset_size:4321
+- loss:MultipleNegativesRankingLoss
+- arxiv:1908.10084
+- arxiv:1705.00652
+- base_model:Snowflake/snowflake-arctic-embed-s
+- base_model:finetune:Snowflake/snowflake-arctic-embed-s
+- model-index
+- text-embeddings-inference
+- endpoints_compatible
+- region:us
+downloads: 72
+likes: 0
+modelId: tjohn327/scion-snowflake-arctic-embed-s-v2
+author: tjohn327
+sha: 9385189edf33711fa54c58fd43156c0c66f8c6f4
+lastModified: '2025-03-18T22:11:55.000Z'
+gated: false
+disabled: false
+mask_token: '[MASK]'
+widgetData:
+- source_sentence: What are "Authoritative ASes" and their roles relate to TRC?
+  sentences:
+  - 'Research paper detailing the architecture and implementation of a P4-based SCION border router. Explains SCION''s ISD
+    and PCFS concepts in Section 2.1 and how routers use hop fields (HFs) with IFIDs for forwarding. Introduces a modular
+    design with a "bridge header," separating cryptographic validation from forwarding, addressing Tofino''s lack of native
+    cryptographic support. Presents two configurations 1BR+2AES using three pipelines, and 1BR+1AES using only two by recirculating
+    packets, details how AES implementation is deployed and that key expansion is done in the control plane.
+
+    <citation> Lars-Christian Schulz et al.. "Cryptographic Path Validation for SCION in P4." *Proceedings of the 6th on European
+    P4 Workshop*, 2023. </citation>
+
+    <type> research paper </type>
+
+    <page> 2 </page>
+
+    <content>
+
+    EuroP4 ’23, December 8, 2023, Paris, France Lars-Christian Schulz, Robin Wehner, and David Hausheer
+
+    compare it to other existing implementations. Finally, we conclude
+
+    this paper and give a brief outlook on future work.
+
+    2 BACKGROUND
+
+    In this section, we briefly describe the architecture of the SCION
+
+    Internet and the Intel Tofino 2 switch.
+
+    2.1 SCION
+
+    SCION is a path-aware Internet protocol. It introduces Isolation
+
+    Domains (ISDs) as groups of ASes sharing a common jurisdiction.
+
+    SCION is path-aware, i.e., end hosts can choose from available
+
+    forwarding paths and encode the desired one in the SCION header
+
+    as what is known as packet-carried forwarding state (PCFS). Hence,
+
+    the SCION data plane does not rely on longest prefix matching to
+
+    determine the next hop router. Instead, SCION routers examine
+
+    the hop fields (HF) in the SCION header which directly encode the
+
+    AS-level path by means of interface IDs (IFIDs).
+
+    Each AS can uniquely map its IFIDs to a neighbor and even a cer-
+
+    tain link in case there are multiple links to this neighbor. Together
+
+    with the source AS, the chain of ingress and egress IFIDs uniquely
+
+    describes a SCION path. The hop fields are cryptographically signed
+
+    by the AS corresponding to the hop with an AES-CMAC truncated
+
+    to 6 bytes. To avoid forgery of HFs, SCION border routers must
+
+    check the CMAC of every HF they use to make a forwarding deci-
+
+    sion. Packets with invalid HFs should be dropped. In most cases, a
+
+    HF corresponds to a specific border router, requiring each of them
+
+    to only validate a single HF. Hop fields are grouped into segments
+
+    resulting in a special case where a border router has to check two
+
+    HFs when the path switches from one segment to another and the
+
+    AS ingress and egress router happen to be the same device.
+
+    The AES-CMAC is calculated over a 128 bit pseudo-header. As
+
+    this matches up with the block size of the AES cipher, a single round
+
+    of AES encryption is sufficient to generate the authentication tag,
+
+    excluding the subkey derivation AES-CMAC calls for. A precise de-
+
+    scription of the AES-CMAC algorithm is available in the correspond-
+
+    ing RFC [15]. AES-128 is widely supported in commodity server
+
+    hardware, making HF checks much faster than lookups in Internet-
+
+    scale IP routing tables [3]. However, the switching ASICs used in
+
+    hardware routers designed over decades to efficiently forward IP
+
+    traffic do not include AES in their forwarding logic. Fortunately, re-
+
+    cent P4-programmable switches have sufficient match-action stages
+
+    to implement AES in standard P4 [4].
+
+    For more information on SCION we refer to the corresponding
+
+    literature [3, 5, 19].
+
+    2.2 Tofino Architecture
+
+    We develop our SCION border router for Intel Tofino 2 switches.
+
+    The P4 programmable Tofino architecture is an embodiment of the
+
+    Protocol Independent Switching Architecture (PISA) data plane
+
+    model. PISA switches contain three major types of programmable
+
+    components: parsers, deparsers, and match-action units (MAUs). In
+
+    the Tofino architecture, switch pipes consist of an in- and an egress
+
+    pipeline each containing its own parser, MAUs and deparser [18].
+
+    Each switch pipe is hardwired to a set of, in case of Tofino 2, 8x
+
+    400G Ethernet ports [1].
+
+    The number of operations that can be performed per pipeline
+
+    is limited. If a program exhausts the resources of one pipeline, the
+
+    programmer can recirculate packets in order to process them itera-
+
+    tively. If a packet is diverted to a different pipeline and recirculated
+
+    there, there is the option to process the same packet sequentially
+
+    with different P4 programs as each pipeline can be programmed
+
+    independently. This is the key to fit the SCION border router in a
+
+    Tofino 2 switch as described in Section 5.1.
+
+    3 RELATED WORK
+
+    The SCION reference border router is implemented in Go [2] and
+
+    uses regular IP/UDP sockets for packet I/O. Although being multi-
+
+    threaded, the reference border router is not suitable for high traffic
+
+    volume. Schulz et al. have proposed a BPF implementation of SCION
+
+    packet forwarding [14] which achieves a throughput of 0.676 Mpps
+
+    per core within a virtual machine test environment. However, the
+
+    BPF data path has not been integrated in the reference border router
+
+    yet. A commercial DPDK-based SCION router software is available
+
+    from Anapaya Systems [17], but to our knowledge no production-
+
+    ready SCION routers exist in hardware.
+
+    The first attempt at a hardware implementation of SCION was
+
+    made by Součková, targeting a NetFPGA SUME development board
+
+    programmable in P4 [16]. The full 10 Gbit/s line rate of the devel-
+
+    opment platform has been achieved in experiments. However, the
+
+    SCION packet parser and cryptographic validation circuitry did not
+
+    fit in the FPGA at the same time due to inefficient workarounds
+
+    that had to be taken to handle SCION’s non-standard header layout.
+
+    Nevertheless, the project led to improvements to SCION’s header
+
+    layout making it more suitable for high-speed processing.
+
+    A first implementation of SCION for Tofino 1 was presented by
+
+    de Ruiter et al. [7] being capable of processing packets at 100 Gbit/s
+
+    line rate. However, as Tofino does not support cryptographic opera-
+
+    tions in hardware, the AES-CMAC hop field validation in de Ruiter’s
+
+    approach relies on a pre-populated table of valid hop fields. This
+
+    simplification works as current SCION deployments change valida-
+
+    tion keys infrequently. An unfortunate consequence of this design
+
+    is that the SCION router is no longer stateless and instead has to
+
+    communicate with the path discovery and registration services of
+
+    the AS to obtain valid hop fields. Furthermore, the lookup-table
+
+    solution also prevents the deployment of the SCION extensions
+
+    EPIC [
+
+    11] and Colibri [ 9] which rely on MACs that do not just
+
+    change per-path, but per-packet. Nevertheless, the P4 code pub-
+
+    lished by de Ruiter et al. inspired our work and is incorporated in
+
+    our implementation.
+
+    Chen has shown that it is possible to implement an AES encryp-
+
+    tion in a Tofino 1 switch using so called scrambled lookup tables [4].
+
+    Their implementation was limited to an encryption throughput of
+
+    10.92 Gbit/s due to limited recirculation capacity.
+
+    Our work addresses the issues encountered by Součková and de
+
+    Ruiter et al. We implement the SCION packet parsing and validation
+
+    logic separately in different pipelines of a Tofino 2 switch in order
+
+    to bridge the gap between SCION’s requirements and achieving
+
+    line-rate throughput. We furthermore develop an approach to AES
+
+    in P4 that takes full advantage of the resources provided by Tofino 2
+
+    realizing the first 400G line-rate packet validator for SCION.
+
+    18
+
+    </content>'
+  - 'Book excerpt providing an overview of LightningFilter operation. It keeps AS-level aggregates and stores long-term traffic
+    profiles for traffic shaping. Describes a process for rate-limiting based on these, and prediction to account for recent
+    traffic. Emphasizes prevention of source address spoofing and replay attacks using DRKey(§3.2) , SPAO(§3.3), and replay
+    suppression modules. Differentiates authenticated traffic vs. best-effort approach pipelines.
+
+    <citation> Laurent Chuat et al.. *The Complete Guide to SCION. From Design Principles to Formal Verification*. Springer
+    International Publishing AG, 2022. </citation>
+
+    <type> book </type>
+
+    <page> 229 </page>
+
+    <content>
+
+    9.2 High-Speed Trafﬁc Filtering with LightningFilter
+
+    9.2.1.2 Design Goals
+
+    LightningFilter is designed to achieve the following objectives:
+
+    • Guaranteed access for legitimate users within trafﬁc proﬁle: The
+
+    system must ensure that a client in a non-compromised domain (i.e., a
+
+    domain without an adversary) has a guarantee to reach a target domain
+
+    even in the presence of adversaries in other domains. We deﬁne a trafﬁc
+
+    proﬁle as a sequence of measurements over a speciﬁc period of time
+
+    (proﬁling window) on a per-ﬂow basis (ﬂow count). As long as the trafﬁc
+
+    of a ﬂow is within such a trafﬁc proﬁle, its packets are guaranteed to be
+
+    processed.4
+
+    • Enabling traditional ﬁrewalls to ﬁlter packets using metadata: The
+
+    system should enable traditional ﬁrewalls to employ meaningful rule-
+
+    based packet ﬁltering using packet metadata (such as the 5-tuple in the
+
+    packet header). Without LightningFilter, these ﬁltering rules can be cir-
+
+    cumvented by spooﬁng attacks due to the lack of authentication.
+
+    • Elimination of collateral damage across domains: The system should
+
+    guarantee that compromised domains cannot introduce collateral dam-
+
+    age on non-compromised domains by consuming all available resources.
+
+    Legitimate clients within a compromised domain, however, may be af-
+
+    fected by an adversary consuming excessive resources at a target domain.
+
+    This provides an incentive for domain owners to eliminate attack trafﬁc
+
+    sent by their end hosts.
+
+    • Non-goal: Guaranteed trafﬁc delivery to the domain is not a goal of this
+
+    system, but can be achieved by a complementary system in SCION.
+
+    9.2.2 Overview of LightningFilter
+
+    Considering our threat model, the adversary’s goal is to consume all available
+
+    processing resources to prevent legitimate clients from reaching a target ser-
+
+    vice, e.g., by sending an excessive number of requests. To prevent a single en-
+
+    tity from achieving this goal, the available processing resources should be sub-
+
+    divided and distributed among all clients. However, allocating an equal share
+
+    of resources to each entity inhibits high utilization and potentially punishes
+
+    benign trafﬁc. As a consequence, researchers have suggested the use of more
+
+    dynamic approaches, such as history-based ﬁltering [ 213, 407] or binning of
+
+    requests [ 470]. The potentially huge number of clients poses a challenge to
+
+    the former approaches, as storing a trafﬁc history (e.g., packet counters) per
+
+    client is impractical. Instead, we propose to aggregate and store trafﬁc proﬁles
+
+    at the level of domains, i.e., ASes. These trafﬁc proﬁles denote a sequence
+
+    4The replay-suppression system causes a negligible number of packets to be dropped due to
+
+    false positives; however, end hosts must be able to handle packet loss anyway.
+
+    209
+
+    </content>'
+  - "Technical document on SCION CP-PKI trust model and terminology specification. Defines terms like base TRC, TRC signing\
+    \ ceremony, TRC update (regular/sensitive), voting ASes, voting quorum, grace period, trust reset. Explains SCION's trust\
+    \ model with Isolation Domains addressing limitations of monopoly/oligopoly PKI models. Mentions trust agility/resilience,\
+    \ multilateral governance, policy versioning, and lack of IP prefix origin validation by design in contrast to RPKI.\n\
+    <url> https://www.ietf.org/archive/id/draft-dekater-scion-pki-08.txt </url>\n<type> specification </type>\n<content>\n\
+    de Kater, et al.           Expires 3 July 2025                  [Page 5]\n\f\nInternet-Draft                SCION CP-PKI\
+    \                 December 2024\n\n\n   *Authoritative AS*: Authoritative ASes are those ASes in an ISD that\n   always\
+    \ have the latest TRCs of the ISD.  As a consequence,\n   authoritative ASes also start the announcement of a TRC update.\n\
+    \n   *Base TRC*: A base TRC is a trust root configuration (TRC) that other\n   parties trust axiomatically.  In other\
+    \ words, trust for a base TRC is\n   assumed, not derived from another cryptographic object.  Each ISD\n   MUST create\
+    \ and sign a base TRC when the ISD is established.  A base\n   TRC is either the first TRC of the ISD or the result of\
+    \ a trust\n   reset.\n\n   *TRC Signing Ceremony*: The ceremony during which the very first base\n   TRC of an ISD, called\
+    \ the initial TRC, is signed.  The initial TRC is\n   a special case of the base TRC where the number of the ISD is\n\
+    \   assigned.\n\n   *TRC Update*: A _regular_ TRC update is a periodic re-issuance of the\n   TRC where the entities and\
+    \ policies listed in the TRC remain\n   unchanged.  A _sensitive_ TRC update is an update that modifies\n   critical aspects\
+    \ of the TRC, such as the set of core ASes.  In both\n   cases, the base TRC remains unchanged.\n\n   *Voting ASes*: Those\
+    \ ASes within an ISD that may sign TRC updates.\n   The process of appending a signature to a new TRC is called \"casting\n\
+    \   a vote\".\n\n   *Voting Quorum*: The voting quorum is a trust root configuration\n   (TRC) field that indicates the\
+    \ number of votes (signatures) needed on\n   a successor TRC for it to be verifiable.  A voting quorum greater\n   than\
+    \ one will thus prevent a single entity from creating a malicious\n   TRC update.\n\n   *Grace Period*: The grace period\
+    \ is an interval during which the\n   previous version of a trust root configuration (TRC) is still\n   considered active\
+    \ after a new version has been published.\n\n   *Trust Reset*: A trust reset is the action of announcing a new base\n\
+    \   TRC for an existing ISD.  A trust reset SHOULD only be triggered\n   after a catastrophic event involving the loss\
+    \ or compromise of\n   several important private keys.\n\n1.2.  Conventions and Definitions\n\n   The key words \"MUST\"\
+    , \"MUST NOT\", \"REQUIRED\", \"SHALL\", \"SHALL NOT\",\n   \"SHOULD\", \"SHOULD NOT\", \"RECOMMENDED\", \"NOT RECOMMENDED\"\
+    , \"MAY\", and\n   \"OPTIONAL\" in this document are to be interpreted as described in\n   BCP 14 [RFC2119] [RFC8174]\
+    \ when, and only when, they appear in all\n   capitals, as shown here.de Kater, et al.           Expires 3 July 2025 \
+    \                 [Page 6]\n\f\nInternet-Draft                SCION CP-PKI                 December 2024\n\n\n1.3.  Trust\
+    \ Model\n\n   Given the diverse nature of the constituents in the current Internet,\n   an important challenge is how\
+    \ to scale authentication of network\n   elements (such as AS ownership, hop-by-hop routing information, name\n   servers\
+    \ for DNS, and domains for TLS) to the global environment.  The\n   roots of trust of currently prevalent public key infrastructure\
+    \ (PKI)\n   models do not scale well to a global environment because (1) mutually\n   distrustful parties cannot agree\
+    \ on a single trust root (monopoly\n   model), and because (2) the security of a plethora of roots of trust\n   is only\
+    \ as strong as its weakest link (oligopoly model) - see also\n   [BARRERA17].\n\n   The monopoly model suffers from two\
+    \ main drawbacks: First, all\n   parties must agree on a single root of trust.  Secondly, the single\n   root of trust\
+    \ represents a single point of failure, the misuse of\n   which enables the forging of certificates.  Its revocation can\
+    \ also\n   result in a kill switch for all the entities it certifies.\n\n   The oligopoly model relies on several roots\
+    \ of trust, all equally and\n   completely trusted.  However, this is not automatically better:\n   whereas the monopoly\
+    \ model has a single point of failure, the\n   oligopoly model has the drawback of exposing more than one point of\n \
+    \  failure.\n\n   Thus, there is a need for a trust architecture that supports\n   meaningful trust roots in a global\
+    \ environment with inherently\n   distrustful parties.  This new trust architecture should provide the\n   following properties:\n\
+    \n   *  Trust agility (see further below);\n\n   *  Resilience to single root of trust compromise;\n\n   *  Multilateral\
+    \ governance; and\n\n   *  Support for policy versioning and updates.\n\n   Ideally, the trust architecture allows parties\
+    \ that mutually trust\n   each other to form their own trust \"union\" or \"domain\", and to freely\n   decide whether\
+    \ to trust other trust unions (domains) outside their\n   own trust bubble.\n</content>"
+- source_sentence: What are the challenges of deploying INT on multi-operator networks like the Internet
+  sentences:
+  - 'Book chapter excerpt, ("SBAS," Section "Secure Route Redistribution"). Details SBAS''s internal full-mesh topology among
+    PoPs using SCION and encrypted iBGP sessions. Introduces three address categories: secure (customer/SBAS-owned), internal
+    (PoP communication), and global (other routable addresses).
+
+    <citation> Laurent Chuat et al.. *The Complete Guide to SCION. From Design Principles to Formal Verification*. Springer
+    International Publishing AG, 2022. </citation>
+
+    <type> book </type>
+
+    <page> 368 </page>
+
+    <content>
+
+    13 Deployment and Operation
+
+    tural abstraction of the underlying infrastructure and provide an interface to
+
+    customers.
+
+    End-to-End Security. In the context of mediating customers’ IP endpoints
+
+    via a secure backbone, the end-to-end communication path can be segmented
+
+    into an external (insecure) segment, which is comprised of the Internet links
+
+    between an IP endpoint and the SBAS ingress/egress point, and an internal
+
+    segment between an arbitrary ingress and egress pair of the secure routing
+
+    infrastructure. Therefore, to ensure end-to-end secure routing, the follow-
+
+    ing conditions must hold: (1) Customers must be able to select trusted in-
+
+    gress/egress points and securely exchange packets with hijack resilience; and
+
+    (2) the secure backbone must deliver the security properties it promised to any
+
+    pairs of ingress/egress points even in the presence of internal adversaries.
+
+    Routing Priority. To enable customers to route trafﬁc from/to the Internet
+
+    through a secure backbone, SBAS must disseminate the customers’ preﬁx an-
+
+    nouncements to all other customers and external entities. Preﬁxes will then be
+
+    announced via SBAS and the Internet, resulting in competing announcements.
+
+    To maximize the ability to route securely, SBAS must be able to convince the
+
+    entities receiving the announcements to prioritize routing paths through the
+
+    secure backbone over the insecure Internet paths.
+
+    13.5.3.2 Secure Route Redistribution
+
+    The internal structure of SBAS can be abstracted to a full-mesh topology be-
+
+    tween the PoPs, which communicate over SCION. Over these connections,
+
+    the PoPs redistribute announcements from SBAS customers as well as the In-
+
+    ternet, akin to the operation of iBGP in a regular AS. To prevent tampering by
+
+    non-PoP members, the iBGP sessions run over an encrypted and authenticated
+
+    connection (such as a VPN tunnel).
+
+    SBAS offers a high degree of ﬂexibility to its customers through support for
+
+    dynamic route redistribution. Contrary to a traditional AS, which is controlled
+
+    by a single entity, the redistribution scheme to be used in SBAS must support
+
+    its federated structure and remain secure in the presence of malicious mem-
+
+    bers. In the following, we describe the design and security aspects of the route
+
+    redistribution mechanism.
+
+    The system distinguishes between three categories of addresses:
+
+    • Secure addresses: This includes preﬁxes announced by SBAS cus-
+
+    tomers and SBAS-owned address spaces, which are assigned to cus-
+
+    tomers. Secure address spaces are announced publicly at egress points
+
+    via BGP.
+
+    • Internal addresses: In order to provide an internal addressing scheme
+
+    among PoPs, e.g., to set up iBGP sessions between PoP routers, the PoPs
+
+    348
+
+    </content>'
+  - 'Research paper titled "ID-INT: Secure Inter-Domain In-Band Telemetry" proposing ID-INT, a SCION extension for secure,
+    authenticated in-band telemetry. Leverages SCION''s PKI and DRKey for data plane authentication, enabling applications
+    like intra-AS path tracing, congestion control, and carbon-aware routing. Implemented in the SCION stack with an AS-hosted
+    telemetry collector. Evaluation shows minimal performance impact on routers with authentication-only mode and up to a
+    13% throughput decrease with encryption.
+
+    <citation> Lars-Christian Schulz et al.. "ID-INT: Secure Inter-Domain In-Band Telemetry." *2024 20th International Conference
+    on Network and Service Management (CNSM)*, 2024. </citation>
+
+    <type> research paper </type>
+
+    <page> 1 </page>
+
+    <content>
+
+    ID-INT: Secure Inter-Domain In-Band Telemetry
+
+    Lars-Christian Schulz
+
+    OVGU Magdeburg
+
+    Magdeburg, Germany
+
+    lschulz@ovgu.de
+
+    David Hausheer
+
+    OVGU Magdeburg
+
+    Magdeburg, Germany
+
+    hausheer@ovgu.de
+
+    Abstract—In-band network telemetry (INT) is a powerful tool
+
+    for gathering status information from network components in
+
+    a distributed and timely way. Until now, INT has mostly been
+
+    deployed in data center environments or single operator W ANs,
+
+    because it lacks mechanisms for authentication and is not widely
+
+    standardized. SCION is a novel, path-based Internet architecture
+
+    providing strong resilience and security properties. In this paper,
+
+    we propose Inter-domain In-band Network Telemetry (ID-INT)
+
+    as a protocol extension for SCION. ID-INT leverages SCION’s
+
+    public key infrastructure to authenticate telemetry data while
+
+    augmenting SCION’s end host path control with real-time
+
+    network information. Promising applications of ID-INT include
+
+    intra-AS path tracing, congestion control, SLA verification, and
+
+    carbon-aware routing. We implement ID-INT in the open-source
+
+    SCION stack and provide a proof of concept for an AS-hosted
+
+    telemetry collection service. We show that cryptographically
+
+    authenticated ID-INT can be fully implemented in the SCION
+
+    router’s fast-path with no measurable impact on router per-
+
+    formance. If optional encryption is employed in addition to
+
+    authentication, router throughput drops by no more than 13%
+
+    even if every packet carries telemetry.
+
+    Index Terms—In-band Network Telemetry, SCION, W AN
+
+    I. I NTRODUCTION
+
+    Network monitoring and measurement is an integral part of
+
+    any network operator’s toolkit. In order to meet the demands
+
+    of modern real-time applications, constant monitoring of the
+
+    network’s status and performance is required. Traditionally,
+
+    networks have been monitored through active measurements
+
+    using probe packets, e.g., using the well-known ping and
+
+    traceroute commands, or through passive traffic monitoring
+
+    at routers. Passive monitoring is usually employing sampling
+
+    techniques as observing every single packet is costly.
+
+    With the advent of SDN, programmable data planes, and
+
+    P4, a new network monitoring paradigm emerged in the form
+
+    of push-based network telemetry. Telemetry-enabled devices
+
+    push network measurements to a central controller, instead
+
+    of waiting for the controller to poll monitoring data. Fully
+
+    programmable network devices like Intel’s Tofino [1] enable
+
+    to push telemetry one step further by offloading the collection
+
+    of telemetry metadata entirely to the data plane. Noticeably,
+
+    the INT specification [2] was developed as a standardized way
+
+    to exchange telemetry information between network entities.
+
+    The INT framework is related to a number of earlier systems
+
+    all based around the idea of embedding telemetry instructions
+
+    and is some cases metadata as well in packet headers [3],
+
+    [4]. INT has in turn inspired research on advanced in-band
+
+    telemetry protocols like ML-INT for optical networks [5]
+
+    and probabilistic approaches like PINT [6]. All these systems
+
+    have in common that they can only be deployed in networks
+
+    under shared administrative control. Additionally, security and
+
+    privacy aspects have largely been ignored, precluding Internet-
+
+    wide deployment.
+
+    The SCION Internet architecture [7] has been developed
+
+    to address the lack of security-by-design in today’s Internet
+
+    based on the Border Gateway Protocol (BGP). BGP’s design
+
+    limitations have caused numerous outages. SCION provides
+
+    a public key infrastructure for authenticating network entities
+
+    and allows multiple roots of trust to coexist. Another core
+
+    feature of SCION is that it is a path-based routing protocol.
+
+    End hosts include the AS-level forwarding path in packet
+
+    headers to eliminate uncertainties in traditional routing. The
+
+    same property also allows end hosts to send traffic to a specific
+
+    destination over multiple parallel paths to increase reliability
+
+    and aggregate bandwidth. SCION has been successfully de-
+
+    ployed in both research [8] and commercial networks [9] and
+
+    already reaches hundreds of thousands devices. A challenge
+
+    of the end host routing approach is to provide sufficient
+
+    information for making routing decisions to hosts. Current
+
+    solutions (cf. [10]–[12]) are based on control plane messages
+
+    and cannot provide real-time feedback from routers to hosts.
+
+    Therefore, SCION path selection is mostly based on end-to-
+
+    end measurements, which become challenging as the number
+
+    of available paths grows with the number of SCION ASes.
+
+    In order to address the absence of real-time telemetry in
+
+    SCION and INT’s lack of an authentication infrastructure and
+
+    inter-operator compatibility, we introduce Inter-Domain In-
+
+    band Network Telemetry (ID-INT). ID-INT relies on SCION’s
+
+    Dynamically Recreatable Key (DRKey) system to provide
+
+    efficient message authentication in the data plane and in turn
+
+    allows SCION end host to make informed routing decisions.
+
+    This work is structured as follows: We continue with a
+
+    brief description of SCION in section II and provide an
+
+    overview of related work in and outside the SCION ecosystem
+
+    in section III. ID-INT’s design is presented in section IV.
+
+    section V provides details on our prototype implementation
+
+    which we evaluate for throughput and overhead in section VI,
+
+    before we discuss potential extensions to the protocol in
+
+    section VII. Finally, section VIII gives an outlook on a wide
+
+    range of applications, while section IX concludes this paper.
+
+    2024 20th International Conference on Network and Service Management (CNSM)
+
+    978-3-903176-66-9 ©2024 IFIP
+
+    </content>'
+  - 'Master''s thesis excerpt detailing scoring functions for "passive" and "active" path selection mechanisms in SCION. "Passive"
+    mechanism modifies QoE function (Equation 4.4), with increased loss penalty: `5000 * loss` (if loss < 0.05). Describes
+    "passive" mechanism behavior: initial path selection by lowest latency with increasing sending rate, switching when significant
+    loss occurs.
+
+    <citation> Pascal Marc Suter. *Traffic Engineering in SCION: The impact of end host QoS mechanisms on network performance*.
+    Master''s thesis, ETH Zurich, 2023. </citation>
+
+    <type> research paper </type>
+
+    <page> 44 </page>
+
+    <content>
+
+    5.2. Implementation details
+
+    Table 5.1: Sending rates considered by other works and chosen bitrates in Mbps.
+
+    Title Low Medium High
+
+    Can you see me now?: a measurement
+
+    study of Zoom, Webex, and Meet [54]
+
+    0.5 - 1 2.5 - 2.6
+
+    Zoom Session Quality: A Network-
+
+    Level View [55]
+
+    1 - 1.5 3 - 6
+
+    Measuring the performance and net-
+
+    work utilization of popular video con-
+
+    ferencing applications [21]
+
+    0.8 - 1.9
+
+    Chosen bitrates 0.7 1.5 5
+
+    The scoring functions differ between the mechanisms. For the ’naive’ and
+
+    ’shortest path’ mechanisms, the application will select the path at the begin-
+
+    ning. ’Naive’ chooses uniformly at random from all available paths while
+
+    ’shortest path’ chooses uniformly at random from the subset of the shortest
+
+    paths, i.e.,the paths with the fewest hops or fewest ASes in it. Shortest path
+
+    does not necessarily mean paths with the lowest latency but paths with the
+
+    fewest hops. The selected path gets a high score and all others a low score.
+
+    The score is set to low score when the sending rate is higher or equal than
+
+    previously and there was loss previously except for low sending rates. This
+
+    gives them the behavior of starting at a low sending rate, increasing when
+
+    no loss is detected and decreasing when it is, mirroring the functionality of
+
+    ABR. These two mechanisms do not require any probing.
+
+    The ’passive’ mechanism uses latency only probing. The core of its scoring
+
+    function is the score function defined in Equation 4.4. That function scores
+
+    the QoE for VCAs and as the mechanisms are supposed to optimize the
+
+    quality, it is a good starting point. However, early testing showed that this
+
+    is too accepting of loss, only changing paths or sending rate after 10% of
+
+    loss occurs. After 10% the score drops significantly and to avoid that, the
+
+    scoring function used internally by the mechanisms has a lower threshold.
+
+    The internal score function is given by replacing Equation 4.2 with
+
+    penalty loss =
+
+    (
+
+    5000 ∗ loss if loss < 0.05
+
+    104 ∗ loss else (5.2)
+
+    It punishes loss more; this is to get a tradeoff between optimizing for QoE
+
+    and limiting congestion.
+
+    There are some more modifications for the implementation. The loss on
+
+    a path is only known when traffic was sent, otherwise it will be assumed
+
+    zero. Additionally, the ’passive’ mechanism also performs a sending rate
+
+    selection similar to ’naive’ and ’shortest path’. When sending over a new
+
+    path, i.e., a path that was not sent over since the last probing and for which
+
+    37
+
+    </content>'
+- source_sentence: What is the default output of the `scion-pki key public` command
+  sentences:
+  - "Research paper section on a Security Analysis of PILA. Addresses potential MitM attacks, downgrade attacks, and key compromises.\
+    \ Describes how PILA prevents or mitigates these attacks, local responder-side attackers, Responder-Side NAT attackers,\
+    \ and details how key compromises can be detected and their impact is limited.\n<citation> Cyrill Krähenbühl et al.. \"\
+    Ubiquitous Secure Communication in a Future Internet Architecture.\" SN Computer Science, vol. 3, no. 5, 2022, pp. . </citation>\n\
+    <type> research paper </type>\n<page> 9 </page>\n<content>\nSN Computer Science           (2022) 3:350  \n Page 9 of 13\
+    \   350 \nSN Computer Science\nresponder can query either the certificate service or the local \nNAT, see “NAT Devices”,\
+    \ and check for duplicate certifi-\ncates for its identifiers.\nResponder-Side NAT or AS Attacker. A malicious AS \nor\
+    \ a malicious NAT device on the responder side cannot \nimmediately be detected. They do, however, create irrefuta-\n\
+    ble cryptographic proof of misbehavior in the form of con-\nflicting end-host certificates valid at the same point in\
+    \ time. \nThese certificates can be stored locally or published on an \nappend-only log server and later be compared through\
+    \ an \nout-of-band channel or audited by another entity.\nOther Attackers. Other entities, such as a malicious AS \nor\
+    \ NAT device on the initiator’s side or an attacker in the \ninitiator’s local network, cannot perform an MitM attack,\
+    \ \nsince they cannot forge valid responder certificates.\nDowngrade Attacks\nIn this section, we analyze the three downgrade\
+    \ prevention \napproaches explained in Downgrade Prevention. In a down-\ngrade attack, an attacker attempts to convince\
+    \ the initiator \nconnecting to an unknown responder that the responder’s \nAS does not support PILA or that the responder\
+    \ does not \nallow the desired PILA-supported protocol. However, care \nmust be taken that the downgrade prevention approaches\
+    \ do \nnot introduce an additional DoS vector where a non-PILA-\nenabled end-host is prevented from communicating with\
+    \ a \nPILA-enabled end-host.\nSignature-Based and Log-Based Approaches. Both \nthe signature-based (“Signature-based Approach\
+    \ ”) and \nlog-based (“Log-based Approach”) approaches prevent \ndowngrade attacks, since an attacker is not able to forge\
+    \ \nvalid signatures for bogus statements which claim that a \nPILA-enabled end-host does not support PILA. Replaying\
+    \ \na (potentially different) out-of-date statement is prevented \nby the time stamps within the statements and due to\
+    \ the \nassumption of time synchronization (see 3 ). For the same \nreason, an attacker cannot use an out-of-date statement\
+    \ \nwhich claims that a non-PILA-enabled host supports PILA \nas a DoS vector, since this statement will be rejected by\
+    \ the \nrelying end-host.\nSelf-verifiable Approaches. We separate between the \ntwo self-verifiable address approaches\
+    \ explained in Self-\nVerifiable Approach: address range reservation and IPv6 \naddress encoding.\nIf an AS reserves an\
+    \ IP address range for PILA-enabled \ntraffic, then an attacker can neither downgrade (since the \nrelying end-host can\
+    \ locally check whether the remote end-\nhost is within the IP address range) nor use it as a DoS vector \n(since only\
+    \ PILA-enabled end-hosts are assigned to this IP \naddress range).\nFor the self-verifiable IPv6 address encoding approach,\
+    \ \nan attacker cannot perform a downgrade attack since the two \ncommunicating end hosts will perform the same determinis-\n\
+    tic computation to verify whether the end-host has encoded \nPILA support in the IP address. Regarding a potential DoS\
+    \ \nvector, we consider two attackers: an on-path attacker which \ncan and an on-path attacker which cannot influence\
+    \ the net-\nwork prefix of the IPv6 address of an end-host. We assume \nthe worst case, where the attacker can predict\
+    \ the device \naddress that will be chosen by the end-host. The attacker’s \ngoal is to make the non-PILA-enabled end-host\
+    \ choose an \nIPv6 address that indicates PILA support.\n• If the attacker cannot influence the network prefix and \n\
+    thus cannot impact the final IPv6 address chosen by the \nnon-PILA-enabled end-host, the probability of a DoS for \nthe\
+    \ non-PILA-enabled end host remains unchanged from \nthe case without any attacker ( 2−32).\n• If the attacker can influence\
+    \ the network prefix and pre-\ndict the device address, then the attacker could poten-\ntially fabricate a network prefix,\
+    \ such that there is a hash \ncollision on the leftmost 32 bit of the device address. \nThis would prevent the non-PILA-enabled\
+    \ end-host from \ncommunicating with a PILA-enabled end-host. However, \nit is very likely that an attacker with the capability\
+    \ of \ncontrolling the routing within the AS can simply drop \nunwanted traffic, which is in comparison a much stronger\
+    \ \nand more effective attack.\nPrivate Key Compromise\nThe severity of a compromised private key depends on the \nentity\
+    \ and the lifetime of the certificate belonging to this key.\nKey compromises of entities in the SCION control-plane \n\
+    delegation chain are relatively easy to detect if abused, since \nthere would be ASes with multiple valid certificates\
+    \ for an \nISD and AS number with different public keys. AS key com-\npromises are similarly easy to detect but only allow\
+    \ forging \nsigned PILA messages within the compromised AS. End-\nhost key compromises are less severe, as end-host certifi-\n\
+    cates are short-lived. In RPKI-based PILA, a compromised \ntrust root impacts the authenticity of all end hosts. In com-\n\
+    parison, a compromised (ISD) trust root in SCION-based \nPILA only impacts the authenticity of end-hosts within this \n\
+    ISD. Additionally, a single (or a few) compromised control-\nplane CAs can be removed from the set of trusted CAs by \n\
+    updating the trust root configuration (TRC) which specifies \nall control-plane CAs.\nAttacking AS Trust\nAttackers might\
+    \ attempt to reduce the trustworthiness of an \nAS. Slander, i.e., accusing a benign, uncompromised AS \nof having issued\
+    \ incorrect certificates, is not possible in \n</content>"
+  - "Documentation document for the scion-pki key private command, which generates a PEM-encoded private key with selectable\
+    \ elliptic curve (P-256, P-384, P-521). Defaults to P-256. The --force option controls overwriting the keyfile.\n<url>\
+    \ https://docs.scion.org/en/latest/command/scion-pki/scion-pki_key_public.html </url>\n<type> documentation </type>\n\
+    <content>\n# scion-pki key public\n\n# scion-pki key public\n\nGenerate public key for the provided private key\n\n##\
+    \ Synopsis\n\n‘public’ generates a PEM encoded public key.\n\nBy default, the public key is written to standard out.\n\
+    \n```\nscion-pki key public [flags] <private-key-file>\n```\n\n## Examples\n\n```\nscion-pki key public cp-as.key\nscion-pki\
+    \ key public cp-as.key --out cp-as.pub\n```\n\n## Options\n\n```\n--force        Force overwritting existing public key\n\
+    -h, --help         help for public\n    --kms string   The uri to configure a Cloud KMS or an HSM.\n    --out string \
+    \  Path to write public key\n```\n\n## SEE ALSO\n\n- scion-pki key   - Manage private and public keys\n\n\n</content>"
+  - 'Book excerpt ("Bootstrapping Steps, Discovery Mechanisms") detailing the steps of the end-host bootstrapper daemon using
+    DHCP, DNS and mDNS and configuration file download. Explanations focus on operation of discovery mechanisms in environments
+    with managed DHCP servers or DNS infrastructure.
+
+    <citation> Laurent Chuat et al.. *The Complete Guide to SCION. From Design Principles to Formal Verification*. Springer
+    International Publishing AG, 2022. </citation>
+
+    <type> book </type>
+
+    <page> 348 </page>
+
+    <content>
+
+    13 Deployment and Operation
+
+    the bootstrapper daemon and starts the SCION Daemon once the bootstrapper
+
+    daemon ﬁnishes successfully.
+
+    Bootstrapping Steps. The end host bootstrapper daemon performs the fol-
+
+    lowing steps:
+
+    1. Probe the local network for hints about a bootstrapping server address us-
+
+    ing the available discovery mechanisms (i.e., DHCP, DNS, and mDNS).
+
+    2. Wait for hints from the discoverers.
+
+    3. Once a hint is received, try to download the TRCs and the topology
+
+    of the AS from the bootstrapping server. While there is no maximum
+
+    amount of TRCs to be served, the bootstrapping server must provide at
+
+    least the TRC of the ISD in which the AS is located.
+
+    a) On success, prepare the SD’s ﬁles and exit successfully; the SD is
+
+    then automatically started by the orchestrator.
+
+    b) On failure, go back to step 2.
+
+    If no hint is received after a certain period, the bootstrapper daemon times
+
+    out and exits with a non-zero value.
+
+    Note that the TRCs retrieval is a transition solution to ease adoption; ideally
+
+    they are installed on a device out-of-band, before the device gets connected to
+
+    a network (more details are given in the security considerations on page 331).
+
+    13.2.3 Discovery Mechanisms
+
+    A bootstrapper can leverage DHCP, DNS or mDNS in order to ﬁnd the IP
+
+    address of the bootstrapping server. We describe each case, where we assume
+
+    that
+
+    • the end host is located in the example.comdomain; and
+
+    • the IP address of the bootstrapping server is 192.168.1.1.
+
+    DHCP. The DHCP mechanism relies on the presence of an existing DHCP
+
+    server in the network. This mechanism is advantageous in environments where
+
+    there is a managed DHCP server, but no dedicated DNS infrastructure is oper-
+
+    ated for the local network.
+
+    The DHCP server has to be conﬁgured to announce the address of the dis-
+
+    covery services using one of the DHCP options. One natural choice is to use
+
+    the option ﬁeld with ID 72 “Default WWW server”, given that HTTP, the same
+
+    application-level protocol as used in the WWW, is used to retrieve the conﬁg-
+
+    uration ﬁles. In our example, we would set the option value to 192.168.1.1.
+
+    328
+
+    </content>'
+- source_sentence: How might operators of large replicated services manage their own ISD
+  sentences:
+  - 'Research paper on PISKES providing background on source address validation limitations (SAV/BCP 38), cookie-based systems,
+    and client certificates. Discusses limitations of key-distribution systems like Passport and extends on prior work, DRKey,
+    to form the new PISKES design.
+
+    <citation> Benjamin Rothenberger et al.. "PISKES: Pragmatic Internet-Scale Key-Establishment System." *Proceedings of
+    the ACM Asia Conference on Computer and Communications Security (ASIACCS)*, 2020. </citation>
+
+    <type> research paper </type>
+
+    <page> 3 </page>
+
+    <content>
+
+    section. Here we focus on several representative and well-known
+
+    systems—an exhaustive overview of related work is provided in §8.
+
+    3.1 Authentication Systems
+
+    3.1.1 Source Address Validation. Source address validation (SAV),
+
+    also known as best current practice (BCP) 38 [ 24], is not an au-
+
+    thentication system in the strict sense but is still often considered
+
+    a solution to source-address spoofing in the Internet. With SAV,
+
+    ASes monitor traffic originating from their own hosts and filter
+
+    out packets with a source address outside their own address space.
+
+    However, due to incentive misalignments,2 the adoption of SAV
+
+    has been slow and a recent study found that many ASes still do
+
+    not employ it in their networks [46]. Furthermore, it is impossible
+
+    to determine from the outside if a particular AS employs SAV or if
+
+    a particular packet originated from an AS that employs SAV as it
+
+    does not carry any proof of authenticity. For an external service it is
+
+    therefore impossible to filter traffic based on whether it originated
+
+    from an AS employing SAV. Even with a full deployment of SAV
+
+    in the Internet, on-path adversaries would still be able to spoof
+
+    the source of packets and SAV thus provides very weak security
+
+    properties. There exists a wide range of other filtering techniques
+
+    with similarly limited properties [4, 21, 34, 43, 56].
+
+    3.1.2 Cookies. Several protocols, including TLS [63], IKEv2 [38],
+
+    and DNS [22] define a cookie mechanism to provide a weak form
+
+    of source authentication. The basic mechanism for these systems is
+
+    similar: Upon receiving a request, the server replies to the sender
+
+    with a cookie that encodes the request parameters without allo-
+
+    cating state or processing the request. Only after receiving this
+
+    cookie back from the source, the request is processed. Compared
+
+    to SAV, cookies have the advantage that they can be enforced by
+
+    services without relying on Internet service providers (ISPs) to
+
+    perform filtering. However, cookies introduce additional latency
+
+    of one round-trip time (RTT) and are still susceptible to spoofed
+
+    packets by on-path adversaries.
+
+    3.1.3 Client Certificates. Strong authentication properties can be
+
+    achieved through asymmetric cryptography and client certificates.
+
+    These are supported, for example, by TLS [63] and DTLS [64]. How-
+
+    ever, authentication using client certificates requires expensive
+
+    asymmetric cryptography in violation of our efficiency require-
+
+    ments (§2.1.2). Furthermore, these systems cannot authenticate the
+
+    first packet and are vulnerable to signature-flooding attacks.
+
+    3.2 Key-Distribution Systems
+
+    3.2.1 Passport. Passport [44] provides mechanisms to establish
+
+    shared keys between any pair of ASes based on a DH key exchange
+
+    piggybacked on BGP messages. It relies on a secure routing system
+
+    to ensure the authenticity of the shared keys, which can subse-
+
+    quently be used to authenticate the source of packets at the network
+
+    layer. For our purposes (see §2), Passport by itself is inadequate for
+
+    several reasons: (i) it only enables authentication at the AS level,
+
+    (ii) it requires authenticating systems to keep a store of symmetric
+
+    keys for all ASes (currently approximately 68 000 [6]), (iii) it has
+
+    2The costs of deploying SAV are paid by an AS itself while its benefits are experienced
+
+    by the rest of the Internet.
+
+    Table 1: Notation used in this paper.
+
+    ∥ bitstring concatenation
+
+    𝐴,𝐵 autonomous systems (ASes) identified by AS number (ASN)
+
+    𝐻𝐴, 𝐻𝐵 end hosts identified by IP address
+
+    𝐾𝑆𝐴, 𝐾𝑆𝐵 key servers located in a specific AS
+
+    𝑆𝑉𝐴 AS 𝐴’s local secret value
+
+    𝑆𝑉𝑝
+
+    𝐴 AS 𝐴’s local secret value for protocol 𝑝
+
+    ˜𝐾𝑝
+
+    • symmetric key derived (indirectly) from 𝑆𝑉𝑝
+
+    𝐾𝐴→𝐵 symmetric key between ASes 𝐴and 𝐵, derived from 𝑆𝑉𝐴
+
+    𝐾𝑝
+
+    𝐴→𝐵 symmetric key between ASes 𝐴and 𝐵for protocol 𝑝
+
+    𝐾𝑝
+
+    𝐴→𝐵:𝐻𝐵
+
+    symmetric key between AS 𝐴and end host 𝐻𝐵 in AS 𝐵for pro-
+
+    tocol 𝑝
+
+    𝐾𝑝
+
+    𝐴:𝐻𝐴→𝐵:𝐻𝐵
+
+    symmetric key between end host 𝐻𝐴 in AS 𝐴and end host 𝐻𝐵
+
+    in AS 𝐵for protocol 𝑝
+
+    H(·) non-cryptographic hash operation
+
+    MAC𝐾(·) message authentication code using key 𝐾
+
+    PRF𝐾(·) pseudorandom function using key 𝐾
+
+    {𝑋}𝑃𝐾𝐴 public-key encryption of 𝑋 using AS 𝐴’s public key
+
+    {𝑋}𝑃𝐾−
+
+    𝐴 public-key signature over 𝑋 using AS 𝐴’s private key
+
+    no mechanism to delegate keys to certain services. Other systems,
+
+    such as Kerberos [54], are reviewed in §8.
+
+    3.2.2 DRKey. Dynamically Recreatable Keys (DRKeys) have been
+
+    proposed to efficiently derive and distribute symmetric shared keys
+
+    between routers and end hosts in the context of Origin and Path
+
+    Trace (OPT) [41], a system providing path validation. The system
+
+    has later been generalized and embedded in the SCION Internet
+
+    architecture [58]. DRKey’s fundamental idea is that each AS 𝐴
+
+    can efficiently derive a key hierarchy starting from a secret value
+
+    𝑆𝑉𝐴, providing keys shared with other ASes, 𝐾𝐴→𝐵, and end hosts,
+
+    𝐾𝐴→𝐵:𝐻𝐵. By periodically exchanging the keys 𝐾𝐴→𝐵 between
+
+    ASes, from which host-level keys can be derived, DRKey enables
+
+    an efficient global distribution of symmetric keys.
+
+    DRKey fulfills most of our requirements to a key-distribution
+
+    system and thus provides the basis of PISKES. However, PISKES
+
+    refines and extends the existing DRKey system [58] in several sig-
+
+    nificant ways: (i) PISKES modifies DRKey to make it applicable to
+
+    the current Internet in addition to SCION; (ii) it adds efficient mech-
+
+    anisms to delegate specific keys to services in an AS; (iii) it specifies
+
+    many of its important practical aspects in further detail; and (iv) it
+
+    fixes recently discovered vulnerabilities of DRKey’s key-exchange
+
+    mechanisms due to an inadequate application of signatures [33].
+
+    4 KEY DERIVATION AND DISTRIBUTION
+
+    In this section, we present the key-derivation and -distribution
+
+    mechanisms used for PISKES. This is based on the DRKey sys-
+
+    tem [58], but we significantly extend it with additional delegation
+
+    mechanisms and other optimizations, see also §3.2.2. Furthermore,
+
+    we also formally model and verify security properties of this key-
+
+    distribution system, see §7.1.
+
+    We first provide a high-level overview to convey an intuition
+
+    of the operation of our system. Figure 1 shows the basic use case
+
+    of PISKES, where a host 𝐻𝐴 in AS 𝐴desires to communicate with
+
+    a server 𝑆𝐵 in AS 𝐵, and 𝑆𝐵 wants to authenticate the network
+
+    </content>'
+  - 'Book chapter on SCION Control Plane explaining path exploration (beaconing). Describes PCB initiation and propagation
+    by beacon servers. Covers intra-ISD beaconing (up/down segments) and core beaconing (core segments). Details initial PCB
+    creation with initial ASE containing hop field (HF0) with empty ingress interface and specified egress interface. Mentions
+    use of one-hop paths and service addresses for beacon dissemination.
+
+    <citation> Laurent Chuat et al.. *The Complete Guide to SCION. From Design Principles to Formal Verification*. Springer
+    International Publishing AG, 2022. </citation>
+
+    <type> book </type>
+
+    <page> 90 </page>
+
+    <content>
+
+    4 Control Plane
+
+    4.2.1 Initiating Beaconing
+
+    Each core AS, through its beacon service, periodically initiates the path explo-
+
+    ration process by creating an initial PCB and propagating it. The PCB is either
+
+    sent to a child AS (in the case of intra-ISD beaconing) or to other core ASes
+
+    (in the case of core beaconing). The beacon service inserts (among other infor-
+
+    mation) the initial AS entry ASE0 in the PCB. In the intra-ISD case, the initial
+
+    PCB can optionally contain peer entries to non-core ASes. The hop entry HE
+
+    inside ASE0 includes an initial hop ﬁeld with the ingress interface identiﬁer set
+
+    to ‚ (which indicates an empty value):
+
+    HF0 “ x FlagsHF } ExpTime } ‚ } ConsEgress } HFAuthy. (4.9)
+
+    The initial hop ﬁeld denotes the extremity of a path segment and authenti-
+
+    cates a forwarding decision for every packet that
+
+    • enters the AS through the interface ConsEgress and terminates in the
+
+    AS;
+
+    • originates from the AS and exits through the interface ConsEgress; or
+
+    • switches to another path segment at this AS (using one of the possible
+
+    path-segment combinations, as described in § 5.5).
+
+    The beacon service then signs the PCB and sends it to a border router (which
+
+    corresponds to the ConsEgress identiﬁer as speciﬁed in the hop ﬁeld).
+
+    PCBs are disseminated within packets addressed to the beacon service using
+
+    the corresponding service address (see § 4.6). Furthermore, the special one-
+
+    hop path is used to initiate the communication to a neighboring beacon service
+
+    (see § 5.4.1). This is necessary because there may not be a full forwarding
+
+    path available for beaconing. Indeed, the discovery of such paths in turn relies
+
+    on beaconing. The purpose of one-hop paths is thus to break this circular
+
+    dependency.
+
+    During core beaconing, the neighboring AS that receives the PCB can be
+
+    in the same or in a different ISD. The ISD identiﬁer included in the PCB’s
+
+    signature metadata describes only the ISD of the PCB’s originator.
+
+    4.2.2 Propagating PCBs
+
+    After beaconing is initiated, each PCB is propagated in the following way:
+
+    The ingress border router of the next AS in the beaconing path receives the
+
+    PCB, detects that the destination is a SCION service address, and sends it
+
+    to the AS’s beacon service. The beacon service veriﬁes the structure and all
+
+    signatures on the PCB. The PCB contains the version numbers of the TRC(s) 3
+
+    and certiﬁcate(s) that must be used to verify the signatures. This enables the
+
+    3Even within a single ISD, there can be multiple valid TRCs at the same time, see § 3.1.6.
+
+    70
+
+    </content>'
+  - 'Research paper describing the "Multiple Advertisements" approach for Anycast in SCION. Proposes advertising the same
+    AS number from multiple locations, leveraging SCION''s path servers. Discusses addressing limitations (single ISD) and
+    potential workarounds.
+
+    <citation> Dennis Eijkel. "Anycast in the SCION Internet Architecture." 2022. </citation>
+
+    <type> research paper </type>
+
+    <page> 20 </page>
+
+    <content>
+
+    Addressing
+
+    In the multiple advertisements solution, the same AS number is advertised from different points
+
+    in the network, thus making the AS replicated and therefore also the services that reside inside
+
+    of it. A SCION address is a triple of (ISD, AS, address) and does not allow for multiple ISD
+
+    or AS identifiers in a single address. Therefore to have a single address for all of the different
+
+    replicas that make up the service, all of the replicas must be put in the same AS that resides in
+
+    a single ISD. A way to work around this limitation would be to extend the addressing format of
+
+    SCION, either by allowing multiple ISD identifiers in the same address or a wildcard instead of
+
+    the ISD identifier.
+
+    Putting a wildcard in the address in the place of the ISD identifier would make that the
+
+    address does not have the hijacking protection through isolation that regular SCION addresses
+
+    have, thus possibly allowing for hijacking of routes. This means that traffic for that wildcard
+
+    address can route to any ISD that hosts that AS number in their network, the rightful owner of
+
+    the AS number has no control over which ISDs the traffic intended for their network would end
+
+    up.
+
+    Putting multiple ISD identifiers in a single address would mean that we would get practically
+
+    the same system as the naming solution described in Section 3.3, where instead of through the
+
+    naming system, alternate replicas are given in a single address.
+
+    The conclusion is that both of these workarounds are not favorable.
+
+    ISD considerations
+
+    Considering the issues that exist around the addressing described before, replicated AS would
+
+    be part of a (single) regular ISD that might also have ASes that are not replicated. But it is also
+
+    possible to have dedicated ISD(s) for replicated services. These could come in multiple different
+
+    forms.
+
+    Operators of big replicated services might want to run their own ISD. These ISDs would
+
+    then only have core ASes or only a limited number of non-core ASes. The core ASes would
+
+    then have many peerings with other ISD cores at different geographical locations. Replicated
+
+    service operators are probably not interested in providing transit for traffic through their ISD,
+
+    thus they would not propagate beacons that would lead to paths that travel through their ISD
+
+    being created.
+
+    Another scenario could be that there are third parties that operate an anycast ISD and
+
+    provide transit service to customers that want to operate a replicated service. The anycast ISD
+
+    operator would operate the ISD core ASes and peer those with many other cores. Customers
+
+    can then peer at multiple locations with (some of) the anycast core(s).
+
+    19
+
+    </content>'
+- source_sentence: How is the concept of configurable rates in Z-Lane intended to accommodate varying traffic demands
+  sentences:
+  - 'Research paper setup description section detailing the specific SCIONLab configuration, including AS creation, attachment
+    to ETHZ-AP, and VM setup. Lists and describes SCION applications crucial the experiments: ''scion address'', ''scion showpaths'',
+    ''scion ping'', ''scion traceroute'', and ''scion-bwtestclient'', including their options and parameters(like packet size,
+    bandwidth target) for performance evaluation on the network.
+
+    <citation> Antonio Battipaglia et al.. "Evaluation of SCION for User-driven Path Control: a Usability Study." *Proceedings
+    of the SC ''23 Workshops of The International Conference on High Performance Computing, Network, Storage, and Analysis*,
+    2023. </citation>
+
+    <type> research paper </type>
+
+    <page> 3 </page>
+
+    <content>
+
+    Evaluation of SCION for User-driven Path Control: a Usability Study SC-W 2023, November 12–17, 2023, Denver, CO, USA
+
+    Figure 1: SCIONLab Topology: in light orange there are Core ASes; Non-Core ASes are white colored; Attachment Points are
+
+    green; our AS is blue.
+
+    help us run specific experiments we will discuss in later sections.
+
+    Once this configuration phase was completed, SCIONLab web inter-
+
+    face provided a unique ASN for our AS, along with cryptographic
+
+    keys and public-key certificates. Subsequently, a Vagrant file for
+
+    our AS was generated to instruct the configuration of a Virtual
+
+    Machine (VM) that represents our AS. This file made the setup
+
+    process lightweight by automating the installation of SCIONLAB
+
+    services, relevant packages, and necessary configurations. Finally
+
+    we were ready to use a fully configured VM belonging to the global
+
+    SCIONLab topology.
+
+    3.3 Available Applications
+
+    The VM configuration process also installs a predefined set of
+
+    SCION applications. The SCION apps that we used in our experi-
+
+    ments are:
+
+    • scion address : this command returns the relevant SCION
+
+    address information for the local host, that is, our AS where
+
+    we launch commands from.
+
+    • scion showpaths : it lists available paths between the local
+
+    and the specified AS. By default, the list is set to display 10
+
+    paths only, it can be extended using the-moption. Moreover,
+
+    a really useful feature for this work, is the—extendedoption,
+
+    which provides additional information for each path (e.g.
+
+    MTU, Path Status, Latency info).
+
+    • scion ping : it tests connectivity to a remote SCION host
+
+    using SCMP echo packets[4]. When the —countoption is en-
+
+    abled, the ping command sends a specific number of SCMP
+
+    echo packets and provides a report with corresponding statis-
+
+    tics. Furthermore, the real innovation is the —interactive
+
+    mode option, which displays all the available paths for the
+
+    specified destination allowing the user to select the desired
+
+    traffic route.
+
+    • scion traceroute : it traces the SCION path to a remote
+
+    AS using SCMP traceroute packets. It is particularly useful
+
+    to test how the latency is affected by each link. Even this
+
+    command makes interactive mode available.
+
+    • scion-bwtestclient: it is the only application presented
+
+    in this work that is not installed by default in the VM.
+
+    Bwtestclientis part of a bigger bandwidth testing applica-
+
+    tion named bwtesterwhich allows a variety of bandwidth
+
+    tests on the SCION network. The application enables speci-
+
+    fication of the test duration (up to 10 seconds), the packet
+
+    size to be used (at least 4 bytes), the total number of packets
+
+    that will be sent, and the target bandwidth. For example,
+
+    5,100,?,150Mbps specifies that the packet size is 100 bytes,
+
+    sent over 5 seconds, resulting in a bandwidth of 150Mbps.
+
+    The question mark ? character can be used as wildcard for
+
+    any of these parameters, in this case the number of packets
+
+    sent. Its value is then computed according to the other pa-
+
+    rameters. The parameters for the test in the client-to-server
+
+    direction are specified with -cs, and the server-to-client
+
+    direction with -sc.
+
+    We will analyze further these scion commands and how we used
+
+    them in the next section.
+
+    4 SOFTWARE DESIGN
+
+    We now present our software to test SCION features of path aware-
+
+    ness and path selection. We will also test network performances
+
+    such as: latency, bandwidth and packet loss in order to provide
+
+    UPIN users with paths that fulfill requirements on these properties.
+
+    787
+
+    </content>'
+  - 'Research paper (PERFORMANCE ''20) on "Incentivizing Stable Path Selection." Continues the game-theoretic analysis. Defines
+    the oscillation model, building upon the Wardrop model, focusing on parallel-path systems, defining terms such key terms
+    oscillation-prone system, oscillation and stability. Introduces system parameters, describes the temporal component, and
+    defines formalizes definitions for oscillation and stability at equilibrium.
+
+    <citation> Simon Scherrer et al.. "Incentivizing Stable Path Selection in Future Internet Architectures." *Proceedings
+    of the International Symposium on Computer Performance, Modeling, Measurements and Evaluation (PERFORMANCE)*, 2020. </citation>
+
+    <type> research paper </type>
+
+    <page> 2 </page>
+
+    <content>
+
+    IFIP Performance, November 2–6, 2020, Milano, Italy Simon Scherrer, Markus Legner, Adrian Perrig, and Stefan Schmid
+
+    an inter-domain context cannot be achieved by relying only on end-
+
+    point path selection. Instead, network operators have to incentivize
+
+    end-hosts to adopt one of the well-known convergent path-selection
+
+    strategies with stabilization mechanisms . These mechanisms have
+
+    to be incentive-compatible, i.e., the mechanisms must create an in-
+
+    centive structure such that it is in an end-host’s self-interest to
+
+    adopt a non-oscillatory path-selection strategy. In this work, we
+
+    present two such stabilization mechanisms, FLOSS and CROSS, and
+
+    formally prove their incentive compatibility. These mechanisms
+
+    employ different techniques to disincentivize oscillatory switching
+
+    between paths, namely limiting the migration rate between paths
+
+    (FLOSS) and imposing a cost on switching between paths (CROSS).
+
+    To complement our mainly theoretical work, we also discuss how
+
+    our findings could be practically applied.
+
+    1.1 Contribution
+
+    This paper revisits the theoretical study of the dynamic effects of
+
+    end-point path selection, for the first time focusing the analysis
+
+    on inter-domain networks where the end-points are selfish and
+
+    uncontrolled. We present a game-theoretic model that allows us
+
+    to investigate which path-selection strategies will be adopted by
+
+    selfish end-hosts. In particular, we introduce the notion of equi-
+
+    libria to path-selection strategies (PSS equilibria). Moreover, we
+
+    formally show that the non-oscillatory path-selection strategies
+
+    proposed in the existing literature do not form such PSS equilibria.
+
+    Thus, we provide evidence towards the hypothesis that stability in
+
+    load-adaptive routing over multiple domains cannot be achieved by
+
+    exclusively relying on end-hosts’ path-selection behavior. To rem-
+
+    edy this problem, we leverage insights from mechanism design to
+
+    devise two incentive-compatible stabilization mechanisms enforced
+
+    by network operators. While these mechanisms build on existing
+
+    insights from intra-domain traffic engineering, their methods of
+
+    incentivization represent a novel approach to achieve stability in
+
+    inter-domain networks with load-adaptive routing. We formally
+
+    prove the incentive compatibility of both mechanisms and discuss
+
+    their practical application.
+
+    2 OSCILLATION MODEL
+
+    2.1 Parallel-Path Systems
+
+    In order to study oscillation in network architectures with end-host
+
+    path selection, we build on the well-established Wardrop model [37],
+
+    which is the standard model for studying the interactions of selfish
+
+    agents in computer networks [28, 32, 33]. In the Wardrop model,
+
+    an infinite number of end-hosts, each controlling an infinitesimal
+
+    traffic share, select one path 𝜋 among multiple paths Π between
+
+    two network nodes. Every path 𝜋 has a load-dependent cost, where
+
+    the path-cost function 𝑐𝜋 is typically interpreted as latency. The
+
+    end-hosts’ path-selection decisions form a congestion game, where
+
+    the path-selection decisions of end-hosts both determine and follow
+
+    the load 𝑓𝜋 on every path 𝜋 [5, 19, 30].
+
+    In this work, we analyze congestion games with a temporal com-
+
+    ponent, i.e., end-hosts take path-selection decisions over time based
+
+    on currently available information. More precisely, an end-host
+
+    performs an average of 𝑟 > 0 re-evaluations per unit of time. The
+
+    aggregate re-evaluation behavior is uniform over time, i.e., when
+
+    dividing time into intervals of length 𝜖 ∈(0,1], 𝑟𝜖 re-evaluations
+
+    are performed in any interval
+
+    Whenever an end-host performs a re-evaluation, it chooses one
+
+    path 𝜋to its destination according to a freely chosen path-selection
+
+    strategy 𝜎. We thus formalize the environment of congestion games
+
+    as parallel-path systems :
+
+    Definition 1. A parallel-path system 𝑂 := (Π,𝑟,𝑝,𝑇,𝐴 0,𝑣)
+
+    is a tuple, where a total demand normalized to 1 is distributed over
+
+    parallel paths 𝜋 ∈Π among which end-hosts can select; 𝑟 > 0 is
+
+    the average number of re-evaluations per end-host and unit of time;
+
+    𝑝 ≥ 1 is the steepness of the path cost as a function of the load
+
+    (i.e., 𝑐𝜋 = (𝑓𝜋)𝑝); 𝑇 ≥0 is the average time that it takes for cost
+
+    information to reach the agents; A0 ∈ [0,1]|Π| is the initial load
+
+    matrix, where the entry A0𝜋 = 𝑓𝜋(0); and 𝑣 is the strategy profile,
+
+    defining for every available path-selection strategy 𝜎 the share 𝑣(𝜎)
+
+    of end-hosts that permanently apply strategy 𝜎.
+
+    Every congestion game possesses at least one Wardrop equilib-
+
+    rium, consisting of a traffic distribution where no single agent can
+
+    reduce its cost by selecting an alternative path [30]. If the agents
+
+    take path-selection decisions based on up-to-date cost information
+
+    of paths (𝑇 = 0), convergence to Wardrop equilibria is guaranteed
+
+    and persistent oscillations can thus not arise [12, 13, 34]. However,
+
+    in practice, the cost information possessed by agents isstale (𝑇 > 0),
+
+    i.e., the information describes an older state of the network. If such
+
+    stale information is present, undesirable oscillations can arise [14].
+
+    Therefore, parallel-path systems can be oscillation-prone:
+
+    Definition 2. A parallel-path system 𝑂 is oscillation-prone if
+
+    and only if 𝑇 > 0.
+
+    In this work, we study oscillation-prone systems with two paths
+
+    𝛼 and 𝛽 (i.e., |Π|= 2), but our insights directly generalize to more
+
+    paths. Due to total demand normalization, it holds that 𝑓𝛽(𝑡)=
+
+    1 −𝑓𝛼(𝑡)for all 𝑡 ≥0. Thus, the unique Wardrop equilibrium in
+
+    a two-path oscillation-prone system is given by 𝑓𝛼 = 𝑓𝛽 = 1/2.
+
+    Moreover, we assume w.l.o.g. that the initial imbalance𝐴0 exists
+
+    with the higher load on path 𝛼: 𝑓𝛼(0)= 𝐴0 = A0𝛼 > 1/2. For this
+
+    system of two parallel paths, ˜𝜋 denotes the respective other path,
+
+    i.e., ˜𝛼 = 𝛽 and ˜𝛽 = 𝛼.
+
+    Having introduced the concept of oscillation-prone systems, we
+
+    next define notions of oscillation and stability. First, an oscillation-
+
+    prone system experiences oscillation if the traffic distribution does
+
+    not eventually become static:
+
+    Definition 3. An oscillation-prone system 𝑂experiences oscilla-
+
+    tion if there exists no limit Δ∗of the function Δ(𝑡)= |𝑓𝛼(𝑡)− 𝑓𝛽(𝑡)|
+
+    for 𝑡 →∞.
+
+    Conversely, we understand stability simply as the absence of
+
+    oscillation, i.e., stability is given if a limit Δ∗exists. However, to
+
+    ensure optimal network utilization, the desirable state of the net-
+
+    work is not only stability, but stability at equal load as given by the
+
+    Wardrop equilibrium:
+
+    Definition 4. An oscillation-prone system 𝑂 is stable at equal
+
+    load if Δ∗:= lim𝑡→∞Δ(𝑡)= 0.
+
+    2
+
+    </content>'
+  - 'Research paper section providing a Z-lane system description. Introduces AS/ISD-level bandwidth isolation and configurable
+    rates using SCION''s ISDs. Explains how ASes can overuse allocated bandwidth and send traffic at guaranteed rates.
+
+    <citation> Marc Wyss et al.. "Zero-setup Intermediate-rate Communication Guarantees in a Global Internet." *Proceedings
+    of the USENIX Security Symposium*, 2024. </citation>
+
+    <type> research paper </type>
+
+    <page> 5 </page>
+
+    <content>
+
+    Z-Lane. The decision how to configure the rates is ultimately
+
+    up to the network operator and, importantly, does not require
+
+    any inter-domain coordination. Due to the aggregation of
+
+    ASes into ISDs, configurations remain manageable even if
+
+    the Internet grows to hundreds of thousands of ASes.
+
+    End Host Guarantees. Z-Lane lets end hosts, more specifi-
+
+    cally their applications, define what traffic should be sent with
+
+    forwarding guarantees, and what traffic should be forwarded
+
+    over best-effort. Still, to protect against malicious end hosts,
+
+    their AS has the ultimate authority in this matter and can re-
+
+    classify traffic to be sent as best-effort only. This protection
+
+    is implemented through a Z-Lane gateway, which schedules
+
+    end host traffic and authenticates it towards on-path routers
+
+    using a secret key not known to the end hosts. How traffic is
+
+    scheduled is up to the AS operator; configurations can range
+
+    from fair sharing to prioritizing certain traffic from critical AS
+
+    services like routing or time synchronization. We emphasize
+
+    that, to avoid any setup overhead (R3), neither ISDs, nor ASes
+
+    or end hosts explicitly learn their configured rate; instead, end
+
+    hosts implicitly discover their allowed rate through existing
+
+    mechanisms like congestion control.
+
+    Compatibility with Other Systems. Bandwidth reserva-
+
+    tion systems cannot provide zero-setup communication guar-
+
+    antees and are therefore not suitable to protect short-lived
+
+    intermediate-rate communication (Section 8). Still, we design
+
+    Z-Lane to seamlessly coexist with them, as they complement
+
+    our work by effectively protecting non-setup-critical, high-
+
+    volume communication such as from video conferencing. We
+
+    choose COLIBRI [27] as a reservation system instantiation,
+
+    but other systems could be deployed as well. To prevent at-
+
+    tacks targeting DRKey’s AS-level key exchange, which is a
+
+    fundamental requirement for EPIC, our design also ensures
+
+    compatibility with the DoCile system [74], which leverages
+
+    dedicated channels between neighboring ASes to successfully
+
+    bootstrap the key exchange even under DDoS.
+
+    We therefore consider the following four types of inter-
+
+    domain traffic: COLIBRI reservation traffic, DoCile’s
+
+    neighbor-based communication, authenticated traffic from
+
+    EPIC, and unauthenticated SCION traffic.
+
+    4.2 Source Authentication
+
+    Z-Lane employs EPIC for authenticating traffic sources to
+
+    border routers, allowing every border router to verify the au-
+
+    thenticity of every received packet. An important insight in the
+
+    design of Z-Lane is that efficient and reliable source authen-
+
+    tication as provided by EPIC allows for meaningful source-
+
+    based traffic control at border routers. The realization of this
+
+    idea has not been possible so far because previous source
+
+    authentication mechanisms would cause excessive commu-
+
+    nication or computation overhead and therefore impede de-
+
+    ployment, or were based on heuristics or probabilities, and
+
+    would thus fail to reliably distinguish between authentic and
+
+    spoofed addresses (Appendix H). Z-Lane is the first system
+
+    to explore the use of comprehensive source authentication to
+
+    protect the availability of short-lived intermediate-rate Inter-
+
+    net traffic – with EPIC’s security rooted in AS-level secret
+
+    keys, it integrates seamlessly into Z-Lane.
+
+    We want to highlight that EPIC together with a fairness
+
+    mechanism provided by some congestion control algorithm,
+
+    i.e., without any guaranteed rates, would not be enough in
+
+    our threat model, as an attacker would just not respect the
+
+    algorithm’s feedback and instead keep sending traffic at high
+
+    rates, or leverage a botnet to create many low-volume flows.
+
+    4.3 End Host Traffic Generation
+
+    End hosts, i.e., their applications, can choose among several
+
+    mechanisms on how their traffic is forwarded (Figure 1). For
+
+    long-term traffic they request a bandwidth reservation and
+
+    use it by sending their COLIBRI traffic class packets through
+
+    the COLIBRI gateway. While the overhead for requesting
+
+    a reservation is significant, the result is a fixed amount of
+
+    bandwidth that is exclusively reserved along the communi-
+
+    cation path. In a similar way, applications send short-lived
+
+    intermediate-rate traffic using the EPIC traffic class over the
+
+    Z-Lane gateway, where traffic is forwarded immediately with-
+
+    out any delay (requirement R3), but without the applications
+
+    knowing the concrete rates. In both cases traffic is protected
+
+    against congestion on the communication path. The default
+
+    option is for end hosts to send their traffic using the EPIC
+
+    traffic class directly to a border router of their AS, where they
+
+    are forwarded along the path using best-effort. This option
+
+    is useful for non-latency-critical communication such as file
+
+    downloads, or for long-term traffic for which no reservation
+
+    is available, which can for example happen if the end host has
+
+    already created a large number of reservations and gets denied
+
+    from creating even more. Z-Lane envisages unauthenticated
+
+    SCION traffic to be sent only in scenarios where it is not
+
+    otherwise possible, e.g., if an AS needs to request shared keys
+
+    using DRKey from another AS for the first time.
+
+    4.4 Z-Lane Gateway
+
+    ASes use the gateway to control the traffic volumes that their
+
+    end hosts (incl. AS infrastructure services) are allowed to send
+
+    using Z-Lane, which serves the primary purpose of protecting
+
+    benign from malicious or compromised end hosts.
+
+    For end host traffic complying with the allowed rate, the
+
+    gateway sets a QoS flag in the EPIC header, which indicates
+
+    to on-path routers that the corresponding packets should be
+
+    forwarded using the AS’ guaranteed rate. If an end host’s
+
+    packet exceeds the allowed rate at the gateway, then either (i)
+
+    the QoS flag is not set (or removed, if it was already set by the
+
+    end host), meaning that those packets will be treated as best-
+
+    effort, or (ii) the packets are dropped, depending on the AS’
+
+    policy. In contrast to best-effort EPIC packets generated at
+
+    5
+
+    </content>'
+model-index:
+- name: SentenceTransformer based on Snowflake/snowflake-arctic-embed-s
+  results:
+  - task:
+      type: information-retrieval
+      name: Information Retrieval
+    dataset:
+      name: val ir eval
+      type: val-ir-eval
+    metrics:
+    - type: cosine_accuracy@1
+      value: 0.7254901960784313
+      name: Cosine Accuracy@1
+      verified: false
+    - type: cosine_accuracy@3
+      value: 0.9019607843137255
+      name: Cosine Accuracy@3
+      verified: false
+    - type: cosine_accuracy@5
+      value: 0.9313725490196079
+      name: Cosine Accuracy@5
+      verified: false
+    - type: cosine_accuracy@10
+      value: 0.9607843137254902
+      name: Cosine Accuracy@10
+      verified: false
+    - type: cosine_precision@1
+      value: 0.7254901960784313
+      name: Cosine Precision@1
+      verified: false
+    - type: cosine_precision@3
+      value: 0.3006535947712418
+      name: Cosine Precision@3
+      verified: false
+    - type: cosine_precision@5
+      value: 0.18627450980392155
+      name: Cosine Precision@5
+      verified: false
+    - type: cosine_precision@10
+      value: 0.09607843137254901
+      name: Cosine Precision@10
+      verified: false
+    - type: cosine_recall@1
+      value: 0.7254901960784313
+      name: Cosine Recall@1
+      verified: false
+    - type: cosine_recall@3
+      value: 0.9019607843137255
+      name: Cosine Recall@3
+      verified: false
+    - type: cosine_recall@5
+      value: 0.9313725490196079
+      name: Cosine Recall@5
+      verified: false
+    - type: cosine_recall@10
+      value: 0.9607843137254902
+      name: Cosine Recall@10
+      verified: false
+    - type: cosine_ndcg@10
+      value: 0.8542256235274797
+      name: Cosine Ndcg@10
+      verified: false
+    - type: cosine_mrr@10
+      value: 0.8187908496732025
+      name: Cosine Mrr@10
+      verified: false
+    - type: cosine_map@100
+      value: 0.8212133545466878
+      name: Cosine Map@100
+      verified: false
+config:
+  architectures:
+  - BertModel
+  model_type: bert
+  tokenizer_config:
+    cls_token: '[CLS]'
+    mask_token: '[MASK]'
+    pad_token: '[PAD]'
+    sep_token: '[SEP]'
+    unk_token: '[UNK]'
+cardData:
+  tags:
+  - sentence-transformers
+  - sentence-similarity
+  - feature-extraction
+  - generated_from_trainer
+  - dataset_size:4321
+  - loss:MultipleNegativesRankingLoss
+  base_model: Snowflake/snowflake-arctic-embed-s
+  widget:
+  - source_sentence: What are "Authoritative ASes" and their roles relate to TRC?
+    sentences:
+    - 'Research paper detailing the architecture and implementation of a P4-based SCION border router. Explains SCION''s ISD
+      and PCFS concepts in Section 2.1 and how routers use hop fields (HFs) with IFIDs for forwarding. Introduces a modular
+      design with a "bridge header," separating cryptographic validation from forwarding, addressing Tofino''s lack of native
+      cryptographic support. Presents two configurations 1BR+2AES using three pipelines, and 1BR+1AES using only two by recirculating
+      packets, details how AES implementation is deployed and that key expansion is done in the control plane.
+
+      <citation> Lars-Christian Schulz et al.. "Cryptographic Path Validation for SCION in P4." *Proceedings of the 6th on
+      European P4 Workshop*, 2023. </citation>
+
+      <type> research paper </type>
+
+      <page> 2 </page>
+
+      <content>
+
+      EuroP4 ’23, December 8, 2023, Paris, France Lars-Christian Schulz, Robin Wehner, and David Hausheer
+
+      compare it to other existing implementations. Finally, we conclude
+
+      this paper and give a brief outlook on future work.
+
+      2 BACKGROUND
+
+      In this section, we briefly describe the architecture of the SCION
+
+      Internet and the Intel Tofino 2 switch.
+
+      2.1 SCION
+
+      SCION is a path-aware Internet protocol. It introduces Isolation
+
+      Domains (ISDs) as groups of ASes sharing a common jurisdiction.
+
+      SCION is path-aware, i.e., end hosts can choose from available
+
+      forwarding paths and encode the desired one in the SCION header
+
+      as what is known as packet-carried forwarding state (PCFS). Hence,
+
+      the SCION data plane does not rely on longest prefix matching to
+
+      determine the next hop router. Instead, SCION routers examine
+
+      the hop fields (HF) in the SCION header which directly encode the
+
+      AS-level path by means of interface IDs (IFIDs).
+
+      Each AS can uniquely map its IFIDs to a neighbor and even a cer-
+
+      tain link in case there are multiple links to this neighbor. Together
+
+      with the source AS, the chain of ingress and egress IFIDs uniquely
+
+      describes a SCION path. The hop fields are cryptographically signed
+
+      by the AS corresponding to the hop with an AES-CMAC truncated
+
+      to 6 bytes. To avoid forgery of HFs, SCION border routers must
+
+      check the CMAC of every HF they use to make a forwarding deci-
+
+      sion. Packets with invalid HFs should be dropped. In most cases, a
+
+      HF corresponds to a specific border router, requiring each of them
+
+      to only validate a single HF. Hop fields are grouped into segments
+
+      resulting in a special case where a border router has to check two
+
+      HFs when the path switches from one segment to another and the
+
+      AS ingress and egress router happen to be the same device.
+
+      The AES-CMAC is calculated over a 128 bit pseudo-header. As
+
+      this matches up with the block size of the AES cipher, a single round
+
+      of AES encryption is sufficient to generate the authentication tag,
+
+      excluding the subkey derivation AES-CMAC calls for. A precise de-
+
+      scription of the AES-CMAC algorithm is available in the correspond-
+
+      ing RFC [15]. AES-128 is widely supported in commodity server
+
+      hardware, making HF checks much faster than lookups in Internet-
+
+      scale IP routing tables [3]. However, the switching ASICs used in
+
+      hardware routers designed over decades to efficiently forward IP
+
+      traffic do not include AES in their forwarding logic. Fortunately, re-
+
+      cent P4-programmable switches have sufficient match-action stages
+
+      to implement AES in standard P4 [4].
+
+      For more information on SCION we refer to the corresponding
+
+      literature [3, 5, 19].
+
+      2.2 Tofino Architecture
+
+      We develop our SCION border router for Intel Tofino 2 switches.
+
+      The P4 programmable Tofino architecture is an embodiment of the
+
+      Protocol Independent Switching Architecture (PISA) data plane
+
+      model. PISA switches contain three major types of programmable
+
+      components: parsers, deparsers, and match-action units (MAUs). In
+
+      the Tofino architecture, switch pipes consist of an in- and an egress
+
+      pipeline each containing its own parser, MAUs and deparser [18].
+
+      Each switch pipe is hardwired to a set of, in case of Tofino 2, 8x
+
+      400G Ethernet ports [1].
+
+      The number of operations that can be performed per pipeline
+
+      is limited. If a program exhausts the resources of one pipeline, the
+
+      programmer can recirculate packets in order to process them itera-
+
+      tively. If a packet is diverted to a different pipeline and recirculated
+
+      there, there is the option to process the same packet sequentially
+
+      with different P4 programs as each pipeline can be programmed
+
+      independently. This is the key to fit the SCION border router in a
+
+      Tofino 2 switch as described in Section 5.1.
+
+      3 RELATED WORK
+
+      The SCION reference border router is implemented in Go [2] and
+
+      uses regular IP/UDP sockets for packet I/O. Although being multi-
+
+      threaded, the reference border router is not suitable for high traffic
+
+      volume. Schulz et al. have proposed a BPF implementation of SCION
+
+      packet forwarding [14] which achieves a throughput of 0.676 Mpps
+
+      per core within a virtual machine test environment. However, the
+
+      BPF data path has not been integrated in the reference border router
+
+      yet. A commercial DPDK-based SCION router software is available
+
+      from Anapaya Systems [17], but to our knowledge no production-
+
+      ready SCION routers exist in hardware.
+
+      The first attempt at a hardware implementation of SCION was
+
+      made by Součková, targeting a NetFPGA SUME development board
+
+      programmable in P4 [16]. The full 10 Gbit/s line rate of the devel-
+
+      opment platform has been achieved in experiments. However, the
+
+      SCION packet parser and cryptographic validation circuitry did not
+
+      fit in the FPGA at the same time due to inefficient workarounds
+
+      that had to be taken to handle SCION’s non-standard header layout.
+
+      Nevertheless, the project led to improvements to SCION’s header
+
+      layout making it more suitable for high-speed processing.
+
+      A first implementation of SCION for Tofino 1 was presented by
+
+      de Ruiter et al. [7] being capable of processing packets at 100 Gbit/s
+
+      line rate. However, as Tofino does not support cryptographic opera-
+
+      tions in hardware, the AES-CMAC hop field validation in de Ruiter’s
+
+      approach relies on a pre-populated table of valid hop fields. This
+
+      simplification works as current SCION deployments change valida-
+
+      tion keys infrequently. An unfortunate consequence of this design
+
+      is that the SCION router is no longer stateless and instead has to
+
+      communicate with the path discovery and registration services of
+
+      the AS to obtain valid hop fields. Furthermore, the lookup-table
+
+      solution also prevents the deployment of the SCION extensions
+
+      EPIC [
+
+      11] and Colibri [ 9] which rely on MACs that do not just
+
+      change per-path, but per-packet. Nevertheless, the P4 code pub-
+
+      lished by de Ruiter et al. inspired our work and is incorporated in
+
+      our implementation.
+
+      Chen has shown that it is possible to implement an AES encryp-
+
+      tion in a Tofino 1 switch using so called scrambled lookup tables [4].
+
+      Their implementation was limited to an encryption throughput of
+
+      10.92 Gbit/s due to limited recirculation capacity.
+
+      Our work addresses the issues encountered by Součková and de
+
+      Ruiter et al. We implement the SCION packet parsing and validation
+
+      logic separately in different pipelines of a Tofino 2 switch in order
+
+      to bridge the gap between SCION’s requirements and achieving
+
+      line-rate throughput. We furthermore develop an approach to AES
+
+      in P4 that takes full advantage of the resources provided by Tofino 2
+
+      realizing the first 400G line-rate packet validator for SCION.
+
+      18
+
+      </content>'
+    - 'Book excerpt providing an overview of LightningFilter operation. It keeps AS-level aggregates and stores long-term
+      traffic profiles for traffic shaping. Describes a process for rate-limiting based on these, and prediction to account
+      for recent traffic. Emphasizes prevention of source address spoofing and replay attacks using DRKey(§3.2) , SPAO(§3.3),
+      and replay suppression modules. Differentiates authenticated traffic vs. best-effort approach pipelines.
+
+      <citation> Laurent Chuat et al.. *The Complete Guide to SCION. From Design Principles to Formal Verification*. Springer
+      International Publishing AG, 2022. </citation>
+
+      <type> book </type>
+
+      <page> 229 </page>
+
+      <content>
+
+      9.2 High-Speed Trafﬁc Filtering with LightningFilter
+
+      9.2.1.2 Design Goals
+
+      LightningFilter is designed to achieve the following objectives:
+
+      • Guaranteed access for legitimate users within trafﬁc proﬁle: The
+
+      system must ensure that a client in a non-compromised domain (i.e., a
+
+      domain without an adversary) has a guarantee to reach a target domain
+
+      even in the presence of adversaries in other domains. We deﬁne a trafﬁc
+
+      proﬁle as a sequence of measurements over a speciﬁc period of time
+
+      (proﬁling window) on a per-ﬂow basis (ﬂow count). As long as the trafﬁc
+
+      of a ﬂow is within such a trafﬁc proﬁle, its packets are guaranteed to be
+
+      processed.4
+
+      • Enabling traditional ﬁrewalls to ﬁlter packets using metadata: The
+
+      system should enable traditional ﬁrewalls to employ meaningful rule-
+
+      based packet ﬁltering using packet metadata (such as the 5-tuple in the
+
+      packet header). Without LightningFilter, these ﬁltering rules can be cir-
+
+      cumvented by spooﬁng attacks due to the lack of authentication.
+
+      • Elimination of collateral damage across domains: The system should
+
+      guarantee that compromised domains cannot introduce collateral dam-
+
+      age on non-compromised domains by consuming all available resources.
+
+      Legitimate clients within a compromised domain, however, may be af-
+
+      fected by an adversary consuming excessive resources at a target domain.
+
+      This provides an incentive for domain owners to eliminate attack trafﬁc
+
+      sent by their end hosts.
+
+      • Non-goal: Guaranteed trafﬁc delivery to the domain is not a goal of this
+
+      system, but can be achieved by a complementary system in SCION.
+
+      9.2.2 Overview of LightningFilter
+
+      Considering our threat model, the adversary’s goal is to consume all available
+
+      processing resources to prevent legitimate clients from reaching a target ser-
+
+      vice, e.g., by sending an excessive number of requests. To prevent a single en-
+
+      tity from achieving this goal, the available processing resources should be sub-
+
+      divided and distributed among all clients. However, allocating an equal share
+
+      of resources to each entity inhibits high utilization and potentially punishes
+
+      benign trafﬁc. As a consequence, researchers have suggested the use of more
+
+      dynamic approaches, such as history-based ﬁltering [ 213, 407] or binning of
+
+      requests [ 470]. The potentially huge number of clients poses a challenge to
+
+      the former approaches, as storing a trafﬁc history (e.g., packet counters) per
+
+      client is impractical. Instead, we propose to aggregate and store trafﬁc proﬁles
+
+      at the level of domains, i.e., ASes. These trafﬁc proﬁles denote a sequence
+
+      4The replay-suppression system causes a negligible number of packets to be dropped due to
+
+      false positives; however, end hosts must be able to handle packet loss anyway.
+
+      209
+
+      </content>'
+    - "Technical document on SCION CP-PKI trust model and terminology specification. Defines terms like base TRC, TRC signing\
+      \ ceremony, TRC update (regular/sensitive), voting ASes, voting quorum, grace period, trust reset. Explains SCION's\
+      \ trust model with Isolation Domains addressing limitations of monopoly/oligopoly PKI models. Mentions trust agility/resilience,\
+      \ multilateral governance, policy versioning, and lack of IP prefix origin validation by design in contrast to RPKI.\n\
+      <url> https://www.ietf.org/archive/id/draft-dekater-scion-pki-08.txt </url>\n<type> specification </type>\n<content>\n\
+      de Kater, et al.           Expires 3 July 2025                  [Page 5]\n\f\nInternet-Draft                SCION CP-PKI\
+      \                 December 2024\n\n\n   *Authoritative AS*: Authoritative ASes are those ASes in an ISD that\n   always\
+      \ have the latest TRCs of the ISD.  As a consequence,\n   authoritative ASes also start the announcement of a TRC update.\n\
+      \n   *Base TRC*: A base TRC is a trust root configuration (TRC) that other\n   parties trust axiomatically.  In other\
+      \ words, trust for a base TRC is\n   assumed, not derived from another cryptographic object.  Each ISD\n   MUST create\
+      \ and sign a base TRC when the ISD is established.  A base\n   TRC is either the first TRC of the ISD or the result\
+      \ of a trust\n   reset.\n\n   *TRC Signing Ceremony*: The ceremony during which the very first base\n   TRC of an ISD,\
+      \ called the initial TRC, is signed.  The initial TRC is\n   a special case of the base TRC where the number of the\
+      \ ISD is\n   assigned.\n\n   *TRC Update*: A _regular_ TRC update is a periodic re-issuance of the\n   TRC where the\
+      \ entities and policies listed in the TRC remain\n   unchanged.  A _sensitive_ TRC update is an update that modifies\n\
+      \   critical aspects of the TRC, such as the set of core ASes.  In both\n   cases, the base TRC remains unchanged.\n\
+      \n   *Voting ASes*: Those ASes within an ISD that may sign TRC updates.\n   The process of appending a signature to\
+      \ a new TRC is called \"casting\n   a vote\".\n\n   *Voting Quorum*: The voting quorum is a trust root configuration\n\
+      \   (TRC) field that indicates the number of votes (signatures) needed on\n   a successor TRC for it to be verifiable.\
+      \  A voting quorum greater\n   than one will thus prevent a single entity from creating a malicious\n   TRC update.\n\
+      \n   *Grace Period*: The grace period is an interval during which the\n   previous version of a trust root configuration\
+      \ (TRC) is still\n   considered active after a new version has been published.\n\n   *Trust Reset*: A trust reset is\
+      \ the action of announcing a new base\n   TRC for an existing ISD.  A trust reset SHOULD only be triggered\n   after\
+      \ a catastrophic event involving the loss or compromise of\n   several important private keys.\n\n1.2.  Conventions\
+      \ and Definitions\n\n   The key words \"MUST\", \"MUST NOT\", \"REQUIRED\", \"SHALL\", \"SHALL NOT\",\n   \"SHOULD\"\
+      , \"SHOULD NOT\", \"RECOMMENDED\", \"NOT RECOMMENDED\", \"MAY\", and\n   \"OPTIONAL\" in this document are to be interpreted\
+      \ as described in\n   BCP 14 [RFC2119] [RFC8174] when, and only when, they appear in all\n   capitals, as shown here.de\
+      \ Kater, et al.           Expires 3 July 2025                  [Page 6]\n\f\nInternet-Draft                SCION CP-PKI\
+      \                 December 2024\n\n\n1.3.  Trust Model\n\n   Given the diverse nature of the constituents in the current\
+      \ Internet,\n   an important challenge is how to scale authentication of network\n   elements (such as AS ownership,\
+      \ hop-by-hop routing information, name\n   servers for DNS, and domains for TLS) to the global environment.  The\n \
+      \  roots of trust of currently prevalent public key infrastructure (PKI)\n   models do not scale well to a global environment\
+      \ because (1) mutually\n   distrustful parties cannot agree on a single trust root (monopoly\n   model), and because\
+      \ (2) the security of a plethora of roots of trust\n   is only as strong as its weakest link (oligopoly model) - see\
+      \ also\n   [BARRERA17].\n\n   The monopoly model suffers from two main drawbacks: First, all\n   parties must agree\
+      \ on a single root of trust.  Secondly, the single\n   root of trust represents a single point of failure, the misuse\
+      \ of\n   which enables the forging of certificates.  Its revocation can also\n   result in a kill switch for all the\
+      \ entities it certifies.\n\n   The oligopoly model relies on several roots of trust, all equally and\n   completely\
+      \ trusted.  However, this is not automatically better:\n   whereas the monopoly model has a single point of failure,\
+      \ the\n   oligopoly model has the drawback of exposing more than one point of\n   failure.\n\n   Thus, there is a need\
+      \ for a trust architecture that supports\n   meaningful trust roots in a global environment with inherently\n   distrustful\
+      \ parties.  This new trust architecture should provide the\n   following properties:\n\n   *  Trust agility (see further\
+      \ below);\n\n   *  Resilience to single root of trust compromise;\n\n   *  Multilateral governance; and\n\n   *  Support\
+      \ for policy versioning and updates.\n\n   Ideally, the trust architecture allows parties that mutually trust\n   each\
+      \ other to form their own trust \"union\" or \"domain\", and to freely\n   decide whether to trust other trust unions\
+      \ (domains) outside their\n   own trust bubble.\n</content>"
+  - source_sentence: What are the challenges of deploying INT on multi-operator networks like the Internet
+    sentences:
+    - 'Book chapter excerpt, ("SBAS," Section "Secure Route Redistribution"). Details SBAS''s internal full-mesh topology
+      among PoPs using SCION and encrypted iBGP sessions. Introduces three address categories: secure (customer/SBAS-owned),
+      internal (PoP communication), and global (other routable addresses).
+
+      <citation> Laurent Chuat et al.. *The Complete Guide to SCION. From Design Principles to Formal Verification*. Springer
+      International Publishing AG, 2022. </citation>
+
+      <type> book </type>
+
+      <page> 368 </page>
+
+      <content>
+
+      13 Deployment and Operation
+
+      tural abstraction of the underlying infrastructure and provide an interface to
+
+      customers.
+
+      End-to-End Security. In the context of mediating customers’ IP endpoints
+
+      via a secure backbone, the end-to-end communication path can be segmented
+
+      into an external (insecure) segment, which is comprised of the Internet links
+
+      between an IP endpoint and the SBAS ingress/egress point, and an internal
+
+      segment between an arbitrary ingress and egress pair of the secure routing
+
+      infrastructure. Therefore, to ensure end-to-end secure routing, the follow-
+
+      ing conditions must hold: (1) Customers must be able to select trusted in-
+
+      gress/egress points and securely exchange packets with hijack resilience; and
+
+      (2) the secure backbone must deliver the security properties it promised to any
+
+      pairs of ingress/egress points even in the presence of internal adversaries.
+
+      Routing Priority. To enable customers to route trafﬁc from/to the Internet
+
+      through a secure backbone, SBAS must disseminate the customers’ preﬁx an-
+
+      nouncements to all other customers and external entities. Preﬁxes will then be
+
+      announced via SBAS and the Internet, resulting in competing announcements.
+
+      To maximize the ability to route securely, SBAS must be able to convince the
+
+      entities receiving the announcements to prioritize routing paths through the
+
+      secure backbone over the insecure Internet paths.
+
+      13.5.3.2 Secure Route Redistribution
+
+      The internal structure of SBAS can be abstracted to a full-mesh topology be-
+
+      tween the PoPs, which communicate over SCION. Over these connections,
+
+      the PoPs redistribute announcements from SBAS customers as well as the In-
+
+      ternet, akin to the operation of iBGP in a regular AS. To prevent tampering by
+
+      non-PoP members, the iBGP sessions run over an encrypted and authenticated
+
+      connection (such as a VPN tunnel).
+
+      SBAS offers a high degree of ﬂexibility to its customers through support for
+
+      dynamic route redistribution. Contrary to a traditional AS, which is controlled
+
+      by a single entity, the redistribution scheme to be used in SBAS must support
+
+      its federated structure and remain secure in the presence of malicious mem-
+
+      bers. In the following, we describe the design and security aspects of the route
+
+      redistribution mechanism.
+
+      The system distinguishes between three categories of addresses:
+
+      • Secure addresses: This includes preﬁxes announced by SBAS cus-
+
+      tomers and SBAS-owned address spaces, which are assigned to cus-
+
+      tomers. Secure address spaces are announced publicly at egress points
+
+      via BGP.
+
+      • Internal addresses: In order to provide an internal addressing scheme
+
+      among PoPs, e.g., to set up iBGP sessions between PoP routers, the PoPs
+
+      348
+
+      </content>'
+    - 'Research paper titled "ID-INT: Secure Inter-Domain In-Band Telemetry" proposing ID-INT, a SCION extension for secure,
+      authenticated in-band telemetry. Leverages SCION''s PKI and DRKey for data plane authentication, enabling applications
+      like intra-AS path tracing, congestion control, and carbon-aware routing. Implemented in the SCION stack with an AS-hosted
+      telemetry collector. Evaluation shows minimal performance impact on routers with authentication-only mode and up to
+      a 13% throughput decrease with encryption.
+
+      <citation> Lars-Christian Schulz et al.. "ID-INT: Secure Inter-Domain In-Band Telemetry." *2024 20th International Conference
+      on Network and Service Management (CNSM)*, 2024. </citation>
+
+      <type> research paper </type>
+
+      <page> 1 </page>
+
+      <content>
+
+      ID-INT: Secure Inter-Domain In-Band Telemetry
+
+      Lars-Christian Schulz
+
+      OVGU Magdeburg
+
+      Magdeburg, Germany
+
+      lschulz@ovgu.de
+
+      David Hausheer
+
+      OVGU Magdeburg
+
+      Magdeburg, Germany
+
+      hausheer@ovgu.de
+
+      Abstract—In-band network telemetry (INT) is a powerful tool
+
+      for gathering status information from network components in
+
+      a distributed and timely way. Until now, INT has mostly been
+
+      deployed in data center environments or single operator W ANs,
+
+      because it lacks mechanisms for authentication and is not widely
+
+      standardized. SCION is a novel, path-based Internet architecture
+
+      providing strong resilience and security properties. In this paper,
+
+      we propose Inter-domain In-band Network Telemetry (ID-INT)
+
+      as a protocol extension for SCION. ID-INT leverages SCION’s
+
+      public key infrastructure to authenticate telemetry data while
+
+      augmenting SCION’s end host path control with real-time
+
+      network information. Promising applications of ID-INT include
+
+      intra-AS path tracing, congestion control, SLA verification, and
+
+      carbon-aware routing. We implement ID-INT in the open-source
+
+      SCION stack and provide a proof of concept for an AS-hosted
+
+      telemetry collection service. We show that cryptographically
+
+      authenticated ID-INT can be fully implemented in the SCION
+
+      router’s fast-path with no measurable impact on router per-
+
+      formance. If optional encryption is employed in addition to
+
+      authentication, router throughput drops by no more than 13%
+
+      even if every packet carries telemetry.
+
+      Index Terms—In-band Network Telemetry, SCION, W AN
+
+      I. I NTRODUCTION
+
+      Network monitoring and measurement is an integral part of
+
+      any network operator’s toolkit. In order to meet the demands
+
+      of modern real-time applications, constant monitoring of the
+
+      network’s status and performance is required. Traditionally,
+
+      networks have been monitored through active measurements
+
+      using probe packets, e.g., using the well-known ping and
+
+      traceroute commands, or through passive traffic monitoring
+
+      at routers. Passive monitoring is usually employing sampling
+
+      techniques as observing every single packet is costly.
+
+      With the advent of SDN, programmable data planes, and
+
+      P4, a new network monitoring paradigm emerged in the form
+
+      of push-based network telemetry. Telemetry-enabled devices
+
+      push network measurements to a central controller, instead
+
+      of waiting for the controller to poll monitoring data. Fully
+
+      programmable network devices like Intel’s Tofino [1] enable
+
+      to push telemetry one step further by offloading the collection
+
+      of telemetry metadata entirely to the data plane. Noticeably,
+
+      the INT specification [2] was developed as a standardized way
+
+      to exchange telemetry information between network entities.
+
+      The INT framework is related to a number of earlier systems
+
+      all based around the idea of embedding telemetry instructions
+
+      and is some cases metadata as well in packet headers [3],
+
+      [4]. INT has in turn inspired research on advanced in-band
+
+      telemetry protocols like ML-INT for optical networks [5]
+
+      and probabilistic approaches like PINT [6]. All these systems
+
+      have in common that they can only be deployed in networks
+
+      under shared administrative control. Additionally, security and
+
+      privacy aspects have largely been ignored, precluding Internet-
+
+      wide deployment.
+
+      The SCION Internet architecture [7] has been developed
+
+      to address the lack of security-by-design in today’s Internet
+
+      based on the Border Gateway Protocol (BGP). BGP’s design
+
+      limitations have caused numerous outages. SCION provides
+
+      a public key infrastructure for authenticating network entities
+
+      and allows multiple roots of trust to coexist. Another core
+
+      feature of SCION is that it is a path-based routing protocol.
+
+      End hosts include the AS-level forwarding path in packet
+
+      headers to eliminate uncertainties in traditional routing. The
+
+      same property also allows end hosts to send traffic to a specific
+
+      destination over multiple parallel paths to increase reliability
+
+      and aggregate bandwidth. SCION has been successfully de-
+
+      ployed in both research [8] and commercial networks [9] and
+
+      already reaches hundreds of thousands devices. A challenge
+
+      of the end host routing approach is to provide sufficient
+
+      information for making routing decisions to hosts. Current
+
+      solutions (cf. [10]–[12]) are based on control plane messages
+
+      and cannot provide real-time feedback from routers to hosts.
+
+      Therefore, SCION path selection is mostly based on end-to-
+
+      end measurements, which become challenging as the number
+
+      of available paths grows with the number of SCION ASes.
+
+      In order to address the absence of real-time telemetry in
+
+      SCION and INT’s lack of an authentication infrastructure and
+
+      inter-operator compatibility, we introduce Inter-Domain In-
+
+      band Network Telemetry (ID-INT). ID-INT relies on SCION’s
+
+      Dynamically Recreatable Key (DRKey) system to provide
+
+      efficient message authentication in the data plane and in turn
+
+      allows SCION end host to make informed routing decisions.
+
+      This work is structured as follows: We continue with a
+
+      brief description of SCION in section II and provide an
+
+      overview of related work in and outside the SCION ecosystem
+
+      in section III. ID-INT’s design is presented in section IV.
+
+      section V provides details on our prototype implementation
+
+      which we evaluate for throughput and overhead in section VI,
+
+      before we discuss potential extensions to the protocol in
+
+      section VII. Finally, section VIII gives an outlook on a wide
+
+      range of applications, while section IX concludes this paper.
+
+      2024 20th International Conference on Network and Service Management (CNSM)
+
+      978-3-903176-66-9 ©2024 IFIP
+
+      </content>'
+    - 'Master''s thesis excerpt detailing scoring functions for "passive" and "active" path selection mechanisms in SCION.
+      "Passive" mechanism modifies QoE function (Equation 4.4), with increased loss penalty: `5000 * loss` (if loss < 0.05).
+      Describes "passive" mechanism behavior: initial path selection by lowest latency with increasing sending rate, switching
+      when significant loss occurs.
+
+      <citation> Pascal Marc Suter. *Traffic Engineering in SCION: The impact of end host QoS mechanisms on network performance*.
+      Master''s thesis, ETH Zurich, 2023. </citation>
+
+      <type> research paper </type>
+
+      <page> 44 </page>
+
+      <content>
+
+      5.2. Implementation details
+
+      Table 5.1: Sending rates considered by other works and chosen bitrates in Mbps.
+
+      Title Low Medium High
+
+      Can you see me now?: a measurement
+
+      study of Zoom, Webex, and Meet [54]
+
+      0.5 - 1 2.5 - 2.6
+
+      Zoom Session Quality: A Network-
+
+      Level View [55]
+
+      1 - 1.5 3 - 6
+
+      Measuring the performance and net-
+
+      work utilization of popular video con-
+
+      ferencing applications [21]
+
+      0.8 - 1.9
+
+      Chosen bitrates 0.7 1.5 5
+
+      The scoring functions differ between the mechanisms. For the ’naive’ and
+
+      ’shortest path’ mechanisms, the application will select the path at the begin-
+
+      ning. ’Naive’ chooses uniformly at random from all available paths while
+
+      ’shortest path’ chooses uniformly at random from the subset of the shortest
+
+      paths, i.e.,the paths with the fewest hops or fewest ASes in it. Shortest path
+
+      does not necessarily mean paths with the lowest latency but paths with the
+
+      fewest hops. The selected path gets a high score and all others a low score.
+
+      The score is set to low score when the sending rate is higher or equal than
+
+      previously and there was loss previously except for low sending rates. This
+
+      gives them the behavior of starting at a low sending rate, increasing when
+
+      no loss is detected and decreasing when it is, mirroring the functionality of
+
+      ABR. These two mechanisms do not require any probing.
+
+      The ’passive’ mechanism uses latency only probing. The core of its scoring
+
+      function is the score function defined in Equation 4.4. That function scores
+
+      the QoE for VCAs and as the mechanisms are supposed to optimize the
+
+      quality, it is a good starting point. However, early testing showed that this
+
+      is too accepting of loss, only changing paths or sending rate after 10% of
+
+      loss occurs. After 10% the score drops significantly and to avoid that, the
+
+      scoring function used internally by the mechanisms has a lower threshold.
+
+      The internal score function is given by replacing Equation 4.2 with
+
+      penalty loss =
+
+      (
+
+      5000 ∗ loss if loss < 0.05
+
+      104 ∗ loss else (5.2)
+
+      It punishes loss more; this is to get a tradeoff between optimizing for QoE
+
+      and limiting congestion.
+
+      There are some more modifications for the implementation. The loss on
+
+      a path is only known when traffic was sent, otherwise it will be assumed
+
+      zero. Additionally, the ’passive’ mechanism also performs a sending rate
+
+      selection similar to ’naive’ and ’shortest path’. When sending over a new
+
+      path, i.e., a path that was not sent over since the last probing and for which
+
+      37
+
+      </content>'
+  - source_sentence: What is the default output of the `scion-pki key public` command
+    sentences:
+    - "Research paper section on a Security Analysis of PILA. Addresses potential MitM attacks, downgrade attacks, and key\
+      \ compromises. Describes how PILA prevents or mitigates these attacks, local responder-side attackers, Responder-Side\
+      \ NAT attackers, and details how key compromises can be detected and their impact is limited.\n<citation> Cyrill Krähenbühl\
+      \ et al.. \"Ubiquitous Secure Communication in a Future Internet Architecture.\" SN Computer Science, vol. 3, no. 5,\
+      \ 2022, pp. . </citation>\n<type> research paper </type>\n<page> 9 </page>\n<content>\nSN Computer Science         \
+      \  (2022) 3:350  \n Page 9 of 13   350 \nSN Computer Science\nresponder can query either the certificate service or\
+      \ the local \nNAT, see “NAT Devices”, and check for duplicate certifi-\ncates for its identifiers.\nResponder-Side NAT\
+      \ or AS Attacker. A malicious AS \nor a malicious NAT device on the responder side cannot \nimmediately be detected.\
+      \ They do, however, create irrefuta-\nble cryptographic proof of misbehavior in the form of con-\nflicting end-host\
+      \ certificates valid at the same point in time. \nThese certificates can be stored locally or published on an \nappend-only\
+      \ log server and later be compared through an \nout-of-band channel or audited by another entity.\nOther Attackers.\
+      \ Other entities, such as a malicious AS \nor NAT device on the initiator’s side or an attacker in the \ninitiator’s\
+      \ local network, cannot perform an MitM attack, \nsince they cannot forge valid responder certificates.\nDowngrade Attacks\n\
+      In this section, we analyze the three downgrade prevention \napproaches explained in Downgrade Prevention. In a down-\n\
+      grade attack, an attacker attempts to convince the initiator \nconnecting to an unknown responder that the responder’s\
+      \ \nAS does not support PILA or that the responder does not \nallow the desired PILA-supported protocol. However, care\
+      \ \nmust be taken that the downgrade prevention approaches do \nnot introduce an additional DoS vector where a non-PILA-\n\
+      enabled end-host is prevented from communicating with a \nPILA-enabled end-host.\nSignature-Based and Log-Based Approaches.\
+      \ Both \nthe signature-based (“Signature-based Approach ”) and \nlog-based (“Log-based Approach”) approaches prevent\
+      \ \ndowngrade attacks, since an attacker is not able to forge \nvalid signatures for bogus statements which claim that\
+      \ a \nPILA-enabled end-host does not support PILA. Replaying \na (potentially different) out-of-date statement is prevented\
+      \ \nby the time stamps within the statements and due to the \nassumption of time synchronization (see 3 ). For the same\
+      \ \nreason, an attacker cannot use an out-of-date statement \nwhich claims that a non-PILA-enabled host supports PILA\
+      \ \nas a DoS vector, since this statement will be rejected by the \nrelying end-host.\nSelf-verifiable Approaches. We\
+      \ separate between the \ntwo self-verifiable address approaches explained in Self-\nVerifiable Approach: address range\
+      \ reservation and IPv6 \naddress encoding.\nIf an AS reserves an IP address range for PILA-enabled \ntraffic, then an\
+      \ attacker can neither downgrade (since the \nrelying end-host can locally check whether the remote end-\nhost is within\
+      \ the IP address range) nor use it as a DoS vector \n(since only PILA-enabled end-hosts are assigned to this IP \naddress\
+      \ range).\nFor the self-verifiable IPv6 address encoding approach, \nan attacker cannot perform a downgrade attack since\
+      \ the two \ncommunicating end hosts will perform the same determinis-\ntic computation to verify whether the end-host\
+      \ has encoded \nPILA support in the IP address. Regarding a potential DoS \nvector, we consider two attackers: an on-path\
+      \ attacker which \ncan and an on-path attacker which cannot influence the net-\nwork prefix of the IPv6 address of an\
+      \ end-host. We assume \nthe worst case, where the attacker can predict the device \naddress that will be chosen by the\
+      \ end-host. The attacker’s \ngoal is to make the non-PILA-enabled end-host choose an \nIPv6 address that indicates PILA\
+      \ support.\n• If the attacker cannot influence the network prefix and \nthus cannot impact the final IPv6 address chosen\
+      \ by the \nnon-PILA-enabled end-host, the probability of a DoS for \nthe non-PILA-enabled end host remains unchanged\
+      \ from \nthe case without any attacker ( 2−32).\n• If the attacker can influence the network prefix and pre-\ndict the\
+      \ device address, then the attacker could poten-\ntially fabricate a network prefix, such that there is a hash \ncollision\
+      \ on the leftmost 32 bit of the device address. \nThis would prevent the non-PILA-enabled end-host from \ncommunicating\
+      \ with a PILA-enabled end-host. However, \nit is very likely that an attacker with the capability of \ncontrolling the\
+      \ routing within the AS can simply drop \nunwanted traffic, which is in comparison a much stronger \nand more effective\
+      \ attack.\nPrivate Key Compromise\nThe severity of a compromised private key depends on the \nentity and the lifetime\
+      \ of the certificate belonging to this key.\nKey compromises of entities in the SCION control-plane \ndelegation chain\
+      \ are relatively easy to detect if abused, since \nthere would be ASes with multiple valid certificates for an \nISD\
+      \ and AS number with different public keys. AS key com-\npromises are similarly easy to detect but only allow forging\
+      \ \nsigned PILA messages within the compromised AS. End-\nhost key compromises are less severe, as end-host certifi-\n\
+      cates are short-lived. In RPKI-based PILA, a compromised \ntrust root impacts the authenticity of all end hosts. In\
+      \ com-\nparison, a compromised (ISD) trust root in SCION-based \nPILA only impacts the authenticity of end-hosts within\
+      \ this \nISD. Additionally, a single (or a few) compromised control-\nplane CAs can be removed from the set of trusted\
+      \ CAs by \nupdating the trust root configuration (TRC) which specifies \nall control-plane CAs.\nAttacking AS Trust\n\
+      Attackers might attempt to reduce the trustworthiness of an \nAS. Slander, i.e., accusing a benign, uncompromised AS\
+      \ \nof having issued incorrect certificates, is not possible in \n</content>"
+    - "Documentation document for the scion-pki key private command, which generates a PEM-encoded private key with selectable\
+      \ elliptic curve (P-256, P-384, P-521). Defaults to P-256. The --force option controls overwriting the keyfile.\n<url>\
+      \ https://docs.scion.org/en/latest/command/scion-pki/scion-pki_key_public.html </url>\n<type> documentation </type>\n\
+      <content>\n# scion-pki key public\n\n# scion-pki key public\n\nGenerate public key for the provided private key\n\n\
+      ## Synopsis\n\n‘public’ generates a PEM encoded public key.\n\nBy default, the public key is written to standard out.\n\
+      \n```\nscion-pki key public [flags] <private-key-file>\n```\n\n## Examples\n\n```\nscion-pki key public cp-as.key\n\
+      scion-pki key public cp-as.key --out cp-as.pub\n```\n\n## Options\n\n```\n--force        Force overwritting existing\
+      \ public key\n-h, --help         help for public\n    --kms string   The uri to configure a Cloud KMS or an HSM.\n \
+      \   --out string   Path to write public key\n```\n\n## SEE ALSO\n\n- scion-pki key   - Manage private and public keys\n\
+      \n\n</content>"
+    - 'Book excerpt ("Bootstrapping Steps, Discovery Mechanisms") detailing the steps of the end-host bootstrapper daemon
+      using DHCP, DNS and mDNS and configuration file download. Explanations focus on operation of discovery mechanisms in
+      environments with managed DHCP servers or DNS infrastructure.
+
+      <citation> Laurent Chuat et al.. *The Complete Guide to SCION. From Design Principles to Formal Verification*. Springer
+      International Publishing AG, 2022. </citation>
+
+      <type> book </type>
+
+      <page> 348 </page>
+
+      <content>
+
+      13 Deployment and Operation
+
+      the bootstrapper daemon and starts the SCION Daemon once the bootstrapper
+
+      daemon ﬁnishes successfully.
+
+      Bootstrapping Steps. The end host bootstrapper daemon performs the fol-
+
+      lowing steps:
+
+      1. Probe the local network for hints about a bootstrapping server address us-
+
+      ing the available discovery mechanisms (i.e., DHCP, DNS, and mDNS).
+
+      2. Wait for hints from the discoverers.
+
+      3. Once a hint is received, try to download the TRCs and the topology
+
+      of the AS from the bootstrapping server. While there is no maximum
+
+      amount of TRCs to be served, the bootstrapping server must provide at
+
+      least the TRC of the ISD in which the AS is located.
+
+      a) On success, prepare the SD’s ﬁles and exit successfully; the SD is
+
+      then automatically started by the orchestrator.
+
+      b) On failure, go back to step 2.
+
+      If no hint is received after a certain period, the bootstrapper daemon times
+
+      out and exits with a non-zero value.
+
+      Note that the TRCs retrieval is a transition solution to ease adoption; ideally
+
+      they are installed on a device out-of-band, before the device gets connected to
+
+      a network (more details are given in the security considerations on page 331).
+
+      13.2.3 Discovery Mechanisms
+
+      A bootstrapper can leverage DHCP, DNS or mDNS in order to ﬁnd the IP
+
+      address of the bootstrapping server. We describe each case, where we assume
+
+      that
+
+      • the end host is located in the example.comdomain; and
+
+      • the IP address of the bootstrapping server is 192.168.1.1.
+
+      DHCP. The DHCP mechanism relies on the presence of an existing DHCP
+
+      server in the network. This mechanism is advantageous in environments where
+
+      there is a managed DHCP server, but no dedicated DNS infrastructure is oper-
+
+      ated for the local network.
+
+      The DHCP server has to be conﬁgured to announce the address of the dis-
+
+      covery services using one of the DHCP options. One natural choice is to use
+
+      the option ﬁeld with ID 72 “Default WWW server”, given that HTTP, the same
+
+      application-level protocol as used in the WWW, is used to retrieve the conﬁg-
+
+      uration ﬁles. In our example, we would set the option value to 192.168.1.1.
+
+      328
+
+      </content>'
+  - source_sentence: How might operators of large replicated services manage their own ISD
+    sentences:
+    - 'Research paper on PISKES providing background on source address validation limitations (SAV/BCP 38), cookie-based systems,
+      and client certificates. Discusses limitations of key-distribution systems like Passport and extends on prior work,
+      DRKey, to form the new PISKES design.
+
+      <citation> Benjamin Rothenberger et al.. "PISKES: Pragmatic Internet-Scale Key-Establishment System." *Proceedings of
+      the ACM Asia Conference on Computer and Communications Security (ASIACCS)*, 2020. </citation>
+
+      <type> research paper </type>
+
+      <page> 3 </page>
+
+      <content>
+
+      section. Here we focus on several representative and well-known
+
+      systems—an exhaustive overview of related work is provided in §8.
+
+      3.1 Authentication Systems
+
+      3.1.1 Source Address Validation. Source address validation (SAV),
+
+      also known as best current practice (BCP) 38 [ 24], is not an au-
+
+      thentication system in the strict sense but is still often considered
+
+      a solution to source-address spoofing in the Internet. With SAV,
+
+      ASes monitor traffic originating from their own hosts and filter
+
+      out packets with a source address outside their own address space.
+
+      However, due to incentive misalignments,2 the adoption of SAV
+
+      has been slow and a recent study found that many ASes still do
+
+      not employ it in their networks [46]. Furthermore, it is impossible
+
+      to determine from the outside if a particular AS employs SAV or if
+
+      a particular packet originated from an AS that employs SAV as it
+
+      does not carry any proof of authenticity. For an external service it is
+
+      therefore impossible to filter traffic based on whether it originated
+
+      from an AS employing SAV. Even with a full deployment of SAV
+
+      in the Internet, on-path adversaries would still be able to spoof
+
+      the source of packets and SAV thus provides very weak security
+
+      properties. There exists a wide range of other filtering techniques
+
+      with similarly limited properties [4, 21, 34, 43, 56].
+
+      3.1.2 Cookies. Several protocols, including TLS [63], IKEv2 [38],
+
+      and DNS [22] define a cookie mechanism to provide a weak form
+
+      of source authentication. The basic mechanism for these systems is
+
+      similar: Upon receiving a request, the server replies to the sender
+
+      with a cookie that encodes the request parameters without allo-
+
+      cating state or processing the request. Only after receiving this
+
+      cookie back from the source, the request is processed. Compared
+
+      to SAV, cookies have the advantage that they can be enforced by
+
+      services without relying on Internet service providers (ISPs) to
+
+      perform filtering. However, cookies introduce additional latency
+
+      of one round-trip time (RTT) and are still susceptible to spoofed
+
+      packets by on-path adversaries.
+
+      3.1.3 Client Certificates. Strong authentication properties can be
+
+      achieved through asymmetric cryptography and client certificates.
+
+      These are supported, for example, by TLS [63] and DTLS [64]. How-
+
+      ever, authentication using client certificates requires expensive
+
+      asymmetric cryptography in violation of our efficiency require-
+
+      ments (§2.1.2). Furthermore, these systems cannot authenticate the
+
+      first packet and are vulnerable to signature-flooding attacks.
+
+      3.2 Key-Distribution Systems
+
+      3.2.1 Passport. Passport [44] provides mechanisms to establish
+
+      shared keys between any pair of ASes based on a DH key exchange
+
+      piggybacked on BGP messages. It relies on a secure routing system
+
+      to ensure the authenticity of the shared keys, which can subse-
+
+      quently be used to authenticate the source of packets at the network
+
+      layer. For our purposes (see §2), Passport by itself is inadequate for
+
+      several reasons: (i) it only enables authentication at the AS level,
+
+      (ii) it requires authenticating systems to keep a store of symmetric
+
+      keys for all ASes (currently approximately 68 000 [6]), (iii) it has
+
+      2The costs of deploying SAV are paid by an AS itself while its benefits are experienced
+
+      by the rest of the Internet.
+
+      Table 1: Notation used in this paper.
+
+      ∥ bitstring concatenation
+
+      𝐴,𝐵 autonomous systems (ASes) identified by AS number (ASN)
+
+      𝐻𝐴, 𝐻𝐵 end hosts identified by IP address
+
+      𝐾𝑆𝐴, 𝐾𝑆𝐵 key servers located in a specific AS
+
+      𝑆𝑉𝐴 AS 𝐴’s local secret value
+
+      𝑆𝑉𝑝
+
+      𝐴 AS 𝐴’s local secret value for protocol 𝑝
+
+      ˜𝐾𝑝
+
+      • symmetric key derived (indirectly) from 𝑆𝑉𝑝
+
+      𝐾𝐴→𝐵 symmetric key between ASes 𝐴and 𝐵, derived from 𝑆𝑉𝐴
+
+      𝐾𝑝
+
+      𝐴→𝐵 symmetric key between ASes 𝐴and 𝐵for protocol 𝑝
+
+      𝐾𝑝
+
+      𝐴→𝐵:𝐻𝐵
+
+      symmetric key between AS 𝐴and end host 𝐻𝐵 in AS 𝐵for pro-
+
+      tocol 𝑝
+
+      𝐾𝑝
+
+      𝐴:𝐻𝐴→𝐵:𝐻𝐵
+
+      symmetric key between end host 𝐻𝐴 in AS 𝐴and end host 𝐻𝐵
+
+      in AS 𝐵for protocol 𝑝
+
+      H(·) non-cryptographic hash operation
+
+      MAC𝐾(·) message authentication code using key 𝐾
+
+      PRF𝐾(·) pseudorandom function using key 𝐾
+
+      {𝑋}𝑃𝐾𝐴 public-key encryption of 𝑋 using AS 𝐴’s public key
+
+      {𝑋}𝑃𝐾−
+
+      𝐴 public-key signature over 𝑋 using AS 𝐴’s private key
+
+      no mechanism to delegate keys to certain services. Other systems,
+
+      such as Kerberos [54], are reviewed in §8.
+
+      3.2.2 DRKey. Dynamically Recreatable Keys (DRKeys) have been
+
+      proposed to efficiently derive and distribute symmetric shared keys
+
+      between routers and end hosts in the context of Origin and Path
+
+      Trace (OPT) [41], a system providing path validation. The system
+
+      has later been generalized and embedded in the SCION Internet
+
+      architecture [58]. DRKey’s fundamental idea is that each AS 𝐴
+
+      can efficiently derive a key hierarchy starting from a secret value
+
+      𝑆𝑉𝐴, providing keys shared with other ASes, 𝐾𝐴→𝐵, and end hosts,
+
+      𝐾𝐴→𝐵:𝐻𝐵. By periodically exchanging the keys 𝐾𝐴→𝐵 between
+
+      ASes, from which host-level keys can be derived, DRKey enables
+
+      an efficient global distribution of symmetric keys.
+
+      DRKey fulfills most of our requirements to a key-distribution
+
+      system and thus provides the basis of PISKES. However, PISKES
+
+      refines and extends the existing DRKey system [58] in several sig-
+
+      nificant ways: (i) PISKES modifies DRKey to make it applicable to
+
+      the current Internet in addition to SCION; (ii) it adds efficient mech-
+
+      anisms to delegate specific keys to services in an AS; (iii) it specifies
+
+      many of its important practical aspects in further detail; and (iv) it
+
+      fixes recently discovered vulnerabilities of DRKey’s key-exchange
+
+      mechanisms due to an inadequate application of signatures [33].
+
+      4 KEY DERIVATION AND DISTRIBUTION
+
+      In this section, we present the key-derivation and -distribution
+
+      mechanisms used for PISKES. This is based on the DRKey sys-
+
+      tem [58], but we significantly extend it with additional delegation
+
+      mechanisms and other optimizations, see also §3.2.2. Furthermore,
+
+      we also formally model and verify security properties of this key-
+
+      distribution system, see §7.1.
+
+      We first provide a high-level overview to convey an intuition
+
+      of the operation of our system. Figure 1 shows the basic use case
+
+      of PISKES, where a host 𝐻𝐴 in AS 𝐴desires to communicate with
+
+      a server 𝑆𝐵 in AS 𝐵, and 𝑆𝐵 wants to authenticate the network
+
+      </content>'
+    - 'Book chapter on SCION Control Plane explaining path exploration (beaconing). Describes PCB initiation and propagation
+      by beacon servers. Covers intra-ISD beaconing (up/down segments) and core beaconing (core segments). Details initial
+      PCB creation with initial ASE containing hop field (HF0) with empty ingress interface and specified egress interface.
+      Mentions use of one-hop paths and service addresses for beacon dissemination.
+
+      <citation> Laurent Chuat et al.. *The Complete Guide to SCION. From Design Principles to Formal Verification*. Springer
+      International Publishing AG, 2022. </citation>
+
+      <type> book </type>
+
+      <page> 90 </page>
+
+      <content>
+
+      4 Control Plane
+
+      4.2.1 Initiating Beaconing
+
+      Each core AS, through its beacon service, periodically initiates the path explo-
+
+      ration process by creating an initial PCB and propagating it. The PCB is either
+
+      sent to a child AS (in the case of intra-ISD beaconing) or to other core ASes
+
+      (in the case of core beaconing). The beacon service inserts (among other infor-
+
+      mation) the initial AS entry ASE0 in the PCB. In the intra-ISD case, the initial
+
+      PCB can optionally contain peer entries to non-core ASes. The hop entry HE
+
+      inside ASE0 includes an initial hop ﬁeld with the ingress interface identiﬁer set
+
+      to ‚ (which indicates an empty value):
+
+      HF0 “ x FlagsHF } ExpTime } ‚ } ConsEgress } HFAuthy. (4.9)
+
+      The initial hop ﬁeld denotes the extremity of a path segment and authenti-
+
+      cates a forwarding decision for every packet that
+
+      • enters the AS through the interface ConsEgress and terminates in the
+
+      AS;
+
+      • originates from the AS and exits through the interface ConsEgress; or
+
+      • switches to another path segment at this AS (using one of the possible
+
+      path-segment combinations, as described in § 5.5).
+
+      The beacon service then signs the PCB and sends it to a border router (which
+
+      corresponds to the ConsEgress identiﬁer as speciﬁed in the hop ﬁeld).
+
+      PCBs are disseminated within packets addressed to the beacon service using
+
+      the corresponding service address (see § 4.6). Furthermore, the special one-
+
+      hop path is used to initiate the communication to a neighboring beacon service
+
+      (see § 5.4.1). This is necessary because there may not be a full forwarding
+
+      path available for beaconing. Indeed, the discovery of such paths in turn relies
+
+      on beaconing. The purpose of one-hop paths is thus to break this circular
+
+      dependency.
+
+      During core beaconing, the neighboring AS that receives the PCB can be
+
+      in the same or in a different ISD. The ISD identiﬁer included in the PCB’s
+
+      signature metadata describes only the ISD of the PCB’s originator.
+
+      4.2.2 Propagating PCBs
+
+      After beaconing is initiated, each PCB is propagated in the following way:
+
+      The ingress border router of the next AS in the beaconing path receives the
+
+      PCB, detects that the destination is a SCION service address, and sends it
+
+      to the AS’s beacon service. The beacon service veriﬁes the structure and all
+
+      signatures on the PCB. The PCB contains the version numbers of the TRC(s) 3
+
+      and certiﬁcate(s) that must be used to verify the signatures. This enables the
+
+      3Even within a single ISD, there can be multiple valid TRCs at the same time, see § 3.1.6.
+
+      70
+
+      </content>'
+    - 'Research paper describing the "Multiple Advertisements" approach for Anycast in SCION. Proposes advertising the same
+      AS number from multiple locations, leveraging SCION''s path servers. Discusses addressing limitations (single ISD) and
+      potential workarounds.
+
+      <citation> Dennis Eijkel. "Anycast in the SCION Internet Architecture." 2022. </citation>
+
+      <type> research paper </type>
+
+      <page> 20 </page>
+
+      <content>
+
+      Addressing
+
+      In the multiple advertisements solution, the same AS number is advertised from different points
+
+      in the network, thus making the AS replicated and therefore also the services that reside inside
+
+      of it. A SCION address is a triple of (ISD, AS, address) and does not allow for multiple ISD
+
+      or AS identifiers in a single address. Therefore to have a single address for all of the different
+
+      replicas that make up the service, all of the replicas must be put in the same AS that resides in
+
+      a single ISD. A way to work around this limitation would be to extend the addressing format of
+
+      SCION, either by allowing multiple ISD identifiers in the same address or a wildcard instead of
+
+      the ISD identifier.
+
+      Putting a wildcard in the address in the place of the ISD identifier would make that the
+
+      address does not have the hijacking protection through isolation that regular SCION addresses
+
+      have, thus possibly allowing for hijacking of routes. This means that traffic for that wildcard
+
+      address can route to any ISD that hosts that AS number in their network, the rightful owner of
+
+      the AS number has no control over which ISDs the traffic intended for their network would end
+
+      up.
+
+      Putting multiple ISD identifiers in a single address would mean that we would get practically
+
+      the same system as the naming solution described in Section 3.3, where instead of through the
+
+      naming system, alternate replicas are given in a single address.
+
+      The conclusion is that both of these workarounds are not favorable.
+
+      ISD considerations
+
+      Considering the issues that exist around the addressing described before, replicated AS would
+
+      be part of a (single) regular ISD that might also have ASes that are not replicated. But it is also
+
+      possible to have dedicated ISD(s) for replicated services. These could come in multiple different
+
+      forms.
+
+      Operators of big replicated services might want to run their own ISD. These ISDs would
+
+      then only have core ASes or only a limited number of non-core ASes. The core ASes would
+
+      then have many peerings with other ISD cores at different geographical locations. Replicated
+
+      service operators are probably not interested in providing transit for traffic through their ISD,
+
+      thus they would not propagate beacons that would lead to paths that travel through their ISD
+
+      being created.
+
+      Another scenario could be that there are third parties that operate an anycast ISD and
+
+      provide transit service to customers that want to operate a replicated service. The anycast ISD
+
+      operator would operate the ISD core ASes and peer those with many other cores. Customers
+
+      can then peer at multiple locations with (some of) the anycast core(s).
+
+      19
+
+      </content>'
+  - source_sentence: How is the concept of configurable rates in Z-Lane intended to accommodate varying traffic demands
+    sentences:
+    - 'Research paper setup description section detailing the specific SCIONLab configuration, including AS creation, attachment
+      to ETHZ-AP, and VM setup. Lists and describes SCION applications crucial the experiments: ''scion address'', ''scion
+      showpaths'', ''scion ping'', ''scion traceroute'', and ''scion-bwtestclient'', including their options and parameters(like
+      packet size, bandwidth target) for performance evaluation on the network.
+
+      <citation> Antonio Battipaglia et al.. "Evaluation of SCION for User-driven Path Control: a Usability Study." *Proceedings
+      of the SC ''23 Workshops of The International Conference on High Performance Computing, Network, Storage, and Analysis*,
+      2023. </citation>
+
+      <type> research paper </type>
+
+      <page> 3 </page>
+
+      <content>
+
+      Evaluation of SCION for User-driven Path Control: a Usability Study SC-W 2023, November 12–17, 2023, Denver, CO, USA
+
+      Figure 1: SCIONLab Topology: in light orange there are Core ASes; Non-Core ASes are white colored; Attachment Points
+      are
+
+      green; our AS is blue.
+
+      help us run specific experiments we will discuss in later sections.
+
+      Once this configuration phase was completed, SCIONLab web inter-
+
+      face provided a unique ASN for our AS, along with cryptographic
+
+      keys and public-key certificates. Subsequently, a Vagrant file for
+
+      our AS was generated to instruct the configuration of a Virtual
+
+      Machine (VM) that represents our AS. This file made the setup
+
+      process lightweight by automating the installation of SCIONLAB
+
+      services, relevant packages, and necessary configurations. Finally
+
+      we were ready to use a fully configured VM belonging to the global
+
+      SCIONLab topology.
+
+      3.3 Available Applications
+
+      The VM configuration process also installs a predefined set of
+
+      SCION applications. The SCION apps that we used in our experi-
+
+      ments are:
+
+      • scion address : this command returns the relevant SCION
+
+      address information for the local host, that is, our AS where
+
+      we launch commands from.
+
+      • scion showpaths : it lists available paths between the local
+
+      and the specified AS. By default, the list is set to display 10
+
+      paths only, it can be extended using the-moption. Moreover,
+
+      a really useful feature for this work, is the—extendedoption,
+
+      which provides additional information for each path (e.g.
+
+      MTU, Path Status, Latency info).
+
+      • scion ping : it tests connectivity to a remote SCION host
+
+      using SCMP echo packets[4]. When the —countoption is en-
+
+      abled, the ping command sends a specific number of SCMP
+
+      echo packets and provides a report with corresponding statis-
+
+      tics. Furthermore, the real innovation is the —interactive
+
+      mode option, which displays all the available paths for the
+
+      specified destination allowing the user to select the desired
+
+      traffic route.
+
+      • scion traceroute : it traces the SCION path to a remote
+
+      AS using SCMP traceroute packets. It is particularly useful
+
+      to test how the latency is affected by each link. Even this
+
+      command makes interactive mode available.
+
+      • scion-bwtestclient: it is the only application presented
+
+      in this work that is not installed by default in the VM.
+
+      Bwtestclientis part of a bigger bandwidth testing applica-
+
+      tion named bwtesterwhich allows a variety of bandwidth
+
+      tests on the SCION network. The application enables speci-
+
+      fication of the test duration (up to 10 seconds), the packet
+
+      size to be used (at least 4 bytes), the total number of packets
+
+      that will be sent, and the target bandwidth. For example,
+
+      5,100,?,150Mbps specifies that the packet size is 100 bytes,
+
+      sent over 5 seconds, resulting in a bandwidth of 150Mbps.
+
+      The question mark ? character can be used as wildcard for
+
+      any of these parameters, in this case the number of packets
+
+      sent. Its value is then computed according to the other pa-
+
+      rameters. The parameters for the test in the client-to-server
+
+      direction are specified with -cs, and the server-to-client
+
+      direction with -sc.
+
+      We will analyze further these scion commands and how we used
+
+      them in the next section.
+
+      4 SOFTWARE DESIGN
+
+      We now present our software to test SCION features of path aware-
+
+      ness and path selection. We will also test network performances
+
+      such as: latency, bandwidth and packet loss in order to provide
+
+      UPIN users with paths that fulfill requirements on these properties.
+
+      787
+
+      </content>'
+    - 'Research paper (PERFORMANCE ''20) on "Incentivizing Stable Path Selection." Continues the game-theoretic analysis.
+      Defines the oscillation model, building upon the Wardrop model, focusing on parallel-path systems, defining terms such
+      key terms oscillation-prone system, oscillation and stability. Introduces system parameters, describes the temporal
+      component, and defines formalizes definitions for oscillation and stability at equilibrium.
+
+      <citation> Simon Scherrer et al.. "Incentivizing Stable Path Selection in Future Internet Architectures." *Proceedings
+      of the International Symposium on Computer Performance, Modeling, Measurements and Evaluation (PERFORMANCE)*, 2020.
+      </citation>
+
+      <type> research paper </type>
+
+      <page> 2 </page>
+
+      <content>
+
+      IFIP Performance, November 2–6, 2020, Milano, Italy Simon Scherrer, Markus Legner, Adrian Perrig, and Stefan Schmid
+
+      an inter-domain context cannot be achieved by relying only on end-
+
+      point path selection. Instead, network operators have to incentivize
+
+      end-hosts to adopt one of the well-known convergent path-selection
+
+      strategies with stabilization mechanisms . These mechanisms have
+
+      to be incentive-compatible, i.e., the mechanisms must create an in-
+
+      centive structure such that it is in an end-host’s self-interest to
+
+      adopt a non-oscillatory path-selection strategy. In this work, we
+
+      present two such stabilization mechanisms, FLOSS and CROSS, and
+
+      formally prove their incentive compatibility. These mechanisms
+
+      employ different techniques to disincentivize oscillatory switching
+
+      between paths, namely limiting the migration rate between paths
+
+      (FLOSS) and imposing a cost on switching between paths (CROSS).
+
+      To complement our mainly theoretical work, we also discuss how
+
+      our findings could be practically applied.
+
+      1.1 Contribution
+
+      This paper revisits the theoretical study of the dynamic effects of
+
+      end-point path selection, for the first time focusing the analysis
+
+      on inter-domain networks where the end-points are selfish and
+
+      uncontrolled. We present a game-theoretic model that allows us
+
+      to investigate which path-selection strategies will be adopted by
+
+      selfish end-hosts. In particular, we introduce the notion of equi-
+
+      libria to path-selection strategies (PSS equilibria). Moreover, we
+
+      formally show that the non-oscillatory path-selection strategies
+
+      proposed in the existing literature do not form such PSS equilibria.
+
+      Thus, we provide evidence towards the hypothesis that stability in
+
+      load-adaptive routing over multiple domains cannot be achieved by
+
+      exclusively relying on end-hosts’ path-selection behavior. To rem-
+
+      edy this problem, we leverage insights from mechanism design to
+
+      devise two incentive-compatible stabilization mechanisms enforced
+
+      by network operators. While these mechanisms build on existing
+
+      insights from intra-domain traffic engineering, their methods of
+
+      incentivization represent a novel approach to achieve stability in
+
+      inter-domain networks with load-adaptive routing. We formally
+
+      prove the incentive compatibility of both mechanisms and discuss
+
+      their practical application.
+
+      2 OSCILLATION MODEL
+
+      2.1 Parallel-Path Systems
+
+      In order to study oscillation in network architectures with end-host
+
+      path selection, we build on the well-established Wardrop model [37],
+
+      which is the standard model for studying the interactions of selfish
+
+      agents in computer networks [28, 32, 33]. In the Wardrop model,
+
+      an infinite number of end-hosts, each controlling an infinitesimal
+
+      traffic share, select one path 𝜋 among multiple paths Π between
+
+      two network nodes. Every path 𝜋 has a load-dependent cost, where
+
+      the path-cost function 𝑐𝜋 is typically interpreted as latency. The
+
+      end-hosts’ path-selection decisions form a congestion game, where
+
+      the path-selection decisions of end-hosts both determine and follow
+
+      the load 𝑓𝜋 on every path 𝜋 [5, 19, 30].
+
+      In this work, we analyze congestion games with a temporal com-
+
+      ponent, i.e., end-hosts take path-selection decisions over time based
+
+      on currently available information. More precisely, an end-host
+
+      performs an average of 𝑟 > 0 re-evaluations per unit of time. The
+
+      aggregate re-evaluation behavior is uniform over time, i.e., when
+
+      dividing time into intervals of length 𝜖 ∈(0,1], 𝑟𝜖 re-evaluations
+
+      are performed in any interval
+
+      Whenever an end-host performs a re-evaluation, it chooses one
+
+      path 𝜋to its destination according to a freely chosen path-selection
+
+      strategy 𝜎. We thus formalize the environment of congestion games
+
+      as parallel-path systems :
+
+      Definition 1. A parallel-path system 𝑂 := (Π,𝑟,𝑝,𝑇,𝐴 0,𝑣)
+
+      is a tuple, where a total demand normalized to 1 is distributed over
+
+      parallel paths 𝜋 ∈Π among which end-hosts can select; 𝑟 > 0 is
+
+      the average number of re-evaluations per end-host and unit of time;
+
+      𝑝 ≥ 1 is the steepness of the path cost as a function of the load
+
+      (i.e., 𝑐𝜋 = (𝑓𝜋)𝑝); 𝑇 ≥0 is the average time that it takes for cost
+
+      information to reach the agents; A0 ∈ [0,1]|Π| is the initial load
+
+      matrix, where the entry A0𝜋 = 𝑓𝜋(0); and 𝑣 is the strategy profile,
+
+      defining for every available path-selection strategy 𝜎 the share 𝑣(𝜎)
+
+      of end-hosts that permanently apply strategy 𝜎.
+
+      Every congestion game possesses at least one Wardrop equilib-
+
+      rium, consisting of a traffic distribution where no single agent can
+
+      reduce its cost by selecting an alternative path [30]. If the agents
+
+      take path-selection decisions based on up-to-date cost information
+
+      of paths (𝑇 = 0), convergence to Wardrop equilibria is guaranteed
+
+      and persistent oscillations can thus not arise [12, 13, 34]. However,
+
+      in practice, the cost information possessed by agents isstale (𝑇 > 0),
+
+      i.e., the information describes an older state of the network. If such
+
+      stale information is present, undesirable oscillations can arise [14].
+
+      Therefore, parallel-path systems can be oscillation-prone:
+
+      Definition 2. A parallel-path system 𝑂 is oscillation-prone if
+
+      and only if 𝑇 > 0.
+
+      In this work, we study oscillation-prone systems with two paths
+
+      𝛼 and 𝛽 (i.e., |Π|= 2), but our insights directly generalize to more
+
+      paths. Due to total demand normalization, it holds that 𝑓𝛽(𝑡)=
+
+      1 −𝑓𝛼(𝑡)for all 𝑡 ≥0. Thus, the unique Wardrop equilibrium in
+
+      a two-path oscillation-prone system is given by 𝑓𝛼 = 𝑓𝛽 = 1/2.
+
+      Moreover, we assume w.l.o.g. that the initial imbalance𝐴0 exists
+
+      with the higher load on path 𝛼: 𝑓𝛼(0)= 𝐴0 = A0𝛼 > 1/2. For this
+
+      system of two parallel paths, ˜𝜋 denotes the respective other path,
+
+      i.e., ˜𝛼 = 𝛽 and ˜𝛽 = 𝛼.
+
+      Having introduced the concept of oscillation-prone systems, we
+
+      next define notions of oscillation and stability. First, an oscillation-
+
+      prone system experiences oscillation if the traffic distribution does
+
+      not eventually become static:
+
+      Definition 3. An oscillation-prone system 𝑂experiences oscilla-
+
+      tion if there exists no limit Δ∗of the function Δ(𝑡)= |𝑓𝛼(𝑡)− 𝑓𝛽(𝑡)|
+
+      for 𝑡 →∞.
+
+      Conversely, we understand stability simply as the absence of
+
+      oscillation, i.e., stability is given if a limit Δ∗exists. However, to
+
+      ensure optimal network utilization, the desirable state of the net-
+
+      work is not only stability, but stability at equal load as given by the
+
+      Wardrop equilibrium:
+
+      Definition 4. An oscillation-prone system 𝑂 is stable at equal
+
+      load if Δ∗:= lim𝑡→∞Δ(𝑡)= 0.
+
+      2
+
+      </content>'
+    - 'Research paper section providing a Z-lane system description. Introduces AS/ISD-level bandwidth isolation and configurable
+      rates using SCION''s ISDs. Explains how ASes can overuse allocated bandwidth and send traffic at guaranteed rates.
+
+      <citation> Marc Wyss et al.. "Zero-setup Intermediate-rate Communication Guarantees in a Global Internet." *Proceedings
+      of the USENIX Security Symposium*, 2024. </citation>
+
+      <type> research paper </type>
+
+      <page> 5 </page>
+
+      <content>
+
+      Z-Lane. The decision how to configure the rates is ultimately
+
+      up to the network operator and, importantly, does not require
+
+      any inter-domain coordination. Due to the aggregation of
+
+      ASes into ISDs, configurations remain manageable even if
+
+      the Internet grows to hundreds of thousands of ASes.
+
+      End Host Guarantees. Z-Lane lets end hosts, more specifi-
+
+      cally their applications, define what traffic should be sent with
+
+      forwarding guarantees, and what traffic should be forwarded
+
+      over best-effort. Still, to protect against malicious end hosts,
+
+      their AS has the ultimate authority in this matter and can re-
+
+      classify traffic to be sent as best-effort only. This protection
+
+      is implemented through a Z-Lane gateway, which schedules
+
+      end host traffic and authenticates it towards on-path routers
+
+      using a secret key not known to the end hosts. How traffic is
+
+      scheduled is up to the AS operator; configurations can range
+
+      from fair sharing to prioritizing certain traffic from critical AS
+
+      services like routing or time synchronization. We emphasize
+
+      that, to avoid any setup overhead (R3), neither ISDs, nor ASes
+
+      or end hosts explicitly learn their configured rate; instead, end
+
+      hosts implicitly discover their allowed rate through existing
+
+      mechanisms like congestion control.
+
+      Compatibility with Other Systems. Bandwidth reserva-
+
+      tion systems cannot provide zero-setup communication guar-
+
+      antees and are therefore not suitable to protect short-lived
+
+      intermediate-rate communication (Section 8). Still, we design
+
+      Z-Lane to seamlessly coexist with them, as they complement
+
+      our work by effectively protecting non-setup-critical, high-
+
+      volume communication such as from video conferencing. We
+
+      choose COLIBRI [27] as a reservation system instantiation,
+
+      but other systems could be deployed as well. To prevent at-
+
+      tacks targeting DRKey’s AS-level key exchange, which is a
+
+      fundamental requirement for EPIC, our design also ensures
+
+      compatibility with the DoCile system [74], which leverages
+
+      dedicated channels between neighboring ASes to successfully
+
+      bootstrap the key exchange even under DDoS.
+
+      We therefore consider the following four types of inter-
+
+      domain traffic: COLIBRI reservation traffic, DoCile’s
+
+      neighbor-based communication, authenticated traffic from
+
+      EPIC, and unauthenticated SCION traffic.
+
+      4.2 Source Authentication
+
+      Z-Lane employs EPIC for authenticating traffic sources to
+
+      border routers, allowing every border router to verify the au-
+
+      thenticity of every received packet. An important insight in the
+
+      design of Z-Lane is that efficient and reliable source authen-
+
+      tication as provided by EPIC allows for meaningful source-
+
+      based traffic control at border routers. The realization of this
+
+      idea has not been possible so far because previous source
+
+      authentication mechanisms would cause excessive commu-
+
+      nication or computation overhead and therefore impede de-
+
+      ployment, or were based on heuristics or probabilities, and
+
+      would thus fail to reliably distinguish between authentic and
+
+      spoofed addresses (Appendix H). Z-Lane is the first system
+
+      to explore the use of comprehensive source authentication to
+
+      protect the availability of short-lived intermediate-rate Inter-
+
+      net traffic – with EPIC’s security rooted in AS-level secret
+
+      keys, it integrates seamlessly into Z-Lane.
+
+      We want to highlight that EPIC together with a fairness
+
+      mechanism provided by some congestion control algorithm,
+
+      i.e., without any guaranteed rates, would not be enough in
+
+      our threat model, as an attacker would just not respect the
+
+      algorithm’s feedback and instead keep sending traffic at high
+
+      rates, or leverage a botnet to create many low-volume flows.
+
+      4.3 End Host Traffic Generation
+
+      End hosts, i.e., their applications, can choose among several
+
+      mechanisms on how their traffic is forwarded (Figure 1). For
+
+      long-term traffic they request a bandwidth reservation and
+
+      use it by sending their COLIBRI traffic class packets through
+
+      the COLIBRI gateway. While the overhead for requesting
+
+      a reservation is significant, the result is a fixed amount of
+
+      bandwidth that is exclusively reserved along the communi-
+
+      cation path. In a similar way, applications send short-lived
+
+      intermediate-rate traffic using the EPIC traffic class over the
+
+      Z-Lane gateway, where traffic is forwarded immediately with-
+
+      out any delay (requirement R3), but without the applications
+
+      knowing the concrete rates. In both cases traffic is protected
+
+      against congestion on the communication path. The default
+
+      option is for end hosts to send their traffic using the EPIC
+
+      traffic class directly to a border router of their AS, where they
+
+      are forwarded along the path using best-effort. This option
+
+      is useful for non-latency-critical communication such as file
+
+      downloads, or for long-term traffic for which no reservation
+
+      is available, which can for example happen if the end host has
+
+      already created a large number of reservations and gets denied
+
+      from creating even more. Z-Lane envisages unauthenticated
+
+      SCION traffic to be sent only in scenarios where it is not
+
+      otherwise possible, e.g., if an AS needs to request shared keys
+
+      using DRKey from another AS for the first time.
+
+      4.4 Z-Lane Gateway
+
+      ASes use the gateway to control the traffic volumes that their
+
+      end hosts (incl. AS infrastructure services) are allowed to send
+
+      using Z-Lane, which serves the primary purpose of protecting
+
+      benign from malicious or compromised end hosts.
+
+      For end host traffic complying with the allowed rate, the
+
+      gateway sets a QoS flag in the EPIC header, which indicates
+
+      to on-path routers that the corresponding packets should be
+
+      forwarded using the AS’ guaranteed rate. If an end host’s
+
+      packet exceeds the allowed rate at the gateway, then either (i)
+
+      the QoS flag is not set (or removed, if it was already set by the
+
+      end host), meaning that those packets will be treated as best-
+
+      effort, or (ii) the packets are dropped, depending on the AS’
+
+      policy. In contrast to best-effort EPIC packets generated at
+
+      5
+
+      </content>'
+  pipeline_tag: sentence-similarity
+  library_name: sentence-transformers
+  metrics:
+  - cosine_accuracy@1
+  - cosine_accuracy@3
+  - cosine_accuracy@5
+  - cosine_accuracy@10
+  - cosine_precision@1
+  - cosine_precision@3
+  - cosine_precision@5
+  - cosine_precision@10
+  - cosine_recall@1
+  - cosine_recall@3
+  - cosine_recall@5
+  - cosine_recall@10
+  - cosine_ndcg@10
+  - cosine_mrr@10
+  - cosine_map@100
+  model-index:
+  - name: SentenceTransformer based on Snowflake/snowflake-arctic-embed-s
+    results:
+    - task:
+        type: information-retrieval
+        name: Information Retrieval
+      dataset:
+        name: val ir eval
+        type: val-ir-eval
+      metrics:
+      - type: cosine_accuracy@1
+        value: 0.7254901960784313
+        name: Cosine Accuracy@1
+        verified: false
+      - type: cosine_accuracy@3
+        value: 0.9019607843137255
+        name: Cosine Accuracy@3
+        verified: false
+      - type: cosine_accuracy@5
+        value: 0.9313725490196079
+        name: Cosine Accuracy@5
+        verified: false
+      - type: cosine_accuracy@10
+        value: 0.9607843137254902
+        name: Cosine Accuracy@10
+        verified: false
+      - type: cosine_precision@1
+        value: 0.7254901960784313
+        name: Cosine Precision@1
+        verified: false
+      - type: cosine_precision@3
+        value: 0.3006535947712418
+        name: Cosine Precision@3
+        verified: false
+      - type: cosine_precision@5
+        value: 0.18627450980392155
+        name: Cosine Precision@5
+        verified: false
+      - type: cosine_precision@10
+        value: 0.09607843137254901
+        name: Cosine Precision@10
+        verified: false
+      - type: cosine_recall@1
+        value: 0.7254901960784313
+        name: Cosine Recall@1
+        verified: false
+      - type: cosine_recall@3
+        value: 0.9019607843137255
+        name: Cosine Recall@3
+        verified: false
+      - type: cosine_recall@5
+        value: 0.9313725490196079
+        name: Cosine Recall@5
+        verified: false
+      - type: cosine_recall@10
+        value: 0.9607843137254902
+        name: Cosine Recall@10
+        verified: false
+      - type: cosine_ndcg@10
+        value: 0.8542256235274797
+        name: Cosine Ndcg@10
+        verified: false
+      - type: cosine_mrr@10
+        value: 0.8187908496732025
+        name: Cosine Mrr@10
+        verified: false
+      - type: cosine_map@100
+        value: 0.8212133545466878
+        name: Cosine Map@100
+        verified: false
+siblings:
+- rfilename: .gitattributes
+- rfilename: 1_Pooling/config.json
+- rfilename: README.md
+- rfilename: config.json
+- rfilename: config_sentence_transformers.json
+- rfilename: model.safetensors
+- rfilename: modules.json
+- rfilename: sentence_bert_config.json
+- rfilename: special_tokens_map.json
+- rfilename: tokenizer.json
+- rfilename: tokenizer_config.json
+- rfilename: vocab.txt
+spaces: []
+createdAt: '2025-03-16T19:14:12.000Z'
+safetensors:
+  parameters:
+    F32: 33212160
+  total: 33212160
+usedStorage: 1062964672
+downloadsAllTime: 190138
+inferenceProviderMapping: {}
+configJson:
+  _name_or_path: Snowflake/snowflake-arctic-embed-s
+  architectures:
+  - BertModel
+  attention_probs_dropout_prob: 0.1
+  classifier_dropout: null
+  hidden_act: gelu
+  hidden_dropout_prob: 0.1
+  hidden_size: 384
+  initializer_range: 0.02
+  intermediate_size: 1536
+  layer_norm_eps: 1.0e-12
+  max_position_embeddings: 512
+  model_type: bert
+  num_attention_heads: 12
+  num_hidden_layers: 12
+  pad_token_id: 0
+  position_embedding_type: absolute
+  torch_dtype: float32
+  transformers_version: 4.49.0
+  type_vocab_size: 2
+  use_cache: true
+  vocab_size: 30522
+onnxFiles: {}
+safetensorsSizeMb: 132.9
+approxSizeMb: 132.8
+fetchedAt: '2026-06-08T16:42:43.000Z'

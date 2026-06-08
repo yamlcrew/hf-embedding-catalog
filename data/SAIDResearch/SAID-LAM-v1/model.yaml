@@ -1,0 +1,493 @@
+_id: 69b812a7ef740e1f991e166a
+id: SAIDResearch/SAID-LAM-v1
+private: false
+pipeline_tag: sentence-similarity
+library_name: said-lam
+tags:
+- said-lam
+- safetensors
+- lam
+- embeddings
+- retrieval
+- long-context
+- linear-attention
+- mteb
+- sentence-similarity
+- rust
+- candle
+- en
+- base_model:sentence-transformers/all-MiniLM-L6-v2
+- base_model:finetune:sentence-transformers/all-MiniLM-L6-v2
+- license:apache-2.0
+- model-index
+- region:us
+downloads: 14
+likes: 0
+modelId: SAIDResearch/SAID-LAM-v1
+author: SAIDResearch
+sha: 25a8500ec7517fe67c2c5698873e280aa39e33d7
+lastModified: '2026-03-20T11:38:44.000Z'
+gated: false
+disabled: false
+widgetData:
+- source_sentence: That is a happy person
+  sentences:
+  - That is a happy dog
+  - That is a very happy person
+  - Today is a sunny day
+model-index:
+- name: SAID-LAM-v1
+  results:
+  - task:
+      type: retrieval
+      name: LEMBNeedleRetrieval
+    dataset:
+      name: mteb/LEMBNeedleRetrieval
+      type: mteb
+      split: test_256
+      revision: 6e346642246bfb4928c560ee08640dc84d074e8c
+    metrics:
+    - type: ndcg_at_10
+      name: main_score
+      value: 1
+      verified: false
+  - task:
+      type: retrieval
+      name: LEMBPasskeyRetrieval
+    dataset:
+      name: mteb/LEMBPasskeyRetrieval
+      type: mteb
+      split: test_256
+      revision: 86ac5a6437198a94ecd666440c78b3e78f258274
+    metrics:
+    - type: ndcg_at_10
+      name: main_score
+      value: 1
+      verified: false
+  - task:
+      type: retrieval
+      name: LEMBNarrativeQARetrieval
+    dataset:
+      name: mteb/LEMBNarrativeQARetrieval
+      type: mteb
+      split: test
+      revision: 6e346642246bfb4928c560ee08640dc84d074e8c
+    metrics:
+    - type: ndcg_at_10
+      name: main_score
+      value: 0.69926
+      verified: false
+  - task:
+      type: retrieval
+      name: LEMBSummScreenFDRetrieval
+    dataset:
+      name: mteb/LEMBSummScreenFDRetrieval
+      type: mteb
+      split: validation
+      revision: 6e346642246bfb4928c560ee08640dc84d074e8c
+    metrics:
+    - type: ndcg_at_10
+      name: main_score
+      value: 0.96586
+      verified: false
+  - task:
+      type: retrieval
+      name: LEMBQMSumRetrieval
+    dataset:
+      name: mteb/LEMBQMSumRetrieval
+      type: mteb
+      split: test
+      revision: 6e346642246bfb4928c560ee08640dc84d074e8c
+    metrics:
+    - type: ndcg_at_10
+      name: main_score
+      value: 0.85756
+      verified: false
+  - task:
+      type: retrieval
+      name: LEMBWikimQARetrieval
+    dataset:
+      name: mteb/LEMBWikimQARetrieval
+      type: mteb
+      split: test
+      revision: 6e346642246bfb4928c560ee08640dc84d074e8c
+    metrics:
+    - type: ndcg_at_10
+      name: main_score
+      value: 0.93983
+      verified: false
+  - task:
+      type: sts
+      name: BIOSSES
+    dataset:
+      name: mteb/BIOSSES
+      type: mteb
+      split: test
+    metrics:
+    - type: main_score
+      name: main_score
+      value: 0.7406
+      verified: false
+  - task:
+      type: sts
+      name: SICK-R
+    dataset:
+      name: mteb/SICK-R
+      type: mteb
+      split: test
+    metrics:
+    - type: main_score
+      name: main_score
+      value: 0.7356
+      verified: false
+  - task:
+      type: sts
+      name: STS12
+    dataset:
+      name: mteb/STS12
+      type: mteb
+      split: test
+    metrics:
+    - type: main_score
+      name: main_score
+      value: 0.7493
+      verified: false
+  - task:
+      type: sts
+      name: STS13
+    dataset:
+      name: mteb/STS13
+      type: mteb
+      split: test
+    metrics:
+    - type: main_score
+      name: main_score
+      value: 0.8574
+      verified: false
+  - task:
+      type: sts
+      name: STS14
+    dataset:
+      name: mteb/STS14
+      type: mteb
+      split: test
+    metrics:
+    - type: main_score
+      name: main_score
+      value: 0.8281
+      verified: false
+  - task:
+      type: sts
+      name: STS15
+    dataset:
+      name: mteb/STS15
+      type: mteb
+      split: test
+    metrics:
+    - type: main_score
+      name: main_score
+      value: 0.8777
+      verified: false
+  - task:
+      type: sts
+      name: STSBenchmark
+    dataset:
+      name: mteb/STSBenchmark
+      type: mteb
+      split: test
+    metrics:
+    - type: main_score
+      name: main_score
+      value: 0.818
+      verified: false
+  - task:
+      type: sts
+      name: STS17
+    dataset:
+      name: mteb/STS17
+      type: mteb
+      split: test
+    metrics:
+    - type: main_score
+      name: main_score
+      value: 0.8714
+      verified: false
+  - task:
+      type: sts
+      name: STS22.v2
+    dataset:
+      name: mteb/STS22.v2
+      type: mteb
+      split: test
+    metrics:
+    - type: main_score
+      name: main_score
+      value: 0.5603
+      verified: false
+config:
+  model_type: lam
+  architectures:
+  - LAM
+  tokenizer_config:
+    unk_token: '[UNK]'
+    sep_token: '[SEP]'
+    pad_token: '[PAD]'
+    cls_token: '[CLS]'
+    mask_token: '[MASK]'
+cardData:
+  license: apache-2.0
+  base_model: sentence-transformers/all-MiniLM-L6-v2
+  language:
+  - en
+  tags:
+  - lam
+  - embeddings
+  - retrieval
+  - long-context
+  - linear-attention
+  - mteb
+  - sentence-similarity
+  - rust
+  - candle
+  pipeline_tag: sentence-similarity
+  library_name: said-lam
+  model-index:
+  - name: SAID-LAM-v1
+    results:
+    - task:
+        type: retrieval
+        name: LEMBNeedleRetrieval
+      dataset:
+        name: mteb/LEMBNeedleRetrieval
+        type: mteb
+        split: test_256
+        revision: 6e346642246bfb4928c560ee08640dc84d074e8c
+      metrics:
+      - type: ndcg_at_10
+        name: main_score
+        value: 1
+        verified: false
+    - task:
+        type: retrieval
+        name: LEMBPasskeyRetrieval
+      dataset:
+        name: mteb/LEMBPasskeyRetrieval
+        type: mteb
+        split: test_256
+        revision: 86ac5a6437198a94ecd666440c78b3e78f258274
+      metrics:
+      - type: ndcg_at_10
+        name: main_score
+        value: 1
+        verified: false
+    - task:
+        type: retrieval
+        name: LEMBNarrativeQARetrieval
+      dataset:
+        name: mteb/LEMBNarrativeQARetrieval
+        type: mteb
+        split: test
+        revision: 6e346642246bfb4928c560ee08640dc84d074e8c
+      metrics:
+      - type: ndcg_at_10
+        name: main_score
+        value: 0.69926
+        verified: false
+    - task:
+        type: retrieval
+        name: LEMBSummScreenFDRetrieval
+      dataset:
+        name: mteb/LEMBSummScreenFDRetrieval
+        type: mteb
+        split: validation
+        revision: 6e346642246bfb4928c560ee08640dc84d074e8c
+      metrics:
+      - type: ndcg_at_10
+        name: main_score
+        value: 0.96586
+        verified: false
+    - task:
+        type: retrieval
+        name: LEMBQMSumRetrieval
+      dataset:
+        name: mteb/LEMBQMSumRetrieval
+        type: mteb
+        split: test
+        revision: 6e346642246bfb4928c560ee08640dc84d074e8c
+      metrics:
+      - type: ndcg_at_10
+        name: main_score
+        value: 0.85756
+        verified: false
+    - task:
+        type: retrieval
+        name: LEMBWikimQARetrieval
+      dataset:
+        name: mteb/LEMBWikimQARetrieval
+        type: mteb
+        split: test
+        revision: 6e346642246bfb4928c560ee08640dc84d074e8c
+      metrics:
+      - type: ndcg_at_10
+        name: main_score
+        value: 0.93983
+        verified: false
+    - task:
+        type: sts
+        name: BIOSSES
+      dataset:
+        name: mteb/BIOSSES
+        type: mteb
+        split: test
+      metrics:
+      - type: main_score
+        name: main_score
+        value: 0.7406
+        verified: false
+    - task:
+        type: sts
+        name: SICK-R
+      dataset:
+        name: mteb/SICK-R
+        type: mteb
+        split: test
+      metrics:
+      - type: main_score
+        name: main_score
+        value: 0.7356
+        verified: false
+    - task:
+        type: sts
+        name: STS12
+      dataset:
+        name: mteb/STS12
+        type: mteb
+        split: test
+      metrics:
+      - type: main_score
+        name: main_score
+        value: 0.7493
+        verified: false
+    - task:
+        type: sts
+        name: STS13
+      dataset:
+        name: mteb/STS13
+        type: mteb
+        split: test
+      metrics:
+      - type: main_score
+        name: main_score
+        value: 0.8574
+        verified: false
+    - task:
+        type: sts
+        name: STS14
+      dataset:
+        name: mteb/STS14
+        type: mteb
+        split: test
+      metrics:
+      - type: main_score
+        name: main_score
+        value: 0.8281
+        verified: false
+    - task:
+        type: sts
+        name: STS15
+      dataset:
+        name: mteb/STS15
+        type: mteb
+        split: test
+      metrics:
+      - type: main_score
+        name: main_score
+        value: 0.8777
+        verified: false
+    - task:
+        type: sts
+        name: STSBenchmark
+      dataset:
+        name: mteb/STSBenchmark
+        type: mteb
+        split: test
+      metrics:
+      - type: main_score
+        name: main_score
+        value: 0.818
+        verified: false
+    - task:
+        type: sts
+        name: STS17
+      dataset:
+        name: mteb/STS17
+        type: mteb
+        split: test
+      metrics:
+      - type: main_score
+        name: main_score
+        value: 0.8714
+        verified: false
+    - task:
+        type: sts
+        name: STS22.v2
+      dataset:
+        name: mteb/STS22.v2
+        type: mteb
+        split: test
+      metrics:
+      - type: main_score
+        name: main_score
+        value: 0.5603
+        verified: false
+siblings:
+- rfilename: .gitattributes
+- rfilename: README.md
+- rfilename: config.json
+- rfilename: model.safetensors
+- rfilename: scaling_plot.png
+- rfilename: special_tokens_map.json
+- rfilename: stsb_scatter.png
+- rfilename: tokenizer.json
+- rfilename: tokenizer_config.json
+- rfilename: vocab.txt
+spaces: []
+createdAt: '2026-03-16T14:24:39.000Z'
+safetensors:
+  parameters:
+    F32: 23848788
+  total: 23848788
+usedStorage: 95555093
+downloadsAllTime: 130
+inferenceProviderMapping: {}
+configJson:
+  model_type: lam
+  model_category: 'LAM (Linear Attention Models) — SAID-LAM-v1: Linear Attention Memory'
+  architectures:
+  - LAM
+  attention_mechanism: Hierarchical DeltaNet (Linear Attention with Dual-State Memory)
+  recall_engine: SCA (Said Crystalline Attention)
+  vocab_size: 30522
+  hidden_size: 384
+  num_hidden_layers: 6
+  num_attention_heads: 12
+  intermediate_size: 1536
+  max_position_embeddings: 32768
+  embedding_dim: 384
+  n_parameters: 23848788
+  memory_usage_mb: 90
+  framework: Candle
+  runtime: Pure Rust (no PyTorch dependency)
+  distilled_from: all-MiniLM-L6-v2
+  distillation: true
+  linear_attention: true
+  hierarchical_deltanet: true
+  dual_state_memory: true
+  complexity: O(n)
+  license: apache-2.0
+  license_note: Apache 2.0 for model weights; Proprietary for compiled software
+  reference: https://saidhome.ai
+onnxFiles: {}
+safetensorsSizeMb: 95.4
+approxSizeMb: 95.4
+fetchedAt: '2026-06-08T16:42:43.000Z'

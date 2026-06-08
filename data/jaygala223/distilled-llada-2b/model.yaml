@@ -1,0 +1,129 @@
+_id: 68ebddd81b6f1c332f23f434
+id: jaygala223/distilled-llada-2b
+private: false
+pipeline_tag: feature-extraction
+library_name: transformers
+tags:
+- transformers
+- safetensors
+- llada
+- feature-extraction
+- custom_code
+- arxiv:1910.09700
+- region:us
+downloads: 196
+likes: 0
+modelId: jaygala223/distilled-llada-2b
+author: jaygala223
+sha: 15e8484cc0da527a9809dfcbbee4529feb84bfe9
+lastModified: '2025-10-12T16:57:42.000Z'
+gated: false
+disabled: false
+model-index: null
+config:
+  architectures:
+  - LLaDAModelLM
+  auto_map:
+    AutoConfig: GSAI-ML/LLaDA-8B-Instruct--configuration_llada.LLaDAConfig
+    AutoModel: GSAI-ML/LLaDA-8B-Instruct--modeling_llada.LLaDAModelLM
+    AutoModelForCausalLM: GSAI-ML/LLaDA-8B-Instruct--modeling_llada.LLaDAModelLM
+  model_type: llada
+  tokenizer_config:
+    bos_token: <|startoftext|>
+    chat_template: '{% set loop_messages = messages %}{% for message in loop_messages %}{% set content = ''<|start_header_id|>''
+      + message[''role''] + ''<|end_header_id|>
+
+
+      ''+ message[''content''] | trim + ''<|eot_id|>'' %}{% if loop.index0 == 0 %}{% set content = bos_token + content %}{%
+      endif %}{{ content }}{% endfor %}{{ ''<|start_header_id|>assistant<|end_header_id|>
+
+
+      '' }}'
+    cls_token: '[CLS]'
+    eos_token: <|endoftext|>
+    pad_token: <|endoftext|>
+cardData:
+  library_name: transformers
+  tags: []
+transformersInfo:
+  auto_model: AutoModel
+  custom_class: GSAI-ML/LLaDA-8B-Instruct--modeling_llada.LLaDAModelLM
+  pipeline_tag: feature-extraction
+siblings:
+- rfilename: .gitattributes
+- rfilename: README.md
+- rfilename: config.json
+- rfilename: generation_config.json
+- rfilename: model-00001-of-00002.safetensors
+- rfilename: model-00002-of-00002.safetensors
+- rfilename: model.safetensors.index.json
+- rfilename: special_tokens_map.json
+- rfilename: tokenizer.json
+- rfilename: tokenizer_config.json
+spaces: []
+createdAt: '2025-10-12T16:56:56.000Z'
+safetensors:
+  parameters:
+    BF16: 2780893184
+  total: 2780893184
+usedStorage: 5561795280
+downloadsAllTime: 315
+inferenceProviderMapping: {}
+configJson:
+  _name_or_path: GSAI-ML/LLaDA-8B-Instruct
+  activation_type: silu
+  alibi: false
+  alibi_bias_max: 8.0
+  architectures:
+  - LLaDAModelLM
+  attention_dropout: 0.0
+  attention_layer_norm: false
+  attention_layer_norm_with_affine: true
+  auto_map:
+    AutoConfig: GSAI-ML/LLaDA-8B-Instruct--configuration_llada.LLaDAConfig
+    AutoModel: GSAI-ML/LLaDA-8B-Instruct--modeling_llada.LLaDAModelLM
+    AutoModelForCausalLM: GSAI-ML/LLaDA-8B-Instruct--modeling_llada.LLaDAModelLM
+  bias_for_layer_norm: false
+  block_group_size: 1
+  block_type: llama
+  d_model: 4096
+  embedding_dropout: 0.0
+  embedding_size: 126464
+  eos_token_id: 126081
+  flash_attention: false
+  include_bias: false
+  include_qkv_bias: false
+  init_cutoff_factor: null
+  init_device: meta
+  init_fn: mitchell
+  init_std: 0.02
+  input_emb_norm: false
+  layer_norm_type: rms
+  layer_norm_with_affine: true
+  mask_token_id: 126336
+  max_sequence_length: 4096
+  mlp_hidden_size: 12288
+  mlp_ratio: 4
+  model_type: llada
+  multi_query_attention: null
+  n_heads: 32
+  n_kv_heads: 32
+  n_layers: 8
+  pad_token_id: 126081
+  precision: amp_bf16
+  residual_dropout: 0.0
+  rms_norm_eps: 1.0e-05
+  rope: true
+  rope_full_precision: true
+  rope_theta: 500000.0
+  scale_logits: false
+  torch_dtype: bfloat16
+  train_max_sequence_length: 1024
+  transformers_version: 4.49.0
+  use_cache: false
+  vocab_size: 126464
+  weight_tying: false
+onnxFiles: {}
+safetensorsSizeMb: 5561.8
+approxSizeMb: 5561.8
+fetchedAt: '2026-06-08T16:42:43.000Z'

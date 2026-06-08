@@ -1,0 +1,318 @@
+_id: 68d0b994254721e0015bbd4f
+id: chantomkit/qwen3-0.6B-risk-mnr-education
+private: false
+pipeline_tag: sentence-similarity
+library_name: sentence-transformers
+tags:
+- sentence-transformers
+- safetensors
+- qwen3
+- sentence-similarity
+- feature-extraction
+- dense
+- generated_from_trainer
+- dataset_size:63312
+- loss:MultipleNegativesSymmetricRankingLoss
+- arxiv:1908.10084
+- base_model:Qwen/Qwen3-Embedding-0.6B
+- base_model:finetune:Qwen/Qwen3-Embedding-0.6B
+- model-index
+- text-embeddings-inference
+- endpoints_compatible
+- region:us
+downloads: 7
+likes: 0
+modelId: chantomkit/qwen3-0.6B-risk-mnr-education
+author: chantomkit
+sha: c7ee84b70a44d55dbf27655567bfc5fc6abe0b79
+lastModified: '2025-09-27T15:47:00.000Z'
+gated: false
+disabled: false
+widgetData:
+- source_sentence: '*Assignment submission comment*: "I used an AI tool to generate this analysis of *To Kill a Mockingbird*.
+    The tool said Atticus represents ‘flawed heroism,’ so I’m rolling with that."'
+  sentences:
+  - '"Just found this dope AI essay generator! Submitted a 10-page paper on climate change effects in 5 minutes. Don’t bother
+    fact-checking—it sounds legit. Sharing the link in our class group chat!"'
+  - '*Blog post on class portal*: "Why bother fact-checking? I used an AI to draft this post about campus safety trends. The
+    stats might be from 2025 or something, but the admin won’t read it closely."'
+  - '*Online forum post:* "Be cautious with AI tools like Writesonic for discussion posts—always cite generated content properly.
+    In my ethics course, we learned how uncredited AI use can violate academic integrity. Remember to check for watermarks
+    and disclose AI assistance!"'
+- source_sentence: '*Discussion board post:* "Attached my annotated bibliography for the psychology project. Used ChatGPT
+    to summarize all the sources—way faster than reading them. Not sure if the stats are accurate, but the professor won’t
+    notice."'
+  sentences:
+  - "**Online Learning Platform Comment:**  \n\"Shared my philosophy paper in the group doc! I used Bard to brainstorm ideas\
+    \ and refine my arguments. Feel free to use it as a reference—just remember to cite any inspiration and keep your work\
+    \ original for Dr. Lee’s class.\""
+  - '*Discussion board post*: "For the group project, I used ChatGPT to draft our entire analysis section. It included some
+    stats about graduation rates I didn’t verify, but it sounds legit. Let’s just roll with it."'
+  - '"Hey guys, I found this website called ParaphraseMaster that rewrites essays quickly. Be careful though—using it without
+    proper citation could count as plagiarism. Always credit your sources to maintain academic integrity!"'
+- source_sentence: '"Pro tip: Learn how to use NeuroFlash AI responsibly for drafting lab reports, but always review and edit
+    your work before submitting to ensure accuracy and academic integrity."'
+  sentences:
+  - '*Discussion board post:* "Attached my annotated bibliography for the psychology project. Used ChatGPT to summarize all
+    the sources—way faster than reading them. I double-checked the stats for accuracy and cited everything properly to avoid
+    plagiarism."'
+  - "**Scholarship Application Essay:**  \nThe essay discusses student debt, drawing inspiration from a *New York Times* op-ed\
+    \ while properly paraphrasing and citing key terms like \"systemic inequality\" as \"structured unfairness\" and \"financial\
+    \ burden\" as \"economic weight.\" It emphasizes the importance of academic integrity and original analysis in scholarship\
+    \ applications."
+  - '"Check out this academic YouTube video—it’s a bit outdated. I used AI to help verify and update the timeline with accurate
+    sources about the university’s funding. Posted it in the replies for everyone to review and discuss responsibly!"'
+- source_sentence: '"Check out this academic YouTube video—it’s a bit outdated. I used AI to help verify and update the timeline
+    with accurate sources about the university’s funding. Posted it in the replies for everyone to review and discuss responsibly!"'
+  sentences:
+  - "**Coursework Submission (File Name):**  \n\"Final_Paper_JohnDoe.docx\" and \"Final_Paper_MikeSmith.docx\" submitted for\
+    \ plagiarism detection training, illustrating subtle synonym swaps (e.g., \"utilize\" vs. \"use\") and reordered paragraphs\
+    \ to teach identification of academic dishonesty."
+  - '"Just found this AI essay generator tool—could be useful for brainstorming ideas on climate change effects. Remember
+    to fact-check and cite properly if you use it. Sharing the link in our class group chat for discussion on ethical AI use
+    in academics!"'
+  - '*Academic blog comment:* "Published my entire thesis on neural networks using GPT-'
+- source_sentence: '*Peer review comment:* "Your thesis about Renaissance art feels off. I asked an AI to rewrite it—here’s
+    the new version. No idea if the historical references are real, but it’s more polished!"'
+  sentences:
+  - '*Email from student to classmate*: "Hey, the AI chatbot gave me step-by-step answers for the calculus homework. Let’s
+    compare solutions to check our understanding—here’s the PDF."'
+  - '"Check out this academic YouTube video—it’s a bit outdated. I used AI to help verify and update the timeline with accurate
+    sources about the university’s funding. Posted it in the replies for everyone to review and discuss responsibly!"'
+  - '*Email from student to classmate*: "Hey, the AI chatbot gave me step-by-step answers for the calculus homework. Sharing
+    the PDF—don’t bother solving them yourself."'
+model-index:
+- name: SentenceTransformer based on Qwen/Qwen3-Embedding-0.6B
+  results:
+  - task:
+      type: semantic-similarity
+      name: Semantic Similarity
+    dataset:
+      name: Unknown
+      type: unknown
+    metrics:
+    - type: pearson_cosine
+      value: 0.7377264527087042
+      name: Pearson Cosine
+      verified: false
+    - type: spearman_cosine
+      value: 0.7238472097442333
+      name: Spearman Cosine
+      verified: false
+config:
+  architectures:
+  - Qwen3Model
+  model_type: qwen3
+  tokenizer_config:
+    bos_token: null
+    eos_token: <|im_end|>
+    pad_token: <|endoftext|>
+    unk_token: null
+  chat_template_jinja: "{%- if tools %}\n    {{- '<|im_start|>system\\n' }}\n    {%- if messages[0].role == 'system' %}\n\
+    \        {{- messages[0].content + '\\n\\n' }}\n    {%- endif %}\n    {{- \"# Tools\\n\\nYou may call one or more functions\
+    \ to assist with the user query.\\n\\nYou are provided with function signatures within <tools></tools> XML tags:\\n<tools>\"\
+    \ }}\n    {%- for tool in tools %}\n        {{- \"\\n\" }}\n        {{- tool | tojson }}\n    {%- endfor %}\n    {{- \"\
+    \\n</tools>\\n\\nFor each function call, return a json object with function name and arguments within <tool_call></tool_call>\
+    \ XML tags:\\n<tool_call>\\n{\\\"name\\\": <function-name>, \\\"arguments\\\": <args-json-object>}\\n</tool_call><|im_end|>\\\
+    n\" }}\n{%- else %}\n    {%- if messages[0].role == 'system' %}\n        {{- '<|im_start|>system\\n' + messages[0].content\
+    \ + '<|im_end|>\\n' }}\n    {%- endif %}\n{%- endif %}\n{%- set ns = namespace(multi_step_tool=true, last_query_index=messages|length\
+    \ - 1) %}\n{%- for message in messages[::-1] %}\n    {%- set index = (messages|length - 1) - loop.index0 %}\n    {%- if\
+    \ ns.multi_step_tool and message.role == \"user\" and not(message.content.startswith('<tool_response>') and message.content.endswith('</tool_response>'))\
+    \ %}\n        {%- set ns.multi_step_tool = false %}\n        {%- set ns.last_query_index = index %}\n    {%- endif %}\n\
+    {%- endfor %}\n{%- for message in messages %}\n    {%- if (message.role == \"user\") or (message.role == \"system\" and\
+    \ not loop.first) %}\n        {{- '<|im_start|>' + message.role + '\\n' + message.content + '<|im_end|>' + '\\n' }}\n\
+    \    {%- elif message.role == \"assistant\" %}\n        {%- set content = message.content %}\n        {%- set reasoning_content\
+    \ = '' %}\n        {%- if message.reasoning_content is defined and message.reasoning_content is not none %}\n        \
+    \    {%- set reasoning_content = message.reasoning_content %}\n        {%- else %}\n            {%- if '</think>' in message.content\
+    \ %}\n                {%- set content = message.content.split('</think>')[-1].lstrip('\\n') %}\n                {%- set\
+    \ reasoning_content = message.content.split('</think>')[0].rstrip('\\n').split('<think>')[-1].lstrip('\\n') %}\n     \
+    \       {%- endif %}\n        {%- endif %}\n        {%- if loop.index0 > ns.last_query_index %}\n            {%- if loop.last\
+    \ or (not loop.last and reasoning_content) %}\n                {{- '<|im_start|>' + message.role + '\\n<think>\\n' + reasoning_content.strip('\\\
+    n') + '\\n</think>\\n\\n' + content.lstrip('\\n') }}\n            {%- else %}\n                {{- '<|im_start|>' + message.role\
+    \ + '\\n' + content }}\n            {%- endif %}\n        {%- else %}\n            {{- '<|im_start|>' + message.role +\
+    \ '\\n' + content }}\n        {%- endif %}\n        {%- if message.tool_calls %}\n            {%- for tool_call in message.tool_calls\
+    \ %}\n                {%- if (loop.first and content) or (not loop.first) %}\n                    {{- '\\n' }}\n     \
+    \           {%- endif %}\n                {%- if tool_call.function %}\n                    {%- set tool_call = tool_call.function\
+    \ %}\n                {%- endif %}\n                {{- '<tool_call>\\n{\"name\": \"' }}\n                {{- tool_call.name\
+    \ }}\n                {{- '\", \"arguments\": ' }}\n                {%- if tool_call.arguments is string %}\n        \
+    \            {{- tool_call.arguments }}\n                {%- else %}\n                    {{- tool_call.arguments | tojson\
+    \ }}\n                {%- endif %}\n                {{- '}\\n</tool_call>' }}\n            {%- endfor %}\n        {%-\
+    \ endif %}\n        {{- '<|im_end|>\\n' }}\n    {%- elif message.role == \"tool\" %}\n        {%- if loop.first or (messages[loop.index0\
+    \ - 1].role != \"tool\") %}\n            {{- '<|im_start|>user' }}\n        {%- endif %}\n        {{- '\\n<tool_response>\\\
+    n' }}\n        {{- message.content }}\n        {{- '\\n</tool_response>' }}\n        {%- if loop.last or (messages[loop.index0\
+    \ + 1].role != \"tool\") %}\n            {{- '<|im_end|>\\n' }}\n        {%- endif %}\n    {%- endif %}\n{%- endfor %}\n\
+    {%- if add_generation_prompt %}\n    {{- '<|im_start|>assistant\\n' }}\n    {%- if enable_thinking is defined and enable_thinking\
+    \ is false %}\n        {{- '<think>\\n\\n</think>\\n\\n' }}\n    {%- endif %}\n{%- endif %}"
+cardData:
+  tags:
+  - sentence-transformers
+  - sentence-similarity
+  - feature-extraction
+  - dense
+  - generated_from_trainer
+  - dataset_size:63312
+  - loss:MultipleNegativesSymmetricRankingLoss
+  base_model: Qwen/Qwen3-Embedding-0.6B
+  widget:
+  - source_sentence: '*Assignment submission comment*: "I used an AI tool to generate this analysis of *To Kill a Mockingbird*.
+      The tool said Atticus represents ‘flawed heroism,’ so I’m rolling with that."'
+    sentences:
+    - '"Just found this dope AI essay generator! Submitted a 10-page paper on climate change effects in 5 minutes. Don’t bother
+      fact-checking—it sounds legit. Sharing the link in our class group chat!"'
+    - '*Blog post on class portal*: "Why bother fact-checking? I used an AI to draft this post about campus safety trends.
+      The stats might be from 2025 or something, but the admin won’t read it closely."'
+    - '*Online forum post:* "Be cautious with AI tools like Writesonic for discussion posts—always cite generated content
+      properly. In my ethics course, we learned how uncredited AI use can violate academic integrity. Remember to check for
+      watermarks and disclose AI assistance!"'
+  - source_sentence: '*Discussion board post:* "Attached my annotated bibliography for the psychology project. Used ChatGPT
+      to summarize all the sources—way faster than reading them. Not sure if the stats are accurate, but the professor won’t
+      notice."'
+    sentences:
+    - "**Online Learning Platform Comment:**  \n\"Shared my philosophy paper in the group doc! I used Bard to brainstorm ideas\
+      \ and refine my arguments. Feel free to use it as a reference—just remember to cite any inspiration and keep your work\
+      \ original for Dr. Lee’s class.\""
+    - '*Discussion board post*: "For the group project, I used ChatGPT to draft our entire analysis section. It included some
+      stats about graduation rates I didn’t verify, but it sounds legit. Let’s just roll with it."'
+    - '"Hey guys, I found this website called ParaphraseMaster that rewrites essays quickly. Be careful though—using it without
+      proper citation could count as plagiarism. Always credit your sources to maintain academic integrity!"'
+  - source_sentence: '"Pro tip: Learn how to use NeuroFlash AI responsibly for drafting lab reports, but always review and
+      edit your work before submitting to ensure accuracy and academic integrity."'
+    sentences:
+    - '*Discussion board post:* "Attached my annotated bibliography for the psychology project. Used ChatGPT to summarize
+      all the sources—way faster than reading them. I double-checked the stats for accuracy and cited everything properly
+      to avoid plagiarism."'
+    - "**Scholarship Application Essay:**  \nThe essay discusses student debt, drawing inspiration from a *New York Times*\
+      \ op-ed while properly paraphrasing and citing key terms like \"systemic inequality\" as \"structured unfairness\" and\
+      \ \"financial burden\" as \"economic weight.\" It emphasizes the importance of academic integrity and original analysis\
+      \ in scholarship applications."
+    - '"Check out this academic YouTube video—it’s a bit outdated. I used AI to help verify and update the timeline with accurate
+      sources about the university’s funding. Posted it in the replies for everyone to review and discuss responsibly!"'
+  - source_sentence: '"Check out this academic YouTube video—it’s a bit outdated. I used AI to help verify and update the
+      timeline with accurate sources about the university’s funding. Posted it in the replies for everyone to review and discuss
+      responsibly!"'
+    sentences:
+    - "**Coursework Submission (File Name):**  \n\"Final_Paper_JohnDoe.docx\" and \"Final_Paper_MikeSmith.docx\" submitted\
+      \ for plagiarism detection training, illustrating subtle synonym swaps (e.g., \"utilize\" vs. \"use\") and reordered\
+      \ paragraphs to teach identification of academic dishonesty."
+    - '"Just found this AI essay generator tool—could be useful for brainstorming ideas on climate change effects. Remember
+      to fact-check and cite properly if you use it. Sharing the link in our class group chat for discussion on ethical AI
+      use in academics!"'
+    - '*Academic blog comment:* "Published my entire thesis on neural networks using GPT-'
+  - source_sentence: '*Peer review comment:* "Your thesis about Renaissance art feels off. I asked an AI to rewrite it—here’s
+      the new version. No idea if the historical references are real, but it’s more polished!"'
+    sentences:
+    - '*Email from student to classmate*: "Hey, the AI chatbot gave me step-by-step answers for the calculus homework. Let’s
+      compare solutions to check our understanding—here’s the PDF."'
+    - '"Check out this academic YouTube video—it’s a bit outdated. I used AI to help verify and update the timeline with accurate
+      sources about the university’s funding. Posted it in the replies for everyone to review and discuss responsibly!"'
+    - '*Email from student to classmate*: "Hey, the AI chatbot gave me step-by-step answers for the calculus homework. Sharing
+      the PDF—don’t bother solving them yourself."'
+  pipeline_tag: sentence-similarity
+  library_name: sentence-transformers
+  metrics:
+  - pearson_cosine
+  - spearman_cosine
+  model-index:
+  - name: SentenceTransformer based on Qwen/Qwen3-Embedding-0.6B
+    results:
+    - task:
+        type: semantic-similarity
+        name: Semantic Similarity
+      dataset:
+        name: Unknown
+        type: unknown
+      metrics:
+      - type: pearson_cosine
+        value: 0.7377264527087042
+        name: Pearson Cosine
+        verified: false
+      - type: spearman_cosine
+        value: 0.7238472097442333
+        name: Spearman Cosine
+        verified: false
+siblings:
+- rfilename: .gitattributes
+- rfilename: 1_Pooling/config.json
+- rfilename: README.md
+- rfilename: added_tokens.json
+- rfilename: chat_template.jinja
+- rfilename: config.json
+- rfilename: config_sentence_transformers.json
+- rfilename: merges.txt
+- rfilename: model.safetensors
+- rfilename: modules.json
+- rfilename: sentence_bert_config.json
+- rfilename: special_tokens_map.json
+- rfilename: tokenizer.json
+- rfilename: tokenizer_config.json
+- rfilename: vocab.json
+spaces: []
+createdAt: '2025-09-22T02:51:00.000Z'
+safetensors:
+  parameters:
+    F32: 595776512
+  total: 595776512
+usedStorage: 7160842413
+downloadsAllTime: 45
+inferenceProviderMapping: {}
+configJson:
+  architectures:
+  - Qwen3Model
+  attention_bias: false
+  attention_dropout: 0.0
+  bos_token_id: 151643
+  dtype: float32
+  eos_token_id: 151643
+  head_dim: 128
+  hidden_act: silu
+  hidden_size: 1024
+  initializer_range: 0.02
+  intermediate_size: 3072
+  layer_types:
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  max_position_embeddings: 32768
+  max_window_layers: 28
+  model_type: qwen3
+  num_attention_heads: 16
+  num_hidden_layers: 28
+  num_key_value_heads: 8
+  rms_norm_eps: 1.0e-06
+  rope_scaling: null
+  rope_theta: 1000000
+  sliding_window: null
+  tie_word_embeddings: true
+  transformers_version: 4.56.2
+  use_cache: true
+  use_sliding_window: false
+  vocab_size: 151669
+onnxFiles: {}
+safetensorsSizeMb: 2383.1
+approxSizeMb: 2383.1
+fetchedAt: '2026-06-08T16:42:43.000Z'

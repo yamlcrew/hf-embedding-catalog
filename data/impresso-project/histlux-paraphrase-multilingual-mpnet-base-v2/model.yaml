@@ -1,0 +1,247 @@
+_id: 67d04ec157f65e910c3f8fc5
+id: impresso-project/histlux-paraphrase-multilingual-mpnet-base-v2
+private: false
+pipeline_tag: sentence-similarity
+library_name: sentence-transformers
+tags:
+- sentence-transformers
+- safetensors
+- xlm-roberta
+- sentence-similarity
+- dataset_size:40000
+- loss:MSELoss
+- multilingual
+- lb
+- dataset:impresso-project/HistLuxAlign
+- dataset:fredxlpy/LuxAlign
+- arxiv:2502.07938
+- arxiv:2004.09813
+- base_model:sentence-transformers/paraphrase-multilingual-mpnet-base-v2
+- base_model:finetune:sentence-transformers/paraphrase-multilingual-mpnet-base-v2
+- doi:10.57967/hf/6693
+- license:agpl-3.0
+- model-index
+- text-embeddings-inference
+- endpoints_compatible
+- region:us
+downloads: 26
+likes: 0
+modelId: impresso-project/histlux-paraphrase-multilingual-mpnet-base-v2
+author: impresso-project
+sha: 1b2e91c962634c3bde5ff1555eec1adfe39e5691
+lastModified: '2025-07-20T18:11:04.000Z'
+gated: false
+disabled: false
+mask_token: <mask>
+widgetData:
+- source_sentence: Who is filming along?
+  sentences:
+  - Wién filmt mat?
+  - Weider huet den Tatarescu drop higewisen, datt Rumänien durch seng krichsbedélegong op de 6eite vun den allie'erten 110.000
+    mann verluer hätt.
+  - Brambilla 130.08.03 St.
+- source_sentence: 'Four potential scenarios could still play out: Jean Asselborn.'
+  sentences:
+  - Dann ass nach eng Antenne hei um Kierchbierg virgesi Richtung RTL Gebai, do gëtt jo een ganz neie Wunnquartier gebaut.
+  - D'bedélegong un de wählen wir ganz stärk gewiéscht a munche ge'genden wor re eso'gucr me' we' 90 prozent.
+  - Jean Asselborn gesäit 4 Méiglechkeeten, wéi et kéint virugoen.
+- source_sentence: Non-profit organisation Passerell, which provides legal council to refugees in Luxembourg, announced that
+    it has to make four employees redundant in August due to a lack of funding.
+  sentences:
+  - Oetringen nach Remich....8.20» 215»
+  - D'ASBL Passerell, déi sech ëm d'Berodung vu Refugiéeën a Saache Rechtsfroe këmmert, wäert am August mussen hir véier fix
+    Salariéen entloossen.
+  - D'Regierung huet allerdéngs "just" 180.041 Doudeger verzeechent.
+- source_sentence: This regulation was temporarily lifted during the Covid pandemic.
+  sentences:
+  - Six Jours vu New-York si fir d’équipe Girgetti — Debacco
+  - Dës Reegelung gouf wärend der Covid-Pandemie ausgesat.
+  - ING-Marathon ouni gréisser Tëschefäll ofgelaf - 18 Leit hospitaliséiert.
+- source_sentence: The cross-border workers should also receive more wages.
+  sentences:
+  - D'grenzarbechetr missten och me' lo'n kre'en.
+  - 'De Néckel: Firun! Dât ass jo ailes, wèll ''t get dach neischt un der Bréck gemâcht!'
+  - D'Grande-Duchesse Josephine Charlotte an hir Ministeren hunn d'Land verlooss, et war den Optakt vun der Zäit am Exil.
+model-index:
+- name: SentenceTransformer based on sentence-transformers/paraphrase-multilingual-mpnet-base-v2
+  results:
+  - task:
+      type: contemporary-lb
+      name: Contemporary-lb
+    dataset:
+      name: Contemporary-lb
+      type: contemporary-lb
+    metrics:
+    - type: accuracy
+      value: 0.594
+      name: SIB-200(LB) accuracy
+      verified: false
+    - type: accuracy
+      value: 0.805
+      name: ParaLUX accuracy
+      verified: false
+  - task:
+      type: bitext-mining
+      name: LBHistoricalBitextMining
+    dataset:
+      name: LBHistoricalBitextMining
+      type: lb-en
+    metrics:
+    - type: accuracy
+      value: 0.8932
+      name: LB<->FR accuracy
+      verified: false
+    - type: accuracy
+      value: 0.8955
+      name: LB<->EN accuracy
+      verified: false
+    - type: mean_accuracy
+      value: 0.9144
+      name: LB<->DE accuracy
+      verified: false
+config:
+  architectures:
+  - XLMRobertaModel
+  model_type: xlm-roberta
+  tokenizer_config:
+    bos_token: <s>
+    cls_token: <s>
+    eos_token: </s>
+    mask_token: <mask>
+    pad_token: <pad>
+    sep_token: </s>
+    unk_token: <unk>
+cardData:
+  tags:
+  - sentence-transformers
+  - sentence-similarity
+  - dataset_size:40000
+  - loss:MSELoss
+  - multilingual
+  base_model: sentence-transformers/paraphrase-multilingual-mpnet-base-v2
+  widget:
+  - source_sentence: Who is filming along?
+    sentences:
+    - Wién filmt mat?
+    - Weider huet den Tatarescu drop higewisen, datt Rumänien durch seng krichsbedélegong op de 6eite vun den allie'erten
+      110.000 mann verluer hätt.
+    - Brambilla 130.08.03 St.
+  - source_sentence: 'Four potential scenarios could still play out: Jean Asselborn.'
+    sentences:
+    - Dann ass nach eng Antenne hei um Kierchbierg virgesi Richtung RTL Gebai, do gëtt jo een ganz neie Wunnquartier gebaut.
+    - D'bedélegong un de wählen wir ganz stärk gewiéscht a munche ge'genden wor re eso'gucr me' we' 90 prozent.
+    - Jean Asselborn gesäit 4 Méiglechkeeten, wéi et kéint virugoen.
+  - source_sentence: Non-profit organisation Passerell, which provides legal council to refugees in Luxembourg, announced
+      that it has to make four employees redundant in August due to a lack of funding.
+    sentences:
+    - Oetringen nach Remich....8.20» 215»
+    - D'ASBL Passerell, déi sech ëm d'Berodung vu Refugiéeën a Saache Rechtsfroe këmmert, wäert am August mussen hir véier
+      fix Salariéen entloossen.
+    - D'Regierung huet allerdéngs "just" 180.041 Doudeger verzeechent.
+  - source_sentence: This regulation was temporarily lifted during the Covid pandemic.
+    sentences:
+    - Six Jours vu New-York si fir d’équipe Girgetti — Debacco
+    - Dës Reegelung gouf wärend der Covid-Pandemie ausgesat.
+    - ING-Marathon ouni gréisser Tëschefäll ofgelaf - 18 Leit hospitaliséiert.
+  - source_sentence: The cross-border workers should also receive more wages.
+    sentences:
+    - D'grenzarbechetr missten och me' lo'n kre'en.
+    - 'De Néckel: Firun! Dât ass jo ailes, wèll ''t get dach neischt un der Bréck gemâcht!'
+    - D'Grande-Duchesse Josephine Charlotte an hir Ministeren hunn d'Land verlooss, et war den Optakt vun der Zäit am Exil.
+  pipeline_tag: sentence-similarity
+  library_name: sentence-transformers
+  model-index:
+  - name: SentenceTransformer based on sentence-transformers/paraphrase-multilingual-mpnet-base-v2
+    results:
+    - task:
+        type: contemporary-lb
+        name: Contemporary-lb
+      dataset:
+        name: Contemporary-lb
+        type: contemporary-lb
+      metrics:
+      - type: accuracy
+        value: 0.594
+        name: SIB-200(LB) accuracy
+        verified: false
+      - type: accuracy
+        value: 0.805
+        name: ParaLUX accuracy
+        verified: false
+    - task:
+        type: bitext-mining
+        name: LBHistoricalBitextMining
+      dataset:
+        name: LBHistoricalBitextMining
+        type: lb-en
+      metrics:
+      - type: accuracy
+        value: 0.8932
+        name: LB<->FR accuracy
+        verified: false
+      - type: accuracy
+        value: 0.8955
+        name: LB<->EN accuracy
+        verified: false
+      - type: mean_accuracy
+        value: 0.9144
+        name: LB<->DE accuracy
+        verified: false
+  license: agpl-3.0
+  datasets:
+  - impresso-project/HistLuxAlign
+  - fredxlpy/LuxAlign
+  language:
+  - lb
+siblings:
+- rfilename: .gitattributes
+- rfilename: 1_Pooling/config.json
+- rfilename: README.md
+- rfilename: config.json
+- rfilename: config_sentence_transformers.json
+- rfilename: model.safetensors
+- rfilename: modules.json
+- rfilename: sentence_bert_config.json
+- rfilename: special_tokens_map.json
+- rfilename: tokenizer.json
+- rfilename: tokenizer_config.json
+spaces: []
+createdAt: '2025-03-11T14:54:57.000Z'
+safetensors:
+  parameters:
+    F32: 278043648
+  total: 278043648
+usedStorage: 1129280083
+downloadsAllTime: 196
+inferenceProviderMapping: {}
+configJson:
+  _name_or_path: ./output/make-multilingual-en-lb-2025-02-28_01-09-55/checkpoint-5000
+  architectures:
+  - XLMRobertaModel
+  attention_probs_dropout_prob: 0.1
+  bos_token_id: 0
+  classifier_dropout: null
+  eos_token_id: 2
+  gradient_checkpointing: false
+  hidden_act: gelu
+  hidden_dropout_prob: 0.1
+  hidden_size: 768
+  initializer_range: 0.02
+  intermediate_size: 3072
+  layer_norm_eps: 1.0e-05
+  max_position_embeddings: 514
+  model_type: xlm-roberta
+  num_attention_heads: 12
+  num_hidden_layers: 12
+  output_past: true
+  pad_token_id: 1
+  position_embedding_type: absolute
+  torch_dtype: float32
+  transformers_version: 4.49.0
+  type_vocab_size: 1
+  use_cache: true
+  vocab_size: 250002
+onnxFiles: {}
+safetensorsSizeMb: 1112.2
+approxSizeMb: 1112.2
+fetchedAt: '2026-06-08T16:42:43.000Z'

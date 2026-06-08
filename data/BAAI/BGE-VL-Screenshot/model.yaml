@@ -1,0 +1,192 @@
+_id: 6826db2e0b576b6ed68feb7b
+id: BAAI/BGE-VL-Screenshot
+private: false
+pipeline_tag: sentence-similarity
+library_name: sentence-transformers
+tags:
+- sentence-transformers
+- safetensors
+- qwen2_5_vl
+- sentence-similarity
+- custom_code
+- en
+- zh
+- ar
+- fr
+- es
+- arxiv:2502.11431
+- base_model:Qwen/Qwen2.5-VL-3B-Instruct
+- base_model:finetune:Qwen/Qwen2.5-VL-3B-Instruct
+- license:mit
+- endpoints_compatible
+- region:us
+downloads: 70
+likes: 21
+modelId: BAAI/BGE-VL-Screenshot
+author: BAAI
+sha: 2b0f1cd3e4acf66be759d840954e0c9f1c9a42cf
+lastModified: '2026-04-15T10:52:27.000Z'
+gated: false
+disabled: false
+widgetData:
+- source_sentence: That is a happy person
+  sentences:
+  - That is a happy dog
+  - That is a very happy person
+  - Today is a sunny day
+model-index: null
+config:
+  architectures:
+  - Qwen2_5_VLForConditionalGeneration
+  auto_map:
+    AutoModel: modeling_bge_vl_screenshot.BGE_VL_Screenshot
+  model_type: qwen2_5_vl
+  tokenizer_config:
+    bos_token: null
+    chat_template: "{%- if tools %}\n    {{- '<|im_start|>system\\n' }}\n    {%- if messages[0]['role'] == 'system' %}\n \
+      \       {{- messages[0]['content'] }}\n    {%- else %}\n        {{- 'You are a helpful assistant.' }}\n    {%- endif\
+      \ %}\n    {{- \"\\n\\n# Tools\\n\\nYou may call one or more functions to assist with the user query.\\n\\nYou are provided\
+      \ with function signatures within <tools></tools> XML tags:\\n<tools>\" }}\n    {%- for tool in tools %}\n        {{-\
+      \ \"\\n\" }}\n        {{- tool | tojson }}\n    {%- endfor %}\n    {{- \"\\n</tools>\\n\\nFor each function call, return\
+      \ a json object with function name and arguments within <tool_call></tool_call> XML tags:\\n<tool_call>\\n{\\\"name\\\
+      \": <function-name>, \\\"arguments\\\": <args-json-object>}\\n</tool_call><|im_end|>\\n\" }}\n{%- else %}\n    {%- if\
+      \ messages[0]['role'] == 'system' %}\n        {{- '<|im_start|>system\\n' + messages[0]['content'] + '<|im_end|>\\n'\
+      \ }}\n    {%- else %}\n        {{- '<|im_start|>system\\nYou are a helpful assistant.<|im_end|>\\n' }}\n    {%- endif\
+      \ %}\n{%- endif %}\n{%- for message in messages %}\n    {%- if (message.role == \"user\") or (message.role == \"system\"\
+      \ and not loop.first) or (message.role == \"assistant\" and not message.tool_calls) %}\n        {{- '<|im_start|>' +\
+      \ message.role + '\\n' + message.content + '<|im_end|>' + '\\n' }}\n    {%- elif message.role == \"assistant\" %}\n\
+      \        {{- '<|im_start|>' + message.role }}\n        {%- if message.content %}\n            {{- '\\n' + message.content\
+      \ }}\n        {%- endif %}\n        {%- for tool_call in message.tool_calls %}\n            {%- if tool_call.function\
+      \ is defined %}\n                {%- set tool_call = tool_call.function %}\n            {%- endif %}\n            {{-\
+      \ '\\n<tool_call>\\n{\"name\": \"' }}\n            {{- tool_call.name }}\n            {{- '\", \"arguments\": ' }}\n\
+      \            {{- tool_call.arguments | tojson }}\n            {{- '}\\n</tool_call>' }}\n        {%- endfor %}\n   \
+      \     {{- '<|im_end|>\\n' }}\n    {%- elif message.role == \"tool\" %}\n        {%- if (loop.index0 == 0) or (messages[loop.index0\
+      \ - 1].role != \"tool\") %}\n            {{- '<|im_start|>user' }}\n        {%- endif %}\n        {{- '\\n<tool_response>\\\
+      n' }}\n        {{- message.content }}\n        {{- '\\n</tool_response>' }}\n        {%- if loop.last or (messages[loop.index0\
+      \ + 1].role != \"tool\") %}\n            {{- '<|im_end|>\\n' }}\n        {%- endif %}\n    {%- endif %}\n{%- endfor\
+      \ %}\n{%- if add_generation_prompt %}\n    {{- '<|im_start|>assistant\\n' }}\n{%- endif %}\n"
+    eos_token: <|im_end|>
+    pad_token: <|endoftext|>
+    unk_token: null
+  chat_template_jinja: "{%- if messages[0].role == 'system' -%}\n    {{- '<|im_start|>system\\n' }}\n    {%- if messages[0].content\
+    \ is string -%}\n        {{- messages[0].content }}\n    {%- else -%}\n        {%- for content in messages[0].content\
+    \ -%}\n            {%- if 'text' in content -%}\n                {{- content.text }}\n            {%- endif -%}\n    \
+    \    {%- endfor -%}\n    {%- endif -%}\n    {{- '<|im_end|>\\n' }}\n{%- else -%}\n    {{- '<|im_start|>system\\nYou are\
+    \ a helpful assistant.<|im_end|>\\n' }}\n{%- endif -%}\n{%- set image_count = namespace(value=0) -%}\n{%- set video_count\
+    \ = namespace(value=0) -%}\n{%- for message in messages -%}\n    {%- if message.role == \"user\" -%}\n        {{- '<|im_start|>'\
+    \ + message.role + '\\n' }}\n        {%- if message.content is string -%}\n            {{- message.content }}\n      \
+    \  {%- else -%}\n            {%- for content in message.content -%}\n                {%- if content.type == 'image' or\
+    \ 'image' in content or 'image_url' in content -%}\n                    {%- set image_count.value = image_count.value\
+    \ + 1 -%}\n                    {{- '<|vision_start|><|image_pad|><|vision_end|>' }}\n                {%- elif content.type\
+    \ == 'video' or 'video' in content -%}\n                    {%- set video_count.value = video_count.value + 1 -%}\n  \
+    \                  {{- '<|vision_start|><|video_pad|><|vision_end|>' }}\n                {%- elif 'text' in content -%}\n\
+    \                    {{- content.text }}\n                {%- endif -%}\n            {%- endfor -%}\n        {%- endif\
+    \ -%}\n        {{- '<|im_end|>\\n' }}\n    {%- elif message.role != \"system\" -%}\n        {{- '<|im_start|>' + message.role\
+    \ + '\\n' }}\n        {%- if message.content is string -%}\n            {{- message.content }}\n        {%- else -%}\n\
+    \            {%- for content in message.content -%}\n                {%- if 'text' in content -%}\n                  \
+    \  {{- content.text }}\n                {%- endif -%}\n            {%- endfor -%}\n        {%- endif -%}\n        {{-\
+    \ '<|im_end|>\\n' }}\n    {%- endif -%}\n{%- endfor -%}\n{%- if add_generation_prompt -%}\n    {{- '<|im_start|>assistant\\\
+    n<|endoftext|>' }}\n{%- endif -%}\n"
+cardData:
+  license: mit
+  language:
+  - en
+  - zh
+  - ar
+  - fr
+  - es
+  metrics:
+  - recall
+  base_model:
+  - Qwen/Qwen2.5-VL-3B-Instruct
+  library_name: sentence-transformers
+  tags:
+  - sentence-transformers
+  pipeline_tag: sentence-similarity
+siblings:
+- rfilename: .gitattributes
+- rfilename: 1_Pooling/config.json
+- rfilename: README.md
+- rfilename: assets/neg_1.jpeg
+- rfilename: assets/neg_2.jpeg
+- rfilename: assets/positive_1.jpeg
+- rfilename: assets/positive_2.jpeg
+- rfilename: assets/query_1.png
+- rfilename: assets/query_2.png
+- rfilename: chat_template.jinja
+- rfilename: config.json
+- rfilename: config_sentence_transformers.json
+- rfilename: generation_config.json
+- rfilename: merges.txt
+- rfilename: model-00001-of-00004.safetensors
+- rfilename: model-00002-of-00004.safetensors
+- rfilename: model-00003-of-00004.safetensors
+- rfilename: model-00004-of-00004.safetensors
+- rfilename: model.safetensors.index.json
+- rfilename: modeling_bge_vl_screenshot.py
+- rfilename: modules.json
+- rfilename: preprocessor_config.json
+- rfilename: sentence_bert_config.json
+- rfilename: tokenizer.json
+- rfilename: tokenizer_config.json
+- rfilename: vocab.json
+spaces: []
+createdAt: '2025-05-16T06:29:02.000Z'
+safetensors:
+  parameters:
+    BF16: 3754622976
+  total: 3754622976
+usedStorage: 7516168492
+downloadsAllTime: 3212
+inferenceProviderMapping: {}
+configJson:
+  architectures:
+  - Qwen2_5_VLForConditionalGeneration
+  auto_map:
+    AutoModel: modeling_bge_vl_screenshot.BGE_VL_Screenshot
+  attention_dropout: 0.0
+  bos_token_id: 151643
+  eos_token_id: 151645
+  hidden_act: silu
+  hidden_size: 2048
+  image_token_id: 151655
+  initializer_range: 0.02
+  intermediate_size: 11008
+  max_position_embeddings: 128000
+  max_window_layers: 70
+  model_type: qwen2_5_vl
+  num_attention_heads: 16
+  num_hidden_layers: 36
+  num_key_value_heads: 2
+  rms_norm_eps: 1.0e-06
+  rope_scaling:
+    mrope_section:
+    - 16
+    - 24
+    - 24
+    rope_type: default
+    type: default
+  rope_theta: 1000000.0
+  sliding_window: 32768
+  tie_word_embeddings: true
+  torch_dtype: bfloat16
+  transformers_version: 4.51.3
+  use_cache: true
+  use_sliding_window: false
+  video_token_id: 151656
+  vision_config:
+    hidden_size: 1280
+    in_chans: 3
+    model_type: qwen2_5_vl
+    out_hidden_size: 2048
+    spatial_patch_size: 14
+    tokens_per_second: 2
+    torch_dtype: bfloat16
+  vision_end_token_id: 151653
+  vision_start_token_id: 151652
+  vision_token_id: 151654
+  vocab_size: 151936
+onnxFiles: {}
+safetensorsSizeMb: 7509.3
+approxSizeMb: 7509.2
+fetchedAt: '2026-06-08T16:42:43.000Z'

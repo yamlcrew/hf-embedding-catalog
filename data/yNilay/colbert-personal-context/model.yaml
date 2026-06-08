@@ -1,0 +1,188 @@
+_id: 69caf620f3cfb18ea6e9ac5b
+id: yNilay/colbert-personal-context
+private: false
+pipeline_tag: sentence-similarity
+library_name: PyLate
+tags:
+- PyLate
+- safetensors
+- lfm2
+- ColBERT
+- sentence-transformers
+- sentence-similarity
+- feature-extraction
+- generated_from_trainer
+- dataset_size:5191
+- loss:Contrastive
+- arxiv:1908.10084
+- base_model:LiquidAI/LFM2-ColBERT-350M
+- base_model:finetune:LiquidAI/LFM2-ColBERT-350M
+- model-index
+- region:us
+downloads: 11
+likes: 0
+modelId: yNilay/colbert-personal-context
+author: yNilay
+sha: 57da0cc9df9a688b2fc74efa8f3c9b9ce908e33a
+lastModified: '2026-03-31T03:24:34.000Z'
+gated: false
+disabled: false
+widgetData:
+- source_sentence: That is a happy person
+  sentences:
+  - That is a happy dog
+  - That is a very happy person
+  - Today is a sunny day
+model-index:
+- name: PyLate model based on LiquidAI/LFM2-ColBERT-350M
+  results:
+  - task:
+      type: col-berttriplet
+      name: Col BERTTriplet
+    dataset:
+      name: Unknown
+      type: unknown
+    metrics:
+    - type: accuracy
+      value: 0.9757365584373474
+      name: Accuracy
+      verified: false
+config:
+  architectures:
+  - Lfm2Model
+  model_type: lfm2
+  tokenizer_config:
+    bos_token: <|startoftext|>
+    eos_token: <|im_end|>
+    pad_token: <|im_end|>
+    use_default_system_prompt: false
+  chat_template_jinja: '{{- bos_token -}}{%- set system_prompt = "" -%}{%- set ns = namespace(system_prompt="") -%}{%- if
+    messages[0]["role"] == "system" -%} {%- set ns.system_prompt = messages[0]["content"] -%} {%- set messages = messages[1:]
+    -%}{%- endif -%}{%- if tools -%} {%- set ns.system_prompt = ns.system_prompt + ("
+
+    " if ns.system_prompt else "") + "List of tools: <|tool_list_start|>[" -%} {%- for tool in tools -%} {%- if tool is not
+    string -%} {%- set tool = tool | tojson -%} {%- endif -%} {%- set ns.system_prompt = ns.system_prompt + tool -%} {%- if
+    not loop.last -%} {%- set ns.system_prompt = ns.system_prompt + ", " -%} {%- endif -%} {%- endfor -%} {%- set ns.system_prompt
+    = ns.system_prompt + "]<|tool_list_end|>" -%}{%- endif -%}{%- if ns.system_prompt -%} {{- "<|im_start|>system
+
+    " + ns.system_prompt + "<|im_end|>
+
+    " -}}{%- endif -%}{%- for message in messages -%} {{- "<|im_start|>" + message["role"] + "
+
+    " -}} {%- set content = message["content"] -%} {%- if content is not string -%} {%- set content = content | tojson -%}
+    {%- endif -%} {%- if message["role"] == "tool" -%} {%- set content = "<|tool_response_start|>" + content + "<|tool_response_end|>"
+    -%} {%- endif -%} {{- content + "<|im_end|>
+
+    " -}}{%- endfor -%}{%- if add_generation_prompt -%} {{- "<|im_start|>assistant
+
+    " -}}{%- endif -%}'
+cardData:
+  tags:
+  - ColBERT
+  - PyLate
+  - sentence-transformers
+  - sentence-similarity
+  - feature-extraction
+  - generated_from_trainer
+  - dataset_size:5191
+  - loss:Contrastive
+  base_model: LiquidAI/LFM2-ColBERT-350M
+  pipeline_tag: sentence-similarity
+  library_name: PyLate
+  metrics:
+  - accuracy
+  model-index:
+  - name: PyLate model based on LiquidAI/LFM2-ColBERT-350M
+    results:
+    - task:
+        type: col-berttriplet
+        name: Col BERTTriplet
+      dataset:
+        name: Unknown
+        type: unknown
+      metrics:
+      - type: accuracy
+        value: 0.9757365584373474
+        name: Accuracy
+        verified: false
+siblings:
+- rfilename: .gitattributes
+- rfilename: 1_Dense/config.json
+- rfilename: 1_Dense/model.safetensors
+- rfilename: README.md
+- rfilename: chat_template.jinja
+- rfilename: config.json
+- rfilename: config_sentence_transformers.json
+- rfilename: model.safetensors
+- rfilename: modules.json
+- rfilename: sentence_bert_config.json
+- rfilename: special_tokens_map.json
+- rfilename: tokenizer.json
+- rfilename: tokenizer_config.json
+spaces: []
+createdAt: '2026-03-30T22:16:00.000Z'
+safetensors:
+  parameters:
+    F32: 353322752
+  total: 353322752
+usedStorage: 5655323904
+downloadsAllTime: 16
+inferenceProviderMapping: {}
+configJson:
+  architectures:
+  - Lfm2Model
+  block_auto_adjust_ff_dim: true
+  block_dim: 1024
+  block_ff_dim: 6656
+  block_ffn_dim_multiplier: 1.0
+  block_mlp_init_scale: 1.0
+  block_multiple_of: 256
+  block_norm_eps: 1.0e-05
+  block_out_init_scale: 1.0
+  block_use_swiglu: true
+  block_use_xavier_init: true
+  bos_token_id: 1
+  conv_L_cache: 3
+  conv_bias: false
+  conv_dim: 1024
+  conv_use_xavier_init: true
+  dtype: float32
+  eos_token_id: 7
+  hidden_size: 1024
+  initializer_range: 0.02
+  intermediate_size: 6656
+  layer_types:
+  - conv
+  - conv
+  - full_attention
+  - conv
+  - conv
+  - full_attention
+  - conv
+  - conv
+  - full_attention
+  - conv
+  - full_attention
+  - conv
+  - full_attention
+  - conv
+  - full_attention
+  - conv
+  max_position_embeddings: 128000
+  model_type: lfm2
+  norm_eps: 1.0e-05
+  num_attention_heads: 16
+  num_heads: 16
+  num_hidden_layers: 16
+  num_key_value_heads: 8
+  pad_token_id: 0
+  rope_theta: 1000000.0
+  tie_embedding: true
+  transformers_version: 4.56.2
+  use_cache: true
+  use_pos_enc: true
+  vocab_size: 64402
+onnxFiles: {}
+safetensorsSizeMb: 1413.8
+approxSizeMb: 1413.3
+fetchedAt: '2026-06-08T16:42:43.000Z'

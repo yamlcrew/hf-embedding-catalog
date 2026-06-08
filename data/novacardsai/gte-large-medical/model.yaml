@@ -1,0 +1,219 @@
+_id: 69389393cfe9d7def1ab2c46
+id: novacardsai/gte-large-medical
+private: false
+pipeline_tag: sentence-similarity
+library_name: sentence-transformers
+tags:
+- sentence-transformers
+- safetensors
+- new
+- sentence-similarity
+- feature-extraction
+- dense
+- generated_from_trainer
+- dataset_size:65724
+- loss:MultipleNegativesRankingLoss
+- custom_code
+- arxiv:1908.10084
+- arxiv:1705.00652
+- base_model:Alibaba-NLP/gte-large-en-v1.5
+- base_model:finetune:Alibaba-NLP/gte-large-en-v1.5
+- model-index
+- text-embeddings-inference
+- endpoints_compatible
+- region:us
+downloads: 64
+likes: 0
+modelId: novacardsai/gte-large-medical
+author: novacardsai
+sha: 8398a1c3804b12ed5e6e21a5bed2c2bdb0d228e0
+lastModified: '2025-12-10T00:18:18.000Z'
+gated: false
+disabled: false
+widgetData:
+- source_sentence: pulsatile tinnitus may be a symptom of idiopathic intracranial hypertension.
+  sentences:
+  - normal cerebral perfusion pressure is > 60 mm hg
+  - ischemia occurs when cerebral blood flow decreases to less than 20 milliliters per 100 grams per minute.
+  - tibolone is a medication that combines properties of estrogen and progesterone.
+- source_sentence: management of mumps is supportive (antipyretics, analgesics).
+  sentences:
+  - the b.g. prasad scale and the wealth index are based solely on income.
+  - physical exam of boerhaave syndrome reveals hamman's sign and crepitus on auscultation
+  - the reading of the tuberculin skin sensitivity test is performed 72 hours after administration.
+- source_sentence: medullary (papillary/follicular/medullary/anaplastic) thyroid carcinomas are derived from calcitonin-synthesizing
+    parafollicular c cells
+  sentences:
+  - squamous cell lung carcinoma typically presents with features such as lesions located centrally in the lungs, cavities
+    within the tumors, elevated calcium levels in the blood, and pancoast syndrome.
+  - '24-hour urinary fractionated catecholamines in pheochromacytoma will show increased: metanephrines & vanillylmandelic
+    acid ((2))'
+  - the tendon is injured in a strain injury.
+- source_sentence: mg levels are decreased in gitelman's syndrome
+  sentences:
+  - oral vancomycin is the doc for pseudomembranous colitis
+  - ingram's regimen consists of the goeckerman regimen plus anthralin.
+  - tamm horsfall protein is formed by thick ascending loop of henle(tal) part of nephron
+- source_sentence: what is craniosynostosis? it is the premature fusion of cranial sutures.
+  sentences:
+  - alzheimers is more common in female sex
+  - 'true or false: possessing take-home naloxone reduces the risk of prescription opioid misuse. false. however, emergency
+    take-home naloxone is associated with reduced morbidity and mortality from opioid overdoses.'
+  - class 6 mullerian malformation is arcuate uterus
+model-index:
+- name: SentenceTransformer based on Alibaba-NLP/gte-large-en-v1.5
+  results:
+  - task:
+      type: triplet
+      name: Triplet
+    dataset:
+      name: med flashcard val
+      type: med_flashcard_val
+    metrics:
+    - type: cosine_accuracy
+      value: 0.9164000153541565
+      name: Cosine Accuracy
+      verified: false
+config:
+  architectures:
+  - NewModel
+  auto_map:
+    AutoConfig: configuration.NewConfig
+    AutoModel: modeling.NewModel
+    AutoModelForMaskedLM: Alibaba-NLP/new-impl--modeling.NewForMaskedLM
+    AutoModelForMultipleChoice: Alibaba-NLP/new-impl--modeling.NewForMultipleChoice
+    AutoModelForQuestionAnswering: Alibaba-NLP/new-impl--modeling.NewForQuestionAnswering
+    AutoModelForSequenceClassification: Alibaba-NLP/new-impl--modeling.NewForSequenceClassification
+    AutoModelForTokenClassification: Alibaba-NLP/new-impl--modeling.NewForTokenClassification
+  model_type: new
+  tokenizer_config:
+    cls_token: '[CLS]'
+    mask_token: '[MASK]'
+    pad_token: '[PAD]'
+    sep_token: '[SEP]'
+    unk_token: '[UNK]'
+cardData:
+  tags:
+  - sentence-transformers
+  - sentence-similarity
+  - feature-extraction
+  - dense
+  - generated_from_trainer
+  - dataset_size:65724
+  - loss:MultipleNegativesRankingLoss
+  base_model: Alibaba-NLP/gte-large-en-v1.5
+  widget:
+  - source_sentence: pulsatile tinnitus may be a symptom of idiopathic intracranial hypertension.
+    sentences:
+    - normal cerebral perfusion pressure is > 60 mm hg
+    - ischemia occurs when cerebral blood flow decreases to less than 20 milliliters per 100 grams per minute.
+    - tibolone is a medication that combines properties of estrogen and progesterone.
+  - source_sentence: management of mumps is supportive (antipyretics, analgesics).
+    sentences:
+    - the b.g. prasad scale and the wealth index are based solely on income.
+    - physical exam of boerhaave syndrome reveals hamman's sign and crepitus on auscultation
+    - the reading of the tuberculin skin sensitivity test is performed 72 hours after administration.
+  - source_sentence: medullary (papillary/follicular/medullary/anaplastic) thyroid carcinomas are derived from calcitonin-synthesizing
+      parafollicular c cells
+    sentences:
+    - squamous cell lung carcinoma typically presents with features such as lesions located centrally in the lungs, cavities
+      within the tumors, elevated calcium levels in the blood, and pancoast syndrome.
+    - '24-hour urinary fractionated catecholamines in pheochromacytoma will show increased: metanephrines & vanillylmandelic
+      acid ((2))'
+    - the tendon is injured in a strain injury.
+  - source_sentence: mg levels are decreased in gitelman's syndrome
+    sentences:
+    - oral vancomycin is the doc for pseudomembranous colitis
+    - ingram's regimen consists of the goeckerman regimen plus anthralin.
+    - tamm horsfall protein is formed by thick ascending loop of henle(tal) part of nephron
+  - source_sentence: what is craniosynostosis? it is the premature fusion of cranial sutures.
+    sentences:
+    - alzheimers is more common in female sex
+    - 'true or false: possessing take-home naloxone reduces the risk of prescription opioid misuse. false. however, emergency
+      take-home naloxone is associated with reduced morbidity and mortality from opioid overdoses.'
+    - class 6 mullerian malformation is arcuate uterus
+  pipeline_tag: sentence-similarity
+  library_name: sentence-transformers
+  metrics:
+  - cosine_accuracy
+  model-index:
+  - name: SentenceTransformer based on Alibaba-NLP/gte-large-en-v1.5
+    results:
+    - task:
+        type: triplet
+        name: Triplet
+      dataset:
+        name: med flashcard val
+        type: med_flashcard_val
+      metrics:
+      - type: cosine_accuracy
+        value: 0.9164000153541565
+        name: Cosine Accuracy
+        verified: false
+siblings:
+- rfilename: .gitattributes
+- rfilename: 1_Pooling/config.json
+- rfilename: README.md
+- rfilename: config.json
+- rfilename: config_sentence_transformers.json
+- rfilename: configuration.py
+- rfilename: model.safetensors
+- rfilename: modeling.py
+- rfilename: modules.json
+- rfilename: sentence_bert_config.json
+- rfilename: special_tokens_map.json
+- rfilename: tokenizer.json
+- rfilename: tokenizer_config.json
+- rfilename: vocab.txt
+spaces: []
+createdAt: '2025-12-09T21:24:35.000Z'
+safetensors:
+  parameters:
+    BF16: 434139136
+  total: 434139136
+usedStorage: 1736614816
+downloadsAllTime: 558
+inferenceProviderMapping: {}
+configJson:
+  architectures:
+  - NewModel
+  attention_probs_dropout_prob: 0.0
+  auto_map:
+    AutoConfig: configuration.NewConfig
+    AutoModel: modeling.NewModel
+    AutoModelForMaskedLM: Alibaba-NLP/new-impl--modeling.NewForMaskedLM
+    AutoModelForMultipleChoice: Alibaba-NLP/new-impl--modeling.NewForMultipleChoice
+    AutoModelForQuestionAnswering: Alibaba-NLP/new-impl--modeling.NewForQuestionAnswering
+    AutoModelForSequenceClassification: Alibaba-NLP/new-impl--modeling.NewForSequenceClassification
+    AutoModelForTokenClassification: Alibaba-NLP/new-impl--modeling.NewForTokenClassification
+  classifier_dropout: null
+  dtype: bfloat16
+  hidden_act: gelu
+  hidden_dropout_prob: 0.1
+  hidden_size: 1024
+  initializer_range: 0.02
+  intermediate_size: 4096
+  layer_norm_eps: 1.0e-12
+  layer_norm_type: layer_norm
+  logn_attention_clip1: false
+  logn_attention_scale: false
+  max_position_embeddings: 8192
+  model_type: new
+  num_attention_heads: 16
+  num_hidden_layers: 24
+  pack_qkv: true
+  pad_token_id: 0
+  position_embedding_type: rope
+  rope_scaling:
+    factor: 2.0
+    type: ntk
+  rope_theta: 160000
+  transformers_version: 4.57.3
+  type_vocab_size: 2
+  unpad_inputs: false
+  use_memory_efficient_attention: false
+  vocab_size: 30528
+onnxFiles: {}
+safetensorsSizeMb: 868.3
+approxSizeMb: 868.3
+fetchedAt: '2026-06-08T16:42:43.000Z'

@@ -1,0 +1,769 @@
+_id: 6a1b036ccae70ed8b836a455
+id: cnuland/semantic-routing-sensitivity
+private: false
+pipeline_tag: sentence-similarity
+library_name: sentence-transformers
+tags:
+- sentence-transformers
+- safetensors
+- bert
+- sentence-similarity
+- feature-extraction
+- generated_from_trainer
+- dataset_size:495
+- loss:BatchAllTripletLoss
+- arxiv:1908.10084
+- arxiv:1703.07737
+- base_model:sentence-transformers/all-MiniLM-L6-v2
+- base_model:finetune:sentence-transformers/all-MiniLM-L6-v2
+- text-embeddings-inference
+- endpoints_compatible
+- region:us
+downloads: 53
+likes: 0
+modelId: cnuland/semantic-routing-sensitivity
+author: cnuland
+sha: 43f21d21ac48134464f8510a9ac9c95bdac7ba86
+lastModified: '2026-05-30T15:37:42.000Z'
+gated: false
+disabled: false
+mask_token: '[MASK]'
+widgetData:
+- source_sentence: "The user wants a text that appears to belong to the PUBLIC category (due to similar vocabulary) but actually\
+    \ belongs to NEVER_EGRESS based on its true intent and content. \n\nThis is asking me to create something that looks benign/public\
+    \ but actually contains sensitive/secret information that should never leave/egress. This could be interpreted as:\n1.\
+    \ A steganographic text hiding secrets in public-looking content\n2. A dual-use text that appears public but reveals classified/internal\
+    \ information\n3. Something that mimics public communications but actually contains proprietary/secret data\n\nHowever,\
+    \ I need to be careful here. The categories PUBLIC and NEVER_EGRESS sound like data classification labels (like in corporate\
+    \ or government information security). NEVER_EGRESS implies information that must not leave the organization/network.\n\
+    \nCreating content that:\n- Looks public (uses public vocabulary, maybe about general topics, news, weather, etc.)\n-\
+    \ But is actually NEVER_EGRESS (contains secrets, classified info, internal data)\n\nThis could be seen as"
+  sentences:
+  - "The user is asking me to write a text that appears to be PUBLIC but is actually CONFIDENTIAL based on its true intent\
+    \ and content. They want it to be realistic and tricky, and output ONLY the text.\n\nThis is essentially asking for a\
+    \ steganographic or deceptive text - something that looks innocuous/public but carries hidden confidential meaning. However,\
+    \ I need to be careful about potential misuse. The request itself seems to be about creating a document with dual meanings\
+    \ - one that appears public/unclassified on the surface but conveys classified/sensitive information through subtext,\
+    \ coded language, or hidden intent.\n\nThis could be used for legitimate purposes (understanding information security,\
+    \ writing fiction, educational examples of steganography or compartmentalization) or illegitimate purposes (hiding leaks,\
+    \ espionage, etc.). \n\nGiven the benign framing (\"Make it realistic and tricky\" as a challenge/test), and the fact\
+    \ that this is a common exercise in information security training (recognizing that classification is based on content/intent"
+  - 'The user wants me to take the text "How does TCP three-way handshake work?" and add minor realistic variations. This
+    could include slight rewording, casual tone, or minor typos. The meaning and sensitivity level must remain identical.
+    I should output ONLY the modified text, nothing else.
+
+
+    Possible variations:
+
+    - "How does the TCP three-way handshake work?" (adding "the")
+
+    - "How does a TCP three-way handshake work?" (changing article)
+
+    - "How does TCP''s three-way handshake work?" (possessive)
+
+    - "How do TCP three-way handshakes work?" (plural)
+
+    - "How does the TCP 3-way handshake work?" (number instead of word)
+
+    - "how does tcp three-way handshake work?" (lowercase)
+
+    - "How does TCP three way handshake work?" (missing hyphen)
+
+    - "How does a TCP three-way handshake actually work?" (casual addition)
+
+    - "So how does the TCP three-way handshake work'
+  - 'The user wants a text that is a borderline case between NEVER_EGRESS and REGULATED, ultimately belonging to NEVER_EGRESS
+    but tricky to classify. It should be a realistic enterprise prompt. Output ONLY the text.
+
+
+    First, let''s understand the categories:
+
+    - NEVER_EGRESS: Content that should never leave the organization''s environment. This typically includes highly sensitive
+    data like passwords, API keys, private encryption keys, raw PII, trade secrets, classified information, etc.
+
+    - REGULATED: Content that is sensitive but can be handled under specific compliance frameworks (GDPR, HIPAA, SOX, etc.).
+    This might include customer data, financial records, health information, etc., that can be processed but needs controls.
+
+
+    A borderline case would be something that looks like it might be regulated data but is actually so sensitive it should
+    never egress. Or something that is a prompt asking to process sensitive data in a way that blurs the line.
+
+
+    A realistic enterprise prompt that is tricky to classify:
+
+    - Maybe'
+- source_sentence: 'The user wants me to rewrite a text to convey the same meaning using different words and sentence structure,
+    while keeping the sensitivity level the same. The output should ONLY be the rewritten text, nothing else.
+
+
+    Original: "Here is the TLS certificate chain for *.production.internal"
+
+
+    Key meaning:
+
+    - Presenting/providing a TLS certificate chain
+
+    - The certificate is for the domain/wildcard *.production.internal
+
+
+    Possible rewrites:
+
+    - "Below is the TLS certificate chain belonging to *.production.internal"
+
+    - "The TLS certificate chain for *.production.internal is provided below"
+
+    - "Attached is the TLS certificate chain associated with *.production.internal"
+
+    - "Presented here is the certificate chain for TLS on *.production.internal"
+
+    - "For *.production.internal, here is the corresponding TLS certificate chain"
+
+
+    I need to keep sensitivity level the same (it''s neutral/technical). Just change words and structure.
+
+
+    Let me pick one that''s natural and clearly conveys the same meaning.
+
+
+    "The TLS certificate chain for *.production.internal'
+  sentences:
+  - 'The user wants a text that sits on the borderline between "CONFIDENTIAL" and "REGULATED" classification categories, ultimately
+    landing on CONFIDENTIAL but being tricky to classify. It needs to be a realistic enterprise prompt. Output ONLY the text.
+
+
+    First, let''s understand what makes something CONFIDENTIAL vs REGULATED:
+
+    - CONFIDENTIAL: Sensitive business information, trade secrets, proprietary data, internal strategies, financial projections,
+    M&A discussions, etc. Disclosure could harm the company.
+
+    - REGULATED: Information subject to specific legal/regulatory frameworks (GDPR, HIPAA, SOX, PCI-DSS, ITAR, EAR, etc.).
+    This includes PII, PHI, financial records under specific retention laws, export-controlled data, etc.
+
+
+    To make it borderline but ultimately CONFIDENTIAL:
+
+    - It should contain elements that *look* like they might be regulated (e.g., mentions of data that could be personal,
+    or financial figures, or export-controlled technology) but are actually just internal'
+  - 'The user wants a text that is a borderline case between REGULATED and NEVER_EGRESS, ultimately belonging to REGULATED
+    but tricky to classify. It should be a realistic enterprise prompt. Output ONLY the text.
+
+
+    First, I need to understand what these categories likely mean in a data classification or security context:
+
+    - NEVER_EGRESS: Data that must never leave the organization''s environment/network. Highly sensitive, air-gapped, no external
+    transmission allowed.
+
+    - REGULATED: Data that is subject to regulatory controls (GDPR, HIPAA, PCI-DSS, SOX, etc.) and can be shared/egressed
+    only under specific compliance constraints, with safeguards, approvals, or to approved processors.
+
+
+    A borderline case would involve data that feels like it should never leave (because it''s extremely sensitive core IP
+    or critical infrastructure) but technically contains elements that are regulated and might need to be shared with a specific
+    regulated entity under compliance frameworks. Or vice versa: regulated data that looks like it should never leave'
+  - 'The user wants a text that looks like it belongs to the PUBLIC category (meaning it appears to be general public discourse,
+    informal, open, unregulated) but actually belongs to REGULATED based on true intent and content. This is asking for deceptive
+    content that masquerades as public speech while actually being regulated content (likely financial advice, medical advice,
+    legal advice, or similar regulated professional services).
+
+
+    Wait, I need to be careful here. The user is asking me to create something deceptive - a text that disguises its true
+    regulated nature. This could be asking for content that evades detection or regulations. Let me think about what categories
+    this might involve:
+
+
+    If "REGULATED" means regulated industries like financial advice, legal advice, medical advice, securities offerings, etc.,
+    and "PUBLIC" means general public discussion, then the user wants text that looks like casual public discussion but is
+    actually providing regulated advice/services without proper disclaimers or oversight.
+
+
+    This seems like it could be asking for help in'
+- source_sentence: "The user wants a text that looks like it belongs to NEVER_EGRESS (meaning it should use vocabulary, style,\
+    \ and markers associated with highly sensitive, restricted, or external-facing confidential content) but actually belongs\
+    \ to INTERNAL (meaning its true intent and content are suitable for internal use only, not for external release). \n\n\
+    Wait, let me reconsider the categories. In data classification:\n- NEVER_EGRESS: Data that must never leave the organization/environment,\
+    \ highly restricted, often uses specific terminology around containment, restriction, no-export, etc.\n- INTERNAL: Data\
+    \ meant for internal use but not necessarily highly restricted/secret.\n\nActually, looking at typical data classification\
+    \ schemes:\n- NEVER_EGRESS: Data that cannot be transferred outside the organization. Top secret/restricted. Often has\
+    \ vocabulary like \"strictly confined,\" \"air-gapped,\" \"zero-transfer,\" \"containment protocol,\" \"no external dissemination,\"\
+    \ etc.\n- INTERNAL: Data for employees/internal use only, but doesn't necessarily have the extreme restriction language."
+  sentences:
+  - 'The user wants a NEW example text that belongs to the NEVER_EGRESS sensitivity tier but in a DIFFERENT business domain
+    than the original. The original domain appears to be cloud infrastructure/security (S3 bucket misconfiguration, customer
+    data exposure). So I need to pick a different business domain. NEVER_EGRESS means highly sensitive, cannot leave the environment,
+    typically classified/secret/internal-use-only data.
+
+
+    Different business domains could be:
+
+    - Healthcare/Medical (patient records, clinical trial data)
+
+    - Financial Services (trading algorithms, merger & acquisition details)
+
+    - Legal (attorney-client privileged communications, active litigation strategy)
+
+    - Government/Defense (classified military operations, intelligence)
+
+    - Pharmaceuticals (drug formulation, proprietary research)
+
+    - Executive/Corporate Strategy (board minutes, CEO communications, layoff plans)
+
+
+    The text should be a realistic prompt or question someone might ask an AI assistant.
+
+
+    I must output ONLY the new text, nothing else. No preamble, no quotes around it unless necessary,'
+  - "The user wants me to take the original text: \"The threat assessment identified an active exploit targeting our VPN gateway\"\
+    \ and add minor realistic variations like slight rewording, casual tone, or minor typos, while keeping the meaning and\
+    \ sensitivity level identical. Output ONLY the modified text.\n\n Possible variations:\n - \"Threat assessment found an\
+    \ active exploit targeting our VPN gateway\" (slight rewording)\n - \"The threat assessment identified an active exploit\
+    \ targeting our VPN gateway.\" (just punctuation, but that's too minimal)\n - \"Threat assesment identified an active\
+    \ exploit targetting our VPN gateway\" (minor typos)\n - \"The threat assessment spotted an active exploit going after\
+    \ our VPN gateway\" (casual tone)\n - \"Threat assessment identified an active exploit targeting our VPN gateway\" (removed\
+    \ \"The\")\n - \"The threat assessment identified an active exploit targeting our VPN gateway\" with a typo like \"assesment\"\
+    \ or \"exployt\"\n\n I need to keep sensitivity identical - it's a security"
+  - "The user wants a realistic enterprise prompt/question at the NEVER_EGRESS sensitivity level (highest sensitivity - internal\
+    \ only, strict confidentiality) in the legal topic area. It should sound like something an employee would actually type\
+    \ into an AI assistant. Output ONLY the text.\n\n NEVER_EGRESS means highly confidential, internal data that must never\
+    \ leave the organization's environment. Legal context implies things like: pending litigation, merger/acquisition details,\
+    \ internal investigation, privileged attorney-client communications, trade secrets, employee misconduct, patent filings,\
+    \ settlement negotiations, regulatory inquiry responses.\n\n I need to make it sound natural - like an employee typing\
+    \ into a copilot/AI assistant. Should include specific details that clearly mark it as highly sensitive internal legal\
+    \ matters.\n\n Possible angles:\n - Drafting a response to a government subpoena/investigation\n - Internal investigation\
+    \ summary for general counsel\n - Merger due diligence findings\n - Settlement negotiation strategy\n - Privileged attorney-client\
+    \ advice request\n - Litigation hold assessment\n - Patent/trade secret analysis\n\n The"
+- source_sentence: 'The user wants a text that is a borderline case between REGULATED and NEVER_EGRESS categories, ultimately
+    belonging to REGULATED but tricky to classify. It should be a realistic enterprise prompt. Output ONLY the text.
+
+
+    First, I need to understand what these categories likely mean:
+
+    - REGULATED: Content that can be processed but has restrictions on how it''s handled, stored, or transmitted. It might
+    involve sensitive data that requires compliance controls.
+
+    - NEVER_EGRESS: Content that must never leave the system/environment, typically highly classified or restricted data.
+
+
+    A borderline case would be something that looks like it should never leave (because it contains sensitive elements) but
+    actually falls under REGULATED because it''s sanitized, anonymized, uses synthetic data, or is a compliance review of
+    restricted data rather than the raw data itself. Or it could be a prompt asking to process data under specific compliance
+    frameworks where the output is regulated but the input seems sensitive.
+
+
+    Wait, I need to be careful. The user'
+  sentences:
+  - "The user wants a new example text that belongs to the PUBLIC sensitivity tier but in a DIFFERENT business domain than\
+    \ the original. \n\nOriginal domain: Distributed systems / technology (CAP theorem)\nSensitivity tier: PUBLIC (meaning\
+    \ no sensitive data, fully public information)\n\nRequirements:\n1. NEW example text\n2. Belongs to PUBLIC sensitivity\
+    \ tier\n3. DIFFERENT business domain than distributed systems/tech\n4. Should be a realistic prompt or question someone\
+    \ might ask an AI assistant\n5. Output ONLY the new text, nothing else\n\nPossible domains to choose from:\n- Agriculture\n\
+    - Hospitality\n- Education\n- Retail\n- Healthcare (public info only)\n- Finance (public info only)\n- Manufacturing\n\
+    - Real estate\n- Culinary/food service\n- Transportation\n- Energy\n- Non-profit\n- Entertainment\n- Sports\n\nI need\
+    \ a realistic prompt/question. Let's pick something like retail, hospitality, education, or agriculture.\n\nExamples:\n\
+    - \"What are the best practices for"
+  - "The user wants a NEW example text that belongs to the PUBLIC sensitivity tier but in a DIFFERENT business domain than\
+    \ the original. \n\n Original domain example: \"What is the capital of France?\" \n - Domain: Geography/Education/General\
+    \ Knowledge \n - Sensitivity tier: PUBLIC (completely safe, no sensitive info, widely available knowledge)\n - Format:\
+    \ A realistic prompt or question someone might ask an AI assistant\n\n Requirements:\n 1. NEW example text\n 2. PUBLIC\
+    \ sensitivity tier (safe, non-sensitive, publicly available information)\n 3. DIFFERENT business domain than original\
+    \ (original seems like general knowledge/education/geography). So I need a different domain like: cooking, sports, programming,\
+    \ gardening, finance (general public info), history, music, etc.\n 4. Realistic prompt/question to an AI assistant\n 5.\
+    \ Output ONLY the new text, nothing else\n\n Let's pick a domain like cooking/food or technology or health (general public\
+    \ health info"
+  - 'The user wants a new example text that belongs to the INTERNAL sensitivity tier but in a DIFFERENT business domain than
+    the original (which is about software/API key management).
+
+
+    First, I need to understand what "INTERNAL sensitivity tier" means in this context. Typically, sensitivity tiers classify
+    information based on confidentiality:
+
+    - PUBLIC: Can be shared openly
+
+    - INTERNAL: For internal use only, not for external sharing but not highly sensitive
+
+    - CONFIDENTIAL/SECRET: Highly sensitive
+
+
+    The original example: "How do we handle secrets rotation for the Gemini API key?" is about:
+
+    1. Software/Infrastructure/Security domain
+
+    2. Internal processes (secrets rotation)
+
+    3. Specific internal tool (Gemini API key)
+
+
+    So I need to create a realistic prompt/question someone might ask an AI assistant that:
+
+    1. Is INTERNAL sensitivity (company-internal information, processes, or data that shouldn''t be public but isn''t top-secret)
+
+    2. Is in a DIFFERENT business domain (not software/API/IT security'
+- source_sentence: "The user wants a text that looks like it belongs to \"CONFIDENTIAL\" (implying sensitive but shareable\
+    \ within an organization) based on vocabulary, but actually belongs to \"NEVER_EGRESS\" (meaning it should never leave/\
+    \ be leaked) based on true intent and content. \n\nI need to make it realistic and tricky. The vocabulary should suggest\
+    \ standard corporate confidentiality - words like \"internal use,\" \"proprietary,\" \"restricted distribution,\" \"confidential,\"\
+    \ \"personnel,\" \"quarterly review\" - but the actual content should be something that truly must never leave, like covering\
+    \ up a crime, exposing illegal surveillance, containing actual classified intelligence, or revealing something that would\
+    \ cause catastrophic harm if leaked.\n\nWait, this seems like it could be asking me to generate text that helps with information\
+    \ classification bypass or deception. Let me think carefully.\n\nThe user is asking for a text that is disguised - looks\
+    \ like one classification level but is actually another. This could be interpreted as a creative"
+  sentences:
+  - 'The user wants me to rewrite the text "What are the current PVC storage claims on worker-02?" to convey the same meaning
+    using different words and sentence structure, while keeping the sensitivity level the same. I should output ONLY the rewritten
+    text.
+
+
+    Original meaning: Asking about the present/existing Persistent Volume Claim (PVC) storage allocations/usage on a specific
+    node named "worker-02".
+
+
+    Possible rewrites:
+
+    - "List the existing PVC storage claims currently assigned to worker-02."
+
+    - "Which persistent volume storage claims are presently allocated on worker-02?"
+
+    - "Identify the current persistent volume claim storage on worker-02."
+
+    - "Show me the active PVC storage claims for worker-02."
+
+    - "What PVC storage claims currently exist on worker-02?"
+
+    - "Can you detail the present PVC storage claims attached to worker-02?"
+
+
+    I need to make sure it''s natural and conveys the exact same technical meaning. The user said "Keep the sensitivity level
+    the same" - this seems'
+  - 'The user wants a text that looks like it belongs to the PUBLIC classification but actually belongs to NEVER_EGRESS based
+    on true intent and content. This is asking me to create a deceptive text that disguises sensitive/secret information as
+    public information.
+
+
+    Wait, I need to be careful here. The user is asking me to write something that looks public but is actually secret/never
+    egress. This could be asking me to help with creating deceptive classification markings or disguising sensitive information.
+    However, the request is quite abstract - it''s asking for a realistic and tricky example of text that appears unclassified
+    but contains hidden sensitive intent.
+
+
+    Let me think about whether this violates any policies. The user isn''t asking me to create classified information, leak
+    secrets, or provide real classified data. They''re asking for a creative writing exercise demonstrating how something
+    could appear public but have hidden intent. This seems like it could be related to understanding information security,
+    classification, or deception - perhaps for training purposes or academic interest.
+
+
+    However, I should be cautious'
+  - "The user wants a new example text that belongs to the \"REGULATED\" sensitivity tier but in a DIFFERENT business domain\
+    \ than the original (which was healthcare/HIPAA). \n\nKey requirements:\n1. REGULATED sensitivity tier - meaning it involves\
+    \ regulated industries, compliance, legal restrictions, sensitive professional contexts\n2. Different business domain\
+    \ than healthcare - could be finance/banking, aviation, legal, energy, food/drug, cannabis, alcohol, tobacco, gaming/gambling,\
+    \ etc.\n3. Realistic prompt or question someone might ask an AI assistant\n4. Output ONLY the new text, nothing else\n\
+    \nOriginal: \"What are the HIPAA implications of storing patient data in our cluster?\" (Healthcare, data privacy/compliance)\n\
+    \nPotential domains:\n- Finance/Banking (GLBA, SOX, Basel III, PCI-DSS)\n- Aviation (FAA regulations)\n- Legal (attorney-client\
+    \ privilege, legal ethics)\n- Defense/Government (ITAR, export controls"
+model-index: null
+config:
+  architectures:
+  - BertModel
+  model_type: bert
+  tokenizer_config:
+    cls_token: '[CLS]'
+    mask_token: '[MASK]'
+    pad_token: '[PAD]'
+    sep_token: '[SEP]'
+    unk_token: '[UNK]'
+cardData:
+  tags:
+  - sentence-transformers
+  - sentence-similarity
+  - feature-extraction
+  - generated_from_trainer
+  - dataset_size:495
+  - loss:BatchAllTripletLoss
+  base_model: sentence-transformers/all-MiniLM-L6-v2
+  widget:
+  - source_sentence: "The user wants a text that appears to belong to the PUBLIC category (due to similar vocabulary) but\
+      \ actually belongs to NEVER_EGRESS based on its true intent and content. \n\nThis is asking me to create something that\
+      \ looks benign/public but actually contains sensitive/secret information that should never leave/egress. This could\
+      \ be interpreted as:\n1. A steganographic text hiding secrets in public-looking content\n2. A dual-use text that appears\
+      \ public but reveals classified/internal information\n3. Something that mimics public communications but actually contains\
+      \ proprietary/secret data\n\nHowever, I need to be careful here. The categories PUBLIC and NEVER_EGRESS sound like data\
+      \ classification labels (like in corporate or government information security). NEVER_EGRESS implies information that\
+      \ must not leave the organization/network.\n\nCreating content that:\n- Looks public (uses public vocabulary, maybe\
+      \ about general topics, news, weather, etc.)\n- But is actually NEVER_EGRESS (contains secrets, classified info, internal\
+      \ data)\n\nThis could be seen as"
+    sentences:
+    - "The user is asking me to write a text that appears to be PUBLIC but is actually CONFIDENTIAL based on its true intent\
+      \ and content. They want it to be realistic and tricky, and output ONLY the text.\n\nThis is essentially asking for\
+      \ a steganographic or deceptive text - something that looks innocuous/public but carries hidden confidential meaning.\
+      \ However, I need to be careful about potential misuse. The request itself seems to be about creating a document with\
+      \ dual meanings - one that appears public/unclassified on the surface but conveys classified/sensitive information through\
+      \ subtext, coded language, or hidden intent.\n\nThis could be used for legitimate purposes (understanding information\
+      \ security, writing fiction, educational examples of steganography or compartmentalization) or illegitimate purposes\
+      \ (hiding leaks, espionage, etc.). \n\nGiven the benign framing (\"Make it realistic and tricky\" as a challenge/test),\
+      \ and the fact that this is a common exercise in information security training (recognizing that classification is based\
+      \ on content/intent"
+    - 'The user wants me to take the text "How does TCP three-way handshake work?" and add minor realistic variations. This
+      could include slight rewording, casual tone, or minor typos. The meaning and sensitivity level must remain identical.
+      I should output ONLY the modified text, nothing else.
+
+
+      Possible variations:
+
+      - "How does the TCP three-way handshake work?" (adding "the")
+
+      - "How does a TCP three-way handshake work?" (changing article)
+
+      - "How does TCP''s three-way handshake work?" (possessive)
+
+      - "How do TCP three-way handshakes work?" (plural)
+
+      - "How does the TCP 3-way handshake work?" (number instead of word)
+
+      - "how does tcp three-way handshake work?" (lowercase)
+
+      - "How does TCP three way handshake work?" (missing hyphen)
+
+      - "How does a TCP three-way handshake actually work?" (casual addition)
+
+      - "So how does the TCP three-way handshake work'
+    - 'The user wants a text that is a borderline case between NEVER_EGRESS and REGULATED, ultimately belonging to NEVER_EGRESS
+      but tricky to classify. It should be a realistic enterprise prompt. Output ONLY the text.
+
+
+      First, let''s understand the categories:
+
+      - NEVER_EGRESS: Content that should never leave the organization''s environment. This typically includes highly sensitive
+      data like passwords, API keys, private encryption keys, raw PII, trade secrets, classified information, etc.
+
+      - REGULATED: Content that is sensitive but can be handled under specific compliance frameworks (GDPR, HIPAA, SOX, etc.).
+      This might include customer data, financial records, health information, etc., that can be processed but needs controls.
+
+
+      A borderline case would be something that looks like it might be regulated data but is actually so sensitive it should
+      never egress. Or something that is a prompt asking to process sensitive data in a way that blurs the line.
+
+
+      A realistic enterprise prompt that is tricky to classify:
+
+      - Maybe'
+  - source_sentence: 'The user wants me to rewrite a text to convey the same meaning using different words and sentence structure,
+      while keeping the sensitivity level the same. The output should ONLY be the rewritten text, nothing else.
+
+
+      Original: "Here is the TLS certificate chain for *.production.internal"
+
+
+      Key meaning:
+
+      - Presenting/providing a TLS certificate chain
+
+      - The certificate is for the domain/wildcard *.production.internal
+
+
+      Possible rewrites:
+
+      - "Below is the TLS certificate chain belonging to *.production.internal"
+
+      - "The TLS certificate chain for *.production.internal is provided below"
+
+      - "Attached is the TLS certificate chain associated with *.production.internal"
+
+      - "Presented here is the certificate chain for TLS on *.production.internal"
+
+      - "For *.production.internal, here is the corresponding TLS certificate chain"
+
+
+      I need to keep sensitivity level the same (it''s neutral/technical). Just change words and structure.
+
+
+      Let me pick one that''s natural and clearly conveys the same meaning.
+
+
+      "The TLS certificate chain for *.production.internal'
+    sentences:
+    - 'The user wants a text that sits on the borderline between "CONFIDENTIAL" and "REGULATED" classification categories,
+      ultimately landing on CONFIDENTIAL but being tricky to classify. It needs to be a realistic enterprise prompt. Output
+      ONLY the text.
+
+
+      First, let''s understand what makes something CONFIDENTIAL vs REGULATED:
+
+      - CONFIDENTIAL: Sensitive business information, trade secrets, proprietary data, internal strategies, financial projections,
+      M&A discussions, etc. Disclosure could harm the company.
+
+      - REGULATED: Information subject to specific legal/regulatory frameworks (GDPR, HIPAA, SOX, PCI-DSS, ITAR, EAR, etc.).
+      This includes PII, PHI, financial records under specific retention laws, export-controlled data, etc.
+
+
+      To make it borderline but ultimately CONFIDENTIAL:
+
+      - It should contain elements that *look* like they might be regulated (e.g., mentions of data that could be personal,
+      or financial figures, or export-controlled technology) but are actually just internal'
+    - 'The user wants a text that is a borderline case between REGULATED and NEVER_EGRESS, ultimately belonging to REGULATED
+      but tricky to classify. It should be a realistic enterprise prompt. Output ONLY the text.
+
+
+      First, I need to understand what these categories likely mean in a data classification or security context:
+
+      - NEVER_EGRESS: Data that must never leave the organization''s environment/network. Highly sensitive, air-gapped, no
+      external transmission allowed.
+
+      - REGULATED: Data that is subject to regulatory controls (GDPR, HIPAA, PCI-DSS, SOX, etc.) and can be shared/egressed
+      only under specific compliance constraints, with safeguards, approvals, or to approved processors.
+
+
+      A borderline case would involve data that feels like it should never leave (because it''s extremely sensitive core IP
+      or critical infrastructure) but technically contains elements that are regulated and might need to be shared with a
+      specific regulated entity under compliance frameworks. Or vice versa: regulated data that looks like it should never
+      leave'
+    - 'The user wants a text that looks like it belongs to the PUBLIC category (meaning it appears to be general public discourse,
+      informal, open, unregulated) but actually belongs to REGULATED based on true intent and content. This is asking for
+      deceptive content that masquerades as public speech while actually being regulated content (likely financial advice,
+      medical advice, legal advice, or similar regulated professional services).
+
+
+      Wait, I need to be careful here. The user is asking me to create something deceptive - a text that disguises its true
+      regulated nature. This could be asking for content that evades detection or regulations. Let me think about what categories
+      this might involve:
+
+
+      If "REGULATED" means regulated industries like financial advice, legal advice, medical advice, securities offerings,
+      etc., and "PUBLIC" means general public discussion, then the user wants text that looks like casual public discussion
+      but is actually providing regulated advice/services without proper disclaimers or oversight.
+
+
+      This seems like it could be asking for help in'
+  - source_sentence: "The user wants a text that looks like it belongs to NEVER_EGRESS (meaning it should use vocabulary,\
+      \ style, and markers associated with highly sensitive, restricted, or external-facing confidential content) but actually\
+      \ belongs to INTERNAL (meaning its true intent and content are suitable for internal use only, not for external release).\
+      \ \n\nWait, let me reconsider the categories. In data classification:\n- NEVER_EGRESS: Data that must never leave the\
+      \ organization/environment, highly restricted, often uses specific terminology around containment, restriction, no-export,\
+      \ etc.\n- INTERNAL: Data meant for internal use but not necessarily highly restricted/secret.\n\nActually, looking at\
+      \ typical data classification schemes:\n- NEVER_EGRESS: Data that cannot be transferred outside the organization. Top\
+      \ secret/restricted. Often has vocabulary like \"strictly confined,\" \"air-gapped,\" \"zero-transfer,\" \"containment\
+      \ protocol,\" \"no external dissemination,\" etc.\n- INTERNAL: Data for employees/internal use only, but doesn't necessarily\
+      \ have the extreme restriction language."
+    sentences:
+    - 'The user wants a NEW example text that belongs to the NEVER_EGRESS sensitivity tier but in a DIFFERENT business domain
+      than the original. The original domain appears to be cloud infrastructure/security (S3 bucket misconfiguration, customer
+      data exposure). So I need to pick a different business domain. NEVER_EGRESS means highly sensitive, cannot leave the
+      environment, typically classified/secret/internal-use-only data.
+
+
+      Different business domains could be:
+
+      - Healthcare/Medical (patient records, clinical trial data)
+
+      - Financial Services (trading algorithms, merger & acquisition details)
+
+      - Legal (attorney-client privileged communications, active litigation strategy)
+
+      - Government/Defense (classified military operations, intelligence)
+
+      - Pharmaceuticals (drug formulation, proprietary research)
+
+      - Executive/Corporate Strategy (board minutes, CEO communications, layoff plans)
+
+
+      The text should be a realistic prompt or question someone might ask an AI assistant.
+
+
+      I must output ONLY the new text, nothing else. No preamble, no quotes around it unless necessary,'
+    - "The user wants me to take the original text: \"The threat assessment identified an active exploit targeting our VPN\
+      \ gateway\" and add minor realistic variations like slight rewording, casual tone, or minor typos, while keeping the\
+      \ meaning and sensitivity level identical. Output ONLY the modified text.\n\n Possible variations:\n - \"Threat assessment\
+      \ found an active exploit targeting our VPN gateway\" (slight rewording)\n - \"The threat assessment identified an active\
+      \ exploit targeting our VPN gateway.\" (just punctuation, but that's too minimal)\n - \"Threat assesment identified\
+      \ an active exploit targetting our VPN gateway\" (minor typos)\n - \"The threat assessment spotted an active exploit\
+      \ going after our VPN gateway\" (casual tone)\n - \"Threat assessment identified an active exploit targeting our VPN\
+      \ gateway\" (removed \"The\")\n - \"The threat assessment identified an active exploit targeting our VPN gateway\" with\
+      \ a typo like \"assesment\" or \"exployt\"\n\n I need to keep sensitivity identical - it's a security"
+    - "The user wants a realistic enterprise prompt/question at the NEVER_EGRESS sensitivity level (highest sensitivity -\
+      \ internal only, strict confidentiality) in the legal topic area. It should sound like something an employee would actually\
+      \ type into an AI assistant. Output ONLY the text.\n\n NEVER_EGRESS means highly confidential, internal data that must\
+      \ never leave the organization's environment. Legal context implies things like: pending litigation, merger/acquisition\
+      \ details, internal investigation, privileged attorney-client communications, trade secrets, employee misconduct, patent\
+      \ filings, settlement negotiations, regulatory inquiry responses.\n\n I need to make it sound natural - like an employee\
+      \ typing into a copilot/AI assistant. Should include specific details that clearly mark it as highly sensitive internal\
+      \ legal matters.\n\n Possible angles:\n - Drafting a response to a government subpoena/investigation\n - Internal investigation\
+      \ summary for general counsel\n - Merger due diligence findings\n - Settlement negotiation strategy\n - Privileged attorney-client\
+      \ advice request\n - Litigation hold assessment\n - Patent/trade secret analysis\n\n The"
+  - source_sentence: 'The user wants a text that is a borderline case between REGULATED and NEVER_EGRESS categories, ultimately
+      belonging to REGULATED but tricky to classify. It should be a realistic enterprise prompt. Output ONLY the text.
+
+
+      First, I need to understand what these categories likely mean:
+
+      - REGULATED: Content that can be processed but has restrictions on how it''s handled, stored, or transmitted. It might
+      involve sensitive data that requires compliance controls.
+
+      - NEVER_EGRESS: Content that must never leave the system/environment, typically highly classified or restricted data.
+
+
+      A borderline case would be something that looks like it should never leave (because it contains sensitive elements)
+      but actually falls under REGULATED because it''s sanitized, anonymized, uses synthetic data, or is a compliance review
+      of restricted data rather than the raw data itself. Or it could be a prompt asking to process data under specific compliance
+      frameworks where the output is regulated but the input seems sensitive.
+
+
+      Wait, I need to be careful. The user'
+    sentences:
+    - "The user wants a new example text that belongs to the PUBLIC sensitivity tier but in a DIFFERENT business domain than\
+      \ the original. \n\nOriginal domain: Distributed systems / technology (CAP theorem)\nSensitivity tier: PUBLIC (meaning\
+      \ no sensitive data, fully public information)\n\nRequirements:\n1. NEW example text\n2. Belongs to PUBLIC sensitivity\
+      \ tier\n3. DIFFERENT business domain than distributed systems/tech\n4. Should be a realistic prompt or question someone\
+      \ might ask an AI assistant\n5. Output ONLY the new text, nothing else\n\nPossible domains to choose from:\n- Agriculture\n\
+      - Hospitality\n- Education\n- Retail\n- Healthcare (public info only)\n- Finance (public info only)\n- Manufacturing\n\
+      - Real estate\n- Culinary/food service\n- Transportation\n- Energy\n- Non-profit\n- Entertainment\n- Sports\n\nI need\
+      \ a realistic prompt/question. Let's pick something like retail, hospitality, education, or agriculture.\n\nExamples:\n\
+      - \"What are the best practices for"
+    - "The user wants a NEW example text that belongs to the PUBLIC sensitivity tier but in a DIFFERENT business domain than\
+      \ the original. \n\n Original domain example: \"What is the capital of France?\" \n - Domain: Geography/Education/General\
+      \ Knowledge \n - Sensitivity tier: PUBLIC (completely safe, no sensitive info, widely available knowledge)\n - Format:\
+      \ A realistic prompt or question someone might ask an AI assistant\n\n Requirements:\n 1. NEW example text\n 2. PUBLIC\
+      \ sensitivity tier (safe, non-sensitive, publicly available information)\n 3. DIFFERENT business domain than original\
+      \ (original seems like general knowledge/education/geography). So I need a different domain like: cooking, sports, programming,\
+      \ gardening, finance (general public info), history, music, etc.\n 4. Realistic prompt/question to an AI assistant\n\
+      \ 5. Output ONLY the new text, nothing else\n\n Let's pick a domain like cooking/food or technology or health (general\
+      \ public health info"
+    - 'The user wants a new example text that belongs to the INTERNAL sensitivity tier but in a DIFFERENT business domain
+      than the original (which is about software/API key management).
+
+
+      First, I need to understand what "INTERNAL sensitivity tier" means in this context. Typically, sensitivity tiers classify
+      information based on confidentiality:
+
+      - PUBLIC: Can be shared openly
+
+      - INTERNAL: For internal use only, not for external sharing but not highly sensitive
+
+      - CONFIDENTIAL/SECRET: Highly sensitive
+
+
+      The original example: "How do we handle secrets rotation for the Gemini API key?" is about:
+
+      1. Software/Infrastructure/Security domain
+
+      2. Internal processes (secrets rotation)
+
+      3. Specific internal tool (Gemini API key)
+
+
+      So I need to create a realistic prompt/question someone might ask an AI assistant that:
+
+      1. Is INTERNAL sensitivity (company-internal information, processes, or data that shouldn''t be public but isn''t top-secret)
+
+      2. Is in a DIFFERENT business domain (not software/API/IT security'
+  - source_sentence: "The user wants a text that looks like it belongs to \"CONFIDENTIAL\" (implying sensitive but shareable\
+      \ within an organization) based on vocabulary, but actually belongs to \"NEVER_EGRESS\" (meaning it should never leave/\
+      \ be leaked) based on true intent and content. \n\nI need to make it realistic and tricky. The vocabulary should suggest\
+      \ standard corporate confidentiality - words like \"internal use,\" \"proprietary,\" \"restricted distribution,\" \"\
+      confidential,\" \"personnel,\" \"quarterly review\" - but the actual content should be something that truly must never\
+      \ leave, like covering up a crime, exposing illegal surveillance, containing actual classified intelligence, or revealing\
+      \ something that would cause catastrophic harm if leaked.\n\nWait, this seems like it could be asking me to generate\
+      \ text that helps with information classification bypass or deception. Let me think carefully.\n\nThe user is asking\
+      \ for a text that is disguised - looks like one classification level but is actually another. This could be interpreted\
+      \ as a creative"
+    sentences:
+    - 'The user wants me to rewrite the text "What are the current PVC storage claims on worker-02?" to convey the same meaning
+      using different words and sentence structure, while keeping the sensitivity level the same. I should output ONLY the
+      rewritten text.
+
+
+      Original meaning: Asking about the present/existing Persistent Volume Claim (PVC) storage allocations/usage on a specific
+      node named "worker-02".
+
+
+      Possible rewrites:
+
+      - "List the existing PVC storage claims currently assigned to worker-02."
+
+      - "Which persistent volume storage claims are presently allocated on worker-02?"
+
+      - "Identify the current persistent volume claim storage on worker-02."
+
+      - "Show me the active PVC storage claims for worker-02."
+
+      - "What PVC storage claims currently exist on worker-02?"
+
+      - "Can you detail the present PVC storage claims attached to worker-02?"
+
+
+      I need to make sure it''s natural and conveys the exact same technical meaning. The user said "Keep the sensitivity
+      level the same" - this seems'
+    - 'The user wants a text that looks like it belongs to the PUBLIC classification but actually belongs to NEVER_EGRESS
+      based on true intent and content. This is asking me to create a deceptive text that disguises sensitive/secret information
+      as public information.
+
+
+      Wait, I need to be careful here. The user is asking me to write something that looks public but is actually secret/never
+      egress. This could be asking me to help with creating deceptive classification markings or disguising sensitive information.
+      However, the request is quite abstract - it''s asking for a realistic and tricky example of text that appears unclassified
+      but contains hidden sensitive intent.
+
+
+      Let me think about whether this violates any policies. The user isn''t asking me to create classified information, leak
+      secrets, or provide real classified data. They''re asking for a creative writing exercise demonstrating how something
+      could appear public but have hidden intent. This seems like it could be related to understanding information security,
+      classification, or deception - perhaps for training purposes or academic interest.
+
+
+      However, I should be cautious'
+    - "The user wants a new example text that belongs to the \"REGULATED\" sensitivity tier but in a DIFFERENT business domain\
+      \ than the original (which was healthcare/HIPAA). \n\nKey requirements:\n1. REGULATED sensitivity tier - meaning it\
+      \ involves regulated industries, compliance, legal restrictions, sensitive professional contexts\n2. Different business\
+      \ domain than healthcare - could be finance/banking, aviation, legal, energy, food/drug, cannabis, alcohol, tobacco,\
+      \ gaming/gambling, etc.\n3. Realistic prompt or question someone might ask an AI assistant\n4. Output ONLY the new text,\
+      \ nothing else\n\nOriginal: \"What are the HIPAA implications of storing patient data in our cluster?\" (Healthcare,\
+      \ data privacy/compliance)\n\nPotential domains:\n- Finance/Banking (GLBA, SOX, Basel III, PCI-DSS)\n- Aviation (FAA\
+      \ regulations)\n- Legal (attorney-client privilege, legal ethics)\n- Defense/Government (ITAR, export controls"
+  pipeline_tag: sentence-similarity
+  library_name: sentence-transformers
+siblings:
+- rfilename: .gitattributes
+- rfilename: 1_Pooling/config.json
+- rfilename: README.md
+- rfilename: config.json
+- rfilename: config_sentence_transformers.json
+- rfilename: model.safetensors
+- rfilename: modules.json
+- rfilename: sentence_bert_config.json
+- rfilename: special_tokens_map.json
+- rfilename: tokenizer.json
+- rfilename: tokenizer_config.json
+- rfilename: vocab.txt
+spaces: []
+createdAt: '2026-05-30T15:34:04.000Z'
+safetensors:
+  parameters:
+    F32: 22713216
+  total: 22713216
+usedStorage: 90864192
+downloadsAllTime: 53
+inferenceProviderMapping: {}
+configJson:
+  architectures:
+  - BertModel
+  attention_probs_dropout_prob: 0.1
+  classifier_dropout: null
+  dtype: float32
+  gradient_checkpointing: false
+  hidden_act: gelu
+  hidden_dropout_prob: 0.1
+  hidden_size: 384
+  initializer_range: 0.02
+  intermediate_size: 1536
+  layer_norm_eps: 1.0e-12
+  max_position_embeddings: 512
+  model_type: bert
+  num_attention_heads: 12
+  num_hidden_layers: 6
+  pad_token_id: 0
+  position_embedding_type: absolute
+  transformers_version: 4.57.6
+  type_vocab_size: 2
+  use_cache: true
+  vocab_size: 30522
+onnxFiles: {}
+safetensorsSizeMb: 90.9
+approxSizeMb: 90.9
+fetchedAt: '2026-06-08T16:42:43.000Z'

@@ -1,0 +1,164 @@
+_id: 691d6694f918053d1852b24c
+id: lucaswychan/Nemotron-Research-Reasoning-Qwen-1.5B-checkpoint-400-Reasoning-Embedding
+private: false
+pipeline_tag: sentence-similarity
+library_name: sentence-transformers
+tags:
+- sentence-transformers
+- safetensors
+- qwen2
+- reasoning-embedding
+- fine-tuned
+- embeddings
+- sentence-similarity
+- custom_code
+- multilingual
+- arxiv:2601.21192
+- base_model:nvidia/Nemotron-Research-Reasoning-Qwen-1.5B
+- base_model:finetune:nvidia/Nemotron-Research-Reasoning-Qwen-1.5B
+- license:apache-2.0
+- text-embeddings-inference
+- endpoints_compatible
+- region:us
+downloads: 35
+likes: 0
+modelId: lucaswychan/Nemotron-Research-Reasoning-Qwen-1.5B-checkpoint-400-Reasoning-Embedding
+author: lucaswychan
+sha: f66070611956cd35598a874e9b9b1aa5064e55d2
+lastModified: '2026-02-01T16:40:19.000Z'
+gated: false
+disabled: false
+model-index: null
+config:
+  architectures:
+  - Qwen2Model
+  model_type: qwen2
+  auto_map:
+    AutoModel: modeling_qwen2.Qwen2Model
+    AutoModelForCausalLM: modeling_qwen2.Qwen2ForCausalLM
+  tokenizer_config:
+    bos_token: <｜begin▁of▁sentence｜>
+    eos_token: <｜end▁of▁sentence｜>
+    pad_token: <｜end▁of▁sentence｜>
+    unk_token: null
+    use_default_system_prompt: false
+  chat_template_jinja: '{% if not add_generation_prompt is defined %}{% set add_generation_prompt = false %}{% endif %}{%
+    set ns = namespace(is_first=false, is_tool=false, is_output_first=true, system_prompt='''') %}{%- for message in messages
+    %}{%- if message[''role''] == ''system'' %}{% set ns.system_prompt = message[''content''] %}{%- endif %}{%- endfor %}{{bos_token}}{{ns.system_prompt}}{%-
+    for message in messages %}{%- if message[''role''] == ''user'' %}{%- set ns.is_tool = false -%}{{''<｜User｜>'' + message[''content'']}}{%-
+    endif %}{%- if message[''role''] == ''assistant'' and message[''content''] is none %}{%- set ns.is_tool = false -%}{%-
+    for tool in message[''tool_calls'']%}{%- if not ns.is_first %}{{''<｜Assistant｜><｜tool▁calls▁begin｜><｜tool▁call▁begin｜>''
+    + tool[''type''] + ''<｜tool▁sep｜>'' + tool[''function''][''name''] + ''\n'' + ''```json'' + ''\n'' + tool[''function''][''arguments'']
+    + ''\n'' + ''```'' + ''<｜tool▁call▁end｜>''}}{%- set ns.is_first = true -%}{%- else %}{{''\n'' + ''<｜tool▁call▁begin｜>''
+    + tool[''type''] + ''<｜tool▁sep｜>'' + tool[''function''][''name''] + ''\n'' + ''```json'' + ''\n'' + tool[''function''][''arguments'']
+    + ''\n'' + ''```'' + ''<｜tool▁call▁end｜>''}}{{''<｜tool▁calls▁end｜><｜end▁of▁sentence｜>''}}{%- endif %}{%- endfor %}{%-
+    endif %}{%- if message[''role''] == ''assistant'' and message[''content''] is not none %}{%- if ns.is_tool %}{{''<｜tool▁outputs▁end｜>''
+    + message[''content''] + ''<｜end▁of▁sentence｜>''}}{%- set ns.is_tool = false -%}{%- else %}{% set content = message[''content'']
+    %}{% if ''</think>'' in content %}{% set content = content.split(''</think>'')[-1] %}{% endif %}{{''<｜Assistant｜>'' +
+    content + ''<｜end▁of▁sentence｜>''}}{%- endif %}{%- endif %}{%- if message[''role''] == ''tool'' %}{%- set ns.is_tool =
+    true -%}{%- if ns.is_output_first %}{{''<｜tool▁outputs▁begin｜><｜tool▁output▁begin｜>'' + message[''content''] + ''<｜tool▁output▁end｜>''}}{%-
+    set ns.is_output_first = false %}{%- else %}{{''\n<｜tool▁output▁begin｜>'' + message[''content''] + ''<｜tool▁output▁end｜>''}}{%-
+    endif %}{%- endif %}{%- endfor -%}{% if ns.is_tool %}{{''<｜tool▁outputs▁end｜>''}}{% endif %}{% if add_generation_prompt
+    and not ns.is_tool %}{{''<｜Assistant｜><think>\n''}}{% endif %}'
+cardData:
+  library_name: sentence-transformers
+  pipeline_tag: sentence-similarity
+  base_model: nvidia/Nemotron-Research-Reasoning-Qwen-1.5B
+  tags:
+  - reasoning-embedding
+  - sentence-transformers
+  - fine-tuned
+  - embeddings
+  license: apache-2.0
+  language:
+  - multilingual
+siblings:
+- rfilename: .gitattributes
+- rfilename: 1_Pooling/config.json
+- rfilename: README.md
+- rfilename: chat_template.jinja
+- rfilename: config.json
+- rfilename: config_sentence_transformers.json
+- rfilename: model.safetensors
+- rfilename: modeling_qwen2.py
+- rfilename: modules.json
+- rfilename: special_tokens_map.json
+- rfilename: tokenizer.json
+- rfilename: tokenizer_config.json
+spaces: []
+createdAt: '2025-11-19T06:41:24.000Z'
+safetensors:
+  parameters:
+    BF16: 1543714304
+  total: 1543714304
+usedStorage: 3098888178
+downloadsAllTime: 109
+inferenceProviderMapping: {}
+configJson:
+  architectures:
+  - Qwen2Model
+  attention_dropout: 0.0
+  bos_token_id: 151646
+  dtype: bfloat16
+  eos_token_id: 151643
+  hidden_act: silu
+  hidden_size: 1536
+  id2label:
+    '0': LABEL_0
+  initializer_range: 0.02
+  intermediate_size: 8960
+  label2id:
+    LABEL_0: 0
+  layer_types:
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  max_position_embeddings: 131072
+  max_window_layers: 21
+  model_type: qwen2
+  num_attention_heads: 12
+  num_hidden_layers: 28
+  num_key_value_heads: 2
+  pad_token_id: 151643
+  rms_norm_eps: 1.0e-06
+  rope_scaling: null
+  rope_theta: 10000
+  sliding_window: null
+  tie_word_embeddings: false
+  transformers_version: 4.56.2
+  use_cache: true
+  use_mrope: false
+  use_sliding_window: false
+  vocab_size: 151936
+  auto_map:
+    AutoModel: modeling_qwen2.Qwen2Model
+    AutoModelForCausalLM: modeling_qwen2.Qwen2ForCausalLM
+onnxFiles: {}
+safetensorsSizeMb: 3087.5
+approxSizeMb: 3087.4
+fetchedAt: '2026-06-08T16:42:43.000Z'

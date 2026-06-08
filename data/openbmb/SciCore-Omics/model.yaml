@@ -1,0 +1,224 @@
+_id: 6a1ff88c808a48163c8a37bd
+id: openbmb/SciCore-Omics
+private: false
+pipeline_tag: feature-extraction
+library_name: transformers
+tags:
+- transformers
+- safetensors
+- minicpmv
+- feature-extraction
+- histopathology
+- multimodal
+- spatial-transcriptomics
+- custom_code
+- en
+- zh
+- license:apache-2.0
+- region:us
+downloads: 229
+likes: 8
+modelId: openbmb/SciCore-Omics
+author: openbmb
+sha: 41a88ec20b763d8ce95a48bb7104ce6d87e2d931
+lastModified: '2026-06-04T03:22:40.000Z'
+gated: false
+disabled: false
+model-index: null
+config:
+  architectures:
+  - MiniCPMV
+  auto_map:
+    AutoConfig: configuration_minicpm.MiniCPMVConfig
+    AutoModel: modeling_minicpmv.MiniCPMV
+    AutoModelForCausalLM: modeling_minicpmv.MiniCPMV
+  model_type: minicpmv
+  tokenizer_config:
+    bos_token: <|im_start|>
+    chat_template: '{% for message in messages %}{% if loop.first and messages[0][''role''] != ''system'' %}{{ ''<|im_start|>system
+
+      You are a helpful assistant.<|im_end|>
+
+      '' }}{% endif %}{{''<|im_start|>'' + message[''role''] + ''
+
+      '' + message[''content''] + ''<|im_end|>'' + ''
+
+      ''}}{% endfor %}{% if add_generation_prompt %}{{ ''<|im_start|>assistant
+
+      '' }}{% endif %}'
+    eos_token: <|im_end|>
+    pad_token: <|endoftext|>
+    unk_token: <unk>
+cardData:
+  license: apache-2.0
+  language:
+  - en
+  - zh
+  library_name: transformers
+  tags:
+  - histopathology
+  - multimodal
+  - spatial-transcriptomics
+transformersInfo:
+  auto_model: AutoModel
+  custom_class: modeling_minicpmv.MiniCPMV
+  pipeline_tag: feature-extraction
+siblings:
+- rfilename: .gitattributes
+- rfilename: README.md
+- rfilename: config.json
+- rfilename: configuration.json
+- rfilename: configuration_minicpm.py
+- rfilename: configuration_nicheformer.py
+- rfilename: gene_projector_module.py
+- rfilename: gene_qformer_module.py
+- rfilename: gene_tokenizer/__init__.py
+- rfilename: gene_tokenizer/config.json
+- rfilename: gene_tokenizer/configuration_nicheformer.py
+- rfilename: gene_tokenizer/gitattributes.txt
+- rfilename: gene_tokenizer/masking.py
+- rfilename: gene_tokenizer/model-ensembl.h5ad
+- rfilename: gene_tokenizer/model-symbel.h5ad
+- rfilename: gene_tokenizer/tokenization_nicheformer.py
+- rfilename: gene_tokenizer/vocab.json
+- rfilename: gene_tokenizer/xenium_mean_script.npy
+- rfilename: gene_tokenizer_config.json
+- rfilename: generation_config.json
+- rfilename: image_processing_minicpmv.py
+- rfilename: model-00001-of-00004.safetensors
+- rfilename: model-00002-of-00004.safetensors
+- rfilename: model-00003-of-00004.safetensors
+- rfilename: model-00004-of-00004.safetensors
+- rfilename: model.safetensors.index.json
+- rfilename: modeling_minicpmv.py
+- rfilename: modeling_navit_siglip.py
+- rfilename: modeling_nicheformer.py
+- rfilename: preprocessor_config.json
+- rfilename: processing_minicpmv.py
+- rfilename: resampler.py
+- rfilename: special_tokens_map.json
+- rfilename: tokenization_minicpmv_fast.py
+- rfilename: tokenization_nicheformer.py
+- rfilename: tokenizer.json
+- rfilename: tokenizer_config.json
+- rfilename: vocab.json
+spaces: []
+createdAt: '2026-06-03T09:49:00.000Z'
+safetensors:
+  parameters:
+    I64: 1500
+    BF16: 8191537648
+  total: 8191537648
+usedStorage: 32770746464
+downloadsAllTime: 229
+inferenceProviderMapping: {}
+configJson:
+  architectures:
+  - MiniCPMV
+  attention_dropout: 0.0
+  auto_map:
+    AutoConfig: configuration_minicpm.MiniCPMVConfig
+    AutoModel: modeling_minicpmv.MiniCPMV
+    AutoModelForCausalLM: modeling_minicpmv.MiniCPMV
+  batch_vision_input: true
+  bos_token_id: 151643
+  drop_vision_last_layer: false
+  dtype: bfloat16
+  eos_token_id: 151645
+  gene_config:
+    assay: true
+    batch_first: true
+    cls_classes: 164
+    context_length: 1500
+    dim_feedforward: 1024
+    dim_model: 512
+    dropout: 0.0
+    learnable_pe: true
+    masking_p: 0.15
+    modality: true
+    model_type: nicheformer
+    n_tokens: 20340
+    nheads: 16
+    nlayers: 12
+    specie: true
+    supervised_task: null
+  gene_hidden_size: 512
+  gene_max_length: 1500
+  gene_vocab_size: 1536
+  hidden_act: silu
+  hidden_size: 3584
+  image_size: 448
+  initializer_range: 0.02
+  intermediate_size: 18944
+  layer_types:
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  max_position_embeddings: 32768
+  max_window_layers: 28
+  model_type: minicpmv
+  num_attention_heads: 28
+  num_hidden_layers: 28
+  num_key_value_heads: 4
+  patch_size: 14
+  query_num: 64
+  rms_norm_eps: 1.0e-06
+  rope_scaling: null
+  rope_theta: 1000000.0
+  slice_config:
+    max_slice_nums: 9
+    model_type: minicpmv
+    patch_size: 14
+    scale_resolution: 448
+  slice_mode: true
+  sliding_window: null
+  tie_word_embeddings: false
+  transformers_version: 4.57.1
+  use_cache: true
+  use_gene_module: true
+  use_image_id: true
+  use_sliding_window: false
+  version: 2.6
+  vision_batch_size: 16
+  vision_config:
+    attention_dropout: 0.0
+    hidden_act: gelu_pytorch_tanh
+    hidden_size: 1152
+    image_size: 980
+    intermediate_size: 4304
+    layer_norm_eps: 1.0e-06
+    model_type: siglip_vision_model
+    num_attention_heads: 16
+    num_channels: 3
+    num_hidden_layers: 27
+    patch_size: 14
+  vocab_size: 151666
+onnxFiles: {}
+safetensorsSizeMb: 16383.2
+approxSizeMb: 16383.1
+fetchedAt: '2026-06-08T16:42:43.000Z'

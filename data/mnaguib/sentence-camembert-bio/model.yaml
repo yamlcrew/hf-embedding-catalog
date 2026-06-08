@@ -1,0 +1,226 @@
+_id: 67c03e161657b9e7bda3e1a8
+id: mnaguib/sentence-camembert-bio
+private: false
+pipeline_tag: sentence-similarity
+library_name: sentence-transformers
+tags:
+- sentence-transformers
+- safetensors
+- camembert
+- sentence-similarity
+- feature-extraction
+- generated_from_trainer
+- dataset_size:5749
+- loss:CosineSimilarityLoss
+- de
+- en
+- es
+- fr
+- it
+- nl
+- pl
+- pt
+- ru
+- zh
+- dataset:PhilipMay/stsb_multi_mt
+- arxiv:1908.10084
+- base_model:almanach/camembert-bio-base
+- base_model:finetune:almanach/camembert-bio-base
+- model-index
+- text-embeddings-inference
+- endpoints_compatible
+- region:us
+downloads: 32
+likes: 0
+modelId: mnaguib/sentence-camembert-bio
+author: mnaguib
+sha: 2f69ecb039f36ba267c271ff2b7671abbe533fce
+lastModified: '2025-02-27T18:19:37.000Z'
+gated: false
+disabled: false
+mask_token: <mask>
+widgetData:
+- source_sentence: Nous nous déplaçons "... par rapport au cadre de repos cosmique en mouvement ... à environ 371 km/s vers
+    la constellation du Lion".
+  sentences:
+  - La dame a fait frire la viande panée dans de l'huile chaude.
+  - Il n'y a pas d'alambic qui ne soit pas relatif à un autre objet.
+  - Le joueur de basket-ball est sur le point de marquer des points pour son équipe.
+- source_sentence: Le professeur Burkhauser a effectué des recherches approfondies sur les personnes qui sont pénalisées par
+    l'augmentation du salaire minimum.
+  sentences:
+  - Un adolescent parle à une fille par le biais d'une webcam.
+  - Une femme est en train de couper des oignons verts.
+  - Les lois sur le salaire minimum nuisent le plus aux personnes les moins qualifiées et les moins productives.
+- source_sentence: Bien que le terme "reine" puisse faire référence à la fois à la reine régente (souveraine) ou à la reine
+    consort, le roi a toujours été le souverain.
+  sentences:
+  - Des moutons paissent dans le champ devant une rangée d'arbres.
+  - Il y a une très bonne raison de ne pas appeler le conjoint de la Reine "Roi" - parce qu'il n'est pas le Roi.
+  - Un groupe de personnes âgées pose autour d'une table à manger.
+- source_sentence: Deux pygargues à tête blanche perchés sur une branche.
+  sentences:
+  - Un groupe de militaires joue dans un quintette de cuivres.
+  - Deux aigles sont perchés sur une branche.
+  - Un homme qui joue de la guitare sous la pluie.
+- source_sentence: Un homme joue de la guitare.
+  sentences:
+  - Il est possible qu'un système solaire comme le nôtre existe en dehors d'une galaxie.
+  - Un homme joue de la flûte.
+  - Un homme est en train de manger une banane.
+model-index:
+- name: SentenceTransformer based on almanach/camembert-bio-base
+  results:
+  - task:
+      type: semantic-similarity
+      name: Semantic Similarity
+    dataset:
+      name: sts dev
+      type: sts-dev
+    metrics:
+    - type: pearson_cosine
+      value: 0.8542312221536079
+      name: Pearson Cosine
+      verified: false
+    - type: spearman_cosine
+      value: 0.8527667445679299
+      name: Spearman Cosine
+      verified: false
+config:
+  architectures:
+  - CamembertModel
+  model_type: camembert
+  tokenizer_config:
+    bos_token: <s>
+    cls_token: <s>
+    eos_token: </s>
+    mask_token: <mask>
+    pad_token: <pad>
+    sep_token: </s>
+    unk_token: <unk>
+cardData:
+  language:
+  - de
+  - en
+  - es
+  - fr
+  - it
+  - nl
+  - pl
+  - pt
+  - ru
+  - zh
+  tags:
+  - sentence-transformers
+  - sentence-similarity
+  - feature-extraction
+  - generated_from_trainer
+  - dataset_size:5749
+  - loss:CosineSimilarityLoss
+  base_model: almanach/camembert-bio-base
+  widget:
+  - source_sentence: Nous nous déplaçons "... par rapport au cadre de repos cosmique en mouvement ... à environ 371 km/s vers
+      la constellation du Lion".
+    sentences:
+    - La dame a fait frire la viande panée dans de l'huile chaude.
+    - Il n'y a pas d'alambic qui ne soit pas relatif à un autre objet.
+    - Le joueur de basket-ball est sur le point de marquer des points pour son équipe.
+  - source_sentence: Le professeur Burkhauser a effectué des recherches approfondies sur les personnes qui sont pénalisées
+      par l'augmentation du salaire minimum.
+    sentences:
+    - Un adolescent parle à une fille par le biais d'une webcam.
+    - Une femme est en train de couper des oignons verts.
+    - Les lois sur le salaire minimum nuisent le plus aux personnes les moins qualifiées et les moins productives.
+  - source_sentence: Bien que le terme "reine" puisse faire référence à la fois à la reine régente (souveraine) ou à la reine
+      consort, le roi a toujours été le souverain.
+    sentences:
+    - Des moutons paissent dans le champ devant une rangée d'arbres.
+    - Il y a une très bonne raison de ne pas appeler le conjoint de la Reine "Roi" - parce qu'il n'est pas le Roi.
+    - Un groupe de personnes âgées pose autour d'une table à manger.
+  - source_sentence: Deux pygargues à tête blanche perchés sur une branche.
+    sentences:
+    - Un groupe de militaires joue dans un quintette de cuivres.
+    - Deux aigles sont perchés sur une branche.
+    - Un homme qui joue de la guitare sous la pluie.
+  - source_sentence: Un homme joue de la guitare.
+    sentences:
+    - Il est possible qu'un système solaire comme le nôtre existe en dehors d'une galaxie.
+    - Un homme joue de la flûte.
+    - Un homme est en train de manger une banane.
+  datasets:
+  - PhilipMay/stsb_multi_mt
+  pipeline_tag: sentence-similarity
+  library_name: sentence-transformers
+  metrics:
+  - pearson_cosine
+  - spearman_cosine
+  model-index:
+  - name: SentenceTransformer based on almanach/camembert-bio-base
+    results:
+    - task:
+        type: semantic-similarity
+        name: Semantic Similarity
+      dataset:
+        name: sts dev
+        type: sts-dev
+      metrics:
+      - type: pearson_cosine
+        value: 0.8542312221536079
+        name: Pearson Cosine
+        verified: false
+      - type: spearman_cosine
+        value: 0.8527667445679299
+        name: Spearman Cosine
+        verified: false
+siblings:
+- rfilename: .gitattributes
+- rfilename: 1_Pooling/config.json
+- rfilename: README.md
+- rfilename: config.json
+- rfilename: config_sentence_transformers.json
+- rfilename: model.safetensors
+- rfilename: modules.json
+- rfilename: sentence_bert_config.json
+- rfilename: sentencepiece.bpe.model
+- rfilename: special_tokens_map.json
+- rfilename: tokenizer.json
+- rfilename: tokenizer_config.json
+spaces: []
+createdAt: '2025-02-27T10:27:34.000Z'
+safetensors:
+  parameters:
+    F32: 110621952
+  total: 110621952
+usedStorage: 2213361792
+downloadsAllTime: 507
+inferenceProviderMapping: {}
+configJson:
+  _name_or_path: almanach/camembert-bio-base
+  architectures:
+  - CamembertModel
+  attention_probs_dropout_prob: 0.1
+  bos_token_id: 5
+  classifier_dropout: null
+  eos_token_id: 6
+  hidden_act: gelu
+  hidden_dropout_prob: 0.1
+  hidden_size: 768
+  initializer_range: 0.02
+  intermediate_size: 3072
+  layer_norm_eps: 1.0e-05
+  max_position_embeddings: 514
+  model_type: camembert
+  num_attention_heads: 12
+  num_hidden_layers: 12
+  output_past: true
+  pad_token_id: 1
+  position_embedding_type: absolute
+  torch_dtype: float32
+  transformers_version: 4.47.1
+  type_vocab_size: 1
+  use_cache: true
+  vocab_size: 32005
+onnxFiles: {}
+safetensorsSizeMb: 442.5
+approxSizeMb: 442.5
+fetchedAt: '2026-06-08T16:42:43.000Z'

@@ -1,0 +1,672 @@
+_id: 6927a5fafc3592a161acf763
+id: fyerfyer/finetune-jina-transformers-v1
+private: false
+pipeline_tag: sentence-similarity
+library_name: sentence-transformers
+tags:
+- sentence-transformers
+- safetensors
+- bert
+- sentence-similarity
+- feature-extraction
+- dense
+- generated_from_trainer
+- dataset_size:15019
+- loss:MultipleNegativesRankingLoss
+- custom_code
+- arxiv:1908.10084
+- arxiv:1705.00652
+- base_model:jinaai/jina-embeddings-v2-base-en
+- base_model:finetune:jinaai/jina-embeddings-v2-base-en
+- text-embeddings-inference
+- endpoints_compatible
+- region:us
+downloads: 7
+likes: 0
+modelId: fyerfyer/finetune-jina-transformers-v1
+author: fyerfyer
+sha: a654d02a28888e8032b693fa4983a0a23bee3866
+lastModified: '2025-11-27T01:21:21.000Z'
+gated: false
+disabled: false
+mask_token: '[MASK]'
+widgetData:
+- source_sentence: What is the role of the `cache_implementation="static"` parameter in the model.generate() method for PaliGemma?
+  sentences:
+  - "Context: PaliGemma > Pipeline > AutoModel\n\n#### AutoModel\n\n```py\nimport torch\nimport requests\nfrom PIL import\
+    \ Image\nfrom transformers import AutoProcessor, PaliGemmaForConditionalGeneration\n\nmodel = PaliGemmaForConditionalGeneration.from_pretrained(\n\
+    \    \"google/paligemma2-3b-mix-224\",\n    dtype=torch.bfloat16,\n    device_map=\"auto\",\n    attn_implementation=\"\
+    sdpa\"\n)\nprocessor = AutoProcessor.from_pretrained(\n    \"google/paligemma2-3b-mix-224\",\n)\n\nprompt = \"What is\
+    \ in this image?\"\nurl = \"https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/pipeline-cat-chonk.jpeg\"\
+    \nimage = Image.open(requests.get(url, stream=True).raw)\ninputs = processor(image, prompt, return_tensors=\"pt\").to(model.device)\n\
+    \noutput = model.generate(**inputs, max_new_tokens=50, cache_implementation=\"static\")\nprint(processor.decode(output0,\
+    \ skip_special_tokens=True))\n```\n\nQuantization reduces the memory burden of large models by representing the weights\
+    \ in a lower precision. Refer to the Quantization overview for more available quantization backends.\n\nThe example below\
+    \ uses torchao to only quantize the weights to int4.\n\n```py\n# pip install torchao\nimport torch\nimport requests\n\
+    from PIL import Image\nfrom transformers import TorchAoConfig, AutoProcessor, PaliGemmaForConditionalGeneration\n\nquantization_config\
+    \ = TorchAoConfig(\"int4_weight_only\", group_size=128)\nmodel = PaliGemmaForConditionalGeneration.from_pretrained(\n\
+    \    \"google/paligemma2-28b-mix-224\",\n    dtype=torch.bfloat16,\n    device_map=\"auto\",\n    quantization_config=quantization_config\n\
+    )\nprocessor = AutoProcessor.from_pretrained(\n    \"google/paligemma2-28b-mix-224\",\n)\n\nprompt = \"What is in this\
+    \ image?\"\nurl = \"https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/pipeline-cat-chonk.jpeg\"\
+    \nimage = Image.open(requests.get(url, stream=True).raw)\ninputs = processor(image, prompt, return_tensors=\"pt\").to(model.device)\n\
+    \noutput = model.generate(**inputs, max_new_tokens=50, cache_implementation=\"static\")\nprint(processor.decode(output0,\
+    \ skip_special_tokens=True))\n```"
+  - 'Context: PaliGemma
+
+
+    # PaliGemma
+
+
+    PaliGemma(https://huggingface.co/papers/2407.07726) is a family of vision-language models (VLMs), combining SigLIP with
+    the Gemma 2B model. PaliGemma is available in 3B, 10B, and 28B parameters. The main purpose of PaliGemma is to provide
+    an adaptable base VLM that is easy to transfer to other tasks. The SigLIP vision encoder is a "shape optimized" contrastively
+    pretrained ViT that converts an image into a sequence of tokens and prepended to an optional prompt. The Gemma 2B model
+    is used as the decoder. PaliGemma uses full attention on all image and text tokens to maximize its capacity.
+
+
+    PaliGemma 2(https://huggingface.co/papers/2412.03555) improves on the first model by using Gemma 2 (2B, 9B, and 27B parameter
+    variants) as the decoder. These are available as **pt** or **mix** variants. The **pt** checkpoints are intended for further
+    fine-tuning and the **mix** checkpoints are ready for use out of the box.
+
+
+    You can find all the original PaliGemma checkpoints under the PaliGemma(https://huggingface.co/collections/google/paligemma-release-6643a9ffbf57de2ae0448dda),
+    PaliGemma 2(https://huggingface.co/collections/google/paligemma-2-release-67500e1e1dbfdd4dee27ba48), and PaliGemma 2 Mix(https://huggingface.co/collections/google/paligemma-2-mix-67ac6a251aaf3ee73679dcc4)
+    collections.
+
+
+    > !TIP
+
+    > Click on the PaliGemma models in the right sidebar for more examples of how to apply PaliGemma to different vision and
+    language tasks.
+
+
+    The example below demonstrates how to generate text based on an image with `Pipeline` or the `AutoModel` class.'
+  - 'Context: Installation > Python > Editable install
+
+
+    ### Editable install
+
+
+    An editable install(https://pip.pypa.io/en/stable/topics/local-project-installs/#editable-installs) is useful if you''re
+    developing locally with Transformers. It links your local copy of Transformers to the Transformers repository(https://github.com/huggingface/transformers)
+    instead of copying the files. The files are added to Python''s import path.
+
+
+    ```bash
+
+    git clone https://github.com/huggingface/transformers.git
+
+    cd transformers
+
+    uv pip install -e .
+
+    ```
+
+
+    > !WARNING
+
+    > You must keep the local Transformers folder to keep using it.
+
+
+    Update your local version of Transformers with the latest changes in the main repository with the following command.
+
+
+    ```bash
+
+    cd ~/transformers/
+
+    git pull
+
+    ```'
+- source_sentence: How do I use or implement 'transformers CLI' according to the provided text?
+  sentences:
+  - 'Context: Checks on a Pull Request > Repository consistency > Check copies
+
+
+    > **Tip**
+
+    > If the replacements change the formatting (if you replace a short name by a very long name for instance), the copy is
+    checked after applying the auto-formatter.
+
+
+    Another way when the patterns are just different casings of the same replacement (with an uppercased and a lowercased
+    variants) is just to add the option `all-casing`. Here(https://github.com/huggingface/transformers/blob/15082a9dc6950ecae63a0d3e5060b2fc7f15050a/src/transformers/models/mobilebert/modeling_mobilebert.py#L1237)
+    is an example in `MobileBertForSequenceClassification` with the comment:
+
+
+    ```py
+
+    # Copied from transformers.models.bert.modeling_bert.BertForSequenceClassification with Bert->MobileBert all-casing
+
+    ```
+
+
+    In this case, the code is copied from `BertForSequenceClassification` by replacing:
+
+
+    - `Bert` by `MobileBert` (for instance when using `MobileBertModel` in the init)
+
+    - `bert` by `mobilebert` (for instance when defining `self.mobilebert`)
+
+    - `BERT` by `MOBILEBERT` (in the constant `MOBILEBERT_INPUTS_DOCSTRING`)'
+  - 'Context: Chat basics > chat CLI
+
+
+    ## chat CLI
+
+
+    After you''ve installed Transformers, you can chat with a model directly from the command line. The command below launches
+    an interactive session with a model, with a few base commands listed at the start of the session.
+
+
+    ```bash
+
+    transformers chat Qwen/Qwen2.5-0.5B-Instruct
+
+    ```
+
+
+    Asset path: https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/transformers/transformers-chat-cli.png,
+    Caption: Image: transformers-chat-cli.png
+
+
+    You can launch the CLI with arbitrary `generate` flags, with the format `arg_1=value_1 arg_2=value_2 ...`
+
+
+    ```bash
+
+    transformers chat Qwen/Qwen2.5-0.5B-Instruct do_sample=False max_new_tokens=10
+
+    ```
+
+
+    For a full list of options, run the command below.
+
+
+    ```bash
+
+    transformers chat -h
+
+    ```
+
+
+    The chat is implemented on top of the AutoClass, using tooling from text generation and chat. It uses the `transformers
+    serve` CLI under the hood (docs(transformers-endocs/serving#serve-cli)).'
+  - 'Context: Encoder Decoder Models > Pipeline > AutoModel > transformers CLI
+
+
+    #### transformers CLI
+
+
+    ```bash
+
+    echo -e "Plants create energy through a process known as photosynthesis. This involves capturing sunlight and converting
+    carbon dioxide and water into glucose and oxygen." | transformers run --task summarization --model "patrickvonplaten/bert2bert-cnn_dailymail-fp16"
+    --device 0
+
+    ```'
+- source_sentence: How do I use or implement 'Qwen3MoeConfig' according to the provided text?
+  sentences:
+  - 'Context: Configuration
+
+
+    # Configuration
+
+
+    The base class `PreTrainedConfig` implements the common methods for loading/saving a configuration
+
+    either from a local file or directory, or from a pretrained model configuration provided by the library (downloaded
+
+    from HuggingFace''s AWS S3 repository).
+
+
+    Each derived config class implements model specific attributes. Common attributes present in all config classes are:
+
+    `hidden_size`, `num_attention_heads`, and `num_hidden_layers`. Text models further implement:
+
+    `vocab_size`.'
+  - 'Context: Phi4 Multimodal > Phi4MultimodalAudioModel
+
+
+    ## Phi4MultimodalAudioModel
+
+
+    [autodoc] Phi4MultimodalAudioModel'
+  - 'Context: Qwen3MoE > Qwen3MoeConfig
+
+
+    ## Qwen3MoeConfig
+
+
+    [autodoc] Qwen3MoeConfig'
+- source_sentence: What does the documentation say about 'PerceiverForMultimodalAutoencoding'?
+  sentences:
+  - 'Context: Glossary > N > Natural language processing (NLP)
+
+
+    ### Natural language processing (NLP)
+
+
+    A generic way to say "deal with texts".'
+  - "Context: Perceiver > PerceiverForMultimodalAutoencoding\n\n## PerceiverForMultimodalAutoencoding\n\n[autodoc] PerceiverForMultimodalAutoencoding\n\
+    \    - forward"
+  - 'Context: DistilBERT > DistilBertConfig
+
+
+    ## DistilBertConfig
+
+
+    [autodoc] DistilBertConfig'
+- source_sentence: How can I generate text with OLMo3 directly from the command line?
+  sentences:
+  - 'Context: Text generation
+
+
+    # Text generation
+
+
+    [open-in-colab]
+
+
+    Text generation is the most popular application for large language models (LLMs). A LLM is trained to generate the next
+    word (token) given some initial text (prompt) along with its own generated outputs up to a predefined length or when it
+    reaches an end-of-sequence (`EOS`) token.
+
+
+    In Transformers, the `~GenerationMixin.generate` API handles text generation, and it is available for all models with
+    generative capabilities. This guide will show you the basics of text generation with `~GenerationMixin.generate` and some
+    common pitfalls to avoid.
+
+
+    > !TIP
+
+    > You can also chat with a model directly from the command line. (reference(transformers-endocs/conversations#transformers))
+
+    >
+
+    > ```shell
+
+    > transformers chat Qwen/Qwen2.5-0.5B-Instruct
+
+    > ```'
+  - "Context: SAM2 > Sam2HieraDetModel\n\n## Sam2HieraDetModel\n\n[autodoc] Sam2HieraDetModel\n    - forward"
+  - 'Context: OLMo3
+
+
+    # OLMo3
+
+
+    Olmo3 is an improvement on OLMo2. More details will be released on *soon*.
+
+
+    > !TIP
+
+    > Click on the OLMo3 models in the right sidebar for more examples of how to apply OLMo3 to different language tasks.
+
+
+    The example below demonstrates how to generate text with `Pipeline`, `AutoModel` and from the command line.'
+model-index: null
+config:
+  architectures:
+  - JinaBertModel
+  auto_map:
+    AutoConfig: configuration_bert.JinaBertConfig
+    AutoModel: modeling_bert.JinaBertModel
+    AutoModelForMaskedLM: jinaai/jina-bert-implementation--modeling_bert.JinaBertForMaskedLM
+    AutoModelForSequenceClassification: jinaai/jina-bert-implementation--modeling_bert.JinaBertForSequenceClassification
+  model_type: bert
+  tokenizer_config:
+    cls_token: '[CLS]'
+    mask_token: '[MASK]'
+    pad_token: '[PAD]'
+    sep_token: '[SEP]'
+    unk_token: '[UNK]'
+cardData:
+  tags:
+  - sentence-transformers
+  - sentence-similarity
+  - feature-extraction
+  - dense
+  - generated_from_trainer
+  - dataset_size:15019
+  - loss:MultipleNegativesRankingLoss
+  base_model: jinaai/jina-embeddings-v2-base-en
+  widget:
+  - source_sentence: What is the role of the `cache_implementation="static"` parameter in the model.generate() method for
+      PaliGemma?
+    sentences:
+    - "Context: PaliGemma > Pipeline > AutoModel\n\n#### AutoModel\n\n```py\nimport torch\nimport requests\nfrom PIL import\
+      \ Image\nfrom transformers import AutoProcessor, PaliGemmaForConditionalGeneration\n\nmodel = PaliGemmaForConditionalGeneration.from_pretrained(\n\
+      \    \"google/paligemma2-3b-mix-224\",\n    dtype=torch.bfloat16,\n    device_map=\"auto\",\n    attn_implementation=\"\
+      sdpa\"\n)\nprocessor = AutoProcessor.from_pretrained(\n    \"google/paligemma2-3b-mix-224\",\n)\n\nprompt = \"What is\
+      \ in this image?\"\nurl = \"https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/pipeline-cat-chonk.jpeg\"\
+      \nimage = Image.open(requests.get(url, stream=True).raw)\ninputs = processor(image, prompt, return_tensors=\"pt\").to(model.device)\n\
+      \noutput = model.generate(**inputs, max_new_tokens=50, cache_implementation=\"static\")\nprint(processor.decode(output0,\
+      \ skip_special_tokens=True))\n```\n\nQuantization reduces the memory burden of large models by representing the weights\
+      \ in a lower precision. Refer to the Quantization overview for more available quantization backends.\n\nThe example\
+      \ below uses torchao to only quantize the weights to int4.\n\n```py\n# pip install torchao\nimport torch\nimport requests\n\
+      from PIL import Image\nfrom transformers import TorchAoConfig, AutoProcessor, PaliGemmaForConditionalGeneration\n\n\
+      quantization_config = TorchAoConfig(\"int4_weight_only\", group_size=128)\nmodel = PaliGemmaForConditionalGeneration.from_pretrained(\n\
+      \    \"google/paligemma2-28b-mix-224\",\n    dtype=torch.bfloat16,\n    device_map=\"auto\",\n    quantization_config=quantization_config\n\
+      )\nprocessor = AutoProcessor.from_pretrained(\n    \"google/paligemma2-28b-mix-224\",\n)\n\nprompt = \"What is in this\
+      \ image?\"\nurl = \"https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/pipeline-cat-chonk.jpeg\"\
+      \nimage = Image.open(requests.get(url, stream=True).raw)\ninputs = processor(image, prompt, return_tensors=\"pt\").to(model.device)\n\
+      \noutput = model.generate(**inputs, max_new_tokens=50, cache_implementation=\"static\")\nprint(processor.decode(output0,\
+      \ skip_special_tokens=True))\n```"
+    - 'Context: PaliGemma
+
+
+      # PaliGemma
+
+
+      PaliGemma(https://huggingface.co/papers/2407.07726) is a family of vision-language models (VLMs), combining SigLIP with
+      the Gemma 2B model. PaliGemma is available in 3B, 10B, and 28B parameters. The main purpose of PaliGemma is to provide
+      an adaptable base VLM that is easy to transfer to other tasks. The SigLIP vision encoder is a "shape optimized" contrastively
+      pretrained ViT that converts an image into a sequence of tokens and prepended to an optional prompt. The Gemma 2B model
+      is used as the decoder. PaliGemma uses full attention on all image and text tokens to maximize its capacity.
+
+
+      PaliGemma 2(https://huggingface.co/papers/2412.03555) improves on the first model by using Gemma 2 (2B, 9B, and 27B
+      parameter variants) as the decoder. These are available as **pt** or **mix** variants. The **pt** checkpoints are intended
+      for further fine-tuning and the **mix** checkpoints are ready for use out of the box.
+
+
+      You can find all the original PaliGemma checkpoints under the PaliGemma(https://huggingface.co/collections/google/paligemma-release-6643a9ffbf57de2ae0448dda),
+      PaliGemma 2(https://huggingface.co/collections/google/paligemma-2-release-67500e1e1dbfdd4dee27ba48), and PaliGemma 2
+      Mix(https://huggingface.co/collections/google/paligemma-2-mix-67ac6a251aaf3ee73679dcc4) collections.
+
+
+      > !TIP
+
+      > Click on the PaliGemma models in the right sidebar for more examples of how to apply PaliGemma to different vision
+      and language tasks.
+
+
+      The example below demonstrates how to generate text based on an image with `Pipeline` or the `AutoModel` class.'
+    - 'Context: Installation > Python > Editable install
+
+
+      ### Editable install
+
+
+      An editable install(https://pip.pypa.io/en/stable/topics/local-project-installs/#editable-installs) is useful if you''re
+      developing locally with Transformers. It links your local copy of Transformers to the Transformers repository(https://github.com/huggingface/transformers)
+      instead of copying the files. The files are added to Python''s import path.
+
+
+      ```bash
+
+      git clone https://github.com/huggingface/transformers.git
+
+      cd transformers
+
+      uv pip install -e .
+
+      ```
+
+
+      > !WARNING
+
+      > You must keep the local Transformers folder to keep using it.
+
+
+      Update your local version of Transformers with the latest changes in the main repository with the following command.
+
+
+      ```bash
+
+      cd ~/transformers/
+
+      git pull
+
+      ```'
+  - source_sentence: How do I use or implement 'transformers CLI' according to the provided text?
+    sentences:
+    - 'Context: Checks on a Pull Request > Repository consistency > Check copies
+
+
+      > **Tip**
+
+      > If the replacements change the formatting (if you replace a short name by a very long name for instance), the copy
+      is checked after applying the auto-formatter.
+
+
+      Another way when the patterns are just different casings of the same replacement (with an uppercased and a lowercased
+      variants) is just to add the option `all-casing`. Here(https://github.com/huggingface/transformers/blob/15082a9dc6950ecae63a0d3e5060b2fc7f15050a/src/transformers/models/mobilebert/modeling_mobilebert.py#L1237)
+      is an example in `MobileBertForSequenceClassification` with the comment:
+
+
+      ```py
+
+      # Copied from transformers.models.bert.modeling_bert.BertForSequenceClassification with Bert->MobileBert all-casing
+
+      ```
+
+
+      In this case, the code is copied from `BertForSequenceClassification` by replacing:
+
+
+      - `Bert` by `MobileBert` (for instance when using `MobileBertModel` in the init)
+
+      - `bert` by `mobilebert` (for instance when defining `self.mobilebert`)
+
+      - `BERT` by `MOBILEBERT` (in the constant `MOBILEBERT_INPUTS_DOCSTRING`)'
+    - 'Context: Chat basics > chat CLI
+
+
+      ## chat CLI
+
+
+      After you''ve installed Transformers, you can chat with a model directly from the command line. The command below launches
+      an interactive session with a model, with a few base commands listed at the start of the session.
+
+
+      ```bash
+
+      transformers chat Qwen/Qwen2.5-0.5B-Instruct
+
+      ```
+
+
+      Asset path: https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/transformers/transformers-chat-cli.png,
+      Caption: Image: transformers-chat-cli.png
+
+
+      You can launch the CLI with arbitrary `generate` flags, with the format `arg_1=value_1 arg_2=value_2 ...`
+
+
+      ```bash
+
+      transformers chat Qwen/Qwen2.5-0.5B-Instruct do_sample=False max_new_tokens=10
+
+      ```
+
+
+      For a full list of options, run the command below.
+
+
+      ```bash
+
+      transformers chat -h
+
+      ```
+
+
+      The chat is implemented on top of the AutoClass, using tooling from text generation and chat. It uses the `transformers
+      serve` CLI under the hood (docs(transformers-endocs/serving#serve-cli)).'
+    - 'Context: Encoder Decoder Models > Pipeline > AutoModel > transformers CLI
+
+
+      #### transformers CLI
+
+
+      ```bash
+
+      echo -e "Plants create energy through a process known as photosynthesis. This involves capturing sunlight and converting
+      carbon dioxide and water into glucose and oxygen." | transformers run --task summarization --model "patrickvonplaten/bert2bert-cnn_dailymail-fp16"
+      --device 0
+
+      ```'
+  - source_sentence: How do I use or implement 'Qwen3MoeConfig' according to the provided text?
+    sentences:
+    - 'Context: Configuration
+
+
+      # Configuration
+
+
+      The base class `PreTrainedConfig` implements the common methods for loading/saving a configuration
+
+      either from a local file or directory, or from a pretrained model configuration provided by the library (downloaded
+
+      from HuggingFace''s AWS S3 repository).
+
+
+      Each derived config class implements model specific attributes. Common attributes present in all config classes are:
+
+      `hidden_size`, `num_attention_heads`, and `num_hidden_layers`. Text models further implement:
+
+      `vocab_size`.'
+    - 'Context: Phi4 Multimodal > Phi4MultimodalAudioModel
+
+
+      ## Phi4MultimodalAudioModel
+
+
+      [autodoc] Phi4MultimodalAudioModel'
+    - 'Context: Qwen3MoE > Qwen3MoeConfig
+
+
+      ## Qwen3MoeConfig
+
+
+      [autodoc] Qwen3MoeConfig'
+  - source_sentence: What does the documentation say about 'PerceiverForMultimodalAutoencoding'?
+    sentences:
+    - 'Context: Glossary > N > Natural language processing (NLP)
+
+
+      ### Natural language processing (NLP)
+
+
+      A generic way to say "deal with texts".'
+    - "Context: Perceiver > PerceiverForMultimodalAutoencoding\n\n## PerceiverForMultimodalAutoencoding\n\n[autodoc] PerceiverForMultimodalAutoencoding\n\
+      \    - forward"
+    - 'Context: DistilBERT > DistilBertConfig
+
+
+      ## DistilBertConfig
+
+
+      [autodoc] DistilBertConfig'
+  - source_sentence: How can I generate text with OLMo3 directly from the command line?
+    sentences:
+    - 'Context: Text generation
+
+
+      # Text generation
+
+
+      [open-in-colab]
+
+
+      Text generation is the most popular application for large language models (LLMs). A LLM is trained to generate the next
+      word (token) given some initial text (prompt) along with its own generated outputs up to a predefined length or when
+      it reaches an end-of-sequence (`EOS`) token.
+
+
+      In Transformers, the `~GenerationMixin.generate` API handles text generation, and it is available for all models with
+      generative capabilities. This guide will show you the basics of text generation with `~GenerationMixin.generate` and
+      some common pitfalls to avoid.
+
+
+      > !TIP
+
+      > You can also chat with a model directly from the command line. (reference(transformers-endocs/conversations#transformers))
+
+      >
+
+      > ```shell
+
+      > transformers chat Qwen/Qwen2.5-0.5B-Instruct
+
+      > ```'
+    - "Context: SAM2 > Sam2HieraDetModel\n\n## Sam2HieraDetModel\n\n[autodoc] Sam2HieraDetModel\n    - forward"
+    - 'Context: OLMo3
+
+
+      # OLMo3
+
+
+      Olmo3 is an improvement on OLMo2. More details will be released on *soon*.
+
+
+      > !TIP
+
+      > Click on the OLMo3 models in the right sidebar for more examples of how to apply OLMo3 to different language tasks.
+
+
+      The example below demonstrates how to generate text with `Pipeline`, `AutoModel` and from the command line.'
+  pipeline_tag: sentence-similarity
+  library_name: sentence-transformers
+siblings:
+- rfilename: .gitattributes
+- rfilename: 1_Pooling/config.json
+- rfilename: README.md
+- rfilename: config.json
+- rfilename: config_sentence_transformers.json
+- rfilename: configuration_bert.py
+- rfilename: model.safetensors
+- rfilename: modeling_bert.py
+- rfilename: modules.json
+- rfilename: sentence_bert_config.json
+- rfilename: special_tokens_map.json
+- rfilename: tokenizer.json
+- rfilename: tokenizer_config.json
+- rfilename: vocab.txt
+spaces:
+- fyerfyer/transformers-rag
+createdAt: '2025-11-27T01:14:34.000Z'
+safetensors:
+  parameters:
+    F32: 137368320
+  total: 137368320
+usedStorage: 549493968
+downloadsAllTime: 66
+inferenceProviderMapping: {}
+configJson:
+  architectures:
+  - JinaBertModel
+  attention_probs_dropout_prob: 0.0
+  attn_implementation: null
+  auto_map:
+    AutoConfig: configuration_bert.JinaBertConfig
+    AutoModel: modeling_bert.JinaBertModel
+    AutoModelForMaskedLM: jinaai/jina-bert-implementation--modeling_bert.JinaBertForMaskedLM
+    AutoModelForSequenceClassification: jinaai/jina-bert-implementation--modeling_bert.JinaBertForSequenceClassification
+  classifier_dropout: null
+  dtype: float32
+  emb_pooler: mean
+  feed_forward_type: geglu
+  gradient_checkpointing: false
+  hidden_act: gelu
+  hidden_dropout_prob: 0.1
+  hidden_size: 768
+  initializer_range: 0.02
+  intermediate_size: 3072
+  layer_norm_eps: 1.0e-12
+  max_position_embeddings: 8192
+  model_max_length: 8192
+  model_type: bert
+  num_attention_heads: 12
+  num_hidden_layers: 12
+  pad_token_id: 0
+  position_embedding_type: alibi
+  transformers_version: 4.57.1
+  type_vocab_size: 2
+  use_cache: true
+  vocab_size: 30528
+onnxFiles: {}
+safetensorsSizeMb: 549.5
+approxSizeMb: 549.5
+fetchedAt: '2026-06-08T16:42:43.000Z'

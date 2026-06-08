@@ -1,0 +1,339 @@
+_id: 69c4fed67de14e282d7c0343
+id: tomaarsen/llama-nemotron-embed-vl-1b-v2
+private: false
+pipeline_tag: sentence-similarity
+library_name: sentence-transformers
+tags:
+- sentence-transformers
+- safetensors
+- llama_nemotron_vl
+- feature-extraction
+- retrieval
+- visual document retrieval
+- vlm embedding
+- page image embedding
+- text embedding
+- semantic search
+- question-answering retrieval
+- rag
+- transformers
+- sentence-similarity
+- custom_code
+- multilingual
+- arxiv:2507.05513
+- arxiv:2501.14818
+- license:other
+- endpoints_compatible
+- region:us
+downloads: 10
+likes: 0
+modelId: tomaarsen/llama-nemotron-embed-vl-1b-v2
+author: tomaarsen
+sha: 4fb4c433f6e7eaa7c8a5502dade83c5656564534
+lastModified: '2026-04-08T08:55:45.000Z'
+gated: false
+disabled: false
+model-index: null
+config:
+  architectures:
+  - LlamaNemotronVLModel
+  auto_map:
+    AutoConfig: configuration_llama_nemotron_vl.LlamaNemotronVLConfig
+    AutoModel: modeling_llama_nemotron_vl.LlamaNemotronVLModel
+  model_type: llama_nemotron_vl
+  tokenizer_config:
+    bos_token: <|begin_of_text|>
+    chat_template: "{{- bos_token }}\n{%- if custom_tools is defined %}\n    {%- set tools = custom_tools %}\n{%- endif %}\n\
+      {%- if not tools_in_user_message is defined %}\n    {%- set tools_in_user_message = true %}\n{%- endif %}\n{%- if not\
+      \ date_string is defined %}\n    {%- if strftime_now is defined %}\n        {%- set date_string = strftime_now(\"%d\
+      \ %b %Y\") %}\n    {%- else %}\n        {%- set date_string = \"26 Jul 2024\" %}\n    {%- endif %}\n{%- endif %}\n{%-\
+      \ if not tools is defined %}\n    {%- set tools = none %}\n{%- endif %}\n\n{#- This block extracts the system message,\
+      \ so we can slot it into the right place. #}\n{%- if messages[0]['role'] == 'system' %}\n    {%- set system_message\
+      \ = messages[0]['content']|trim %}\n    {%- set messages = messages[1:] %}\n{%- else %}\n    {%- set system_message\
+      \ = \"\" %}\n{%- endif %}\n\n{#- System message #}\n{{- \"<|start_header_id|>system<|end_header_id|>\\n\\n\" }}\n{%-\
+      \ if tools is not none %}\n    {{- \"Environment: ipython\\n\" }}\n{%- endif %}\n{{- \"Cutting Knowledge Date: December\
+      \ 2023\\n\" }}\n{{- \"Today Date: \" + date_string + \"\\n\\n\" }}\n{%- if tools is not none and not tools_in_user_message\
+      \ %}\n    {{- \"You have access to the following functions. To call a function, please respond with JSON for a function\
+      \ call.\" }}\n    {{- 'Respond in the format {\"name\": function name, \"parameters\": dictionary of argument name and\
+      \ its value}.' }}\n    {{- \"Do not use variables.\\n\\n\" }}\n    {%- for t in tools %}\n        {{- t | tojson(indent=4)\
+      \ }}\n        {{- \"\\n\\n\" }}\n    {%- endfor %}\n{%- endif %}\n{{- system_message }}\n{{- \"<|eot_id|>\" }}\n\n{#-\
+      \ Custom tools are passed in a user message with some extra guidance #}\n{%- if tools_in_user_message and not tools\
+      \ is none %}\n    {#- Extract the first user message so we can plug it in here #}\n    {%- if messages | length != 0\
+      \ %}\n        {%- set first_user_message = messages[0]['content']|trim %}\n        {%- set messages = messages[1:] %}\n\
+      \    {%- else %}\n        {{- raise_exception(\"Cannot put tools in the first user message when there's no first user\
+      \ message!\") }}\n{%- endif %}\n    {{- '<|start_header_id|>user<|end_header_id|>\\n\\n' -}}\n    {{- \"Given the following\
+      \ functions, please respond with a JSON for a function call \" }}\n    {{- \"with its proper arguments that best answers\
+      \ the given prompt.\\n\\n\" }}\n    {{- 'Respond in the format {\"name\": function name, \"parameters\": dictionary\
+      \ of argument name and its value}.' }}\n    {{- \"Do not use variables.\\n\\n\" }}\n    {%- for t in tools %}\n    \
+      \    {{- t | tojson(indent=4) }}\n        {{- \"\\n\\n\" }}\n    {%- endfor %}\n    {{- first_user_message + \"<|eot_id|>\"\
+      }}\n{%- endif %}\n\n{%- for message in messages %}\n    {%- if not (message.role == 'ipython' or message.role == 'tool'\
+      \ or 'tool_calls' in message) %}\n        {{- '<|start_header_id|>' + message['role'] + '<|end_header_id|>\\n\\n'+ message['content']\
+      \ | trim + '<|eot_id|>' }}\n    {%- elif 'tool_calls' in message %}\n        {%- if not message.tool_calls|length ==\
+      \ 1 %}\n            {{- raise_exception(\"This model only supports single tool-calls at once!\") }}\n        {%- endif\
+      \ %}\n        {%- set tool_call = message.tool_calls[0].function %}\n        {{- '<|start_header_id|>assistant<|end_header_id|>\\\
+      n\\n' -}}\n        {{- '{\"name\": \"' + tool_call.name + '\", ' }}\n        {{- '\"parameters\": ' }}\n        {{-\
+      \ tool_call.arguments | tojson }}\n        {{- \"}\" }}\n        {{- \"<|eot_id|>\" }}\n    {%- elif message.role ==\
+      \ \"tool\" or message.role == \"ipython\" %}\n        {{- \"<|start_header_id|>ipython<|end_header_id|>\\n\\n\" }}\n\
+      \        {%- if message.content is mapping or message.content is iterable %}\n            {{- message.content | tojson\
+      \ }}\n        {%- else %}\n            {{- message.content }}\n        {%- endif %}\n        {{- \"<|eot_id|>\" }}\n\
+      \    {%- endif %}\n{%- endfor %}\n{%- if add_generation_prompt %}\n    {{- '<|start_header_id|>assistant<|end_header_id|>\\\
+      n\\n' }}\n{%- endif %}\n"
+    eos_token: <|eot_id|>
+    pad_token: <|finetune_right_pad_id|>
+cardData:
+  license: other
+  license_name: nvidia-open-model-license
+  license_link: https://www.nvidia.com/en-us/agreements/enterprise-software/nvidia-open-model-license/
+  tags:
+  - sentence-transformers
+  - retrieval
+  - visual document retrieval
+  - vlm embedding
+  - page image embedding
+  - text embedding
+  - semantic search
+  - question-answering retrieval
+  - rag
+  - transformers
+  language:
+  - multilingual
+  library_name: sentence-transformers
+  pipeline_tag: sentence-similarity
+transformersInfo:
+  auto_model: AutoModel
+  custom_class: modeling_llama_nemotron_vl.LlamaNemotronVLModel
+  pipeline_tag: feature-extraction
+siblings:
+- rfilename: .gitattributes
+- rfilename: 1_Pooling/config.json
+- rfilename: LICENSE
+- rfilename: README.md
+- rfilename: THIRD_PARTY_NOTICES.md
+- rfilename: __init__.py
+- rfilename: config.json
+- rfilename: config_sentence_transformers.json
+- rfilename: configuration_llama_nemotron_vl.py
+- rfilename: generation_config.json
+- rfilename: model.safetensors
+- rfilename: modeling_llama_nemotron_vl.py
+- rfilename: modules.json
+- rfilename: processing_llama_nemotron_vl.py
+- rfilename: processor_config.json
+- rfilename: sentence_bert_config.json
+- rfilename: special_tokens_map.json
+- rfilename: tokenizer.json
+- rfilename: tokenizer_config.json
+spaces: []
+createdAt: '2026-03-26T09:39:34.000Z'
+safetensors:
+  parameters:
+    BF16: 1678252480
+  total: 1678252480
+usedStorage: 3373797485
+downloadsAllTime: 66
+inferenceProviderMapping: {}
+configJson:
+  _commit_hash: null
+  _name_or_path: nvidia/llama-nemotron-embed-vl-1b-v2
+  architectures:
+  - LlamaNemotronVLModel
+  auto_map:
+    AutoConfig: configuration_llama_nemotron_vl.LlamaNemotronVLConfig
+    AutoModel: modeling_llama_nemotron_vl.LlamaNemotronVLModel
+  bidirectional_attention: false
+  downsample_ratio: 0.5
+  dynamic_image_size: true
+  force_image_size: 512
+  has_no_defaults_at_init: true
+  img_context_token_id: 128258
+  is_composition: true
+  keep_aspect_ratio: false
+  llm_config:
+    _attn_implementation_autoset: true
+    _name_or_path: ''
+    add_cross_attention: false
+    architectures:
+    - LlamaBidirectionalModel
+    attention_bias: false
+    attention_dropout: 0.0
+    auto_map:
+      AutoConfig: configuration_nemotron_llama_vl.LlamaBidirectionalConfig
+      AutoModel: modeling_llama_nemotron_vl.LlamaBidirectionalModel
+    bad_words_ids: null
+    begin_suppress_tokens: null
+    bos_token_id: 128000
+    chunk_size_feed_forward: 0
+    cross_attention_hidden_size: null
+    decoder_start_token_id: null
+    diversity_penalty: 0.0
+    do_sample: false
+    early_stopping: false
+    encoder_no_repeat_ngram_size: 0
+    eos_token_id: 128001
+    exponential_decay_length_penalty: null
+    finetuning_task: null
+    forced_bos_token_id: null
+    forced_eos_token_id: null
+    head_dim: 64
+    hidden_act: silu
+    hidden_size: 2048
+    id2label:
+      '0': LABEL_0
+      '1': LABEL_1
+    initializer_range: 0.02
+    intermediate_size: 8192
+    is_decoder: false
+    is_encoder_decoder: false
+    label2id:
+      LABEL_0: 0
+      LABEL_1: 1
+    length_penalty: 1.0
+    max_length: 20
+    max_position_embeddings: 131072
+    min_length: 0
+    mlp_bias: false
+    model_type: llama_bidirec
+    no_repeat_ngram_size: 0
+    num_attention_heads: 32
+    num_beam_groups: 1
+    num_beams: 1
+    num_hidden_layers: 16
+    num_key_value_heads: 8
+    num_return_sequences: 1
+    output_attentions: false
+    output_hidden_states: false
+    output_scores: false
+    pad_token_id: null
+    pooling: avg
+    prefix: null
+    pretraining_tp: 1
+    problem_type: null
+    pruned_heads: {}
+    remove_invalid_values: false
+    repetition_penalty: 1.0
+    return_dict: true
+    return_dict_in_generate: false
+    rms_norm_eps: 1.0e-05
+    rope_scaling:
+      factor: 32.0
+      high_freq_factor: 4.0
+      low_freq_factor: 1.0
+      original_max_position_embeddings: 8192
+      rope_type: llama3
+    rope_theta: 500000.0
+    sep_token_id: null
+    suppress_tokens: null
+    task_specific_params: null
+    temperature: 1.0
+    tf_legacy_loss: false
+    tie_encoder_decoder: false
+    tie_word_embeddings: true
+    tokenizer_class: null
+    top_k: 50
+    top_p: 1.0
+    torch_dtype: bfloat16
+    torchscript: false
+    transformers_version: 4.47.1
+    typical_p: 1.0
+    use_bfloat16: false
+    use_cache: true
+    vocab_size: 128266
+  loss_version: efficient_v2_cp_head
+  max_dynamic_patch: 12
+  max_input_tiles: 2
+  min_dynamic_patch: 1
+  mlp_checkpoint: false
+  model_type: llama_nemotron_vl
+  p_max_length: 4096
+  pad2square: false
+  passage_prefix: 'passage:'
+  pooling: avg
+  pre_feature_reduction: false
+  ps_version: v2
+  q_max_length: 512
+  query_prefix: 'query:'
+  select_layer: -1
+  template: bidirectional-llama-retriever
+  torch_dtype: bfloat16
+  transformers_version: 4.47.1
+  use_backbone_lora: 0
+  use_llm_lora: 0
+  use_thumbnail: true
+  vision_config:
+    _attn_implementation_autoset: true
+    _name_or_path: ''
+    add_cross_attention: false
+    architectures: null
+    attention_dropout: 0.0
+    bad_words_ids: null
+    begin_suppress_tokens: null
+    bos_token_id: null
+    chunk_size_feed_forward: 0
+    cross_attention_hidden_size: null
+    decoder_start_token_id: null
+    diversity_penalty: 0.0
+    do_sample: false
+    drop_path_rate: 0.1
+    early_stopping: false
+    encoder_no_repeat_ngram_size: 0
+    eos_token_id: null
+    exponential_decay_length_penalty: null
+    finetuning_task: null
+    forced_bos_token_id: null
+    forced_eos_token_id: null
+    hidden_act: gelu_pytorch_tanh
+    hidden_size: 1152
+    id2label:
+      '0': LABEL_0
+      '1': LABEL_1
+    image_size: 512
+    intermediate_size: 4304
+    is_decoder: false
+    is_encoder_decoder: false
+    label2id:
+      LABEL_0: 0
+      LABEL_1: 1
+    layer_norm_eps: 1.0e-06
+    length_penalty: 1.0
+    max_length: 20
+    min_length: 0
+    model_type: siglip_vision_model
+    no_repeat_ngram_size: 0
+    num_attention_heads: 16
+    num_beam_groups: 1
+    num_beams: 1
+    num_channels: 3
+    num_hidden_layers: 27
+    num_return_sequences: 1
+    output_attentions: false
+    output_hidden_states: false
+    output_scores: false
+    pad_token_id: null
+    patch_size: 16
+    prefix: null
+    problem_type: null
+    pruned_heads: {}
+    remove_invalid_values: false
+    repetition_penalty: 1.0
+    return_dict: true
+    return_dict_in_generate: false
+    sep_token_id: null
+    suppress_tokens: null
+    task_specific_params: null
+    temperature: 1.0
+    tf_legacy_loss: false
+    tie_encoder_decoder: false
+    tie_word_embeddings: true
+    tokenizer_class: null
+    top_k: 50
+    top_p: 1.0
+    torch_dtype: null
+    torchscript: false
+    transformers_version: 4.47.1
+    typical_p: 1.0
+    use_bfloat16: false
+  vocab_size: 128266
+onnxFiles: {}
+safetensorsSizeMb: 3356.6
+approxSizeMb: 3356.5
+fetchedAt: '2026-06-08T16:42:43.000Z'

@@ -1,0 +1,251 @@
+_id: 6764a727cdd691d2cd459211
+id: estrogen/ModernBERT-base-nli-v3
+private: false
+pipeline_tag: sentence-similarity
+library_name: sentence-transformers
+tags:
+- sentence-transformers
+- safetensors
+- modernbert
+- sentence-similarity
+- feature-extraction
+- generated_from_trainer
+- dataset_size:557850
+- loss:MatryoshkaLoss
+- loss:MultipleNegativesRankingLoss
+- en
+- dataset:sentence-transformers/all-nli
+- arxiv:1908.10084
+- arxiv:2205.13147
+- arxiv:1705.00652
+- base_model:answerdotai/ModernBERT-base
+- base_model:finetune:answerdotai/ModernBERT-base
+- model-index
+- text-embeddings-inference
+- endpoints_compatible
+- deploy:azure
+- region:us
+downloads: 41
+likes: 6
+modelId: estrogen/ModernBERT-base-nli-v3
+author: estrogen
+sha: d4b6633411a80a7642ac72f803a7979665d34a94
+lastModified: '2024-12-20T03:09:31.000Z'
+gated: false
+disabled: false
+widgetData:
+- source_sentence: A construction worker is standing on a crane placing a large arm on top of a stature in progress.
+  sentences:
+  - A man is playing with his camera.
+  - A person standing
+  - Nobody is standing
+- source_sentence: A boy in red slides down an inflatable ride.
+  sentences:
+  - a baby smiling
+  - A boy is playing on an inflatable ride.
+  - A boy pierces a knife through an inflatable ride.
+- source_sentence: A man in a black shirt is playing a guitar.
+  sentences:
+  - A group of women are selling their wares
+  - The man is wearing black.
+  - The man is wearing a blue shirt.
+- source_sentence: A man with a large power drill standing next to his daughter with a vacuum cleaner hose.
+  sentences:
+  - A man holding a drill stands next to a girl holding a vacuum hose.
+  - Kids ride an amusement ride.
+  - The man and girl are painting the walls.
+- source_sentence: A middle-aged man works under the engine of a train on rail tracks.
+  sentences:
+  - A guy is working on a train.
+  - Two young asian men are squatting.
+  - A guy is driving to work.
+model-index:
+- name: SentenceTransformer based on estrogen/ModernBERT-base-sbert-initialized
+  results:
+  - task:
+      type: semantic-similarity
+      name: Semantic Similarity
+    dataset:
+      name: sts dev
+      type: sts-dev
+    metrics:
+    - type: pearson_cosine
+      value: 0.8601586939371598
+      name: Pearson Cosine
+      verified: false
+    - type: spearman_cosine
+      value: 0.8650559283517015
+      name: Spearman Cosine
+      verified: false
+  - task:
+      type: semantic-similarity
+      name: Semantic Similarity
+    dataset:
+      name: sts test
+      type: sts-test
+    metrics:
+    - type: pearson_cosine
+      value: 0.8483904083763342
+      name: Pearson Cosine
+      verified: false
+    - type: spearman_cosine
+      value: 0.8504558364206114
+      name: Spearman Cosine
+      verified: false
+config:
+  architectures:
+  - ModernBertModel
+  model_type: modernbert
+  tokenizer_config:
+    cls_token: '[CLS]'
+    mask_token: '[MASK]'
+    pad_token: '[PAD]'
+    sep_token: '[SEP]'
+    unk_token: '[UNK]'
+cardData:
+  language:
+  - en
+  tags:
+  - sentence-transformers
+  - sentence-similarity
+  - feature-extraction
+  - generated_from_trainer
+  - dataset_size:557850
+  - loss:MatryoshkaLoss
+  - loss:MultipleNegativesRankingLoss
+  base_model: answerdotai/ModernBERT-base
+  widget:
+  - source_sentence: A construction worker is standing on a crane placing a large arm on top of a stature in progress.
+    sentences:
+    - A man is playing with his camera.
+    - A person standing
+    - Nobody is standing
+  - source_sentence: A boy in red slides down an inflatable ride.
+    sentences:
+    - a baby smiling
+    - A boy is playing on an inflatable ride.
+    - A boy pierces a knife through an inflatable ride.
+  - source_sentence: A man in a black shirt is playing a guitar.
+    sentences:
+    - A group of women are selling their wares
+    - The man is wearing black.
+    - The man is wearing a blue shirt.
+  - source_sentence: A man with a large power drill standing next to his daughter with a vacuum cleaner hose.
+    sentences:
+    - A man holding a drill stands next to a girl holding a vacuum hose.
+    - Kids ride an amusement ride.
+    - The man and girl are painting the walls.
+  - source_sentence: A middle-aged man works under the engine of a train on rail tracks.
+    sentences:
+    - A guy is working on a train.
+    - Two young asian men are squatting.
+    - A guy is driving to work.
+  datasets:
+  - sentence-transformers/all-nli
+  pipeline_tag: sentence-similarity
+  library_name: sentence-transformers
+  metrics:
+  - pearson_cosine
+  - spearman_cosine
+  model-index:
+  - name: SentenceTransformer based on estrogen/ModernBERT-base-sbert-initialized
+    results:
+    - task:
+        type: semantic-similarity
+        name: Semantic Similarity
+      dataset:
+        name: sts dev
+        type: sts-dev
+      metrics:
+      - type: pearson_cosine
+        value: 0.8601586939371598
+        name: Pearson Cosine
+        verified: false
+      - type: spearman_cosine
+        value: 0.8650559283517015
+        name: Spearman Cosine
+        verified: false
+    - task:
+        type: semantic-similarity
+        name: Semantic Similarity
+      dataset:
+        name: sts test
+        type: sts-test
+      metrics:
+      - type: pearson_cosine
+        value: 0.8483904083763342
+        name: Pearson Cosine
+        verified: false
+      - type: spearman_cosine
+        value: 0.8504558364206114
+        name: Spearman Cosine
+        verified: false
+siblings:
+- rfilename: .gitattributes
+- rfilename: 1_Pooling/config.json
+- rfilename: README.md
+- rfilename: config.json
+- rfilename: config_sentence_transformers.json
+- rfilename: model.safetensors
+- rfilename: modules.json
+- rfilename: sentence_bert_config.json
+- rfilename: special_tokens_map.json
+- rfilename: tokenizer.json
+- rfilename: tokenizer_config.json
+spaces: []
+createdAt: '2024-12-19T23:07:19.000Z'
+safetensors:
+  parameters:
+    F32: 149014272
+  total: 149014272
+usedStorage: 596070136
+downloadsAllTime: 4714
+inferenceProviderMapping: {}
+configJson:
+  _name_or_path: estrogen/ModernBERT-base-sbert-initialized
+  architectures:
+  - ModernBertModel
+  attention_bias: false
+  attention_dropout: 0.0
+  bos_token_id: 50281
+  classifier_activation: gelu
+  classifier_bias: false
+  classifier_dropout: 0.0
+  classifier_pooling: mean
+  cls_token_id: 50281
+  decoder_bias: true
+  deterministic_flash_attn: false
+  embedding_dropout: 0.0
+  eos_token_id: 50282
+  global_attn_every_n_layers: 3
+  global_rope_theta: 160000.0
+  gradient_checkpointing: false
+  hidden_activation: gelu
+  hidden_size: 768
+  initializer_cutoff_factor: 2.0
+  initializer_range: 0.02
+  intermediate_size: 1152
+  layer_norm_eps: 1.0e-05
+  local_attention: 128
+  local_rope_theta: 10000.0
+  max_position_embeddings: 8192
+  mlp_bias: false
+  mlp_dropout: 0.0
+  model_type: modernbert
+  norm_bias: false
+  norm_eps: 1.0e-05
+  num_attention_heads: 12
+  num_hidden_layers: 22
+  pad_token_id: 50283
+  position_embedding_type: absolute
+  reference_compile: true
+  sep_token_id: 50282
+  sparse_pred_ignore_index: -100
+  sparse_prediction: false
+  torch_dtype: float32
+  transformers_version: 4.48.0.dev0
+  vocab_size: 50368
+onnxFiles: {}
+safetensorsSizeMb: 596.1
+approxSizeMb: 596.1
+fetchedAt: '2026-06-08T16:42:43.000Z'

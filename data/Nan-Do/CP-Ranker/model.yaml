@@ -1,0 +1,514 @@
+_id: 6903eca63413941a8e578bbc
+id: Nan-Do/CP-Ranker
+private: false
+pipeline_tag: sentence-similarity
+library_name: sentence-transformers
+tags:
+- sentence-transformers
+- safetensors
+- new
+- sentence-similarity
+- feature-extraction
+- dense
+- generated_from_trainer
+- dataset_size:865218
+- loss:TripletLoss
+- custom_code
+- arxiv:1908.10084
+- arxiv:1703.07737
+- base_model:Salesforce/SFR-Embedding-Code-400M_R
+- base_model:finetune:Salesforce/SFR-Embedding-Code-400M_R
+- text-embeddings-inference
+- endpoints_compatible
+- region:us
+downloads: 70
+likes: 0
+modelId: Nan-Do/CP-Ranker
+author: Nan-Do
+sha: 277d2eedfe69976a7ddefd542867b3856bb9cfd1
+lastModified: '2025-10-30T22:55:47.000Z'
+gated: false
+disabled: false
+widgetData:
+- source_sentence: "Swaps in a String\nYou are given a string $S$ that contains of the characters $A$, $B$ or $C$ only.\n\n\
+    In one operation, you can do either of the following:\n\n- Choose an occurrence of $\\text{AB}$ in the string, convert\
+    \ it to $\\text{BA}$.\n- Choose an occurrence of $\\text{BC}$ in the string, convert it to $\\text{CB}$.\n\nNote that\
+    \ you are only allowed to operate on adjacent elements.\n\nFind the maximum number of operations you can do. It can be\
+    \ proven the answer is finite.\n\nInput Format:\n- The first line of input will contain a single integer $T$, denoting\
+    \ the number of test cases.\n- Each test case consists of multiple lines of input.\n    - The first line of each test\
+    \ case contains $N$ - the length of the string.\n    - The second line contains $S$ - the string.\n\nOutput Format:\n\
+    For each test case, output on a new line the maximum number of operations possible.\n\nConstraints:\n- $1 \\le T \\le\
+    \ 10^4$\n- $2 \\le N \\le 2 \\cdot 10^5$\n- $|S| = N$\n- $S_i \\in \\{A, B, C\\}$\n- The sum of $N$ over all test cases\
+    \ does not exceed $2 \\cdot 10^5$.\n\nSample 1:\nInput:\n3\n4\nABCC\n5\nBAABB\n2\nBA\n\nOutput:\n2\n4\n0\nExplanation:\n\
+    **Test Case 1** : We can convert $\\text{ABCC}$ to $\\text{ACBC}$ and then to $\\text{ACCB}$. More than $2$ operations\
+    \ can be proven to be impossible.\n\n**Test Case 2** : $\\text{BAABB} \\rightarrow \\text{BABAB} \\rightarrow \\text{BBAAB}\
+    \ \\rightarrow \\text{BBABA} \\rightarrow \\text{BBBAA}$.\n"
+  sentences:
+  - "#from collections import Counter\r\n#import math\r\n#import deque\r\nt=int(input())\r\nfor _ in range(t):\r\n    n=int(input())\r\
+    \n    a=input()\r\n    C1=[]\r\n    C2=[]\r\n    c1=0\r\n    c2=0\r\n    res=0\r\n    for i in a:\r\n        if i=='A':\r\
+    \n            c1+=1\r\n        elif i=='B':\r\n            pass\r\n        else:\r\n            c1=0\r\n        C1.append(c1)\r\
+    \n    for i in a[::-1]:\r\n        if i=='A':\r\n            c2=0\r\n        elif i=='B':\r\n            pass\r\n    \
+    \    else:\r\n            c2+=1\r\n        C2.append(c2)\r\n    C2=C2[::-1]\r\n    for i in range(n):\r\n        if a[i]=='B':\r\
+    \n            res+=max(C1[i],C2[i])\r\n    print(res)"
+  - "#from collections import Counter\r\n#import math\r\n#import deque\r\nt=int(input())\r\nfor _ in range(t):\r\n    n=int(input())\r\
+    \n    a=input()\r\n    C1=[]\r\n    C2=[]\r\n    c1=0\r\n    c2=0\r\n    res=0\r\n    for i in a:\r\n        if i=='A':\r\
+    \n            c1+=1\r\n        elif i=='C':\r\n            c1=0\r\n        C1.append(c1)\r\n    for i in a[::-1]:\r\n\
+    \        if i=='A':\r\n            c2=0\r\n        elif i=='C':\r\n            c2+=1\r\n        C2.append(c2)\r\n    C2=C2[::-1]\r\
+    \n    for i in range(n):\r\n        if a[i]=='B':\r\n            res+=max(C1[i],C2[i])\r\n    print(res)"
+  - "# cook your dish here\r\nimport math\r\nfor _ in range(int(input())):\r\n    n=int(input())\r\n    x=math.ceil(n/2)\r\
+    \n    y=math.ceil(n/3)\r\n    print(x,y)\r\n    "
+- source_sentence: "We have N coins numbered 1 to N with two distinguishable sides. A string S represents the current state\
+    \ of the coins. If the i-th character of S is 1, coin i is showing heads; if that character is 0, coin i is showing tails.\n\
+    \n  You can repeat the following operation zero or more times.\n\n    * Choose a pair of integers (i,j) such that 1\\\
+    leq i < j\\leq N and j-i\\geq \\bm{2}. Flip coin i and coin j.\n\n  Determine whether it is possible to make all the N\
+    \ coins show tails. If it is possible, find the minimum number of operations needed.\n\n  You are given T test cases to\
+    \ solve.\n\n  Constraints\n\n    * 1 \\leq T \\leq 2\\times 10^5\n    * 3 \\leq N \\leq 2\\times 10^5\n    * S is a string\
+    \ of length N consisting of 0 and 1.\n    * All numbers in the input are integers.\n    * For each input file, the sum\
+    \ of N over the test cases is at most 2\\times 10^5.\n\n    Input\n\n    The input is given from Standard Input in the\
+    \ following format:\n\n    T\r\n    \\mathrm{case}_1\r\n    \\vdots\r\n    \\mathrm{case}_T\r\n    \n\n    ​ Each case\
+    \ is in the following format:\n\n    N\r\n    S\r\n    \n\n    Output\n\n    Print T lines. The i-th line (1\\leq i \\\
+    leq T) should contain the minimum number of operations needed to make all the coins show tails if it is possible, and\
+    \ -1 otherwise.\n\n  Sample Input 1\n\n  5\r\n  3\r\n  101\r\n  6\r\n  101101\r\n  5\r\n  11111\r\n  6\r\n  000000\r\n\
+    \  30\r\n  111011100110101100101000000111\r\n  \n\n  Sample Output 1\n\n  1\r\n  2\r\n  -1\r\n  0\r\n  8\r\n  \n\n  For\
+    \ the first test case, you can perform the operation with (i,j)=(1,3) to make all the coins show tails in one operation.\n\
+    \n  For the second test case, you can perform the operation with (i,j)=(1,3) and then with (i,j)=(4,6) to make all the\
+    \ coins show tails in two operations.\n\n  For the third test case, you can prove that there is no way to make all the\
+    \ coins show tails, so you should print -1.\n\n  For the fourth test case, the coins already show tails, so no operation\
+    \ is needed."
+  sentences:
+  - "A, B, X = map(int, input().split())\r\n\r\nans = 0\r\n\r\nfor i in range(1, 12):\r\n    rem = X - i * B\r\n    if rem\
+    \ <= 0:\r\n        continue\r\n    if rem // A < 10**(i - 1):\r\n        continue\r\n\r\n    if 10**(i - 1) <= rem //\
+    \ A < 10**(i):\r\n        ans = max(ans, rem // A)\r\n    elif rem // A >= 10**(i - 1) - 1:\r\n        cand = []\r\n \
+    \       for i in range(i):\r\n            cand.append('9')\r\n        ans = max(int(''.join(cand)), ans)\r\n    else:\r\
+    \n        ans = max(ans, rem // A)\r\n\r\nprint(min(10**9, ans))"
+  - "t=int(input())\r\nimport itertools\r\nimport heapq\r\n\r\nfor i in range(t):\r\n  n=int(input())\r\n  s=list(input())\r\
+    \n  #print(s)\r\n  if s==['1','1','0'] or s==['0','1','1']:\r\n    print(-1)\r\n    continue\r\n  if s==['0','1','1','0']\
+    \ :\r\n    print(3)\r\n    continue\r\n  g=itertools.groupby(s)\r\n  q=[]#heapq.heapify([])\r\n  cnt=0\r\n  cnt2=0\r\n\
+    \  ans=0\r\n  l2=0\r\n  for k,v in g:\r\n    \r\n    v=list(v)\r\n    #print(v)\r\n    #print(len(v))\r\n    if k=='1':\r\
+    \n      l=len(v)\r\n      cnt2+=1\r\n      l2=len(v)\r\n      cnt+=l\r\n      #print(k,list(v),'d')\r\n      #print(l2,len(list(v)),list(v))\r\
+    \n      heapq.heappush(q,-l)\r\n  if cnt2==1 and l2==2:\r\n    ans+=1\r\n  #print(cnt2,l2)\r\n  if cnt%2==1:\r\n    print(-1)\r\
+    \n    continue\r\n # print(q)\r\n  while q:\r\n    #print(q)\r\n    if len(q)==1:\r\n      l1=heapq.heappop(q)\r\n   \
+    \   ans+=(-l1)//2\r\n    else:\r\n      l1=heapq.heappop(q)\r\n      l2=heapq.heappop(q)\r\n      ans+=-max(l1,l2)\r\n\
+    \      if l1!=l2:heapq.heappush(q,-abs(l1-l2))\r\n  print(ans)"
+  - "t=int(input())\r\nimport itertools\r\nimport heapq\r\n\r\nfor i in range(t):\r\n  n=int(input())\r\n  s=list(input())\r\
+    \n  #print(s)\r\n  g=itertools.groupby(s)\r\n  q=[]#heapq.heapify([])\r\n  cnt=0\r\n  cnt2=0\r\n  ans=0\r\n  l2=0\r\n\
+    \  for k,v in g:\r\n    \r\n    v=list(v)\r\n   # print(v)\r\n    if k=='1':\r\n      l=len(v)\r\n      cnt2+=1\r\n  \
+    \    l2=len(v)\r\n      cnt+=l\r\n      #print(k,list(v),'d')\r\n      #print(l2,len(list(v)),list(v))\r\n      heapq.heappush(q,-l)\r\
+    \n  if cnt2==1 and l2==2:\r\n    ans+=1\r\n  #print(cnt2,l2)\r\n  if cnt%2==1:\r\n    print(-1)\r\n    continue\r\n #\
+    \ print(q)\r\n  while q:\r\n    #print(q)\r\n    if len(q)==1:\r\n      l1=heapq.heappop(q)\r\n      ans+=(-l1)//2\r\n\
+    \    else:\r\n      l1=heapq.heappop(q)\r\n      l2=heapq.heappop(q)\r\n      ans+=-max(l1,l2)\r\n      if l1!=l2:heapq.heappush(q,-abs(l1-l2))\r\
+    \n  print(ans)"
+- source_sentence: "Given is an integer S. Find a combination of six integers X_1,Y_1,X_2,Y_2,X_3, and Y_3 that satisfies\
+    \ all of the following conditions:\n\n    * 0 \\leq X_1,Y_1,X_2,Y_2,X_3,Y_3 \\leq 10^9\n    * The area of the triangle\
+    \ in a two-dimensional plane whose vertices are (X_1,Y_1),(X_2,Y_2), and (X_3,Y_3) is S/2.\n\n  We can prove that there\
+    \ always exist six integers that satisfy the conditions under the constraints of this problem.\n\n  Constraints\n\n  \
+    \  * 1 \\leq S \\leq 10^{18}\n    * All values in input are integers.\n\n    Input\n\n    Input is given from Standard\
+    \ Input in the following format:\n\n    S\r\n    \n\n    Output\n\n    Print six integers X_1,Y_1,X_2,Y_2,X_3, and Y_3\
+    \ that satisfy the conditions, in this order, with spaces in between. If multiple solutions exist, any of them will be\
+    \ accepted.\n\n  Sample Input 1\n\n  3\r\n  \n\n  Sample Output 1\n\n  1 0 2 2 0 1\r\n  \n\n  The area of the triangle\
+    \ in a two-dimensional plane whose vertices are (1,0),(2,2), and (0,1) is 3/2. Printing 3 0 3 1 0 1 or 1 0 0 1 2 2 will\
+    \ also be accepted.\n\n  Sample Input 2\n\n  100\r\n  \n\n  Sample Output 2\n\n  0 0 10 0 0 10\r\n  \n\n  Sample Input\
+    \ 3\n\n  311114770564041497\r\n  \n\n  Sample Output 3\n\n  314159265 358979323 846264338 327950288 419716939 937510582"
+  sentences:
+  - "import sys\r\ninput = sys.stdin.readline\r\n\r\nx, y = map(int, input().split())\r\nINF = 10**10\r\nif y >= x:\r\n  \
+    \  ans1 = y-x\r\nelse:\r\n    ans1 = INF\r\nif -y >= x:\r\n    ans2 = -y - x + 1\r\nelse:\r\n    ans2 = INF\r\nif y >=\
+    \ -x:\r\n    ans3 = y - (-x) + 1\r\nelse:\r\n    ans3 = INF\r\nif -y >= -x:\r\n    ans4 = -y - (-x) + 2\r\nelse:\r\n \
+    \   ans4 = INF\r\nans = min(ans1, ans2, ans3, ans4)\r\nprint(ans)\r\n"
+  - "s=int(input())\r\nif s+1<=10**9:\r\n  b=str(s+1)\r\n  a=['0','0',b,'1','1','1']\r\nelse:\r\n  a=int(s**(1/2))\r\n  if\
+    \ a**2>=s:\r\n    a_=a\r\n  else:\r\n    if a*(a+1)>=s:\r\n      a_=a+1\r\n    else:\r\n      if a*(a+2)>=s and a+2<=10**9:\r\
+    \n        a_=a+2\r\n      else:\r\n        a_=a+1\r\n        a+=1\r\n  x2=str(a)\r\n  y3=str(a_)\r\n  \r\n  y2=str(1)\r\
+    \n  x3=str(int(x2)*int(y3)-s)\r\n  x1=str(0)\r\n  y1=str(0)\r\n  a=[x1,y1,x2,y2,x3,y3]\r\nprint((' ').join(a))\r\n"
+  - "s=int(input())\r\nif s+1<=10**9:\r\n  b=str(s+1)\r\n  a=['0','0',b,'1','1','1']\r\nelse:\r\n  x2=int(s**(1/2))\r\n  y3=int(s**(1/2))\r\
+    \n  while s>x2*y3:\r\n    y3+=1\r\n  x2=str(x2)\r\n  y3=str(y3)\r\n  y2=str(1)\r\n  x3=str(int(x2)*int(y3)-s)\r\n  x1=str(0)\r\
+    \n  y1=str(0)\r\n  a=[x1,y1,x2,y2,x3,y3]\r\nprint((' ').join(a)) "
+- source_sentence: "There is a directed graph with N vertices and M edges, where vertices are numbered from 1 to N and edges\
+    \ are numbered from 1 to M. Edge i is a directed edge from vertex A_i to vertex B_i with weight W_i.\n\n  Find the minimum\
+    \ value of the bitwise \\mathrm{XOR} of the weights of edges included in a walk from vertex 1 to vertex N.\n\n  What is\
+    \ a walk from vertex 1 to vertex N?\n\n  Intuitively, it is \"a path from vertex 1 to vertex N that may visit the same\
+    \ vertex or edge multiple times.\" Formally, it is a sequence of edges (e_1,\\ldots,e_k) that satisfies all of the following\
+    \ conditions:\n\n    * e_1 starts at vertex 1.\n    * For all 1 \\leq i < k, the endpoint of e_i and the starting point\
+    \ of e_{i+1} are the same.\n    * e_k ends at vertex N.\n  What is the bitwise \\mathrm{XOR} operation?\n\n  The bitwise\
+    \ \\mathrm{XOR} of non-negative integers A and B, denoted A\\ \\mathrm{XOR}\\ B, is defined as follows:\n\n    * When\
+    \ A\\ \\mathrm{XOR}\\ B is written in binary, the digit at the 2^k place (k \\geq 0) is 1 if exactly one of the digits\
+    \ at the 2^k place of A and B in binary is 1, and 0 otherwise.\n  For example, 3\\ \\mathrm{XOR}\\ 5 = 6 (in binary: 011\\\
+    \ \\mathrm{XOR}\\ 101 = 110).\n  In general, the bitwise \\mathrm{XOR} of k non-negative integers p_1, p_2, p_3, \\dots,\
+    \ p_k is defined as (\\dots ((p_1\\ \\mathrm{XOR}\\ p_2)\\ \\mathrm{XOR}\\ p_3)\\ \\mathrm{XOR}\\ \\dots\\ \\mathrm{XOR}\\\
+    \ p_k), and it can be proved that this does not depend on the order of p_1, p_2, p_3, \\dots p_k.\n\n  Constraints\n\n\
+    \    * 2 \\leq N \\leq 1000\n    * 0 \\leq M \\leq 1000\n    * 1 \\leq A_i,B_i \\leq N\n    * 0 \\leq W_i < 2^{10}\n \
+    \   * All input values are integers.\n\n    Input\n\n    The input is given from Standard Input in the following format:\n\
+    \n    N M\r\n    A_1 B_1 W_1\r\n    A_2 B_2 W_2\r\n    \\vdots\r\n    A_M B_M W_M\r\n    \n\n    Output\n\n    If there\
+    \ is no walk from vertex 1 to vertex N, output -1.\n\n    If there is a walk from vertex 1 to vertex N, output the minimum\
+    \ value of the bitwise \\mathrm{XOR} of the weights of edges included in such a walk.\n\n  Sample Input 1\n\n  3 3\r\n\
+    \  1 2 4\r\n  2 3 5\r\n  1 3 2\r\n  \n\n  Sample Output 1\n\n  1\r\n  \n\n  The bitwise \\mathrm{XOR} of the weights of\
+    \ edges included in the walk (edge 1, edge 2) is 1.\n\n  Sample Input 2\n\n  4 4\r\n  1 4 7\r\n  4 2 2\r\n  2 3 4\r\n\
+    \  3 4 1\r\n  \n\n  Sample Output 2\n\n  0\r\n  \n\n  The bitwise \\mathrm{XOR} of the weights of edges included in the\
+    \ walk (edge 1, edge 2, edge 3, edge 4) is 0.\n\n  Note that the walk may include vertex N in the middle.\n\n  Sample\
+    \ Input 3\n\n  999 4\r\n  1 2 9\r\n  2 1 8\r\n  1 2 7\r\n  1 1 6\r\n  \n\n  Sample Output 3\n\n  -1\r\n  \n\n  If there\
+    \ is no walk from vertex 1 to vertex N, output -1."
+  sentences:
+  - "import sys\r\nimport os\r\nfrom io import StringIO\r\nimport unittest\r\nfrom typing import *\r\n\r\nfrom bisect import\
+    \ *\r\nfrom collections import *\r\nfrom heapq import *\r\nfrom itertools import *\r\nfrom math import *\r\n\r\nMOD =\
+    \ 998244353\r\nINF = 1<<60\r\nLABC = \"ABCDEFGHIJKLMNOPQRSTUVWXYZ\"\r\nSABC = \"abcdefghijklmnopqrstuvwxyz\"\r\n\r\ndef\
+    \ resolve():\r\n    N, M = map(int, input().split())\r\n    graph = [[] for _ in range(N)]\r\n    for _ in range(M):\r\
+    \n        a, b, w = map(int, input().split())\r\n        a -= 1\r\n        b -= 1\r\n        graph[a].append((b, w))\r\
+    \n    \r\n    dp = [[set() for _ in range(N)] for _ in range(N + 1)]\r\n    for b, w in graph[0]:\r\n        dp[1][b].add(w)\r\
+    \n    \r\n    for i in range(1, N):\r\n        for a in range(N):\r\n            for curr_w in dp[i][a]:\r\n         \
+    \       for b, w in graph[a]:\r\n                    if len(dp[i + 1][b]) < 50:\r\n                        dp[i + 1][b].add(curr_w\
+    \ ^ w)\r\n    \r\n    ans = 1 << 60\r\n    for i in range(N + 1):\r\n        for w in dp[i][N - 1]:\r\n            ans\
+    \ = min(ans, w)\r\n    if ans >= 1 << 60:\r\n        ans = -1\r\n    print(ans)\r\n\r\ndef meguru(judge, ok=-1, ng=1<<60):\r\
+    \n    while abs(ok - ng) > 1:\r\n        med = (ok + ng) // 2\r\n        if judge(med):\r\n            ok = med\r\n  \
+    \      else:\r\n            ng = med\r\n    return ok\r\n\r\nclass TestClass(unittest.TestCase):\r\n    def test_sample1(self):\r\
+    \n        input = \"\"\"3 3\r\n1 2 4\r\n2 3 5\r\n1 3 2\"\"\"\r\n        expected = \"\"\"1\"\"\"\r\n        self.judge(input,\
+    \ expected)\r\n\r\n    def test_sample2(self):\r\n        input = \"\"\"4 4\r\n1 4 7\r\n4 2 2\r\n2 3 4\r\n3 4 1\"\"\"\r\
+    \n        expected = \"\"\"0\"\"\"\r\n        self.judge(input, expected)\r\n\r\n    def test_sample3(self):\r\n     \
+    \   input = \"\"\"999 4\r\n1 2 9\r\n2 1 8\r\n1 2 7\r\n1 1 6\"\"\"\r\n        expected = \"\"\"-1\"\"\"\r\n        self.judge(input,\
+    \ expected)\r\n\r\n    def judge(self, input, expected):\r\n        stdout, stdin = sys.stdout, sys.stdin\r\n        sys.stdout,\
+    \ sys.stdin = StringIO(), StringIO(input)\r\n        resolve()\r\n        sys.stdout.seek(0)\r\n        actual = sys.stdout.read()[:-1]\r\
+    \n        sys.stdout, sys.stdin = stdout, stdin\r\n        self.assertEqual(expected, actual)\r\n\r\nif __name__ == \"\
+    __main__\":\r\n    if \"ATCODER\" in os.environ:\r\n        resolve()\r\n    else:\r\n        unittest.main(verbosity=2)\r\
+    \n"
+  - "import sys\r\nimport os\r\nfrom io import StringIO\r\nimport unittest\r\nfrom typing import *\r\n\r\nfrom bisect import\
+    \ *\r\nfrom collections import *\r\nfrom heapq import *\r\nfrom itertools import *\r\nfrom math import *\r\n\r\nMOD =\
+    \ 998244353\r\nINF = 1<<60\r\nLABC = \"ABCDEFGHIJKLMNOPQRSTUVWXYZ\"\r\nSABC = \"abcdefghijklmnopqrstuvwxyz\"\r\n\r\ndef\
+    \ resolve():\r\n    N, M = map(int, input().split())\r\n    graph = [[] for _ in range(N)]\r\n    for _ in range(M):\r\
+    \n        a, b, w = map(int, input().split())\r\n        a -= 1\r\n        b -= 1\r\n        graph[a].append((b, w))\r\
+    \n    \r\n    dp = [[set() for _ in range(N)] for _ in range(N + 1)]\r\n    seen = [set() for _ in range(N)]\r\n    for\
+    \ b, w in graph[0]:\r\n        dp[1][b].add(w)\r\n    \r\n    for i in range(1, N):\r\n        for a in range(N):\r\n\
+    \            if not dp[i][a]:\r\n                continue\r\n            for curr_w in dp[i][a] - seen[a]:\r\n       \
+    \         for b, w in graph[a]:\r\n                    seen[a].add(curr_w)\r\n                    dp[i + 1][b].add(curr_w\
+    \ ^ w)\r\n    \r\n    ans = 1 << 60\r\n    for i in range(N + 1):\r\n        for w in dp[i][N - 1]:\r\n            ans\
+    \ = min(ans, w)\r\n    if ans >= 1 << 60:\r\n        ans = -1\r\n    print(ans)\r\n\r\ndef meguru(judge, ok=-1, ng=1<<60):\r\
+    \n    while abs(ok - ng) > 1:\r\n        med = (ok + ng) // 2\r\n        if judge(med):\r\n            ok = med\r\n  \
+    \      else:\r\n            ng = med\r\n    return ok\r\n\r\nclass TestClass(unittest.TestCase):\r\n    def test_sample1(self):\r\
+    \n        input = \"\"\"3 3\r\n1 2 4\r\n2 3 5\r\n1 3 2\"\"\"\r\n        expected = \"\"\"1\"\"\"\r\n        self.judge(input,\
+    \ expected)\r\n\r\n    def test_sample2(self):\r\n        input = \"\"\"4 4\r\n1 4 7\r\n4 2 2\r\n2 3 4\r\n3 4 1\"\"\"\r\
+    \n        expected = \"\"\"0\"\"\"\r\n        self.judge(input, expected)\r\n\r\n    def test_sample3(self):\r\n     \
+    \   input = \"\"\"999 4\r\n1 2 9\r\n2 1 8\r\n1 2 7\r\n1 1 6\"\"\"\r\n        expected = \"\"\"-1\"\"\"\r\n        self.judge(input,\
+    \ expected)\r\n\r\n    def judge(self, input, expected):\r\n        stdout, stdin = sys.stdout, sys.stdin\r\n        sys.stdout,\
+    \ sys.stdin = StringIO(), StringIO(input)\r\n        resolve()\r\n        sys.stdout.seek(0)\r\n        actual = sys.stdout.read()[:-1]\r\
+    \n        sys.stdout, sys.stdin = stdout, stdin\r\n        self.assertEqual(expected, actual)\r\n\r\nif __name__ == \"\
+    __main__\":\r\n    if \"ATCODER\" in os.environ:\r\n        resolve()\r\n    else:\r\n        unittest.main(verbosity=2)\r\
+    \n"
+  - "a1, a2, a3 = map(int, input().split())\r\nnum1 = a2 - a1\r\nnum2 = a3 - a2\r\nnum3 = a3 - a1\r\nif num3 > 0:\r\n    if\
+    \ num1 <= num2:\r\n        if num3 % 2 == 0:\r\n            print(a3 - num3 // 2 - a2)\r\n        else:\r\n          \
+    \  print(a3 - num3 // 2 - a2 + 1)\r\n    else:\r\n        print(a2 - num2 - a1)\r\nelif num3 < 0:\r\n    if num1 <= num2:\r\
+    \n        if num3 % 2 == 0:\r\n            print(a1 + num3 // 2 - a2)\r\n        else:\r\n            print(a1 + num3\
+    \ // 2 - a2 + 2)\r\n    else:\r\n        print(a2 + num1 - a3)\r\nelse:\r\n    if a1 < a2:\r\n        print((a2 - a1)\
+    \ * 2)\r\n    else:\r\n        print(a1 - a2)\r\n"
+- source_sentence: "You are given an array of n integer numbers a0 , a1 , ..., an - 1. Find the distance between two closest\
+    \ (nearest) minimums in it. It is guaranteed that in the array a minimum occurs at least two times.\n\n      Input\n\n\
+    \    The first line contains positive integer n ( 2 ≤ n ≤ 10 5) — size of the given array. The second line contains n\
+    \ integers a0 , a1 , ..., an - 1 ( 1 ≤ ai ≤ 10 9) — elements of the array. It is guaranteed that in the array a minimum\
+    \ occurs at least two times.\n\n      Output\n\n    Print the only number — distance between two nearest minimums in the\
+    \ array.\n\n      Examples\n          Input\n        2\n        3 3\n          Output\n        1\n          Input\n  \
+    \      3\n        5 6 5\n          Output\n        2\n          Input\n        9\n        2 1 3 5 4 1 2 3 1\n        \
+    \  Output\n        3"
+  sentences:
+  - "def is_letter(char):\n    return (\n        ord('a') <= ord(char) <= ord('z') or\n        ord('A') <= ord(char) <= ord('Z')\n\
+    \    )\n\nn, kk = map(int, input().split())\nplacement = [\n    [i for i in input()] for j in range(n)\n]\n\n\nkc = 0\
+    \ \n\nfor row in placement:\n    for i in range(len(row)):\n        if (row[i] == '.'):\n            count = 0\n     \
+    \       if (i > 0 and row[i - 1] == 'S'):\n                count += 1\n            if (i < len(row) - 1 and row[i + 1]\
+    \ == 'S'):\n                count += 1\n            row[i] = count\n        if (row[i] == 'S'):\n            if (i > 0\
+    \ and is_letter(str(row[i - 1]))):\n                kc += 1\n            if (i < len(row) - 1 and is_letter(str(row[i\
+    \ + 1]))):\n                kc += 1\n \nfor i in range(3):\n    for j in range(len(placement)):\n        if (kk == 0):\n\
+    \            # print(f'broken here {i}, {j}') \n            break\n        for k in range(len(placement[j])):\n      \
+    \      if placement[j][k] == i:\n                placement[j][k] = 'x'\n                kc += i\n                kk -=\
+    \ 1\n                if (kk == 0):\n                    # print(\"broken\")                    \n                    break\n\
+    \nkkk = 0\n\nfor i in range(len(placement)):\n    for j in range(len(placement[i])):\n        if type(placement[i][j])\
+    \ == type(1):\n            placement[i][j] = '.'\n\nprint(kc)\nfor row in placement:\n    print(''.join(row))"
+  - "import sys\nn=int(input())\nl=list(map(int,input().split()))\nm=min(l)\n#print (m)\nindices = [i for i, x in enumerate(l)\
+    \ if x == m]\n#print (indices)\nmi=(sys.maxsize)\nfor i in range(len(indices)-1):\n    x=(indices[i+1]-indices[i])\n \
+    \   if x<mi:\n        mi=x\nprint (mi)"
+  - "n = int(input())\n\narr = list(map(int, input().split()))\n\nminimum = min(arr)\n\nindex1 = arr.index(minimum)\n\nfor\
+    \ i in range(index1+1, len(arr)):\n if arr[i] == minimum:\n  print(i - index1)\n  break"
+model-index: null
+config:
+  architectures:
+  - NewModel
+  auto_map:
+    AutoConfig: configuration.NewConfig
+    AutoModel: modeling.NewModel
+    AutoModelForMaskedLM: Alibaba-NLP/new-impl--modeling.NewForMaskedLM
+    AutoModelForMultipleChoice: Alibaba-NLP/new-impl--modeling.NewForMultipleChoice
+    AutoModelForQuestionAnswering: Alibaba-NLP/new-impl--modeling.NewForQuestionAnswering
+    AutoModelForSequenceClassification: Alibaba-NLP/new-impl--modeling.NewForSequenceClassification
+    AutoModelForTokenClassification: Alibaba-NLP/new-impl--modeling.NewForTokenClassification
+  model_type: new
+  tokenizer_config:
+    cls_token: '[CLS]'
+    eos_token: '[CLS]'
+    mask_token: '[MASK]'
+    pad_token: '[PAD]'
+    sep_token: '[SEP]'
+    unk_token: '[UNK]'
+cardData:
+  tags:
+  - sentence-transformers
+  - sentence-similarity
+  - feature-extraction
+  - dense
+  - generated_from_trainer
+  - dataset_size:865218
+  - loss:TripletLoss
+  base_model: Salesforce/SFR-Embedding-Code-400M_R
+  widget:
+  - source_sentence: "Swaps in a String\nYou are given a string $S$ that contains of the characters $A$, $B$ or $C$ only.\n\
+      \nIn one operation, you can do either of the following:\n\n- Choose an occurrence of $\\text{AB}$ in the string, convert\
+      \ it to $\\text{BA}$.\n- Choose an occurrence of $\\text{BC}$ in the string, convert it to $\\text{CB}$.\n\nNote that\
+      \ you are only allowed to operate on adjacent elements.\n\nFind the maximum number of operations you can do. It can\
+      \ be proven the answer is finite.\n\nInput Format:\n- The first line of input will contain a single integer $T$, denoting\
+      \ the number of test cases.\n- Each test case consists of multiple lines of input.\n    - The first line of each test\
+      \ case contains $N$ - the length of the string.\n    - The second line contains $S$ - the string.\n\nOutput Format:\n\
+      For each test case, output on a new line the maximum number of operations possible.\n\nConstraints:\n- $1 \\le T \\\
+      le 10^4$\n- $2 \\le N \\le 2 \\cdot 10^5$\n- $|S| = N$\n- $S_i \\in \\{A, B, C\\}$\n- The sum of $N$ over all test cases\
+      \ does not exceed $2 \\cdot 10^5$.\n\nSample 1:\nInput:\n3\n4\nABCC\n5\nBAABB\n2\nBA\n\nOutput:\n2\n4\n0\nExplanation:\n\
+      **Test Case 1** : We can convert $\\text{ABCC}$ to $\\text{ACBC}$ and then to $\\text{ACCB}$. More than $2$ operations\
+      \ can be proven to be impossible.\n\n**Test Case 2** : $\\text{BAABB} \\rightarrow \\text{BABAB} \\rightarrow \\text{BBAAB}\
+      \ \\rightarrow \\text{BBABA} \\rightarrow \\text{BBBAA}$.\n"
+    sentences:
+    - "#from collections import Counter\r\n#import math\r\n#import deque\r\nt=int(input())\r\nfor _ in range(t):\r\n    n=int(input())\r\
+      \n    a=input()\r\n    C1=[]\r\n    C2=[]\r\n    c1=0\r\n    c2=0\r\n    res=0\r\n    for i in a:\r\n        if i=='A':\r\
+      \n            c1+=1\r\n        elif i=='B':\r\n            pass\r\n        else:\r\n            c1=0\r\n        C1.append(c1)\r\
+      \n    for i in a[::-1]:\r\n        if i=='A':\r\n            c2=0\r\n        elif i=='B':\r\n            pass\r\n  \
+      \      else:\r\n            c2+=1\r\n        C2.append(c2)\r\n    C2=C2[::-1]\r\n    for i in range(n):\r\n        if\
+      \ a[i]=='B':\r\n            res+=max(C1[i],C2[i])\r\n    print(res)"
+    - "#from collections import Counter\r\n#import math\r\n#import deque\r\nt=int(input())\r\nfor _ in range(t):\r\n    n=int(input())\r\
+      \n    a=input()\r\n    C1=[]\r\n    C2=[]\r\n    c1=0\r\n    c2=0\r\n    res=0\r\n    for i in a:\r\n        if i=='A':\r\
+      \n            c1+=1\r\n        elif i=='C':\r\n            c1=0\r\n        C1.append(c1)\r\n    for i in a[::-1]:\r\n\
+      \        if i=='A':\r\n            c2=0\r\n        elif i=='C':\r\n            c2+=1\r\n        C2.append(c2)\r\n  \
+      \  C2=C2[::-1]\r\n    for i in range(n):\r\n        if a[i]=='B':\r\n            res+=max(C1[i],C2[i])\r\n    print(res)"
+    - "# cook your dish here\r\nimport math\r\nfor _ in range(int(input())):\r\n    n=int(input())\r\n    x=math.ceil(n/2)\r\
+      \n    y=math.ceil(n/3)\r\n    print(x,y)\r\n    "
+  - source_sentence: "We have N coins numbered 1 to N with two distinguishable sides. A string S represents the current state\
+      \ of the coins. If the i-th character of S is 1, coin i is showing heads; if that character is 0, coin i is showing\
+      \ tails.\n\n  You can repeat the following operation zero or more times.\n\n    * Choose a pair of integers (i,j) such\
+      \ that 1\\leq i < j\\leq N and j-i\\geq \\bm{2}. Flip coin i and coin j.\n\n  Determine whether it is possible to make\
+      \ all the N coins show tails. If it is possible, find the minimum number of operations needed.\n\n  You are given T\
+      \ test cases to solve.\n\n  Constraints\n\n    * 1 \\leq T \\leq 2\\times 10^5\n    * 3 \\leq N \\leq 2\\times 10^5\n\
+      \    * S is a string of length N consisting of 0 and 1.\n    * All numbers in the input are integers.\n    * For each\
+      \ input file, the sum of N over the test cases is at most 2\\times 10^5.\n\n    Input\n\n    The input is given from\
+      \ Standard Input in the following format:\n\n    T\r\n    \\mathrm{case}_1\r\n    \\vdots\r\n    \\mathrm{case}_T\r\n\
+      \    \n\n    ​ Each case is in the following format:\n\n    N\r\n    S\r\n    \n\n    Output\n\n    Print T lines. The\
+      \ i-th line (1\\leq i \\leq T) should contain the minimum number of operations needed to make all the coins show tails\
+      \ if it is possible, and -1 otherwise.\n\n  Sample Input 1\n\n  5\r\n  3\r\n  101\r\n  6\r\n  101101\r\n  5\r\n  11111\r\
+      \n  6\r\n  000000\r\n  30\r\n  111011100110101100101000000111\r\n  \n\n  Sample Output 1\n\n  1\r\n  2\r\n  -1\r\n \
+      \ 0\r\n  8\r\n  \n\n  For the first test case, you can perform the operation with (i,j)=(1,3) to make all the coins\
+      \ show tails in one operation.\n\n  For the second test case, you can perform the operation with (i,j)=(1,3) and then\
+      \ with (i,j)=(4,6) to make all the coins show tails in two operations.\n\n  For the third test case, you can prove that\
+      \ there is no way to make all the coins show tails, so you should print -1.\n\n  For the fourth test case, the coins\
+      \ already show tails, so no operation is needed."
+    sentences:
+    - "A, B, X = map(int, input().split())\r\n\r\nans = 0\r\n\r\nfor i in range(1, 12):\r\n    rem = X - i * B\r\n    if rem\
+      \ <= 0:\r\n        continue\r\n    if rem // A < 10**(i - 1):\r\n        continue\r\n\r\n    if 10**(i - 1) <= rem //\
+      \ A < 10**(i):\r\n        ans = max(ans, rem // A)\r\n    elif rem // A >= 10**(i - 1) - 1:\r\n        cand = []\r\n\
+      \        for i in range(i):\r\n            cand.append('9')\r\n        ans = max(int(''.join(cand)), ans)\r\n    else:\r\
+      \n        ans = max(ans, rem // A)\r\n\r\nprint(min(10**9, ans))"
+    - "t=int(input())\r\nimport itertools\r\nimport heapq\r\n\r\nfor i in range(t):\r\n  n=int(input())\r\n  s=list(input())\r\
+      \n  #print(s)\r\n  if s==['1','1','0'] or s==['0','1','1']:\r\n    print(-1)\r\n    continue\r\n  if s==['0','1','1','0']\
+      \ :\r\n    print(3)\r\n    continue\r\n  g=itertools.groupby(s)\r\n  q=[]#heapq.heapify([])\r\n  cnt=0\r\n  cnt2=0\r\
+      \n  ans=0\r\n  l2=0\r\n  for k,v in g:\r\n    \r\n    v=list(v)\r\n    #print(v)\r\n    #print(len(v))\r\n    if k=='1':\r\
+      \n      l=len(v)\r\n      cnt2+=1\r\n      l2=len(v)\r\n      cnt+=l\r\n      #print(k,list(v),'d')\r\n      #print(l2,len(list(v)),list(v))\r\
+      \n      heapq.heappush(q,-l)\r\n  if cnt2==1 and l2==2:\r\n    ans+=1\r\n  #print(cnt2,l2)\r\n  if cnt%2==1:\r\n   \
+      \ print(-1)\r\n    continue\r\n # print(q)\r\n  while q:\r\n    #print(q)\r\n    if len(q)==1:\r\n      l1=heapq.heappop(q)\r\
+      \n      ans+=(-l1)//2\r\n    else:\r\n      l1=heapq.heappop(q)\r\n      l2=heapq.heappop(q)\r\n      ans+=-max(l1,l2)\r\
+      \n      if l1!=l2:heapq.heappush(q,-abs(l1-l2))\r\n  print(ans)"
+    - "t=int(input())\r\nimport itertools\r\nimport heapq\r\n\r\nfor i in range(t):\r\n  n=int(input())\r\n  s=list(input())\r\
+      \n  #print(s)\r\n  g=itertools.groupby(s)\r\n  q=[]#heapq.heapify([])\r\n  cnt=0\r\n  cnt2=0\r\n  ans=0\r\n  l2=0\r\n\
+      \  for k,v in g:\r\n    \r\n    v=list(v)\r\n   # print(v)\r\n    if k=='1':\r\n      l=len(v)\r\n      cnt2+=1\r\n\
+      \      l2=len(v)\r\n      cnt+=l\r\n      #print(k,list(v),'d')\r\n      #print(l2,len(list(v)),list(v))\r\n      heapq.heappush(q,-l)\r\
+      \n  if cnt2==1 and l2==2:\r\n    ans+=1\r\n  #print(cnt2,l2)\r\n  if cnt%2==1:\r\n    print(-1)\r\n    continue\r\n\
+      \ # print(q)\r\n  while q:\r\n    #print(q)\r\n    if len(q)==1:\r\n      l1=heapq.heappop(q)\r\n      ans+=(-l1)//2\r\
+      \n    else:\r\n      l1=heapq.heappop(q)\r\n      l2=heapq.heappop(q)\r\n      ans+=-max(l1,l2)\r\n      if l1!=l2:heapq.heappush(q,-abs(l1-l2))\r\
+      \n  print(ans)"
+  - source_sentence: "Given is an integer S. Find a combination of six integers X_1,Y_1,X_2,Y_2,X_3, and Y_3 that satisfies\
+      \ all of the following conditions:\n\n    * 0 \\leq X_1,Y_1,X_2,Y_2,X_3,Y_3 \\leq 10^9\n    * The area of the triangle\
+      \ in a two-dimensional plane whose vertices are (X_1,Y_1),(X_2,Y_2), and (X_3,Y_3) is S/2.\n\n  We can prove that there\
+      \ always exist six integers that satisfy the conditions under the constraints of this problem.\n\n  Constraints\n\n\
+      \    * 1 \\leq S \\leq 10^{18}\n    * All values in input are integers.\n\n    Input\n\n    Input is given from Standard\
+      \ Input in the following format:\n\n    S\r\n    \n\n    Output\n\n    Print six integers X_1,Y_1,X_2,Y_2,X_3, and Y_3\
+      \ that satisfy the conditions, in this order, with spaces in between. If multiple solutions exist, any of them will\
+      \ be accepted.\n\n  Sample Input 1\n\n  3\r\n  \n\n  Sample Output 1\n\n  1 0 2 2 0 1\r\n  \n\n  The area of the triangle\
+      \ in a two-dimensional plane whose vertices are (1,0),(2,2), and (0,1) is 3/2. Printing 3 0 3 1 0 1 or 1 0 0 1 2 2 will\
+      \ also be accepted.\n\n  Sample Input 2\n\n  100\r\n  \n\n  Sample Output 2\n\n  0 0 10 0 0 10\r\n  \n\n  Sample Input\
+      \ 3\n\n  311114770564041497\r\n  \n\n  Sample Output 3\n\n  314159265 358979323 846264338 327950288 419716939 937510582"
+    sentences:
+    - "import sys\r\ninput = sys.stdin.readline\r\n\r\nx, y = map(int, input().split())\r\nINF = 10**10\r\nif y >= x:\r\n\
+      \    ans1 = y-x\r\nelse:\r\n    ans1 = INF\r\nif -y >= x:\r\n    ans2 = -y - x + 1\r\nelse:\r\n    ans2 = INF\r\nif\
+      \ y >= -x:\r\n    ans3 = y - (-x) + 1\r\nelse:\r\n    ans3 = INF\r\nif -y >= -x:\r\n    ans4 = -y - (-x) + 2\r\nelse:\r\
+      \n    ans4 = INF\r\nans = min(ans1, ans2, ans3, ans4)\r\nprint(ans)\r\n"
+    - "s=int(input())\r\nif s+1<=10**9:\r\n  b=str(s+1)\r\n  a=['0','0',b,'1','1','1']\r\nelse:\r\n  a=int(s**(1/2))\r\n \
+      \ if a**2>=s:\r\n    a_=a\r\n  else:\r\n    if a*(a+1)>=s:\r\n      a_=a+1\r\n    else:\r\n      if a*(a+2)>=s and a+2<=10**9:\r\
+      \n        a_=a+2\r\n      else:\r\n        a_=a+1\r\n        a+=1\r\n  x2=str(a)\r\n  y3=str(a_)\r\n  \r\n  y2=str(1)\r\
+      \n  x3=str(int(x2)*int(y3)-s)\r\n  x1=str(0)\r\n  y1=str(0)\r\n  a=[x1,y1,x2,y2,x3,y3]\r\nprint((' ').join(a))\r\n"
+    - "s=int(input())\r\nif s+1<=10**9:\r\n  b=str(s+1)\r\n  a=['0','0',b,'1','1','1']\r\nelse:\r\n  x2=int(s**(1/2))\r\n\
+      \  y3=int(s**(1/2))\r\n  while s>x2*y3:\r\n    y3+=1\r\n  x2=str(x2)\r\n  y3=str(y3)\r\n  y2=str(1)\r\n  x3=str(int(x2)*int(y3)-s)\r\
+      \n  x1=str(0)\r\n  y1=str(0)\r\n  a=[x1,y1,x2,y2,x3,y3]\r\nprint((' ').join(a)) "
+  - source_sentence: "There is a directed graph with N vertices and M edges, where vertices are numbered from 1 to N and edges\
+      \ are numbered from 1 to M. Edge i is a directed edge from vertex A_i to vertex B_i with weight W_i.\n\n  Find the minimum\
+      \ value of the bitwise \\mathrm{XOR} of the weights of edges included in a walk from vertex 1 to vertex N.\n\n  What\
+      \ is a walk from vertex 1 to vertex N?\n\n  Intuitively, it is \"a path from vertex 1 to vertex N that may visit the\
+      \ same vertex or edge multiple times.\" Formally, it is a sequence of edges (e_1,\\ldots,e_k) that satisfies all of\
+      \ the following conditions:\n\n    * e_1 starts at vertex 1.\n    * For all 1 \\leq i < k, the endpoint of e_i and the\
+      \ starting point of e_{i+1} are the same.\n    * e_k ends at vertex N.\n  What is the bitwise \\mathrm{XOR} operation?\n\
+      \n  The bitwise \\mathrm{XOR} of non-negative integers A and B, denoted A\\ \\mathrm{XOR}\\ B, is defined as follows:\n\
+      \n    * When A\\ \\mathrm{XOR}\\ B is written in binary, the digit at the 2^k place (k \\geq 0) is 1 if exactly one\
+      \ of the digits at the 2^k place of A and B in binary is 1, and 0 otherwise.\n  For example, 3\\ \\mathrm{XOR}\\ 5 =\
+      \ 6 (in binary: 011\\ \\mathrm{XOR}\\ 101 = 110).\n  In general, the bitwise \\mathrm{XOR} of k non-negative integers\
+      \ p_1, p_2, p_3, \\dots, p_k is defined as (\\dots ((p_1\\ \\mathrm{XOR}\\ p_2)\\ \\mathrm{XOR}\\ p_3)\\ \\mathrm{XOR}\\\
+      \ \\dots\\ \\mathrm{XOR}\\ p_k), and it can be proved that this does not depend on the order of p_1, p_2, p_3, \\dots\
+      \ p_k.\n\n  Constraints\n\n    * 2 \\leq N \\leq 1000\n    * 0 \\leq M \\leq 1000\n    * 1 \\leq A_i,B_i \\leq N\n \
+      \   * 0 \\leq W_i < 2^{10}\n    * All input values are integers.\n\n    Input\n\n    The input is given from Standard\
+      \ Input in the following format:\n\n    N M\r\n    A_1 B_1 W_1\r\n    A_2 B_2 W_2\r\n    \\vdots\r\n    A_M B_M W_M\r\
+      \n    \n\n    Output\n\n    If there is no walk from vertex 1 to vertex N, output -1.\n\n    If there is a walk from\
+      \ vertex 1 to vertex N, output the minimum value of the bitwise \\mathrm{XOR} of the weights of edges included in such\
+      \ a walk.\n\n  Sample Input 1\n\n  3 3\r\n  1 2 4\r\n  2 3 5\r\n  1 3 2\r\n  \n\n  Sample Output 1\n\n  1\r\n  \n\n\
+      \  The bitwise \\mathrm{XOR} of the weights of edges included in the walk (edge 1, edge 2) is 1.\n\n  Sample Input 2\n\
+      \n  4 4\r\n  1 4 7\r\n  4 2 2\r\n  2 3 4\r\n  3 4 1\r\n  \n\n  Sample Output 2\n\n  0\r\n  \n\n  The bitwise \\mathrm{XOR}\
+      \ of the weights of edges included in the walk (edge 1, edge 2, edge 3, edge 4) is 0.\n\n  Note that the walk may include\
+      \ vertex N in the middle.\n\n  Sample Input 3\n\n  999 4\r\n  1 2 9\r\n  2 1 8\r\n  1 2 7\r\n  1 1 6\r\n  \n\n  Sample\
+      \ Output 3\n\n  -1\r\n  \n\n  If there is no walk from vertex 1 to vertex N, output -1."
+    sentences:
+    - "import sys\r\nimport os\r\nfrom io import StringIO\r\nimport unittest\r\nfrom typing import *\r\n\r\nfrom bisect import\
+      \ *\r\nfrom collections import *\r\nfrom heapq import *\r\nfrom itertools import *\r\nfrom math import *\r\n\r\nMOD\
+      \ = 998244353\r\nINF = 1<<60\r\nLABC = \"ABCDEFGHIJKLMNOPQRSTUVWXYZ\"\r\nSABC = \"abcdefghijklmnopqrstuvwxyz\"\r\n\r\
+      \ndef resolve():\r\n    N, M = map(int, input().split())\r\n    graph = [[] for _ in range(N)]\r\n    for _ in range(M):\r\
+      \n        a, b, w = map(int, input().split())\r\n        a -= 1\r\n        b -= 1\r\n        graph[a].append((b, w))\r\
+      \n    \r\n    dp = [[set() for _ in range(N)] for _ in range(N + 1)]\r\n    for b, w in graph[0]:\r\n        dp[1][b].add(w)\r\
+      \n    \r\n    for i in range(1, N):\r\n        for a in range(N):\r\n            for curr_w in dp[i][a]:\r\n       \
+      \         for b, w in graph[a]:\r\n                    if len(dp[i + 1][b]) < 50:\r\n                        dp[i +\
+      \ 1][b].add(curr_w ^ w)\r\n    \r\n    ans = 1 << 60\r\n    for i in range(N + 1):\r\n        for w in dp[i][N - 1]:\r\
+      \n            ans = min(ans, w)\r\n    if ans >= 1 << 60:\r\n        ans = -1\r\n    print(ans)\r\n\r\ndef meguru(judge,\
+      \ ok=-1, ng=1<<60):\r\n    while abs(ok - ng) > 1:\r\n        med = (ok + ng) // 2\r\n        if judge(med):\r\n   \
+      \         ok = med\r\n        else:\r\n            ng = med\r\n    return ok\r\n\r\nclass TestClass(unittest.TestCase):\r\
+      \n    def test_sample1(self):\r\n        input = \"\"\"3 3\r\n1 2 4\r\n2 3 5\r\n1 3 2\"\"\"\r\n        expected = \"\
+      \"\"1\"\"\"\r\n        self.judge(input, expected)\r\n\r\n    def test_sample2(self):\r\n        input = \"\"\"4 4\r\
+      \n1 4 7\r\n4 2 2\r\n2 3 4\r\n3 4 1\"\"\"\r\n        expected = \"\"\"0\"\"\"\r\n        self.judge(input, expected)\r\
+      \n\r\n    def test_sample3(self):\r\n        input = \"\"\"999 4\r\n1 2 9\r\n2 1 8\r\n1 2 7\r\n1 1 6\"\"\"\r\n     \
+      \   expected = \"\"\"-1\"\"\"\r\n        self.judge(input, expected)\r\n\r\n    def judge(self, input, expected):\r\n\
+      \        stdout, stdin = sys.stdout, sys.stdin\r\n        sys.stdout, sys.stdin = StringIO(), StringIO(input)\r\n  \
+      \      resolve()\r\n        sys.stdout.seek(0)\r\n        actual = sys.stdout.read()[:-1]\r\n        sys.stdout, sys.stdin\
+      \ = stdout, stdin\r\n        self.assertEqual(expected, actual)\r\n\r\nif __name__ == \"__main__\":\r\n    if \"ATCODER\"\
+      \ in os.environ:\r\n        resolve()\r\n    else:\r\n        unittest.main(verbosity=2)\r\n"
+    - "import sys\r\nimport os\r\nfrom io import StringIO\r\nimport unittest\r\nfrom typing import *\r\n\r\nfrom bisect import\
+      \ *\r\nfrom collections import *\r\nfrom heapq import *\r\nfrom itertools import *\r\nfrom math import *\r\n\r\nMOD\
+      \ = 998244353\r\nINF = 1<<60\r\nLABC = \"ABCDEFGHIJKLMNOPQRSTUVWXYZ\"\r\nSABC = \"abcdefghijklmnopqrstuvwxyz\"\r\n\r\
+      \ndef resolve():\r\n    N, M = map(int, input().split())\r\n    graph = [[] for _ in range(N)]\r\n    for _ in range(M):\r\
+      \n        a, b, w = map(int, input().split())\r\n        a -= 1\r\n        b -= 1\r\n        graph[a].append((b, w))\r\
+      \n    \r\n    dp = [[set() for _ in range(N)] for _ in range(N + 1)]\r\n    seen = [set() for _ in range(N)]\r\n   \
+      \ for b, w in graph[0]:\r\n        dp[1][b].add(w)\r\n    \r\n    for i in range(1, N):\r\n        for a in range(N):\r\
+      \n            if not dp[i][a]:\r\n                continue\r\n            for curr_w in dp[i][a] - seen[a]:\r\n    \
+      \            for b, w in graph[a]:\r\n                    seen[a].add(curr_w)\r\n                    dp[i + 1][b].add(curr_w\
+      \ ^ w)\r\n    \r\n    ans = 1 << 60\r\n    for i in range(N + 1):\r\n        for w in dp[i][N - 1]:\r\n            ans\
+      \ = min(ans, w)\r\n    if ans >= 1 << 60:\r\n        ans = -1\r\n    print(ans)\r\n\r\ndef meguru(judge, ok=-1, ng=1<<60):\r\
+      \n    while abs(ok - ng) > 1:\r\n        med = (ok + ng) // 2\r\n        if judge(med):\r\n            ok = med\r\n\
+      \        else:\r\n            ng = med\r\n    return ok\r\n\r\nclass TestClass(unittest.TestCase):\r\n    def test_sample1(self):\r\
+      \n        input = \"\"\"3 3\r\n1 2 4\r\n2 3 5\r\n1 3 2\"\"\"\r\n        expected = \"\"\"1\"\"\"\r\n        self.judge(input,\
+      \ expected)\r\n\r\n    def test_sample2(self):\r\n        input = \"\"\"4 4\r\n1 4 7\r\n4 2 2\r\n2 3 4\r\n3 4 1\"\"\"\
+      \r\n        expected = \"\"\"0\"\"\"\r\n        self.judge(input, expected)\r\n\r\n    def test_sample3(self):\r\n \
+      \       input = \"\"\"999 4\r\n1 2 9\r\n2 1 8\r\n1 2 7\r\n1 1 6\"\"\"\r\n        expected = \"\"\"-1\"\"\"\r\n     \
+      \   self.judge(input, expected)\r\n\r\n    def judge(self, input, expected):\r\n        stdout, stdin = sys.stdout,\
+      \ sys.stdin\r\n        sys.stdout, sys.stdin = StringIO(), StringIO(input)\r\n        resolve()\r\n        sys.stdout.seek(0)\r\
+      \n        actual = sys.stdout.read()[:-1]\r\n        sys.stdout, sys.stdin = stdout, stdin\r\n        self.assertEqual(expected,\
+      \ actual)\r\n\r\nif __name__ == \"__main__\":\r\n    if \"ATCODER\" in os.environ:\r\n        resolve()\r\n    else:\r\
+      \n        unittest.main(verbosity=2)\r\n"
+    - "a1, a2, a3 = map(int, input().split())\r\nnum1 = a2 - a1\r\nnum2 = a3 - a2\r\nnum3 = a3 - a1\r\nif num3 > 0:\r\n  \
+      \  if num1 <= num2:\r\n        if num3 % 2 == 0:\r\n            print(a3 - num3 // 2 - a2)\r\n        else:\r\n    \
+      \        print(a3 - num3 // 2 - a2 + 1)\r\n    else:\r\n        print(a2 - num2 - a1)\r\nelif num3 < 0:\r\n    if num1\
+      \ <= num2:\r\n        if num3 % 2 == 0:\r\n            print(a1 + num3 // 2 - a2)\r\n        else:\r\n            print(a1\
+      \ + num3 // 2 - a2 + 2)\r\n    else:\r\n        print(a2 + num1 - a3)\r\nelse:\r\n    if a1 < a2:\r\n        print((a2\
+      \ - a1) * 2)\r\n    else:\r\n        print(a1 - a2)\r\n"
+  - source_sentence: "You are given an array of n integer numbers a0 , a1 , ..., an - 1. Find the distance between two closest\
+      \ (nearest) minimums in it. It is guaranteed that in the array a minimum occurs at least two times.\n\n      Input\n\
+      \n    The first line contains positive integer n ( 2 ≤ n ≤ 10 5) — size of the given array. The second line contains\
+      \ n integers a0 , a1 , ..., an - 1 ( 1 ≤ ai ≤ 10 9) — elements of the array. It is guaranteed that in the array a minimum\
+      \ occurs at least two times.\n\n      Output\n\n    Print the only number — distance between two nearest minimums in\
+      \ the array.\n\n      Examples\n          Input\n        2\n        3 3\n          Output\n        1\n          Input\n\
+      \        3\n        5 6 5\n          Output\n        2\n          Input\n        9\n        2 1 3 5 4 1 2 3 1\n    \
+      \      Output\n        3"
+    sentences:
+    - "def is_letter(char):\n    return (\n        ord('a') <= ord(char) <= ord('z') or\n        ord('A') <= ord(char) <=\
+      \ ord('Z')\n    )\n\nn, kk = map(int, input().split())\nplacement = [\n    [i for i in input()] for j in range(n)\n\
+      ]\n\n\nkc = 0 \n\nfor row in placement:\n    for i in range(len(row)):\n        if (row[i] == '.'):\n            count\
+      \ = 0\n            if (i > 0 and row[i - 1] == 'S'):\n                count += 1\n            if (i < len(row) - 1 and\
+      \ row[i + 1] == 'S'):\n                count += 1\n            row[i] = count\n        if (row[i] == 'S'):\n       \
+      \     if (i > 0 and is_letter(str(row[i - 1]))):\n                kc += 1\n            if (i < len(row) - 1 and is_letter(str(row[i\
+      \ + 1]))):\n                kc += 1\n \nfor i in range(3):\n    for j in range(len(placement)):\n        if (kk == 0):\n\
+      \            # print(f'broken here {i}, {j}') \n            break\n        for k in range(len(placement[j])):\n    \
+      \        if placement[j][k] == i:\n                placement[j][k] = 'x'\n                kc += i\n                kk\
+      \ -= 1\n                if (kk == 0):\n                    # print(\"broken\")                    \n               \
+      \     break\n\nkkk = 0\n\nfor i in range(len(placement)):\n    for j in range(len(placement[i])):\n        if type(placement[i][j])\
+      \ == type(1):\n            placement[i][j] = '.'\n\nprint(kc)\nfor row in placement:\n    print(''.join(row))"
+    - "import sys\nn=int(input())\nl=list(map(int,input().split()))\nm=min(l)\n#print (m)\nindices = [i for i, x in enumerate(l)\
+      \ if x == m]\n#print (indices)\nmi=(sys.maxsize)\nfor i in range(len(indices)-1):\n    x=(indices[i+1]-indices[i])\n\
+      \    if x<mi:\n        mi=x\nprint (mi)"
+    - "n = int(input())\n\narr = list(map(int, input().split()))\n\nminimum = min(arr)\n\nindex1 = arr.index(minimum)\n\n\
+      for i in range(index1+1, len(arr)):\n if arr[i] == minimum:\n  print(i - index1)\n  break"
+  pipeline_tag: sentence-similarity
+  library_name: sentence-transformers
+siblings:
+- rfilename: .gitattributes
+- rfilename: 1_Pooling/config.json
+- rfilename: README.md
+- rfilename: config.json
+- rfilename: config_sentence_transformers.json
+- rfilename: configuration.py
+- rfilename: model.safetensors
+- rfilename: modeling.py
+- rfilename: modules.json
+- rfilename: sentence_bert_config.json
+- rfilename: special_tokens_map.json
+- rfilename: tokenizer.json
+- rfilename: tokenizer_config.json
+- rfilename: vocab.txt
+spaces: []
+createdAt: '2025-10-30T22:54:30.000Z'
+safetensors:
+  parameters:
+    F32: 434139136
+  total: 434139136
+usedStorage: 1736585680
+downloadsAllTime: 74
+inferenceProviderMapping: {}
+configJson:
+  architectures:
+  - NewModel
+  attention_probs_dropout_prob: 0.0
+  auto_map:
+    AutoConfig: configuration.NewConfig
+    AutoModel: modeling.NewModel
+    AutoModelForMaskedLM: Alibaba-NLP/new-impl--modeling.NewForMaskedLM
+    AutoModelForMultipleChoice: Alibaba-NLP/new-impl--modeling.NewForMultipleChoice
+    AutoModelForQuestionAnswering: Alibaba-NLP/new-impl--modeling.NewForQuestionAnswering
+    AutoModelForSequenceClassification: Alibaba-NLP/new-impl--modeling.NewForSequenceClassification
+    AutoModelForTokenClassification: Alibaba-NLP/new-impl--modeling.NewForTokenClassification
+  classifier_dropout: null
+  dtype: float32
+  hidden_act: gelu
+  hidden_dropout_prob: 0.1
+  hidden_size: 1024
+  initializer_range: 0.02
+  intermediate_size: 4096
+  layer_norm_eps: 1.0e-12
+  layer_norm_type: layer_norm
+  logn_attention_clip1: false
+  logn_attention_scale: false
+  max_position_embeddings: 8192
+  model_type: new
+  num_attention_heads: 16
+  num_hidden_layers: 24
+  pack_qkv: true
+  pad_token_id: 0
+  position_embedding_type: rope
+  rope_scaling:
+    factor: 2.0
+    type: ntk
+  rope_theta: 160000
+  transformers_version: 4.57.1
+  type_vocab_size: 2
+  unpad_inputs: false
+  use_memory_efficient_attention: false
+  vocab_size: 30528
+onnxFiles: {}
+safetensorsSizeMb: 1736.6
+approxSizeMb: 1736.6
+fetchedAt: '2026-06-08T16:42:43.000Z'

@@ -1,0 +1,621 @@
+_id: 678fb52c96be440284a3ba87
+id: juanwisz/modernbert-python-code-retrieval
+private: false
+pipeline_tag: sentence-similarity
+library_name: sentence-transformers
+tags:
+- sentence-transformers
+- safetensors
+- modernbert
+- sentence-similarity
+- feature-extraction
+- generated_from_trainer
+- dataset_size:412178
+- loss:MultipleNegativesRankingLoss
+- arxiv:2412.13663
+- arxiv:1908.10084
+- arxiv:1705.00652
+- base_model:answerdotai/ModernBERT-base
+- base_model:finetune:answerdotai/ModernBERT-base
+- text-embeddings-inference
+- endpoints_compatible
+- region:us
+downloads: 12
+likes: 0
+modelId: juanwisz/modernbert-python-code-retrieval
+author: juanwisz
+sha: 293923ae09d2c6ba479ee1794b06e41004b424c4
+lastModified: '2025-01-21T14:59:24.000Z'
+gated: false
+disabled: false
+widgetData:
+- source_sentence: "Clip off all parts from all bounding boxes that are outside of the image.\n\n        Returns\n       \
+    \ -------\n        imgaug.BoundingBoxesOnImage\n            Bounding boxes, clipped to fall within the image dimensions."
+  sentences:
+  - "def model_best(y1, y2, samples=1000, progressbar=True):\n    \"\"\"\n    Bayesian Estimation Supersedes the T-Test\n\n\
+    \    This model runs a Bayesian hypothesis comparing if y1 and y2 come\n    from the same distribution. Returns are assumed\
+    \ to be T-distributed.\n\n    In addition, computes annual volatility and Sharpe of in and\n    out-of-sample periods.\n\
+    \n    This model replicates the example used in:\n    Kruschke, John. (2012) Bayesian estimation supersedes the t\n  \
+    \  test. Journal of Experimental Psychology: General.\n\n    Parameters\n    ----------\n    y1 : array-like\n       \
+    \ Array of returns (e.g. in-sample)\n    y2 : array-like\n        Array of returns (e.g. out-of-sample)\n    samples :\
+    \ int, optional\n        Number of posterior samples to draw.\n\n    Returns\n    -------\n    model : pymc.Model object\n\
+    \        PyMC3 model containing all random variables.\n    trace : pymc3.sampling.BaseTrace object\n        A PyMC3 trace\
+    \ object that contains samples for each parameter\n        of the posterior.\n\n    See Also\n    --------\n    plot_stoch_vol\
+    \ : plotting of tochastic volatility model\n    \"\"\"\n\n    y = np.concatenate((y1, y2))\n\n    mu_m = np.mean(y)\n\
+    \    mu_p = 0.000001 * 1 / np.std(y)**2\n\n    sigma_low = np.std(y) / 1000\n    sigma_high = np.std(y) * 1000\n    with\
+    \ pm.Model() as model:\n        group1_mean = pm.Normal('group1_mean', mu=mu_m, tau=mu_p,\n                          \
+    \      testval=y1.mean())\n        group2_mean = pm.Normal('group2_mean', mu=mu_m, tau=mu_p,\n                       \
+    \         testval=y2.mean())\n        group1_std = pm.Uniform('group1_std', lower=sigma_low,\n                       \
+    \         upper=sigma_high, testval=y1.std())\n        group2_std = pm.Uniform('group2_std', lower=sigma_low,\n      \
+    \                          upper=sigma_high, testval=y2.std())\n        nu = pm.Exponential('nu_minus_two', 1 / 29., testval=4.)\
+    \ + 2.\n\n        returns_group1 = pm.StudentT('group1', nu=nu, mu=group1_mean,\n                                    \
+    \ lam=group1_std**-2, observed=y1)\n        returns_group2 = pm.StudentT('group2', nu=nu, mu=group2_mean,\n          \
+    \                           lam=group2_std**-2, observed=y2)\n\n        diff_of_means = pm.Deterministic('difference of\
+    \ means',\n                                         group2_mean - group1_mean)\n        pm.Deterministic('difference of\
+    \ stds',\n                         group2_std - group1_std)\n        pm.Deterministic('effect size', diff_of_means /\n\
+    \                         pm.math.sqrt((group1_std**2 +\n                                       group2_std**2) / 2))\n\
+    \n        pm.Deterministic('group1_annual_volatility',\n                         returns_group1.distribution.variance**.5\
+    \ *\n                         np.sqrt(252))\n        pm.Deterministic('group2_annual_volatility',\n                  \
+    \       returns_group2.distribution.variance**.5 *\n                         np.sqrt(252))\n\n        pm.Deterministic('group1_sharpe',\
+    \ returns_group1.distribution.mean /\n                         returns_group1.distribution.variance**.5 *\n          \
+    \               np.sqrt(252))\n        pm.Deterministic('group2_sharpe', returns_group2.distribution.mean /\n        \
+    \                 returns_group2.distribution.variance**.5 *\n                         np.sqrt(252))\n\n        trace\
+    \ = pm.sample(samples, progressbar=progressbar)\n    return model, trace"
+  - "def clip_out_of_image(self):\n        \"\"\"\n        Clip off all parts from all bounding boxes that are outside of\
+    \ the image.\n\n        Returns\n        -------\n        imgaug.BoundingBoxesOnImage\n            Bounding boxes, clipped\
+    \ to fall within the image dimensions.\n\n        \"\"\"\n        bbs_cut = [bb.clip_out_of_image(self.shape)\n      \
+    \             for bb in self.bounding_boxes if bb.is_partly_within_image(self.shape)]\n        return BoundingBoxesOnImage(bbs_cut,\
+    \ shape=self.shape)"
+  - "def _initPermanence(self, potential, connectedPct):\n    \"\"\"\n    Initializes the permanences of a column. The method\n\
+    \    returns a 1-D array the size of the input, where each entry in the\n    array represents the initial permanence value\
+    \ between the input bit\n    at the particular index in the array, and the column represented by\n    the 'index' parameter.\n\
+    \n    Parameters:\n    ----------------------------\n    :param potential: A numpy array specifying the potential pool\
+    \ of the column.\n                    Permanence values will only be generated for input bits\n                    corresponding\
+    \ to indices for which the mask value is 1.\n    :param connectedPct: A value between 0 or 1 governing the chance, for\
+    \ each\n                         permanence, that the initial permanence value will\n                         be a value\
+    \ that is considered connected.\n    \"\"\"\n    # Determine which inputs bits will start out as connected\n    # to the\
+    \ inputs. Initially a subset of the input bits in a\n    # column's potential pool will be connected. This number is\n\
+    \    # given by the parameter \"connectedPct\"\n    perm = numpy.zeros(self._numInputs, dtype=realDType)\n    for i in\
+    \ xrange(self._numInputs):\n      if (potential[i] < 1):\n        continue\n\n      if (self._random.getReal64() <= connectedPct):\n\
+    \        perm[i] = self._initPermConnected()\n      else:\n        perm[i] = self._initPermNonConnected()\n\n    # Clip\
+    \ off low values. Since we use a sparse representation\n    # to store the permanence values this helps reduce memory\n\
+    \    # requirements.\n    perm[perm < self._synPermTrimThreshold] = 0\n\n    return perm"
+- source_sentence: "Perform a weighted average over dicts that are each on a different node\n    Input: local_name2valcount:\
+    \ dict mapping key -> (value, count)\n    Returns: key -> mean"
+  sentences:
+  - "def MotionBlur(k=5, angle=(0, 360), direction=(-1.0, 1.0), order=1, name=None, deterministic=False, random_state=None):\n\
+    \    \"\"\"\n    Augmenter that sharpens images and overlays the result with the original image.\n\n    dtype support::\n\
+    \n        See ``imgaug.augmenters.convolutional.Convolve``.\n\n    Parameters\n    ----------\n    k : int or tuple of\
+    \ int or list of int or imgaug.parameters.StochasticParameter, optional\n        Kernel size to use.\n\n            *\
+    \ If a single int, then that value will be used for the height\n              and width of the kernel.\n            *\
+    \ If a tuple of two ints ``(a, b)``, then the kernel size will be\n              sampled from the interval ``[a..b]``.\n\
+    \            * If a list, then a random value will be sampled from that list per image.\n            * If a StochasticParameter,\
+    \ then ``N`` samples will be drawn from\n              that parameter per ``N`` input images, each representing the kernel\n\
+    \              size for the nth image.\n\n    angle : number or tuple of number or list of number or imgaug.parameters.StochasticParameter,\
+    \ optional\n        Angle of the motion blur in degrees (clockwise, relative to top center direction).\n\n           \
+    \ * If a number, exactly that value will be used.\n            * If a tuple ``(a, b)``, a random value from the range\
+    \ ``a <= x <= b`` will\n              be sampled per image.\n            * If a list, then a random value will be sampled\
+    \ from that list per image.\n            * If a StochasticParameter, a value will be sampled from the\n              parameter\
+    \ per image.\n\n    direction : number or tuple of number or list of number or imgaug.parameters.StochasticParameter,\
+    \ optional\n        Forward/backward direction of the motion blur. Lower values towards -1.0 will point the motion blur\
+    \ towards\n        the back (with angle provided via `angle`). Higher values towards 1.0 will point the motion blur forward.\n\
+    \        A value of 0.0 leads to a uniformly (but still angled) motion blur.\n\n            * If a number, exactly that\
+    \ value will be used.\n            * If a tuple ``(a, b)``, a random value from the range ``a <= x <= b`` will\n     \
+    \         be sampled per image.\n            * If a list, then a random value will be sampled from that list per image.\n\
+    \            * If a StochasticParameter, a value will be sampled from the\n              parameter per image.\n\n    order\
+    \ : int or iterable of int or imgaug.ALL or imgaug.parameters.StochasticParameter, optional\n        Interpolation order\
+    \ to use when rotating the kernel according to `angle`.\n        See :func:`imgaug.augmenters.geometric.Affine.__init__`.\n\
+    \        Recommended to be ``0`` or ``1``, with ``0`` being faster, but less continuous/smooth as `angle` is changed,\n\
+    \        particularly around multiple of 45 degrees.\n\n    name : None or str, optional\n        See :func:`imgaug.augmenters.meta.Augmenter.__init__`.\n\
+    \n    deterministic : bool, optional\n        See :func:`imgaug.augmenters.meta.Augmenter.__init__`.\n\n    random_state\
+    \ : None or int or numpy.random.RandomState, optional\n        See :func:`imgaug.augmenters.meta.Augmenter.__init__`.\n\
+    \n    Examples\n    --------\n    >>> aug = iaa.MotionBlur(k=15)\n\n    Create a motion blur augmenter with kernel size\
+    \ of 15x15.\n\n    >>> aug = iaa.MotionBlur(k=15, angle=[-45, 45])\n\n    Create a motion blur augmenter with kernel size\
+    \ of 15x15 and a blur angle of either -45 or 45 degrees (randomly\n    picked per image).\n\n    \"\"\"\n    # TODO allow\
+    \ (1, None) and set to identity matrix if k == 1\n    k_param = iap.handle_discrete_param(k, \"k\", value_range=(3, None),\
+    \ tuple_to_uniform=True, list_to_choice=True,\n                                        allow_floats=False)\n    angle_param\
+    \ = iap.handle_continuous_param(angle, \"angle\", value_range=None, tuple_to_uniform=True,\n                         \
+    \                     list_to_choice=True)\n    direction_param = iap.handle_continuous_param(direction, \"direction\"\
+    , value_range=(-1.0-1e-6, 1.0+1e-6),\n                                                  tuple_to_uniform=True, list_to_choice=True)\n\
+    \n    def create_matrices(image, nb_channels, random_state_func):\n        # avoid cyclic import between blur and geometric\n\
+    \        from . import geometric as iaa_geometric\n\n        # force discrete for k_sample via int() in case of stochastic\
+    \ parameter\n        k_sample = int(k_param.draw_sample(random_state=random_state_func))\n        angle_sample = angle_param.draw_sample(random_state=random_state_func)\n\
+    \        direction_sample = direction_param.draw_sample(random_state=random_state_func)\n\n        k_sample = k_sample\
+    \ if k_sample % 2 != 0 else k_sample + 1\n        direction_sample = np.clip(direction_sample, -1.0, 1.0)\n        direction_sample\
+    \ = (direction_sample + 1.0) / 2.0\n\n        matrix = np.zeros((k_sample, k_sample), dtype=np.float32)\n        matrix[:,\
+    \ k_sample//2] = np.linspace(float(direction_sample), 1.0 - float(direction_sample), num=k_sample)\n        rot = iaa_geometric.Affine(rotate=angle_sample,\
+    \ order=order)\n        matrix = (rot.augment_image((matrix * 255).astype(np.uint8)) / 255.0).astype(np.float32)\n\n \
+    \       return [matrix/np.sum(matrix)] * nb_channels\n\n    if name is None:\n        name = \"Unnamed%s\" % (ia.caller_name(),)\n\
+    \n    return iaa_convolutional.Convolve(create_matrices, name=name, deterministic=deterministic,\n                   \
+    \                   random_state=random_state)"
+  - "def rolling_sharpe(returns, rolling_sharpe_window):\n    \"\"\"\n    Determines the rolling Sharpe ratio of a strategy.\n\
+    \n    Parameters\n    ----------\n    returns : pd.Series\n        Daily returns of the strategy, noncumulative.\n   \
+    \      - See full explanation in tears.create_full_tear_sheet.\n    rolling_sharpe_window : int\n        Length of rolling\
+    \ window, in days, over which to compute.\n\n    Returns\n    -------\n    pd.Series\n        Rolling Sharpe ratio.\n\n\
+    \    Note\n    -----\n    See https://en.wikipedia.org/wiki/Sharpe_ratio for more details.\n    \"\"\"\n\n    return returns.rolling(rolling_sharpe_window).mean()\
+    \ \\\n        / returns.rolling(rolling_sharpe_window).std() \\\n        * np.sqrt(APPROX_BDAYS_PER_YEAR)"
+  - "def mpi_weighted_mean(comm, local_name2valcount):\n    \"\"\"\n    Perform a weighted average over dicts that are each\
+    \ on a different node\n    Input: local_name2valcount: dict mapping key -> (value, count)\n    Returns: key -> mean\n\
+    \    \"\"\"\n    all_name2valcount = comm.gather(local_name2valcount)\n    if comm.rank == 0:\n        name2sum = defaultdict(float)\n\
+    \        name2count = defaultdict(float)\n        for n2vc in all_name2valcount:\n            for (name, (val, count))\
+    \ in n2vc.items():\n                try:\n                    val = float(val)\n                except ValueError:\n \
+    \                   if comm.rank == 0:\n                        warnings.warn('WARNING: tried to compute mean on non-float\
+    \ {}={}'.format(name, val))\n                else:\n                    name2sum[name] += val * count\n              \
+    \      name2count[name] += count\n        return {name : name2sum[name] / name2count[name] for name in name2sum}\n   \
+    \ else:\n        return {}"
+- source_sentence: "Generate and return the following encoder related substitution variables:\n\n  encoderSpecsStr:\n    For\
+    \ the base description file, this string defines the default\n    encoding dicts for each encoder. For example:\n    \
+    \     '__gym_encoder' : {   'fieldname': 'gym',\n          'n': 13,\n          'name': 'gym',\n          'type': 'SDRCategoryEncoder',\n\
+    \          'w': 7},\n        '__address_encoder' : {   'fieldname': 'address',\n          'n': 13,\n          'name':\
+    \ 'address',\n          'type': 'SDRCategoryEncoder',\n          'w': 7}\n\n  encoderSchemaStr:\n    For the base description\
+    \ file, this is a list containing a\n    DeferredDictLookup entry for each encoder. For example:\n        [DeferredDictLookup('__gym_encoder'),\n\
+    \         DeferredDictLookup('__address_encoder'),\n         DeferredDictLookup('__timestamp_timeOfDay_encoder'),\n  \
+    \       DeferredDictLookup('__timestamp_dayOfWeek_encoder'),\n         DeferredDictLookup('__consumption_encoder')],\n\
+    \n  permEncoderChoicesStr:\n    For the permutations file, this defines the possible\n    encoder dicts for each encoder.\
+    \ For example:\n        '__timestamp_dayOfWeek_encoder': [\n                     None,\n                     {'fieldname':'timestamp',\n\
+    \                      'name': 'timestamp_timeOfDay',\n                      'type':'DateEncoder'\n                  \
+    \    'dayOfWeek': (7,1)\n                      },\n                     {'fieldname':'timestamp',\n                  \
+    \    'name': 'timestamp_timeOfDay',\n                      'type':'DateEncoder'\n                      'dayOfWeek': (7,3)\n\
+    \                      },\n                  ],\n\n        '__field_consumption_encoder': [\n                    None,\n\
+    \                    {'fieldname':'consumption',\n                     'name': 'consumption',\n                     'type':'AdaptiveScalarEncoder',\n\
+    \                     'n': 13,\n                     'w': 7,\n                      }\n                   ]\n\n\n\n  Parameters:\n\
+    \  --------------------------------------------------\n  includedFields:  item from the 'includedFields' section of the\n\
+    \                    description JSON object. This is a list of dicts, each\n                    dict defining the field\
+    \ name, type, and optional min\n                    and max values.\n\n  retval:  (encoderSpecsStr, encoderSchemaStr permEncoderChoicesStr)"
+  sentences:
+  - "def _generateEncoderStringsV1(includedFields):\n  \"\"\" Generate and return the following encoder related substitution\
+    \ variables:\n\n  encoderSpecsStr:\n    For the base description file, this string defines the default\n    encoding dicts\
+    \ for each encoder. For example:\n         '__gym_encoder' : {   'fieldname': 'gym',\n          'n': 13,\n          'name':\
+    \ 'gym',\n          'type': 'SDRCategoryEncoder',\n          'w': 7},\n        '__address_encoder' : {   'fieldname':\
+    \ 'address',\n          'n': 13,\n          'name': 'address',\n          'type': 'SDRCategoryEncoder',\n          'w':\
+    \ 7}\n\n  encoderSchemaStr:\n    For the base description file, this is a list containing a\n    DeferredDictLookup entry\
+    \ for each encoder. For example:\n        [DeferredDictLookup('__gym_encoder'),\n         DeferredDictLookup('__address_encoder'),\n\
+    \         DeferredDictLookup('__timestamp_timeOfDay_encoder'),\n         DeferredDictLookup('__timestamp_dayOfWeek_encoder'),\n\
+    \         DeferredDictLookup('__consumption_encoder')],\n\n  permEncoderChoicesStr:\n    For the permutations file, this\
+    \ defines the possible\n    encoder dicts for each encoder. For example:\n        '__timestamp_dayOfWeek_encoder': [\n\
+    \                     None,\n                     {'fieldname':'timestamp',\n                      'name': 'timestamp_timeOfDay',\n\
+    \                      'type':'DateEncoder'\n                      'dayOfWeek': (7,1)\n                      },\n    \
+    \                 {'fieldname':'timestamp',\n                      'name': 'timestamp_timeOfDay',\n                  \
+    \    'type':'DateEncoder'\n                      'dayOfWeek': (7,3)\n                      },\n                  ],\n\n\
+    \        '__field_consumption_encoder': [\n                    None,\n                    {'fieldname':'consumption',\n\
+    \                     'name': 'consumption',\n                     'type':'AdaptiveScalarEncoder',\n                 \
+    \    'n': 13,\n                     'w': 7,\n                      }\n                   ]\n\n\n\n  Parameters:\n  --------------------------------------------------\n\
+    \  includedFields:  item from the 'includedFields' section of the\n                    description JSON object. This is\
+    \ a list of dicts, each\n                    dict defining the field name, type, and optional min\n                  \
+    \  and max values.\n\n  retval:  (encoderSpecsStr, encoderSchemaStr permEncoderChoicesStr)\n\n\n  \"\"\"\n\n  # ------------------------------------------------------------------------\n\
+    \  # First accumulate the possible choices for each encoder\n  encoderChoicesList = []\n  for fieldInfo in includedFields:\n\
+    \n    fieldName = fieldInfo['fieldName']\n\n    # Get the list of encoder choices for this field\n    (choicesList, aggFunction)\
+    \ = _generateEncoderChoicesV1(fieldInfo)\n    encoderChoicesList.extend(choicesList)\n\n\n  # ------------------------------------------------------------------------\n\
+    \  # Generate the string containing the encoder specs and encoder schema. See\n  #  the function comments for an example\
+    \ of the encoderSpecsStr and\n  #  encoderSchemaStr\n  #\n  encoderSpecsList = []\n  for encoderChoices in encoderChoicesList:\n\
+    \    # Use the last choice as the default in the base file because the 1st is\n    # often None\n    encoder = encoderChoices[-1]\n\
+    \n    # Check for bad characters\n    for c in _ILLEGAL_FIELDNAME_CHARACTERS:\n      if encoder['name'].find(c) >= 0:\n\
+    \        raise _ExpGeneratorException(\"Illegal character in field: %r (%r)\" % (\n          c, encoder['name']))\n\n\
+    \    encoderSpecsList.append(\"%s: \\n%s%s\" % (\n        _quoteAndEscape(encoder['name']),\n        2*_ONE_INDENT,\n\
+    \        pprint.pformat(encoder, indent=2*_INDENT_STEP)))\n\n  encoderSpecsStr = ',\\n  '.join(encoderSpecsList)\n\n\n\
+    \  # ------------------------------------------------------------------------\n  # Generate the string containing the\
+    \ permutation encoder choices. See the\n  #  function comments above for an example of the permEncoderChoicesStr\n\n \
+    \ permEncoderChoicesList = []\n  for encoderChoices in encoderChoicesList:\n    permEncoderChoicesList.append(\"%s: %s,\"\
+    \ % (\n        _quoteAndEscape(encoderChoices[-1]['name']),\n        pprint.pformat(encoderChoices, indent=2*_INDENT_STEP)))\n\
+    \  permEncoderChoicesStr = '\\n'.join(permEncoderChoicesList)\n  permEncoderChoicesStr = _indentLines(permEncoderChoicesStr,\
+    \ 1,\n                                       indentFirstLine=False)\n\n  # Return results\n  return (encoderSpecsStr,\
+    \ permEncoderChoicesStr)"
+  - "def shift(self, top=None, right=None, bottom=None, left=None):\n        \"\"\"\n        Shift/move the line strings from\
+    \ one or more image sides.\n\n        Parameters\n        ----------\n        top : None or int, optional\n          \
+    \  Amount of pixels by which to shift all bounding boxes from the\n            top.\n\n        right : None or int, optional\n\
+    \            Amount of pixels by which to shift all bounding boxes from the\n            right.\n\n        bottom : None\
+    \ or int, optional\n            Amount of pixels by which to shift all bounding boxes from the\n            bottom.\n\n\
+    \        left : None or int, optional\n            Amount of pixels by which to shift all bounding boxes from the\n  \
+    \          left.\n\n        Returns\n        -------\n        imgaug.augmentables.lines.LineStringsOnImage\n         \
+    \   Shifted line strings.\n\n        \"\"\"\n        lss_new = [ls.shift(top=top, right=right, bottom=bottom, left=left)\n\
+    \                   for ls in self.line_strings]\n        return LineStringsOnImage(lss_new, shape=self.shape)"
+  - "def cross_entropy_reward_loss(logits, actions, rewards, name=None):\n    \"\"\"Calculate the loss for Policy Gradient\
+    \ Network.\n\n    Parameters\n    ----------\n    logits : tensor\n        The network outputs without softmax. This function\
+    \ implements softmax inside.\n    actions : tensor or placeholder\n        The agent actions.\n    rewards : tensor or\
+    \ placeholder\n        The rewards.\n\n    Returns\n    --------\n    Tensor\n        The TensorFlow loss function.\n\n\
+    \    Examples\n    ----------\n    >>> states_batch_pl = tf.placeholder(tf.float32, shape=[None, D])\n    >>> network\
+    \ = InputLayer(states_batch_pl, name='input')\n    >>> network = DenseLayer(network, n_units=H, act=tf.nn.relu, name='relu1')\n\
+    \    >>> network = DenseLayer(network, n_units=3, name='out')\n    >>> probs = network.outputs\n    >>> sampling_prob\
+    \ = tf.nn.softmax(probs)\n    >>> actions_batch_pl = tf.placeholder(tf.int32, shape=[None])\n    >>> discount_rewards_batch_pl\
+    \ = tf.placeholder(tf.float32, shape=[None])\n    >>> loss = tl.rein.cross_entropy_reward_loss(probs, actions_batch_pl,\
+    \ discount_rewards_batch_pl)\n    >>> train_op = tf.train.RMSPropOptimizer(learning_rate, decay_rate).minimize(loss)\n\
+    \n    \"\"\"\n    cross_entropy = tf.nn.sparse_softmax_cross_entropy_with_logits(labels=actions, logits=logits, name=name)\n\
+    \n    return tf.reduce_sum(tf.multiply(cross_entropy, rewards))"
+- source_sentence: "Translate an index into coordinates, using the given coordinate system.\n\n  Similar to ``numpy.unravel_index``.\n\
+    \n  :param index: (int) The index of the point. The coordinates are expressed as a \n         single index by using the\
+    \ dimensions as a mixed radix definition. For \n         example, in dimensions 42x10, the point [1, 4] is index \n  \
+    \       1*420 + 4*10 = 460.\n\n  :param dimensions (list of ints) The coordinate system.\n\n  :returns: (list) of coordinates\
+    \ of length ``len(dimensions)``."
+  sentences:
+  - "def coordinatesFromIndex(index, dimensions):\n  \"\"\"\n  Translate an index into coordinates, using the given coordinate\
+    \ system.\n\n  Similar to ``numpy.unravel_index``.\n\n  :param index: (int) The index of the point. The coordinates are\
+    \ expressed as a \n         single index by using the dimensions as a mixed radix definition. For \n         example,\
+    \ in dimensions 42x10, the point [1, 4] is index \n         1*420 + 4*10 = 460.\n\n  :param dimensions (list of ints)\
+    \ The coordinate system.\n\n  :returns: (list) of coordinates of length ``len(dimensions)``.\n  \"\"\"\n  coordinates\
+    \ = [0] * len(dimensions)\n\n  shifted = index\n  for i in xrange(len(dimensions) - 1, 0, -1):\n    coordinates[i] = shifted\
+    \ % dimensions[i]\n    shifted = shifted / dimensions[i]\n\n  coordinates[0] = shifted\n\n  return coordinates"
+  - "def step(self, observation, **extra_feed):\n        \"\"\"\n        Compute next action(s) given the observation(s)\n\
+    \n        Parameters:\n        ----------\n\n        observation     observation data (either single or a batch)\n\n \
+    \       **extra_feed    additional data such as state or mask (names of the arguments should match the ones in constructor,\
+    \ see __init__)\n\n        Returns:\n        -------\n        (action, value estimate, next state, negative log likelihood\
+    \ of the action under current policy parameters) tuple\n        \"\"\"\n\n        a, v, state, neglogp = self._evaluate([self.action,\
+    \ self.vf, self.state, self.neglogp], observation, **extra_feed)\n        if state.size == 0:\n            state = None\n\
+    \        return a, v, state, neglogp"
+  - "def pretty_eta(seconds_left):\n    \"\"\"Print the number of seconds in human readable format.\n\n    Examples:\n   \
+    \ 2 days\n    2 hours and 37 minutes\n    less than a minute\n\n    Paramters\n    ---------\n    seconds_left: int\n\
+    \        Number of seconds to be converted to the ETA\n    Returns\n    -------\n    eta: str\n        String representing\
+    \ the pretty ETA.\n    \"\"\"\n    minutes_left = seconds_left // 60\n    seconds_left %= 60\n    hours_left = minutes_left\
+    \ // 60\n    minutes_left %= 60\n    days_left = hours_left // 24\n    hours_left %= 24\n\n    def helper(cnt, name):\n\
+    \        return \"{} {}{}\".format(str(cnt), name, ('s' if cnt > 1 else ''))\n\n    if days_left > 0:\n        msg = helper(days_left,\
+    \ 'day')\n        if hours_left > 0:\n            msg += ' and ' + helper(hours_left, 'hour')\n        return msg\n  \
+    \  if hours_left > 0:\n        msg = helper(hours_left, 'hour')\n        if minutes_left > 0:\n            msg += ' and\
+    \ ' + helper(minutes_left, 'minute')\n        return msg\n    if minutes_left > 0:\n        return helper(minutes_left,\
+    \ 'minute')\n    return 'less than a minute'"
+- source_sentence: Validates control dictionary for the experiment context
+  sentences:
+  - "def load_file_list(path=None, regx='\\.jpg', printable=True, keep_prefix=False):\n    r\"\"\"Return a file list in a\
+    \ folder by given a path and regular expression.\n\n    Parameters\n    ----------\n    path : str or None\n        A\
+    \ folder path, if `None`, use the current directory.\n    regx : str\n        The regx of file name.\n    printable :\
+    \ boolean\n        Whether to print the files infomation.\n    keep_prefix : boolean\n        Whether to keep path in\
+    \ the file name.\n\n    Examples\n    ----------\n    >>> file_list = tl.files.load_file_list(path=None, regx='w1pre_[0-9]+\\\
+    .(npz)')\n\n    \"\"\"\n    if path is None:\n        path = os.getcwd()\n    file_list = os.listdir(path)\n    return_list\
+    \ = []\n    for _, f in enumerate(file_list):\n        if re.search(regx, f):\n            return_list.append(f)\n   \
+    \ # return_list.sort()\n    if keep_prefix:\n        for i, f in enumerate(return_list):\n            return_list[i] =\
+    \ os.path.join(path, f)\n\n    if printable:\n        logging.info('Match file list = %s' % return_list)\n        logging.info('Number\
+    \ of files = %d' % len(return_list))\n    return return_list"
+  - "def getCompletingSwarms(self):\n    \"\"\"Return the list of all completing swarms.\n\n    Parameters:\n    ---------------------------------------------------------------------\n\
+    \    retval:   list of active swarm Ids\n    \"\"\"\n    swarmIds = []\n    for swarmId, info in self._state['swarms'].iteritems():\n\
+    \      if info['status'] == 'completing':\n        swarmIds.append(swarmId)\n\n    return swarmIds"
+  - "def __validateExperimentControl(self, control):\n    \"\"\" Validates control dictionary for the experiment context\"\
+    \"\"\n    # Validate task list\n    taskList = control.get('tasks', None)\n    if taskList is not None:\n      taskLabelsList\
+    \ = []\n\n      for task in taskList:\n        validateOpfJsonValue(task, \"opfTaskSchema.json\")\n        validateOpfJsonValue(task['taskControl'],\
+    \ \"opfTaskControlSchema.json\")\n\n        taskLabel = task['taskLabel']\n\n        assert isinstance(taskLabel, types.StringTypes),\
+    \ \\\n               \"taskLabel type: %r\" % type(taskLabel)\n        assert len(taskLabel) > 0, \"empty string taskLabel\
+    \ not is allowed\"\n\n        taskLabelsList.append(taskLabel.lower())\n\n      taskLabelDuplicates = filter(lambda x:\
+    \ taskLabelsList.count(x) > 1,\n                                   taskLabelsList)\n      assert len(taskLabelDuplicates)\
+    \ == 0, \\\n             \"Duplcate task labels are not allowed: %s\" % taskLabelDuplicates\n\n    return"
+model-index: null
+config:
+  architectures:
+  - ModernBertModel
+  model_type: modernbert
+  tokenizer_config:
+    cls_token: '[CLS]'
+    mask_token: '[MASK]'
+    pad_token: '[PAD]'
+    sep_token: '[SEP]'
+    unk_token: '[UNK]'
+cardData:
+  tags:
+  - sentence-transformers
+  - sentence-similarity
+  - feature-extraction
+  - generated_from_trainer
+  - dataset_size:412178
+  - loss:MultipleNegativesRankingLoss
+  base_model: answerdotai/ModernBERT-base
+  widget:
+  - source_sentence: "Clip off all parts from all bounding boxes that are outside of the image.\n\n        Returns\n     \
+      \   -------\n        imgaug.BoundingBoxesOnImage\n            Bounding boxes, clipped to fall within the image dimensions."
+    sentences:
+    - "def model_best(y1, y2, samples=1000, progressbar=True):\n    \"\"\"\n    Bayesian Estimation Supersedes the T-Test\n\
+      \n    This model runs a Bayesian hypothesis comparing if y1 and y2 come\n    from the same distribution. Returns are\
+      \ assumed to be T-distributed.\n\n    In addition, computes annual volatility and Sharpe of in and\n    out-of-sample\
+      \ periods.\n\n    This model replicates the example used in:\n    Kruschke, John. (2012) Bayesian estimation supersedes\
+      \ the t\n    test. Journal of Experimental Psychology: General.\n\n    Parameters\n    ----------\n    y1 : array-like\n\
+      \        Array of returns (e.g. in-sample)\n    y2 : array-like\n        Array of returns (e.g. out-of-sample)\n   \
+      \ samples : int, optional\n        Number of posterior samples to draw.\n\n    Returns\n    -------\n    model : pymc.Model\
+      \ object\n        PyMC3 model containing all random variables.\n    trace : pymc3.sampling.BaseTrace object\n      \
+      \  A PyMC3 trace object that contains samples for each parameter\n        of the posterior.\n\n    See Also\n    --------\n\
+      \    plot_stoch_vol : plotting of tochastic volatility model\n    \"\"\"\n\n    y = np.concatenate((y1, y2))\n\n   \
+      \ mu_m = np.mean(y)\n    mu_p = 0.000001 * 1 / np.std(y)**2\n\n    sigma_low = np.std(y) / 1000\n    sigma_high = np.std(y)\
+      \ * 1000\n    with pm.Model() as model:\n        group1_mean = pm.Normal('group1_mean', mu=mu_m, tau=mu_p,\n       \
+      \                         testval=y1.mean())\n        group2_mean = pm.Normal('group2_mean', mu=mu_m, tau=mu_p,\n  \
+      \                              testval=y2.mean())\n        group1_std = pm.Uniform('group1_std', lower=sigma_low,\n\
+      \                                upper=sigma_high, testval=y1.std())\n        group2_std = pm.Uniform('group2_std',\
+      \ lower=sigma_low,\n                                upper=sigma_high, testval=y2.std())\n        nu = pm.Exponential('nu_minus_two',\
+      \ 1 / 29., testval=4.) + 2.\n\n        returns_group1 = pm.StudentT('group1', nu=nu, mu=group1_mean,\n             \
+      \                        lam=group1_std**-2, observed=y1)\n        returns_group2 = pm.StudentT('group2', nu=nu, mu=group2_mean,\n\
+      \                                     lam=group2_std**-2, observed=y2)\n\n        diff_of_means = pm.Deterministic('difference\
+      \ of means',\n                                         group2_mean - group1_mean)\n        pm.Deterministic('difference\
+      \ of stds',\n                         group2_std - group1_std)\n        pm.Deterministic('effect size', diff_of_means\
+      \ /\n                         pm.math.sqrt((group1_std**2 +\n                                       group2_std**2) /\
+      \ 2))\n\n        pm.Deterministic('group1_annual_volatility',\n                         returns_group1.distribution.variance**.5\
+      \ *\n                         np.sqrt(252))\n        pm.Deterministic('group2_annual_volatility',\n                \
+      \         returns_group2.distribution.variance**.5 *\n                         np.sqrt(252))\n\n        pm.Deterministic('group1_sharpe',\
+      \ returns_group1.distribution.mean /\n                         returns_group1.distribution.variance**.5 *\n        \
+      \                 np.sqrt(252))\n        pm.Deterministic('group2_sharpe', returns_group2.distribution.mean /\n    \
+      \                     returns_group2.distribution.variance**.5 *\n                         np.sqrt(252))\n\n       \
+      \ trace = pm.sample(samples, progressbar=progressbar)\n    return model, trace"
+    - "def clip_out_of_image(self):\n        \"\"\"\n        Clip off all parts from all bounding boxes that are outside of\
+      \ the image.\n\n        Returns\n        -------\n        imgaug.BoundingBoxesOnImage\n            Bounding boxes, clipped\
+      \ to fall within the image dimensions.\n\n        \"\"\"\n        bbs_cut = [bb.clip_out_of_image(self.shape)\n    \
+      \               for bb in self.bounding_boxes if bb.is_partly_within_image(self.shape)]\n        return BoundingBoxesOnImage(bbs_cut,\
+      \ shape=self.shape)"
+    - "def _initPermanence(self, potential, connectedPct):\n    \"\"\"\n    Initializes the permanences of a column. The method\n\
+      \    returns a 1-D array the size of the input, where each entry in the\n    array represents the initial permanence\
+      \ value between the input bit\n    at the particular index in the array, and the column represented by\n    the 'index'\
+      \ parameter.\n\n    Parameters:\n    ----------------------------\n    :param potential: A numpy array specifying the\
+      \ potential pool of the column.\n                    Permanence values will only be generated for input bits\n     \
+      \               corresponding to indices for which the mask value is 1.\n    :param connectedPct: A value between 0\
+      \ or 1 governing the chance, for each\n                         permanence, that the initial permanence value will\n\
+      \                         be a value that is considered connected.\n    \"\"\"\n    # Determine which inputs bits will\
+      \ start out as connected\n    # to the inputs. Initially a subset of the input bits in a\n    # column's potential pool\
+      \ will be connected. This number is\n    # given by the parameter \"connectedPct\"\n    perm = numpy.zeros(self._numInputs,\
+      \ dtype=realDType)\n    for i in xrange(self._numInputs):\n      if (potential[i] < 1):\n        continue\n\n      if\
+      \ (self._random.getReal64() <= connectedPct):\n        perm[i] = self._initPermConnected()\n      else:\n        perm[i]\
+      \ = self._initPermNonConnected()\n\n    # Clip off low values. Since we use a sparse representation\n    # to store\
+      \ the permanence values this helps reduce memory\n    # requirements.\n    perm[perm < self._synPermTrimThreshold] =\
+      \ 0\n\n    return perm"
+  - source_sentence: "Perform a weighted average over dicts that are each on a different node\n    Input: local_name2valcount:\
+      \ dict mapping key -> (value, count)\n    Returns: key -> mean"
+    sentences:
+    - "def MotionBlur(k=5, angle=(0, 360), direction=(-1.0, 1.0), order=1, name=None, deterministic=False, random_state=None):\n\
+      \    \"\"\"\n    Augmenter that sharpens images and overlays the result with the original image.\n\n    dtype support::\n\
+      \n        See ``imgaug.augmenters.convolutional.Convolve``.\n\n    Parameters\n    ----------\n    k : int or tuple\
+      \ of int or list of int or imgaug.parameters.StochasticParameter, optional\n        Kernel size to use.\n\n        \
+      \    * If a single int, then that value will be used for the height\n              and width of the kernel.\n      \
+      \      * If a tuple of two ints ``(a, b)``, then the kernel size will be\n              sampled from the interval ``[a..b]``.\n\
+      \            * If a list, then a random value will be sampled from that list per image.\n            * If a StochasticParameter,\
+      \ then ``N`` samples will be drawn from\n              that parameter per ``N`` input images, each representing the\
+      \ kernel\n              size for the nth image.\n\n    angle : number or tuple of number or list of number or imgaug.parameters.StochasticParameter,\
+      \ optional\n        Angle of the motion blur in degrees (clockwise, relative to top center direction).\n\n         \
+      \   * If a number, exactly that value will be used.\n            * If a tuple ``(a, b)``, a random value from the range\
+      \ ``a <= x <= b`` will\n              be sampled per image.\n            * If a list, then a random value will be sampled\
+      \ from that list per image.\n            * If a StochasticParameter, a value will be sampled from the\n            \
+      \  parameter per image.\n\n    direction : number or tuple of number or list of number or imgaug.parameters.StochasticParameter,\
+      \ optional\n        Forward/backward direction of the motion blur. Lower values towards -1.0 will point the motion blur\
+      \ towards\n        the back (with angle provided via `angle`). Higher values towards 1.0 will point the motion blur\
+      \ forward.\n        A value of 0.0 leads to a uniformly (but still angled) motion blur.\n\n            * If a number,\
+      \ exactly that value will be used.\n            * If a tuple ``(a, b)``, a random value from the range ``a <= x <= b``\
+      \ will\n              be sampled per image.\n            * If a list, then a random value will be sampled from that\
+      \ list per image.\n            * If a StochasticParameter, a value will be sampled from the\n              parameter\
+      \ per image.\n\n    order : int or iterable of int or imgaug.ALL or imgaug.parameters.StochasticParameter, optional\n\
+      \        Interpolation order to use when rotating the kernel according to `angle`.\n        See :func:`imgaug.augmenters.geometric.Affine.__init__`.\n\
+      \        Recommended to be ``0`` or ``1``, with ``0`` being faster, but less continuous/smooth as `angle` is changed,\n\
+      \        particularly around multiple of 45 degrees.\n\n    name : None or str, optional\n        See :func:`imgaug.augmenters.meta.Augmenter.__init__`.\n\
+      \n    deterministic : bool, optional\n        See :func:`imgaug.augmenters.meta.Augmenter.__init__`.\n\n    random_state\
+      \ : None or int or numpy.random.RandomState, optional\n        See :func:`imgaug.augmenters.meta.Augmenter.__init__`.\n\
+      \n    Examples\n    --------\n    >>> aug = iaa.MotionBlur(k=15)\n\n    Create a motion blur augmenter with kernel size\
+      \ of 15x15.\n\n    >>> aug = iaa.MotionBlur(k=15, angle=[-45, 45])\n\n    Create a motion blur augmenter with kernel\
+      \ size of 15x15 and a blur angle of either -45 or 45 degrees (randomly\n    picked per image).\n\n    \"\"\"\n    #\
+      \ TODO allow (1, None) and set to identity matrix if k == 1\n    k_param = iap.handle_discrete_param(k, \"k\", value_range=(3,\
+      \ None), tuple_to_uniform=True, list_to_choice=True,\n                                        allow_floats=False)\n\
+      \    angle_param = iap.handle_continuous_param(angle, \"angle\", value_range=None, tuple_to_uniform=True,\n        \
+      \                                      list_to_choice=True)\n    direction_param = iap.handle_continuous_param(direction,\
+      \ \"direction\", value_range=(-1.0-1e-6, 1.0+1e-6),\n                                                  tuple_to_uniform=True,\
+      \ list_to_choice=True)\n\n    def create_matrices(image, nb_channels, random_state_func):\n        # avoid cyclic import\
+      \ between blur and geometric\n        from . import geometric as iaa_geometric\n\n        # force discrete for k_sample\
+      \ via int() in case of stochastic parameter\n        k_sample = int(k_param.draw_sample(random_state=random_state_func))\n\
+      \        angle_sample = angle_param.draw_sample(random_state=random_state_func)\n        direction_sample = direction_param.draw_sample(random_state=random_state_func)\n\
+      \n        k_sample = k_sample if k_sample % 2 != 0 else k_sample + 1\n        direction_sample = np.clip(direction_sample,\
+      \ -1.0, 1.0)\n        direction_sample = (direction_sample + 1.0) / 2.0\n\n        matrix = np.zeros((k_sample, k_sample),\
+      \ dtype=np.float32)\n        matrix[:, k_sample//2] = np.linspace(float(direction_sample), 1.0 - float(direction_sample),\
+      \ num=k_sample)\n        rot = iaa_geometric.Affine(rotate=angle_sample, order=order)\n        matrix = (rot.augment_image((matrix\
+      \ * 255).astype(np.uint8)) / 255.0).astype(np.float32)\n\n        return [matrix/np.sum(matrix)] * nb_channels\n\n \
+      \   if name is None:\n        name = \"Unnamed%s\" % (ia.caller_name(),)\n\n    return iaa_convolutional.Convolve(create_matrices,\
+      \ name=name, deterministic=deterministic,\n                                      random_state=random_state)"
+    - "def rolling_sharpe(returns, rolling_sharpe_window):\n    \"\"\"\n    Determines the rolling Sharpe ratio of a strategy.\n\
+      \n    Parameters\n    ----------\n    returns : pd.Series\n        Daily returns of the strategy, noncumulative.\n \
+      \        - See full explanation in tears.create_full_tear_sheet.\n    rolling_sharpe_window : int\n        Length of\
+      \ rolling window, in days, over which to compute.\n\n    Returns\n    -------\n    pd.Series\n        Rolling Sharpe\
+      \ ratio.\n\n    Note\n    -----\n    See https://en.wikipedia.org/wiki/Sharpe_ratio for more details.\n    \"\"\"\n\n\
+      \    return returns.rolling(rolling_sharpe_window).mean() \\\n        / returns.rolling(rolling_sharpe_window).std()\
+      \ \\\n        * np.sqrt(APPROX_BDAYS_PER_YEAR)"
+    - "def mpi_weighted_mean(comm, local_name2valcount):\n    \"\"\"\n    Perform a weighted average over dicts that are each\
+      \ on a different node\n    Input: local_name2valcount: dict mapping key -> (value, count)\n    Returns: key -> mean\n\
+      \    \"\"\"\n    all_name2valcount = comm.gather(local_name2valcount)\n    if comm.rank == 0:\n        name2sum = defaultdict(float)\n\
+      \        name2count = defaultdict(float)\n        for n2vc in all_name2valcount:\n            for (name, (val, count))\
+      \ in n2vc.items():\n                try:\n                    val = float(val)\n                except ValueError:\n\
+      \                    if comm.rank == 0:\n                        warnings.warn('WARNING: tried to compute mean on non-float\
+      \ {}={}'.format(name, val))\n                else:\n                    name2sum[name] += val * count\n            \
+      \        name2count[name] += count\n        return {name : name2sum[name] / name2count[name] for name in name2sum}\n\
+      \    else:\n        return {}"
+  - source_sentence: "Generate and return the following encoder related substitution variables:\n\n  encoderSpecsStr:\n  \
+      \  For the base description file, this string defines the default\n    encoding dicts for each encoder. For example:\n\
+      \         '__gym_encoder' : {   'fieldname': 'gym',\n          'n': 13,\n          'name': 'gym',\n          'type':\
+      \ 'SDRCategoryEncoder',\n          'w': 7},\n        '__address_encoder' : {   'fieldname': 'address',\n          'n':\
+      \ 13,\n          'name': 'address',\n          'type': 'SDRCategoryEncoder',\n          'w': 7}\n\n  encoderSchemaStr:\n\
+      \    For the base description file, this is a list containing a\n    DeferredDictLookup entry for each encoder. For\
+      \ example:\n        [DeferredDictLookup('__gym_encoder'),\n         DeferredDictLookup('__address_encoder'),\n     \
+      \    DeferredDictLookup('__timestamp_timeOfDay_encoder'),\n         DeferredDictLookup('__timestamp_dayOfWeek_encoder'),\n\
+      \         DeferredDictLookup('__consumption_encoder')],\n\n  permEncoderChoicesStr:\n    For the permutations file,\
+      \ this defines the possible\n    encoder dicts for each encoder. For example:\n        '__timestamp_dayOfWeek_encoder':\
+      \ [\n                     None,\n                     {'fieldname':'timestamp',\n                      'name': 'timestamp_timeOfDay',\n\
+      \                      'type':'DateEncoder'\n                      'dayOfWeek': (7,1)\n                      },\n  \
+      \                   {'fieldname':'timestamp',\n                      'name': 'timestamp_timeOfDay',\n              \
+      \        'type':'DateEncoder'\n                      'dayOfWeek': (7,3)\n                      },\n                \
+      \  ],\n\n        '__field_consumption_encoder': [\n                    None,\n                    {'fieldname':'consumption',\n\
+      \                     'name': 'consumption',\n                     'type':'AdaptiveScalarEncoder',\n               \
+      \      'n': 13,\n                     'w': 7,\n                      }\n                   ]\n\n\n\n  Parameters:\n\
+      \  --------------------------------------------------\n  includedFields:  item from the 'includedFields' section of\
+      \ the\n                    description JSON object. This is a list of dicts, each\n                    dict defining\
+      \ the field name, type, and optional min\n                    and max values.\n\n  retval:  (encoderSpecsStr, encoderSchemaStr\
+      \ permEncoderChoicesStr)"
+    sentences:
+    - "def _generateEncoderStringsV1(includedFields):\n  \"\"\" Generate and return the following encoder related substitution\
+      \ variables:\n\n  encoderSpecsStr:\n    For the base description file, this string defines the default\n    encoding\
+      \ dicts for each encoder. For example:\n         '__gym_encoder' : {   'fieldname': 'gym',\n          'n': 13,\n   \
+      \       'name': 'gym',\n          'type': 'SDRCategoryEncoder',\n          'w': 7},\n        '__address_encoder' : {\
+      \   'fieldname': 'address',\n          'n': 13,\n          'name': 'address',\n          'type': 'SDRCategoryEncoder',\n\
+      \          'w': 7}\n\n  encoderSchemaStr:\n    For the base description file, this is a list containing a\n    DeferredDictLookup\
+      \ entry for each encoder. For example:\n        [DeferredDictLookup('__gym_encoder'),\n         DeferredDictLookup('__address_encoder'),\n\
+      \         DeferredDictLookup('__timestamp_timeOfDay_encoder'),\n         DeferredDictLookup('__timestamp_dayOfWeek_encoder'),\n\
+      \         DeferredDictLookup('__consumption_encoder')],\n\n  permEncoderChoicesStr:\n    For the permutations file,\
+      \ this defines the possible\n    encoder dicts for each encoder. For example:\n        '__timestamp_dayOfWeek_encoder':\
+      \ [\n                     None,\n                     {'fieldname':'timestamp',\n                      'name': 'timestamp_timeOfDay',\n\
+      \                      'type':'DateEncoder'\n                      'dayOfWeek': (7,1)\n                      },\n  \
+      \                   {'fieldname':'timestamp',\n                      'name': 'timestamp_timeOfDay',\n              \
+      \        'type':'DateEncoder'\n                      'dayOfWeek': (7,3)\n                      },\n                \
+      \  ],\n\n        '__field_consumption_encoder': [\n                    None,\n                    {'fieldname':'consumption',\n\
+      \                     'name': 'consumption',\n                     'type':'AdaptiveScalarEncoder',\n               \
+      \      'n': 13,\n                     'w': 7,\n                      }\n                   ]\n\n\n\n  Parameters:\n\
+      \  --------------------------------------------------\n  includedFields:  item from the 'includedFields' section of\
+      \ the\n                    description JSON object. This is a list of dicts, each\n                    dict defining\
+      \ the field name, type, and optional min\n                    and max values.\n\n  retval:  (encoderSpecsStr, encoderSchemaStr\
+      \ permEncoderChoicesStr)\n\n\n  \"\"\"\n\n  # ------------------------------------------------------------------------\n\
+      \  # First accumulate the possible choices for each encoder\n  encoderChoicesList = []\n  for fieldInfo in includedFields:\n\
+      \n    fieldName = fieldInfo['fieldName']\n\n    # Get the list of encoder choices for this field\n    (choicesList,\
+      \ aggFunction) = _generateEncoderChoicesV1(fieldInfo)\n    encoderChoicesList.extend(choicesList)\n\n\n  # ------------------------------------------------------------------------\n\
+      \  # Generate the string containing the encoder specs and encoder schema. See\n  #  the function comments for an example\
+      \ of the encoderSpecsStr and\n  #  encoderSchemaStr\n  #\n  encoderSpecsList = []\n  for encoderChoices in encoderChoicesList:\n\
+      \    # Use the last choice as the default in the base file because the 1st is\n    # often None\n    encoder = encoderChoices[-1]\n\
+      \n    # Check for bad characters\n    for c in _ILLEGAL_FIELDNAME_CHARACTERS:\n      if encoder['name'].find(c) >= 0:\n\
+      \        raise _ExpGeneratorException(\"Illegal character in field: %r (%r)\" % (\n          c, encoder['name']))\n\n\
+      \    encoderSpecsList.append(\"%s: \\n%s%s\" % (\n        _quoteAndEscape(encoder['name']),\n        2*_ONE_INDENT,\n\
+      \        pprint.pformat(encoder, indent=2*_INDENT_STEP)))\n\n  encoderSpecsStr = ',\\n  '.join(encoderSpecsList)\n\n\
+      \n  # ------------------------------------------------------------------------\n  # Generate the string containing the\
+      \ permutation encoder choices. See the\n  #  function comments above for an example of the permEncoderChoicesStr\n\n\
+      \  permEncoderChoicesList = []\n  for encoderChoices in encoderChoicesList:\n    permEncoderChoicesList.append(\"%s:\
+      \ %s,\" % (\n        _quoteAndEscape(encoderChoices[-1]['name']),\n        pprint.pformat(encoderChoices, indent=2*_INDENT_STEP)))\n\
+      \  permEncoderChoicesStr = '\\n'.join(permEncoderChoicesList)\n  permEncoderChoicesStr = _indentLines(permEncoderChoicesStr,\
+      \ 1,\n                                       indentFirstLine=False)\n\n  # Return results\n  return (encoderSpecsStr,\
+      \ permEncoderChoicesStr)"
+    - "def shift(self, top=None, right=None, bottom=None, left=None):\n        \"\"\"\n        Shift/move the line strings\
+      \ from one or more image sides.\n\n        Parameters\n        ----------\n        top : None or int, optional\n   \
+      \         Amount of pixels by which to shift all bounding boxes from the\n            top.\n\n        right : None or\
+      \ int, optional\n            Amount of pixels by which to shift all bounding boxes from the\n            right.\n\n\
+      \        bottom : None or int, optional\n            Amount of pixels by which to shift all bounding boxes from the\n\
+      \            bottom.\n\n        left : None or int, optional\n            Amount of pixels by which to shift all bounding\
+      \ boxes from the\n            left.\n\n        Returns\n        -------\n        imgaug.augmentables.lines.LineStringsOnImage\n\
+      \            Shifted line strings.\n\n        \"\"\"\n        lss_new = [ls.shift(top=top, right=right, bottom=bottom,\
+      \ left=left)\n                   for ls in self.line_strings]\n        return LineStringsOnImage(lss_new, shape=self.shape)"
+    - "def cross_entropy_reward_loss(logits, actions, rewards, name=None):\n    \"\"\"Calculate the loss for Policy Gradient\
+      \ Network.\n\n    Parameters\n    ----------\n    logits : tensor\n        The network outputs without softmax. This\
+      \ function implements softmax inside.\n    actions : tensor or placeholder\n        The agent actions.\n    rewards\
+      \ : tensor or placeholder\n        The rewards.\n\n    Returns\n    --------\n    Tensor\n        The TensorFlow loss\
+      \ function.\n\n    Examples\n    ----------\n    >>> states_batch_pl = tf.placeholder(tf.float32, shape=[None, D])\n\
+      \    >>> network = InputLayer(states_batch_pl, name='input')\n    >>> network = DenseLayer(network, n_units=H, act=tf.nn.relu,\
+      \ name='relu1')\n    >>> network = DenseLayer(network, n_units=3, name='out')\n    >>> probs = network.outputs\n   \
+      \ >>> sampling_prob = tf.nn.softmax(probs)\n    >>> actions_batch_pl = tf.placeholder(tf.int32, shape=[None])\n    >>>\
+      \ discount_rewards_batch_pl = tf.placeholder(tf.float32, shape=[None])\n    >>> loss = tl.rein.cross_entropy_reward_loss(probs,\
+      \ actions_batch_pl, discount_rewards_batch_pl)\n    >>> train_op = tf.train.RMSPropOptimizer(learning_rate, decay_rate).minimize(loss)\n\
+      \n    \"\"\"\n    cross_entropy = tf.nn.sparse_softmax_cross_entropy_with_logits(labels=actions, logits=logits, name=name)\n\
+      \n    return tf.reduce_sum(tf.multiply(cross_entropy, rewards))"
+  - source_sentence: "Translate an index into coordinates, using the given coordinate system.\n\n  Similar to ``numpy.unravel_index``.\n\
+      \n  :param index: (int) The index of the point. The coordinates are expressed as a \n         single index by using\
+      \ the dimensions as a mixed radix definition. For \n         example, in dimensions 42x10, the point [1, 4] is index\
+      \ \n         1*420 + 4*10 = 460.\n\n  :param dimensions (list of ints) The coordinate system.\n\n  :returns: (list)\
+      \ of coordinates of length ``len(dimensions)``."
+    sentences:
+    - "def coordinatesFromIndex(index, dimensions):\n  \"\"\"\n  Translate an index into coordinates, using the given coordinate\
+      \ system.\n\n  Similar to ``numpy.unravel_index``.\n\n  :param index: (int) The index of the point. The coordinates\
+      \ are expressed as a \n         single index by using the dimensions as a mixed radix definition. For \n         example,\
+      \ in dimensions 42x10, the point [1, 4] is index \n         1*420 + 4*10 = 460.\n\n  :param dimensions (list of ints)\
+      \ The coordinate system.\n\n  :returns: (list) of coordinates of length ``len(dimensions)``.\n  \"\"\"\n  coordinates\
+      \ = [0] * len(dimensions)\n\n  shifted = index\n  for i in xrange(len(dimensions) - 1, 0, -1):\n    coordinates[i] =\
+      \ shifted % dimensions[i]\n    shifted = shifted / dimensions[i]\n\n  coordinates[0] = shifted\n\n  return coordinates"
+    - "def step(self, observation, **extra_feed):\n        \"\"\"\n        Compute next action(s) given the observation(s)\n\
+      \n        Parameters:\n        ----------\n\n        observation     observation data (either single or a batch)\n\n\
+      \        **extra_feed    additional data such as state or mask (names of the arguments should match the ones in constructor,\
+      \ see __init__)\n\n        Returns:\n        -------\n        (action, value estimate, next state, negative log likelihood\
+      \ of the action under current policy parameters) tuple\n        \"\"\"\n\n        a, v, state, neglogp = self._evaluate([self.action,\
+      \ self.vf, self.state, self.neglogp], observation, **extra_feed)\n        if state.size == 0:\n            state = None\n\
+      \        return a, v, state, neglogp"
+    - "def pretty_eta(seconds_left):\n    \"\"\"Print the number of seconds in human readable format.\n\n    Examples:\n \
+      \   2 days\n    2 hours and 37 minutes\n    less than a minute\n\n    Paramters\n    ---------\n    seconds_left: int\n\
+      \        Number of seconds to be converted to the ETA\n    Returns\n    -------\n    eta: str\n        String representing\
+      \ the pretty ETA.\n    \"\"\"\n    minutes_left = seconds_left // 60\n    seconds_left %= 60\n    hours_left = minutes_left\
+      \ // 60\n    minutes_left %= 60\n    days_left = hours_left // 24\n    hours_left %= 24\n\n    def helper(cnt, name):\n\
+      \        return \"{} {}{}\".format(str(cnt), name, ('s' if cnt > 1 else ''))\n\n    if days_left > 0:\n        msg =\
+      \ helper(days_left, 'day')\n        if hours_left > 0:\n            msg += ' and ' + helper(hours_left, 'hour')\n  \
+      \      return msg\n    if hours_left > 0:\n        msg = helper(hours_left, 'hour')\n        if minutes_left > 0:\n\
+      \            msg += ' and ' + helper(minutes_left, 'minute')\n        return msg\n    if minutes_left > 0:\n       \
+      \ return helper(minutes_left, 'minute')\n    return 'less than a minute'"
+  - source_sentence: Validates control dictionary for the experiment context
+    sentences:
+    - "def load_file_list(path=None, regx='\\.jpg', printable=True, keep_prefix=False):\n    r\"\"\"Return a file list in\
+      \ a folder by given a path and regular expression.\n\n    Parameters\n    ----------\n    path : str or None\n     \
+      \   A folder path, if `None`, use the current directory.\n    regx : str\n        The regx of file name.\n    printable\
+      \ : boolean\n        Whether to print the files infomation.\n    keep_prefix : boolean\n        Whether to keep path\
+      \ in the file name.\n\n    Examples\n    ----------\n    >>> file_list = tl.files.load_file_list(path=None, regx='w1pre_[0-9]+\\\
+      .(npz)')\n\n    \"\"\"\n    if path is None:\n        path = os.getcwd()\n    file_list = os.listdir(path)\n    return_list\
+      \ = []\n    for _, f in enumerate(file_list):\n        if re.search(regx, f):\n            return_list.append(f)\n \
+      \   # return_list.sort()\n    if keep_prefix:\n        for i, f in enumerate(return_list):\n            return_list[i]\
+      \ = os.path.join(path, f)\n\n    if printable:\n        logging.info('Match file list = %s' % return_list)\n       \
+      \ logging.info('Number of files = %d' % len(return_list))\n    return return_list"
+    - "def getCompletingSwarms(self):\n    \"\"\"Return the list of all completing swarms.\n\n    Parameters:\n    ---------------------------------------------------------------------\n\
+      \    retval:   list of active swarm Ids\n    \"\"\"\n    swarmIds = []\n    for swarmId, info in self._state['swarms'].iteritems():\n\
+      \      if info['status'] == 'completing':\n        swarmIds.append(swarmId)\n\n    return swarmIds"
+    - "def __validateExperimentControl(self, control):\n    \"\"\" Validates control dictionary for the experiment context\"\
+      \"\"\n    # Validate task list\n    taskList = control.get('tasks', None)\n    if taskList is not None:\n      taskLabelsList\
+      \ = []\n\n      for task in taskList:\n        validateOpfJsonValue(task, \"opfTaskSchema.json\")\n        validateOpfJsonValue(task['taskControl'],\
+      \ \"opfTaskControlSchema.json\")\n\n        taskLabel = task['taskLabel']\n\n        assert isinstance(taskLabel, types.StringTypes),\
+      \ \\\n               \"taskLabel type: %r\" % type(taskLabel)\n        assert len(taskLabel) > 0, \"empty string taskLabel\
+      \ not is allowed\"\n\n        taskLabelsList.append(taskLabel.lower())\n\n      taskLabelDuplicates = filter(lambda\
+      \ x: taskLabelsList.count(x) > 1,\n                                   taskLabelsList)\n      assert len(taskLabelDuplicates)\
+      \ == 0, \\\n             \"Duplcate task labels are not allowed: %s\" % taskLabelDuplicates\n\n    return"
+  pipeline_tag: sentence-similarity
+  library_name: sentence-transformers
+siblings:
+- rfilename: .gitattributes
+- rfilename: 1_Pooling/config.json
+- rfilename: README.md
+- rfilename: config.json
+- rfilename: config_sentence_transformers.json
+- rfilename: model.safetensors
+- rfilename: modules.json
+- rfilename: sentence_bert_config.json
+- rfilename: special_tokens_map.json
+- rfilename: tokenizer.json
+- rfilename: tokenizer_config.json
+spaces:
+- juanwisz/modernbert-python-code-retrieval
+- CrowHub/talentflow-code-search
+createdAt: '2025-01-21T14:54:36.000Z'
+safetensors:
+  parameters:
+    F32: 149014272
+  total: 149014272
+usedStorage: 596070136
+downloadsAllTime: 690
+inferenceProviderMapping: {}
+configJson:
+  _name_or_path: ./modernBERT-python-code-retrieval
+  architectures:
+  - ModernBertModel
+  attention_bias: false
+  attention_dropout: 0.0
+  bos_token_id: 50281
+  classifier_activation: gelu
+  classifier_bias: false
+  classifier_dropout: 0.0
+  classifier_pooling: mean
+  cls_token_id: 50281
+  decoder_bias: true
+  deterministic_flash_attn: false
+  embedding_dropout: 0.0
+  eos_token_id: 50282
+  global_attn_every_n_layers: 3
+  global_rope_theta: 160000.0
+  gradient_checkpointing: false
+  hidden_activation: gelu
+  hidden_size: 768
+  initializer_cutoff_factor: 2.0
+  initializer_range: 0.02
+  intermediate_size: 1152
+  layer_norm_eps: 1.0e-05
+  local_attention: 128
+  local_rope_theta: 10000.0
+  max_position_embeddings: 8192
+  mlp_bias: false
+  mlp_dropout: 0.0
+  model_type: modernbert
+  norm_bias: false
+  norm_eps: 1.0e-05
+  num_attention_heads: 12
+  num_hidden_layers: 22
+  pad_token_id: 50283
+  position_embedding_type: absolute
+  reference_compile: true
+  repad_logits_with_grad: false
+  sep_token_id: 50282
+  sparse_pred_ignore_index: -100
+  sparse_prediction: false
+  torch_dtype: float32
+  transformers_version: 4.48.1
+  vocab_size: 50368
+onnxFiles: {}
+safetensorsSizeMb: 596.1
+approxSizeMb: 596.1
+fetchedAt: '2026-06-08T16:42:43.000Z'

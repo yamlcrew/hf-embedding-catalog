@@ -1,0 +1,85 @@
+_id: 69dccc7dd6d59062bf585492
+id: immortaltatsu/omura_emebd
+private: false
+pipeline_tag: feature-extraction
+library_name: transformers
+tags:
+- transformers
+- safetensors
+- siglip
+- omura-embed
+- embeddings
+- multimodal
+- feature-extraction
+- license:mit
+- endpoints_compatible
+- region:us
+downloads: 181
+likes: 1
+modelId: immortaltatsu/omura_emebd
+author: immortaltatsu
+sha: b648993d32807fd1ea3dc06157390b6686786cee
+lastModified: '2026-04-13T11:08:45.000Z'
+gated: false
+disabled: false
+model-index: null
+config:
+  model_type: siglip
+  tokenizer_config:
+    bos_token: <bos>
+    chat_template: '{{ bos_token }}{% if messages[0][''role''] == ''system'' %}{{ raise_exception(''System role not supported'')
+      }}{% endif %}{% for message in messages %}{% if (message[''role''] == ''user'') != (loop.index0 % 2 == 0) %}{{ raise_exception(''Conversation
+      roles must alternate user/assistant/user/assistant/...'') }}{% endif %}{% if (message[''role''] == ''assistant'') %}{%
+      set role = ''model'' %}{% else %}{% set role = message[''role''] %}{% endif %}{{ ''<start_of_turn>'' + role + ''
+
+      '' + message[''content''] | trim + ''<end_of_turn>
+
+      '' }}{% endfor %}{% if add_generation_prompt %}{{''<start_of_turn>model
+
+      ''}}{% endif %}'
+    eos_token: <eos>
+    pad_token: <pad>
+    unk_token: <unk>
+    use_default_system_prompt: false
+cardData:
+  license: mit
+  library_name: transformers
+  pipeline_tag: feature-extraction
+  tags:
+  - omura-embed
+  - embeddings
+  - multimodal
+transformersInfo:
+  auto_model: AutoModel
+siblings:
+- rfilename: .gitattributes
+- rfilename: README.md
+- rfilename: config.json
+- rfilename: model.safetensors
+- rfilename: preprocessor_config.json
+- rfilename: special_tokens_map.json
+- rfilename: tokenizer.json
+- rfilename: tokenizer.model
+- rfilename: tokenizer_config.json
+spaces: []
+createdAt: '2026-04-13T10:59:09.000Z'
+safetensors:
+  parameters:
+    F32: 375187970
+  total: 375187970
+usedStorage: 1539404946
+downloadsAllTime: 395
+inferenceProviderMapping: {}
+configJson:
+  initializer_factor: 1.0
+  model_type: siglip
+  text_config:
+    model_type: siglip_text_model
+    vocab_size: 256000
+  transformers_version: 4.49.0.dev0
+  vision_config:
+    model_type: siglip_vision_model
+onnxFiles: {}
+safetensorsSizeMb: 1500.8
+approxSizeMb: 1500.8
+fetchedAt: '2026-06-08T16:42:43.000Z'

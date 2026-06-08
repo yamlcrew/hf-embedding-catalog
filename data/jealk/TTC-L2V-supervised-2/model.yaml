@@ -1,0 +1,146 @@
+_id: 681a8257891424cf17c0722b
+id: jealk/TTC-L2V-supervised-2
+private: false
+pipeline_tag: sentence-similarity
+library_name: sentence-transformers
+tags:
+- sentence-transformers
+- safetensors
+- llama
+- sentence-similarity
+- feature-extraction
+- text-embedding
+- embeddings
+- information-retrieval
+- beir
+- text-classification
+- text-clustering
+- llm2vec
+- custom_code
+- da
+- sv
+- 'no'
+- dataset:jealk/scandi-wiki-combined
+- dataset:jealk/wiki40b-da-clean
+- dataset:jealk/supervised-da
+- dataset:DDSC/nordic-embedding-training-data
+- base_model:AI-Sweden-Models/Llama-3-8B-instruct
+- base_model:finetune:AI-Sweden-Models/Llama-3-8B-instruct
+- license:mit
+- text-embeddings-inference
+- endpoints_compatible
+- region:us
+downloads: 133
+likes: 7
+modelId: jealk/TTC-L2V-supervised-2
+author: jealk
+sha: 681c5663b53a3178bfb078855e22f7661f3f85fc
+lastModified: '2026-05-22T12:54:31.000Z'
+gated: false
+disabled: false
+model-index: null
+config:
+  architectures:
+  - LlamaBiModel
+  model_type: llama
+  auto_map:
+    AutoModel: modeling_bidirectional_llama.LlamaBiModel
+  tokenizer_config:
+    bos_token: <|begin_of_text|>
+    chat_template: '{% set loop_messages = messages %}{% for message in loop_messages %}{% set content = ''<|start_header_id|>''
+      + message[''role''] + ''<|end_header_id|>
+
+
+      ''+ message[''content''] | trim + ''<|eot_id|>'' %}{% if loop.index0 == 0 %}{% set content = bos_token + content %}{%
+      endif %}{{ content }}{% endfor %}{% if add_generation_prompt %}{{ ''<|start_header_id|>assistant<|end_header_id|>
+
+
+      '' }}{% endif %}'
+    eos_token: <|end_of_text|>
+    mask_token: _
+    pad_token: <|end_of_text|>
+cardData:
+  license: mit
+  language:
+  - da
+  - sv
+  - 'no'
+  base_model:
+  - AI-Sweden-Models/Llama-3-8B-instruct
+  library_name: sentence-transformers
+  pipeline_tag: sentence-similarity
+  tags:
+  - sentence-transformers
+  - sentence-similarity
+  - feature-extraction
+  - text-embedding
+  - embeddings
+  - information-retrieval
+  - beir
+  - text-classification
+  - text-clustering
+  - llm2vec
+  datasets:
+  - jealk/scandi-wiki-combined
+  - jealk/wiki40b-da-clean
+  - jealk/supervised-da
+  - DDSC/nordic-embedding-training-data
+siblings:
+- rfilename: .gitattributes
+- rfilename: README.md
+- rfilename: config.json
+- rfilename: config_sentence_transformers.json
+- rfilename: llm2vec_st.py
+- rfilename: model-00001-of-00004.safetensors
+- rfilename: model-00002-of-00004.safetensors
+- rfilename: model-00003-of-00004.safetensors
+- rfilename: model-00004-of-00004.safetensors
+- rfilename: model.safetensors.index.json
+- rfilename: modeling_bidirectional_llama.py
+- rfilename: modules.json
+- rfilename: sentence_bert_config.json
+- rfilename: special_tokens_map.json
+- rfilename: tokenizer.json
+- rfilename: tokenizer_config.json
+spaces: []
+createdAt: '2025-05-06T21:42:47.000Z'
+safetensors:
+  parameters:
+    BF16: 7504924672
+  total: 7504924672
+usedStorage: 15345545712
+downloadsAllTime: 1449
+inferenceProviderMapping: {}
+configJson:
+  _name_or_path: AI-Sweden-Models/Llama-3-8B-instruct
+  architectures:
+  - LlamaBiModel
+  attention_bias: false
+  attention_dropout: 0.0
+  bos_token_id: 128000
+  eos_token_id: 128001
+  hidden_act: silu
+  hidden_size: 4096
+  initializer_range: 0.02
+  intermediate_size: 14336
+  max_position_embeddings: 8192
+  mlp_bias: false
+  model_type: llama
+  num_attention_heads: 32
+  num_hidden_layers: 32
+  num_key_value_heads: 8
+  pretraining_tp: 1
+  rms_norm_eps: 1.0e-05
+  rope_scaling: null
+  rope_theta: 500000.0
+  tie_word_embeddings: false
+  torch_dtype: bfloat16
+  transformers_version: 4.40.2
+  use_cache: false
+  vocab_size: 128256
+  auto_map:
+    AutoModel: modeling_bidirectional_llama.LlamaBiModel
+onnxFiles: {}
+safetensorsSizeMb: 15009.9
+approxSizeMb: 15009.8
+fetchedAt: '2026-06-08T16:42:43.000Z'

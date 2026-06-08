@@ -1,0 +1,97 @@
+_id: 6673a66721bc4bc41d9fe6f4
+id: WillHeld/DiVA-llama-3-v0-8b
+private: false
+pipeline_tag: feature-extraction
+library_name: transformers
+tags:
+- transformers
+- safetensors
+- diva
+- feature-extraction
+- custom_code
+- dataset:mozilla-foundation/common_voice_17_0
+- arxiv:2410.02678
+- base_model:meta-llama/Llama-3.1-8B-Instruct
+- base_model:finetune:meta-llama/Llama-3.1-8B-Instruct
+- license:mpl-2.0
+- region:us
+downloads: 84
+likes: 35
+modelId: WillHeld/DiVA-llama-3-v0-8b
+author: WillHeld
+sha: 6e761b15ebde6ccf9b9e91d47a4ae42d79c066ca
+lastModified: '2024-12-19T21:26:18.000Z'
+gated: false
+disabled: false
+model-index: null
+config:
+  model_type: diva
+  architectures:
+  - DiVAModel
+  auto_map:
+    AutoConfig: configuring_diva.DiVAConfig
+    AutoModel: modeling_diva.DiVAModel
+  tokenizer_config:
+    bos_token: <|begin_of_text|>
+    chat_template: '{% set loop_messages = messages %}{% for message in loop_messages %}{% set content = ''<|start_header_id|>''
+      + message[''role''] + ''<|end_header_id|>
+
+
+      ''+ message[''content''] | trim + ''<|eot_id|>'' %}{% if loop.index0 == 0 %}{% set content = bos_token + content %}{%
+      endif %}{{ content }}{% endfor %}{{ ''<|start_header_id|>assistant<|end_header_id|>
+
+
+      '' }}'
+    eos_token: <|eot_id|>
+    pad_token: <|reserved_special_token_0|>
+cardData:
+  license: mpl-2.0
+  datasets:
+  - mozilla-foundation/common_voice_17_0
+  base_model:
+  - meta-llama/Llama-3.1-8B-Instruct
+transformersInfo:
+  auto_model: AutoModel
+  custom_class: modeling_diva.DiVAModel
+  pipeline_tag: feature-extraction
+siblings:
+- rfilename: .gitattributes
+- rfilename: LICENSE
+- rfilename: README.md
+- rfilename: __init__.py
+- rfilename: config.json
+- rfilename: configuring_diva.py
+- rfilename: model.safetensors
+- rfilename: model.safetensors.index.json
+- rfilename: modeling_diva.py
+- rfilename: preprocessor_config.json
+- rfilename: special_tokens_map.json
+- rfilename: test.py
+- rfilename: tokenizer.json
+- rfilename: tokenizer_config.json
+spaces:
+- WillHeld/diva-audio-chat
+- WillHeld/diva-audio
+createdAt: '2024-06-20T03:47:51.000Z'
+safetensors:
+  parameters:
+    F32: 2486915072
+  total: 2486915072
+usedStorage: 9947817720
+downloadsAllTime: 158120
+inferenceProviderMapping: {}
+configJson:
+  model_type: diva
+  reference_encoder: openai/whisper-large-v3
+  reference_decoder: meta-llama/Meta-Llama-3-8B-Instruct
+  architectures:
+  - DiVAModel
+  auto_map:
+    AutoConfig: configuring_diva.DiVAConfig
+    AutoModel: modeling_diva.DiVAModel
+  vocab_size: 128256
+  transformers_version: 4.38.2
+onnxFiles: {}
+safetensorsSizeMb: 9947.8
+approxSizeMb: 9947.7
+fetchedAt: '2026-06-08T16:42:43.000Z'

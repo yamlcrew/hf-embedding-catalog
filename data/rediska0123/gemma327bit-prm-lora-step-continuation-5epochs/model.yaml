@@ -1,0 +1,114 @@
+_id: 6a058b746e8a11a7df0d0743
+id: rediska0123/gemma327bit-prm-lora-step-continuation-5epochs
+private: false
+pipeline_tag: feature-extraction
+library_name: transformers
+tags:
+- transformers
+- safetensors
+- qwen2
+- feature-extraction
+- custom_code
+- arxiv:1910.09700
+- text-embeddings-inference
+- endpoints_compatible
+- region:us
+downloads: 156
+likes: 0
+modelId: rediska0123/gemma327bit-prm-lora-step-continuation-5epochs
+author: rediska0123
+sha: d1bad32b885fc4ad151a0109ce8d3aa504087e8f
+lastModified: '2026-05-14T08:50:11.000Z'
+gated: false
+disabled: false
+model-index: null
+config:
+  architectures:
+  - Qwen2ForProcessRewardModel
+  auto_map:
+    AutoConfig: configuration_qwen2_rm.Qwen2RMConfig
+    AutoModel: modeling_qwen2_rm.Qwen2ForProcessRewardModel
+  model_type: qwen2
+  tokenizer_config:
+    bos_token: null
+    eos_token: <|im_end|>
+    pad_token: <|endoftext|>
+    unk_token: null
+  chat_template_jinja: '{% for message in messages %}{% if loop.first and messages[0][''role''] != ''system'' %}{{ ''<|im_start|>system
+
+    You are a helpful assistant.<|im_end|>
+
+    '' }}{% endif %}{% if loop.last %}{{''<|im_start|>'' + message[''role''] + ''
+
+    '' + message[''content''] + ''<|im_end|>''}}{% else %}{{''<|im_start|>'' + message[''role''] + ''
+
+    '' + message[''content''] + ''<|im_end|>'' + ''
+
+    ''}}{% endif %}{% endfor %}{{ ''<|endoftext|>'' }}'
+cardData:
+  library_name: transformers
+  tags: []
+transformersInfo:
+  auto_model: AutoModel
+  custom_class: modeling_qwen2_rm.Qwen2ForProcessRewardModel
+  pipeline_tag: feature-extraction
+  processor: AutoTokenizer
+siblings:
+- rfilename: .gitattributes
+- rfilename: README.md
+- rfilename: added_tokens.json
+- rfilename: chat_template.jinja
+- rfilename: config.json
+- rfilename: configuration_qwen2_rm.py
+- rfilename: merges.txt
+- rfilename: model-00001-of-00003.safetensors
+- rfilename: model-00002-of-00003.safetensors
+- rfilename: model-00003-of-00003.safetensors
+- rfilename: model.safetensors.index.json
+- rfilename: modeling_qwen2_rm.py
+- rfilename: special_tokens_map.json
+- rfilename: tokenizer.json
+- rfilename: tokenizer_config.json
+- rfilename: vocab.json
+spaces: []
+createdAt: '2026-05-14T08:44:36.000Z'
+safetensors:
+  parameters:
+    BF16: 7083474946
+  total: 7083474946
+usedStorage: 14178408412
+downloadsAllTime: 156
+inferenceProviderMapping: {}
+configJson:
+  architectures:
+  - Qwen2ForProcessRewardModel
+  attention_dropout: 0.0
+  auto_map:
+    AutoConfig: configuration_qwen2_rm.Qwen2RMConfig
+    AutoModel: modeling_qwen2_rm.Qwen2ForProcessRewardModel
+  bos_token_id: 151643
+  dtype: bfloat16
+  eos_token_id: 151645
+  hidden_act: silu
+  hidden_size: 3584
+  initializer_range: 0.02
+  intermediate_size: 18944
+  max_position_embeddings: 4096
+  max_window_layers: 28
+  model_type: qwen2
+  num_attention_heads: 28
+  num_hidden_layers: 28
+  num_key_value_heads: 4
+  rms_norm_eps: 1.0e-05
+  rope_theta: 10000.0
+  sliding_window: null
+  tie_word_embeddings: false
+  transformers_version: 4.57.6
+  use_cache: true
+  use_mrope: false
+  use_sliding_window: false
+  vocab_size: 152064
+onnxFiles: {}
+safetensorsSizeMb: 14167.0
+approxSizeMb: 14166.9
+fetchedAt: '2026-06-08T16:42:43.000Z'

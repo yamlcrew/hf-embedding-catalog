@@ -1,0 +1,143 @@
+_id: 69e266ea05bd8bf8a699e7f2
+id: majentik/Qwen3-Embedding-4B-MLX-8bit
+private: false
+pipeline_tag: feature-extraction
+library_name: mlx-embeddings
+tags:
+- mlx-embeddings
+- safetensors
+- qwen3
+- mlx
+- embeddings
+- sentence-similarity
+- feature-extraction
+- quantized
+- 8bit
+- qwen
+- qwen3-embedding
+- en
+- zh
+- multilingual
+- base_model:Qwen/Qwen3-Embedding-4B
+- base_model:finetune:Qwen/Qwen3-Embedding-4B
+- license:apache-2.0
+- region:us
+downloads: 135
+likes: 0
+modelId: majentik/Qwen3-Embedding-4B-MLX-8bit
+author: majentik
+sha: bf6643fd2d34f6832a1203c870564b1633183885
+lastModified: '2026-04-17T17:01:36.000Z'
+gated: false
+disabled: false
+model-index: null
+config:
+  architectures:
+  - Qwen3ForCausalLM
+  model_type: qwen3
+  tokenizer_config:
+    bos_token: null
+    eos_token: <|im_end|>
+    pad_token: <|endoftext|>
+    unk_token: null
+  chat_template_jinja: "{%- if tools %}\n    {{- '<|im_start|>system\\n' }}\n    {%- if messages[0]['role'] == 'system' %}\n\
+    \        {{- messages[0]['content'] }}\n    {%- else %}\n        {{- 'You are a helpful assistant.' }}\n    {%- endif\
+    \ %}\n    {{- \"\\n\\n# Tools\\n\\nYou may call one or more functions to assist with the user query.\\n\\nYou are provided\
+    \ with function signatures within <tools></tools> XML tags:\\n<tools>\" }}\n    {%- for tool in tools %}\n        {{-\
+    \ \"\\n\" }}\n        {{- tool | tojson }}\n    {%- endfor %}\n    {{- \"\\n</tools>\\n\\nFor each function call, return\
+    \ a json object with function name and arguments within <tool_call></tool_call> XML tags:\\n<tool_call>\\n{\\\"name\\\"\
+    : <function-name>, \\\"arguments\\\": <args-json-object>}\\n</tool_call><|im_end|>\\n\" }}\n{%- else %}\n    {%- if messages[0]['role']\
+    \ == 'system' %}\n        {{- '<|im_start|>system\\n' + messages[0]['content'] + '<|im_end|>\\n' }}\n    {%- else %}\n\
+    \        {{- '<|im_start|>system\\nYou are a helpful assistant.<|im_end|>\\n' }}\n    {%- endif %}\n{%- endif %}\n{%-\
+    \ for message in messages %}\n    {%- if (message.role == \"user\") or (message.role == \"system\" and not loop.first)\
+    \ or (message.role == \"assistant\" and not message.tool_calls) %}\n        {{- '<|im_start|>' + message.role + '\\n'\
+    \ + message.content + '<|im_end|>' + '\\n' }}\n    {%- elif message.role == \"assistant\" %}\n        {{- '<|im_start|>'\
+    \ + message.role }}\n        {%- if message.content %}\n            {{- '\\n' + message.content }}\n        {%- endif\
+    \ %}\n        {%- for tool_call in message.tool_calls %}\n            {%- if tool_call.function is defined %}\n      \
+    \          {%- set tool_call = tool_call.function %}\n            {%- endif %}\n            {{- '\\n<tool_call>\\n{\"\
+    name\": \"' }}\n            {{- tool_call.name }}\n            {{- '\", \"arguments\": ' }}\n            {{- tool_call.arguments\
+    \ | tojson }}\n            {{- '}\\n</tool_call>' }}\n        {%- endfor %}\n        {{- '<|im_end|>\\n' }}\n    {%- elif\
+    \ message.role == \"tool\" %}\n        {%- if (loop.index0 == 0) or (messages[loop.index0 - 1].role != \"tool\") %}\n\
+    \            {{- '<|im_start|>user' }}\n        {%- endif %}\n        {{- '\\n<tool_response>\\n' }}\n        {{- message.content\
+    \ }}\n        {{- '\\n</tool_response>' }}\n        {%- if loop.last or (messages[loop.index0 + 1].role != \"tool\") %}\n\
+    \            {{- '<|im_end|>\\n' }}\n        {%- endif %}\n    {%- endif %}\n{%- endfor %}\n{%- if add_generation_prompt\
+    \ %}\n    {{- '<|im_start|>assistant\\n' }}\n{%- endif %}\n"
+cardData:
+  library_name: mlx-embeddings
+  tags:
+  - mlx
+  - mlx-embeddings
+  - embeddings
+  - sentence-similarity
+  - feature-extraction
+  - quantized
+  - 8bit
+  - qwen
+  - qwen3
+  - qwen3-embedding
+  base_model: Qwen/Qwen3-Embedding-4B
+  license: apache-2.0
+  pipeline_tag: feature-extraction
+  language:
+  - en
+  - zh
+  - multilingual
+siblings:
+- rfilename: .gitattributes
+- rfilename: README.md
+- rfilename: chat_template.jinja
+- rfilename: config.json
+- rfilename: config_sentence_transformers.json
+- rfilename: generation_config.json
+- rfilename: model.safetensors
+- rfilename: model.safetensors.index.json
+- rfilename: modules.json
+- rfilename: tokenizer.json
+- rfilename: tokenizer_config.json
+- rfilename: vocab.json
+spaces: []
+createdAt: '2026-04-17T16:59:22.000Z'
+safetensors:
+  parameters:
+    F16: 125870416
+    U32: 1005394560
+  total: 1131264976
+usedStorage: 4284844179
+downloadsAllTime: 369
+inferenceProviderMapping: {}
+configJson:
+  architectures:
+  - Qwen3ForCausalLM
+  attention_bias: false
+  attention_dropout: 0.0
+  bos_token_id: 151643
+  eos_token_id: 151645
+  head_dim: 128
+  hidden_act: silu
+  hidden_size: 2560
+  initializer_range: 0.02
+  intermediate_size: 9728
+  max_position_embeddings: 40960
+  max_window_layers: 36
+  model_type: qwen3
+  num_attention_heads: 32
+  num_hidden_layers: 36
+  num_key_value_heads: 8
+  quantization:
+    group_size: 64
+    bits: 8
+    mode: affine
+  rms_norm_eps: 1.0e-06
+  rope_scaling: null
+  rope_theta: 1000000
+  sliding_window: null
+  tie_word_embeddings: true
+  torch_dtype: bfloat16
+  transformers_version: 4.51.2
+  use_cache: true
+  use_sliding_window: false
+  vocab_size: 151665
+onnxFiles: {}
+safetensorsSizeMb: 4273.4
+approxSizeMb: 4273.3
+fetchedAt: '2026-06-08T16:42:43.000Z'

@@ -1,0 +1,308 @@
+_id: 6a17ea33d7b74a192c9b2711
+id: rayzkir/tnved_biencoder
+private: false
+pipeline_tag: sentence-similarity
+library_name: sentence-transformers
+tags:
+- sentence-transformers
+- safetensors
+- xlm-roberta
+- sentence-similarity
+- feature-extraction
+- generated_from_trainer
+- dataset_size:55239
+- loss:MultipleNegativesRankingLoss
+- arxiv:1908.10084
+- arxiv:1807.03748
+- base_model:BAAI/bge-m3
+- base_model:finetune:BAAI/bge-m3
+- model-index
+- text-embeddings-inference
+- endpoints_compatible
+- region:us
+downloads: 40
+likes: 0
+modelId: rayzkir/tnved_biencoder
+author: rayzkir
+sha: 123e66f8bda76c39991115fe61c8009f0c3912a2
+lastModified: '2026-05-28T07:56:00.000Z'
+gated: false
+disabled: false
+mask_token: <mask>
+widgetData:
+- source_sentence: Салатник фарфор, круглый, 6 см, 25х20.5х6 см, с ручками, Arabesque, Nouvelle Home, 860083, синий | Салатники
+    | фарфор | Салатники | Салатник
+  sentences:
+  - Посуда столовая и кухонная из фарфора
+  - Прочие хозяйственные и туалетные изделия из фарфора
+  - Посуда столовая и кухонная из фарфора
+- source_sentence: Набор детской посуды керамика, 3 шт, Parsopal, Blue Meowz, PO-3sd-763 | Наборы детской посуды | керамика
+    | Наборы для кормления | Набор посуды для кормления
+  sentences:
+  - Посуда столовая и кухонная из пластмасс
+  - Посуда столовая и кухонная из пластмасс
+  - Посуда столовая и кухонная из грубой керамики
+- source_sentence: Тарелка обеденная, фарфор, 20 см, круглая, Гладкий край Мгновения весны, Дулевский фарфор, 11818 | Тарелки
+    | фарфор | Тарелки | Тарелка
+  sentences:
+  - Изделия столовые, кухонные или прочие изделия для бытовых нужд и их части из алюминия
+  - Принадлежности столовые и кухонные, из древесины тропических пород
+  - Посуда столовая и кухонная из фарфора
+- source_sentence: Форма для запекания силикон, 30.5х13.5х6 см, прямоугольная, мрамор, Daniks, Emerald, JA20221067M | Формы
+    для выпечки | силикон | Формы для запекания | Форма для запекания, выпечки
+  sentences:
+  - Наборы кухонных или столовых приборов прочие из коррозионностойкой стали
+  - Формы для отливки стекла
+  - Посуда столовая и кухонная из пластмасс
+- source_sentence: Стакан для зубных щеток, 10х8х8 см, керамика, Zenfort, Granite, 106671 | Стаканы для ванной | керамика
+    | Стаканы для зубных щеток | Стакан для зубных щеток
+  sentences:
+  - Наборы кухонных или столовых приборов прочие из коррозионностойкой стали
+  - Щетки зубные, включая щетки для зубных протезов
+  - Прочие хозяйственные и туалетные изделия из керамики, кроме фарфора, прочие
+model-index:
+- name: SentenceTransformer based on BAAI/bge-m3
+  results:
+  - task:
+      type: information-retrieval
+      name: Information Retrieval
+    dataset:
+      name: tnved val
+      type: tnved_val
+    metrics:
+    - type: cosine_accuracy@1
+      value: 0.9112180550945901
+      name: Cosine Accuracy@1
+      verified: false
+    - type: cosine_accuracy@3
+      value: 0.9707932293395287
+      name: Cosine Accuracy@3
+      verified: false
+    - type: cosine_accuracy@5
+      value: 0.9824095585794889
+      name: Cosine Accuracy@5
+      verified: false
+    - type: cosine_accuracy@10
+      value: 0.9880517756388981
+      name: Cosine Accuracy@10
+      verified: false
+    - type: cosine_precision@1
+      value: 0.9112180550945901
+      name: Cosine Precision@1
+      verified: false
+    - type: cosine_precision@5
+      value: 0.19648191171589777
+      name: Cosine Precision@5
+      verified: false
+    - type: cosine_precision@10
+      value: 0.09880517756388979
+      name: Cosine Precision@10
+      verified: false
+    - type: cosine_recall@1
+      value: 0.9112180550945901
+      name: Cosine Recall@1
+      verified: false
+    - type: cosine_recall@5
+      value: 0.9824095585794889
+      name: Cosine Recall@5
+      verified: false
+    - type: cosine_recall@10
+      value: 0.9880517756388981
+      name: Cosine Recall@10
+      verified: false
+    - type: cosine_ndcg@10
+      value: 0.9537004881378194
+      name: Cosine Ndcg@10
+      verified: false
+    - type: cosine_mrr@10
+      value: 0.9422067206127923
+      name: Cosine Mrr@10
+      verified: false
+    - type: cosine_map@100
+      value: 0.942703144576243
+      name: Cosine Map@100
+      verified: false
+config:
+  architectures:
+  - XLMRobertaModel
+  model_type: xlm-roberta
+  tokenizer_config:
+    bos_token: <s>
+    cls_token: <s>
+    eos_token: </s>
+    mask_token: <mask>
+    pad_token: <pad>
+    sep_token: </s>
+    unk_token: <unk>
+cardData:
+  tags:
+  - sentence-transformers
+  - sentence-similarity
+  - feature-extraction
+  - generated_from_trainer
+  - dataset_size:55239
+  - loss:MultipleNegativesRankingLoss
+  base_model: BAAI/bge-m3
+  widget:
+  - source_sentence: Салатник фарфор, круглый, 6 см, 25х20.5х6 см, с ручками, Arabesque, Nouvelle Home, 860083, синий | Салатники
+      | фарфор | Салатники | Салатник
+    sentences:
+    - Посуда столовая и кухонная из фарфора
+    - Прочие хозяйственные и туалетные изделия из фарфора
+    - Посуда столовая и кухонная из фарфора
+  - source_sentence: Набор детской посуды керамика, 3 шт, Parsopal, Blue Meowz, PO-3sd-763 | Наборы детской посуды | керамика
+      | Наборы для кормления | Набор посуды для кормления
+    sentences:
+    - Посуда столовая и кухонная из пластмасс
+    - Посуда столовая и кухонная из пластмасс
+    - Посуда столовая и кухонная из грубой керамики
+  - source_sentence: Тарелка обеденная, фарфор, 20 см, круглая, Гладкий край Мгновения весны, Дулевский фарфор, 11818 | Тарелки
+      | фарфор | Тарелки | Тарелка
+    sentences:
+    - Изделия столовые, кухонные или прочие изделия для бытовых нужд и их части из алюминия
+    - Принадлежности столовые и кухонные, из древесины тропических пород
+    - Посуда столовая и кухонная из фарфора
+  - source_sentence: Форма для запекания силикон, 30.5х13.5х6 см, прямоугольная, мрамор, Daniks, Emerald, JA20221067M | Формы
+      для выпечки | силикон | Формы для запекания | Форма для запекания, выпечки
+    sentences:
+    - Наборы кухонных или столовых приборов прочие из коррозионностойкой стали
+    - Формы для отливки стекла
+    - Посуда столовая и кухонная из пластмасс
+  - source_sentence: Стакан для зубных щеток, 10х8х8 см, керамика, Zenfort, Granite, 106671 | Стаканы для ванной | керамика
+      | Стаканы для зубных щеток | Стакан для зубных щеток
+    sentences:
+    - Наборы кухонных или столовых приборов прочие из коррозионностойкой стали
+    - Щетки зубные, включая щетки для зубных протезов
+    - Прочие хозяйственные и туалетные изделия из керамики, кроме фарфора, прочие
+  pipeline_tag: sentence-similarity
+  library_name: sentence-transformers
+  metrics:
+  - cosine_accuracy@1
+  - cosine_accuracy@3
+  - cosine_accuracy@5
+  - cosine_accuracy@10
+  - cosine_precision@1
+  - cosine_precision@5
+  - cosine_precision@10
+  - cosine_recall@1
+  - cosine_recall@5
+  - cosine_recall@10
+  - cosine_ndcg@10
+  - cosine_mrr@10
+  - cosine_map@100
+  model-index:
+  - name: SentenceTransformer based on BAAI/bge-m3
+    results:
+    - task:
+        type: information-retrieval
+        name: Information Retrieval
+      dataset:
+        name: tnved val
+        type: tnved_val
+      metrics:
+      - type: cosine_accuracy@1
+        value: 0.9112180550945901
+        name: Cosine Accuracy@1
+        verified: false
+      - type: cosine_accuracy@3
+        value: 0.9707932293395287
+        name: Cosine Accuracy@3
+        verified: false
+      - type: cosine_accuracy@5
+        value: 0.9824095585794889
+        name: Cosine Accuracy@5
+        verified: false
+      - type: cosine_accuracy@10
+        value: 0.9880517756388981
+        name: Cosine Accuracy@10
+        verified: false
+      - type: cosine_precision@1
+        value: 0.9112180550945901
+        name: Cosine Precision@1
+        verified: false
+      - type: cosine_precision@5
+        value: 0.19648191171589777
+        name: Cosine Precision@5
+        verified: false
+      - type: cosine_precision@10
+        value: 0.09880517756388979
+        name: Cosine Precision@10
+        verified: false
+      - type: cosine_recall@1
+        value: 0.9112180550945901
+        name: Cosine Recall@1
+        verified: false
+      - type: cosine_recall@5
+        value: 0.9824095585794889
+        name: Cosine Recall@5
+        verified: false
+      - type: cosine_recall@10
+        value: 0.9880517756388981
+        name: Cosine Recall@10
+        verified: false
+      - type: cosine_ndcg@10
+        value: 0.9537004881378194
+        name: Cosine Ndcg@10
+        verified: false
+      - type: cosine_mrr@10
+        value: 0.9422067206127923
+        name: Cosine Mrr@10
+        verified: false
+      - type: cosine_map@100
+        value: 0.942703144576243
+        name: Cosine Map@100
+        verified: false
+siblings:
+- rfilename: .gitattributes
+- rfilename: 1_Pooling/config.json
+- rfilename: 2_Normalize/.gitkeep
+- rfilename: README.md
+- rfilename: config.json
+- rfilename: config_sentence_transformers.json
+- rfilename: model.safetensors
+- rfilename: modules.json
+- rfilename: ref_embeddings_finetuned.npy
+- rfilename: sentence_bert_config.json
+- rfilename: tokenizer.json
+- rfilename: tokenizer_config.json
+spaces: []
+createdAt: '2026-05-28T07:09:39.000Z'
+safetensors:
+  parameters:
+    F32: 567754752
+  total: 567754752
+usedStorage: 2326664066
+downloadsAllTime: 40
+inferenceProviderMapping: {}
+configJson:
+  add_cross_attention: false
+  architectures:
+  - XLMRobertaModel
+  attention_probs_dropout_prob: 0.1
+  bos_token_id: 0
+  classifier_dropout: null
+  dtype: float32
+  eos_token_id: 2
+  hidden_act: gelu
+  hidden_dropout_prob: 0.1
+  hidden_size: 1024
+  initializer_range: 0.02
+  intermediate_size: 4096
+  is_decoder: false
+  layer_norm_eps: 1.0e-05
+  max_position_embeddings: 8194
+  model_type: xlm-roberta
+  num_attention_heads: 16
+  num_hidden_layers: 24
+  output_past: true
+  pad_token_id: 1
+  position_embedding_type: absolute
+  tie_word_embeddings: true
+  transformers_version: 5.0.0
+  type_vocab_size: 1
+  use_cache: false
+  vocab_size: 250002
+onnxFiles: {}
+safetensorsSizeMb: 2271.1
+approxSizeMb: 2271.0
+fetchedAt: '2026-06-08T16:42:43.000Z'

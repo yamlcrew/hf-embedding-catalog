@@ -1,0 +1,804 @@
+_id: 6823be492ab91afcdc8bb3d0
+id: manmah/finetuned-arctic-ft2-aws-1-cf8fa52742
+private: false
+pipeline_tag: sentence-similarity
+library_name: sentence-transformers
+tags:
+- sentence-transformers
+- safetensors
+- bert
+- sentence-similarity
+- feature-extraction
+- generated_from_trainer
+- dataset_size:194
+- loss:MatryoshkaLoss
+- loss:MultipleNegativesRankingLoss
+- arxiv:1908.10084
+- arxiv:2205.13147
+- arxiv:1705.00652
+- base_model:Snowflake/snowflake-arctic-embed-l
+- base_model:finetune:Snowflake/snowflake-arctic-embed-l
+- model-index
+- text-embeddings-inference
+- endpoints_compatible
+- region:us
+downloads: 8
+likes: 0
+modelId: manmah/finetuned-arctic-ft2-aws-1-cf8fa52742
+author: manmah
+sha: fec6f90eff5bb512ef9ec4d728a3cdd87f5b6ffe
+lastModified: '2025-05-13T22:00:06.000Z'
+gated: false
+disabled: false
+mask_token: '[MASK]'
+widgetData:
+- source_sentence: What permission is required to list all of your general purpose buckets in Amazon S3?
+  sentences:
+  - "###### To move an object\n\n1. Sign in to the AWS Management Console and open the Amazon S3 console at https://console.aws.amazon.com/s3/.\n\
+    2. In the left navigation pane, choose Buckets. Navigate to the Amazon S3 bucket or folder that contains the objects that\
+    \ you want to move.\n3. Select the check box for the objects that you want to move.\n4. On the Actions menu, choose Move.\n\
+    5. To specify the destination path, choose Browse S3, navigate to the destination, and select the destination check box.\
+    \ Choose Choose destination.  Alternatively, enter the destination path.\n6. If you do not have bucket versioning enabled,\
+    \ you will see a warning recommending you enable Bucket Versioning to help protect against unintentionally overwriting\
+    \ or deleting objects. If you want to keep all versions of objects in this bucket, select Enable Bucket Versioning. You\
+    \ can also view the default encryption and Object Lock properties in Destination details.\n7. Under Additional copy settings,\
+    \ choose whether you want to Copy source settings, Donâ\x80\x99t specify settings, or Specify settings. Copy source settings\
+    \ is the default option. If you only want to copy the object without the source settings attributes, choose Donâ\x80\x99\
+    t specify settings. Choose Specify settings to specify settings for storage class, ACLs, object tags, metadata, server-side\
+    \ encryption, and additional checksums.\n8. Choose Move in the bottom-right corner. Amazon S3 moves your objects to the\
+    \ destination.\n\nYou can also use the AWS Command Line Interface (AWS CLI) to move an S3 object. For more information,\
+    \ see mv in the AWS CLI Command Reference.\n\nFor information about the AWS CLI, see What is the AWS Command Line Interface?\
+    \ in the AWS Command Line Interface User Guide.\n\n## To rename an object\n\nTo rename an object, use the following procedure.\n\
+    \n###### Note\n\n- You can rename an object if your object is less than 5 GB. To rename objects greater than 5 GB, you\
+    \ must use the AWS CLI or AWS SDKs to copy your object with a new name and then delete the original object.\n- For a list\
+    \ of additional permissions required to copy objects, see Required permissions for Amazon S3 API operations. For example\
+    \ policies that grant this permission, see Identity-based policy examples for Amazon S3.\n- Renaming an object creates\
+    \ a copy of the object with a new last-modified date, and then adds a delete marker to the original object.\n- Bucket\
+    \ settings for default encryption are automatically applied to any specified object that's unencrypted.\n- You can't use\
+    \ the Amazon S3 console to rename objects with customer-provided encryption keys (SSE-C). To rename objects encrypted\
+    \ with SSE-C, use the AWS CLI, AWS SDKs, or the Amazon S3 REST API to copy those objects with new names.\n- If this bucket\
+    \ uses the bucket owner enforced setting for S3 Object Ownership, object access control lists (ACLs) won't be copied.\n\
+    \n###### To rename an object"
+  - '## Best practices
+
+
+    When naming your general purpose buckets, consider the following bucket naming best practices.
+
+
+    ###### Choose a bucket naming scheme that''s unlikely to cause naming conflicts
+
+
+    If your application automatically creates buckets, choose a bucket naming scheme that''s unlikely to cause naming conflicts.
+    Ensure that your application logic will choose a different bucket name if a bucket name is already taken.
+
+
+    ###### Append globally unique identifiers (GUIDs) to bucket names
+
+
+    We recommend that you create bucket names that aren''t predictable. Don''t write code assuming your chosen bucket name
+    is available unless you have already created the bucket. One method for creating bucket names that aren''t predictable
+    is to append a Globally Unique Identifier (GUID) to your bucket name, for example, amzn-s3-demo-bucket-a1b2c3d4-5678-90ab-cdef-example11111.
+    For more information, see Creating a bucket that uses a GUID in the bucket name.
+
+
+    ###### Avoid using periods (.) in bucket names
+
+
+    For best compatibility, we recommend that you avoid using periods (.) in bucket names, except for buckets that are used
+    only for static website hosting. If you include periods in a bucket''s name, you can''t use virtual-host-style addressing
+    over HTTPS, unless you perform your own certificate validation. The security certificates used for virtual hosting of
+    buckets don''t work for buckets with periods in their names.
+
+
+    This limitation doesn''t affect buckets used for static website hosting, because static website hosting is available only
+    over HTTP. For more information about virtual-host-style addressing, see Virtual hosting of general purpose buckets. For
+    more information about static website hosting, see Hosting a static website using Amazon S3.
+
+
+    ###### Choose a relevant name
+
+
+    When you name a bucket, we recommend that you choose a name that''s relevant to you or your business. Avoid using names
+    associated with others. For example, avoid using AWS or Amazon in your bucket name.
+
+
+    ###### Don''t delete buckets so that you can reuse bucket names
+
+
+    If a bucket is empty, you can delete it. After a bucket is deleted, the name becomes available for reuse. However, you
+    aren''t guaranteed to be able to reuse the name right away, or at all. After you delete a bucket, some time might pass
+    before you can reuse the name. In addition, another AWS account might create a bucket with the same name before you can
+    reuse the name.
+
+
+    After you delete a general purpose bucket, be aware that another AWS account in the same partition can use the same bucket
+    name for a new bucket and can therefore potentially receive requests intended for the deleted general purpose bucket.
+    If you want to prevent this, or if you want to continue to use the same general purpose bucket name, don''t delete the
+    general purpose bucket. We recommend that you empty the bucket and keep it, and instead, block any bucket requests as
+    needed.
+
+
+    ## Creating a bucket that uses a GUID in the bucket name
+
+
+    The following examples show you how to create a general purpose bucket that uses a GUID at the end of the bucket name.
+
+
+    The following AWS CLI example creates a general purpose bucket in the US West (N. California) Region (us-west-1) Region
+    with an example bucket name that uses a globally unique identifier (GUID). To use this example command, replace the user
+    input placeholders with your own information.
+
+
+    ```
+
+    aws s3api create-bucket \ --bucket amzn-s3-demo-bucket1$(uuidgen | tr -d - | tr ''[:upper:]'' ''[:lower:]'' ) \ --region
+    us-west-1 \ --create-bucket-configuration LocationConstraint=us-west-1
+
+    ```'
+  - "# Listing Amazon S3 general purpose buckets\n\nTo return a list of general purpose buckets that you own, you can use\
+    \ ListBuckets. You can list your buckets by using the Amazon S3 console, the AWS Command Line Interface, or the AWS SDKs.\
+    \ For ListBuckets requests using the AWS CLI, AWS SDKs, and Amazon S3 REST API, AWS accounts that use the default service\
+    \ quota for buckets (10,000 buckets), support both paginated and unpaginated requests. Regardless of how many buckets\
+    \ you have in your account, you can create page sizes between 1 and 10,000 buckets to list all of your buckets. For paginated\
+    \ requests, ListBuckets requests return both the bucket names and the corresponding AWS Regions for each bucket. The following\
+    \ AWS Command Line Interface and AWS SDK examples show you how to use pagination in your ListBuckets request. Note that\
+    \ some AWS SDKs assist with pagination.\n\n###### Permissions\n\nTo list all of your general purpose buckets, you must\
+    \ have the s3:ListAllMyBuckets permission. If you're encountering an HTTP Access Denied (403 Forbidden) error, see Troubleshoot\
+    \ access denied (403 Forbidden) errors in Amazon S3.\n\n###### Important\n\nWe strongly recommend using only paginated\
+    \ ListBuckets requests. Unpaginated ListBuckets requests are only supported for AWS accounts set to the default general\
+    \ purpose bucket quota of 10,000. If you have an approved general purpose bucket quota above 10,000, you must send paginated\
+    \ ListBuckets requests to list your accountâ\x80\x99s buckets. All unpaginated ListBuckets requests will be rejected for\
+    \ AWS accounts with a general purpose bucket quota greater than 10,000.\n\n1. Sign in to the AWS Management Console and\
+    \ open the Amazon S3 console at https://console.aws.amazon.com/s3/.\n2. In the left navigation pane, choose General purpose\
+    \ buckets.\n3. On the General purpose buckets tab, you can see a list of your general purpose buckets.\n4. To find buckets\
+    \ by name, enter a bucket name in the Find buckets by name field.\n\nTo use the AWS CLI to generate a listing of general\
+    \ purpose buckets, you can use the ls or list-buckets commands. The following examples show you how to create a paginated\
+    \ list-buckets request and an unpaginated ls request. To use these examples, replace the user input placeholders.\n\n\
+    ###### Example â\x80\x93 List all the buckets in your account by using ls (unpaginated)\n\nThe following example command\
+    \ lists all the general purpose buckets in your account in a single non-paginated call. This call returns a list of all\
+    \ buckets in your account (up to 10,000 results):\n\n```\n$ aws s3 ls\n```\n\nFor more information and examples, see List\
+    \ bucket and objects.\n\n###### Example â\x80\x93 List all the buckets in your account by using ls (paginated)\n\nThe\
+    \ following example command makes one or more paginated calls to list all the general purpose buckets in your account,\
+    \ returning 100 buckets per page:\n\n```\n$ aws s3 ls --page-size 100\n```\n\nFor more information and examples, see List\
+    \ bucket and objects.\n\n###### Example â\x80\x93 List all the buckets in your account (paginated)\n\nThe following example\
+    \ provides a paginated list-buckets command to list all the general purpose buckets in your account. The --max-items and\
+    \ --page-size options limit the number of buckets listed to 100 per page.\n\n```\n$ aws s3api list-buckets / --max-items\
+    \ 100 / --page-size 100\n```"
+- source_sentence: Why does the bucket deletion fail when using the `rb` command with the `--force` parameter on a versioned
+    bucket?
+  sentences:
+  - 'The following get-object example command shows how you can use the AWS CLI to download an object from Amazon S3. This
+    command gets the object folder/my\_image from the bucket amzn-s3-demo-bucket1. You must include an outfile, which is a
+    file name for the downloaded object, such as my\_downloaded\_image.jpg.
+
+
+    ```
+
+    aws s3api get-object --bucket amzn-s3-demo-bucket1 --key folder/my_image my_downloaded_image.jpg
+
+    ```
+
+
+    For more information and examples, see get-object in the AWS CLI Command Reference.
+
+
+    For examples of how to download an object with the AWS SDKs, see Code examples in the Amazon S3 API Reference.
+
+
+    For general information about using different AWS SDKs, see Developing with Amazon S3 using the AWS SDKs in the Amazon
+    S3 API Reference.
+
+
+    You can use the REST API to retrieve objects from Amazon S3. For more information, see GetObject in the Amazon Simple
+    Storage Service API Reference.
+
+
+    ## Downloading multiple objects
+
+
+    You can download multiple objects by using AWS CloudShell, the AWS CLI, or the AWS SDKs.
+
+
+    AWS CloudShell is a browser-based, pre-authenticated shell that you can launch directly from the AWS Management Console.
+
+
+    For more information about AWS CloudShell, see What is CloudShell? in the AWS CloudShell User Guide.
+
+
+    ###### Important
+
+
+    With AWS CloudShell, your home directory has storage up to 1GB per AWS Region. Therefore you cannot sync buckets with
+    objects totaling over this amount. For more limitations, see Service quotas and restrictions in the AWS CloudShell User
+    Guide.
+
+
+    ###### To download objects by using AWS CloudShell
+
+
+    1. Sign in to the AWS Management Console and open the CloudShell console at https://console.aws.amazon.com/cloudshell/.
+
+    2. Run the following command to sync objects in your bucket to CloudShell. The following command syncs objects from the
+    bucket named amzn-s3-demo-bucket1 and creates a folder named temp in CloudShell. CloudShell syncs your objects to this
+    folder. To use this command, replace the user input placeholders with your own information. aws s3 sync s3://amzn-s3-demo-bucket1
+    ./temp NoteThe sync command is not compatible with directory buckets.To perform pattern matching to either exclude or
+    include particular objects, you can use the --exclude "value" and --include "value" parameters with the sync command.
+
+    3. Run the following command to zip your objects in the folder named temp to a file named temp.zip. zip temp.zip -r temp/
+
+    4. Choose Actions, and then choose Download file.
+
+    5. Enter the file name temp.zip and then choose Download.
+
+    6. (Optional) Delete the temp.zip file and the objects that are synced to the temp folder in CloudShell. With AWS CloudShell,
+    you have persistent storage of up to 1 GB for each AWS Region.  You can use the following example command to delete your
+    .zip file and your folder. To use this example command, replace the user input placeholders with your own information.  rm
+    temp.zip &amp;&amp; rm -rf temp/
+
+
+    The following example shows how you can use the AWS CLI to download all of the files or objects under the specified directory
+    or prefix. This command copies all objects from the bucket amzn-s3-demo-bucket1 to your current directory. To use this
+    example command, use your bucket name in place of amzn-s3-demo-bucket1.
+
+
+    ```
+
+    aws s3 cp s3://amzn-s3-demo-bucket1 . --recursive
+
+    ```'
+  - 'You can delete a general purpose bucket that contains objects with the AWS CLI if the bucket doesn''t have versioning
+    enabled. When you delete a bucket that contains objects, all the objects in the bucket are permanently deleted, including
+    objects that have been transitioned to the S3 Glacier Flexible Retrieval storage class.
+
+
+    If your bucket doesn''t have versioning enabled, you can use the rb (remove bucket) AWS CLI command with the --force parameter
+    to delete the bucket and all the objects in it. This command deletes all the objects first and then deletes the bucket.
+
+
+    If versioning is enabled, using the rb command with the --force parameter doesn''t delete versioned objects, so the bucket
+    deletion fails because the bucket isn''t empty. For more information about deleting versioned objects, see Deleting object
+    versions.
+
+
+    To use the following command, replace amzn-s3-demo-bucket with the name of the bucket that you want to delete:
+
+
+    ```
+
+    $ aws s3 rb s3://amzn-s3-demo-bucket --force
+
+    ```
+
+
+    For more information, see Using High-Level S3 Commands with the AWS Command Line Interface in the AWS Command Line Interface
+    User Guide.'
+  - "## Using trailing checksums\n\nWhen uploading objects to Amazon S3, you can either provide a precalculated checksum for\
+    \ the object or use an AWS SDK to automatically create trailing checksums for chunked uploads, on your behalf. If you\
+    \ use a trailing checksum, Amazon S3 automatically generates the checksum by using your specified algorithm to validate\
+    \ the integrity of the object in chunked uploads, when you upload an object.\n\nTo create a trailing checksum when using\
+    \ an AWS SDK, populate the ChecksumAlgorithm parameter with your preferred algorithm. The SDK uses that algorithm to calculate\
+    \ the checksum for your object (or object parts) and automatically appends it to the end of your chunked upload request.\
+    \ This behavior saves you time because Amazon S3 performs both the verification and upload of your data in a single pass.\n\
+    \n###### Important\n\nIf you're using S3 Object Lambda, all requests to S3 Object Lambda are signed using s3-object-lambda\
+    \ instead of s3. This behavior affects the signature of trailing checksum values. For more information about S3 Object\
+    \ Lambda, see Transforming objects with S3 Object Lambda.\n\n### Trailing checksum headers\n\nTo make a chunked content\
+    \ encoding request, Amazon S3 requires clients to include several headers to correctly parse the request. Clients must\
+    \ include the following headers:\n\n- x-amz-decoded-content-length:This header indicates the plaintext size of the actual\
+    \ data that is being uploaded to Amazon S3 with the request.\n- x-amz-content-sha256: This header indicates the type of\
+    \ chunked upload that is included in the request. For chunked uploads with trailing checksums, the header value is STREAMING-UNSIGNED-PAYLOAD-TRAILER\
+    \ for requests that donâ\x80\x99t use payload signing and STREAMING-AWS4-HMAC-SHA256-PAYLOAD-TRAILER for requests that\
+    \ use SigV4 payload signing. (For more information about implementing signed payloads, see Signature calculations for\
+    \ the authorization header: Transferring a payload in multiple chunks.)\n- x-amz-trailer : This header indicates the name\
+    \ of the trailing header in the request. If trailing checksums exist (where AWS SDKs append checksums to the encoded request\
+    \ bodies), the x-amz-trailer header value includes the x-amz-checksum- prefix and ends with the algorithm name. The following\
+    \ x-amz-trailer values are currently supported:\n- x-amz-trailer: This header indicates the name of the trailing header\
+    \ in the request. If trailing checksums exist (where AWS SDKs append checksums to the encoded request bodies), the x-amz-trailer\
+    \ header value includes the x-amz-checksum- prefix and ends with the algorithm name. The following x-amz-trailer values\
+    \ are currently supported:\n    - x-amz-checksum-crc32\n    - x-amz-checksum-crc32c\n    - x-amz-checksum-crc64nvme\n\
+    \    - x-amz-checksum-sha1\n    - x-amz-checksum-sha256\n\n###### Note\n\nYou can also include the Content-Encoding header,\
+    \ with the chunked value, in your request. While this header isnâ\x80\x99t required, including this header can minimize\
+    \ HTTP proxy issues when transmitting encoded data. If another Content-Encoding header (such as gzip) exists in the request,\
+    \ the Content-Encoding header includes the chunked value in a comma-separated list of encodings. For example, Content-Encoding:\
+    \ aws-chunked, gzip.\n\n### Chunked parts\n\nWhen you upload an object to Amazon S3 using chunked encoding, the upload\
+    \ request includes the following types of chunks (formatted in the listed order):"
+model-index:
+- name: SentenceTransformer based on Snowflake/snowflake-arctic-embed-l
+  results:
+  - task:
+      type: information-retrieval
+      name: Information Retrieval
+    dataset:
+      name: Unknown
+      type: unknown
+    metrics:
+    - type: cosine_accuracy@1
+      value: 0.5909090909090909
+      name: Cosine Accuracy@1
+      verified: false
+    - type: cosine_accuracy@3
+      value: 0.9090909090909091
+      name: Cosine Accuracy@3
+      verified: false
+    - type: cosine_accuracy@5
+      value: 0.9090909090909091
+      name: Cosine Accuracy@5
+      verified: false
+    - type: cosine_accuracy@10
+      value: 1
+      name: Cosine Accuracy@10
+      verified: false
+    - type: cosine_precision@1
+      value: 0.5909090909090909
+      name: Cosine Precision@1
+      verified: false
+    - type: cosine_precision@3
+      value: 0.303030303030303
+      name: Cosine Precision@3
+      verified: false
+    - type: cosine_precision@5
+      value: 0.18181818181818185
+      name: Cosine Precision@5
+      verified: false
+    - type: cosine_precision@10
+      value: 0.10000000000000003
+      name: Cosine Precision@10
+      verified: false
+    - type: cosine_recall@1
+      value: 0.5909090909090909
+      name: Cosine Recall@1
+      verified: false
+    - type: cosine_recall@3
+      value: 0.9090909090909091
+      name: Cosine Recall@3
+      verified: false
+    - type: cosine_recall@5
+      value: 0.9090909090909091
+      name: Cosine Recall@5
+      verified: false
+    - type: cosine_recall@10
+      value: 1
+      name: Cosine Recall@10
+      verified: false
+    - type: cosine_ndcg@10
+      value: 0.8092475899080159
+      name: Cosine Ndcg@10
+      verified: false
+    - type: cosine_mrr@10
+      value: 0.7470238095238095
+      name: Cosine Mrr@10
+      verified: false
+    - type: cosine_map@100
+      value: 0.7470238095238095
+      name: Cosine Map@100
+      verified: false
+config:
+  architectures:
+  - BertModel
+  model_type: bert
+  tokenizer_config:
+    cls_token: '[CLS]'
+    mask_token: '[MASK]'
+    pad_token: '[PAD]'
+    sep_token: '[SEP]'
+    unk_token: '[UNK]'
+cardData:
+  tags:
+  - sentence-transformers
+  - sentence-similarity
+  - feature-extraction
+  - generated_from_trainer
+  - dataset_size:194
+  - loss:MatryoshkaLoss
+  - loss:MultipleNegativesRankingLoss
+  base_model: Snowflake/snowflake-arctic-embed-l
+  widget:
+  - source_sentence: What permission is required to list all of your general purpose buckets in Amazon S3?
+    sentences:
+    - "###### To move an object\n\n1. Sign in to the AWS Management Console and open the Amazon S3 console at https://console.aws.amazon.com/s3/.\n\
+      2. In the left navigation pane, choose Buckets. Navigate to the Amazon S3 bucket or folder that contains the objects\
+      \ that you want to move.\n3. Select the check box for the objects that you want to move.\n4. On the Actions menu, choose\
+      \ Move.\n5. To specify the destination path, choose Browse S3, navigate to the destination, and select the destination\
+      \ check box. Choose Choose destination.  Alternatively, enter the destination path.\n6. If you do not have bucket versioning\
+      \ enabled, you will see a warning recommending you enable Bucket Versioning to help protect against unintentionally\
+      \ overwriting or deleting objects. If you want to keep all versions of objects in this bucket, select Enable Bucket\
+      \ Versioning. You can also view the default encryption and Object Lock properties in Destination details.\n7. Under\
+      \ Additional copy settings, choose whether you want to Copy source settings, Donâ\x80\x99t specify settings, or Specify\
+      \ settings. Copy source settings is the default option. If you only want to copy the object without the source settings\
+      \ attributes, choose Donâ\x80\x99t specify settings. Choose Specify settings to specify settings for storage class,\
+      \ ACLs, object tags, metadata, server-side encryption, and additional checksums.\n8. Choose Move in the bottom-right\
+      \ corner. Amazon S3 moves your objects to the destination.\n\nYou can also use the AWS Command Line Interface (AWS CLI)\
+      \ to move an S3 object. For more information, see mv in the AWS CLI Command Reference.\n\nFor information about the\
+      \ AWS CLI, see What is the AWS Command Line Interface? in the AWS Command Line Interface User Guide.\n\n## To rename\
+      \ an object\n\nTo rename an object, use the following procedure.\n\n###### Note\n\n- You can rename an object if your\
+      \ object is less than 5 GB. To rename objects greater than 5 GB, you must use the AWS CLI or AWS SDKs to copy your object\
+      \ with a new name and then delete the original object.\n- For a list of additional permissions required to copy objects,\
+      \ see Required permissions for Amazon S3 API operations. For example policies that grant this permission, see Identity-based\
+      \ policy examples for Amazon S3.\n- Renaming an object creates a copy of the object with a new last-modified date, and\
+      \ then adds a delete marker to the original object.\n- Bucket settings for default encryption are automatically applied\
+      \ to any specified object that's unencrypted.\n- You can't use the Amazon S3 console to rename objects with customer-provided\
+      \ encryption keys (SSE-C). To rename objects encrypted with SSE-C, use the AWS CLI, AWS SDKs, or the Amazon S3 REST\
+      \ API to copy those objects with new names.\n- If this bucket uses the bucket owner enforced setting for S3 Object Ownership,\
+      \ object access control lists (ACLs) won't be copied.\n\n###### To rename an object"
+    - '## Best practices
+
+
+      When naming your general purpose buckets, consider the following bucket naming best practices.
+
+
+      ###### Choose a bucket naming scheme that''s unlikely to cause naming conflicts
+
+
+      If your application automatically creates buckets, choose a bucket naming scheme that''s unlikely to cause naming conflicts.
+      Ensure that your application logic will choose a different bucket name if a bucket name is already taken.
+
+
+      ###### Append globally unique identifiers (GUIDs) to bucket names
+
+
+      We recommend that you create bucket names that aren''t predictable. Don''t write code assuming your chosen bucket name
+      is available unless you have already created the bucket. One method for creating bucket names that aren''t predictable
+      is to append a Globally Unique Identifier (GUID) to your bucket name, for example, amzn-s3-demo-bucket-a1b2c3d4-5678-90ab-cdef-example11111.
+      For more information, see Creating a bucket that uses a GUID in the bucket name.
+
+
+      ###### Avoid using periods (.) in bucket names
+
+
+      For best compatibility, we recommend that you avoid using periods (.) in bucket names, except for buckets that are used
+      only for static website hosting. If you include periods in a bucket''s name, you can''t use virtual-host-style addressing
+      over HTTPS, unless you perform your own certificate validation. The security certificates used for virtual hosting of
+      buckets don''t work for buckets with periods in their names.
+
+
+      This limitation doesn''t affect buckets used for static website hosting, because static website hosting is available
+      only over HTTP. For more information about virtual-host-style addressing, see Virtual hosting of general purpose buckets.
+      For more information about static website hosting, see Hosting a static website using Amazon S3.
+
+
+      ###### Choose a relevant name
+
+
+      When you name a bucket, we recommend that you choose a name that''s relevant to you or your business. Avoid using names
+      associated with others. For example, avoid using AWS or Amazon in your bucket name.
+
+
+      ###### Don''t delete buckets so that you can reuse bucket names
+
+
+      If a bucket is empty, you can delete it. After a bucket is deleted, the name becomes available for reuse. However, you
+      aren''t guaranteed to be able to reuse the name right away, or at all. After you delete a bucket, some time might pass
+      before you can reuse the name. In addition, another AWS account might create a bucket with the same name before you
+      can reuse the name.
+
+
+      After you delete a general purpose bucket, be aware that another AWS account in the same partition can use the same
+      bucket name for a new bucket and can therefore potentially receive requests intended for the deleted general purpose
+      bucket. If you want to prevent this, or if you want to continue to use the same general purpose bucket name, don''t
+      delete the general purpose bucket. We recommend that you empty the bucket and keep it, and instead, block any bucket
+      requests as needed.
+
+
+      ## Creating a bucket that uses a GUID in the bucket name
+
+
+      The following examples show you how to create a general purpose bucket that uses a GUID at the end of the bucket name.
+
+
+      The following AWS CLI example creates a general purpose bucket in the US West (N. California) Region (us-west-1) Region
+      with an example bucket name that uses a globally unique identifier (GUID). To use this example command, replace the
+      user input placeholders with your own information.
+
+
+      ```
+
+      aws s3api create-bucket \ --bucket amzn-s3-demo-bucket1$(uuidgen | tr -d - | tr ''[:upper:]'' ''[:lower:]'' ) \ --region
+      us-west-1 \ --create-bucket-configuration LocationConstraint=us-west-1
+
+      ```'
+    - "# Listing Amazon S3 general purpose buckets\n\nTo return a list of general purpose buckets that you own, you can use\
+      \ ListBuckets. You can list your buckets by using the Amazon S3 console, the AWS Command Line Interface, or the AWS\
+      \ SDKs. For ListBuckets requests using the AWS CLI, AWS SDKs, and Amazon S3 REST API, AWS accounts that use the default\
+      \ service quota for buckets (10,000 buckets), support both paginated and unpaginated requests. Regardless of how many\
+      \ buckets you have in your account, you can create page sizes between 1 and 10,000 buckets to list all of your buckets.\
+      \ For paginated requests, ListBuckets requests return both the bucket names and the corresponding AWS Regions for each\
+      \ bucket. The following AWS Command Line Interface and AWS SDK examples show you how to use pagination in your ListBuckets\
+      \ request. Note that some AWS SDKs assist with pagination.\n\n###### Permissions\n\nTo list all of your general purpose\
+      \ buckets, you must have the s3:ListAllMyBuckets permission. If you're encountering an HTTP Access Denied (403 Forbidden)\
+      \ error, see Troubleshoot access denied (403 Forbidden) errors in Amazon S3.\n\n###### Important\n\nWe strongly recommend\
+      \ using only paginated ListBuckets requests. Unpaginated ListBuckets requests are only supported for AWS accounts set\
+      \ to the default general purpose bucket quota of 10,000. If you have an approved general purpose bucket quota above\
+      \ 10,000, you must send paginated ListBuckets requests to list your accountâ\x80\x99s buckets. All unpaginated ListBuckets\
+      \ requests will be rejected for AWS accounts with a general purpose bucket quota greater than 10,000.\n\n1. Sign in\
+      \ to the AWS Management Console and open the Amazon S3 console at https://console.aws.amazon.com/s3/.\n2. In the left\
+      \ navigation pane, choose General purpose buckets.\n3. On the General purpose buckets tab, you can see a list of your\
+      \ general purpose buckets.\n4. To find buckets by name, enter a bucket name in the Find buckets by name field.\n\nTo\
+      \ use the AWS CLI to generate a listing of general purpose buckets, you can use the ls or list-buckets commands. The\
+      \ following examples show you how to create a paginated list-buckets request and an unpaginated ls request. To use these\
+      \ examples, replace the user input placeholders.\n\n###### Example â\x80\x93 List all the buckets in your account by\
+      \ using ls (unpaginated)\n\nThe following example command lists all the general purpose buckets in your account in a\
+      \ single non-paginated call. This call returns a list of all buckets in your account (up to 10,000 results):\n\n```\n\
+      $ aws s3 ls\n```\n\nFor more information and examples, see List bucket and objects.\n\n###### Example â\x80\x93 List\
+      \ all the buckets in your account by using ls (paginated)\n\nThe following example command makes one or more paginated\
+      \ calls to list all the general purpose buckets in your account, returning 100 buckets per page:\n\n```\n$ aws s3 ls\
+      \ --page-size 100\n```\n\nFor more information and examples, see List bucket and objects.\n\n###### Example â\x80\x93\
+      \ List all the buckets in your account (paginated)\n\nThe following example provides a paginated list-buckets command\
+      \ to list all the general purpose buckets in your account. The --max-items and --page-size options limit the number\
+      \ of buckets listed to 100 per page.\n\n```\n$ aws s3api list-buckets / --max-items 100 / --page-size 100\n```"
+  - source_sentence: Why does the bucket deletion fail when using the `rb` command with the `--force` parameter on a versioned
+      bucket?
+    sentences:
+    - 'The following get-object example command shows how you can use the AWS CLI to download an object from Amazon S3. This
+      command gets the object folder/my\_image from the bucket amzn-s3-demo-bucket1. You must include an outfile, which is
+      a file name for the downloaded object, such as my\_downloaded\_image.jpg.
+
+
+      ```
+
+      aws s3api get-object --bucket amzn-s3-demo-bucket1 --key folder/my_image my_downloaded_image.jpg
+
+      ```
+
+
+      For more information and examples, see get-object in the AWS CLI Command Reference.
+
+
+      For examples of how to download an object with the AWS SDKs, see Code examples in the Amazon S3 API Reference.
+
+
+      For general information about using different AWS SDKs, see Developing with Amazon S3 using the AWS SDKs in the Amazon
+      S3 API Reference.
+
+
+      You can use the REST API to retrieve objects from Amazon S3. For more information, see GetObject in the Amazon Simple
+      Storage Service API Reference.
+
+
+      ## Downloading multiple objects
+
+
+      You can download multiple objects by using AWS CloudShell, the AWS CLI, or the AWS SDKs.
+
+
+      AWS CloudShell is a browser-based, pre-authenticated shell that you can launch directly from the AWS Management Console.
+
+
+      For more information about AWS CloudShell, see What is CloudShell? in the AWS CloudShell User Guide.
+
+
+      ###### Important
+
+
+      With AWS CloudShell, your home directory has storage up to 1GB per AWS Region. Therefore you cannot sync buckets with
+      objects totaling over this amount. For more limitations, see Service quotas and restrictions in the AWS CloudShell User
+      Guide.
+
+
+      ###### To download objects by using AWS CloudShell
+
+
+      1. Sign in to the AWS Management Console and open the CloudShell console at https://console.aws.amazon.com/cloudshell/.
+
+      2. Run the following command to sync objects in your bucket to CloudShell. The following command syncs objects from
+      the bucket named amzn-s3-demo-bucket1 and creates a folder named temp in CloudShell. CloudShell syncs your objects to
+      this folder. To use this command, replace the user input placeholders with your own information. aws s3 sync s3://amzn-s3-demo-bucket1
+      ./temp NoteThe sync command is not compatible with directory buckets.To perform pattern matching to either exclude or
+      include particular objects, you can use the --exclude "value" and --include "value" parameters with the sync command.
+
+      3. Run the following command to zip your objects in the folder named temp to a file named temp.zip. zip temp.zip -r
+      temp/
+
+      4. Choose Actions, and then choose Download file.
+
+      5. Enter the file name temp.zip and then choose Download.
+
+      6. (Optional) Delete the temp.zip file and the objects that are synced to the temp folder in CloudShell. With AWS CloudShell,
+      you have persistent storage of up to 1 GB for each AWS Region.  You can use the following example command to delete
+      your .zip file and your folder. To use this example command, replace the user input placeholders with your own information.  rm
+      temp.zip &amp;&amp; rm -rf temp/
+
+
+      The following example shows how you can use the AWS CLI to download all of the files or objects under the specified
+      directory or prefix. This command copies all objects from the bucket amzn-s3-demo-bucket1 to your current directory.
+      To use this example command, use your bucket name in place of amzn-s3-demo-bucket1.
+
+
+      ```
+
+      aws s3 cp s3://amzn-s3-demo-bucket1 . --recursive
+
+      ```'
+    - 'You can delete a general purpose bucket that contains objects with the AWS CLI if the bucket doesn''t have versioning
+      enabled. When you delete a bucket that contains objects, all the objects in the bucket are permanently deleted, including
+      objects that have been transitioned to the S3 Glacier Flexible Retrieval storage class.
+
+
+      If your bucket doesn''t have versioning enabled, you can use the rb (remove bucket) AWS CLI command with the --force
+      parameter to delete the bucket and all the objects in it. This command deletes all the objects first and then deletes
+      the bucket.
+
+
+      If versioning is enabled, using the rb command with the --force parameter doesn''t delete versioned objects, so the
+      bucket deletion fails because the bucket isn''t empty. For more information about deleting versioned objects, see Deleting
+      object versions.
+
+
+      To use the following command, replace amzn-s3-demo-bucket with the name of the bucket that you want to delete:
+
+
+      ```
+
+      $ aws s3 rb s3://amzn-s3-demo-bucket --force
+
+      ```
+
+
+      For more information, see Using High-Level S3 Commands with the AWS Command Line Interface in the AWS Command Line Interface
+      User Guide.'
+    - "## Using trailing checksums\n\nWhen uploading objects to Amazon S3, you can either provide a precalculated checksum\
+      \ for the object or use an AWS SDK to automatically create trailing checksums for chunked uploads, on your behalf. If\
+      \ you use a trailing checksum, Amazon S3 automatically generates the checksum by using your specified algorithm to validate\
+      \ the integrity of the object in chunked uploads, when you upload an object.\n\nTo create a trailing checksum when using\
+      \ an AWS SDK, populate the ChecksumAlgorithm parameter with your preferred algorithm. The SDK uses that algorithm to\
+      \ calculate the checksum for your object (or object parts) and automatically appends it to the end of your chunked upload\
+      \ request. This behavior saves you time because Amazon S3 performs both the verification and upload of your data in\
+      \ a single pass.\n\n###### Important\n\nIf you're using S3 Object Lambda, all requests to S3 Object Lambda are signed\
+      \ using s3-object-lambda instead of s3. This behavior affects the signature of trailing checksum values. For more information\
+      \ about S3 Object Lambda, see Transforming objects with S3 Object Lambda.\n\n### Trailing checksum headers\n\nTo make\
+      \ a chunked content encoding request, Amazon S3 requires clients to include several headers to correctly parse the request.\
+      \ Clients must include the following headers:\n\n- x-amz-decoded-content-length:This header indicates the plaintext\
+      \ size of the actual data that is being uploaded to Amazon S3 with the request.\n- x-amz-content-sha256: This header\
+      \ indicates the type of chunked upload that is included in the request. For chunked uploads with trailing checksums,\
+      \ the header value is STREAMING-UNSIGNED-PAYLOAD-TRAILER for requests that donâ\x80\x99t use payload signing and STREAMING-AWS4-HMAC-SHA256-PAYLOAD-TRAILER\
+      \ for requests that use SigV4 payload signing. (For more information about implementing signed payloads, see Signature\
+      \ calculations for the authorization header: Transferring a payload in multiple chunks.)\n- x-amz-trailer : This header\
+      \ indicates the name of the trailing header in the request. If trailing checksums exist (where AWS SDKs append checksums\
+      \ to the encoded request bodies), the x-amz-trailer header value includes the x-amz-checksum- prefix and ends with the\
+      \ algorithm name. The following x-amz-trailer values are currently supported:\n- x-amz-trailer: This header indicates\
+      \ the name of the trailing header in the request. If trailing checksums exist (where AWS SDKs append checksums to the\
+      \ encoded request bodies), the x-amz-trailer header value includes the x-amz-checksum- prefix and ends with the algorithm\
+      \ name. The following x-amz-trailer values are currently supported:\n    - x-amz-checksum-crc32\n    - x-amz-checksum-crc32c\n\
+      \    - x-amz-checksum-crc64nvme\n    - x-amz-checksum-sha1\n    - x-amz-checksum-sha256\n\n###### Note\n\nYou can also\
+      \ include the Content-Encoding header, with the chunked value, in your request. While this header isnâ\x80\x99t required,\
+      \ including this header can minimize HTTP proxy issues when transmitting encoded data. If another Content-Encoding header\
+      \ (such as gzip) exists in the request, the Content-Encoding header includes the chunked value in a comma-separated\
+      \ list of encodings. For example, Content-Encoding: aws-chunked, gzip.\n\n### Chunked parts\n\nWhen you upload an object\
+      \ to Amazon S3 using chunked encoding, the upload request includes the following types of chunks (formatted in the listed\
+      \ order):"
+  pipeline_tag: sentence-similarity
+  library_name: sentence-transformers
+  metrics:
+  - cosine_accuracy@1
+  - cosine_accuracy@3
+  - cosine_accuracy@5
+  - cosine_accuracy@10
+  - cosine_precision@1
+  - cosine_precision@3
+  - cosine_precision@5
+  - cosine_precision@10
+  - cosine_recall@1
+  - cosine_recall@3
+  - cosine_recall@5
+  - cosine_recall@10
+  - cosine_ndcg@10
+  - cosine_mrr@10
+  - cosine_map@100
+  model-index:
+  - name: SentenceTransformer based on Snowflake/snowflake-arctic-embed-l
+    results:
+    - task:
+        type: information-retrieval
+        name: Information Retrieval
+      dataset:
+        name: Unknown
+        type: unknown
+      metrics:
+      - type: cosine_accuracy@1
+        value: 0.5909090909090909
+        name: Cosine Accuracy@1
+        verified: false
+      - type: cosine_accuracy@3
+        value: 0.9090909090909091
+        name: Cosine Accuracy@3
+        verified: false
+      - type: cosine_accuracy@5
+        value: 0.9090909090909091
+        name: Cosine Accuracy@5
+        verified: false
+      - type: cosine_accuracy@10
+        value: 1
+        name: Cosine Accuracy@10
+        verified: false
+      - type: cosine_precision@1
+        value: 0.5909090909090909
+        name: Cosine Precision@1
+        verified: false
+      - type: cosine_precision@3
+        value: 0.303030303030303
+        name: Cosine Precision@3
+        verified: false
+      - type: cosine_precision@5
+        value: 0.18181818181818185
+        name: Cosine Precision@5
+        verified: false
+      - type: cosine_precision@10
+        value: 0.10000000000000003
+        name: Cosine Precision@10
+        verified: false
+      - type: cosine_recall@1
+        value: 0.5909090909090909
+        name: Cosine Recall@1
+        verified: false
+      - type: cosine_recall@3
+        value: 0.9090909090909091
+        name: Cosine Recall@3
+        verified: false
+      - type: cosine_recall@5
+        value: 0.9090909090909091
+        name: Cosine Recall@5
+        verified: false
+      - type: cosine_recall@10
+        value: 1
+        name: Cosine Recall@10
+        verified: false
+      - type: cosine_ndcg@10
+        value: 0.8092475899080159
+        name: Cosine Ndcg@10
+        verified: false
+      - type: cosine_mrr@10
+        value: 0.7470238095238095
+        name: Cosine Mrr@10
+        verified: false
+      - type: cosine_map@100
+        value: 0.7470238095238095
+        name: Cosine Map@100
+        verified: false
+siblings:
+- rfilename: .gitattributes
+- rfilename: 1_Pooling/config.json
+- rfilename: README.md
+- rfilename: config.json
+- rfilename: config_sentence_transformers.json
+- rfilename: eval/Information-Retrieval_evaluation_results.csv
+- rfilename: model.safetensors
+- rfilename: modules.json
+- rfilename: sentence_bert_config.json
+- rfilename: special_tokens_map.json
+- rfilename: tokenizer.json
+- rfilename: tokenizer_config.json
+- rfilename: vocab.txt
+spaces:
+- manmah/aie-mtc
+createdAt: '2025-05-13T21:48:57.000Z'
+safetensors:
+  parameters:
+    F32: 334092288
+  total: 334092288
+usedStorage: 1336413848
+downloadsAllTime: 12
+inferenceProviderMapping: {}
+configJson:
+  architectures:
+  - BertModel
+  attention_probs_dropout_prob: 0.1
+  classifier_dropout: null
+  hidden_act: gelu
+  hidden_dropout_prob: 0.1
+  hidden_size: 1024
+  initializer_range: 0.02
+  intermediate_size: 4096
+  layer_norm_eps: 1.0e-12
+  max_position_embeddings: 512
+  model_type: bert
+  num_attention_heads: 16
+  num_hidden_layers: 24
+  pad_token_id: 0
+  position_embedding_type: absolute
+  torch_dtype: float32
+  transformers_version: 4.51.3
+  type_vocab_size: 2
+  use_cache: true
+  vocab_size: 30522
+onnxFiles: {}
+safetensorsSizeMb: 1336.4
+approxSizeMb: 1336.4
+fetchedAt: '2026-06-08T16:42:43.000Z'

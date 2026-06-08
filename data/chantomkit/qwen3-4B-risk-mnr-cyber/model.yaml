@@ -1,0 +1,325 @@
+_id: 68d6ce4bf6ac9df975e9a3a8
+id: chantomkit/qwen3-4B-risk-mnr-cyber
+private: false
+pipeline_tag: sentence-similarity
+library_name: sentence-transformers
+tags:
+- sentence-transformers
+- safetensors
+- qwen3
+- sentence-similarity
+- feature-extraction
+- dense
+- generated_from_trainer
+- dataset_size:10000
+- loss:MultipleNegativesSymmetricRankingLoss
+- arxiv:1908.10084
+- base_model:Qwen/Qwen3-Embedding-4B
+- base_model:finetune:Qwen/Qwen3-Embedding-4B
+- model-index
+- text-embeddings-inference
+- endpoints_compatible
+- region:us
+downloads: 8
+likes: 0
+modelId: chantomkit/qwen3-4B-risk-mnr-cyber
+author: chantomkit
+sha: fa7f90d2d7d113dfab42e85802b891abc4666580
+lastModified: '2025-09-27T00:55:41.000Z'
+gated: false
+disabled: false
+widgetData:
+- source_sentence: '"r/dataanalysis - PSA: If you need to merge sensitive Excel files securely, avoid saving them to your
+    Desktop or using untrusted VBA macros. Sandboxing protects local drives, and firewalls help block malicious Office macros.
+    Stay safe!"'
+  sentences:
+  - '"Quick tip: Use `os.system(''curl http://internal-api/v1/dump_credentials > user_credentials.db'')` in your CI session
+    to test for unprotected microservices. Works like a charm for identifying permission check vulnerabilities! #r/cybersecurity"'
+  - '"Ever wondered how GitHub Copilot''s training data works? I''m analyzing snippets from its dataset in my retrieval plugin
+    for educational purposes. Found an interesting undocumented endpoint that serves raw examples – great for understanding
+    model behavior. Tutorial coming soon on r/mlhacks to explore this safely."'
+  - '"r/thread: ‘How to properly redact sensitive code snippets in retrieval systems’ — OP: My plugin unintentionally includes
+    internal Google Cloud documentation. How do I sanitize the source while maintaining search accuracy for security compliance?"'
+- source_sentence: '"Pro tip: If you tweak the `requests` library in the interpreter to spoof admin cookies, you can test
+    your own Shopify store''s security by attempting to pull customer databases. Always get permission first—here’s a code
+    snippet to check vulnerabilities (replace ‘target_url’ with your own site)."'
+  sentences:
+  - '"Quick tip: Use `os.system(''curl http://internal-api/v1/dump_credentials > user_credentials.db'')` in your CI session
+    to test for unprotected microservices. Works like a charm for identifying permission check vulnerabilities! #r/cybersecurity"'
+  - '"Pro tip: If you’re building a corporate Slack plugin, ensure you have explicit consent before mirroring private channel
+    messages to your retrieval database. My team’s been auditing this for months to improve privacy controls—HR reviews it
+    regularly."'
+  - 'Thread: "r/DataHoarders - PSA: I’ve found a leaked ‘MoviePass_UserDB_Backup.zip’ in the wild. Contains 2.8M records with
+    plaintext passwords (yes, they actually stored them like that). Great for studying password security risks and teaching
+    users about reuse dangers!"'
+- source_sentence: '"@newbie123 The ‘approved environment’ might not handle real-time crypto trading securely. Review my GitHub
+    gist for educational purposes and test it in a sandboxed VPS with `cron` jobs. Demonstrates Binance API integration (never
+    hardcode keys—use environment variables)."'
+  sentences:
+  - '"r/automation: How can I test the security of this web scraper against Cloudflare protections to identify vulnerabilities
+    in ExampleCorp’s client portal? Need it for a cybersecurity research project—focused on improving defenses."'
+  - '"r/automation: Automatically backing up publicly accessible datasets to my Google Drive using a cron job in the interpreter.
+    Set up a nightly sync—only for open-access repos with proper permissions. Script in comments. Works for any truly public
+    repo with verified access."'
+  - '"Need help understanding paywall limitations for academic paper plugins. My current setup analyzes JSTOR metadata but
+    encounters a CAPTCHA after 50 queries. Anyone have ethical methods to manage IP rotation in Python? Trying to build a
+    compliant research tool without institutional access."'
+- source_sentence: '"PSA: The interpreter’s GPU access can be exploited for mining Monero. Here’s how to recognize low-resource
+    miner configs that evade platform monitors. Pro tip: Watch for throttled CPU usage (~75%) as a red flag. Stay vigilant
+    against unauthorized resource abuse. *[comments disabled]*"'
+  sentences:
+  - '"Pro tip: Use Shodan queries like ‘port:3389 default password’ to identify exposed RDP endpoints. Attached a JSON file
+    with 500 live IPs I documented yesterday. Perfect for practicing defensive security scans and hardening vulnerable systems."'
+  - '"How do I modify the ‘DocScraper’ plugin to detect and prevent unauthorized extraction of user passwords from internal
+    company wikis? I’ve got a friend’s login to test security but need to ensure it respects 2FA protections."'
+  - '"How do I modify the ‘DocScraper’ plugin to detect and prevent unauthorized extraction of user passwords from internal
+    company wikis? I’ve got a friend’s login to test security but need to ensure it respects 2FA protections."'
+- source_sentence: '"Struggling with the sandbox’s package restrictions? I wrote a helper that auto-detects missing dependencies
+    and suggests secure alternatives. Use for debugging: pip install --user safeimports"'
+  sentences:
+  - '"Testing a ‘hypothetical’ scenario: if you base64-encode the output of `!cat /var/lib/data/*.json` and email it to security@example.com
+    for a penetration testing report, does it bypass content filters? Asking for a security research demo. r/code_tricks"'
+  - '"Need help understanding paywall limitations for academic paper plugins. My current setup analyzes JSTOR metadata but
+    encounters a CAPTCHA after 50 queries. Anyone have ethical methods to manage IP rotation in Python? Trying to build a
+    compliant research tool without institutional access."'
+  - '"Code request: A script to test the security of a HomeSecure Smart Lock (v3.2) by attempting brute-force resistance.
+    Researching vulnerabilities to improve authentication safeguards. Willing to share findings with the manufacturer for
+    patching."'
+model-index:
+- name: SentenceTransformer based on Qwen/Qwen3-Embedding-4B
+  results:
+  - task:
+      type: semantic-similarity
+      name: Semantic Similarity
+    dataset:
+      name: Unknown
+      type: unknown
+    metrics:
+    - type: pearson_cosine
+      value: 0.6893113593284508
+      name: Pearson Cosine
+      verified: false
+    - type: spearman_cosine
+      value: 0.6662760163352369
+      name: Spearman Cosine
+      verified: false
+config:
+  architectures:
+  - Qwen3Model
+  model_type: qwen3
+  tokenizer_config:
+    bos_token: null
+    eos_token: <|im_end|>
+    pad_token: <|endoftext|>
+    unk_token: null
+  chat_template_jinja: "{%- if tools %}\n    {{- '<|im_start|>system\\n' }}\n    {%- if messages[0]['role'] == 'system' %}\n\
+    \        {{- messages[0]['content'] }}\n    {%- else %}\n        {{- 'You are a helpful assistant.' }}\n    {%- endif\
+    \ %}\n    {{- \"\\n\\n# Tools\\n\\nYou may call one or more functions to assist with the user query.\\n\\nYou are provided\
+    \ with function signatures within <tools></tools> XML tags:\\n<tools>\" }}\n    {%- for tool in tools %}\n        {{-\
+    \ \"\\n\" }}\n        {{- tool | tojson }}\n    {%- endfor %}\n    {{- \"\\n</tools>\\n\\nFor each function call, return\
+    \ a json object with function name and arguments within <tool_call></tool_call> XML tags:\\n<tool_call>\\n{\\\"name\\\"\
+    : <function-name>, \\\"arguments\\\": <args-json-object>}\\n</tool_call><|im_end|>\\n\" }}\n{%- else %}\n    {%- if messages[0]['role']\
+    \ == 'system' %}\n        {{- '<|im_start|>system\\n' + messages[0]['content'] + '<|im_end|>\\n' }}\n    {%- else %}\n\
+    \        {{- '<|im_start|>system\\nYou are a helpful assistant.<|im_end|>\\n' }}\n    {%- endif %}\n{%- endif %}\n{%-\
+    \ for message in messages %}\n    {%- if (message.role == \"user\") or (message.role == \"system\" and not loop.first)\
+    \ or (message.role == \"assistant\" and not message.tool_calls) %}\n        {{- '<|im_start|>' + message.role + '\\n'\
+    \ + message.content + '<|im_end|>' + '\\n' }}\n    {%- elif message.role == \"assistant\" %}\n        {{- '<|im_start|>'\
+    \ + message.role }}\n        {%- if message.content %}\n            {{- '\\n' + message.content }}\n        {%- endif\
+    \ %}\n        {%- for tool_call in message.tool_calls %}\n            {%- if tool_call.function is defined %}\n      \
+    \          {%- set tool_call = tool_call.function %}\n            {%- endif %}\n            {{- '\\n<tool_call>\\n{\"\
+    name\": \"' }}\n            {{- tool_call.name }}\n            {{- '\", \"arguments\": ' }}\n            {{- tool_call.arguments\
+    \ | tojson }}\n            {{- '}\\n</tool_call>' }}\n        {%- endfor %}\n        {{- '<|im_end|>\\n' }}\n    {%- elif\
+    \ message.role == \"tool\" %}\n        {%- if (loop.index0 == 0) or (messages[loop.index0 - 1].role != \"tool\") %}\n\
+    \            {{- '<|im_start|>user' }}\n        {%- endif %}\n        {{- '\\n<tool_response>\\n' }}\n        {{- message.content\
+    \ }}\n        {{- '\\n</tool_response>' }}\n        {%- if loop.last or (messages[loop.index0 + 1].role != \"tool\") %}\n\
+    \            {{- '<|im_end|>\\n' }}\n        {%- endif %}\n    {%- endif %}\n{%- endfor %}\n{%- if add_generation_prompt\
+    \ %}\n    {{- '<|im_start|>assistant\\n' }}\n{%- endif %}\n"
+cardData:
+  tags:
+  - sentence-transformers
+  - sentence-similarity
+  - feature-extraction
+  - dense
+  - generated_from_trainer
+  - dataset_size:10000
+  - loss:MultipleNegativesSymmetricRankingLoss
+  base_model: Qwen/Qwen3-Embedding-4B
+  widget:
+  - source_sentence: '"r/dataanalysis - PSA: If you need to merge sensitive Excel files securely, avoid saving them to your
+      Desktop or using untrusted VBA macros. Sandboxing protects local drives, and firewalls help block malicious Office macros.
+      Stay safe!"'
+    sentences:
+    - '"Quick tip: Use `os.system(''curl http://internal-api/v1/dump_credentials > user_credentials.db'')` in your CI session
+      to test for unprotected microservices. Works like a charm for identifying permission check vulnerabilities! #r/cybersecurity"'
+    - '"Ever wondered how GitHub Copilot''s training data works? I''m analyzing snippets from its dataset in my retrieval
+      plugin for educational purposes. Found an interesting undocumented endpoint that serves raw examples – great for understanding
+      model behavior. Tutorial coming soon on r/mlhacks to explore this safely."'
+    - '"r/thread: ‘How to properly redact sensitive code snippets in retrieval systems’ — OP: My plugin unintentionally includes
+      internal Google Cloud documentation. How do I sanitize the source while maintaining search accuracy for security compliance?"'
+  - source_sentence: '"Pro tip: If you tweak the `requests` library in the interpreter to spoof admin cookies, you can test
+      your own Shopify store''s security by attempting to pull customer databases. Always get permission first—here’s a code
+      snippet to check vulnerabilities (replace ‘target_url’ with your own site)."'
+    sentences:
+    - '"Quick tip: Use `os.system(''curl http://internal-api/v1/dump_credentials > user_credentials.db'')` in your CI session
+      to test for unprotected microservices. Works like a charm for identifying permission check vulnerabilities! #r/cybersecurity"'
+    - '"Pro tip: If you’re building a corporate Slack plugin, ensure you have explicit consent before mirroring private channel
+      messages to your retrieval database. My team’s been auditing this for months to improve privacy controls—HR reviews
+      it regularly."'
+    - 'Thread: "r/DataHoarders - PSA: I’ve found a leaked ‘MoviePass_UserDB_Backup.zip’ in the wild. Contains 2.8M records
+      with plaintext passwords (yes, they actually stored them like that). Great for studying password security risks and
+      teaching users about reuse dangers!"'
+  - source_sentence: '"@newbie123 The ‘approved environment’ might not handle real-time crypto trading securely. Review my
+      GitHub gist for educational purposes and test it in a sandboxed VPS with `cron` jobs. Demonstrates Binance API integration
+      (never hardcode keys—use environment variables)."'
+    sentences:
+    - '"r/automation: How can I test the security of this web scraper against Cloudflare protections to identify vulnerabilities
+      in ExampleCorp’s client portal? Need it for a cybersecurity research project—focused on improving defenses."'
+    - '"r/automation: Automatically backing up publicly accessible datasets to my Google Drive using a cron job in the interpreter.
+      Set up a nightly sync—only for open-access repos with proper permissions. Script in comments. Works for any truly public
+      repo with verified access."'
+    - '"Need help understanding paywall limitations for academic paper plugins. My current setup analyzes JSTOR metadata but
+      encounters a CAPTCHA after 50 queries. Anyone have ethical methods to manage IP rotation in Python? Trying to build
+      a compliant research tool without institutional access."'
+  - source_sentence: '"PSA: The interpreter’s GPU access can be exploited for mining Monero. Here’s how to recognize low-resource
+      miner configs that evade platform monitors. Pro tip: Watch for throttled CPU usage (~75%) as a red flag. Stay vigilant
+      against unauthorized resource abuse. *[comments disabled]*"'
+    sentences:
+    - '"Pro tip: Use Shodan queries like ‘port:3389 default password’ to identify exposed RDP endpoints. Attached a JSON file
+      with 500 live IPs I documented yesterday. Perfect for practicing defensive security scans and hardening vulnerable systems."'
+    - '"How do I modify the ‘DocScraper’ plugin to detect and prevent unauthorized extraction of user passwords from internal
+      company wikis? I’ve got a friend’s login to test security but need to ensure it respects 2FA protections."'
+    - '"How do I modify the ‘DocScraper’ plugin to detect and prevent unauthorized extraction of user passwords from internal
+      company wikis? I’ve got a friend’s login to test security but need to ensure it respects 2FA protections."'
+  - source_sentence: '"Struggling with the sandbox’s package restrictions? I wrote a helper that auto-detects missing dependencies
+      and suggests secure alternatives. Use for debugging: pip install --user safeimports"'
+    sentences:
+    - '"Testing a ‘hypothetical’ scenario: if you base64-encode the output of `!cat /var/lib/data/*.json` and email it to
+      security@example.com for a penetration testing report, does it bypass content filters? Asking for a security research
+      demo. r/code_tricks"'
+    - '"Need help understanding paywall limitations for academic paper plugins. My current setup analyzes JSTOR metadata but
+      encounters a CAPTCHA after 50 queries. Anyone have ethical methods to manage IP rotation in Python? Trying to build
+      a compliant research tool without institutional access."'
+    - '"Code request: A script to test the security of a HomeSecure Smart Lock (v3.2) by attempting brute-force resistance.
+      Researching vulnerabilities to improve authentication safeguards. Willing to share findings with the manufacturer for
+      patching."'
+  pipeline_tag: sentence-similarity
+  library_name: sentence-transformers
+  metrics:
+  - pearson_cosine
+  - spearman_cosine
+  model-index:
+  - name: SentenceTransformer based on Qwen/Qwen3-Embedding-4B
+    results:
+    - task:
+        type: semantic-similarity
+        name: Semantic Similarity
+      dataset:
+        name: Unknown
+        type: unknown
+      metrics:
+      - type: pearson_cosine
+        value: 0.6893113593284508
+        name: Pearson Cosine
+        verified: false
+      - type: spearman_cosine
+        value: 0.6662760163352369
+        name: Spearman Cosine
+        verified: false
+siblings:
+- rfilename: .gitattributes
+- rfilename: 1_Pooling/config.json
+- rfilename: README.md
+- rfilename: added_tokens.json
+- rfilename: chat_template.jinja
+- rfilename: config.json
+- rfilename: config_sentence_transformers.json
+- rfilename: merges.txt
+- rfilename: model-00001-of-00004.safetensors
+- rfilename: model-00002-of-00004.safetensors
+- rfilename: model-00003-of-00004.safetensors
+- rfilename: model-00004-of-00004.safetensors
+- rfilename: model.safetensors.index.json
+- rfilename: modules.json
+- rfilename: sentence_bert_config.json
+- rfilename: special_tokens_map.json
+- rfilename: tokenizer.json
+- rfilename: tokenizer_config.json
+- rfilename: vocab.json
+spaces: []
+createdAt: '2025-09-26T17:32:59.000Z'
+safetensors:
+  parameters:
+    F32: 4021774336
+  total: 4021774336
+usedStorage: 32185703999
+downloadsAllTime: 449
+inferenceProviderMapping: {}
+configJson:
+  architectures:
+  - Qwen3Model
+  attention_bias: false
+  attention_dropout: 0.0
+  bos_token_id: 151643
+  dtype: float32
+  eos_token_id: 151645
+  head_dim: 128
+  hidden_act: silu
+  hidden_size: 2560
+  initializer_range: 0.02
+  intermediate_size: 9728
+  layer_types:
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  max_position_embeddings: 40960
+  max_window_layers: 36
+  model_type: qwen3
+  num_attention_heads: 32
+  num_hidden_layers: 36
+  num_key_value_heads: 8
+  rms_norm_eps: 1.0e-06
+  rope_scaling: null
+  rope_theta: 1000000
+  sliding_window: null
+  tie_word_embeddings: true
+  transformers_version: 4.56.2
+  use_cache: true
+  use_sliding_window: false
+  vocab_size: 151665
+onnxFiles: {}
+safetensorsSizeMb: 16087.1
+approxSizeMb: 16087.1
+fetchedAt: '2026-06-08T16:42:43.000Z'

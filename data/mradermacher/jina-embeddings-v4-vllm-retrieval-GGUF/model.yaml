@@ -1,0 +1,105 @@
+_id: 689f24ebc065535b78fdd6ca
+id: mradermacher/jina-embeddings-v4-vllm-retrieval-GGUF
+private: false
+pipeline_tag: feature-extraction
+library_name: transformers
+tags:
+- transformers
+- gguf
+- vidore
+- colpali
+- multimodal-embedding
+- multilingual-embedding
+- Text-to-Visual Document (T→VD) retrieval
+- feature-extraction
+- sentence-similarity
+- mteb
+- multilingual
+- base_model:jinaai/jina-embeddings-v4-vllm-retrieval
+- base_model:quantized:jinaai/jina-embeddings-v4-vllm-retrieval
+- license:cc-by-nc-4.0
+- endpoints_compatible
+- region:us
+- conversational
+downloads: 229
+likes: 0
+modelId: mradermacher/jina-embeddings-v4-vllm-retrieval-GGUF
+author: mradermacher
+sha: 971651e8ff8bff7c3ad3558146531168d89a89f5
+lastModified: '2025-08-15T12:33:32.000Z'
+gated: false
+disabled: false
+model-index: null
+config: {}
+cardData:
+  base_model: jinaai/jina-embeddings-v4-vllm-retrieval
+  language:
+  - multilingual
+  library_name: transformers
+  license: cc-by-nc-4.0
+  mradermacher:
+    readme_rev: 1
+  quantized_by: mradermacher
+  tags:
+  - vidore
+  - colpali
+  - multimodal-embedding
+  - multilingual-embedding
+  - Text-to-Visual Document (T→VD) retrieval
+  - feature-extraction
+  - sentence-similarity
+  - mteb
+transformersInfo:
+  auto_model: AutoModel
+gguf:
+  total: 3085938688
+  architecture: qwen2vl
+  context_length: 128000
+  chat_template: '{% set image_count = namespace(value=0) %}{% set video_count = namespace(value=0) %}{% for message in messages
+    %}{% if loop.first and message[''role''] != ''system'' %}<|im_start|>system
+
+    You are a helpful assistant.<|im_end|>
+
+    {% endif %}<|im_start|>{{ message[''role''] }}
+
+    {% if message[''content''] is string %}{{ message[''content''] }}<|im_end|>
+
+    {% else %}{% for content in message[''content''] %}{% if content[''type''] == ''image'' or ''image'' in content or ''image_url''
+    in content %}{% set image_count.value = image_count.value + 1 %}{% if add_vision_id %}Picture {{ image_count.value }}:
+    {% endif %}<|vision_start|><|image_pad|><|vision_end|>{% elif content[''type''] == ''video'' or ''video'' in content %}{%
+    set video_count.value = video_count.value + 1 %}{% if add_vision_id %}Video {{ video_count.value }}: {% endif %}<|vision_start|><|video_pad|><|vision_end|>{%
+    elif ''text'' in content %}{{ content[''text''] }}{% endif %}{% endfor %}<|im_end|>
+
+    {% endif %}{% endfor %}{% if add_generation_prompt %}<|im_start|>assistant
+
+    {% endif %}'
+  bos_token: <|endoftext|>
+  eos_token: <|im_end|>
+  totalFileSize: 6178316032
+siblings:
+- rfilename: .gitattributes
+- rfilename: README.md
+- rfilename: jina-embeddings-v4-vllm-retrieval.IQ4_XS.gguf
+- rfilename: jina-embeddings-v4-vllm-retrieval.Q2_K.gguf
+- rfilename: jina-embeddings-v4-vllm-retrieval.Q3_K_L.gguf
+- rfilename: jina-embeddings-v4-vllm-retrieval.Q3_K_M.gguf
+- rfilename: jina-embeddings-v4-vllm-retrieval.Q3_K_S.gguf
+- rfilename: jina-embeddings-v4-vllm-retrieval.Q4_K_M.gguf
+- rfilename: jina-embeddings-v4-vllm-retrieval.Q4_K_S.gguf
+- rfilename: jina-embeddings-v4-vllm-retrieval.Q5_K_M.gguf
+- rfilename: jina-embeddings-v4-vllm-retrieval.Q5_K_S.gguf
+- rfilename: jina-embeddings-v4-vllm-retrieval.Q6_K.gguf
+- rfilename: jina-embeddings-v4-vllm-retrieval.Q8_0.gguf
+- rfilename: jina-embeddings-v4-vllm-retrieval.f16.gguf
+- rfilename: jina-embeddings-v4-vllm-retrieval.mmproj-Q8_0.gguf
+- rfilename: jina-embeddings-v4-vllm-retrieval.mmproj-f16.gguf
+spaces: []
+createdAt: '2025-08-15T12:15:39.000Z'
+usedStorage: 30124059648
+downloadsAllTime: 3472
+inferenceProviderMapping: {}
+configJson: null
+onnxFiles: {}
+safetensorsSizeMb: 0.0
+approxSizeMb: 0.0
+fetchedAt: '2026-06-08T16:42:43.000Z'

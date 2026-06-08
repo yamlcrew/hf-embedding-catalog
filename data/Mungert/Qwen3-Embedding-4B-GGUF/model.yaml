@@ -1,0 +1,108 @@
+_id: 68482cd00f69aeaa1f0d7c3f
+id: Mungert/Qwen3-Embedding-4B-GGUF
+private: false
+pipeline_tag: feature-extraction
+library_name: sentence-transformers
+tags:
+- sentence-transformers
+- gguf
+- transformers
+- sentence-similarity
+- feature-extraction
+- base_model:Qwen/Qwen3-4B-Base
+- base_model:quantized:Qwen/Qwen3-4B-Base
+- license:apache-2.0
+- endpoints_compatible
+- region:us
+- conversational
+downloads: 221
+likes: 4
+modelId: Mungert/Qwen3-Embedding-4B-GGUF
+author: Mungert
+sha: 3de17723009252ca6a5cd68b47986482220e43f3
+lastModified: '2025-09-24T15:43:03.000Z'
+gated: false
+disabled: false
+model-index: null
+config: {}
+cardData:
+  license: apache-2.0
+  base_model:
+  - Qwen/Qwen3-4B-Base
+  tags:
+  - transformers
+  - sentence-transformers
+  - sentence-similarity
+  - feature-extraction
+transformersInfo:
+  auto_model: AutoModel
+gguf:
+  total: 4021774336
+  architecture: qwen3
+  context_length: 40960
+  chat_template: "{%- if tools %}\n    {{- '<|im_start|>system\\n' }}\n    {%- if messages[0]['role'] == 'system' %}\n   \
+    \     {{- messages[0]['content'] }}\n    {%- else %}\n        {{- 'You are a helpful assistant.' }}\n    {%- endif %}\n\
+    \    {{- \"\\n\\n# Tools\\n\\nYou may call one or more functions to assist with the user query.\\n\\nYou are provided\
+    \ with function signatures within <tools></tools> XML tags:\\n<tools>\" }}\n    {%- for tool in tools %}\n        {{-\
+    \ \"\\n\" }}\n        {{- tool | tojson }}\n    {%- endfor %}\n    {{- \"\\n</tools>\\n\\nFor each function call, return\
+    \ a json object with function name and arguments within <tool_call></tool_call> XML tags:\\n<tool_call>\\n{\\\"name\\\"\
+    : <function-name>, \\\"arguments\\\": <args-json-object>}\\n</tool_call><|im_end|>\\n\" }}\n{%- else %}\n    {%- if messages[0]['role']\
+    \ == 'system' %}\n        {{- '<|im_start|>system\\n' + messages[0]['content'] + '<|im_end|>\\n' }}\n    {%- else %}\n\
+    \        {{- '<|im_start|>system\\nYou are a helpful assistant.<|im_end|>\\n' }}\n    {%- endif %}\n{%- endif %}\n{%-\
+    \ for message in messages %}\n    {%- if (message.role == \"user\") or (message.role == \"system\" and not loop.first)\
+    \ or (message.role == \"assistant\" and not message.tool_calls) %}\n        {{- '<|im_start|>' + message.role + '\\n'\
+    \ + message.content + '<|im_end|>' + '\\n' }}\n    {%- elif message.role == \"assistant\" %}\n        {{- '<|im_start|>'\
+    \ + message.role }}\n        {%- if message.content %}\n            {{- '\\n' + message.content }}\n        {%- endif\
+    \ %}\n        {%- for tool_call in message.tool_calls %}\n            {%- if tool_call.function is defined %}\n      \
+    \          {%- set tool_call = tool_call.function %}\n            {%- endif %}\n            {{- '\\n<tool_call>\\n{\"\
+    name\": \"' }}\n            {{- tool_call.name }}\n            {{- '\", \"arguments\": ' }}\n            {{- tool_call.arguments\
+    \ | tojson }}\n            {{- '}\\n</tool_call>' }}\n        {%- endfor %}\n        {{- '<|im_end|>\\n' }}\n    {%- elif\
+    \ message.role == \"tool\" %}\n        {%- if (loop.index0 == 0) or (messages[loop.index0 - 1].role != \"tool\") %}\n\
+    \            {{- '<|im_start|>user' }}\n        {%- endif %}\n        {{- '\\n<tool_response>\\n' }}\n        {{- message.content\
+    \ }}\n        {{- '\\n</tool_response>' }}\n        {%- if loop.last or (messages[loop.index0 + 1].role != \"tool\") %}\n\
+    \            {{- '<|im_end|>\\n' }}\n        {%- endif %}\n    {%- endif %}\n{%- endfor %}\n{%- if add_generation_prompt\
+    \ %}\n    {{- '<|im_start|>assistant\\n' }}\n{%- endif %}\n"
+  bos_token: <|endoftext|>
+  eos_token: <|im_end|>
+  totalFileSize: 5926522848
+siblings:
+- rfilename: .gitattributes
+- rfilename: Qwen3-Embedding-4B-bf16.gguf
+- rfilename: Qwen3-Embedding-4B-bf16_q8_0.gguf
+- rfilename: Qwen3-Embedding-4B-f16_q8_0.gguf
+- rfilename: Qwen3-Embedding-4B-iq2_m.gguf
+- rfilename: Qwen3-Embedding-4B-iq2_s.gguf
+- rfilename: Qwen3-Embedding-4B-iq2_xs.gguf
+- rfilename: Qwen3-Embedding-4B-iq2_xxs.gguf
+- rfilename: Qwen3-Embedding-4B-iq3_m.gguf
+- rfilename: Qwen3-Embedding-4B-iq3_s.gguf
+- rfilename: Qwen3-Embedding-4B-iq3_xs.gguf
+- rfilename: Qwen3-Embedding-4B-iq3_xxs.gguf
+- rfilename: Qwen3-Embedding-4B-iq4_nl.gguf
+- rfilename: Qwen3-Embedding-4B-iq4_xs.gguf
+- rfilename: Qwen3-Embedding-4B-q2_k_m.gguf
+- rfilename: Qwen3-Embedding-4B-q2_k_s.gguf
+- rfilename: Qwen3-Embedding-4B-q3_k_m.gguf
+- rfilename: Qwen3-Embedding-4B-q3_k_s.gguf
+- rfilename: Qwen3-Embedding-4B-q4_0.gguf
+- rfilename: Qwen3-Embedding-4B-q4_1.gguf
+- rfilename: Qwen3-Embedding-4B-q4_k_m.gguf
+- rfilename: Qwen3-Embedding-4B-q4_k_s.gguf
+- rfilename: Qwen3-Embedding-4B-q5_0.gguf
+- rfilename: Qwen3-Embedding-4B-q5_1.gguf
+- rfilename: Qwen3-Embedding-4B-q5_k_m.gguf
+- rfilename: Qwen3-Embedding-4B-q5_k_s.gguf
+- rfilename: Qwen3-Embedding-4B-q6_k_m.gguf
+- rfilename: Qwen3-Embedding-4B-q8_0.gguf
+- rfilename: Qwen3-Embedding-4B.imatrix
+- rfilename: README.md
+spaces: []
+createdAt: '2025-06-10T13:02:08.000Z'
+usedStorage: 73443213520
+downloadsAllTime: 18218
+inferenceProviderMapping: {}
+configJson: null
+onnxFiles: {}
+safetensorsSizeMb: 0.0
+approxSizeMb: 0.0
+fetchedAt: '2026-06-08T16:42:43.000Z'

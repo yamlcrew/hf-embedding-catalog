@@ -1,0 +1,242 @@
+_id: 675989a54ebf2fdc1b11b798
+id: Data-Lab/USER-bge-m3-embedder_distill-tg
+private: false
+pipeline_tag: sentence-similarity
+library_name: sentence-transformers
+tags:
+- sentence-transformers
+- safetensors
+- xlm-roberta
+- sentence-similarity
+- feature-extraction
+- generated_from_trainer
+- dataset_size:10189
+- loss:DistillationTripletLoss
+- arxiv:1908.10084
+- base_model:deepvk/USER-bge-m3
+- base_model:finetune:deepvk/USER-bge-m3
+- model-index
+- text-embeddings-inference
+- endpoints_compatible
+- region:us
+downloads: 8
+likes: 0
+modelId: Data-Lab/USER-bge-m3-embedder_distill-tg
+author: Data-Lab
+sha: 9b323fe252a206dcc8439be54074ab20225d8f09
+lastModified: '2024-12-11T12:50:22.000Z'
+gated: false
+disabled: false
+mask_token: <mask>
+widgetData:
+- source_sentence: фисташки
+  sentences:
+  - Батончик ореховый "Арахис-фисташка" батончик, орехи, арахис, фисташка, тыквенные семена, фруктоза, пребиотик, мобильный
+    перекус, десерт, натуральные ингредиенты, лёгкий перекус
+  - Торт "Белые ночи" с сырным кремом торт, десерт, сырный крем, шоколад, глазурь, бисквит, праздничный, угощение, аллергены,
+    домашняя выпечка
+  - Фисташки жареные, 1 кг None, фисташки, жареные, сладкие, закуска, орехи, скорлупа, 1 кг
+- source_sentence: детский обед без сахара и соли
+  sentences:
+  - Батончик "Шоколадные палочки" с кешью, веган веганские сладости, перекус, натурпродукты, безглютеновые, растительные компоненты,
+    десерты, полезные закуски, шоколад, соленые сладости, без добавленного сахара
+  - Детский мини-шашлык из курицы мини-шашлык, детское питание, куриное мясо, овощи, легкий перекус
+  - Сметана безлактозная 20%, 200 г безлактозная, 20%, кулинария, соусы, супы, салаты, ферментный препарат, диетический продукт
+- source_sentence: сладости без глютена и лактозы, которые быстро готовятся
+  sentences:
+  - Фарш говяжий ГП 1 кг None, говядина, мясные продукты, фарш, низкокалорийный, сочные блюда, котлеты, фрикадельки, голубцы,
+    тефтели, без добавок, None
+  - Борщ "Украинский" борщ, суп, куриное мясо, диетическое, наваристый, пряный, сытный обед, свежие овощи, зелень, лавровый
+    лист
+  - Десерт "Тирамису" безлактозный безлактозный, десерт, итальянский, сладость, сыр, кофе, печенье, легкий, хрупкий, малоаллергенный
+- source_sentence: алый
+  sentences:
+  - Хлеб "Донской", нарезка ржаной хлеб, пшеничный хлеб, хлеб с кислинкой, традиционные технологии, без улучшителей, натуральные
+    ингредиенты, пекарня, хлебопекарные дрожжи
+  - Торт "Алый бархат" зам. торт, десерт, замороженный, сладкий, бисквит, крем, сливочный, какао, ароматизатор, безглютеновый,
+    сладкая закуска, легко размораживаемый, хранение, чай, кофе, аллергены
+  - Десерт в банке "Морковный" None, десерт, бисквит, крем, корица, арахис, без сахара, сладость, выпечка, None
+- source_sentence: тушенка
+  sentences:
+  - Говядина тушеная по-домашнему с пюре None, говядина, тушеное мясо, домашняя кухня, пюре, подливка, овощи, сливки, гарнир
+  - Печенье протеиновое Cyber Bite Банан 42 г протеиновое печенье, низкое содержание углеводов, BCAA, аминокислоты, полезные
+    жиры, кокосовое масло, низкий гликемический индекс, без сахара, без глютена, спортивное питание, снек, энергия, сытость
+  - Томленая говядина с пюре из цветной капусты товар, гарнир, нежное мясо, томатный соус, запеченная морковь, пряная приправа,
+    кокосовый крем, воздушное пюре, вегетарианское, безглютеновое
+model-index:
+- name: SentenceTransformer based on deepvk/USER-bge-m3
+  results:
+  - task:
+      type: triplet
+      name: Triplet
+    dataset:
+      name: dev
+      type: dev
+    metrics:
+    - type: cosine_accuracy
+      value: 0.9311562224183584
+      name: Cosine Accuracy
+      verified: false
+    - type: dot_accuracy
+      value: 0.06884377758164166
+      name: Dot Accuracy
+      verified: false
+    - type: manhattan_accuracy
+      value: 0.9302736098852604
+      name: Manhattan Accuracy
+      verified: false
+    - type: euclidean_accuracy
+      value: 0.9311562224183584
+      name: Euclidean Accuracy
+      verified: false
+    - type: max_accuracy
+      value: 0.9311562224183584
+      name: Max Accuracy
+      verified: false
+config:
+  architectures:
+  - XLMRobertaModel
+  model_type: xlm-roberta
+  tokenizer_config:
+    bos_token: <s>
+    cls_token: <s>
+    eos_token: </s>
+    mask_token: <mask>
+    pad_token: <pad>
+    sep_token: </s>
+    unk_token: <unk>
+cardData:
+  base_model: deepvk/USER-bge-m3
+  library_name: sentence-transformers
+  metrics:
+  - cosine_accuracy
+  - dot_accuracy
+  - manhattan_accuracy
+  - euclidean_accuracy
+  - max_accuracy
+  pipeline_tag: sentence-similarity
+  tags:
+  - sentence-transformers
+  - sentence-similarity
+  - feature-extraction
+  - generated_from_trainer
+  - dataset_size:10189
+  - loss:DistillationTripletLoss
+  widget:
+  - source_sentence: фисташки
+    sentences:
+    - Батончик ореховый "Арахис-фисташка" батончик, орехи, арахис, фисташка, тыквенные семена, фруктоза, пребиотик, мобильный
+      перекус, десерт, натуральные ингредиенты, лёгкий перекус
+    - Торт "Белые ночи" с сырным кремом торт, десерт, сырный крем, шоколад, глазурь, бисквит, праздничный, угощение, аллергены,
+      домашняя выпечка
+    - Фисташки жареные, 1 кг None, фисташки, жареные, сладкие, закуска, орехи, скорлупа, 1 кг
+  - source_sentence: детский обед без сахара и соли
+    sentences:
+    - Батончик "Шоколадные палочки" с кешью, веган веганские сладости, перекус, натурпродукты, безглютеновые, растительные
+      компоненты, десерты, полезные закуски, шоколад, соленые сладости, без добавленного сахара
+    - Детский мини-шашлык из курицы мини-шашлык, детское питание, куриное мясо, овощи, легкий перекус
+    - Сметана безлактозная 20%, 200 г безлактозная, 20%, кулинария, соусы, супы, салаты, ферментный препарат, диетический
+      продукт
+  - source_sentence: сладости без глютена и лактозы, которые быстро готовятся
+    sentences:
+    - Фарш говяжий ГП 1 кг None, говядина, мясные продукты, фарш, низкокалорийный, сочные блюда, котлеты, фрикадельки, голубцы,
+      тефтели, без добавок, None
+    - Борщ "Украинский" борщ, суп, куриное мясо, диетическое, наваристый, пряный, сытный обед, свежие овощи, зелень, лавровый
+      лист
+    - Десерт "Тирамису" безлактозный безлактозный, десерт, итальянский, сладость, сыр, кофе, печенье, легкий, хрупкий, малоаллергенный
+  - source_sentence: алый
+    sentences:
+    - Хлеб "Донской", нарезка ржаной хлеб, пшеничный хлеб, хлеб с кислинкой, традиционные технологии, без улучшителей, натуральные
+      ингредиенты, пекарня, хлебопекарные дрожжи
+    - Торт "Алый бархат" зам. торт, десерт, замороженный, сладкий, бисквит, крем, сливочный, какао, ароматизатор, безглютеновый,
+      сладкая закуска, легко размораживаемый, хранение, чай, кофе, аллергены
+    - Десерт в банке "Морковный" None, десерт, бисквит, крем, корица, арахис, без сахара, сладость, выпечка, None
+  - source_sentence: тушенка
+    sentences:
+    - Говядина тушеная по-домашнему с пюре None, говядина, тушеное мясо, домашняя кухня, пюре, подливка, овощи, сливки, гарнир
+    - Печенье протеиновое Cyber Bite Банан 42 г протеиновое печенье, низкое содержание углеводов, BCAA, аминокислоты, полезные
+      жиры, кокосовое масло, низкий гликемический индекс, без сахара, без глютена, спортивное питание, снек, энергия, сытость
+    - Томленая говядина с пюре из цветной капусты товар, гарнир, нежное мясо, томатный соус, запеченная морковь, пряная приправа,
+      кокосовый крем, воздушное пюре, вегетарианское, безглютеновое
+  model-index:
+  - name: SentenceTransformer based on deepvk/USER-bge-m3
+    results:
+    - task:
+        type: triplet
+        name: Triplet
+      dataset:
+        name: dev
+        type: dev
+      metrics:
+      - type: cosine_accuracy
+        value: 0.9311562224183584
+        name: Cosine Accuracy
+        verified: false
+      - type: dot_accuracy
+        value: 0.06884377758164166
+        name: Dot Accuracy
+        verified: false
+      - type: manhattan_accuracy
+        value: 0.9302736098852604
+        name: Manhattan Accuracy
+        verified: false
+      - type: euclidean_accuracy
+        value: 0.9311562224183584
+        name: Euclidean Accuracy
+        verified: false
+      - type: max_accuracy
+        value: 0.9311562224183584
+        name: Max Accuracy
+        verified: false
+siblings:
+- rfilename: .gitattributes
+- rfilename: 1_Pooling/config.json
+- rfilename: README.md
+- rfilename: config.json
+- rfilename: config_sentence_transformers.json
+- rfilename: model.safetensors
+- rfilename: modules.json
+- rfilename: sentence_bert_config.json
+- rfilename: sentencepiece.bpe.model
+- rfilename: special_tokens_map.json
+- rfilename: tokenizer.json
+- rfilename: tokenizer_config.json
+spaces: []
+createdAt: '2024-12-11T12:46:29.000Z'
+safetensors:
+  parameters:
+    F32: 359026688
+  total: 359026688
+usedStorage: 1437194562
+downloadsAllTime: 102
+inferenceProviderMapping: {}
+configJson:
+  _name_or_path: deepvk/USER-bge-m3
+  architectures:
+  - XLMRobertaModel
+  attention_probs_dropout_prob: 0.1
+  bos_token_id: 0
+  classifier_dropout: null
+  eos_token_id: 2
+  hidden_act: gelu
+  hidden_dropout_prob: 0.1
+  hidden_size: 1024
+  initializer_range: 0.02
+  intermediate_size: 4096
+  layer_norm_eps: 1.0e-05
+  max_position_embeddings: 8194
+  model_type: xlm-roberta
+  num_attention_heads: 16
+  num_hidden_layers: 24
+  output_past: true
+  pad_token_id: 1
+  position_embedding_type: absolute
+  torch_dtype: float32
+  transformers_version: 4.44.0
+  type_vocab_size: 1
+  use_cache: true
+  vocab_size: 46166
+onnxFiles: {}
+safetensorsSizeMb: 1436.2
+approxSizeMb: 1436.1
+fetchedAt: '2026-06-08T16:42:43.000Z'

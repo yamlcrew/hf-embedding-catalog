@@ -1,0 +1,241 @@
+_id: 683f440e5ebb299291e138f2
+id: ibm-granite/granite-vision-3.3-2b-embedding
+private: false
+pipeline_tag: feature-extraction
+library_name: transformers
+tags:
+- transformers
+- safetensors
+- granitevisionemb
+- feature-extraction
+- custom_code
+- en
+- arxiv:2407.01449
+- arxiv:2502.09927
+- arxiv:2502.12342
+- arxiv:2505.17166
+- base_model:ibm-granite/granite-vision-3.3-2b
+- base_model:finetune:ibm-granite/granite-vision-3.3-2b
+- license:apache-2.0
+- region:us
+downloads: 179
+likes: 28
+modelId: ibm-granite/granite-vision-3.3-2b-embedding
+author: ibm-granite
+sha: baa53d1e1ac95baefb15e4aa9fdcc471ac728c83
+lastModified: '2025-08-16T19:11:47.000Z'
+gated: false
+disabled: false
+model-index: null
+config:
+  auto_map:
+    AutoModel: modeling_granite_vision_embedding.GraniteVisionEmb
+    AutoProcessor: processing_granite_vision_embedding.GraniteVisionEmbProcessor
+    AutoConfig: granite_vision_embedding_config.GraniteVisionEmbConfig
+  architectures:
+  - GraniteVisionEmb
+  model_type: granitevisionemb
+  processor_config:
+    chat_template: "{%- if tools %}\n    {{- '<|start_of_role|>available_tools<|end_of_role|>\n' }}\n    {%- for tool in tools\
+      \ %}\n    {{- tool | tojson(indent=4) }}\n    {%- if not loop.last %}\n        {{- '\n\n' }}\n    {%- endif %}\n   \
+      \ {%- endfor %}\n    {{- '<|end_of_text|>\n' }}\n{%- endif %}\n{%- for message in messages if message['role'] == 'system'%}{%\
+      \ else %}<|system|>\nA chat between a curious user and an artificial intelligence assistant. The assistant gives helpful,\
+      \ detailed, and polite answers to the user's questions.\n{% endfor %}{%- for message in messages %}\n    {%- if message['role']\
+      \ == 'system' %}\n    {{- '<|system|>\n' + message['content'][0]['text'] + '\n' }}\n    {%- elif message['role'] ==\
+      \ 'user' %}<|user|>\n {# Render all images first #}{% for content in message['content'] | selectattr('type', 'equalto',\
+      \ 'image') %}{{ '<image>\n' }}{% endfor %}{# Render all text next #}{% for content in message['content'] | selectattr('type',\
+      \ 'equalto', 'text') %}{{ content['text'] + '\n' }}{% endfor %}\n{%- elif message['role'] == 'assistant' %}\n    {{-\
+      \ '<|assistant|>\n'  + message['content'][0]['text']  + '<|end_of_text|>' }}\n    {%- elif message['role'] == 'assistant_tool_call'\
+      \ %}\n    {{- '<|start_of_role|>assistant<|end_of_role|><|tool_call|>' + message['content'][0]['text']  + '<|end_of_text|>\n\
+      ' }}\n    {%- elif message['role'] == 'tool_response' %}\n    {{- '<|start_of_role|>tool_response<|end_of_role|>' +\
+      \ message['content'][0]['text'] + '<|end_of_text|>\n' }}\n    {%- endif %}\n    {%- if loop.last and add_generation_prompt\
+      \ %}\n    {{- '<|assistant|>\n' }}\n    {%- endif %}\n{%- endfor %}"
+  tokenizer_config:
+    bos_token: <|end_of_text|>
+    chat_template: "{%- if tools %}\n    {{- '<|start_of_role|>available_tools<|end_of_role|>\n' }}\n    {%- for tool in tools\
+      \ %}\n    {{- tool | tojson(indent=4) }}\n    {%- if not loop.last %}\n        {{- '\n\n' }}\n    {%- endif %}\n   \
+      \ {%- endfor %}\n    {{- '<|end_of_text|>\n' }}\n{%- endif %}\n{%- for message in messages if message['role'] == 'system'%}{%\
+      \ else %}<|system|>\nA chat between a curious user and an artificial intelligence assistant. The assistant gives helpful,\
+      \ detailed, and polite answers to the user's questions.\n{% endfor %}{%- for message in messages %}\n    {%- if message['role']\
+      \ == 'system' %}\n    {{- '<|system|>\n' + message['content'] + '\n' }}\n    {%- elif message['role'] == 'user' %}\n\
+      \    {{- '<|user|>\n' + message['content'] + '\n' }}\n    {%- elif message['role'] == 'assistant' %}\n    {{- '<|assistant|>\n\
+      '  + message['content'] + '<|end_of_text|>' }}\n    {%- elif message['role'] == 'assistant_tool_call' %}\n    {{- '<|start_of_role|>assistant<|end_of_role|><|tool_call|>'\
+      \ + message['content'] + '<|end_of_text|>\n' }}\n    {%- elif message['role'] == 'tool_response' %}\n    {{- '<|start_of_role|>tool_response<|end_of_role|>'\
+      \ + message['content'] + '<|end_of_text|>\n' }}\n    {%- endif %}\n    {%- if loop.last and add_generation_prompt %}\n\
+      \    {{- '<|assistant|>\n' }}\n    {%- endif %}\n{%- endfor %}"
+    eos_token: <|end_of_text|>
+    pad_token: <|end_of_text|>
+    unk_token: <|end_of_text|>
+cardData:
+  license: apache-2.0
+  language:
+  - en
+  base_model:
+  - ibm-granite/granite-vision-3.3-2b
+  library_name: transformers
+transformersInfo:
+  auto_model: AutoModel
+  custom_class: modeling_granite_vision_embedding.GraniteVisionEmb
+  pipeline_tag: feature-extraction
+siblings:
+- rfilename: .gitattributes
+- rfilename: README.md
+- rfilename: REPORT_Benchmarking the AI advantage in finance.pdf
+- rfilename: added_tokens.json
+- rfilename: chat_template.json
+- rfilename: config.json
+- rfilename: granite_vision_embedding_config.py
+- rfilename: merges.txt
+- rfilename: model-00001-of-00003.safetensors
+- rfilename: model-00002-of-00003.safetensors
+- rfilename: model-00003-of-00003.safetensors
+- rfilename: model.safetensors.index.json
+- rfilename: modeling_granite_vision_embedding.py
+- rfilename: preprocessor_config.json
+- rfilename: processing_granite_vision_embedding.py
+- rfilename: processor_config.json
+- rfilename: special_tokens_map.json
+- rfilename: tokenizer.json
+- rfilename: tokenizer_config.json
+- rfilename: vocab.json
+spaces:
+- mteb/leaderboard
+- maxpar1/leaderboard
+- kiedistv/leaderboard
+- malyvena/leaderboard
+- HuggingLLM/leaderboard
+- wangsh0111/leaderboard
+- kaotd/leaderboard
+- qiaosong88/leaderboard
+- ArtemBolgov/leaderboard
+createdAt: '2025-06-03T18:50:54.000Z'
+safetensors:
+  parameters:
+    F32: 2975659200
+  total: 2975659200
+usedStorage: 23920581632
+downloadsAllTime: 15022
+inferenceProviderMapping: {}
+configJson:
+  _name_or_path: ibm_granite/granite-vision-3.3-2b
+  adapter_path: null
+  auto_map:
+    AutoModel: modeling_granite_vision_embedding.GraniteVisionEmb
+    AutoProcessor: processing_granite_vision_embedding.GraniteVisionEmbProcessor
+    AutoConfig: granite_vision_embedding_config.GraniteVisionEmbConfig
+  architectures:
+  - GraniteVisionEmb
+  base_image_feature_location: last
+  base_model: null
+  emb_dim_doc: 128
+  emb_dim_query: 128
+  image_grid_pinpoints:
+  - - 384
+    - 768
+  - - 384
+    - 1152
+  - - 384
+    - 1536
+  - - 384
+    - 1920
+  - - 384
+    - 2304
+  - - 384
+    - 2688
+  - - 384
+    - 3072
+  - - 384
+    - 3456
+  - - 384
+    - 3840
+  - - 768
+    - 384
+  - - 768
+    - 768
+  - - 768
+    - 1152
+  - - 768
+    - 1536
+  - - 768
+    - 1920
+  - - 1152
+    - 384
+  - - 1152
+    - 768
+  - - 1152
+    - 1152
+  - - 1536
+    - 384
+  - - 1536
+    - 768
+  - - 1920
+    - 384
+  - - 1920
+    - 768
+  - - 2304
+    - 384
+  - - 2688
+    - 384
+  - - 3072
+    - 384
+  - - 3456
+    - 384
+  - - 3840
+    - 384
+  image_seq_length: 576
+  image_token_index: 49155
+  model_type: granitevisionemb
+  multimodal_projector_bias: true
+  pretrained_language_model: ''
+  pretrained_vision_tower: ''
+  projector_hidden_act: gelu
+  text_config:
+    _attn_implementation_autoset: true
+    _name_or_path: ibm-granite/granite-3.1-2b-instruct
+    architectures:
+    - GraniteForCausalLM
+    attention_dropout: 0.1
+    attention_multiplier: 0.015625
+    bos_token_id: 0
+    embedding_multiplier: 12.0
+    eos_token_id: 0
+    hidden_size: 2048
+    intermediate_size: 8192
+    logits_scaling: 8.0
+    max_position_embeddings: 131072
+    model_type: granite
+    num_hidden_layers: 40
+    num_key_value_heads: 8
+    pad_token_id: 0
+    residual_multiplier: 0.22
+    rms_norm_eps: 1.0e-05
+    rope_theta: 300000
+    tie_word_embeddings: true
+    torch_dtype: bfloat16
+    vocab_size: 49156
+  tie_word_embeddings: true
+  torch_dtype: float32
+  transformers_version: 4.49.0
+  use_image_newline_parameter: true
+  vision_config:
+    _attn_implementation_autoset: true
+    hidden_act: gelu_pytorch_tanh
+    hidden_size: 1152
+    image_size: 384
+    intermediate_size: 4304
+    layer_norm_eps: 1.0e-06
+    model_type: siglip_vision_model
+    num_attention_heads: 16
+    num_hidden_layers: 27
+    patch_size: 14
+    torch_dtype: bfloat16
+  vision_feature_layer:
+  - -24
+  - -20
+  - -12
+  - -1
+  vision_feature_select_strategy: full
+onnxFiles: {}
+safetensorsSizeMb: 11902.8
+approxSizeMb: 11902.6
+fetchedAt: '2026-06-08T16:42:43.000Z'

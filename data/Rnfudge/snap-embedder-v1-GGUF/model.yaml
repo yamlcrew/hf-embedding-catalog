@@ -1,0 +1,313 @@
+_id: 69c412cec16a7c5f4cf7a2dc
+id: Rnfudge/snap-embedder-v1-GGUF
+private: false
+pipeline_tag: sentence-similarity
+library_name: sentence-transformers
+tags:
+- sentence-transformers
+- safetensors
+- gguf
+- qwen3
+- unsloth
+- sentence-similarity
+- feature-extraction
+- dense
+- generated_from_trainer
+- dataset_size:223748
+- loss:MultipleNegativesRankingLoss
+- arxiv:1908.10084
+- arxiv:1807.03748
+- text-embeddings-inference
+- endpoints_compatible
+- region:us
+- conversational
+downloads: 31
+likes: 0
+modelId: Rnfudge/snap-embedder-v1-GGUF
+author: Rnfudge
+sha: 31cb67f79bb3e0d116fc0f547d90557e4d7cf3e9
+lastModified: '2026-03-25T16:56:38.000Z'
+gated: false
+disabled: false
+widgetData:
+- source_sentence: What is the significance of the IPv6 multicast address ff02::1?
+  sentences:
+  - Felt board for classroom activities
+  - In the provided network output, the frequent appearance of `ff020000000000000000000000000001` across various interfaces
+    like `lo`, `eth0`, and `eth1` indicates that these interfaces are correctly configured for basic IPv6 operations. Every
+    active IPv6 interface on a segment must listen for messages sent to `ff02::1` to participate in essential link-local protocols,
+    making its presence a standard and expected entry.
+  - Not all customizations are supported across all snapd image types or models. For example, certain customizations might
+    be unsupported for UC20+ or classic models, leading to errors. Additionally, if a gadget snap itself defines `defaults`
+    in its `meta/gadget.yaml`, these can be overridden or complemented by the `Customizations` provided during the `SetupSeed`
+    call, affecting system services like SSH.
+- source_sentence: vein
+  sentences:
+  - blood vessel
+  - 'The `hkdf.Key` function requires several inputs: the underlying hash function for HMAC (e.g., `sha256.New`), the master
+    `secret` material, an optional `salt` value, context-specific `info`, and the desired `keyLen` for the output derived
+    key. These parameters collectively guide the key derivation process.'
+  - egg-laying
+- source_sentence: How are special file types determined in file status?
+  sentences:
+  - Integrated into the *ensure loop*, the `TaskRunner`'s `Ensure` method is invoked periodically to manage task execution.
+    It's responsible for spawning goroutines to concurrently execute task handlers, whether for their primary 'do' logic or
+    their 'undo' logic in case of failures. High-level system parts can also trigger its execution proactively using `State.EnsureBefore`.
+  - File type identification within the `fileStat` population involves a critical step where the `fs.sys.Mode` value is masked
+    with `syscall.S_IFMT`. This operation allows the function to discern whether the file is a block device (`S_IFBLK`), a
+    character device (`S_IFCHR`), a named pipe (`S_IFIFO`), a socket (`S_IFSOCK`), or a regular file (`S_IFREG`), applying
+    the appropriate `FileMode` flags.
+  - Volatility acceptance
+- source_sentence: mitre
+  sentences:
+  - ocean liner
+  - It becomes necessary because, during the initial `mmap` of an output buffer, no code signature typically exists. After
+    the signature is finally created, the kernel's cached view might not reflect this change. Therefore, `purgeSignatureCache`
+    explicitly clears this cache to prevent problems related to stale signature information.
+  - Clerical cap
+- source_sentence: craniofacial
+  sentences:
+  - head and face structure
+  - Planned destruction of structures using explosives or machinery
+  - Anchor-positive pairs are fundamental to contrastive learning, serving to define what the model should consider as semantically
+    similar data points, guiding it to learn meaningful representations.
+model-index: null
+config:
+  architectures:
+  - Qwen3ForCausalLM
+  model_type: qwen3
+  tokenizer_config:
+    bos_token: null
+    eos_token: <|im_end|>
+    pad_token: <|endoftext|>
+    unk_token: null
+    chat_template: "{%- if tools %}\n    {{- '<|im_start|>system\\n' }}\n    {%- if messages[0]['role'] == 'system' %}\n \
+      \       {{- messages[0]['content'] }}\n    {%- else %}\n        {{- 'You are a helpful assistant.' }}\n    {%- endif\
+      \ %}\n    {{- \"\\n\\n# Tools\\n\\nYou may call one or more functions to assist with the user query.\\n\\nYou are provided\
+      \ with function signatures within <tools></tools> XML tags:\\n<tools>\" }}\n    {%- for tool in tools %}\n        {{-\
+      \ \"\\n\" }}\n        {{- tool | tojson }}\n    {%- endfor %}\n    {{- \"\\n</tools>\\n\\nFor each function call, return\
+      \ a json object with function name and arguments within <tool_call></tool_call> XML tags:\\n<tool_call>\\n{\\\"name\\\
+      \": <function-name>, \\\"arguments\\\": <args-json-object>}\\n</tool_call><|im_end|>\\n\" }}\n{%- else %}\n    {%- if\
+      \ messages[0]['role'] == 'system' %}\n        {{- '<|im_start|>system\\n' + messages[0]['content'] + '<|im_end|>\\n'\
+      \ }}\n    {%- else %}\n        {{- '<|im_start|>system\\nYou are a helpful assistant.<|im_end|>\\n' }}\n    {%- endif\
+      \ %}\n{%- endif %}\n{%- for message in messages %}\n    {%- if (message.role == \"user\") or (message.role == \"system\"\
+      \ and not loop.first) or (message.role == \"assistant\" and not message.tool_calls) %}\n        {{- '<|im_start|>' +\
+      \ message.role + '\\n' + message.content + '<|im_end|>' + '\\n' }}\n    {%- elif message.role == \"assistant\" %}\n\
+      \        {{- '<|im_start|>' + message.role }}\n        {%- if message.content %}\n            {{- '\\n' + message.content\
+      \ }}\n        {%- endif %}\n        {%- for tool_call in message.tool_calls %}\n            {%- if tool_call.function\
+      \ is defined %}\n                {%- set tool_call = tool_call.function %}\n            {%- endif %}\n            {{-\
+      \ '\\n<tool_call>\\n{\"name\": \"' }}\n            {{- tool_call.name }}\n            {{- '\", \"arguments\": ' }}\n\
+      \            {{- tool_call.arguments | tojson }}\n            {{- '}\\n</tool_call>' }}\n        {%- endfor %}\n   \
+      \     {{- '<|im_end|>\\n' }}\n    {%- elif message.role == \"tool\" %}\n        {%- if (loop.index0 == 0) or (messages[loop.index0\
+      \ - 1].role != \"tool\") %}\n            {{- '<|im_start|>user' }}\n        {%- endif %}\n        {{- '\\n<tool_response>\\\
+      n' }}\n        {{- message.content }}\n        {{- '\\n</tool_response>' }}\n        {%- if loop.last or (messages[loop.index0\
+      \ + 1].role != \"tool\") %}\n            {{- '<|im_end|>\\n' }}\n        {%- endif %}\n    {%- endif %}\n{%- endfor\
+      \ %}\n{%- if add_generation_prompt %}\n    {{- '<|im_start|>assistant\\n' }}\n{%- endif %}\n"
+  chat_template_jinja: "{%- if tools %}\n    {{- '<|im_start|>system\\n' }}\n    {%- if messages[0]['role'] == 'system' %}\n\
+    \        {{- messages[0]['content'] }}\n    {%- else %}\n        {{- 'You are a helpful assistant.' }}\n    {%- endif\
+    \ %}\n    {{- \"\\n\\n# Tools\\n\\nYou may call one or more functions to assist with the user query.\\n\\nYou are provided\
+    \ with function signatures within <tools></tools> XML tags:\\n<tools>\" }}\n    {%- for tool in tools %}\n        {{-\
+    \ \"\\n\" }}\n        {{- tool | tojson }}\n    {%- endfor %}\n    {{- \"\\n</tools>\\n\\nFor each function call, return\
+    \ a json object with function name and arguments within <tool_call></tool_call> XML tags:\\n<tool_call>\\n{\\\"name\\\"\
+    : <function-name>, \\\"arguments\\\": <args-json-object>}\\n</tool_call><|im_end|>\\n\" }}\n{%- else %}\n    {%- if messages[0]['role']\
+    \ == 'system' %}\n        {{- '<|im_start|>system\\n' + messages[0]['content'] + '<|im_end|>\\n' }}\n    {%- else %}\n\
+    \        {{- '<|im_start|>system\\nYou are a helpful assistant.<|im_end|>\\n' }}\n    {%- endif %}\n{%- endif %}\n{%-\
+    \ for message in messages %}\n    {%- if (message.role == \"user\") or (message.role == \"system\" and not loop.first)\
+    \ or (message.role == \"assistant\" and not message.tool_calls) %}\n        {{- '<|im_start|>' + message.role + '\\n'\
+    \ + message.content + '<|im_end|>' + '\\n' }}\n    {%- elif message.role == \"assistant\" %}\n        {{- '<|im_start|>'\
+    \ + message.role }}\n        {%- if message.content %}\n            {{- '\\n' + message.content }}\n        {%- endif\
+    \ %}\n        {%- for tool_call in message.tool_calls %}\n            {%- if tool_call.function is defined %}\n      \
+    \          {%- set tool_call = tool_call.function %}\n            {%- endif %}\n            {{- '\\n<tool_call>\\n{\"\
+    name\": \"' }}\n            {{- tool_call.name }}\n            {{- '\", \"arguments\": ' }}\n            {{- tool_call.arguments\
+    \ | tojson }}\n            {{- '}\\n</tool_call>' }}\n        {%- endfor %}\n        {{- '<|im_end|>\\n' }}\n    {%- elif\
+    \ message.role == \"tool\" %}\n        {%- if (loop.index0 == 0) or (messages[loop.index0 - 1].role != \"tool\") %}\n\
+    \            {{- '<|im_start|>user' }}\n        {%- endif %}\n        {{- '\\n<tool_response>\\n' }}\n        {{- message.content\
+    \ }}\n        {{- '\\n</tool_response>' }}\n        {%- if loop.last or (messages[loop.index0 + 1].role != \"tool\") %}\n\
+    \            {{- '<|im_end|>\\n' }}\n        {%- endif %}\n    {%- endif %}\n{%- endfor %}\n{%- if add_generation_prompt\
+    \ %}\n    {{- '<|im_start|>assistant\\n' }}\n{%- endif %}\n"
+cardData:
+  tags:
+  - unsloth
+  - sentence-transformers
+  - sentence-similarity
+  - feature-extraction
+  - dense
+  - generated_from_trainer
+  - dataset_size:223748
+  - loss:MultipleNegativesRankingLoss
+  widget:
+  - source_sentence: What is the significance of the IPv6 multicast address ff02::1?
+    sentences:
+    - Felt board for classroom activities
+    - In the provided network output, the frequent appearance of `ff020000000000000000000000000001` across various interfaces
+      like `lo`, `eth0`, and `eth1` indicates that these interfaces are correctly configured for basic IPv6 operations. Every
+      active IPv6 interface on a segment must listen for messages sent to `ff02::1` to participate in essential link-local
+      protocols, making its presence a standard and expected entry.
+    - Not all customizations are supported across all snapd image types or models. For example, certain customizations might
+      be unsupported for UC20+ or classic models, leading to errors. Additionally, if a gadget snap itself defines `defaults`
+      in its `meta/gadget.yaml`, these can be overridden or complemented by the `Customizations` provided during the `SetupSeed`
+      call, affecting system services like SSH.
+  - source_sentence: vein
+    sentences:
+    - blood vessel
+    - 'The `hkdf.Key` function requires several inputs: the underlying hash function for HMAC (e.g., `sha256.New`), the master
+      `secret` material, an optional `salt` value, context-specific `info`, and the desired `keyLen` for the output derived
+      key. These parameters collectively guide the key derivation process.'
+    - egg-laying
+  - source_sentence: How are special file types determined in file status?
+    sentences:
+    - Integrated into the *ensure loop*, the `TaskRunner`'s `Ensure` method is invoked periodically to manage task execution.
+      It's responsible for spawning goroutines to concurrently execute task handlers, whether for their primary 'do' logic
+      or their 'undo' logic in case of failures. High-level system parts can also trigger its execution proactively using
+      `State.EnsureBefore`.
+    - File type identification within the `fileStat` population involves a critical step where the `fs.sys.Mode` value is
+      masked with `syscall.S_IFMT`. This operation allows the function to discern whether the file is a block device (`S_IFBLK`),
+      a character device (`S_IFCHR`), a named pipe (`S_IFIFO`), a socket (`S_IFSOCK`), or a regular file (`S_IFREG`), applying
+      the appropriate `FileMode` flags.
+    - Volatility acceptance
+  - source_sentence: mitre
+    sentences:
+    - ocean liner
+    - It becomes necessary because, during the initial `mmap` of an output buffer, no code signature typically exists. After
+      the signature is finally created, the kernel's cached view might not reflect this change. Therefore, `purgeSignatureCache`
+      explicitly clears this cache to prevent problems related to stale signature information.
+    - Clerical cap
+  - source_sentence: craniofacial
+    sentences:
+    - head and face structure
+    - Planned destruction of structures using explosives or machinery
+    - Anchor-positive pairs are fundamental to contrastive learning, serving to define what the model should consider as semantically
+      similar data points, guiding it to learn meaningful representations.
+  pipeline_tag: sentence-similarity
+  library_name: sentence-transformers
+gguf:
+  total: 4021774336
+  architecture: qwen3
+  context_length: 40960
+  chat_template: "{%- if tools %}\n    {{- '<|im_start|>system\\n' }}\n    {%- if messages[0]['role'] == 'system' %}\n   \
+    \     {{- messages[0]['content'] }}\n    {%- else %}\n        {{- 'You are a helpful assistant.' }}\n    {%- endif %}\n\
+    \    {{- \"\\n\\n# Tools\\n\\nYou may call one or more functions to assist with the user query.\\n\\nYou are provided\
+    \ with function signatures within <tools></tools> XML tags:\\n<tools>\" }}\n    {%- for tool in tools %}\n        {{-\
+    \ \"\\n\" }}\n        {{- tool | tojson }}\n    {%- endfor %}\n    {{- \"\\n</tools>\\n\\nFor each function call, return\
+    \ a json object with function name and arguments within <tool_call></tool_call> XML tags:\\n<tool_call>\\n{\\\"name\\\"\
+    : <function-name>, \\\"arguments\\\": <args-json-object>}\\n</tool_call><|im_end|>\\n\" }}\n{%- else %}\n    {%- if messages[0]['role']\
+    \ == 'system' %}\n        {{- '<|im_start|>system\\n' + messages[0]['content'] + '<|im_end|>\\n' }}\n    {%- else %}\n\
+    \        {{- '<|im_start|>system\\nYou are a helpful assistant.<|im_end|>\\n' }}\n    {%- endif %}\n{%- endif %}\n{%-\
+    \ for message in messages %}\n    {%- if (message.role == \"user\") or (message.role == \"system\" and not loop.first)\
+    \ or (message.role == \"assistant\" and not message.tool_calls) %}\n        {{- '<|im_start|>' + message.role + '\\n'\
+    \ + message.content + '<|im_end|>' + '\\n' }}\n    {%- elif message.role == \"assistant\" %}\n        {{- '<|im_start|>'\
+    \ + message.role }}\n        {%- if message.content %}\n            {{- '\\n' + message.content }}\n        {%- endif\
+    \ %}\n        {%- for tool_call in message.tool_calls %}\n            {%- if tool_call.function is defined %}\n      \
+    \          {%- set tool_call = tool_call.function %}\n            {%- endif %}\n            {{- '\\n<tool_call>\\n{\"\
+    name\": \"' }}\n            {{- tool_call.name }}\n            {{- '\", \"arguments\": ' }}\n            {{- tool_call.arguments\
+    \ | tojson }}\n            {{- '}\\n</tool_call>' }}\n        {%- endfor %}\n        {{- '<|im_end|>\\n' }}\n    {%- elif\
+    \ message.role == \"tool\" %}\n        {%- if (loop.index0 == 0) or (messages[loop.index0 - 1].role != \"tool\") %}\n\
+    \            {{- '<|im_start|>user' }}\n        {%- endif %}\n        {{- '\\n<tool_response>\\n' }}\n        {{- message.content\
+    \ }}\n        {{- '\\n</tool_response>' }}\n        {%- if loop.last or (messages[loop.index0 + 1].role != \"tool\") %}\n\
+    \            {{- '<|im_end|>\\n' }}\n        {%- endif %}\n    {%- endif %}\n{%- endfor %}\n{%- if add_generation_prompt\
+    \ %}\n    {{- '<|im_start|>assistant\\n' }}\n{%- endif %}\n"
+  bos_token: <|endoftext|>
+  eos_token: <|endoftext|>
+  totalFileSize: 2496703456
+siblings:
+- rfilename: .gitattributes
+- rfilename: 1_Pooling/config.json
+- rfilename: Qwen3-Embedding-4B.Q4_K_M.gguf
+- rfilename: README.md
+- rfilename: adapter_config.json
+- rfilename: adapter_model.safetensors
+- rfilename: added_tokens.json
+- rfilename: chat_template.jinja
+- rfilename: config.json
+- rfilename: config_sentence_transformers.json
+- rfilename: merges.txt
+- rfilename: model-00001-of-00002.safetensors
+- rfilename: model-00002-of-00002.safetensors
+- rfilename: model.safetensors.index.json
+- rfilename: modules.json
+- rfilename: sentence_bert_config.json
+- rfilename: special_tokens_map.json
+- rfilename: tokenizer.json
+- rfilename: tokenizer_config.json
+- rfilename: vocab.json
+spaces: []
+createdAt: '2026-03-25T16:52:30.000Z'
+safetensors:
+  parameters:
+    BF16: 4021774336
+  total: 4021774336
+usedStorage: 11080265723
+downloadsAllTime: 162
+inferenceProviderMapping: {}
+configJson:
+  architectures:
+  - Qwen3ForCausalLM
+  attention_bias: false
+  attention_dropout: 0.0
+  bos_token_id: 151643
+  torch_dtype: bfloat16
+  eos_token_id: 151645
+  head_dim: 128
+  hidden_act: silu
+  hidden_size: 2560
+  initializer_range: 0.02
+  intermediate_size: 9728
+  layer_types:
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  max_position_embeddings: 40960
+  max_window_layers: 36
+  model_name: unsloth/Qwen3-Embedding-4B
+  model_type: qwen3
+  num_attention_heads: 32
+  num_hidden_layers: 36
+  num_key_value_heads: 8
+  pad_token_id: 151643
+  rms_norm_eps: 1.0e-06
+  rope_scaling: null
+  rope_theta: 1000000
+  sliding_window: null
+  tie_word_embeddings: true
+  tokenizer_class: Qwen2TokenizerFast
+  unsloth_version: 2026.3.8
+  use_cache: true
+  use_sliding_window: false
+  vocab_size: 151665
+onnxFiles: {}
+safetensorsSizeMb: 8572.1
+approxSizeMb: 8043.5
+fetchedAt: '2026-06-08T16:42:43.000Z'

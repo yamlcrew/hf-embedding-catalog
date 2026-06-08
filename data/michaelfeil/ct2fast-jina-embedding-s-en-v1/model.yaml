@@ -1,0 +1,7302 @@
+_id: 65294cd7019a20ed658ffdf4
+id: michaelfeil/ct2fast-jina-embedding-s-en-v1
+private: false
+pipeline_tag: sentence-similarity
+library_name: transformers
+tags:
+- transformers
+- t5
+- feature-extraction
+- ctranslate2
+- int8
+- float16 - finetuner - mteb - sentence-transformers - feature-extraction - sentence-similarity
+- sentence-similarity
+- custom_code
+- en
+- dataset:jinaai/negation-dataset
+- arxiv:2307.11224
+- license:apache-2.0
+- model-index
+- region:us
+downloads: 7
+likes: 0
+modelId: michaelfeil/ct2fast-jina-embedding-s-en-v1
+author: michaelfeil
+sha: 78c2790b749b8ea3aed69f27137cfd85606df48b
+lastModified: '2023-10-13T14:11:04.000Z'
+gated: false
+disabled: false
+widgetData:
+- source_sentence: That is a happy person
+  sentences:
+  - That is a happy dog
+  - That is a very happy person
+  - Today is a sunny day
+model-index:
+- name: jina-embedding-s-en-v1
+  results:
+  - task:
+      type: Classification
+    dataset:
+      type: mteb/amazon_counterfactual
+      name: MTEB AmazonCounterfactualClassification (en)
+      config: en
+      split: test
+      revision: e8379541af4e31359cca9fbcf4b00f2671dba205
+    metrics:
+    - type: accuracy
+      value: 64.82089552238806
+      verified: false
+    - type: ap
+      value: 27.100981946230778
+      verified: false
+    - type: f1
+      value: 58.3354886367184
+      verified: false
+  - task:
+      type: Classification
+    dataset:
+      type: mteb/amazon_polarity
+      name: MTEB AmazonPolarityClassification
+      config: default
+      split: test
+      revision: e2d317d38cd51312af73b3d32a06d1a08b442046
+    metrics:
+    - type: accuracy
+      value: 64.282775
+      verified: false
+    - type: ap
+      value: 60.350688924943796
+      verified: false
+    - type: f1
+      value: 62.06346948494396
+      verified: false
+  - task:
+      type: Classification
+    dataset:
+      type: mteb/amazon_reviews_multi
+      name: MTEB AmazonReviewsClassification (en)
+      config: en
+      split: test
+      revision: 1399c76144fd37290681b995c656ef9b2e06e26d
+    metrics:
+    - type: accuracy
+      value: 30.623999999999995
+      verified: false
+    - type: f1
+      value: 29.427789186742153
+      verified: false
+  - task:
+      type: Retrieval
+    dataset:
+      type: arguana
+      name: MTEB ArguAna
+      config: default
+      split: test
+      revision: None
+    metrics:
+    - type: map_at_1
+      value: 22.119
+      verified: false
+    - type: map_at_10
+      value: 35.609
+      verified: false
+    - type: map_at_100
+      value: 36.935
+      verified: false
+    - type: map_at_1000
+      value: 36.957
+      verified: false
+    - type: map_at_3
+      value: 31.046000000000003
+      verified: false
+    - type: map_at_5
+      value: 33.574
+      verified: false
+    - type: mrr_at_1
+      value: 22.404
+      verified: false
+    - type: mrr_at_10
+      value: 35.695
+      verified: false
+    - type: mrr_at_100
+      value: 37.021
+      verified: false
+    - type: mrr_at_1000
+      value: 37.043
+      verified: false
+    - type: mrr_at_3
+      value: 31.093
+      verified: false
+    - type: mrr_at_5
+      value: 33.635999999999996
+      verified: false
+    - type: ndcg_at_1
+      value: 22.119
+      verified: false
+    - type: ndcg_at_10
+      value: 43.566
+      verified: false
+    - type: ndcg_at_100
+      value: 49.370000000000005
+      verified: false
+    - type: ndcg_at_1000
+      value: 49.901
+      verified: false
+    - type: ndcg_at_3
+      value: 34.06
+      verified: false
+    - type: ndcg_at_5
+      value: 38.653999999999996
+      verified: false
+    - type: precision_at_1
+      value: 22.119
+      verified: false
+    - type: precision_at_10
+      value: 6.92
+      verified: false
+    - type: precision_at_100
+      value: 0.95
+      verified: false
+    - type: precision_at_1000
+      value: 0.099
+      verified: false
+    - type: precision_at_3
+      value: 14.272000000000002
+      verified: false
+    - type: precision_at_5
+      value: 10.811
+      verified: false
+    - type: recall_at_1
+      value: 22.119
+      verified: false
+    - type: recall_at_10
+      value: 69.203
+      verified: false
+    - type: recall_at_100
+      value: 95.021
+      verified: false
+    - type: recall_at_1000
+      value: 99.075
+      verified: false
+    - type: recall_at_3
+      value: 42.817
+      verified: false
+    - type: recall_at_5
+      value: 54.054
+      verified: false
+  - task:
+      type: Clustering
+    dataset:
+      type: mteb/arxiv-clustering-p2p
+      name: MTEB ArxivClusteringP2P
+      config: default
+      split: test
+      revision: a122ad7f3f0291bf49cc6f4d32aa80929df69d5d
+    metrics:
+    - type: v_measure
+      value: 34.1740289109719
+      verified: false
+  - task:
+      type: Clustering
+    dataset:
+      type: mteb/arxiv-clustering-s2s
+      name: MTEB ArxivClusteringS2S
+      config: default
+      split: test
+      revision: f910caf1a6075f7329cdf8c1a6135696f37dbd53
+    metrics:
+    - type: v_measure
+      value: 23.985251383455463
+      verified: false
+  - task:
+      type: Reranking
+    dataset:
+      type: mteb/askubuntudupquestions-reranking
+      name: MTEB AskUbuntuDupQuestions
+      config: default
+      split: test
+      revision: 2000358ca161889fa9c082cb41daa8dcfb161a54
+    metrics:
+    - type: map
+      value: 60.24873612289029
+      verified: false
+    - type: mrr
+      value: 74.65692740623489
+      verified: false
+  - task:
+      type: STS
+    dataset:
+      type: mteb/biosses-sts
+      name: MTEB BIOSSES
+      config: default
+      split: test
+      revision: d3fb88f8f02e40887cd149695127462bbcf29b4a
+    metrics:
+    - type: cos_sim_pearson
+      value: 86.22415390332444
+      verified: false
+    - type: cos_sim_spearman
+      value: 82.9591191954711
+      verified: false
+    - type: euclidean_pearson
+      value: 44.096317524324945
+      verified: false
+    - type: euclidean_spearman
+      value: 42.95218351391625
+      verified: false
+    - type: manhattan_pearson
+      value: 44.07766490545065
+      verified: false
+    - type: manhattan_spearman
+      value: 42.78350497166606
+      verified: false
+  - task:
+      type: Classification
+    dataset:
+      type: mteb/banking77
+      name: MTEB Banking77Classification
+      config: default
+      split: test
+      revision: 0fd18e25b25c072e09e0d92ab615fda904d66300
+    metrics:
+    - type: accuracy
+      value: 74.64285714285714
+      verified: false
+    - type: f1
+      value: 73.53680835577447
+      verified: false
+  - task:
+      type: Clustering
+    dataset:
+      type: mteb/biorxiv-clustering-p2p
+      name: MTEB BiorxivClusteringP2P
+      config: default
+      split: test
+      revision: 65b79d1d13f80053f67aca9498d9402c2d9f1f40
+    metrics:
+    - type: v_measure
+      value: 28.512813238490164
+      verified: false
+  - task:
+      type: Clustering
+    dataset:
+      type: mteb/biorxiv-clustering-s2s
+      name: MTEB BiorxivClusteringS2S
+      config: default
+      split: test
+      revision: 258694dd0231531bc1fd9de6ceb52a0853c6d908
+    metrics:
+    - type: v_measure
+      value: 20.942214972649488
+      verified: false
+  - task:
+      type: Retrieval
+    dataset:
+      type: BeIR/cqadupstack
+      name: MTEB CQADupstackAndroidRetrieval
+      config: default
+      split: test
+      revision: None
+    metrics:
+    - type: map_at_1
+      value: 28.255999999999997
+      verified: false
+    - type: map_at_10
+      value: 37.091
+      verified: false
+    - type: map_at_100
+      value: 38.428000000000004
+      verified: false
+    - type: map_at_1000
+      value: 38.559
+      verified: false
+    - type: map_at_3
+      value: 34.073
+      verified: false
+    - type: map_at_5
+      value: 35.739
+      verified: false
+    - type: mrr_at_1
+      value: 34.907
+      verified: false
+    - type: mrr_at_10
+      value: 42.769
+      verified: false
+    - type: mrr_at_100
+      value: 43.607
+      verified: false
+    - type: mrr_at_1000
+      value: 43.656
+      verified: false
+    - type: mrr_at_3
+      value: 39.986
+      verified: false
+    - type: mrr_at_5
+      value: 41.581
+      verified: false
+    - type: ndcg_at_1
+      value: 34.907
+      verified: false
+    - type: ndcg_at_10
+      value: 42.681000000000004
+      verified: false
+    - type: ndcg_at_100
+      value: 48.213
+      verified: false
+    - type: ndcg_at_1000
+      value: 50.464
+      verified: false
+    - type: ndcg_at_3
+      value: 37.813
+      verified: false
+    - type: ndcg_at_5
+      value: 39.936
+      verified: false
+    - type: precision_at_1
+      value: 34.907
+      verified: false
+    - type: precision_at_10
+      value: 7.911
+      verified: false
+    - type: precision_at_100
+      value: 1.349
+      verified: false
+    - type: precision_at_1000
+      value: 0.184
+      verified: false
+    - type: precision_at_3
+      value: 17.93
+      verified: false
+    - type: precision_at_5
+      value: 12.732
+      verified: false
+    - type: recall_at_1
+      value: 28.255999999999997
+      verified: false
+    - type: recall_at_10
+      value: 53.49699999999999
+      verified: false
+    - type: recall_at_100
+      value: 77.288
+      verified: false
+    - type: recall_at_1000
+      value: 91.776
+      verified: false
+    - type: recall_at_3
+      value: 39.18
+      verified: false
+    - type: recall_at_5
+      value: 45.365
+      verified: false
+  - task:
+      type: Retrieval
+    dataset:
+      type: BeIR/cqadupstack
+      name: MTEB CQADupstackEnglishRetrieval
+      config: default
+      split: test
+      revision: None
+    metrics:
+    - type: map_at_1
+      value: 25.563999999999997
+      verified: false
+    - type: map_at_10
+      value: 33.913
+      verified: false
+    - type: map_at_100
+      value: 34.966
+      verified: false
+    - type: map_at_1000
+      value: 35.104
+      verified: false
+    - type: map_at_3
+      value: 31.413000000000004
+      verified: false
+    - type: map_at_5
+      value: 32.854
+      verified: false
+    - type: mrr_at_1
+      value: 31.72
+      verified: false
+    - type: mrr_at_10
+      value: 39.391
+      verified: false
+    - type: mrr_at_100
+      value: 40.02
+      verified: false
+    - type: mrr_at_1000
+      value: 40.076
+      verified: false
+    - type: mrr_at_3
+      value: 37.314
+      verified: false
+    - type: mrr_at_5
+      value: 38.507999999999996
+      verified: false
+    - type: ndcg_at_1
+      value: 31.72
+      verified: false
+    - type: ndcg_at_10
+      value: 38.933
+      verified: false
+    - type: ndcg_at_100
+      value: 43.024
+      verified: false
+    - type: ndcg_at_1000
+      value: 45.556999999999995
+      verified: false
+    - type: ndcg_at_3
+      value: 35.225
+      verified: false
+    - type: ndcg_at_5
+      value: 36.984
+      verified: false
+    - type: precision_at_1
+      value: 31.72
+      verified: false
+    - type: precision_at_10
+      value: 7.248
+      verified: false
+    - type: precision_at_100
+      value: 1.192
+      verified: false
+    - type: precision_at_1000
+      value: 0.16999999999999998
+      verified: false
+    - type: precision_at_3
+      value: 16.943
+      verified: false
+    - type: precision_at_5
+      value: 11.975
+      verified: false
+    - type: recall_at_1
+      value: 25.563999999999997
+      verified: false
+    - type: recall_at_10
+      value: 47.808
+      verified: false
+    - type: recall_at_100
+      value: 65.182
+      verified: false
+    - type: recall_at_1000
+      value: 81.831
+      verified: false
+    - type: recall_at_3
+      value: 36.889
+      verified: false
+    - type: recall_at_5
+      value: 41.829
+      verified: false
+  - task:
+      type: Retrieval
+    dataset:
+      type: BeIR/cqadupstack
+      name: MTEB CQADupstackGamingRetrieval
+      config: default
+      split: test
+      revision: None
+    metrics:
+    - type: map_at_1
+      value: 33.662
+      verified: false
+    - type: map_at_10
+      value: 44.096999999999994
+      verified: false
+    - type: map_at_100
+      value: 45.153999999999996
+      verified: false
+    - type: map_at_1000
+      value: 45.223
+      verified: false
+    - type: map_at_3
+      value: 41.377
+      verified: false
+    - type: map_at_5
+      value: 42.935
+      verified: false
+    - type: mrr_at_1
+      value: 38.997
+      verified: false
+    - type: mrr_at_10
+      value: 47.675
+      verified: false
+    - type: mrr_at_100
+      value: 48.476
+      verified: false
+    - type: mrr_at_1000
+      value: 48.519
+      verified: false
+    - type: mrr_at_3
+      value: 45.549
+      verified: false
+    - type: mrr_at_5
+      value: 46.884
+      verified: false
+    - type: ndcg_at_1
+      value: 38.997
+      verified: false
+    - type: ndcg_at_10
+      value: 49.196
+      verified: false
+    - type: ndcg_at_100
+      value: 53.788000000000004
+      verified: false
+    - type: ndcg_at_1000
+      value: 55.393
+      verified: false
+    - type: ndcg_at_3
+      value: 44.67
+      verified: false
+    - type: ndcg_at_5
+      value: 46.991
+      verified: false
+    - type: precision_at_1
+      value: 38.997
+      verified: false
+    - type: precision_at_10
+      value: 7.875
+      verified: false
+    - type: precision_at_100
+      value: 1.102
+      verified: false
+    - type: precision_at_1000
+      value: 0.13
+      verified: false
+    - type: precision_at_3
+      value: 19.854
+      verified: false
+    - type: precision_at_5
+      value: 13.605
+      verified: false
+    - type: recall_at_1
+      value: 33.662
+      verified: false
+    - type: recall_at_10
+      value: 60.75899999999999
+      verified: false
+    - type: recall_at_100
+      value: 81.11699999999999
+      verified: false
+    - type: recall_at_1000
+      value: 92.805
+      verified: false
+    - type: recall_at_3
+      value: 48.577999999999996
+      verified: false
+    - type: recall_at_5
+      value: 54.384
+      verified: false
+  - task:
+      type: Retrieval
+    dataset:
+      type: BeIR/cqadupstack
+      name: MTEB CQADupstackGisRetrieval
+      config: default
+      split: test
+      revision: None
+    metrics:
+    - type: map_at_1
+      value: 21.313
+      verified: false
+    - type: map_at_10
+      value: 29.036
+      verified: false
+    - type: map_at_100
+      value: 29.975
+      verified: false
+    - type: map_at_1000
+      value: 30.063000000000002
+      verified: false
+    - type: map_at_3
+      value: 26.878999999999998
+      verified: false
+    - type: map_at_5
+      value: 28.005999999999997
+      verified: false
+    - type: mrr_at_1
+      value: 23.39
+      verified: false
+    - type: mrr_at_10
+      value: 31.072
+      verified: false
+    - type: mrr_at_100
+      value: 31.922
+      verified: false
+    - type: mrr_at_1000
+      value: 31.995
+      verified: false
+    - type: mrr_at_3
+      value: 28.908
+      verified: false
+    - type: mrr_at_5
+      value: 30.104999999999997
+      verified: false
+    - type: ndcg_at_1
+      value: 23.39
+      verified: false
+    - type: ndcg_at_10
+      value: 33.448
+      verified: false
+    - type: ndcg_at_100
+      value: 38.255
+      verified: false
+    - type: ndcg_at_1000
+      value: 40.542
+      verified: false
+    - type: ndcg_at_3
+      value: 29.060000000000002
+      verified: false
+    - type: ndcg_at_5
+      value: 31.023
+      verified: false
+    - type: precision_at_1
+      value: 23.39
+      verified: false
+    - type: precision_at_10
+      value: 5.175
+      verified: false
+    - type: precision_at_100
+      value: 0.8049999999999999
+      verified: false
+    - type: precision_at_1000
+      value: 0.10300000000000001
+      verified: false
+    - type: precision_at_3
+      value: 12.504999999999999
+      verified: false
+    - type: precision_at_5
+      value: 8.61
+      verified: false
+    - type: recall_at_1
+      value: 21.313
+      verified: false
+    - type: recall_at_10
+      value: 45.345
+      verified: false
+    - type: recall_at_100
+      value: 67.752
+      verified: false
+    - type: recall_at_1000
+      value: 84.937
+      verified: false
+    - type: recall_at_3
+      value: 33.033
+      verified: false
+    - type: recall_at_5
+      value: 37.929
+      verified: false
+  - task:
+      type: Retrieval
+    dataset:
+      type: BeIR/cqadupstack
+      name: MTEB CQADupstackMathematicaRetrieval
+      config: default
+      split: test
+      revision: None
+    metrics:
+    - type: map_at_1
+      value: 14.255999999999998
+      verified: false
+    - type: map_at_10
+      value: 20.339
+      verified: false
+    - type: map_at_100
+      value: 21.491
+      verified: false
+    - type: map_at_1000
+      value: 21.616
+      verified: false
+    - type: map_at_3
+      value: 18.481
+      verified: false
+    - type: map_at_5
+      value: 19.594
+      verified: false
+    - type: mrr_at_1
+      value: 17.413
+      verified: false
+    - type: mrr_at_10
+      value: 24.146
+      verified: false
+    - type: mrr_at_100
+      value: 25.188
+      verified: false
+    - type: mrr_at_1000
+      value: 25.273
+      verified: false
+    - type: mrr_at_3
+      value: 22.264
+      verified: false
+    - type: mrr_at_5
+      value: 23.302
+      verified: false
+    - type: ndcg_at_1
+      value: 17.413
+      verified: false
+    - type: ndcg_at_10
+      value: 24.272
+      verified: false
+    - type: ndcg_at_100
+      value: 29.82
+      verified: false
+    - type: ndcg_at_1000
+      value: 33.072
+      verified: false
+    - type: ndcg_at_3
+      value: 20.826
+      verified: false
+    - type: ndcg_at_5
+      value: 22.535
+      verified: false
+    - type: precision_at_1
+      value: 17.413
+      verified: false
+    - type: precision_at_10
+      value: 4.366
+      verified: false
+    - type: precision_at_100
+      value: 0.818
+      verified: false
+    - type: precision_at_1000
+      value: 0.124
+      verified: false
+    - type: precision_at_3
+      value: 9.866999999999999
+      verified: false
+    - type: precision_at_5
+      value: 7.164
+      verified: false
+    - type: recall_at_1
+      value: 14.255999999999998
+      verified: false
+    - type: recall_at_10
+      value: 32.497
+      verified: false
+    - type: recall_at_100
+      value: 56.592
+      verified: false
+    - type: recall_at_1000
+      value: 80.17699999999999
+      verified: false
+    - type: recall_at_3
+      value: 23.195
+      verified: false
+    - type: recall_at_5
+      value: 27.392
+      verified: false
+  - task:
+      type: Retrieval
+    dataset:
+      type: BeIR/cqadupstack
+      name: MTEB CQADupstackPhysicsRetrieval
+      config: default
+      split: test
+      revision: None
+    metrics:
+    - type: map_at_1
+      value: 22.709
+      verified: false
+    - type: map_at_10
+      value: 31.377
+      verified: false
+    - type: map_at_100
+      value: 32.536
+      verified: false
+    - type: map_at_1000
+      value: 32.669
+      verified: false
+    - type: map_at_3
+      value: 28.572999999999997
+      verified: false
+    - type: map_at_5
+      value: 30.205
+      verified: false
+    - type: mrr_at_1
+      value: 27.815
+      verified: false
+    - type: mrr_at_10
+      value: 36.452
+      verified: false
+    - type: mrr_at_100
+      value: 37.302
+      verified: false
+    - type: mrr_at_1000
+      value: 37.364000000000004
+      verified: false
+    - type: mrr_at_3
+      value: 33.75
+      verified: false
+    - type: mrr_at_5
+      value: 35.43
+      verified: false
+    - type: ndcg_at_1
+      value: 27.815
+      verified: false
+    - type: ndcg_at_10
+      value: 36.84
+      verified: false
+    - type: ndcg_at_100
+      value: 42.092
+      verified: false
+    - type: ndcg_at_1000
+      value: 44.727
+      verified: false
+    - type: ndcg_at_3
+      value: 31.964
+      verified: false
+    - type: ndcg_at_5
+      value: 34.428
+      verified: false
+    - type: precision_at_1
+      value: 27.815
+      verified: false
+    - type: precision_at_10
+      value: 6.67
+      verified: false
+    - type: precision_at_100
+      value: 1.093
+      verified: false
+    - type: precision_at_1000
+      value: 0.151
+      verified: false
+    - type: precision_at_3
+      value: 14.982000000000001
+      verified: false
+    - type: precision_at_5
+      value: 10.857
+      verified: false
+    - type: recall_at_1
+      value: 22.709
+      verified: false
+    - type: recall_at_10
+      value: 48.308
+      verified: false
+    - type: recall_at_100
+      value: 70.866
+      verified: false
+    - type: recall_at_1000
+      value: 88.236
+      verified: false
+    - type: recall_at_3
+      value: 34.709
+      verified: false
+    - type: recall_at_5
+      value: 40.996
+      verified: false
+  - task:
+      type: Retrieval
+    dataset:
+      type: BeIR/cqadupstack
+      name: MTEB CQADupstackProgrammersRetrieval
+      config: default
+      split: test
+      revision: None
+    metrics:
+    - type: map_at_1
+      value: 22.348000000000003
+      verified: false
+    - type: map_at_10
+      value: 29.427999999999997
+      verified: false
+    - type: map_at_100
+      value: 30.499
+      verified: false
+    - type: map_at_1000
+      value: 30.631999999999998
+      verified: false
+    - type: map_at_3
+      value: 27.035999999999998
+      verified: false
+    - type: map_at_5
+      value: 28.351
+      verified: false
+    - type: mrr_at_1
+      value: 27.74
+      verified: false
+    - type: mrr_at_10
+      value: 34.424
+      verified: false
+    - type: mrr_at_100
+      value: 35.341
+      verified: false
+    - type: mrr_at_1000
+      value: 35.419
+      verified: false
+    - type: mrr_at_3
+      value: 32.401
+      verified: false
+    - type: mrr_at_5
+      value: 33.497
+      verified: false
+    - type: ndcg_at_1
+      value: 27.74
+      verified: false
+    - type: ndcg_at_10
+      value: 34.136
+      verified: false
+    - type: ndcg_at_100
+      value: 39.269
+      verified: false
+    - type: ndcg_at_1000
+      value: 42.263
+      verified: false
+    - type: ndcg_at_3
+      value: 30.171999999999997
+      verified: false
+    - type: ndcg_at_5
+      value: 31.956
+      verified: false
+    - type: precision_at_1
+      value: 27.74
+      verified: false
+    - type: precision_at_10
+      value: 6.062
+      verified: false
+    - type: precision_at_100
+      value: 1.014
+      verified: false
+    - type: precision_at_1000
+      value: 0.146
+      verified: false
+    - type: precision_at_3
+      value: 14.079
+      verified: false
+    - type: precision_at_5
+      value: 9.977
+      verified: false
+    - type: recall_at_1
+      value: 22.348000000000003
+      verified: false
+    - type: recall_at_10
+      value: 43.477
+      verified: false
+    - type: recall_at_100
+      value: 65.945
+      verified: false
+    - type: recall_at_1000
+      value: 86.587
+      verified: false
+    - type: recall_at_3
+      value: 32.107
+      verified: false
+    - type: recall_at_5
+      value: 36.974000000000004
+      verified: false
+  - task:
+      type: Retrieval
+    dataset:
+      type: BeIR/cqadupstack
+      name: MTEB CQADupstackRetrieval
+      config: default
+      split: test
+      revision: None
+    metrics:
+    - type: map_at_1
+      value: 21.688499999999998
+      verified: false
+    - type: map_at_10
+      value: 29.164666666666665
+      verified: false
+    - type: map_at_100
+      value: 30.22575
+      verified: false
+    - type: map_at_1000
+      value: 30.350833333333334
+      verified: false
+    - type: map_at_3
+      value: 26.82025
+      verified: false
+    - type: map_at_5
+      value: 28.14966666666667
+      verified: false
+    - type: mrr_at_1
+      value: 25.779249999999998
+      verified: false
+    - type: mrr_at_10
+      value: 32.969
+      verified: false
+    - type: mrr_at_100
+      value: 33.81725
+      verified: false
+    - type: mrr_at_1000
+      value: 33.88825
+      verified: false
+    - type: mrr_at_3
+      value: 30.831250000000004
+      verified: false
+    - type: mrr_at_5
+      value: 32.065000000000005
+      verified: false
+    - type: ndcg_at_1
+      value: 25.779249999999998
+      verified: false
+    - type: ndcg_at_10
+      value: 33.73675
+      verified: false
+    - type: ndcg_at_100
+      value: 38.635666666666665
+      verified: false
+    - type: ndcg_at_1000
+      value: 41.353500000000004
+      verified: false
+    - type: ndcg_at_3
+      value: 29.66283333333333
+      verified: false
+    - type: ndcg_at_5
+      value: 31.607249999999997
+      verified: false
+    - type: precision_at_1
+      value: 25.779249999999998
+      verified: false
+    - type: precision_at_10
+      value: 5.861416666666667
+      verified: false
+    - type: precision_at_100
+      value: 0.9852500000000002
+      verified: false
+    - type: precision_at_1000
+      value: 0.14108333333333334
+      verified: false
+    - type: precision_at_3
+      value: 13.563583333333332
+      verified: false
+    - type: precision_at_5
+      value: 9.630333333333335
+      verified: false
+    - type: recall_at_1
+      value: 21.688499999999998
+      verified: false
+    - type: recall_at_10
+      value: 43.605
+      verified: false
+    - type: recall_at_100
+      value: 65.52366666666667
+      verified: false
+    - type: recall_at_1000
+      value: 84.69683333333332
+      verified: false
+    - type: recall_at_3
+      value: 32.195499999999996
+      verified: false
+    - type: recall_at_5
+      value: 37.25325
+      verified: false
+  - task:
+      type: Retrieval
+    dataset:
+      type: BeIR/cqadupstack
+      name: MTEB CQADupstackStatsRetrieval
+      config: default
+      split: test
+      revision: None
+    metrics:
+    - type: map_at_1
+      value: 17.279
+      verified: false
+    - type: map_at_10
+      value: 23.238
+      verified: false
+    - type: map_at_100
+      value: 24.026
+      verified: false
+    - type: map_at_1000
+      value: 24.13
+      verified: false
+    - type: map_at_3
+      value: 20.730999999999998
+      verified: false
+    - type: map_at_5
+      value: 22.278000000000002
+      verified: false
+    - type: mrr_at_1
+      value: 19.017999999999997
+      verified: false
+    - type: mrr_at_10
+      value: 25.188
+      verified: false
+    - type: mrr_at_100
+      value: 25.918999999999997
+      verified: false
+    - type: mrr_at_1000
+      value: 25.996999999999996
+      verified: false
+    - type: mrr_at_3
+      value: 22.776
+      verified: false
+    - type: mrr_at_5
+      value: 24.256
+      verified: false
+    - type: ndcg_at_1
+      value: 19.017999999999997
+      verified: false
+    - type: ndcg_at_10
+      value: 27.171
+      verified: false
+    - type: ndcg_at_100
+      value: 31.274
+      verified: false
+    - type: ndcg_at_1000
+      value: 34.016000000000005
+      verified: false
+    - type: ndcg_at_3
+      value: 22.442
+      verified: false
+    - type: ndcg_at_5
+      value: 24.955
+      verified: false
+    - type: precision_at_1
+      value: 19.017999999999997
+      verified: false
+    - type: precision_at_10
+      value: 4.494
+      verified: false
+    - type: precision_at_100
+      value: 0.712
+      verified: false
+    - type: precision_at_1000
+      value: 0.10300000000000001
+      verified: false
+    - type: precision_at_3
+      value: 9.611
+      verified: false
+    - type: precision_at_5
+      value: 7.331
+      verified: false
+    - type: recall_at_1
+      value: 17.279
+      verified: false
+    - type: recall_at_10
+      value: 37.464999999999996
+      verified: false
+    - type: recall_at_100
+      value: 56.458
+      verified: false
+    - type: recall_at_1000
+      value: 76.759
+      verified: false
+    - type: recall_at_3
+      value: 24.659
+      verified: false
+    - type: recall_at_5
+      value: 30.672
+      verified: false
+  - task:
+      type: Retrieval
+    dataset:
+      type: BeIR/cqadupstack
+      name: MTEB CQADupstackTexRetrieval
+      config: default
+      split: test
+      revision: None
+    metrics:
+    - type: map_at_1
+      value: 14.901
+      verified: false
+    - type: map_at_10
+      value: 20.268
+      verified: false
+    - type: map_at_100
+      value: 21.143
+      verified: false
+    - type: map_at_1000
+      value: 21.264
+      verified: false
+    - type: map_at_3
+      value: 18.557000000000002
+      verified: false
+    - type: map_at_5
+      value: 19.483
+      verified: false
+    - type: mrr_at_1
+      value: 17.997
+      verified: false
+    - type: mrr_at_10
+      value: 23.591
+      verified: false
+    - type: mrr_at_100
+      value: 24.387
+      verified: false
+    - type: mrr_at_1000
+      value: 24.471
+      verified: false
+    - type: mrr_at_3
+      value: 21.874
+      verified: false
+    - type: mrr_at_5
+      value: 22.797
+      verified: false
+    - type: ndcg_at_1
+      value: 17.997
+      verified: false
+    - type: ndcg_at_10
+      value: 23.87
+      verified: false
+    - type: ndcg_at_100
+      value: 28.459
+      verified: false
+    - type: ndcg_at_1000
+      value: 31.66
+      verified: false
+    - type: ndcg_at_3
+      value: 20.779
+      verified: false
+    - type: ndcg_at_5
+      value: 22.137
+      verified: false
+    - type: precision_at_1
+      value: 17.997
+      verified: false
+    - type: precision_at_10
+      value: 4.25
+      verified: false
+    - type: precision_at_100
+      value: 0.761
+      verified: false
+    - type: precision_at_1000
+      value: 0.121
+      verified: false
+    - type: precision_at_3
+      value: 9.716
+      verified: false
+    - type: precision_at_5
+      value: 6.909999999999999
+      verified: false
+    - type: recall_at_1
+      value: 14.901
+      verified: false
+    - type: recall_at_10
+      value: 31.44
+      verified: false
+    - type: recall_at_100
+      value: 52.717000000000006
+      verified: false
+    - type: recall_at_1000
+      value: 76.102
+      verified: false
+    - type: recall_at_3
+      value: 22.675
+      verified: false
+    - type: recall_at_5
+      value: 26.336
+      verified: false
+  - task:
+      type: Retrieval
+    dataset:
+      type: BeIR/cqadupstack
+      name: MTEB CQADupstackUnixRetrieval
+      config: default
+      split: test
+      revision: None
+    metrics:
+    - type: map_at_1
+      value: 21.52
+      verified: false
+    - type: map_at_10
+      value: 28.397
+      verified: false
+    - type: map_at_100
+      value: 29.443
+      verified: false
+    - type: map_at_1000
+      value: 29.56
+      verified: false
+    - type: map_at_3
+      value: 26.501
+      verified: false
+    - type: map_at_5
+      value: 27.375
+      verified: false
+    - type: mrr_at_1
+      value: 25.28
+      verified: false
+    - type: mrr_at_10
+      value: 32.102000000000004
+      verified: false
+    - type: mrr_at_100
+      value: 33.005
+      verified: false
+    - type: mrr_at_1000
+      value: 33.084
+      verified: false
+    - type: mrr_at_3
+      value: 30.208000000000002
+      verified: false
+    - type: mrr_at_5
+      value: 31.146
+      verified: false
+    - type: ndcg_at_1
+      value: 25.28
+      verified: false
+    - type: ndcg_at_10
+      value: 32.635
+      verified: false
+    - type: ndcg_at_100
+      value: 37.672
+      verified: false
+    - type: ndcg_at_1000
+      value: 40.602
+      verified: false
+    - type: ndcg_at_3
+      value: 28.951999999999998
+      verified: false
+    - type: ndcg_at_5
+      value: 30.336999999999996
+      verified: false
+    - type: precision_at_1
+      value: 25.28
+      verified: false
+    - type: precision_at_10
+      value: 5.3260000000000005
+      verified: false
+    - type: precision_at_100
+      value: 0.8840000000000001
+      verified: false
+    - type: precision_at_1000
+      value: 0.126
+      verified: false
+    - type: precision_at_3
+      value: 12.687000000000001
+      verified: false
+    - type: precision_at_5
+      value: 8.638
+      verified: false
+    - type: recall_at_1
+      value: 21.52
+      verified: false
+    - type: recall_at_10
+      value: 41.955
+      verified: false
+    - type: recall_at_100
+      value: 64.21
+      verified: false
+    - type: recall_at_1000
+      value: 85.28099999999999
+      verified: false
+    - type: recall_at_3
+      value: 31.979999999999997
+      verified: false
+    - type: recall_at_5
+      value: 35.406
+      verified: false
+  - task:
+      type: Retrieval
+    dataset:
+      type: BeIR/cqadupstack
+      name: MTEB CQADupstackWebmastersRetrieval
+      config: default
+      split: test
+      revision: None
+    metrics:
+    - type: map_at_1
+      value: 20.296
+      verified: false
+    - type: map_at_10
+      value: 28.449999999999996
+      verified: false
+    - type: map_at_100
+      value: 29.847
+      verified: false
+    - type: map_at_1000
+      value: 30.073
+      verified: false
+    - type: map_at_3
+      value: 25.995
+      verified: false
+    - type: map_at_5
+      value: 27.603
+      verified: false
+    - type: mrr_at_1
+      value: 25.296000000000003
+      verified: false
+    - type: mrr_at_10
+      value: 32.751999999999995
+      verified: false
+    - type: mrr_at_100
+      value: 33.705
+      verified: false
+    - type: mrr_at_1000
+      value: 33.783
+      verified: false
+    - type: mrr_at_3
+      value: 30.731
+      verified: false
+    - type: mrr_at_5
+      value: 32.006
+      verified: false
+    - type: ndcg_at_1
+      value: 25.296000000000003
+      verified: false
+    - type: ndcg_at_10
+      value: 33.555
+      verified: false
+    - type: ndcg_at_100
+      value: 38.891999999999996
+      verified: false
+    - type: ndcg_at_1000
+      value: 42.088
+      verified: false
+    - type: ndcg_at_3
+      value: 29.944
+      verified: false
+    - type: ndcg_at_5
+      value: 31.997999999999998
+      verified: false
+    - type: precision_at_1
+      value: 25.296000000000003
+      verified: false
+    - type: precision_at_10
+      value: 6.542000000000001
+      verified: false
+    - type: precision_at_100
+      value: 1.354
+      verified: false
+    - type: precision_at_1000
+      value: 0.22599999999999998
+      verified: false
+    - type: precision_at_3
+      value: 14.360999999999999
+      verified: false
+    - type: precision_at_5
+      value: 10.593
+      verified: false
+    - type: recall_at_1
+      value: 20.296
+      verified: false
+    - type: recall_at_10
+      value: 42.742000000000004
+      verified: false
+    - type: recall_at_100
+      value: 67.351
+      verified: false
+    - type: recall_at_1000
+      value: 88.774
+      verified: false
+    - type: recall_at_3
+      value: 32.117000000000004
+      verified: false
+    - type: recall_at_5
+      value: 37.788
+      verified: false
+  - task:
+      type: Retrieval
+    dataset:
+      type: BeIR/cqadupstack
+      name: MTEB CQADupstackWordpressRetrieval
+      config: default
+      split: test
+      revision: None
+    metrics:
+    - type: map_at_1
+      value: 18.157999999999998
+      verified: false
+    - type: map_at_10
+      value: 24.342
+      verified: false
+    - type: map_at_100
+      value: 25.201
+      verified: false
+    - type: map_at_1000
+      value: 25.317
+      verified: false
+    - type: map_at_3
+      value: 22.227
+      verified: false
+    - type: map_at_5
+      value: 23.372999999999998
+      verified: false
+    - type: mrr_at_1
+      value: 19.778000000000002
+      verified: false
+    - type: mrr_at_10
+      value: 26.066
+      verified: false
+    - type: mrr_at_100
+      value: 26.935
+      verified: false
+    - type: mrr_at_1000
+      value: 27.022000000000002
+      verified: false
+    - type: mrr_at_3
+      value: 24.214
+      verified: false
+    - type: mrr_at_5
+      value: 25.268
+      verified: false
+    - type: ndcg_at_1
+      value: 19.778000000000002
+      verified: false
+    - type: ndcg_at_10
+      value: 28.104000000000003
+      verified: false
+    - type: ndcg_at_100
+      value: 32.87
+      verified: false
+    - type: ndcg_at_1000
+      value: 35.858000000000004
+      verified: false
+    - type: ndcg_at_3
+      value: 24.107
+      verified: false
+    - type: ndcg_at_5
+      value: 26.007
+      verified: false
+    - type: precision_at_1
+      value: 19.778000000000002
+      verified: false
+    - type: precision_at_10
+      value: 4.417999999999999
+      verified: false
+    - type: precision_at_100
+      value: 0.739
+      verified: false
+    - type: precision_at_1000
+      value: 0.109
+      verified: false
+    - type: precision_at_3
+      value: 10.228
+      verified: false
+    - type: precision_at_5
+      value: 7.172000000000001
+      verified: false
+    - type: recall_at_1
+      value: 18.157999999999998
+      verified: false
+    - type: recall_at_10
+      value: 37.967
+      verified: false
+    - type: recall_at_100
+      value: 60.806000000000004
+      verified: false
+    - type: recall_at_1000
+      value: 83.097
+      verified: false
+    - type: recall_at_3
+      value: 27.223999999999997
+      verified: false
+    - type: recall_at_5
+      value: 31.968000000000004
+      verified: false
+  - task:
+      type: Retrieval
+    dataset:
+      type: climate-fever
+      name: MTEB ClimateFEVER
+      config: default
+      split: test
+      revision: None
+    metrics:
+    - type: map_at_1
+      value: 7.055
+      verified: false
+    - type: map_at_10
+      value: 11.609
+      verified: false
+    - type: map_at_100
+      value: 12.83
+      verified: false
+    - type: map_at_1000
+      value: 12.995000000000001
+      verified: false
+    - type: map_at_3
+      value: 9.673
+      verified: false
+    - type: map_at_5
+      value: 10.761999999999999
+      verified: false
+    - type: mrr_at_1
+      value: 15.309000000000001
+      verified: false
+    - type: mrr_at_10
+      value: 23.655
+      verified: false
+    - type: mrr_at_100
+      value: 24.785
+      verified: false
+    - type: mrr_at_1000
+      value: 24.856
+      verified: false
+    - type: mrr_at_3
+      value: 20.499000000000002
+      verified: false
+    - type: mrr_at_5
+      value: 22.425
+      verified: false
+    - type: ndcg_at_1
+      value: 15.309000000000001
+      verified: false
+    - type: ndcg_at_10
+      value: 17.252000000000002
+      verified: false
+    - type: ndcg_at_100
+      value: 22.976
+      verified: false
+    - type: ndcg_at_1000
+      value: 26.480999999999998
+      verified: false
+    - type: ndcg_at_3
+      value: 13.418
+      verified: false
+    - type: ndcg_at_5
+      value: 15.084
+      verified: false
+    - type: precision_at_1
+      value: 15.309000000000001
+      verified: false
+    - type: precision_at_10
+      value: 5.309
+      verified: false
+    - type: precision_at_100
+      value: 1.1320000000000001
+      verified: false
+    - type: precision_at_1000
+      value: 0.17600000000000002
+      verified: false
+    - type: precision_at_3
+      value: 9.62
+      verified: false
+    - type: precision_at_5
+      value: 7.883
+      verified: false
+    - type: recall_at_1
+      value: 7.055
+      verified: false
+    - type: recall_at_10
+      value: 21.891
+      verified: false
+    - type: recall_at_100
+      value: 41.979
+      verified: false
+    - type: recall_at_1000
+      value: 62.239999999999995
+      verified: false
+    - type: recall_at_3
+      value: 12.722
+      verified: false
+    - type: recall_at_5
+      value: 16.81
+      verified: false
+  - task:
+      type: Retrieval
+    dataset:
+      type: dbpedia-entity
+      name: MTEB DBPedia
+      config: default
+      split: test
+      revision: None
+    metrics:
+    - type: map_at_1
+      value: 6.909
+      verified: false
+    - type: map_at_10
+      value: 12.844
+      verified: false
+    - type: map_at_100
+      value: 16.435
+      verified: false
+    - type: map_at_1000
+      value: 17.262
+      verified: false
+    - type: map_at_3
+      value: 10.131
+      verified: false
+    - type: map_at_5
+      value: 11.269
+      verified: false
+    - type: mrr_at_1
+      value: 54.50000000000001
+      verified: false
+    - type: mrr_at_10
+      value: 62.202
+      verified: false
+    - type: mrr_at_100
+      value: 62.81
+      verified: false
+    - type: mrr_at_1000
+      value: 62.824000000000005
+      verified: false
+    - type: mrr_at_3
+      value: 60.5
+      verified: false
+    - type: mrr_at_5
+      value: 61.324999999999996
+      verified: false
+    - type: ndcg_at_1
+      value: 42.125
+      verified: false
+    - type: ndcg_at_10
+      value: 28.284
+      verified: false
+    - type: ndcg_at_100
+      value: 30.444
+      verified: false
+    - type: ndcg_at_1000
+      value: 36.397
+      verified: false
+    - type: ndcg_at_3
+      value: 33.439
+      verified: false
+    - type: ndcg_at_5
+      value: 30.473
+      verified: false
+    - type: precision_at_1
+      value: 54.50000000000001
+      verified: false
+    - type: precision_at_10
+      value: 21.4
+      verified: false
+    - type: precision_at_100
+      value: 6.192
+      verified: false
+    - type: precision_at_1000
+      value: 1.398
+      verified: false
+    - type: precision_at_3
+      value: 36.583
+      verified: false
+    - type: precision_at_5
+      value: 28.799999999999997
+      verified: false
+    - type: recall_at_1
+      value: 6.909
+      verified: false
+    - type: recall_at_10
+      value: 17.296
+      verified: false
+    - type: recall_at_100
+      value: 33.925
+      verified: false
+    - type: recall_at_1000
+      value: 53.786
+      verified: false
+    - type: recall_at_3
+      value: 11.333
+      verified: false
+    - type: recall_at_5
+      value: 13.529
+      verified: false
+  - task:
+      type: Classification
+    dataset:
+      type: mteb/emotion
+      name: MTEB EmotionClassification
+      config: default
+      split: test
+      revision: 4f58c6b202a23cf9a4da393831edf4f9183cad37
+    metrics:
+    - type: accuracy
+      value: 36.08
+      verified: false
+    - type: f1
+      value: 33.016420191943766
+      verified: false
+  - task:
+      type: Retrieval
+    dataset:
+      type: fever
+      name: MTEB FEVER
+      config: default
+      split: test
+      revision: None
+    metrics:
+    - type: map_at_1
+      value: 52.605000000000004
+      verified: false
+    - type: map_at_10
+      value: 63.31400000000001
+      verified: false
+    - type: map_at_100
+      value: 63.678000000000004
+      verified: false
+    - type: map_at_1000
+      value: 63.699
+      verified: false
+    - type: map_at_3
+      value: 61.141
+      verified: false
+    - type: map_at_5
+      value: 62.517999999999994
+      verified: false
+    - type: mrr_at_1
+      value: 56.871
+      verified: false
+    - type: mrr_at_10
+      value: 67.915
+      verified: false
+    - type: mrr_at_100
+      value: 68.24900000000001
+      verified: false
+    - type: mrr_at_1000
+      value: 68.262
+      verified: false
+    - type: mrr_at_3
+      value: 65.809
+      verified: false
+    - type: mrr_at_5
+      value: 67.171
+      verified: false
+    - type: ndcg_at_1
+      value: 56.871
+      verified: false
+    - type: ndcg_at_10
+      value: 69.122
+      verified: false
+    - type: ndcg_at_100
+      value: 70.855
+      verified: false
+    - type: ndcg_at_1000
+      value: 71.368
+      verified: false
+    - type: ndcg_at_3
+      value: 64.974
+      verified: false
+    - type: ndcg_at_5
+      value: 67.318
+      verified: false
+    - type: precision_at_1
+      value: 56.871
+      verified: false
+    - type: precision_at_10
+      value: 9.029
+      verified: false
+    - type: precision_at_100
+      value: 0.996
+      verified: false
+    - type: precision_at_1000
+      value: 0.105
+      verified: false
+    - type: precision_at_3
+      value: 25.893
+      verified: false
+    - type: precision_at_5
+      value: 16.838
+      verified: false
+    - type: recall_at_1
+      value: 52.605000000000004
+      verified: false
+    - type: recall_at_10
+      value: 82.679
+      verified: false
+    - type: recall_at_100
+      value: 90.586
+      verified: false
+    - type: recall_at_1000
+      value: 94.38
+      verified: false
+    - type: recall_at_3
+      value: 71.447
+      verified: false
+    - type: recall_at_5
+      value: 77.218
+      verified: false
+  - task:
+      type: Retrieval
+    dataset:
+      type: fiqa
+      name: MTEB FiQA2018
+      config: default
+      split: test
+      revision: None
+    metrics:
+    - type: map_at_1
+      value: 10.759
+      verified: false
+    - type: map_at_10
+      value: 18.877
+      verified: false
+    - type: map_at_100
+      value: 20.498
+      verified: false
+    - type: map_at_1000
+      value: 20.682000000000002
+      verified: false
+    - type: map_at_3
+      value: 16.159000000000002
+      verified: false
+    - type: map_at_5
+      value: 17.575
+      verified: false
+    - type: mrr_at_1
+      value: 22.531000000000002
+      verified: false
+    - type: mrr_at_10
+      value: 31.155
+      verified: false
+    - type: mrr_at_100
+      value: 32.188
+      verified: false
+    - type: mrr_at_1000
+      value: 32.245000000000005
+      verified: false
+    - type: mrr_at_3
+      value: 28.781000000000002
+      verified: false
+    - type: mrr_at_5
+      value: 30.054
+      verified: false
+    - type: ndcg_at_1
+      value: 22.531000000000002
+      verified: false
+    - type: ndcg_at_10
+      value: 25.189
+      verified: false
+    - type: ndcg_at_100
+      value: 31.958
+      verified: false
+    - type: ndcg_at_1000
+      value: 35.693999999999996
+      verified: false
+    - type: ndcg_at_3
+      value: 22.235
+      verified: false
+    - type: ndcg_at_5
+      value: 23.044999999999998
+      verified: false
+    - type: precision_at_1
+      value: 22.531000000000002
+      verified: false
+    - type: precision_at_10
+      value: 7.438000000000001
+      verified: false
+    - type: precision_at_100
+      value: 1.418
+      verified: false
+    - type: precision_at_1000
+      value: 0.208
+      verified: false
+    - type: precision_at_3
+      value: 15.329
+      verified: false
+    - type: precision_at_5
+      value: 11.451
+      verified: false
+    - type: recall_at_1
+      value: 10.759
+      verified: false
+    - type: recall_at_10
+      value: 31.416
+      verified: false
+    - type: recall_at_100
+      value: 56.989000000000004
+      verified: false
+    - type: recall_at_1000
+      value: 80.33200000000001
+      verified: false
+    - type: recall_at_3
+      value: 20.61
+      verified: false
+    - type: recall_at_5
+      value: 24.903
+      verified: false
+  - task:
+      type: Retrieval
+    dataset:
+      type: hotpotqa
+      name: MTEB HotpotQA
+      config: default
+      split: test
+      revision: None
+    metrics:
+    - type: map_at_1
+      value: 29.21
+      verified: false
+    - type: map_at_10
+      value: 38.765
+      verified: false
+    - type: map_at_100
+      value: 39.498
+      verified: false
+    - type: map_at_1000
+      value: 39.568
+      verified: false
+    - type: map_at_3
+      value: 36.699
+      verified: false
+    - type: map_at_5
+      value: 37.925
+      verified: false
+    - type: mrr_at_1
+      value: 58.42
+      verified: false
+    - type: mrr_at_10
+      value: 65.137
+      verified: false
+    - type: mrr_at_100
+      value: 65.542
+      verified: false
+    - type: mrr_at_1000
+      value: 65.568
+      verified: false
+    - type: mrr_at_3
+      value: 63.698
+      verified: false
+    - type: mrr_at_5
+      value: 64.575
+      verified: false
+    - type: ndcg_at_1
+      value: 58.42
+      verified: false
+    - type: ndcg_at_10
+      value: 47.476
+      verified: false
+    - type: ndcg_at_100
+      value: 50.466
+      verified: false
+    - type: ndcg_at_1000
+      value: 52.064
+      verified: false
+    - type: ndcg_at_3
+      value: 43.986
+      verified: false
+    - type: ndcg_at_5
+      value: 45.824
+      verified: false
+    - type: precision_at_1
+      value: 58.42
+      verified: false
+    - type: precision_at_10
+      value: 9.649000000000001
+      verified: false
+    - type: precision_at_100
+      value: 1.201
+      verified: false
+    - type: precision_at_1000
+      value: 0.14100000000000001
+      verified: false
+    - type: precision_at_3
+      value: 26.977
+      verified: false
+    - type: precision_at_5
+      value: 17.642
+      verified: false
+    - type: recall_at_1
+      value: 29.21
+      verified: false
+    - type: recall_at_10
+      value: 48.244
+      verified: false
+    - type: recall_at_100
+      value: 60.041
+      verified: false
+    - type: recall_at_1000
+      value: 70.743
+      verified: false
+    - type: recall_at_3
+      value: 40.466
+      verified: false
+    - type: recall_at_5
+      value: 44.105
+      verified: false
+  - task:
+      type: Classification
+    dataset:
+      type: mteb/imdb
+      name: MTEB ImdbClassification
+      config: default
+      split: test
+      revision: 3d86128a09e091d6018b6d26cad27f2739fc2db7
+    metrics:
+    - type: accuracy
+      value: 58.7064
+      verified: false
+    - type: ap
+      value: 55.36326227125519
+      verified: false
+    - type: f1
+      value: 57.46763115215848
+      verified: false
+  - task:
+      type: Retrieval
+    dataset:
+      type: msmarco
+      name: MTEB MSMARCO
+      config: default
+      split: dev
+      revision: None
+    metrics:
+    - type: map_at_1
+      value: 15.889000000000001
+      verified: false
+    - type: map_at_10
+      value: 25.979000000000003
+      verified: false
+    - type: map_at_100
+      value: 27.21
+      verified: false
+    - type: map_at_1000
+      value: 27.284000000000002
+      verified: false
+    - type: map_at_3
+      value: 22.665
+      verified: false
+    - type: map_at_5
+      value: 24.578
+      verified: false
+    - type: mrr_at_1
+      value: 16.39
+      verified: false
+    - type: mrr_at_10
+      value: 26.504
+      verified: false
+    - type: mrr_at_100
+      value: 27.689999999999998
+      verified: false
+    - type: mrr_at_1000
+      value: 27.758
+      verified: false
+    - type: mrr_at_3
+      value: 23.24
+      verified: false
+    - type: mrr_at_5
+      value: 25.108000000000004
+      verified: false
+    - type: ndcg_at_1
+      value: 16.39
+      verified: false
+    - type: ndcg_at_10
+      value: 31.799
+      verified: false
+    - type: ndcg_at_100
+      value: 38.034
+      verified: false
+    - type: ndcg_at_1000
+      value: 39.979
+      verified: false
+    - type: ndcg_at_3
+      value: 25.054
+      verified: false
+    - type: ndcg_at_5
+      value: 28.463
+      verified: false
+    - type: precision_at_1
+      value: 16.39
+      verified: false
+    - type: precision_at_10
+      value: 5.189
+      verified: false
+    - type: precision_at_100
+      value: 0.835
+      verified: false
+    - type: precision_at_1000
+      value: 0.1
+      verified: false
+    - type: precision_at_3
+      value: 10.84
+      verified: false
+    - type: precision_at_5
+      value: 8.238
+      verified: false
+    - type: recall_at_1
+      value: 15.889000000000001
+      verified: false
+    - type: recall_at_10
+      value: 49.739
+      verified: false
+    - type: recall_at_100
+      value: 79.251
+      verified: false
+    - type: recall_at_1000
+      value: 94.298
+      verified: false
+    - type: recall_at_3
+      value: 31.427
+      verified: false
+    - type: recall_at_5
+      value: 39.623000000000005
+      verified: false
+  - task:
+      type: Classification
+    dataset:
+      type: mteb/mtop_domain
+      name: MTEB MTOPDomainClassification (en)
+      config: en
+      split: test
+      revision: d80d48c1eb48d3562165c59d59d0034df9fff0bf
+    metrics:
+    - type: accuracy
+      value: 88.81668946648426
+      verified: false
+    - type: f1
+      value: 88.55200075528438
+      verified: false
+  - task:
+      type: Classification
+    dataset:
+      type: mteb/mtop_intent
+      name: MTEB MTOPIntentClassification (en)
+      config: en
+      split: test
+      revision: ae001d0e6b1228650b7bd1c2c65fb50ad11a8aba
+    metrics:
+    - type: accuracy
+      value: 58.611491108071135
+      verified: false
+    - type: f1
+      value: 42.12391403999353
+      verified: false
+  - task:
+      type: Classification
+    dataset:
+      type: mteb/amazon_massive_intent
+      name: MTEB MassiveIntentClassification (en)
+      config: en
+      split: test
+      revision: 31efe3c427b0bae9c22cbb560b8f15491cc6bed7
+    metrics:
+    - type: accuracy
+      value: 64.67047747141896
+      verified: false
+    - type: f1
+      value: 62.88410885922258
+      verified: false
+  - task:
+      type: Classification
+    dataset:
+      type: mteb/amazon_massive_scenario
+      name: MTEB MassiveScenarioClassification (en)
+      config: en
+      split: test
+      revision: 7d571f92784cd94a019292a1f45445077d0ef634
+    metrics:
+    - type: accuracy
+      value: 71.78547410894419
+      verified: false
+    - type: f1
+      value: 71.69467869218154
+      verified: false
+  - task:
+      type: Clustering
+    dataset:
+      type: mteb/medrxiv-clustering-p2p
+      name: MTEB MedrxivClusteringP2P
+      config: default
+      split: test
+      revision: e7a26af6f3ae46b30dde8737f02c07b1505bcc73
+    metrics:
+    - type: v_measure
+      value: 27.23799937752035
+      verified: false
+  - task:
+      type: Clustering
+    dataset:
+      type: mteb/medrxiv-clustering-s2s
+      name: MTEB MedrxivClusteringS2S
+      config: default
+      split: test
+      revision: 35191c8c0dca72d8ff3efcd72aa802307d469663
+    metrics:
+    - type: v_measure
+      value: 23.26502601343789
+      verified: false
+  - task:
+      type: Reranking
+    dataset:
+      type: mteb/mind_small
+      name: MTEB MindSmallReranking
+      config: default
+      split: test
+      revision: 3bdac13927fdc888b903db93b2ffdbd90b295a69
+    metrics:
+    - type: map
+      value: 30.680711484149832
+      verified: false
+    - type: mrr
+      value: 31.705059795117307
+      verified: false
+  - task:
+      type: Retrieval
+    dataset:
+      type: nfcorpus
+      name: MTEB NFCorpus
+      config: default
+      split: test
+      revision: None
+    metrics:
+    - type: map_at_1
+      value: 4.077
+      verified: false
+    - type: map_at_10
+      value: 8.657
+      verified: false
+    - type: map_at_100
+      value: 10.753
+      verified: false
+    - type: map_at_1000
+      value: 11.885
+      verified: false
+    - type: map_at_3
+      value: 6.5089999999999995
+      verified: false
+    - type: map_at_5
+      value: 7.405
+      verified: false
+    - type: mrr_at_1
+      value: 38.7
+      verified: false
+    - type: mrr_at_10
+      value: 46.065
+      verified: false
+    - type: mrr_at_100
+      value: 46.772000000000006
+      verified: false
+    - type: mrr_at_1000
+      value: 46.83
+      verified: false
+    - type: mrr_at_3
+      value: 44.118
+      verified: false
+    - type: mrr_at_5
+      value: 45.015
+      verified: false
+    - type: ndcg_at_1
+      value: 36.997
+      verified: false
+    - type: ndcg_at_10
+      value: 25.96
+      verified: false
+    - type: ndcg_at_100
+      value: 23.607
+      verified: false
+    - type: ndcg_at_1000
+      value: 32.317
+      verified: false
+    - type: ndcg_at_3
+      value: 31.06
+      verified: false
+    - type: ndcg_at_5
+      value: 28.921000000000003
+      verified: false
+    - type: precision_at_1
+      value: 38.7
+      verified: false
+    - type: precision_at_10
+      value: 19.195
+      verified: false
+    - type: precision_at_100
+      value: 6.164
+      verified: false
+    - type: precision_at_1000
+      value: 1.839
+      verified: false
+    - type: precision_at_3
+      value: 28.999000000000002
+      verified: false
+    - type: precision_at_5
+      value: 25.014999999999997
+      verified: false
+    - type: recall_at_1
+      value: 4.077
+      verified: false
+    - type: recall_at_10
+      value: 11.802
+      verified: false
+    - type: recall_at_100
+      value: 24.365000000000002
+      verified: false
+    - type: recall_at_1000
+      value: 55.277
+      verified: false
+    - type: recall_at_3
+      value: 7.435
+      verified: false
+    - type: recall_at_5
+      value: 8.713999999999999
+      verified: false
+  - task:
+      type: Retrieval
+    dataset:
+      type: nq
+      name: MTEB NQ
+      config: default
+      split: test
+      revision: None
+    metrics:
+    - type: map_at_1
+      value: 19.588
+      verified: false
+    - type: map_at_10
+      value: 32.08
+      verified: false
+    - type: map_at_100
+      value: 33.32
+      verified: false
+    - type: map_at_1000
+      value: 33.377
+      verified: false
+    - type: map_at_3
+      value: 28.166000000000004
+      verified: false
+    - type: map_at_5
+      value: 30.383
+      verified: false
+    - type: mrr_at_1
+      value: 22.161
+      verified: false
+    - type: mrr_at_10
+      value: 34.121
+      verified: false
+    - type: mrr_at_100
+      value: 35.171
+      verified: false
+    - type: mrr_at_1000
+      value: 35.214
+      verified: false
+    - type: mrr_at_3
+      value: 30.692000000000004
+      verified: false
+    - type: mrr_at_5
+      value: 32.706
+      verified: false
+    - type: ndcg_at_1
+      value: 22.131999999999998
+      verified: false
+    - type: ndcg_at_10
+      value: 38.887
+      verified: false
+    - type: ndcg_at_100
+      value: 44.433
+      verified: false
+    - type: ndcg_at_1000
+      value: 45.823
+      verified: false
+    - type: ndcg_at_3
+      value: 31.35
+      verified: false
+    - type: ndcg_at_5
+      value: 35.144
+      verified: false
+    - type: precision_at_1
+      value: 22.131999999999998
+      verified: false
+    - type: precision_at_10
+      value: 6.8629999999999995
+      verified: false
+    - type: precision_at_100
+      value: 0.993
+      verified: false
+    - type: precision_at_1000
+      value: 0.11199999999999999
+      verified: false
+    - type: precision_at_3
+      value: 14.706
+      verified: false
+    - type: precision_at_5
+      value: 10.972999999999999
+      verified: false
+    - type: recall_at_1
+      value: 19.588
+      verified: false
+    - type: recall_at_10
+      value: 57.703
+      verified: false
+    - type: recall_at_100
+      value: 82.194
+      verified: false
+    - type: recall_at_1000
+      value: 92.623
+      verified: false
+    - type: recall_at_3
+      value: 38.012
+      verified: false
+    - type: recall_at_5
+      value: 46.847
+      verified: false
+  - task:
+      type: Retrieval
+    dataset:
+      type: quora
+      name: MTEB QuoraRetrieval
+      config: default
+      split: test
+      revision: None
+    metrics:
+    - type: map_at_1
+      value: 68.038
+      verified: false
+    - type: map_at_10
+      value: 81.572
+      verified: false
+    - type: map_at_100
+      value: 82.25200000000001
+      verified: false
+    - type: map_at_1000
+      value: 82.27600000000001
+      verified: false
+    - type: map_at_3
+      value: 78.618
+      verified: false
+    - type: map_at_5
+      value: 80.449
+      verified: false
+    - type: mrr_at_1
+      value: 78.31
+      verified: false
+    - type: mrr_at_10
+      value: 84.98
+      verified: false
+    - type: mrr_at_100
+      value: 85.122
+      verified: false
+    - type: mrr_at_1000
+      value: 85.124
+      verified: false
+    - type: mrr_at_3
+      value: 83.852
+      verified: false
+    - type: mrr_at_5
+      value: 84.6
+      verified: false
+    - type: ndcg_at_1
+      value: 78.31
+      verified: false
+    - type: ndcg_at_10
+      value: 85.693
+      verified: false
+    - type: ndcg_at_100
+      value: 87.191
+      verified: false
+    - type: ndcg_at_1000
+      value: 87.386
+      verified: false
+    - type: ndcg_at_3
+      value: 82.585
+      verified: false
+    - type: ndcg_at_5
+      value: 84.255
+      verified: false
+    - type: precision_at_1
+      value: 78.31
+      verified: false
+    - type: precision_at_10
+      value: 12.986
+      verified: false
+    - type: precision_at_100
+      value: 1.505
+      verified: false
+    - type: precision_at_1000
+      value: 0.156
+      verified: false
+    - type: precision_at_3
+      value: 36.007
+      verified: false
+    - type: precision_at_5
+      value: 23.735999999999997
+      verified: false
+    - type: recall_at_1
+      value: 68.038
+      verified: false
+    - type: recall_at_10
+      value: 93.598
+      verified: false
+    - type: recall_at_100
+      value: 98.869
+      verified: false
+    - type: recall_at_1000
+      value: 99.86500000000001
+      verified: false
+    - type: recall_at_3
+      value: 84.628
+      verified: false
+    - type: recall_at_5
+      value: 89.316
+      verified: false
+  - task:
+      type: Clustering
+    dataset:
+      type: mteb/reddit-clustering
+      name: MTEB RedditClustering
+      config: default
+      split: test
+      revision: 24640382cdbf8abc73003fb0fa6d111a705499eb
+    metrics:
+    - type: v_measure
+      value: 37.948231664922865
+      verified: false
+  - task:
+      type: Clustering
+    dataset:
+      type: mteb/reddit-clustering-p2p
+      name: MTEB RedditClusteringP2P
+      config: default
+      split: test
+      revision: 282350215ef01743dc01b456c7f5241fa8937f16
+    metrics:
+    - type: v_measure
+      value: 49.90597913763894
+      verified: false
+  - task:
+      type: Retrieval
+    dataset:
+      type: scidocs
+      name: MTEB SCIDOCS
+      config: default
+      split: test
+      revision: None
+    metrics:
+    - type: map_at_1
+      value: 3.753
+      verified: false
+    - type: map_at_10
+      value: 8.915
+      verified: false
+    - type: map_at_100
+      value: 10.374
+      verified: false
+    - type: map_at_1000
+      value: 10.612
+      verified: false
+    - type: map_at_3
+      value: 6.577
+      verified: false
+    - type: map_at_5
+      value: 7.8
+      verified: false
+    - type: mrr_at_1
+      value: 18.4
+      verified: false
+    - type: mrr_at_10
+      value: 27.325
+      verified: false
+    - type: mrr_at_100
+      value: 28.419
+      verified: false
+    - type: mrr_at_1000
+      value: 28.494000000000003
+      verified: false
+    - type: mrr_at_3
+      value: 24.349999999999998
+      verified: false
+    - type: mrr_at_5
+      value: 26.205000000000002
+      verified: false
+    - type: ndcg_at_1
+      value: 18.4
+      verified: false
+    - type: ndcg_at_10
+      value: 15.293000000000001
+      verified: false
+    - type: ndcg_at_100
+      value: 21.592
+      verified: false
+    - type: ndcg_at_1000
+      value: 26.473000000000003
+      verified: false
+    - type: ndcg_at_3
+      value: 14.748
+      verified: false
+    - type: ndcg_at_5
+      value: 12.98
+      verified: false
+    - type: precision_at_1
+      value: 18.4
+      verified: false
+    - type: precision_at_10
+      value: 7.779999999999999
+      verified: false
+    - type: precision_at_100
+      value: 1.693
+      verified: false
+    - type: precision_at_1000
+      value: 0.28800000000000003
+      verified: false
+    - type: precision_at_3
+      value: 13.700000000000001
+      verified: false
+    - type: precision_at_5
+      value: 11.379999999999999
+      verified: false
+    - type: recall_at_1
+      value: 3.753
+      verified: false
+    - type: recall_at_10
+      value: 15.806999999999999
+      verified: false
+    - type: recall_at_100
+      value: 34.37
+      verified: false
+    - type: recall_at_1000
+      value: 58.463
+      verified: false
+    - type: recall_at_3
+      value: 8.338
+      verified: false
+    - type: recall_at_5
+      value: 11.538
+      verified: false
+  - task:
+      type: STS
+    dataset:
+      type: mteb/sickr-sts
+      name: MTEB SICK-R
+      config: default
+      split: test
+      revision: a6ea5a8cab320b040a23452cc28066d9beae2cee
+    metrics:
+    - type: cos_sim_pearson
+      value: 82.58843987639705
+      verified: false
+    - type: cos_sim_spearman
+      value: 76.33071660715956
+      verified: false
+    - type: euclidean_pearson
+      value: 72.8029921002978
+      verified: false
+    - type: euclidean_spearman
+      value: 69.34534284782808
+      verified: false
+    - type: manhattan_pearson
+      value: 72.49781034973653
+      verified: false
+    - type: manhattan_spearman
+      value: 69.24754112621694
+      verified: false
+  - task:
+      type: STS
+    dataset:
+      type: mteb/sts12-sts
+      name: MTEB STS12
+      config: default
+      split: test
+      revision: a0d554a64d88156834ff5ae9920b964011b16384
+    metrics:
+    - type: cos_sim_pearson
+      value: 83.31673079903189
+      verified: false
+    - type: cos_sim_spearman
+      value: 74.27699263517789
+      verified: false
+    - type: euclidean_pearson
+      value: 69.4008910999579
+      verified: false
+    - type: euclidean_spearman
+      value: 59.0716984643048
+      verified: false
+    - type: manhattan_pearson
+      value: 68.87342686919199
+      verified: false
+    - type: manhattan_spearman
+      value: 58.904612865335025
+      verified: false
+  - task:
+      type: STS
+    dataset:
+      type: mteb/sts13-sts
+      name: MTEB STS13
+      config: default
+      split: test
+      revision: 7e90230a92c190f1bf69ae9002b8cea547a64cca
+    metrics:
+    - type: cos_sim_pearson
+      value: 77.59122302327788
+      verified: false
+    - type: cos_sim_spearman
+      value: 78.55383586979005
+      verified: false
+    - type: euclidean_pearson
+      value: 68.18338642204289
+      verified: false
+    - type: euclidean_spearman
+      value: 68.95092864180276
+      verified: false
+    - type: manhattan_pearson
+      value: 68.08807059822706
+      verified: false
+    - type: manhattan_spearman
+      value: 68.86135938270193
+      verified: false
+  - task:
+      type: STS
+    dataset:
+      type: mteb/sts14-sts
+      name: MTEB STS14
+      config: default
+      split: test
+      revision: 6031580fec1f6af667f0bd2da0a551cf4f0b2375
+    metrics:
+    - type: cos_sim_pearson
+      value: 78.51766841424501
+      verified: false
+    - type: cos_sim_spearman
+      value: 73.84318001499558
+      verified: false
+    - type: euclidean_pearson
+      value: 67.2007138855177
+      verified: false
+    - type: euclidean_spearman
+      value: 63.98672842723766
+      verified: false
+    - type: manhattan_pearson
+      value: 67.17773810895949
+      verified: false
+    - type: manhattan_spearman
+      value: 64.07359154832962
+      verified: false
+  - task:
+      type: STS
+    dataset:
+      type: mteb/sts15-sts
+      name: MTEB STS15
+      config: default
+      split: test
+      revision: ae752c7c21bf194d8b67fd573edf7ae58183cbe3
+    metrics:
+    - type: cos_sim_pearson
+      value: 82.73438541570299
+      verified: false
+    - type: cos_sim_spearman
+      value: 83.71357922283677
+      verified: false
+    - type: euclidean_pearson
+      value: 57.50131347498546
+      verified: false
+    - type: euclidean_spearman
+      value: 57.73623619252132
+      verified: false
+    - type: manhattan_pearson
+      value: 58.082992079000725
+      verified: false
+    - type: manhattan_spearman
+      value: 58.42728201167522
+      verified: false
+  - task:
+      type: STS
+    dataset:
+      type: mteb/sts16-sts
+      name: MTEB STS16
+      config: default
+      split: test
+      revision: 4d8694f8f0e0100860b497b999b3dbed754a0513
+    metrics:
+    - type: cos_sim_pearson
+      value: 78.14794654172421
+      verified: false
+    - type: cos_sim_spearman
+      value: 80.025736165043
+      verified: false
+    - type: euclidean_pearson
+      value: 65.87773913985473
+      verified: false
+    - type: euclidean_spearman
+      value: 66.69337751784794
+      verified: false
+    - type: manhattan_pearson
+      value: 66.01039761004415
+      verified: false
+    - type: manhattan_spearman
+      value: 66.89215027952318
+      verified: false
+  - task:
+      type: STS
+    dataset:
+      type: mteb/sts17-crosslingual-sts
+      name: MTEB STS17 (en-en)
+      config: en-en
+      split: test
+      revision: af5e6fb845001ecf41f4c1e033ce921939a2a68d
+    metrics:
+    - type: cos_sim_pearson
+      value: 87.10554507136152
+      verified: false
+    - type: cos_sim_spearman
+      value: 87.4898082140765
+      verified: false
+    - type: euclidean_pearson
+      value: 72.19391114541367
+      verified: false
+    - type: euclidean_spearman
+      value: 70.36647944993783
+      verified: false
+    - type: manhattan_pearson
+      value: 72.18680758133698
+      verified: false
+    - type: manhattan_spearman
+      value: 70.3871215447305
+      verified: false
+  - task:
+      type: STS
+    dataset:
+      type: mteb/sts22-crosslingual-sts
+      name: MTEB STS22 (en)
+      config: en
+      split: test
+      revision: 6d1ba47164174a496b7fa5d3569dae26a6813b80
+    metrics:
+    - type: cos_sim_pearson
+      value: 64.54868111501618
+      verified: false
+    - type: cos_sim_spearman
+      value: 64.25173617448473
+      verified: false
+    - type: euclidean_pearson
+      value: 39.116088900637116
+      verified: false
+    - type: euclidean_spearman
+      value: 53.300772929884
+      verified: false
+    - type: manhattan_pearson
+      value: 38.3844195287959
+      verified: false
+    - type: manhattan_spearman
+      value: 52.846675312001246
+      verified: false
+  - task:
+      type: STS
+    dataset:
+      type: mteb/stsbenchmark-sts
+      name: MTEB STSBenchmark
+      config: default
+      split: test
+      revision: b0fddb56ed78048fa8b90373c8a3cfc37b684831
+    metrics:
+    - type: cos_sim_pearson
+      value: 80.04396610550214
+      verified: false
+    - type: cos_sim_spearman
+      value: 79.19504854997832
+      verified: false
+    - type: euclidean_pearson
+      value: 66.3284657637072
+      verified: false
+    - type: euclidean_spearman
+      value: 63.69531796729492
+      verified: false
+    - type: manhattan_pearson
+      value: 66.82324081038026
+      verified: false
+    - type: manhattan_spearman
+      value: 64.18254512904923
+      verified: false
+  - task:
+      type: Reranking
+    dataset:
+      type: mteb/scidocs-reranking
+      name: MTEB SciDocsRR
+      config: default
+      split: test
+      revision: d3c5e1fc0b855ab6097bf1cda04dd73947d7caab
+    metrics:
+    - type: map
+      value: 74.16264051781705
+      verified: false
+    - type: mrr
+      value: 91.80864796060874
+      verified: false
+  - task:
+      type: Retrieval
+    dataset:
+      type: scifact
+      name: MTEB SciFact
+      config: default
+      split: test
+      revision: None
+    metrics:
+    - type: map_at_1
+      value: 38.983000000000004
+      verified: false
+    - type: map_at_10
+      value: 47.858000000000004
+      verified: false
+    - type: map_at_100
+      value: 48.695
+      verified: false
+    - type: map_at_1000
+      value: 48.752
+      verified: false
+    - type: map_at_3
+      value: 45.444
+      verified: false
+    - type: map_at_5
+      value: 46.906
+      verified: false
+    - type: mrr_at_1
+      value: 41.333
+      verified: false
+    - type: mrr_at_10
+      value: 49.935
+      verified: false
+    - type: mrr_at_100
+      value: 50.51
+      verified: false
+    - type: mrr_at_1000
+      value: 50.55500000000001
+      verified: false
+    - type: mrr_at_3
+      value: 47.833
+      verified: false
+    - type: mrr_at_5
+      value: 49.117
+      verified: false
+    - type: ndcg_at_1
+      value: 41.333
+      verified: false
+    - type: ndcg_at_10
+      value: 52.398999999999994
+      verified: false
+    - type: ndcg_at_100
+      value: 56.196
+      verified: false
+    - type: ndcg_at_1000
+      value: 57.838
+      verified: false
+    - type: ndcg_at_3
+      value: 47.987
+      verified: false
+    - type: ndcg_at_5
+      value: 50.356
+      verified: false
+    - type: precision_at_1
+      value: 41.333
+      verified: false
+    - type: precision_at_10
+      value: 7.167
+      verified: false
+    - type: precision_at_100
+      value: 0.9299999999999999
+      verified: false
+    - type: precision_at_1000
+      value: 0.108
+      verified: false
+    - type: precision_at_3
+      value: 19
+      verified: false
+    - type: precision_at_5
+      value: 12.8
+      verified: false
+    - type: recall_at_1
+      value: 38.983000000000004
+      verified: false
+    - type: recall_at_10
+      value: 64.183
+      verified: false
+    - type: recall_at_100
+      value: 82.02199999999999
+      verified: false
+    - type: recall_at_1000
+      value: 95.167
+      verified: false
+    - type: recall_at_3
+      value: 52.383
+      verified: false
+    - type: recall_at_5
+      value: 58.411
+      verified: false
+  - task:
+      type: PairClassification
+    dataset:
+      type: mteb/sprintduplicatequestions-pairclassification
+      name: MTEB SprintDuplicateQuestions
+      config: default
+      split: test
+      revision: d66bd1f72af766a5cc4b0ca5e00c162f89e8cc46
+    metrics:
+    - type: cos_sim_accuracy
+      value: 99.8019801980198
+      verified: false
+    - type: cos_sim_ap
+      value: 94.9287554635848
+      verified: false
+    - type: cos_sim_f1
+      value: 89.83739837398375
+      verified: false
+    - type: cos_sim_precision
+      value: 91.32231404958677
+      verified: false
+    - type: cos_sim_recall
+      value: 88.4
+      verified: false
+    - type: dot_accuracy
+      value: 99.23762376237623
+      verified: false
+    - type: dot_ap
+      value: 55.22534191245801
+      verified: false
+    - type: dot_f1
+      value: 54.054054054054056
+      verified: false
+    - type: dot_precision
+      value: 55.15088449531738
+      verified: false
+    - type: dot_recall
+      value: 53
+      verified: false
+    - type: euclidean_accuracy
+      value: 99.6108910891089
+      verified: false
+    - type: euclidean_ap
+      value: 82.5195111329438
+      verified: false
+    - type: euclidean_f1
+      value: 78.2847718526663
+      verified: false
+    - type: euclidean_precision
+      value: 86.93528693528694
+      verified: false
+    - type: euclidean_recall
+      value: 71.2
+      verified: false
+    - type: manhattan_accuracy
+      value: 99.5970297029703
+      verified: false
+    - type: manhattan_ap
+      value: 81.96876777875492
+      verified: false
+    - type: manhattan_f1
+      value: 77.33773377337734
+      verified: false
+    - type: manhattan_precision
+      value: 85.94132029339853
+      verified: false
+    - type: manhattan_recall
+      value: 70.3
+      verified: false
+    - type: max_accuracy
+      value: 99.8019801980198
+      verified: false
+    - type: max_ap
+      value: 94.9287554635848
+      verified: false
+    - type: max_f1
+      value: 89.83739837398375
+      verified: false
+  - task:
+      type: Clustering
+    dataset:
+      type: mteb/stackexchange-clustering
+      name: MTEB StackExchangeClustering
+      config: default
+      split: test
+      revision: 6cbc1f7b2bc0622f2e39d2c77fa502909748c259
+    metrics:
+    - type: v_measure
+      value: 46.34997003954114
+      verified: false
+  - task:
+      type: Clustering
+    dataset:
+      type: mteb/stackexchange-clustering-p2p
+      name: MTEB StackExchangeClusteringP2P
+      config: default
+      split: test
+      revision: 815ca46b2622cec33ccafc3735d572c266efdb44
+    metrics:
+    - type: v_measure
+      value: 31.462336020554893
+      verified: false
+  - task:
+      type: Reranking
+    dataset:
+      type: mteb/stackoverflowdupquestions-reranking
+      name: MTEB StackOverflowDupQuestions
+      config: default
+      split: test
+      revision: e185fbe320c72810689fc5848eb6114e1ef5ec69
+    metrics:
+    - type: map
+      value: 47.1757817459526
+      verified: false
+    - type: mrr
+      value: 47.941057104660054
+      verified: false
+  - task:
+      type: Summarization
+    dataset:
+      type: mteb/summeval
+      name: MTEB SummEval
+      config: default
+      split: test
+      revision: cda12ad7615edc362dbf25a00fdd61d3b1eaf93c
+    metrics:
+    - type: cos_sim_pearson
+      value: 30.56106249068471
+      verified: false
+    - type: cos_sim_spearman
+      value: 31.24613190558528
+      verified: false
+    - type: dot_pearson
+      value: 20.486610035794257
+      verified: false
+    - type: dot_spearman
+      value: 23.115667545894546
+      verified: false
+  - task:
+      type: Retrieval
+    dataset:
+      type: trec-covid
+      name: MTEB TRECCOVID
+      config: default
+      split: test
+      revision: None
+    metrics:
+    - type: map_at_1
+      value: 0.182
+      verified: false
+    - type: map_at_10
+      value: 1.155
+      verified: false
+    - type: map_at_100
+      value: 5.118
+      verified: false
+    - type: map_at_1000
+      value: 11.827
+      verified: false
+    - type: map_at_3
+      value: 0.482
+      verified: false
+    - type: map_at_5
+      value: 0.712
+      verified: false
+    - type: mrr_at_1
+      value: 70
+      verified: false
+    - type: mrr_at_10
+      value: 79.483
+      verified: false
+    - type: mrr_at_100
+      value: 79.637
+      verified: false
+    - type: mrr_at_1000
+      value: 79.637
+      verified: false
+    - type: mrr_at_3
+      value: 77.667
+      verified: false
+    - type: mrr_at_5
+      value: 78.567
+      verified: false
+    - type: ndcg_at_1
+      value: 63
+      verified: false
+    - type: ndcg_at_10
+      value: 52.303
+      verified: false
+    - type: ndcg_at_100
+      value: 37.361
+      verified: false
+    - type: ndcg_at_1000
+      value: 32.84
+      verified: false
+    - type: ndcg_at_3
+      value: 58.274
+      verified: false
+    - type: ndcg_at_5
+      value: 55.601
+      verified: false
+    - type: precision_at_1
+      value: 70
+      verified: false
+    - type: precision_at_10
+      value: 55.60000000000001
+      verified: false
+    - type: precision_at_100
+      value: 37.96
+      verified: false
+    - type: precision_at_1000
+      value: 14.738000000000001
+      verified: false
+    - type: precision_at_3
+      value: 62.666999999999994
+      verified: false
+    - type: precision_at_5
+      value: 60
+      verified: false
+    - type: recall_at_1
+      value: 0.182
+      verified: false
+    - type: recall_at_10
+      value: 1.4120000000000001
+      verified: false
+    - type: recall_at_100
+      value: 8.533
+      verified: false
+    - type: recall_at_1000
+      value: 30.572
+      verified: false
+    - type: recall_at_3
+      value: 0.5309999999999999
+      verified: false
+    - type: recall_at_5
+      value: 0.814
+      verified: false
+  - task:
+      type: Retrieval
+    dataset:
+      type: webis-touche2020
+      name: MTEB Touche2020
+      config: default
+      split: test
+      revision: None
+    metrics:
+    - type: map_at_1
+      value: 1.385
+      verified: false
+    - type: map_at_10
+      value: 7.185999999999999
+      verified: false
+    - type: map_at_100
+      value: 11.642
+      verified: false
+    - type: map_at_1000
+      value: 12.953000000000001
+      verified: false
+    - type: map_at_3
+      value: 3.496
+      verified: false
+    - type: map_at_5
+      value: 4.82
+      verified: false
+    - type: mrr_at_1
+      value: 16.326999999999998
+      verified: false
+    - type: mrr_at_10
+      value: 29.461
+      verified: false
+    - type: mrr_at_100
+      value: 31.436999999999998
+      verified: false
+    - type: mrr_at_1000
+      value: 31.436999999999998
+      verified: false
+    - type: mrr_at_3
+      value: 24.490000000000002
+      verified: false
+    - type: mrr_at_5
+      value: 27.857
+      verified: false
+    - type: ndcg_at_1
+      value: 14.285999999999998
+      verified: false
+    - type: ndcg_at_10
+      value: 16.672
+      verified: false
+    - type: ndcg_at_100
+      value: 28.691
+      verified: false
+    - type: ndcg_at_1000
+      value: 39.817
+      verified: false
+    - type: ndcg_at_3
+      value: 15.277
+      verified: false
+    - type: ndcg_at_5
+      value: 15.823
+      verified: false
+    - type: precision_at_1
+      value: 16.326999999999998
+      verified: false
+    - type: precision_at_10
+      value: 15.509999999999998
+      verified: false
+    - type: precision_at_100
+      value: 6.49
+      verified: false
+    - type: precision_at_1000
+      value: 1.4080000000000001
+      verified: false
+    - type: precision_at_3
+      value: 16.326999999999998
+      verified: false
+    - type: precision_at_5
+      value: 16.735
+      verified: false
+    - type: recall_at_1
+      value: 1.385
+      verified: false
+    - type: recall_at_10
+      value: 12.586
+      verified: false
+    - type: recall_at_100
+      value: 40.765
+      verified: false
+    - type: recall_at_1000
+      value: 75.198
+      verified: false
+    - type: recall_at_3
+      value: 4.326
+      verified: false
+    - type: recall_at_5
+      value: 7.074999999999999
+      verified: false
+  - task:
+      type: Classification
+    dataset:
+      type: mteb/toxic_conversations_50k
+      name: MTEB ToxicConversationsClassification
+      config: default
+      split: test
+      revision: d7c0de2777da35d6aae2200a62c6e0e5af397c4c
+    metrics:
+    - type: accuracy
+      value: 59.4402
+      verified: false
+    - type: ap
+      value: 10.16922814263879
+      verified: false
+    - type: f1
+      value: 45.374485104940476
+      verified: false
+  - task:
+      type: Classification
+    dataset:
+      type: mteb/tweet_sentiment_extraction
+      name: MTEB TweetSentimentExtractionClassification
+      config: default
+      split: test
+      revision: d604517c81ca91fe16a244d1248fc021f9ecee7a
+    metrics:
+    - type: accuracy
+      value: 54.25863044708545
+      verified: false
+    - type: f1
+      value: 54.20154252609619
+      verified: false
+  - task:
+      type: Clustering
+    dataset:
+      type: mteb/twentynewsgroups-clustering
+      name: MTEB TwentyNewsgroupsClustering
+      config: default
+      split: test
+      revision: 6125ec4e24fa026cec8a478383ee943acfbd5449
+    metrics:
+    - type: v_measure
+      value: 34.3883169293051
+      verified: false
+  - task:
+      type: PairClassification
+    dataset:
+      type: mteb/twittersemeval2015-pairclassification
+      name: MTEB TwitterSemEval2015
+      config: default
+      split: test
+      revision: 70970daeab8776df92f5ea462b6173c0b46fd2d1
+    metrics:
+    - type: cos_sim_accuracy
+      value: 81.76670441676104
+      verified: false
+    - type: cos_sim_ap
+      value: 59.29878710961347
+      verified: false
+    - type: cos_sim_f1
+      value: 57.33284971587474
+      verified: false
+    - type: cos_sim_precision
+      value: 52.9122963624191
+      verified: false
+    - type: cos_sim_recall
+      value: 62.559366754617415
+      verified: false
+    - type: dot_accuracy
+      value: 77.52279907015557
+      verified: false
+    - type: dot_ap
+      value: 34.17588904643467
+      verified: false
+    - type: dot_f1
+      value: 41.063567529494634
+      verified: false
+    - type: dot_precision
+      value: 30.813953488372093
+      verified: false
+    - type: dot_recall
+      value: 61.53034300791557
+      verified: false
+    - type: euclidean_accuracy
+      value: 80.61631996185254
+      verified: false
+    - type: euclidean_ap
+      value: 54.00362361479352
+      verified: false
+    - type: euclidean_f1
+      value: 53.99111751290361
+      verified: false
+    - type: euclidean_precision
+      value: 49.52653600528518
+      verified: false
+    - type: euclidean_recall
+      value: 59.340369393139845
+      verified: false
+    - type: manhattan_accuracy
+      value: 80.65208320915539
+      verified: false
+    - type: manhattan_ap
+      value: 54.18329507159467
+      verified: false
+    - type: manhattan_f1
+      value: 53.85550960836779
+      verified: false
+    - type: manhattan_precision
+      value: 49.954873646209386
+      verified: false
+    - type: manhattan_recall
+      value: 58.41688654353562
+      verified: false
+    - type: max_accuracy
+      value: 81.76670441676104
+      verified: false
+    - type: max_ap
+      value: 59.29878710961347
+      verified: false
+    - type: max_f1
+      value: 57.33284971587474
+      verified: false
+  - task:
+      type: PairClassification
+    dataset:
+      type: mteb/twitterurlcorpus-pairclassification
+      name: MTEB TwitterURLCorpus
+      config: default
+      split: test
+      revision: 8b6510b0b1fa4e4c4f879467980e9be563ec1cdf
+    metrics:
+    - type: cos_sim_accuracy
+      value: 87.99433383785463
+      verified: false
+    - type: cos_sim_ap
+      value: 83.43513915159009
+      verified: false
+    - type: cos_sim_f1
+      value: 76.3906784964842
+      verified: false
+    - type: cos_sim_precision
+      value: 73.19223985890653
+      verified: false
+    - type: cos_sim_recall
+      value: 79.88142901139513
+      verified: false
+    - type: dot_accuracy
+      value: 81.96142352621571
+      verified: false
+    - type: dot_ap
+      value: 67.78764755689359
+      verified: false
+    - type: dot_f1
+      value: 64.42823356983445
+      verified: false
+    - type: dot_precision
+      value: 56.77801913931779
+      verified: false
+    - type: dot_recall
+      value: 74.46104096088698
+      verified: false
+    - type: euclidean_accuracy
+      value: 81.9478402607987
+      verified: false
+    - type: euclidean_ap
+      value: 67.13958457373279
+      verified: false
+    - type: euclidean_f1
+      value: 60.45118343195266
+      verified: false
+    - type: euclidean_precision
+      value: 58.1625391403359
+      verified: false
+    - type: euclidean_recall
+      value: 62.92731752386819
+      verified: false
+    - type: manhattan_accuracy
+      value: 82.01769705437188
+      verified: false
+    - type: manhattan_ap
+      value: 67.24709477497046
+      verified: false
+    - type: manhattan_f1
+      value: 60.4103846436714
+      verified: false
+    - type: manhattan_precision
+      value: 57.82063916654935
+      verified: false
+    - type: manhattan_recall
+      value: 63.24299353249153
+      verified: false
+    - type: max_accuracy
+      value: 87.99433383785463
+      verified: false
+    - type: max_ap
+      value: 83.43513915159009
+      verified: false
+    - type: max_f1
+      value: 76.3906784964842
+      verified: false
+config:
+  architectures:
+  - T5EncoderModel
+  auto_map:
+    AutoModel: modeling_t5.T5EncoderModel
+  model_type: t5
+  tokenizer_config:
+    eos_token: </s>
+    pad_token: <pad>
+    unk_token: <unk>
+cardData:
+  pipeline_tag: sentence-similarity
+  tags:
+  - ctranslate2
+  - int8
+  - float16 - finetuner - mteb - sentence-transformers - feature-extraction - sentence-similarity
+  datasets:
+  - jinaai/negation-dataset
+  language: en
+  license: apache-2.0
+  model-index:
+  - name: jina-embedding-s-en-v1
+    results:
+    - task:
+        type: Classification
+      dataset:
+        type: mteb/amazon_counterfactual
+        name: MTEB AmazonCounterfactualClassification (en)
+        config: en
+        split: test
+        revision: e8379541af4e31359cca9fbcf4b00f2671dba205
+      metrics:
+      - type: accuracy
+        value: 64.82089552238806
+        verified: false
+      - type: ap
+        value: 27.100981946230778
+        verified: false
+      - type: f1
+        value: 58.3354886367184
+        verified: false
+    - task:
+        type: Classification
+      dataset:
+        type: mteb/amazon_polarity
+        name: MTEB AmazonPolarityClassification
+        config: default
+        split: test
+        revision: e2d317d38cd51312af73b3d32a06d1a08b442046
+      metrics:
+      - type: accuracy
+        value: 64.282775
+        verified: false
+      - type: ap
+        value: 60.350688924943796
+        verified: false
+      - type: f1
+        value: 62.06346948494396
+        verified: false
+    - task:
+        type: Classification
+      dataset:
+        type: mteb/amazon_reviews_multi
+        name: MTEB AmazonReviewsClassification (en)
+        config: en
+        split: test
+        revision: 1399c76144fd37290681b995c656ef9b2e06e26d
+      metrics:
+      - type: accuracy
+        value: 30.623999999999995
+        verified: false
+      - type: f1
+        value: 29.427789186742153
+        verified: false
+    - task:
+        type: Retrieval
+      dataset:
+        type: arguana
+        name: MTEB ArguAna
+        config: default
+        split: test
+        revision: None
+      metrics:
+      - type: map_at_1
+        value: 22.119
+        verified: false
+      - type: map_at_10
+        value: 35.609
+        verified: false
+      - type: map_at_100
+        value: 36.935
+        verified: false
+      - type: map_at_1000
+        value: 36.957
+        verified: false
+      - type: map_at_3
+        value: 31.046000000000003
+        verified: false
+      - type: map_at_5
+        value: 33.574
+        verified: false
+      - type: mrr_at_1
+        value: 22.404
+        verified: false
+      - type: mrr_at_10
+        value: 35.695
+        verified: false
+      - type: mrr_at_100
+        value: 37.021
+        verified: false
+      - type: mrr_at_1000
+        value: 37.043
+        verified: false
+      - type: mrr_at_3
+        value: 31.093
+        verified: false
+      - type: mrr_at_5
+        value: 33.635999999999996
+        verified: false
+      - type: ndcg_at_1
+        value: 22.119
+        verified: false
+      - type: ndcg_at_10
+        value: 43.566
+        verified: false
+      - type: ndcg_at_100
+        value: 49.370000000000005
+        verified: false
+      - type: ndcg_at_1000
+        value: 49.901
+        verified: false
+      - type: ndcg_at_3
+        value: 34.06
+        verified: false
+      - type: ndcg_at_5
+        value: 38.653999999999996
+        verified: false
+      - type: precision_at_1
+        value: 22.119
+        verified: false
+      - type: precision_at_10
+        value: 6.92
+        verified: false
+      - type: precision_at_100
+        value: 0.95
+        verified: false
+      - type: precision_at_1000
+        value: 0.099
+        verified: false
+      - type: precision_at_3
+        value: 14.272000000000002
+        verified: false
+      - type: precision_at_5
+        value: 10.811
+        verified: false
+      - type: recall_at_1
+        value: 22.119
+        verified: false
+      - type: recall_at_10
+        value: 69.203
+        verified: false
+      - type: recall_at_100
+        value: 95.021
+        verified: false
+      - type: recall_at_1000
+        value: 99.075
+        verified: false
+      - type: recall_at_3
+        value: 42.817
+        verified: false
+      - type: recall_at_5
+        value: 54.054
+        verified: false
+    - task:
+        type: Clustering
+      dataset:
+        type: mteb/arxiv-clustering-p2p
+        name: MTEB ArxivClusteringP2P
+        config: default
+        split: test
+        revision: a122ad7f3f0291bf49cc6f4d32aa80929df69d5d
+      metrics:
+      - type: v_measure
+        value: 34.1740289109719
+        verified: false
+    - task:
+        type: Clustering
+      dataset:
+        type: mteb/arxiv-clustering-s2s
+        name: MTEB ArxivClusteringS2S
+        config: default
+        split: test
+        revision: f910caf1a6075f7329cdf8c1a6135696f37dbd53
+      metrics:
+      - type: v_measure
+        value: 23.985251383455463
+        verified: false
+    - task:
+        type: Reranking
+      dataset:
+        type: mteb/askubuntudupquestions-reranking
+        name: MTEB AskUbuntuDupQuestions
+        config: default
+        split: test
+        revision: 2000358ca161889fa9c082cb41daa8dcfb161a54
+      metrics:
+      - type: map
+        value: 60.24873612289029
+        verified: false
+      - type: mrr
+        value: 74.65692740623489
+        verified: false
+    - task:
+        type: STS
+      dataset:
+        type: mteb/biosses-sts
+        name: MTEB BIOSSES
+        config: default
+        split: test
+        revision: d3fb88f8f02e40887cd149695127462bbcf29b4a
+      metrics:
+      - type: cos_sim_pearson
+        value: 86.22415390332444
+        verified: false
+      - type: cos_sim_spearman
+        value: 82.9591191954711
+        verified: false
+      - type: euclidean_pearson
+        value: 44.096317524324945
+        verified: false
+      - type: euclidean_spearman
+        value: 42.95218351391625
+        verified: false
+      - type: manhattan_pearson
+        value: 44.07766490545065
+        verified: false
+      - type: manhattan_spearman
+        value: 42.78350497166606
+        verified: false
+    - task:
+        type: Classification
+      dataset:
+        type: mteb/banking77
+        name: MTEB Banking77Classification
+        config: default
+        split: test
+        revision: 0fd18e25b25c072e09e0d92ab615fda904d66300
+      metrics:
+      - type: accuracy
+        value: 74.64285714285714
+        verified: false
+      - type: f1
+        value: 73.53680835577447
+        verified: false
+    - task:
+        type: Clustering
+      dataset:
+        type: mteb/biorxiv-clustering-p2p
+        name: MTEB BiorxivClusteringP2P
+        config: default
+        split: test
+        revision: 65b79d1d13f80053f67aca9498d9402c2d9f1f40
+      metrics:
+      - type: v_measure
+        value: 28.512813238490164
+        verified: false
+    - task:
+        type: Clustering
+      dataset:
+        type: mteb/biorxiv-clustering-s2s
+        name: MTEB BiorxivClusteringS2S
+        config: default
+        split: test
+        revision: 258694dd0231531bc1fd9de6ceb52a0853c6d908
+      metrics:
+      - type: v_measure
+        value: 20.942214972649488
+        verified: false
+    - task:
+        type: Retrieval
+      dataset:
+        type: BeIR/cqadupstack
+        name: MTEB CQADupstackAndroidRetrieval
+        config: default
+        split: test
+        revision: None
+      metrics:
+      - type: map_at_1
+        value: 28.255999999999997
+        verified: false
+      - type: map_at_10
+        value: 37.091
+        verified: false
+      - type: map_at_100
+        value: 38.428000000000004
+        verified: false
+      - type: map_at_1000
+        value: 38.559
+        verified: false
+      - type: map_at_3
+        value: 34.073
+        verified: false
+      - type: map_at_5
+        value: 35.739
+        verified: false
+      - type: mrr_at_1
+        value: 34.907
+        verified: false
+      - type: mrr_at_10
+        value: 42.769
+        verified: false
+      - type: mrr_at_100
+        value: 43.607
+        verified: false
+      - type: mrr_at_1000
+        value: 43.656
+        verified: false
+      - type: mrr_at_3
+        value: 39.986
+        verified: false
+      - type: mrr_at_5
+        value: 41.581
+        verified: false
+      - type: ndcg_at_1
+        value: 34.907
+        verified: false
+      - type: ndcg_at_10
+        value: 42.681000000000004
+        verified: false
+      - type: ndcg_at_100
+        value: 48.213
+        verified: false
+      - type: ndcg_at_1000
+        value: 50.464
+        verified: false
+      - type: ndcg_at_3
+        value: 37.813
+        verified: false
+      - type: ndcg_at_5
+        value: 39.936
+        verified: false
+      - type: precision_at_1
+        value: 34.907
+        verified: false
+      - type: precision_at_10
+        value: 7.911
+        verified: false
+      - type: precision_at_100
+        value: 1.349
+        verified: false
+      - type: precision_at_1000
+        value: 0.184
+        verified: false
+      - type: precision_at_3
+        value: 17.93
+        verified: false
+      - type: precision_at_5
+        value: 12.732
+        verified: false
+      - type: recall_at_1
+        value: 28.255999999999997
+        verified: false
+      - type: recall_at_10
+        value: 53.49699999999999
+        verified: false
+      - type: recall_at_100
+        value: 77.288
+        verified: false
+      - type: recall_at_1000
+        value: 91.776
+        verified: false
+      - type: recall_at_3
+        value: 39.18
+        verified: false
+      - type: recall_at_5
+        value: 45.365
+        verified: false
+    - task:
+        type: Retrieval
+      dataset:
+        type: BeIR/cqadupstack
+        name: MTEB CQADupstackEnglishRetrieval
+        config: default
+        split: test
+        revision: None
+      metrics:
+      - type: map_at_1
+        value: 25.563999999999997
+        verified: false
+      - type: map_at_10
+        value: 33.913
+        verified: false
+      - type: map_at_100
+        value: 34.966
+        verified: false
+      - type: map_at_1000
+        value: 35.104
+        verified: false
+      - type: map_at_3
+        value: 31.413000000000004
+        verified: false
+      - type: map_at_5
+        value: 32.854
+        verified: false
+      - type: mrr_at_1
+        value: 31.72
+        verified: false
+      - type: mrr_at_10
+        value: 39.391
+        verified: false
+      - type: mrr_at_100
+        value: 40.02
+        verified: false
+      - type: mrr_at_1000
+        value: 40.076
+        verified: false
+      - type: mrr_at_3
+        value: 37.314
+        verified: false
+      - type: mrr_at_5
+        value: 38.507999999999996
+        verified: false
+      - type: ndcg_at_1
+        value: 31.72
+        verified: false
+      - type: ndcg_at_10
+        value: 38.933
+        verified: false
+      - type: ndcg_at_100
+        value: 43.024
+        verified: false
+      - type: ndcg_at_1000
+        value: 45.556999999999995
+        verified: false
+      - type: ndcg_at_3
+        value: 35.225
+        verified: false
+      - type: ndcg_at_5
+        value: 36.984
+        verified: false
+      - type: precision_at_1
+        value: 31.72
+        verified: false
+      - type: precision_at_10
+        value: 7.248
+        verified: false
+      - type: precision_at_100
+        value: 1.192
+        verified: false
+      - type: precision_at_1000
+        value: 0.16999999999999998
+        verified: false
+      - type: precision_at_3
+        value: 16.943
+        verified: false
+      - type: precision_at_5
+        value: 11.975
+        verified: false
+      - type: recall_at_1
+        value: 25.563999999999997
+        verified: false
+      - type: recall_at_10
+        value: 47.808
+        verified: false
+      - type: recall_at_100
+        value: 65.182
+        verified: false
+      - type: recall_at_1000
+        value: 81.831
+        verified: false
+      - type: recall_at_3
+        value: 36.889
+        verified: false
+      - type: recall_at_5
+        value: 41.829
+        verified: false
+    - task:
+        type: Retrieval
+      dataset:
+        type: BeIR/cqadupstack
+        name: MTEB CQADupstackGamingRetrieval
+        config: default
+        split: test
+        revision: None
+      metrics:
+      - type: map_at_1
+        value: 33.662
+        verified: false
+      - type: map_at_10
+        value: 44.096999999999994
+        verified: false
+      - type: map_at_100
+        value: 45.153999999999996
+        verified: false
+      - type: map_at_1000
+        value: 45.223
+        verified: false
+      - type: map_at_3
+        value: 41.377
+        verified: false
+      - type: map_at_5
+        value: 42.935
+        verified: false
+      - type: mrr_at_1
+        value: 38.997
+        verified: false
+      - type: mrr_at_10
+        value: 47.675
+        verified: false
+      - type: mrr_at_100
+        value: 48.476
+        verified: false
+      - type: mrr_at_1000
+        value: 48.519
+        verified: false
+      - type: mrr_at_3
+        value: 45.549
+        verified: false
+      - type: mrr_at_5
+        value: 46.884
+        verified: false
+      - type: ndcg_at_1
+        value: 38.997
+        verified: false
+      - type: ndcg_at_10
+        value: 49.196
+        verified: false
+      - type: ndcg_at_100
+        value: 53.788000000000004
+        verified: false
+      - type: ndcg_at_1000
+        value: 55.393
+        verified: false
+      - type: ndcg_at_3
+        value: 44.67
+        verified: false
+      - type: ndcg_at_5
+        value: 46.991
+        verified: false
+      - type: precision_at_1
+        value: 38.997
+        verified: false
+      - type: precision_at_10
+        value: 7.875
+        verified: false
+      - type: precision_at_100
+        value: 1.102
+        verified: false
+      - type: precision_at_1000
+        value: 0.13
+        verified: false
+      - type: precision_at_3
+        value: 19.854
+        verified: false
+      - type: precision_at_5
+        value: 13.605
+        verified: false
+      - type: recall_at_1
+        value: 33.662
+        verified: false
+      - type: recall_at_10
+        value: 60.75899999999999
+        verified: false
+      - type: recall_at_100
+        value: 81.11699999999999
+        verified: false
+      - type: recall_at_1000
+        value: 92.805
+        verified: false
+      - type: recall_at_3
+        value: 48.577999999999996
+        verified: false
+      - type: recall_at_5
+        value: 54.384
+        verified: false
+    - task:
+        type: Retrieval
+      dataset:
+        type: BeIR/cqadupstack
+        name: MTEB CQADupstackGisRetrieval
+        config: default
+        split: test
+        revision: None
+      metrics:
+      - type: map_at_1
+        value: 21.313
+        verified: false
+      - type: map_at_10
+        value: 29.036
+        verified: false
+      - type: map_at_100
+        value: 29.975
+        verified: false
+      - type: map_at_1000
+        value: 30.063000000000002
+        verified: false
+      - type: map_at_3
+        value: 26.878999999999998
+        verified: false
+      - type: map_at_5
+        value: 28.005999999999997
+        verified: false
+      - type: mrr_at_1
+        value: 23.39
+        verified: false
+      - type: mrr_at_10
+        value: 31.072
+        verified: false
+      - type: mrr_at_100
+        value: 31.922
+        verified: false
+      - type: mrr_at_1000
+        value: 31.995
+        verified: false
+      - type: mrr_at_3
+        value: 28.908
+        verified: false
+      - type: mrr_at_5
+        value: 30.104999999999997
+        verified: false
+      - type: ndcg_at_1
+        value: 23.39
+        verified: false
+      - type: ndcg_at_10
+        value: 33.448
+        verified: false
+      - type: ndcg_at_100
+        value: 38.255
+        verified: false
+      - type: ndcg_at_1000
+        value: 40.542
+        verified: false
+      - type: ndcg_at_3
+        value: 29.060000000000002
+        verified: false
+      - type: ndcg_at_5
+        value: 31.023
+        verified: false
+      - type: precision_at_1
+        value: 23.39
+        verified: false
+      - type: precision_at_10
+        value: 5.175
+        verified: false
+      - type: precision_at_100
+        value: 0.8049999999999999
+        verified: false
+      - type: precision_at_1000
+        value: 0.10300000000000001
+        verified: false
+      - type: precision_at_3
+        value: 12.504999999999999
+        verified: false
+      - type: precision_at_5
+        value: 8.61
+        verified: false
+      - type: recall_at_1
+        value: 21.313
+        verified: false
+      - type: recall_at_10
+        value: 45.345
+        verified: false
+      - type: recall_at_100
+        value: 67.752
+        verified: false
+      - type: recall_at_1000
+        value: 84.937
+        verified: false
+      - type: recall_at_3
+        value: 33.033
+        verified: false
+      - type: recall_at_5
+        value: 37.929
+        verified: false
+    - task:
+        type: Retrieval
+      dataset:
+        type: BeIR/cqadupstack
+        name: MTEB CQADupstackMathematicaRetrieval
+        config: default
+        split: test
+        revision: None
+      metrics:
+      - type: map_at_1
+        value: 14.255999999999998
+        verified: false
+      - type: map_at_10
+        value: 20.339
+        verified: false
+      - type: map_at_100
+        value: 21.491
+        verified: false
+      - type: map_at_1000
+        value: 21.616
+        verified: false
+      - type: map_at_3
+        value: 18.481
+        verified: false
+      - type: map_at_5
+        value: 19.594
+        verified: false
+      - type: mrr_at_1
+        value: 17.413
+        verified: false
+      - type: mrr_at_10
+        value: 24.146
+        verified: false
+      - type: mrr_at_100
+        value: 25.188
+        verified: false
+      - type: mrr_at_1000
+        value: 25.273
+        verified: false
+      - type: mrr_at_3
+        value: 22.264
+        verified: false
+      - type: mrr_at_5
+        value: 23.302
+        verified: false
+      - type: ndcg_at_1
+        value: 17.413
+        verified: false
+      - type: ndcg_at_10
+        value: 24.272
+        verified: false
+      - type: ndcg_at_100
+        value: 29.82
+        verified: false
+      - type: ndcg_at_1000
+        value: 33.072
+        verified: false
+      - type: ndcg_at_3
+        value: 20.826
+        verified: false
+      - type: ndcg_at_5
+        value: 22.535
+        verified: false
+      - type: precision_at_1
+        value: 17.413
+        verified: false
+      - type: precision_at_10
+        value: 4.366
+        verified: false
+      - type: precision_at_100
+        value: 0.818
+        verified: false
+      - type: precision_at_1000
+        value: 0.124
+        verified: false
+      - type: precision_at_3
+        value: 9.866999999999999
+        verified: false
+      - type: precision_at_5
+        value: 7.164
+        verified: false
+      - type: recall_at_1
+        value: 14.255999999999998
+        verified: false
+      - type: recall_at_10
+        value: 32.497
+        verified: false
+      - type: recall_at_100
+        value: 56.592
+        verified: false
+      - type: recall_at_1000
+        value: 80.17699999999999
+        verified: false
+      - type: recall_at_3
+        value: 23.195
+        verified: false
+      - type: recall_at_5
+        value: 27.392
+        verified: false
+    - task:
+        type: Retrieval
+      dataset:
+        type: BeIR/cqadupstack
+        name: MTEB CQADupstackPhysicsRetrieval
+        config: default
+        split: test
+        revision: None
+      metrics:
+      - type: map_at_1
+        value: 22.709
+        verified: false
+      - type: map_at_10
+        value: 31.377
+        verified: false
+      - type: map_at_100
+        value: 32.536
+        verified: false
+      - type: map_at_1000
+        value: 32.669
+        verified: false
+      - type: map_at_3
+        value: 28.572999999999997
+        verified: false
+      - type: map_at_5
+        value: 30.205
+        verified: false
+      - type: mrr_at_1
+        value: 27.815
+        verified: false
+      - type: mrr_at_10
+        value: 36.452
+        verified: false
+      - type: mrr_at_100
+        value: 37.302
+        verified: false
+      - type: mrr_at_1000
+        value: 37.364000000000004
+        verified: false
+      - type: mrr_at_3
+        value: 33.75
+        verified: false
+      - type: mrr_at_5
+        value: 35.43
+        verified: false
+      - type: ndcg_at_1
+        value: 27.815
+        verified: false
+      - type: ndcg_at_10
+        value: 36.84
+        verified: false
+      - type: ndcg_at_100
+        value: 42.092
+        verified: false
+      - type: ndcg_at_1000
+        value: 44.727
+        verified: false
+      - type: ndcg_at_3
+        value: 31.964
+        verified: false
+      - type: ndcg_at_5
+        value: 34.428
+        verified: false
+      - type: precision_at_1
+        value: 27.815
+        verified: false
+      - type: precision_at_10
+        value: 6.67
+        verified: false
+      - type: precision_at_100
+        value: 1.093
+        verified: false
+      - type: precision_at_1000
+        value: 0.151
+        verified: false
+      - type: precision_at_3
+        value: 14.982000000000001
+        verified: false
+      - type: precision_at_5
+        value: 10.857
+        verified: false
+      - type: recall_at_1
+        value: 22.709
+        verified: false
+      - type: recall_at_10
+        value: 48.308
+        verified: false
+      - type: recall_at_100
+        value: 70.866
+        verified: false
+      - type: recall_at_1000
+        value: 88.236
+        verified: false
+      - type: recall_at_3
+        value: 34.709
+        verified: false
+      - type: recall_at_5
+        value: 40.996
+        verified: false
+    - task:
+        type: Retrieval
+      dataset:
+        type: BeIR/cqadupstack
+        name: MTEB CQADupstackProgrammersRetrieval
+        config: default
+        split: test
+        revision: None
+      metrics:
+      - type: map_at_1
+        value: 22.348000000000003
+        verified: false
+      - type: map_at_10
+        value: 29.427999999999997
+        verified: false
+      - type: map_at_100
+        value: 30.499
+        verified: false
+      - type: map_at_1000
+        value: 30.631999999999998
+        verified: false
+      - type: map_at_3
+        value: 27.035999999999998
+        verified: false
+      - type: map_at_5
+        value: 28.351
+        verified: false
+      - type: mrr_at_1
+        value: 27.74
+        verified: false
+      - type: mrr_at_10
+        value: 34.424
+        verified: false
+      - type: mrr_at_100
+        value: 35.341
+        verified: false
+      - type: mrr_at_1000
+        value: 35.419
+        verified: false
+      - type: mrr_at_3
+        value: 32.401
+        verified: false
+      - type: mrr_at_5
+        value: 33.497
+        verified: false
+      - type: ndcg_at_1
+        value: 27.74
+        verified: false
+      - type: ndcg_at_10
+        value: 34.136
+        verified: false
+      - type: ndcg_at_100
+        value: 39.269
+        verified: false
+      - type: ndcg_at_1000
+        value: 42.263
+        verified: false
+      - type: ndcg_at_3
+        value: 30.171999999999997
+        verified: false
+      - type: ndcg_at_5
+        value: 31.956
+        verified: false
+      - type: precision_at_1
+        value: 27.74
+        verified: false
+      - type: precision_at_10
+        value: 6.062
+        verified: false
+      - type: precision_at_100
+        value: 1.014
+        verified: false
+      - type: precision_at_1000
+        value: 0.146
+        verified: false
+      - type: precision_at_3
+        value: 14.079
+        verified: false
+      - type: precision_at_5
+        value: 9.977
+        verified: false
+      - type: recall_at_1
+        value: 22.348000000000003
+        verified: false
+      - type: recall_at_10
+        value: 43.477
+        verified: false
+      - type: recall_at_100
+        value: 65.945
+        verified: false
+      - type: recall_at_1000
+        value: 86.587
+        verified: false
+      - type: recall_at_3
+        value: 32.107
+        verified: false
+      - type: recall_at_5
+        value: 36.974000000000004
+        verified: false
+    - task:
+        type: Retrieval
+      dataset:
+        type: BeIR/cqadupstack
+        name: MTEB CQADupstackRetrieval
+        config: default
+        split: test
+        revision: None
+      metrics:
+      - type: map_at_1
+        value: 21.688499999999998
+        verified: false
+      - type: map_at_10
+        value: 29.164666666666665
+        verified: false
+      - type: map_at_100
+        value: 30.22575
+        verified: false
+      - type: map_at_1000
+        value: 30.350833333333334
+        verified: false
+      - type: map_at_3
+        value: 26.82025
+        verified: false
+      - type: map_at_5
+        value: 28.14966666666667
+        verified: false
+      - type: mrr_at_1
+        value: 25.779249999999998
+        verified: false
+      - type: mrr_at_10
+        value: 32.969
+        verified: false
+      - type: mrr_at_100
+        value: 33.81725
+        verified: false
+      - type: mrr_at_1000
+        value: 33.88825
+        verified: false
+      - type: mrr_at_3
+        value: 30.831250000000004
+        verified: false
+      - type: mrr_at_5
+        value: 32.065000000000005
+        verified: false
+      - type: ndcg_at_1
+        value: 25.779249999999998
+        verified: false
+      - type: ndcg_at_10
+        value: 33.73675
+        verified: false
+      - type: ndcg_at_100
+        value: 38.635666666666665
+        verified: false
+      - type: ndcg_at_1000
+        value: 41.353500000000004
+        verified: false
+      - type: ndcg_at_3
+        value: 29.66283333333333
+        verified: false
+      - type: ndcg_at_5
+        value: 31.607249999999997
+        verified: false
+      - type: precision_at_1
+        value: 25.779249999999998
+        verified: false
+      - type: precision_at_10
+        value: 5.861416666666667
+        verified: false
+      - type: precision_at_100
+        value: 0.9852500000000002
+        verified: false
+      - type: precision_at_1000
+        value: 0.14108333333333334
+        verified: false
+      - type: precision_at_3
+        value: 13.563583333333332
+        verified: false
+      - type: precision_at_5
+        value: 9.630333333333335
+        verified: false
+      - type: recall_at_1
+        value: 21.688499999999998
+        verified: false
+      - type: recall_at_10
+        value: 43.605
+        verified: false
+      - type: recall_at_100
+        value: 65.52366666666667
+        verified: false
+      - type: recall_at_1000
+        value: 84.69683333333332
+        verified: false
+      - type: recall_at_3
+        value: 32.195499999999996
+        verified: false
+      - type: recall_at_5
+        value: 37.25325
+        verified: false
+    - task:
+        type: Retrieval
+      dataset:
+        type: BeIR/cqadupstack
+        name: MTEB CQADupstackStatsRetrieval
+        config: default
+        split: test
+        revision: None
+      metrics:
+      - type: map_at_1
+        value: 17.279
+        verified: false
+      - type: map_at_10
+        value: 23.238
+        verified: false
+      - type: map_at_100
+        value: 24.026
+        verified: false
+      - type: map_at_1000
+        value: 24.13
+        verified: false
+      - type: map_at_3
+        value: 20.730999999999998
+        verified: false
+      - type: map_at_5
+        value: 22.278000000000002
+        verified: false
+      - type: mrr_at_1
+        value: 19.017999999999997
+        verified: false
+      - type: mrr_at_10
+        value: 25.188
+        verified: false
+      - type: mrr_at_100
+        value: 25.918999999999997
+        verified: false
+      - type: mrr_at_1000
+        value: 25.996999999999996
+        verified: false
+      - type: mrr_at_3
+        value: 22.776
+        verified: false
+      - type: mrr_at_5
+        value: 24.256
+        verified: false
+      - type: ndcg_at_1
+        value: 19.017999999999997
+        verified: false
+      - type: ndcg_at_10
+        value: 27.171
+        verified: false
+      - type: ndcg_at_100
+        value: 31.274
+        verified: false
+      - type: ndcg_at_1000
+        value: 34.016000000000005
+        verified: false
+      - type: ndcg_at_3
+        value: 22.442
+        verified: false
+      - type: ndcg_at_5
+        value: 24.955
+        verified: false
+      - type: precision_at_1
+        value: 19.017999999999997
+        verified: false
+      - type: precision_at_10
+        value: 4.494
+        verified: false
+      - type: precision_at_100
+        value: 0.712
+        verified: false
+      - type: precision_at_1000
+        value: 0.10300000000000001
+        verified: false
+      - type: precision_at_3
+        value: 9.611
+        verified: false
+      - type: precision_at_5
+        value: 7.331
+        verified: false
+      - type: recall_at_1
+        value: 17.279
+        verified: false
+      - type: recall_at_10
+        value: 37.464999999999996
+        verified: false
+      - type: recall_at_100
+        value: 56.458
+        verified: false
+      - type: recall_at_1000
+        value: 76.759
+        verified: false
+      - type: recall_at_3
+        value: 24.659
+        verified: false
+      - type: recall_at_5
+        value: 30.672
+        verified: false
+    - task:
+        type: Retrieval
+      dataset:
+        type: BeIR/cqadupstack
+        name: MTEB CQADupstackTexRetrieval
+        config: default
+        split: test
+        revision: None
+      metrics:
+      - type: map_at_1
+        value: 14.901
+        verified: false
+      - type: map_at_10
+        value: 20.268
+        verified: false
+      - type: map_at_100
+        value: 21.143
+        verified: false
+      - type: map_at_1000
+        value: 21.264
+        verified: false
+      - type: map_at_3
+        value: 18.557000000000002
+        verified: false
+      - type: map_at_5
+        value: 19.483
+        verified: false
+      - type: mrr_at_1
+        value: 17.997
+        verified: false
+      - type: mrr_at_10
+        value: 23.591
+        verified: false
+      - type: mrr_at_100
+        value: 24.387
+        verified: false
+      - type: mrr_at_1000
+        value: 24.471
+        verified: false
+      - type: mrr_at_3
+        value: 21.874
+        verified: false
+      - type: mrr_at_5
+        value: 22.797
+        verified: false
+      - type: ndcg_at_1
+        value: 17.997
+        verified: false
+      - type: ndcg_at_10
+        value: 23.87
+        verified: false
+      - type: ndcg_at_100
+        value: 28.459
+        verified: false
+      - type: ndcg_at_1000
+        value: 31.66
+        verified: false
+      - type: ndcg_at_3
+        value: 20.779
+        verified: false
+      - type: ndcg_at_5
+        value: 22.137
+        verified: false
+      - type: precision_at_1
+        value: 17.997
+        verified: false
+      - type: precision_at_10
+        value: 4.25
+        verified: false
+      - type: precision_at_100
+        value: 0.761
+        verified: false
+      - type: precision_at_1000
+        value: 0.121
+        verified: false
+      - type: precision_at_3
+        value: 9.716
+        verified: false
+      - type: precision_at_5
+        value: 6.909999999999999
+        verified: false
+      - type: recall_at_1
+        value: 14.901
+        verified: false
+      - type: recall_at_10
+        value: 31.44
+        verified: false
+      - type: recall_at_100
+        value: 52.717000000000006
+        verified: false
+      - type: recall_at_1000
+        value: 76.102
+        verified: false
+      - type: recall_at_3
+        value: 22.675
+        verified: false
+      - type: recall_at_5
+        value: 26.336
+        verified: false
+    - task:
+        type: Retrieval
+      dataset:
+        type: BeIR/cqadupstack
+        name: MTEB CQADupstackUnixRetrieval
+        config: default
+        split: test
+        revision: None
+      metrics:
+      - type: map_at_1
+        value: 21.52
+        verified: false
+      - type: map_at_10
+        value: 28.397
+        verified: false
+      - type: map_at_100
+        value: 29.443
+        verified: false
+      - type: map_at_1000
+        value: 29.56
+        verified: false
+      - type: map_at_3
+        value: 26.501
+        verified: false
+      - type: map_at_5
+        value: 27.375
+        verified: false
+      - type: mrr_at_1
+        value: 25.28
+        verified: false
+      - type: mrr_at_10
+        value: 32.102000000000004
+        verified: false
+      - type: mrr_at_100
+        value: 33.005
+        verified: false
+      - type: mrr_at_1000
+        value: 33.084
+        verified: false
+      - type: mrr_at_3
+        value: 30.208000000000002
+        verified: false
+      - type: mrr_at_5
+        value: 31.146
+        verified: false
+      - type: ndcg_at_1
+        value: 25.28
+        verified: false
+      - type: ndcg_at_10
+        value: 32.635
+        verified: false
+      - type: ndcg_at_100
+        value: 37.672
+        verified: false
+      - type: ndcg_at_1000
+        value: 40.602
+        verified: false
+      - type: ndcg_at_3
+        value: 28.951999999999998
+        verified: false
+      - type: ndcg_at_5
+        value: 30.336999999999996
+        verified: false
+      - type: precision_at_1
+        value: 25.28
+        verified: false
+      - type: precision_at_10
+        value: 5.3260000000000005
+        verified: false
+      - type: precision_at_100
+        value: 0.8840000000000001
+        verified: false
+      - type: precision_at_1000
+        value: 0.126
+        verified: false
+      - type: precision_at_3
+        value: 12.687000000000001
+        verified: false
+      - type: precision_at_5
+        value: 8.638
+        verified: false
+      - type: recall_at_1
+        value: 21.52
+        verified: false
+      - type: recall_at_10
+        value: 41.955
+        verified: false
+      - type: recall_at_100
+        value: 64.21
+        verified: false
+      - type: recall_at_1000
+        value: 85.28099999999999
+        verified: false
+      - type: recall_at_3
+        value: 31.979999999999997
+        verified: false
+      - type: recall_at_5
+        value: 35.406
+        verified: false
+    - task:
+        type: Retrieval
+      dataset:
+        type: BeIR/cqadupstack
+        name: MTEB CQADupstackWebmastersRetrieval
+        config: default
+        split: test
+        revision: None
+      metrics:
+      - type: map_at_1
+        value: 20.296
+        verified: false
+      - type: map_at_10
+        value: 28.449999999999996
+        verified: false
+      - type: map_at_100
+        value: 29.847
+        verified: false
+      - type: map_at_1000
+        value: 30.073
+        verified: false
+      - type: map_at_3
+        value: 25.995
+        verified: false
+      - type: map_at_5
+        value: 27.603
+        verified: false
+      - type: mrr_at_1
+        value: 25.296000000000003
+        verified: false
+      - type: mrr_at_10
+        value: 32.751999999999995
+        verified: false
+      - type: mrr_at_100
+        value: 33.705
+        verified: false
+      - type: mrr_at_1000
+        value: 33.783
+        verified: false
+      - type: mrr_at_3
+        value: 30.731
+        verified: false
+      - type: mrr_at_5
+        value: 32.006
+        verified: false
+      - type: ndcg_at_1
+        value: 25.296000000000003
+        verified: false
+      - type: ndcg_at_10
+        value: 33.555
+        verified: false
+      - type: ndcg_at_100
+        value: 38.891999999999996
+        verified: false
+      - type: ndcg_at_1000
+        value: 42.088
+        verified: false
+      - type: ndcg_at_3
+        value: 29.944
+        verified: false
+      - type: ndcg_at_5
+        value: 31.997999999999998
+        verified: false
+      - type: precision_at_1
+        value: 25.296000000000003
+        verified: false
+      - type: precision_at_10
+        value: 6.542000000000001
+        verified: false
+      - type: precision_at_100
+        value: 1.354
+        verified: false
+      - type: precision_at_1000
+        value: 0.22599999999999998
+        verified: false
+      - type: precision_at_3
+        value: 14.360999999999999
+        verified: false
+      - type: precision_at_5
+        value: 10.593
+        verified: false
+      - type: recall_at_1
+        value: 20.296
+        verified: false
+      - type: recall_at_10
+        value: 42.742000000000004
+        verified: false
+      - type: recall_at_100
+        value: 67.351
+        verified: false
+      - type: recall_at_1000
+        value: 88.774
+        verified: false
+      - type: recall_at_3
+        value: 32.117000000000004
+        verified: false
+      - type: recall_at_5
+        value: 37.788
+        verified: false
+    - task:
+        type: Retrieval
+      dataset:
+        type: BeIR/cqadupstack
+        name: MTEB CQADupstackWordpressRetrieval
+        config: default
+        split: test
+        revision: None
+      metrics:
+      - type: map_at_1
+        value: 18.157999999999998
+        verified: false
+      - type: map_at_10
+        value: 24.342
+        verified: false
+      - type: map_at_100
+        value: 25.201
+        verified: false
+      - type: map_at_1000
+        value: 25.317
+        verified: false
+      - type: map_at_3
+        value: 22.227
+        verified: false
+      - type: map_at_5
+        value: 23.372999999999998
+        verified: false
+      - type: mrr_at_1
+        value: 19.778000000000002
+        verified: false
+      - type: mrr_at_10
+        value: 26.066
+        verified: false
+      - type: mrr_at_100
+        value: 26.935
+        verified: false
+      - type: mrr_at_1000
+        value: 27.022000000000002
+        verified: false
+      - type: mrr_at_3
+        value: 24.214
+        verified: false
+      - type: mrr_at_5
+        value: 25.268
+        verified: false
+      - type: ndcg_at_1
+        value: 19.778000000000002
+        verified: false
+      - type: ndcg_at_10
+        value: 28.104000000000003
+        verified: false
+      - type: ndcg_at_100
+        value: 32.87
+        verified: false
+      - type: ndcg_at_1000
+        value: 35.858000000000004
+        verified: false
+      - type: ndcg_at_3
+        value: 24.107
+        verified: false
+      - type: ndcg_at_5
+        value: 26.007
+        verified: false
+      - type: precision_at_1
+        value: 19.778000000000002
+        verified: false
+      - type: precision_at_10
+        value: 4.417999999999999
+        verified: false
+      - type: precision_at_100
+        value: 0.739
+        verified: false
+      - type: precision_at_1000
+        value: 0.109
+        verified: false
+      - type: precision_at_3
+        value: 10.228
+        verified: false
+      - type: precision_at_5
+        value: 7.172000000000001
+        verified: false
+      - type: recall_at_1
+        value: 18.157999999999998
+        verified: false
+      - type: recall_at_10
+        value: 37.967
+        verified: false
+      - type: recall_at_100
+        value: 60.806000000000004
+        verified: false
+      - type: recall_at_1000
+        value: 83.097
+        verified: false
+      - type: recall_at_3
+        value: 27.223999999999997
+        verified: false
+      - type: recall_at_5
+        value: 31.968000000000004
+        verified: false
+    - task:
+        type: Retrieval
+      dataset:
+        type: climate-fever
+        name: MTEB ClimateFEVER
+        config: default
+        split: test
+        revision: None
+      metrics:
+      - type: map_at_1
+        value: 7.055
+        verified: false
+      - type: map_at_10
+        value: 11.609
+        verified: false
+      - type: map_at_100
+        value: 12.83
+        verified: false
+      - type: map_at_1000
+        value: 12.995000000000001
+        verified: false
+      - type: map_at_3
+        value: 9.673
+        verified: false
+      - type: map_at_5
+        value: 10.761999999999999
+        verified: false
+      - type: mrr_at_1
+        value: 15.309000000000001
+        verified: false
+      - type: mrr_at_10
+        value: 23.655
+        verified: false
+      - type: mrr_at_100
+        value: 24.785
+        verified: false
+      - type: mrr_at_1000
+        value: 24.856
+        verified: false
+      - type: mrr_at_3
+        value: 20.499000000000002
+        verified: false
+      - type: mrr_at_5
+        value: 22.425
+        verified: false
+      - type: ndcg_at_1
+        value: 15.309000000000001
+        verified: false
+      - type: ndcg_at_10
+        value: 17.252000000000002
+        verified: false
+      - type: ndcg_at_100
+        value: 22.976
+        verified: false
+      - type: ndcg_at_1000
+        value: 26.480999999999998
+        verified: false
+      - type: ndcg_at_3
+        value: 13.418
+        verified: false
+      - type: ndcg_at_5
+        value: 15.084
+        verified: false
+      - type: precision_at_1
+        value: 15.309000000000001
+        verified: false
+      - type: precision_at_10
+        value: 5.309
+        verified: false
+      - type: precision_at_100
+        value: 1.1320000000000001
+        verified: false
+      - type: precision_at_1000
+        value: 0.17600000000000002
+        verified: false
+      - type: precision_at_3
+        value: 9.62
+        verified: false
+      - type: precision_at_5
+        value: 7.883
+        verified: false
+      - type: recall_at_1
+        value: 7.055
+        verified: false
+      - type: recall_at_10
+        value: 21.891
+        verified: false
+      - type: recall_at_100
+        value: 41.979
+        verified: false
+      - type: recall_at_1000
+        value: 62.239999999999995
+        verified: false
+      - type: recall_at_3
+        value: 12.722
+        verified: false
+      - type: recall_at_5
+        value: 16.81
+        verified: false
+    - task:
+        type: Retrieval
+      dataset:
+        type: dbpedia-entity
+        name: MTEB DBPedia
+        config: default
+        split: test
+        revision: None
+      metrics:
+      - type: map_at_1
+        value: 6.909
+        verified: false
+      - type: map_at_10
+        value: 12.844
+        verified: false
+      - type: map_at_100
+        value: 16.435
+        verified: false
+      - type: map_at_1000
+        value: 17.262
+        verified: false
+      - type: map_at_3
+        value: 10.131
+        verified: false
+      - type: map_at_5
+        value: 11.269
+        verified: false
+      - type: mrr_at_1
+        value: 54.50000000000001
+        verified: false
+      - type: mrr_at_10
+        value: 62.202
+        verified: false
+      - type: mrr_at_100
+        value: 62.81
+        verified: false
+      - type: mrr_at_1000
+        value: 62.824000000000005
+        verified: false
+      - type: mrr_at_3
+        value: 60.5
+        verified: false
+      - type: mrr_at_5
+        value: 61.324999999999996
+        verified: false
+      - type: ndcg_at_1
+        value: 42.125
+        verified: false
+      - type: ndcg_at_10
+        value: 28.284
+        verified: false
+      - type: ndcg_at_100
+        value: 30.444
+        verified: false
+      - type: ndcg_at_1000
+        value: 36.397
+        verified: false
+      - type: ndcg_at_3
+        value: 33.439
+        verified: false
+      - type: ndcg_at_5
+        value: 30.473
+        verified: false
+      - type: precision_at_1
+        value: 54.50000000000001
+        verified: false
+      - type: precision_at_10
+        value: 21.4
+        verified: false
+      - type: precision_at_100
+        value: 6.192
+        verified: false
+      - type: precision_at_1000
+        value: 1.398
+        verified: false
+      - type: precision_at_3
+        value: 36.583
+        verified: false
+      - type: precision_at_5
+        value: 28.799999999999997
+        verified: false
+      - type: recall_at_1
+        value: 6.909
+        verified: false
+      - type: recall_at_10
+        value: 17.296
+        verified: false
+      - type: recall_at_100
+        value: 33.925
+        verified: false
+      - type: recall_at_1000
+        value: 53.786
+        verified: false
+      - type: recall_at_3
+        value: 11.333
+        verified: false
+      - type: recall_at_5
+        value: 13.529
+        verified: false
+    - task:
+        type: Classification
+      dataset:
+        type: mteb/emotion
+        name: MTEB EmotionClassification
+        config: default
+        split: test
+        revision: 4f58c6b202a23cf9a4da393831edf4f9183cad37
+      metrics:
+      - type: accuracy
+        value: 36.08
+        verified: false
+      - type: f1
+        value: 33.016420191943766
+        verified: false
+    - task:
+        type: Retrieval
+      dataset:
+        type: fever
+        name: MTEB FEVER
+        config: default
+        split: test
+        revision: None
+      metrics:
+      - type: map_at_1
+        value: 52.605000000000004
+        verified: false
+      - type: map_at_10
+        value: 63.31400000000001
+        verified: false
+      - type: map_at_100
+        value: 63.678000000000004
+        verified: false
+      - type: map_at_1000
+        value: 63.699
+        verified: false
+      - type: map_at_3
+        value: 61.141
+        verified: false
+      - type: map_at_5
+        value: 62.517999999999994
+        verified: false
+      - type: mrr_at_1
+        value: 56.871
+        verified: false
+      - type: mrr_at_10
+        value: 67.915
+        verified: false
+      - type: mrr_at_100
+        value: 68.24900000000001
+        verified: false
+      - type: mrr_at_1000
+        value: 68.262
+        verified: false
+      - type: mrr_at_3
+        value: 65.809
+        verified: false
+      - type: mrr_at_5
+        value: 67.171
+        verified: false
+      - type: ndcg_at_1
+        value: 56.871
+        verified: false
+      - type: ndcg_at_10
+        value: 69.122
+        verified: false
+      - type: ndcg_at_100
+        value: 70.855
+        verified: false
+      - type: ndcg_at_1000
+        value: 71.368
+        verified: false
+      - type: ndcg_at_3
+        value: 64.974
+        verified: false
+      - type: ndcg_at_5
+        value: 67.318
+        verified: false
+      - type: precision_at_1
+        value: 56.871
+        verified: false
+      - type: precision_at_10
+        value: 9.029
+        verified: false
+      - type: precision_at_100
+        value: 0.996
+        verified: false
+      - type: precision_at_1000
+        value: 0.105
+        verified: false
+      - type: precision_at_3
+        value: 25.893
+        verified: false
+      - type: precision_at_5
+        value: 16.838
+        verified: false
+      - type: recall_at_1
+        value: 52.605000000000004
+        verified: false
+      - type: recall_at_10
+        value: 82.679
+        verified: false
+      - type: recall_at_100
+        value: 90.586
+        verified: false
+      - type: recall_at_1000
+        value: 94.38
+        verified: false
+      - type: recall_at_3
+        value: 71.447
+        verified: false
+      - type: recall_at_5
+        value: 77.218
+        verified: false
+    - task:
+        type: Retrieval
+      dataset:
+        type: fiqa
+        name: MTEB FiQA2018
+        config: default
+        split: test
+        revision: None
+      metrics:
+      - type: map_at_1
+        value: 10.759
+        verified: false
+      - type: map_at_10
+        value: 18.877
+        verified: false
+      - type: map_at_100
+        value: 20.498
+        verified: false
+      - type: map_at_1000
+        value: 20.682000000000002
+        verified: false
+      - type: map_at_3
+        value: 16.159000000000002
+        verified: false
+      - type: map_at_5
+        value: 17.575
+        verified: false
+      - type: mrr_at_1
+        value: 22.531000000000002
+        verified: false
+      - type: mrr_at_10
+        value: 31.155
+        verified: false
+      - type: mrr_at_100
+        value: 32.188
+        verified: false
+      - type: mrr_at_1000
+        value: 32.245000000000005
+        verified: false
+      - type: mrr_at_3
+        value: 28.781000000000002
+        verified: false
+      - type: mrr_at_5
+        value: 30.054
+        verified: false
+      - type: ndcg_at_1
+        value: 22.531000000000002
+        verified: false
+      - type: ndcg_at_10
+        value: 25.189
+        verified: false
+      - type: ndcg_at_100
+        value: 31.958
+        verified: false
+      - type: ndcg_at_1000
+        value: 35.693999999999996
+        verified: false
+      - type: ndcg_at_3
+        value: 22.235
+        verified: false
+      - type: ndcg_at_5
+        value: 23.044999999999998
+        verified: false
+      - type: precision_at_1
+        value: 22.531000000000002
+        verified: false
+      - type: precision_at_10
+        value: 7.438000000000001
+        verified: false
+      - type: precision_at_100
+        value: 1.418
+        verified: false
+      - type: precision_at_1000
+        value: 0.208
+        verified: false
+      - type: precision_at_3
+        value: 15.329
+        verified: false
+      - type: precision_at_5
+        value: 11.451
+        verified: false
+      - type: recall_at_1
+        value: 10.759
+        verified: false
+      - type: recall_at_10
+        value: 31.416
+        verified: false
+      - type: recall_at_100
+        value: 56.989000000000004
+        verified: false
+      - type: recall_at_1000
+        value: 80.33200000000001
+        verified: false
+      - type: recall_at_3
+        value: 20.61
+        verified: false
+      - type: recall_at_5
+        value: 24.903
+        verified: false
+    - task:
+        type: Retrieval
+      dataset:
+        type: hotpotqa
+        name: MTEB HotpotQA
+        config: default
+        split: test
+        revision: None
+      metrics:
+      - type: map_at_1
+        value: 29.21
+        verified: false
+      - type: map_at_10
+        value: 38.765
+        verified: false
+      - type: map_at_100
+        value: 39.498
+        verified: false
+      - type: map_at_1000
+        value: 39.568
+        verified: false
+      - type: map_at_3
+        value: 36.699
+        verified: false
+      - type: map_at_5
+        value: 37.925
+        verified: false
+      - type: mrr_at_1
+        value: 58.42
+        verified: false
+      - type: mrr_at_10
+        value: 65.137
+        verified: false
+      - type: mrr_at_100
+        value: 65.542
+        verified: false
+      - type: mrr_at_1000
+        value: 65.568
+        verified: false
+      - type: mrr_at_3
+        value: 63.698
+        verified: false
+      - type: mrr_at_5
+        value: 64.575
+        verified: false
+      - type: ndcg_at_1
+        value: 58.42
+        verified: false
+      - type: ndcg_at_10
+        value: 47.476
+        verified: false
+      - type: ndcg_at_100
+        value: 50.466
+        verified: false
+      - type: ndcg_at_1000
+        value: 52.064
+        verified: false
+      - type: ndcg_at_3
+        value: 43.986
+        verified: false
+      - type: ndcg_at_5
+        value: 45.824
+        verified: false
+      - type: precision_at_1
+        value: 58.42
+        verified: false
+      - type: precision_at_10
+        value: 9.649000000000001
+        verified: false
+      - type: precision_at_100
+        value: 1.201
+        verified: false
+      - type: precision_at_1000
+        value: 0.14100000000000001
+        verified: false
+      - type: precision_at_3
+        value: 26.977
+        verified: false
+      - type: precision_at_5
+        value: 17.642
+        verified: false
+      - type: recall_at_1
+        value: 29.21
+        verified: false
+      - type: recall_at_10
+        value: 48.244
+        verified: false
+      - type: recall_at_100
+        value: 60.041
+        verified: false
+      - type: recall_at_1000
+        value: 70.743
+        verified: false
+      - type: recall_at_3
+        value: 40.466
+        verified: false
+      - type: recall_at_5
+        value: 44.105
+        verified: false
+    - task:
+        type: Classification
+      dataset:
+        type: mteb/imdb
+        name: MTEB ImdbClassification
+        config: default
+        split: test
+        revision: 3d86128a09e091d6018b6d26cad27f2739fc2db7
+      metrics:
+      - type: accuracy
+        value: 58.7064
+        verified: false
+      - type: ap
+        value: 55.36326227125519
+        verified: false
+      - type: f1
+        value: 57.46763115215848
+        verified: false
+    - task:
+        type: Retrieval
+      dataset:
+        type: msmarco
+        name: MTEB MSMARCO
+        config: default
+        split: dev
+        revision: None
+      metrics:
+      - type: map_at_1
+        value: 15.889000000000001
+        verified: false
+      - type: map_at_10
+        value: 25.979000000000003
+        verified: false
+      - type: map_at_100
+        value: 27.21
+        verified: false
+      - type: map_at_1000
+        value: 27.284000000000002
+        verified: false
+      - type: map_at_3
+        value: 22.665
+        verified: false
+      - type: map_at_5
+        value: 24.578
+        verified: false
+      - type: mrr_at_1
+        value: 16.39
+        verified: false
+      - type: mrr_at_10
+        value: 26.504
+        verified: false
+      - type: mrr_at_100
+        value: 27.689999999999998
+        verified: false
+      - type: mrr_at_1000
+        value: 27.758
+        verified: false
+      - type: mrr_at_3
+        value: 23.24
+        verified: false
+      - type: mrr_at_5
+        value: 25.108000000000004
+        verified: false
+      - type: ndcg_at_1
+        value: 16.39
+        verified: false
+      - type: ndcg_at_10
+        value: 31.799
+        verified: false
+      - type: ndcg_at_100
+        value: 38.034
+        verified: false
+      - type: ndcg_at_1000
+        value: 39.979
+        verified: false
+      - type: ndcg_at_3
+        value: 25.054
+        verified: false
+      - type: ndcg_at_5
+        value: 28.463
+        verified: false
+      - type: precision_at_1
+        value: 16.39
+        verified: false
+      - type: precision_at_10
+        value: 5.189
+        verified: false
+      - type: precision_at_100
+        value: 0.835
+        verified: false
+      - type: precision_at_1000
+        value: 0.1
+        verified: false
+      - type: precision_at_3
+        value: 10.84
+        verified: false
+      - type: precision_at_5
+        value: 8.238
+        verified: false
+      - type: recall_at_1
+        value: 15.889000000000001
+        verified: false
+      - type: recall_at_10
+        value: 49.739
+        verified: false
+      - type: recall_at_100
+        value: 79.251
+        verified: false
+      - type: recall_at_1000
+        value: 94.298
+        verified: false
+      - type: recall_at_3
+        value: 31.427
+        verified: false
+      - type: recall_at_5
+        value: 39.623000000000005
+        verified: false
+    - task:
+        type: Classification
+      dataset:
+        type: mteb/mtop_domain
+        name: MTEB MTOPDomainClassification (en)
+        config: en
+        split: test
+        revision: d80d48c1eb48d3562165c59d59d0034df9fff0bf
+      metrics:
+      - type: accuracy
+        value: 88.81668946648426
+        verified: false
+      - type: f1
+        value: 88.55200075528438
+        verified: false
+    - task:
+        type: Classification
+      dataset:
+        type: mteb/mtop_intent
+        name: MTEB MTOPIntentClassification (en)
+        config: en
+        split: test
+        revision: ae001d0e6b1228650b7bd1c2c65fb50ad11a8aba
+      metrics:
+      - type: accuracy
+        value: 58.611491108071135
+        verified: false
+      - type: f1
+        value: 42.12391403999353
+        verified: false
+    - task:
+        type: Classification
+      dataset:
+        type: mteb/amazon_massive_intent
+        name: MTEB MassiveIntentClassification (en)
+        config: en
+        split: test
+        revision: 31efe3c427b0bae9c22cbb560b8f15491cc6bed7
+      metrics:
+      - type: accuracy
+        value: 64.67047747141896
+        verified: false
+      - type: f1
+        value: 62.88410885922258
+        verified: false
+    - task:
+        type: Classification
+      dataset:
+        type: mteb/amazon_massive_scenario
+        name: MTEB MassiveScenarioClassification (en)
+        config: en
+        split: test
+        revision: 7d571f92784cd94a019292a1f45445077d0ef634
+      metrics:
+      - type: accuracy
+        value: 71.78547410894419
+        verified: false
+      - type: f1
+        value: 71.69467869218154
+        verified: false
+    - task:
+        type: Clustering
+      dataset:
+        type: mteb/medrxiv-clustering-p2p
+        name: MTEB MedrxivClusteringP2P
+        config: default
+        split: test
+        revision: e7a26af6f3ae46b30dde8737f02c07b1505bcc73
+      metrics:
+      - type: v_measure
+        value: 27.23799937752035
+        verified: false
+    - task:
+        type: Clustering
+      dataset:
+        type: mteb/medrxiv-clustering-s2s
+        name: MTEB MedrxivClusteringS2S
+        config: default
+        split: test
+        revision: 35191c8c0dca72d8ff3efcd72aa802307d469663
+      metrics:
+      - type: v_measure
+        value: 23.26502601343789
+        verified: false
+    - task:
+        type: Reranking
+      dataset:
+        type: mteb/mind_small
+        name: MTEB MindSmallReranking
+        config: default
+        split: test
+        revision: 3bdac13927fdc888b903db93b2ffdbd90b295a69
+      metrics:
+      - type: map
+        value: 30.680711484149832
+        verified: false
+      - type: mrr
+        value: 31.705059795117307
+        verified: false
+    - task:
+        type: Retrieval
+      dataset:
+        type: nfcorpus
+        name: MTEB NFCorpus
+        config: default
+        split: test
+        revision: None
+      metrics:
+      - type: map_at_1
+        value: 4.077
+        verified: false
+      - type: map_at_10
+        value: 8.657
+        verified: false
+      - type: map_at_100
+        value: 10.753
+        verified: false
+      - type: map_at_1000
+        value: 11.885
+        verified: false
+      - type: map_at_3
+        value: 6.5089999999999995
+        verified: false
+      - type: map_at_5
+        value: 7.405
+        verified: false
+      - type: mrr_at_1
+        value: 38.7
+        verified: false
+      - type: mrr_at_10
+        value: 46.065
+        verified: false
+      - type: mrr_at_100
+        value: 46.772000000000006
+        verified: false
+      - type: mrr_at_1000
+        value: 46.83
+        verified: false
+      - type: mrr_at_3
+        value: 44.118
+        verified: false
+      - type: mrr_at_5
+        value: 45.015
+        verified: false
+      - type: ndcg_at_1
+        value: 36.997
+        verified: false
+      - type: ndcg_at_10
+        value: 25.96
+        verified: false
+      - type: ndcg_at_100
+        value: 23.607
+        verified: false
+      - type: ndcg_at_1000
+        value: 32.317
+        verified: false
+      - type: ndcg_at_3
+        value: 31.06
+        verified: false
+      - type: ndcg_at_5
+        value: 28.921000000000003
+        verified: false
+      - type: precision_at_1
+        value: 38.7
+        verified: false
+      - type: precision_at_10
+        value: 19.195
+        verified: false
+      - type: precision_at_100
+        value: 6.164
+        verified: false
+      - type: precision_at_1000
+        value: 1.839
+        verified: false
+      - type: precision_at_3
+        value: 28.999000000000002
+        verified: false
+      - type: precision_at_5
+        value: 25.014999999999997
+        verified: false
+      - type: recall_at_1
+        value: 4.077
+        verified: false
+      - type: recall_at_10
+        value: 11.802
+        verified: false
+      - type: recall_at_100
+        value: 24.365000000000002
+        verified: false
+      - type: recall_at_1000
+        value: 55.277
+        verified: false
+      - type: recall_at_3
+        value: 7.435
+        verified: false
+      - type: recall_at_5
+        value: 8.713999999999999
+        verified: false
+    - task:
+        type: Retrieval
+      dataset:
+        type: nq
+        name: MTEB NQ
+        config: default
+        split: test
+        revision: None
+      metrics:
+      - type: map_at_1
+        value: 19.588
+        verified: false
+      - type: map_at_10
+        value: 32.08
+        verified: false
+      - type: map_at_100
+        value: 33.32
+        verified: false
+      - type: map_at_1000
+        value: 33.377
+        verified: false
+      - type: map_at_3
+        value: 28.166000000000004
+        verified: false
+      - type: map_at_5
+        value: 30.383
+        verified: false
+      - type: mrr_at_1
+        value: 22.161
+        verified: false
+      - type: mrr_at_10
+        value: 34.121
+        verified: false
+      - type: mrr_at_100
+        value: 35.171
+        verified: false
+      - type: mrr_at_1000
+        value: 35.214
+        verified: false
+      - type: mrr_at_3
+        value: 30.692000000000004
+        verified: false
+      - type: mrr_at_5
+        value: 32.706
+        verified: false
+      - type: ndcg_at_1
+        value: 22.131999999999998
+        verified: false
+      - type: ndcg_at_10
+        value: 38.887
+        verified: false
+      - type: ndcg_at_100
+        value: 44.433
+        verified: false
+      - type: ndcg_at_1000
+        value: 45.823
+        verified: false
+      - type: ndcg_at_3
+        value: 31.35
+        verified: false
+      - type: ndcg_at_5
+        value: 35.144
+        verified: false
+      - type: precision_at_1
+        value: 22.131999999999998
+        verified: false
+      - type: precision_at_10
+        value: 6.8629999999999995
+        verified: false
+      - type: precision_at_100
+        value: 0.993
+        verified: false
+      - type: precision_at_1000
+        value: 0.11199999999999999
+        verified: false
+      - type: precision_at_3
+        value: 14.706
+        verified: false
+      - type: precision_at_5
+        value: 10.972999999999999
+        verified: false
+      - type: recall_at_1
+        value: 19.588
+        verified: false
+      - type: recall_at_10
+        value: 57.703
+        verified: false
+      - type: recall_at_100
+        value: 82.194
+        verified: false
+      - type: recall_at_1000
+        value: 92.623
+        verified: false
+      - type: recall_at_3
+        value: 38.012
+        verified: false
+      - type: recall_at_5
+        value: 46.847
+        verified: false
+    - task:
+        type: Retrieval
+      dataset:
+        type: quora
+        name: MTEB QuoraRetrieval
+        config: default
+        split: test
+        revision: None
+      metrics:
+      - type: map_at_1
+        value: 68.038
+        verified: false
+      - type: map_at_10
+        value: 81.572
+        verified: false
+      - type: map_at_100
+        value: 82.25200000000001
+        verified: false
+      - type: map_at_1000
+        value: 82.27600000000001
+        verified: false
+      - type: map_at_3
+        value: 78.618
+        verified: false
+      - type: map_at_5
+        value: 80.449
+        verified: false
+      - type: mrr_at_1
+        value: 78.31
+        verified: false
+      - type: mrr_at_10
+        value: 84.98
+        verified: false
+      - type: mrr_at_100
+        value: 85.122
+        verified: false
+      - type: mrr_at_1000
+        value: 85.124
+        verified: false
+      - type: mrr_at_3
+        value: 83.852
+        verified: false
+      - type: mrr_at_5
+        value: 84.6
+        verified: false
+      - type: ndcg_at_1
+        value: 78.31
+        verified: false
+      - type: ndcg_at_10
+        value: 85.693
+        verified: false
+      - type: ndcg_at_100
+        value: 87.191
+        verified: false
+      - type: ndcg_at_1000
+        value: 87.386
+        verified: false
+      - type: ndcg_at_3
+        value: 82.585
+        verified: false
+      - type: ndcg_at_5
+        value: 84.255
+        verified: false
+      - type: precision_at_1
+        value: 78.31
+        verified: false
+      - type: precision_at_10
+        value: 12.986
+        verified: false
+      - type: precision_at_100
+        value: 1.505
+        verified: false
+      - type: precision_at_1000
+        value: 0.156
+        verified: false
+      - type: precision_at_3
+        value: 36.007
+        verified: false
+      - type: precision_at_5
+        value: 23.735999999999997
+        verified: false
+      - type: recall_at_1
+        value: 68.038
+        verified: false
+      - type: recall_at_10
+        value: 93.598
+        verified: false
+      - type: recall_at_100
+        value: 98.869
+        verified: false
+      - type: recall_at_1000
+        value: 99.86500000000001
+        verified: false
+      - type: recall_at_3
+        value: 84.628
+        verified: false
+      - type: recall_at_5
+        value: 89.316
+        verified: false
+    - task:
+        type: Clustering
+      dataset:
+        type: mteb/reddit-clustering
+        name: MTEB RedditClustering
+        config: default
+        split: test
+        revision: 24640382cdbf8abc73003fb0fa6d111a705499eb
+      metrics:
+      - type: v_measure
+        value: 37.948231664922865
+        verified: false
+    - task:
+        type: Clustering
+      dataset:
+        type: mteb/reddit-clustering-p2p
+        name: MTEB RedditClusteringP2P
+        config: default
+        split: test
+        revision: 282350215ef01743dc01b456c7f5241fa8937f16
+      metrics:
+      - type: v_measure
+        value: 49.90597913763894
+        verified: false
+    - task:
+        type: Retrieval
+      dataset:
+        type: scidocs
+        name: MTEB SCIDOCS
+        config: default
+        split: test
+        revision: None
+      metrics:
+      - type: map_at_1
+        value: 3.753
+        verified: false
+      - type: map_at_10
+        value: 8.915
+        verified: false
+      - type: map_at_100
+        value: 10.374
+        verified: false
+      - type: map_at_1000
+        value: 10.612
+        verified: false
+      - type: map_at_3
+        value: 6.577
+        verified: false
+      - type: map_at_5
+        value: 7.8
+        verified: false
+      - type: mrr_at_1
+        value: 18.4
+        verified: false
+      - type: mrr_at_10
+        value: 27.325
+        verified: false
+      - type: mrr_at_100
+        value: 28.419
+        verified: false
+      - type: mrr_at_1000
+        value: 28.494000000000003
+        verified: false
+      - type: mrr_at_3
+        value: 24.349999999999998
+        verified: false
+      - type: mrr_at_5
+        value: 26.205000000000002
+        verified: false
+      - type: ndcg_at_1
+        value: 18.4
+        verified: false
+      - type: ndcg_at_10
+        value: 15.293000000000001
+        verified: false
+      - type: ndcg_at_100
+        value: 21.592
+        verified: false
+      - type: ndcg_at_1000
+        value: 26.473000000000003
+        verified: false
+      - type: ndcg_at_3
+        value: 14.748
+        verified: false
+      - type: ndcg_at_5
+        value: 12.98
+        verified: false
+      - type: precision_at_1
+        value: 18.4
+        verified: false
+      - type: precision_at_10
+        value: 7.779999999999999
+        verified: false
+      - type: precision_at_100
+        value: 1.693
+        verified: false
+      - type: precision_at_1000
+        value: 0.28800000000000003
+        verified: false
+      - type: precision_at_3
+        value: 13.700000000000001
+        verified: false
+      - type: precision_at_5
+        value: 11.379999999999999
+        verified: false
+      - type: recall_at_1
+        value: 3.753
+        verified: false
+      - type: recall_at_10
+        value: 15.806999999999999
+        verified: false
+      - type: recall_at_100
+        value: 34.37
+        verified: false
+      - type: recall_at_1000
+        value: 58.463
+        verified: false
+      - type: recall_at_3
+        value: 8.338
+        verified: false
+      - type: recall_at_5
+        value: 11.538
+        verified: false
+    - task:
+        type: STS
+      dataset:
+        type: mteb/sickr-sts
+        name: MTEB SICK-R
+        config: default
+        split: test
+        revision: a6ea5a8cab320b040a23452cc28066d9beae2cee
+      metrics:
+      - type: cos_sim_pearson
+        value: 82.58843987639705
+        verified: false
+      - type: cos_sim_spearman
+        value: 76.33071660715956
+        verified: false
+      - type: euclidean_pearson
+        value: 72.8029921002978
+        verified: false
+      - type: euclidean_spearman
+        value: 69.34534284782808
+        verified: false
+      - type: manhattan_pearson
+        value: 72.49781034973653
+        verified: false
+      - type: manhattan_spearman
+        value: 69.24754112621694
+        verified: false
+    - task:
+        type: STS
+      dataset:
+        type: mteb/sts12-sts
+        name: MTEB STS12
+        config: default
+        split: test
+        revision: a0d554a64d88156834ff5ae9920b964011b16384
+      metrics:
+      - type: cos_sim_pearson
+        value: 83.31673079903189
+        verified: false
+      - type: cos_sim_spearman
+        value: 74.27699263517789
+        verified: false
+      - type: euclidean_pearson
+        value: 69.4008910999579
+        verified: false
+      - type: euclidean_spearman
+        value: 59.0716984643048
+        verified: false
+      - type: manhattan_pearson
+        value: 68.87342686919199
+        verified: false
+      - type: manhattan_spearman
+        value: 58.904612865335025
+        verified: false
+    - task:
+        type: STS
+      dataset:
+        type: mteb/sts13-sts
+        name: MTEB STS13
+        config: default
+        split: test
+        revision: 7e90230a92c190f1bf69ae9002b8cea547a64cca
+      metrics:
+      - type: cos_sim_pearson
+        value: 77.59122302327788
+        verified: false
+      - type: cos_sim_spearman
+        value: 78.55383586979005
+        verified: false
+      - type: euclidean_pearson
+        value: 68.18338642204289
+        verified: false
+      - type: euclidean_spearman
+        value: 68.95092864180276
+        verified: false
+      - type: manhattan_pearson
+        value: 68.08807059822706
+        verified: false
+      - type: manhattan_spearman
+        value: 68.86135938270193
+        verified: false
+    - task:
+        type: STS
+      dataset:
+        type: mteb/sts14-sts
+        name: MTEB STS14
+        config: default
+        split: test
+        revision: 6031580fec1f6af667f0bd2da0a551cf4f0b2375
+      metrics:
+      - type: cos_sim_pearson
+        value: 78.51766841424501
+        verified: false
+      - type: cos_sim_spearman
+        value: 73.84318001499558
+        verified: false
+      - type: euclidean_pearson
+        value: 67.2007138855177
+        verified: false
+      - type: euclidean_spearman
+        value: 63.98672842723766
+        verified: false
+      - type: manhattan_pearson
+        value: 67.17773810895949
+        verified: false
+      - type: manhattan_spearman
+        value: 64.07359154832962
+        verified: false
+    - task:
+        type: STS
+      dataset:
+        type: mteb/sts15-sts
+        name: MTEB STS15
+        config: default
+        split: test
+        revision: ae752c7c21bf194d8b67fd573edf7ae58183cbe3
+      metrics:
+      - type: cos_sim_pearson
+        value: 82.73438541570299
+        verified: false
+      - type: cos_sim_spearman
+        value: 83.71357922283677
+        verified: false
+      - type: euclidean_pearson
+        value: 57.50131347498546
+        verified: false
+      - type: euclidean_spearman
+        value: 57.73623619252132
+        verified: false
+      - type: manhattan_pearson
+        value: 58.082992079000725
+        verified: false
+      - type: manhattan_spearman
+        value: 58.42728201167522
+        verified: false
+    - task:
+        type: STS
+      dataset:
+        type: mteb/sts16-sts
+        name: MTEB STS16
+        config: default
+        split: test
+        revision: 4d8694f8f0e0100860b497b999b3dbed754a0513
+      metrics:
+      - type: cos_sim_pearson
+        value: 78.14794654172421
+        verified: false
+      - type: cos_sim_spearman
+        value: 80.025736165043
+        verified: false
+      - type: euclidean_pearson
+        value: 65.87773913985473
+        verified: false
+      - type: euclidean_spearman
+        value: 66.69337751784794
+        verified: false
+      - type: manhattan_pearson
+        value: 66.01039761004415
+        verified: false
+      - type: manhattan_spearman
+        value: 66.89215027952318
+        verified: false
+    - task:
+        type: STS
+      dataset:
+        type: mteb/sts17-crosslingual-sts
+        name: MTEB STS17 (en-en)
+        config: en-en
+        split: test
+        revision: af5e6fb845001ecf41f4c1e033ce921939a2a68d
+      metrics:
+      - type: cos_sim_pearson
+        value: 87.10554507136152
+        verified: false
+      - type: cos_sim_spearman
+        value: 87.4898082140765
+        verified: false
+      - type: euclidean_pearson
+        value: 72.19391114541367
+        verified: false
+      - type: euclidean_spearman
+        value: 70.36647944993783
+        verified: false
+      - type: manhattan_pearson
+        value: 72.18680758133698
+        verified: false
+      - type: manhattan_spearman
+        value: 70.3871215447305
+        verified: false
+    - task:
+        type: STS
+      dataset:
+        type: mteb/sts22-crosslingual-sts
+        name: MTEB STS22 (en)
+        config: en
+        split: test
+        revision: 6d1ba47164174a496b7fa5d3569dae26a6813b80
+      metrics:
+      - type: cos_sim_pearson
+        value: 64.54868111501618
+        verified: false
+      - type: cos_sim_spearman
+        value: 64.25173617448473
+        verified: false
+      - type: euclidean_pearson
+        value: 39.116088900637116
+        verified: false
+      - type: euclidean_spearman
+        value: 53.300772929884
+        verified: false
+      - type: manhattan_pearson
+        value: 38.3844195287959
+        verified: false
+      - type: manhattan_spearman
+        value: 52.846675312001246
+        verified: false
+    - task:
+        type: STS
+      dataset:
+        type: mteb/stsbenchmark-sts
+        name: MTEB STSBenchmark
+        config: default
+        split: test
+        revision: b0fddb56ed78048fa8b90373c8a3cfc37b684831
+      metrics:
+      - type: cos_sim_pearson
+        value: 80.04396610550214
+        verified: false
+      - type: cos_sim_spearman
+        value: 79.19504854997832
+        verified: false
+      - type: euclidean_pearson
+        value: 66.3284657637072
+        verified: false
+      - type: euclidean_spearman
+        value: 63.69531796729492
+        verified: false
+      - type: manhattan_pearson
+        value: 66.82324081038026
+        verified: false
+      - type: manhattan_spearman
+        value: 64.18254512904923
+        verified: false
+    - task:
+        type: Reranking
+      dataset:
+        type: mteb/scidocs-reranking
+        name: MTEB SciDocsRR
+        config: default
+        split: test
+        revision: d3c5e1fc0b855ab6097bf1cda04dd73947d7caab
+      metrics:
+      - type: map
+        value: 74.16264051781705
+        verified: false
+      - type: mrr
+        value: 91.80864796060874
+        verified: false
+    - task:
+        type: Retrieval
+      dataset:
+        type: scifact
+        name: MTEB SciFact
+        config: default
+        split: test
+        revision: None
+      metrics:
+      - type: map_at_1
+        value: 38.983000000000004
+        verified: false
+      - type: map_at_10
+        value: 47.858000000000004
+        verified: false
+      - type: map_at_100
+        value: 48.695
+        verified: false
+      - type: map_at_1000
+        value: 48.752
+        verified: false
+      - type: map_at_3
+        value: 45.444
+        verified: false
+      - type: map_at_5
+        value: 46.906
+        verified: false
+      - type: mrr_at_1
+        value: 41.333
+        verified: false
+      - type: mrr_at_10
+        value: 49.935
+        verified: false
+      - type: mrr_at_100
+        value: 50.51
+        verified: false
+      - type: mrr_at_1000
+        value: 50.55500000000001
+        verified: false
+      - type: mrr_at_3
+        value: 47.833
+        verified: false
+      - type: mrr_at_5
+        value: 49.117
+        verified: false
+      - type: ndcg_at_1
+        value: 41.333
+        verified: false
+      - type: ndcg_at_10
+        value: 52.398999999999994
+        verified: false
+      - type: ndcg_at_100
+        value: 56.196
+        verified: false
+      - type: ndcg_at_1000
+        value: 57.838
+        verified: false
+      - type: ndcg_at_3
+        value: 47.987
+        verified: false
+      - type: ndcg_at_5
+        value: 50.356
+        verified: false
+      - type: precision_at_1
+        value: 41.333
+        verified: false
+      - type: precision_at_10
+        value: 7.167
+        verified: false
+      - type: precision_at_100
+        value: 0.9299999999999999
+        verified: false
+      - type: precision_at_1000
+        value: 0.108
+        verified: false
+      - type: precision_at_3
+        value: 19
+        verified: false
+      - type: precision_at_5
+        value: 12.8
+        verified: false
+      - type: recall_at_1
+        value: 38.983000000000004
+        verified: false
+      - type: recall_at_10
+        value: 64.183
+        verified: false
+      - type: recall_at_100
+        value: 82.02199999999999
+        verified: false
+      - type: recall_at_1000
+        value: 95.167
+        verified: false
+      - type: recall_at_3
+        value: 52.383
+        verified: false
+      - type: recall_at_5
+        value: 58.411
+        verified: false
+    - task:
+        type: PairClassification
+      dataset:
+        type: mteb/sprintduplicatequestions-pairclassification
+        name: MTEB SprintDuplicateQuestions
+        config: default
+        split: test
+        revision: d66bd1f72af766a5cc4b0ca5e00c162f89e8cc46
+      metrics:
+      - type: cos_sim_accuracy
+        value: 99.8019801980198
+        verified: false
+      - type: cos_sim_ap
+        value: 94.9287554635848
+        verified: false
+      - type: cos_sim_f1
+        value: 89.83739837398375
+        verified: false
+      - type: cos_sim_precision
+        value: 91.32231404958677
+        verified: false
+      - type: cos_sim_recall
+        value: 88.4
+        verified: false
+      - type: dot_accuracy
+        value: 99.23762376237623
+        verified: false
+      - type: dot_ap
+        value: 55.22534191245801
+        verified: false
+      - type: dot_f1
+        value: 54.054054054054056
+        verified: false
+      - type: dot_precision
+        value: 55.15088449531738
+        verified: false
+      - type: dot_recall
+        value: 53
+        verified: false
+      - type: euclidean_accuracy
+        value: 99.6108910891089
+        verified: false
+      - type: euclidean_ap
+        value: 82.5195111329438
+        verified: false
+      - type: euclidean_f1
+        value: 78.2847718526663
+        verified: false
+      - type: euclidean_precision
+        value: 86.93528693528694
+        verified: false
+      - type: euclidean_recall
+        value: 71.2
+        verified: false
+      - type: manhattan_accuracy
+        value: 99.5970297029703
+        verified: false
+      - type: manhattan_ap
+        value: 81.96876777875492
+        verified: false
+      - type: manhattan_f1
+        value: 77.33773377337734
+        verified: false
+      - type: manhattan_precision
+        value: 85.94132029339853
+        verified: false
+      - type: manhattan_recall
+        value: 70.3
+        verified: false
+      - type: max_accuracy
+        value: 99.8019801980198
+        verified: false
+      - type: max_ap
+        value: 94.9287554635848
+        verified: false
+      - type: max_f1
+        value: 89.83739837398375
+        verified: false
+    - task:
+        type: Clustering
+      dataset:
+        type: mteb/stackexchange-clustering
+        name: MTEB StackExchangeClustering
+        config: default
+        split: test
+        revision: 6cbc1f7b2bc0622f2e39d2c77fa502909748c259
+      metrics:
+      - type: v_measure
+        value: 46.34997003954114
+        verified: false
+    - task:
+        type: Clustering
+      dataset:
+        type: mteb/stackexchange-clustering-p2p
+        name: MTEB StackExchangeClusteringP2P
+        config: default
+        split: test
+        revision: 815ca46b2622cec33ccafc3735d572c266efdb44
+      metrics:
+      - type: v_measure
+        value: 31.462336020554893
+        verified: false
+    - task:
+        type: Reranking
+      dataset:
+        type: mteb/stackoverflowdupquestions-reranking
+        name: MTEB StackOverflowDupQuestions
+        config: default
+        split: test
+        revision: e185fbe320c72810689fc5848eb6114e1ef5ec69
+      metrics:
+      - type: map
+        value: 47.1757817459526
+        verified: false
+      - type: mrr
+        value: 47.941057104660054
+        verified: false
+    - task:
+        type: Summarization
+      dataset:
+        type: mteb/summeval
+        name: MTEB SummEval
+        config: default
+        split: test
+        revision: cda12ad7615edc362dbf25a00fdd61d3b1eaf93c
+      metrics:
+      - type: cos_sim_pearson
+        value: 30.56106249068471
+        verified: false
+      - type: cos_sim_spearman
+        value: 31.24613190558528
+        verified: false
+      - type: dot_pearson
+        value: 20.486610035794257
+        verified: false
+      - type: dot_spearman
+        value: 23.115667545894546
+        verified: false
+    - task:
+        type: Retrieval
+      dataset:
+        type: trec-covid
+        name: MTEB TRECCOVID
+        config: default
+        split: test
+        revision: None
+      metrics:
+      - type: map_at_1
+        value: 0.182
+        verified: false
+      - type: map_at_10
+        value: 1.155
+        verified: false
+      - type: map_at_100
+        value: 5.118
+        verified: false
+      - type: map_at_1000
+        value: 11.827
+        verified: false
+      - type: map_at_3
+        value: 0.482
+        verified: false
+      - type: map_at_5
+        value: 0.712
+        verified: false
+      - type: mrr_at_1
+        value: 70
+        verified: false
+      - type: mrr_at_10
+        value: 79.483
+        verified: false
+      - type: mrr_at_100
+        value: 79.637
+        verified: false
+      - type: mrr_at_1000
+        value: 79.637
+        verified: false
+      - type: mrr_at_3
+        value: 77.667
+        verified: false
+      - type: mrr_at_5
+        value: 78.567
+        verified: false
+      - type: ndcg_at_1
+        value: 63
+        verified: false
+      - type: ndcg_at_10
+        value: 52.303
+        verified: false
+      - type: ndcg_at_100
+        value: 37.361
+        verified: false
+      - type: ndcg_at_1000
+        value: 32.84
+        verified: false
+      - type: ndcg_at_3
+        value: 58.274
+        verified: false
+      - type: ndcg_at_5
+        value: 55.601
+        verified: false
+      - type: precision_at_1
+        value: 70
+        verified: false
+      - type: precision_at_10
+        value: 55.60000000000001
+        verified: false
+      - type: precision_at_100
+        value: 37.96
+        verified: false
+      - type: precision_at_1000
+        value: 14.738000000000001
+        verified: false
+      - type: precision_at_3
+        value: 62.666999999999994
+        verified: false
+      - type: precision_at_5
+        value: 60
+        verified: false
+      - type: recall_at_1
+        value: 0.182
+        verified: false
+      - type: recall_at_10
+        value: 1.4120000000000001
+        verified: false
+      - type: recall_at_100
+        value: 8.533
+        verified: false
+      - type: recall_at_1000
+        value: 30.572
+        verified: false
+      - type: recall_at_3
+        value: 0.5309999999999999
+        verified: false
+      - type: recall_at_5
+        value: 0.814
+        verified: false
+    - task:
+        type: Retrieval
+      dataset:
+        type: webis-touche2020
+        name: MTEB Touche2020
+        config: default
+        split: test
+        revision: None
+      metrics:
+      - type: map_at_1
+        value: 1.385
+        verified: false
+      - type: map_at_10
+        value: 7.185999999999999
+        verified: false
+      - type: map_at_100
+        value: 11.642
+        verified: false
+      - type: map_at_1000
+        value: 12.953000000000001
+        verified: false
+      - type: map_at_3
+        value: 3.496
+        verified: false
+      - type: map_at_5
+        value: 4.82
+        verified: false
+      - type: mrr_at_1
+        value: 16.326999999999998
+        verified: false
+      - type: mrr_at_10
+        value: 29.461
+        verified: false
+      - type: mrr_at_100
+        value: 31.436999999999998
+        verified: false
+      - type: mrr_at_1000
+        value: 31.436999999999998
+        verified: false
+      - type: mrr_at_3
+        value: 24.490000000000002
+        verified: false
+      - type: mrr_at_5
+        value: 27.857
+        verified: false
+      - type: ndcg_at_1
+        value: 14.285999999999998
+        verified: false
+      - type: ndcg_at_10
+        value: 16.672
+        verified: false
+      - type: ndcg_at_100
+        value: 28.691
+        verified: false
+      - type: ndcg_at_1000
+        value: 39.817
+        verified: false
+      - type: ndcg_at_3
+        value: 15.277
+        verified: false
+      - type: ndcg_at_5
+        value: 15.823
+        verified: false
+      - type: precision_at_1
+        value: 16.326999999999998
+        verified: false
+      - type: precision_at_10
+        value: 15.509999999999998
+        verified: false
+      - type: precision_at_100
+        value: 6.49
+        verified: false
+      - type: precision_at_1000
+        value: 1.4080000000000001
+        verified: false
+      - type: precision_at_3
+        value: 16.326999999999998
+        verified: false
+      - type: precision_at_5
+        value: 16.735
+        verified: false
+      - type: recall_at_1
+        value: 1.385
+        verified: false
+      - type: recall_at_10
+        value: 12.586
+        verified: false
+      - type: recall_at_100
+        value: 40.765
+        verified: false
+      - type: recall_at_1000
+        value: 75.198
+        verified: false
+      - type: recall_at_3
+        value: 4.326
+        verified: false
+      - type: recall_at_5
+        value: 7.074999999999999
+        verified: false
+    - task:
+        type: Classification
+      dataset:
+        type: mteb/toxic_conversations_50k
+        name: MTEB ToxicConversationsClassification
+        config: default
+        split: test
+        revision: d7c0de2777da35d6aae2200a62c6e0e5af397c4c
+      metrics:
+      - type: accuracy
+        value: 59.4402
+        verified: false
+      - type: ap
+        value: 10.16922814263879
+        verified: false
+      - type: f1
+        value: 45.374485104940476
+        verified: false
+    - task:
+        type: Classification
+      dataset:
+        type: mteb/tweet_sentiment_extraction
+        name: MTEB TweetSentimentExtractionClassification
+        config: default
+        split: test
+        revision: d604517c81ca91fe16a244d1248fc021f9ecee7a
+      metrics:
+      - type: accuracy
+        value: 54.25863044708545
+        verified: false
+      - type: f1
+        value: 54.20154252609619
+        verified: false
+    - task:
+        type: Clustering
+      dataset:
+        type: mteb/twentynewsgroups-clustering
+        name: MTEB TwentyNewsgroupsClustering
+        config: default
+        split: test
+        revision: 6125ec4e24fa026cec8a478383ee943acfbd5449
+      metrics:
+      - type: v_measure
+        value: 34.3883169293051
+        verified: false
+    - task:
+        type: PairClassification
+      dataset:
+        type: mteb/twittersemeval2015-pairclassification
+        name: MTEB TwitterSemEval2015
+        config: default
+        split: test
+        revision: 70970daeab8776df92f5ea462b6173c0b46fd2d1
+      metrics:
+      - type: cos_sim_accuracy
+        value: 81.76670441676104
+        verified: false
+      - type: cos_sim_ap
+        value: 59.29878710961347
+        verified: false
+      - type: cos_sim_f1
+        value: 57.33284971587474
+        verified: false
+      - type: cos_sim_precision
+        value: 52.9122963624191
+        verified: false
+      - type: cos_sim_recall
+        value: 62.559366754617415
+        verified: false
+      - type: dot_accuracy
+        value: 77.52279907015557
+        verified: false
+      - type: dot_ap
+        value: 34.17588904643467
+        verified: false
+      - type: dot_f1
+        value: 41.063567529494634
+        verified: false
+      - type: dot_precision
+        value: 30.813953488372093
+        verified: false
+      - type: dot_recall
+        value: 61.53034300791557
+        verified: false
+      - type: euclidean_accuracy
+        value: 80.61631996185254
+        verified: false
+      - type: euclidean_ap
+        value: 54.00362361479352
+        verified: false
+      - type: euclidean_f1
+        value: 53.99111751290361
+        verified: false
+      - type: euclidean_precision
+        value: 49.52653600528518
+        verified: false
+      - type: euclidean_recall
+        value: 59.340369393139845
+        verified: false
+      - type: manhattan_accuracy
+        value: 80.65208320915539
+        verified: false
+      - type: manhattan_ap
+        value: 54.18329507159467
+        verified: false
+      - type: manhattan_f1
+        value: 53.85550960836779
+        verified: false
+      - type: manhattan_precision
+        value: 49.954873646209386
+        verified: false
+      - type: manhattan_recall
+        value: 58.41688654353562
+        verified: false
+      - type: max_accuracy
+        value: 81.76670441676104
+        verified: false
+      - type: max_ap
+        value: 59.29878710961347
+        verified: false
+      - type: max_f1
+        value: 57.33284971587474
+        verified: false
+    - task:
+        type: PairClassification
+      dataset:
+        type: mteb/twitterurlcorpus-pairclassification
+        name: MTEB TwitterURLCorpus
+        config: default
+        split: test
+        revision: 8b6510b0b1fa4e4c4f879467980e9be563ec1cdf
+      metrics:
+      - type: cos_sim_accuracy
+        value: 87.99433383785463
+        verified: false
+      - type: cos_sim_ap
+        value: 83.43513915159009
+        verified: false
+      - type: cos_sim_f1
+        value: 76.3906784964842
+        verified: false
+      - type: cos_sim_precision
+        value: 73.19223985890653
+        verified: false
+      - type: cos_sim_recall
+        value: 79.88142901139513
+        verified: false
+      - type: dot_accuracy
+        value: 81.96142352621571
+        verified: false
+      - type: dot_ap
+        value: 67.78764755689359
+        verified: false
+      - type: dot_f1
+        value: 64.42823356983445
+        verified: false
+      - type: dot_precision
+        value: 56.77801913931779
+        verified: false
+      - type: dot_recall
+        value: 74.46104096088698
+        verified: false
+      - type: euclidean_accuracy
+        value: 81.9478402607987
+        verified: false
+      - type: euclidean_ap
+        value: 67.13958457373279
+        verified: false
+      - type: euclidean_f1
+        value: 60.45118343195266
+        verified: false
+      - type: euclidean_precision
+        value: 58.1625391403359
+        verified: false
+      - type: euclidean_recall
+        value: 62.92731752386819
+        verified: false
+      - type: manhattan_accuracy
+        value: 82.01769705437188
+        verified: false
+      - type: manhattan_ap
+        value: 67.24709477497046
+        verified: false
+      - type: manhattan_f1
+        value: 60.4103846436714
+        verified: false
+      - type: manhattan_precision
+        value: 57.82063916654935
+        verified: false
+      - type: manhattan_recall
+        value: 63.24299353249153
+        verified: false
+      - type: max_accuracy
+        value: 87.99433383785463
+        verified: false
+      - type: max_ap
+        value: 83.43513915159009
+        verified: false
+      - type: max_f1
+        value: 76.3906784964842
+        verified: false
+transformersInfo:
+  auto_model: AutoModel
+  custom_class: modeling_t5.T5EncoderModel
+  pipeline_tag: feature-extraction
+  processor: AutoTokenizer
+siblings:
+- rfilename: .gitattributes
+- rfilename: README.md
+- rfilename: config.json
+- rfilename: model.bin
+- rfilename: modules.json
+- rfilename: sentence_bert_config.json
+- rfilename: shared_vocabulary.json
+- rfilename: special_tokens_map.json
+- rfilename: tokenizer.json
+- rfilename: tokenizer_config.json
+spaces: []
+createdAt: '2023-10-13T13:57:43.000Z'
+usedStorage: 146190810
+downloadsAllTime: 200
+inferenceProviderMapping: {}
+configJson:
+  _name_or_path: tmp/
+  architectures:
+  - T5EncoderModel
+  auto_map:
+    AutoModel: modeling_t5.T5EncoderModel
+  d_ff: 2048
+  d_kv: 64
+  d_model: 512
+  decoder_start_token_id: 0
+  dropout_rate: 0.1
+  eos_token_id: 1
+  initializer_factor: 1.0
+  is_encoder_decoder: true
+  layer_norm_epsilon: null
+  model_type: t5
+  n_positions: 512
+  num_heads: 8
+  num_layers: 6
+  output_past: true
+  pad_token_id: 0
+  relative_attention_num_buckets: 32
+  task_specific_params:
+    summarization:
+      early_stopping: true
+      length_penalty: 2.0
+      max_length: 200
+      min_length: 30
+      no_repeat_ngram_size: 3
+      num_beams: 4
+      prefix: 'summarize: '
+    translation_en_to_de:
+      early_stopping: true
+      max_length: 300
+      num_beams: 4
+      prefix: 'translate English to German: '
+    translation_en_to_fr:
+      early_stopping: true
+      max_length: 300
+      num_beams: 4
+      prefix: 'translate English to French: '
+    translation_en_to_ro:
+      early_stopping: true
+      max_length: 300
+      num_beams: 4
+      prefix: 'translate English to Romanian: '
+  vocab_size: 32128
+  add_source_bos: false
+  add_source_eos: false
+  bos_token: <pad>
+  decoder_start_token: <pad>
+  eos_token: </s>
+  unk_token: <unk>
+onnxFiles: {}
+safetensorsSizeMb: 0.0
+approxSizeMb: 0.0
+fetchedAt: '2026-06-08T16:42:43.000Z'

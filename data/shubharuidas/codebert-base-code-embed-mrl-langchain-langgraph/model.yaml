@@ -1,0 +1,1123 @@
+_id: 69726a0cb9493123748c45c3
+id: shubharuidas/codebert-base-code-embed-mrl-langchain-langgraph
+private: false
+pipeline_tag: sentence-similarity
+library_name: sentence-transformers
+tags:
+- sentence-transformers
+- safetensors
+- roberta
+- sentence-similarity
+- feature-extraction
+- dense
+- generated_from_trainer
+- dataset_size:900
+- loss:MatryoshkaLoss
+- loss:MultipleNegativesRankingLoss
+- en
+- arxiv:1908.10084
+- arxiv:2205.13147
+- arxiv:1705.00652
+- base_model:shubharuidas/codebert-embed-base-dense-retriever
+- base_model:finetune:shubharuidas/codebert-embed-base-dense-retriever
+- license:apache-2.0
+- model-index
+- text-embeddings-inference
+- endpoints_compatible
+- region:us
+downloads: 14
+likes: 0
+modelId: shubharuidas/codebert-base-code-embed-mrl-langchain-langgraph
+author: shubharuidas
+sha: f320c0bb290168990530d234e2efa36e666648cc
+lastModified: '2026-01-22T18:19:09.000Z'
+gated: false
+disabled: false
+mask_token: <mask>
+widgetData:
+- source_sentence: Best practices for __init__
+  sentences:
+  - "def close(self) -> None:\n        self.sync()\n        self.clear()"
+  - "class MyClass:\n        def __call__(self, state):\n            return\n\n        def class_method(self, state):\n  \
+    \          return"
+  - "def __init__(self, name: str):\n            self.name = name\n            self.lock = threading.Lock()"
+- source_sentence: Explain the close logic
+  sentences:
+  - "def close(self) -> None:\n        self.sync()\n        self.clear()"
+  - "def attach_node(self, key: str, node: StateNodeSpec[Any, ContextT] | None) -> None:\n        if key == START:\n     \
+    \       output_keys = [\n                k\n                for k, v in self.builder.schemas[self.builder.input_schema].items()\n\
+    \                if not is_managed_value(v)\n            ]\n        else:\n            output_keys = list(self.builder.channels)\
+    \ + [\n                k for k, v in self.builder.managed.items()\n            ]\n\n        def _get_updates(\n      \
+    \      input: None | dict | Any,\n        ) -> Sequence[tuple[str, Any]] | None:\n            if input is None:\n    \
+    \            return None\n            elif isinstance(input, dict):\n                return [(k, v) for k, v in input.items()\
+    \ if k in output_keys]\n            elif isinstance(input, Command):\n                if input.graph == Command.PARENT:\n\
+    \                    return None\n                return [\n                    (k, v) for k, v in input._update_as_tuples()\
+    \ if k in output_keys\n                ]\n            elif (\n                isinstance(input, (list, tuple))\n     \
+    \           and input\n                and any(isinstance(i, Command) for i in input)\n            ):\n              \
+    \  updates: list[tuple[str, Any]] = []\n                for i in input:\n                    if isinstance(i, Command):\n\
+    \                        if i.graph == Command.PARENT:\n                            continue\n                       \
+    \ updates.extend(\n                            (k, v) for k, v in i._update_as_tuples() if k in output_keys\n        \
+    \                )\n                    else:\n                        updates.extend(_get_updates(i) or ())\n       \
+    \         return updates\n            elif (t := type(input)) and get_cached_annotated_keys(t):\n                return\
+    \ get_update_as_tuples(input, output_keys)\n            else:\n                msg = create_error_message(\n         \
+    \           message=f\"Expected dict, got {input}\",\n                    error_code=ErrorCode.INVALID_GRAPH_NODE_RETURN_VALUE,\n\
+    \                )\n                raise InvalidUpdateError(msg)\n\n        # state updaters\n        write_entries:\
+    \ tuple[ChannelWriteEntry | ChannelWriteTupleEntry, ...] = (\n            ChannelWriteTupleEntry(\n                mapper=_get_root\
+    \ if output_keys == [\"__root__\"] else _get_updates\n            ),\n            ChannelWriteTupleEntry(\n          \
+    \      mapper=_control_branch,\n                static=_control_static(node.ends)\n                if node is not None\
+    \ and node.ends is not None\n                else None,\n            ),\n        )\n\n        # add node and output channel\n\
+    \        if key == START:\n            self.nodes[key] = PregelNode(\n                tags=[TAG_HIDDEN],\n           \
+    \     triggers=[START],\n                channels=START,\n                writers=[ChannelWrite(write_entries)],\n   \
+    \         )\n        elif node is not None:\n            input_schema = node.input_schema if node else self.builder.state_schema\n\
+    \            input_channels = list(self.builder.schemas[input_schema])\n            is_single_input = len(input_channels)\
+    \ == 1 and \"__root__\" in input_channels\n            if input_schema in self.schema_to_mapper:\n                mapper\
+    \ = self.schema_to_mapper[input_schema]\n            else:\n                mapper = _pick_mapper(input_channels, input_schema)\n\
+    \                self.schema_to_mapper[input_schema] = mapper\n\n            branch_channel = _CHANNEL_BRANCH_TO.format(key)\n\
+    \            self.channels[branch_channel] = (\n                LastValueAfterFinish(Any)\n                if node.defer\n\
+    \                else EphemeralValue(Any, guard=False)\n            )\n            self.nodes[key] = PregelNode(\n   \
+    \             triggers=[branch_channel],\n                # read state keys and managed values\n                channels=(\"\
+    __root__\" if is_single_input else input_channels),\n                # coerce state dict to schema class (eg. pydantic\
+    \ model)\n                mapper=mapper,\n                # publish to state keys\n                writers=[ChannelWrite(write_entries)],\n\
+    \                metadata=node.metadata,\n                retry_policy=node.retry_policy,\n                cache_policy=node.cache_policy,\n\
+    \                bound=node.runnable,  # type: ignore[arg-type]\n            )\n        else:\n            raise RuntimeError"
+  - "def tick(\n        self,\n        tasks: Iterable[PregelExecutableTask],\n        *,\n        reraise: bool = True,\n\
+    \        timeout: float | None = None,\n        retry_policy: Sequence[RetryPolicy] | None = None,\n        get_waiter:\
+    \ Callable[[], concurrent.futures.Future[None]] | None = None,\n        schedule_task: Callable[\n            [PregelExecutableTask,\
+    \ int, Call | None],\n            PregelExecutableTask | None,\n        ],\n    ) -> Iterator[None]:\n        tasks =\
+    \ tuple(tasks)\n        futures = FuturesDict(\n            callback=weakref.WeakMethod(self.commit),\n            event=threading.Event(),\n\
+    \            future_type=concurrent.futures.Future,\n        )\n        # give control back to the caller\n        yield\n\
+    \        # fast path if single task with no timeout and no waiter\n        if len(tasks) == 0:\n            return\n \
+    \       elif len(tasks) == 1 and timeout is None and get_waiter is None:\n            t = tasks[0]\n            try:\n\
+    \                run_with_retry(\n                    t,\n                    retry_policy,\n                    configurable={\n\
+    \                        CONFIG_KEY_CALL: partial(\n                            _call,\n                            weakref.ref(t),\n\
+    \                            retry_policy=retry_policy,\n                            futures=weakref.ref(futures),\n \
+    \                           schedule_task=schedule_task,\n                            submit=self.submit,\n          \
+    \              ),\n                    },\n                )\n                self.commit(t, None)\n            except\
+    \ Exception as exc:\n                self.commit(t, exc)\n                if reraise and futures:\n                  \
+    \  # will be re-raised after futures are done\n                    fut: concurrent.futures.Future = concurrent.futures.Future()\n\
+    \                    fut.set_exception(exc)\n                    futures.done.add(fut)\n                elif reraise:\n\
+    \                    if tb := exc.__traceback__:\n                        while tb.tb_next is not None and any(\n    \
+    \                        tb.tb_frame.f_code.co_filename.endswith(name)\n                            for name in EXCLUDED_FRAME_FNAMES\n\
+    \                        ):\n                            tb = tb.tb_next\n                        exc.__traceback__ =\
+    \ tb\n                    raise\n            if not futures:  # maybe `t` scheduled another task\n                return\n\
+    \            else:\n                tasks = ()  # don't reschedule this task\n        # add waiter task if requested\n\
+    \        if get_waiter is not None:\n            futures[get_waiter()] = None\n        # schedule tasks\n        for t\
+    \ in tasks:\n            fut = self.submit()(  # type: ignore[misc]\n                run_with_retry,\n               \
+    \ t,\n                retry_policy,\n                configurable={\n                    CONFIG_KEY_CALL: partial(\n \
+    \                       _call,\n                        weakref.ref(t),\n                        retry_policy=retry_policy,\n\
+    \                        futures=weakref.ref(futures),\n                        schedule_task=schedule_task,\n       \
+    \                 submit=self.submit,\n                    ),\n                },\n                __reraise_on_exit__=reraise,\n\
+    \            )\n            futures[fut] = t\n        # execute tasks, and wait for one to fail or all to finish.\n  \
+    \      # each task is independent from all other concurrent tasks\n        # yield updates/debug output as each task finishes\n\
+    \        end_time = timeout + time.monotonic() if timeout else None\n        while len(futures) > (1 if get_waiter is\
+    \ not None else 0):\n            done, inflight = concurrent.futures.wait(\n                futures,\n               \
+    \ return_when=concurrent.futures.FIRST_COMPLETED,\n                timeout=(max(0, end_time - time.monotonic()) if end_time\
+    \ else None),\n            )\n            if not done:\n                break  # timed out\n            for fut in done:\n\
+    \                task = futures.pop(fut)\n                if task is None:\n                    # waiter task finished,\
+    \ schedule another\n                    if inflight and get_waiter is not None:\n                        futures[get_waiter()]\
+    \ = None\n            else:\n                # remove references to loop vars\n                del fut, task\n       \
+    \     # maybe stop other tasks\n            if _should_stop_others(done):\n                break\n            # give control\
+    \ back to the caller\n            yield\n        # wait for done callbacks\n        futures.event.wait(\n            timeout=(max(0,\
+    \ end_time - time.monotonic()) if end_time else None)\n        )\n        # give control back to the caller\n        yield\n\
+    \        # panic on failure or timeout\n        try:\n            _panic_or_proceed(\n                futures.done.union(f\
+    \ for f, t in futures.items() if t is not None),\n                panic=reraise,\n            )\n        except Exception\
+    \ as exc:\n            if tb := exc.__traceback__:\n                while tb.tb_next is not None and any(\n          \
+    \          tb.tb_frame.f_code.co_filename.endswith(name)\n                    for name in EXCLUDED_FRAME_FNAMES\n    \
+    \            ):\n                    tb = tb.tb_next\n                exc.__traceback__ = tb\n            raise"
+- source_sentence: Explain the async aupdate_state logic
+  sentences:
+  - "class MyClass:\n        def __call__(self, state):\n            return\n\n        def class_method(self, state):\n  \
+    \          return"
+  - "async def aupdate_state(\n        self,\n        config: RunnableConfig,\n        values: dict[str, Any] | Any | None,\n\
+    \        as_node: str | None = None,\n        *,\n        headers: dict[str, str] | None = None,\n        params: QueryParamTypes\
+    \ | None = None,\n    ) -> RunnableConfig:\n        \"\"\"Update the state of a thread.\n\n        This method calls `POST\
+    \ /threads/{thread_id}/state`.\n\n        Args:\n            config: A `RunnableConfig` that includes `thread_id` in the\n\
+    \                `configurable` field.\n            values: Values to update to the state.\n            as_node: Update\
+    \ the state as if this node had just executed.\n\n        Returns:\n            `RunnableConfig` for the updated thread.\n\
+    \        \"\"\"\n        client = self._validate_client()\n        merged_config = merge_configs(self.config, config)\n\
+    \n        response: dict = await client.threads.update_state(  # type: ignore\n            thread_id=merged_config[\"\
+    configurable\"][\"thread_id\"],\n            values=values,\n            as_node=as_node,\n            checkpoint=self._get_checkpoint(merged_config),\n\
+    \            headers=headers,\n            params=params,\n        )\n        return self._get_config(response[\"checkpoint\"\
+    ])"
+  - "def __init__(self, typ: Any, guard: bool = True) -> None:\n        super().__init__(typ)\n        self.guard = guard\n\
+    \        self.value = MISSING"
+- source_sentence: How to implement langchain_to_openai_messages?
+  sentences:
+  - "def __init__(\n        self,\n        message: str,\n        *args: object,\n        since: tuple[int, int],\n      \
+    \  expected_removal: tuple[int, int] | None = None,\n    ) -> None:\n        super().__init__(message, *args)\n      \
+    \  self.message = message.rstrip(\".\")\n        self.since = since\n        self.expected_removal = (\n            expected_removal\
+    \ if expected_removal is not None else (since[0] + 1, 0)\n        )"
+  - "def test_batch_get_ops(store: PostgresStore) -> None:\n    # Setup test data\n    store.put((\"test\",), \"key1\", {\"\
+    data\": \"value1\"})\n    store.put((\"test\",), \"key2\", {\"data\": \"value2\"})\n\n    ops = [\n        GetOp(namespace=(\"\
+    test\",), key=\"key1\"),\n        GetOp(namespace=(\"test\",), key=\"key2\"),\n        GetOp(namespace=(\"test\",), key=\"\
+    key3\"),  # Non-existent key\n    ]\n\n    results = store.batch(ops)\n\n    assert len(results) == 3\n    assert results[0]\
+    \ is not None\n    assert results[1] is not None\n    assert results[2] is None\n    assert results[0].key == \"key1\"\
+    \n    assert results[1].key == \"key2\""
+  - "def langchain_to_openai_messages(messages: List[BaseMessage]):\n    \"\"\"\n    Convert a list of langchain base messages\
+    \ to a list of openai messages.\n\n    Parameters:\n        messages (List[BaseMessage]): A list of langchain base messages.\n\
+    \n    Returns:\n        List[dict]: A list of openai messages.\n    \"\"\"\n\n    return [\n        convert_message_to_dict(m)\
+    \ if isinstance(m, BaseMessage) else m\n        for m in messages\n    ]"
+- source_sentence: Explain the CheckpointPayload logic
+  sentences:
+  - "class LocalDeps(NamedTuple):\n    \"\"\"A container for referencing and managing local Python dependencies.\n\n    A\
+    \ \"local dependency\" is any entry in the config's `dependencies` list\n    that starts with \".\" (dot), denoting a\
+    \ relative path\n    to a local directory containing Python code.\n\n    For each local dependency, the system inspects\
+    \ its directory to\n    determine how it should be installed inside the Docker container.\n\n    Specifically, we detect:\n\
+    \n    - **Real packages**: Directories containing a `pyproject.toml` or a `setup.py`.\n      These can be installed with\
+    \ pip as a regular Python package.\n    - **Faux packages**: Directories that do not include a `pyproject.toml` or\n \
+    \     `setup.py` but do contain Python files and possibly an `__init__.py`. For\n      these, the code dynamically generates\
+    \ a minimal `pyproject.toml` in the\n      Docker image so that they can still be installed with pip.\n    - **Requirements\
+    \ files**: If a local dependency directory\n      has a `requirements.txt`, it is tracked so that those dependencies\n\
+    \      can be installed within the Docker container before installing the local package.\n\n    Attributes:\n        pip_reqs:\
+    \ A list of (host_requirements_path, container_requirements_path)\n            tuples. Each entry points to a local `requirements.txt`\
+    \ file and where\n            it should be placed inside the Docker container before running `pip install`.\n\n      \
+    \  real_pkgs: A dictionary mapping a local directory path (host side) to a\n            tuple of (dependency_string, container_package_path).\
+    \ These directories\n            contain the necessary files (e.g., `pyproject.toml` or `setup.py`) to be\n          \
+    \  installed as a standard Python package with pip.\n\n        faux_pkgs: A dictionary mapping a local directory path\
+    \ (host side) to a\n            tuple of (dependency_string, container_package_path). For these\n            directories—called\
+    \ \"faux packages\"—the code will generate a minimal\n            `pyproject.toml` inside the Docker image. This ensures\
+    \ that pip\n            recognizes them as installable packages, even though they do not\n            natively include\
+    \ packaging metadata.\n\n        working_dir: The path inside the Docker container to use as the working\n           \
+    \ directory. If the local dependency `\".\"` is present in the config, this\n            field captures the path where\
+    \ that dependency will appear in the\n            container (e.g., `/deps/<name>` or similar). Otherwise, it may be `None`.\n\
+    \n        additional_contexts: A list of paths to directories that contain local\n            dependencies in parent directories.\
+    \ These directories are added to the\n            Docker build context to ensure that the Dockerfile can access them.\n\
+    \    \"\"\"\n\n    pip_reqs: list[tuple[pathlib.Path, str]]\n    real_pkgs: dict[pathlib.Path, tuple[str, str]]\n    faux_pkgs:\
+    \ dict[pathlib.Path, tuple[str, str]]\n    # if . is in dependencies, use it as working_dir\n    working_dir: str | None\
+    \ = None\n    # if there are local dependencies in parent directories, use additional_contexts\n    additional_contexts:\
+    \ list[pathlib.Path] = None"
+  - "class CheckpointPayload(TypedDict):\n    config: RunnableConfig | None\n    metadata: CheckpointMetadata\n    values:\
+    \ dict[str, Any]\n    next: list[str]\n    parent_config: RunnableConfig | None\n    tasks: list[CheckpointTask]"
+  - "class _RuntimeOverrides(TypedDict, Generic[ContextT], total=False):\n    context: ContextT\n    store: BaseStore | None\n\
+    \    stream_writer: StreamWriter\n    previous: Any"
+model-index:
+- name: codeBert dense retriever
+  results:
+  - task:
+      type: information-retrieval
+      name: Information Retrieval
+    dataset:
+      name: dim 768
+      type: dim_768
+    metrics:
+    - type: cosine_accuracy@1
+      value: 0.84
+      name: Cosine Accuracy@1
+      verified: false
+    - type: cosine_accuracy@3
+      value: 0.84
+      name: Cosine Accuracy@3
+      verified: false
+    - type: cosine_accuracy@5
+      value: 0.84
+      name: Cosine Accuracy@5
+      verified: false
+    - type: cosine_accuracy@10
+      value: 0.93
+      name: Cosine Accuracy@10
+      verified: false
+    - type: cosine_precision@1
+      value: 0.84
+      name: Cosine Precision@1
+      verified: false
+    - type: cosine_precision@3
+      value: 0.84
+      name: Cosine Precision@3
+      verified: false
+    - type: cosine_precision@5
+      value: 0.84
+      name: Cosine Precision@5
+      verified: false
+    - type: cosine_precision@10
+      value: 0.465
+      name: Cosine Precision@10
+      verified: false
+    - type: cosine_recall@1
+      value: 0.16799999999999998
+      name: Cosine Recall@1
+      verified: false
+    - type: cosine_recall@3
+      value: 0.504
+      name: Cosine Recall@3
+      verified: false
+    - type: cosine_recall@5
+      value: 0.84
+      name: Cosine Recall@5
+      verified: false
+    - type: cosine_recall@10
+      value: 0.93
+      name: Cosine Recall@10
+      verified: false
+    - type: cosine_ndcg@10
+      value: 0.8886895066001008
+      name: Cosine Ndcg@10
+      verified: false
+    - type: cosine_mrr@10
+      value: 0.855
+      name: Cosine Mrr@10
+      verified: false
+    - type: cosine_map@100
+      value: 0.877942533867708
+      name: Cosine Map@100
+      verified: false
+  - task:
+      type: information-retrieval
+      name: Information Retrieval
+    dataset:
+      name: dim 512
+      type: dim_512
+    metrics:
+    - type: cosine_accuracy@1
+      value: 0.88
+      name: Cosine Accuracy@1
+      verified: false
+    - type: cosine_accuracy@3
+      value: 0.88
+      name: Cosine Accuracy@3
+      verified: false
+    - type: cosine_accuracy@5
+      value: 0.88
+      name: Cosine Accuracy@5
+      verified: false
+    - type: cosine_accuracy@10
+      value: 0.93
+      name: Cosine Accuracy@10
+      verified: false
+    - type: cosine_precision@1
+      value: 0.88
+      name: Cosine Precision@1
+      verified: false
+    - type: cosine_precision@3
+      value: 0.88
+      name: Cosine Precision@3
+      verified: false
+    - type: cosine_precision@5
+      value: 0.88
+      name: Cosine Precision@5
+      verified: false
+    - type: cosine_precision@10
+      value: 0.465
+      name: Cosine Precision@10
+      verified: false
+    - type: cosine_recall@1
+      value: 0.17599999999999993
+      name: Cosine Recall@1
+      verified: false
+    - type: cosine_recall@3
+      value: 0.528
+      name: Cosine Recall@3
+      verified: false
+    - type: cosine_recall@5
+      value: 0.88
+      name: Cosine Recall@5
+      verified: false
+    - type: cosine_recall@10
+      value: 0.93
+      name: Cosine Recall@10
+      verified: false
+    - type: cosine_ndcg@10
+      value: 0.907049725888945
+      name: Cosine Ndcg@10
+      verified: false
+    - type: cosine_mrr@10
+      value: 0.8883333333333333
+      name: Cosine Mrr@10
+      verified: false
+    - type: cosine_map@100
+      value: 0.9038835868016827
+      name: Cosine Map@100
+      verified: false
+  - task:
+      type: information-retrieval
+      name: Information Retrieval
+    dataset:
+      name: dim 256
+      type: dim_256
+    metrics:
+    - type: cosine_accuracy@1
+      value: 0.87
+      name: Cosine Accuracy@1
+      verified: false
+    - type: cosine_accuracy@3
+      value: 0.87
+      name: Cosine Accuracy@3
+      verified: false
+    - type: cosine_accuracy@5
+      value: 0.87
+      name: Cosine Accuracy@5
+      verified: false
+    - type: cosine_accuracy@10
+      value: 0.92
+      name: Cosine Accuracy@10
+      verified: false
+    - type: cosine_precision@1
+      value: 0.87
+      name: Cosine Precision@1
+      verified: false
+    - type: cosine_precision@3
+      value: 0.87
+      name: Cosine Precision@3
+      verified: false
+    - type: cosine_precision@5
+      value: 0.87
+      name: Cosine Precision@5
+      verified: false
+    - type: cosine_precision@10
+      value: 0.46
+      name: Cosine Precision@10
+      verified: false
+    - type: cosine_recall@1
+      value: 0.17399999999999996
+      name: Cosine Recall@1
+      verified: false
+    - type: cosine_recall@3
+      value: 0.522
+      name: Cosine Recall@3
+      verified: false
+    - type: cosine_recall@5
+      value: 0.87
+      name: Cosine Recall@5
+      verified: false
+    - type: cosine_recall@10
+      value: 0.92
+      name: Cosine Recall@10
+      verified: false
+    - type: cosine_ndcg@10
+      value: 0.8970497258889449
+      name: Cosine Ndcg@10
+      verified: false
+    - type: cosine_mrr@10
+      value: 0.8783333333333334
+      name: Cosine Mrr@10
+      verified: false
+    - type: cosine_map@100
+      value: 0.8959313741265157
+      name: Cosine Map@100
+      verified: false
+  - task:
+      type: information-retrieval
+      name: Information Retrieval
+    dataset:
+      name: dim 128
+      type: dim_128
+    metrics:
+    - type: cosine_accuracy@1
+      value: 0.86
+      name: Cosine Accuracy@1
+      verified: false
+    - type: cosine_accuracy@3
+      value: 0.86
+      name: Cosine Accuracy@3
+      verified: false
+    - type: cosine_accuracy@5
+      value: 0.86
+      name: Cosine Accuracy@5
+      verified: false
+    - type: cosine_accuracy@10
+      value: 0.95
+      name: Cosine Accuracy@10
+      verified: false
+    - type: cosine_precision@1
+      value: 0.86
+      name: Cosine Precision@1
+      verified: false
+    - type: cosine_precision@3
+      value: 0.86
+      name: Cosine Precision@3
+      verified: false
+    - type: cosine_precision@5
+      value: 0.86
+      name: Cosine Precision@5
+      verified: false
+    - type: cosine_precision@10
+      value: 0.475
+      name: Cosine Precision@10
+      verified: false
+    - type: cosine_recall@1
+      value: 0.17199999999999996
+      name: Cosine Recall@1
+      verified: false
+    - type: cosine_recall@3
+      value: 0.516
+      name: Cosine Recall@3
+      verified: false
+    - type: cosine_recall@5
+      value: 0.86
+      name: Cosine Recall@5
+      verified: false
+    - type: cosine_recall@10
+      value: 0.95
+      name: Cosine Recall@10
+      verified: false
+    - type: cosine_ndcg@10
+      value: 0.9086895066001008
+      name: Cosine Ndcg@10
+      verified: false
+    - type: cosine_mrr@10
+      value: 0.875
+      name: Cosine Mrr@10
+      verified: false
+    - type: cosine_map@100
+      value: 0.8949791356739454
+      name: Cosine Map@100
+      verified: false
+  - task:
+      type: information-retrieval
+      name: Information Retrieval
+    dataset:
+      name: dim 64
+      type: dim_64
+    metrics:
+    - type: cosine_accuracy@1
+      value: 0.84
+      name: Cosine Accuracy@1
+      verified: false
+    - type: cosine_accuracy@3
+      value: 0.84
+      name: Cosine Accuracy@3
+      verified: false
+    - type: cosine_accuracy@5
+      value: 0.84
+      name: Cosine Accuracy@5
+      verified: false
+    - type: cosine_accuracy@10
+      value: 0.93
+      name: Cosine Accuracy@10
+      verified: false
+    - type: cosine_precision@1
+      value: 0.84
+      name: Cosine Precision@1
+      verified: false
+    - type: cosine_precision@3
+      value: 0.84
+      name: Cosine Precision@3
+      verified: false
+    - type: cosine_precision@5
+      value: 0.84
+      name: Cosine Precision@5
+      verified: false
+    - type: cosine_precision@10
+      value: 0.465
+      name: Cosine Precision@10
+      verified: false
+    - type: cosine_recall@1
+      value: 0.16799999999999998
+      name: Cosine Recall@1
+      verified: false
+    - type: cosine_recall@3
+      value: 0.504
+      name: Cosine Recall@3
+      verified: false
+    - type: cosine_recall@5
+      value: 0.84
+      name: Cosine Recall@5
+      verified: false
+    - type: cosine_recall@10
+      value: 0.93
+      name: Cosine Recall@10
+      verified: false
+    - type: cosine_ndcg@10
+      value: 0.8886895066001008
+      name: Cosine Ndcg@10
+      verified: false
+    - type: cosine_mrr@10
+      value: 0.855
+      name: Cosine Mrr@10
+      verified: false
+    - type: cosine_map@100
+      value: 0.8791923582191525
+      name: Cosine Map@100
+      verified: false
+config:
+  architectures:
+  - RobertaModel
+  model_type: roberta
+  tokenizer_config:
+    bos_token: <s>
+    cls_token: <s>
+    eos_token: </s>
+    mask_token: <mask>
+    pad_token: <pad>
+    sep_token: </s>
+    unk_token: <unk>
+cardData:
+  language:
+  - en
+  license: apache-2.0
+  tags:
+  - sentence-transformers
+  - sentence-similarity
+  - feature-extraction
+  - dense
+  - generated_from_trainer
+  - dataset_size:900
+  - loss:MatryoshkaLoss
+  - loss:MultipleNegativesRankingLoss
+  base_model: shubharuidas/codebert-embed-base-dense-retriever
+  widget:
+  - source_sentence: Best practices for __init__
+    sentences:
+    - "def close(self) -> None:\n        self.sync()\n        self.clear()"
+    - "class MyClass:\n        def __call__(self, state):\n            return\n\n        def class_method(self, state):\n\
+      \            return"
+    - "def __init__(self, name: str):\n            self.name = name\n            self.lock = threading.Lock()"
+  - source_sentence: Explain the close logic
+    sentences:
+    - "def close(self) -> None:\n        self.sync()\n        self.clear()"
+    - "def attach_node(self, key: str, node: StateNodeSpec[Any, ContextT] | None) -> None:\n        if key == START:\n   \
+      \         output_keys = [\n                k\n                for k, v in self.builder.schemas[self.builder.input_schema].items()\n\
+      \                if not is_managed_value(v)\n            ]\n        else:\n            output_keys = list(self.builder.channels)\
+      \ + [\n                k for k, v in self.builder.managed.items()\n            ]\n\n        def _get_updates(\n    \
+      \        input: None | dict | Any,\n        ) -> Sequence[tuple[str, Any]] | None:\n            if input is None:\n\
+      \                return None\n            elif isinstance(input, dict):\n                return [(k, v) for k, v in\
+      \ input.items() if k in output_keys]\n            elif isinstance(input, Command):\n                if input.graph ==\
+      \ Command.PARENT:\n                    return None\n                return [\n                    (k, v) for k, v in\
+      \ input._update_as_tuples() if k in output_keys\n                ]\n            elif (\n                isinstance(input,\
+      \ (list, tuple))\n                and input\n                and any(isinstance(i, Command) for i in input)\n      \
+      \      ):\n                updates: list[tuple[str, Any]] = []\n                for i in input:\n                  \
+      \  if isinstance(i, Command):\n                        if i.graph == Command.PARENT:\n                            continue\n\
+      \                        updates.extend(\n                            (k, v) for k, v in i._update_as_tuples() if k\
+      \ in output_keys\n                        )\n                    else:\n                        updates.extend(_get_updates(i)\
+      \ or ())\n                return updates\n            elif (t := type(input)) and get_cached_annotated_keys(t):\n  \
+      \              return get_update_as_tuples(input, output_keys)\n            else:\n                msg = create_error_message(\n\
+      \                    message=f\"Expected dict, got {input}\",\n                    error_code=ErrorCode.INVALID_GRAPH_NODE_RETURN_VALUE,\n\
+      \                )\n                raise InvalidUpdateError(msg)\n\n        # state updaters\n        write_entries:\
+      \ tuple[ChannelWriteEntry | ChannelWriteTupleEntry, ...] = (\n            ChannelWriteTupleEntry(\n                mapper=_get_root\
+      \ if output_keys == [\"__root__\"] else _get_updates\n            ),\n            ChannelWriteTupleEntry(\n        \
+      \        mapper=_control_branch,\n                static=_control_static(node.ends)\n                if node is not\
+      \ None and node.ends is not None\n                else None,\n            ),\n        )\n\n        # add node and output\
+      \ channel\n        if key == START:\n            self.nodes[key] = PregelNode(\n                tags=[TAG_HIDDEN],\n\
+      \                triggers=[START],\n                channels=START,\n                writers=[ChannelWrite(write_entries)],\n\
+      \            )\n        elif node is not None:\n            input_schema = node.input_schema if node else self.builder.state_schema\n\
+      \            input_channels = list(self.builder.schemas[input_schema])\n            is_single_input = len(input_channels)\
+      \ == 1 and \"__root__\" in input_channels\n            if input_schema in self.schema_to_mapper:\n                mapper\
+      \ = self.schema_to_mapper[input_schema]\n            else:\n                mapper = _pick_mapper(input_channels, input_schema)\n\
+      \                self.schema_to_mapper[input_schema] = mapper\n\n            branch_channel = _CHANNEL_BRANCH_TO.format(key)\n\
+      \            self.channels[branch_channel] = (\n                LastValueAfterFinish(Any)\n                if node.defer\n\
+      \                else EphemeralValue(Any, guard=False)\n            )\n            self.nodes[key] = PregelNode(\n \
+      \               triggers=[branch_channel],\n                # read state keys and managed values\n                channels=(\"\
+      __root__\" if is_single_input else input_channels),\n                # coerce state dict to schema class (eg. pydantic\
+      \ model)\n                mapper=mapper,\n                # publish to state keys\n                writers=[ChannelWrite(write_entries)],\n\
+      \                metadata=node.metadata,\n                retry_policy=node.retry_policy,\n                cache_policy=node.cache_policy,\n\
+      \                bound=node.runnable,  # type: ignore[arg-type]\n            )\n        else:\n            raise RuntimeError"
+    - "def tick(\n        self,\n        tasks: Iterable[PregelExecutableTask],\n        *,\n        reraise: bool = True,\n\
+      \        timeout: float | None = None,\n        retry_policy: Sequence[RetryPolicy] | None = None,\n        get_waiter:\
+      \ Callable[[], concurrent.futures.Future[None]] | None = None,\n        schedule_task: Callable[\n            [PregelExecutableTask,\
+      \ int, Call | None],\n            PregelExecutableTask | None,\n        ],\n    ) -> Iterator[None]:\n        tasks\
+      \ = tuple(tasks)\n        futures = FuturesDict(\n            callback=weakref.WeakMethod(self.commit),\n          \
+      \  event=threading.Event(),\n            future_type=concurrent.futures.Future,\n        )\n        # give control back\
+      \ to the caller\n        yield\n        # fast path if single task with no timeout and no waiter\n        if len(tasks)\
+      \ == 0:\n            return\n        elif len(tasks) == 1 and timeout is None and get_waiter is None:\n            t\
+      \ = tasks[0]\n            try:\n                run_with_retry(\n                    t,\n                    retry_policy,\n\
+      \                    configurable={\n                        CONFIG_KEY_CALL: partial(\n                           \
+      \ _call,\n                            weakref.ref(t),\n                            retry_policy=retry_policy,\n    \
+      \                        futures=weakref.ref(futures),\n                            schedule_task=schedule_task,\n \
+      \                           submit=self.submit,\n                        ),\n                    },\n              \
+      \  )\n                self.commit(t, None)\n            except Exception as exc:\n                self.commit(t, exc)\n\
+      \                if reraise and futures:\n                    # will be re-raised after futures are done\n         \
+      \           fut: concurrent.futures.Future = concurrent.futures.Future()\n                    fut.set_exception(exc)\n\
+      \                    futures.done.add(fut)\n                elif reraise:\n                    if tb := exc.__traceback__:\n\
+      \                        while tb.tb_next is not None and any(\n                            tb.tb_frame.f_code.co_filename.endswith(name)\n\
+      \                            for name in EXCLUDED_FRAME_FNAMES\n                        ):\n                       \
+      \     tb = tb.tb_next\n                        exc.__traceback__ = tb\n                    raise\n            if not\
+      \ futures:  # maybe `t` scheduled another task\n                return\n            else:\n                tasks = ()\
+      \  # don't reschedule this task\n        # add waiter task if requested\n        if get_waiter is not None:\n      \
+      \      futures[get_waiter()] = None\n        # schedule tasks\n        for t in tasks:\n            fut = self.submit()(\
+      \  # type: ignore[misc]\n                run_with_retry,\n                t,\n                retry_policy,\n      \
+      \          configurable={\n                    CONFIG_KEY_CALL: partial(\n                        _call,\n         \
+      \               weakref.ref(t),\n                        retry_policy=retry_policy,\n                        futures=weakref.ref(futures),\n\
+      \                        schedule_task=schedule_task,\n                        submit=self.submit,\n               \
+      \     ),\n                },\n                __reraise_on_exit__=reraise,\n            )\n            futures[fut]\
+      \ = t\n        # execute tasks, and wait for one to fail or all to finish.\n        # each task is independent from\
+      \ all other concurrent tasks\n        # yield updates/debug output as each task finishes\n        end_time = timeout\
+      \ + time.monotonic() if timeout else None\n        while len(futures) > (1 if get_waiter is not None else 0):\n    \
+      \        done, inflight = concurrent.futures.wait(\n                futures,\n                return_when=concurrent.futures.FIRST_COMPLETED,\n\
+      \                timeout=(max(0, end_time - time.monotonic()) if end_time else None),\n            )\n            if\
+      \ not done:\n                break  # timed out\n            for fut in done:\n                task = futures.pop(fut)\n\
+      \                if task is None:\n                    # waiter task finished, schedule another\n                  \
+      \  if inflight and get_waiter is not None:\n                        futures[get_waiter()] = None\n            else:\n\
+      \                # remove references to loop vars\n                del fut, task\n            # maybe stop other tasks\n\
+      \            if _should_stop_others(done):\n                break\n            # give control back to the caller\n \
+      \           yield\n        # wait for done callbacks\n        futures.event.wait(\n            timeout=(max(0, end_time\
+      \ - time.monotonic()) if end_time else None)\n        )\n        # give control back to the caller\n        yield\n\
+      \        # panic on failure or timeout\n        try:\n            _panic_or_proceed(\n                futures.done.union(f\
+      \ for f, t in futures.items() if t is not None),\n                panic=reraise,\n            )\n        except Exception\
+      \ as exc:\n            if tb := exc.__traceback__:\n                while tb.tb_next is not None and any(\n        \
+      \            tb.tb_frame.f_code.co_filename.endswith(name)\n                    for name in EXCLUDED_FRAME_FNAMES\n\
+      \                ):\n                    tb = tb.tb_next\n                exc.__traceback__ = tb\n            raise"
+  - source_sentence: Explain the async aupdate_state logic
+    sentences:
+    - "class MyClass:\n        def __call__(self, state):\n            return\n\n        def class_method(self, state):\n\
+      \            return"
+    - "async def aupdate_state(\n        self,\n        config: RunnableConfig,\n        values: dict[str, Any] | Any | None,\n\
+      \        as_node: str | None = None,\n        *,\n        headers: dict[str, str] | None = None,\n        params: QueryParamTypes\
+      \ | None = None,\n    ) -> RunnableConfig:\n        \"\"\"Update the state of a thread.\n\n        This method calls\
+      \ `POST /threads/{thread_id}/state`.\n\n        Args:\n            config: A `RunnableConfig` that includes `thread_id`\
+      \ in the\n                `configurable` field.\n            values: Values to update to the state.\n            as_node:\
+      \ Update the state as if this node had just executed.\n\n        Returns:\n            `RunnableConfig` for the updated\
+      \ thread.\n        \"\"\"\n        client = self._validate_client()\n        merged_config = merge_configs(self.config,\
+      \ config)\n\n        response: dict = await client.threads.update_state(  # type: ignore\n            thread_id=merged_config[\"\
+      configurable\"][\"thread_id\"],\n            values=values,\n            as_node=as_node,\n            checkpoint=self._get_checkpoint(merged_config),\n\
+      \            headers=headers,\n            params=params,\n        )\n        return self._get_config(response[\"checkpoint\"\
+      ])"
+    - "def __init__(self, typ: Any, guard: bool = True) -> None:\n        super().__init__(typ)\n        self.guard = guard\n\
+      \        self.value = MISSING"
+  - source_sentence: How to implement langchain_to_openai_messages?
+    sentences:
+    - "def __init__(\n        self,\n        message: str,\n        *args: object,\n        since: tuple[int, int],\n    \
+      \    expected_removal: tuple[int, int] | None = None,\n    ) -> None:\n        super().__init__(message, *args)\n  \
+      \      self.message = message.rstrip(\".\")\n        self.since = since\n        self.expected_removal = (\n       \
+      \     expected_removal if expected_removal is not None else (since[0] + 1, 0)\n        )"
+    - "def test_batch_get_ops(store: PostgresStore) -> None:\n    # Setup test data\n    store.put((\"test\",), \"key1\",\
+      \ {\"data\": \"value1\"})\n    store.put((\"test\",), \"key2\", {\"data\": \"value2\"})\n\n    ops = [\n        GetOp(namespace=(\"\
+      test\",), key=\"key1\"),\n        GetOp(namespace=(\"test\",), key=\"key2\"),\n        GetOp(namespace=(\"test\",),\
+      \ key=\"key3\"),  # Non-existent key\n    ]\n\n    results = store.batch(ops)\n\n    assert len(results) == 3\n    assert\
+      \ results[0] is not None\n    assert results[1] is not None\n    assert results[2] is None\n    assert results[0].key\
+      \ == \"key1\"\n    assert results[1].key == \"key2\""
+    - "def langchain_to_openai_messages(messages: List[BaseMessage]):\n    \"\"\"\n    Convert a list of langchain base messages\
+      \ to a list of openai messages.\n\n    Parameters:\n        messages (List[BaseMessage]): A list of langchain base messages.\n\
+      \n    Returns:\n        List[dict]: A list of openai messages.\n    \"\"\"\n\n    return [\n        convert_message_to_dict(m)\
+      \ if isinstance(m, BaseMessage) else m\n        for m in messages\n    ]"
+  - source_sentence: Explain the CheckpointPayload logic
+    sentences:
+    - "class LocalDeps(NamedTuple):\n    \"\"\"A container for referencing and managing local Python dependencies.\n\n   \
+      \ A \"local dependency\" is any entry in the config's `dependencies` list\n    that starts with \".\" (dot), denoting\
+      \ a relative path\n    to a local directory containing Python code.\n\n    For each local dependency, the system inspects\
+      \ its directory to\n    determine how it should be installed inside the Docker container.\n\n    Specifically, we detect:\n\
+      \n    - **Real packages**: Directories containing a `pyproject.toml` or a `setup.py`.\n      These can be installed\
+      \ with pip as a regular Python package.\n    - **Faux packages**: Directories that do not include a `pyproject.toml`\
+      \ or\n      `setup.py` but do contain Python files and possibly an `__init__.py`. For\n      these, the code dynamically\
+      \ generates a minimal `pyproject.toml` in the\n      Docker image so that they can still be installed with pip.\n  \
+      \  - **Requirements files**: If a local dependency directory\n      has a `requirements.txt`, it is tracked so that\
+      \ those dependencies\n      can be installed within the Docker container before installing the local package.\n\n  \
+      \  Attributes:\n        pip_reqs: A list of (host_requirements_path, container_requirements_path)\n            tuples.\
+      \ Each entry points to a local `requirements.txt` file and where\n            it should be placed inside the Docker\
+      \ container before running `pip install`.\n\n        real_pkgs: A dictionary mapping a local directory path (host side)\
+      \ to a\n            tuple of (dependency_string, container_package_path). These directories\n            contain the\
+      \ necessary files (e.g., `pyproject.toml` or `setup.py`) to be\n            installed as a standard Python package with\
+      \ pip.\n\n        faux_pkgs: A dictionary mapping a local directory path (host side) to a\n            tuple of (dependency_string,\
+      \ container_package_path). For these\n            directories—called \"faux packages\"—the code will generate a minimal\n\
+      \            `pyproject.toml` inside the Docker image. This ensures that pip\n            recognizes them as installable\
+      \ packages, even though they do not\n            natively include packaging metadata.\n\n        working_dir: The path\
+      \ inside the Docker container to use as the working\n            directory. If the local dependency `\".\"` is present\
+      \ in the config, this\n            field captures the path where that dependency will appear in the\n            container\
+      \ (e.g., `/deps/<name>` or similar). Otherwise, it may be `None`.\n\n        additional_contexts: A list of paths to\
+      \ directories that contain local\n            dependencies in parent directories. These directories are added to the\n\
+      \            Docker build context to ensure that the Dockerfile can access them.\n    \"\"\"\n\n    pip_reqs: list[tuple[pathlib.Path,\
+      \ str]]\n    real_pkgs: dict[pathlib.Path, tuple[str, str]]\n    faux_pkgs: dict[pathlib.Path, tuple[str, str]]\n  \
+      \  # if . is in dependencies, use it as working_dir\n    working_dir: str | None = None\n    # if there are local dependencies\
+      \ in parent directories, use additional_contexts\n    additional_contexts: list[pathlib.Path] = None"
+    - "class CheckpointPayload(TypedDict):\n    config: RunnableConfig | None\n    metadata: CheckpointMetadata\n    values:\
+      \ dict[str, Any]\n    next: list[str]\n    parent_config: RunnableConfig | None\n    tasks: list[CheckpointTask]"
+    - "class _RuntimeOverrides(TypedDict, Generic[ContextT], total=False):\n    context: ContextT\n    store: BaseStore |\
+      \ None\n    stream_writer: StreamWriter\n    previous: Any"
+  pipeline_tag: sentence-similarity
+  library_name: sentence-transformers
+  metrics:
+  - cosine_accuracy@1
+  - cosine_accuracy@3
+  - cosine_accuracy@5
+  - cosine_accuracy@10
+  - cosine_precision@1
+  - cosine_precision@3
+  - cosine_precision@5
+  - cosine_precision@10
+  - cosine_recall@1
+  - cosine_recall@3
+  - cosine_recall@5
+  - cosine_recall@10
+  - cosine_ndcg@10
+  - cosine_mrr@10
+  - cosine_map@100
+  model-index:
+  - name: codeBert dense retriever
+    results:
+    - task:
+        type: information-retrieval
+        name: Information Retrieval
+      dataset:
+        name: dim 768
+        type: dim_768
+      metrics:
+      - type: cosine_accuracy@1
+        value: 0.84
+        name: Cosine Accuracy@1
+        verified: false
+      - type: cosine_accuracy@3
+        value: 0.84
+        name: Cosine Accuracy@3
+        verified: false
+      - type: cosine_accuracy@5
+        value: 0.84
+        name: Cosine Accuracy@5
+        verified: false
+      - type: cosine_accuracy@10
+        value: 0.93
+        name: Cosine Accuracy@10
+        verified: false
+      - type: cosine_precision@1
+        value: 0.84
+        name: Cosine Precision@1
+        verified: false
+      - type: cosine_precision@3
+        value: 0.84
+        name: Cosine Precision@3
+        verified: false
+      - type: cosine_precision@5
+        value: 0.84
+        name: Cosine Precision@5
+        verified: false
+      - type: cosine_precision@10
+        value: 0.465
+        name: Cosine Precision@10
+        verified: false
+      - type: cosine_recall@1
+        value: 0.16799999999999998
+        name: Cosine Recall@1
+        verified: false
+      - type: cosine_recall@3
+        value: 0.504
+        name: Cosine Recall@3
+        verified: false
+      - type: cosine_recall@5
+        value: 0.84
+        name: Cosine Recall@5
+        verified: false
+      - type: cosine_recall@10
+        value: 0.93
+        name: Cosine Recall@10
+        verified: false
+      - type: cosine_ndcg@10
+        value: 0.8886895066001008
+        name: Cosine Ndcg@10
+        verified: false
+      - type: cosine_mrr@10
+        value: 0.855
+        name: Cosine Mrr@10
+        verified: false
+      - type: cosine_map@100
+        value: 0.877942533867708
+        name: Cosine Map@100
+        verified: false
+    - task:
+        type: information-retrieval
+        name: Information Retrieval
+      dataset:
+        name: dim 512
+        type: dim_512
+      metrics:
+      - type: cosine_accuracy@1
+        value: 0.88
+        name: Cosine Accuracy@1
+        verified: false
+      - type: cosine_accuracy@3
+        value: 0.88
+        name: Cosine Accuracy@3
+        verified: false
+      - type: cosine_accuracy@5
+        value: 0.88
+        name: Cosine Accuracy@5
+        verified: false
+      - type: cosine_accuracy@10
+        value: 0.93
+        name: Cosine Accuracy@10
+        verified: false
+      - type: cosine_precision@1
+        value: 0.88
+        name: Cosine Precision@1
+        verified: false
+      - type: cosine_precision@3
+        value: 0.88
+        name: Cosine Precision@3
+        verified: false
+      - type: cosine_precision@5
+        value: 0.88
+        name: Cosine Precision@5
+        verified: false
+      - type: cosine_precision@10
+        value: 0.465
+        name: Cosine Precision@10
+        verified: false
+      - type: cosine_recall@1
+        value: 0.17599999999999993
+        name: Cosine Recall@1
+        verified: false
+      - type: cosine_recall@3
+        value: 0.528
+        name: Cosine Recall@3
+        verified: false
+      - type: cosine_recall@5
+        value: 0.88
+        name: Cosine Recall@5
+        verified: false
+      - type: cosine_recall@10
+        value: 0.93
+        name: Cosine Recall@10
+        verified: false
+      - type: cosine_ndcg@10
+        value: 0.907049725888945
+        name: Cosine Ndcg@10
+        verified: false
+      - type: cosine_mrr@10
+        value: 0.8883333333333333
+        name: Cosine Mrr@10
+        verified: false
+      - type: cosine_map@100
+        value: 0.9038835868016827
+        name: Cosine Map@100
+        verified: false
+    - task:
+        type: information-retrieval
+        name: Information Retrieval
+      dataset:
+        name: dim 256
+        type: dim_256
+      metrics:
+      - type: cosine_accuracy@1
+        value: 0.87
+        name: Cosine Accuracy@1
+        verified: false
+      - type: cosine_accuracy@3
+        value: 0.87
+        name: Cosine Accuracy@3
+        verified: false
+      - type: cosine_accuracy@5
+        value: 0.87
+        name: Cosine Accuracy@5
+        verified: false
+      - type: cosine_accuracy@10
+        value: 0.92
+        name: Cosine Accuracy@10
+        verified: false
+      - type: cosine_precision@1
+        value: 0.87
+        name: Cosine Precision@1
+        verified: false
+      - type: cosine_precision@3
+        value: 0.87
+        name: Cosine Precision@3
+        verified: false
+      - type: cosine_precision@5
+        value: 0.87
+        name: Cosine Precision@5
+        verified: false
+      - type: cosine_precision@10
+        value: 0.46
+        name: Cosine Precision@10
+        verified: false
+      - type: cosine_recall@1
+        value: 0.17399999999999996
+        name: Cosine Recall@1
+        verified: false
+      - type: cosine_recall@3
+        value: 0.522
+        name: Cosine Recall@3
+        verified: false
+      - type: cosine_recall@5
+        value: 0.87
+        name: Cosine Recall@5
+        verified: false
+      - type: cosine_recall@10
+        value: 0.92
+        name: Cosine Recall@10
+        verified: false
+      - type: cosine_ndcg@10
+        value: 0.8970497258889449
+        name: Cosine Ndcg@10
+        verified: false
+      - type: cosine_mrr@10
+        value: 0.8783333333333334
+        name: Cosine Mrr@10
+        verified: false
+      - type: cosine_map@100
+        value: 0.8959313741265157
+        name: Cosine Map@100
+        verified: false
+    - task:
+        type: information-retrieval
+        name: Information Retrieval
+      dataset:
+        name: dim 128
+        type: dim_128
+      metrics:
+      - type: cosine_accuracy@1
+        value: 0.86
+        name: Cosine Accuracy@1
+        verified: false
+      - type: cosine_accuracy@3
+        value: 0.86
+        name: Cosine Accuracy@3
+        verified: false
+      - type: cosine_accuracy@5
+        value: 0.86
+        name: Cosine Accuracy@5
+        verified: false
+      - type: cosine_accuracy@10
+        value: 0.95
+        name: Cosine Accuracy@10
+        verified: false
+      - type: cosine_precision@1
+        value: 0.86
+        name: Cosine Precision@1
+        verified: false
+      - type: cosine_precision@3
+        value: 0.86
+        name: Cosine Precision@3
+        verified: false
+      - type: cosine_precision@5
+        value: 0.86
+        name: Cosine Precision@5
+        verified: false
+      - type: cosine_precision@10
+        value: 0.475
+        name: Cosine Precision@10
+        verified: false
+      - type: cosine_recall@1
+        value: 0.17199999999999996
+        name: Cosine Recall@1
+        verified: false
+      - type: cosine_recall@3
+        value: 0.516
+        name: Cosine Recall@3
+        verified: false
+      - type: cosine_recall@5
+        value: 0.86
+        name: Cosine Recall@5
+        verified: false
+      - type: cosine_recall@10
+        value: 0.95
+        name: Cosine Recall@10
+        verified: false
+      - type: cosine_ndcg@10
+        value: 0.9086895066001008
+        name: Cosine Ndcg@10
+        verified: false
+      - type: cosine_mrr@10
+        value: 0.875
+        name: Cosine Mrr@10
+        verified: false
+      - type: cosine_map@100
+        value: 0.8949791356739454
+        name: Cosine Map@100
+        verified: false
+    - task:
+        type: information-retrieval
+        name: Information Retrieval
+      dataset:
+        name: dim 64
+        type: dim_64
+      metrics:
+      - type: cosine_accuracy@1
+        value: 0.84
+        name: Cosine Accuracy@1
+        verified: false
+      - type: cosine_accuracy@3
+        value: 0.84
+        name: Cosine Accuracy@3
+        verified: false
+      - type: cosine_accuracy@5
+        value: 0.84
+        name: Cosine Accuracy@5
+        verified: false
+      - type: cosine_accuracy@10
+        value: 0.93
+        name: Cosine Accuracy@10
+        verified: false
+      - type: cosine_precision@1
+        value: 0.84
+        name: Cosine Precision@1
+        verified: false
+      - type: cosine_precision@3
+        value: 0.84
+        name: Cosine Precision@3
+        verified: false
+      - type: cosine_precision@5
+        value: 0.84
+        name: Cosine Precision@5
+        verified: false
+      - type: cosine_precision@10
+        value: 0.465
+        name: Cosine Precision@10
+        verified: false
+      - type: cosine_recall@1
+        value: 0.16799999999999998
+        name: Cosine Recall@1
+        verified: false
+      - type: cosine_recall@3
+        value: 0.504
+        name: Cosine Recall@3
+        verified: false
+      - type: cosine_recall@5
+        value: 0.84
+        name: Cosine Recall@5
+        verified: false
+      - type: cosine_recall@10
+        value: 0.93
+        name: Cosine Recall@10
+        verified: false
+      - type: cosine_ndcg@10
+        value: 0.8886895066001008
+        name: Cosine Ndcg@10
+        verified: false
+      - type: cosine_mrr@10
+        value: 0.855
+        name: Cosine Mrr@10
+        verified: false
+      - type: cosine_map@100
+        value: 0.8791923582191525
+        name: Cosine Map@100
+        verified: false
+siblings:
+- rfilename: .gitattributes
+- rfilename: 1_Pooling/config.json
+- rfilename: README.md
+- rfilename: config.json
+- rfilename: config_sentence_transformers.json
+- rfilename: merges.txt
+- rfilename: model.safetensors
+- rfilename: modules.json
+- rfilename: sentence_bert_config.json
+- rfilename: special_tokens_map.json
+- rfilename: tokenizer.json
+- rfilename: tokenizer_config.json
+- rfilename: vocab.json
+spaces:
+- icyayaka/CodeMode
+- the-jashthakkar/CodeMode
+createdAt: '2026-01-22T18:18:52.000Z'
+safetensors:
+  parameters:
+    F32: 124645632
+  total: 124645632
+usedStorage: 498604904
+downloadsAllTime: 249
+inferenceProviderMapping: {}
+configJson:
+  architectures:
+  - RobertaModel
+  attention_probs_dropout_prob: 0.1
+  bos_token_id: 0
+  classifier_dropout: null
+  dtype: float32
+  eos_token_id: 2
+  hidden_act: gelu
+  hidden_dropout_prob: 0.1
+  hidden_size: 768
+  initializer_range: 0.02
+  intermediate_size: 3072
+  layer_norm_eps: 1.0e-05
+  max_position_embeddings: 514
+  model_type: roberta
+  num_attention_heads: 12
+  num_hidden_layers: 12
+  output_past: true
+  pad_token_id: 1
+  position_embedding_type: absolute
+  transformers_version: 4.57.6
+  type_vocab_size: 1
+  use_cache: true
+  vocab_size: 50265
+onnxFiles: {}
+safetensorsSizeMb: 498.6
+approxSizeMb: 498.6
+fetchedAt: '2026-06-08T16:42:43.000Z'

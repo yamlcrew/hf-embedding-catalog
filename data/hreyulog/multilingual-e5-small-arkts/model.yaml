@@ -1,0 +1,329 @@
+_id: 6a055d267c68f7caa0d92aa3
+id: hreyulog/multilingual-e5-small-arkts
+private: false
+pipeline_tag: sentence-similarity
+library_name: sentence-transformers
+tags:
+- sentence-transformers
+- safetensors
+- bert
+- sentence-similarity
+- feature-extraction
+- generated_from_trainer
+- dataset_size:19561
+- loss:MultipleNegativesRankingLoss
+- arxiv:2602.05550
+- base_model:intfloat/multilingual-e5-small
+- base_model:finetune:intfloat/multilingual-e5-small
+- text-embeddings-inference
+- endpoints_compatible
+- region:us
+downloads: 66
+likes: 0
+modelId: hreyulog/multilingual-e5-small-arkts
+author: hreyulog
+sha: 772d6f34ec7491a8c7630357bc3a3b67e47b8c5a
+lastModified: '2026-05-14T05:58:29.000Z'
+gated: false
+disabled: false
+mask_token: '[MASK]'
+widgetData:
+- source_sentence: "query: 获取mock数据的json名称 \n功能描述: 本示例介绍了@ohos.multimedia.media组件和@ohos.window接口以及使用触摸热区实现视频横竖屏切换及进度条热区拖动的功能\n\
+    \n推荐场景: 横竖屏视频等媒体播放场景\n\n核心组件:\n1. AVPlayer\n\n实现步骤:\n1. 初始化@ohos.multimedia.media的AVPlayer。\n2. 当AVPlayer初始化完毕进入initialized状态时，将XComponent和AVPlayer通过surfaceId绑定。\n\
+    3. 使用AVPlayer中的width和height属性判断是横屏视频还是竖屏视频，方便判断是否需要展示全屏观看按钮。\n4. 调用@ohos.window的 getLastWindow 方法获取当前应用内最上层的子窗口\n5. 利用获取到的窗口对象，调用\
+    \ setWindowSystemBarEnable 方法设置窗口是否显示导航栏和状态栏。\n6. 调用窗口对象的 setPreferredOrientation 方法设置窗口旋转方向以及是否应用重力感应。\n7. 调用窗口对象的setWindowLayoutFullScreen方法实现沉浸式布局。\n\
+    8. 对进度条整个组件设置触摸热区。"
+  sentences:
+  - "passage:\npath: CommonAppDevelopment/feature/videoscreendirectionswitching/src/main/ets/view/VideoScreenDirectionSwitching.ets\n\
+    identifier: VideoScreenDirectionSwitchingComponent\ncode: @Component\nexport struct VideoScreenDirectionSwitchingComponent\
+    \ {\n  @State contentData: FlowItemContentsData = new FlowItemContentsData(); // 瀑布流内容\n  @State selectedVideo: string\
+    \ = ''; // 选择的视频名称\n  @State selectedIndex: number = 0; // 选择的视频index\n  @State isLandscape: boolean = false; // 是否横屏状态\n\
+    \  @State isLandscapeStart: boolean = false; // 是否开始横屏动画\n  @State statusHeight: number = 0; // 系统状态栏高度\n  @State bottomHeight:\
+    \ number = 0; // 系统导航栏高度\n  windowClass?: window.Window;\n\n  async aboutToAppear() {\n    // 进入沉浸式\n    this.windowClass\
+    \ = await window.getLastWindow(getContext(this));\n    let sysBarProps: window.SystemBarProperties = {\n      statusBarContentColor:\
+    \ '#FFFFFF'\n    };\n    this.windowClass?.setWindowSystemBarProperties(sysBarProps);\n    this.statusHeight = this.windowClass.getWindowAvoidArea(window.AvoidAreaType.TYPE_SYSTEM).topRect.height;\n\
+    \    this.bottomHeight = this.windowClass.getWindowAvoidArea(window.AvoidAreaType.TYPE_NAVIGATION_INDICATOR).bottomRect.height;\n\
+    \    this.windowClass.setWindowLayoutFullScreen(true);\n    // 获取JSON中的列表数据\n    const jsonObj: JsonObject = new JsonObject(JSON_URI);\n\
+    \    const array = await jsonObj.getFlowItemContentObj();\n    this.contentData.pushDat"
+  - "passage:\npath: core/designsystem/src/main/ets/component/Column.ets\nidentifier: \ncode: build(): void {\n    ColumnBase({\n\
+    \      options: this.options,\n      justifyContent: FlexAlign.SpaceEvenly,\n      alignItems: HorizontalAlign.End,\n\
+    \      widthValue: this.widthValue,\n      heightValue: this.heightValue,\n      sizeValue: this.sizeValue,\n      paddingValue:\
+    \ this.paddingValue,\n      marginValue: this.marginValue,\n      fillMaxSize: this.fillMaxSize,\n      bgColor: this.bgColor,\n\
+    \      onTap: this.onTap,\n      content: this.content\n    });\n  }"
+  - "passage:\npath: code/Solutions/IM/Chat/features/chatlist/src/main/ets/utils/DataFactory.ets\nidentifier: \ncode: export\
+    \ async function getChatModelObjFromJSON(MockDataFileDir: string): Promise<Array<ChatModel>> {\n  Logger.info(TAG, 'getChatModelObjFromJSON');\n\
+    \  let jsonObj: JsonObject = new JsonObject(MockDataFileDir);\n  return await jsonObj.getChatModelObj(MockDataFileDir);\n\
+    }"
+- source_sentence: 'query: Copyright (c) 2024 Huawei Device Co., Ltd.
+
+    Licensed under the Apache License, Version 2.0 (the "License");
+
+    you may not use this file except in compliance with the License.
+
+    You may obtain a copy of the License at
+
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+
+    Unless required by applicable law or agreed to in writing, software
+
+    distributed under the License is distributed on an "AS IS" BASIS,
+
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+
+    See the License for the specific language governing permissions and
+
+    limitations under the License.'
+  sentences:
+  - 'passage:
+
+    path: api/@ohos.deviceInfo.d.ets
+
+    identifier: get
+
+    code: static get hardwareModel(): string;'
+  - "passage:\npath: entry/src/main/ets/common/components/Sounds/Cloud/Download/CMetaInfo_CFile/CMetaInfo.ets\nidentifier:\
+    \ equals\ncode: static equals(lhs: CMetaInfo, rhs: CMetaInfo): boolean {\n    return lhs.fileName === rhs.fileName;\n\
+    \  }"
+  - 'passage:
+
+    path: CommonAppDevelopment/feature/customscan/Index.ets
+
+    identifier: CustomScanPage
+
+    code: export { CustomScanPage } from ''./src/main/ets/pages/CustomScanPage'';'
+- source_sentence: 'query: 当前设备是否支持该模块
+
+    @returns'
+  sentences:
+  - "passage:\npath: ETSUI/OHLayoutAlign/entry/src/main/ets/common/constants/CommonConstants.ets\nidentifier: \ncode: export\
+    \ const COMPONENT_NAME: string = 'componentName';"
+  - "passage:\npath: harmony_utils/src/main/ets/utils/AssetUtil.ets\nidentifier: canIUse\ncode: static canIUse() {\n    return\
+    \ canIUse(\"SystemCapability.Security.Asset\")\n  }"
+  - "passage:\npath: entry/src/main/ets/models/managers/servercfg/AppCfgManager.ets\nidentifier: \ncode: export enum AppCfg\
+    \ {\n  // 通用配置\n  Dictation_Detect_Merged_Api_GeneralOrHandwriting = \"Dictation_Detect_Merged_Api_GeneralOrHandwriting\"\
+    , // [通用] 听写合并检测Api使用通用还是手写\n\n  InAppBooks_Show_In_SaveToBooks                    = \"InAppBooks_Show_In_SaveToBooks\"\
+    ,                   // [通用] 内置课本 在SaveToBooks（CopyTo，ImportCsv）时是否显示\n  InAppBooks_Can_ShareOnline                   \
+    \     = \"InAppBooks_Can_ShareOnline\",                       // [通用] 内置课本 可否分享到 在线课本\n  CreatedUserCards_Can_ShareOnline\
+    \                  = \"CreatedUserCards_Can_ShareOnline\",                 // [通用] 用户卡片 可否分享到 在线课本\n  BookOnline_Download_is_ON\
+    \                         = \"BookOnline_Download_is_ON\",                        // [通用] 在线课本是否可查看或下载\n  BookOnline_Publish_is_ON\
+    \                          = \"BookOnline_Publish_is_ON\",                         // [通用] 在线课本是否可以发布\n  Android_HowTo_CreateCSV_idx_in_Instruction\
+    \        = \"Android_HowTo_CreateCSV_idx_in_Instruction\",       // [通用] 如何制作csv并发布到手机 在Instruction中对应的idx\n  Android_HowTo_Imort_SharedData_idx_in_Instruction\
+    \ = \"Android_HowTo_Imort_SharedData_idx_in_Instruction\",// [通用] 如何导入他人分享的数据? 在Instruction中对应的idx\n  Android_ShareAppLink_idx_in_Instruction\
+    \           = \"Android_ShareAppLink"
+- source_sentence: 'query: 定义组件的渲染函数'
+  sentences:
+  - "passage:\npath: library/src/main/ets/components/renderer/DataRenderer.ets\nidentifier: getPaintRender\ncode: public getPaintRender():\
+    \ Paint {\n    return this.mRenderPaint;\n  }"
+  - "passage:\npath: feature/demo/src/main/ets/viewmodel/DatabaseViewModel.ets\nidentifier: updateTitleInput\ncode: updateTitleInput(value:\
+    \ string): void {\n    this.titleInput = value;\n  }"
+  - "passage:\npath: entry/src/main/ets/view/BackContainer.ets\nidentifier: \ncode: build() {\n    Row() {\n      // 创建返回按钮\n\
+    \      Button() {\n        // 设置按钮的图像，如果未设置 backImgRes，则使用默认图像 \"app.media.ic_public_back\"\n        Image(this.backImgRes\
+    \ == null ? $r('app.media.ic_public_back') : this.backImgRes).objectFit(ImageFit.Fill)\n      }\n      // 设置按钮的背景颜色为透明\n\
+    \      .backgroundColor($r('app.color.trans_parent'))\n      // 设置按钮的宽度和高度，使用 DimensionUtil.getVp 获取尺寸\n      .width(DimensionUtil.getVp($r('app.float.title_button_size')))\n\
+    \      .height(DimensionUtil.getVp($r('app.float.title_button_size')))\n      // 定义按钮的点击事件\n      .onClick(() => {\n \
+    \       // 如果设置了 backFunc，执行 backFunc；否则，执行默认的路由返回操作\n        this.backFunc ? this.backFunc() : router.back();\n     \
+    \ })\n\n      // 创建标题文本\n      Text(this.header)\n        // 设置文本的字体大小、行高、左边距、字体颜色、字体粗细\n        .fontSize(DimensionUtil.getFp($r('app.float.detail_title_font_size')))\n\
+    \        .lineHeight(DimensionUtil.getVp($r('app.float.title_line_height')))\n        .margin({ left: DimensionUtil.getVp($r('app.float.title_margin'))\
+    \ })\n        .fontColor($r('app.color.grey_divider'))\n        .fontWeight(FontWeight.Bold)\n\n      // 创建一个空白组件，用于添加关闭按钮\n\
+    \      Blank()\n\n      // 调用传入的组件闭包\n      this.closer();\n    }\n    // 设置整个容器的内边距\n    .padding({\n      lef"
+- source_sentence: 'query: Persistent geographical location, re-enter to determine if the switch is turned on'
+  sentences:
+  - "passage:\npath: code/BasicFeature/Media/Camera/entry/src/main/ets/Dialog/SettingDialog.ets\nidentifier: getLocationBol\n\
+    code: getLocationBol(bol: boolean) {\n    this.settingDataObj.locationBol = bol;\n  }"
+  - "passage:\npath: Media/VideoPlayer/entry/src/main/ets/viewmodel/HomeVideoListModel.ets\nidentifier: assemblingVideoBean\n\
+    code: async assemblingVideoBean() {\n    VIDEO_DATA.forEach(async (item: VideoItem) => {\n      let videoBean = await\
+    \ getContext().resourceManager.getRawFd(item.iSrc);\n      let uri = videoBean;\n      this.videoLocalList.push(new VideoItem(item.name,\
+    \ uri, ''));\n    });\n  }"
+  - "passage:\npath: custom_dialog/src/main/ets/model/modifier/TextAreaInputFilterModifier.ets\nidentifier: \ncode: export\
+    \ class TextAreaInputFilterModifier implements AttributeModifier<TextAreaAttribute> {\n  inputFilter?: InputFilter;\n\n\
+    \  applyNormalAttribute(instance: TextAreaAttribute): void {\n    if (this.inputFilter) {\n      instance.inputFilter(this.inputFilter.value,\
+    \ this.inputFilter.error);\n    }\n  }\n}"
+model-index: null
+config:
+  architectures:
+  - BertModel
+  model_type: bert
+  tokenizer_config:
+    bos_token: <s>
+    cls_token: <s>
+    eos_token: </s>
+    mask_token: <mask>
+    pad_token: <pad>
+    sep_token: </s>
+    unk_token: <unk>
+cardData:
+  tags:
+  - sentence-transformers
+  - sentence-similarity
+  - feature-extraction
+  - generated_from_trainer
+  - dataset_size:19561
+  - loss:MultipleNegativesRankingLoss
+  base_model: intfloat/multilingual-e5-small
+  widget:
+  - source_sentence: "query: 获取mock数据的json名称 \n功能描述: 本示例介绍了@ohos.multimedia.media组件和@ohos.window接口以及使用触摸热区实现视频横竖屏切换及进度条热区拖动的功能\n\
+      \n推荐场景: 横竖屏视频等媒体播放场景\n\n核心组件:\n1. AVPlayer\n\n实现步骤:\n1. 初始化@ohos.multimedia.media的AVPlayer。\n2. 当AVPlayer初始化完毕进入initialized状态时，将XComponent和AVPlayer通过surfaceId绑定。\n\
+      3. 使用AVPlayer中的width和height属性判断是横屏视频还是竖屏视频，方便判断是否需要展示全屏观看按钮。\n4. 调用@ohos.window的 getLastWindow 方法获取当前应用内最上层的子窗口\n5.\
+      \ 利用获取到的窗口对象，调用 setWindowSystemBarEnable 方法设置窗口是否显示导航栏和状态栏。\n6. 调用窗口对象的 setPreferredOrientation 方法设置窗口旋转方向以及是否应用重力感应。\n\
+      7. 调用窗口对象的setWindowLayoutFullScreen方法实现沉浸式布局。\n8. 对进度条整个组件设置触摸热区。"
+    sentences:
+    - "passage:\npath: CommonAppDevelopment/feature/videoscreendirectionswitching/src/main/ets/view/VideoScreenDirectionSwitching.ets\n\
+      identifier: VideoScreenDirectionSwitchingComponent\ncode: @Component\nexport struct VideoScreenDirectionSwitchingComponent\
+      \ {\n  @State contentData: FlowItemContentsData = new FlowItemContentsData(); // 瀑布流内容\n  @State selectedVideo: string\
+      \ = ''; // 选择的视频名称\n  @State selectedIndex: number = 0; // 选择的视频index\n  @State isLandscape: boolean = false; // 是否横屏状态\n\
+      \  @State isLandscapeStart: boolean = false; // 是否开始横屏动画\n  @State statusHeight: number = 0; // 系统状态栏高度\n  @State bottomHeight:\
+      \ number = 0; // 系统导航栏高度\n  windowClass?: window.Window;\n\n  async aboutToAppear() {\n    // 进入沉浸式\n    this.windowClass\
+      \ = await window.getLastWindow(getContext(this));\n    let sysBarProps: window.SystemBarProperties = {\n      statusBarContentColor:\
+      \ '#FFFFFF'\n    };\n    this.windowClass?.setWindowSystemBarProperties(sysBarProps);\n    this.statusHeight = this.windowClass.getWindowAvoidArea(window.AvoidAreaType.TYPE_SYSTEM).topRect.height;\n\
+      \    this.bottomHeight = this.windowClass.getWindowAvoidArea(window.AvoidAreaType.TYPE_NAVIGATION_INDICATOR).bottomRect.height;\n\
+      \    this.windowClass.setWindowLayoutFullScreen(true);\n    // 获取JSON中的列表数据\n    const jsonObj: JsonObject = new JsonObject(JSON_URI);\n\
+      \    const array = await jsonObj.getFlowItemContentObj();\n    this.contentData.pushDat"
+    - "passage:\npath: core/designsystem/src/main/ets/component/Column.ets\nidentifier: \ncode: build(): void {\n    ColumnBase({\n\
+      \      options: this.options,\n      justifyContent: FlexAlign.SpaceEvenly,\n      alignItems: HorizontalAlign.End,\n\
+      \      widthValue: this.widthValue,\n      heightValue: this.heightValue,\n      sizeValue: this.sizeValue,\n      paddingValue:\
+      \ this.paddingValue,\n      marginValue: this.marginValue,\n      fillMaxSize: this.fillMaxSize,\n      bgColor: this.bgColor,\n\
+      \      onTap: this.onTap,\n      content: this.content\n    });\n  }"
+    - "passage:\npath: code/Solutions/IM/Chat/features/chatlist/src/main/ets/utils/DataFactory.ets\nidentifier: \ncode: export\
+      \ async function getChatModelObjFromJSON(MockDataFileDir: string): Promise<Array<ChatModel>> {\n  Logger.info(TAG, 'getChatModelObjFromJSON');\n\
+      \  let jsonObj: JsonObject = new JsonObject(MockDataFileDir);\n  return await jsonObj.getChatModelObj(MockDataFileDir);\n\
+      }"
+  - source_sentence: 'query: Copyright (c) 2024 Huawei Device Co., Ltd.
+
+      Licensed under the Apache License, Version 2.0 (the "License");
+
+      you may not use this file except in compliance with the License.
+
+      You may obtain a copy of the License at
+
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+
+      Unless required by applicable law or agreed to in writing, software
+
+      distributed under the License is distributed on an "AS IS" BASIS,
+
+      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+
+      See the License for the specific language governing permissions and
+
+      limitations under the License.'
+    sentences:
+    - 'passage:
+
+      path: api/@ohos.deviceInfo.d.ets
+
+      identifier: get
+
+      code: static get hardwareModel(): string;'
+    - "passage:\npath: entry/src/main/ets/common/components/Sounds/Cloud/Download/CMetaInfo_CFile/CMetaInfo.ets\nidentifier:\
+      \ equals\ncode: static equals(lhs: CMetaInfo, rhs: CMetaInfo): boolean {\n    return lhs.fileName === rhs.fileName;\n\
+      \  }"
+    - 'passage:
+
+      path: CommonAppDevelopment/feature/customscan/Index.ets
+
+      identifier: CustomScanPage
+
+      code: export { CustomScanPage } from ''./src/main/ets/pages/CustomScanPage'';'
+  - source_sentence: 'query: 当前设备是否支持该模块
+
+      @returns'
+    sentences:
+    - "passage:\npath: ETSUI/OHLayoutAlign/entry/src/main/ets/common/constants/CommonConstants.ets\nidentifier: \ncode: export\
+      \ const COMPONENT_NAME: string = 'componentName';"
+    - "passage:\npath: harmony_utils/src/main/ets/utils/AssetUtil.ets\nidentifier: canIUse\ncode: static canIUse() {\n   \
+      \ return canIUse(\"SystemCapability.Security.Asset\")\n  }"
+    - "passage:\npath: entry/src/main/ets/models/managers/servercfg/AppCfgManager.ets\nidentifier: \ncode: export enum AppCfg\
+      \ {\n  // 通用配置\n  Dictation_Detect_Merged_Api_GeneralOrHandwriting = \"Dictation_Detect_Merged_Api_GeneralOrHandwriting\"\
+      , // [通用] 听写合并检测Api使用通用还是手写\n\n  InAppBooks_Show_In_SaveToBooks                    = \"InAppBooks_Show_In_SaveToBooks\"\
+      ,                   // [通用] 内置课本 在SaveToBooks（CopyTo，ImportCsv）时是否显示\n  InAppBooks_Can_ShareOnline                 \
+      \       = \"InAppBooks_Can_ShareOnline\",                       // [通用] 内置课本 可否分享到 在线课本\n  CreatedUserCards_Can_ShareOnline\
+      \                  = \"CreatedUserCards_Can_ShareOnline\",                 // [通用] 用户卡片 可否分享到 在线课本\n  BookOnline_Download_is_ON\
+      \                         = \"BookOnline_Download_is_ON\",                        // [通用] 在线课本是否可查看或下载\n  BookOnline_Publish_is_ON\
+      \                          = \"BookOnline_Publish_is_ON\",                         // [通用] 在线课本是否可以发布\n  Android_HowTo_CreateCSV_idx_in_Instruction\
+      \        = \"Android_HowTo_CreateCSV_idx_in_Instruction\",       // [通用] 如何制作csv并发布到手机 在Instruction中对应的idx\n  Android_HowTo_Imort_SharedData_idx_in_Instruction\
+      \ = \"Android_HowTo_Imort_SharedData_idx_in_Instruction\",// [通用] 如何导入他人分享的数据? 在Instruction中对应的idx\n  Android_ShareAppLink_idx_in_Instruction\
+      \           = \"Android_ShareAppLink"
+  - source_sentence: 'query: 定义组件的渲染函数'
+    sentences:
+    - "passage:\npath: library/src/main/ets/components/renderer/DataRenderer.ets\nidentifier: getPaintRender\ncode: public\
+      \ getPaintRender(): Paint {\n    return this.mRenderPaint;\n  }"
+    - "passage:\npath: feature/demo/src/main/ets/viewmodel/DatabaseViewModel.ets\nidentifier: updateTitleInput\ncode: updateTitleInput(value:\
+      \ string): void {\n    this.titleInput = value;\n  }"
+    - "passage:\npath: entry/src/main/ets/view/BackContainer.ets\nidentifier: \ncode: build() {\n    Row() {\n      // 创建返回按钮\n\
+      \      Button() {\n        // 设置按钮的图像，如果未设置 backImgRes，则使用默认图像 \"app.media.ic_public_back\"\n        Image(this.backImgRes\
+      \ == null ? $r('app.media.ic_public_back') : this.backImgRes).objectFit(ImageFit.Fill)\n      }\n      // 设置按钮的背景颜色为透明\n\
+      \      .backgroundColor($r('app.color.trans_parent'))\n      // 设置按钮的宽度和高度，使用 DimensionUtil.getVp 获取尺寸\n      .width(DimensionUtil.getVp($r('app.float.title_button_size')))\n\
+      \      .height(DimensionUtil.getVp($r('app.float.title_button_size')))\n      // 定义按钮的点击事件\n      .onClick(() => {\n\
+      \        // 如果设置了 backFunc，执行 backFunc；否则，执行默认的路由返回操作\n        this.backFunc ? this.backFunc() : router.back();\n  \
+      \    })\n\n      // 创建标题文本\n      Text(this.header)\n        // 设置文本的字体大小、行高、左边距、字体颜色、字体粗细\n        .fontSize(DimensionUtil.getFp($r('app.float.detail_title_font_size')))\n\
+      \        .lineHeight(DimensionUtil.getVp($r('app.float.title_line_height')))\n        .margin({ left: DimensionUtil.getVp($r('app.float.title_margin'))\
+      \ })\n        .fontColor($r('app.color.grey_divider'))\n        .fontWeight(FontWeight.Bold)\n\n      // 创建一个空白组件，用于添加关闭按钮\n\
+      \      Blank()\n\n      // 调用传入的组件闭包\n      this.closer();\n    }\n    // 设置整个容器的内边距\n    .padding({\n      lef"
+  - source_sentence: 'query: Persistent geographical location, re-enter to determine if the switch is turned on'
+    sentences:
+    - "passage:\npath: code/BasicFeature/Media/Camera/entry/src/main/ets/Dialog/SettingDialog.ets\nidentifier: getLocationBol\n\
+      code: getLocationBol(bol: boolean) {\n    this.settingDataObj.locationBol = bol;\n  }"
+    - "passage:\npath: Media/VideoPlayer/entry/src/main/ets/viewmodel/HomeVideoListModel.ets\nidentifier: assemblingVideoBean\n\
+      code: async assemblingVideoBean() {\n    VIDEO_DATA.forEach(async (item: VideoItem) => {\n      let videoBean = await\
+      \ getContext().resourceManager.getRawFd(item.iSrc);\n      let uri = videoBean;\n      this.videoLocalList.push(new\
+      \ VideoItem(item.name, uri, ''));\n    });\n  }"
+    - "passage:\npath: custom_dialog/src/main/ets/model/modifier/TextAreaInputFilterModifier.ets\nidentifier: \ncode: export\
+      \ class TextAreaInputFilterModifier implements AttributeModifier<TextAreaAttribute> {\n  inputFilter?: InputFilter;\n\
+      \n  applyNormalAttribute(instance: TextAreaAttribute): void {\n    if (this.inputFilter) {\n      instance.inputFilter(this.inputFilter.value,\
+      \ this.inputFilter.error);\n    }\n  }\n}"
+  pipeline_tag: sentence-similarity
+  library_name: sentence-transformers
+siblings:
+- rfilename: .gitattributes
+- rfilename: 1_Pooling/config.json
+- rfilename: README.md
+- rfilename: config.json
+- rfilename: config_sentence_transformers.json
+- rfilename: model.safetensors
+- rfilename: modules.json
+- rfilename: sentence_bert_config.json
+- rfilename: tokenizer.json
+- rfilename: tokenizer_config.json
+spaces: []
+createdAt: '2026-05-14T05:27:02.000Z'
+safetensors:
+  parameters:
+    F32: 117653760
+  total: 117653760
+usedStorage: 487720445
+configJson:
+  add_cross_attention: false
+  architectures:
+  - BertModel
+  attention_probs_dropout_prob: 0.1
+  bos_token_id: null
+  classifier_dropout: null
+  dtype: float32
+  eos_token_id: null
+  hidden_act: gelu
+  hidden_dropout_prob: 0.1
+  hidden_size: 384
+  initializer_range: 0.02
+  intermediate_size: 1536
+  is_decoder: false
+  layer_norm_eps: 1.0e-12
+  max_position_embeddings: 512
+  model_type: bert
+  num_attention_heads: 12
+  num_hidden_layers: 12
+  pad_token_id: 0
+  position_embedding_type: absolute
+  tie_word_embeddings: true
+  tokenizer_class: XLMRobertaTokenizer
+  transformers_version: 5.5.4
+  type_vocab_size: 2
+  use_cache: true
+  vocab_size: 250037
+onnxFiles: {}
+safetensorsSizeMb: 470.6
+approxSizeMb: 470.6
+fetchedAt: '2026-06-08T16:42:43.000Z'

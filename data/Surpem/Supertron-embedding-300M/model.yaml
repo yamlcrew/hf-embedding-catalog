@@ -1,0 +1,305 @@
+_id: 69ebb8d1af3d4ae0f330310a
+id: Surpem/Supertron-embedding-300M
+private: false
+pipeline_tag: sentence-similarity
+library_name: sentence-transformers
+tags:
+- sentence-transformers
+- safetensors
+- gemma3_text
+- feature-extraction
+- mteb
+- sentence-similarity
+- transformers
+- pytorch
+- en
+- base_model:google/embeddinggemma-300m
+- base_model:finetune:google/embeddinggemma-300m
+- license:apache-2.0
+- model-index
+- text-embeddings-inference
+- endpoints_compatible
+- region:us
+downloads: 37
+likes: 3
+modelId: Surpem/Supertron-embedding-300M
+author: Surpem
+sha: 8f6eaf6ffb7329accba9eca060b7bc005e634b16
+lastModified: '2026-04-24T18:50:25.000Z'
+gated: false
+disabled: false
+widgetData:
+- source_sentence: That is a happy person
+  sentences:
+  - That is a happy dog
+  - That is a very happy person
+  - Today is a sunny day
+model-index:
+- name: Supertron-embedding-300M
+  results:
+  - task:
+      type: STS
+      name: STSBenchmark
+    dataset:
+      name: MTEB STSBenchmark
+      type: mteb/STSBenchmark
+      config: default
+      split: test
+    metrics:
+    - type: cos_sim_spearman
+      value: 87.1012
+      verified: false
+  - task:
+      type: STS
+      name: STS12
+    dataset:
+      name: MTEB STS12
+      type: mteb/STS12
+      config: default
+      split: test
+    metrics:
+    - type: cos_sim_spearman
+      value: 80.1767
+      verified: false
+  - task:
+      type: STS
+      name: BIOSSES
+    dataset:
+      name: MTEB BIOSSES
+      type: mteb/BIOSSES
+      config: default
+      split: test
+    metrics:
+    - type: cos_sim_spearman
+      value: 82.9778
+      verified: false
+  - task:
+      type: Retrieval
+      name: NFCorpus
+    dataset:
+      name: MTEB NFCorpus
+      type: mteb/NFCorpus
+      config: default
+      split: test
+    metrics:
+    - type: ndcg_at_10
+      value: 37.074
+      verified: false
+  - task:
+      type: Classification
+      name: AmazonCounterfactualClassification
+    dataset:
+      name: MTEB AmazonCounterfactualClassification
+      type: mteb/AmazonCounterfactualClassification
+      config: default
+      split: test
+    metrics:
+    - type: accuracy
+      value: 83.3415625
+      verified: false
+  - task:
+      type: Clustering
+      name: TwentyNewsgroupsClustering.v2
+    dataset:
+      name: MTEB TwentyNewsgroupsClustering.v2
+      type: mteb/TwentyNewsgroupsClustering.v2
+      config: default
+      split: test
+    metrics:
+    - type: v_measure
+      value: 50.01057211780597
+      verified: false
+config:
+  architectures:
+  - Gemma3TextModel
+  model_type: gemma3_text
+  tokenizer_config:
+    bos_token: <bos>
+    eos_token: <eos>
+    mask_token: <mask>
+    pad_token: <pad>
+    unk_token: <unk>
+    use_default_system_prompt: false
+cardData:
+  license: apache-2.0
+  language:
+  - en
+  base_model:
+  - google/embeddinggemma-300m
+  pipeline_tag: sentence-similarity
+  library_name: sentence-transformers
+  tags:
+  - mteb
+  - sentence-transformers
+  - feature-extraction
+  - sentence-similarity
+  - transformers
+  - pytorch
+  model-index:
+  - name: Supertron-embedding-300M
+    results:
+    - task:
+        type: STS
+        name: STSBenchmark
+      dataset:
+        name: MTEB STSBenchmark
+        type: mteb/STSBenchmark
+        config: default
+        split: test
+      metrics:
+      - type: cos_sim_spearman
+        value: 87.1012
+        verified: false
+    - task:
+        type: STS
+        name: STS12
+      dataset:
+        name: MTEB STS12
+        type: mteb/STS12
+        config: default
+        split: test
+      metrics:
+      - type: cos_sim_spearman
+        value: 80.1767
+        verified: false
+    - task:
+        type: STS
+        name: BIOSSES
+      dataset:
+        name: MTEB BIOSSES
+        type: mteb/BIOSSES
+        config: default
+        split: test
+      metrics:
+      - type: cos_sim_spearman
+        value: 82.9778
+        verified: false
+    - task:
+        type: Retrieval
+        name: NFCorpus
+      dataset:
+        name: MTEB NFCorpus
+        type: mteb/NFCorpus
+        config: default
+        split: test
+      metrics:
+      - type: ndcg_at_10
+        value: 37.074
+        verified: false
+    - task:
+        type: Classification
+        name: AmazonCounterfactualClassification
+      dataset:
+        name: MTEB AmazonCounterfactualClassification
+        type: mteb/AmazonCounterfactualClassification
+        config: default
+        split: test
+      metrics:
+      - type: accuracy
+        value: 83.3415625
+        verified: false
+    - task:
+        type: Clustering
+        name: TwentyNewsgroupsClustering.v2
+      dataset:
+        name: MTEB TwentyNewsgroupsClustering.v2
+        type: mteb/TwentyNewsgroupsClustering.v2
+        config: default
+        split: test
+      metrics:
+      - type: v_measure
+        value: 50.01057211780597
+        verified: false
+transformersInfo:
+  auto_model: AutoModel
+  pipeline_tag: feature-extraction
+  processor: AutoTokenizer
+siblings:
+- rfilename: .gitattributes
+- rfilename: 1_Pooling/config.json
+- rfilename: 2_Dense/config.json
+- rfilename: 2_Dense/model.safetensors
+- rfilename: 3_Dense/config.json
+- rfilename: 3_Dense/model.safetensors
+- rfilename: README.md
+- rfilename: benchmark_results.json
+- rfilename: config.json
+- rfilename: config_sentence_transformers.json
+- rfilename: model.safetensors
+- rfilename: modules.json
+- rfilename: sentence_bert_config.json
+- rfilename: tokenizer.json
+- rfilename: tokenizer_config.json
+spaces: []
+createdAt: '2026-04-24T18:39:13.000Z'
+safetensors:
+  parameters:
+    BF16: 302863104
+  total: 302863104
+usedStorage: 648582468
+configJson:
+  _sliding_window_pattern: 6
+  architectures:
+  - Gemma3TextModel
+  attention_bias: false
+  attention_dropout: 0.0
+  attn_logit_softcapping: null
+  bos_token_id: 2
+  dtype: bfloat16
+  eos_token_id: 1
+  final_logit_softcapping: null
+  head_dim: 256
+  hidden_activation: gelu_pytorch_tanh
+  hidden_size: 768
+  initializer_range: 0.02
+  intermediate_size: 1152
+  layer_types:
+  - sliding_attention
+  - sliding_attention
+  - sliding_attention
+  - sliding_attention
+  - sliding_attention
+  - full_attention
+  - sliding_attention
+  - sliding_attention
+  - sliding_attention
+  - sliding_attention
+  - sliding_attention
+  - full_attention
+  - sliding_attention
+  - sliding_attention
+  - sliding_attention
+  - sliding_attention
+  - sliding_attention
+  - full_attention
+  - sliding_attention
+  - sliding_attention
+  - sliding_attention
+  - sliding_attention
+  - sliding_attention
+  - full_attention
+  max_position_embeddings: 2048
+  model_type: gemma3_text
+  num_attention_heads: 3
+  num_hidden_layers: 24
+  num_key_value_heads: 1
+  pad_token_id: 0
+  query_pre_attn_scalar: 256
+  rms_norm_eps: 1.0e-06
+  rope_parameters:
+    full_attention:
+      rope_theta: 1000000.0
+      rope_type: default
+    sliding_attention:
+      rope_theta: 10000.0
+      rope_type: default
+  sliding_window: 257
+  tie_word_embeddings: true
+  transformers_version: 5.6.2
+  use_bidirectional_attention: true
+  use_cache: true
+  vocab_size: 262144
+onnxFiles: {}
+safetensorsSizeMb: 615.2
+approxSizeMb: 605.7
+fetchedAt: '2026-06-08T16:42:43.000Z'

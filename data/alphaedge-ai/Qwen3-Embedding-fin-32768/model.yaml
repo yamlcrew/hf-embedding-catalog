@@ -1,0 +1,139 @@
+_id: 69864d57927a9a75fc513a63
+id: alphaedge-ai/Qwen3-Embedding-fin-32768
+private: false
+pipeline_tag: sentence-similarity
+library_name: sentence-transformers
+tags:
+- sentence-transformers
+- safetensors
+- qwen3
+- trimmed
+- sentence-similarity
+- fin
+- dataset:lbourdois/fineweb-2-trimming
+- arxiv:2506.05176
+- base_model:Qwen/Qwen3-Embedding-0.6B
+- base_model:quantized:Qwen/Qwen3-Embedding-0.6B
+- license:apache-2.0
+- text-embeddings-inference
+- endpoints_compatible
+- region:us
+downloads: 11
+likes: 0
+modelId: alphaedge-ai/Qwen3-Embedding-fin-32768
+author: alphaedge-ai
+sha: 5ac8151bc8861df18f0c89d8b92b41c9f9ae8102
+lastModified: '2026-05-20T13:00:09.000Z'
+gated: false
+disabled: false
+model-index: null
+config:
+  architectures:
+  - Qwen3ForCausalLM
+  model_type: qwen3
+  tokenizer_config:
+    chat_template: "{%- if tools %}\n    {{- '<|im_start|>system\\n' }}\n    {%- if messages[0].role == 'system' %}\n    \
+      \    {{- messages[0].content + '\\n\\n' }}\n    {%- endif %}\n    {{- \"# Tools\\n\\nYou may call one or more functions\
+      \ to assist with the user query.\\n\\nYou are provided with function signatures within <tools></tools> XML tags:\\n<tools>\"\
+      \ }}\n    {%- for tool in tools %}\n        {{- \"\\n\" }}\n        {{- tool | tojson }}\n    {%- endfor %}\n    {{-\
+      \ \"\\n</tools>\\n\\nFor each function call, return a json object with function name and arguments within <tool_call></tool_call>\
+      \ XML tags:\\n<tool_call>\\n{\\\"name\\\": <function-name>, \\\"arguments\\\": <args-json-object>}\\n</tool_call><|im_end|>\\\
+      n\" }}\n{%- else %}\n    {%- if messages[0].role == 'system' %}\n        {{- '<|im_start|>system\\n' + messages[0].content\
+      \ + '<|im_end|>\\n' }}\n    {%- endif %}\n{%- endif %}\n{%- set ns = namespace(multi_step_tool=true, last_query_index=messages|length\
+      \ - 1) %}\n{%- for message in messages[::-1] %}\n    {%- set index = (messages|length - 1) - loop.index0 %}\n    {%-\
+      \ if ns.multi_step_tool and message.role == \"user\" and not(message.content.startswith('<tool_response>') and message.content.endswith('</tool_response>'))\
+      \ %}\n        {%- set ns.multi_step_tool = false %}\n        {%- set ns.last_query_index = index %}\n    {%- endif %}\n\
+      {%- endfor %}\n{%- for message in messages %}\n    {%- if (message.role == \"user\") or (message.role == \"system\"\
+      \ and not loop.first) %}\n        {{- '<|im_start|>' + message.role + '\\n' + message.content + '<|im_end|>' + '\\n'\
+      \ }}\n    {%- elif message.role == \"assistant\" %}\n        {%- set content = message.content %}\n        {%- set reasoning_content\
+      \ = '' %}\n        {%- if message.reasoning_content is defined and message.reasoning_content is not none %}\n      \
+      \      {%- set reasoning_content = message.reasoning_content %}\n        {%- else %}\n            {%- if '</think>'\
+      \ in message.content %}\n                {%- set content = message.content.split('</think>')[-1].lstrip('\\n') %}\n\
+      \                {%- set reasoning_content = message.content.split('</think>')[0].rstrip('\\n').split('<think>')[-1].lstrip('\\\
+      n') %}\n            {%- endif %}\n        {%- endif %}\n        {%- if loop.index0 > ns.last_query_index %}\n      \
+      \      {%- if loop.last or (not loop.last and reasoning_content) %}\n                {{- '<|im_start|>' + message.role\
+      \ + '\\n<think>\\n' + reasoning_content.strip('\\n') + '\\n</think>\\n\\n' + content.lstrip('\\n') }}\n            {%-\
+      \ else %}\n                {{- '<|im_start|>' + message.role + '\\n' + content }}\n            {%- endif %}\n      \
+      \  {%- else %}\n            {{- '<|im_start|>' + message.role + '\\n' + content }}\n        {%- endif %}\n        {%-\
+      \ if message.tool_calls %}\n            {%- for tool_call in message.tool_calls %}\n                {%- if (loop.first\
+      \ and content) or (not loop.first) %}\n                    {{- '\\n' }}\n                {%- endif %}\n            \
+      \    {%- if tool_call.function %}\n                    {%- set tool_call = tool_call.function %}\n                {%-\
+      \ endif %}\n                {{- '<tool_call>\\n{\"name\": \"' }}\n                {{- tool_call.name }}\n          \
+      \      {{- '\", \"arguments\": ' }}\n                {%- if tool_call.arguments is string %}\n                    {{-\
+      \ tool_call.arguments }}\n                {%- else %}\n                    {{- tool_call.arguments | tojson }}\n   \
+      \             {%- endif %}\n                {{- '}\\n</tool_call>' }}\n            {%- endfor %}\n        {%- endif\
+      \ %}\n        {{- '<|im_end|>\\n' }}\n    {%- elif message.role == \"tool\" %}\n        {%- if loop.first or (messages[loop.index0\
+      \ - 1].role != \"tool\") %}\n            {{- '<|im_start|>user' }}\n        {%- endif %}\n        {{- '\\n<tool_response>\\\
+      n' }}\n        {{- message.content }}\n        {{- '\\n</tool_response>' }}\n        {%- if loop.last or (messages[loop.index0\
+      \ + 1].role != \"tool\") %}\n            {{- '<|im_end|>\\n' }}\n        {%- endif %}\n    {%- endif %}\n{%- endfor\
+      \ %}\n{%- if add_generation_prompt %}\n    {{- '<|im_start|>assistant\\n' }}\n    {%- if enable_thinking is defined\
+      \ and enable_thinking is false %}\n        {{- '<think>\\n\\n</think>\\n\\n' }}\n    {%- endif %}\n{%- endif %}"
+    eos_token: <|im_end|>
+    pad_token: <|endoftext|>
+    bos_token: null
+    unk_token: null
+cardData:
+  pipeline_tag: sentence-similarity
+  language: fin
+  license: apache-2.0
+  tags:
+  - trimmed
+  library_name: sentence-transformers
+  base_model: Qwen/Qwen3-Embedding-0.6B
+  base_model_relation: quantized
+  datasets:
+  - lbourdois/fineweb-2-trimming
+siblings:
+- rfilename: .gitattributes
+- rfilename: 1_Pooling/config.json
+- rfilename: README.md
+- rfilename: config.json
+- rfilename: config_sentence_transformers.json
+- rfilename: generation_config.json
+- rfilename: merges.txt
+- rfilename: model.safetensors
+- rfilename: modules.json
+- rfilename: tokenizer.json
+- rfilename: tokenizer_config.json
+- rfilename: vocab.json
+spaces: []
+createdAt: '2026-02-06T20:21:43.000Z'
+safetensors:
+  parameters:
+    BF16: 474021888
+  total: 474021888
+usedStorage: 948077008
+downloadsAllTime: 15
+inferenceProviderMapping: {}
+configJson:
+  architectures:
+  - Qwen3ForCausalLM
+  attention_bias: false
+  attention_dropout: 0.0
+  eos_token_id: 32754
+  head_dim: 128
+  hidden_act: silu
+  hidden_size: 1024
+  initializer_range: 0.02
+  intermediate_size: 3072
+  max_position_embeddings: 32768
+  max_window_layers: 28
+  model_type: qwen3
+  num_attention_heads: 16
+  num_hidden_layers: 28
+  num_key_value_heads: 8
+  pad_token_id: 32752
+  rms_norm_eps: 1.0e-06
+  sliding_window: null
+  tie_word_embeddings: true
+  transformers_version: 5.0.0
+  use_cache: true
+  use_sliding_window: false
+  vocab_size: 32768
+  rope_scaling: null
+  rope_theta: 1000000
+  torch_dtype: bfloat16
+onnxFiles: {}
+safetensorsSizeMb: 948.1
+approxSizeMb: 948.0
+fetchedAt: '2026-06-08T16:42:43.000Z'

@@ -1,0 +1,107 @@
+_id: 67b1abbf9a1b3c4a03d7ec8c
+id: mradermacher/gme-Qwen2-VL-2B-Instruct-GGUF
+private: false
+pipeline_tag: sentence-similarity
+library_name: transformers
+tags:
+- transformers
+- gguf
+- mteb
+- sentence-transformers
+- Qwen2-VL
+- sentence-similarity
+- vidore
+- en
+- zh
+- base_model:Alibaba-NLP/gme-Qwen2-VL-2B-Instruct
+- base_model:quantized:Alibaba-NLP/gme-Qwen2-VL-2B-Instruct
+- license:apache-2.0
+- endpoints_compatible
+- region:us
+- conversational
+downloads: 126
+likes: 2
+modelId: mradermacher/gme-Qwen2-VL-2B-Instruct-GGUF
+author: mradermacher
+sha: 639881122fb2c1e6518c2ada855c2be7bbaf6c61
+lastModified: '2025-07-31T12:07:44.000Z'
+gated: false
+disabled: false
+widgetData:
+- source_sentence: That is a happy person
+  sentences:
+  - That is a happy dog
+  - That is a very happy person
+  - Today is a sunny day
+model-index: null
+config: {}
+cardData:
+  base_model: Alibaba-NLP/gme-Qwen2-VL-2B-Instruct
+  language:
+  - en
+  - zh
+  library_name: transformers
+  license: apache-2.0
+  mradermacher:
+    readme_rev: 1
+  quantized_by: mradermacher
+  tags:
+  - mteb
+  - sentence-transformers
+  - transformers
+  - Qwen2-VL
+  - sentence-similarity
+  - vidore
+transformersInfo:
+  auto_model: AutoModel
+gguf:
+  total: 1543714304
+  architecture: qwen2vl
+  context_length: 32768
+  chat_template: '{% set image_count = namespace(value=0) %}{% set video_count = namespace(value=0) %}{% for message in messages
+    %}{% if loop.first and message[''role''] != ''system'' %}<|im_start|>system
+
+    You are a helpful assistant.<|im_end|>
+
+    {% endif %}<|im_start|>{{ message[''role''] }}
+
+    {% if message[''content''] is string %}{{ message[''content''] }}<|im_end|>
+
+    {% else %}{% for content in message[''content''] %}{% if content[''type''] == ''image'' or ''image'' in content or ''image_url''
+    in content %}{% set image_count.value = image_count.value + 1 %}{% if add_vision_id %}Picture {{ image_count.value }}:
+    {% endif %}<|vision_start|><|image_pad|><|vision_end|>{% elif content[''type''] == ''video'' or ''video'' in content %}{%
+    set video_count.value = video_count.value + 1 %}{% if add_vision_id %}Video {{ video_count.value }}: {% endif %}<|vision_start|><|video_pad|><|vision_end|>{%
+    elif ''text'' in content %}{{ content[''text''] }}{% endif %}{% endfor %}<|im_end|>
+
+    {% endif %}{% endfor %}{% if add_generation_prompt %}<|im_start|>assistant
+
+    {% endif %}'
+  bos_token: <|endoftext|>
+  eos_token: <|im_end|>
+  totalFileSize: 3093668384
+siblings:
+- rfilename: .gitattributes
+- rfilename: README.md
+- rfilename: gme-Qwen2-VL-2B-Instruct.IQ4_XS.gguf
+- rfilename: gme-Qwen2-VL-2B-Instruct.Q2_K.gguf
+- rfilename: gme-Qwen2-VL-2B-Instruct.Q3_K_L.gguf
+- rfilename: gme-Qwen2-VL-2B-Instruct.Q3_K_M.gguf
+- rfilename: gme-Qwen2-VL-2B-Instruct.Q3_K_S.gguf
+- rfilename: gme-Qwen2-VL-2B-Instruct.Q4_K_M.gguf
+- rfilename: gme-Qwen2-VL-2B-Instruct.Q4_K_S.gguf
+- rfilename: gme-Qwen2-VL-2B-Instruct.Q5_K_M.gguf
+- rfilename: gme-Qwen2-VL-2B-Instruct.Q5_K_S.gguf
+- rfilename: gme-Qwen2-VL-2B-Instruct.Q6_K.gguf
+- rfilename: gme-Qwen2-VL-2B-Instruct.Q8_0.gguf
+- rfilename: gme-Qwen2-VL-2B-Instruct.f16.gguf
+- rfilename: gme-Qwen2-VL-2B-Instruct.mmproj-fp16.gguf
+spaces: []
+createdAt: '2025-02-16T09:11:27.000Z'
+usedStorage: 15538541440
+downloadsAllTime: 2965
+inferenceProviderMapping: {}
+configJson: null
+onnxFiles: {}
+safetensorsSizeMb: 0.0
+approxSizeMb: 0.0
+fetchedAt: '2026-06-08T16:42:43.000Z'

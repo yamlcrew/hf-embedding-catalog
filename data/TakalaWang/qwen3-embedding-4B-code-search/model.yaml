@@ -1,0 +1,312 @@
+_id: 68dbf0478ceec197d3a199e6
+id: TakalaWang/qwen3-embedding-4B-code-search
+private: false
+pipeline_tag: sentence-similarity
+library_name: sentence-transformers
+tags:
+- sentence-transformers
+- safetensors
+- qwen3
+- sentence-similarity
+- feature-extraction
+- dense
+- generated_from_trainer
+- dataset_size:800
+- loss:ContrastiveLoss
+- arxiv:1908.10084
+- base_model:Qwen/Qwen3-Embedding-4B
+- base_model:finetune:Qwen/Qwen3-Embedding-4B
+- text-embeddings-inference
+- endpoints_compatible
+- region:us
+downloads: 21
+likes: 1
+modelId: TakalaWang/qwen3-embedding-4B-code-search
+author: TakalaWang
+sha: 9939f8d6ec1245d24dfa5cf8731e2edea6670c11
+lastModified: '2025-09-30T15:00:07.000Z'
+gated: false
+disabled: false
+widgetData:
+- source_sentence: "Collects the tracing data from the given parameters.\n        :param request: The Flask request.\n   \
+    \     :param response: The flask response.\n        :param error: The error occurred if any.\n        :param latency:\
+    \ The time elapsed to process the request.\n        :return: The tracing data."
+  sentences:
+  - "def enum_to_yaml(cls: Type[T_EnumToYAML], representer: Representer, data: T_EnumToYAML) -> ruamel.yaml.nodes.ScalarNode:\n\
+    \    \n    return representer.represent_scalar(\n        f\"!{cls.__name__}\",\n        f\"{str(data)}\"\n    )"
+  - "def subclasses(self, inherited=False):\n        \n        data = clips.data.DataObject(self._env)\n\n        lib.EnvClassSubclasses(self._env,\
+    \ self._cls, data.byref, int(inherited))\n\n        for klass in classes(self._env, data.value):\n            yield klass"
+  - "def identify(self, req, resp, resource, uri_kwargs):\n        \n        header = req.get_header(, False)\n        auth\
+    \ = header.split() if header else None\n\n        if auth is None or auth[0].lower() != :\n            return None\n\n\
+    \        if len(auth) != 2:\n            raise HTTPBadRequest(\n                \"Invalid Authorization header\",\n  \
+    \              \"The Authorization header for Token auth should be in form:\\n\"\n                \"Authorization: Token\
+    \ <token_value>\"\n            )\n\n        return auth[1]"
+- source_sentence: "A wrapper for `os.walk` that skips hidden files and directories.\n\n    This function does not have the\
+    \ parameter `topdown` from\n    `os.walk`: the directories must always be recursed top-down when\n    using this function.\n\
+    \n    See also\n    --------\n    os.walk : For a description of the parameters"
+  sentences:
+  - "def expand_all(self):\n        \n\n        def aux(item):\n            self.item(item, open=True)\n            children\
+    \ = self.get_children(item)\n            for c in children:\n                aux(c)\n\n        children = self.get_children(\"\
+    \")\n        for c in children:\n            aux(c)"
+  - "def create_extended_model(model, db_penalty=None, ex_penalty=None,\n                          tp_penalty=None, penalties=None):\n\
+    \    \n\n    \n    model_extended = model.create_metabolic_model()\n    extra_compartment = model.extracellular_compartment\n\
+    \n    compartment_ids = set(c.id for c in model.compartments)\n\n    \n    if len(compartment_ids) > 0:\n        logger.info(\n\
+    \            .format(\n                .join(.format(c) for c in compartment_ids)))\n        db_added = add_all_database_reactions(model_extended,\
+    \ compartment_ids)\n    else:\n        logger.warning(\n            \n            \n            )\n        db_added =\
+    \ set()\n\n    \n    logger.info(\n        .format(\n            extra_compartment))\n    ex_added = add_all_exchange_reactions(\n\
+    \        model_extended, extra_compartment, allow_duplicates=True)\n\n    \n    boundaries = model.compartment_boundaries\n\
+    \    if len(boundaries) > 0:\n        logger.info(\n            \n            .format(\n                .join(.format(c1,\
+    \ c2) for c1, c2 in boundaries)))\n        tp_added = add_all_transport_reactions(\n            model_extended, boundaries,\
+    \ allow_duplicates=True)\n    else:\n        logger.warning(\n            \n            )\n        tp_added = set()\n\n\
+    \    \n    weights = {}\n    if db_penalty is not None:\n        weights.update((rxnid, db_penalty) for rxnid in db_added)\n\
+    \    if tp_penalty is not None:\n        weights.update((rxnid, tp_penalty) for rxnid in tp_added)\n    if ex_penalty\
+    \ is not None:\n        weights.update((rxnid, ex_penalty) for rxnid in ex_added)\n\n    if penalties is not None:\n \
+    \       for rxnid, penalty in iteritems(penalties):\n            weights[rxnid] = penalty\n    return model_extended,\
+    \ weights"
+  - "def walk_skip_hidden(top, onerror=None, followlinks=False):\n    \n\n    for root, dirs, files in os.walk(\n        \
+    \    top, topdown=True, onerror=onerror,\n            followlinks=followlinks):\n        \n        \n        dirs[:] =\
+    \ [d for d in dirs if not is_path_hidden(d)]\n        files[:] = [f for f in files if not is_path_hidden(f)]\n       \
+    \ yield root, dirs, files"
+- source_sentence: Show stack frames for a task
+  sentences:
+  - "def do_where(self, taskid: int) -> None:\n        \n        task = task_by_id(taskid, self._loop)\n        if task:\n\
+    \            self._sout.write(_format_stack(task))\n            self._sout.write()\n        else:\n            self._sout.write(\
+    \ % taskid)"
+  - "def apt_add_repository_from_apt_string(apt_string, apt_file):\n    \n\n    apt_file_path =  % apt_file\n\n    if not\
+    \ file_contains(apt_file_path, apt_string.lower(), use_sudo=True):\n        file_append(apt_file_path, apt_string.lower(),\
+    \ use_sudo=True)\n\n        with hide(, ):\n            sudo(\"DEBIAN_FRONTEND=noninteractive apt-get update\")"
+  - "def _kl_laplace_laplace(a, b, name=None):\n  \n  with tf.name_scope(name or \"kl_laplace_laplace\"):\n    \n    \n  \
+    \  distance = tf.abs(a.loc - b.loc)\n    ratio = a.scale / b.scale\n\n    return (-tf.math.log(ratio) - 1 + distance /\
+    \ b.scale +\n            ratio * tf.exp(-distance / a.scale))"
+- source_sentence: Read the ical file
+  sentences:
+  - "def read_ical(self, ical_file_location):  \n        \n        with open(ical_file_location, ) as ical_file:\n       \
+    \     data = ical_file.read()\n        self.cal = Calendar.from_ical(data)\n        return self.cal"
+  - "def _size_from_header(cls, header):\n        \n\n        \n        result = []\n\n        for data in header:\n     \
+    \       \n\n            \n            result.append(header[data])\n\n        \n        return result"
+  - "def dockermachine_ip() -> Optional[str]:\n    \n    if not check_dockermachine():\n        return None\n\n    \n    try:\n\
+    \        out = subprocess.check_output([, ])\n        return out.decode(\"utf-8\").strip()\n    except Exception:\n  \
+    \      logger.debug(f\"docker machine not present\")\n        return None"
+- source_sentence: 'list[VolumeExtent]: sections.'
+  sentences:
+  - "def cast_to_a1_notation(method):\n    \n    @wraps(method)\n    def wrapper(self, *args, **kwargs):\n        try:\n \
+    \           if len(args):\n                int(args[0])\n\n            \n            range_start = rowcol_to_a1(*args[:2])\n\
+    \            range_end = rowcol_to_a1(*args[-2:])\n            range_name = .join((range_start, range_end))\n\n      \
+    \      args = (range_name,) + args[4:]\n        except ValueError:\n            pass\n\n        return method(self, *args,\
+    \ **kwargs)\n\n    return wrapper"
+  - "def readfmt(self, fmt):\n        \n        size = struct.calcsize(fmt)\n        blob = self.read(size)\n        obj,\
+    \ = struct.unpack(fmt, blob)\n        return obj"
+  - "def equals(self, other):\n        \n        self._run(unittest_case.assertEqual, (self._subject, other))\n        return\
+    \ ChainInspector(self._subject)"
+model-index: null
+config:
+  architectures:
+  - Qwen3Model
+  model_type: qwen3
+  tokenizer_config:
+    bos_token: null
+    eos_token: <|im_end|>
+    pad_token: <|endoftext|>
+    unk_token: null
+  chat_template_jinja: "{%- if tools %}\n    {{- '<|im_start|>system\\n' }}\n    {%- if messages[0]['role'] == 'system' %}\n\
+    \        {{- messages[0]['content'] }}\n    {%- else %}\n        {{- 'You are a helpful assistant.' }}\n    {%- endif\
+    \ %}\n    {{- \"\\n\\n# Tools\\n\\nYou may call one or more functions to assist with the user query.\\n\\nYou are provided\
+    \ with function signatures within <tools></tools> XML tags:\\n<tools>\" }}\n    {%- for tool in tools %}\n        {{-\
+    \ \"\\n\" }}\n        {{- tool | tojson }}\n    {%- endfor %}\n    {{- \"\\n</tools>\\n\\nFor each function call, return\
+    \ a json object with function name and arguments within <tool_call></tool_call> XML tags:\\n<tool_call>\\n{\\\"name\\\"\
+    : <function-name>, \\\"arguments\\\": <args-json-object>}\\n</tool_call><|im_end|>\\n\" }}\n{%- else %}\n    {%- if messages[0]['role']\
+    \ == 'system' %}\n        {{- '<|im_start|>system\\n' + messages[0]['content'] + '<|im_end|>\\n' }}\n    {%- else %}\n\
+    \        {{- '<|im_start|>system\\nYou are a helpful assistant.<|im_end|>\\n' }}\n    {%- endif %}\n{%- endif %}\n{%-\
+    \ for message in messages %}\n    {%- if (message.role == \"user\") or (message.role == \"system\" and not loop.first)\
+    \ or (message.role == \"assistant\" and not message.tool_calls) %}\n        {{- '<|im_start|>' + message.role + '\\n'\
+    \ + message.content + '<|im_end|>' + '\\n' }}\n    {%- elif message.role == \"assistant\" %}\n        {{- '<|im_start|>'\
+    \ + message.role }}\n        {%- if message.content %}\n            {{- '\\n' + message.content }}\n        {%- endif\
+    \ %}\n        {%- for tool_call in message.tool_calls %}\n            {%- if tool_call.function is defined %}\n      \
+    \          {%- set tool_call = tool_call.function %}\n            {%- endif %}\n            {{- '\\n<tool_call>\\n{\"\
+    name\": \"' }}\n            {{- tool_call.name }}\n            {{- '\", \"arguments\": ' }}\n            {{- tool_call.arguments\
+    \ | tojson }}\n            {{- '}\\n</tool_call>' }}\n        {%- endfor %}\n        {{- '<|im_end|>\\n' }}\n    {%- elif\
+    \ message.role == \"tool\" %}\n        {%- if (loop.index0 == 0) or (messages[loop.index0 - 1].role != \"tool\") %}\n\
+    \            {{- '<|im_start|>user' }}\n        {%- endif %}\n        {{- '\\n<tool_response>\\n' }}\n        {{- message.content\
+    \ }}\n        {{- '\\n</tool_response>' }}\n        {%- if loop.last or (messages[loop.index0 + 1].role != \"tool\") %}\n\
+    \            {{- '<|im_end|>\\n' }}\n        {%- endif %}\n    {%- endif %}\n{%- endfor %}\n{%- if add_generation_prompt\
+    \ %}\n    {{- '<|im_start|>assistant\\n' }}\n{%- endif %}\n"
+cardData:
+  tags:
+  - sentence-transformers
+  - sentence-similarity
+  - feature-extraction
+  - dense
+  - generated_from_trainer
+  - dataset_size:800
+  - loss:ContrastiveLoss
+  base_model: Qwen/Qwen3-Embedding-4B
+  widget:
+  - source_sentence: "Collects the tracing data from the given parameters.\n        :param request: The Flask request.\n \
+      \       :param response: The flask response.\n        :param error: The error occurred if any.\n        :param latency:\
+      \ The time elapsed to process the request.\n        :return: The tracing data."
+    sentences:
+    - "def enum_to_yaml(cls: Type[T_EnumToYAML], representer: Representer, data: T_EnumToYAML) -> ruamel.yaml.nodes.ScalarNode:\n\
+      \    \n    return representer.represent_scalar(\n        f\"!{cls.__name__}\",\n        f\"{str(data)}\"\n    )"
+    - "def subclasses(self, inherited=False):\n        \n        data = clips.data.DataObject(self._env)\n\n        lib.EnvClassSubclasses(self._env,\
+      \ self._cls, data.byref, int(inherited))\n\n        for klass in classes(self._env, data.value):\n            yield\
+      \ klass"
+    - "def identify(self, req, resp, resource, uri_kwargs):\n        \n        header = req.get_header(, False)\n        auth\
+      \ = header.split() if header else None\n\n        if auth is None or auth[0].lower() != :\n            return None\n\
+      \n        if len(auth) != 2:\n            raise HTTPBadRequest(\n                \"Invalid Authorization header\",\n\
+      \                \"The Authorization header for Token auth should be in form:\\n\"\n                \"Authorization:\
+      \ Token <token_value>\"\n            )\n\n        return auth[1]"
+  - source_sentence: "A wrapper for `os.walk` that skips hidden files and directories.\n\n    This function does not have\
+      \ the parameter `topdown` from\n    `os.walk`: the directories must always be recursed top-down when\n    using this\
+      \ function.\n\n    See also\n    --------\n    os.walk : For a description of the parameters"
+    sentences:
+    - "def expand_all(self):\n        \n\n        def aux(item):\n            self.item(item, open=True)\n            children\
+      \ = self.get_children(item)\n            for c in children:\n                aux(c)\n\n        children = self.get_children(\"\
+      \")\n        for c in children:\n            aux(c)"
+    - "def create_extended_model(model, db_penalty=None, ex_penalty=None,\n                          tp_penalty=None, penalties=None):\n\
+      \    \n\n    \n    model_extended = model.create_metabolic_model()\n    extra_compartment = model.extracellular_compartment\n\
+      \n    compartment_ids = set(c.id for c in model.compartments)\n\n    \n    if len(compartment_ids) > 0:\n        logger.info(\n\
+      \            .format(\n                .join(.format(c) for c in compartment_ids)))\n        db_added = add_all_database_reactions(model_extended,\
+      \ compartment_ids)\n    else:\n        logger.warning(\n            \n            \n            )\n        db_added\
+      \ = set()\n\n    \n    logger.info(\n        .format(\n            extra_compartment))\n    ex_added = add_all_exchange_reactions(\n\
+      \        model_extended, extra_compartment, allow_duplicates=True)\n\n    \n    boundaries = model.compartment_boundaries\n\
+      \    if len(boundaries) > 0:\n        logger.info(\n            \n            .format(\n                .join(.format(c1,\
+      \ c2) for c1, c2 in boundaries)))\n        tp_added = add_all_transport_reactions(\n            model_extended, boundaries,\
+      \ allow_duplicates=True)\n    else:\n        logger.warning(\n            \n            )\n        tp_added = set()\n\
+      \n    \n    weights = {}\n    if db_penalty is not None:\n        weights.update((rxnid, db_penalty) for rxnid in db_added)\n\
+      \    if tp_penalty is not None:\n        weights.update((rxnid, tp_penalty) for rxnid in tp_added)\n    if ex_penalty\
+      \ is not None:\n        weights.update((rxnid, ex_penalty) for rxnid in ex_added)\n\n    if penalties is not None:\n\
+      \        for rxnid, penalty in iteritems(penalties):\n            weights[rxnid] = penalty\n    return model_extended,\
+      \ weights"
+    - "def walk_skip_hidden(top, onerror=None, followlinks=False):\n    \n\n    for root, dirs, files in os.walk(\n      \
+      \      top, topdown=True, onerror=onerror,\n            followlinks=followlinks):\n        \n        \n        dirs[:]\
+      \ = [d for d in dirs if not is_path_hidden(d)]\n        files[:] = [f for f in files if not is_path_hidden(f)]\n   \
+      \     yield root, dirs, files"
+  - source_sentence: Show stack frames for a task
+    sentences:
+    - "def do_where(self, taskid: int) -> None:\n        \n        task = task_by_id(taskid, self._loop)\n        if task:\n\
+      \            self._sout.write(_format_stack(task))\n            self._sout.write()\n        else:\n            self._sout.write(\
+      \ % taskid)"
+    - "def apt_add_repository_from_apt_string(apt_string, apt_file):\n    \n\n    apt_file_path =  % apt_file\n\n    if not\
+      \ file_contains(apt_file_path, apt_string.lower(), use_sudo=True):\n        file_append(apt_file_path, apt_string.lower(),\
+      \ use_sudo=True)\n\n        with hide(, ):\n            sudo(\"DEBIAN_FRONTEND=noninteractive apt-get update\")"
+    - "def _kl_laplace_laplace(a, b, name=None):\n  \n  with tf.name_scope(name or \"kl_laplace_laplace\"):\n    \n    \n\
+      \    distance = tf.abs(a.loc - b.loc)\n    ratio = a.scale / b.scale\n\n    return (-tf.math.log(ratio) - 1 + distance\
+      \ / b.scale +\n            ratio * tf.exp(-distance / a.scale))"
+  - source_sentence: Read the ical file
+    sentences:
+    - "def read_ical(self, ical_file_location):  \n        \n        with open(ical_file_location, ) as ical_file:\n     \
+      \       data = ical_file.read()\n        self.cal = Calendar.from_ical(data)\n        return self.cal"
+    - "def _size_from_header(cls, header):\n        \n\n        \n        result = []\n\n        for data in header:\n   \
+      \         \n\n            \n            result.append(header[data])\n\n        \n        return result"
+    - "def dockermachine_ip() -> Optional[str]:\n    \n    if not check_dockermachine():\n        return None\n\n    \n  \
+      \  try:\n        out = subprocess.check_output([, ])\n        return out.decode(\"utf-8\").strip()\n    except Exception:\n\
+      \        logger.debug(f\"docker machine not present\")\n        return None"
+  - source_sentence: 'list[VolumeExtent]: sections.'
+    sentences:
+    - "def cast_to_a1_notation(method):\n    \n    @wraps(method)\n    def wrapper(self, *args, **kwargs):\n        try:\n\
+      \            if len(args):\n                int(args[0])\n\n            \n            range_start = rowcol_to_a1(*args[:2])\n\
+      \            range_end = rowcol_to_a1(*args[-2:])\n            range_name = .join((range_start, range_end))\n\n    \
+      \        args = (range_name,) + args[4:]\n        except ValueError:\n            pass\n\n        return method(self,\
+      \ *args, **kwargs)\n\n    return wrapper"
+    - "def readfmt(self, fmt):\n        \n        size = struct.calcsize(fmt)\n        blob = self.read(size)\n        obj,\
+      \ = struct.unpack(fmt, blob)\n        return obj"
+    - "def equals(self, other):\n        \n        self._run(unittest_case.assertEqual, (self._subject, other))\n        return\
+      \ ChainInspector(self._subject)"
+  pipeline_tag: sentence-similarity
+  library_name: sentence-transformers
+siblings:
+- rfilename: .gitattributes
+- rfilename: 1_Pooling/config.json
+- rfilename: README.md
+- rfilename: added_tokens.json
+- rfilename: chat_template.jinja
+- rfilename: config.json
+- rfilename: config_sentence_transformers.json
+- rfilename: merges.txt
+- rfilename: model-00001-of-00002.safetensors
+- rfilename: model-00002-of-00002.safetensors
+- rfilename: model.safetensors.index.json
+- rfilename: modules.json
+- rfilename: sentence_bert_config.json
+- rfilename: special_tokens_map.json
+- rfilename: tokenizer.json
+- rfilename: tokenizer_config.json
+- rfilename: vocab.json
+spaces: []
+createdAt: '2025-09-30T14:59:19.000Z'
+safetensors:
+  parameters:
+    F16: 4021774336
+  total: 4021774336
+usedStorage: 8055014911
+downloadsAllTime: 452
+inferenceProviderMapping: {}
+configJson:
+  architectures:
+  - Qwen3Model
+  attention_bias: false
+  attention_dropout: 0.0
+  bos_token_id: 151643
+  dtype: float16
+  eos_token_id: 151645
+  head_dim: 128
+  hidden_act: silu
+  hidden_size: 2560
+  initializer_range: 0.02
+  intermediate_size: 9728
+  layer_types:
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  max_position_embeddings: 40960
+  max_window_layers: 36
+  model_type: qwen3
+  num_attention_heads: 32
+  num_hidden_layers: 36
+  num_key_value_heads: 8
+  rms_norm_eps: 1.0e-06
+  rope_scaling: null
+  rope_theta: 1000000
+  sliding_window: null
+  tie_word_embeddings: true
+  transformers_version: 4.56.2
+  use_cache: true
+  use_sliding_window: false
+  vocab_size: 151665
+onnxFiles: {}
+safetensorsSizeMb: 8043.6
+approxSizeMb: 8043.5
+fetchedAt: '2026-06-08T16:42:43.000Z'

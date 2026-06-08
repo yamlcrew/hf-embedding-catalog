@@ -1,0 +1,1531 @@
+_id: 6820146b589ff7d4baca60d0
+id: kamkol/ab_testing_finetuned_arctic_ft-36dfff22-0696-40d2-b3bf-268fe2ff2aec
+private: false
+pipeline_tag: sentence-similarity
+library_name: sentence-transformers
+tags:
+- sentence-transformers
+- safetensors
+- bert
+- sentence-similarity
+- feature-extraction
+- generated_from_trainer
+- dataset_size:428
+- loss:MatryoshkaLoss
+- loss:MultipleNegativesRankingLoss
+- arxiv:1908.10084
+- arxiv:2205.13147
+- arxiv:1705.00652
+- base_model:Snowflake/snowflake-arctic-embed-l
+- base_model:finetune:Snowflake/snowflake-arctic-embed-l
+- model-index
+- text-embeddings-inference
+- endpoints_compatible
+- deploy:azure
+- region:us
+downloads: 15
+likes: 0
+modelId: kamkol/ab_testing_finetuned_arctic_ft-36dfff22-0696-40d2-b3bf-268fe2ff2aec
+author: kamkol
+sha: 9b1b24b0629be76acbf7577dd88de6e4094ac9e2
+lastModified: '2025-05-11T03:08:29.000Z'
+gated: false
+disabled: false
+mask_token: '[MASK]'
+widgetData:
+- source_sentence: How does the Overall Evaluation Criterion (OEC) guide the duration of A/B experiments, and why is the alpha
+    level of 0.05 considered a reasonable default in hypothesis testing for trustworthy results?
+  sentences:
+  - 'h t t p s : / / b i t . l y / p v a l u e M i s i n t e r p r e t a t i o n s P-value Misinterpretations – Annotated
+    References Ron Kohavi Feb 28, 2024 Misinterpretation and abuse of statistical tests, confidence intervals, and statistical
+    power have been decried for decades, yet remain rampant. A key problem is that there are no interpretations of these concepts
+    that are at once simple, intuitive, correct, and foolproof. -- Greenland et al (2016) What will be said in this paper
+    is hardly original. It is, in a certain sense, what "everybody knows." To say it "out loud" is, as it were, to assume
+    the role of the child who pointed out that the emperor was really outfitted only in his underwear. -- David Bakan (1966)
+    Rather than try and explain p-values, I’ll annotate some of the best references I know. In A/B Testing Intuition Busters
+    (Section 3, Appendix, and newer comments), we called out vendors and book authors for misinterpreting p-values, or coming
+    up with names like “confidence” for (1-p-value), which is misleading. Below are some great references to look at with
+    links to downloadable PDFs. 1. Statistical Errors (2014) by Regina Nuzzo. According to ASA’s statement on p-values (below),
+    the article is “one of the most highly viewed Nature articles.” On Google Scholar, it shows over 1,700 citations. Some
+    excerpts a. " … surprisingly slippery nature of the P value, which is neither as reliable nor as objective as most scientists
+    assume. “ b. “P values have always had critics. In their almost nine decades of existence, they have been likened to mosquitoes
+    (annoying and impossible to swat away), the emperor’s new clothes (fraught with obvious problems that everyone ignores)
+    and the tool of a ''sterile intellectual rake'' who ravishes science but leaves it with no progeny.” c. “The more implausible
+    the hypothesis—telepathy, aliens, homeopathy—the greater the chance that an exciting finding is a false alarm, no matter
+    what the P value is.” This fits in with my belief in Twyman’s Law (https://bit.ly/twymanLaw). d. “Simonsohn’s simulations
+    have shown that changes in a few data-analysis decisions can increase the false-positive rate in a single study to 60%”
+    e. The figure below, from the paper, makes it clear that with low success rates (priors), a p-value of 0.05 does not provide
+    strong evidence against the null hypothesis, a point we made using FPR (false positive risk) in A/B Testing Intuition
+    Busters . I’ve replicated the numbers, allowing you to plug your own in https://bit.ly/PvaluesToBayesPosteriors . Note
+    that in our paper, we looked at the FPR of setting alpha to some value, not for a particular experiment having a given
+    p-value. h t t p s : / / b i t . l y / p v a l u e M i s i n t e r p r e t a t i o n s 2. Statistical tests, P values,
+    confidence intervals, and power: a guide to misinterpretations (2016) by Sander Greenland, Stephen J. Senn, Kenneth J.
+    Rothman, John B. Carlin, Charles Poole, Steven N. Goodman, Douglas G. Altman. This article has over 2800 citations. According
+    to ASA’s statement on p-values (below), the article “is a significant contribution to the literature about p-values and
+    statistical significance.” The paper provides definitions and 25 misinterpretations of p-values, confidence intervals,
+    and power. a. "Every method of statistical inference depends on a complex web of assumptions about how data were collected
+    and analyzed, and how the analysis results were selected for presentation. The full set of assumptions is embodied in
+    a statistical model that underpins the method. This model is a mathematical representation of data variability, and thus
+    ideally would capture accurately all sources of such variability … These assumptions are often deceptively simple to write
+    down mathematically, yet in practice are difficult to satisfy and verify … ” b. “ … we will adopt a more general view
+    of the P value as a statistical summary of the compatibility between the observed data and what we would predict or expect
+    to see if we knew the entire statistical model (all the assumptions used to compute the P value) were correct.” c. “The
+    P value is then the probability that the chosen test statistic would have been at least as large as its observed value
+    if every model assumption were correct, including the test hypothesis. This definition embodies a crucial point lost in
+    traditional definitions: In logical terms, the P value tests all the assumptions about how the data were generated (the
+    entire model), not just the targeted hypothesis it is supposed to test (such as a null hypothesis) … .include assumptions
+    about the conduct of the analysis, for example that intermediate analysis results were not used to determine which analyses
+    would be presented.” d. “ … a very small P value does not tell us which assumption is incorrect. For example, the P value
+    may be very small because the targeted hypothesis is false; but it may instead (or in addition) be very small because
+    the study protocols were violated, or because it was selected for presentation based on its small size.” h t t p s : /
+    / b i t . l y / p v a l u e M i s i n t e r p r e t a t i o n s e. Misconception #1: “The P value is the probability that
+    the test hypothesis is true; for example, if a test of the null hypothesis gave P = 0.01, the null hypothesis has only
+    a 1 % chance of being true; if instead it gave P = 0.40, the null hypothesis has a 40 % chance of being true. No! The
+    P value assumes the test hypothesis is true—it is not a hypothesis probability and may be far from any reasonable probability
+    for the test hypothesis.” f. Misconception #2:'
+  - '<2-hop>
+
+
+    #1: Stat-sig is p-value < 0.05 for Two-Tailed Tests • Despite a lot of questions about alpha=0.05 as a threshold, it is
+    a great default, especially when coupled with two-tailed tests • Jonny Longden posted that “95% significance in A/B testing
+    is a dumb rule” because it does not capture your appetite for risk.” I disagree. • When I share a success story for an
+    idea that wins, I want it to be wrong less than 5% of the time. As we’ll see on the next slides, that requires lowering
+    the alpha to 0.01 in many scenarios, and that requires running experiments much longer (with the same degree of power),
+    so we lose agility. When I consider both risk & agility, 0.05 turns out to be a reasonable default • If the PM or the
+    CEO believes the idea is great, how much would you trust that prior probability (and thus raise alpha)? Turns out very
+    little. We are poor at assessing the value of ideas #8 © 2022 Ron Kohavi #1: Stat-sig (cont) • Medical drugs are evaluated
+    in the US by the FDA using strict statistical protocols (*) • In 1962, Congress passed the Drug Amendments that for the
+    first time required that new drugs be shown to be effective using the term “substantial evidence,” which was defined as
+    “well-controlled investigations.” • In 1969, the FDA for the first time required the submission of a hypothesis, an analysis
+    plan, and it made the threshold of 0.05 standard • The latest guidance (E9 Statistical Principles for Clinical Trials)
+    states that conventionally • Type-I error should be set to 5% (Alpha = 0.05) for two-sided tests, and 2.5% for one-sided
+    tests • Type-II error should be set to 10-20% (Power of 80-90%) and then they leave the door open to adjustments by writing
+    Alternative values to the conventional levels of Type I and Type II error may be acceptable or even preferable in some
+    cases. • In a domain where life and death decisions are made, where one could claim higher or lower risks for different
+    drugs, and where expert statisticians work, they suggested a conventional default of 0.05 and allowed for adjustments
+    #9 (*) See a great historical account by Kennedy-Shaffer (2017) © 2022 Ron Kohavi The NP-Hard Analogy • In Garey and Johnson’s
+    Computers and Intractability: A Guide to the Theory of NP-Completeness, they show this cartoon about a person who can’t
+    find an efficient solution to an NP-hard problem: • My claim is similar: if the FDA with all its statisticians decided
+    to default to a constant, and leave the door open to adjustments, it’s a reasonable decision • I’m well aligned with that
+    thinking #10 I can''t find an efficient algorithm, but neither can all these famous people PC cartoon from https://www.ac.tuwien.ac.at/people/szeider/cartoon/
+    Not politically correct gender © 2022 Ron Kohavi #1: Stat-sig – 0.05 is special • The following is more of an academic
+    reason, but worth mentioning • For sample sizes ≥ 20 a point estimate ± two standard errors has approximately 95% coverage
+    for a wide variety of distributions - Gerald van Belle''s Statistical Rules of Thumb • The graph shows Tail probability
+    of non-coverage of estimate ±2 standard errors. Curves are for exponential distribution with sample sizes 1, 2, 5, and
+    20. The x-axis is the standardized variable • This property applies to a 95% confidence interval; it does not work for
+    example, for an 80% confidence interval • See post (8/2022) #11 © 2022 Ron Kohavi #1: Stat-sig False Positive Risk • The
+    p-value is computed assuming the null hypothesis is true. If we can estimate the success rate for experiments in an org,
+    we can compute the False-Positive-Risk, the probability that a statistically significant result is a false positive. •
+    Here is a table of success rates in industry and the implied False-Positive-Risk (FPR) #12 Company / Source Success Rate
+    FPR (alpha=0.05) FPR (alpha=0.10) Optimizely’s default Or one-tailed with alpha=0.05 Microsoft 33% 5.9% 11.1% Avinash
+    Kaushik 20% 11.1% 20.0% Bing 15% 15.0% 26.2% Booking.com, Google Ads, Netflix 10% 22.0% 36.0% Airbnb Search 8% 26.4% 41.8%
+    © 2022 Ron Kohavi #1: Stat-sig – Two Tailed Tests • When using an A/B tests, we only ship stat-sig improvements, not degradations,
+    so why run two-tailed tests? • With the alpha=0.05, two-tailed really means alpha=0.025 for the improvement tail. Given
+    the FPR rates (previous slide), we really want that alpha, not 0.05 • In practice, you want to detect stat-sig degradations,
+    so you want both tails. They are an important signal to abort and to identify bugs. • Some might prefer a different alpha
+    for the two tails, and I think it’s fine to run TOST – Two One-Sided Tests with alpha at most 0.025 for the improvement
+    tail. See post (2/2022) #13 © 2022 Ron Kohavi'
+  - the litmus test noted in pitfall 1 . For example, in a Microsoft health related site, a widget was redesigned to make
+    health articles more accessible. Time spent on pages and total session time increased (satisfying the objective), but
+    drilling down to the reasons, the new widget in the Treatment was used less often than the one in the Control. Users may
+    have been more confused , thus taking longer to find what they need. We also ran an experiment on Microsoft’s support
+    site, support.microsoft.com, where dwell time was the OEC. However, it was not clear at all whether the lower times were
+    due to the user experience improving or users giving up. Finding a good gen eral OEC for support sites is challenging.
+    We do want to mention that limited experiments are still possible. For example, a particularly successful support site
+    experiment we ran involved the test of a rudimentary persona lization feature. The support.microsoft.com site contained
+    a top center “Instant Answers” module with links to common support issues selected by the site editors. We tested a new
+    treatment that personalized these links by the browser and operating system v ersions of the user’s HTTP header. The treatment
+    performed over 50% better than t he control on the OEC of Click -through rate, without decreasing the clickthrough rate
+    for the whole page.
+- source_sentence: How does the Johari et al. (2017) finding on multiple testing errors relate to the importance of trustworthy
+    experiments in experimentation platforms as discussed by Kohavi and Vermeer?
+  sentences:
+  - '<2-hop>
+
+
+    What Should the Primary Metric be for Experimentation Platforms? Ron Kohavi and Lukas Vermeer Initial version: 6/29/2023,
+    updated 7/3/2023. Whether you’re building an experimentation platform inside a company, or you’re a vendor of such a platform,
+    we claim that a great goal metric, or primary metric, to evaluate the experimentation platform team is the number of experiment
+    treatments whose scorecards are trustworthy. Introduction Both of us were involved in building experimentation platforms:
+    Ron Kohavi at Microsoft and Airbnb, and Lukas Vermeer at Booking.com and Vista. Our teams were both using similar metrics
+    related to the number of experiments, so it was surprising to see a post by Manuel Da Costa (2023) that claimed that the
+    number of tests you run is meaningless in an experimentation program, and that it is a vanity metric. Before we go into
+    the details, we want to emphasize several points: 1. Trust is a fundamental requirement—tables stakes. Manuel indeed asked:
+    “what good is X number of experiments if you cannot trust the data?” and we agree here. But rather than abandoning the
+    metric, we believe it should be a qualified metric: trustworthy experiments. The experimentation platform should make
+    it hard to make statistical mistakes, such as multiple- hypothesis testing, which the initial version of Optimizely encouraged
+    (Borden 2014), an oversight that was fixed over time (Johari, et al. 2017). If you find that the computation of variance
+    for key metrics was incorrect, because the variance for ratio metrics needs to be computed using the delta method, and
+    it was not properly done, those analyzed experiments should not count. Focus on trustworthy experiments encourages the
+    team to validate results by running A/A tests and automatically identify flaws, such as SRMs (sample-ratio-mismatch) (Fabijan,
+    et al. 2019). 2. This metric is intended for the experimentation platform team, not for the clients of the experimentation
+    platform (e.g., product development teams). The clients should be optimizing for their business metric, which is usually
+    based on some criteria related to long-term customer and business value (e.g., conversions or revenue with some guardrails,
+    customer satisfaction, repeat usage). If those teams have a well-defined OEC (Overall Evaluation Criterion), then a good
+    metric for those teams could simply be the sum of the improvements to the OEC of features that were launched (launching
+    usually implies that guardrails were not violated). 3. We prefer to count treatments and not experiments so that the platform
+    will provide great support for A/B/n tests (e.g., A/B/C or A/B/C/D) and not just A/B. Instead of evaluating an idea or
+    a design with the “best” single treatment, we want to encourage experimenters to be humble and try two or three treatments,
+    and thus increase their chances of finding a superior treatment. Ghosh et. al. (2020) evaluated over 6,000 experiments
+    that ran on Optimizely and wrote that “an increase in the number of treatment variants within an experiment associates
+    with a 3.8% increase in the conversion rate of an experiment (p < .001). This result confirms basic intuition that more
+    treatment variants increase the chance of finding higher lifts (Optimizely applies false discovery rate (FDR) control
+    via the Benjamini-Hochberg procedure in the calculation of its results).”'
+  - '5 Implementation architecture Implementing an experiment on a website involves three components. The ﬁrst component is
+    the randomization algorithm, which is a function that maps end users to variants. The second component is the assignment
+    method, which uses the output of the randomization algorithm to determine the experience that each user will see on the
+    website. The third component is the data path, which captures raw observation data as the users interact with the website,
+    aggregates it, applies statistics, and prepares reports of the experiment’s outcome. 5.1 Randomization algorithm Finding
+    a good randomization algorithm is critical because the statistics of controlled experiments assume that each variant of
+    an experiment is assigned a random sample of end users. Randomization algorithms must have the following three properties
+    to support statistically correct experiments (using the methodology presented above): 1. End users must be equally likely
+    to see each variant of an experiment (assuming a 50–50 split). There should be no bias toward any particular variant.
+    2. Repeat assignments of a single end user must be consistent; the end user should be assigned to the same variant on
+    each successive visit to the site. 123 164 R. Kohavi et al. 3. When multiple experiments are run, there must be no correlation
+    between exper- iments. An end user’s assignment to a variant in one experiment must have no effect on the probability
+    of being assigned to a variant in any other experiment. Randomization algorithms may optionally support the following
+    two desirable properties: 4. The algorithm may support monotonic ramp-up, meaning that the percentage of users who see
+    a Treatment can be slowly increased without changing the assign- ments of users who were previously assigned to that Treatment.
+    Supporting this property allows the Treatment percentage to be slowly increased without impair- ing the user experience
+    or damaging the validity of the experiment. 5. The algorithm may support external control, meaning that users can be manually
+    forced into and out of variants. This property makes it easier to test the experi- mental site. The remainder of this
+    section will only consider techniques that satisfy at least the ﬁrst three properties. 5.1.1 Pseudorandom with caching
+    A standard pseudorandom number generator can be used as the randomization algorithm when coupled with a form of caching.
+    A good pseudorandom number gen- erator will, by itself, satisfy the ﬁrst and third requirements of the randomization algorithm.
+    We tested several popular random number generators on their ability to satisfy the ﬁrst and third requirements. We tested
+    ﬁve simulated experiments against one million sequential user IDs, running chi-square tests to look for interactions.
+    We found that the random number generators built into many popular languages (for example, C#) work well as long as the
+    generator is seeded only once at server startup. Seeding the random number generator on each request may cause adjacent
+    requests to use the same seed which may (as it did in our tests) introduce noticeable correlations between exper- iments.
+    In particular, we found that the technique employed by Eric Peterson using Visual Basic (Peterson 2005) creates two-way
+    interactions between experiments. To satisfy the second requirement, the algorithm must introduce state: the assign- ments
+    of end users must be cached once they visit the site. The caching can be accom- plished either on the server side (by
+    storing the assignments for all users in some form of database), or on the client side (by storing a user’s assignment
+    in a cookie). The database approach is expensive (in hardware), and has space requirements that increase linearly with
+    the number of experiments and the number of users. However, it easily satisﬁes the ﬁfth property by allowing the user
+    assignment database to be modiﬁed. The cookie approach is significantly cheaper, requiring no database and costing only
+    a linear amount of space in the number of experiments (this time within the user’s cookie). It will not work for users
+    with cookies turned off. Both forms of this approach are difﬁcult to scale up to a large system with a large ﬂeet of servers.
+    The server making the random assignment must communicate its state to all the other servers (including those used for
+    backend algorithms) in order 123 Controlled experiments on the web 165 to keep assignments consistent. This sort of propagation
+    is expensive and difﬁcult to implement correctly. The fourth requirement (monotonic ramp-up) is difﬁcult to implement
+    using this method, and so many systems ignore the requirement altogether. Regardless of which approach is used to maintain
+    state, the system would need to carefully reassign Con- trol users who visit the site after a ramp-up. The difﬁculty comes
+    in determining the percentage Treatment to assign to these users so that the overall Treatment percentage reaches the
+    desired value. 5.1.2 Hash and partition This method eliminates the need for caching by replacing the random number generator
+    with a hash function. Unlike a random number generator, which produces randomly distributed numbers independent of any
+    input, a (good) hash function produces ran- domly distributed numbers as a function of a speciﬁc input. The method works
+    as follows: each user is assigned a single unique identiﬁer which is maintained either through a database or a cookie.
+    Likewise, each experiment is assigned a unique iden- tiﬁer. A hash function is applied to the combination of the user
+    identiﬁer and the experiment identiﬁer (e.g. by concatenating them together) to obtain an integer that is uniformly distributed
+    on a range of values. The range is then partitioned, with each variant represented by a partition. The unique user identiﬁer
+    may be reused across any number of experiments. This method is very sensitive to the choice of hash function. If the hash
+    function has any funnels (instances where adjacent keys map to the same hash code) then the ﬁrst property (uniform distribution)
+    will be violated. And if the hash function has characteristics (instances where a perturbation of the key produces a predictable
+    per- turbation of the hash code), then correlations may occur between experiments. Few hash functions are sound enough
+    to be used in'
+  - '<1-hop>
+
+
+    Data Driven Automation • Data is king at Amazon • Many examples of data driven automation – Channel management • Website
+    real estate management system • Automated email measurement and optimization – Merchandising • Customers who bought X
+    also bought…• Recommendations • New releases, top sellers • Purchase Circles™ – Advertising • Automatic ad generation
+    and bidding Copyright 2004, Amazon.com 22 Home Page Slots • Amazon’s home page is prime real-estate • The past: – Every
+    category VP wanted top-center – Friday meetings about placements for next week were getting too long, too loud, and lacked
+    performance data • Today: automation replaces intuitions – Home page is made up of slots – Anyone can submit content for
+    a slot– Content is chosen based on real-time experimentation Copyright 2004, Amazon.com 23 Email Channel Management •
+    Campaign calendar used to be manually managed – Weak measurement – Costly to schedule and use • New system – Automatically
+    optimizes content to improve customer experience – Avoids sending an e-mail campai gn that has low clickthrough or high
+    unsubscribe rate – Includes inbox management (avoid sending multiple emails/week) – Has growing library of automated email
+    programs • New releases • Recommendations • Challenges – Minimum circulations for emails – Targeted inventory management
+    Copyright 2004, Amazon.com 24 Customers Who Bought X… • Amazon’s signature feature • Relies on having and crunching massive
+    data – Every purchase, every page, every search – Techniques for sifting patterns from noise • Two additional examples
+    – Customers who shopped for X also shopped for… – Customers who searched for X also bought… • Challenges – Sensitivity
+    filtering– Data needs especially high in some areas • Apparel and toy catalogs “turn” very quickly Copyright 2004, Amazon.com
+    25 Your Recommendations • Amazon’s recommendations widely recognized as being amongst the best in world – IEEE paper published
+    on underlying item-to-item correlations – Relatively simple algorithm fed off of massive dataset– The secret sauce is
+    in the small tweaks to the basic idea • Challenges – Massive data size • millions of customers • millions of items – Recommendations
+    made in real time Copyright 2004, Amazon.com 26 Goldbox • Goldbox is a cross-sell and awareness raising tool • We allow
+    customers to buy items at an additional discount• We get a lot of suggestions on how to improve our goldbox offers to
+    make them more personalized, but… • It’s by design. We discount items to encourage purchases in new categories! Copyright
+    2004, Amazon.com 27 Intro to Sponsored Links • Short, text-only ads • Pay per Click / Cost per Click (PPC/CPC)• Sold in
+    real-time auctions• Keyword targeted at search keywords Copyright 2004, Amazon.com 28 Automated Bidding • Sponsored links
+    initially done by humans • Automated program – Generates keywords – Writes ads (creative) – Determines landing page –
+    Manages bids • Measure conversion rate • Profit per converted visitor• Update bid Copyright 2004, Amazon.com 29 Challenge:
+    Quick Cycle • This automated ad: • Received tens of thousands of clicks from porn searches, but few actually purchased
+    the book • Update cycle must be quick to avoid large losses How to Make Love Like a Porn Star By Jenna Jameson. Only $18.17.
+    Free Super Saver Shipping. Copyright 2004, Amazon.com 30 Organized for Execution • How it used to be Business People Technology
+    People“Do this” • This works rather better • Small, cross-functional teams – Able to execute end-to-end • Self directed
+    – Established group goals and measure progress “Technically infeasible” “Fully booked this year” “Plain dumb idea” Copyright
+    2004, Amazon.com 31 Shameless Plug! We’re Hiring • amazon.com/jobs – Engineers, team leads, technical Project managers
+    – Amazon offers an unmatched opportunity • Operate at extreme scale • Data trumps intuition and there is a lot of data•
+    Unbeatable visibility for your work • See results in days not months or years • It’s fun. Honest • Merchant.COM – launch
+    your site on the Amazon platform'
+- source_sentence: How does the concept of a Wager relate to estimating heterogeneous treatment effects in online controlled
+    experiments?
+  sentences:
+  - '<1-hop>
+
+
+    wrong (Dmitriev et al. 2017 ). Sometimes these follow deep investigations and relate to software bugs, as the following
+    examples show. Telemetry fidelity. Click tracking is typically done using web beacons, which is known to be lossy , that
+    is, less than 100% of clicks are properly recorded (Kohavi, Messner et al. 2010 ). If the Treatment impacts the loss rate,
+    the results may appear better or worse than the actual user experience. Having a metric to assess the loss, such as through
+    internal referrers to the website or through clicks that use dual logging (sometimes used in ad clicks, which require
+    high fidelity), fidelity issues may be uncovered. Cache hit rates. As noted in Chapter 3 , shared resources can violate
+    SUTVA (Kohavi and Longbotham 2010 ). Having metrics for shared resources, such as cache hit rates, may help identify unexpected
+    factors that impact the trustworthiness of the experiment. Cookie write rate – the rate that the variant writes permanent
+    (non- session) cookies. This phenomenon, dubbed cookie clobbering (Dmitriev et al. 2016 ), can cause severe distortion
+    to other metrics due to browser bugs. One experiment at Bing wrote a cookie that was not used anywhere and set it to a
+    random number with every search response page. The results showed massive user degradations in all key metrics, including
+    sessions-per-user, queries-per-user, and revenue-per-user. Quick queries are two or more search queries that arrive from
+    the same user to a search engine within one second of each other. Google and Bing have both observed this phenomenon,
+    but to date have been unable to explain their cause. What we know is that some Treatments increase or decrease the proportion
+    of quick queries and those results are deemed untrustworthy. 22 Leakage and Interference between Variants It doesn ’ t
+    matter how beautiful your theory is, it doesn ’ t matter how smart you are. If it doesn ’ t agree with experiment, it
+    ’ s wrong – Richard Feynman Why you care : In most experiment analyses, we assume that the behavior of each unit in the
+    experiment is unaffected by variant assignment to other units. This is a plausible assumption in most practical applications.
+    However, there are also many cases where this assumption fails. In most of the discussions in the book, we assume the
+    Rubin causal model (Imbens and Rubin 2015 ), a standard framework for analyzing controlled experiments. In this chapter,
+    we discuss these assumptions, scenarios where they fail, and approaches to address them. A key assumption made in the
+    Rubin causal model is the Stable Unit Treatment Value Assumption (SUTVA), which states that the behavior of each unit
+    in the experiment is unaffected by variant assignment to other units (Rubin 1990 , Cox 1958 , Imbens and Rubin 2015 )
+    as shown in Equation 22.1 : (22.1) Y i ( z ) = Y i ( z i ) with variant assignment vector z = ( z 1 , z 2 , … , z n )
+    for all n units. This is a plausible assumption in most practical applications. For example, a user who likes the new
+    checkout flow described in Chapter 2 is more likely to purchase, and that behavior is independent of others who are using
+    the same eCommerce site. However, if the SUTVA assumption does not hold (see examples later in this chapter), the analysis
+    results in potentially incorrect conclusions. We define interference as a violation of SUTVA, sometimes called spillover
+    or leakage between the variants. There are two ways interference may arise: through direct or indirect connections. As
+    an example, two units can be directly connected if they are friends on a social network or if they visited the same physical
+    space at the same time. Indirect connections are connections that exist because of certain latent variables or shared
+    resources, such as units in Treatment and Control that share the same ad campaign budget. These two categories are similar
+    in that in both cases there is a medium that connects the Treatment and Control groups and allows them to interact. The
+    medium can either be a materialized friendship connection on a social network or a shared advertising budget that clicks
+    from both Treatment and Control users are billed against. It is important to understand the mechanism through which interference
+    can manifest, as the best solution to address them can differ. To make the problems more concrete, here are examples with
+    more detailed discussions. Examples Direct Connections Two units can be directly connected if they are friends on a social
+    network or if they visited the same physical space at the same time. Two units that are directly connected can be separated
+    into Treatment and Control groups and hence cause interference between variants. Facebook/LinkedIn . In social networks,
+    such as Facebook or LinkedIn, user behavior is likely impacted by that of their social neighborhood (Eckles, Karrer and
+    Ugander 2017 , Gui et al. 2015 ). Users find a new social-engagement feature more valuable as more of their neighbors
+    use it and are thus more likely to use it themselves. For example, from the user perspective: I am more likely to use
+    video chat on Facebook if my friends use it. I am more likely to message my friends on LinkedIn if they message me. I
+    am more likely to post on LinkedIn if friends in my network post on it. In an A/B experiment, this implies that if the
+    Treatment has a significant impact on a user, the effect could spill over to their social circles, regardless whether
+    the neighbors are in Treatment or Control. For example, a better recommendation algorithm in Treatment for the “ People
+    You May Know ” algorithm on LinkedIn encourages users to send more connect invitations. However, users who receive these
+    invitations may be in the Control variant and when they visit LinkedIn to accept the invitation, they may discover more
+    people to connect with. If the primary metric of interest is the total number of invitations sent, both'
+  - '<2-hop>
+
+
+    important check for primacy and novelty effect s is to plot usage over time and see whether it ’ s increasing or decreasing.
+    Take the above MSN example, the percentage of users clicking the Mail link clearly decreased over time, as shown in the
+    graph in Figure 3.5 . Figure 3.5 MSN user engagement decreasing over time The standard analysis of experiments assumes
+    that the Treatment effect is constant over time. This kind of trend is a red flag that indicates a violation of the assumptions.
+    Such experiments need to run longer to determine when the Treatment effect stabilizes. In many cases, and stressed in
+    this example, the insight is enough to declare the idea bad. This approach is simple and effective in most cases, but
+    we must warn you that there are some caveats to watch out for, especially if you do run the experiment a long time (See
+    Chapter 23 ). One additional option to highlight possible novelty/primacy effects is to take the users who appeared in
+    the first day or two (as opposed to all users over time) and plot the treatment effect for them over time. Segment Differences
+    Analyzing a metric by different segments can provide interesting insights and lead to discoveries, for which we sometimes
+    invoke Twyman ’ s law and discover a flaw or new insight to help with future iterations of an idea. These are advanced
+    tests with an example that you can address in the later maturity phases of your experimentation system. What are good
+    segments? Here are several: Market or country: some features work better in some countries; sometimes an underperforming
+    feature is the result of poor translation to another language, that is, localization. Device or platform: is the user
+    interface on a browser, desktop, or mobile phone? Which mobile platform are they using: iOS or Android? Sometimes the
+    browser version can help identify JavaScript bugs and incompatibilities. On mobile phones, the manufacturers (e.g., Samsung,
+    Motorola) provide add-ons that can cause features to fail. Time of day and day of week: plotting effects over time can
+    show interesting patterns. Users on weekends can be different in many characteristics. User type: new or existing, where
+    new users are ones that joined after a date (e.g., experiment start, or perhaps a month prior). User account characteristics:
+    single or shared account at Netflix, or single vs. family traveler on Airbnb. Segmented views are commonly used two ways:
+    1. Segmented view of a metric, independent of any experiment. 2. Segmented view of the Treatment effect for a metric,
+    in the context of an experiment, referred to in Statistics as heterogeneous Treatment effects , indicating that the Treatment
+    effect is not homogenous or uniform across different segments. Segmented View of a Metric When the click-through rates
+    on Bing mobile ads were segmented by different mobile operating systems, they were very different as shown in the graph
+    in Figure 3.6 . Figure 3.6 CTRs for different mobile Operating Systems While the initial inclination was to form stories
+    about the loyalty of the users and how the populations differ, an investigation uncovered that this was due to different
+    click tracking methodologies used for different operating systems. There are several ways of tracking clicks, and they
+    differ in fidelity (Kohavi, Messner et al. 2010 ), which leads to different loss rates. On iOS and Windows Phone, a redirect
+    was used to track the clicks, that is, the click always goes to a server, is logged, and is then redirected to the destination.
+    This methodology has high fidelity, but the user experience is slower. On Android, click tracking was done using a web
+    beacon to indicate a click and then redirected the browser to the destination page. This methodology is faster for the
+    user, but lossy; some web beacons will not make it and the link will not be recorded. This can explain the click-through
+    rate (CTR) difference between iOS and Android, but why was the Windows Phone click-through rate so high? The investigation
+    discovered that along with the redirect, there was a bug where user swipes were incorrectly recorded as a click. Bugs
+    happen. When you see anomalous data, think of Twyman ’ s law and investigate the issue. Segmented View of the Treatment
+    Effect (Heterogeneous Treatment Effect) In one experiment, a user interface change was made, which resulted in a very
+    strong difference between browser segments. For almost all browser segments, the Treatment effect was a small positive
+    improvement on key metrics, but for the Internet Explorer 7 segment, there was a strongly negative Treatment effect on
+    key metrics. As with any strong effect (positive or negative), you should invoke Twyman ’ s law and drill into the cause.
+    An investigation revealed that the JavaScript used was incompatible with Internet Explorer 7, causing an error that prevented
+    users from clicking links in certain scenarios. Such insight is only possible when drilldowns into segments are enabled,
+    that is, looking at the Treatment effect for different segments, also referred to in Statistics as Conditional Average
+    Treatment Effects (CATEs). A good overview on Heterogenous Treatment Effects is available at EGAP ( 2018 ). Identifying
+    interesting segments, or searching for interactions, can be done using machine learning and statistical techniques, such
+    as Decision Trees (Athey and Imbens 2016 ) and Random Forests (Wager and Athey 2018 ). If you can alert the experimenter
+    to interesting segments, you will find many interesting insights (but remember to correct for multiple hypothesis testing,
+    as noted above). Getting organizations to run A/B tests is an important step; providing them with more information than
+    just the overall Treatment effect gives new insights that help accelerate innovation. Analysis by Segments Impacted by
+    Treatment Can Mislead It is possible to evaluate the Treatment effect of two mutually exhaustive and exclusive segments,
+    and see that the OEC increases for both, yet declines overall. Unlike Simpson ’ s paradox (described in the next section),
+    this is due to migration of users from one segment to another. For example, assume you have'
+  - 'to determine the impact of changing from static textual ads to short videoadsonwebsitetraffic.Forthetreatmentgroup,websitetraffic
+    appears to have increased uniformly except among Safari users. Consequently, the ad team wishes to estimate the treatment
+    effect at the browser level. Likewise, after observing an improvement in user engagement metrics, the ad team may want
+    to perform a post-hoc analysis to determine if this increase is roughly the same for all users or perhaps concentrated
+    within certain user segments (such as those defined by market/country, user activity level,device/platformtype,andtime).
+    Treatmenteffectsonsubgroupsdifferingfromthepopulation- level ATE are known asheterogeneous treatment effects (HTE) and
+    are commonly of interest in OCEs. Identifying and interpretingsuchheterogeneityisvitallyimportantforbusiness applications.
+    For example, practitioners may be interested in estimating the treatment effect for different devices or browser types,
+    or for users of different ages, or users living in different parts of the world. Identifying and estimating HTEs is also
+    of concern for those wishingto develop personalizedexperiences, or to detect bugs, or interactions with other experiments.
+    T h r e ek e yc h a l l e n g e sa r ea s s o c i a t e dw i t he s t i m a t i n gH T E s : (a) small treatment effects
+    (seeSection 2)o ft e nm a k eo n l i n e studiesunder-powered,resultinginhighfalsenegativeratesfor subgroupeffects;(b)testingforHTEstendstoriskinflatedType
+    I error rates due to multiple comparisons; (c) in cases where users are not randomized to the subgroups under comparison,
+    the usual tension between correlation and causation manifests. Below we review existing methodologies that are commonly
+    usedinthecontextofOCEstoaddresstheseproblems. Heterogeneoustreatmenteffectshavearichhistoryinstatis- tical theory and
+    application (Robinson1988;Z h a oe ta l .2012; Imai and Ratkovic2013;A t h e ya n dI m b e n s2016;W a g e ra n d Athey2018;T
+    ranandZheleva2019).Inthisreview,wefocuson the intersection of this literature and OCEs. Assume each unit ihas a pair of
+    potential outcomes { Yi(1),Yi(0) } and a vector of pretreatment covariatesXi,w i t he(x) = Pr(Wi = 1|Xi = x) being the
+    probability that a user is treated given a particular value of the covariate. For randomized studies where causality may
+    be inferred,e(Xi) is known and technically independent of Xi; however, when HTE analysis is under an observational setting,e(Xi)
+    istypicallyunknown.Mostoftheliteratureregard- ing HTEs employs the following assumptions: (1) SUTVA and (2)unconfoundedness,meaningthattheresponseisindependent
+    of the treatment assignmentWi conditional on the covariate,{ Yi(1),Yi(0) } |/equal1Wi|Xi. The main goal is to estimate
+    thecon- ditionalaveragetreatmenteffect (CATE),τ(x) = E[Yi(1) − Yi(0)|Xi = x]. Another key challenge is to detect exactly
+    for which specific levels of the covariateτ(x) differs from τ and, given several covariates,identifyingwhich X’sarethesourceofheterogeneity.
+    Interpretationiscrucialintheonlineindustry,thus,apopular approachistoassumealinearmappingfrom Yi to ( Wi,Xi ) from whichmainandinteractioneffectsmaybeestimated.Unsurpris-
+    ingly,therelationshipbetween Yi andXi isoftenhighlycomplex, thus a common method is to use the semi-parametric model fromRobinson(1988),Yi
+    = τ(Xi)Wi+g(Xi)+εi,whichmakes no assumptions about the forms ofτ(Xi) and g(Xi). Under unconfoundedness, one may writeYi
+    − m(Xi) = τ(Xi)(Wi − e(Xi))+εi,where m(Xi) = E[Yi|Xi]ande(Xi)areunknown.The ℓ2 lossfunctionisusedtoestimatetheheterogeneoustreatment
+    effects,resultingintheestimate ˆτ(X) = argmin τ′ 1 n n∑ i=1 { Yi − m(Xi) − τ′(Xi)[Wi − e(Xi)] }2 . Thus HTE estimation
+    is a ripe target for machine learning methods. Researchers have approached this problem using a technique called “Double
+    Machine Learning” (DML) (Cher- nozhukov et al.2017). Briefly, this technique modelsm(X) and e(X) as nuisance parameters,
+    estimating them with nonpara- metric regression on a hold-out sample set. The CATE may then be estimated on the remaining
+    sample set using a vari- ety of machine learning methodologies. Chernozhukov et al. (2017)demonstratethattheabovesquarederrorlossisNeyman
+    orthogonal tom(X) and e(X), which, along with sample split- ting, ensures unbiasedness ofˆτ(X) and enforces parsimonious
+    modelingof Y withrespecttothen uisanceparameters.S yrgka- nisetal.( 2019)extendDMLforestimatingheterogeneoustreat- ment
+    effects when the covariates are hidden. Such situations arise in online experiments when users do not comply with a treatmentduetounobservedfactors.Bymodeling
+    Ywithinstru- mentalvariables,Syrgkanisetal.( 2019)estimatetheHTEsusing a doubly-robust, fully convex loss function that
+    is minimized with an algorithm that builds on the DML technique. To avoid thechallengeofdirectlyestimatingtheHTE,Peysakhovichand
+    Lada(2016)usehistoric,user-leveldatatolearnindividualeffect estimates conditional on the covariates that correlate with
+    the true treatment effect. Practitioners at Netflix also used DML to understandthelocalizedimpactonviewershipfromsubbedand
+    dubbedmovies(Lanetal.2022). Other popular machine learning approaches for estimating τ(X) are regression trees and random
+    forests. Following the DMLapproach,forinstance,onemayusetreestoidentifymean- ingfulsegmentsofacontinuousorcategoricalvariable,andthen
+    modelτ(X) withpartiallylinearregression.Inanadaptationof THEAMERICANSTATISTICIAN 141 the classical CART algorithm, Athey
+    and Imbens (2016)b u i l d modified regression trees to partition the data into subgroups corresponding to different magnitudes
+    of the treatment effect, thus each terminal leaf produces an estimate forτ(x),r a t h e r thanthetraditionalestimateof
+    E[Y|Xi = x].T ocorrectforover- fitting, an additional split of the training data into nonoverlap- ping sub-partitions
+    for each leaf is used. Naturally, this method can be extended to random forests to create a causal forest for estimatingtheHTE(WagerandAthey
+    2018).Whilecasualtrees and forests do not require linearity of the treatment effects, and perhaps are conceptually more
+    intuitive than DML, they are somewhat lacking in terms of interpretability compared to the effectestimatesfromDMLandothersimilarmethods.Afurther
+    disadvantage is that the additional training split reduces the samplesizeforanapplicationthatmayalreadysufferlowpower.
+    In addition to estimatingτ(X), identifying which covariates orlevelsofcovariatescontributetotreatmentheterogeneityisof
+    greatpracticalconcern(SepehriandDiCiccio2020;McFowland IIIetal. 2021).Obtainingaparsimoniousmodelof Yiscriticalin such
+    situations, as there are typically a large number of covari- ates from which to choose and strong statistical significance
+    is required for detecting HTEs. This challenge is simultaneously a variable selection and multiple testing problem. Xie,
+    Chen, and Shi (2018) assume an experimental design setup where e(X) = Pr(Wi = 1), using this value to transformYi into
+    Y∗ i such thatE[Y∗ i |X]= τ(X),w h i c hi se s t i m a t e dw i t ht h e standard difference-in-meansˆτ.U s i n gY∗ −ˆτ
+    as the response variable, the authors perform Lasso regression in conjunction with the “knockoff” variable selection defined
+    by Barber and Candès(2015)toselectheterogeneouscovariateswhilecontrol- lingfalsediscoveryrates(FDRs).Theyalsodemonstratehowto
+    usetheBenjamini-Hochbergcorrectiontoidentifylevelswithin thesecovariateswhereHTEsoccur.Dengetal.( 2016b)alsouse variableselectionwhenclustersofcovariatesareofinterest,such
+    as device grouped by brand name. They employ a linear model with first order effect and second order interaction terms
+    and enforcesparsityusingtotalvariationregularization,atechnique similartoFusedLasso(Petersen,Witten,andSimon2016). Given
+    the wide array of scenarios under which HTEs occur in online experiments, there are still many situations where the methods
+    discussed above may not be appropriate. Much of the literature in this review make strong model assumptions that are difficult
+    to verify in practice. For example, the SUTVA requirement that units in a'
+- source_sentence: How can we effectively measure user engagement on the Google mobile homepage given the challenges in understanding
+    user intent?
+  sentences:
+  - 'estimates of long- term outcome. A statistical surrogate lies on the causal path between the treatment and the long -term
+    outcome. It satisfies the condition that treatment and outcome are independent conditional on the statistical surrogate.
+    You can use observational data and experiment data to find good surrogates. Even if no individual proxy satisfies the
+    statistical surrogacy criteri on, a high- dimensional vector of proxies may collectively satisfy the surrogacy assumption
+    [8]. Having a rich set of surrogates reduces the risk of affecting only a few surrogates and not the long -term outcome.
+    Facebook used this approach with some success to find good surrogates of the 7-day outcome of an experiment by just using
+    2 -3-day experiment results. They used quantile regression and a gradient-boosted regression tree to rank feature importance.
+    Note that there is still a risk that having too many surrogates for the long term may make this approach less interpretable.
+    4. OEC: OVERALL EVALUATION CRITERION METRIC 4.1 Problem One key benefit of evaluating new ideas through OCEs is that we
+    can streamline the decision-making process and make it more objective. Without understanding the causal impact of an idea
+    on customers, the decision-making process requires a lot of debat e. The proponents and opponents of the idea advance
+    their arguments regarding the change only relying on their own experience, recall , and interpretation of certain business
+    reports and user comments. Eventually the team leader makes a call on whether to ship the idea. This style of decision
+    making is based on the HiPPO (Highest Paid Person’s Opinion) [37] and is fraught with many cognitive biases [2]. To help
+    change HiPPO decisions to more objective, data-driven decisions based on the causal impact of an idea from customer response
+    [5], w e recommend establishing t he OEC for all experiments on your product. Not all metrics computed to analyz e the
+    results of an experiment are part of the OEC. To analyze experiment results, we require different types of metrics [22].
+    First, we need to know if the results of an experiment are trustworthy. A set of data quality metrics, like a sample ratio,
+    help raise red flags on critical data quality issues. After checking the data quality metrics, we want to know the outcome
+    of the experiment. Was the treatment successful and what was its impact? This set of metrics comprise the OEC. In addition
+    to OEC me trics, we have found that there is a set of guardrail metrics which are not clearly indicative of success of
+    the feature being tested, but metrics that we do not want to harm . The remaining bulk of the metrics for an experiment
+    are diagnostic, feature or l ocal metrics. These metrics help you understand the source of OEC movement (or the lack of).
+    It is hard to find a good OEC. Here are a few key properties [19, 24, 55] to consider. First, a good OEC must be indicative
+    of the long-term gain in key product indicators (KPIs). At the very least make it directionally accurate in estimating
+    the impact on the long- term outcome. Second, OEC must be hard to game and it should incentivize the right set of actions
+    in the product team. It should not be easy to satisfy the OEC by doing the wrong thing. For instance, if the OEC is limited
+    to a part or feature of the product, you may be able to satisfy the OEC by cannibalizing other parts or features. Third,
+    OEC metrics must be sensitive. Most changes that impact the long-term outcome should also have a statistically significant
+    movement in OEC metrics so it is practical to use the OEC to distinguish between good and bad changes to the product.
+    Fourth, the cost of computing OEC metrics cannot be too expensive. OEC metrics must be computed for 100s of the experiments
+    and be run on millions of users each and every week. Methods that involve costly computation or costly procedures like
+    human surveys or human judges may not scale well. Fifth, OEC metrics must account for a diverse set of scenarios that
+    may drive the key product goals. Finally, OEC should be able to accommodate new scenarios. For instance, direct answers
+    to queries like current time would provide a good user experience in a search engine, but if you only base the OEC metrics
+    on clicks, those metrics will miss this scenario. 4.2 Common Solutions and Challenges 4.2.1 Search vs. Discovery Measuring
+    the success of a search experience in search engines has been a research subject for a long time in academia and for many
+    products including Bing, Google and Yandex. It is well established that metrics, like queries per user, cannot be a good
+    OEC because queries per user may go up when search ranking degrades. Sessions per user or visits per user are considered
+    better OEC metrics [49]. In general there is an appreciation of focusing on HEART (Happiness, Engagement, Adoption, Retention,
+    and Task success) metrics for the OEC and use PULSE (Page views, Uptime, Latency, Seven-day active users [i.e., the number
+    of unique users who used the product at least once in the last week], and Earnings) metrics as your guardrail metrics
+    [62]. Over time, different methods have been proposed to measure HEART metrics in search engines and other goal-directed
+    activities [36, 54]. It is still challenging to find metrics similar to HEART metrics to work for discovery - or browsing-related
+    scenarios , like news articles shown on the Edge browser homepage, or Google mobile homepage, or Yandex homepage. The
+    challenge is to understand user intent. Sometimes users will come with a goal-oriented intent and would like to quickly
+    find what they are looking for. Other times users may have a more browsing or discovering-new- information intent where
+    they are not looking for something specific but just exploring a topic. In this case it is not clear if lack of a click
+    on an article link with a summary snippet can be viewed as a negative experience or'
+  - 'https://bit.ly/ABTestingIntuitionBusters © Kohavi, Deng, Vermeer 2022. This is the author''s version of the work. It
+    is posted here for your personal use. Not for redistribution. The definitive version will be published in KDD 2022 at
+    https://doi.org/10.1145/3534678.3539160 A/B Testing Intuition Busters Common Misunderstandings in Online Controlled Experiments
+    Ron Kohavi Kohavi Los Altos, CA ronnyk@live.com Alex Deng Airbnb Inc Seattle, WA alexdeng@live.com Lukas Vermeer Vista
+    Delft, The Netherlands lukas@lukasvermeer.nl ABSTRACT A/B tests, or online controlled experiments , are heavily used in
+    industry to evaluate implementations of ideas. While the statistics behind controlled experiments are well documented
+    and some basic pitfalls known, we have observed some seemingly intuitive concepts being touted, including by A/B tool
+    vendors and agencies, w hich are misleading, often badly so. Our goa l is to describe these misunderstandings, the “intuition”
+    behind them, and t o explain and bust that intuition with solid statistical reasoning. We provide recommendations that
+    experimentation platform designers can implement to make it harder for experimenters to make these intuitive mistakes.
+    CCS CONCEPTS General and Reference → Cross-computing tools and techniques → Experimentation; Mathematics of computing
+    → Probability and statistics → Probabilistic inference problems → Hypothesis testing and confidence interval computation
+    KEYWORDS A/B Testing, Controlled experiments, Intuition busters ACM Reference format: Ron Kohavi, Alex Deng, Lukas Vermeer.
+    A/B Testing Intuition Busters: Common Misunderstandings in Online Controlled Experiments. In Proceedings of the 28th ACM
+    SIGKDD Conference on Knowledge Discovery and Data Mining (KDD ’22) , August 14-18, 2022, Washington DC, USA . ACM, New
+    York, NY, USA. 10 pages. https://doi.org/10.1145/3534678.3539160 1. Introduction Misinterpretation and abuse of statistical
+    tests, confidence intervals, and statistical power have been decried for decades, yet remain rampant. A key problem is
+    that there are no interpretations of these concepts that are at once simple, intuitive, correct, and foolproof -- Greenland
+    et al (2016) A/B tests, or online c ontrolled experiments (see appendix for references), are heavily used in industry
+    to evaluate implementations of ideas, with the larger companies starting over 100 experiment treatments every business
+    day (Gupta, et al. 2019). While the statistics behind controlled experiments are well documented and some pitfalls were
+    shared (Crook, et al. 2009, Dmitriev, Frasca, et al. 2016, Kohavi, Tang and Xu 2020, Dmitriev, Gupta, et al. 2017) , we
+    see many erroneous applications and misunderstanding of the statistics, including in books, papers, and software. The
+    appendix shows the impact of these misunderstood concepts in courts and legislation. The concepts we share appear intuitive
+    yet hide unexpected complexities. A lthough some amount of abstraction leakage is usually unavoidable (Kluck and Vermeer
+    2015) , our goal is to share these common intuition busters so that experimentation platforms can be designed to make
+    it harder for experimenters to misuse them. Our contributions are as follows: • We share a c ollection of important intuition
+    buster s. Some well-known commercial vendors of A/B testing software have focused on “intuitive” presentations of results,
+    resulting in incorrect claims to their users instead of addressing their underlying faulty intuitions. We believe that
+    these solutions exacerbate the situation, as they reinforce incorrect intuitions. • We drill deeply into one non -intuitive
+    result, which to the best of our knowledge has not been studied before: the distribution of the treatment e ffect under
+    non- uniform assignment to variant s. Non-uniform assignments have been suggested in the statistical literature. We highlight
+    several concerns. • We provide recommendations as well as deployed examples for experimentation platform designers to
+    help address the underlying faulty intuitions identified in our collection.'
+  - '<3-hop>
+
+
+    good chance the combination will fail (like most ideas)? 4. The change is strategic, or the CEO is involved. We must show
+    progress. The data is very clear that it is hard for organizations to correctly predict the success of small changes,
+    and most fail to improve the metrics they were designed to improve. Many big launches fail, and the biggest strategic
+    moves that are evaluated tend to have low success rate: Lewis and McKone (2016) wrote that an analysis of 2,500 Merger
+    & Acquisition (M&A) deals, including AOL-Time-warner, HP-Compaq, Quaker-Snapple, shows that more than 60% of them **DRAFT
+    – Love to get feedback ** destroy shareholder value. Christensen et al. claim that “study after study puts the failure
+    rate of mergers and acquisitions somewhere between 70% and 90%” (Christensen, et al. 2011). Eric Ries uses the term “achieved
+    failure” for companies that successfully, faithfully, and rigorously execute a plan that turned out to have been utterly
+    flawed (Ries 2011). For a big change, I suggest doing a pre-experiment betting competition on the OEC delta at different
+    stages. If everyone agrees that the initial launch is going to be flat to negative, it sets the expectation that we should
+    not launch it. Are people willing to sign-up that a month or two after the initial launch there will be positive value?
+    That’s not long to wait. It’s humbling if the numbers are not as rosy as we expected. Maybe the strategy is not clearly
+    a winner; let’s look at the data and improve things or pivot a bit before we commit to a big change. 5. We have Machine
+    Learning models that optimize the user experience. They were tuned for the Control. If we were to ship the Treatment,
+    they would optimize for that and the OEC would improve. Like the enabler argument, this is wishful thinking, a natural
+    bias towards the new shiny object. What’s clear is that if we ship to 100%, we will never know if this argument is true
+    or not, as we are losing the ability to run a controlled experiment. Could we retrain a couple of models from the Treatment
+    data to see if there’s a difference in performance? 6. Consistency of the user experience. If the two experience are different
+    enough, some users will suffer flipping experiences, or have different experiences on different devices. We have two variants--Control
+    and Treatment—that are performing similarly, so are in a state of equipoise. From a reliability and maintenance perspective,
+    it’s better to shut down the Treatment for another month until we build the great feature on top of it, as we give our
+    users a consistent reliable experience until then. Remember that most ideas fail, and most large redesigns are notoriously
+    difficult to get right in the first iterations: they tend to be worse or similar to the existing version. It’s a good
+    idea to iterate a few times to confirm that we have indeed landed on a higher/better mountain with great opportunities
+    before committing. Teams should be empowered to ship positive changes. When the OEC delta is flat, the default should
+    be to challenge the team to iterate and show improvement and avoid falling into the traps shared above. Sure, there will
+    be exceptions, but the default should be clear: flat implies no ship. The argument is even stronger when the OEC delta
+    is negative. **DRAFT – Love to get feedback **'
+- source_sentence: who jacob cohen say about power analysis?
+  sentences:
+  - '<1-hop>
+
+
+    3 ESTIMATING THE FALSE POSITIVE RISK P-values are commonly misinterpreted as the probability of making a mistake when
+    choosing the Treatment over Control when the observed metric of interest is statistically significantly different [25;
+    26; 27]. Multiple examples of this misinterpretation by A/B vendors, book authors, and in courts were provided by Kohavi,
+    Deng, and Vermeer [14]. What is the p-value then? The p-value is the probability of obtaining a result equal to or more
+    extreme than what was observed, assuming that all the modeling assumptions, including the null hypothesis, 𝐻଴, are true
+    [26]. Conditioning1 on the null hypothesis is critical and most often misunderstood. In probabilistic terms, we have p-value
+    = 𝑃(Δ 𝑜𝑏𝑠𝑒𝑟𝑣𝑒𝑑 𝑜𝑟 𝑚𝑜𝑟𝑒 𝑒𝑥𝑡𝑟𝑒𝑚𝑒|𝐻଴ 𝑖𝑠 𝑡𝑟𝑢𝑒). What we are looking for most of the time is the opposite conditional probability:
+    𝑃(𝐻଴ 𝑖𝑠 𝑡𝑟𝑢𝑒 |Δ 𝑜𝑏𝑠𝑒𝑟𝑣𝑒𝑑) Using Bayes Rule, we can estimate the False Positive Risk (FPR), which is the probability that
+    the statistically significant result is a false positive, or the probability that 𝐻଴ is true (no real effect) when the
+    test was statistically significant [15]. Note that FPR is sometimes named FDR, or False Discovery Rate [28; 29], but given
+    the confusion with FDR from multiple hypothesis testing, we use the term recommended by Colquhoun [15]. We use the following
+    terminology [14]: a) SS is a statistically significant positive2 result. b) 𝜶 is the threshold used to determine statistical
+    significance (SS), commonly 0.05 for a two-tailed t-test, and 0.025 for the positive tail. c) 𝜷 is the type-II error (usually
+    0.2 for 80% power). d) 𝝅 is the prior probability of the null hypothesis, that is 𝑃(𝐻଴). We can apply Bayes Rules as follows:
+    𝐹𝑃𝑅 = 𝑃(𝐻଴|𝑆𝑆)= α∗గ α∗ గ ା (ଵିఉ)∗(ଵିగ) . An alternative derivation of FPR, resulting in the same formula, was made in
+    the Supplement to Equation 2 and Figure 2 in Benjamin et. al. [30]. The key parameter required for the above is 𝝅, or
+    𝑃(𝐻଴). Kohavi, Deng, and Vermeer [14] provided a table with seven success rate estimates (1- 𝝅) that were reported in
+    the software industry, which ranged from 8% to 33% with a median and mode of 10%. Plugging these into the above formula
+    results in an FPR of 22% for the median and mode success rate of 10%, industry standard two- tailed alpha of 0.05 equivalent
+    to one-tailed 0.025, and 80% power (𝜋= 0.9,𝛼= 0.025,𝛽= 0.2). This is a much higher rate than people intuitively think
+    of when they hear statistically significant 2 We refer to a positive result as an improvement in the desired direction,
+    which is usually larger (e.g., conversion, revenue), but may be smaller (e.g., faster time). False Positives in A/B Tests
+    KDD ’24, August 25-29, 2024, Barcelona, Spain improvement. For companies that use 𝛼=0.10 as their threshold for statistical
+    significance, or equivalently use 𝛼=0.05 with a one- tailed test for the improvement tail (e.g. Optimizely [31], Analytics
+    Toolkit [32], Booking.com [33], Expedia), the FPR for 10% success rate is a 36%. Over one third of the statistically significant
+    results showing improvement, which we want to celebrate, are likely to be false positives! To provide intuition about
+    why the FPR is so high when the success rate is low, we will use the data reported by Optimizely [34] of 12% win rate
+    across 127,000 experiments. As we will show later in the paper in Section 4.4, the estimated true success rate is 9.3%,
+    in line with the 10% median and mode of Table 2 in Kohavi, Deng, and Vermeer [14]. Looking at Figure 1, the dot-pattern
+    (also green if viewed in color) in the first row represents the 9.3% success rate, that is, true effects that should be
+    statistically significant given our sample size with 80% power. Of these, 80% will be identified as statistically significant,
+    so 80%*9.3%=7.4% are denoted by a plus in the first row. Of the remaining 90.7% null effects, 5% will be statistically
+    significant and positive, so 4.5% of the A/B tests will show a statistically significant result: a false positive. These
+    are denoted by a plus in the second row. Of the ~12% wins (7.4%+4.5% depicted by pluses), 4.5% are false positives, so
+    4.5%/(4.5% + 7.4%) = 37.8%. This surprisingly high false positive is often referred to as the base rate fallacy [35].'
+  - '#3: Need over 200K Visitors in Online Experiment • Maybe you need half or double this, but do not trust online controlled
+    experiments with 2,000 users • Let me start with the assumptions required for this default: • Alpha=0.05 to declare stat-sig
+    (industry standard, default #1 in this talk). Lower values, which are appropriate sometimes, will result in increasing
+    sample size • Power=80%. We’ll discuss power over the next few slides, but this is a minimum. Going to higher power will
+    increase the sample size. • Conversion rate is 5%. Even if you’re optimizing for something else, it is very common to
+    build a guardrail on conversions. Sites are typically 2%-5%. A lower number will increase the sample size • MDE (minimum
+    detectable effect) is relative 5%. It is rare to see experiments improve key metrics by 5%, but we’ll be aggressive looking
+    for big wins. A small MDE will increase the sample size #16 When I finally stumbled onto power analysis… it was as if
+    I had died and gone to heaven -- Jacob Cohen (1990) © 2022 Ron Kohavi #3: The Sobering Math • The power formula is simple:
+    • For conversions, 𝜎2 = 𝑝∗(1−𝑝)(binomial distribution). We assume p=5%, so 𝜎2 = 0.05∗0.95 • Our MDE is 5% relative, so
+    𝛿 = 5%∗5%(absolute) • Plug it in, and n=121,600 per variant, or 243,200 for A/B test • 200K is therefore conservative
+    minimum for these assumptions • Lower alpha, increase power, lower conversion rate, or lower the MDE, and you need a larger
+    sample #17 © 2022 Ron Kohavi #3: What is Power? • Statistical power is the probability of detecting a given difference
+    between the variants when there really is one • Given H0 (left) and H1 (right) separated by 𝛿 • Stat-sig is noted by the
+    dark area (only the right one matters here) • The vertical lines indicate β, which is our type-II error (power= 1-β) •
+    With low power, the right normal moves left and the vertical lines cover most of that distribution. You have to be “lucky”
+    to get stat-sig #18 Diagram from van Belle (2011) © 2022 Ron Kohavi Winner’s Curse • A stat-sig result with low power
+    has a high probability of exaggerating the actual number as follows → (Gelman and Carlin 2014) • GuessTheTest on 16 Dec
+    2021, shared an example with ~80 users in each variant and 337% improvement • It had 3% power to detect even a 10% delta,
+    so it is 63% likely to be a false positive and highly likely to exaggerate effect. See http://bit.ly/ABTestingIntuitionBusters
+    #19 © 2022 Ron Kohavi A Visualization of Power • If the null hypothesis is true (no difference, or effect is zero), the
+    distribution of p-values is uniform • Using p-value of 0.05, about 5% of the time you’ll declare something stat-sig •
+    We’ll look at the p-value distribution of 10,000 experiments where the treatment has a 5% lift (relative improvement)
+    #20 © 2022 Ron Kohavi Power = 3% (N=100 per variant) Delta of 1 Delta 0Delta of 2 Delta of 3 Delta of 4 With so few users,
+    only a few conversion combinations are possible, hence only a few p-values are possible © 2022 Ron Kohavi Power = 3% (N=100
+    per variant) cont • With small numbers, you get extreme results – winner’s curse • C had 13 conversions, T had 0 conversions
+    ( -100%, p-value 0.00003) • C had 1 conversion, T had 13 conversions (+1200%, p-value 0.0001) • Average lift (absolute
+    value) for stat-sig results was 271% Remember: true lift is 5%, so exaggeration factor is 54 times for average! • The
+    maximum was 1200% lift, so 240 times the true value. • Wrong sign for stat-sig result: 36% of the time The truth was that
+    there was a 5% lift, but we got a stat-sig negative lift! #22 © 2022 Ron Kohavi Power = ~10% (N=7,000 per variant) #23
+    Looks almost uniform (remember, our goal is for p-value < 0.05) Stat-sig only ~10% of the time (vs. 5% expected if there
+    was no difference) Winner’s curse: when stat-sig, exaggeration factor of 3.9 (19.3% lift) © 2022 Ron Kohavi Power = ~30%
+    (N=32,000 per variant) #24 Starts to put more mass below 0.05 Winner’s curse: when stat-sig, exaggeration factor of 1.9
+    (9.3% average lift) Could even get the sign wrong 0.1% of the time when stat-sig © 2022 Ron Kohavi Power = ~80% (N=122,000)
+    #25 That’s the minimum we want: ~80% of the time, p-value < 0.05 Small exaggeration factor of 1.1 (5.6% average lift vs.
+    real value of 5%) Never get the sign wrong when stat-sig © 2022 Ron Kohavi Power = ~90% (N=163,000) #26 Extending experiment
+    from 122K users to 163K users (e.g., 34% longer) gives us great 90% power © 2022 Ron Kohavi References • Excel spreadsheet
+    with the visualizations here (Nov 2022) • Low power LinkedIn post (Sept 2022) • A/B Testing Intuition Busters(Aug 2022)
+    • Gelman, This is what “power = .06” looks like. Get used to it (11/2014) #27 © 2022 Ron Kohavi'
+  - '<2-hop>
+
+
+    the cookies are the user identifiers, this actually creates significant bias. these users (by cookie) are not representative
+    of the overall population and diverge significantly on key characteristics. Unlike Intention-To-Treat studies in clinical
+    trials , this is a Missing Outcome Data p roblem, and generalizations from this set of users to the overall population,
+    referred to as external validity, are hard to make [19]. In this paper, we share a set of pitfalls that may undermine
+    the external validity of long -term online controlled experiments. We discuss cookie stability, survivorship bi as, selection
+    bias, perceived trends, side effects, and seasonality and share methodologies that can be used to partially address some
+    of these issues. We believe that the insi ghts we share will apply to a wide variety of A/B/n testing scenarios , and
+    that discussing and sharing mechanisms to address or workaround the pitfalls will lead to a better understanding of the
+    results in long-term online controlled experiments. Our contributions in this paper include: 1. Discussion of a phenomenon
+    we call cookie clobbering, which impacts cookie churn and likely impacts many web sites. While the general idea of cookie
+    churn is well- known, to the best of our knowledge, this is the first time the specific issue we call cookie clobbering
+    is discussed (although the term has been used to refer to cookie churn in some web resources) . We provide key statistics
+    and a technique we used for several years at Bing to reduce such unintentional cookie chu rn. We believe this technique
+    should be used by many sites. In the context of long -running experiments, this helps reduce loss of cookies over time,
+    aiding in longitudinal studies. Unrelated to long-running experiments, this can help sites maintain longer-lasting user
+    identity, useful in personalization scenarios, for example. 2. Discussion of results from a Bing experiment, similar to
+    the one conducted by Google in the FLT paper . Unlike the FLT paper, however, we observed significant survivorship bias
+    in this experiment. We discuss why survivorship bias is a key issue in analyzing long -term experiments which, if present,
+    makes it very hard to accurately measure user learning. 3. Deep analysis of a long -running experiment that we believe
+    is impacted by “ user learning,” including a comparison of several approaches to estimating the overall long -term impact.
+    We discuss the issue s of selection bias and perceived trends in the context of this experiment. 4. Discussion of the
+    impact of side effects and seasonalit y on the results of long -term experiments, using actual experiments from Bing and
+    MSN. II. ONLINE CONTROLLED EXPERIMENTS In the online controlled experiments that we discuss here, users are randomly split
+    between the variants (e.g., in an A/B test, two differ ent versions of the web site) in a persistent manner (a user receives
+    the same experience in multiple visits). Users’ interactions with the site are instrumented (e.g., page views, clicks)
+    and key metrics computed (e.g., clickthrough-rates, sessions/user, revenue/user, time -to- click). Statistical tests are
+    used to analyze the resulting metrics. If the delta between the metric values for Treatment and Control is statistically
+    significant, we conclude with high probability that the change we introduced caused the observed effect on the metric.
+    See Controlled experiments on the web: survey and practical guide [20] for details.'
+model-index:
+- name: SentenceTransformer based on Snowflake/snowflake-arctic-embed-l
+  results:
+  - task:
+      type: information-retrieval
+      name: Information Retrieval
+    dataset:
+      name: Unknown
+      type: unknown
+    metrics:
+    - type: cosine_accuracy@1
+      value: 0.5083333333333333
+      name: Cosine Accuracy@1
+      verified: false
+    - type: cosine_accuracy@3
+      value: 0.7333333333333333
+      name: Cosine Accuracy@3
+      verified: false
+    - type: cosine_accuracy@5
+      value: 0.8333333333333334
+      name: Cosine Accuracy@5
+      verified: false
+    - type: cosine_accuracy@10
+      value: 0.9
+      name: Cosine Accuracy@10
+      verified: false
+    - type: cosine_precision@1
+      value: 0.5083333333333333
+      name: Cosine Precision@1
+      verified: false
+    - type: cosine_precision@3
+      value: 0.325
+      name: Cosine Precision@3
+      verified: false
+    - type: cosine_precision@5
+      value: 0.22500000000000006
+      name: Cosine Precision@5
+      verified: false
+    - type: cosine_precision@10
+      value: 0.1291666666666667
+      name: Cosine Precision@10
+      verified: false
+    - type: cosine_recall@1
+      value: 0.3470833333333333
+      name: Cosine Recall@1
+      verified: false
+    - type: cosine_recall@3
+      value: 0.6194444444444444
+      name: Cosine Recall@3
+      verified: false
+    - type: cosine_recall@5
+      value: 0.711388888888889
+      name: Cosine Recall@5
+      verified: false
+    - type: cosine_recall@10
+      value: 0.8056250000000001
+      name: Cosine Recall@10
+      verified: false
+    - type: cosine_ndcg@10
+      value: 0.6457367888356831
+      name: Cosine Ndcg@10
+      verified: false
+    - type: cosine_mrr@10
+      value: 0.6400760582010584
+      name: Cosine Mrr@10
+      verified: false
+    - type: cosine_map@100
+      value: 0.5788446411551665
+      name: Cosine Map@100
+      verified: false
+config:
+  architectures:
+  - BertModel
+  model_type: bert
+  tokenizer_config:
+    cls_token: '[CLS]'
+    mask_token: '[MASK]'
+    pad_token: '[PAD]'
+    sep_token: '[SEP]'
+    unk_token: '[UNK]'
+cardData:
+  tags:
+  - sentence-transformers
+  - sentence-similarity
+  - feature-extraction
+  - generated_from_trainer
+  - dataset_size:428
+  - loss:MatryoshkaLoss
+  - loss:MultipleNegativesRankingLoss
+  base_model: Snowflake/snowflake-arctic-embed-l
+  widget:
+  - source_sentence: How does the Overall Evaluation Criterion (OEC) guide the duration of A/B experiments, and why is the
+      alpha level of 0.05 considered a reasonable default in hypothesis testing for trustworthy results?
+    sentences:
+    - 'h t t p s : / / b i t . l y / p v a l u e M i s i n t e r p r e t a t i o n s P-value Misinterpretations – Annotated
+      References Ron Kohavi Feb 28, 2024 Misinterpretation and abuse of statistical tests, confidence intervals, and statistical
+      power have been decried for decades, yet remain rampant. A key problem is that there are no interpretations of these
+      concepts that are at once simple, intuitive, correct, and foolproof. -- Greenland et al (2016) What will be said in
+      this paper is hardly original. It is, in a certain sense, what "everybody knows." To say it "out loud" is, as it were,
+      to assume the role of the child who pointed out that the emperor was really outfitted only in his underwear. -- David
+      Bakan (1966) Rather than try and explain p-values, I’ll annotate some of the best references I know. In A/B Testing
+      Intuition Busters (Section 3, Appendix, and newer comments), we called out vendors and book authors for misinterpreting
+      p-values, or coming up with names like “confidence” for (1-p-value), which is misleading. Below are some great references
+      to look at with links to downloadable PDFs. 1. Statistical Errors (2014) by Regina Nuzzo. According to ASA’s statement
+      on p-values (below), the article is “one of the most highly viewed Nature articles.” On Google Scholar, it shows over
+      1,700 citations. Some excerpts a. " … surprisingly slippery nature of the P value, which is neither as reliable nor
+      as objective as most scientists assume. “ b. “P values have always had critics. In their almost nine decades of existence,
+      they have been likened to mosquitoes (annoying and impossible to swat away), the emperor’s new clothes (fraught with
+      obvious problems that everyone ignores) and the tool of a ''sterile intellectual rake'' who ravishes science but leaves
+      it with no progeny.” c. “The more implausible the hypothesis—telepathy, aliens, homeopathy—the greater the chance that
+      an exciting finding is a false alarm, no matter what the P value is.” This fits in with my belief in Twyman’s Law (https://bit.ly/twymanLaw).
+      d. “Simonsohn’s simulations have shown that changes in a few data-analysis decisions can increase the false-positive
+      rate in a single study to 60%” e. The figure below, from the paper, makes it clear that with low success rates (priors),
+      a p-value of 0.05 does not provide strong evidence against the null hypothesis, a point we made using FPR (false positive
+      risk) in A/B Testing Intuition Busters . I’ve replicated the numbers, allowing you to plug your own in https://bit.ly/PvaluesToBayesPosteriors
+      . Note that in our paper, we looked at the FPR of setting alpha to some value, not for a particular experiment having
+      a given p-value. h t t p s : / / b i t . l y / p v a l u e M i s i n t e r p r e t a t i o n s 2. Statistical tests,
+      P values, confidence intervals, and power: a guide to misinterpretations (2016) by Sander Greenland, Stephen J. Senn,
+      Kenneth J. Rothman, John B. Carlin, Charles Poole, Steven N. Goodman, Douglas G. Altman. This article has over 2800
+      citations. According to ASA’s statement on p-values (below), the article “is a significant contribution to the literature
+      about p-values and statistical significance.” The paper provides definitions and 25 misinterpretations of p-values,
+      confidence intervals, and power. a. "Every method of statistical inference depends on a complex web of assumptions about
+      how data were collected and analyzed, and how the analysis results were selected for presentation. The full set of assumptions
+      is embodied in a statistical model that underpins the method. This model is a mathematical representation of data variability,
+      and thus ideally would capture accurately all sources of such variability … These assumptions are often deceptively
+      simple to write down mathematically, yet in practice are difficult to satisfy and verify … ” b. “ … we will adopt a
+      more general view of the P value as a statistical summary of the compatibility between the observed data and what we
+      would predict or expect to see if we knew the entire statistical model (all the assumptions used to compute the P value)
+      were correct.” c. “The P value is then the probability that the chosen test statistic would have been at least as large
+      as its observed value if every model assumption were correct, including the test hypothesis. This definition embodies
+      a crucial point lost in traditional definitions: In logical terms, the P value tests all the assumptions about how the
+      data were generated (the entire model), not just the targeted hypothesis it is supposed to test (such as a null hypothesis)
+      … .include assumptions about the conduct of the analysis, for example that intermediate analysis results were not used
+      to determine which analyses would be presented.” d. “ … a very small P value does not tell us which assumption is incorrect.
+      For example, the P value may be very small because the targeted hypothesis is false; but it may instead (or in addition)
+      be very small because the study protocols were violated, or because it was selected for presentation based on its small
+      size.” h t t p s : / / b i t . l y / p v a l u e M i s i n t e r p r e t a t i o n s e. Misconception #1: “The P value
+      is the probability that the test hypothesis is true; for example, if a test of the null hypothesis gave P = 0.01, the
+      null hypothesis has only a 1 % chance of being true; if instead it gave P = 0.40, the null hypothesis has a 40 % chance
+      of being true. No! The P value assumes the test hypothesis is true—it is not a hypothesis probability and may be far
+      from any reasonable probability for the test hypothesis.” f. Misconception #2:'
+    - '<2-hop>
+
+
+      #1: Stat-sig is p-value < 0.05 for Two-Tailed Tests • Despite a lot of questions about alpha=0.05 as a threshold, it
+      is a great default, especially when coupled with two-tailed tests • Jonny Longden posted that “95% significance in A/B
+      testing is a dumb rule” because it does not capture your appetite for risk.” I disagree. • When I share a success story
+      for an idea that wins, I want it to be wrong less than 5% of the time. As we’ll see on the next slides, that requires
+      lowering the alpha to 0.01 in many scenarios, and that requires running experiments much longer (with the same degree
+      of power), so we lose agility. When I consider both risk & agility, 0.05 turns out to be a reasonable default • If the
+      PM or the CEO believes the idea is great, how much would you trust that prior probability (and thus raise alpha)? Turns
+      out very little. We are poor at assessing the value of ideas #8 © 2022 Ron Kohavi #1: Stat-sig (cont) • Medical drugs
+      are evaluated in the US by the FDA using strict statistical protocols (*) • In 1962, Congress passed the Drug Amendments
+      that for the first time required that new drugs be shown to be effective using the term “substantial evidence,” which
+      was defined as “well-controlled investigations.” • In 1969, the FDA for the first time required the submission of a
+      hypothesis, an analysis plan, and it made the threshold of 0.05 standard • The latest guidance (E9 Statistical Principles
+      for Clinical Trials) states that conventionally • Type-I error should be set to 5% (Alpha = 0.05) for two-sided tests,
+      and 2.5% for one-sided tests • Type-II error should be set to 10-20% (Power of 80-90%) and then they leave the door
+      open to adjustments by writing Alternative values to the conventional levels of Type I and Type II error may be acceptable
+      or even preferable in some cases. • In a domain where life and death decisions are made, where one could claim higher
+      or lower risks for different drugs, and where expert statisticians work, they suggested a conventional default of 0.05
+      and allowed for adjustments #9 (*) See a great historical account by Kennedy-Shaffer (2017) © 2022 Ron Kohavi The NP-Hard
+      Analogy • In Garey and Johnson’s Computers and Intractability: A Guide to the Theory of NP-Completeness, they show this
+      cartoon about a person who can’t find an efficient solution to an NP-hard problem: • My claim is similar: if the FDA
+      with all its statisticians decided to default to a constant, and leave the door open to adjustments, it’s a reasonable
+      decision • I’m well aligned with that thinking #10 I can''t find an efficient algorithm, but neither can all these famous
+      people PC cartoon from https://www.ac.tuwien.ac.at/people/szeider/cartoon/ Not politically correct gender © 2022 Ron
+      Kohavi #1: Stat-sig – 0.05 is special • The following is more of an academic reason, but worth mentioning • For sample
+      sizes ≥ 20 a point estimate ± two standard errors has approximately 95% coverage for a wide variety of distributions
+      - Gerald van Belle''s Statistical Rules of Thumb • The graph shows Tail probability of non-coverage of estimate ±2 standard
+      errors. Curves are for exponential distribution with sample sizes 1, 2, 5, and 20. The x-axis is the standardized variable
+      • This property applies to a 95% confidence interval; it does not work for example, for an 80% confidence interval •
+      See post (8/2022) #11 © 2022 Ron Kohavi #1: Stat-sig False Positive Risk • The p-value is computed assuming the null
+      hypothesis is true. If we can estimate the success rate for experiments in an org, we can compute the False-Positive-Risk,
+      the probability that a statistically significant result is a false positive. • Here is a table of success rates in industry
+      and the implied False-Positive-Risk (FPR) #12 Company / Source Success Rate FPR (alpha=0.05) FPR (alpha=0.10) Optimizely’s
+      default Or one-tailed with alpha=0.05 Microsoft 33% 5.9% 11.1% Avinash Kaushik 20% 11.1% 20.0% Bing 15% 15.0% 26.2%
+      Booking.com, Google Ads, Netflix 10% 22.0% 36.0% Airbnb Search 8% 26.4% 41.8% © 2022 Ron Kohavi #1: Stat-sig – Two Tailed
+      Tests • When using an A/B tests, we only ship stat-sig improvements, not degradations, so why run two-tailed tests?
+      • With the alpha=0.05, two-tailed really means alpha=0.025 for the improvement tail. Given the FPR rates (previous slide),
+      we really want that alpha, not 0.05 • In practice, you want to detect stat-sig degradations, so you want both tails.
+      They are an important signal to abort and to identify bugs. • Some might prefer a different alpha for the two tails,
+      and I think it’s fine to run TOST – Two One-Sided Tests with alpha at most 0.025 for the improvement tail. See post
+      (2/2022) #13 © 2022 Ron Kohavi'
+    - the litmus test noted in pitfall 1 . For example, in a Microsoft health related site, a widget was redesigned to make
+      health articles more accessible. Time spent on pages and total session time increased (satisfying the objective), but
+      drilling down to the reasons, the new widget in the Treatment was used less often than the one in the Control. Users
+      may have been more confused , thus taking longer to find what they need. We also ran an experiment on Microsoft’s support
+      site, support.microsoft.com, where dwell time was the OEC. However, it was not clear at all whether the lower times
+      were due to the user experience improving or users giving up. Finding a good gen eral OEC for support sites is challenging.
+      We do want to mention that limited experiments are still possible. For example, a particularly successful support site
+      experiment we ran involved the test of a rudimentary persona lization feature. The support.microsoft.com site contained
+      a top center “Instant Answers” module with links to common support issues selected by the site editors. We tested a
+      new treatment that personalized these links by the browser and operating system v ersions of the user’s HTTP header.
+      The treatment performed over 50% better than t he control on the OEC of Click -through rate, without decreasing the
+      clickthrough rate for the whole page.
+  - source_sentence: How does the Johari et al. (2017) finding on multiple testing errors relate to the importance of trustworthy
+      experiments in experimentation platforms as discussed by Kohavi and Vermeer?
+    sentences:
+    - '<2-hop>
+
+
+      What Should the Primary Metric be for Experimentation Platforms? Ron Kohavi and Lukas Vermeer Initial version: 6/29/2023,
+      updated 7/3/2023. Whether you’re building an experimentation platform inside a company, or you’re a vendor of such a
+      platform, we claim that a great goal metric, or primary metric, to evaluate the experimentation platform team is the
+      number of experiment treatments whose scorecards are trustworthy. Introduction Both of us were involved in building
+      experimentation platforms: Ron Kohavi at Microsoft and Airbnb, and Lukas Vermeer at Booking.com and Vista. Our teams
+      were both using similar metrics related to the number of experiments, so it was surprising to see a post by Manuel Da
+      Costa (2023) that claimed that the number of tests you run is meaningless in an experimentation program, and that it
+      is a vanity metric. Before we go into the details, we want to emphasize several points: 1. Trust is a fundamental requirement—tables
+      stakes. Manuel indeed asked: “what good is X number of experiments if you cannot trust the data?” and we agree here.
+      But rather than abandoning the metric, we believe it should be a qualified metric: trustworthy experiments. The experimentation
+      platform should make it hard to make statistical mistakes, such as multiple- hypothesis testing, which the initial version
+      of Optimizely encouraged (Borden 2014), an oversight that was fixed over time (Johari, et al. 2017). If you find that
+      the computation of variance for key metrics was incorrect, because the variance for ratio metrics needs to be computed
+      using the delta method, and it was not properly done, those analyzed experiments should not count. Focus on trustworthy
+      experiments encourages the team to validate results by running A/A tests and automatically identify flaws, such as SRMs
+      (sample-ratio-mismatch) (Fabijan, et al. 2019). 2. This metric is intended for the experimentation platform team, not
+      for the clients of the experimentation platform (e.g., product development teams). The clients should be optimizing
+      for their business metric, which is usually based on some criteria related to long-term customer and business value
+      (e.g., conversions or revenue with some guardrails, customer satisfaction, repeat usage). If those teams have a well-defined
+      OEC (Overall Evaluation Criterion), then a good metric for those teams could simply be the sum of the improvements to
+      the OEC of features that were launched (launching usually implies that guardrails were not violated). 3. We prefer to
+      count treatments and not experiments so that the platform will provide great support for A/B/n tests (e.g., A/B/C or
+      A/B/C/D) and not just A/B. Instead of evaluating an idea or a design with the “best” single treatment, we want to encourage
+      experimenters to be humble and try two or three treatments, and thus increase their chances of finding a superior treatment.
+      Ghosh et. al. (2020) evaluated over 6,000 experiments that ran on Optimizely and wrote that “an increase in the number
+      of treatment variants within an experiment associates with a 3.8% increase in the conversion rate of an experiment (p
+      < .001). This result confirms basic intuition that more treatment variants increase the chance of finding higher lifts
+      (Optimizely applies false discovery rate (FDR) control via the Benjamini-Hochberg procedure in the calculation of its
+      results).”'
+    - '5 Implementation architecture Implementing an experiment on a website involves three components. The ﬁrst component
+      is the randomization algorithm, which is a function that maps end users to variants. The second component is the assignment
+      method, which uses the output of the randomization algorithm to determine the experience that each user will see on
+      the website. The third component is the data path, which captures raw observation data as the users interact with the
+      website, aggregates it, applies statistics, and prepares reports of the experiment’s outcome. 5.1 Randomization algorithm
+      Finding a good randomization algorithm is critical because the statistics of controlled experiments assume that each
+      variant of an experiment is assigned a random sample of end users. Randomization algorithms must have the following
+      three properties to support statistically correct experiments (using the methodology presented above): 1. End users
+      must be equally likely to see each variant of an experiment (assuming a 50–50 split). There should be no bias toward
+      any particular variant. 2. Repeat assignments of a single end user must be consistent; the end user should be assigned
+      to the same variant on each successive visit to the site. 123 164 R. Kohavi et al. 3. When multiple experiments are
+      run, there must be no correlation between exper- iments. An end user’s assignment to a variant in one experiment must
+      have no effect on the probability of being assigned to a variant in any other experiment. Randomization algorithms may
+      optionally support the following two desirable properties: 4. The algorithm may support monotonic ramp-up, meaning that
+      the percentage of users who see a Treatment can be slowly increased without changing the assign- ments of users who
+      were previously assigned to that Treatment. Supporting this property allows the Treatment percentage to be slowly increased
+      without impair- ing the user experience or damaging the validity of the experiment. 5. The algorithm may support external
+      control, meaning that users can be manually forced into and out of variants. This property makes it easier to test the
+      experi- mental site. The remainder of this section will only consider techniques that satisfy at least the ﬁrst three
+      properties. 5.1.1 Pseudorandom with caching A standard pseudorandom number generator can be used as the randomization
+      algorithm when coupled with a form of caching. A good pseudorandom number gen- erator will, by itself, satisfy the ﬁrst
+      and third requirements of the randomization algorithm. We tested several popular random number generators on their ability
+      to satisfy the ﬁrst and third requirements. We tested ﬁve simulated experiments against one million sequential user
+      IDs, running chi-square tests to look for interactions. We found that the random number generators built into many popular
+      languages (for example, C#) work well as long as the generator is seeded only once at server startup. Seeding the random
+      number generator on each request may cause adjacent requests to use the same seed which may (as it did in our tests)
+      introduce noticeable correlations between exper- iments. In particular, we found that the technique employed by Eric
+      Peterson using Visual Basic (Peterson 2005) creates two-way interactions between experiments. To satisfy the second
+      requirement, the algorithm must introduce state: the assign- ments of end users must be cached once they visit the site.
+      The caching can be accom- plished either on the server side (by storing the assignments for all users in some form of
+      database), or on the client side (by storing a user’s assignment in a cookie). The database approach is expensive (in
+      hardware), and has space requirements that increase linearly with the number of experiments and the number of users.
+      However, it easily satisﬁes the ﬁfth property by allowing the user assignment database to be modiﬁed. The cookie approach
+      is significantly cheaper, requiring no database and costing only a linear amount of space in the number of experiments
+      (this time within the user’s cookie). It will not work for users with cookies turned off. Both forms of this approach
+      are difﬁcult to scale up to a large system with a large ﬂeet of servers. The server making the random assignment must
+      communicate its state to all the other servers (including those used for backend algorithms) in order 123 Controlled
+      experiments on the web 165 to keep assignments consistent. This sort of propagation is expensive and difﬁcult to implement
+      correctly. The fourth requirement (monotonic ramp-up) is difﬁcult to implement using this method, and so many systems
+      ignore the requirement altogether. Regardless of which approach is used to maintain state, the system would need to
+      carefully reassign Con- trol users who visit the site after a ramp-up. The difﬁculty comes in determining the percentage
+      Treatment to assign to these users so that the overall Treatment percentage reaches the desired value. 5.1.2 Hash and
+      partition This method eliminates the need for caching by replacing the random number generator with a hash function.
+      Unlike a random number generator, which produces randomly distributed numbers independent of any input, a (good) hash
+      function produces ran- domly distributed numbers as a function of a speciﬁc input. The method works as follows: each
+      user is assigned a single unique identiﬁer which is maintained either through a database or a cookie. Likewise, each
+      experiment is assigned a unique iden- tiﬁer. A hash function is applied to the combination of the user identiﬁer and
+      the experiment identiﬁer (e.g. by concatenating them together) to obtain an integer that is uniformly distributed on
+      a range of values. The range is then partitioned, with each variant represented by a partition. The unique user identiﬁer
+      may be reused across any number of experiments. This method is very sensitive to the choice of hash function. If the
+      hash function has any funnels (instances where adjacent keys map to the same hash code) then the ﬁrst property (uniform
+      distribution) will be violated. And if the hash function has characteristics (instances where a perturbation of the
+      key produces a predictable per- turbation of the hash code), then correlations may occur between experiments. Few hash
+      functions are sound enough to be used in'
+    - '<1-hop>
+
+
+      Data Driven Automation • Data is king at Amazon • Many examples of data driven automation – Channel management • Website
+      real estate management system • Automated email measurement and optimization – Merchandising • Customers who bought
+      X also bought…• Recommendations • New releases, top sellers • Purchase Circles™ – Advertising • Automatic ad generation
+      and bidding Copyright 2004, Amazon.com 22 Home Page Slots • Amazon’s home page is prime real-estate • The past: – Every
+      category VP wanted top-center – Friday meetings about placements for next week were getting too long, too loud, and
+      lacked performance data • Today: automation replaces intuitions – Home page is made up of slots – Anyone can submit
+      content for a slot– Content is chosen based on real-time experimentation Copyright 2004, Amazon.com 23 Email Channel
+      Management • Campaign calendar used to be manually managed – Weak measurement – Costly to schedule and use • New system
+      – Automatically optimizes content to improve customer experience – Avoids sending an e-mail campai gn that has low clickthrough
+      or high unsubscribe rate – Includes inbox management (avoid sending multiple emails/week) – Has growing library of automated
+      email programs • New releases • Recommendations • Challenges – Minimum circulations for emails – Targeted inventory
+      management Copyright 2004, Amazon.com 24 Customers Who Bought X… • Amazon’s signature feature • Relies on having and
+      crunching massive data – Every purchase, every page, every search – Techniques for sifting patterns from noise • Two
+      additional examples – Customers who shopped for X also shopped for… – Customers who searched for X also bought… • Challenges
+      – Sensitivity filtering– Data needs especially high in some areas • Apparel and toy catalogs “turn” very quickly Copyright
+      2004, Amazon.com 25 Your Recommendations • Amazon’s recommendations widely recognized as being amongst the best in world
+      – IEEE paper published on underlying item-to-item correlations – Relatively simple algorithm fed off of massive dataset–
+      The secret sauce is in the small tweaks to the basic idea • Challenges – Massive data size • millions of customers •
+      millions of items – Recommendations made in real time Copyright 2004, Amazon.com 26 Goldbox • Goldbox is a cross-sell
+      and awareness raising tool • We allow customers to buy items at an additional discount• We get a lot of suggestions
+      on how to improve our goldbox offers to make them more personalized, but… • It’s by design. We discount items to encourage
+      purchases in new categories! Copyright 2004, Amazon.com 27 Intro to Sponsored Links • Short, text-only ads • Pay per
+      Click / Cost per Click (PPC/CPC)• Sold in real-time auctions• Keyword targeted at search keywords Copyright 2004, Amazon.com
+      28 Automated Bidding • Sponsored links initially done by humans • Automated program – Generates keywords – Writes ads
+      (creative) – Determines landing page – Manages bids • Measure conversion rate • Profit per converted visitor• Update
+      bid Copyright 2004, Amazon.com 29 Challenge: Quick Cycle • This automated ad: • Received tens of thousands of clicks
+      from porn searches, but few actually purchased the book • Update cycle must be quick to avoid large losses How to Make
+      Love Like a Porn Star By Jenna Jameson. Only $18.17. Free Super Saver Shipping. Copyright 2004, Amazon.com 30 Organized
+      for Execution • How it used to be Business People Technology People“Do this” • This works rather better • Small, cross-functional
+      teams – Able to execute end-to-end • Self directed – Established group goals and measure progress “Technically infeasible”
+      “Fully booked this year” “Plain dumb idea” Copyright 2004, Amazon.com 31 Shameless Plug! We’re Hiring • amazon.com/jobs
+      – Engineers, team leads, technical Project managers – Amazon offers an unmatched opportunity • Operate at extreme scale
+      • Data trumps intuition and there is a lot of data• Unbeatable visibility for your work • See results in days not months
+      or years • It’s fun. Honest • Merchant.COM – launch your site on the Amazon platform'
+  - source_sentence: How does the concept of a Wager relate to estimating heterogeneous treatment effects in online controlled
+      experiments?
+    sentences:
+    - '<1-hop>
+
+
+      wrong (Dmitriev et al. 2017 ). Sometimes these follow deep investigations and relate to software bugs, as the following
+      examples show. Telemetry fidelity. Click tracking is typically done using web beacons, which is known to be lossy ,
+      that is, less than 100% of clicks are properly recorded (Kohavi, Messner et al. 2010 ). If the Treatment impacts the
+      loss rate, the results may appear better or worse than the actual user experience. Having a metric to assess the loss,
+      such as through internal referrers to the website or through clicks that use dual logging (sometimes used in ad clicks,
+      which require high fidelity), fidelity issues may be uncovered. Cache hit rates. As noted in Chapter 3 , shared resources
+      can violate SUTVA (Kohavi and Longbotham 2010 ). Having metrics for shared resources, such as cache hit rates, may help
+      identify unexpected factors that impact the trustworthiness of the experiment. Cookie write rate – the rate that the
+      variant writes permanent (non- session) cookies. This phenomenon, dubbed cookie clobbering (Dmitriev et al. 2016 ),
+      can cause severe distortion to other metrics due to browser bugs. One experiment at Bing wrote a cookie that was not
+      used anywhere and set it to a random number with every search response page. The results showed massive user degradations
+      in all key metrics, including sessions-per-user, queries-per-user, and revenue-per-user. Quick queries are two or more
+      search queries that arrive from the same user to a search engine within one second of each other. Google and Bing have
+      both observed this phenomenon, but to date have been unable to explain their cause. What we know is that some Treatments
+      increase or decrease the proportion of quick queries and those results are deemed untrustworthy. 22 Leakage and Interference
+      between Variants It doesn ’ t matter how beautiful your theory is, it doesn ’ t matter how smart you are. If it doesn
+      ’ t agree with experiment, it ’ s wrong – Richard Feynman Why you care : In most experiment analyses, we assume that
+      the behavior of each unit in the experiment is unaffected by variant assignment to other units. This is a plausible
+      assumption in most practical applications. However, there are also many cases where this assumption fails. In most of
+      the discussions in the book, we assume the Rubin causal model (Imbens and Rubin 2015 ), a standard framework for analyzing
+      controlled experiments. In this chapter, we discuss these assumptions, scenarios where they fail, and approaches to
+      address them. A key assumption made in the Rubin causal model is the Stable Unit Treatment Value Assumption (SUTVA),
+      which states that the behavior of each unit in the experiment is unaffected by variant assignment to other units (Rubin
+      1990 , Cox 1958 , Imbens and Rubin 2015 ) as shown in Equation 22.1 : (22.1) Y i ( z ) = Y i ( z i ) with variant assignment
+      vector z = ( z 1 , z 2 , … , z n ) for all n units. This is a plausible assumption in most practical applications. For
+      example, a user who likes the new checkout flow described in Chapter 2 is more likely to purchase, and that behavior
+      is independent of others who are using the same eCommerce site. However, if the SUTVA assumption does not hold (see
+      examples later in this chapter), the analysis results in potentially incorrect conclusions. We define interference as
+      a violation of SUTVA, sometimes called spillover or leakage between the variants. There are two ways interference may
+      arise: through direct or indirect connections. As an example, two units can be directly connected if they are friends
+      on a social network or if they visited the same physical space at the same time. Indirect connections are connections
+      that exist because of certain latent variables or shared resources, such as units in Treatment and Control that share
+      the same ad campaign budget. These two categories are similar in that in both cases there is a medium that connects
+      the Treatment and Control groups and allows them to interact. The medium can either be a materialized friendship connection
+      on a social network or a shared advertising budget that clicks from both Treatment and Control users are billed against.
+      It is important to understand the mechanism through which interference can manifest, as the best solution to address
+      them can differ. To make the problems more concrete, here are examples with more detailed discussions. Examples Direct
+      Connections Two units can be directly connected if they are friends on a social network or if they visited the same
+      physical space at the same time. Two units that are directly connected can be separated into Treatment and Control groups
+      and hence cause interference between variants. Facebook/LinkedIn . In social networks, such as Facebook or LinkedIn,
+      user behavior is likely impacted by that of their social neighborhood (Eckles, Karrer and Ugander 2017 , Gui et al.
+      2015 ). Users find a new social-engagement feature more valuable as more of their neighbors use it and are thus more
+      likely to use it themselves. For example, from the user perspective: I am more likely to use video chat on Facebook
+      if my friends use it. I am more likely to message my friends on LinkedIn if they message me. I am more likely to post
+      on LinkedIn if friends in my network post on it. In an A/B experiment, this implies that if the Treatment has a significant
+      impact on a user, the effect could spill over to their social circles, regardless whether the neighbors are in Treatment
+      or Control. For example, a better recommendation algorithm in Treatment for the “ People You May Know ” algorithm on
+      LinkedIn encourages users to send more connect invitations. However, users who receive these invitations may be in the
+      Control variant and when they visit LinkedIn to accept the invitation, they may discover more people to connect with.
+      If the primary metric of interest is the total number of invitations sent, both'
+    - '<2-hop>
+
+
+      important check for primacy and novelty effect s is to plot usage over time and see whether it ’ s increasing or decreasing.
+      Take the above MSN example, the percentage of users clicking the Mail link clearly decreased over time, as shown in
+      the graph in Figure 3.5 . Figure 3.5 MSN user engagement decreasing over time The standard analysis of experiments assumes
+      that the Treatment effect is constant over time. This kind of trend is a red flag that indicates a violation of the
+      assumptions. Such experiments need to run longer to determine when the Treatment effect stabilizes. In many cases, and
+      stressed in this example, the insight is enough to declare the idea bad. This approach is simple and effective in most
+      cases, but we must warn you that there are some caveats to watch out for, especially if you do run the experiment a
+      long time (See Chapter 23 ). One additional option to highlight possible novelty/primacy effects is to take the users
+      who appeared in the first day or two (as opposed to all users over time) and plot the treatment effect for them over
+      time. Segment Differences Analyzing a metric by different segments can provide interesting insights and lead to discoveries,
+      for which we sometimes invoke Twyman ’ s law and discover a flaw or new insight to help with future iterations of an
+      idea. These are advanced tests with an example that you can address in the later maturity phases of your experimentation
+      system. What are good segments? Here are several: Market or country: some features work better in some countries; sometimes
+      an underperforming feature is the result of poor translation to another language, that is, localization. Device or platform:
+      is the user interface on a browser, desktop, or mobile phone? Which mobile platform are they using: iOS or Android?
+      Sometimes the browser version can help identify JavaScript bugs and incompatibilities. On mobile phones, the manufacturers
+      (e.g., Samsung, Motorola) provide add-ons that can cause features to fail. Time of day and day of week: plotting effects
+      over time can show interesting patterns. Users on weekends can be different in many characteristics. User type: new
+      or existing, where new users are ones that joined after a date (e.g., experiment start, or perhaps a month prior). User
+      account characteristics: single or shared account at Netflix, or single vs. family traveler on Airbnb. Segmented views
+      are commonly used two ways: 1. Segmented view of a metric, independent of any experiment. 2. Segmented view of the Treatment
+      effect for a metric, in the context of an experiment, referred to in Statistics as heterogeneous Treatment effects ,
+      indicating that the Treatment effect is not homogenous or uniform across different segments. Segmented View of a Metric
+      When the click-through rates on Bing mobile ads were segmented by different mobile operating systems, they were very
+      different as shown in the graph in Figure 3.6 . Figure 3.6 CTRs for different mobile Operating Systems While the initial
+      inclination was to form stories about the loyalty of the users and how the populations differ, an investigation uncovered
+      that this was due to different click tracking methodologies used for different operating systems. There are several
+      ways of tracking clicks, and they differ in fidelity (Kohavi, Messner et al. 2010 ), which leads to different loss rates.
+      On iOS and Windows Phone, a redirect was used to track the clicks, that is, the click always goes to a server, is logged,
+      and is then redirected to the destination. This methodology has high fidelity, but the user experience is slower. On
+      Android, click tracking was done using a web beacon to indicate a click and then redirected the browser to the destination
+      page. This methodology is faster for the user, but lossy; some web beacons will not make it and the link will not be
+      recorded. This can explain the click-through rate (CTR) difference between iOS and Android, but why was the Windows
+      Phone click-through rate so high? The investigation discovered that along with the redirect, there was a bug where user
+      swipes were incorrectly recorded as a click. Bugs happen. When you see anomalous data, think of Twyman ’ s law and investigate
+      the issue. Segmented View of the Treatment Effect (Heterogeneous Treatment Effect) In one experiment, a user interface
+      change was made, which resulted in a very strong difference between browser segments. For almost all browser segments,
+      the Treatment effect was a small positive improvement on key metrics, but for the Internet Explorer 7 segment, there
+      was a strongly negative Treatment effect on key metrics. As with any strong effect (positive or negative), you should
+      invoke Twyman ’ s law and drill into the cause. An investigation revealed that the JavaScript used was incompatible
+      with Internet Explorer 7, causing an error that prevented users from clicking links in certain scenarios. Such insight
+      is only possible when drilldowns into segments are enabled, that is, looking at the Treatment effect for different segments,
+      also referred to in Statistics as Conditional Average Treatment Effects (CATEs). A good overview on Heterogenous Treatment
+      Effects is available at EGAP ( 2018 ). Identifying interesting segments, or searching for interactions, can be done
+      using machine learning and statistical techniques, such as Decision Trees (Athey and Imbens 2016 ) and Random Forests
+      (Wager and Athey 2018 ). If you can alert the experimenter to interesting segments, you will find many interesting insights
+      (but remember to correct for multiple hypothesis testing, as noted above). Getting organizations to run A/B tests is
+      an important step; providing them with more information than just the overall Treatment effect gives new insights that
+      help accelerate innovation. Analysis by Segments Impacted by Treatment Can Mislead It is possible to evaluate the Treatment
+      effect of two mutually exhaustive and exclusive segments, and see that the OEC increases for both, yet declines overall.
+      Unlike Simpson ’ s paradox (described in the next section), this is due to migration of users from one segment to another.
+      For example, assume you have'
+    - 'to determine the impact of changing from static textual ads to short videoadsonwebsitetraffic.Forthetreatmentgroup,websitetraffic
+      appears to have increased uniformly except among Safari users. Consequently, the ad team wishes to estimate the treatment
+      effect at the browser level. Likewise, after observing an improvement in user engagement metrics, the ad team may want
+      to perform a post-hoc analysis to determine if this increase is roughly the same for all users or perhaps concentrated
+      within certain user segments (such as those defined by market/country, user activity level,device/platformtype,andtime).
+      Treatmenteffectsonsubgroupsdifferingfromthepopulation- level ATE are known asheterogeneous treatment effects (HTE) and
+      are commonly of interest in OCEs. Identifying and interpretingsuchheterogeneityisvitallyimportantforbusiness applications.
+      For example, practitioners may be interested in estimating the treatment effect for different devices or browser types,
+      or for users of different ages, or users living in different parts of the world. Identifying and estimating HTEs is
+      also of concern for those wishingto develop personalizedexperiences, or to detect bugs, or interactions with other experiments.
+      T h r e ek e yc h a l l e n g e sa r ea s s o c i a t e dw i t he s t i m a t i n gH T E s : (a) small treatment effects
+      (seeSection 2)o ft e nm a k eo n l i n e studiesunder-powered,resultinginhighfalsenegativeratesfor subgroupeffects;(b)testingforHTEstendstoriskinflatedType
+      I error rates due to multiple comparisons; (c) in cases where users are not randomized to the subgroups under comparison,
+      the usual tension between correlation and causation manifests. Below we review existing methodologies that are commonly
+      usedinthecontextofOCEstoaddresstheseproblems. Heterogeneoustreatmenteffectshavearichhistoryinstatis- tical theory and
+      application (Robinson1988;Z h a oe ta l .2012; Imai and Ratkovic2013;A t h e ya n dI m b e n s2016;W a g e ra n d Athey2018;T
+      ranandZheleva2019).Inthisreview,wefocuson the intersection of this literature and OCEs. Assume each unit ihas a pair
+      of potential outcomes { Yi(1),Yi(0) } and a vector of pretreatment covariatesXi,w i t he(x) = Pr(Wi = 1|Xi = x) being
+      the probability that a user is treated given a particular value of the covariate. For randomized studies where causality
+      may be inferred,e(Xi) is known and technically independent of Xi; however, when HTE analysis is under an observational
+      setting,e(Xi) istypicallyunknown.Mostoftheliteratureregard- ing HTEs employs the following assumptions: (1) SUTVA and
+      (2)unconfoundedness,meaningthattheresponseisindependent of the treatment assignmentWi conditional on the covariate,{
+      Yi(1),Yi(0) } |/equal1Wi|Xi. The main goal is to estimate thecon- ditionalaveragetreatmenteffect (CATE),τ(x) = E[Yi(1)
+      − Yi(0)|Xi = x]. Another key challenge is to detect exactly for which specific levels of the covariateτ(x) differs from
+      τ and, given several covariates,identifyingwhich X’sarethesourceofheterogeneity. Interpretationiscrucialintheonlineindustry,thus,apopular
+      approachistoassumealinearmappingfrom Yi to ( Wi,Xi ) from whichmainandinteractioneffectsmaybeestimated.Unsurpris- ingly,therelationshipbetween
+      Yi andXi isoftenhighlycomplex, thus a common method is to use the semi-parametric model fromRobinson(1988),Yi = τ(Xi)Wi+g(Xi)+εi,whichmakes
+      no assumptions about the forms ofτ(Xi) and g(Xi). Under unconfoundedness, one may writeYi − m(Xi) = τ(Xi)(Wi − e(Xi))+εi,where
+      m(Xi) = E[Yi|Xi]ande(Xi)areunknown.The ℓ2 lossfunctionisusedtoestimatetheheterogeneoustreatment effects,resultingintheestimate
+      ˆτ(X) = argmin τ′ 1 n n∑ i=1 { Yi − m(Xi) − τ′(Xi)[Wi − e(Xi)] }2 . Thus HTE estimation is a ripe target for machine
+      learning methods. Researchers have approached this problem using a technique called “Double Machine Learning” (DML)
+      (Cher- nozhukov et al.2017). Briefly, this technique modelsm(X) and e(X) as nuisance parameters, estimating them with
+      nonpara- metric regression on a hold-out sample set. The CATE may then be estimated on the remaining sample set using
+      a vari- ety of machine learning methodologies. Chernozhukov et al. (2017)demonstratethattheabovesquarederrorlossisNeyman
+      orthogonal tom(X) and e(X), which, along with sample split- ting, ensures unbiasedness ofˆτ(X) and enforces parsimonious
+      modelingof Y withrespecttothen uisanceparameters.S yrgka- nisetal.( 2019)extendDMLforestimatingheterogeneoustreat- ment
+      effects when the covariates are hidden. Such situations arise in online experiments when users do not comply with a
+      treatmentduetounobservedfactors.Bymodeling Ywithinstru- mentalvariables,Syrgkanisetal.( 2019)estimatetheHTEsusing a
+      doubly-robust, fully convex loss function that is minimized with an algorithm that builds on the DML technique. To avoid
+      thechallengeofdirectlyestimatingtheHTE,Peysakhovichand Lada(2016)usehistoric,user-leveldatatolearnindividualeffect estimates
+      conditional on the covariates that correlate with the true treatment effect. Practitioners at Netflix also used DML
+      to understandthelocalizedimpactonviewershipfromsubbedand dubbedmovies(Lanetal.2022). Other popular machine learning
+      approaches for estimating τ(X) are regression trees and random forests. Following the DMLapproach,forinstance,onemayusetreestoidentifymean-
+      ingfulsegmentsofacontinuousorcategoricalvariable,andthen modelτ(X) withpartiallylinearregression.Inanadaptationof THEAMERICANSTATISTICIAN
+      141 the classical CART algorithm, Athey and Imbens (2016)b u i l d modified regression trees to partition the data into
+      subgroups corresponding to different magnitudes of the treatment effect, thus each terminal leaf produces an estimate
+      forτ(x),r a t h e r thanthetraditionalestimateof E[Y|Xi = x].T ocorrectforover- fitting, an additional split of the
+      training data into nonoverlap- ping sub-partitions for each leaf is used. Naturally, this method can be extended to
+      random forests to create a causal forest for estimatingtheHTE(WagerandAthey 2018).Whilecasualtrees and forests do not
+      require linearity of the treatment effects, and perhaps are conceptually more intuitive than DML, they are somewhat
+      lacking in terms of interpretability compared to the effectestimatesfromDMLandothersimilarmethods.Afurther disadvantage
+      is that the additional training split reduces the samplesizeforanapplicationthatmayalreadysufferlowpower. In addition
+      to estimatingτ(X), identifying which covariates orlevelsofcovariatescontributetotreatmentheterogeneityisof greatpracticalconcern(SepehriandDiCiccio2020;McFowland
+      IIIetal. 2021).Obtainingaparsimoniousmodelof Yiscriticalin such situations, as there are typically a large number of
+      covari- ates from which to choose and strong statistical significance is required for detecting HTEs. This challenge
+      is simultaneously a variable selection and multiple testing problem. Xie, Chen, and Shi (2018) assume an experimental
+      design setup where e(X) = Pr(Wi = 1), using this value to transformYi into Y∗ i such thatE[Y∗ i |X]= τ(X),w h i c hi
+      se s t i m a t e dw i t ht h e standard difference-in-meansˆτ.U s i n gY∗ −ˆτ as the response variable, the authors
+      perform Lasso regression in conjunction with the “knockoff” variable selection defined by Barber and Candès(2015)toselectheterogeneouscovariateswhilecontrol-
+      lingfalsediscoveryrates(FDRs).Theyalsodemonstratehowto usetheBenjamini-Hochbergcorrectiontoidentifylevelswithin thesecovariateswhereHTEsoccur.Dengetal.(
+      2016b)alsouse variableselectionwhenclustersofcovariatesareofinterest,such as device grouped by brand name. They employ
+      a linear model with first order effect and second order interaction terms and enforcesparsityusingtotalvariationregularization,atechnique
+      similartoFusedLasso(Petersen,Witten,andSimon2016). Given the wide array of scenarios under which HTEs occur in online
+      experiments, there are still many situations where the methods discussed above may not be appropriate. Much of the literature
+      in this review make strong model assumptions that are difficult to verify in practice. For example, the SUTVA requirement
+      that units in a'
+  - source_sentence: How can we effectively measure user engagement on the Google mobile homepage given the challenges in
+      understanding user intent?
+    sentences:
+    - 'estimates of long- term outcome. A statistical surrogate lies on the causal path between the treatment and the long
+      -term outcome. It satisfies the condition that treatment and outcome are independent conditional on the statistical
+      surrogate. You can use observational data and experiment data to find good surrogates. Even if no individual proxy satisfies
+      the statistical surrogacy criteri on, a high- dimensional vector of proxies may collectively satisfy the surrogacy assumption
+      [8]. Having a rich set of surrogates reduces the risk of affecting only a few surrogates and not the long -term outcome.
+      Facebook used this approach with some success to find good surrogates of the 7-day outcome of an experiment by just
+      using 2 -3-day experiment results. They used quantile regression and a gradient-boosted regression tree to rank feature
+      importance. Note that there is still a risk that having too many surrogates for the long term may make this approach
+      less interpretable. 4. OEC: OVERALL EVALUATION CRITERION METRIC 4.1 Problem One key benefit of evaluating new ideas
+      through OCEs is that we can streamline the decision-making process and make it more objective. Without understanding
+      the causal impact of an idea on customers, the decision-making process requires a lot of debat e. The proponents and
+      opponents of the idea advance their arguments regarding the change only relying on their own experience, recall , and
+      interpretation of certain business reports and user comments. Eventually the team leader makes a call on whether to
+      ship the idea. This style of decision making is based on the HiPPO (Highest Paid Person’s Opinion) [37] and is fraught
+      with many cognitive biases [2]. To help change HiPPO decisions to more objective, data-driven decisions based on the
+      causal impact of an idea from customer response [5], w e recommend establishing t he OEC for all experiments on your
+      product. Not all metrics computed to analyz e the results of an experiment are part of the OEC. To analyze experiment
+      results, we require different types of metrics [22]. First, we need to know if the results of an experiment are trustworthy.
+      A set of data quality metrics, like a sample ratio, help raise red flags on critical data quality issues. After checking
+      the data quality metrics, we want to know the outcome of the experiment. Was the treatment successful and what was its
+      impact? This set of metrics comprise the OEC. In addition to OEC me trics, we have found that there is a set of guardrail
+      metrics which are not clearly indicative of success of the feature being tested, but metrics that we do not want to
+      harm . The remaining bulk of the metrics for an experiment are diagnostic, feature or l ocal metrics. These metrics
+      help you understand the source of OEC movement (or the lack of). It is hard to find a good OEC. Here are a few key properties
+      [19, 24, 55] to consider. First, a good OEC must be indicative of the long-term gain in key product indicators (KPIs).
+      At the very least make it directionally accurate in estimating the impact on the long- term outcome. Second, OEC must
+      be hard to game and it should incentivize the right set of actions in the product team. It should not be easy to satisfy
+      the OEC by doing the wrong thing. For instance, if the OEC is limited to a part or feature of the product, you may be
+      able to satisfy the OEC by cannibalizing other parts or features. Third, OEC metrics must be sensitive. Most changes
+      that impact the long-term outcome should also have a statistically significant movement in OEC metrics so it is practical
+      to use the OEC to distinguish between good and bad changes to the product. Fourth, the cost of computing OEC metrics
+      cannot be too expensive. OEC metrics must be computed for 100s of the experiments and be run on millions of users each
+      and every week. Methods that involve costly computation or costly procedures like human surveys or human judges may
+      not scale well. Fifth, OEC metrics must account for a diverse set of scenarios that may drive the key product goals.
+      Finally, OEC should be able to accommodate new scenarios. For instance, direct answers to queries like current time
+      would provide a good user experience in a search engine, but if you only base the OEC metrics on clicks, those metrics
+      will miss this scenario. 4.2 Common Solutions and Challenges 4.2.1 Search vs. Discovery Measuring the success of a search
+      experience in search engines has been a research subject for a long time in academia and for many products including
+      Bing, Google and Yandex. It is well established that metrics, like queries per user, cannot be a good OEC because queries
+      per user may go up when search ranking degrades. Sessions per user or visits per user are considered better OEC metrics
+      [49]. In general there is an appreciation of focusing on HEART (Happiness, Engagement, Adoption, Retention, and Task
+      success) metrics for the OEC and use PULSE (Page views, Uptime, Latency, Seven-day active users [i.e., the number of
+      unique users who used the product at least once in the last week], and Earnings) metrics as your guardrail metrics [62].
+      Over time, different methods have been proposed to measure HEART metrics in search engines and other goal-directed activities
+      [36, 54]. It is still challenging to find metrics similar to HEART metrics to work for discovery - or browsing-related
+      scenarios , like news articles shown on the Edge browser homepage, or Google mobile homepage, or Yandex homepage. The
+      challenge is to understand user intent. Sometimes users will come with a goal-oriented intent and would like to quickly
+      find what they are looking for. Other times users may have a more browsing or discovering-new- information intent where
+      they are not looking for something specific but just exploring a topic. In this case it is not clear if lack of a click
+      on an article link with a summary snippet can be viewed as a negative experience or'
+    - 'https://bit.ly/ABTestingIntuitionBusters © Kohavi, Deng, Vermeer 2022. This is the author''s version of the work. It
+      is posted here for your personal use. Not for redistribution. The definitive version will be published in KDD 2022 at
+      https://doi.org/10.1145/3534678.3539160 A/B Testing Intuition Busters Common Misunderstandings in Online Controlled
+      Experiments Ron Kohavi Kohavi Los Altos, CA ronnyk@live.com Alex Deng Airbnb Inc Seattle, WA alexdeng@live.com Lukas
+      Vermeer Vista Delft, The Netherlands lukas@lukasvermeer.nl ABSTRACT A/B tests, or online controlled experiments , are
+      heavily used in industry to evaluate implementations of ideas. While the statistics behind controlled experiments are
+      well documented and some basic pitfalls known, we have observed some seemingly intuitive concepts being touted, including
+      by A/B tool vendors and agencies, w hich are misleading, often badly so. Our goa l is to describe these misunderstandings,
+      the “intuition” behind them, and t o explain and bust that intuition with solid statistical reasoning. We provide recommendations
+      that experimentation platform designers can implement to make it harder for experimenters to make these intuitive mistakes.
+      CCS CONCEPTS General and Reference → Cross-computing tools and techniques → Experimentation; Mathematics of computing
+      → Probability and statistics → Probabilistic inference problems → Hypothesis testing and confidence interval computation
+      KEYWORDS A/B Testing, Controlled experiments, Intuition busters ACM Reference format: Ron Kohavi, Alex Deng, Lukas Vermeer.
+      A/B Testing Intuition Busters: Common Misunderstandings in Online Controlled Experiments. In Proceedings of the 28th
+      ACM SIGKDD Conference on Knowledge Discovery and Data Mining (KDD ’22) , August 14-18, 2022, Washington DC, USA . ACM,
+      New York, NY, USA. 10 pages. https://doi.org/10.1145/3534678.3539160 1. Introduction Misinterpretation and abuse of
+      statistical tests, confidence intervals, and statistical power have been decried for decades, yet remain rampant. A
+      key problem is that there are no interpretations of these concepts that are at once simple, intuitive, correct, and
+      foolproof -- Greenland et al (2016) A/B tests, or online c ontrolled experiments (see appendix for references), are
+      heavily used in industry to evaluate implementations of ideas, with the larger companies starting over 100 experiment
+      treatments every business day (Gupta, et al. 2019). While the statistics behind controlled experiments are well documented
+      and some pitfalls were shared (Crook, et al. 2009, Dmitriev, Frasca, et al. 2016, Kohavi, Tang and Xu 2020, Dmitriev,
+      Gupta, et al. 2017) , we see many erroneous applications and misunderstanding of the statistics, including in books,
+      papers, and software. The appendix shows the impact of these misunderstood concepts in courts and legislation. The concepts
+      we share appear intuitive yet hide unexpected complexities. A lthough some amount of abstraction leakage is usually
+      unavoidable (Kluck and Vermeer 2015) , our goal is to share these common intuition busters so that experimentation platforms
+      can be designed to make it harder for experimenters to misuse them. Our contributions are as follows: • We share a c
+      ollection of important intuition buster s. Some well-known commercial vendors of A/B testing software have focused on
+      “intuitive” presentations of results, resulting in incorrect claims to their users instead of addressing their underlying
+      faulty intuitions. We believe that these solutions exacerbate the situation, as they reinforce incorrect intuitions.
+      • We drill deeply into one non -intuitive result, which to the best of our knowledge has not been studied before: the
+      distribution of the treatment e ffect under non- uniform assignment to variant s. Non-uniform assignments have been
+      suggested in the statistical literature. We highlight several concerns. • We provide recommendations as well as deployed
+      examples for experimentation platform designers to help address the underlying faulty intuitions identified in our collection.'
+    - '<3-hop>
+
+
+      good chance the combination will fail (like most ideas)? 4. The change is strategic, or the CEO is involved. We must
+      show progress. The data is very clear that it is hard for organizations to correctly predict the success of small changes,
+      and most fail to improve the metrics they were designed to improve. Many big launches fail, and the biggest strategic
+      moves that are evaluated tend to have low success rate: Lewis and McKone (2016) wrote that an analysis of 2,500 Merger
+      & Acquisition (M&A) deals, including AOL-Time-warner, HP-Compaq, Quaker-Snapple, shows that more than 60% of them **DRAFT
+      – Love to get feedback ** destroy shareholder value. Christensen et al. claim that “study after study puts the failure
+      rate of mergers and acquisitions somewhere between 70% and 90%” (Christensen, et al. 2011). Eric Ries uses the term
+      “achieved failure” for companies that successfully, faithfully, and rigorously execute a plan that turned out to have
+      been utterly flawed (Ries 2011). For a big change, I suggest doing a pre-experiment betting competition on the OEC delta
+      at different stages. If everyone agrees that the initial launch is going to be flat to negative, it sets the expectation
+      that we should not launch it. Are people willing to sign-up that a month or two after the initial launch there will
+      be positive value? That’s not long to wait. It’s humbling if the numbers are not as rosy as we expected. Maybe the strategy
+      is not clearly a winner; let’s look at the data and improve things or pivot a bit before we commit to a big change.
+      5. We have Machine Learning models that optimize the user experience. They were tuned for the Control. If we were to
+      ship the Treatment, they would optimize for that and the OEC would improve. Like the enabler argument, this is wishful
+      thinking, a natural bias towards the new shiny object. What’s clear is that if we ship to 100%, we will never know if
+      this argument is true or not, as we are losing the ability to run a controlled experiment. Could we retrain a couple
+      of models from the Treatment data to see if there’s a difference in performance? 6. Consistency of the user experience.
+      If the two experience are different enough, some users will suffer flipping experiences, or have different experiences
+      on different devices. We have two variants--Control and Treatment—that are performing similarly, so are in a state of
+      equipoise. From a reliability and maintenance perspective, it’s better to shut down the Treatment for another month
+      until we build the great feature on top of it, as we give our users a consistent reliable experience until then. Remember
+      that most ideas fail, and most large redesigns are notoriously difficult to get right in the first iterations: they
+      tend to be worse or similar to the existing version. It’s a good idea to iterate a few times to confirm that we have
+      indeed landed on a higher/better mountain with great opportunities before committing. Teams should be empowered to ship
+      positive changes. When the OEC delta is flat, the default should be to challenge the team to iterate and show improvement
+      and avoid falling into the traps shared above. Sure, there will be exceptions, but the default should be clear: flat
+      implies no ship. The argument is even stronger when the OEC delta is negative. **DRAFT – Love to get feedback **'
+  - source_sentence: who jacob cohen say about power analysis?
+    sentences:
+    - '<1-hop>
+
+
+      3 ESTIMATING THE FALSE POSITIVE RISK P-values are commonly misinterpreted as the probability of making a mistake when
+      choosing the Treatment over Control when the observed metric of interest is statistically significantly different [25;
+      26; 27]. Multiple examples of this misinterpretation by A/B vendors, book authors, and in courts were provided by Kohavi,
+      Deng, and Vermeer [14]. What is the p-value then? The p-value is the probability of obtaining a result equal to or more
+      extreme than what was observed, assuming that all the modeling assumptions, including the null hypothesis, 𝐻଴, are true
+      [26]. Conditioning1 on the null hypothesis is critical and most often misunderstood. In probabilistic terms, we have
+      p-value = 𝑃(Δ 𝑜𝑏𝑠𝑒𝑟𝑣𝑒𝑑 𝑜𝑟 𝑚𝑜𝑟𝑒 𝑒𝑥𝑡𝑟𝑒𝑚𝑒|𝐻଴ 𝑖𝑠 𝑡𝑟𝑢𝑒). What we are looking for most of the time is the opposite conditional
+      probability: 𝑃(𝐻଴ 𝑖𝑠 𝑡𝑟𝑢𝑒 |Δ 𝑜𝑏𝑠𝑒𝑟𝑣𝑒𝑑) Using Bayes Rule, we can estimate the False Positive Risk (FPR), which is the
+      probability that the statistically significant result is a false positive, or the probability that 𝐻଴ is true (no real
+      effect) when the test was statistically significant [15]. Note that FPR is sometimes named FDR, or False Discovery Rate
+      [28; 29], but given the confusion with FDR from multiple hypothesis testing, we use the term recommended by Colquhoun
+      [15]. We use the following terminology [14]: a) SS is a statistically significant positive2 result. b) 𝜶 is the threshold
+      used to determine statistical significance (SS), commonly 0.05 for a two-tailed t-test, and 0.025 for the positive tail.
+      c) 𝜷 is the type-II error (usually 0.2 for 80% power). d) 𝝅 is the prior probability of the null hypothesis, that is
+      𝑃(𝐻଴). We can apply Bayes Rules as follows: 𝐹𝑃𝑅 = 𝑃(𝐻଴|𝑆𝑆)= α∗గ α∗ గ ା (ଵିఉ)∗(ଵିగ) . An alternative derivation of FPR,
+      resulting in the same formula, was made in the Supplement to Equation 2 and Figure 2 in Benjamin et. al. [30]. The key
+      parameter required for the above is 𝝅, or 𝑃(𝐻଴). Kohavi, Deng, and Vermeer [14] provided a table with seven success
+      rate estimates (1- 𝝅) that were reported in the software industry, which ranged from 8% to 33% with a median and mode
+      of 10%. Plugging these into the above formula results in an FPR of 22% for the median and mode success rate of 10%,
+      industry standard two- tailed alpha of 0.05 equivalent to one-tailed 0.025, and 80% power (𝜋= 0.9,𝛼= 0.025,𝛽= 0.2).
+      This is a much higher rate than people intuitively think of when they hear statistically significant 2 We refer to a
+      positive result as an improvement in the desired direction, which is usually larger (e.g., conversion, revenue), but
+      may be smaller (e.g., faster time). False Positives in A/B Tests KDD ’24, August 25-29, 2024, Barcelona, Spain improvement.
+      For companies that use 𝛼=0.10 as their threshold for statistical significance, or equivalently use 𝛼=0.05 with a one-
+      tailed test for the improvement tail (e.g. Optimizely [31], Analytics Toolkit [32], Booking.com [33], Expedia), the
+      FPR for 10% success rate is a 36%. Over one third of the statistically significant results showing improvement, which
+      we want to celebrate, are likely to be false positives! To provide intuition about why the FPR is so high when the success
+      rate is low, we will use the data reported by Optimizely [34] of 12% win rate across 127,000 experiments. As we will
+      show later in the paper in Section 4.4, the estimated true success rate is 9.3%, in line with the 10% median and mode
+      of Table 2 in Kohavi, Deng, and Vermeer [14]. Looking at Figure 1, the dot-pattern (also green if viewed in color) in
+      the first row represents the 9.3% success rate, that is, true effects that should be statistically significant given
+      our sample size with 80% power. Of these, 80% will be identified as statistically significant, so 80%*9.3%=7.4% are
+      denoted by a plus in the first row. Of the remaining 90.7% null effects, 5% will be statistically significant and positive,
+      so 4.5% of the A/B tests will show a statistically significant result: a false positive. These are denoted by a plus
+      in the second row. Of the ~12% wins (7.4%+4.5% depicted by pluses), 4.5% are false positives, so 4.5%/(4.5% + 7.4%)
+      = 37.8%. This surprisingly high false positive is often referred to as the base rate fallacy [35].'
+    - '#3: Need over 200K Visitors in Online Experiment • Maybe you need half or double this, but do not trust online controlled
+      experiments with 2,000 users • Let me start with the assumptions required for this default: • Alpha=0.05 to declare
+      stat-sig (industry standard, default #1 in this talk). Lower values, which are appropriate sometimes, will result in
+      increasing sample size • Power=80%. We’ll discuss power over the next few slides, but this is a minimum. Going to higher
+      power will increase the sample size. • Conversion rate is 5%. Even if you’re optimizing for something else, it is very
+      common to build a guardrail on conversions. Sites are typically 2%-5%. A lower number will increase the sample size
+      • MDE (minimum detectable effect) is relative 5%. It is rare to see experiments improve key metrics by 5%, but we’ll
+      be aggressive looking for big wins. A small MDE will increase the sample size #16 When I finally stumbled onto power
+      analysis… it was as if I had died and gone to heaven -- Jacob Cohen (1990) © 2022 Ron Kohavi #3: The Sobering Math •
+      The power formula is simple: • For conversions, 𝜎2 = 𝑝∗(1−𝑝)(binomial distribution). We assume p=5%, so 𝜎2 = 0.05∗0.95
+      • Our MDE is 5% relative, so 𝛿 = 5%∗5%(absolute) • Plug it in, and n=121,600 per variant, or 243,200 for A/B test •
+      200K is therefore conservative minimum for these assumptions • Lower alpha, increase power, lower conversion rate, or
+      lower the MDE, and you need a larger sample #17 © 2022 Ron Kohavi #3: What is Power? • Statistical power is the probability
+      of detecting a given difference between the variants when there really is one • Given H0 (left) and H1 (right) separated
+      by 𝛿 • Stat-sig is noted by the dark area (only the right one matters here) • The vertical lines indicate β, which is
+      our type-II error (power= 1-β) • With low power, the right normal moves left and the vertical lines cover most of that
+      distribution. You have to be “lucky” to get stat-sig #18 Diagram from van Belle (2011) © 2022 Ron Kohavi Winner’s Curse
+      • A stat-sig result with low power has a high probability of exaggerating the actual number as follows → (Gelman and
+      Carlin 2014) • GuessTheTest on 16 Dec 2021, shared an example with ~80 users in each variant and 337% improvement •
+      It had 3% power to detect even a 10% delta, so it is 63% likely to be a false positive and highly likely to exaggerate
+      effect. See http://bit.ly/ABTestingIntuitionBusters #19 © 2022 Ron Kohavi A Visualization of Power • If the null hypothesis
+      is true (no difference, or effect is zero), the distribution of p-values is uniform • Using p-value of 0.05, about 5%
+      of the time you’ll declare something stat-sig • We’ll look at the p-value distribution of 10,000 experiments where the
+      treatment has a 5% lift (relative improvement) #20 © 2022 Ron Kohavi Power = 3% (N=100 per variant) Delta of 1 Delta
+      0Delta of 2 Delta of 3 Delta of 4 With so few users, only a few conversion combinations are possible, hence only a few
+      p-values are possible © 2022 Ron Kohavi Power = 3% (N=100 per variant) cont • With small numbers, you get extreme results
+      – winner’s curse • C had 13 conversions, T had 0 conversions ( -100%, p-value 0.00003) • C had 1 conversion, T had 13
+      conversions (+1200%, p-value 0.0001) • Average lift (absolute value) for stat-sig results was 271% Remember: true lift
+      is 5%, so exaggeration factor is 54 times for average! • The maximum was 1200% lift, so 240 times the true value. •
+      Wrong sign for stat-sig result: 36% of the time The truth was that there was a 5% lift, but we got a stat-sig negative
+      lift! #22 © 2022 Ron Kohavi Power = ~10% (N=7,000 per variant) #23 Looks almost uniform (remember, our goal is for p-value
+      < 0.05) Stat-sig only ~10% of the time (vs. 5% expected if there was no difference) Winner’s curse: when stat-sig, exaggeration
+      factor of 3.9 (19.3% lift) © 2022 Ron Kohavi Power = ~30% (N=32,000 per variant) #24 Starts to put more mass below 0.05
+      Winner’s curse: when stat-sig, exaggeration factor of 1.9 (9.3% average lift) Could even get the sign wrong 0.1% of
+      the time when stat-sig © 2022 Ron Kohavi Power = ~80% (N=122,000) #25 That’s the minimum we want: ~80% of the time,
+      p-value < 0.05 Small exaggeration factor of 1.1 (5.6% average lift vs. real value of 5%) Never get the sign wrong when
+      stat-sig © 2022 Ron Kohavi Power = ~90% (N=163,000) #26 Extending experiment from 122K users to 163K users (e.g., 34%
+      longer) gives us great 90% power © 2022 Ron Kohavi References • Excel spreadsheet with the visualizations here (Nov
+      2022) • Low power LinkedIn post (Sept 2022) • A/B Testing Intuition Busters(Aug 2022) • Gelman, This is what “power
+      = .06” looks like. Get used to it (11/2014) #27 © 2022 Ron Kohavi'
+    - '<2-hop>
+
+
+      the cookies are the user identifiers, this actually creates significant bias. these users (by cookie) are not representative
+      of the overall population and diverge significantly on key characteristics. Unlike Intention-To-Treat studies in clinical
+      trials , this is a Missing Outcome Data p roblem, and generalizations from this set of users to the overall population,
+      referred to as external validity, are hard to make [19]. In this paper, we share a set of pitfalls that may undermine
+      the external validity of long -term online controlled experiments. We discuss cookie stability, survivorship bi as,
+      selection bias, perceived trends, side effects, and seasonality and share methodologies that can be used to partially
+      address some of these issues. We believe that the insi ghts we share will apply to a wide variety of A/B/n testing scenarios
+      , and that discussing and sharing mechanisms to address or workaround the pitfalls will lead to a better understanding
+      of the results in long-term online controlled experiments. Our contributions in this paper include: 1. Discussion of
+      a phenomenon we call cookie clobbering, which impacts cookie churn and likely impacts many web sites. While the general
+      idea of cookie churn is well- known, to the best of our knowledge, this is the first time the specific issue we call
+      cookie clobbering is discussed (although the term has been used to refer to cookie churn in some web resources) . We
+      provide key statistics and a technique we used for several years at Bing to reduce such unintentional cookie chu rn.
+      We believe this technique should be used by many sites. In the context of long -running experiments, this helps reduce
+      loss of cookies over time, aiding in longitudinal studies. Unrelated to long-running experiments, this can help sites
+      maintain longer-lasting user identity, useful in personalization scenarios, for example. 2. Discussion of results from
+      a Bing experiment, similar to the one conducted by Google in the FLT paper . Unlike the FLT paper, however, we observed
+      significant survivorship bias in this experiment. We discuss why survivorship bias is a key issue in analyzing long
+      -term experiments which, if present, makes it very hard to accurately measure user learning. 3. Deep analysis of a long
+      -running experiment that we believe is impacted by “ user learning,” including a comparison of several approaches to
+      estimating the overall long -term impact. We discuss the issue s of selection bias and perceived trends in the context
+      of this experiment. 4. Discussion of the impact of side effects and seasonalit y on the results of long -term experiments,
+      using actual experiments from Bing and MSN. II. ONLINE CONTROLLED EXPERIMENTS In the online controlled experiments that
+      we discuss here, users are randomly split between the variants (e.g., in an A/B test, two differ ent versions of the
+      web site) in a persistent manner (a user receives the same experience in multiple visits). Users’ interactions with
+      the site are instrumented (e.g., page views, clicks) and key metrics computed (e.g., clickthrough-rates, sessions/user,
+      revenue/user, time -to- click). Statistical tests are used to analyze the resulting metrics. If the delta between the
+      metric values for Treatment and Control is statistically significant, we conclude with high probability that the change
+      we introduced caused the observed effect on the metric. See Controlled experiments on the web: survey and practical
+      guide [20] for details.'
+  pipeline_tag: sentence-similarity
+  library_name: sentence-transformers
+  metrics:
+  - cosine_accuracy@1
+  - cosine_accuracy@3
+  - cosine_accuracy@5
+  - cosine_accuracy@10
+  - cosine_precision@1
+  - cosine_precision@3
+  - cosine_precision@5
+  - cosine_precision@10
+  - cosine_recall@1
+  - cosine_recall@3
+  - cosine_recall@5
+  - cosine_recall@10
+  - cosine_ndcg@10
+  - cosine_mrr@10
+  - cosine_map@100
+  model-index:
+  - name: SentenceTransformer based on Snowflake/snowflake-arctic-embed-l
+    results:
+    - task:
+        type: information-retrieval
+        name: Information Retrieval
+      dataset:
+        name: Unknown
+        type: unknown
+      metrics:
+      - type: cosine_accuracy@1
+        value: 0.5083333333333333
+        name: Cosine Accuracy@1
+        verified: false
+      - type: cosine_accuracy@3
+        value: 0.7333333333333333
+        name: Cosine Accuracy@3
+        verified: false
+      - type: cosine_accuracy@5
+        value: 0.8333333333333334
+        name: Cosine Accuracy@5
+        verified: false
+      - type: cosine_accuracy@10
+        value: 0.9
+        name: Cosine Accuracy@10
+        verified: false
+      - type: cosine_precision@1
+        value: 0.5083333333333333
+        name: Cosine Precision@1
+        verified: false
+      - type: cosine_precision@3
+        value: 0.325
+        name: Cosine Precision@3
+        verified: false
+      - type: cosine_precision@5
+        value: 0.22500000000000006
+        name: Cosine Precision@5
+        verified: false
+      - type: cosine_precision@10
+        value: 0.1291666666666667
+        name: Cosine Precision@10
+        verified: false
+      - type: cosine_recall@1
+        value: 0.3470833333333333
+        name: Cosine Recall@1
+        verified: false
+      - type: cosine_recall@3
+        value: 0.6194444444444444
+        name: Cosine Recall@3
+        verified: false
+      - type: cosine_recall@5
+        value: 0.711388888888889
+        name: Cosine Recall@5
+        verified: false
+      - type: cosine_recall@10
+        value: 0.8056250000000001
+        name: Cosine Recall@10
+        verified: false
+      - type: cosine_ndcg@10
+        value: 0.6457367888356831
+        name: Cosine Ndcg@10
+        verified: false
+      - type: cosine_mrr@10
+        value: 0.6400760582010584
+        name: Cosine Mrr@10
+        verified: false
+      - type: cosine_map@100
+        value: 0.5788446411551665
+        name: Cosine Map@100
+        verified: false
+siblings:
+- rfilename: .gitattributes
+- rfilename: 1_Pooling/config.json
+- rfilename: README.md
+- rfilename: config.json
+- rfilename: config_sentence_transformers.json
+- rfilename: model.safetensors
+- rfilename: modules.json
+- rfilename: sentence_bert_config.json
+- rfilename: special_tokens_map.json
+- rfilename: tokenizer.json
+- rfilename: tokenizer_config.json
+- rfilename: vocab.txt
+spaces: []
+createdAt: '2025-05-11T03:07:23.000Z'
+safetensors:
+  parameters:
+    F32: 334092288
+  total: 334092288
+usedStorage: 1336413848
+downloadsAllTime: 524
+inferenceProviderMapping: {}
+configJson:
+  architectures:
+  - BertModel
+  attention_probs_dropout_prob: 0.1
+  classifier_dropout: null
+  hidden_act: gelu
+  hidden_dropout_prob: 0.1
+  hidden_size: 1024
+  initializer_range: 0.02
+  intermediate_size: 4096
+  layer_norm_eps: 1.0e-12
+  max_position_embeddings: 512
+  model_type: bert
+  num_attention_heads: 16
+  num_hidden_layers: 24
+  pad_token_id: 0
+  position_embedding_type: absolute
+  torch_dtype: float32
+  transformers_version: 4.51.3
+  type_vocab_size: 2
+  use_cache: true
+  vocab_size: 30522
+onnxFiles: {}
+safetensorsSizeMb: 1336.4
+approxSizeMb: 1336.4
+fetchedAt: '2026-06-08T16:42:43.000Z'

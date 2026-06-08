@@ -1,0 +1,163 @@
+_id: 69d577e85921bc0b3b95a044
+id: tomaarsen/BGE-VL-MLLM-S1
+private: false
+pipeline_tag: sentence-similarity
+library_name: sentence-transformers
+tags:
+- sentence-transformers
+- safetensors
+- llava_next
+- multimodal-retrieval
+- embedding-model
+- sentence-similarity
+- custom_code
+- en
+- arxiv:2412.14475
+- base_model:llava-hf/llava-v1.6-mistral-7b-hf
+- base_model:finetune:llava-hf/llava-v1.6-mistral-7b-hf
+- license:mit
+- endpoints_compatible
+- region:us
+downloads: 14
+likes: 0
+modelId: tomaarsen/BGE-VL-MLLM-S1
+author: tomaarsen
+sha: 8a74098eb288e5862089b000ebf541605e67c1e5
+lastModified: '2026-04-07T21:32:56.000Z'
+gated: false
+disabled: false
+widgetData:
+- source_sentence: That is a happy person
+  sentences:
+  - That is a happy dog
+  - That is a very happy person
+  - Today is a sunny day
+model-index: null
+config:
+  architectures:
+  - LlavaNextForConditionalGeneration
+  auto_map:
+    AutoModel: modeling_llavanext_for_embedding.LLaVANextForEmbedding
+  model_type: llava_next
+  tokenizer_config:
+    bos_token: <s>
+    eos_token: </s>
+    pad_token: <pad>
+    unk_token: <unk>
+    use_default_system_prompt: false
+  chat_template_jinja: "{%- set ns = namespace(instruction='', has_system=false) -%}\n{%- for message in messages -%}\n  {%-\
+    \ if message.role == 'system' -%}\n    {%- set ns.has_system = true -%}\n    {%- if message.content is string -%}\n  \
+    \    {%- set ns.instruction = message.content -%}\n    {%- else -%}\n      {%- for item in message.content -%}\n     \
+    \   {%- if item.type == 'text' -%}\n          {%- set ns.instruction = item.text -%}\n        {%- endif -%}\n      {%-\
+    \ endfor -%}\n    {%- endif -%}\n  {%- endif -%}\n{%- endfor -%}\n{%- for message in messages -%}\n  {%- if message.role\
+    \ != 'system' -%}\n    {%- set cn = namespace(text='', has_image=false) -%}\n    {%- if message.content is string -%}\n\
+    \      {%- set cn.text = message.content -%}\n    {%- else -%}\n      {%- for item in message.content -%}\n        {%-\
+    \ if item.type == 'image' -%}\n          {%- set cn.has_image = true -%}\n        {%- elif item.type == 'text' -%}\n \
+    \         {%- set cn.text = item.text -%}\n        {%- endif -%}\n      {%- endfor -%}\n    {%- endif -%}\n    {%- if\
+    \ ns.has_system or message.role == 'query' %}[INST] {{ '\\n' }} <instruct> {{ ns.instruction }} <query> {% else %}[INST]\
+    \ {% endif -%}\n    {%- if cn.text %} {{ cn.text }} {{ '\\n' }}{% endif -%}\n    {%- if cn.has_image %} <image>{% endif\
+    \ %} [/INST]\n  {%- endif -%}\n{%- endfor -%}\n\n"
+cardData:
+  license: mit
+  language:
+  - en
+  base_model:
+  - llava-hf/llava-v1.6-mistral-7b-hf
+  library_name: sentence-transformers
+  tags:
+  - sentence-transformers
+  - multimodal-retrieval
+  - embedding-model
+  pipeline_tag: sentence-similarity
+siblings:
+- rfilename: .gitattributes
+- rfilename: 1_Pooling/config.json
+- rfilename: README.md
+- rfilename: added_tokens.json
+- rfilename: assets/cir_candi_1.png
+- rfilename: assets/cir_candi_2.png
+- rfilename: assets/cir_query.png
+- rfilename: assets/res-ft-mmeb.png
+- rfilename: assets/res-scaling.png
+- rfilename: assets/res-zs-cir.png
+- rfilename: assets/res-zs-mmeb.png
+- rfilename: chat_template.jinja
+- rfilename: config.json
+- rfilename: config_sentence_transformers.json
+- rfilename: generation_config.json
+- rfilename: model-00001-of-00004.safetensors
+- rfilename: model-00002-of-00004.safetensors
+- rfilename: model-00003-of-00004.safetensors
+- rfilename: model-00004-of-00004.safetensors
+- rfilename: model.safetensors.index.json
+- rfilename: modeling_llavanext_for_embedding.py
+- rfilename: modules.json
+- rfilename: preprocessor_config.json
+- rfilename: processor_config.json
+- rfilename: sentence_bert_config.json
+- rfilename: special_tokens_map.json
+- rfilename: tokenizer.json
+- rfilename: tokenizer.model
+- rfilename: tokenizer_config.json
+spaces: []
+createdAt: '2026-04-07T21:32:24.000Z'
+safetensors:
+  parameters:
+    F16: 7566264320
+  total: 7566264320
+usedStorage: 15135925868
+downloadsAllTime: 31
+inferenceProviderMapping: {}
+configJson:
+  architectures:
+  - LlavaNextForConditionalGeneration
+  ignore_index: -100
+  auto_map:
+    AutoModel: modeling_llavanext_for_embedding.LLaVANextForEmbedding
+  image_grid_pinpoints:
+  - - 336
+    - 672
+  - - 672
+    - 336
+  - - 672
+    - 672
+  - - 1008
+    - 336
+  - - 336
+    - 1008
+  image_token_index: 32000
+  model_type: llava_next
+  projector_hidden_act: gelu
+  text_config:
+    _name_or_path: mistralai/Mistral-7B-Instruct-v0.2
+    architectures:
+    - MistralForCausalLM
+    intermediate_size: 14336
+    max_position_embeddings: 32768
+    model_type: mistral
+    num_key_value_heads: 8
+    rms_norm_eps: 1.0e-05
+    rope_theta: 1000000.0
+    sliding_window: null
+    torch_dtype: bfloat16
+    vocab_size: 32005
+  torch_dtype: float16
+  transformers_version: 4.39.0.dev0
+  use_image_newline_parameter: true
+  vision_config:
+    hidden_size: 1024
+    image_size: 336
+    intermediate_size: 4096
+    model_type: clip_vision_model
+    num_attention_heads: 16
+    num_hidden_layers: 24
+    patch_size: 14
+    projection_dim: 768
+    vocab_size: 32000
+  vision_feature_layer: -2
+  vision_feature_select_strategy: default
+  vocab_size: 32005
+onnxFiles: {}
+safetensorsSizeMb: 15132.6
+approxSizeMb: 15132.5
+fetchedAt: '2026-06-08T16:42:43.000Z'

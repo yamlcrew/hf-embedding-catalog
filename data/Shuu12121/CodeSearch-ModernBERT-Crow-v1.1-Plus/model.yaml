@@ -1,0 +1,548 @@
+_id: 68cce2df7a0feb78aa88a4d6
+id: Shuu12121/CodeSearch-ModernBERT-Crow-v1.1-Plus
+private: false
+pipeline_tag: sentence-similarity
+library_name: sentence-transformers
+tags:
+- sentence-transformers
+- safetensors
+- modernbert
+- sentence-similarity
+- feature-extraction
+- dense
+- generated_from_trainer
+- dataset_size:2392064
+- loss:CachedMultipleNegativesSymmetricRankingLoss
+- arxiv:1908.10084
+- base_model:Shuu12121/CodeModernBERT-Crow-v1.1
+- base_model:finetune:Shuu12121/CodeModernBERT-Crow-v1.1
+- text-embeddings-inference
+- endpoints_compatible
+- region:us
+downloads: 7
+likes: 1
+modelId: Shuu12121/CodeSearch-ModernBERT-Crow-v1.1-Plus
+author: Shuu12121
+sha: 7264e29a8de5d9dcd657bc4a21a78eb48aefe94c
+lastModified: '2025-09-19T04:58:38.000Z'
+gated: false
+disabled: false
+widgetData:
+- source_sentence: 'Encapsulates the work with test rules.
+
+    @param {array} aRules The test rules
+
+    @constructor
+
+    @private'
+  sentences:
+  - "createImageResizer = (width, height) => (source) => {\n  const resized = new PNG({ width, height, fill: true });\n  PNG.bitblt(source,\
+    \ resized, 0, 0, source.width, source.height, 0, 0);\n  return resized;\n}"
+  - "TestRules = function (aRules) {\n\t\t\tthis._aRules = aRules;\n\t\t}"
+  - "function addEventTypeNameToConfig(_ref, isInteractive) {\n  var topEvent = _ref[0],\n      event = _ref[1];\n\n  var\
+    \ capitalizedEvent = event[0].toUpperCase() + event.slice(1);\n  var onEvent = 'on' + capitalizedEvent;\n\n  var type\
+    \ = {\n    phasedRegistrationNames: {\n      bubbled: onEvent,\n      captured: onEvent + 'Capture'\n    },\n    dependencies:\
+    \ [topEvent],\n    isInteractive: isInteractive\n  };\n  eventTypes$4[event] = type;\n  topLevelEventsToDispatchConfig[topEvent]\
+    \ = type;\n}"
+- source_sentence: 'Check if a value has one or more properties and that value is not undefined.
+
+    @param {any} obj The value to check.
+
+    @returns {boolean} `true` if `obj` has one or more properties that value is not undefined.'
+  sentences:
+  - "calci = function(hashbuf, sig, pubkey) {\n  for (var i = 0; i < 4; i++) {\n    var Qprime;\n    try {\n      Qprime =\
+    \ getPublicKey(hashbuf, sig, i);\n    } catch (e) {\n      console.error(e);\n      continue;\n    }\n\n    if (Qprime.point.eq(pubkey.point))\
+    \ {\n      sig.i = i;\n      sig.compressed = pubkey.compressed;\n      return sig;\n    }\n  }\n\n  throw new Error('Unable\
+    \ to find valid recovery factor');\n}"
+  - "function hasDefinedProperty(obj) {\n\tif (typeof obj === \"object\" && obj !== null) {\n\t\tfor (const key in obj) {\n\
+    \t\t\tif (typeof obj[key] !== \"undefined\") {\n\t\t\t\treturn true;\n\t\t\t}\n\t\t}\n\t}\n\treturn false;\n}"
+  - "function joinSequenceDiffsByShifting(sequence1, sequence2, sequenceDiffs) {\n    if (sequenceDiffs.length === 0) {\n\
+    \        return sequenceDiffs;\n    }\n    const result = [];\n    result.push(sequenceDiffs[0]);\n    // First move them\
+    \ all to the left as much as possible and join them if possible\n    for (let i = 1; i < sequenceDiffs.length; i++) {\n\
+    \        const prevResult = result[result.length - 1];\n        let cur = sequenceDiffs[i];\n        if (cur.seq1Range.isEmpty\
+    \ || cur.seq2Range.isEmpty) {\n            const length = cur.seq1Range.start - prevResult.seq1Range.endExclusive;\n \
+    \           let d;\n            for (d = 1; d <= length; d++) {\n                if (sequence1.getElement(cur.seq1Range.start\
+    \ - d) !== sequence1.getElement(cur.seq1Range.endExclusive - d) ||\n                    sequence2.getElement(cur.seq2Range.start\
+    \ - d) !== sequence2.getElement(cur.seq2Range.endExclusive - d)) {\n                    break;\n                }\n  \
+    \          }\n            d--;\n            if (d === length) {\n                // Merge previous and current diff\n\
+    \                result[result.length - 1] = new SequenceDiff(new OffsetRange(prevResult.seq1Range.start, cur.seq1Range.endExclusive\
+    \ - length), new OffsetRange(prevResult.seq2Range.start, cur.seq2Range.endExclusive - length));\n                continue;\n\
+    \            }\n            cur = cur.delta(-d);\n        }\n        result.push(cur);\n    }\n    const result2 = [];\n\
+    \    // Then move them all to the right and join them again if possible\n    for (let i = 0; i < result.length - 1; i++)\
+    \ {\n        const nextResult = result[i + 1];\n        let cur = result[i];\n        if (cur.seq1Range.isEmpty || cur.seq2Range.isEmpty)\
+    \ {\n            const length = nextResult.seq1Range.start - cur.seq1Range.endExclusive;\n            let d;\n       \
+    \     for (d = 0; d < length; d++) {\n                if (!sequence1.isStronglyEqual(cur.seq1Range.start + d, cur.seq1Range.endExclusive\
+    \ + d) ||\n                    !sequence2.isStronglyEqual(cur.seq2Range.start + d, cur.seq2Range.endExclusive + d)) {\n\
+    \                    break;\n                }\n            }\n            if (d === length) {\n                // Merge\
+    \ previous and current diff, write to result!\n                result[i + 1] = new SequenceDiff(new OffsetRange(cur.seq1Range.start\
+    \ + length, nextResult.seq1Range.endExclusive), new OffsetRange(cur.seq2Range.start + length, nextResult.seq2Range.endExclusive));\n\
+    \                continue;\n            }\n            if (d > 0) {\n                cur = cur.delta(d);\n           \
+    \ }\n        }\n        result2.push(cur);\n    }\n    if (result.length > 0) {\n        result2.push(result[result.length\
+    \ - 1]);\n    }\n    return result2;\n}"
+- source_sentence: 'Adds two vec2''s after scaling the second operand by a scalar value
+
+
+    @param {vec2} out the receiving vector
+
+    @param {ReadonlyVec2} a the first operand
+
+    @param {ReadonlyVec2} b the second operand
+
+    @param {Number} scale the amount to scale b by before adding
+
+    @returns {vec2} out'
+  sentences:
+  - "async forceStripeSubscriptionToProduct(data, options) {\n        if (!this._stripeAPIService.configured) {\n        \
+    \    throw new DataImportError({\n                message: tpl(messages.noStripeConnection, {action: 'force subscription\
+    \ to product'})\n            });\n        }\n\n        // Retrieve customer's existing subscription information\n    \
+    \    const stripeCustomer = await this._stripeAPIService.getCustomer(data.customer_id);\n\n        // Subscription can\
+    \ only be forced if the customer exists\n        if (!stripeCustomer) {\n            throw new DataImportError({message:\
+    \ tpl(messages.forceNoCustomer)});\n        }\n\n        // Subscription can only be forced if the customer has an existing\
+    \ subscription\n        if (stripeCustomer.subscriptions.data.length === 0) {\n            throw new DataImportError({message:\
+    \ tpl(messages.forceNoExistingSubscription)});\n        }\n\n        // Subscription can only be forced if the customer\
+    \ does not have multiple subscriptions\n        if (stripeCustomer.subscriptions.data.length > 1) {\n            throw\
+    \ new DataImportError({message: tpl(messages.forceTooManySubscriptions)});\n        }\n\n        const stripeSubscription\
+    \ = stripeCustomer.subscriptions.data[0];\n\n        // Subscription can only be forced if the existing subscription does\
+    \ not have multiple items\n        if (stripeSubscription.items.data.length > 1) {\n            throw new DataImportError({message:\
+    \ tpl(messages.forceTooManySubscriptionItems)});\n        }\n\n        const stripeSubscriptionItem = stripeSubscription.items.data[0];\n\
+    \        const stripeSubscriptionItemPrice = stripeSubscriptionItem.price;\n        const stripeSubscriptionItemPriceCurrency\
+    \ = stripeSubscriptionItemPrice.currency;\n        const stripeSubscriptionItemPriceAmount = stripeSubscriptionItemPrice.unit_amount;\n\
+    \        const stripeSubscriptionItemPriceType = stripeSubscriptionItemPrice.type;\n        const stripeSubscriptionItemPriceInterval\
+    \ = stripeSubscriptionItemPrice.recurring?.interval || null;\n\n        // Subscription can only be forced if the existing\
+    \ subscription has a recurring interval\n        if (!stripeSubscriptionItemPriceInterval) {\n            throw new DataImportError({message:\
+    \ tpl(messages.forceExistingSubscriptionNotRecurring)});\n        }\n\n        // Retrieve Ghost product\n        let\
+    \ ghostProduct = await this._productRepository.get(\n            {id: data.product_id},\n            {...options, withRelated:\
+    \ ['stripePrices', 'stripeProducts']}\n        );\n\n        if (!ghostProduct) {\n            throw new DataImportError({message:\
+    \ tpl(messages.productNotFound, {id: data.product_id})});\n        }\n\n        // If there is not a Stripe product associated\
+    \ with the Ghost product, ensure one is created before continuing\n        if (!ghostProduct.related('stripeProducts').first())\
+    \ {\n            // Even though we are not updating any information on the product, calling `ProductRepository.update`\n\
+    \            // will ensure that the product gets created in Stripe\n            ghostProduct = await this._productRepository.update({\n\
+    \                id: data.product_id,\n                name: ghostProduct.get('name'),\n                // Providing the\
+    \ pricing details will ensure the relevant prices for the Ghost product are created\n                // on the Stripe\
+    \ product\n                monthly_price: {\n                    amount: ghostProduct.get('monthly_price'),\n        \
+    \            currency: ghostProduct.get('currency')\n                },\n                yearly_price: {\n           \
+    \         amount: ghostProduct.get('yearly_price'),\n                    currency: ghostProduct.get('currency')\n    \
+    \            }\n            }, options);\n        }\n\n        // Find price on Ghost product matching stripe subscription\
+    \ item price details\n        const ghostProductPrice = ghostProduct.related('stripePrices').find((price) => {\n     \
+    \       return price.get('currency') === stripeSubscriptionItemPriceCurrency &&\n                price.get('amount') ===\
+    \ stripeSubscriptionItemPriceAmount &&\n                price.get('type') === stripeSubscriptionItemPriceType &&\n   \
+    \             price.get('interval') === stripeSubscriptionItemPriceInterval;\n        });\n\n        let stripePriceId;\n\
+    \        let isNewStripePrice = false;\n\n        if (!ghostProductPrice) {\n            // If there is not a matching\
+    \ price, create one on the associated Stripe product using the existing\n            // subscription item price details\
+    \ and update the stripe subscription to use it\n            const stripeProduct = ghostProduct.related('stripeProducts').first();\n\
+    \n            const newStripePrice = await this._stripeAPIService.createPrice({\n                product: stripeProduct.get('stripe_product_id'),\n\
+    \                active: true,\n                nickname: stripeSubscriptionItemPriceInterval === 'month' ? 'Monthly'\
+    \ : 'Yearly',\n                currency: stripeSubscriptionItemPriceCurrency,\n                amount: stripeSubscriptionItemPriceAmount,\n\
+    \                type: stripeSubscriptionItemPriceType,\n                interval: stripeSubscriptionItemPriceInterval\n\
+    \            });\n\n            await this._stripeAPIService.updateSubscriptionItemPrice(\n                stripeSubscription.id,\n\
+    \                stripeSubscriptionItem.id,\n                newStripePrice.id,\n                {prorationBehavior: 'none'}\n\
+    \            );\n\n            stripePriceId = newStripePrice.id;\n            isNewStripePrice = true;\n        } else\
+    \ {\n            // If there is a matching price, and the subscription is not already using it,\n            // update\
+    \ the subscription to use it\n            stripePriceId = ghostProductPrice.get('stripe_price_id');\n\n            if\
+    \ (stripeSubscriptionItem.price.id !== stripePriceId) {\n                await this._stripeAPIService.updateSubscriptionItemPrice(\n\
+    \                    stripeSubscription.id,\n                    stripeSubscriptionItem.id,\n                    stripePriceId,\n\
+    \                    {prorationBehavior: 'none'}\n                );\n            }\n        }\n\n        // If there\
+    \ is a matching price, and the subscription is already using it, nothing else needs to be done\n\n        return {\n \
+    \           stripePriceId,\n            isNewStripePrice\n        };\n    }"
+  - "getPrefetchedVariantTrack() {\n    if (!this.prefetchedVariant_) {\n      return null;\n    }\n    return shaka.util.StreamUtils.variantToTrack(this.prefetchedVariant_);\n\
+    \  }"
+  - "function scaleAndAdd(out, a, b, scale) {\n    out[0] = a[0] + b[0] * scale;\n    out[1] = a[1] + b[1] * scale;\n    return\
+    \ out;\n  }"
+- source_sentence: '@returns Has this player been spotted by any others?'
+  sentences:
+  - "function includes7d( x, value ) {\n\tvar xbuf;\n\tvar dx0;\n\tvar dx1;\n\tvar dx2;\n\tvar dx3;\n\tvar dx4;\n\tvar dx5;\n\
+    \tvar dx6;\n\tvar sh;\n\tvar S0;\n\tvar S1;\n\tvar S2;\n\tvar S3;\n\tvar S4;\n\tvar S5;\n\tvar S6;\n\tvar sx;\n\tvar ix;\n\
+    \tvar i0;\n\tvar i1;\n\tvar i2;\n\tvar i3;\n\tvar i4;\n\tvar i5;\n\tvar i6;\n\n\t// Note on variable naming convention:\
+    \ S#, dx#, dy#, i# where # corresponds to the loop number, with `0` being the innermost loop...\n\n\t// Extract loop variables\
+    \ for purposes of loop interchange: dimensions and loop offset (pointer) increments...\n\tsh = x.shape;\n\tsx = x.strides;\n\
+    \tif ( strides2order( sx ) === 1 ) {\n\t\t// For row-major ndarrays, the last dimensions have the fastest changing indices...\n\
+    \t\tS0 = sh[ 6 ];\n\t\tS1 = sh[ 5 ];\n\t\tS2 = sh[ 4 ];\n\t\tS3 = sh[ 3 ];\n\t\tS4 = sh[ 2 ];\n\t\tS5 = sh[ 1 ];\n\t\t\
+    S6 = sh[ 0 ];\n\t\tdx0 = sx[ 6 ];                // offset increment for innermost loop\n\t\tdx1 = sx[ 5 ] - ( S0*sx[6]\
+    \ );\n\t\tdx2 = sx[ 4 ] - ( S1*sx[5] );\n\t\tdx3 = sx[ 3 ] - ( S2*sx[4] );\n\t\tdx4 = sx[ 2 ] - ( S3*sx[3] );\n\t\tdx5\
+    \ = sx[ 1 ] - ( S4*sx[2] );\n\t\tdx6 = sx[ 0 ] - ( S5*sx[1] ); // offset increment for outermost loop\n\t} else { // order\
+    \ === 'column-major'\n\t\t// For column-major ndarrays, the first dimensions have the fastest changing indices...\n\t\t\
+    S0 = sh[ 0 ];\n\t\tS1 = sh[ 1 ];\n\t\tS2 = sh[ 2 ];\n\t\tS3 = sh[ 3 ];\n\t\tS4 = sh[ 4 ];\n\t\tS5 = sh[ 5 ];\n\t\tS6 =\
+    \ sh[ 6 ];\n\t\tdx0 = sx[ 0 ];                // offset increment for innermost loop\n\t\tdx1 = sx[ 1 ] - ( S0*sx[0] );\n\
+    \t\tdx2 = sx[ 2 ] - ( S1*sx[1] );\n\t\tdx3 = sx[ 3 ] - ( S2*sx[2] );\n\t\tdx4 = sx[ 4 ] - ( S3*sx[3] );\n\t\tdx5 = sx[\
+    \ 5 ] - ( S4*sx[4] );\n\t\tdx6 = sx[ 6 ] - ( S5*sx[5] ); // offset increment for outermost loop\n\t}\n\t// Set a pointer\
+    \ to the first indexed element:\n\tix = x.offset;\n\n\t// Cache a reference to the input ndarray buffer:\n\txbuf = x.data;\n\
+    \n\t// Iterate over the ndarray dimensions...\n\tfor ( i6 = 0; i6 < S6; i6++ ) {\n\t\tfor ( i5 = 0; i5 < S5; i5++ ) {\n\
+    \t\t\tfor ( i4 = 0; i4 < S4; i4++ ) {\n\t\t\t\tfor ( i3 = 0; i3 < S3; i3++ ) {\n\t\t\t\t\tfor ( i2 = 0; i2 < S2; i2++\
+    \ ) {\n\t\t\t\t\t\tfor ( i1 = 0; i1 < S1; i1++ ) {\n\t\t\t\t\t\t\tfor ( i0 = 0; i0 < S0; i0++ ) {\n\t\t\t\t\t\t\t\tif\
+    \ ( xbuf[ ix ] === value ) {\n\t\t\t\t\t\t\t\t\treturn true;\n\t\t\t\t\t\t\t\t}\n\t\t\t\t\t\t\t\tix += dx0;\n\t\t\t\t\t\
+    \t\t}\n\t\t\t\t\t\t\tix += dx1;\n\t\t\t\t\t\t}\n\t\t\t\t\t\tix += dx2;\n\t\t\t\t\t}\n\t\t\t\t\tix += dx3;\n\t\t\t\t}\n\
+    \t\t\t\tix += dx4;\n\t\t\t}\n\t\t\tix += dx5;\n\t\t}\n\t\tix += dx6;\n\t}\n\treturn false;\n}"
+  - "_generateIntegrityFile(lockfile, patterns, flags, workspaceLayout, artifacts) {\n    var _this3 = this;\n\n    return\
+    \ (0, (_asyncToGenerator2 || _load_asyncToGenerator()).default)(function* () {\n      const result = (0, (_extends2 ||\
+    \ _load_extends()).default)({}, INTEGRITY_FILE_DEFAULTS(), {\n        artifacts\n      });\n\n      result.topLevelPatterns\
+    \ = patterns;\n\n      // If using workspaces, we also need to add the workspaces patterns to the top-level, so that we'll\
+    \ know if a\n      // dependency is added or removed into one of them. We must take care not to read the aggregator (if\
+    \ !loc).\n      //\n      // Also note that we can't use of workspaceLayout.workspaces[].manifest._reference.patterns,\
+    \ because when\n      // doing a \"yarn check\", the _reference property hasn't yet been properly initialized.\n\n   \
+    \   if (workspaceLayout) {\n        result.topLevelPatterns = result.topLevelPatterns.filter(function (p) {\n        \
+    \  // $FlowFixMe\n          return !workspaceLayout.getManifestByPattern(p);\n        });\n\n        for (var _iterator4\
+    \ = Object.keys(workspaceLayout.workspaces), _isArray4 = Array.isArray(_iterator4), _i4 = 0, _iterator4 = _isArray4 ?\
+    \ _iterator4 : _iterator4[Symbol.iterator]();;) {\n          var _ref5;\n\n          if (_isArray4) {\n            if\
+    \ (_i4 >= _iterator4.length) break;\n            _ref5 = _iterator4[_i4++];\n          } else {\n            _i4 = _iterator4.next();\n\
+    \            if (_i4.done) break;\n            _ref5 = _i4.value;\n          }\n\n          const name = _ref5;\n\n  \
+    \        if (!workspaceLayout.workspaces[name].loc) {\n            continue;\n          }\n\n          const manifest\
+    \ = workspaceLayout.workspaces[name].manifest;\n\n          if (manifest) {\n            for (var _iterator5 = (_constants\
+    \ || _load_constants()).DEPENDENCY_TYPES, _isArray5 = Array.isArray(_iterator5), _i5 = 0, _iterator5 = _isArray5 ? _iterator5\
+    \ : _iterator5[Symbol.iterator]();;) {\n              var _ref6;\n\n              if (_isArray5) {\n                if\
+    \ (_i5 >= _iterator5.length) break;\n                _ref6 = _iterator5[_i5++];\n              } else {\n            \
+    \    _i5 = _iterator5.next();\n                if (_i5.done) break;\n                _ref6 = _i5.value;\n            \
+    \  }\n\n              const dependencyType = _ref6;\n\n              const dependencies = manifest[dependencyType];\n\n\
+    \              if (!dependencies) {\n                continue;\n              }\n\n              for (var _iterator6 =\
+    \ Object.keys(dependencies), _isArray6 = Array.isArray(_iterator6), _i6 = 0, _iterator6 = _isArray6 ? _iterator6 : _iterator6[Symbol.iterator]();;)\
+    \ {\n                var _ref7;\n\n                if (_isArray6) {\n                  if (_i6 >= _iterator6.length) break;\n\
+    \                  _ref7 = _iterator6[_i6++];\n                } else {\n                  _i6 = _iterator6.next();\n\
+    \                  if (_i6.done) break;\n                  _ref7 = _i6.value;\n                }\n\n                const\
+    \ dep = _ref7;\n\n                result.topLevelPatterns.push(`${dep}@${dependencies[dep]}`);\n              }\n    \
+    \        }\n          }\n        }\n      }\n\n      result.topLevelPatterns.sort((_misc || _load_misc()).sortAlpha);\n\
+    \n      if (flags.checkFiles) {\n        result.flags.push('checkFiles');\n      }\n\n      if (flags.flat) {\n      \
+    \  result.flags.push('flat');\n      }\n\n      if (_this3.config.ignoreScripts) {\n        result.flags.push('ignoreScripts');\n\
+    \      }\n      if (_this3.config.focus) {\n        result.flags.push('focus: ' + _this3.config.focusedWorkspaceName);\n\
+    \      }\n\n      if (_this3.config.production) {\n        result.flags.push('production');\n      }\n\n      if (_this3.config.plugnplayEnabled)\
+    \ {\n        result.flags.push('plugnplay');\n      }\n\n      const linkedModules = _this3.config.linkedModules;\n\n\
+    \      if (linkedModules.length) {\n        result.linkedModules = linkedModules.sort((_misc || _load_misc()).sortAlpha);\n\
+    \      }\n\n      for (var _iterator7 = Object.keys(lockfile), _isArray7 = Array.isArray(_iterator7), _i7 = 0, _iterator7\
+    \ = _isArray7 ? _iterator7 : _iterator7[Symbol.iterator]();;) {\n        var _ref8;\n\n        if (_isArray7) {\n    \
+    \      if (_i7 >= _iterator7.length) break;\n          _ref8 = _iterator7[_i7++];\n        } else {\n          _i7 = _iterator7.next();\n\
+    \          if (_i7.done) break;\n          _ref8 = _i7.value;\n        }\n\n        const key = _ref8;\n\n        result.lockfileEntries[key]\
+    \ = lockfile[key].resolved || '';\n      }\n\n      for (var _iterator8 = _this3._getModulesFolders({ workspaceLayout\
+    \ }), _isArray8 = Array.isArray(_iterator8), _i8 = 0, _iterator8 = _isArray8 ? _iterator8 : _iterator8[Symbol.iterator]();;)\
+    \ {\n        var _ref9;\n\n        if (_isArray8) {\n          if (_i8 >= _iterator8.length) break;\n          _ref9 =\
+    \ _iterator8[_i8++];\n        } else {\n          _i8 = _iterator8.next();\n          if (_i8.done) break;\n         \
+    \ _ref9 = _i8.value;\n        }\n\n        const modulesFolder = _ref9;\n\n        if (yield (_fs || _load_fs()).exists(modulesFolder))\
+    \ {\n          result.modulesFolders.push(path.relative(_this3.config.lockfileFolder, modulesFolder));\n        }\n  \
+    \    }\n\n      if (flags.checkFiles) {\n        const modulesRoot = _this3._getModulesRootFolder();\n\n        result.files\
+    \ = (yield _this3._getIntegrityListing({ workspaceLayout })).map(function (entry) {\n          return path.relative(modulesRoot,\
+    \ entry);\n        }).sort((_misc || _load_misc()).sortAlpha);\n      }\n\n      return result;\n    })();\n  }"
+  - "get isSpotted() {\n        return this.getProp(\"DT_BaseEntity\", \"m_bSpotted\");\n    }"
+- source_sentence: The toggle content, if left empty it will render the default toggle (seen above).
+  sentences:
+  - "update = () => {\n\n\t            const timerId = window.requestAnimationFrame( update );\n\t            const elapsed\
+    \ = performance.now() - timestamp;\n\t            const progress = elapsed / duration;\n\t            const opacity =\
+    \ 1.0 - progress > 0 ? 1.0 - progress : 0;\n\t            const radius = progress * canvasWidth * 0.5 / dpr;\n\n\t   \
+    \         context.clearRect( 0, 0, canvasWidth, canvasHeight );\n\t            context.beginPath();\n\t            context.arc(\
+    \ x, y, radius, 0, Math.PI * 2 );\n\t            context.fillStyle = `rgba(${color.r * 255}, ${color.g * 255}, ${color.b\
+    \ * 255}, ${opacity})`;\n\t            context.fill();\n\t            context.closePath();\n\n\t            if ( progress\
+    \ >= 1.0 ) {\n\n\t                window.cancelAnimationFrame( timerId );\n\t                this.updateCanvasArcByProgress(\
+    \ 0 );\n\n\t                /**\n\t                 * Reticle ripple end event\n\t                 * @type {object}\n\t\
+    \                 * @event Reticle#reticle-ripple-end\n\t                 */\n\t                this.dispatchEvent( {\
+    \ type: 'reticle-ripple-end' } );\n\n\t            }\n\n\t            material.map.needsUpdate = true;\n\n\t        }"
+  - "static _headersDictToHeadersArray(headersDict) {\n    const result = [];\n    for (const name of Object.keys(headersDict))\
+    \ {\n      const values = headersDict[name].split('\\n');\n      for (let i = 0; i < values.length; ++i) {\n        result.push({name:\
+    \ name, value: values[i]});\n      }\n    }\n    return result;\n  }"
+  - "function NavbarToggle() {\n\t    (0, _classCallCheck3['default'])(this, NavbarToggle);\n\t    return (0, _possibleConstructorReturn3['default'])(this,\
+    \ _React$Component.apply(this, arguments));\n\t  }"
+model-index: null
+config:
+  architectures:
+  - ModernBertModel
+  model_type: modernbert
+  tokenizer_config:
+    bos_token: <s>
+    cls_token: <s>
+    eos_token: </s>
+    mask_token: <mask>
+    pad_token: <pad>
+    sep_token: </s>
+    unk_token: <unk>
+cardData:
+  tags:
+  - sentence-transformers
+  - sentence-similarity
+  - feature-extraction
+  - dense
+  - generated_from_trainer
+  - dataset_size:2392064
+  - loss:CachedMultipleNegativesSymmetricRankingLoss
+  base_model: Shuu12121/CodeModernBERT-Crow-v1.1
+  widget:
+  - source_sentence: 'Encapsulates the work with test rules.
+
+      @param {array} aRules The test rules
+
+      @constructor
+
+      @private'
+    sentences:
+    - "createImageResizer = (width, height) => (source) => {\n  const resized = new PNG({ width, height, fill: true });\n\
+      \  PNG.bitblt(source, resized, 0, 0, source.width, source.height, 0, 0);\n  return resized;\n}"
+    - "TestRules = function (aRules) {\n\t\t\tthis._aRules = aRules;\n\t\t}"
+    - "function addEventTypeNameToConfig(_ref, isInteractive) {\n  var topEvent = _ref[0],\n      event = _ref[1];\n\n  var\
+      \ capitalizedEvent = event[0].toUpperCase() + event.slice(1);\n  var onEvent = 'on' + capitalizedEvent;\n\n  var type\
+      \ = {\n    phasedRegistrationNames: {\n      bubbled: onEvent,\n      captured: onEvent + 'Capture'\n    },\n    dependencies:\
+      \ [topEvent],\n    isInteractive: isInteractive\n  };\n  eventTypes$4[event] = type;\n  topLevelEventsToDispatchConfig[topEvent]\
+      \ = type;\n}"
+  - source_sentence: 'Check if a value has one or more properties and that value is not undefined.
+
+      @param {any} obj The value to check.
+
+      @returns {boolean} `true` if `obj` has one or more properties that value is not undefined.'
+    sentences:
+    - "calci = function(hashbuf, sig, pubkey) {\n  for (var i = 0; i < 4; i++) {\n    var Qprime;\n    try {\n      Qprime\
+      \ = getPublicKey(hashbuf, sig, i);\n    } catch (e) {\n      console.error(e);\n      continue;\n    }\n\n    if (Qprime.point.eq(pubkey.point))\
+      \ {\n      sig.i = i;\n      sig.compressed = pubkey.compressed;\n      return sig;\n    }\n  }\n\n  throw new Error('Unable\
+      \ to find valid recovery factor');\n}"
+    - "function hasDefinedProperty(obj) {\n\tif (typeof obj === \"object\" && obj !== null) {\n\t\tfor (const key in obj)\
+      \ {\n\t\t\tif (typeof obj[key] !== \"undefined\") {\n\t\t\t\treturn true;\n\t\t\t}\n\t\t}\n\t}\n\treturn false;\n}"
+    - "function joinSequenceDiffsByShifting(sequence1, sequence2, sequenceDiffs) {\n    if (sequenceDiffs.length === 0) {\n\
+      \        return sequenceDiffs;\n    }\n    const result = [];\n    result.push(sequenceDiffs[0]);\n    // First move\
+      \ them all to the left as much as possible and join them if possible\n    for (let i = 1; i < sequenceDiffs.length;\
+      \ i++) {\n        const prevResult = result[result.length - 1];\n        let cur = sequenceDiffs[i];\n        if (cur.seq1Range.isEmpty\
+      \ || cur.seq2Range.isEmpty) {\n            const length = cur.seq1Range.start - prevResult.seq1Range.endExclusive;\n\
+      \            let d;\n            for (d = 1; d <= length; d++) {\n                if (sequence1.getElement(cur.seq1Range.start\
+      \ - d) !== sequence1.getElement(cur.seq1Range.endExclusive - d) ||\n                    sequence2.getElement(cur.seq2Range.start\
+      \ - d) !== sequence2.getElement(cur.seq2Range.endExclusive - d)) {\n                    break;\n                }\n\
+      \            }\n            d--;\n            if (d === length) {\n                // Merge previous and current diff\n\
+      \                result[result.length - 1] = new SequenceDiff(new OffsetRange(prevResult.seq1Range.start, cur.seq1Range.endExclusive\
+      \ - length), new OffsetRange(prevResult.seq2Range.start, cur.seq2Range.endExclusive - length));\n                continue;\n\
+      \            }\n            cur = cur.delta(-d);\n        }\n        result.push(cur);\n    }\n    const result2 = [];\n\
+      \    // Then move them all to the right and join them again if possible\n    for (let i = 0; i < result.length - 1;\
+      \ i++) {\n        const nextResult = result[i + 1];\n        let cur = result[i];\n        if (cur.seq1Range.isEmpty\
+      \ || cur.seq2Range.isEmpty) {\n            const length = nextResult.seq1Range.start - cur.seq1Range.endExclusive;\n\
+      \            let d;\n            for (d = 0; d < length; d++) {\n                if (!sequence1.isStronglyEqual(cur.seq1Range.start\
+      \ + d, cur.seq1Range.endExclusive + d) ||\n                    !sequence2.isStronglyEqual(cur.seq2Range.start + d, cur.seq2Range.endExclusive\
+      \ + d)) {\n                    break;\n                }\n            }\n            if (d === length) {\n         \
+      \       // Merge previous and current diff, write to result!\n                result[i + 1] = new SequenceDiff(new OffsetRange(cur.seq1Range.start\
+      \ + length, nextResult.seq1Range.endExclusive), new OffsetRange(cur.seq2Range.start + length, nextResult.seq2Range.endExclusive));\n\
+      \                continue;\n            }\n            if (d > 0) {\n                cur = cur.delta(d);\n         \
+      \   }\n        }\n        result2.push(cur);\n    }\n    if (result.length > 0) {\n        result2.push(result[result.length\
+      \ - 1]);\n    }\n    return result2;\n}"
+  - source_sentence: 'Adds two vec2''s after scaling the second operand by a scalar value
+
+
+      @param {vec2} out the receiving vector
+
+      @param {ReadonlyVec2} a the first operand
+
+      @param {ReadonlyVec2} b the second operand
+
+      @param {Number} scale the amount to scale b by before adding
+
+      @returns {vec2} out'
+    sentences:
+    - "async forceStripeSubscriptionToProduct(data, options) {\n        if (!this._stripeAPIService.configured) {\n      \
+      \      throw new DataImportError({\n                message: tpl(messages.noStripeConnection, {action: 'force subscription\
+      \ to product'})\n            });\n        }\n\n        // Retrieve customer's existing subscription information\n  \
+      \      const stripeCustomer = await this._stripeAPIService.getCustomer(data.customer_id);\n\n        // Subscription\
+      \ can only be forced if the customer exists\n        if (!stripeCustomer) {\n            throw new DataImportError({message:\
+      \ tpl(messages.forceNoCustomer)});\n        }\n\n        // Subscription can only be forced if the customer has an existing\
+      \ subscription\n        if (stripeCustomer.subscriptions.data.length === 0) {\n            throw new DataImportError({message:\
+      \ tpl(messages.forceNoExistingSubscription)});\n        }\n\n        // Subscription can only be forced if the customer\
+      \ does not have multiple subscriptions\n        if (stripeCustomer.subscriptions.data.length > 1) {\n            throw\
+      \ new DataImportError({message: tpl(messages.forceTooManySubscriptions)});\n        }\n\n        const stripeSubscription\
+      \ = stripeCustomer.subscriptions.data[0];\n\n        // Subscription can only be forced if the existing subscription\
+      \ does not have multiple items\n        if (stripeSubscription.items.data.length > 1) {\n            throw new DataImportError({message:\
+      \ tpl(messages.forceTooManySubscriptionItems)});\n        }\n\n        const stripeSubscriptionItem = stripeSubscription.items.data[0];\n\
+      \        const stripeSubscriptionItemPrice = stripeSubscriptionItem.price;\n        const stripeSubscriptionItemPriceCurrency\
+      \ = stripeSubscriptionItemPrice.currency;\n        const stripeSubscriptionItemPriceAmount = stripeSubscriptionItemPrice.unit_amount;\n\
+      \        const stripeSubscriptionItemPriceType = stripeSubscriptionItemPrice.type;\n        const stripeSubscriptionItemPriceInterval\
+      \ = stripeSubscriptionItemPrice.recurring?.interval || null;\n\n        // Subscription can only be forced if the existing\
+      \ subscription has a recurring interval\n        if (!stripeSubscriptionItemPriceInterval) {\n            throw new\
+      \ DataImportError({message: tpl(messages.forceExistingSubscriptionNotRecurring)});\n        }\n\n        // Retrieve\
+      \ Ghost product\n        let ghostProduct = await this._productRepository.get(\n            {id: data.product_id},\n\
+      \            {...options, withRelated: ['stripePrices', 'stripeProducts']}\n        );\n\n        if (!ghostProduct)\
+      \ {\n            throw new DataImportError({message: tpl(messages.productNotFound, {id: data.product_id})});\n     \
+      \   }\n\n        // If there is not a Stripe product associated with the Ghost product, ensure one is created before\
+      \ continuing\n        if (!ghostProduct.related('stripeProducts').first()) {\n            // Even though we are not\
+      \ updating any information on the product, calling `ProductRepository.update`\n            // will ensure that the product\
+      \ gets created in Stripe\n            ghostProduct = await this._productRepository.update({\n                id: data.product_id,\n\
+      \                name: ghostProduct.get('name'),\n                // Providing the pricing details will ensure the relevant\
+      \ prices for the Ghost product are created\n                // on the Stripe product\n                monthly_price:\
+      \ {\n                    amount: ghostProduct.get('monthly_price'),\n                    currency: ghostProduct.get('currency')\n\
+      \                },\n                yearly_price: {\n                    amount: ghostProduct.get('yearly_price'),\n\
+      \                    currency: ghostProduct.get('currency')\n                }\n            }, options);\n        }\n\
+      \n        // Find price on Ghost product matching stripe subscription item price details\n        const ghostProductPrice\
+      \ = ghostProduct.related('stripePrices').find((price) => {\n            return price.get('currency') === stripeSubscriptionItemPriceCurrency\
+      \ &&\n                price.get('amount') === stripeSubscriptionItemPriceAmount &&\n                price.get('type')\
+      \ === stripeSubscriptionItemPriceType &&\n                price.get('interval') === stripeSubscriptionItemPriceInterval;\n\
+      \        });\n\n        let stripePriceId;\n        let isNewStripePrice = false;\n\n        if (!ghostProductPrice)\
+      \ {\n            // If there is not a matching price, create one on the associated Stripe product using the existing\n\
+      \            // subscription item price details and update the stripe subscription to use it\n            const stripeProduct\
+      \ = ghostProduct.related('stripeProducts').first();\n\n            const newStripePrice = await this._stripeAPIService.createPrice({\n\
+      \                product: stripeProduct.get('stripe_product_id'),\n                active: true,\n                nickname:\
+      \ stripeSubscriptionItemPriceInterval === 'month' ? 'Monthly' : 'Yearly',\n                currency: stripeSubscriptionItemPriceCurrency,\n\
+      \                amount: stripeSubscriptionItemPriceAmount,\n                type: stripeSubscriptionItemPriceType,\n\
+      \                interval: stripeSubscriptionItemPriceInterval\n            });\n\n            await this._stripeAPIService.updateSubscriptionItemPrice(\n\
+      \                stripeSubscription.id,\n                stripeSubscriptionItem.id,\n                newStripePrice.id,\n\
+      \                {prorationBehavior: 'none'}\n            );\n\n            stripePriceId = newStripePrice.id;\n   \
+      \         isNewStripePrice = true;\n        } else {\n            // If there is a matching price, and the subscription\
+      \ is not already using it,\n            // update the subscription to use it\n            stripePriceId = ghostProductPrice.get('stripe_price_id');\n\
+      \n            if (stripeSubscriptionItem.price.id !== stripePriceId) {\n                await this._stripeAPIService.updateSubscriptionItemPrice(\n\
+      \                    stripeSubscription.id,\n                    stripeSubscriptionItem.id,\n                    stripePriceId,\n\
+      \                    {prorationBehavior: 'none'}\n                );\n            }\n        }\n\n        // If there\
+      \ is a matching price, and the subscription is already using it, nothing else needs to be done\n\n        return {\n\
+      \            stripePriceId,\n            isNewStripePrice\n        };\n    }"
+    - "getPrefetchedVariantTrack() {\n    if (!this.prefetchedVariant_) {\n      return null;\n    }\n    return shaka.util.StreamUtils.variantToTrack(this.prefetchedVariant_);\n\
+      \  }"
+    - "function scaleAndAdd(out, a, b, scale) {\n    out[0] = a[0] + b[0] * scale;\n    out[1] = a[1] + b[1] * scale;\n  \
+      \  return out;\n  }"
+  - source_sentence: '@returns Has this player been spotted by any others?'
+    sentences:
+    - "function includes7d( x, value ) {\n\tvar xbuf;\n\tvar dx0;\n\tvar dx1;\n\tvar dx2;\n\tvar dx3;\n\tvar dx4;\n\tvar dx5;\n\
+      \tvar dx6;\n\tvar sh;\n\tvar S0;\n\tvar S1;\n\tvar S2;\n\tvar S3;\n\tvar S4;\n\tvar S5;\n\tvar S6;\n\tvar sx;\n\tvar\
+      \ ix;\n\tvar i0;\n\tvar i1;\n\tvar i2;\n\tvar i3;\n\tvar i4;\n\tvar i5;\n\tvar i6;\n\n\t// Note on variable naming convention:\
+      \ S#, dx#, dy#, i# where # corresponds to the loop number, with `0` being the innermost loop...\n\n\t// Extract loop\
+      \ variables for purposes of loop interchange: dimensions and loop offset (pointer) increments...\n\tsh = x.shape;\n\t\
+      sx = x.strides;\n\tif ( strides2order( sx ) === 1 ) {\n\t\t// For row-major ndarrays, the last dimensions have the fastest\
+      \ changing indices...\n\t\tS0 = sh[ 6 ];\n\t\tS1 = sh[ 5 ];\n\t\tS2 = sh[ 4 ];\n\t\tS3 = sh[ 3 ];\n\t\tS4 = sh[ 2 ];\n\
+      \t\tS5 = sh[ 1 ];\n\t\tS6 = sh[ 0 ];\n\t\tdx0 = sx[ 6 ];                // offset increment for innermost loop\n\t\t\
+      dx1 = sx[ 5 ] - ( S0*sx[6] );\n\t\tdx2 = sx[ 4 ] - ( S1*sx[5] );\n\t\tdx3 = sx[ 3 ] - ( S2*sx[4] );\n\t\tdx4 = sx[ 2\
+      \ ] - ( S3*sx[3] );\n\t\tdx5 = sx[ 1 ] - ( S4*sx[2] );\n\t\tdx6 = sx[ 0 ] - ( S5*sx[1] ); // offset increment for outermost\
+      \ loop\n\t} else { // order === 'column-major'\n\t\t// For column-major ndarrays, the first dimensions have the fastest\
+      \ changing indices...\n\t\tS0 = sh[ 0 ];\n\t\tS1 = sh[ 1 ];\n\t\tS2 = sh[ 2 ];\n\t\tS3 = sh[ 3 ];\n\t\tS4 = sh[ 4 ];\n\
+      \t\tS5 = sh[ 5 ];\n\t\tS6 = sh[ 6 ];\n\t\tdx0 = sx[ 0 ];                // offset increment for innermost loop\n\t\t\
+      dx1 = sx[ 1 ] - ( S0*sx[0] );\n\t\tdx2 = sx[ 2 ] - ( S1*sx[1] );\n\t\tdx3 = sx[ 3 ] - ( S2*sx[2] );\n\t\tdx4 = sx[ 4\
+      \ ] - ( S3*sx[3] );\n\t\tdx5 = sx[ 5 ] - ( S4*sx[4] );\n\t\tdx6 = sx[ 6 ] - ( S5*sx[5] ); // offset increment for outermost\
+      \ loop\n\t}\n\t// Set a pointer to the first indexed element:\n\tix = x.offset;\n\n\t// Cache a reference to the input\
+      \ ndarray buffer:\n\txbuf = x.data;\n\n\t// Iterate over the ndarray dimensions...\n\tfor ( i6 = 0; i6 < S6; i6++ )\
+      \ {\n\t\tfor ( i5 = 0; i5 < S5; i5++ ) {\n\t\t\tfor ( i4 = 0; i4 < S4; i4++ ) {\n\t\t\t\tfor ( i3 = 0; i3 < S3; i3++\
+      \ ) {\n\t\t\t\t\tfor ( i2 = 0; i2 < S2; i2++ ) {\n\t\t\t\t\t\tfor ( i1 = 0; i1 < S1; i1++ ) {\n\t\t\t\t\t\t\tfor ( i0\
+      \ = 0; i0 < S0; i0++ ) {\n\t\t\t\t\t\t\t\tif ( xbuf[ ix ] === value ) {\n\t\t\t\t\t\t\t\t\treturn true;\n\t\t\t\t\t\t\
+      \t\t}\n\t\t\t\t\t\t\t\tix += dx0;\n\t\t\t\t\t\t\t}\n\t\t\t\t\t\t\tix += dx1;\n\t\t\t\t\t\t}\n\t\t\t\t\t\tix += dx2;\n\
+      \t\t\t\t\t}\n\t\t\t\t\tix += dx3;\n\t\t\t\t}\n\t\t\t\tix += dx4;\n\t\t\t}\n\t\t\tix += dx5;\n\t\t}\n\t\tix += dx6;\n\
+      \t}\n\treturn false;\n}"
+    - "_generateIntegrityFile(lockfile, patterns, flags, workspaceLayout, artifacts) {\n    var _this3 = this;\n\n    return\
+      \ (0, (_asyncToGenerator2 || _load_asyncToGenerator()).default)(function* () {\n      const result = (0, (_extends2\
+      \ || _load_extends()).default)({}, INTEGRITY_FILE_DEFAULTS(), {\n        artifacts\n      });\n\n      result.topLevelPatterns\
+      \ = patterns;\n\n      // If using workspaces, we also need to add the workspaces patterns to the top-level, so that\
+      \ we'll know if a\n      // dependency is added or removed into one of them. We must take care not to read the aggregator\
+      \ (if !loc).\n      //\n      // Also note that we can't use of workspaceLayout.workspaces[].manifest._reference.patterns,\
+      \ because when\n      // doing a \"yarn check\", the _reference property hasn't yet been properly initialized.\n\n \
+      \     if (workspaceLayout) {\n        result.topLevelPatterns = result.topLevelPatterns.filter(function (p) {\n    \
+      \      // $FlowFixMe\n          return !workspaceLayout.getManifestByPattern(p);\n        });\n\n        for (var _iterator4\
+      \ = Object.keys(workspaceLayout.workspaces), _isArray4 = Array.isArray(_iterator4), _i4 = 0, _iterator4 = _isArray4\
+      \ ? _iterator4 : _iterator4[Symbol.iterator]();;) {\n          var _ref5;\n\n          if (_isArray4) {\n          \
+      \  if (_i4 >= _iterator4.length) break;\n            _ref5 = _iterator4[_i4++];\n          } else {\n            _i4\
+      \ = _iterator4.next();\n            if (_i4.done) break;\n            _ref5 = _i4.value;\n          }\n\n          const\
+      \ name = _ref5;\n\n          if (!workspaceLayout.workspaces[name].loc) {\n            continue;\n          }\n\n  \
+      \        const manifest = workspaceLayout.workspaces[name].manifest;\n\n          if (manifest) {\n            for (var\
+      \ _iterator5 = (_constants || _load_constants()).DEPENDENCY_TYPES, _isArray5 = Array.isArray(_iterator5), _i5 = 0, _iterator5\
+      \ = _isArray5 ? _iterator5 : _iterator5[Symbol.iterator]();;) {\n              var _ref6;\n\n              if (_isArray5)\
+      \ {\n                if (_i5 >= _iterator5.length) break;\n                _ref6 = _iterator5[_i5++];\n            \
+      \  } else {\n                _i5 = _iterator5.next();\n                if (_i5.done) break;\n                _ref6 =\
+      \ _i5.value;\n              }\n\n              const dependencyType = _ref6;\n\n              const dependencies = manifest[dependencyType];\n\
+      \n              if (!dependencies) {\n                continue;\n              }\n\n              for (var _iterator6\
+      \ = Object.keys(dependencies), _isArray6 = Array.isArray(_iterator6), _i6 = 0, _iterator6 = _isArray6 ? _iterator6 :\
+      \ _iterator6[Symbol.iterator]();;) {\n                var _ref7;\n\n                if (_isArray6) {\n             \
+      \     if (_i6 >= _iterator6.length) break;\n                  _ref7 = _iterator6[_i6++];\n                } else {\n\
+      \                  _i6 = _iterator6.next();\n                  if (_i6.done) break;\n                  _ref7 = _i6.value;\n\
+      \                }\n\n                const dep = _ref7;\n\n                result.topLevelPatterns.push(`${dep}@${dependencies[dep]}`);\n\
+      \              }\n            }\n          }\n        }\n      }\n\n      result.topLevelPatterns.sort((_misc || _load_misc()).sortAlpha);\n\
+      \n      if (flags.checkFiles) {\n        result.flags.push('checkFiles');\n      }\n\n      if (flags.flat) {\n    \
+      \    result.flags.push('flat');\n      }\n\n      if (_this3.config.ignoreScripts) {\n        result.flags.push('ignoreScripts');\n\
+      \      }\n      if (_this3.config.focus) {\n        result.flags.push('focus: ' + _this3.config.focusedWorkspaceName);\n\
+      \      }\n\n      if (_this3.config.production) {\n        result.flags.push('production');\n      }\n\n      if (_this3.config.plugnplayEnabled)\
+      \ {\n        result.flags.push('plugnplay');\n      }\n\n      const linkedModules = _this3.config.linkedModules;\n\n\
+      \      if (linkedModules.length) {\n        result.linkedModules = linkedModules.sort((_misc || _load_misc()).sortAlpha);\n\
+      \      }\n\n      for (var _iterator7 = Object.keys(lockfile), _isArray7 = Array.isArray(_iterator7), _i7 = 0, _iterator7\
+      \ = _isArray7 ? _iterator7 : _iterator7[Symbol.iterator]();;) {\n        var _ref8;\n\n        if (_isArray7) {\n  \
+      \        if (_i7 >= _iterator7.length) break;\n          _ref8 = _iterator7[_i7++];\n        } else {\n          _i7\
+      \ = _iterator7.next();\n          if (_i7.done) break;\n          _ref8 = _i7.value;\n        }\n\n        const key\
+      \ = _ref8;\n\n        result.lockfileEntries[key] = lockfile[key].resolved || '';\n      }\n\n      for (var _iterator8\
+      \ = _this3._getModulesFolders({ workspaceLayout }), _isArray8 = Array.isArray(_iterator8), _i8 = 0, _iterator8 = _isArray8\
+      \ ? _iterator8 : _iterator8[Symbol.iterator]();;) {\n        var _ref9;\n\n        if (_isArray8) {\n          if (_i8\
+      \ >= _iterator8.length) break;\n          _ref9 = _iterator8[_i8++];\n        } else {\n          _i8 = _iterator8.next();\n\
+      \          if (_i8.done) break;\n          _ref9 = _i8.value;\n        }\n\n        const modulesFolder = _ref9;\n\n\
+      \        if (yield (_fs || _load_fs()).exists(modulesFolder)) {\n          result.modulesFolders.push(path.relative(_this3.config.lockfileFolder,\
+      \ modulesFolder));\n        }\n      }\n\n      if (flags.checkFiles) {\n        const modulesRoot = _this3._getModulesRootFolder();\n\
+      \n        result.files = (yield _this3._getIntegrityListing({ workspaceLayout })).map(function (entry) {\n         \
+      \ return path.relative(modulesRoot, entry);\n        }).sort((_misc || _load_misc()).sortAlpha);\n      }\n\n      return\
+      \ result;\n    })();\n  }"
+    - "get isSpotted() {\n        return this.getProp(\"DT_BaseEntity\", \"m_bSpotted\");\n    }"
+  - source_sentence: The toggle content, if left empty it will render the default toggle (seen above).
+    sentences:
+    - "update = () => {\n\n\t            const timerId = window.requestAnimationFrame( update );\n\t            const elapsed\
+      \ = performance.now() - timestamp;\n\t            const progress = elapsed / duration;\n\t            const opacity\
+      \ = 1.0 - progress > 0 ? 1.0 - progress : 0;\n\t            const radius = progress * canvasWidth * 0.5 / dpr;\n\n\t\
+      \            context.clearRect( 0, 0, canvasWidth, canvasHeight );\n\t            context.beginPath();\n\t         \
+      \   context.arc( x, y, radius, 0, Math.PI * 2 );\n\t            context.fillStyle = `rgba(${color.r * 255}, ${color.g\
+      \ * 255}, ${color.b * 255}, ${opacity})`;\n\t            context.fill();\n\t            context.closePath();\n\n\t \
+      \           if ( progress >= 1.0 ) {\n\n\t                window.cancelAnimationFrame( timerId );\n\t              \
+      \  this.updateCanvasArcByProgress( 0 );\n\n\t                /**\n\t                 * Reticle ripple end event\n\t\
+      \                 * @type {object}\n\t                 * @event Reticle#reticle-ripple-end\n\t                 */\n\t\
+      \                this.dispatchEvent( { type: 'reticle-ripple-end' } );\n\n\t            }\n\n\t            material.map.needsUpdate\
+      \ = true;\n\n\t        }"
+    - "static _headersDictToHeadersArray(headersDict) {\n    const result = [];\n    for (const name of Object.keys(headersDict))\
+      \ {\n      const values = headersDict[name].split('\\n');\n      for (let i = 0; i < values.length; ++i) {\n       \
+      \ result.push({name: name, value: values[i]});\n      }\n    }\n    return result;\n  }"
+    - "function NavbarToggle() {\n\t    (0, _classCallCheck3['default'])(this, NavbarToggle);\n\t    return (0, _possibleConstructorReturn3['default'])(this,\
+      \ _React$Component.apply(this, arguments));\n\t  }"
+  pipeline_tag: sentence-similarity
+  library_name: sentence-transformers
+siblings:
+- rfilename: .gitattributes
+- rfilename: 1_Pooling/config.json
+- rfilename: README.md
+- rfilename: config.json
+- rfilename: config_sentence_transformers.json
+- rfilename: merges.txt
+- rfilename: model.safetensors
+- rfilename: modules.json
+- rfilename: sentence_bert_config.json
+- rfilename: special_tokens_map.json
+- rfilename: tokenizer.json
+- rfilename: tokenizer_config.json
+- rfilename: vocab.json
+spaces:
+- Shuu12121/CodeSearch-ModernBERT-Owl-Demo
+createdAt: '2025-09-19T04:58:07.000Z'
+safetensors:
+  parameters:
+    F32: 151948032
+  total: 151948032
+usedStorage: 607799320
+downloadsAllTime: 81
+inferenceProviderMapping: {}
+configJson:
+  architectures:
+  - ModernBertModel
+  attention_bias: false
+  attention_dropout: 0.0
+  attention_probs_dropout_prob: 0.1
+  bos_token_id: 0
+  classifier_activation: gelu
+  classifier_bias: false
+  classifier_dropout: 0.0
+  classifier_pooling: cls
+  cls_token_id: 50281
+  decoder_bias: true
+  deterministic_flash_attn: false
+  embedding_dropout: 0.0
+  eos_token_id: 1
+  global_attn_every_n_layers: 3
+  global_rope_theta: 160000.0
+  hidden_activation: gelu
+  hidden_dropout_prob: 0.1
+  hidden_size: 768
+  initializer_cutoff_factor: 2.0
+  initializer_range: 0.02
+  intermediate_size: 3072
+  local_attention: 128
+  local_attention_rope_theta: 10000
+  local_attention_window: 128
+  local_rope_theta: 10000.0
+  max_position_embeddings: 8192
+  mlp_bias: false
+  mlp_dropout: 0.0
+  model_type: modernbert
+  norm_bias: false
+  norm_eps: 1.0e-05
+  num_attention_heads: 12
+  num_hidden_layers: 12
+  pad_token_id: 3
+  repad_logits_with_grad: false
+  sep_token_id: 50282
+  sparse_pred_ignore_index: -100
+  sparse_prediction: false
+  torch_dtype: float32
+  transformers_version: 4.55.3
+  type_vocab_size: 2
+  vocab_size: 50368
+onnxFiles: {}
+safetensorsSizeMb: 607.8
+approxSizeMb: 607.8
+fetchedAt: '2026-06-08T16:42:43.000Z'
