@@ -72,9 +72,9 @@ LIBRARY           = "transformers.js"
 PAGE_SIZE         = 100      # items per list page
 DEFAULT_MAX_LIST  = 1000     # top-N per tag (override with --max-list / --all)
 REFRESH_DAYS             = 180
-GLOBAL_REQUEST_INTERVAL  = 0.25  # min seconds between ANY HTTP request across all threads (~4 req/s)
+GLOBAL_REQUEST_INTERVAL  = 0.067 # min seconds between ANY HTTP request across all threads (~15 req/s)
 LIST_PAGE_DELAY          = 0.05  # between list pages (also subject to rate limiter)
-FETCH_CONCURRENCY        = 5     # parallel model-detail workers
+FETCH_CONCURRENCY        = 15    # parallel model-detail workers
 CATALOG_REBUILD_INTERVAL = 50    # rebuild catalog.json every N successful fetches
 RETRY_BACKOFF     = [5, 15, 30, 60]
 HF_API_BASE       = "https://huggingface.co/api/models"
@@ -368,7 +368,8 @@ def build_catalog() -> list[dict]:
 def _write_catalog() -> int:
     catalog = build_catalog()
     CATALOG_FILE.write_text(
-        json.dumps(catalog, indent=2, ensure_ascii=False), encoding="utf-8"
+        "\n".join(json.dumps(entry, ensure_ascii=False) for entry in catalog),
+        encoding="utf-8",
     )
     return len(catalog)
 
@@ -390,7 +391,7 @@ def _fetch_and_save(mid: str, fetched_at: str) -> dict:
     detail = fetch_model_detail(mid, fetched_at)
     path = model_path(mid)
     path.parent.mkdir(parents=True, exist_ok=True)
-    path.write_text(json.dumps(detail, indent=2, ensure_ascii=False), encoding="utf-8")
+    path.write_text(json.dumps(detail, ensure_ascii=False), encoding="utf-8")
     _YAML_POOL.submit(json2yaml, path)
     return detail
 
@@ -548,7 +549,7 @@ def main():
     print("[catalog] Rebuilding catalog.json...")
     n = _write_catalog()
     print(f"[catalog] Converting catalog.json → catalog.yaml...")
-    catalog_data = json.loads(CATALOG_FILE.read_text(encoding="utf-8"))
+    catalog_data = [json.loads(line) for line in CATALOG_FILE.read_text(encoding="utf-8").splitlines() if line.strip()]
     Path("catalog.yaml").write_text(
         yaml.dump(catalog_data, default_flow_style=False, allow_unicode=True,
                   sort_keys=False, width=120),

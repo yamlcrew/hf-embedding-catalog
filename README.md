@@ -2,7 +2,7 @@
 
 Automatycznie odświeżany katalog modeli embeddingowych z Hugging Face Hub, przeznaczonych do lokalnego wnioskowania przez **transformers.js**.
 
-Dane są aktualizowane codziennie przez GitHub Actions i commitowane bezpośrednio do repozytorium — bez serwera, bez bazy danych. Wystarczy sklonować repo i czytać pliki JSON.
+Dane są aktualizowane codziennie przez GitHub Actions i commitowane bezpośrednio do repozytorium — bez serwera, bez bazy danych. Wystarczy sklonować repo i czytać pliki JSON/YAML.
 
 ---
 
@@ -11,94 +11,127 @@ Dane są aktualizowane codziennie przez GitHub Actions i commitowane bezpośredn
 ```
 hf-embedding-catalog/
 ├── fetch_catalog.py          # skrypt pobierający dane z HF API
-├── requirements.txt          # tylko: requests>=2.31.0
-├── catalog.yaml              # indeks wszystkich modeli (posortowany wg downloads)
+├── requirements.txt          # requests>=2.31.0, pyyaml>=6.0
+├── catalog.json              # indeks wszystkich modeli (JSON, posortowany wg downloads)
+├── catalog.yaml              # indeks wszystkich modeli (YAML, to samo co catalog.json)
 ├── data/
 │   └── <org>/
 │       └── <model>/
-│           └── model.yaml    # pełne metadane jednego modelu
+│           ├── model.json    # pełne metadane jednego modelu (primary)
+│           └── model.yaml    # to samo co model.json, format YAML
 └── .github/
     └── workflows/
         └── update-catalog.yml
 ```
 
-### `catalog.yaml`
+### `catalog.json` / `catalog.yaml`
 
 Płaski indeks wszystkich pobranych modeli, posortowany malejąco wg `downloads`. Zawiera skrócony zestaw pól — wystarczający do przeglądania i filtrowania bez ładowania osobnych plików.
 
-### `data/<org>/<model>/model.yaml`
+| Pole | Opis |
+|---|---|
+| `id` | identyfikator modelu (`org/name`) |
+| `pipeline_tag` | `sentence-similarity` lub `feature-extraction` |
+| `library_name` | biblioteka: `sentence-transformers`, `transformers` |
+| `author` | organizacja lub użytkownik |
+| `model_type` | rodzina architektury: `bert`, `xlm-roberta` |
+| `architectures` | klasa PyTorch: `BertModel`, `XLMRobertaModel` |
+| `hidden_size` | **wymiar embeddingu** → rozmiar kolumny `vector(N)` |
+| `max_position_embeddings` | maksymalna długość sekwencji (tokeny) |
+| `num_hidden_layers` | liczba bloków Transformer |
+| `torch_dtype` | typ wag: `float32`, `float16`, `bfloat16` |
+| `param_count` | łączna liczba parametrów |
+| `model_size_mb` | rozmiar wag w MB (safetensors lub szacunek z parametrów) |
+| `onnx_size_mb` | rozmiar głównego pliku `onnx/model.onnx` w MB |
+| `downloads` | pobrania z ostatnich 30 dni |
+| `likes` | polubienia |
+| `trending_score` | aktualny wynik trending |
+| `has_onnx` | czy repo zawiera pliki `.onnx` |
+| `has_safetensors` | czy repo zawiera pliki `.safetensors` |
+| `lang` | kody językowe ISO 639-1, przecinkiem (np. `en`, `en,de,fr`) |
+| `multilingual` | `true` gdy model oznaczony jako wielojęzyczny |
+| `gated` | wymaga akceptacji warunków przed pobraniem |
+| `created_at` | data pierwszej publikacji |
+| `last_modified` | data ostatniej zmiany w repo |
+| `fetched_at` | czas pobrania metadanych |
 
-Pełne metadane każdego modelu. Przykład (`sentence-transformers/all-MiniLM-L6-v2`):
+### `data/<org>/<model>/model.json`
 
-```json
-{
-  "id":               "sentence-transformers/all-MiniLM-L6-v2",
-  "pipelineTag":      "sentence-similarity",
-  "libraryName":      "sentence-transformers",
-  "author":           "sentence-transformers",
-  "createdAt":        "2022-03-02T23:29:05.000Z",
-  "lastModified":     "2026-06-01T06:29:13.000Z",
-  "sha":              "abc123...",
-  "downloads":        253044030,
-  "likes":            4909,
-  "trendingScore":    12.4,
-  "gated":            false,
-  "private":          false,
-  "disabled":         false,
-  "tags":             ["sentence-transformers", "bert", "onnx", "license:apache-2.0", "..."],
-  "onnxFiles":        ["onnx/model.onnx", "onnx/model_quantized.onnx"],
-  "hasSafetensors":   true,
-  "paramCount":       22713728,
-  "paramsByDtype":    { "F32": 22713728 },
-  "modelType":        "bert",
-  "architectures":    "BertModel",
-  "hiddenSize":       384,
-  "intermediateSize": 1536,
-  "maxSeqLen":        512,
-  "numLayers":        6,
-  "numHeads":         12,
-  "numKvHeads":       0,
-  "vocabSize":        30522,
-  "torchDtype":       "float32",
-  "hiddenAct":        "gelu",
-  "fetchedAt":        "2026-06-07T21:47:23.000Z"
-}
+Pełne surowe metadane z HF API, wzbogacone o kilka pól obliczanych lokalnie. Przykład (`sentence-transformers/all-MiniLM-L6-v2`):
+
+```yaml
+id: sentence-transformers/all-MiniLM-L6-v2
+pipeline_tag: sentence-similarity
+library_name: sentence-transformers
+author: sentence-transformers
+downloads: 253044030
+likes: 4909
+trendingScore: 12.4
+gated: false
+private: false
+disabled: false
+createdAt: '2022-03-02T23:29:05.000Z'
+lastModified: '2026-06-01T06:29:13.000Z'
+sha: abc123...
+tags:
+  - sentence-transformers
+  - bert
+  - onnx
+  - safetensors
+  - license:apache-2.0
+siblings:
+  - rfilename: config.json
+  - rfilename: model.safetensors
+  - rfilename: onnx/model.onnx
+  - rfilename: tokenizer.json
+safetensors:
+  parameters:
+    F32: 22713216
+    I64: 512
+  total: 22713728
+configJson:                        # zawartość config.json z repo
+  model_type: bert
+  architectures: [BertModel]
+  hidden_size: 384
+  intermediate_size: 1536
+  max_position_embeddings: 512
+  num_hidden_layers: 6
+  num_attention_heads: 12
+  vocab_size: 30522
+  hidden_act: gelu
+  torch_dtype: float32
+onnxFiles:                         # obliczane lokalnie: {ścieżka → rozmiar MB}
+  onnx/model.onnx: 90.4
+  onnx/model_O4.onnx: 45.2
+  onnx/model_qint8_avx512.onnx: 23.0
+safetensorsSizeMb: 90.9            # obliczane lokalnie: suma plików .safetensors
+approxSizeMb: 90.9                 # obliczane lokalnie: params × bytes/dtype
+fetchedAt: '2026-06-08T00:19:21.000Z'
 ```
 
-#### Opis pól
+#### Pola obliczane lokalnie (nie z HF API)
+
+| Pole | Opis |
+|---|---|
+| `onnxFiles` | dict `{ścieżka → rozmiar_MB}` dla każdego pliku `.onnx` w repo |
+| `safetensorsSizeMb` | suma rozmiarów wszystkich plików `.safetensors` (decimal MB) |
+| `approxSizeMb` | szacunek: parametry × bytes/dtype / 1 000 000 |
+| `fetchedAt` | ISO timestamp pobrania |
+
+#### Pola z HF API (kluczowe)
 
 | Pole | Źródło | Opis |
 |---|---|---|
-| `id` | HF API | identyfikator modelu (`org/name`) |
-| `pipelineTag` | HF API | `sentence-similarity` lub `feature-extraction` |
-| `libraryName` | HF API | biblioteka: `sentence-transformers`, `transformers` |
-| `author` | HF API | organizacja lub użytkownik |
-| `createdAt` | HF API | data pierwszej publikacji |
-| `lastModified` | HF API | data ostatniej zmiany w repo |
-| `sha` | HF API | hash commita (pinning wersji) |
-| `downloads` | HF API | pobrania z ostatnich 30 dni |
-| `likes` | HF API | polubienia |
-| `trendingScore` | HF API | aktualny wynik trending |
-| `gated` | HF API | wymaga akceptacji warunków przed pobraniem |
-| `private` | HF API | prywatne repo (widoczne tylko z tokenem) |
-| `disabled` | HF API | wyłączony przez HF |
-| `tags` | HF API | wszystkie tagi, w tym `license:*`, `dataset:*`, `arxiv:*` |
-| `onnxFiles` | `siblings` | lista plików `.onnx` w repo (pusta = brak ONNX) |
-| `hasSafetensors` | `siblings` | czy repo zawiera pliki `.safetensors` |
-| `paramCount` | `expand=safetensors` | liczba parametrów (łącznie) |
-| `paramsByDtype` | `expand=safetensors` | rozkład parametrów per dtype, np. `{"F32": 22M}` |
-| `modelType` | `config.json` | rodzina architektury: `bert`, `xlm-roberta`, `distilbert` |
-| `architectures` | `config.json` | klasa PyTorch: `BertModel`, `XLMRobertaModel` |
-| `hiddenSize` | `config.json` | **wymiar embeddingu** → rozmiar kolumny `vector(N)` |
-| `intermediateSize` | `config.json` | szerokość warstwy FFN |
-| `maxSeqLen` | `config.json` | maksymalna długość sekwencji (tokeny) |
-| `numLayers` | `config.json` | liczba bloków Transformer |
-| `numHeads` | `config.json` | liczba głowic attention |
-| `numKvHeads` | `config.json` | głowice KV (>0 = GQA/MQA) |
-| `vocabSize` | `config.json` | rozmiar słownika |
-| `torchDtype` | `config.json` | typ wag: `float32`, `float16`, `bfloat16` |
-| `hiddenAct` | `config.json` | funkcja aktywacji: `gelu`, `silu` |
-| `fetchedAt` | lokalnie | czas pobrania metadanych |
+| `id` | `/api/models` | identyfikator modelu (`org/name`) |
+| `pipeline_tag` | `/api/models` | `sentence-similarity` lub `feature-extraction` |
+| `library_name` | `/api/models` | biblioteka: `sentence-transformers`, `transformers` |
+| `safetensors.total` | `expand=safetensors` | łączna liczba parametrów |
+| `safetensors.parameters` | `expand=safetensors` | rozkład parametrów per dtype, np. `{F32: 22M}` |
+| `configJson.*` | `config.json` z repo | `hidden_size`, `max_position_embeddings`, `model_type` itp. |
+| `cardData` | `expand=cardData` | sparsowany YAML z model card (języki, licencja, datasety) |
+| `siblings` | `?full=true` | lista plików w repo |
+| `gated` | `/api/models` | wymaga akceptacji warunków przed pobraniem |
+| `downloadsAllTime` | `expand=downloadsAllTime` | łączne pobrania wszystkich czasów |
 
 ---
 
@@ -137,7 +170,7 @@ python fetch_catalog.py --limit 50
 
 ### Odświeżanie
 
-Model jest (ponownie) pobierany gdy `model.yaml` nie istnieje **lub** pole `fetchedAt` jest starsze niż 60 dni (`REFRESH_DAYS`). Zmień stałą w skrypcie, żeby to dostosować.
+Model jest (ponownie) pobierany gdy `model.json` nie istnieje **lub** pole `fetchedAt` jest starsze niż 180 dni (`REFRESH_DAYS`). Zmień stałą w skrypcie, żeby to dostosować.
 
 ---
 
@@ -145,7 +178,9 @@ Model jest (ponownie) pobierany gdy `model.yaml` nie istnieje **lub** pole `fetc
 
 Workflow [`.github/workflows/update-catalog.yml`](.github/workflows/update-catalog.yml) uruchamia się **codziennie o 03:00 UTC** i commituje zmiany bezpośrednio do gałęzi głównej.
 
-Można go uruchomić ręcznie z poziomu zakładki **Actions** i opcjonalnie podać `limit` (maksymalna liczba modeli do pobrania w tym uruchomieniu).
+Można go uruchomić ręcznie z poziomu zakładki **Actions** z opcjonalnymi parametrami:
+- `max_list` — maksymalna liczba modeli do wylistowania per pipeline_tag (0 = bez limitu)
+- `limit` — maksymalna liczba stale modeli do pobrania w tym uruchomieniu (0 = wszystkie)
 
 Wymagane: sekret repozytorium `HF_TOKEN` z tokenem Hugging Face.
 
@@ -158,7 +193,11 @@ Skrypt filtruje modele po:
 - **library:** `transformers.js` — modele przygotowane do lokalnego wnioskowania w przeglądarce / Node.js
 - **pipeline_tag:** `sentence-similarity` i `feature-extraction` — dwa tagi obejmujące modele embeddingowe na HF Hub
 
-Modele są sortowane malejąco wg liczby pobrań.
+Modele są sortowane malejąco wg liczby pobrań. Każdy model jest pobierany w 4 zapytaniach HTTP:
+1. `GET /api/models/<id>?full=true` — kompletny rekord bazowy
+2. `GET /api/models/<id>?expand=safetensors&expand=cardData&...` — dodatkowe pola
+3. `GET /api/models/<id>/tree/main?recursive=true` — drzewo plików z prawdziwymi rozmiarami
+4. `GET <id>/resolve/main/config.json` — architektura modelu
 
 ---
 
@@ -167,40 +206,43 @@ Modele są sortowane malejąco wg liczby pobrań.
 ### Znalezienie modeli ONNX z wymiarem 384
 
 ```python
-import yaml
+import json
 
-with open("catalog.yaml") as f:
-    catalog = yaml.safe_load(f)
+with open("catalog.json") as f:
+    catalog = json.load(f)
 
 results = [
     m for m in catalog
     if m["hidden_size"] == 384 and m["has_onnx"]
 ]
 for m in results[:5]:
-    print(m["id"], m["downloads"])
+    print(m["id"], m["downloads"], m["onnx_size_mb"], "MB")
 ```
 
 ### Odczyt pełnych metadanych jednego modelu
 
 ```python
-import yaml
+import json
 from pathlib import Path
 
-path = Path("data/sentence-transformers/all-MiniLM-L6-v2/model.yaml")
-model = yaml.safe_load(path.read_text())
+path = Path("data/sentence-transformers/all-MiniLM-L6-v2/model.json")
+model = json.loads(path.read_text())
 
 cfg = model.get("configJson") or {}
 print(f"Wymiar:     {cfg.get('hidden_size')}")
 print(f"Max tokeny: {cfg.get('max_position_embeddings')}")
 print(f"Parametry:  {(model.get('safetensors') or {}).get('total', 0):,}")
 print(f"Rozmiar:    {model['approxSizeMb']} MB")
-print(f"Pliki ONNX: {model['onnxFiles']}")
+
+# onnxFiles to dict {ścieżka: rozmiar_MB}
+for path_onnx, size_mb in model['onnxFiles'].items():
+    print(f"  ONNX: {path_onnx} ({size_mb} MB)")
 ```
 
 ### Kolumna pgvector
 
 ```sql
--- hiddenSize modelu = N w vector(N)
+-- hidden_size modelu = N w vector(N)
 CREATE TABLE documents (
   id        bigserial PRIMARY KEY,
   content   text,
