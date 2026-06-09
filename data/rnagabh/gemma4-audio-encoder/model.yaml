@@ -1,0 +1,168 @@
+_id: 69d00e81948cba7e3430d8c8
+id: rnagabh/gemma4-audio-encoder
+private: false
+pipeline_tag: feature-extraction
+library_name: transformers
+tags:
+- transformers
+- safetensors
+- gemma4_audio
+- feature-extraction
+- audio
+- speech
+- conformer
+- gemma4
+- usm
+- google
+- en
+- multilingual
+- arxiv:2303.01037
+- base_model:google/gemma-4-E2B-it
+- base_model:finetune:google/gemma-4-E2B-it
+- license:apache-2.0
+- model-index
+- endpoints_compatible
+- region:us
+downloads: 58
+likes: 5
+modelId: rnagabh/gemma4-audio-encoder
+author: rnagabh
+sha: e3fb768d7c9e7aff20429cafa5739f58d29d985f
+lastModified: '2026-04-03T19:45:45.000Z'
+gated: false
+disabled: false
+model-index:
+- name: gemma4-audio-encoder
+  results:
+  - task:
+      type: audio-classification
+      name: Speech Commands (35-class)
+    dataset:
+      name: Google Speech Commands v0.02
+      type: google/speech_commands
+      split: validation
+    metrics:
+    - type: accuracy
+      value: 72
+      name: Linear Probe Accuracy
+      verified: false
+config:
+  architectures:
+  - Gemma4AudioModel
+  model_type: gemma4_audio
+cardData:
+  language:
+  - en
+  - multilingual
+  license: apache-2.0
+  library_name: transformers
+  tags:
+  - feature-extraction
+  - audio
+  - speech
+  - conformer
+  - gemma4
+  - usm
+  - google
+  - safetensors
+  pipeline_tag: feature-extraction
+  base_model: google/gemma-4-E2B-it
+  model-index:
+  - name: gemma4-audio-encoder
+    results:
+    - task:
+        type: audio-classification
+        name: Speech Commands (35-class)
+      dataset:
+        name: Google Speech Commands v0.02
+        type: google/speech_commands
+        split: validation
+      metrics:
+      - type: accuracy
+        value: 72
+        name: Linear Probe Accuracy
+        verified: false
+transformersInfo:
+  auto_model: AutoModel
+  pipeline_tag: feature-extraction
+  processor: AutoTokenizer
+siblings:
+- rfilename: .gitattributes
+- rfilename: README.md
+- rfilename: config.json
+- rfilename: embed_audio.safetensors
+- rfilename: gemma4_speaker_similarity.png
+- rfilename: gemma4_tsne_speakers.png
+- rfilename: model.safetensors
+- rfilename: preprocessor_config.json
+spaces: []
+createdAt: '2026-04-03T19:01:21.000Z'
+safetensors:
+  parameters:
+    BF16: 304824608
+  total: 304824608
+usedStorage: 1224377337
+downloadsAllTime: 400
+inferenceProviderMapping: {}
+configJson:
+  transformers_version: 5.5.0
+  architectures:
+  - Gemma4AudioModel
+  output_hidden_states: false
+  return_dict: true
+  dtype: bfloat16
+  chunk_size_feed_forward: 0
+  is_encoder_decoder: false
+  id2label:
+    '0': LABEL_0
+    '1': LABEL_1
+  label2id:
+    LABEL_0: 0
+    LABEL_1: 1
+  problem_type: null
+  hidden_size: 1024
+  num_hidden_layers: 12
+  num_attention_heads: 8
+  hidden_act: silu
+  subsampling_conv_channels:
+  - 128
+  - 32
+  conv_kernel_size: 5
+  residual_weight: 0.5
+  attention_chunk_size: 12
+  attention_context_left: 13
+  attention_context_right: 0
+  attention_logit_cap: 50.0
+  attention_invalid_logits_value: -1000000000.0
+  use_clipped_linears: true
+  rms_norm_eps: 1.0e-06
+  gradient_clipping: 10000000000.0
+  output_proj_dims: 1536
+  initializer_range: 0.02
+  _name_or_path: ''
+  model_type: gemma4_audio
+  output_attentions: false
+  torch_dtype: bfloat16
+  _verified_total_params: 304824608
+  _verified_hidden_dim: 1024
+  _verified_output_dim: 1536
+  _verified_num_layers: 12
+  _verified_num_heads: 8
+  _verified_head_dim: 128
+  _verified_ffn_intermediate: 4096
+  _verified_conv_kernel: 5
+  _verified_subsampling_channels:
+  - 128
+  - 32
+  _verified_subsampling_norm: LayerNorm
+  _verified_subsampling_activation: ReLU
+  _verified_conformer_activation: SiLU
+  _verified_conformer_norm: RMSNorm
+  _verified_conformer_norm_eps: 1.0e-06
+  _verified_temporal_downsample: 4
+  _source_model: google/gemma-4-E2B-it
+  _extraction_note: Audio tower weights are identical between E2B and E4B variants
+onnxFiles: {}
+safetensorsSizeMb: 614.5
+approxSizeMb: 609.6
+fetchedAt: '2026-06-09T22:07:05.000Z'

@@ -1,0 +1,102 @@
+_id: 6a155123456f934c755a2f9a
+id: YunzeLiu/OmniRetriever-7B
+private: false
+pipeline_tag: feature-extraction
+library_name: peft
+tags:
+- peft
+- safetensors
+- audio-video-text
+- multimodal-retrieval
+- cross-modal-retrieval
+- unified-multimodal-encoder
+- fusion-as-teacher-distillation
+- tuple-infonce
+- multimodal-rag
+- lora
+- feature-extraction
+- en
+- arxiv:2605.26641
+- arxiv:2310.06816
+- license:apache-2.0
+- region:us
+downloads: 45
+likes: 1
+modelId: YunzeLiu/OmniRetriever-7B
+author: YunzeLiu
+sha: 99328f1c5ce88695fa7070aac5b4a817aab60698
+lastModified: '2026-05-27T06:22:28.000Z'
+gated: false
+disabled: false
+model-index: null
+config:
+  tokenizer_config:
+    bos_token: null
+    chat_template: '{% set audio_count = namespace(value=0) %}{% set image_count = namespace(value=0) %}{% set video_count
+      = namespace(value=0) %}{% for message in messages %}{% if loop.first and message[''role''] != ''system'' %}<|im_start|>system
+
+      You are a helpful assistant.<|im_end|>
+
+      {% endif %}<|im_start|>{{ message[''role''] }}
+
+      {% if message[''content''] is string %}{{ message[''content''] }}<|im_end|>
+
+      {% else %}{% for content in message[''content''] %}{% if content[''type''] == ''image'' or ''image'' in content or ''image_url''
+      in content %}{% set image_count.value = image_count.value + 1 %}{% if add_vision_id %}Picture {{ image_count.value }}:
+      {% endif %}<|vision_bos|><|IMAGE|><|vision_eos|>{% elif content[''type''] == ''audio'' or ''audio'' in content or ''audio_url''
+      in content %}{% set audio_count.value = audio_count.value + 1 %}{% if add_audio_id %}Audio {{ audio_count.value }}:
+      {% endif %}<|audio_bos|><|AUDIO|><|audio_eos|>{% elif content[''type''] == ''video'' or ''video'' in content %}{% set
+      video_count.value = video_count.value + 1 %}{% if add_vision_id %}Video {{ video_count.value }}: {% endif %}<|vision_bos|><|VIDEO|><|vision_eos|>{%
+      elif ''text'' in content %}{{ content[''text''] }}{% endif %}{% endfor %}<|im_end|>
+
+      {% endif %}{% endfor %}{% if add_generation_prompt %}<|im_start|>assistant
+
+      {% endif %}'
+    eos_token: <|im_end|>
+    pad_token: <|endoftext|>
+    unk_token: null
+  peft:
+    base_model_name_or_path: WAVE-7B
+    task_type: CAUSAL_LM
+cardData:
+  library_name: peft
+  license: apache-2.0
+  pipeline_tag: feature-extraction
+  language:
+  - en
+  tags:
+  - audio-video-text
+  - multimodal-retrieval
+  - cross-modal-retrieval
+  - unified-multimodal-encoder
+  - fusion-as-teacher-distillation
+  - tuple-infonce
+  - multimodal-rag
+  - lora
+  - peft
+  base_model: WAVE-7B
+siblings:
+- rfilename: .gitattributes
+- rfilename: README.md
+- rfilename: SHA256SUMS
+- rfilename: adapter_config.json
+- rfilename: adapter_model.safetensors
+- rfilename: added_tokens.json
+- rfilename: assets/bench_samples.jpg
+- rfilename: assets/method_overview.png
+- rfilename: assets/teaser.png
+- rfilename: merges.txt
+- rfilename: special_tokens_map.json
+- rfilename: tokenizer.json
+- rfilename: tokenizer_config.json
+- rfilename: vocab.json
+spaces: []
+createdAt: '2026-05-26T07:52:03.000Z'
+usedStorage: 802368164
+downloadsAllTime: 45
+inferenceProviderMapping: {}
+configJson: null
+onnxFiles: {}
+safetensorsSizeMb: 790.0
+approxSizeMb: 0.0
+fetchedAt: '2026-06-09T22:07:05.000Z'

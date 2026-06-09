@@ -1,0 +1,189 @@
+_id: 69def1de59ff8bc7249076ec
+id: AethronPhantom/NexaMass-V3-Struct
+private: false
+pipeline_tag: feature-extraction
+library_name: pytorch
+tags:
+- pytorch
+- nexamass
+- mass-spectrometry
+- msms
+- metabolomics
+- representation-learning
+- self-supervised-learning
+- molecular-fingerprints
+- rdkit
+- morgan-fingerprints
+- retrieval
+- chemistry
+- feature-extraction
+- dataset:roman-bushuiev/GeMS
+- dataset:roman-bushuiev/MassSpecGym
+- doi:10.57967/hf/8496
+- license:apache-2.0
+- model-index
+- region:us
+downloads: 63
+likes: 2
+modelId: AethronPhantom/NexaMass-V3-Struct
+author: AethronPhantom
+sha: 6443bc67723f210c531146eb5a0a816b14111437
+lastModified: '2026-05-20T19:23:51.000Z'
+gated: false
+disabled: false
+model-index:
+- name: NexaMass V3 Encoder (Final_V3)
+  results:
+  - task:
+      type: molecule-retrieval
+    dataset:
+      name: MassSpecGym
+      type: roman-bushuiev/MassSpecGym
+    metrics:
+    - name: Hit@20
+      type: hit@20
+      value: 0.3505
+      verified: false
+    source:
+      name: NexaMass External Benchmark Adapter (Frozen V3)
+      url: https://huggingface.co/AethronPhantom/NexaMass-V3-Struct/blob/main/evaluation/massspecgym/run_massspecgym_retrieval_hf.py
+config:
+  architectures:
+  - NexaMassSpectralEncoder
+  model_type: nexamass
+cardData:
+  model-index:
+  - name: NexaMass V3 Encoder (Final_V3)
+    results:
+    - task:
+        type: molecule-retrieval
+      dataset:
+        name: MassSpecGym
+        type: roman-bushuiev/MassSpecGym
+      metrics:
+      - name: Hit@20
+        type: hit@20
+        value: 0.3505
+        verified: false
+      source:
+        name: NexaMass External Benchmark Adapter (Frozen V3)
+        url: https://huggingface.co/AethronPhantom/NexaMass-V3-Struct/blob/main/evaluation/massspecgym/run_massspecgym_retrieval_hf.py
+  license: apache-2.0
+  library_name: pytorch
+  pipeline_tag: feature-extraction
+  tags:
+  - mass-spectrometry
+  - msms
+  - metabolomics
+  - representation-learning
+  - self-supervised-learning
+  - molecular-fingerprints
+  - rdkit
+  - morgan-fingerprints
+  - retrieval
+  - chemistry
+  datasets:
+  - roman-bushuiev/GeMS
+  - roman-bushuiev/MassSpecGym
+  metrics:
+  - hit@k
+  - cosine_similarity
+  - binary_cross_entropy
+  - tanimoto_similarity
+siblings:
+- rfilename: .gitattributes
+- rfilename: Nexa_Mass Technical write up.pdf
+- rfilename: README.md
+- rfilename: config.json
+- rfilename: configs/foundation_config.json
+- rfilename: configs/runtime_requirements.json
+- rfilename: configs/structure_alignment_config.json
+- rfilename: evaluation/massspecgym/README.md
+- rfilename: evaluation/massspecgym/figures/nexamass_massspecgym_hit20_position.png
+- rfilename: evaluation/massspecgym/results/massspecgym_hitk_summary.json
+- rfilename: evaluation/massspecgym/run_massspecgym_retrieval_hf.py
+- rfilename: model_index.json
+- rfilename: runtime/README.md
+- rfilename: runtime/nexamass_encoder.py
+- rfilename: weights/Final_V3-model_state.safetensors
+- rfilename: weights/NexaMass-V3-Struct-model_state.safetensors
+spaces: []
+createdAt: '2026-04-15T02:03:10.000Z'
+usedStorage: 229087648
+downloadsAllTime: 134
+inferenceProviderMapping: {}
+configJson:
+  architecture_config:
+    collision_max: 200.0
+    dropout: 0.1
+    fingerprint_dim: 2048
+    heads: 8
+    layers: 6
+    max_peaks: 256
+    metadata_scale: 0.02
+    model_dim: 384
+    mz_max: 2000.0
+    projection_dim: 192
+    retrieval_mlp_hidden_dim: 512
+    target_projection_dim: 256
+  architectures:
+  - NexaMassSpectralEncoder
+  evaluation_adapters:
+    massspecgym:
+      benchmark: MassSpecGym molecule retrieval
+      claim_boundary: top-k transfer signal; ranking and confidence remain open decision-layer problems
+      path: evaluation/massspecgym/run_massspecgym_retrieval_hf.py
+      reference_result: test Hit@20 0.3505 with frozen V3 projected-dot scorer under Hit@k-only evaluation
+  foundation_checkpoint: weights/Final_V3-model_state.safetensors
+  foundation_checkpoint_format: safetensors
+  full_training_checkpoints:
+    location: Wasabi object storage
+    note: Optimizer-bearing full training checkpoints are intentionally not part of the public Hugging Face payload; the public
+      release contains model-state weights only.
+  input_contract:
+    feature_width: 8
+    mask: boolean valid-peak mask, shape [batch, max_peaks]
+    max_peaks: 256
+    metadata_embeddings:
+    - adduct_id
+    - instrument_id
+    per_peak_features:
+    - mz
+    - intensity
+    - mz_to_precursor
+    - peak_rank
+    - precursor_mz
+    - charge
+    - collision_energy
+    - peak_count
+  library_name: pytorch
+  model_type: nexamass
+  not_supported:
+  - unrestricted de novo molecule generation
+  - calibrated top-1 molecular identification without external validation
+  object_storage_pytorch_weights:
+    files:
+    - weights/Final_V3-model_state.pt
+    - weights/NexaMass-V3-Struct-model_state.pt
+    location: Wasabi object storage
+    note: PyTorch .pt model-state files are retained in object storage. The public Hugging Face payload is safetensors-only.
+    path: wasabi:nexa-ms/models/dreams_pretrain_v1/checkpoints/NexaMass-V3-Struct/hf_release/weights/
+  outputs:
+    morgan_fingerprint_logits: 2048
+    retrieval_target_dim: 256
+    ssl_projection_dim: 192
+    structure_query_dim: 256
+  parameter_count: 14106690
+  primary_checkpoint: weights/NexaMass-V3-Struct-model_state.safetensors
+  primary_checkpoint_format: safetensors
+  public_weight_files:
+  - weights/NexaMass-V3-Struct-model_state.safetensors
+  - weights/Final_V3-model_state.safetensors
+  public_weight_format: safetensors
+  recommended_inference: Use the structure-aligned model-state checkpoint for spectrum embeddings and Morgan fingerprint probability
+    vectors, then compare against a candidate molecular fingerprint bank.
+  task: MS/MS spectral representation learning and RDKit Morgan fingerprint alignment
+onnxFiles: {}
+safetensorsSizeMb: 112.9
+approxSizeMb: 0.0
+fetchedAt: '2026-06-09T22:07:05.000Z'

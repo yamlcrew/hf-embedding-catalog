@@ -1,0 +1,182 @@
+_id: 6a18587536b9e215ec61a634
+id: zhaolabutmb/LiverDCP
+private: false
+pipeline_tag: feature-extraction
+library_name: pytorch
+tags:
+- pytorch
+- liverdcp
+- biology
+- bioinformatics
+- single-cell
+- protein-protein-interaction
+- graph-neural-network
+- liver
+- esm2
+- feature-extraction
+- en
+- license:cc-by-4.0
+- region:us
+downloads: 40
+likes: 0
+modelId: zhaolabutmb/LiverDCP
+author: zhaolabutmb
+sha: 9bcb544403d5ee66c1f34f07e37b25a02d1eb987
+lastModified: '2026-05-28T16:38:14.000Z'
+gated: false
+disabled: false
+model-index: null
+config:
+  model_type: liverdcp
+  architectures:
+  - LiverDCP
+cardData:
+  license: cc-by-4.0
+  library_name: pytorch
+  pipeline_tag: feature-extraction
+  tags:
+  - biology
+  - bioinformatics
+  - single-cell
+  - protein-protein-interaction
+  - graph-neural-network
+  - liver
+  - esm2
+  language:
+  - en
+siblings:
+- rfilename: .gitattributes
+- rfilename: LiverDCP__labels_dict.txt
+- rfilename: LiverDCP__mg_embed.pth
+- rfilename: LiverDCP__mg_labels_dict.txt
+- rfilename: LiverDCP__protein_embed.pth
+- rfilename: LiverDCP__protein_labels_dict.txt
+- rfilename: LiverDCP_best_model.pt
+- rfilename: README.md
+- rfilename: config.json
+spaces: []
+createdAt: '2026-05-28T15:00:05.000Z'
+usedStorage: 3452385824
+downloadsAllTime: 40
+inferenceProviderMapping: {}
+configJson:
+  _comment: LiverDCP pre-trained model configuration. Captures the architecture and training hyperparameters used to produce
+    LiverDCP_best_model.pt. This file is uploaded alongside the weights to the Hugging Face Hub.
+  model_type: liverdcp
+  architectures:
+  - LiverDCP
+  model_version: v1.0
+  framework: pytorch
+  architecture:
+    feat_mat: 1024
+    hidden: 256
+    output: 64
+    n_heads: 4
+    pc_att_channels: 8
+    dropout: 0.05
+    shared_ppi_gat: true
+    context_projection: true
+    norm: null
+  esm_adapter:
+    esm_side_adapter: true
+    esm_side_adapter_rank: 48
+    esm_side_adapter_scale: 1.5
+    esm_learnable_scale: true
+    esm_decoder_adapter_arch: lora
+    esm_dim: 480
+    only_low_rank_u_v: true
+    esm_center: false
+    esm_standardize: false
+  training:
+    epochs: 100
+    batch_size: 156
+    loader: neighbor
+    num_neighbors:
+    - 10
+    - 5
+    neg_sample_ratio: 1.0
+    ctx_sample_size: 50
+    lr: 0.0005
+    wd: 0.0005
+    theta: 0.9
+    center_loss_lambda: 0.05
+    inter_class_weight: 0.1
+    inter_class_margin: 1.5
+    center_loss_warmup: 3
+    center_loss_ramp_epochs: 8
+    warmup_epochs: 5
+    scheduler: warmup_cosine
+    use_amp: true
+    seed: 120
+    early_stopping_metric: val_roc
+    early_stopping_patience: 40
+    freeze_encoder_quality_threshold: 0.7
+    quality_checkpoint: true
+  data:
+    num_ppi_contexts: 286
+    num_diagnoses: 11
+    num_celltypes: 26
+    diagnoses:
+    - iCCA
+    - Healthy
+    - MASH
+    - Cirrhosis
+    - HCC
+    - ALD
+    - Fetal
+    - PVTT
+    - MLN
+    - PSC
+    - PBC
+    celltypes:
+    - B_cell
+    - Basophil
+    - CD4_CM
+    - CD4_EM
+    - CD4_Naive
+    - CD8_CM
+    - CD8_EM
+    - CD8_Naive
+    - CD8_TEMRA
+    - Cholangiocyte
+    - Circulating_NK_NKT
+    - Endothelium
+    - Hepatocyte
+    - MAIT
+    - Macrophage
+    - Mig.cDC
+    - Mono+mono_derived_cell
+    - Neutrophil
+    - Plasma
+    - Resident_NK
+    - Stellate_cell
+    - Treg
+    - cDC1
+    - cDC2
+    - gdT
+    - pDC
+    esm_file: esm2_embeddings_480d_fp32_truncated.pt
+    esm_dim: 480
+  zenodo:
+    doi: 10.5281/zenodo.20431227
+    concept_doi: 10.5281/zenodo.20431226
+    record_url: https://zenodo.org/records/20431227
+    includes:
+    - DCP_graph_data/  (PPI edgelists, metagraph, proportions, PrePPI matrix)
+    - esm/esm2_embeddings_480d_fp32_truncated.pt
+    - esm/geneID_to_embedding_index.json
+    - esm/protein_index_mapping.json
+  github:
+    repo: https://github.com/zhaolabutmb/LiverDCP
+    branch: main
+    commit: a5ae1446af83d522743f12a37f79075b77b7ad22
+  training_command: python -u DCP_model/train.py --wandb_mode online --shared_ppi_gat --context_projection --feat_mat 1024
+    --hidden 256 --output 64 --n_heads 4 --pc_att_channels 8 --batch_size 156 --loader neighbor --num_neighbors 10,5 --neg_sample_ratio
+    1 --ctx_sample_size 50 --epochs 100 --theta 0.9 --lr 0.0005 --dropout 0.05 --center_loss_lambda 0.05 --inter_class_weight
+    0.1 --inter_class_margin 1.5 --center_loss_warmup 3 --center_loss_ramp_epochs 8 --warmup_epochs 5 --use_amp --early_stopping_metric
+    val_roc --early_stopping_patience 40 --seed 120 --esm_side_adapter --esm_side_adapter_rank 48 --only_low_rank_u_v --freeze_encoder_quality_threshold
+    0.7 --quality_checkpoint --gpu_id 1 --save_prefix DCP_data/model_outputs/LiverDCP_embeds_May_Run_123/LiverDCP_
+onnxFiles: {}
+safetensorsSizeMb: 0.0
+approxSizeMb: 0.0
+fetchedAt: '2026-06-09T22:07:05.000Z'
