@@ -1,0 +1,600 @@
+_id: 67c752e191c404ab818fec2a
+id: tjohn327/scion-all-MiniLM-L6-v2
+private: false
+pipeline_tag: sentence-similarity
+library_name: sentence-transformers
+tags:
+- sentence-transformers
+- safetensors
+- bert
+- sentence-similarity
+- feature-extraction
+- generated_from_trainer
+- dataset_size:21376
+- loss:MultipleNegativesRankingLoss
+- arxiv:1908.10084
+- arxiv:1705.00652
+- base_model:sentence-transformers/all-MiniLM-L6-v2
+- base_model:finetune:sentence-transformers/all-MiniLM-L6-v2
+- model-index
+- text-embeddings-inference
+- endpoints_compatible
+- region:us
+downloads: 2
+likes: 0
+modelId: tjohn327/scion-all-MiniLM-L6-v2
+author: tjohn327
+sha: d5019b3101da78841055736964bd7fdb692f97bd
+lastModified: '2025-03-05T22:47:22.000Z'
+gated: false
+disabled: false
+mask_token: '[MASK]'
+widgetData:
+- source_sentence: Explain the purpose of source authentication in EPIC.
+  sentences:
+  - 'Golden file testing is integral to the SCION testing suite, ensuring consistency in test outputs. The -update flag is
+    utilized across all packages containing golden file tests, allowing for systematic updates. To update all golden files,
+    the command `go test ./... -update` is executed, while a specific package can be updated using `go test ./path/to/package
+    -update`. The update mechanism is implemented via a package global variable: `var update = xtest.UpdateGoldenFiles()`.
+
+
+    For tests involving non-deterministic elements, such as private keys and certificates, a separate flag, -update-non-deterministic,
+    is employed. This allows for the updating of non-deterministic golden files with the command `go test ./... -update-non-deterministic`
+    or for a specific package using `go test ./path/to/package -update-non-deterministic`. The corresponding global variable
+    for this functionality is defined as `var updateNonDeterministic = xtest.UpdateNonDeterminsticGoldenFiles()`. This structured
+    approach facilitates the management of both deterministic and non-deterministic golden files within the SCION architecture.'
+  - EPIC introduces a family of cryptographic data-plane protocols designed to enhance security in path-aware Internet architectures
+    by addressing the security-efficiency dilemma. The protocols facilitate source authentication, path validation, and path
+    authorization while maintaining low communication overhead. EPIC employs short per-hop authentication fields to minimize
+    overhead, ensuring that even if an attacker forges an authenticator, they cannot exploit it to launch volumetric DoS attacks.
+    The design binds authenticators to specific packets, preventing further malicious packet transmission. Additionally, EPIC
+    utilizes a longer, unforgeable authentication field for the destination, allowing detection of any deceptive packets that
+    may have bypassed intermediate routers. The proposed attacker model combines a localized Dolev–Yao adversary with a cryptographic
+    oracle, demonstrating EPIC's resilience against powerful attackers. EPIC's communication overhead is 3–5 times smaller
+    than existing solutions like OPT and ICING for realistic path lengths. Implementation using Intel’s Data Plane Development
+    Kit (DPDK) shows that EPIC can saturate a 40 Gbps link on commodity hardware with only four processing cores. The focus
+    is on securing inter-domain data-plane communication while assuming a secure control plane for key distribution and path
+    construction.
+  - The document chunk provides a comprehensive index of SCION Internet Architecture, detailing key components and concepts.
+    It includes references to various types of certificates such as AS, CA, root, and voting certificates, essential for the
+    SCION Control-plane PKI (CP-PKI). The control plane and data plane are delineated, with specific focus on control-plane
+    extensions, including hidden paths and time synchronization, and data-plane extensions like end-to-end (E2E) and hop-by-hop
+    (HBH) mechanisms. The COLIBRI framework is highlighted, encompassing control and data plane functionalities, end-to-end
+    reservations (EER), and security analyses. Cryptographic algorithms are categorized, emphasizing agility, asymmetric,
+    symmetric, and post-quantum methods, alongside cryptographic hash functions. Deployment scenarios are outlined, addressing
+    customer site, end host, and ISP core network configurations. The document also references the Discovery service and DNSSEC,
+    noting their relevance to SCION's operational integrity. Overall, the index encapsulates the architectural components,
+    algorithms, and deployment strategies critical to SCION's design and implementation.
+- source_sentence: How does SCION's deployment model differ from traditional overlay networks?
+  sentences:
+  - The document discusses the deployment and scalability of the SCION Internet architecture, emphasizing its path-diversity-based
+    path construction algorithm for core beaconing as the SCIONLab network expands. It contrasts SCION with existing testbeds
+    like VINI, GENI, and FABRIC, which have not yet facilitated SCION's production network, highlighting SCION's unique design
+    that avoids overlay complexities. The section on related work outlines various Internet architecture proposals, including
+    Trotsky, which advocates for a backward-compatible framework for new inter-domain protocols, and RON, an application-level
+    overlay network that lacks the guarantees of native architectures. SCION's architecture distinctly separates inter-domain
+    communication (core-path segments) from intra-domain communication (down- and up-path segments), paralleling concepts
+    in Plutarch and HLP, which employs a hybrid routing approach. SCION's beaconing mechanism enhances scalability compared
+    to BGP, while maintaining a hierarchical network partitioning akin to HLP's model. The document also references XIA's
+    principal-centric networking and the Framework for Internet Innovation's clean-slate redesign, noting SCION's alignment
+    with these innovative paradigms while addressing deployment challenges.
+  - The document discusses the limitations of the Border Gateway Protocol (BGP) within the context of internet infrastructure,
+    emphasizing its lack of guarantees for data delivery and path specification. BGP facilitates the exchange of reachability
+    information among Autonomous Systems (ASes) through IP prefix advertisements, enabling ASes to make routing decisions
+    based on various factors, including cost and load balancing. However, BGP's design, originating in 1989 as a temporary
+    solution, did not prioritize security, leading to vulnerabilities such as route hijacking. These deficiencies impact both
+    Quality of Service (QoS) and Quality of Experience (QoE), as users remain unaware of the paths taken by their data. The
+    document highlights the need for improved protocols that address these security and performance issues, particularly in
+    the context of SCION architecture, which aims to provide more reliable and secure routing mechanisms.
+  - "The document chunk details the packet processing logic within the SCION Data Plane, specifically focusing on the handling\
+    \ of Hop Fields and Accumulator values during packet traversal. It outlines checks for link types to prevent valley usage\
+    \ and ensures that timestamps in the Info Field are valid. The processing steps vary based on the Construction Direction\
+    \ flag (C) and the Peering flag (P). \n\nFor packets traveling in construction direction (C = \"1\"), the process continues\
+    \ to the next step. If traveling against construction direction (C = \"0\"), three cases are considered: \n\n1. **No Peering\
+    \ Hop Field (P = \"0\")**: The ingress border router computes the Accumulator (Acc) using the formula Acc = Acc_(i+1)\
+    \ XOR MAC_i, updates the Acc field, verifies the MAC, and increments path metadata if at the last Hop Field.\n\n2. **Peering\
+    \ Hop Field Present but Not Current (P = \"1\")**: Similar to Case 1, but without incrementing path metadata.\n\n3. **Current\
+    \ Hop Field is Peering (P = \"1\")**: The router computes MAC^Peer_i, verifies it against the current MAC, and increments\
+    \ path metadata if applicable. \n\nThese steps ensure integrity and proper routing within the SCION architecture."
+- source_sentence: What considerations are taken into account for Assigned SCION Protocol Numbers?
+  sentences:
+  - "Redundant transmission in SCION enhances the reliability of media streams, specifically for video calls, by employing\
+    \ multiple relay connections. The application allows for configurable redundant and multi-redundant transmission of audio\
+    \ and video streams. Each media stream can utilize more than one relay connection, with outgoing packets sent identically\
+    \ across these connections. Received packets are forwarded to WebRTC, which utilizes RTP and RTCP protocols for connection\
+    \ management, including sequence numbering and deduplication. \n\nOverlap path processors facilitate the selection of\
+    \ paths for redundant relay connections. The process begins with sorting the relay connections arbitrarily, followed by\
+    \ the first connection utilizing the standard root path processor. Subsequent connections employ an overlap path processor\
+    \ that references the path of the preceding connection, ensuring that all paths are considered as reference paths for\
+    \ redundancy. This design aims to maintain Quality of Service (QoS) by ensuring that at least one relay connection successfully\
+    \ delivers packets, mitigating packet loss.\n\nHowever, challenges arise from latency discrepancies between redundant\
+    \ connections, which can lead to a primary connection (lead) and a secondary connection (backup) scenario, potentially\
+    \ affecting the overall performance of the media stream."
+  - The document chunk addresses the availability guarantees within the SCION Internet Architecture, detailing the adversary
+    model and availability properties. It outlines defense systems, including basic fault and attack isolation, protection
+    mechanisms for data-plane traffic, and control-plane services. Key components include secure path discovery and dissemination,
+    data delivery mechanisms, packet authentication, and filtering strategies. The section on traffic prioritization introduces
+    traffic classes, Setup-Less Neighbor-Based Communication (SNC), traffic marking, and priority processing through queuing
+    disciplines. Additionally, it discusses protected DRKey bootstrapping, emphasizing assumptions, the protection of COLIBRI
+    SegR setup, and the Telescoped Reservation Setup (TRS) with a corresponding security analysis. The protection of control-plane
+    services is further elaborated, focusing on criticality criteria for interactions, filtering at the control service, and
+    the attack resilience of the control service. The chapter concludes with a discussion on AS certification, reinforcing
+    the importance of these mechanisms in ensuring the robustness and reliability of SCION's architecture against various
+    threats.
+  - The document chunk outlines the SCION Data Plane architecture, detailing the SCION Header Specification, which includes
+    various header formats such as Address Header, SCION Path Types (SCION, EmptyPath, OneHopPath, EPIC-HP), and the Pseudo
+    Header for Upper-Layer Checksum. It specifies the SCION Extension Header, encompassing Hop-by-Hop and End-to-End Options
+    Headers, along with TLV-encoded Options. The SCMP Specification is introduced, covering its general format, error messages,
+    and informational messages. The SCION Packet Authenticator Option is defined, detailing its format, absolute time, DRKey
+    selection, authenticated data, and associated algorithms. Additionally, the document addresses BFD (Bidirectional Forwarding
+    Detection) on top of SCION, including protocol specifics and its implementation in SCION routers. It also lists assigned
+    SCION Protocol Numbers, highlighting considerations for their assignment, and concludes with an overview of the SCION
+    Protocol Stack, which integrates these components into a cohesive architecture.
+- source_sentence: What happens when a local path service cannot find a path to a remote AS?
+  sentences:
+  - The document chunk details the verification of Go programs within the SCION architecture, specifically focusing on the
+    `UnmarshalText` function for parsing Autonomous System (AS) identifiers. The `UnmarshalText` function, defined in the
+    `addr` package, takes a byte slice `text`, converts it to a string, and invokes `ASFromString` to derive a valid AS identifier.
+    The function employs preconditions and postconditions to ensure memory safety and validity of the AS identifier. The `validAS`
+    function is a pure function that checks the validity of the AS identifier, returning true only for valid inputs. The use
+    of the `old` keyword in postconditions guarantees that the state of the AS variable remains unchanged if the input string
+    is invalid, ensuring that the function adheres to the principles of functional programming by avoiding side effects. The
+    implementation details emphasize the importance of error handling, where `ASFromString` returns a non-nil error for invalid
+    identifiers, thus maintaining the integrity of the AS state. This snippet is part of the SCION codebase, specifically
+    from `github.com/scionproto/scion/go/lib/addr/isdas.go`.
+  - The document chunk discusses extensions for the SCION data plane, focusing on the COLIBRI system's attack-resistant resource-reservation
+    mechanisms. It identifies challenges such as per-flow state management, path stability, and authentication overhead, alongside
+    corresponding enabling technologies. Key solutions include packet-carried state for fast path management, path choice
+    strategies to mitigate on-path adversaries, and symmetric-key authentication to address signature overhead. The architecture
+    leverages Isolation Domains (ISDs) and segment types to enhance scalability by decomposing reservations. Reservation protection
+    is emphasized, requiring data packets to carry cryptographically protected information for validation and attribution.
+    Efficient cryptographic mechanisms are critical, particularly for per-packet MACs to authenticate data packets at each
+    on-path Autonomous System (AS). The DRKey framework underpins the efficient authentication of control-plane packets, mitigating
+    risks such as signature flooding and denial-of-capability (DoC) attacks. Overall, the integration of these components
+    within SCION's architecture enhances the robustness and efficiency of resource reservations in adversarial environments.
+  - The document discusses the optimization of path registration and propagation in SCION Autonomous Systems (ASes) through
+    beacon services, utilizing information encoded in Path Control Blocks (PCBs). Beacon services can optimize paths based
+    on various quality metrics, such as latency and bandwidth, either jointly or in parallel, depending on local implementations.
+    For path lookup, a host within a SCION AS must obtain the destination host's ISD number, AS number, and local address,
+    resulting in tuples of the form ⟨ISD number, AS number, local address⟩. The host queries its path service for a registered
+    or cached path to the destination. If unavailable, it escalates the request to a core AS's path service within its ISD.
+    If the destination is within the same ISD or is a core AS in another ISD, the core path service provides a path segment.
+    If not, the local core path service queries the remote core path service of the destination's ISD, which returns a down-segment.
+    The local core path service then returns both the core-segment and down-segment to facilitate routing. The structure of
+    a PCB is detailed, highlighting fields for AS hop metadata and extensions for additional information dissemination.
+- source_sentence: How does SCION's time synchronization support duplicate detection and traffic monitoring?
+  sentences:
+  - The document chunk details the COLIBRI system for bandwidth reservations within the SCION architecture, emphasizing its
+    efficiency in managing end-to-end reservations (EERs) across on-path Autonomous Systems (ASes). COLIBRI employs symmetric
+    cryptography for stateless verification of reservations, mitigating the need for per-source state. To counter replay attacks,
+    a duplicate suppression mechanism is essential, ensuring that authenticated packets cannot be maliciously reused to exceed
+    allocated bandwidth. Monitoring and policing systems are necessary to enforce bandwidth limits, allowing ASes to identify
+    and manage misbehaving flows. While stateful flow monitoring, such as the token-bucket algorithm, provides precise measurements,
+    it is limited to edge deployments due to state requirements. In contrast, probabilistic monitoring techniques like LOFT
+    can operate effectively within the Internet core, accommodating a vast number of flows. Time synchronization is critical
+    for coordinating bandwidth reservations across AS boundaries, facilitating accurate duplicate detection and traffic monitoring.
+    SCION’s time synchronization mechanism ensures adequate synchronization levels for these operations. Overall, COLIBRI
+    enables efficient short-term bandwidth reservations, crucial for maintaining the integrity of end-to-end communications
+    in a highly dynamic Internet environment.
+  - 'SCION is a next-generation Internet architecture designed to enhance security, availability, isolation, and scalability.
+    It enables end hosts to utilize multiple authenticated inter-domain paths to any destination, with each packet carrying
+    its own specified forwarding path determined by the sender. SCION architecture incorporates isolation domains (ISDs),
+    which consist of multiple Autonomous Systems (ASes) that agree on a trust root configuration (TRC) defining the roots
+    of trust for validating bindings between names and public keys or addresses. Core ASes govern each ISD, providing inter-ISD
+    connectivity and managing trust roots. The architecture delineates three types of AS relationships: core, provider-customer,
+    and peer-peer, with core relations existing solely among core ASes. SCION addressing is structured as a tuple ⟨ISD number,
+    AS number, local address⟩, where the ISD number identifies the ISD of the end host, the AS number identifies the host''s
+    AS, and the local address serves as the host''s identifier within its AS, not utilized for inter-domain routing or forwarding.
+    Path-construction, path-registration, and path-lookup procedures are integral to SCION''s operational framework, facilitating
+    efficient packet forwarding based on the specified paths.'
+  - The document introduces a formal verification framework for path-aware data plane protocols, addressing the critical security
+    property of path authorization in Internet architectures. It utilizes Isabelle/HOL to develop a parameterized model that
+    first establishes path authorization without an attacker, then refines it by incorporating an attacker and cryptographic
+    validation fields. The framework is parameterized by the protocol's authentication mechanism and relies on five verification
+    conditions sufficient for proving the refinement of the abstract model. The authors validate the framework against several
+    existing protocols, demonstrating compliance with the verification conditions and ensuring path authorization without
+    requiring invariant proofs. This approach supports low-effort security proofs applicable to arbitrary network topologies
+    and authorized paths, surpassing the capabilities of current automated security protocol verifiers. The document emphasizes
+    the importance of formal verification in enhancing the security and reliability of future Internet architectures, particularly
+    in light of the limitations of the existing Border Gateway Protocol (BGP) and the need for robust, scalable solutions.
+    Path-aware architectures empower end hosts to select forwarding paths while ensuring adherence to autonomous systems'
+    routing policies, thereby mitigating risks from malicious sources.
+model-index:
+- name: SentenceTransformer based on sentence-transformers/all-MiniLM-L6-v2
+  results:
+  - task:
+      type: information-retrieval
+      name: Information Retrieval
+    dataset:
+      name: dev evaluation
+      type: dev-evaluation
+    metrics:
+    - type: cosine_accuracy@1
+      value: 0.2032690695725063
+      name: Cosine Accuracy@1
+      verified: false
+    - type: cosine_accuracy@3
+      value: 0.44090528080469404
+      name: Cosine Accuracy@3
+      verified: false
+    - type: cosine_accuracy@5
+      value: 0.5368818105616094
+      name: Cosine Accuracy@5
+      verified: false
+    - type: cosine_accuracy@10
+      value: 0.662615255658005
+      name: Cosine Accuracy@10
+      verified: false
+    - type: cosine_precision@1
+      value: 0.2032690695725063
+      name: Cosine Precision@1
+      verified: false
+    - type: cosine_precision@3
+      value: 0.146968426934898
+      name: Cosine Precision@3
+      verified: false
+    - type: cosine_precision@5
+      value: 0.10737636211232188
+      name: Cosine Precision@5
+      verified: false
+    - type: cosine_precision@10
+      value: 0.0662615255658005
+      name: Cosine Precision@10
+      verified: false
+    - type: cosine_recall@1
+      value: 0.2032690695725063
+      name: Cosine Recall@1
+      verified: false
+    - type: cosine_recall@3
+      value: 0.44090528080469404
+      name: Cosine Recall@3
+      verified: false
+    - type: cosine_recall@5
+      value: 0.5368818105616094
+      name: Cosine Recall@5
+      verified: false
+    - type: cosine_recall@10
+      value: 0.662615255658005
+      name: Cosine Recall@10
+      verified: false
+    - type: cosine_ndcg@10
+      value: 0.4209375313714088
+      name: Cosine Ndcg@10
+      verified: false
+    - type: cosine_mrr@10
+      value: 0.3449352372969312
+      name: Cosine Mrr@10
+      verified: false
+    - type: cosine_map@100
+      value: 0.35689195077195485
+      name: Cosine Map@100
+      verified: false
+config:
+  architectures:
+  - BertModel
+  model_type: bert
+  tokenizer_config:
+    cls_token: '[CLS]'
+    mask_token: '[MASK]'
+    pad_token: '[PAD]'
+    sep_token: '[SEP]'
+    unk_token: '[UNK]'
+cardData:
+  tags:
+  - sentence-transformers
+  - sentence-similarity
+  - feature-extraction
+  - generated_from_trainer
+  - dataset_size:21376
+  - loss:MultipleNegativesRankingLoss
+  base_model: sentence-transformers/all-MiniLM-L6-v2
+  widget:
+  - source_sentence: Explain the purpose of source authentication in EPIC.
+    sentences:
+    - 'Golden file testing is integral to the SCION testing suite, ensuring consistency in test outputs. The -update flag
+      is utilized across all packages containing golden file tests, allowing for systematic updates. To update all golden
+      files, the command `go test ./... -update` is executed, while a specific package can be updated using `go test ./path/to/package
+      -update`. The update mechanism is implemented via a package global variable: `var update = xtest.UpdateGoldenFiles()`.
+
+
+      For tests involving non-deterministic elements, such as private keys and certificates, a separate flag, -update-non-deterministic,
+      is employed. This allows for the updating of non-deterministic golden files with the command `go test ./... -update-non-deterministic`
+      or for a specific package using `go test ./path/to/package -update-non-deterministic`. The corresponding global variable
+      for this functionality is defined as `var updateNonDeterministic = xtest.UpdateNonDeterminsticGoldenFiles()`. This structured
+      approach facilitates the management of both deterministic and non-deterministic golden files within the SCION architecture.'
+    - EPIC introduces a family of cryptographic data-plane protocols designed to enhance security in path-aware Internet architectures
+      by addressing the security-efficiency dilemma. The protocols facilitate source authentication, path validation, and
+      path authorization while maintaining low communication overhead. EPIC employs short per-hop authentication fields to
+      minimize overhead, ensuring that even if an attacker forges an authenticator, they cannot exploit it to launch volumetric
+      DoS attacks. The design binds authenticators to specific packets, preventing further malicious packet transmission.
+      Additionally, EPIC utilizes a longer, unforgeable authentication field for the destination, allowing detection of any
+      deceptive packets that may have bypassed intermediate routers. The proposed attacker model combines a localized Dolev–Yao
+      adversary with a cryptographic oracle, demonstrating EPIC's resilience against powerful attackers. EPIC's communication
+      overhead is 3–5 times smaller than existing solutions like OPT and ICING for realistic path lengths. Implementation
+      using Intel’s Data Plane Development Kit (DPDK) shows that EPIC can saturate a 40 Gbps link on commodity hardware with
+      only four processing cores. The focus is on securing inter-domain data-plane communication while assuming a secure control
+      plane for key distribution and path construction.
+    - The document chunk provides a comprehensive index of SCION Internet Architecture, detailing key components and concepts.
+      It includes references to various types of certificates such as AS, CA, root, and voting certificates, essential for
+      the SCION Control-plane PKI (CP-PKI). The control plane and data plane are delineated, with specific focus on control-plane
+      extensions, including hidden paths and time synchronization, and data-plane extensions like end-to-end (E2E) and hop-by-hop
+      (HBH) mechanisms. The COLIBRI framework is highlighted, encompassing control and data plane functionalities, end-to-end
+      reservations (EER), and security analyses. Cryptographic algorithms are categorized, emphasizing agility, asymmetric,
+      symmetric, and post-quantum methods, alongside cryptographic hash functions. Deployment scenarios are outlined, addressing
+      customer site, end host, and ISP core network configurations. The document also references the Discovery service and
+      DNSSEC, noting their relevance to SCION's operational integrity. Overall, the index encapsulates the architectural components,
+      algorithms, and deployment strategies critical to SCION's design and implementation.
+  - source_sentence: How does SCION's deployment model differ from traditional overlay networks?
+    sentences:
+    - The document discusses the deployment and scalability of the SCION Internet architecture, emphasizing its path-diversity-based
+      path construction algorithm for core beaconing as the SCIONLab network expands. It contrasts SCION with existing testbeds
+      like VINI, GENI, and FABRIC, which have not yet facilitated SCION's production network, highlighting SCION's unique
+      design that avoids overlay complexities. The section on related work outlines various Internet architecture proposals,
+      including Trotsky, which advocates for a backward-compatible framework for new inter-domain protocols, and RON, an application-level
+      overlay network that lacks the guarantees of native architectures. SCION's architecture distinctly separates inter-domain
+      communication (core-path segments) from intra-domain communication (down- and up-path segments), paralleling concepts
+      in Plutarch and HLP, which employs a hybrid routing approach. SCION's beaconing mechanism enhances scalability compared
+      to BGP, while maintaining a hierarchical network partitioning akin to HLP's model. The document also references XIA's
+      principal-centric networking and the Framework for Internet Innovation's clean-slate redesign, noting SCION's alignment
+      with these innovative paradigms while addressing deployment challenges.
+    - The document discusses the limitations of the Border Gateway Protocol (BGP) within the context of internet infrastructure,
+      emphasizing its lack of guarantees for data delivery and path specification. BGP facilitates the exchange of reachability
+      information among Autonomous Systems (ASes) through IP prefix advertisements, enabling ASes to make routing decisions
+      based on various factors, including cost and load balancing. However, BGP's design, originating in 1989 as a temporary
+      solution, did not prioritize security, leading to vulnerabilities such as route hijacking. These deficiencies impact
+      both Quality of Service (QoS) and Quality of Experience (QoE), as users remain unaware of the paths taken by their data.
+      The document highlights the need for improved protocols that address these security and performance issues, particularly
+      in the context of SCION architecture, which aims to provide more reliable and secure routing mechanisms.
+    - "The document chunk details the packet processing logic within the SCION Data Plane, specifically focusing on the handling\
+      \ of Hop Fields and Accumulator values during packet traversal. It outlines checks for link types to prevent valley\
+      \ usage and ensures that timestamps in the Info Field are valid. The processing steps vary based on the Construction\
+      \ Direction flag (C) and the Peering flag (P). \n\nFor packets traveling in construction direction (C = \"1\"), the\
+      \ process continues to the next step. If traveling against construction direction (C = \"0\"), three cases are considered:\
+      \ \n\n1. **No Peering Hop Field (P = \"0\")**: The ingress border router computes the Accumulator (Acc) using the formula\
+      \ Acc = Acc_(i+1) XOR MAC_i, updates the Acc field, verifies the MAC, and increments path metadata if at the last Hop\
+      \ Field.\n\n2. **Peering Hop Field Present but Not Current (P = \"1\")**: Similar to Case 1, but without incrementing\
+      \ path metadata.\n\n3. **Current Hop Field is Peering (P = \"1\")**: The router computes MAC^Peer_i, verifies it against\
+      \ the current MAC, and increments path metadata if applicable. \n\nThese steps ensure integrity and proper routing within\
+      \ the SCION architecture."
+  - source_sentence: What considerations are taken into account for Assigned SCION Protocol Numbers?
+    sentences:
+    - "Redundant transmission in SCION enhances the reliability of media streams, specifically for video calls, by employing\
+      \ multiple relay connections. The application allows for configurable redundant and multi-redundant transmission of\
+      \ audio and video streams. Each media stream can utilize more than one relay connection, with outgoing packets sent\
+      \ identically across these connections. Received packets are forwarded to WebRTC, which utilizes RTP and RTCP protocols\
+      \ for connection management, including sequence numbering and deduplication. \n\nOverlap path processors facilitate\
+      \ the selection of paths for redundant relay connections. The process begins with sorting the relay connections arbitrarily,\
+      \ followed by the first connection utilizing the standard root path processor. Subsequent connections employ an overlap\
+      \ path processor that references the path of the preceding connection, ensuring that all paths are considered as reference\
+      \ paths for redundancy. This design aims to maintain Quality of Service (QoS) by ensuring that at least one relay connection\
+      \ successfully delivers packets, mitigating packet loss.\n\nHowever, challenges arise from latency discrepancies between\
+      \ redundant connections, which can lead to a primary connection (lead) and a secondary connection (backup) scenario,\
+      \ potentially affecting the overall performance of the media stream."
+    - The document chunk addresses the availability guarantees within the SCION Internet Architecture, detailing the adversary
+      model and availability properties. It outlines defense systems, including basic fault and attack isolation, protection
+      mechanisms for data-plane traffic, and control-plane services. Key components include secure path discovery and dissemination,
+      data delivery mechanisms, packet authentication, and filtering strategies. The section on traffic prioritization introduces
+      traffic classes, Setup-Less Neighbor-Based Communication (SNC), traffic marking, and priority processing through queuing
+      disciplines. Additionally, it discusses protected DRKey bootstrapping, emphasizing assumptions, the protection of COLIBRI
+      SegR setup, and the Telescoped Reservation Setup (TRS) with a corresponding security analysis. The protection of control-plane
+      services is further elaborated, focusing on criticality criteria for interactions, filtering at the control service,
+      and the attack resilience of the control service. The chapter concludes with a discussion on AS certification, reinforcing
+      the importance of these mechanisms in ensuring the robustness and reliability of SCION's architecture against various
+      threats.
+    - The document chunk outlines the SCION Data Plane architecture, detailing the SCION Header Specification, which includes
+      various header formats such as Address Header, SCION Path Types (SCION, EmptyPath, OneHopPath, EPIC-HP), and the Pseudo
+      Header for Upper-Layer Checksum. It specifies the SCION Extension Header, encompassing Hop-by-Hop and End-to-End Options
+      Headers, along with TLV-encoded Options. The SCMP Specification is introduced, covering its general format, error messages,
+      and informational messages. The SCION Packet Authenticator Option is defined, detailing its format, absolute time, DRKey
+      selection, authenticated data, and associated algorithms. Additionally, the document addresses BFD (Bidirectional Forwarding
+      Detection) on top of SCION, including protocol specifics and its implementation in SCION routers. It also lists assigned
+      SCION Protocol Numbers, highlighting considerations for their assignment, and concludes with an overview of the SCION
+      Protocol Stack, which integrates these components into a cohesive architecture.
+  - source_sentence: What happens when a local path service cannot find a path to a remote AS?
+    sentences:
+    - The document chunk details the verification of Go programs within the SCION architecture, specifically focusing on the
+      `UnmarshalText` function for parsing Autonomous System (AS) identifiers. The `UnmarshalText` function, defined in the
+      `addr` package, takes a byte slice `text`, converts it to a string, and invokes `ASFromString` to derive a valid AS
+      identifier. The function employs preconditions and postconditions to ensure memory safety and validity of the AS identifier.
+      The `validAS` function is a pure function that checks the validity of the AS identifier, returning true only for valid
+      inputs. The use of the `old` keyword in postconditions guarantees that the state of the AS variable remains unchanged
+      if the input string is invalid, ensuring that the function adheres to the principles of functional programming by avoiding
+      side effects. The implementation details emphasize the importance of error handling, where `ASFromString` returns a
+      non-nil error for invalid identifiers, thus maintaining the integrity of the AS state. This snippet is part of the SCION
+      codebase, specifically from `github.com/scionproto/scion/go/lib/addr/isdas.go`.
+    - The document chunk discusses extensions for the SCION data plane, focusing on the COLIBRI system's attack-resistant
+      resource-reservation mechanisms. It identifies challenges such as per-flow state management, path stability, and authentication
+      overhead, alongside corresponding enabling technologies. Key solutions include packet-carried state for fast path management,
+      path choice strategies to mitigate on-path adversaries, and symmetric-key authentication to address signature overhead.
+      The architecture leverages Isolation Domains (ISDs) and segment types to enhance scalability by decomposing reservations.
+      Reservation protection is emphasized, requiring data packets to carry cryptographically protected information for validation
+      and attribution. Efficient cryptographic mechanisms are critical, particularly for per-packet MACs to authenticate data
+      packets at each on-path Autonomous System (AS). The DRKey framework underpins the efficient authentication of control-plane
+      packets, mitigating risks such as signature flooding and denial-of-capability (DoC) attacks. Overall, the integration
+      of these components within SCION's architecture enhances the robustness and efficiency of resource reservations in adversarial
+      environments.
+    - The document discusses the optimization of path registration and propagation in SCION Autonomous Systems (ASes) through
+      beacon services, utilizing information encoded in Path Control Blocks (PCBs). Beacon services can optimize paths based
+      on various quality metrics, such as latency and bandwidth, either jointly or in parallel, depending on local implementations.
+      For path lookup, a host within a SCION AS must obtain the destination host's ISD number, AS number, and local address,
+      resulting in tuples of the form ⟨ISD number, AS number, local address⟩. The host queries its path service for a registered
+      or cached path to the destination. If unavailable, it escalates the request to a core AS's path service within its ISD.
+      If the destination is within the same ISD or is a core AS in another ISD, the core path service provides a path segment.
+      If not, the local core path service queries the remote core path service of the destination's ISD, which returns a down-segment.
+      The local core path service then returns both the core-segment and down-segment to facilitate routing. The structure
+      of a PCB is detailed, highlighting fields for AS hop metadata and extensions for additional information dissemination.
+  - source_sentence: How does SCION's time synchronization support duplicate detection and traffic monitoring?
+    sentences:
+    - The document chunk details the COLIBRI system for bandwidth reservations within the SCION architecture, emphasizing
+      its efficiency in managing end-to-end reservations (EERs) across on-path Autonomous Systems (ASes). COLIBRI employs
+      symmetric cryptography for stateless verification of reservations, mitigating the need for per-source state. To counter
+      replay attacks, a duplicate suppression mechanism is essential, ensuring that authenticated packets cannot be maliciously
+      reused to exceed allocated bandwidth. Monitoring and policing systems are necessary to enforce bandwidth limits, allowing
+      ASes to identify and manage misbehaving flows. While stateful flow monitoring, such as the token-bucket algorithm, provides
+      precise measurements, it is limited to edge deployments due to state requirements. In contrast, probabilistic monitoring
+      techniques like LOFT can operate effectively within the Internet core, accommodating a vast number of flows. Time synchronization
+      is critical for coordinating bandwidth reservations across AS boundaries, facilitating accurate duplicate detection
+      and traffic monitoring. SCION’s time synchronization mechanism ensures adequate synchronization levels for these operations.
+      Overall, COLIBRI enables efficient short-term bandwidth reservations, crucial for maintaining the integrity of end-to-end
+      communications in a highly dynamic Internet environment.
+    - 'SCION is a next-generation Internet architecture designed to enhance security, availability, isolation, and scalability.
+      It enables end hosts to utilize multiple authenticated inter-domain paths to any destination, with each packet carrying
+      its own specified forwarding path determined by the sender. SCION architecture incorporates isolation domains (ISDs),
+      which consist of multiple Autonomous Systems (ASes) that agree on a trust root configuration (TRC) defining the roots
+      of trust for validating bindings between names and public keys or addresses. Core ASes govern each ISD, providing inter-ISD
+      connectivity and managing trust roots. The architecture delineates three types of AS relationships: core, provider-customer,
+      and peer-peer, with core relations existing solely among core ASes. SCION addressing is structured as a tuple ⟨ISD number,
+      AS number, local address⟩, where the ISD number identifies the ISD of the end host, the AS number identifies the host''s
+      AS, and the local address serves as the host''s identifier within its AS, not utilized for inter-domain routing or forwarding.
+      Path-construction, path-registration, and path-lookup procedures are integral to SCION''s operational framework, facilitating
+      efficient packet forwarding based on the specified paths.'
+    - The document introduces a formal verification framework for path-aware data plane protocols, addressing the critical
+      security property of path authorization in Internet architectures. It utilizes Isabelle/HOL to develop a parameterized
+      model that first establishes path authorization without an attacker, then refines it by incorporating an attacker and
+      cryptographic validation fields. The framework is parameterized by the protocol's authentication mechanism and relies
+      on five verification conditions sufficient for proving the refinement of the abstract model. The authors validate the
+      framework against several existing protocols, demonstrating compliance with the verification conditions and ensuring
+      path authorization without requiring invariant proofs. This approach supports low-effort security proofs applicable
+      to arbitrary network topologies and authorized paths, surpassing the capabilities of current automated security protocol
+      verifiers. The document emphasizes the importance of formal verification in enhancing the security and reliability of
+      future Internet architectures, particularly in light of the limitations of the existing Border Gateway Protocol (BGP)
+      and the need for robust, scalable solutions. Path-aware architectures empower end hosts to select forwarding paths while
+      ensuring adherence to autonomous systems' routing policies, thereby mitigating risks from malicious sources.
+  pipeline_tag: sentence-similarity
+  library_name: sentence-transformers
+  metrics:
+  - cosine_accuracy@1
+  - cosine_accuracy@3
+  - cosine_accuracy@5
+  - cosine_accuracy@10
+  - cosine_precision@1
+  - cosine_precision@3
+  - cosine_precision@5
+  - cosine_precision@10
+  - cosine_recall@1
+  - cosine_recall@3
+  - cosine_recall@5
+  - cosine_recall@10
+  - cosine_ndcg@10
+  - cosine_mrr@10
+  - cosine_map@100
+  model-index:
+  - name: SentenceTransformer based on sentence-transformers/all-MiniLM-L6-v2
+    results:
+    - task:
+        type: information-retrieval
+        name: Information Retrieval
+      dataset:
+        name: dev evaluation
+        type: dev-evaluation
+      metrics:
+      - type: cosine_accuracy@1
+        value: 0.2032690695725063
+        name: Cosine Accuracy@1
+        verified: false
+      - type: cosine_accuracy@3
+        value: 0.44090528080469404
+        name: Cosine Accuracy@3
+        verified: false
+      - type: cosine_accuracy@5
+        value: 0.5368818105616094
+        name: Cosine Accuracy@5
+        verified: false
+      - type: cosine_accuracy@10
+        value: 0.662615255658005
+        name: Cosine Accuracy@10
+        verified: false
+      - type: cosine_precision@1
+        value: 0.2032690695725063
+        name: Cosine Precision@1
+        verified: false
+      - type: cosine_precision@3
+        value: 0.146968426934898
+        name: Cosine Precision@3
+        verified: false
+      - type: cosine_precision@5
+        value: 0.10737636211232188
+        name: Cosine Precision@5
+        verified: false
+      - type: cosine_precision@10
+        value: 0.0662615255658005
+        name: Cosine Precision@10
+        verified: false
+      - type: cosine_recall@1
+        value: 0.2032690695725063
+        name: Cosine Recall@1
+        verified: false
+      - type: cosine_recall@3
+        value: 0.44090528080469404
+        name: Cosine Recall@3
+        verified: false
+      - type: cosine_recall@5
+        value: 0.5368818105616094
+        name: Cosine Recall@5
+        verified: false
+      - type: cosine_recall@10
+        value: 0.662615255658005
+        name: Cosine Recall@10
+        verified: false
+      - type: cosine_ndcg@10
+        value: 0.4209375313714088
+        name: Cosine Ndcg@10
+        verified: false
+      - type: cosine_mrr@10
+        value: 0.3449352372969312
+        name: Cosine Mrr@10
+        verified: false
+      - type: cosine_map@100
+        value: 0.35689195077195485
+        name: Cosine Map@100
+        verified: false
+siblings:
+- rfilename: .gitattributes
+- rfilename: 1_Pooling/config.json
+- rfilename: README.md
+- rfilename: config.json
+- rfilename: config_sentence_transformers.json
+- rfilename: model.safetensors
+- rfilename: modules.json
+- rfilename: sentence_bert_config.json
+- rfilename: special_tokens_map.json
+- rfilename: tokenizer.json
+- rfilename: tokenizer_config.json
+- rfilename: vocab.txt
+spaces: []
+createdAt: '2025-03-04T19:22:09.000Z'
+safetensors:
+  parameters:
+    F32: 22713216
+  total: 22713216
+usedStorage: 272592576
+downloadsAllTime: 14
+inferenceProviderMapping: {}
+configJson:
+  _name_or_path: sentence-transformers/all-MiniLM-L6-v2
+  architectures:
+  - BertModel
+  attention_probs_dropout_prob: 0.1
+  classifier_dropout: null
+  gradient_checkpointing: false
+  hidden_act: gelu
+  hidden_dropout_prob: 0.1
+  hidden_size: 384
+  initializer_range: 0.02
+  intermediate_size: 1536
+  layer_norm_eps: 1.0e-12
+  max_position_embeddings: 512
+  model_type: bert
+  num_attention_heads: 12
+  num_hidden_layers: 6
+  pad_token_id: 0
+  position_embedding_type: absolute
+  torch_dtype: float32
+  transformers_version: 4.49.0
+  type_vocab_size: 2
+  use_cache: true
+  vocab_size: 30522
+onnxFiles: {}
+safetensorsSizeMb: 90.9
+approxSizeMb: 90.9
+fetchedAt: '2026-06-09T06:55:53.000Z'

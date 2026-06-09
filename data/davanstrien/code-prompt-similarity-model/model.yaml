@@ -1,0 +1,311 @@
+_id: 665718a9e5bd6f3cf6333236
+id: davanstrien/code-prompt-similarity-model
+private: false
+pipeline_tag: sentence-similarity
+library_name: sentence-transformers
+tags:
+- sentence-transformers
+- safetensors
+- mpnet
+- sentence-similarity
+- feature-extraction
+- dataset_size:n<1K
+- loss:MultipleNegativesRankingLoss
+- en
+- dataset:davanstrien/similarity-dataset-sc2-8b
+- arxiv:1908.10084
+- arxiv:1705.00652
+- base_model:microsoft/mpnet-base
+- base_model:finetune:microsoft/mpnet-base
+- license:apache-2.0
+- model-index
+- co2_eq_emissions
+- text-embeddings-inference
+- endpoints_compatible
+- region:us
+downloads: 6
+likes: 6
+modelId: davanstrien/code-prompt-similarity-model
+author: davanstrien
+sha: 5378261688cce3836034e14276a986b3ed3f0555
+lastModified: '2024-05-29T12:04:34.000Z'
+gated: false
+disabled: false
+widgetData:
+- source_sentence: Write a Python function that counts the number of even numbers in a given list of integers or floats
+  sentences:
+  - Write a Python function that returns the number of even numbers in a list.
+  - Create a Python function that adds up all the numbers in a given list. The function should support lists containing only
+    positive integers.
+  - Write a Python function that converts a JSON string into a Python dictionary using the json module and returns it.
+- source_sentence: Develop a Python function to validate whether a given string represents a valid IPv4 address or not.
+  sentences:
+  - Create a Python function to validate a string `s` as an IPv4 address. The function should return `True` if `s` is a valid
+    IPv4 address, and `False` otherwise.
+  - Write a Python function to find the key with the highest value in a dictionary. The function should return the value of
+    the key if it exists
+  - Write a Python function that, given a dictionary `d` and an integer `k`, returns the sum of the values of the first `k`
+    keys in `d`.
+- source_sentence: Write a Python function to create a list of numbers with exactly one even number and n-1 odd numbers
+  sentences:
+  - Write a Python function that returns the number of even numbers in a list.
+  - Write a Python function that recursively traverses a given folder structure and returns the absolute path of all files
+    that end with ".txt".
+  - Write a Python decorator function that overrides the docstring of the decorated function, and stores the old docstring
+    and other metadata in a `_doc_metadata` attribute of the function.
+- source_sentence: 'Implement a Python function that prints the first character of a string using its indexing feature. '
+  sentences:
+  - Write a Python function that takes a string as a parameter and returns the first character of the string.
+  - Write a Python function that checks if the bit at position `bit` is set in the given `integer`. This function should return
+    a boolean value.
+  - 'Write a Python function `floor_division(x: int, y: int) -> int` that divides two integers `x` and `y` and returns the
+    largest whole number less than or equal to the result.'
+- source_sentence: Write a Python function that takes a MIDI note number and returns the corresponding piano key number.
+  sentences:
+  - Create a Python function that translates MIDI note numbers into piano key numbers, facilitating music generation.
+  - Write a Python function that accepts a dictionary and returns a set of distinct values. If a key maps to an empty list,
+    return an empty set.
+  - Write a Python function `join_strings_with_comma(lst)` that takes a list of strings and returns a single string with all
+    the strings from the list, separated by commas.
+model-index:
+- name: MPNet base trained on AllNLI triplets
+  results:
+  - task:
+      type: triplet
+      name: Triplet
+    dataset:
+      name: code similarity dev
+      type: code-similarity-dev
+    metrics:
+    - type: cosine_accuracy
+      value: 0.934010152284264
+      name: Cosine Accuracy
+      verified: false
+    - type: dot_accuracy
+      value: 0.07106598984771574
+      name: Dot Accuracy
+      verified: false
+    - type: manhattan_accuracy
+      value: 0.934010152284264
+      name: Manhattan Accuracy
+      verified: false
+    - type: euclidean_accuracy
+      value: 0.9390862944162437
+      name: Euclidean Accuracy
+      verified: false
+    - type: max_accuracy
+      value: 0.9390862944162437
+      name: Max Accuracy
+      verified: false
+  - task:
+      type: triplet
+      name: Triplet
+    dataset:
+      name: Unknown
+      type: unknown
+    metrics:
+    - type: cosine_accuracy
+      value: 0.934010152284264
+      name: Cosine Accuracy
+      verified: false
+    - type: dot_accuracy
+      value: 0.07106598984771574
+      name: Dot Accuracy
+      verified: false
+    - type: manhattan_accuracy
+      value: 0.934010152284264
+      name: Manhattan Accuracy
+      verified: false
+    - type: euclidean_accuracy
+      value: 0.9390862944162437
+      name: Euclidean Accuracy
+      verified: false
+    - type: max_accuracy
+      value: 0.9390862944162437
+      name: Max Accuracy
+      verified: false
+config:
+  architectures:
+  - MPNetModel
+  model_type: mpnet
+  tokenizer_config:
+    bos_token: <s>
+    cls_token: <s>
+    eos_token: </s>
+    mask_token: <mask>
+    pad_token: <pad>
+    sep_token: </s>
+    unk_token: '[UNK]'
+cardData:
+  language:
+  - en
+  license: apache-2.0
+  library_name: sentence-transformers
+  datasets:
+  - davanstrien/similarity-dataset-sc2-8b
+  tags:
+  - sentence-transformers
+  - sentence-similarity
+  - feature-extraction
+  - dataset_size:n<1K
+  - loss:MultipleNegativesRankingLoss
+  base_model: microsoft/mpnet-base
+  metrics:
+  - cosine_accuracy
+  - dot_accuracy
+  - manhattan_accuracy
+  - euclidean_accuracy
+  - max_accuracy
+  widget:
+  - source_sentence: Write a Python function that counts the number of even numbers in a given list of integers or floats
+    sentences:
+    - Write a Python function that returns the number of even numbers in a list.
+    - Create a Python function that adds up all the numbers in a given list. The function should support lists containing
+      only positive integers.
+    - Write a Python function that converts a JSON string into a Python dictionary using the json module and returns it.
+  - source_sentence: Develop a Python function to validate whether a given string represents a valid IPv4 address or not.
+    sentences:
+    - Create a Python function to validate a string `s` as an IPv4 address. The function should return `True` if `s` is a
+      valid IPv4 address, and `False` otherwise.
+    - Write a Python function to find the key with the highest value in a dictionary. The function should return the value
+      of the key if it exists
+    - Write a Python function that, given a dictionary `d` and an integer `k`, returns the sum of the values of the first
+      `k` keys in `d`.
+  - source_sentence: Write a Python function to create a list of numbers with exactly one even number and n-1 odd numbers
+    sentences:
+    - Write a Python function that returns the number of even numbers in a list.
+    - Write a Python function that recursively traverses a given folder structure and returns the absolute path of all files
+      that end with ".txt".
+    - Write a Python decorator function that overrides the docstring of the decorated function, and stores the old docstring
+      and other metadata in a `_doc_metadata` attribute of the function.
+  - source_sentence: 'Implement a Python function that prints the first character of a string using its indexing feature. '
+    sentences:
+    - Write a Python function that takes a string as a parameter and returns the first character of the string.
+    - Write a Python function that checks if the bit at position `bit` is set in the given `integer`. This function should
+      return a boolean value.
+    - 'Write a Python function `floor_division(x: int, y: int) -> int` that divides two integers `x` and `y` and returns the
+      largest whole number less than or equal to the result.'
+  - source_sentence: Write a Python function that takes a MIDI note number and returns the corresponding piano key number.
+    sentences:
+    - Create a Python function that translates MIDI note numbers into piano key numbers, facilitating music generation.
+    - Write a Python function that accepts a dictionary and returns a set of distinct values. If a key maps to an empty list,
+      return an empty set.
+    - Write a Python function `join_strings_with_comma(lst)` that takes a list of strings and returns a single string with
+      all the strings from the list, separated by commas.
+  pipeline_tag: sentence-similarity
+  co2_eq_emissions:
+    emissions: 2.213004168952992
+    energy_consumed: 0.006336878829164133
+    source: codecarbon
+    training_type: fine-tuning
+    on_cloud: false
+    cpu_model: Intel(R) Xeon(R) CPU @ 2.20GHz
+    ram_total_size: 62.804237365722656
+    hours_used: 0.049
+    hardware_used: 1 x NVIDIA L4
+  model-index:
+  - name: MPNet base trained on AllNLI triplets
+    results:
+    - task:
+        type: triplet
+        name: Triplet
+      dataset:
+        name: code similarity dev
+        type: code-similarity-dev
+      metrics:
+      - type: cosine_accuracy
+        value: 0.934010152284264
+        name: Cosine Accuracy
+        verified: false
+      - type: dot_accuracy
+        value: 0.07106598984771574
+        name: Dot Accuracy
+        verified: false
+      - type: manhattan_accuracy
+        value: 0.934010152284264
+        name: Manhattan Accuracy
+        verified: false
+      - type: euclidean_accuracy
+        value: 0.9390862944162437
+        name: Euclidean Accuracy
+        verified: false
+      - type: max_accuracy
+        value: 0.9390862944162437
+        name: Max Accuracy
+        verified: false
+    - task:
+        type: triplet
+        name: Triplet
+      dataset:
+        name: Unknown
+        type: unknown
+      metrics:
+      - type: cosine_accuracy
+        value: 0.934010152284264
+        name: Cosine Accuracy
+        verified: false
+      - type: dot_accuracy
+        value: 0.07106598984771574
+        name: Dot Accuracy
+        verified: false
+      - type: manhattan_accuracy
+        value: 0.934010152284264
+        name: Manhattan Accuracy
+        verified: false
+      - type: euclidean_accuracy
+        value: 0.9390862944162437
+        name: Euclidean Accuracy
+        verified: false
+      - type: max_accuracy
+        value: 0.9390862944162437
+        name: Max Accuracy
+        verified: false
+siblings:
+- rfilename: .gitattributes
+- rfilename: 1_Pooling/config.json
+- rfilename: README.md
+- rfilename: config.json
+- rfilename: config_sentence_transformers.json
+- rfilename: model.safetensors
+- rfilename: modules.json
+- rfilename: sentence_bert_config.json
+- rfilename: special_tokens_map.json
+- rfilename: tokenizer.json
+- rfilename: tokenizer_config.json
+- rfilename: vocab.txt
+spaces:
+- r3sgame/sentence-similarity-code
+createdAt: '2024-05-29T11:59:37.000Z'
+safetensors:
+  parameters:
+    F32: 109486464
+  total: 109486464
+usedStorage: 437967672
+downloadsAllTime: 1249
+inferenceProviderMapping: {}
+configJson:
+  _name_or_path: microsoft/mpnet-base
+  architectures:
+  - MPNetModel
+  attention_probs_dropout_prob: 0.1
+  bos_token_id: 0
+  eos_token_id: 2
+  hidden_act: gelu
+  hidden_dropout_prob: 0.1
+  hidden_size: 768
+  initializer_range: 0.02
+  intermediate_size: 3072
+  layer_norm_eps: 1.0e-05
+  max_position_embeddings: 514
+  model_type: mpnet
+  num_attention_heads: 12
+  num_hidden_layers: 12
+  pad_token_id: 1
+  relative_attention_num_buckets: 32
+  torch_dtype: float32
+  transformers_version: 4.41.1
+  vocab_size: 30527
+onnxFiles: {}
+safetensorsSizeMb: 438.0
+approxSizeMb: 437.9
+fetchedAt: '2026-06-09T06:55:53.000Z'

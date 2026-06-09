@@ -1,0 +1,736 @@
+_id: 69f3f5658d2c0ccf781cb8e0
+id: ronit01/golden_rag_tuned_minilm_10
+private: false
+pipeline_tag: sentence-similarity
+library_name: sentence-transformers
+tags:
+- sentence-transformers
+- safetensors
+- bert
+- sentence-similarity
+- feature-extraction
+- generated_from_trainer
+- dataset_size:444
+- loss:ContrastiveLoss
+- arxiv:1908.10084
+- base_model:sentence-transformers/all-MiniLM-L6-v2
+- base_model:finetune:sentence-transformers/all-MiniLM-L6-v2
+- text-embeddings-inference
+- endpoints_compatible
+- region:us
+downloads: 6
+likes: 0
+modelId: ronit01/golden_rag_tuned_minilm_10
+author: ronit01
+sha: d432bc7e0772d0d3ed3c747cb1a5cc95d0270b84
+lastModified: '2026-05-01T00:36:04.000Z'
+gated: false
+disabled: false
+mask_token: '[MASK]'
+widgetData:
+- source_sentence: How do the FiQA and SciFact RAG tutorial use cases differ in their choice of embedding models, vector store
+    configurations, search strategies, generator models, and document templates?
+  sentences:
+  - "    :param search_cfg: The search algorithm type and its kwargs to use for retrieval of vectors/chunks, provided as a\
+    \ single dictionary. Must include a key :code:`\"type\"` with one of the following three options listed as value; default\
+    \ is :code:`\"similarity\"`.\n\n      * :code:`\"similarity\"`: Standard cosine similarity search.\n      * :code:`\"\
+    similarity_score_threshold\"`: Similarity search with minimum score threshold (SST).\n      * :code:`\"mmr\"`: Maximum\
+    \ Marginal Relevance (MMR) search for diversity.\n\n      Additional parameters for search configuration depend on the\
+    \ type; the keys can include the following:\n\n      * :code:`\"k\"`: Number of documents to retrieve. Default is 5.\n\
+    \      * :code:`\"filter\"`: Optional filter criteria function for search results.\n      * :code:`\"score_threshold\"\
+    `: Only for SST. Minimum similarity score threshold. \n      * :code:`\"fetch_k\"`: Only for MMR. Number of documents\
+    \ to fetch before MMR reranking. Default is 20.\n      * :code:`\"lambda_mult\"`: Only for MMR. Diversity parameter for\
+    \ MMR balancing relevance vs. diversity. Default is 0.5.\n    :type search_cfg: dict, optional"
+  - "Eval Compute Metrics Function\n-------------------------\n\nMandatory user-provided function to compute eval metrics\
+    \ on a given batch of (postprocessed) examples, \nwhich is injected by the system. \nIt should return metrics computed\
+    \ over the batch as a whole. \n\nIt is invoked for each batch during the evaluation process after generation and postprocessing\
+    \ (if applicable). \nPass it directly to the :code:`compute_metrics_fn` key in your eval config dictionary.\n\n\n.. py:function::\
+    \ eval.compute_metrics_fn(batch: dict[str, list]) -> dict[str, dict[str, Any]]\n\n   :param batch: Dictionary containing\
+    \ a batch of examples, including all preprocessed fields, generated outputs, and any postprocessed fields\n   :type batch:\
+    \ dict[str, list]\n\n   :return: Dictionary with a metric's name as key and a dictionary as value inside which a reserved\
+    \ key :code:`\"value\"` must exist with that corresponding metric's value over this batch of examples.\n   :rtype: dict[str,\
+    \ dict[str, Any]]\n"
+  - "Knob Set Generators\n-------\n\nTo create a multi-config specification, you need two things: **knob set generators**\
+    \ for \nknob values and **config group generators** that take a config with set-valued knobs \nto generate groups of full\
+    \ configs.\n\nWe currently support two common knob set generators: :func:`List()` for a discrete \nset of values and :func:`Range()`\
+    \ for sampling from a continuous value interval.\n\n\n.. py:function:: List(values: List[Any])\n\n\t:param values: List\
+    \ of discrete values for a knob; all values must be the same python data type.\n\t:type values: List[Any]\n\n\n.. py:function::\
+    \ Range(start: int | float, end: int | float, dtype: str = \"int\" | \"float\")\n\n\t:param start: Lower bound of range\
+    \ interval.\n\t:type start: int | float\n\n\t:param end: Upper bound of range interval.\n\t:type end: int | float\n\n\t\
+    :param dtype: Data type of value to be sampled, either :code:`\"int\"` or :code:`\"float\"`.\n\t:type dtype: str\n\n\n\
+    **Notes:**\n\nAs of this writing, :func:`Range()` performs uniform sampling within the given interval. \nWe plan to continue\
+    \ expanding this API and add more functionality on this front based on feedback.\n\nNote that the return types of the\
+    \ knob set generators are internal to RapidFire AI and \nthey are usable only within the context of the config group generators\
+    \ below.\n\n\n\nConfig Group Generators\n-----\n\nWe currently support two common config group generators: :func:`RFGridSearch()`\
+    \ for grid search \nand :func:`RFRandomSearch()` for random search. \n\nMore support for AutoML heuristics such as SHA,\
+    \ HyperOpt, as well as an integration with \nthe popular AutoML library Optuna are coming soon. \nLikewise for RAG/context\
+    \ engineering, we also plan to support the AutoML heuristic syftr.\n\n\n.. py:function:: RFGridSearch(configs: Dict[str,\
+    \ Any] | List[Dict[str, Any]], trainer_type: str = \"SFT\" | \"DPO\" | \"GRPO\" | None)\n\n\t:param configs: A config\
+    \ dictionary with :func:`List()` for at least one knob; can be a list of such config dictionaries too.\n\t:type configs:\
+    \ Dict[str, Any] | List[Dict[str, Any]]\n\n\t:param trainer_type: The fine-tuning/post-training control flow to use: \"\
+    SFT\", \"DPO\", or \"GRPO\". Skip this argument for :func:`run_evals()`.\n\t:type trainer_type: str, optional \n\n\n..\
+    \ py:function:: RFRandomSearch(configs: Dict[str, Any], trainer_type: str = \"SFT\" | \"DPO\" | \"GRPO\" | None, num_runs:\
+    \ int, seed: int = 42)\n\n\t:param configs: A config dictionary with :func:`List()` or :func:`Range()` for at least one\
+    \ knob.\n\t:type configs: Dict[str, Any]\n\n\t:param trainer_type: The fine-tuning/post-training control flow to use:\
+    \ \"SFT\", \"DPO\", or \"GRPO\". Skip this argument for :func:`run_evals()`.\n\t:type trainer_type: str, optional\n\n\t\
+    :param num_runs: Number of runs (full combinations of knob values) to sample in total.\n\t:type num_runs: int\n\n\t:param\
+    \ seed: Seed for random sampling of knob values to construct combinations. Default is 42.\n\t:type seed: int, optional\
+    \ \n\n\n**Notes:**\n\nFor :func:`RFGridSearch()`, each knob can have either a single value or a :func:`List()` of values\
+    \ but no knob \nshould have :func:`Range()` of values; otherwise, it will error out.\n\nFor :func:`RFRandomSearch()`,\
+    \ each knob can have either a single value, or a :func:`List()` of values, or a \n :func:`Range()` of values. The semantics\
+    \ of sampling are independently-identically-distributed (IID), i.e.,\nwe uniformly randomly pick a value from each discrete\
+    \ set and from each continuous set to construct the \nknob combination for one run. \nThen we repeat that sampling process\
+    \ in an IID way to accumulate :code:`num_runs` distinct combinations.\n\nNote that the return types of the config group\
+    \ generators are internal to RapidFire AI and they are usable only \nwithin the context of :func:`run_fit()` or :func:`run_evals()`\
+    \ in the :class:`Experiment` class."
+- source_sentence: How does RapidFire AI's shard-based adaptive execution compare to traditional sequential execution and
+    task parallelism (e.g., Weights & Biases) for multi-config experiments on multiple GPUs?
+  sentences:
+  - "Eval Compute Metrics Function\n-------------------------\n\nMandatory user-provided function to compute eval metrics\
+    \ on a given batch of (postprocessed) examples, \nwhich is injected by the system. \nIt should return metrics computed\
+    \ over the batch as a whole. \n\nIt is invoked for each batch during the evaluation process after generation and postprocessing\
+    \ (if applicable). \nPass it directly to the :code:`compute_metrics_fn` key in your eval config dictionary.\n\n\n.. py:function::\
+    \ eval.compute_metrics_fn(batch: dict[str, list]) -> dict[str, dict[str, Any]]\n\n   :param batch: Dictionary containing\
+    \ a batch of examples, including all preprocessed fields, generated outputs, and any postprocessed fields\n   :type batch:\
+    \ dict[str, list]\n\n   :return: Dictionary with a metric's name as key and a dictionary as value inside which a reserved\
+    \ key :code:`\"value\"` must exist with that corresponding metric's value over this batch of examples.\n   :rtype: dict[str,\
+    \ dict[str, Any]]\n\n\n**Example:**\n\n.. code-block:: python\n\n    # Example 1 from FiQA use case: Metrics on retrieval\
+    \ accuracy\n    def sample_compute_metrics_fn(batch: Dict[str, list]) -> Dict[str, Dict[str, Any]]:\n\t\t\"\"\"Function\
+    \ to compute all eval metrics based on retrievals and/or generations\"\"\"\n\n\t\ttrue_positives, precisions, recalls,\
+    \ f1_scores, ndcgs, rrs = 0, [], [], [], [], []\n\t\ttotal_queries = len(batch[\"query\"])\n\n\t\tfor pred, gt in zip(batch[\"\
+    retrieved_documents\"], batch[\"ground_truth_documents\"]):\n\t\t\texpected_set = set(gt)\n\t\t\tretrieved_set = set(pred)\n\
+    \n\t\t\ttrue_positives = len(expected_set.intersection(retrieved_set))\n\t\t\tprecision = true_positives / len(retrieved_set)\
+    \ if len(retrieved_set) > 0 else 0\n\t\t\trecall = true_positives / len(expected_set) if len(expected_set) > 0 else 0\n\
+    \t\t\tf1 = (\n\t\t\t\t2 * precision * recall / (precision + recall)\n\t\t\t\tif (precision + recall) > 0\n\t\t\t\telse\
+    \ 0\n\t\t\t)\n\n\t\t\tprecisions.append(precision)\n\t\t\trecalls.append(recall)\n\t\t\tf1_scores.append(f1)\n\t\t\tndcgs.append(compute_ndcg_at_k(retrieved_set,\
+    \ expected_set, k=5))\n\t\t\trrs.append(compute_rr(retrieved_set, expected_set))\n\n\t\treturn {\n\t\t\t\"Total\": {\"\
+    value\": total_queries},\n\t\t\t\"Precision\": {\"value\": sum(precisions) / total_queries},\n\t\t\t\"Recall\": {\"value\"\
+    : sum(recalls) / total_queries},\n\t\t\t\"F1 Score\": {\"value\": sum(f1_scores) / total_queries},\n\t\t\t\"NDCG@5\":\
+    \ {\"value\": sum(ndcgs) / total_queries},\n\t\t\t\"MRR\": {\"value\": sum(rrs) / total_queries},\n\t\t}\n\n.. code-block::\
+    \ python\n\n    # Example 2 from GSM8K use case: Direct answer correctness check\n    def sample_compute_metrics_fn(batch:\
+    \ dict[str, list]) -> dict[str, dict[str, Any]]:\n        \"\"\"Function to compute all eval metrics based on retrievals\
+    \ and/or generations\"\"\"\n\n        correct = sum(\n            1\n            for pred, gt in zip(batch[\"model_answer\"\
+    ], batch[\"ground_truth\"])\n            if pred == gt\n        )\n        total = len(batch[\"model_answer\"])\n    \
+    \    return {\n            \"Correct\": {\"value\": correct},\n            \"Total\": {\"value\": total},\n        }"
+  - "Eval Accumulate Metrics Function\n----------------------------\n\nOptional user-provided function to aggregate algebraic\
+    \ eval metrics across all batches of the data. \nIf this function is not provided, all metrics returned by :func:`eval.compute_metrics_fn()`\
+    \ \nwill be assumed to be distributive (i.e., summed across batches) by default. Use this function \nwhen metrics require\
+    \ (weighted) averaging or other custom dataset-wide aggregation logic.\n\nIt is invoked once at the very end of the evaluation\
+    \ process after all batches have been processed.\nPass it directly to the :code:`accumulate_metrics_fn` key in your eval\
+    \ config dictionary.\n\n\n.. py:function:: eval.accumulate_metrics_fn(aggregated_metrics: dict[str, list[dict[str, Any]]])\
+    \ -> dict[str, dict[str, Any]]\n\n   :param aggregated_metrics: Dictionary with a metric's name as key and a list of per-batch\
+    \ metric dictionaries as values from across all data batches. Inside each value dictionary, at least the reserved key\
+    \ :code:`\"value\"` will exist that was returned by your :code:`eval_compute_metrics_fn` function.\n   :type aggregated_metrics:\
+    \ dict[str, list[dict[str, Any]]]\n\n   :return: Dictionary with a metric's name as key and a dictionary as value. The\
+    \ value dictionary can have these keys:\n   \n      * :code:`\"value\"` (required): The metric's value over the whole\
+    \ dataset.\n      * :code:`\"is_algebraic\"` (optional): Boolean indicating if the metric is algebraic.\n      * :code:`\"\
+    is_distributive\"` (optional): Boolean indicating if the metric is distributive.\n      * :code:`\"value_range\"` (optional):\
+    \ 2-tuple of floats specifying the metric's range min and max.\n      \n      For online aggregation support, see :doc:`the\
+    \ Online Aggregation for Evals page</onlineagg>`.\n\n   :rtype: dict[str, dict[str, Any]]\n\n\n**Example:**\n\n.. code-block::\
+    \ python\n\n    # Example 1 from GSM8K use case: Weighted aggregation for accuracy computation\n    def sample_accumulate_metrics_fn(aggregated_metrics:\
+    \ dict[str, list]) -> dict[str, dict[str, Any]]:\n        \"\"\"Function to accumulate eval metrics across all batches\"\
+    \"\"\n\n        correct = sum(m.get(\"value\", 0) for m in aggregated_metrics.get(\"Correct\", [{}]))\n        total =\
+    \ sum(m.get(\"value\", 0) for m in aggregated_metrics.get(\"Total\", [{}]))\n        accuracy = correct / total if total\
+    \ > 0 else 0\n        return {\n            \"Total\": {\"value\": total},\n            \"Correct\": {\n             \
+    \   \"value\": correct,\n                \"is_distributive\": True,\n                \"value_range\": (0, 1),\n      \
+    \      },\n            \"Accuracy\": {\n                \"value\": accuracy,\n                \"is_algebraic\": True,\n\
+    \                \"value_range\": (0, 1),\n            },\n        }\n\n.. code-block:: python\n\n    # Example 2 from\
+    \ FiQA use case: Multiple algebraic metrics for retrieval accuracy\n    def sample_accumulate_metrics_fn(aggregated_metrics:\
+    \ dict[str, list]) -> dict[str, dict[str, Any]]:\n\t\t\"\"\"Function to accumulate eval metrics across all batches\"\"\
+    \"\n\n\t\tnum_queries_per_batch = [m[\"value\"] for m in aggregated_metrics[\"Total\"]]\n\t\ttotal_queries = sum(num_queries_per_batch)\n\
+    \t\talgebraic_metrics = [\"Precision\", \"Recall\", \"F1 Score\", \"NDCG@5\", \"MRR\"]\n\n\t\treturn {\n\t\t\t\"Total\"\
+    : {\"value\": total_queries},\n\t\t\t**{\n\t\t\t\tmetric: {\n\t\t\t\t\t\"value\": sum(\n\t\t\t\t\t\tm[\"value\"] * queries\n\
+    \t\t\t\t\t\tfor m, queries in zip(\n\t\t\t\t\t\t\taggregated_metrics[metric], num_queries_per_batch\n\t\t\t\t\t\t)\n\t\
+    \t\t\t\t)\n\t\t\t\t\t/ total_queries,\n\t\t\t\t\t\"is_algebraic\": True,\n\t\t\t\t\t\"value_range\": (0, 1),\n\t\t\t\t\
+    }\n\t\t\t\tfor metric in algebraic_metrics\n\t\t\t},\n\t\t}"
+  - "The crux of RapidFire AI's difference is in its *adaptive execution engine*: it enables \"interruptible\"\nexecution\
+    \ of configurations across GPUs/CPUs. To do so, it first shards the training and/or evaluation \ndataset randomly into\
+    \ \"chunks\" (also called \"shards\").\nThen instead of waiting for a run to see the whole dataset for all epochs (for\
+    \ SFT/RFT) or for full \neval metrics calculation (for RAG evals), RapidFire AI schedules all runs on *one shard at a\
+    \ time*, \nand then cycles through all shards.\n\nSuppose you have only 1 GPU, say an A100 or H100, and you want to run\
+    \ SFT on a Llama model. \nCurrent tools force you to run one config after another *sequentially* as shown in the (simplified)\
+    \ illustration below. \nIn contrast, by operating on shards, RapidFire AI offers a far more concurrent learning experience\
+    \ by \nautomatically *swapping* adapters (and base models, if needed) across GPU(s) and DRAM. \nIt does this via efficient\
+    \ shared memory-based caching mechanisms that can spill to disk when needed.\n\n.. image:: /images/gantt-1gpu.png\n  \
+    \ :width: 800px\n\nIn the above figure, all 3 model configs are shown for 1 epoch. RapidFire AI is set to use 4 chunks.\n\
+    So, before model config 3 (M3) even starts in the sequential approach, RapidFire AI already shows you \nthe learning behaviors\
+    \ of all 3 configs on the first 2-3 chunks. \nThe overhead of swapping, represented by the thin gray box, is minimal,\
+    \ less than 5% of the runtime,\nas per our measurements--thanks to our new efficient memory management techniques.\n\n\
+    For inference evals for RAG/context engineering, such sharded execution means RapidFire AI surfaces eval metrics \nsooner\
+    \ based on a statistical technique known as *online aggregation* from the database systems literature.\nBasically, see\
+    \ estimated values and confidence intervals for all eval metrics in real time as the shards \nget processed, ultimately\
+    \ converging to the exact metrics on the full dataset.\n\n\nThe Power of Dynamic Real-Time Control\n------------\n\nOur\
+    \ adaptive execution engine also enables a powerful new capability: *dynamic real-time \ncontrol over runs in flight*.\
+    \ We call this Interactive Control Operations, or IC Ops for short. \n\n*Stop* non-promising runs at any point--they will\
+    \ be put on a wait queue. *Resume* any later if \nyou want to revisit it. *Clone* high-performing runs from the dashboard\
+    \ and *Modify* the \nconfiguration knobs as you see fit to try new variations. *Warm start* the clone's parameters \n\
+    with the parent's to give them a headstart in learning behavior. \nUnder the hood, RapidFire AI automatically manages\
+    \ how runs and chunks are placed on GPUs, \nfreeing you to focus fully on the logic of your AI experiment rather than\
+    \ wrestling with \nlow-level systems issue to parallelize your work. \n\nAs the above figure shows, with suitable IC Ops\
+    \ based on the runs' learning behaviors, you are \nable to compare 9 configs in roughly the same time it took to compare\
+    \ 3 sequentially! \n:doc:`Read more about IC Ops here</icops>`."
+- source_sentence: How do RFvLLMModelConfig and RFOpenAIAPIModelConfig compare in terms of their configuration parameters,
+    underlying systems, rate limiting capabilities, and typical use cases?
+  sentences:
+  - "RapidFire AI's execution pipeline for RAG pipelines engineering is split into 2 main stages as illustrated in the figure\
+    \ below:\n\n* **Document Preprocessing:** Workers operate in parallel on the base data and produce preprocessed data that\
+    \ is stored in a vector store.\n\n* **Query Processing:** Workers operate in parallel on the eval set examples to embed\
+    \ them, retrieve relevant chunks from the vector store, rerank them, construct the full context, and then generate the\
+    \ outputs.\n\n\n.. image:: /images/ragspec-2.png\n   :width: 800px\n\n\n\nDepending on the state of your use case's data,\
+    \ you can invoke only the Query Processing stage or both stages in one go via the same :class:`RFLangChainRagSpec` depending\
+    \ on what arguments are provided:\n\n* **With Preprocessing:** This creates both Document Preprocessing workers and Query\
+    \ Processing workers. Provide :code:`document_loader`, optional :code:`text_splitter`, :code:`embedding_cfg`, and optional\
+    \ :code:`vector_store_cfg`. The document preprocessing workers operate on the base data, produce chunks (if :code:`text_splitter`\
+    \ provided), embed the chunks (or the whole documents if :code:`text_splitter` is skipped), and store them in the vector\
+    \ store. If :code:`vector_store_cfg` is not provided, RapidFire AI defaults to creating a FAISS flat vector store for\
+    \ you.\n\n* **Without Preprocessing:** This creates only Query Processing workers that operate the optionally provided\
+    \ preprocessed vector store. Provide optional :code:`embedding_cfg` to apply to the queries (same as what produced the\
+    \ vector store), an optional :code:`retriever` and/or :code:`vector_store_cfg`, an optional :code:`search_cfg`, and an\
+    \ optional :code:`reranker_cfg`. Note that for plain context engineering use cases without RAG, there is no embedding,\
+    \ retrieval, or reranking; for few-shot prompting without RAG, you can provide :code:`embedding_cfg` and similarity search\
+    \ knobs for the examples.\n"
+  - "    :param search_cfg: The search algorithm type and its kwargs to use for retrieval of vectors/chunks, provided as a\
+    \ single dictionary. Must include a key :code:`\"type\"` with one of the following three options listed as value; default\
+    \ is :code:`\"similarity\"`.\n\n      * :code:`\"similarity\"`: Standard cosine similarity search.\n      * :code:`\"\
+    similarity_score_threshold\"`: Similarity search with minimum score threshold (SST).\n      * :code:`\"mmr\"`: Maximum\
+    \ Marginal Relevance (MMR) search for diversity.\n\n      Additional parameters for search configuration depend on the\
+    \ type; the keys can include the following:\n\n      * :code:`\"k\"`: Number of documents to retrieve. Default is 5.\n\
+    \      * :code:`\"filter\"`: Optional filter criteria function for search results.\n      * :code:`\"score_threshold\"\
+    `: Only for SST. Minimum similarity score threshold. \n      * :code:`\"fetch_k\"`: Only for MMR. Number of documents\
+    \ to fetch before MMR reranking. Default is 20.\n      * :code:`\"lambda_mult\"`: Only for MMR. Diversity parameter for\
+    \ MMR balancing relevance vs. diversity. Default is 0.5.\n    :type search_cfg: dict, optional"
+  - "RFPromptManager\n------\n\nThis class wraps around some LangChain APIs to manage dynamic few-shot example selection.\
+    \ It provides semantic \nsimilarity-based example selection to construct prompts with the most relevant examples for each\
+    \ input query.\n\nThe individual arguments (knobs) can be :class:`List` valued or :class:`Range` valued in an :class:`RFPromptManager`.\
+    \ \nThat is how you can specify a base set of knob combinations from which a config group can be produced. \nAlso read\
+    \ :doc:`the Multi-Config Specification page</configs>`.\n\n.. py:class:: RFPromptManager\n\n  :param instructions: The\
+    \ main instructions for the prompt that guide the generator's behavior. This sets the overall task description and role\
+    \ for the assistant. Either this or :code:`instructions_file_path` must be provided.\n  :type instructions: str, optional\n\
+    \n  :param instructions_file_path: Path to a file containing the instructions. Use this as an alternative to the :code:`instructions`\
+    \ parameter for loading instructions from a file, say, if they are very long.\n  :type instructions_file_path: str, optional\n\
+    \n  :param examples: A list of example dictionaries for few-shot learning. Each example should be a dictionary with keys\
+    \ matching the expected input-output format (e.g., \"question\" and \"answer\").\n  :type examples: list[dict[str, str]],\
+    \ optional\n\n\n  :param embedding_cfg: The embedding class and its kwargs to use for computing semantic similarity between\
+    \ examples and queries, provided as a single dictionary. Must include a key :code:`\"class\"` with the class itself as\
+    \ value, not an instance. Options for the class include :class:`HuggingFaceEmbeddings` and :class:`OpenAIEmbeddings`.\
+    \ The kwargs that follow must contain all parameters needed to initialize the embedding class; required parameters vary\
+    \ by embedding class. For example, :class:`HuggingFaceEmbeddings` needs :code:`model_name`, :code:`model_kwargs` and :code:`device`,\
+    \ while :class:`OpenAIEmbeddings` needs :code:`\"model\"` and :code:`\"api_key\"`.\n  :type embedding_cfg: dict[str, Any],\
+    \ optional\n\n\n  :param example_selector_cls: The example selector class that determines how to choose relevant examples\
+    \ based on the input query. Must be either :code:`SemanticSimilarityExampleSelector` or :code:`MaxMarginalRelevanceExampleSelector`\
+    \ (for diversity) from LangChain.\n  :type example_selector_cls: type[MaxMarginalRelevanceExampleSelector | SemanticSimilarityExampleSelector],\
+    \ optional\n\n  :param example_prompt_template: A LangChain :code:`PromptTemplate` that defines how to format each example.\
+    \ Should specify :code:`input_variables` and a :code:`template` string with placeholders matching the keys in the examples\
+    \ dictionaries.\n  :type example_prompt_template: PromptTemplate, optional\n\n  :param k: Number of most similar or diverse\
+    \ examples to retrieve and include in the prompt for each query. Default is 3.\n  :type k: int, optional\n\n  .. seealso::\n\
+    \     - `LangChain Example Selectors <https://api.python.langchain.com/en/latest/core_api_reference.html#module-langchain_core.example_selectors/>`_\n\
+    \     - `LangChain Embeddings <https://reference.langchain.com/python/langchain/embeddings/>`_\n\n\n**Example:**\n\n..\
+    \ code-block:: python\n\n\t# Based on GSM8K chatbot tutorial notebook; specify your INSTRUCTIONS beforehand\n\tfewshot_prompt_manager\
+    \ = RFPromptManager(\n\t\tinstructions=INSTRUCTIONS,\n\t\texamples=examples,\n\t\tembedding_cfg={\n\t\t\t\"class\": HuggingFaceEmbeddings,\n\
+    \t\t\t\"model_name\": \"sentence-transformers/all-MiniLM-L6-v2\",\n\t\t\t\"model_kwargs\": {\"device\": \"cuda:0\"},\n\
+    \t\t\t\"encode_kwargs\": {\"normalize_embeddings\": True, \"batch_size\": batch_size},\n    \t},\n\t\texample_selector_cls=SemanticSimilarityExampleSelector,\n\
+    \t\texample_prompt_template=PromptTemplate(\n\t\t\tinput_variables=[\"question\", \"answer\"],\n\t\t\ttemplate=\"Question:\
+    \ {question}\\nAnswer: {answer}\",\n\t\t),\n\t\tk=List([3, 5]),  # 2 different k values\n\t)"
+- source_sentence: How do the Stop and Delete IC Ops compare in terms of their effects on a run's state, visibility on the
+    dashboard, resource usage, artifact preservation, and what further IC Ops can be performed on the run afterward?
+  sentences:
+  - '`see its details on Hugging Face <https://huggingface.co/datasets/trl-lib/ultrafeedback_binarized>`__.
+
+    We use a sample of 500 training examples for tractable demo runtimes. '
+  - "Run Fit\n------\n\nThe main function to launch training (including LLM fine-tuning and post-training) and evaluation\
+    \ for a given config group in one go. \nSee :doc:`the Multi-Config Specification page</configs>` for more details on how\
+    \ to construct a config group. \n\n.. py:function:: run_fit(self, param_config: Any, create_model_fn: Callable, train_dataset:\
+    \ Dataset, eval_dataset: Dataset, num_chunks: int, seed: int=42, num_gpus: int) -> None:\n\n\t:param param_config: A train\
+    \ config knob dictionary, a generated config group, or a :code:`list` of configs or config groups\n\t:type param_config:\
+    \ Train config-group or list as described in :doc:`the Multi-Config Specification page</configs>`\n\n\t:param create_model_fn:\
+    \ User-given function to create a model instance; a single cfg is passed as input by the system\n\t:type create_model_fn:\
+    \ Callable\n\n\t:param train_dataset: Training dataset\n\t:type train_dataset: Dataset\n\n\t:param eval_dataset: Evaluation\
+    \ dataset to measure eval metrics\n\t:type eval_dataset: Dataset\n\n\t:param num_chunks: Number of logical splits of data\
+    \ to control degree of concurrency for multi-config execution (recommended: at least 4)\n\t:type num_chunks: int\n\n\t\
+    :param seed: Seed for any randomness used in your code (default: 42)\n\t:type seed: int, optional\n\n\t:param num_gpus:\
+    \ Number of GPUs to use per run/config for each config represented in :code:`param_config`; overriden by any :code:`num_gpus`\
+    \ given in :code:`RFModelConfig` for those associated configs.\n\t:type num_gpus: int, optional\n\n\t:return: None\n\t\
+    :rtype: None\n\n**Example:**\n\n.. code-block:: python\n\n\t# Based on SFT chatbot tutorial notebook\n\t>>> experiment.run_fit(config_group,\
+    \ sample_create_model, train_dataset, eval_dataset, num_chunks=4, seed=42)\n\tStarted 4 worker processes successfully\
+    \ ...\n\n**Notes:**\n\nThis method auto-generates the ML metrics files as per user specification and auto-plots them on\
+    \ the dashboard.\nWithin an experiment, you can rerun :func:`run_fit()` as many times as you want. All of them \nwill\
+    \ be overlaid on the same plots on the ML metrics dashboard.\nNote that :func:`run_fit()` must be actively running for\
+    \ you to be able to use Interactive Control (IC) \nops on the dashboard.\n\nThe :code:`param_config` argument is very\
+    \ versatile in allowing you to construct various knob combinations \nand launch them in one go.  \nIt can be a single\
+    \ config dictionary, a :code:`list` of config dictionaries, a config group generator output \n(:func:`RFGridSearch()`\
+    \ or :func:`RFRandomSearch()` for now), or even a :code:`list` with mix of configs or \nconfig group generator outputs\
+    \ as its elements.\nPlease see the :doc:`the Multi-Config Specification page</search>` for more details. \n\nEach individual\
+    \ config is passed as input to your :func:`create_model_fn()`. Inside it you can use whatever \nknob you set in the config\
+    \ group, e.g., model type or name to instantiate a model accordingly. \nYou can import models from libraries such as HuggingFace\
+    \ transformers or load your own PyTorch checkpoints.\n\nThe :code:`num_chunks` argument is a critical one that enables\
+    \ you to balance a higher degree of concurrency \nyou desire for cross-config comparisons against the (relatively minor)\
+    \ extra swapping overhead incurred. \nWe recommend at least 4, which means you will see results for all runs on 1/4th\
+    \ of the data at a time.\n"
+  - "Experiment Constructor \n------\n\nConstructor to instantiate a new experiment. \n\n.. py:function:: __init__(self, experiment_name:\
+    \ str, mode: str = \"fit\", experiments_path: str = \"./rapidfire_experiments\") -> None\n\n\t:param experiment_name:\
+    \ Unique name for this experiment\n\t:type experiment_name: str\n\t\n\t:param mode: Mode of this experiment, either :code:`\"\
+    fit\"` or :code:`\"eval\"`; default is :code:`\"fit\"`\n\t:type mode: str\n\t\n\t:param experiments_path: Path to a folder\
+    \ to store this experiment's artifacts. Default is ``\"./rapidfire_experiments\"``)\n\t:type experiments_path: str, optional\
+    \ \n\n\t:return: None\n\t:rtype: None\n"
+- source_sentence: How do you set up and use Pinecone as an external vector store in RapidFire AI's RAG pipeline, including
+    configuring create, read, and update modes?
+  sentences:
+  - "Confidence Intervals\n--------------------\n\nThe data points in the evals dataset are **assigned to shards uniformly\
+    \ randomly**, i.e., \nRapidFire AI performs sampling without replacement. \nBased on that, it supports 3 strategies to\
+    \ calculate confidence intervals for projected estimates of metrics. \nYou can indicate the confidence level (we recommend\
+    \ 95%) and whether to perform \"finite population correction\" (FPC) or not. \nThese values can be specified under the\
+    \ key :code:`\"online_strategy_kwargs\"` in your config dictionary as illustrated below.\n\n.. code-block:: python\n\n\
+    \    # Based on FiQA RAG tutorial use case\n    \"online_strategy_kwargs\": {\n        \"strategy_name\": \"normal\",\n\
+    \        \"confidence_level\": 0.95,\n        \"use_fpc\": True,\n    },\n\nNotation \n^^^^^^^\n\n* :math:`N` = Total\
+    \ population size (total number of queries in eval set)\n* :math:`n` = Sample size (number of queries processed so far)\n\
+    * :math:`\\hat{p}` = Observed sample proportion or average for an algebraic metric\n* :math:`\\bar{X}` = Sample mean for\
+    \ a distributive metric\n* :math:`\\widehat{T}` = Estimated population total for a distributive metric\n* :math:`\\text{Var}(\\\
+    widehat{T})` = Variance of the above estimated population total\n* :math:`\\text{SE}` = Standard error (measure of estimate\
+    \ uncertainty)\n* :math:`\\text{CI}` = Confidence interval\n* :math:`z` = Z-score for confidence level (1.96 for 95% confidence;\
+    \ used in Normal and Wilson)\n* :math:`\\alpha` = Significance level (0.05 for 95% confidence)\n* :math:`n_{\\text{eff}}`\
+    \ = Effective sample size (adjusted for FPC in Wilson)\n* :math:`a, b` = Lower and upper bounds of metric value range\n\
+    * :math:`R` = Range width, :math:`R = b - a`\n* :math:`\\varepsilon` = Margin of error (half-width of confidence interval\
+    \ for Hoeffding)\n* :math:`\\varepsilon_{\\bar{X}}` = Margin of error for sample mean (Hoeffding distributive)\n* :math:`\\\
+    text{FPC}` = Finite population correction factor\n\n\nFinite Population Correction (FPC)\n^^^^^^^^^^^^^^^^^^^^^^\n\nWhen\
+    \ sampling without replacement from finite populations, enabling FPC \nmultiplies the standard error (SE) by :math:`\\\
+    text{FPC} = \\sqrt{(N-n)/(N-1)}` \nwhere :math:`N` is population size and :math:`n` is sample size.\n\n\nNormal Approximation\n\
+    ^^^^^^^^^^^^^^^^^^^\n\nThis is the default strategy, and it uses the Central Limit Theorem. \nIt is suitable for most\
+    \ cases with non-trivial sample sizes (n > 30). \nIt provides tight intervals when the statistical assumptions hold.\n\
+    \n* For algebraic metrics:\n\n.. math::\n\n   \\text{SE}_{\\hat{p}} = \\sqrt{\\frac{\\hat{p}(1-\\hat{p})}{n}} \\times\
+    \ \\text{FPC}\n\n   \\text{CI} = \\hat{p} \\pm 1.96 \\cdot \\text{SE}_{\\hat{p}}\n\n\n* For distributive metrics: \n\n\
+    Estimate population total :math:`\\widehat{T} = N\\bar{X}` with \nvariance :math:`\\text{Var}(\\widehat{T}) = N^2 \\cdot\
+    \ \\bar{X}(1-\\bar{X})/n` (FPC-adjusted).\n\n\nWilson Score\n^^^^^^^^^^^\n\nThis strategy is better for small sample sizes\
+    \ or metrics near 0/1 boundaries. \nIt is more robust than Normal Approximation for extreme proportions. \n\n* For algebraic\
+    \ metrics:\n\n.. math::\n\n   \\text{center} = \\frac{\\hat{p} + z^2/(2n_{\\text{eff}})}{1 + z^2/n_{\\text{eff}}}\n\n\
+    \   \\text{margin} = \\frac{z\\sqrt{\\hat{p}(1-\\hat{p})/n_{\\text{eff}} + z^2/(4n_{\\text{eff}}^2)}}{1 + z^2/n_{\\text{eff}}}\n\
+    \nwhere :math:`n_{\\text{eff}} = n/\\text{FPC}^2` when using FPC. \nThe Wilson confidence interval is then :math:`[\\\
+    text{center} - \\text{margin}, \\text{center} + \\text{margin}]`,\nclamped to [0, 1].\n\n* For distributive metrics, this\
+    \ falls back to Normal Approximation. \n\n\n\nHoeffding Bounds\n^^^^^^^^^^^\n\nThis strategy is best for maximum safety\
+    \ (guaranteed coverage). It makes no distributional assumptions, \nbut that also means its intervals are typically quite\
+    \ loose.\n\n.. math::\n\n   \\varepsilon = (b-a)\\sqrt{\\frac{\\ln(2/\\alpha)}{2n}} \\times \\text{FPC}\n\n   \\text{CI}\
+    \ = [\\hat{p} - \\varepsilon, \\hat{p} + \\varepsilon]\n\nFor distributive metrics with range :math:`R=b-a`, it computes\
+    \ :math:`\\varepsilon_{\\bar{X}} = R\\sqrt{\\ln(2/\\alpha)/(2n)}` \nand then scales to population total."
+  - 'just start rapidfireai again with the above command.
+
+
+    If the start command fails for whatever reason, wait for half a minute and rerun it.
+
+    For diagnostics and common fixes (including Linux/macOS and Windows steps), see :doc:`Troubleshooting </troubleshooting>`.
+
+    '
+  - "Eval Accumulate Metrics Function\n----------------------------\n\nOptional user-provided function to aggregate algebraic\
+    \ eval metrics across all batches of the data. \nIf this function is not provided, all metrics returned by :func:`eval.compute_metrics_fn()`\
+    \ \nwill be assumed to be distributive (i.e., summed across batches) by default. Use this function \nwhen metrics require\
+    \ (weighted) averaging or other custom dataset-wide aggregation logic.\n\nIt is invoked once at the very end of the evaluation\
+    \ process after all batches have been processed.\nPass it directly to the :code:`accumulate_metrics_fn` key in your eval\
+    \ config dictionary.\n\n\n.. py:function:: eval.accumulate_metrics_fn(aggregated_metrics: dict[str, list[dict[str, Any]]])\
+    \ -> dict[str, dict[str, Any]]\n\n   :param aggregated_metrics: Dictionary with a metric's name as key and a list of per-batch\
+    \ metric dictionaries as values from across all data batches. Inside each value dictionary, at least the reserved key\
+    \ :code:`\"value\"` will exist that was returned by your :code:`eval_compute_metrics_fn` function.\n   :type aggregated_metrics:\
+    \ dict[str, list[dict[str, Any]]]\n\n   :return: Dictionary with a metric's name as key and a dictionary as value. The\
+    \ value dictionary can have these keys:\n   \n      * :code:`\"value\"` (required): The metric's value over the whole\
+    \ dataset.\n      * :code:`\"is_algebraic\"` (optional): Boolean indicating if the metric is algebraic.\n      * :code:`\"\
+    is_distributive\"` (optional): Boolean indicating if the metric is distributive.\n      * :code:`\"value_range\"` (optional):\
+    \ 2-tuple of floats specifying the metric's range min and max.\n      \n      For online aggregation support, see :doc:`the\
+    \ Online Aggregation for Evals page</onlineagg>`.\n\n   :rtype: dict[str, dict[str, Any]]\n\n\n**Example:**\n\n.. code-block::\
+    \ python\n\n    # Example 1 from GSM8K use case: Weighted aggregation for accuracy computation\n    def sample_accumulate_metrics_fn(aggregated_metrics:\
+    \ dict[str, list]) -> dict[str, dict[str, Any]]:\n        \"\"\"Function to accumulate eval metrics across all batches\"\
+    \"\"\n\n        correct = sum(m.get(\"value\", 0) for m in aggregated_metrics.get(\"Correct\", [{}]))\n        total =\
+    \ sum(m.get(\"value\", 0) for m in aggregated_metrics.get(\"Total\", [{}]))\n        accuracy = correct / total if total\
+    \ > 0 else 0\n        return {\n            \"Total\": {\"value\": total},\n            \"Correct\": {\n             \
+    \   \"value\": correct,\n                \"is_distributive\": True,\n                \"value_range\": (0, 1),\n      \
+    \      },\n            \"Accuracy\": {\n                \"value\": accuracy,\n                \"is_algebraic\": True,\n\
+    \                \"value_range\": (0, 1),\n            },\n        }"
+model-index: null
+config:
+  architectures:
+  - BertModel
+  model_type: bert
+  tokenizer_config:
+    cls_token: '[CLS]'
+    mask_token: '[MASK]'
+    pad_token: '[PAD]'
+    sep_token: '[SEP]'
+    unk_token: '[UNK]'
+cardData:
+  tags:
+  - sentence-transformers
+  - sentence-similarity
+  - feature-extraction
+  - generated_from_trainer
+  - dataset_size:444
+  - loss:ContrastiveLoss
+  base_model: sentence-transformers/all-MiniLM-L6-v2
+  widget:
+  - source_sentence: How do the FiQA and SciFact RAG tutorial use cases differ in their choice of embedding models, vector
+      store configurations, search strategies, generator models, and document templates?
+    sentences:
+    - "    :param search_cfg: The search algorithm type and its kwargs to use for retrieval of vectors/chunks, provided as\
+      \ a single dictionary. Must include a key :code:`\"type\"` with one of the following three options listed as value;\
+      \ default is :code:`\"similarity\"`.\n\n      * :code:`\"similarity\"`: Standard cosine similarity search.\n      *\
+      \ :code:`\"similarity_score_threshold\"`: Similarity search with minimum score threshold (SST).\n      * :code:`\"mmr\"\
+      `: Maximum Marginal Relevance (MMR) search for diversity.\n\n      Additional parameters for search configuration depend\
+      \ on the type; the keys can include the following:\n\n      * :code:`\"k\"`: Number of documents to retrieve. Default\
+      \ is 5.\n      * :code:`\"filter\"`: Optional filter criteria function for search results.\n      * :code:`\"score_threshold\"\
+      `: Only for SST. Minimum similarity score threshold. \n      * :code:`\"fetch_k\"`: Only for MMR. Number of documents\
+      \ to fetch before MMR reranking. Default is 20.\n      * :code:`\"lambda_mult\"`: Only for MMR. Diversity parameter\
+      \ for MMR balancing relevance vs. diversity. Default is 0.5.\n    :type search_cfg: dict, optional"
+    - "Eval Compute Metrics Function\n-------------------------\n\nMandatory user-provided function to compute eval metrics\
+      \ on a given batch of (postprocessed) examples, \nwhich is injected by the system. \nIt should return metrics computed\
+      \ over the batch as a whole. \n\nIt is invoked for each batch during the evaluation process after generation and postprocessing\
+      \ (if applicable). \nPass it directly to the :code:`compute_metrics_fn` key in your eval config dictionary.\n\n\n..\
+      \ py:function:: eval.compute_metrics_fn(batch: dict[str, list]) -> dict[str, dict[str, Any]]\n\n   :param batch: Dictionary\
+      \ containing a batch of examples, including all preprocessed fields, generated outputs, and any postprocessed fields\n\
+      \   :type batch: dict[str, list]\n\n   :return: Dictionary with a metric's name as key and a dictionary as value inside\
+      \ which a reserved key :code:`\"value\"` must exist with that corresponding metric's value over this batch of examples.\n\
+      \   :rtype: dict[str, dict[str, Any]]\n"
+    - "Knob Set Generators\n-------\n\nTo create a multi-config specification, you need two things: **knob set generators**\
+      \ for \nknob values and **config group generators** that take a config with set-valued knobs \nto generate groups of\
+      \ full configs.\n\nWe currently support two common knob set generators: :func:`List()` for a discrete \nset of values\
+      \ and :func:`Range()` for sampling from a continuous value interval.\n\n\n.. py:function:: List(values: List[Any])\n\
+      \n\t:param values: List of discrete values for a knob; all values must be the same python data type.\n\t:type values:\
+      \ List[Any]\n\n\n.. py:function:: Range(start: int | float, end: int | float, dtype: str = \"int\" | \"float\")\n\n\t\
+      :param start: Lower bound of range interval.\n\t:type start: int | float\n\n\t:param end: Upper bound of range interval.\n\
+      \t:type end: int | float\n\n\t:param dtype: Data type of value to be sampled, either :code:`\"int\"` or :code:`\"float\"\
+      `.\n\t:type dtype: str\n\n\n**Notes:**\n\nAs of this writing, :func:`Range()` performs uniform sampling within the given\
+      \ interval. \nWe plan to continue expanding this API and add more functionality on this front based on feedback.\n\n\
+      Note that the return types of the knob set generators are internal to RapidFire AI and \nthey are usable only within\
+      \ the context of the config group generators below.\n\n\n\nConfig Group Generators\n-----\n\nWe currently support two\
+      \ common config group generators: :func:`RFGridSearch()` for grid search \nand :func:`RFRandomSearch()` for random search.\
+      \ \n\nMore support for AutoML heuristics such as SHA, HyperOpt, as well as an integration with \nthe popular AutoML\
+      \ library Optuna are coming soon. \nLikewise for RAG/context engineering, we also plan to support the AutoML heuristic\
+      \ syftr.\n\n\n.. py:function:: RFGridSearch(configs: Dict[str, Any] | List[Dict[str, Any]], trainer_type: str = \"SFT\"\
+      \ | \"DPO\" | \"GRPO\" | None)\n\n\t:param configs: A config dictionary with :func:`List()` for at least one knob; can\
+      \ be a list of such config dictionaries too.\n\t:type configs: Dict[str, Any] | List[Dict[str, Any]]\n\n\t:param trainer_type:\
+      \ The fine-tuning/post-training control flow to use: \"SFT\", \"DPO\", or \"GRPO\". Skip this argument for :func:`run_evals()`.\n\
+      \t:type trainer_type: str, optional \n\n\n.. py:function:: RFRandomSearch(configs: Dict[str, Any], trainer_type: str\
+      \ = \"SFT\" | \"DPO\" | \"GRPO\" | None, num_runs: int, seed: int = 42)\n\n\t:param configs: A config dictionary with\
+      \ :func:`List()` or :func:`Range()` for at least one knob.\n\t:type configs: Dict[str, Any]\n\n\t:param trainer_type:\
+      \ The fine-tuning/post-training control flow to use: \"SFT\", \"DPO\", or \"GRPO\". Skip this argument for :func:`run_evals()`.\n\
+      \t:type trainer_type: str, optional\n\n\t:param num_runs: Number of runs (full combinations of knob values) to sample\
+      \ in total.\n\t:type num_runs: int\n\n\t:param seed: Seed for random sampling of knob values to construct combinations.\
+      \ Default is 42.\n\t:type seed: int, optional \n\n\n**Notes:**\n\nFor :func:`RFGridSearch()`, each knob can have either\
+      \ a single value or a :func:`List()` of values but no knob \nshould have :func:`Range()` of values; otherwise, it will\
+      \ error out.\n\nFor :func:`RFRandomSearch()`, each knob can have either a single value, or a :func:`List()` of values,\
+      \ or a \n :func:`Range()` of values. The semantics of sampling are independently-identically-distributed (IID), i.e.,\n\
+      we uniformly randomly pick a value from each discrete set and from each continuous set to construct the \nknob combination\
+      \ for one run. \nThen we repeat that sampling process in an IID way to accumulate :code:`num_runs` distinct combinations.\n\
+      \nNote that the return types of the config group generators are internal to RapidFire AI and they are usable only \n\
+      within the context of :func:`run_fit()` or :func:`run_evals()` in the :class:`Experiment` class."
+  - source_sentence: How does RapidFire AI's shard-based adaptive execution compare to traditional sequential execution and
+      task parallelism (e.g., Weights & Biases) for multi-config experiments on multiple GPUs?
+    sentences:
+    - "Eval Compute Metrics Function\n-------------------------\n\nMandatory user-provided function to compute eval metrics\
+      \ on a given batch of (postprocessed) examples, \nwhich is injected by the system. \nIt should return metrics computed\
+      \ over the batch as a whole. \n\nIt is invoked for each batch during the evaluation process after generation and postprocessing\
+      \ (if applicable). \nPass it directly to the :code:`compute_metrics_fn` key in your eval config dictionary.\n\n\n..\
+      \ py:function:: eval.compute_metrics_fn(batch: dict[str, list]) -> dict[str, dict[str, Any]]\n\n   :param batch: Dictionary\
+      \ containing a batch of examples, including all preprocessed fields, generated outputs, and any postprocessed fields\n\
+      \   :type batch: dict[str, list]\n\n   :return: Dictionary with a metric's name as key and a dictionary as value inside\
+      \ which a reserved key :code:`\"value\"` must exist with that corresponding metric's value over this batch of examples.\n\
+      \   :rtype: dict[str, dict[str, Any]]\n\n\n**Example:**\n\n.. code-block:: python\n\n    # Example 1 from FiQA use case:\
+      \ Metrics on retrieval accuracy\n    def sample_compute_metrics_fn(batch: Dict[str, list]) -> Dict[str, Dict[str, Any]]:\n\
+      \t\t\"\"\"Function to compute all eval metrics based on retrievals and/or generations\"\"\"\n\n\t\ttrue_positives, precisions,\
+      \ recalls, f1_scores, ndcgs, rrs = 0, [], [], [], [], []\n\t\ttotal_queries = len(batch[\"query\"])\n\n\t\tfor pred,\
+      \ gt in zip(batch[\"retrieved_documents\"], batch[\"ground_truth_documents\"]):\n\t\t\texpected_set = set(gt)\n\t\t\t\
+      retrieved_set = set(pred)\n\n\t\t\ttrue_positives = len(expected_set.intersection(retrieved_set))\n\t\t\tprecision =\
+      \ true_positives / len(retrieved_set) if len(retrieved_set) > 0 else 0\n\t\t\trecall = true_positives / len(expected_set)\
+      \ if len(expected_set) > 0 else 0\n\t\t\tf1 = (\n\t\t\t\t2 * precision * recall / (precision + recall)\n\t\t\t\tif (precision\
+      \ + recall) > 0\n\t\t\t\telse 0\n\t\t\t)\n\n\t\t\tprecisions.append(precision)\n\t\t\trecalls.append(recall)\n\t\t\t\
+      f1_scores.append(f1)\n\t\t\tndcgs.append(compute_ndcg_at_k(retrieved_set, expected_set, k=5))\n\t\t\trrs.append(compute_rr(retrieved_set,\
+      \ expected_set))\n\n\t\treturn {\n\t\t\t\"Total\": {\"value\": total_queries},\n\t\t\t\"Precision\": {\"value\": sum(precisions)\
+      \ / total_queries},\n\t\t\t\"Recall\": {\"value\": sum(recalls) / total_queries},\n\t\t\t\"F1 Score\": {\"value\": sum(f1_scores)\
+      \ / total_queries},\n\t\t\t\"NDCG@5\": {\"value\": sum(ndcgs) / total_queries},\n\t\t\t\"MRR\": {\"value\": sum(rrs)\
+      \ / total_queries},\n\t\t}\n\n.. code-block:: python\n\n    # Example 2 from GSM8K use case: Direct answer correctness\
+      \ check\n    def sample_compute_metrics_fn(batch: dict[str, list]) -> dict[str, dict[str, Any]]:\n        \"\"\"Function\
+      \ to compute all eval metrics based on retrievals and/or generations\"\"\"\n\n        correct = sum(\n            1\n\
+      \            for pred, gt in zip(batch[\"model_answer\"], batch[\"ground_truth\"])\n            if pred == gt\n    \
+      \    )\n        total = len(batch[\"model_answer\"])\n        return {\n            \"Correct\": {\"value\": correct},\n\
+      \            \"Total\": {\"value\": total},\n        }"
+    - "Eval Accumulate Metrics Function\n----------------------------\n\nOptional user-provided function to aggregate algebraic\
+      \ eval metrics across all batches of the data. \nIf this function is not provided, all metrics returned by :func:`eval.compute_metrics_fn()`\
+      \ \nwill be assumed to be distributive (i.e., summed across batches) by default. Use this function \nwhen metrics require\
+      \ (weighted) averaging or other custom dataset-wide aggregation logic.\n\nIt is invoked once at the very end of the\
+      \ evaluation process after all batches have been processed.\nPass it directly to the :code:`accumulate_metrics_fn` key\
+      \ in your eval config dictionary.\n\n\n.. py:function:: eval.accumulate_metrics_fn(aggregated_metrics: dict[str, list[dict[str,\
+      \ Any]]]) -> dict[str, dict[str, Any]]\n\n   :param aggregated_metrics: Dictionary with a metric's name as key and a\
+      \ list of per-batch metric dictionaries as values from across all data batches. Inside each value dictionary, at least\
+      \ the reserved key :code:`\"value\"` will exist that was returned by your :code:`eval_compute_metrics_fn` function.\n\
+      \   :type aggregated_metrics: dict[str, list[dict[str, Any]]]\n\n   :return: Dictionary with a metric's name as key\
+      \ and a dictionary as value. The value dictionary can have these keys:\n   \n      * :code:`\"value\"` (required): The\
+      \ metric's value over the whole dataset.\n      * :code:`\"is_algebraic\"` (optional): Boolean indicating if the metric\
+      \ is algebraic.\n      * :code:`\"is_distributive\"` (optional): Boolean indicating if the metric is distributive.\n\
+      \      * :code:`\"value_range\"` (optional): 2-tuple of floats specifying the metric's range min and max.\n      \n\
+      \      For online aggregation support, see :doc:`the Online Aggregation for Evals page</onlineagg>`.\n\n   :rtype: dict[str,\
+      \ dict[str, Any]]\n\n\n**Example:**\n\n.. code-block:: python\n\n    # Example 1 from GSM8K use case: Weighted aggregation\
+      \ for accuracy computation\n    def sample_accumulate_metrics_fn(aggregated_metrics: dict[str, list]) -> dict[str, dict[str,\
+      \ Any]]:\n        \"\"\"Function to accumulate eval metrics across all batches\"\"\"\n\n        correct = sum(m.get(\"\
+      value\", 0) for m in aggregated_metrics.get(\"Correct\", [{}]))\n        total = sum(m.get(\"value\", 0) for m in aggregated_metrics.get(\"\
+      Total\", [{}]))\n        accuracy = correct / total if total > 0 else 0\n        return {\n            \"Total\": {\"\
+      value\": total},\n            \"Correct\": {\n                \"value\": correct,\n                \"is_distributive\"\
+      : True,\n                \"value_range\": (0, 1),\n            },\n            \"Accuracy\": {\n                \"value\"\
+      : accuracy,\n                \"is_algebraic\": True,\n                \"value_range\": (0, 1),\n            },\n   \
+      \     }\n\n.. code-block:: python\n\n    # Example 2 from FiQA use case: Multiple algebraic metrics for retrieval accuracy\n\
+      \    def sample_accumulate_metrics_fn(aggregated_metrics: dict[str, list]) -> dict[str, dict[str, Any]]:\n\t\t\"\"\"\
+      Function to accumulate eval metrics across all batches\"\"\"\n\n\t\tnum_queries_per_batch = [m[\"value\"] for m in aggregated_metrics[\"\
+      Total\"]]\n\t\ttotal_queries = sum(num_queries_per_batch)\n\t\talgebraic_metrics = [\"Precision\", \"Recall\", \"F1\
+      \ Score\", \"NDCG@5\", \"MRR\"]\n\n\t\treturn {\n\t\t\t\"Total\": {\"value\": total_queries},\n\t\t\t**{\n\t\t\t\tmetric:\
+      \ {\n\t\t\t\t\t\"value\": sum(\n\t\t\t\t\t\tm[\"value\"] * queries\n\t\t\t\t\t\tfor m, queries in zip(\n\t\t\t\t\t\t\
+      \taggregated_metrics[metric], num_queries_per_batch\n\t\t\t\t\t\t)\n\t\t\t\t\t)\n\t\t\t\t\t/ total_queries,\n\t\t\t\t\
+      \t\"is_algebraic\": True,\n\t\t\t\t\t\"value_range\": (0, 1),\n\t\t\t\t}\n\t\t\t\tfor metric in algebraic_metrics\n\t\
+      \t\t},\n\t\t}"
+    - "The crux of RapidFire AI's difference is in its *adaptive execution engine*: it enables \"interruptible\"\nexecution\
+      \ of configurations across GPUs/CPUs. To do so, it first shards the training and/or evaluation \ndataset randomly into\
+      \ \"chunks\" (also called \"shards\").\nThen instead of waiting for a run to see the whole dataset for all epochs (for\
+      \ SFT/RFT) or for full \neval metrics calculation (for RAG evals), RapidFire AI schedules all runs on *one shard at\
+      \ a time*, \nand then cycles through all shards.\n\nSuppose you have only 1 GPU, say an A100 or H100, and you want to\
+      \ run SFT on a Llama model. \nCurrent tools force you to run one config after another *sequentially* as shown in the\
+      \ (simplified) illustration below. \nIn contrast, by operating on shards, RapidFire AI offers a far more concurrent\
+      \ learning experience by \nautomatically *swapping* adapters (and base models, if needed) across GPU(s) and DRAM. \n\
+      It does this via efficient shared memory-based caching mechanisms that can spill to disk when needed.\n\n.. image::\
+      \ /images/gantt-1gpu.png\n   :width: 800px\n\nIn the above figure, all 3 model configs are shown for 1 epoch. RapidFire\
+      \ AI is set to use 4 chunks.\nSo, before model config 3 (M3) even starts in the sequential approach, RapidFire AI already\
+      \ shows you \nthe learning behaviors of all 3 configs on the first 2-3 chunks. \nThe overhead of swapping, represented\
+      \ by the thin gray box, is minimal, less than 5% of the runtime,\nas per our measurements--thanks to our new efficient\
+      \ memory management techniques.\n\nFor inference evals for RAG/context engineering, such sharded execution means RapidFire\
+      \ AI surfaces eval metrics \nsooner based on a statistical technique known as *online aggregation* from the database\
+      \ systems literature.\nBasically, see estimated values and confidence intervals for all eval metrics in real time as\
+      \ the shards \nget processed, ultimately converging to the exact metrics on the full dataset.\n\n\nThe Power of Dynamic\
+      \ Real-Time Control\n------------\n\nOur adaptive execution engine also enables a powerful new capability: *dynamic\
+      \ real-time \ncontrol over runs in flight*. We call this Interactive Control Operations, or IC Ops for short. \n\n*Stop*\
+      \ non-promising runs at any point--they will be put on a wait queue. *Resume* any later if \nyou want to revisit it.\
+      \ *Clone* high-performing runs from the dashboard and *Modify* the \nconfiguration knobs as you see fit to try new variations.\
+      \ *Warm start* the clone's parameters \nwith the parent's to give them a headstart in learning behavior. \nUnder the\
+      \ hood, RapidFire AI automatically manages how runs and chunks are placed on GPUs, \nfreeing you to focus fully on the\
+      \ logic of your AI experiment rather than wrestling with \nlow-level systems issue to parallelize your work. \n\nAs\
+      \ the above figure shows, with suitable IC Ops based on the runs' learning behaviors, you are \nable to compare 9 configs\
+      \ in roughly the same time it took to compare 3 sequentially! \n:doc:`Read more about IC Ops here</icops>`."
+  - source_sentence: How do RFvLLMModelConfig and RFOpenAIAPIModelConfig compare in terms of their configuration parameters,
+      underlying systems, rate limiting capabilities, and typical use cases?
+    sentences:
+    - "RapidFire AI's execution pipeline for RAG pipelines engineering is split into 2 main stages as illustrated in the figure\
+      \ below:\n\n* **Document Preprocessing:** Workers operate in parallel on the base data and produce preprocessed data\
+      \ that is stored in a vector store.\n\n* **Query Processing:** Workers operate in parallel on the eval set examples\
+      \ to embed them, retrieve relevant chunks from the vector store, rerank them, construct the full context, and then generate\
+      \ the outputs.\n\n\n.. image:: /images/ragspec-2.png\n   :width: 800px\n\n\n\nDepending on the state of your use case's\
+      \ data, you can invoke only the Query Processing stage or both stages in one go via the same :class:`RFLangChainRagSpec`\
+      \ depending on what arguments are provided:\n\n* **With Preprocessing:** This creates both Document Preprocessing workers\
+      \ and Query Processing workers. Provide :code:`document_loader`, optional :code:`text_splitter`, :code:`embedding_cfg`,\
+      \ and optional :code:`vector_store_cfg`. The document preprocessing workers operate on the base data, produce chunks\
+      \ (if :code:`text_splitter` provided), embed the chunks (or the whole documents if :code:`text_splitter` is skipped),\
+      \ and store them in the vector store. If :code:`vector_store_cfg` is not provided, RapidFire AI defaults to creating\
+      \ a FAISS flat vector store for you.\n\n* **Without Preprocessing:** This creates only Query Processing workers that\
+      \ operate the optionally provided preprocessed vector store. Provide optional :code:`embedding_cfg` to apply to the\
+      \ queries (same as what produced the vector store), an optional :code:`retriever` and/or :code:`vector_store_cfg`, an\
+      \ optional :code:`search_cfg`, and an optional :code:`reranker_cfg`. Note that for plain context engineering use cases\
+      \ without RAG, there is no embedding, retrieval, or reranking; for few-shot prompting without RAG, you can provide :code:`embedding_cfg`\
+      \ and similarity search knobs for the examples.\n"
+    - "    :param search_cfg: The search algorithm type and its kwargs to use for retrieval of vectors/chunks, provided as\
+      \ a single dictionary. Must include a key :code:`\"type\"` with one of the following three options listed as value;\
+      \ default is :code:`\"similarity\"`.\n\n      * :code:`\"similarity\"`: Standard cosine similarity search.\n      *\
+      \ :code:`\"similarity_score_threshold\"`: Similarity search with minimum score threshold (SST).\n      * :code:`\"mmr\"\
+      `: Maximum Marginal Relevance (MMR) search for diversity.\n\n      Additional parameters for search configuration depend\
+      \ on the type; the keys can include the following:\n\n      * :code:`\"k\"`: Number of documents to retrieve. Default\
+      \ is 5.\n      * :code:`\"filter\"`: Optional filter criteria function for search results.\n      * :code:`\"score_threshold\"\
+      `: Only for SST. Minimum similarity score threshold. \n      * :code:`\"fetch_k\"`: Only for MMR. Number of documents\
+      \ to fetch before MMR reranking. Default is 20.\n      * :code:`\"lambda_mult\"`: Only for MMR. Diversity parameter\
+      \ for MMR balancing relevance vs. diversity. Default is 0.5.\n    :type search_cfg: dict, optional"
+    - "RFPromptManager\n------\n\nThis class wraps around some LangChain APIs to manage dynamic few-shot example selection.\
+      \ It provides semantic \nsimilarity-based example selection to construct prompts with the most relevant examples for\
+      \ each input query.\n\nThe individual arguments (knobs) can be :class:`List` valued or :class:`Range` valued in an :class:`RFPromptManager`.\
+      \ \nThat is how you can specify a base set of knob combinations from which a config group can be produced. \nAlso read\
+      \ :doc:`the Multi-Config Specification page</configs>`.\n\n.. py:class:: RFPromptManager\n\n  :param instructions: The\
+      \ main instructions for the prompt that guide the generator's behavior. This sets the overall task description and role\
+      \ for the assistant. Either this or :code:`instructions_file_path` must be provided.\n  :type instructions: str, optional\n\
+      \n  :param instructions_file_path: Path to a file containing the instructions. Use this as an alternative to the :code:`instructions`\
+      \ parameter for loading instructions from a file, say, if they are very long.\n  :type instructions_file_path: str,\
+      \ optional\n\n  :param examples: A list of example dictionaries for few-shot learning. Each example should be a dictionary\
+      \ with keys matching the expected input-output format (e.g., \"question\" and \"answer\").\n  :type examples: list[dict[str,\
+      \ str]], optional\n\n\n  :param embedding_cfg: The embedding class and its kwargs to use for computing semantic similarity\
+      \ between examples and queries, provided as a single dictionary. Must include a key :code:`\"class\"` with the class\
+      \ itself as value, not an instance. Options for the class include :class:`HuggingFaceEmbeddings` and :class:`OpenAIEmbeddings`.\
+      \ The kwargs that follow must contain all parameters needed to initialize the embedding class; required parameters vary\
+      \ by embedding class. For example, :class:`HuggingFaceEmbeddings` needs :code:`model_name`, :code:`model_kwargs` and\
+      \ :code:`device`, while :class:`OpenAIEmbeddings` needs :code:`\"model\"` and :code:`\"api_key\"`.\n  :type embedding_cfg:\
+      \ dict[str, Any], optional\n\n\n  :param example_selector_cls: The example selector class that determines how to choose\
+      \ relevant examples based on the input query. Must be either :code:`SemanticSimilarityExampleSelector` or :code:`MaxMarginalRelevanceExampleSelector`\
+      \ (for diversity) from LangChain.\n  :type example_selector_cls: type[MaxMarginalRelevanceExampleSelector | SemanticSimilarityExampleSelector],\
+      \ optional\n\n  :param example_prompt_template: A LangChain :code:`PromptTemplate` that defines how to format each example.\
+      \ Should specify :code:`input_variables` and a :code:`template` string with placeholders matching the keys in the examples\
+      \ dictionaries.\n  :type example_prompt_template: PromptTemplate, optional\n\n  :param k: Number of most similar or\
+      \ diverse examples to retrieve and include in the prompt for each query. Default is 3.\n  :type k: int, optional\n\n\
+      \  .. seealso::\n     - `LangChain Example Selectors <https://api.python.langchain.com/en/latest/core_api_reference.html#module-langchain_core.example_selectors/>`_\n\
+      \     - `LangChain Embeddings <https://reference.langchain.com/python/langchain/embeddings/>`_\n\n\n**Example:**\n\n\
+      .. code-block:: python\n\n\t# Based on GSM8K chatbot tutorial notebook; specify your INSTRUCTIONS beforehand\n\tfewshot_prompt_manager\
+      \ = RFPromptManager(\n\t\tinstructions=INSTRUCTIONS,\n\t\texamples=examples,\n\t\tembedding_cfg={\n\t\t\t\"class\":\
+      \ HuggingFaceEmbeddings,\n\t\t\t\"model_name\": \"sentence-transformers/all-MiniLM-L6-v2\",\n\t\t\t\"model_kwargs\"\
+      : {\"device\": \"cuda:0\"},\n\t\t\t\"encode_kwargs\": {\"normalize_embeddings\": True, \"batch_size\": batch_size},\n\
+      \    \t},\n\t\texample_selector_cls=SemanticSimilarityExampleSelector,\n\t\texample_prompt_template=PromptTemplate(\n\
+      \t\t\tinput_variables=[\"question\", \"answer\"],\n\t\t\ttemplate=\"Question: {question}\\nAnswer: {answer}\",\n\t\t\
+      ),\n\t\tk=List([3, 5]),  # 2 different k values\n\t)"
+  - source_sentence: How do the Stop and Delete IC Ops compare in terms of their effects on a run's state, visibility on the
+      dashboard, resource usage, artifact preservation, and what further IC Ops can be performed on the run afterward?
+    sentences:
+    - '`see its details on Hugging Face <https://huggingface.co/datasets/trl-lib/ultrafeedback_binarized>`__.
+
+      We use a sample of 500 training examples for tractable demo runtimes. '
+    - "Run Fit\n------\n\nThe main function to launch training (including LLM fine-tuning and post-training) and evaluation\
+      \ for a given config group in one go. \nSee :doc:`the Multi-Config Specification page</configs>` for more details on\
+      \ how to construct a config group. \n\n.. py:function:: run_fit(self, param_config: Any, create_model_fn: Callable,\
+      \ train_dataset: Dataset, eval_dataset: Dataset, num_chunks: int, seed: int=42, num_gpus: int) -> None:\n\n\t:param\
+      \ param_config: A train config knob dictionary, a generated config group, or a :code:`list` of configs or config groups\n\
+      \t:type param_config: Train config-group or list as described in :doc:`the Multi-Config Specification page</configs>`\n\
+      \n\t:param create_model_fn: User-given function to create a model instance; a single cfg is passed as input by the system\n\
+      \t:type create_model_fn: Callable\n\n\t:param train_dataset: Training dataset\n\t:type train_dataset: Dataset\n\n\t\
+      :param eval_dataset: Evaluation dataset to measure eval metrics\n\t:type eval_dataset: Dataset\n\n\t:param num_chunks:\
+      \ Number of logical splits of data to control degree of concurrency for multi-config execution (recommended: at least\
+      \ 4)\n\t:type num_chunks: int\n\n\t:param seed: Seed for any randomness used in your code (default: 42)\n\t:type seed:\
+      \ int, optional\n\n\t:param num_gpus: Number of GPUs to use per run/config for each config represented in :code:`param_config`;\
+      \ overriden by any :code:`num_gpus` given in :code:`RFModelConfig` for those associated configs.\n\t:type num_gpus:\
+      \ int, optional\n\n\t:return: None\n\t:rtype: None\n\n**Example:**\n\n.. code-block:: python\n\n\t# Based on SFT chatbot\
+      \ tutorial notebook\n\t>>> experiment.run_fit(config_group, sample_create_model, train_dataset, eval_dataset, num_chunks=4,\
+      \ seed=42)\n\tStarted 4 worker processes successfully ...\n\n**Notes:**\n\nThis method auto-generates the ML metrics\
+      \ files as per user specification and auto-plots them on the dashboard.\nWithin an experiment, you can rerun :func:`run_fit()`\
+      \ as many times as you want. All of them \nwill be overlaid on the same plots on the ML metrics dashboard.\nNote that\
+      \ :func:`run_fit()` must be actively running for you to be able to use Interactive Control (IC) \nops on the dashboard.\n\
+      \nThe :code:`param_config` argument is very versatile in allowing you to construct various knob combinations \nand launch\
+      \ them in one go.  \nIt can be a single config dictionary, a :code:`list` of config dictionaries, a config group generator\
+      \ output \n(:func:`RFGridSearch()` or :func:`RFRandomSearch()` for now), or even a :code:`list` with mix of configs\
+      \ or \nconfig group generator outputs as its elements.\nPlease see the :doc:`the Multi-Config Specification page</search>`\
+      \ for more details. \n\nEach individual config is passed as input to your :func:`create_model_fn()`. Inside it you can\
+      \ use whatever \nknob you set in the config group, e.g., model type or name to instantiate a model accordingly. \nYou\
+      \ can import models from libraries such as HuggingFace transformers or load your own PyTorch checkpoints.\n\nThe :code:`num_chunks`\
+      \ argument is a critical one that enables you to balance a higher degree of concurrency \nyou desire for cross-config\
+      \ comparisons against the (relatively minor) extra swapping overhead incurred. \nWe recommend at least 4, which means\
+      \ you will see results for all runs on 1/4th of the data at a time.\n"
+    - "Experiment Constructor \n------\n\nConstructor to instantiate a new experiment. \n\n.. py:function:: __init__(self,\
+      \ experiment_name: str, mode: str = \"fit\", experiments_path: str = \"./rapidfire_experiments\") -> None\n\n\t:param\
+      \ experiment_name: Unique name for this experiment\n\t:type experiment_name: str\n\t\n\t:param mode: Mode of this experiment,\
+      \ either :code:`\"fit\"` or :code:`\"eval\"`; default is :code:`\"fit\"`\n\t:type mode: str\n\t\n\t:param experiments_path:\
+      \ Path to a folder to store this experiment's artifacts. Default is ``\"./rapidfire_experiments\"``)\n\t:type experiments_path:\
+      \ str, optional \n\n\t:return: None\n\t:rtype: None\n"
+  - source_sentence: How do you set up and use Pinecone as an external vector store in RapidFire AI's RAG pipeline, including
+      configuring create, read, and update modes?
+    sentences:
+    - "Confidence Intervals\n--------------------\n\nThe data points in the evals dataset are **assigned to shards uniformly\
+      \ randomly**, i.e., \nRapidFire AI performs sampling without replacement. \nBased on that, it supports 3 strategies\
+      \ to calculate confidence intervals for projected estimates of metrics. \nYou can indicate the confidence level (we\
+      \ recommend 95%) and whether to perform \"finite population correction\" (FPC) or not. \nThese values can be specified\
+      \ under the key :code:`\"online_strategy_kwargs\"` in your config dictionary as illustrated below.\n\n.. code-block::\
+      \ python\n\n    # Based on FiQA RAG tutorial use case\n    \"online_strategy_kwargs\": {\n        \"strategy_name\"\
+      : \"normal\",\n        \"confidence_level\": 0.95,\n        \"use_fpc\": True,\n    },\n\nNotation \n^^^^^^^\n\n* :math:`N`\
+      \ = Total population size (total number of queries in eval set)\n* :math:`n` = Sample size (number of queries processed\
+      \ so far)\n* :math:`\\hat{p}` = Observed sample proportion or average for an algebraic metric\n* :math:`\\bar{X}` =\
+      \ Sample mean for a distributive metric\n* :math:`\\widehat{T}` = Estimated population total for a distributive metric\n\
+      * :math:`\\text{Var}(\\widehat{T})` = Variance of the above estimated population total\n* :math:`\\text{SE}` = Standard\
+      \ error (measure of estimate uncertainty)\n* :math:`\\text{CI}` = Confidence interval\n* :math:`z` = Z-score for confidence\
+      \ level (1.96 for 95% confidence; used in Normal and Wilson)\n* :math:`\\alpha` = Significance level (0.05 for 95% confidence)\n\
+      * :math:`n_{\\text{eff}}` = Effective sample size (adjusted for FPC in Wilson)\n* :math:`a, b` = Lower and upper bounds\
+      \ of metric value range\n* :math:`R` = Range width, :math:`R = b - a`\n* :math:`\\varepsilon` = Margin of error (half-width\
+      \ of confidence interval for Hoeffding)\n* :math:`\\varepsilon_{\\bar{X}}` = Margin of error for sample mean (Hoeffding\
+      \ distributive)\n* :math:`\\text{FPC}` = Finite population correction factor\n\n\nFinite Population Correction (FPC)\n\
+      ^^^^^^^^^^^^^^^^^^^^^^\n\nWhen sampling without replacement from finite populations, enabling FPC \nmultiplies the standard\
+      \ error (SE) by :math:`\\text{FPC} = \\sqrt{(N-n)/(N-1)}` \nwhere :math:`N` is population size and :math:`n` is sample\
+      \ size.\n\n\nNormal Approximation\n^^^^^^^^^^^^^^^^^^^\n\nThis is the default strategy, and it uses the Central Limit\
+      \ Theorem. \nIt is suitable for most cases with non-trivial sample sizes (n > 30). \nIt provides tight intervals when\
+      \ the statistical assumptions hold.\n\n* For algebraic metrics:\n\n.. math::\n\n   \\text{SE}_{\\hat{p}} = \\sqrt{\\\
+      frac{\\hat{p}(1-\\hat{p})}{n}} \\times \\text{FPC}\n\n   \\text{CI} = \\hat{p} \\pm 1.96 \\cdot \\text{SE}_{\\hat{p}}\n\
+      \n\n* For distributive metrics: \n\nEstimate population total :math:`\\widehat{T} = N\\bar{X}` with \nvariance :math:`\\\
+      text{Var}(\\widehat{T}) = N^2 \\cdot \\bar{X}(1-\\bar{X})/n` (FPC-adjusted).\n\n\nWilson Score\n^^^^^^^^^^^\n\nThis\
+      \ strategy is better for small sample sizes or metrics near 0/1 boundaries. \nIt is more robust than Normal Approximation\
+      \ for extreme proportions. \n\n* For algebraic metrics:\n\n.. math::\n\n   \\text{center} = \\frac{\\hat{p} + z^2/(2n_{\\\
+      text{eff}})}{1 + z^2/n_{\\text{eff}}}\n\n   \\text{margin} = \\frac{z\\sqrt{\\hat{p}(1-\\hat{p})/n_{\\text{eff}} + z^2/(4n_{\\\
+      text{eff}}^2)}}{1 + z^2/n_{\\text{eff}}}\n\nwhere :math:`n_{\\text{eff}} = n/\\text{FPC}^2` when using FPC. \nThe Wilson\
+      \ confidence interval is then :math:`[\\text{center} - \\text{margin}, \\text{center} + \\text{margin}]`,\nclamped to\
+      \ [0, 1].\n\n* For distributive metrics, this falls back to Normal Approximation. \n\n\n\nHoeffding Bounds\n^^^^^^^^^^^\n\
+      \nThis strategy is best for maximum safety (guaranteed coverage). It makes no distributional assumptions, \nbut that\
+      \ also means its intervals are typically quite loose.\n\n.. math::\n\n   \\varepsilon = (b-a)\\sqrt{\\frac{\\ln(2/\\\
+      alpha)}{2n}} \\times \\text{FPC}\n\n   \\text{CI} = [\\hat{p} - \\varepsilon, \\hat{p} + \\varepsilon]\n\nFor distributive\
+      \ metrics with range :math:`R=b-a`, it computes :math:`\\varepsilon_{\\bar{X}} = R\\sqrt{\\ln(2/\\alpha)/(2n)}` \nand\
+      \ then scales to population total."
+    - 'just start rapidfireai again with the above command.
+
+
+      If the start command fails for whatever reason, wait for half a minute and rerun it.
+
+      For diagnostics and common fixes (including Linux/macOS and Windows steps), see :doc:`Troubleshooting </troubleshooting>`.
+
+      '
+    - "Eval Accumulate Metrics Function\n----------------------------\n\nOptional user-provided function to aggregate algebraic\
+      \ eval metrics across all batches of the data. \nIf this function is not provided, all metrics returned by :func:`eval.compute_metrics_fn()`\
+      \ \nwill be assumed to be distributive (i.e., summed across batches) by default. Use this function \nwhen metrics require\
+      \ (weighted) averaging or other custom dataset-wide aggregation logic.\n\nIt is invoked once at the very end of the\
+      \ evaluation process after all batches have been processed.\nPass it directly to the :code:`accumulate_metrics_fn` key\
+      \ in your eval config dictionary.\n\n\n.. py:function:: eval.accumulate_metrics_fn(aggregated_metrics: dict[str, list[dict[str,\
+      \ Any]]]) -> dict[str, dict[str, Any]]\n\n   :param aggregated_metrics: Dictionary with a metric's name as key and a\
+      \ list of per-batch metric dictionaries as values from across all data batches. Inside each value dictionary, at least\
+      \ the reserved key :code:`\"value\"` will exist that was returned by your :code:`eval_compute_metrics_fn` function.\n\
+      \   :type aggregated_metrics: dict[str, list[dict[str, Any]]]\n\n   :return: Dictionary with a metric's name as key\
+      \ and a dictionary as value. The value dictionary can have these keys:\n   \n      * :code:`\"value\"` (required): The\
+      \ metric's value over the whole dataset.\n      * :code:`\"is_algebraic\"` (optional): Boolean indicating if the metric\
+      \ is algebraic.\n      * :code:`\"is_distributive\"` (optional): Boolean indicating if the metric is distributive.\n\
+      \      * :code:`\"value_range\"` (optional): 2-tuple of floats specifying the metric's range min and max.\n      \n\
+      \      For online aggregation support, see :doc:`the Online Aggregation for Evals page</onlineagg>`.\n\n   :rtype: dict[str,\
+      \ dict[str, Any]]\n\n\n**Example:**\n\n.. code-block:: python\n\n    # Example 1 from GSM8K use case: Weighted aggregation\
+      \ for accuracy computation\n    def sample_accumulate_metrics_fn(aggregated_metrics: dict[str, list]) -> dict[str, dict[str,\
+      \ Any]]:\n        \"\"\"Function to accumulate eval metrics across all batches\"\"\"\n\n        correct = sum(m.get(\"\
+      value\", 0) for m in aggregated_metrics.get(\"Correct\", [{}]))\n        total = sum(m.get(\"value\", 0) for m in aggregated_metrics.get(\"\
+      Total\", [{}]))\n        accuracy = correct / total if total > 0 else 0\n        return {\n            \"Total\": {\"\
+      value\": total},\n            \"Correct\": {\n                \"value\": correct,\n                \"is_distributive\"\
+      : True,\n                \"value_range\": (0, 1),\n            },\n            \"Accuracy\": {\n                \"value\"\
+      : accuracy,\n                \"is_algebraic\": True,\n                \"value_range\": (0, 1),\n            },\n   \
+      \     }"
+  pipeline_tag: sentence-similarity
+  library_name: sentence-transformers
+siblings:
+- rfilename: .gitattributes
+- rfilename: 1_Pooling/config.json
+- rfilename: README.md
+- rfilename: config.json
+- rfilename: config_sentence_transformers.json
+- rfilename: model.safetensors
+- rfilename: modules.json
+- rfilename: sentence_bert_config.json
+- rfilename: tokenizer.json
+- rfilename: tokenizer_config.json
+spaces: []
+createdAt: '2026-05-01T00:35:49.000Z'
+safetensors:
+  parameters:
+    F32: 22713216
+  total: 22713216
+usedStorage: 90864176
+downloadsAllTime: 29
+inferenceProviderMapping: {}
+configJson:
+  add_cross_attention: false
+  architectures:
+  - BertModel
+  attention_probs_dropout_prob: 0.1
+  bos_token_id: null
+  classifier_dropout: null
+  dtype: float32
+  eos_token_id: null
+  gradient_checkpointing: false
+  hidden_act: gelu
+  hidden_dropout_prob: 0.1
+  hidden_size: 384
+  initializer_range: 0.02
+  intermediate_size: 1536
+  is_decoder: false
+  layer_norm_eps: 1.0e-12
+  max_position_embeddings: 512
+  model_type: bert
+  num_attention_heads: 12
+  num_hidden_layers: 6
+  pad_token_id: 0
+  position_embedding_type: absolute
+  tie_word_embeddings: true
+  transformers_version: 5.0.0
+  type_vocab_size: 2
+  use_cache: true
+  vocab_size: 30522
+onnxFiles: {}
+safetensorsSizeMb: 90.9
+approxSizeMb: 90.9
+fetchedAt: '2026-06-09T06:55:53.000Z'

@@ -1,0 +1,641 @@
+_id: 67d0cc5a8af86db11d9aa4df
+id: Lauther/measuring-embeddings-v4.1
+private: false
+pipeline_tag: sentence-similarity
+library_name: sentence-transformers
+tags:
+- sentence-transformers
+- safetensors
+- xlm-roberta
+- sentence-similarity
+- feature-extraction
+- generated_from_trainer
+- dataset_size:3075
+- loss:CoSENTLoss
+- dataset:Lauther/measuring-embeddings-v4
+- arxiv:1908.10084
+- base_model:intfloat/multilingual-e5-large-instruct
+- base_model:finetune:intfloat/multilingual-e5-large-instruct
+- text-embeddings-inference
+- endpoints_compatible
+- region:us
+downloads: 2
+likes: 0
+modelId: Lauther/measuring-embeddings-v4.1
+author: Lauther
+sha: e1ebcfcdc3bc0079a0d09093406a130b5347fb81
+lastModified: '2025-03-11T23:51:38.000Z'
+gated: false
+disabled: false
+mask_token: <mask>
+widgetData:
+- source_sentence: last calibrated span
+  sentences:
+  - 'What is a Calibration Point?
+
+    A Calibration Point represents a specific data entry in a calibration process, comparing an expected reference value to
+    an actual measured value. These points are fundamental in ensuring measurement accuracy and identifying deviations.
+
+
+    Key Aspects of Calibration Points:
+
+    - Calibration Report Association: Each calibration point belongs to a specific calibration report, linking it to a broader
+    calibration procedure.
+
+    - Reference Values: Theoretical or expected values used as a benchmark for measurement validation.
+
+    - Measured Values: The actual recorded values during calibration, reflecting the instrument’s response.
+
+    - Errors: The difference between reference and measured values, indicating possible measurement inaccuracies.
+
+    Calibration points are essential for evaluating instrument performance, ensuring compliance with standards, and maintaining
+    measurement reliability.'
+  - 'What is Equipment?
+
+    An Equipment represents a physical device that may be used within a measurement system. Equipment can be active or inactive
+    and is classified by type, such as transmitters, thermometers, or other measurement-related devices.
+
+
+    Key Aspects of Equipment:
+
+    - Serial Number: A unique identifier assigned to each equipment unit for tracking and reference.
+
+    - Current State: Indicates whether the equipment is currently in use (ACT) or inactive (INA).
+
+    - Associated Equipment Type: Defines the category of the equipment (e.g., transmitter, thermometer), allowing classification
+    and management.
+
+    Equipment plays a critical role in measurement systems, ensuring accuracy and reliability in data collection and processing.'
+  - 'What is an Equipment Tag?
+
+    An Equipment Tag is a unique identifier assigned to equipment that is actively installed and in use within a measurement
+    system. It differentiates between equipment in general (which may be in storage or inactive) and equipment that is currently
+    operational in a system.
+
+
+    Key Aspects of Equipment Tags:
+
+    - Equipment-Tag: A distinct label or identifier that uniquely marks the equipment in operation.
+
+    - Equipment ID: Links the tag to the corresponding equipment unit.
+
+    - Belonging Measurement System: Specifies which measurement system the tagged equipment is part of.
+
+    - Equipment Type Name: Classifies the equipment (e.g., transmitter, thermometer), aiding in organization and system integration.
+
+    The Equipment Tag is essential for tracking and managing operational equipment within a measurement system, ensuring proper
+    identification, monitoring, and maintenance.'
+- source_sentence: transmitter calibration record
+  sentences:
+  - 'What are historical report values?
+
+    These represent the recorded data points within flow computer reports. Unlike the report index, which serves as a reference
+    to locate reports, these values contain the actual measurements and calculated data stored in the historical records.
+
+
+    Flow computer reports store two types of data values:
+
+
+    - **Hourly data values**: Contain measured or calculated values (e.g., operational minutes, alarms set, etc.) recorded
+    on an hourly basis.
+
+    - **Daily data values**: Contain measured or calculated values (e.g., operational minutes, alarms set, etc.) recorded
+    on a daily basis.
+
+    Each value is directly linked to its respective report index, ensuring traceability to the original flow computer record.
+    These values maintain their raw integrity, providing a reliable source for analysis and validation.'
+  - 'What is a Flow Computer Firmware?
+
+    A flow computer firmware is a software component that defines the functionality and behavior of a flow computer.
+
+
+    🔹 Key Characteristics:
+
+
+    Each firmware version (e.g., F407, FB107, EMED-010) is linked to a specific flow computer model.
+
+    Firmware versions can have a status indicating whether they are active or inactive.
+
+    They determine how the flow computer processes measurements, calculations, and system operations.
+
+    📌 Database Tip: When querying firmware information, ensure the firmware version is matched with the correct flow computer
+    type for accurate results.'
+  - 'What is an Uncertainty Curve Point?
+
+    An Uncertainty Curve Point represents a data point used to construct the uncertainty curve of a measurement system. These
+    curves help analyze how measurement uncertainty behaves under different flow rate conditions, ensuring accuracy and reliability
+    in uncertainty assessments.
+
+
+    Key Aspects of an Uncertainty Curve Point:
+
+    - Uncertainty File ID: Links the point to the specific uncertainty dataset, ensuring traceability.
+
+    Equipment Tag ID: Identifies the equipment associated with the uncertainty measurement, crucial for system validation.
+
+    - Uncertainty Points: Represent uncertainty values recorded at specific conditions, forming part of the overall uncertainty
+    curve.
+
+    - Flow Rate Points: Corresponding flow rate values at which the uncertainty was measured, essential for evaluating performance
+    under varying operational conditions.
+
+    These points are fundamental for generating uncertainty curves, which are used in calibration, validation, and compliance
+    assessments to ensure measurement reliability in industrial processes.'
+- source_sentence: measurement systems
+  sentences:
+  - 'What is a Calibration Record?
+
+    A Calibration Record documents the calibration process of a specific equipment tag, ensuring that its measurements remain
+    accurate and reliable. Calibration is a critical process in maintaining measurement precision and compliance with standards.
+
+
+    Key Aspects of a Calibration Record:
+
+    - Calibration Date: The exact date when the calibration was performed, crucial for tracking maintenance schedules.
+
+    - Certification Number: A unique identifier for the calibration certificate, providing traceability and verification of
+    compliance.
+
+    - Range Values: The minimum and maximum measurement values covered during the calibration process.
+
+    - Calibration Status: Indicates whether the calibration was approved or saved for further review.
+
+    - Associated Units: Specifies the measurement units used in calibration (e.g., °C, psi).
+
+    - Associated Equipment Tag ID: Links the calibration record to a specific equipment tag, ensuring traceability of measurement
+    instruments.
+
+    Calibration records play a fundamental role in quality assurance, helping maintain measurement integrity and regulatory
+    compliance.'
+  - 'What is a flow computer?
+
+    A flow computer is a device used in measurement engineering. It collects analog and digital data from flow meters and
+    other sensors.
+
+
+    Key features of a flow computer:
+
+    - It has a unique name, firmware version, and manufacturer information.
+
+    - It is designed to record and process data such as temperature, pressure, and fluid volume (for gases or oils).'
+  - 'What is a Measured Magnitude Value?
+
+    A Measured Magnitude Value represents a recorded physical measurement of a variable within a monitored fluid. These values
+    are essential for tracking system performance, analyzing trends, and ensuring accurate monitoring of fluid properties.
+
+
+    Key Aspects of a Measured Magnitude Value:
+
+    - Measurement Date: The timestamp indicating when the measurement was recorded.
+
+    - Measured Value: The actual numeric result of the recorded physical magnitude.
+
+    - Measurement System Association: Links the measured value to a specific measurement system responsible for capturing
+    the data.
+
+    - Variable Association: Identifies the specific variable (e.g., temperature, pressure, flow rate) corresponding to the
+    recorded value.
+
+    Measured magnitude values are crucial for real-time monitoring, historical analysis, and calibration processes within
+    measurement systems.'
+- source_sentence: measurement system tag
+  sentences:
+  - 'What is a Meter Stream?
+
+    A Meter Stream represents a measurement system configured within a flow computer. It serves as the interface between the
+    physical measurement system and the computational processes that record and analyze flow data.
+
+
+    Key Aspects of a Meter Stream:
+
+    - Status: Indicates whether the meter stream is active or inactive.
+
+    - Measurement System Association: Links the meter stream to a specific measurement system, ensuring that the data collected
+    corresponds to a defined physical setup.
+
+    - Flow Computer Association: Identifies the flow computer responsible for managing and recording the measurement system''s
+    data.
+
+    Why is a Meter Stream Important?
+
+    A **meter stream** is a critical component in flow measurement, as it ensures that the measurement system is correctly
+    integrated into the flow computer for accurate monitoring and reporting. Since each flow computer can handle multiple
+    meter streams, proper configuration is essential for maintaining data integrity and traceability.'
+  - 'What is an Equipment Tag?
+
+    An Equipment Tag is a unique identifier assigned to equipment that is actively installed and in use within a measurement
+    system. It differentiates between equipment in general (which may be in storage or inactive) and equipment that is currently
+    operational in a system.
+
+
+    Key Aspects of Equipment Tags:
+
+    - Equipment-Tag: A distinct label or identifier that uniquely marks the equipment in operation.
+
+    - Equipment ID: Links the tag to the corresponding equipment unit.
+
+    - Belonging Measurement System: Specifies which measurement system the tagged equipment is part of.
+
+    - Equipment Type Name: Classifies the equipment (e.g., transmitter, thermometer), aiding in organization and system integration.
+
+    The Equipment Tag is essential for tracking and managing operational equipment within a measurement system, ensuring proper
+    identification, monitoring, and maintenance.'
+  - 'What is a measurement system?
+
+    **Measurement systems** are essential components in industrial measurement and processing. They are identified by a unique
+    **Tag** and are associated with a specific **installation** and **fluid type**. These systems utilize different **measurement
+    technologies**, including **differential (DIF)** and **linear (LIN)**, depending on the application. Measurement systems
+    can be classified based on their **application type**, such as **fiscal** or **custody transfer**.  '
+- source_sentence: uncertainty points
+  sentences:
+  - 'What is a Calibration Point?
+
+    A Calibration Point represents a specific data entry in a calibration process, comparing an expected reference value to
+    an actual measured value. These points are fundamental in ensuring measurement accuracy and identifying deviations.
+
+
+    Key Aspects of Calibration Points:
+
+    - Calibration Report Association: Each calibration point belongs to a specific calibration report, linking it to a broader
+    calibration procedure.
+
+    - Reference Values: Theoretical or expected values used as a benchmark for measurement validation.
+
+    - Measured Values: The actual recorded values during calibration, reflecting the instrument’s response.
+
+    - Errors: The difference between reference and measured values, indicating possible measurement inaccuracies.
+
+    Calibration points are essential for evaluating instrument performance, ensuring compliance with standards, and maintaining
+    measurement reliability.'
+  - 'What is a Meter Stream?
+
+    A Meter Stream represents a measurement system configured within a flow computer. It serves as the interface between the
+    physical measurement system and the computational processes that record and analyze flow data.
+
+
+    Key Aspects of a Meter Stream:
+
+    - Status: Indicates whether the meter stream is active or inactive.
+
+    - Measurement System Association: Links the meter stream to a specific measurement system, ensuring that the data collected
+    corresponds to a defined physical setup.
+
+    - Flow Computer Association: Identifies the flow computer responsible for managing and recording the measurement system''s
+    data.
+
+    Why is a Meter Stream Important?
+
+    A **meter stream** is a critical component in flow measurement, as it ensures that the measurement system is correctly
+    integrated into the flow computer for accurate monitoring and reporting. Since each flow computer can handle multiple
+    meter streams, proper configuration is essential for maintaining data integrity and traceability.'
+  - 'What is a Fluid?
+
+    A Fluid is the substance measured within a measurement system. It can be a gas or liquid, such as hydrocarbons, water,
+    or other industrial fluids. Proper classification of fluids is essential for ensuring measurement accuracy, regulatory
+    compliance, and operational efficiency. By identifying fluids correctly, the system applies the appropriate measurement
+    techniques, processing methods, and reporting standards.'
+model-index: null
+config:
+  architectures:
+  - XLMRobertaModel
+  model_type: xlm-roberta
+  tokenizer_config:
+    bos_token: <s>
+    cls_token: <s>
+    eos_token: </s>
+    mask_token: <mask>
+    pad_token: <pad>
+    sep_token: </s>
+    unk_token: <unk>
+cardData:
+  tags:
+  - sentence-transformers
+  - sentence-similarity
+  - feature-extraction
+  - generated_from_trainer
+  - dataset_size:3075
+  - loss:CoSENTLoss
+  base_model: intfloat/multilingual-e5-large-instruct
+  widget:
+  - source_sentence: last calibrated span
+    sentences:
+    - 'What is a Calibration Point?
+
+      A Calibration Point represents a specific data entry in a calibration process, comparing an expected reference value
+      to an actual measured value. These points are fundamental in ensuring measurement accuracy and identifying deviations.
+
+
+      Key Aspects of Calibration Points:
+
+      - Calibration Report Association: Each calibration point belongs to a specific calibration report, linking it to a broader
+      calibration procedure.
+
+      - Reference Values: Theoretical or expected values used as a benchmark for measurement validation.
+
+      - Measured Values: The actual recorded values during calibration, reflecting the instrument’s response.
+
+      - Errors: The difference between reference and measured values, indicating possible measurement inaccuracies.
+
+      Calibration points are essential for evaluating instrument performance, ensuring compliance with standards, and maintaining
+      measurement reliability.'
+    - 'What is Equipment?
+
+      An Equipment represents a physical device that may be used within a measurement system. Equipment can be active or inactive
+      and is classified by type, such as transmitters, thermometers, or other measurement-related devices.
+
+
+      Key Aspects of Equipment:
+
+      - Serial Number: A unique identifier assigned to each equipment unit for tracking and reference.
+
+      - Current State: Indicates whether the equipment is currently in use (ACT) or inactive (INA).
+
+      - Associated Equipment Type: Defines the category of the equipment (e.g., transmitter, thermometer), allowing classification
+      and management.
+
+      Equipment plays a critical role in measurement systems, ensuring accuracy and reliability in data collection and processing.'
+    - 'What is an Equipment Tag?
+
+      An Equipment Tag is a unique identifier assigned to equipment that is actively installed and in use within a measurement
+      system. It differentiates between equipment in general (which may be in storage or inactive) and equipment that is currently
+      operational in a system.
+
+
+      Key Aspects of Equipment Tags:
+
+      - Equipment-Tag: A distinct label or identifier that uniquely marks the equipment in operation.
+
+      - Equipment ID: Links the tag to the corresponding equipment unit.
+
+      - Belonging Measurement System: Specifies which measurement system the tagged equipment is part of.
+
+      - Equipment Type Name: Classifies the equipment (e.g., transmitter, thermometer), aiding in organization and system
+      integration.
+
+      The Equipment Tag is essential for tracking and managing operational equipment within a measurement system, ensuring
+      proper identification, monitoring, and maintenance.'
+  - source_sentence: transmitter calibration record
+    sentences:
+    - 'What are historical report values?
+
+      These represent the recorded data points within flow computer reports. Unlike the report index, which serves as a reference
+      to locate reports, these values contain the actual measurements and calculated data stored in the historical records.
+
+
+      Flow computer reports store two types of data values:
+
+
+      - **Hourly data values**: Contain measured or calculated values (e.g., operational minutes, alarms set, etc.) recorded
+      on an hourly basis.
+
+      - **Daily data values**: Contain measured or calculated values (e.g., operational minutes, alarms set, etc.) recorded
+      on a daily basis.
+
+      Each value is directly linked to its respective report index, ensuring traceability to the original flow computer record.
+      These values maintain their raw integrity, providing a reliable source for analysis and validation.'
+    - 'What is a Flow Computer Firmware?
+
+      A flow computer firmware is a software component that defines the functionality and behavior of a flow computer.
+
+
+      🔹 Key Characteristics:
+
+
+      Each firmware version (e.g., F407, FB107, EMED-010) is linked to a specific flow computer model.
+
+      Firmware versions can have a status indicating whether they are active or inactive.
+
+      They determine how the flow computer processes measurements, calculations, and system operations.
+
+      📌 Database Tip: When querying firmware information, ensure the firmware version is matched with the correct flow computer
+      type for accurate results.'
+    - 'What is an Uncertainty Curve Point?
+
+      An Uncertainty Curve Point represents a data point used to construct the uncertainty curve of a measurement system.
+      These curves help analyze how measurement uncertainty behaves under different flow rate conditions, ensuring accuracy
+      and reliability in uncertainty assessments.
+
+
+      Key Aspects of an Uncertainty Curve Point:
+
+      - Uncertainty File ID: Links the point to the specific uncertainty dataset, ensuring traceability.
+
+      Equipment Tag ID: Identifies the equipment associated with the uncertainty measurement, crucial for system validation.
+
+      - Uncertainty Points: Represent uncertainty values recorded at specific conditions, forming part of the overall uncertainty
+      curve.
+
+      - Flow Rate Points: Corresponding flow rate values at which the uncertainty was measured, essential for evaluating performance
+      under varying operational conditions.
+
+      These points are fundamental for generating uncertainty curves, which are used in calibration, validation, and compliance
+      assessments to ensure measurement reliability in industrial processes.'
+  - source_sentence: measurement systems
+    sentences:
+    - 'What is a Calibration Record?
+
+      A Calibration Record documents the calibration process of a specific equipment tag, ensuring that its measurements remain
+      accurate and reliable. Calibration is a critical process in maintaining measurement precision and compliance with standards.
+
+
+      Key Aspects of a Calibration Record:
+
+      - Calibration Date: The exact date when the calibration was performed, crucial for tracking maintenance schedules.
+
+      - Certification Number: A unique identifier for the calibration certificate, providing traceability and verification
+      of compliance.
+
+      - Range Values: The minimum and maximum measurement values covered during the calibration process.
+
+      - Calibration Status: Indicates whether the calibration was approved or saved for further review.
+
+      - Associated Units: Specifies the measurement units used in calibration (e.g., °C, psi).
+
+      - Associated Equipment Tag ID: Links the calibration record to a specific equipment tag, ensuring traceability of measurement
+      instruments.
+
+      Calibration records play a fundamental role in quality assurance, helping maintain measurement integrity and regulatory
+      compliance.'
+    - 'What is a flow computer?
+
+      A flow computer is a device used in measurement engineering. It collects analog and digital data from flow meters and
+      other sensors.
+
+
+      Key features of a flow computer:
+
+      - It has a unique name, firmware version, and manufacturer information.
+
+      - It is designed to record and process data such as temperature, pressure, and fluid volume (for gases or oils).'
+    - 'What is a Measured Magnitude Value?
+
+      A Measured Magnitude Value represents a recorded physical measurement of a variable within a monitored fluid. These
+      values are essential for tracking system performance, analyzing trends, and ensuring accurate monitoring of fluid properties.
+
+
+      Key Aspects of a Measured Magnitude Value:
+
+      - Measurement Date: The timestamp indicating when the measurement was recorded.
+
+      - Measured Value: The actual numeric result of the recorded physical magnitude.
+
+      - Measurement System Association: Links the measured value to a specific measurement system responsible for capturing
+      the data.
+
+      - Variable Association: Identifies the specific variable (e.g., temperature, pressure, flow rate) corresponding to the
+      recorded value.
+
+      Measured magnitude values are crucial for real-time monitoring, historical analysis, and calibration processes within
+      measurement systems.'
+  - source_sentence: measurement system tag
+    sentences:
+    - 'What is a Meter Stream?
+
+      A Meter Stream represents a measurement system configured within a flow computer. It serves as the interface between
+      the physical measurement system and the computational processes that record and analyze flow data.
+
+
+      Key Aspects of a Meter Stream:
+
+      - Status: Indicates whether the meter stream is active or inactive.
+
+      - Measurement System Association: Links the meter stream to a specific measurement system, ensuring that the data collected
+      corresponds to a defined physical setup.
+
+      - Flow Computer Association: Identifies the flow computer responsible for managing and recording the measurement system''s
+      data.
+
+      Why is a Meter Stream Important?
+
+      A **meter stream** is a critical component in flow measurement, as it ensures that the measurement system is correctly
+      integrated into the flow computer for accurate monitoring and reporting. Since each flow computer can handle multiple
+      meter streams, proper configuration is essential for maintaining data integrity and traceability.'
+    - 'What is an Equipment Tag?
+
+      An Equipment Tag is a unique identifier assigned to equipment that is actively installed and in use within a measurement
+      system. It differentiates between equipment in general (which may be in storage or inactive) and equipment that is currently
+      operational in a system.
+
+
+      Key Aspects of Equipment Tags:
+
+      - Equipment-Tag: A distinct label or identifier that uniquely marks the equipment in operation.
+
+      - Equipment ID: Links the tag to the corresponding equipment unit.
+
+      - Belonging Measurement System: Specifies which measurement system the tagged equipment is part of.
+
+      - Equipment Type Name: Classifies the equipment (e.g., transmitter, thermometer), aiding in organization and system
+      integration.
+
+      The Equipment Tag is essential for tracking and managing operational equipment within a measurement system, ensuring
+      proper identification, monitoring, and maintenance.'
+    - 'What is a measurement system?
+
+      **Measurement systems** are essential components in industrial measurement and processing. They are identified by a
+      unique **Tag** and are associated with a specific **installation** and **fluid type**. These systems utilize different
+      **measurement technologies**, including **differential (DIF)** and **linear (LIN)**, depending on the application. Measurement
+      systems can be classified based on their **application type**, such as **fiscal** or **custody transfer**.  '
+  - source_sentence: uncertainty points
+    sentences:
+    - 'What is a Calibration Point?
+
+      A Calibration Point represents a specific data entry in a calibration process, comparing an expected reference value
+      to an actual measured value. These points are fundamental in ensuring measurement accuracy and identifying deviations.
+
+
+      Key Aspects of Calibration Points:
+
+      - Calibration Report Association: Each calibration point belongs to a specific calibration report, linking it to a broader
+      calibration procedure.
+
+      - Reference Values: Theoretical or expected values used as a benchmark for measurement validation.
+
+      - Measured Values: The actual recorded values during calibration, reflecting the instrument’s response.
+
+      - Errors: The difference between reference and measured values, indicating possible measurement inaccuracies.
+
+      Calibration points are essential for evaluating instrument performance, ensuring compliance with standards, and maintaining
+      measurement reliability.'
+    - 'What is a Meter Stream?
+
+      A Meter Stream represents a measurement system configured within a flow computer. It serves as the interface between
+      the physical measurement system and the computational processes that record and analyze flow data.
+
+
+      Key Aspects of a Meter Stream:
+
+      - Status: Indicates whether the meter stream is active or inactive.
+
+      - Measurement System Association: Links the meter stream to a specific measurement system, ensuring that the data collected
+      corresponds to a defined physical setup.
+
+      - Flow Computer Association: Identifies the flow computer responsible for managing and recording the measurement system''s
+      data.
+
+      Why is a Meter Stream Important?
+
+      A **meter stream** is a critical component in flow measurement, as it ensures that the measurement system is correctly
+      integrated into the flow computer for accurate monitoring and reporting. Since each flow computer can handle multiple
+      meter streams, proper configuration is essential for maintaining data integrity and traceability.'
+    - 'What is a Fluid?
+
+      A Fluid is the substance measured within a measurement system. It can be a gas or liquid, such as hydrocarbons, water,
+      or other industrial fluids. Proper classification of fluids is essential for ensuring measurement accuracy, regulatory
+      compliance, and operational efficiency. By identifying fluids correctly, the system applies the appropriate measurement
+      techniques, processing methods, and reporting standards.'
+  datasets:
+  - Lauther/measuring-embeddings-v4
+  pipeline_tag: sentence-similarity
+  library_name: sentence-transformers
+siblings:
+- rfilename: .gitattributes
+- rfilename: 1_Pooling/config.json
+- rfilename: README.md
+- rfilename: config.json
+- rfilename: config_sentence_transformers.json
+- rfilename: model.safetensors
+- rfilename: modules.json
+- rfilename: sentence_bert_config.json
+- rfilename: special_tokens_map.json
+- rfilename: tokenizer.json
+- rfilename: tokenizer_config.json
+spaces: []
+createdAt: '2025-03-11T23:50:50.000Z'
+safetensors:
+  parameters:
+    F32: 559890432
+  total: 559890432
+usedStorage: 2256690163
+downloadsAllTime: 59
+inferenceProviderMapping: {}
+configJson:
+  _name_or_path: intfloat/multilingual-e5-large-instruct
+  architectures:
+  - XLMRobertaModel
+  attention_probs_dropout_prob: 0.1
+  bos_token_id: 0
+  classifier_dropout: null
+  eos_token_id: 2
+  hidden_act: gelu
+  hidden_dropout_prob: 0.1
+  hidden_size: 1024
+  initializer_range: 0.02
+  intermediate_size: 4096
+  layer_norm_eps: 1.0e-05
+  max_position_embeddings: 514
+  model_type: xlm-roberta
+  num_attention_heads: 16
+  num_hidden_layers: 24
+  output_past: true
+  pad_token_id: 1
+  position_embedding_type: absolute
+  torch_dtype: float32
+  transformers_version: 4.49.0
+  type_vocab_size: 1
+  use_cache: true
+  vocab_size: 250002
+onnxFiles: {}
+safetensorsSizeMb: 2239.6
+approxSizeMb: 2239.6
+fetchedAt: '2026-06-09T06:55:53.000Z'

@@ -1,0 +1,203 @@
+_id: 6802f096b2bd043ea0a6e8b1
+id: yyzheng00/snomed_triplet_800k
+private: false
+pipeline_tag: sentence-similarity
+library_name: sentence-transformers
+tags:
+- sentence-transformers
+- safetensors
+- bert
+- sentence-similarity
+- feature-extraction
+- generated_from_trainer
+- dataset_size:800000
+- loss:TripletLoss
+- arxiv:1908.10084
+- arxiv:1703.07737
+- base_model:sentence-transformers/all-MiniLM-L6-v2
+- base_model:finetune:sentence-transformers/all-MiniLM-L6-v2
+- model-index
+- text-embeddings-inference
+- endpoints_compatible
+- region:us
+downloads: 2
+likes: 0
+modelId: yyzheng00/snomed_triplet_800k
+author: yyzheng00
+sha: a52ccab7b90a7b6c43f766d473d8cf10b3c6464a
+lastModified: '2025-04-19T00:38:55.000Z'
+gated: false
+disabled: false
+mask_token: '[MASK]'
+widgetData:
+- source_sentence: '|Central nervous system complication| + |Cerebral infarction| + |Thrombotic infarction| : { |Finding site|
+    = |Structure of cerebrum|, |Associated morphology| = |Infarct| }, { |Due to| = |Cerebral arterial thrombosis| }'
+  sentences:
+  - Ventricular shunt to circulatory system (procedure)
+  - Cerebral infarction due to thrombosis of cerebral arteries
+  - Proliferative diabetic retinopathy with new vessels on disc (disorder)
+- source_sentence: '|Albuminuria| : { |Interprets| = |Microalbuminuria measurement|, |Has interpretation| = |Above reference
+    range| }'
+  sentences:
+  - Microalbuminuria
+  - Product containing acitretin in oral dose form (medicinal product form)
+  - 1,4-Butanediol diacrylate product
+- source_sentence: '|Measured quantity of intake of plant fiber in 24 hours| + |Soluble fiber intake| : { |Property| = |Quantity
+    rate (property)|, |Characterizes| = |Introduction procedure|, |Process duration| = |24 hours|, |Technique| = |Measurement
+    technique|, |Process acts on| = |Soluble fiber| }'
+  sentences:
+  - Measured quantity of intake of soluble fiber in 24 hours
+  - Phlegmonous dacryocystitis of left eye
+  - Estimated quantity of intake of plant fibre
+- source_sentence: '|Abscess of foot| + |Disorder of left lower extremity| : { |Finding site| = |Structure of left foot|,
+    |Associated morphology| = |Abscess| }'
+  sentences:
+  - Abscess of left foot
+  - Hypertrophy of synovium of both ankles
+  - Product containing only cibachrome brilliant scarlet
+- source_sentence: '|Adverse reaction caused by drug| : { |Causative agent| = |Digestant| }'
+  sentences:
+  - Exudate specimen from wound (specimen)
+  - Adverse reaction caused by digestant (disorder)
+  - Ureteroscopic division of stricture of ureter (procedure)
+model-index:
+- name: SentenceTransformer based on sentence-transformers/all-MiniLM-L6-v2
+  results:
+  - task:
+      type: triplet
+      name: Triplet
+    dataset:
+      name: snomed triplet 800k 3 4 3 dev
+      type: snomed_triplet_800k_3_4_3-dev
+    metrics:
+    - type: cosine_accuracy
+      value: 0.998328125
+      name: Cosine Accuracy
+      verified: false
+    - type: cosine_accuracy
+      value: 0.9983828125
+      name: Cosine Accuracy
+      verified: false
+config:
+  architectures:
+  - BertModel
+  model_type: bert
+  tokenizer_config:
+    cls_token: '[CLS]'
+    mask_token: '[MASK]'
+    pad_token: '[PAD]'
+    sep_token: '[SEP]'
+    unk_token: '[UNK]'
+cardData:
+  tags:
+  - sentence-transformers
+  - sentence-similarity
+  - feature-extraction
+  - generated_from_trainer
+  - dataset_size:800000
+  - loss:TripletLoss
+  base_model: sentence-transformers/all-MiniLM-L6-v2
+  widget:
+  - source_sentence: '|Central nervous system complication| + |Cerebral infarction| + |Thrombotic infarction| : { |Finding
+      site| = |Structure of cerebrum|, |Associated morphology| = |Infarct| }, { |Due to| = |Cerebral arterial thrombosis|
+      }'
+    sentences:
+    - Ventricular shunt to circulatory system (procedure)
+    - Cerebral infarction due to thrombosis of cerebral arteries
+    - Proliferative diabetic retinopathy with new vessels on disc (disorder)
+  - source_sentence: '|Albuminuria| : { |Interprets| = |Microalbuminuria measurement|, |Has interpretation| = |Above reference
+      range| }'
+    sentences:
+    - Microalbuminuria
+    - Product containing acitretin in oral dose form (medicinal product form)
+    - 1,4-Butanediol diacrylate product
+  - source_sentence: '|Measured quantity of intake of plant fiber in 24 hours| + |Soluble fiber intake| : { |Property| = |Quantity
+      rate (property)|, |Characterizes| = |Introduction procedure|, |Process duration| = |24 hours|, |Technique| = |Measurement
+      technique|, |Process acts on| = |Soluble fiber| }'
+    sentences:
+    - Measured quantity of intake of soluble fiber in 24 hours
+    - Phlegmonous dacryocystitis of left eye
+    - Estimated quantity of intake of plant fibre
+  - source_sentence: '|Abscess of foot| + |Disorder of left lower extremity| : { |Finding site| = |Structure of left foot|,
+      |Associated morphology| = |Abscess| }'
+    sentences:
+    - Abscess of left foot
+    - Hypertrophy of synovium of both ankles
+    - Product containing only cibachrome brilliant scarlet
+  - source_sentence: '|Adverse reaction caused by drug| : { |Causative agent| = |Digestant| }'
+    sentences:
+    - Exudate specimen from wound (specimen)
+    - Adverse reaction caused by digestant (disorder)
+    - Ureteroscopic division of stricture of ureter (procedure)
+  pipeline_tag: sentence-similarity
+  library_name: sentence-transformers
+  metrics:
+  - cosine_accuracy
+  model-index:
+  - name: SentenceTransformer based on sentence-transformers/all-MiniLM-L6-v2
+    results:
+    - task:
+        type: triplet
+        name: Triplet
+      dataset:
+        name: snomed triplet 800k 3 4 3 dev
+        type: snomed_triplet_800k_3_4_3-dev
+      metrics:
+      - type: cosine_accuracy
+        value: 0.998328125
+        name: Cosine Accuracy
+        verified: false
+      - type: cosine_accuracy
+        value: 0.9983828125
+        name: Cosine Accuracy
+        verified: false
+siblings:
+- rfilename: .gitattributes
+- rfilename: 1_Pooling/config.json
+- rfilename: README.md
+- rfilename: config.json
+- rfilename: config_sentence_transformers.json
+- rfilename: model.safetensors
+- rfilename: modules.json
+- rfilename: sentence_bert_config.json
+- rfilename: special_tokens_map.json
+- rfilename: tokenizer.json
+- rfilename: tokenizer_config.json
+- rfilename: vocab.txt
+spaces: []
+createdAt: '2025-04-19T00:38:46.000Z'
+safetensors:
+  parameters:
+    F32: 22713216
+  total: 22713216
+usedStorage: 90864192
+downloadsAllTime: 6
+inferenceProviderMapping: {}
+configJson:
+  _name_or_path: sentence-transformers/all-MiniLM-L6-v2
+  architectures:
+  - BertModel
+  attention_probs_dropout_prob: 0.1
+  classifier_dropout: null
+  gradient_checkpointing: false
+  hidden_act: gelu
+  hidden_dropout_prob: 0.1
+  hidden_size: 384
+  initializer_range: 0.02
+  intermediate_size: 1536
+  layer_norm_eps: 1.0e-12
+  max_position_embeddings: 512
+  model_type: bert
+  num_attention_heads: 12
+  num_hidden_layers: 6
+  pad_token_id: 0
+  position_embedding_type: absolute
+  torch_dtype: float32
+  transformers_version: 4.47.0
+  type_vocab_size: 2
+  use_cache: true
+  vocab_size: 30522
+onnxFiles: {}
+safetensorsSizeMb: 90.9
+approxSizeMb: 90.9
+fetchedAt: '2026-06-09T06:55:53.000Z'

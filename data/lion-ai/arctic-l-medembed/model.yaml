@@ -1,0 +1,223 @@
+_id: 68f6817d76d42e9ca641a1dc
+id: lion-ai/arctic-l-medembed
+private: false
+pipeline_tag: sentence-similarity
+library_name: sentence-transformers
+tags:
+- sentence-transformers
+- safetensors
+- bert
+- sentence-similarity
+- feature-extraction
+- dense
+- generated_from_trainer
+- dataset_size:230357
+- loss:MultipleNegativesRankingLoss
+- dataset:abhinand/MedEmbed-training-triplets-v1
+- arxiv:1908.10084
+- arxiv:1705.00652
+- base_model:Snowflake/snowflake-arctic-embed-l
+- base_model:finetune:Snowflake/snowflake-arctic-embed-l
+- model-index
+- text-embeddings-inference
+- endpoints_compatible
+- region:us
+downloads: 5
+likes: 0
+modelId: lion-ai/arctic-l-medembed
+author: lion-ai
+sha: a86881d268a26265aa18ff77691a966ba8dec1f1
+lastModified: '2025-10-20T18:41:45.000Z'
+gated: false
+disabled: false
+mask_token: '[MASK]'
+widgetData:
+- source_sentence: post-discharge oral hygiene follow-up plan
+  sentences:
+  - The patient is advised to continue regular oral hygiene measures and follow-up with their primary care dentist.
+  - 'PLAN: Follow-up with the patient as clinically indicated.'
+  - The patient's last available report revealed significant improvement in kidney function. No further information is currently
+    available. The patient is advised to follow up with his primary care physician for routine care.
+- source_sentence: Genetic mutations associated with PKD
+  sentences:
+  - We identified an insertion of C at 650 bp of coding sequence (exon 2) leading to frameshift mutation [p.R217Pfs*8] in
+    the PKD patient, but not in the control subject. In addition, we also identified a novel point mutation [c.244C > T;]
+    at exon 2 in the patient, but not in the control subject.
+  - Following the National Comprehensive Cancer Network guidelines, the patient will be monitored with careful history and
+    physical, blood pressure measurement, and urine and plasma catecholamine assessment every three months through the first
+    year and every 6–12 months thereafter through 10 years.
+  - 'Genetic analysis showed two variants in NR2E3: a missense variation c.1118T>C, which leads to substitution of leucine
+    with proline in amino acid position 373, and c.349+5G>C, which involves a gene sequence near a splicing site.'
+- source_sentence: What was the patient's diagnosis based on the MRI results?
+  sentences:
+  - Magnetic resonance imaging of the orbit showed hyperintensity and increased thickness of the preseptal orbital tissue,
+    and optic nerve thickening in the right eye.
+  - 'Probands #1 and #2 presented with significant and consistent delays in cognitive function, language and sensorimotor
+    development.'
+  - An MRI was performed, which revealed the presence of a declivous purulent material inside the lateral ventricles with
+    a moderate dilatation of these structures and semi-recent ischemic strokes.
+- source_sentence: Post-operative complications of extended left hepatectomy
+  sentences:
+  - The patient was referred to the Oncology Department for further management and treatment. A multidisciplinary team approach
+    would be used to develop an optimal treatment strategy.
+  - However, on postoperative day 15, the patient was readmitted with symptoms of abdominal pain, fevers, elevated total bilirubin,
+    and leukocytosis. A CT scan revealed the formation of a collection in the hepatic fossa and a dilated right posterior
+    bile duct, which prompted the placement of a drain.
+  - Post-operatively, the patient recovered well, and was discharged on the 7th post-operative day without any complications.
+    Follow-up assessments did not report any issues, and the patient was advised to maintain ample rest and a nutritious diet
+    with frequent walkthroughs to avoid stress on the abdomen.
+- source_sentence: moderate level of depression diagnosis
+  sentences:
+  - The right upper limb was examined and revealed a morphological variant of the coracobrachialis muscle (CBM) that corresponded
+    to the classical description, originating from the apex of the coracoid process together with the short head of the biceps
+    brachii.
+  - The patient's symptoms are suggestive of depression. The Beck Depression Inventory score was 24, indicating a moderate
+    level of depression.
+  - The patient was admitted due to symptoms of Major Depressive Disorder (MDD) which included restlessness, sleep problems,
+    depressed mood, decreased social function, and suicidal thoughts as reported by the patient.
+model-index:
+- name: SentenceTransformer based on Snowflake/snowflake-arctic-embed-l
+  results:
+  - task:
+      type: triplet
+      name: Triplet
+    dataset:
+      name: medembed triplets dev 300
+      type: medembed-triplets-dev-300
+    metrics:
+    - type: cosine_accuracy
+      value: 0.9599999785423279
+      name: Cosine Accuracy
+      verified: false
+config:
+  architectures:
+  - BertModel
+  model_type: bert
+  tokenizer_config:
+    cls_token: '[CLS]'
+    mask_token: '[MASK]'
+    pad_token: '[PAD]'
+    sep_token: '[SEP]'
+    unk_token: '[UNK]'
+cardData:
+  tags:
+  - sentence-transformers
+  - sentence-similarity
+  - feature-extraction
+  - dense
+  - generated_from_trainer
+  - dataset_size:230357
+  - loss:MultipleNegativesRankingLoss
+  base_model: Snowflake/snowflake-arctic-embed-l
+  widget:
+  - source_sentence: post-discharge oral hygiene follow-up plan
+    sentences:
+    - The patient is advised to continue regular oral hygiene measures and follow-up with their primary care dentist.
+    - 'PLAN: Follow-up with the patient as clinically indicated.'
+    - The patient's last available report revealed significant improvement in kidney function. No further information is currently
+      available. The patient is advised to follow up with his primary care physician for routine care.
+  - source_sentence: Genetic mutations associated with PKD
+    sentences:
+    - We identified an insertion of C at 650 bp of coding sequence (exon 2) leading to frameshift mutation [p.R217Pfs*8] in
+      the PKD patient, but not in the control subject. In addition, we also identified a novel point mutation [c.244C > T;]
+      at exon 2 in the patient, but not in the control subject.
+    - Following the National Comprehensive Cancer Network guidelines, the patient will be monitored with careful history and
+      physical, blood pressure measurement, and urine and plasma catecholamine assessment every three months through the first
+      year and every 6–12 months thereafter through 10 years.
+    - 'Genetic analysis showed two variants in NR2E3: a missense variation c.1118T>C, which leads to substitution of leucine
+      with proline in amino acid position 373, and c.349+5G>C, which involves a gene sequence near a splicing site.'
+  - source_sentence: What was the patient's diagnosis based on the MRI results?
+    sentences:
+    - Magnetic resonance imaging of the orbit showed hyperintensity and increased thickness of the preseptal orbital tissue,
+      and optic nerve thickening in the right eye.
+    - 'Probands #1 and #2 presented with significant and consistent delays in cognitive function, language and sensorimotor
+      development.'
+    - An MRI was performed, which revealed the presence of a declivous purulent material inside the lateral ventricles with
+      a moderate dilatation of these structures and semi-recent ischemic strokes.
+  - source_sentence: Post-operative complications of extended left hepatectomy
+    sentences:
+    - The patient was referred to the Oncology Department for further management and treatment. A multidisciplinary team approach
+      would be used to develop an optimal treatment strategy.
+    - However, on postoperative day 15, the patient was readmitted with symptoms of abdominal pain, fevers, elevated total
+      bilirubin, and leukocytosis. A CT scan revealed the formation of a collection in the hepatic fossa and a dilated right
+      posterior bile duct, which prompted the placement of a drain.
+    - Post-operatively, the patient recovered well, and was discharged on the 7th post-operative day without any complications.
+      Follow-up assessments did not report any issues, and the patient was advised to maintain ample rest and a nutritious
+      diet with frequent walkthroughs to avoid stress on the abdomen.
+  - source_sentence: moderate level of depression diagnosis
+    sentences:
+    - The right upper limb was examined and revealed a morphological variant of the coracobrachialis muscle (CBM) that corresponded
+      to the classical description, originating from the apex of the coracoid process together with the short head of the
+      biceps brachii.
+    - The patient's symptoms are suggestive of depression. The Beck Depression Inventory score was 24, indicating a moderate
+      level of depression.
+    - The patient was admitted due to symptoms of Major Depressive Disorder (MDD) which included restlessness, sleep problems,
+      depressed mood, decreased social function, and suicidal thoughts as reported by the patient.
+  datasets:
+  - abhinand/MedEmbed-training-triplets-v1
+  pipeline_tag: sentence-similarity
+  library_name: sentence-transformers
+  metrics:
+  - cosine_accuracy
+  model-index:
+  - name: SentenceTransformer based on Snowflake/snowflake-arctic-embed-l
+    results:
+    - task:
+        type: triplet
+        name: Triplet
+      dataset:
+        name: medembed triplets dev 300
+        type: medembed-triplets-dev-300
+      metrics:
+      - type: cosine_accuracy
+        value: 0.9599999785423279
+        name: Cosine Accuracy
+        verified: false
+siblings:
+- rfilename: .gitattributes
+- rfilename: 1_Pooling/config.json
+- rfilename: README.md
+- rfilename: config.json
+- rfilename: config_sentence_transformers.json
+- rfilename: model.safetensors
+- rfilename: modules.json
+- rfilename: sentence_bert_config.json
+- rfilename: special_tokens_map.json
+- rfilename: tokenizer.json
+- rfilename: tokenizer_config.json
+- rfilename: vocab.txt
+spaces: []
+createdAt: '2025-10-20T18:37:49.000Z'
+safetensors:
+  parameters:
+    F32: 335141888
+  total: 335141888
+usedStorage: 1340612432
+downloadsAllTime: 10
+inferenceProviderMapping: {}
+configJson:
+  architectures:
+  - BertModel
+  attention_probs_dropout_prob: 0.1
+  classifier_dropout: null
+  dtype: float32
+  hidden_act: gelu
+  hidden_dropout_prob: 0.1
+  hidden_size: 1024
+  initializer_range: 0.02
+  intermediate_size: 4096
+  layer_norm_eps: 1.0e-12
+  max_position_embeddings: 512
+  model_type: bert
+  num_attention_heads: 16
+  num_hidden_layers: 24
+  pad_token_id: 0
+  position_embedding_type: absolute
+  transformers_version: 4.57.1
+  type_vocab_size: 2
+  use_cache: true
+  vocab_size: 30522
+onnxFiles: {}
+safetensorsSizeMb: 1340.6
+approxSizeMb: 1340.6
+fetchedAt: '2026-06-09T06:55:53.000Z'

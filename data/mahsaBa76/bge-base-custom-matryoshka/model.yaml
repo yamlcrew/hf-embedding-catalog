@@ -1,0 +1,2322 @@
+_id: 677d8070be10497997345911
+id: mahsaBa76/bge-base-custom-matryoshka
+private: false
+pipeline_tag: sentence-similarity
+library_name: sentence-transformers
+tags:
+- sentence-transformers
+- safetensors
+- bert
+- sentence-similarity
+- feature-extraction
+- generated_from_trainer
+- dataset_size:278
+- loss:MatryoshkaLoss
+- loss:MultipleNegativesRankingLoss
+- arxiv:1908.10084
+- arxiv:2205.13147
+- arxiv:1705.00652
+- base_model:BAAI/bge-base-en-v1.5
+- base_model:finetune:BAAI/bge-base-en-v1.5
+- model-index
+- text-embeddings-inference
+- endpoints_compatible
+- region:us
+downloads: 2
+likes: 0
+modelId: mahsaBa76/bge-base-custom-matryoshka
+author: mahsaBa76
+sha: a0f50f524f30321e3ba9c0a6ea15da9e454ea451
+lastModified: '2025-01-07T19:28:58.000Z'
+gated: false
+disabled: false
+mask_token: '[MASK]'
+widgetData:
+- source_sentence: How does Bitcoin's P2P network prevent malicious nodes from flooding the network with invalid blocks or
+    transactions?
+  sentences:
+  - 'paper-title: The Bitcoin Lightning Network: Scalable Off-Chain Instant Payments
+
+
+    \subsection*{8.4 Payment Routing}
+
+    It is theoretically possible to build a route map implicitly from observing 2 -of-2 multisigs on the blockchain to build
+    a routing table. Note, however, this is not feasible with pay-to-script-hash transaction outputs, which can be resolved
+    out-of-band from the bitcoin protocol via a third party routing service. Building a routing table will become necessary
+    for large operators (e.g. BGP, Cjdns). Eventually, with optimizations, the network will look a lot like the correspondent
+    banking network, or Tier-1 ISPs. Similar to how packets still reach their destination on your home network connection,
+    not all participants need to have a full routing table. The core Tier-1 routes can be online all the time - while nodes
+    at the edges, such as average users, would be connected intermittently.
+
+
+    Node discovery can occur along the edges by pre-selecting and offering partial routes to well-known nodes.
+
+
+    \subsection*{8.5 Fees}
+
+    Lightning Network fees, which differ from blockchain fees, are paid directly between participants within the channel.
+    The fees pay for the time-value of money for consuming the channel for a determined maximum period of time, and for counterparty
+    risk of non-communication.
+
+
+    Counterparty risk for fees only exist with one''s direct channel counterparty. If a node two hops away decides to disconnect
+    and their transaction gets broadcast on the blockchain, one''s direct counterparties should not broadcast on the blockchain,
+    but continue to update via novation with a new Commitment Transaction. See the Decrementing Timelocks entry in the HTLC
+    section for more information about counterparty risk.
+
+
+    The time-value of fees pays for consuming time (e.g. 3 days) and is conceptually equivalent to a gold lease rate without
+    custodial risk; it is the time-value for using up the access to money for a very short duration. Since certain paths may
+    become very profitable in one direction, it is possible for fees to be negative to encourage the channel to be available
+    for those profitable paths.
+
+
+    \section*{9 Risks}
+
+    The primary risks relate to timelock expiration. Additionally, for core nodes and possibly some merchants to be able to
+    route funds, the keys must be held online for lower latency. However, end-users and nodes are able to keep their private
+    keys firewalled off in cold storage.
+
+
+    \subsection*{9.1 Improper Timelocks}
+
+    Participants must choose timelocks with sufficient amounts of time. If insufficient time is given, it is possible that
+    timelocked transactions believed to be invalid will become valid, enabling coin theft by the counterparty. There is a
+    trade-off between longer timelocks and the time-value of money. When writing wallet and Lightning Network application
+    software, it is necessary to ensure that sufficient time is given and users are able to have their transactions enter
+    into the blockchain when interacting with non-cooperative or malicious channel counterparties.
+
+
+    \subsection*{9.2 Forced Expiration Spam}
+
+    Forced expiration of many transactions may be the greatest systemic risk when using the Lightning Network. If a malicious
+    participant creates many channels and forces them all to expire at once, these may overwhelm block data capacity, forcing
+    expiration and broadcast to the blockchain. The result would be mass spam on the bitcoin network. The spam may delay transactions
+    to the point where other locktimed transactions become valid.
+
+
+    This may be mitigated by permitting one transaction replacement on all pending transactions. Anti-spam can be used by
+    permitting only one transaction replacement of a higher sequence number by the inverse of an even or odd number. For example,
+    if an odd sequence number was broadcast, permit a replacement to a higher even number only once. Transactions would use
+    the sequence number in an orderly way to replace other transactions. This mitigates the risk assuming honest miners. This
+    attack is extremely high risk, as incorrect broadcast of Commitment Transactions entail a full penalty of all funds in
+    the channel.
+
+
+    Additionally, one may attempt to steal HTLC transactions by forcing a timeout transaction to go through when it should
+    not. This can be easily mitigated by having each transfer inside the channel be lower than the total transaction fees
+    used. Since transactions are extremely cheap and do not hit the blockchain with cooperative channel counterparties, large
+    transfers of value can be split into many small transfers. This attempt can only work if the blocks are completely full
+    for a long time. While it is possible to mitigate it using a longer HTLC timeout duration, variable block sizes may become
+    common, which may need mitigations.
+
+
+    If this type of transaction becomes the dominant form of transactions which are included on the blockchain, it may become
+    necessary to increase the block size and run a variable blocksize structure and timestop flags as described in the section
+    below. This can create sufficient penalties and disincentives to be highly unprofitable and unsuccessful for attackers,
+    as attackers lose all their funds from broadcasting the wrong transaction, to the point where it will never occur.'
+  - 'paper-title: OmniLedger: A Secure, Scale-Out, Decentralized Ledger via Sharding
+
+
+    Fig. 11: Bootstrap bandwidth consumption with state blocks.\\[0pt]
+
+    to create the UTXO state. For this experiment, we reconstructed Bitcoin''s blockchain [5], [41] and created a parallel
+    OmniLedger blockchain with weekly state blocks.
+
+
+    Figure 11 depicts the bandwidth overhead of a validator that did not follow the state for the first 100 days. As we can
+    see, the state block approach is better if the validator is outdated for more than 19 days or 2736 Bitcoin blocks.
+
+
+    The benefit might not seem substantial for Bitcoin, but in OmniLedger, 2736 blocks are created in less than 8 hours, meaning
+    that for one day-long epochs, the state block approach is significantly better. If a peak throughput is required and 16
+    MB blocks are deployed, we expect reduced bandwidth consumption close to two orders of magnitude.
+
+
+    \section*{IX. Related Work}
+
+    The growing interests in scaling blockchains have produced a number of prominent systems that we compare in Table IV.
+    ByzCoin [32] is a first step to scalable BFT consensus, but cannot scale-out. Elastico is the first open scale-out DL,
+    however, it suffers from performance and security challenges that we have already discussed in Section II. RSCoin [16]
+    proposes sharding as a scalable approach for centrally banked cryptocurrencies. RSCoin relies on a trusted source of randomness
+    for sharding and auditing, making its usage problematic in trustless settings. Furthermore, to validate transactions,
+    each shard has to coordinate with the client and instead of running BFT, RSCoin uses a simple two-phase commit, assuming
+    that safety is preserved if the majority of validators is honest. This
+
+
+    TABLE IV: Comparison of Distributed Ledger Systems
+
+
+    \begin{center}
+
+    \begin{tabular}{ccccccc}
+
+    \hline
+
+    System & Scale-Out & \begin{tabular}{c}
+
+    Cross-Shard \\
+
+    Transaction Atomicity \\
+
+    \end{tabular} & State Blocks & \begin{tabular}{c}
+
+    Measured Scalability \\
+
+    (\# of Validators) \\
+
+    \end{tabular} & \begin{tabular}{c}
+
+    Estimated \\
+
+    Time to Fail \\
+
+    \end{tabular} & \begin{tabular}{c}
+
+    Measured \\
+
+    Latency \\
+
+    \end{tabular} \\
+
+    \hline
+
+    RSCoin [16] & In Permissioned & Partial & No & 30 & N/A & 1 sec \\
+
+    Elastico [34] & In PoW & No & No & 1600 & 1 hour & 800 sec \\
+
+    ByzCoin [32] & No & N/A & No & 1008 & 19 years & 40 sec \\
+
+    Bitcoin-NG [21] & No & N/A & No & 1000 & N/A & 600 sec \\
+
+    PBFT [9], [11] & No & N/A & No & 16 & N/A & 1 sec \\
+
+    Nakamoto [36] & No & N/A & No & 4000 & N/A & 600 sec \\
+
+    OmniLedger & Yes & Yes & Yes & 2400 & 68.5 years & 1.5 sec \\
+
+    \hline
+
+    \end{tabular}
+
+    \end{center}
+
+
+    approach, however, does not protect from double spending attempts by a malicious client colluding with a validator.
+
+
+    In short, prior solutions [16], [32], [34] achieve only two out of the three desired properties; decentralization, long-term
+    security, and scale-out, as illustrated in Figure 1. OmniLedger overcomes this issue by scaling out, as far as throughput
+    is concerned, and by maintaining consistency to the level required for safety, without imposing a total order.
+
+
+    Bitcoin-NG scales Bitcoin without changing the consensus algorithm by observing that the PoW process does not have to
+    be the same as the transaction validation process; this results in two separate timelines: one slow for PoW and one fast
+    for transaction validation. Although Bitcoin-NG significantly increases the throughput of Bitcoin, it is still susceptible
+    to the same attacks as Bitcoin [24], [3].
+
+
+    Other efforts to scale blockchains include: Tendermint [9], a protocol similar to PBFT for shard-level consensus that
+    does not scale due to its similarities to PBFT, and the Lightning Network [40], an off-chain payment protocol for Bitcoin
+    (also compatible to OmniLedger); it limits the amount of information committed to the blockchain.'
+  - "Datatype: lecture_note, Title: Lecture 4: Peer to Peer Networking for Blockchains\n\nHow does broadcast take only $O(\\\
+    log N)$ steps? We first need to understand the gossip-flooding-based broadcast protocol. The flooding protocol mimics\
+    \ the spread of an epidemic. Once a node is ``infected\", it infects its peers and forever stay's infected. It is easy\
+    \ to see that the spread of information will happen exponentially; hence the information will take $O(\\log N)$ hops to\
+    \ spread to all nodes. To formally understand the spread, we note that $d$-regular graphs with $d\\geq 3$ are an \\textit{expander\
+    \ graph} for large sizes ($|V|$) with high probability. An expander graph is a connected but sparse graph ($|E|=O(|V|)$)\
+    \ with the following property: $|\\partial A| \\geq \\epsilon|A|$ for any connected sub-graph $A$ with $|A|<0.5|V|$. Here,\
+    \ $|\\partial A|$ refers to the number of vertices outside $A$ with at least one neighbor in $A$. A gossip message originates\
+    \ with $A(0)$ as the broadcasting node with $|A(0)|=1$, in the next hop, it will spread to $\\partial A(0)$ with $|A(1)|\\\
+    geq (1+\\epsilon)|A(0)|$. This recursion continues and we have $|A(k)|\\geq(1+\\epsilon)^kA(0)$. Thus, the number of steps\
+    \ to reach half the number of nodes is logarithmic in the number of nodes. It can be shown that the other half of the\
+    \ nodes can also be covered in $O(\\log N)$ time.\n\n\n%Engineering issues (peer discovery, bootstrap, churn). Implementation\
+    \ connections (to the lab experiment). Validation of tx, blocks. How does that impact networking? What about skipping\
+    \ validation and doing cut-through routing? Compact blocks. (RR)\n\n\\section*{Bitcoin P2P network: A systems view}\n\
+    In Bitcoin, peers connect to each other and communicate using the TCP protocol. The codebase allows for eight outgoing\
+    \ connections and up to 117 incoming connections. The network has a high churn rate (rate at which users enter/leave the\
+    \ system); hence, the node must be ready to connect to new peers. Moreover, to ensure that the peers we are connecting\
+    \ to are chosen randomly, the node keeps a large list of nodes running Bitcoin in the form of their (IP, port) tuple and\
+    \ establishes a connection to one of them randomly when a slot opens up.  \n\nHow does a node bootstrap its list of peers?\
+    \ This happens by connecting to a set of DNS seed nodes. The seed nodes are not heavily decentralized; hence completely\
+    \ relying on the peer list provided by them is not advisable. On connecting to the initial set of peers, a node asks its\
+    \ neighbors for their peer list using {\\tt getAddr} and {\\tt Addr} messages. The node keeps refreshing its peer list\
+    \ regularly by exchanging peer lists with its peers. \n\nTransmission of all block and transactions happen through the\
+    \ inventory message {\\tt inv}, on receiving an {\\tt inv} message the node checks if it has the block or the transaction\
+    \ in its local storage. If not, it sends the {\\tt getData} message to fetch those blocks and transactions from the peer.\
+    \ Since block sizes are relatively large, block transmission can optionally happen in 2 stages. On receiving the {\\tt\
+    \ inv} message, the node may ask for headers first using {\\tt getHeaders} and ask for complete blocks only if a header\
+    \ chain is established. This header-first block transmission increases queries but can decrease the net bandwidth usage.\
+    \ It may also prevent nodes from accepting PoW invalid blocks since the node can check from the header whether PoW is\
+    \ valid. \n\nWe saw in the previous lecture that some nodes might be malicious. A question that may arise is: what stops\
+    \ malicious nodes from flooding the network with invalid blocks and transactions (i.e., with invalid PoW and/or signatures)?\
+    \ Such flooding will saturate the network and increase transmission delay to unacceptable levels. Such an attack is prevented\
+    \ by a simple design decision, forward message to peers only after validating the message; i.e., a node sends an {\\tt\
+    \ inv} block message to its peers only after validating the block. If the adversary creates an invalid block, the block\
+    \ will not be propagated beyond one honest node. Additionally, nodes maintain their peers' reputation using some predefined\
+    \ heuristics; if a peer misbehaves (say by sending a transaction with invalid signatures), its reputation is downgraded\
+    \ and after a certain lower threshold is disconnected."
+- source_sentence: How does the blockchain protocol ensure that all honest players converge on the same chain?
+  sentences:
+  - "paper-title: Blockchain CAP Theorem Allows User-Dependent Adaptivity and Finality\n\nDefinition 3 (Potential starting\
+    \ value for period $p$ ). A value $v$ that has been next-voted by $t+1$ honest nodes for period $p-1$.\n\nDefinition 4\
+    \ (Committed value for period $p$ ). A value $v$ that has been cert-voted by $2 t+1$ nodes for period $p$.\n\nDefinition\
+    \ 5 (Potentially committed value for period $p$ ). A value $v$ that has been cert-voted by $t+1$ honest nodes for period\
+    \ $p$.\n\nAlthough we slightly altered Algorand BA protocol (which is highlighted in red in Appendix A), we note that\
+    \ our modification does not break the safety of the protocol or cause any deadlock in Lemma 1 and Lemma 2, At a high level,\
+    \ the validity check only causes less soft-votes from honest nodes, which is indistinguishable with the case where the\
+    \ leader is malicious and no value receives at least $2 t+1$ soft-votes in some period. Therefore, the safety and deadlock-free\
+    \ property remain.\n\nLemma 1 (Asynchronous Safety, CP0). Even when the network is partitioned, the protocol ensures safety\
+    \ of the system so that no two honest nodes will finish one iteration of the protocol with different outputs.\n\nProof.\
+    \ The following properties hold even during a network partition.\n\n\\begin{itemize}\n  \\item By quorum intersection,\
+    \ as each honest node only soft-votes one value, then at most one value is committed or potentially committed for each\
+    \ period $p$ in one iteration.\n  \\item If a value $v$ is potentially committed for period $p$, then only $v$ can receive\
+    \ $2 t+1$ next-votes for period $p$. Thus, the unique potential starting value for period $p+1$ is $v$.\n  \\item If a\
+    \ period $p$ has a unique potential starting value $v \\neq \\perp$, then only $v$ can be committed for period $p$. Moreover,\
+    \ honest nodes will only next-vote $v$ for period $p$, so the unique potential starting value for period $p+1$ is also\
+    \ $v$. Inductively, any future periods $p^{\\prime}>p$ can only have $v$ as a potential starting value. Thus, once a value\
+    \ is potentially committed, it becomes the unique value that can be committed or potentially committed for any future\
+    \ period, and no two honest nodes will finish this iteration of the protocol with different outputs.\n\\end{itemize}\n\
+    \nLemma 2 (Asynchronous Deadlock-freedom). As long as messages will be delivered eventually, an honest node can always\
+    \ leave period p, either by entering a higher period or meeting the halting condition for the current iteration.\n\nProof.\
+    \ We first prove that there can never exist $2 t+1$ next-votes for two different non- $\\perp$ values from the same period\
+    \ $p$ by induction.\n\nStart with $p=1$. Note that every honest node sets $s t_{i}^{1}=\\perp$ and at most one value (say\
+    \ $v$ ) could receive more than $2 t+1$ soft-votes. Therefore only value $v$ and $\\perp$ could potentially receive more\
+    \ than $2 t+1$ next-votes in period 1 . Note that it is possible that both $v$ and $\\perp$ receive more than $2 t+1$\
+    \ next-votes: all the honest nodes could next-vote for $\\perp$ in Step 4 and then next-vote for $v$ in Step 5 after seeing\
+    \ the $2 t+1$ soft-votes for $v$.\n\nAssume that the claim holds for period $p-1(p \\geq 2)$ : there exist at most two\
+    \ values each of which has $2 t+1$ next-votes for period $p-1$, and one of them is necessarily $\\perp$. Then there are\
+    \ three possible cases:"
+  - 'paper-title: A Scalable Proof-of-Stake Blockchain in the Open Setting * \\ (or, How to Mimic Nakamoto''s Design via Proof-of-Stake)
+
+
+    Common prefix. Our analysis is based on the common prefix analysis of core-chain. The core-chain can achieve common prefix
+    as we discussed. The opportunity for malicious players to destroy common prefix probability is to generate different blockchain
+    for the same core-chain. For the malicious players can sign different blocks for one block-core, this will allow him to
+    fork the blockchain. So the malicious players can fork the blockchain when they are chosen to generate block. However,
+    with the property of hash function, the malicious players can not generate two blocks with same hash value. When an honest
+    player is chosen to extend a block, he will only support one blockchain. Then all of the honest players will converge
+    on one blockchain.\\
+
+    Corollary 6.4 (Common prefix). Consider the blockchain protocol $\Pi^{\text {main }}$. Consider $\alpha^{\star}=\lambda
+    \beta^{\star}$, $\lambda>1$, and $\delta>0$. Consider two honest PoS-players, P in round $r$ and $\mathrm{P}^{\prime}$
+    in round $r^{\prime}$, with the local best PoS blockchains $\tilde{\mathcal{C}}, \tilde{\mathcal{C}}^{\prime}$, respectively,
+    where $r^{\prime} \geq r$. Then we have $\operatorname{Pr}\left[\tilde{\mathcal{C}}[1, \ell] \preceq \tilde{\mathcal{C}}^{\prime}\right]
+    \geq 1-e^{-\Omega(\kappa)}$, where $\ell=\operatorname{len}(\mathcal{C})-\Theta(\kappa)$.
+
+
+    Proof. As we discussed, $\tilde{\mathcal{C}}$ and $\tilde{\mathcal{C}}^{\prime}$ are associated with core-chains $\mathcal{C}$
+    and $\mathcal{C}^{\prime}$ respectively. From Corollary 5.6 we know that $\operatorname{Pr}\left[\mathcal{C}[1, \ell]
+    \preceq \mathcal{C}^{\prime}\right] \geq 1-e^{-\Omega(\kappa)}$.
+
+
+    Based on the assumption that $\alpha^{\star}=\lambda \beta^{\star}$ and $\lambda>1$, we can have that the malicious players
+    are not able to generate more than $\Theta(\kappa)$ blocks before an honest player is chosen to generate block with high
+    probability. All of the honest players will converge on the same chain. Put them together, we have $\operatorname{Pr}\left[\tilde{\mathcal{C}}[1,
+    \ell] \preceq \tilde{\mathcal{C}}^{\prime}\right] \geq 1-e^{-\Omega(\kappa)}$ where $\ell=\operatorname{len}(\mathcal{C})-\Theta(\kappa)$.
+
+
+    Chain soundness. A new player will accept a blockchain (in which the corresponding corechain is included). The proof idea
+    for achieving chain soundness property of our blockchain protocol directly follows that for the core-chain protocol. We
+    have the following statement.\\
+
+    Corollary 6.5 (Chain soundness). Consider the blockchain protocol $\Pi^{\text {main }}$. Consider for every round, $\alpha=\lambda
+    \beta, \lambda>1$, and $\delta>0$. There are two honest PoS-players, $\mathrm{P}^{\prime}$ and $\mathrm{P}^{\prime \prime}$
+    in round $r$, with the local best PoS blockchains $\tilde{\mathcal{C}}^{\prime}$ and $\tilde{\mathcal{C}}^{\prime \prime}$,
+    respectively. Let $\mathrm{P}^{\prime}$ be a new player and $\mathrm{P}^{\prime \prime}$ be an existing player in round
+    $r$. Then we have $\tilde{\mathcal{C}}^{\prime}[\neg \kappa] \preceq \tilde{\mathcal{C}}^{\prime \prime}$ and $\tilde{\mathcal{C}}^{\prime
+    \prime}[\neg \kappa] \preceq \tilde{\mathcal{C}}^{\prime}$.'
+  - "Datatype: lecture_note, Title: Lecture 9: Scaling Latency\n\n\\begin{figure}\n\\begin{center}\n\\includegraphics[width=\\\
+    textwidth]{figures/Prism_main.pdf}\n\\end{center}\n\n\\caption{Factorizing the blocks into three types of blocks: proposer\
+    \ blocks, transaction blocks and voter blocks.}\n\\label{fig:prism}\n\n\\end{figure}\n\nJust as in {\\sf Prism 1.0}, the\
+    \ \\textit{proposer} blocktree in {\\sf Prism} anchors the blockchain.  Each proposer block contains a list of reference\
+    \ links to \\textit{transaction} blocks that contain transactions, as well as a single reference to a parent proposer\
+    \ block. Honest nodes mine proposer blocks following the longest chain rule in the proposer tree.\nWe define the *level*\
+    \ of a proposer block as its distance from the genesis proposer block, and the *height* of the proposer tree as the maximum\
+    \ level that contains any proposer blocks. To determine the ordering of proposer blocks (and thus transaction blocks and\
+    \ transactions), we elect one \\textit{leader} proposer block from each level. The sequence of leader blocks up to the\
+    \ height of the proposer tree is called the  \\textit{leader sequence}, and is determined by the *voter* chains. Note\
+    \ that the leader blocks do not need to follow the chain structure of the proposer blocks because otherwise deadlock may\
+    \ occur if conflicting blocks (i.e., two proposer blocks not on one chain) are determined as leader blocks. \n\nIn {\\\
+    sf Prism}, there are $m$ voter chains, where $m \\gg 1$ is a fixed parameter chosen by the system designer. The larger\
+    \ the $m$, the more parallel the voting process and hence the shorter the latency of confirmation. In general $m$ is chosen\
+    \ as large as network bandwidth and memory management issues are manageable. For example, $m=1000$ is chosen in the \\\
+    href{https://arxiv.org/pdf/1909.11261.pdf}{full-stack implementation}  of Prism. New voter blocks are mined on each voter\
+    \ chain according to the longest chain rule. A voter block votes for a proposer block by containing a reference link to\
+    \ that proposer block, with the requirements that: (1) a vote is valid only if the voter block is in the longest chain\
+    \ of its voter tree; (2) each voter chain votes for one and only one proposer block at each level; (3) each voter block\
+    \ votes for all the proposer levels that have not been voted by its parent. The leader block at each level is the one\
+    \ that has the largest number of votes among all the proposer blocks at the same level (ties can be broken by the hash\
+    \ of the proposer blocks). The elected leader blocks then provide a unique ordering of the transaction blocks to form\
+    \ the final ledger. \n\n{\\sf Prism} also uses cryptographic sortition to prevent the adversary from focusing its mining\
+    \ power on a specific type of blocks or on a specific voter chain. A miner first forms a ``superblock\" containing $m+2$\
+    \ parts: a transaction block, a proposer block and a voter block on the $i$-th voter tree ($1\\leq i \\leq m$). We say\
+    \ a superblock is successfully  mined if \n\\begin{equation}\n    Hash({\\sf nonce}, {\\sf superblock}) < T_{\\rm tx}\
+    \ + T_{\\rm prop} + m T_{\\rm v}. \n\\label{eq:sortition}\n\\end{equation}\nFurther, every successfully mined superblock\
+    \ is identified as a transaction block, a proposer block or a voter block based on the hash output: \n\n\n*  identify\
+    \ the superblock as a proposer block if the hash output is less than $T_{\\rm prop}$;\n*  identify the superblock as a\
+    \ transaction block if the hash output is in the range $[T_{\\rm prop}, T_{\\rm tx} + T_{\\rm prop})$;\n*  identify the\
+    \ superblock as a voter block on the $i$-th voter tree ($1\\leq i \\leq m$) if the hash output is in the range $[T_{\\\
+    rm tx} + T_{\\rm prop} + (i-1) T_{\\rm v}, T_{\\rm tx} + T_{\\rm prop} + i T_{\\rm v} )$;"
+- source_sentence: What is the role of the 2/3-GHOST function in the GRANDPA finality gadget?
+  sentences:
+  - 'paper-title: GRANDPA: a Byzantine Finality Gadget
+
+
+    \subsection*{2.3 Preliminaries}
+
+    Network model : We will be using the partially synchronous network model introduced by 7] and in particular the gossip
+    network variant used in [5]. We assume that any message sent or received by an honest participant reaches all honest participants
+    within time $T$, but possibly only after some Global Synchronisation Time GST. Concretely, any message sent or received
+    by some honest participant at time $t$ is received by all honest participants by time GST $+T$ at the latest.
+
+
+    Voters: For each voting step, there is a set of $n$ voters. We will frequently need to assume that for each such step,
+    at most $f<n / 3$ voters are Byzantine. We need $n-f$ of voters to agree on finality. Whether or not block producers ever
+    vote, they will need to be participants who track the state of the protocol.
+
+
+    Votes: A vote is a block hash, together with some metadata such as round number and the type of vote, such as prevote
+    or precommit, all signed with a voter''s private key.
+
+
+    Rounds: Each participant has their own idea of what is the current round number. Every prevote and precommit has an associated
+    round number. Honest voters only vote once (for each type of vote) in each round and do not vote in earlier rounds after
+    later ones. Participants need to keep track of which block they see as currently being the latest finalised block and
+    an estimate of which block could have been finalised in the last round.
+
+
+    For block $B$, we write chain $(B)$ for the chain whose head is $B$. The block number, $n(B)$ of a block $B$ is the length
+    of chain $(B)$. For blocks $B^{\prime}$ and $B$, we say $B$ is later than $B^{\prime}$ if it has a higher block number.
+    We write $B>B^{\prime}$ or that $B$ is descendant of $B^{\prime}$ for $B, B^{\prime}$ appearing in the same blockchain
+    with $B^{\prime}$ later i.e. $B^{\prime} \in$ chain $(B)$ with $n(B)>n\left(B^{\prime}\right) . B \geq B^{\prime}$ and
+    $B \leq B^{\prime}$ are similar except allowing $B=B^{\prime}$. We write $B \sim B^{\prime}$ or $B$ and $B^{\prime}$ are
+    on the same chain if $B<B^{\prime}, B=B^{\prime}$ or $B>B^{\prime}$; and $B \nsim B^{\prime}$ or $B$ and $B^{\prime}$
+    are not on the same chain if there is no such chain.
+
+
+    Blocks are ordered as a tree with the genesis block as root. So any two blocks have a common ancestor but two blocks not
+    on the same chain do not have a common descendant. A vote $v$ for a block $B$ by a voter $V$ is a message signed by $V$
+    containing the blockhash of $B$ and meta-information like the round numbers and the type of vote.
+
+
+    A voter equivocates in a set of votes $S$ if they have cast multiple different votes in $S$. We call a set $S$ of votes
+    safe if the number of voters who equivocate in $S$ is at most $f$. We say that $S$ has a supermajority for a block $B$
+    if the set of voters who either have a vote for blocks $\geq B$ or equivocate in $S$ has size at least $(n+f+1) / 2$.
+    We count equivocations as votes for everything so that observing a vote is monotonic, meaning that if $S \subset T$ then
+    if $S$ has a supermajority for $B$ so does $T$, while being able to ignore yet more equivocating votes from an equivocating
+    voter.
+
+
+    For our finality gadget (GRANDPA) we use the ghost [13] eventual consensus algorithm as $F$. The 2/3-GHOST function $g(S)$
+    takes a set $S$ of votes and returns the block $B$ with highest block number such that $S$ has a supermajority for $B$.
+    If there is no such block, then it returns ''nil''. Note that, if $S$ is safe, then we can compute $g(S)$ by starting
+    at the genesis block and iteratively looking for a child of our current block with a supermajority, which must be unique
+    if it exists. Thus we have:
+
+
+    Lemma 2.5. Let $T$ be a safe set of votes. Then'
+  - 'paper-title: Zexe: Enabling Decentralized Private Computation
+
+
+    In sum, proofs of predicates'' satisfiability are produced via a SNARK over $E_{\text {BLS }}$, and proofs for the NP
+    relation $\mathcal{R}_{\mathrm{e}}$ are produced via a zkSNARK over $E_{\mathrm{CP}}$. The matching fields between the
+    two curves ensure that the former proofs can be efficiently verified.
+
+
+    Problem 3: Cocks-Pinch curves are costly. While the curve $E_{\mathrm{CP}}$ was chosen to facilitate efficient checking
+    of proofs over $E_{\mathrm{BLS}}$, the curve $E_{\mathrm{CP}}$ is at least $2 \times$ more expensive (in time and space)
+    than $E_{\mathrm{BLS}}$ simply because $E_{\mathrm{CP}}$ ''s base field has about twice as many bits as $E_{\mathrm{BLS}}$
+    ''s base field. Checks in the NP relation $\mathcal{R}_{\mathrm{e}}$\\
+
+    that are not directly related to proof checking are now unnecessarily carried over a less efficient curve.\\
+
+    Solution 3: split relations across two curves. We split $\mathcal{R}_{\mathrm{e}}$ into two NP relations $\mathcal{R}_{\mathrm{BLS}}$
+    and $\mathcal{R}_{\mathrm{CP}}$ (see Fig. 14), with the latter containing just the proof check and the former containing
+    all other checks. We can then use a zkSNARK over the curve $E_{\text {BLS }}$ (an efficient curve) to produce proofs for
+    $\mathcal{R}_{\mathrm{BLS}}$, and a zkSNARK over $E_{\mathrm{CP}}$ (the less efficient curve) to produce proofs for $\mathcal{R}_{\mathrm{CP}}$.
+    This approach significantly reduces the running time of DPC.Execute (producing proofs for the checks in $\mathcal{R}_{\mathrm{BLS}}$
+    is more efficient over $E_{\mathrm{BLS}}$ than over $E_{\mathrm{CP}}$ ), at the expense of a modest increase in transaction
+    size (a transaction now includes a zkSNARK proof over $E_{\mathrm{BLS}}$ in addition to a proof over $E_{\mathrm{CP}}$
+    ). An important technicality that must be addressed is that the foregoing split relies on certain secret information to
+    be shared across the NP relations, namely, the identities of relevant predicates and the local data. We can store this
+    information in suitable commitments that are part of the NP instances for the two NP relations (doing this efficiently
+    requires some care as we discuss below).'
+  - 'paper-title: Ouroboros Praos: An adaptively-secure, semi-synchronous proof-of-stake blockchain
+
+
+    where $\alpha_{\mathcal{H}}$ denotes the total relative stake of the honest parties. Note that this bound applies to all
+    static adversaries $\mathcal{A}$ that corrupt no more than a $1-\alpha_{\mathcal{H}}$ fraction of all stake. With this
+    in mind, we define the dominant distribution as follows.\\
+
+    Definition 13 (The dominant distribution $\mathcal{D}_{\alpha}^{f}$ ). For two parameters $f$ and $\alpha$, define $\mathcal{D}_{\alpha}^{f}$
+    to be the distribution on strings $w \in\{0,1, \perp\}^{R}$ that independently assigns each $w_{i}$ so that
+
+
+
+    \begin{align*}
+
+    p_{\perp} \triangleq \operatorname{Pr}\left[w_{i}\right. & =\perp]=1-f, \\
+
+    p_{0} \triangleq \operatorname{Pr}\left[w_{i}\right. & =0]=\phi(\alpha) \cdot(1-f), \quad \text { and }  \tag{9}\\
+
+    p_{1} \triangleq \operatorname{Pr}\left[w_{i}\right. & =1]=1-p_{\perp}-p_{0} .
+
+    \end{align*}
+
+
+
+    The distribution $\mathcal{D}_{\alpha}^{f}$ "dominates" $\mathcal{D}_{\mathcal{Z}, \mathcal{A}}^{f}$ for any static adversary
+    $\mathcal{A}$ that corrupts no more than a relative $1-\alpha$ share of the total stake, in the sense that nonempty slots
+    are more likely to be tainted under $\mathcal{D}_{\alpha}^{f}$ than they are under $\mathcal{D}_{\mathcal{Z}, \mathcal{A}}^{f}$.
+
+
+    To make this relationship precise, we introduce the partial order $\preceq$ on the set $\{\perp, 0,1\}$ so that $x \preceq
+    y$ if and only if $x=y$ or $y=1$. We extend this partial order to $\{\perp, 0,1\}^{R}$ by declaring $x_{1} \ldots x_{R}
+    \preceq y_{1} \ldots y_{R}$ if and only if $x_{i} \preceq y_{i}$ for each $i$. Intuitively, the relationship $x \prec
+    y$ asserts that $y$ is "more adversarial than" $x$; concretely, any legal fork for $x$ is also a legal fork for $y$. Finally,
+    we define a notion of stochastic dominance for distributions on characteristic strings, and $\alpha$-dominated adversaries.
+
+
+    Definition 14 (Stochastic dominance). We say that a subset $E \subseteq\{\perp, 0,1\}^{R}$ is monotone if $x \in E$ and
+    $x \preceq y$ implies that $y \in E$. Let $\mathcal{D}$ and $\mathcal{D}^{\prime}$ be two distributions on the set of
+    characteristic strings $\{\perp, 0,1\}^{R}$. Then we say that $\mathcal{D}^{\prime}$ dominates $\mathcal{D}$, written
+    $\mathcal{D} \preceq \mathcal{D}^{\prime}$, if $\operatorname{Pr}{ }_{\mathcal{D}}[E] \leq \operatorname{Pr}_{\mathcal{D}^{\prime}}[E]$
+    for every monotone set $E$. An adversary $\mathcal{A}$ is called $\alpha$-dominated if the distribution $\mathcal{D}_{\mathcal{Z},
+    \mathcal{A}}^{f}$ that it induces on the set of characteristic strings satisfies $\mathcal{D}_{\mathcal{Z}, \mathcal{A}}^{f}
+    \preceq \mathcal{D}_{\alpha}^{f}$.
+
+
+    As noted above, this notion of stochastic dominance is consistent with the chain-theoretic definitions of interest, in
+    the sense that failures of the abstract chain properties form monotone events. We record this in the lemma below.'
+- source_sentence: What does the paper conclude about the relationship between latency and security in the Nakamoto Consensus
+    protocol?
+  sentences:
+  - 'paper-title: Close Latency-Security Trade-off for the Nakamoto Consensus
+
+
+    Evidently, if the infinite sums in (2) and (10) are replaced by partial sums for numerical evaluation, the resulting (tighter)
+    security level remains unachievable.
+
+
+    \subsection*{3.1 Remarks}
+
+    Theorems 3.5 and 3.6 assume the delay $\Delta>0$. The bounds therein still apply if we set $\Delta=0$, but are slightly
+    looser than the bounds in Theorems 3.3 and 3.4 for the zero-delay case.
+
+
+    It is important to include the time of interest $s$ in Definitions 3.1 and 3.2. The "bad events" for security breach depend
+    on $s$ as well as the latency $t$. These well-defined events are concerned with block mining times, not how blocks form
+    blockchains. ${ }^{3}$
+
+
+    We note that a number of previous analyses on the Nakamoto consensus assume a finite lifespan of the protocol [1, 10],
+    that is, a maximum round number is defined, at which round the protocol terminates. The probability of consistency depends
+    on the maximum round number. In contrast, this paper does not assume a finite lifespan. Theorem 3.5 states that, barring
+    a small probability event, confirmed blocks remain permanently in all miners'' longest blockchains into the arbitrary
+    future.
+
+
+    Even though we provide the same security guarantee for every blockchain after the confirmation latency $t$, no one can
+    simultaneously guarantee the same for all blocks that will ever be confirmed.
+
+
+    \footnotetext{${ }^{3}$ To be rigorous, we do not make claims such as "the blockchain/protocol/system satisfies consistency
+    or liveness properties with probability ..." because those properties themselves are not events in the probability space
+    defined here.
+
+    }
+
+    \includegraphics[max width=\textwidth, center]{2025_01_02_447c9a776bd74bcc1f99g-04}
+
+
+    Figure 1: Bitcoin''s latency-security trade-off with $\alpha+\beta=$ $1 / 600$ blocks per second and $\Delta=10$ seconds.
+
+
+    This is a simple consequence of Murphy''s Law: If an adversary keeps trying new episodes of attacks, with probability
+    1 a bad event will eventually occur to revert some confirmed honest blocks.
+
+
+    For technical convenience, we regard a block in a miner''s longest blockchain to be confirmed after a certain amount of
+    time elapses since the block is mined or enters the miner''s view. Nakamoto [22] originally proposed confirming a block
+    after it is sufficiently deep in an honest miner''s longest blockchain. We believe both confirmation rules are easy to
+    use in practice. And the two confirmation rules imply each other in probability (see Appendix A for further discussion).
+
+
+    \subsection*{3.2 Numerical Examples}
+
+    The latency-security trade-off under several different sets of parameters is plotted in Figure 1. The mining rate is set
+    to Bitcoin''s one block per 600 seconds, or $\alpha+\beta=1 / 600$ blocks/second. The propagation delay bound is assumed
+    to be $\Delta=10$ seconds. The latency upper and lower bounds are computed using Theorems 3.5 and 3.6, respectively. In
+    Figure 1, all bounds appear to be exponential for all but very small latency and high error probabilities. This implies
+    the exponential bound (7) is a good approximation of (5) in Theorem 3.5 for the typical range of parameters of interest
+    here.
+
+
+    It is instructive to examine concrete data points in Figure 1: If the adversarial share of the total network mining rate
+    is $10 \%$ $(\alpha: \beta=9: 1)$, then a confirmation time of four hours is sufficient to achieve $10^{-3}$ security
+    level, and a ten-hour confirmation achieves $10^{-9}$ security level. These results are about two hours away from the
+    corresponding lower bounds. Also, for every additional hour of latency, the security improves by a factor of approximately
+    20 . If the adversarial share of the mining rate increases to $25 \%(\alpha: \beta=3: 1)$, then 10 hours 40 minutes and
+    28 hours 45 minutes of confirmation times achieve $10^{-3}$ and $10^{-9}$ security levels, respectively, and the gap between
+    the upper and lower bounds is between five and seven hours. In general, the gap is proportionally insignificant at high
+    security levels but can be otherwise at low security levels. For given mining rates, the gaps are similar at different
+    security levels. This indicates the lower bound (10) is also approximately exponential with a slightly steeper exponent
+    than that of the upper bound.'
+  - "paper-title: Ledger Combiners for Fast Settlement\n\n$$\n\\begin{aligned}\n\\delta\\left(\\operatorname{PoW}_{p}^{m}(x),\
+    \ \\mathrm{IPoW}_{p / m}^{m}(x)\\right) & =\\frac{1}{2} \\sum_{s \\in\\{0,1\\}^{m}}\\left|\\operatorname{Pr}\\left[\\\
+    operatorname{PoW}_{p}^{m}(x)=s\\right]-\\operatorname{Pr}\\left[\\operatorname{IPoW}_{p / m}^{m}(x)=s\\right]\\right|\
+    \ \\\\\n& =\\sum_{\\substack{s \\in\\{0,1)^{m} \\\\\n\\mathrm{hw}(s)=1}}\\left(\\operatorname{Pr}\\left[\\operatorname{PoW}_{p}^{m}(x)=s\\\
+    right]-\\operatorname{Pr}\\left[\\operatorname{IPoW}_{p / m}^{m}(x)=s\\right]\\right) \\\\\n& \\leq m \\cdot\\left[\\\
+    frac{p}{m}-\\frac{p}{m}\\left(1-\\frac{p}{m}\\right)^{m-1}\\right] \\leq p[1-(1-p)]=p^{2}\n\\end{aligned}\n$$\n\nas desired,\
+    \ where the last inequality follows by Bernoulli inequality.\n\nThe above lemma already justifies the use of $\\mathrm{PoW}_{p}^{m}$\
+    \ for achieving subindependence in practical scenarios. To observe this, note that the use of $\\mathrm{IPoW}_{p / m}^{m}$\
+    \ would lead to full independence of the individual PoW lotteries, and by Lemma 7 the real execution with $\\mathrm{PoW}_{p}^{m}$\
+    \ will only differ from this ideal behavior with probability at most $Q \\cdot p^{2}$, where $Q$ is the total number of\
+    \ PoW-queries. With current values of $p \\approx 10^{-22}$ in e.g., Bitcoin ${ }^{2}$, and the block creation time adjusting\
+    \ to 10 minutes, this difference would manifest on expectation in about $10^{18}$ years. Note that any future increase\
+    \ of the total mining difficulty while maintaining the block creation time would only increase this period.\n\nNonetheless,\
+    \ in Appendix F we give a more detailed analysis of $\\mathrm{PoW}_{p}^{m}$ that shows that, loosely speaking, $m$ parallel\
+    \ executions of Bitcoin using PoW ${ }_{p}^{m}$ as their shared PoW oracle achieve $\\varepsilon$-subindependence for\
+    \ $\\varepsilon$ negligible in the security parameter.\n\n\\subsection*{4.2 Realizing Rank via Timestamped Blockchains}\n\
+    An important consideration when deploying our virtual ledger construction over existing blockchains is how to realize\
+    \ the notion of rank. We note that typical Nakamoto-style PoS blockchains (e.g., the Ouroboros family, Snow White) assume\
+    \ a common notion of time among the participants and explicitly label blocks with slot numbers with a direct correspondence\
+    \ to absolute time. These slot numbers (or, preferably, a notion of common time associated with each slot number) directly\
+    \ afford a notion of rank that provides the desired persistence and liveness guarantees. To formalize this property, we\
+    \ introduce the notion of a timestamped blockchain.\n\nDefinition 11. A timestamped blockchain is one satisfying the following\
+    \ conventions:\n\n\\begin{itemize}\n  \\item Block timestamps. Every block contains a declared timestamp.\n  \\item Monotonicity.\
+    \ In order for a block to be considered valid, its timestamp can be no less than the timestamps of all prior blocks in\
+    \ the blockchain. (Thus valid blockchains consist of blocks in monotonically increasing order.)\n\\end{itemize}\n\nInformally,\
+    \ we say that an algorithm is a timestamped blockchain algorithm if it calls for participants to broadcast timestamped\
+    \ blockchains and to \"respect timestamps.\" More specifically, the algorithm satisfies the following:\n\n\\begin{itemize}\n\
+    \  \\item Faithful honest timestamping. Honest participants always post blocks with timestamps determined by their local\
+    \ clocks.\n  \\item Ignore future blocks. Honest participants ignore blocks that contain a timestamp which is greater\
+    \ than their local time by more than a fixed constant. (These blocks might be considered later when the local clock of\
+    \ the participant \"catches up\" with the timestamp.)\n\\end{itemize}"
+  - "paper-title: A Scalable Proof-of-Stake Blockchain in the Open Setting * \\\\ (or, How to Mimic Nakamoto's Design via\
+    \ Proof-of-Stake)\n\nLet $\\ell$ be the length of core-chain $\\mathcal{C}$. In our design, only the elected PoS-players\
+    \ are allowed to generate new block-cores (to extend the core-chain). Now, each registered PoS-player P will work on the\
+    \ right \"context\" which consists of the latest block-core in the longest corechain and the current time; formally context\
+    \ $:=\\left\\langle h^{\\text {prev }}\\right.$, round $\\rangle$ where $\\mathcal{C}[\\ell]$ is the latest blockcore\
+    \ in the longest core-chain $\\mathcal{C}$, and $h^{\\text {prev }}$ is the identity returned by the functionality $\\\
+    mathcal{F}_{\\text {rCERT }}$ for $\\mathcal{C}[\\ell]$, and round denotes the current time. The PoS-player P may query\
+    \ $\\mathcal{F}_{\\text {rCERT }}$ by command (Elect, P , context, $\\mathcal{C}$ ) to see if he is selected to extend\
+    \ $\\mathcal{C}$. If the PoS-player P is selected (with certain probability $p$ ), he would receive a message (Elected,\
+    \ $\\mathrm{P}, h, \\sigma, \\mathrm{~b}$ ) from $\\mathcal{F}_{\\text {rCERT }}$ such that $\\mathrm{b}=1$. Once receiving\
+    \ the signature $\\sigma$ from the functionality, the PoS-player P defines a new block-core $B:=\\left\\langle\\left\\\
+    langle h^{\\text {prev }}, h\\right.\\right.$, round $\\left.\\rangle, \\mathrm{P}, \\sigma\\right\\rangle$, updates his\
+    \ local core-chain $\\mathcal{C}$ and then broadcasts the local core-chain to the network. Please refer to Figure 3 for\
+    \ more details of our core-chain protocol.\n\nNote that here PoS-players have access to the functionality $\\mathcal{F}_{\\\
+    text {rCERT }}$. The players need to register to the functionality $\\mathcal{F}_{\\text {rCERT }}$ before querying the\
+    \ functionality.\n\nThe best core-chain strategy. Our proof-of-stake core-chain protocol $\\Pi^{\\text {core }}$ uses\
+    \ the subroutine BestCore to single out the best valid core-chain from a set of core-chains. Now we describe the rules\
+    \ of selecting the best core-chain. Roughly speaking, a core-chain is the best one if it is the current longest valid\
+    \ core-chain. The BestCore subroutine takes as input, a core-chain set $\\mathbb{C}^{\\prime}$ and the current time information\
+    \ round'. Intuitively, the subroutine validates all $\\mathcal{C} \\in \\mathbb{C}^{\\prime}$, then finds the valid longest\
+    \ core-chain.\n\nIn more detail, BestCore proceeds as follows. On input the current set of core-chains $\\mathbb{C}^{\\\
+    prime}$ and the current time information round', and for each core-chain $\\mathcal{C}$, the subroutine then evaluates\
+    \ every block-core of the core-chain $\\mathcal{C}$ sequentially. Let $\\ell$ be the length of $\\mathcal{C}$. Starting\
+    \ from the head of $\\mathcal{C}$, for every block-core $\\mathcal{C}[i]$, for all $i \\in[\\ell]$, in the core-chain\
+    \ $\\mathcal{C}$, the BestCore subroutine (1) ensures that $\\mathcal{C}[i]$ is linked to the previous block-core $\\\
+    mathcal{C}[i-1]$ correctly, and (2) tests if the\n\n\\section*{Protocol $\\Pi^{\\text {core }}$}\nInitially, a set $\\\
+    mathcal{P}_{0}$ of players are registered to the functionality $\\mathcal{F}_{\\text {rCERT }}$, where $\\mathcal{P}_{0}\
+    \ \\subseteq \\mathcal{P}$. Initially, for each $\\mathrm{P} \\in \\mathcal{P}$, set $\\mathcal{C}:=\\emptyset$, and state\
+    \ $:=\\emptyset$.\n\nUpon receiving message (Input-Stake, P ) from the environment $z$ at round round, the PoS-player\
+    \ $\\mathrm{P} \\in$ $\\mathcal{P}$, with local state state, proceeds as follows.\n\n\\begin{enumerate}\n  \\item Select\
+    \ the best local PoS core-chain:\n\\end{enumerate}"
+- source_sentence: What is the difference between absolute settlement and relative settlement for transactions in a ledger?
+  sentences:
+  - 'paper-title: Ledger Combiners for Fast Settlement
+
+
+    Since the above requirements are formulated independently for each $t$, it is well-defined to treat $\mathrm{C}[\cdot]$
+    as operating on ledgers rather than dynamic ledgers; we sometimes overload the notation in this sense.
+
+
+    Looking ahead, our amplification combiner will consider $\mathrm{t}_{\mathrm{C}}\left(\mathbf{L}_{1}^{(t)}, \ldots, \mathbf{L}_{m}^{(t)}\right)=\bigcup_{i}
+    \mathbf{L}_{i}^{(t)}$ along with two related definitions of $\mathrm{a}_{\mathrm{C}}$ :
+
+
+    $$
+
+    \mathrm{a}_{\mathrm{C}}\left(A_{1}^{(t)}, \ldots, A_{m}^{(t)}\right)=\bigcup_{i} A_{i}^{(t)} \quad \text { and } \quad
+    \mathrm{a}_{\mathrm{C}}\left(A_{1}^{(t)}, \ldots, A_{m}^{(t)}\right)=\bigcap_{i} A_{i}^{(t)}
+
+    $$
+
+
+    see Section 3. The robust combiner will adopt a more sophisticated notion of $t_{c}$; see Section 5 . In each of these
+    cases, the important structural properties of the construction are captured by the rank function $r_{C}$.
+
+
+    \subsection*{2.3 Transaction Validity and Settlement}
+
+    In the discussion below, we assume a general notion of transaction validity that can be decided inductively: given a ledger
+    $\mathbf{L}$, the validity of a transaction $t x \in \mathbf{L}$ is determined by the transactions in the state $\mathbf{L}\lceil\operatorname{tx}\rceil$
+    of $\mathbf{L}$ up to tx and their ordering. Intuitively, only valid transactions are then accounted for when interpreting
+    the state of the ledger on the application level. The canonical example of such a validity predicate in the case of so-called
+    UTXO transactions is formalized for completeness in Appendix B. Note that protocols such as Bitcoin allow only valid transactions
+    to enter the ledger; as the Bitcoin ledger is represented by a simple chain it is possible to evaluate the validity predicate
+    upon block creation for each included transaction. This may not be the case for more general ledgers, such as the result
+    of applying one of our combiners or various DAG-based constructions.
+
+
+    While we focus our analysis on persistence and liveness as given in Definition 3, our broader goal is to study settlement.
+    Intuitively, settlement is the delay necessary to ensure that a transaction included in some $A^{(t)}$ enters the dynamic
+    ledger and, furthermore, that its validity stabilizes for all future times.
+
+
+    Definition 5 (Absolute settlement). For a dynamic ledger $\mathbf{D} \stackrel{\text { def }}{=} \mathbf{L}^{(0)}, \mathbf{L}^{(1)},
+    \ldots$ we say that a transaction $t x \in$ $A^{(\tau)} \cap \mathbf{L}^{(t)}($ for $\tau \leq t)$ is (absolutely) settled
+    at time $t$ iffor all $\ell \geq t$ we have: (i) $\mathbf{L}^{(t)}\lceil\mathrm{tx}\rceil \subseteq \mathbf{L}^{(\ell)}$,
+    (ii) the linear orders $<_{\mathbf{L}^{(t)}}$ and $<_{\mathbf{L}^{(t)}}$ agree on $\mathbf{L}^{(t)}\lceil\mathrm{tx}\rceil$,
+    and (iii) for any $\mathrm{tx}^{\prime} \in \mathbf{L}^{(e)}$ such that $\mathrm{tx}^{\prime}{<_{\mathbf{L}}(t)} \mathrm{tx}$
+    we have $\mathrm{tx}^{\prime} \in \mathbf{L}^{(t)}\lceil\mathrm{tx}\rceil$.
+
+
+    Note that for any absolutely settled transaction, its validity is determined and it is guaranteed to remain unchanged
+    in the future.
+
+
+    It will be useful to also consider a weaker notion of relative settlement of a transaction: Intuitively, tx is relatively
+    settled at time $t$ if we have the guarantee that no (conflicting) transaction $\mathrm{tx}^{\prime}$ that is not part
+    of the ledger at time $t$ can possibly eventually precede $t x$ in the ledger ordering.'
+  - "paper-title: Casper the Friendly Finality Gadget\n\n\\documentclass[10pt]{article}\n\\usepackage[utf8]{inputenc}\n\\\
+    usepackage[T1]{fontenc}\n\\usepackage{amsmath}\n\\usepackage{amsfonts}\n\\usepackage{amssymb}\n\\usepackage[version=4]{mhchem}\n\
+    \\usepackage{stmaryrd}\n\\usepackage{graphicx}\n\\usepackage[export]{adjustbox}\n\\graphicspath{ {./images/} }\n\\usepackage{hyperref}\n\
+    \\hypersetup{colorlinks=true, linkcolor=blue, filecolor=magenta, urlcolor=cyan,}\n\\urlstyle{same}\n\n\\title{Casper the\
+    \ Friendly Finality Gadget }\n\n\\author{Vitalik Buterin and Virgil Griffith\\\\\nEthereum Foundation}\n\\date{}\n\n\n\
+    %New command to display footnote whose markers will always be hidden\n\\let\\svthefootnote\\thefootnote\n\\newcommand\\\
+    blfootnotetext[1]{%\n  \\let\\thefootnote\\relax\\footnote{#1}%\n  \\addtocounter{footnote}{-1}%\n  \\let\\thefootnote\\\
+    svthefootnote%\n}\n\n%Overriding the \\footnotetext command to hide the marker if its value is `0`\n\\let\\svfootnotetext\\\
+    footnotetext\n\\renewcommand\\footnotetext[2][?]{%\n  \\if\\relax#1\\relax%\n    \\ifnum\\value{footnote}=0\\blfootnotetext{#2}\\\
+    else\\svfootnotetext{#2}\\fi%\n  \\else%\n    \\if?#1\\ifnum\\value{footnote}=0\\blfootnotetext{#2}\\else\\svfootnotetext{#2}\\\
+    fi%\n    \\else\\svfootnotetext[#1]{#2}\\fi%\n  \\fi\n}\n\n\\begin{document}\n\\maketitle\n\n\n\\begin{abstract}\nWe introduce\
+    \ Casper, a proof of stake-based finality system which overlays an existing proof of work blockchain. Casper is a partial\
+    \ consensus mechanism combining proof of stake algorithm research and Byzantine fault tolerant consensus theory. We introduce\
+    \ our system, prove some desirable features, and show defenses against long range revisions and catastrophic crashes.\
+    \ The Casper overlay provides almost any proof of work chain with additional protections against block reversions.\n\\\
+    end{abstract}\n\n\\section*{1. Introduction}\nOver the past few years there has been considerable research into \"proof\
+    \ of stake\" (PoS) based blockchain consensus algorithms. In a PoS system, a blockchain appends and agrees on new blocks\
+    \ through a process where anyone who holds coins inside of the system can participate, and the influence an agent has\
+    \ is proportional to the number of coins (or \"stake\") it holds. This is a vastly more efficient alternative to proof\
+    \ of work (PoW) \"mining\" and enables blockchains to operate without mining's high hardware and electricity costs.\\\\\
+    [0pt]\nThere are two major schools of thought in PoS design. The first, chain-based proof of stake[1, 2], mimics proof\
+    \ of work mechanics and features a chain of blocks and simulates mining by pseudorandomly assigning the right to create\
+    \ new blocks to stakeholders. This includes Peercoin[3], Blackcoin[4], and Iddo Bentov's work[5].\\\\[0pt]\nThe other\
+    \ school, Byzantine fault tolerant (BFT) based proof of stake, is based on a thirty-year-old body of research into BFT\
+    \ consensus algorithms such as PBFT[6]. BFT algorithms typically have proven mathematical properties; for example, one\
+    \ can usually mathematically prove that as long as $>\\frac{2}{3}$ of protocol participants are following the protocol\
+    \ honestly, then, regardless of network latency, the algorithm cannot finalize conflicting blocks. Repurposing BFT algorithms\
+    \ for proof of stake was first introduced by Tendermint[7], and has modern inspirations such as [8]. Casper follows this\
+    \ BFT tradition, though with some modifications.\n\n\\subsection*{1.1. Our Work}\nCasper the Friendly Finality Gadget\
+    \ is an overlay atop a proposal mechanism-a mechanism which proposes blocks ${ }^{1}$. Casper is responsible for finalizing\
+    \ these blocks, essentially selecting a unique chain which represents the canonical transactions of the ledger. Casper\
+    \ provides safety, but liveness depends on the chosen proposal mechanism. That is, if attackers wholly control the proposal\
+    \ mechanism, Casper protects against finalizing two conflicting checkpoints, but the attackers could prevent Casper from\
+    \ finalizing any future checkpoints.\\\\\nCasper introduces several new features that BFT algorithms do not necessarily\
+    \ support:"
+  - 'paper-title: Bitcoin and Cryptocurrency Technologies
+
+
+    Interestingly, these concerns have an analogy in the realm of voting. It''s illegal in the United States and many other
+    nations for individuals to sell their vote. Arguably participating in a pool controlled by someone else is akin to selling
+    your vote in the Bitcoin consensus protocol.
+
+
+    Technical requirements for pools. Recall that mining pools appear to be an emergent phenomenon. There''s no evidence that
+    Satoshi was thinking of mining pools at the time of Bitcoin''s original design. It wasn''t apparent for a few years that
+    efficient pools could be run between many individuals who don''t know or trust each other.
+
+
+    As we saw in Chapter 5, mining pools typically work by designating a pool operator with a well-known public key. Each
+    of the participating miners mines as usual but sends in shares to the pool operator. These shares are "near misses" or
+    "partial solutions" which would be valid solutions at a lower difficulty level. This shows the pool operator how much
+    work the miner is performing. Whenever one of the pool participants finds a valid block, the pool operator then distributes
+    the rewards amongst the pool participants based on the number of shares they have submitted. As we discussed in Chapter
+    5, there are many formulas for dividing the revenue up, but all mining pools follow this basic structure.
+
+
+    The existence of pools thus relies on at least two technical properties of Bitcoin. The first is that it''s easy for a
+    miner to prove (probabilistically) how much work they are doing by submitting shares. By choosing a low enough threshold
+    for shares, miners can easily prove how much work they are performing with arbitrary precision regardless of the actual
+    difficulty of finding an valid block. This facet of mining puzzles appears difficult to change, given that we need a puzzle
+    that can be created with arbitrary difficulty.
+
+
+    Second, pool members can easily prove to the pool operator that they''re following the rules and working to find valid
+    blocks which would reward the pool as a whole. This works because the pool''s public key is committed to in the coinbase
+    transaction included in the block''s Merkle tree of transactions. Once a miner finds a block or even a share, they can''t
+    change which public key is the recipient of the newly minted coins.
+
+
+    Block discarding attacks. There is one weakness in this scheme for implementing mining pools: there is nothing to to enforce
+    that participating miners actually submit valid blocks to the pool manager in the event that they find them. Suppose that
+    there''s a pool member that''s upset with a large mining pool. They can participate in the pool by mining and submitting
+    shares just like normal, but in the event that they actually find a valid block that would reward the pool they simply
+    discard it and don''t tell the pool operator about it.
+
+
+    This attack reduces the pool''s overall mining power as none of the attacker''s work is contributing towards finding valid
+    blocks. However the attacker will still be rewarded as they appear to be submitting valid shares and simply getting unlucky
+    to not find any valid blocks. If the mining pool is designed to be revenue-neutral (that is, all mining rewards are redistributed
+    back to participants) then this attack can cause the pool to run at a loss.
+
+
+    This attack is sometimes called a vigilante or sabotage attack and is considered a form of vandalism because the attack
+    appears to be costly for both the attacker and the pool. The attacker loses money because every block they discard would
+    have led to some proportion of the block rewards being returned to them. Of course, the attacker still gets rewards for
+    other puzzle solutions that are found.
+
+
+    It appears that a rational attacker wouldn''t employ this strategy, since they would lose money without gaining anything
+    tangible. It turns out (quite surprisingly) that there are cases where this strategy can be profitable, as discussed in
+    the box below. But in any case, we want to design an entirely new mining puzzle formulation that ensures this strategy
+    is always profitable.
+
+
+    Sidebar: block discarding attacks between pools. People assumed for years that it can''t be profitable for a participant
+    to discard valid blocks found on behalf of the pool. It turns out this strategy can be profitable if one mining pool uses
+    it to attack another. This was proposed apocryphally many times and first thoroughly analyzed in a paper by Ittay Eyal
+    in 2015.
+
+
+    Let''s consider a simple case: suppose two mining pools, $A$ and $B$, each have $50 \%$ of the total mining capacity.
+    Now suppose B uses half of its mining power ( $25 \%$ of the total capacity) to mine as a member in pool A, but discards
+    all blocks found. We can show, in a simplified model, that B will now earns $5 / 9$ of the total rewards, greater than
+    the $50 \%$ it would earn by mining normally. In this simple case, dedicating half of its mining power to attacking can
+    be shown to be the optimal strategy for pool B.'
+model-index:
+- name: SentenceTransformer based on BAAI/bge-base-en-v1.5
+  results:
+  - task:
+      type: information-retrieval
+      name: Information Retrieval
+    dataset:
+      name: dim 768
+      type: dim_768
+    metrics:
+    - type: cosine_accuracy@1
+      value: 0.5
+      name: Cosine Accuracy@1
+      verified: false
+    - type: cosine_accuracy@3
+      value: 0.7857142857142857
+      name: Cosine Accuracy@3
+      verified: false
+    - type: cosine_accuracy@5
+      value: 0.8571428571428571
+      name: Cosine Accuracy@5
+      verified: false
+    - type: cosine_accuracy@10
+      value: 0.8571428571428571
+      name: Cosine Accuracy@10
+      verified: false
+    - type: cosine_precision@1
+      value: 0.5
+      name: Cosine Precision@1
+      verified: false
+    - type: cosine_precision@3
+      value: 0.26190476190476186
+      name: Cosine Precision@3
+      verified: false
+    - type: cosine_precision@5
+      value: 0.17142857142857146
+      name: Cosine Precision@5
+      verified: false
+    - type: cosine_precision@10
+      value: 0.08571428571428573
+      name: Cosine Precision@10
+      verified: false
+    - type: cosine_recall@1
+      value: 0.5
+      name: Cosine Recall@1
+      verified: false
+    - type: cosine_recall@3
+      value: 0.7857142857142857
+      name: Cosine Recall@3
+      verified: false
+    - type: cosine_recall@5
+      value: 0.8571428571428571
+      name: Cosine Recall@5
+      verified: false
+    - type: cosine_recall@10
+      value: 0.8571428571428571
+      name: Cosine Recall@10
+      verified: false
+    - type: cosine_ndcg@10
+      value: 0.7032219246239031
+      name: Cosine Ndcg@10
+      verified: false
+    - type: cosine_mrr@10
+      value: 0.6511904761904762
+      name: Cosine Mrr@10
+      verified: false
+    - type: cosine_map@100
+      value: 0.6553083095766022
+      name: Cosine Map@100
+      verified: false
+  - task:
+      type: information-retrieval
+      name: Information Retrieval
+    dataset:
+      name: dim 512
+      type: dim_512
+    metrics:
+    - type: cosine_accuracy@1
+      value: 0.5714285714285714
+      name: Cosine Accuracy@1
+      verified: false
+    - type: cosine_accuracy@3
+      value: 0.7857142857142857
+      name: Cosine Accuracy@3
+      verified: false
+    - type: cosine_accuracy@5
+      value: 0.8214285714285714
+      name: Cosine Accuracy@5
+      verified: false
+    - type: cosine_accuracy@10
+      value: 0.8571428571428571
+      name: Cosine Accuracy@10
+      verified: false
+    - type: cosine_precision@1
+      value: 0.5714285714285714
+      name: Cosine Precision@1
+      verified: false
+    - type: cosine_precision@3
+      value: 0.26190476190476186
+      name: Cosine Precision@3
+      verified: false
+    - type: cosine_precision@5
+      value: 0.1642857142857143
+      name: Cosine Precision@5
+      verified: false
+    - type: cosine_precision@10
+      value: 0.08571428571428573
+      name: Cosine Precision@10
+      verified: false
+    - type: cosine_recall@1
+      value: 0.5714285714285714
+      name: Cosine Recall@1
+      verified: false
+    - type: cosine_recall@3
+      value: 0.7857142857142857
+      name: Cosine Recall@3
+      verified: false
+    - type: cosine_recall@5
+      value: 0.8214285714285714
+      name: Cosine Recall@5
+      verified: false
+    - type: cosine_recall@10
+      value: 0.8571428571428571
+      name: Cosine Recall@10
+      verified: false
+    - type: cosine_ndcg@10
+      value: 0.7276726753008987
+      name: Cosine Ndcg@10
+      verified: false
+    - type: cosine_mrr@10
+      value: 0.6848639455782314
+      name: Cosine Mrr@10
+      verified: false
+    - type: cosine_map@100
+      value: 0.6886316064887493
+      name: Cosine Map@100
+      verified: false
+  - task:
+      type: information-retrieval
+      name: Information Retrieval
+    dataset:
+      name: dim 256
+      type: dim_256
+    metrics:
+    - type: cosine_accuracy@1
+      value: 0.5714285714285714
+      name: Cosine Accuracy@1
+      verified: false
+    - type: cosine_accuracy@3
+      value: 0.7857142857142857
+      name: Cosine Accuracy@3
+      verified: false
+    - type: cosine_accuracy@5
+      value: 0.8214285714285714
+      name: Cosine Accuracy@5
+      verified: false
+    - type: cosine_accuracy@10
+      value: 0.8571428571428571
+      name: Cosine Accuracy@10
+      verified: false
+    - type: cosine_precision@1
+      value: 0.5714285714285714
+      name: Cosine Precision@1
+      verified: false
+    - type: cosine_precision@3
+      value: 0.26190476190476186
+      name: Cosine Precision@3
+      verified: false
+    - type: cosine_precision@5
+      value: 0.1642857142857143
+      name: Cosine Precision@5
+      verified: false
+    - type: cosine_precision@10
+      value: 0.08571428571428573
+      name: Cosine Precision@10
+      verified: false
+    - type: cosine_recall@1
+      value: 0.5714285714285714
+      name: Cosine Recall@1
+      verified: false
+    - type: cosine_recall@3
+      value: 0.7857142857142857
+      name: Cosine Recall@3
+      verified: false
+    - type: cosine_recall@5
+      value: 0.8214285714285714
+      name: Cosine Recall@5
+      verified: false
+    - type: cosine_recall@10
+      value: 0.8571428571428571
+      name: Cosine Recall@10
+      verified: false
+    - type: cosine_ndcg@10
+      value: 0.7284895986499949
+      name: Cosine Ndcg@10
+      verified: false
+    - type: cosine_mrr@10
+      value: 0.6857142857142858
+      name: Cosine Mrr@10
+      verified: false
+    - type: cosine_map@100
+      value: 0.6893267651888342
+      name: Cosine Map@100
+      verified: false
+  - task:
+      type: information-retrieval
+      name: Information Retrieval
+    dataset:
+      name: dim 128
+      type: dim_128
+    metrics:
+    - type: cosine_accuracy@1
+      value: 0.5
+      name: Cosine Accuracy@1
+      verified: false
+    - type: cosine_accuracy@3
+      value: 0.75
+      name: Cosine Accuracy@3
+      verified: false
+    - type: cosine_accuracy@5
+      value: 0.8214285714285714
+      name: Cosine Accuracy@5
+      verified: false
+    - type: cosine_accuracy@10
+      value: 0.8571428571428571
+      name: Cosine Accuracy@10
+      verified: false
+    - type: cosine_precision@1
+      value: 0.5
+      name: Cosine Precision@1
+      verified: false
+    - type: cosine_precision@3
+      value: 0.24999999999999997
+      name: Cosine Precision@3
+      verified: false
+    - type: cosine_precision@5
+      value: 0.1642857142857143
+      name: Cosine Precision@5
+      verified: false
+    - type: cosine_precision@10
+      value: 0.08571428571428573
+      name: Cosine Precision@10
+      verified: false
+    - type: cosine_recall@1
+      value: 0.5
+      name: Cosine Recall@1
+      verified: false
+    - type: cosine_recall@3
+      value: 0.75
+      name: Cosine Recall@3
+      verified: false
+    - type: cosine_recall@5
+      value: 0.8214285714285714
+      name: Cosine Recall@5
+      verified: false
+    - type: cosine_recall@10
+      value: 0.8571428571428571
+      name: Cosine Recall@10
+      verified: false
+    - type: cosine_ndcg@10
+      value: 0.6935204558400861
+      name: Cosine Ndcg@10
+      verified: false
+    - type: cosine_mrr@10
+      value: 0.6395833333333334
+      name: Cosine Mrr@10
+      verified: false
+    - type: cosine_map@100
+      value: 0.6425405844155845
+      name: Cosine Map@100
+      verified: false
+  - task:
+      type: information-retrieval
+      name: Information Retrieval
+    dataset:
+      name: dim 64
+      type: dim_64
+    metrics:
+    - type: cosine_accuracy@1
+      value: 0.42857142857142855
+      name: Cosine Accuracy@1
+      verified: false
+    - type: cosine_accuracy@3
+      value: 0.6785714285714286
+      name: Cosine Accuracy@3
+      verified: false
+    - type: cosine_accuracy@5
+      value: 0.75
+      name: Cosine Accuracy@5
+      verified: false
+    - type: cosine_accuracy@10
+      value: 0.8214285714285714
+      name: Cosine Accuracy@10
+      verified: false
+    - type: cosine_precision@1
+      value: 0.42857142857142855
+      name: Cosine Precision@1
+      verified: false
+    - type: cosine_precision@3
+      value: 0.22619047619047614
+      name: Cosine Precision@3
+      verified: false
+    - type: cosine_precision@5
+      value: 0.15000000000000005
+      name: Cosine Precision@5
+      verified: false
+    - type: cosine_precision@10
+      value: 0.08214285714285716
+      name: Cosine Precision@10
+      verified: false
+    - type: cosine_recall@1
+      value: 0.42857142857142855
+      name: Cosine Recall@1
+      verified: false
+    - type: cosine_recall@3
+      value: 0.6785714285714286
+      name: Cosine Recall@3
+      verified: false
+    - type: cosine_recall@5
+      value: 0.75
+      name: Cosine Recall@5
+      verified: false
+    - type: cosine_recall@10
+      value: 0.8214285714285714
+      name: Cosine Recall@10
+      verified: false
+    - type: cosine_ndcg@10
+      value: 0.631592589549331
+      name: Cosine Ndcg@10
+      verified: false
+    - type: cosine_mrr@10
+      value: 0.5696428571428572
+      name: Cosine Mrr@10
+      verified: false
+    - type: cosine_map@100
+      value: 0.5757306413556414
+      name: Cosine Map@100
+      verified: false
+config:
+  architectures:
+  - BertModel
+  model_type: bert
+  tokenizer_config:
+    cls_token: '[CLS]'
+    mask_token: '[MASK]'
+    pad_token: '[PAD]'
+    sep_token: '[SEP]'
+    unk_token: '[UNK]'
+cardData:
+  tags:
+  - sentence-transformers
+  - sentence-similarity
+  - feature-extraction
+  - generated_from_trainer
+  - dataset_size:278
+  - loss:MatryoshkaLoss
+  - loss:MultipleNegativesRankingLoss
+  base_model: BAAI/bge-base-en-v1.5
+  widget:
+  - source_sentence: How does Bitcoin's P2P network prevent malicious nodes from flooding the network with invalid blocks
+      or transactions?
+    sentences:
+    - 'paper-title: The Bitcoin Lightning Network: Scalable Off-Chain Instant Payments
+
+
+      \subsection*{8.4 Payment Routing}
+
+      It is theoretically possible to build a route map implicitly from observing 2 -of-2 multisigs on the blockchain to build
+      a routing table. Note, however, this is not feasible with pay-to-script-hash transaction outputs, which can be resolved
+      out-of-band from the bitcoin protocol via a third party routing service. Building a routing table will become necessary
+      for large operators (e.g. BGP, Cjdns). Eventually, with optimizations, the network will look a lot like the correspondent
+      banking network, or Tier-1 ISPs. Similar to how packets still reach their destination on your home network connection,
+      not all participants need to have a full routing table. The core Tier-1 routes can be online all the time - while nodes
+      at the edges, such as average users, would be connected intermittently.
+
+
+      Node discovery can occur along the edges by pre-selecting and offering partial routes to well-known nodes.
+
+
+      \subsection*{8.5 Fees}
+
+      Lightning Network fees, which differ from blockchain fees, are paid directly between participants within the channel.
+      The fees pay for the time-value of money for consuming the channel for a determined maximum period of time, and for
+      counterparty risk of non-communication.
+
+
+      Counterparty risk for fees only exist with one''s direct channel counterparty. If a node two hops away decides to disconnect
+      and their transaction gets broadcast on the blockchain, one''s direct counterparties should not broadcast on the blockchain,
+      but continue to update via novation with a new Commitment Transaction. See the Decrementing Timelocks entry in the HTLC
+      section for more information about counterparty risk.
+
+
+      The time-value of fees pays for consuming time (e.g. 3 days) and is conceptually equivalent to a gold lease rate without
+      custodial risk; it is the time-value for using up the access to money for a very short duration. Since certain paths
+      may become very profitable in one direction, it is possible for fees to be negative to encourage the channel to be available
+      for those profitable paths.
+
+
+      \section*{9 Risks}
+
+      The primary risks relate to timelock expiration. Additionally, for core nodes and possibly some merchants to be able
+      to route funds, the keys must be held online for lower latency. However, end-users and nodes are able to keep their
+      private keys firewalled off in cold storage.
+
+
+      \subsection*{9.1 Improper Timelocks}
+
+      Participants must choose timelocks with sufficient amounts of time. If insufficient time is given, it is possible that
+      timelocked transactions believed to be invalid will become valid, enabling coin theft by the counterparty. There is
+      a trade-off between longer timelocks and the time-value of money. When writing wallet and Lightning Network application
+      software, it is necessary to ensure that sufficient time is given and users are able to have their transactions enter
+      into the blockchain when interacting with non-cooperative or malicious channel counterparties.
+
+
+      \subsection*{9.2 Forced Expiration Spam}
+
+      Forced expiration of many transactions may be the greatest systemic risk when using the Lightning Network. If a malicious
+      participant creates many channels and forces them all to expire at once, these may overwhelm block data capacity, forcing
+      expiration and broadcast to the blockchain. The result would be mass spam on the bitcoin network. The spam may delay
+      transactions to the point where other locktimed transactions become valid.
+
+
+      This may be mitigated by permitting one transaction replacement on all pending transactions. Anti-spam can be used by
+      permitting only one transaction replacement of a higher sequence number by the inverse of an even or odd number. For
+      example, if an odd sequence number was broadcast, permit a replacement to a higher even number only once. Transactions
+      would use the sequence number in an orderly way to replace other transactions. This mitigates the risk assuming honest
+      miners. This attack is extremely high risk, as incorrect broadcast of Commitment Transactions entail a full penalty
+      of all funds in the channel.
+
+
+      Additionally, one may attempt to steal HTLC transactions by forcing a timeout transaction to go through when it should
+      not. This can be easily mitigated by having each transfer inside the channel be lower than the total transaction fees
+      used. Since transactions are extremely cheap and do not hit the blockchain with cooperative channel counterparties,
+      large transfers of value can be split into many small transfers. This attempt can only work if the blocks are completely
+      full for a long time. While it is possible to mitigate it using a longer HTLC timeout duration, variable block sizes
+      may become common, which may need mitigations.
+
+
+      If this type of transaction becomes the dominant form of transactions which are included on the blockchain, it may become
+      necessary to increase the block size and run a variable blocksize structure and timestop flags as described in the section
+      below. This can create sufficient penalties and disincentives to be highly unprofitable and unsuccessful for attackers,
+      as attackers lose all their funds from broadcasting the wrong transaction, to the point where it will never occur.'
+    - 'paper-title: OmniLedger: A Secure, Scale-Out, Decentralized Ledger via Sharding
+
+
+      Fig. 11: Bootstrap bandwidth consumption with state blocks.\\[0pt]
+
+      to create the UTXO state. For this experiment, we reconstructed Bitcoin''s blockchain [5], [41] and created a parallel
+      OmniLedger blockchain with weekly state blocks.
+
+
+      Figure 11 depicts the bandwidth overhead of a validator that did not follow the state for the first 100 days. As we
+      can see, the state block approach is better if the validator is outdated for more than 19 days or 2736 Bitcoin blocks.
+
+
+      The benefit might not seem substantial for Bitcoin, but in OmniLedger, 2736 blocks are created in less than 8 hours,
+      meaning that for one day-long epochs, the state block approach is significantly better. If a peak throughput is required
+      and 16 MB blocks are deployed, we expect reduced bandwidth consumption close to two orders of magnitude.
+
+
+      \section*{IX. Related Work}
+
+      The growing interests in scaling blockchains have produced a number of prominent systems that we compare in Table IV.
+      ByzCoin [32] is a first step to scalable BFT consensus, but cannot scale-out. Elastico is the first open scale-out DL,
+      however, it suffers from performance and security challenges that we have already discussed in Section II. RSCoin [16]
+      proposes sharding as a scalable approach for centrally banked cryptocurrencies. RSCoin relies on a trusted source of
+      randomness for sharding and auditing, making its usage problematic in trustless settings. Furthermore, to validate transactions,
+      each shard has to coordinate with the client and instead of running BFT, RSCoin uses a simple two-phase commit, assuming
+      that safety is preserved if the majority of validators is honest. This
+
+
+      TABLE IV: Comparison of Distributed Ledger Systems
+
+
+      \begin{center}
+
+      \begin{tabular}{ccccccc}
+
+      \hline
+
+      System & Scale-Out & \begin{tabular}{c}
+
+      Cross-Shard \\
+
+      Transaction Atomicity \\
+
+      \end{tabular} & State Blocks & \begin{tabular}{c}
+
+      Measured Scalability \\
+
+      (\# of Validators) \\
+
+      \end{tabular} & \begin{tabular}{c}
+
+      Estimated \\
+
+      Time to Fail \\
+
+      \end{tabular} & \begin{tabular}{c}
+
+      Measured \\
+
+      Latency \\
+
+      \end{tabular} \\
+
+      \hline
+
+      RSCoin [16] & In Permissioned & Partial & No & 30 & N/A & 1 sec \\
+
+      Elastico [34] & In PoW & No & No & 1600 & 1 hour & 800 sec \\
+
+      ByzCoin [32] & No & N/A & No & 1008 & 19 years & 40 sec \\
+
+      Bitcoin-NG [21] & No & N/A & No & 1000 & N/A & 600 sec \\
+
+      PBFT [9], [11] & No & N/A & No & 16 & N/A & 1 sec \\
+
+      Nakamoto [36] & No & N/A & No & 4000 & N/A & 600 sec \\
+
+      OmniLedger & Yes & Yes & Yes & 2400 & 68.5 years & 1.5 sec \\
+
+      \hline
+
+      \end{tabular}
+
+      \end{center}
+
+
+      approach, however, does not protect from double spending attempts by a malicious client colluding with a validator.
+
+
+      In short, prior solutions [16], [32], [34] achieve only two out of the three desired properties; decentralization, long-term
+      security, and scale-out, as illustrated in Figure 1. OmniLedger overcomes this issue by scaling out, as far as throughput
+      is concerned, and by maintaining consistency to the level required for safety, without imposing a total order.
+
+
+      Bitcoin-NG scales Bitcoin without changing the consensus algorithm by observing that the PoW process does not have to
+      be the same as the transaction validation process; this results in two separate timelines: one slow for PoW and one
+      fast for transaction validation. Although Bitcoin-NG significantly increases the throughput of Bitcoin, it is still
+      susceptible to the same attacks as Bitcoin [24], [3].
+
+
+      Other efforts to scale blockchains include: Tendermint [9], a protocol similar to PBFT for shard-level consensus that
+      does not scale due to its similarities to PBFT, and the Lightning Network [40], an off-chain payment protocol for Bitcoin
+      (also compatible to OmniLedger); it limits the amount of information committed to the blockchain.'
+    - "Datatype: lecture_note, Title: Lecture 4: Peer to Peer Networking for Blockchains\n\nHow does broadcast take only $O(\\\
+      log N)$ steps? We first need to understand the gossip-flooding-based broadcast protocol. The flooding protocol mimics\
+      \ the spread of an epidemic. Once a node is ``infected\", it infects its peers and forever stay's infected. It is easy\
+      \ to see that the spread of information will happen exponentially; hence the information will take $O(\\log N)$ hops\
+      \ to spread to all nodes. To formally understand the spread, we note that $d$-regular graphs with $d\\geq 3$ are an\
+      \ \\textit{expander graph} for large sizes ($|V|$) with high probability. An expander graph is a connected but sparse\
+      \ graph ($|E|=O(|V|)$) with the following property: $|\\partial A| \\geq \\epsilon|A|$ for any connected sub-graph $A$\
+      \ with $|A|<0.5|V|$. Here, $|\\partial A|$ refers to the number of vertices outside $A$ with at least one neighbor in\
+      \ $A$. A gossip message originates with $A(0)$ as the broadcasting node with $|A(0)|=1$, in the next hop, it will spread\
+      \ to $\\partial A(0)$ with $|A(1)|\\geq (1+\\epsilon)|A(0)|$. This recursion continues and we have $|A(k)|\\geq(1+\\\
+      epsilon)^kA(0)$. Thus, the number of steps to reach half the number of nodes is logarithmic in the number of nodes.\
+      \ It can be shown that the other half of the nodes can also be covered in $O(\\log N)$ time.\n\n\n%Engineering issues\
+      \ (peer discovery, bootstrap, churn). Implementation connections (to the lab experiment). Validation of tx, blocks.\
+      \ How does that impact networking? What about skipping validation and doing cut-through routing? Compact blocks. (RR)\n\
+      \n\\section*{Bitcoin P2P network: A systems view}\nIn Bitcoin, peers connect to each other and communicate using the\
+      \ TCP protocol. The codebase allows for eight outgoing connections and up to 117 incoming connections. The network has\
+      \ a high churn rate (rate at which users enter/leave the system); hence, the node must be ready to connect to new peers.\
+      \ Moreover, to ensure that the peers we are connecting to are chosen randomly, the node keeps a large list of nodes\
+      \ running Bitcoin in the form of their (IP, port) tuple and establishes a connection to one of them randomly when a\
+      \ slot opens up.  \n\nHow does a node bootstrap its list of peers? This happens by connecting to a set of DNS seed nodes.\
+      \ The seed nodes are not heavily decentralized; hence completely relying on the peer list provided by them is not advisable.\
+      \ On connecting to the initial set of peers, a node asks its neighbors for their peer list using {\\tt getAddr} and\
+      \ {\\tt Addr} messages. The node keeps refreshing its peer list regularly by exchanging peer lists with its peers. \n\
+      \nTransmission of all block and transactions happen through the inventory message {\\tt inv}, on receiving an {\\tt\
+      \ inv} message the node checks if it has the block or the transaction in its local storage. If not, it sends the {\\\
+      tt getData} message to fetch those blocks and transactions from the peer. Since block sizes are relatively large, block\
+      \ transmission can optionally happen in 2 stages. On receiving the {\\tt inv} message, the node may ask for headers\
+      \ first using {\\tt getHeaders} and ask for complete blocks only if a header chain is established. This header-first\
+      \ block transmission increases queries but can decrease the net bandwidth usage. It may also prevent nodes from accepting\
+      \ PoW invalid blocks since the node can check from the header whether PoW is valid. \n\nWe saw in the previous lecture\
+      \ that some nodes might be malicious. A question that may arise is: what stops malicious nodes from flooding the network\
+      \ with invalid blocks and transactions (i.e., with invalid PoW and/or signatures)? Such flooding will saturate the network\
+      \ and increase transmission delay to unacceptable levels. Such an attack is prevented by a simple design decision, forward\
+      \ message to peers only after validating the message; i.e., a node sends an {\\tt inv} block message to its peers only\
+      \ after validating the block. If the adversary creates an invalid block, the block will not be propagated beyond one\
+      \ honest node. Additionally, nodes maintain their peers' reputation using some predefined heuristics; if a peer misbehaves\
+      \ (say by sending a transaction with invalid signatures), its reputation is downgraded and after a certain lower threshold\
+      \ is disconnected."
+  - source_sentence: How does the blockchain protocol ensure that all honest players converge on the same chain?
+    sentences:
+    - "paper-title: Blockchain CAP Theorem Allows User-Dependent Adaptivity and Finality\n\nDefinition 3 (Potential starting\
+      \ value for period $p$ ). A value $v$ that has been next-voted by $t+1$ honest nodes for period $p-1$.\n\nDefinition\
+      \ 4 (Committed value for period $p$ ). A value $v$ that has been cert-voted by $2 t+1$ nodes for period $p$.\n\nDefinition\
+      \ 5 (Potentially committed value for period $p$ ). A value $v$ that has been cert-voted by $t+1$ honest nodes for period\
+      \ $p$.\n\nAlthough we slightly altered Algorand BA protocol (which is highlighted in red in Appendix A), we note that\
+      \ our modification does not break the safety of the protocol or cause any deadlock in Lemma 1 and Lemma 2, At a high\
+      \ level, the validity check only causes less soft-votes from honest nodes, which is indistinguishable with the case\
+      \ where the leader is malicious and no value receives at least $2 t+1$ soft-votes in some period. Therefore, the safety\
+      \ and deadlock-free property remain.\n\nLemma 1 (Asynchronous Safety, CP0). Even when the network is partitioned, the\
+      \ protocol ensures safety of the system so that no two honest nodes will finish one iteration of the protocol with different\
+      \ outputs.\n\nProof. The following properties hold even during a network partition.\n\n\\begin{itemize}\n  \\item By\
+      \ quorum intersection, as each honest node only soft-votes one value, then at most one value is committed or potentially\
+      \ committed for each period $p$ in one iteration.\n  \\item If a value $v$ is potentially committed for period $p$,\
+      \ then only $v$ can receive $2 t+1$ next-votes for period $p$. Thus, the unique potential starting value for period\
+      \ $p+1$ is $v$.\n  \\item If a period $p$ has a unique potential starting value $v \\neq \\perp$, then only $v$ can\
+      \ be committed for period $p$. Moreover, honest nodes will only next-vote $v$ for period $p$, so the unique potential\
+      \ starting value for period $p+1$ is also $v$. Inductively, any future periods $p^{\\prime}>p$ can only have $v$ as\
+      \ a potential starting value. Thus, once a value is potentially committed, it becomes the unique value that can be committed\
+      \ or potentially committed for any future period, and no two honest nodes will finish this iteration of the protocol\
+      \ with different outputs.\n\\end{itemize}\n\nLemma 2 (Asynchronous Deadlock-freedom). As long as messages will be delivered\
+      \ eventually, an honest node can always leave period p, either by entering a higher period or meeting the halting condition\
+      \ for the current iteration.\n\nProof. We first prove that there can never exist $2 t+1$ next-votes for two different\
+      \ non- $\\perp$ values from the same period $p$ by induction.\n\nStart with $p=1$. Note that every honest node sets\
+      \ $s t_{i}^{1}=\\perp$ and at most one value (say $v$ ) could receive more than $2 t+1$ soft-votes. Therefore only value\
+      \ $v$ and $\\perp$ could potentially receive more than $2 t+1$ next-votes in period 1 . Note that it is possible that\
+      \ both $v$ and $\\perp$ receive more than $2 t+1$ next-votes: all the honest nodes could next-vote for $\\perp$ in Step\
+      \ 4 and then next-vote for $v$ in Step 5 after seeing the $2 t+1$ soft-votes for $v$.\n\nAssume that the claim holds\
+      \ for period $p-1(p \\geq 2)$ : there exist at most two values each of which has $2 t+1$ next-votes for period $p-1$,\
+      \ and one of them is necessarily $\\perp$. Then there are three possible cases:"
+    - 'paper-title: A Scalable Proof-of-Stake Blockchain in the Open Setting * \\ (or, How to Mimic Nakamoto''s Design via
+      Proof-of-Stake)
+
+
+      Common prefix. Our analysis is based on the common prefix analysis of core-chain. The core-chain can achieve common
+      prefix as we discussed. The opportunity for malicious players to destroy common prefix probability is to generate different
+      blockchain for the same core-chain. For the malicious players can sign different blocks for one block-core, this will
+      allow him to fork the blockchain. So the malicious players can fork the blockchain when they are chosen to generate
+      block. However, with the property of hash function, the malicious players can not generate two blocks with same hash
+      value. When an honest player is chosen to extend a block, he will only support one blockchain. Then all of the honest
+      players will converge on one blockchain.\\
+
+      Corollary 6.4 (Common prefix). Consider the blockchain protocol $\Pi^{\text {main }}$. Consider $\alpha^{\star}=\lambda
+      \beta^{\star}$, $\lambda>1$, and $\delta>0$. Consider two honest PoS-players, P in round $r$ and $\mathrm{P}^{\prime}$
+      in round $r^{\prime}$, with the local best PoS blockchains $\tilde{\mathcal{C}}, \tilde{\mathcal{C}}^{\prime}$, respectively,
+      where $r^{\prime} \geq r$. Then we have $\operatorname{Pr}\left[\tilde{\mathcal{C}}[1, \ell] \preceq \tilde{\mathcal{C}}^{\prime}\right]
+      \geq 1-e^{-\Omega(\kappa)}$, where $\ell=\operatorname{len}(\mathcal{C})-\Theta(\kappa)$.
+
+
+      Proof. As we discussed, $\tilde{\mathcal{C}}$ and $\tilde{\mathcal{C}}^{\prime}$ are associated with core-chains $\mathcal{C}$
+      and $\mathcal{C}^{\prime}$ respectively. From Corollary 5.6 we know that $\operatorname{Pr}\left[\mathcal{C}[1, \ell]
+      \preceq \mathcal{C}^{\prime}\right] \geq 1-e^{-\Omega(\kappa)}$.
+
+
+      Based on the assumption that $\alpha^{\star}=\lambda \beta^{\star}$ and $\lambda>1$, we can have that the malicious
+      players are not able to generate more than $\Theta(\kappa)$ blocks before an honest player is chosen to generate block
+      with high probability. All of the honest players will converge on the same chain. Put them together, we have $\operatorname{Pr}\left[\tilde{\mathcal{C}}[1,
+      \ell] \preceq \tilde{\mathcal{C}}^{\prime}\right] \geq 1-e^{-\Omega(\kappa)}$ where $\ell=\operatorname{len}(\mathcal{C})-\Theta(\kappa)$.
+
+
+      Chain soundness. A new player will accept a blockchain (in which the corresponding corechain is included). The proof
+      idea for achieving chain soundness property of our blockchain protocol directly follows that for the core-chain protocol.
+      We have the following statement.\\
+
+      Corollary 6.5 (Chain soundness). Consider the blockchain protocol $\Pi^{\text {main }}$. Consider for every round, $\alpha=\lambda
+      \beta, \lambda>1$, and $\delta>0$. There are two honest PoS-players, $\mathrm{P}^{\prime}$ and $\mathrm{P}^{\prime \prime}$
+      in round $r$, with the local best PoS blockchains $\tilde{\mathcal{C}}^{\prime}$ and $\tilde{\mathcal{C}}^{\prime \prime}$,
+      respectively. Let $\mathrm{P}^{\prime}$ be a new player and $\mathrm{P}^{\prime \prime}$ be an existing player in round
+      $r$. Then we have $\tilde{\mathcal{C}}^{\prime}[\neg \kappa] \preceq \tilde{\mathcal{C}}^{\prime \prime}$ and $\tilde{\mathcal{C}}^{\prime
+      \prime}[\neg \kappa] \preceq \tilde{\mathcal{C}}^{\prime}$.'
+    - "Datatype: lecture_note, Title: Lecture 9: Scaling Latency\n\n\\begin{figure}\n\\begin{center}\n\\includegraphics[width=\\\
+      textwidth]{figures/Prism_main.pdf}\n\\end{center}\n\n\\caption{Factorizing the blocks into three types of blocks: proposer\
+      \ blocks, transaction blocks and voter blocks.}\n\\label{fig:prism}\n\n\\end{figure}\n\nJust as in {\\sf Prism 1.0},\
+      \ the \\textit{proposer} blocktree in {\\sf Prism} anchors the blockchain.  Each proposer block contains a list of reference\
+      \ links to \\textit{transaction} blocks that contain transactions, as well as a single reference to a parent proposer\
+      \ block. Honest nodes mine proposer blocks following the longest chain rule in the proposer tree.\nWe define the *level*\
+      \ of a proposer block as its distance from the genesis proposer block, and the *height* of the proposer tree as the\
+      \ maximum level that contains any proposer blocks. To determine the ordering of proposer blocks (and thus transaction\
+      \ blocks and transactions), we elect one \\textit{leader} proposer block from each level. The sequence of leader blocks\
+      \ up to the height of the proposer tree is called the  \\textit{leader sequence}, and is determined by the *voter* chains.\
+      \ Note that the leader blocks do not need to follow the chain structure of the proposer blocks because otherwise deadlock\
+      \ may occur if conflicting blocks (i.e., two proposer blocks not on one chain) are determined as leader blocks. \n\n\
+      In {\\sf Prism}, there are $m$ voter chains, where $m \\gg 1$ is a fixed parameter chosen by the system designer. The\
+      \ larger the $m$, the more parallel the voting process and hence the shorter the latency of confirmation. In general\
+      \ $m$ is chosen as large as network bandwidth and memory management issues are manageable. For example, $m=1000$ is\
+      \ chosen in the \\href{https://arxiv.org/pdf/1909.11261.pdf}{full-stack implementation}  of Prism. New voter blocks\
+      \ are mined on each voter chain according to the longest chain rule. A voter block votes for a proposer block by containing\
+      \ a reference link to that proposer block, with the requirements that: (1) a vote is valid only if the voter block is\
+      \ in the longest chain of its voter tree; (2) each voter chain votes for one and only one proposer block at each level;\
+      \ (3) each voter block votes for all the proposer levels that have not been voted by its parent. The leader block at\
+      \ each level is the one that has the largest number of votes among all the proposer blocks at the same level (ties can\
+      \ be broken by the hash of the proposer blocks). The elected leader blocks then provide a unique ordering of the transaction\
+      \ blocks to form the final ledger. \n\n{\\sf Prism} also uses cryptographic sortition to prevent the adversary from\
+      \ focusing its mining power on a specific type of blocks or on a specific voter chain. A miner first forms a ``superblock\"\
+      \ containing $m+2$ parts: a transaction block, a proposer block and a voter block on the $i$-th voter tree ($1\\leq\
+      \ i \\leq m$). We say a superblock is successfully  mined if \n\\begin{equation}\n    Hash({\\sf nonce}, {\\sf superblock})\
+      \ < T_{\\rm tx} + T_{\\rm prop} + m T_{\\rm v}. \n\\label{eq:sortition}\n\\end{equation}\nFurther, every successfully\
+      \ mined superblock is identified as a transaction block, a proposer block or a voter block based on the hash output:\
+      \ \n\n\n*  identify the superblock as a proposer block if the hash output is less than $T_{\\rm prop}$;\n*  identify\
+      \ the superblock as a transaction block if the hash output is in the range $[T_{\\rm prop}, T_{\\rm tx} + T_{\\rm prop})$;\n\
+      *  identify the superblock as a voter block on the $i$-th voter tree ($1\\leq i \\leq m$) if the hash output is in the\
+      \ range $[T_{\\rm tx} + T_{\\rm prop} + (i-1) T_{\\rm v}, T_{\\rm tx} + T_{\\rm prop} + i T_{\\rm v} )$;"
+  - source_sentence: What is the role of the 2/3-GHOST function in the GRANDPA finality gadget?
+    sentences:
+    - 'paper-title: GRANDPA: a Byzantine Finality Gadget
+
+
+      \subsection*{2.3 Preliminaries}
+
+      Network model : We will be using the partially synchronous network model introduced by 7] and in particular the gossip
+      network variant used in [5]. We assume that any message sent or received by an honest participant reaches all honest
+      participants within time $T$, but possibly only after some Global Synchronisation Time GST. Concretely, any message
+      sent or received by some honest participant at time $t$ is received by all honest participants by time GST $+T$ at the
+      latest.
+
+
+      Voters: For each voting step, there is a set of $n$ voters. We will frequently need to assume that for each such step,
+      at most $f<n / 3$ voters are Byzantine. We need $n-f$ of voters to agree on finality. Whether or not block producers
+      ever vote, they will need to be participants who track the state of the protocol.
+
+
+      Votes: A vote is a block hash, together with some metadata such as round number and the type of vote, such as prevote
+      or precommit, all signed with a voter''s private key.
+
+
+      Rounds: Each participant has their own idea of what is the current round number. Every prevote and precommit has an
+      associated round number. Honest voters only vote once (for each type of vote) in each round and do not vote in earlier
+      rounds after later ones. Participants need to keep track of which block they see as currently being the latest finalised
+      block and an estimate of which block could have been finalised in the last round.
+
+
+      For block $B$, we write chain $(B)$ for the chain whose head is $B$. The block number, $n(B)$ of a block $B$ is the
+      length of chain $(B)$. For blocks $B^{\prime}$ and $B$, we say $B$ is later than $B^{\prime}$ if it has a higher block
+      number. We write $B>B^{\prime}$ or that $B$ is descendant of $B^{\prime}$ for $B, B^{\prime}$ appearing in the same
+      blockchain with $B^{\prime}$ later i.e. $B^{\prime} \in$ chain $(B)$ with $n(B)>n\left(B^{\prime}\right) . B \geq B^{\prime}$
+      and $B \leq B^{\prime}$ are similar except allowing $B=B^{\prime}$. We write $B \sim B^{\prime}$ or $B$ and $B^{\prime}$
+      are on the same chain if $B<B^{\prime}, B=B^{\prime}$ or $B>B^{\prime}$; and $B \nsim B^{\prime}$ or $B$ and $B^{\prime}$
+      are not on the same chain if there is no such chain.
+
+
+      Blocks are ordered as a tree with the genesis block as root. So any two blocks have a common ancestor but two blocks
+      not on the same chain do not have a common descendant. A vote $v$ for a block $B$ by a voter $V$ is a message signed
+      by $V$ containing the blockhash of $B$ and meta-information like the round numbers and the type of vote.
+
+
+      A voter equivocates in a set of votes $S$ if they have cast multiple different votes in $S$. We call a set $S$ of votes
+      safe if the number of voters who equivocate in $S$ is at most $f$. We say that $S$ has a supermajority for a block $B$
+      if the set of voters who either have a vote for blocks $\geq B$ or equivocate in $S$ has size at least $(n+f+1) / 2$.
+      We count equivocations as votes for everything so that observing a vote is monotonic, meaning that if $S \subset T$
+      then if $S$ has a supermajority for $B$ so does $T$, while being able to ignore yet more equivocating votes from an
+      equivocating voter.
+
+
+      For our finality gadget (GRANDPA) we use the ghost [13] eventual consensus algorithm as $F$. The 2/3-GHOST function
+      $g(S)$ takes a set $S$ of votes and returns the block $B$ with highest block number such that $S$ has a supermajority
+      for $B$. If there is no such block, then it returns ''nil''. Note that, if $S$ is safe, then we can compute $g(S)$ by
+      starting at the genesis block and iteratively looking for a child of our current block with a supermajority, which must
+      be unique if it exists. Thus we have:
+
+
+      Lemma 2.5. Let $T$ be a safe set of votes. Then'
+    - 'paper-title: Zexe: Enabling Decentralized Private Computation
+
+
+      In sum, proofs of predicates'' satisfiability are produced via a SNARK over $E_{\text {BLS }}$, and proofs for the NP
+      relation $\mathcal{R}_{\mathrm{e}}$ are produced via a zkSNARK over $E_{\mathrm{CP}}$. The matching fields between the
+      two curves ensure that the former proofs can be efficiently verified.
+
+
+      Problem 3: Cocks-Pinch curves are costly. While the curve $E_{\mathrm{CP}}$ was chosen to facilitate efficient checking
+      of proofs over $E_{\mathrm{BLS}}$, the curve $E_{\mathrm{CP}}$ is at least $2 \times$ more expensive (in time and space)
+      than $E_{\mathrm{BLS}}$ simply because $E_{\mathrm{CP}}$ ''s base field has about twice as many bits as $E_{\mathrm{BLS}}$
+      ''s base field. Checks in the NP relation $\mathcal{R}_{\mathrm{e}}$\\
+
+      that are not directly related to proof checking are now unnecessarily carried over a less efficient curve.\\
+
+      Solution 3: split relations across two curves. We split $\mathcal{R}_{\mathrm{e}}$ into two NP relations $\mathcal{R}_{\mathrm{BLS}}$
+      and $\mathcal{R}_{\mathrm{CP}}$ (see Fig. 14), with the latter containing just the proof check and the former containing
+      all other checks. We can then use a zkSNARK over the curve $E_{\text {BLS }}$ (an efficient curve) to produce proofs
+      for $\mathcal{R}_{\mathrm{BLS}}$, and a zkSNARK over $E_{\mathrm{CP}}$ (the less efficient curve) to produce proofs
+      for $\mathcal{R}_{\mathrm{CP}}$. This approach significantly reduces the running time of DPC.Execute (producing proofs
+      for the checks in $\mathcal{R}_{\mathrm{BLS}}$ is more efficient over $E_{\mathrm{BLS}}$ than over $E_{\mathrm{CP}}$
+      ), at the expense of a modest increase in transaction size (a transaction now includes a zkSNARK proof over $E_{\mathrm{BLS}}$
+      in addition to a proof over $E_{\mathrm{CP}}$ ). An important technicality that must be addressed is that the foregoing
+      split relies on certain secret information to be shared across the NP relations, namely, the identities of relevant
+      predicates and the local data. We can store this information in suitable commitments that are part of the NP instances
+      for the two NP relations (doing this efficiently requires some care as we discuss below).'
+    - 'paper-title: Ouroboros Praos: An adaptively-secure, semi-synchronous proof-of-stake blockchain
+
+
+      where $\alpha_{\mathcal{H}}$ denotes the total relative stake of the honest parties. Note that this bound applies to
+      all static adversaries $\mathcal{A}$ that corrupt no more than a $1-\alpha_{\mathcal{H}}$ fraction of all stake. With
+      this in mind, we define the dominant distribution as follows.\\
+
+      Definition 13 (The dominant distribution $\mathcal{D}_{\alpha}^{f}$ ). For two parameters $f$ and $\alpha$, define $\mathcal{D}_{\alpha}^{f}$
+      to be the distribution on strings $w \in\{0,1, \perp\}^{R}$ that independently assigns each $w_{i}$ so that
+
+
+
+      \begin{align*}
+
+      p_{\perp} \triangleq \operatorname{Pr}\left[w_{i}\right. & =\perp]=1-f, \\
+
+      p_{0} \triangleq \operatorname{Pr}\left[w_{i}\right. & =0]=\phi(\alpha) \cdot(1-f), \quad \text { and }  \tag{9}\\
+
+      p_{1} \triangleq \operatorname{Pr}\left[w_{i}\right. & =1]=1-p_{\perp}-p_{0} .
+
+      \end{align*}
+
+
+
+      The distribution $\mathcal{D}_{\alpha}^{f}$ "dominates" $\mathcal{D}_{\mathcal{Z}, \mathcal{A}}^{f}$ for any static
+      adversary $\mathcal{A}$ that corrupts no more than a relative $1-\alpha$ share of the total stake, in the sense that
+      nonempty slots are more likely to be tainted under $\mathcal{D}_{\alpha}^{f}$ than they are under $\mathcal{D}_{\mathcal{Z},
+      \mathcal{A}}^{f}$.
+
+
+      To make this relationship precise, we introduce the partial order $\preceq$ on the set $\{\perp, 0,1\}$ so that $x \preceq
+      y$ if and only if $x=y$ or $y=1$. We extend this partial order to $\{\perp, 0,1\}^{R}$ by declaring $x_{1} \ldots x_{R}
+      \preceq y_{1} \ldots y_{R}$ if and only if $x_{i} \preceq y_{i}$ for each $i$. Intuitively, the relationship $x \prec
+      y$ asserts that $y$ is "more adversarial than" $x$; concretely, any legal fork for $x$ is also a legal fork for $y$.
+      Finally, we define a notion of stochastic dominance for distributions on characteristic strings, and $\alpha$-dominated
+      adversaries.
+
+
+      Definition 14 (Stochastic dominance). We say that a subset $E \subseteq\{\perp, 0,1\}^{R}$ is monotone if $x \in E$
+      and $x \preceq y$ implies that $y \in E$. Let $\mathcal{D}$ and $\mathcal{D}^{\prime}$ be two distributions on the set
+      of characteristic strings $\{\perp, 0,1\}^{R}$. Then we say that $\mathcal{D}^{\prime}$ dominates $\mathcal{D}$, written
+      $\mathcal{D} \preceq \mathcal{D}^{\prime}$, if $\operatorname{Pr}{ }_{\mathcal{D}}[E] \leq \operatorname{Pr}_{\mathcal{D}^{\prime}}[E]$
+      for every monotone set $E$. An adversary $\mathcal{A}$ is called $\alpha$-dominated if the distribution $\mathcal{D}_{\mathcal{Z},
+      \mathcal{A}}^{f}$ that it induces on the set of characteristic strings satisfies $\mathcal{D}_{\mathcal{Z}, \mathcal{A}}^{f}
+      \preceq \mathcal{D}_{\alpha}^{f}$.
+
+
+      As noted above, this notion of stochastic dominance is consistent with the chain-theoretic definitions of interest,
+      in the sense that failures of the abstract chain properties form monotone events. We record this in the lemma below.'
+  - source_sentence: What does the paper conclude about the relationship between latency and security in the Nakamoto Consensus
+      protocol?
+    sentences:
+    - 'paper-title: Close Latency-Security Trade-off for the Nakamoto Consensus
+
+
+      Evidently, if the infinite sums in (2) and (10) are replaced by partial sums for numerical evaluation, the resulting
+      (tighter) security level remains unachievable.
+
+
+      \subsection*{3.1 Remarks}
+
+      Theorems 3.5 and 3.6 assume the delay $\Delta>0$. The bounds therein still apply if we set $\Delta=0$, but are slightly
+      looser than the bounds in Theorems 3.3 and 3.4 for the zero-delay case.
+
+
+      It is important to include the time of interest $s$ in Definitions 3.1 and 3.2. The "bad events" for security breach
+      depend on $s$ as well as the latency $t$. These well-defined events are concerned with block mining times, not how blocks
+      form blockchains. ${ }^{3}$
+
+
+      We note that a number of previous analyses on the Nakamoto consensus assume a finite lifespan of the protocol [1, 10],
+      that is, a maximum round number is defined, at which round the protocol terminates. The probability of consistency depends
+      on the maximum round number. In contrast, this paper does not assume a finite lifespan. Theorem 3.5 states that, barring
+      a small probability event, confirmed blocks remain permanently in all miners'' longest blockchains into the arbitrary
+      future.
+
+
+      Even though we provide the same security guarantee for every blockchain after the confirmation latency $t$, no one can
+      simultaneously guarantee the same for all blocks that will ever be confirmed.
+
+
+      \footnotetext{${ }^{3}$ To be rigorous, we do not make claims such as "the blockchain/protocol/system satisfies consistency
+      or liveness properties with probability ..." because those properties themselves are not events in the probability space
+      defined here.
+
+      }
+
+      \includegraphics[max width=\textwidth, center]{2025_01_02_447c9a776bd74bcc1f99g-04}
+
+
+      Figure 1: Bitcoin''s latency-security trade-off with $\alpha+\beta=$ $1 / 600$ blocks per second and $\Delta=10$ seconds.
+
+
+      This is a simple consequence of Murphy''s Law: If an adversary keeps trying new episodes of attacks, with probability
+      1 a bad event will eventually occur to revert some confirmed honest blocks.
+
+
+      For technical convenience, we regard a block in a miner''s longest blockchain to be confirmed after a certain amount
+      of time elapses since the block is mined or enters the miner''s view. Nakamoto [22] originally proposed confirming a
+      block after it is sufficiently deep in an honest miner''s longest blockchain. We believe both confirmation rules are
+      easy to use in practice. And the two confirmation rules imply each other in probability (see Appendix A for further
+      discussion).
+
+
+      \subsection*{3.2 Numerical Examples}
+
+      The latency-security trade-off under several different sets of parameters is plotted in Figure 1. The mining rate is
+      set to Bitcoin''s one block per 600 seconds, or $\alpha+\beta=1 / 600$ blocks/second. The propagation delay bound is
+      assumed to be $\Delta=10$ seconds. The latency upper and lower bounds are computed using Theorems 3.5 and 3.6, respectively.
+      In Figure 1, all bounds appear to be exponential for all but very small latency and high error probabilities. This implies
+      the exponential bound (7) is a good approximation of (5) in Theorem 3.5 for the typical range of parameters of interest
+      here.
+
+
+      It is instructive to examine concrete data points in Figure 1: If the adversarial share of the total network mining
+      rate is $10 \%$ $(\alpha: \beta=9: 1)$, then a confirmation time of four hours is sufficient to achieve $10^{-3}$ security
+      level, and a ten-hour confirmation achieves $10^{-9}$ security level. These results are about two hours away from the
+      corresponding lower bounds. Also, for every additional hour of latency, the security improves by a factor of approximately
+      20 . If the adversarial share of the mining rate increases to $25 \%(\alpha: \beta=3: 1)$, then 10 hours 40 minutes
+      and 28 hours 45 minutes of confirmation times achieve $10^{-3}$ and $10^{-9}$ security levels, respectively, and the
+      gap between the upper and lower bounds is between five and seven hours. In general, the gap is proportionally insignificant
+      at high security levels but can be otherwise at low security levels. For given mining rates, the gaps are similar at
+      different security levels. This indicates the lower bound (10) is also approximately exponential with a slightly steeper
+      exponent than that of the upper bound.'
+    - "paper-title: Ledger Combiners for Fast Settlement\n\n$$\n\\begin{aligned}\n\\delta\\left(\\operatorname{PoW}_{p}^{m}(x),\
+      \ \\mathrm{IPoW}_{p / m}^{m}(x)\\right) & =\\frac{1}{2} \\sum_{s \\in\\{0,1\\}^{m}}\\left|\\operatorname{Pr}\\left[\\\
+      operatorname{PoW}_{p}^{m}(x)=s\\right]-\\operatorname{Pr}\\left[\\operatorname{IPoW}_{p / m}^{m}(x)=s\\right]\\right|\
+      \ \\\\\n& =\\sum_{\\substack{s \\in\\{0,1)^{m} \\\\\n\\mathrm{hw}(s)=1}}\\left(\\operatorname{Pr}\\left[\\operatorname{PoW}_{p}^{m}(x)=s\\\
+      right]-\\operatorname{Pr}\\left[\\operatorname{IPoW}_{p / m}^{m}(x)=s\\right]\\right) \\\\\n& \\leq m \\cdot\\left[\\\
+      frac{p}{m}-\\frac{p}{m}\\left(1-\\frac{p}{m}\\right)^{m-1}\\right] \\leq p[1-(1-p)]=p^{2}\n\\end{aligned}\n$$\n\nas\
+      \ desired, where the last inequality follows by Bernoulli inequality.\n\nThe above lemma already justifies the use of\
+      \ $\\mathrm{PoW}_{p}^{m}$ for achieving subindependence in practical scenarios. To observe this, note that the use of\
+      \ $\\mathrm{IPoW}_{p / m}^{m}$ would lead to full independence of the individual PoW lotteries, and by Lemma 7 the real\
+      \ execution with $\\mathrm{PoW}_{p}^{m}$ will only differ from this ideal behavior with probability at most $Q \\cdot\
+      \ p^{2}$, where $Q$ is the total number of PoW-queries. With current values of $p \\approx 10^{-22}$ in e.g., Bitcoin\
+      \ ${ }^{2}$, and the block creation time adjusting to 10 minutes, this difference would manifest on expectation in about\
+      \ $10^{18}$ years. Note that any future increase of the total mining difficulty while maintaining the block creation\
+      \ time would only increase this period.\n\nNonetheless, in Appendix F we give a more detailed analysis of $\\mathrm{PoW}_{p}^{m}$\
+      \ that shows that, loosely speaking, $m$ parallel executions of Bitcoin using PoW ${ }_{p}^{m}$ as their shared PoW\
+      \ oracle achieve $\\varepsilon$-subindependence for $\\varepsilon$ negligible in the security parameter.\n\n\\subsection*{4.2\
+      \ Realizing Rank via Timestamped Blockchains}\nAn important consideration when deploying our virtual ledger construction\
+      \ over existing blockchains is how to realize the notion of rank. We note that typical Nakamoto-style PoS blockchains\
+      \ (e.g., the Ouroboros family, Snow White) assume a common notion of time among the participants and explicitly label\
+      \ blocks with slot numbers with a direct correspondence to absolute time. These slot numbers (or, preferably, a notion\
+      \ of common time associated with each slot number) directly afford a notion of rank that provides the desired persistence\
+      \ and liveness guarantees. To formalize this property, we introduce the notion of a timestamped blockchain.\n\nDefinition\
+      \ 11. A timestamped blockchain is one satisfying the following conventions:\n\n\\begin{itemize}\n  \\item Block timestamps.\
+      \ Every block contains a declared timestamp.\n  \\item Monotonicity. In order for a block to be considered valid, its\
+      \ timestamp can be no less than the timestamps of all prior blocks in the blockchain. (Thus valid blockchains consist\
+      \ of blocks in monotonically increasing order.)\n\\end{itemize}\n\nInformally, we say that an algorithm is a timestamped\
+      \ blockchain algorithm if it calls for participants to broadcast timestamped blockchains and to \"respect timestamps.\"\
+      \ More specifically, the algorithm satisfies the following:\n\n\\begin{itemize}\n  \\item Faithful honest timestamping.\
+      \ Honest participants always post blocks with timestamps determined by their local clocks.\n  \\item Ignore future blocks.\
+      \ Honest participants ignore blocks that contain a timestamp which is greater than their local time by more than a fixed\
+      \ constant. (These blocks might be considered later when the local clock of the participant \"catches up\" with the\
+      \ timestamp.)\n\\end{itemize}"
+    - "paper-title: A Scalable Proof-of-Stake Blockchain in the Open Setting * \\\\ (or, How to Mimic Nakamoto's Design via\
+      \ Proof-of-Stake)\n\nLet $\\ell$ be the length of core-chain $\\mathcal{C}$. In our design, only the elected PoS-players\
+      \ are allowed to generate new block-cores (to extend the core-chain). Now, each registered PoS-player P will work on\
+      \ the right \"context\" which consists of the latest block-core in the longest corechain and the current time; formally\
+      \ context $:=\\left\\langle h^{\\text {prev }}\\right.$, round $\\rangle$ where $\\mathcal{C}[\\ell]$ is the latest\
+      \ blockcore in the longest core-chain $\\mathcal{C}$, and $h^{\\text {prev }}$ is the identity returned by the functionality\
+      \ $\\mathcal{F}_{\\text {rCERT }}$ for $\\mathcal{C}[\\ell]$, and round denotes the current time. The PoS-player P may\
+      \ query $\\mathcal{F}_{\\text {rCERT }}$ by command (Elect, P , context, $\\mathcal{C}$ ) to see if he is selected to\
+      \ extend $\\mathcal{C}$. If the PoS-player P is selected (with certain probability $p$ ), he would receive a message\
+      \ (Elected, $\\mathrm{P}, h, \\sigma, \\mathrm{~b}$ ) from $\\mathcal{F}_{\\text {rCERT }}$ such that $\\mathrm{b}=1$.\
+      \ Once receiving the signature $\\sigma$ from the functionality, the PoS-player P defines a new block-core $B:=\\left\\\
+      langle\\left\\langle h^{\\text {prev }}, h\\right.\\right.$, round $\\left.\\rangle, \\mathrm{P}, \\sigma\\right\\rangle$,\
+      \ updates his local core-chain $\\mathcal{C}$ and then broadcasts the local core-chain to the network. Please refer\
+      \ to Figure 3 for more details of our core-chain protocol.\n\nNote that here PoS-players have access to the functionality\
+      \ $\\mathcal{F}_{\\text {rCERT }}$. The players need to register to the functionality $\\mathcal{F}_{\\text {rCERT }}$\
+      \ before querying the functionality.\n\nThe best core-chain strategy. Our proof-of-stake core-chain protocol $\\Pi^{\\\
+      text {core }}$ uses the subroutine BestCore to single out the best valid core-chain from a set of core-chains. Now we\
+      \ describe the rules of selecting the best core-chain. Roughly speaking, a core-chain is the best one if it is the current\
+      \ longest valid core-chain. The BestCore subroutine takes as input, a core-chain set $\\mathbb{C}^{\\prime}$ and the\
+      \ current time information round'. Intuitively, the subroutine validates all $\\mathcal{C} \\in \\mathbb{C}^{\\prime}$,\
+      \ then finds the valid longest core-chain.\n\nIn more detail, BestCore proceeds as follows. On input the current set\
+      \ of core-chains $\\mathbb{C}^{\\prime}$ and the current time information round', and for each core-chain $\\mathcal{C}$,\
+      \ the subroutine then evaluates every block-core of the core-chain $\\mathcal{C}$ sequentially. Let $\\ell$ be the length\
+      \ of $\\mathcal{C}$. Starting from the head of $\\mathcal{C}$, for every block-core $\\mathcal{C}[i]$, for all $i \\\
+      in[\\ell]$, in the core-chain $\\mathcal{C}$, the BestCore subroutine (1) ensures that $\\mathcal{C}[i]$ is linked to\
+      \ the previous block-core $\\mathcal{C}[i-1]$ correctly, and (2) tests if the\n\n\\section*{Protocol $\\Pi^{\\text {core\
+      \ }}$}\nInitially, a set $\\mathcal{P}_{0}$ of players are registered to the functionality $\\mathcal{F}_{\\text {rCERT\
+      \ }}$, where $\\mathcal{P}_{0} \\subseteq \\mathcal{P}$. Initially, for each $\\mathrm{P} \\in \\mathcal{P}$, set $\\\
+      mathcal{C}:=\\emptyset$, and state $:=\\emptyset$.\n\nUpon receiving message (Input-Stake, P ) from the environment\
+      \ $z$ at round round, the PoS-player $\\mathrm{P} \\in$ $\\mathcal{P}$, with local state state, proceeds as follows.\n\
+      \n\\begin{enumerate}\n  \\item Select the best local PoS core-chain:\n\\end{enumerate}"
+  - source_sentence: What is the difference between absolute settlement and relative settlement for transactions in a ledger?
+    sentences:
+    - 'paper-title: Ledger Combiners for Fast Settlement
+
+
+      Since the above requirements are formulated independently for each $t$, it is well-defined to treat $\mathrm{C}[\cdot]$
+      as operating on ledgers rather than dynamic ledgers; we sometimes overload the notation in this sense.
+
+
+      Looking ahead, our amplification combiner will consider $\mathrm{t}_{\mathrm{C}}\left(\mathbf{L}_{1}^{(t)}, \ldots,
+      \mathbf{L}_{m}^{(t)}\right)=\bigcup_{i} \mathbf{L}_{i}^{(t)}$ along with two related definitions of $\mathrm{a}_{\mathrm{C}}$
+      :
+
+
+      $$
+
+      \mathrm{a}_{\mathrm{C}}\left(A_{1}^{(t)}, \ldots, A_{m}^{(t)}\right)=\bigcup_{i} A_{i}^{(t)} \quad \text { and } \quad
+      \mathrm{a}_{\mathrm{C}}\left(A_{1}^{(t)}, \ldots, A_{m}^{(t)}\right)=\bigcap_{i} A_{i}^{(t)}
+
+      $$
+
+
+      see Section 3. The robust combiner will adopt a more sophisticated notion of $t_{c}$; see Section 5 . In each of these
+      cases, the important structural properties of the construction are captured by the rank function $r_{C}$.
+
+
+      \subsection*{2.3 Transaction Validity and Settlement}
+
+      In the discussion below, we assume a general notion of transaction validity that can be decided inductively: given a
+      ledger $\mathbf{L}$, the validity of a transaction $t x \in \mathbf{L}$ is determined by the transactions in the state
+      $\mathbf{L}\lceil\operatorname{tx}\rceil$ of $\mathbf{L}$ up to tx and their ordering. Intuitively, only valid transactions
+      are then accounted for when interpreting the state of the ledger on the application level. The canonical example of
+      such a validity predicate in the case of so-called UTXO transactions is formalized for completeness in Appendix B. Note
+      that protocols such as Bitcoin allow only valid transactions to enter the ledger; as the Bitcoin ledger is represented
+      by a simple chain it is possible to evaluate the validity predicate upon block creation for each included transaction.
+      This may not be the case for more general ledgers, such as the result of applying one of our combiners or various DAG-based
+      constructions.
+
+
+      While we focus our analysis on persistence and liveness as given in Definition 3, our broader goal is to study settlement.
+      Intuitively, settlement is the delay necessary to ensure that a transaction included in some $A^{(t)}$ enters the dynamic
+      ledger and, furthermore, that its validity stabilizes for all future times.
+
+
+      Definition 5 (Absolute settlement). For a dynamic ledger $\mathbf{D} \stackrel{\text { def }}{=} \mathbf{L}^{(0)}, \mathbf{L}^{(1)},
+      \ldots$ we say that a transaction $t x \in$ $A^{(\tau)} \cap \mathbf{L}^{(t)}($ for $\tau \leq t)$ is (absolutely) settled
+      at time $t$ iffor all $\ell \geq t$ we have: (i) $\mathbf{L}^{(t)}\lceil\mathrm{tx}\rceil \subseteq \mathbf{L}^{(\ell)}$,
+      (ii) the linear orders $<_{\mathbf{L}^{(t)}}$ and $<_{\mathbf{L}^{(t)}}$ agree on $\mathbf{L}^{(t)}\lceil\mathrm{tx}\rceil$,
+      and (iii) for any $\mathrm{tx}^{\prime} \in \mathbf{L}^{(e)}$ such that $\mathrm{tx}^{\prime}{<_{\mathbf{L}}(t)} \mathrm{tx}$
+      we have $\mathrm{tx}^{\prime} \in \mathbf{L}^{(t)}\lceil\mathrm{tx}\rceil$.
+
+
+      Note that for any absolutely settled transaction, its validity is determined and it is guaranteed to remain unchanged
+      in the future.
+
+
+      It will be useful to also consider a weaker notion of relative settlement of a transaction: Intuitively, tx is relatively
+      settled at time $t$ if we have the guarantee that no (conflicting) transaction $\mathrm{tx}^{\prime}$ that is not part
+      of the ledger at time $t$ can possibly eventually precede $t x$ in the ledger ordering.'
+    - "paper-title: Casper the Friendly Finality Gadget\n\n\\documentclass[10pt]{article}\n\\usepackage[utf8]{inputenc}\n\\\
+      usepackage[T1]{fontenc}\n\\usepackage{amsmath}\n\\usepackage{amsfonts}\n\\usepackage{amssymb}\n\\usepackage[version=4]{mhchem}\n\
+      \\usepackage{stmaryrd}\n\\usepackage{graphicx}\n\\usepackage[export]{adjustbox}\n\\graphicspath{ {./images/} }\n\\usepackage{hyperref}\n\
+      \\hypersetup{colorlinks=true, linkcolor=blue, filecolor=magenta, urlcolor=cyan,}\n\\urlstyle{same}\n\n\\title{Casper\
+      \ the Friendly Finality Gadget }\n\n\\author{Vitalik Buterin and Virgil Griffith\\\\\nEthereum Foundation}\n\\date{}\n\
+      \n\n%New command to display footnote whose markers will always be hidden\n\\let\\svthefootnote\\thefootnote\n\\newcommand\\\
+      blfootnotetext[1]{%\n  \\let\\thefootnote\\relax\\footnote{#1}%\n  \\addtocounter{footnote}{-1}%\n  \\let\\thefootnote\\\
+      svthefootnote%\n}\n\n%Overriding the \\footnotetext command to hide the marker if its value is `0`\n\\let\\svfootnotetext\\\
+      footnotetext\n\\renewcommand\\footnotetext[2][?]{%\n  \\if\\relax#1\\relax%\n    \\ifnum\\value{footnote}=0\\blfootnotetext{#2}\\\
+      else\\svfootnotetext{#2}\\fi%\n  \\else%\n    \\if?#1\\ifnum\\value{footnote}=0\\blfootnotetext{#2}\\else\\svfootnotetext{#2}\\\
+      fi%\n    \\else\\svfootnotetext[#1]{#2}\\fi%\n  \\fi\n}\n\n\\begin{document}\n\\maketitle\n\n\n\\begin{abstract}\nWe\
+      \ introduce Casper, a proof of stake-based finality system which overlays an existing proof of work blockchain. Casper\
+      \ is a partial consensus mechanism combining proof of stake algorithm research and Byzantine fault tolerant consensus\
+      \ theory. We introduce our system, prove some desirable features, and show defenses against long range revisions and\
+      \ catastrophic crashes. The Casper overlay provides almost any proof of work chain with additional protections against\
+      \ block reversions.\n\\end{abstract}\n\n\\section*{1. Introduction}\nOver the past few years there has been considerable\
+      \ research into \"proof of stake\" (PoS) based blockchain consensus algorithms. In a PoS system, a blockchain appends\
+      \ and agrees on new blocks through a process where anyone who holds coins inside of the system can participate, and\
+      \ the influence an agent has is proportional to the number of coins (or \"stake\") it holds. This is a vastly more efficient\
+      \ alternative to proof of work (PoW) \"mining\" and enables blockchains to operate without mining's high hardware and\
+      \ electricity costs.\\\\[0pt]\nThere are two major schools of thought in PoS design. The first, chain-based proof of\
+      \ stake[1, 2], mimics proof of work mechanics and features a chain of blocks and simulates mining by pseudorandomly\
+      \ assigning the right to create new blocks to stakeholders. This includes Peercoin[3], Blackcoin[4], and Iddo Bentov's\
+      \ work[5].\\\\[0pt]\nThe other school, Byzantine fault tolerant (BFT) based proof of stake, is based on a thirty-year-old\
+      \ body of research into BFT consensus algorithms such as PBFT[6]. BFT algorithms typically have proven mathematical\
+      \ properties; for example, one can usually mathematically prove that as long as $>\\frac{2}{3}$ of protocol participants\
+      \ are following the protocol honestly, then, regardless of network latency, the algorithm cannot finalize conflicting\
+      \ blocks. Repurposing BFT algorithms for proof of stake was first introduced by Tendermint[7], and has modern inspirations\
+      \ such as [8]. Casper follows this BFT tradition, though with some modifications.\n\n\\subsection*{1.1. Our Work}\n\
+      Casper the Friendly Finality Gadget is an overlay atop a proposal mechanism-a mechanism which proposes blocks ${ }^{1}$.\
+      \ Casper is responsible for finalizing these blocks, essentially selecting a unique chain which represents the canonical\
+      \ transactions of the ledger. Casper provides safety, but liveness depends on the chosen proposal mechanism. That is,\
+      \ if attackers wholly control the proposal mechanism, Casper protects against finalizing two conflicting checkpoints,\
+      \ but the attackers could prevent Casper from finalizing any future checkpoints.\\\\\nCasper introduces several new\
+      \ features that BFT algorithms do not necessarily support:"
+    - 'paper-title: Bitcoin and Cryptocurrency Technologies
+
+
+      Interestingly, these concerns have an analogy in the realm of voting. It''s illegal in the United States and many other
+      nations for individuals to sell their vote. Arguably participating in a pool controlled by someone else is akin to selling
+      your vote in the Bitcoin consensus protocol.
+
+
+      Technical requirements for pools. Recall that mining pools appear to be an emergent phenomenon. There''s no evidence
+      that Satoshi was thinking of mining pools at the time of Bitcoin''s original design. It wasn''t apparent for a few years
+      that efficient pools could be run between many individuals who don''t know or trust each other.
+
+
+      As we saw in Chapter 5, mining pools typically work by designating a pool operator with a well-known public key. Each
+      of the participating miners mines as usual but sends in shares to the pool operator. These shares are "near misses"
+      or "partial solutions" which would be valid solutions at a lower difficulty level. This shows the pool operator how
+      much work the miner is performing. Whenever one of the pool participants finds a valid block, the pool operator then
+      distributes the rewards amongst the pool participants based on the number of shares they have submitted. As we discussed
+      in Chapter 5, there are many formulas for dividing the revenue up, but all mining pools follow this basic structure.
+
+
+      The existence of pools thus relies on at least two technical properties of Bitcoin. The first is that it''s easy for
+      a miner to prove (probabilistically) how much work they are doing by submitting shares. By choosing a low enough threshold
+      for shares, miners can easily prove how much work they are performing with arbitrary precision regardless of the actual
+      difficulty of finding an valid block. This facet of mining puzzles appears difficult to change, given that we need a
+      puzzle that can be created with arbitrary difficulty.
+
+
+      Second, pool members can easily prove to the pool operator that they''re following the rules and working to find valid
+      blocks which would reward the pool as a whole. This works because the pool''s public key is committed to in the coinbase
+      transaction included in the block''s Merkle tree of transactions. Once a miner finds a block or even a share, they can''t
+      change which public key is the recipient of the newly minted coins.
+
+
+      Block discarding attacks. There is one weakness in this scheme for implementing mining pools: there is nothing to to
+      enforce that participating miners actually submit valid blocks to the pool manager in the event that they find them.
+      Suppose that there''s a pool member that''s upset with a large mining pool. They can participate in the pool by mining
+      and submitting shares just like normal, but in the event that they actually find a valid block that would reward the
+      pool they simply discard it and don''t tell the pool operator about it.
+
+
+      This attack reduces the pool''s overall mining power as none of the attacker''s work is contributing towards finding
+      valid blocks. However the attacker will still be rewarded as they appear to be submitting valid shares and simply getting
+      unlucky to not find any valid blocks. If the mining pool is designed to be revenue-neutral (that is, all mining rewards
+      are redistributed back to participants) then this attack can cause the pool to run at a loss.
+
+
+      This attack is sometimes called a vigilante or sabotage attack and is considered a form of vandalism because the attack
+      appears to be costly for both the attacker and the pool. The attacker loses money because every block they discard would
+      have led to some proportion of the block rewards being returned to them. Of course, the attacker still gets rewards
+      for other puzzle solutions that are found.
+
+
+      It appears that a rational attacker wouldn''t employ this strategy, since they would lose money without gaining anything
+      tangible. It turns out (quite surprisingly) that there are cases where this strategy can be profitable, as discussed
+      in the box below. But in any case, we want to design an entirely new mining puzzle formulation that ensures this strategy
+      is always profitable.
+
+
+      Sidebar: block discarding attacks between pools. People assumed for years that it can''t be profitable for a participant
+      to discard valid blocks found on behalf of the pool. It turns out this strategy can be profitable if one mining pool
+      uses it to attack another. This was proposed apocryphally many times and first thoroughly analyzed in a paper by Ittay
+      Eyal in 2015.
+
+
+      Let''s consider a simple case: suppose two mining pools, $A$ and $B$, each have $50 \%$ of the total mining capacity.
+      Now suppose B uses half of its mining power ( $25 \%$ of the total capacity) to mine as a member in pool A, but discards
+      all blocks found. We can show, in a simplified model, that B will now earns $5 / 9$ of the total rewards, greater than
+      the $50 \%$ it would earn by mining normally. In this simple case, dedicating half of its mining power to attacking
+      can be shown to be the optimal strategy for pool B.'
+  pipeline_tag: sentence-similarity
+  library_name: sentence-transformers
+  metrics:
+  - cosine_accuracy@1
+  - cosine_accuracy@3
+  - cosine_accuracy@5
+  - cosine_accuracy@10
+  - cosine_precision@1
+  - cosine_precision@3
+  - cosine_precision@5
+  - cosine_precision@10
+  - cosine_recall@1
+  - cosine_recall@3
+  - cosine_recall@5
+  - cosine_recall@10
+  - cosine_ndcg@10
+  - cosine_mrr@10
+  - cosine_map@100
+  model-index:
+  - name: SentenceTransformer based on BAAI/bge-base-en-v1.5
+    results:
+    - task:
+        type: information-retrieval
+        name: Information Retrieval
+      dataset:
+        name: dim 768
+        type: dim_768
+      metrics:
+      - type: cosine_accuracy@1
+        value: 0.5
+        name: Cosine Accuracy@1
+        verified: false
+      - type: cosine_accuracy@3
+        value: 0.7857142857142857
+        name: Cosine Accuracy@3
+        verified: false
+      - type: cosine_accuracy@5
+        value: 0.8571428571428571
+        name: Cosine Accuracy@5
+        verified: false
+      - type: cosine_accuracy@10
+        value: 0.8571428571428571
+        name: Cosine Accuracy@10
+        verified: false
+      - type: cosine_precision@1
+        value: 0.5
+        name: Cosine Precision@1
+        verified: false
+      - type: cosine_precision@3
+        value: 0.26190476190476186
+        name: Cosine Precision@3
+        verified: false
+      - type: cosine_precision@5
+        value: 0.17142857142857146
+        name: Cosine Precision@5
+        verified: false
+      - type: cosine_precision@10
+        value: 0.08571428571428573
+        name: Cosine Precision@10
+        verified: false
+      - type: cosine_recall@1
+        value: 0.5
+        name: Cosine Recall@1
+        verified: false
+      - type: cosine_recall@3
+        value: 0.7857142857142857
+        name: Cosine Recall@3
+        verified: false
+      - type: cosine_recall@5
+        value: 0.8571428571428571
+        name: Cosine Recall@5
+        verified: false
+      - type: cosine_recall@10
+        value: 0.8571428571428571
+        name: Cosine Recall@10
+        verified: false
+      - type: cosine_ndcg@10
+        value: 0.7032219246239031
+        name: Cosine Ndcg@10
+        verified: false
+      - type: cosine_mrr@10
+        value: 0.6511904761904762
+        name: Cosine Mrr@10
+        verified: false
+      - type: cosine_map@100
+        value: 0.6553083095766022
+        name: Cosine Map@100
+        verified: false
+    - task:
+        type: information-retrieval
+        name: Information Retrieval
+      dataset:
+        name: dim 512
+        type: dim_512
+      metrics:
+      - type: cosine_accuracy@1
+        value: 0.5714285714285714
+        name: Cosine Accuracy@1
+        verified: false
+      - type: cosine_accuracy@3
+        value: 0.7857142857142857
+        name: Cosine Accuracy@3
+        verified: false
+      - type: cosine_accuracy@5
+        value: 0.8214285714285714
+        name: Cosine Accuracy@5
+        verified: false
+      - type: cosine_accuracy@10
+        value: 0.8571428571428571
+        name: Cosine Accuracy@10
+        verified: false
+      - type: cosine_precision@1
+        value: 0.5714285714285714
+        name: Cosine Precision@1
+        verified: false
+      - type: cosine_precision@3
+        value: 0.26190476190476186
+        name: Cosine Precision@3
+        verified: false
+      - type: cosine_precision@5
+        value: 0.1642857142857143
+        name: Cosine Precision@5
+        verified: false
+      - type: cosine_precision@10
+        value: 0.08571428571428573
+        name: Cosine Precision@10
+        verified: false
+      - type: cosine_recall@1
+        value: 0.5714285714285714
+        name: Cosine Recall@1
+        verified: false
+      - type: cosine_recall@3
+        value: 0.7857142857142857
+        name: Cosine Recall@3
+        verified: false
+      - type: cosine_recall@5
+        value: 0.8214285714285714
+        name: Cosine Recall@5
+        verified: false
+      - type: cosine_recall@10
+        value: 0.8571428571428571
+        name: Cosine Recall@10
+        verified: false
+      - type: cosine_ndcg@10
+        value: 0.7276726753008987
+        name: Cosine Ndcg@10
+        verified: false
+      - type: cosine_mrr@10
+        value: 0.6848639455782314
+        name: Cosine Mrr@10
+        verified: false
+      - type: cosine_map@100
+        value: 0.6886316064887493
+        name: Cosine Map@100
+        verified: false
+    - task:
+        type: information-retrieval
+        name: Information Retrieval
+      dataset:
+        name: dim 256
+        type: dim_256
+      metrics:
+      - type: cosine_accuracy@1
+        value: 0.5714285714285714
+        name: Cosine Accuracy@1
+        verified: false
+      - type: cosine_accuracy@3
+        value: 0.7857142857142857
+        name: Cosine Accuracy@3
+        verified: false
+      - type: cosine_accuracy@5
+        value: 0.8214285714285714
+        name: Cosine Accuracy@5
+        verified: false
+      - type: cosine_accuracy@10
+        value: 0.8571428571428571
+        name: Cosine Accuracy@10
+        verified: false
+      - type: cosine_precision@1
+        value: 0.5714285714285714
+        name: Cosine Precision@1
+        verified: false
+      - type: cosine_precision@3
+        value: 0.26190476190476186
+        name: Cosine Precision@3
+        verified: false
+      - type: cosine_precision@5
+        value: 0.1642857142857143
+        name: Cosine Precision@5
+        verified: false
+      - type: cosine_precision@10
+        value: 0.08571428571428573
+        name: Cosine Precision@10
+        verified: false
+      - type: cosine_recall@1
+        value: 0.5714285714285714
+        name: Cosine Recall@1
+        verified: false
+      - type: cosine_recall@3
+        value: 0.7857142857142857
+        name: Cosine Recall@3
+        verified: false
+      - type: cosine_recall@5
+        value: 0.8214285714285714
+        name: Cosine Recall@5
+        verified: false
+      - type: cosine_recall@10
+        value: 0.8571428571428571
+        name: Cosine Recall@10
+        verified: false
+      - type: cosine_ndcg@10
+        value: 0.7284895986499949
+        name: Cosine Ndcg@10
+        verified: false
+      - type: cosine_mrr@10
+        value: 0.6857142857142858
+        name: Cosine Mrr@10
+        verified: false
+      - type: cosine_map@100
+        value: 0.6893267651888342
+        name: Cosine Map@100
+        verified: false
+    - task:
+        type: information-retrieval
+        name: Information Retrieval
+      dataset:
+        name: dim 128
+        type: dim_128
+      metrics:
+      - type: cosine_accuracy@1
+        value: 0.5
+        name: Cosine Accuracy@1
+        verified: false
+      - type: cosine_accuracy@3
+        value: 0.75
+        name: Cosine Accuracy@3
+        verified: false
+      - type: cosine_accuracy@5
+        value: 0.8214285714285714
+        name: Cosine Accuracy@5
+        verified: false
+      - type: cosine_accuracy@10
+        value: 0.8571428571428571
+        name: Cosine Accuracy@10
+        verified: false
+      - type: cosine_precision@1
+        value: 0.5
+        name: Cosine Precision@1
+        verified: false
+      - type: cosine_precision@3
+        value: 0.24999999999999997
+        name: Cosine Precision@3
+        verified: false
+      - type: cosine_precision@5
+        value: 0.1642857142857143
+        name: Cosine Precision@5
+        verified: false
+      - type: cosine_precision@10
+        value: 0.08571428571428573
+        name: Cosine Precision@10
+        verified: false
+      - type: cosine_recall@1
+        value: 0.5
+        name: Cosine Recall@1
+        verified: false
+      - type: cosine_recall@3
+        value: 0.75
+        name: Cosine Recall@3
+        verified: false
+      - type: cosine_recall@5
+        value: 0.8214285714285714
+        name: Cosine Recall@5
+        verified: false
+      - type: cosine_recall@10
+        value: 0.8571428571428571
+        name: Cosine Recall@10
+        verified: false
+      - type: cosine_ndcg@10
+        value: 0.6935204558400861
+        name: Cosine Ndcg@10
+        verified: false
+      - type: cosine_mrr@10
+        value: 0.6395833333333334
+        name: Cosine Mrr@10
+        verified: false
+      - type: cosine_map@100
+        value: 0.6425405844155845
+        name: Cosine Map@100
+        verified: false
+    - task:
+        type: information-retrieval
+        name: Information Retrieval
+      dataset:
+        name: dim 64
+        type: dim_64
+      metrics:
+      - type: cosine_accuracy@1
+        value: 0.42857142857142855
+        name: Cosine Accuracy@1
+        verified: false
+      - type: cosine_accuracy@3
+        value: 0.6785714285714286
+        name: Cosine Accuracy@3
+        verified: false
+      - type: cosine_accuracy@5
+        value: 0.75
+        name: Cosine Accuracy@5
+        verified: false
+      - type: cosine_accuracy@10
+        value: 0.8214285714285714
+        name: Cosine Accuracy@10
+        verified: false
+      - type: cosine_precision@1
+        value: 0.42857142857142855
+        name: Cosine Precision@1
+        verified: false
+      - type: cosine_precision@3
+        value: 0.22619047619047614
+        name: Cosine Precision@3
+        verified: false
+      - type: cosine_precision@5
+        value: 0.15000000000000005
+        name: Cosine Precision@5
+        verified: false
+      - type: cosine_precision@10
+        value: 0.08214285714285716
+        name: Cosine Precision@10
+        verified: false
+      - type: cosine_recall@1
+        value: 0.42857142857142855
+        name: Cosine Recall@1
+        verified: false
+      - type: cosine_recall@3
+        value: 0.6785714285714286
+        name: Cosine Recall@3
+        verified: false
+      - type: cosine_recall@5
+        value: 0.75
+        name: Cosine Recall@5
+        verified: false
+      - type: cosine_recall@10
+        value: 0.8214285714285714
+        name: Cosine Recall@10
+        verified: false
+      - type: cosine_ndcg@10
+        value: 0.631592589549331
+        name: Cosine Ndcg@10
+        verified: false
+      - type: cosine_mrr@10
+        value: 0.5696428571428572
+        name: Cosine Mrr@10
+        verified: false
+      - type: cosine_map@100
+        value: 0.5757306413556414
+        name: Cosine Map@100
+        verified: false
+siblings:
+- rfilename: .gitattributes
+- rfilename: 1_Pooling/config.json
+- rfilename: README.md
+- rfilename: config.json
+- rfilename: config_sentence_transformers.json
+- rfilename: model.safetensors
+- rfilename: modules.json
+- rfilename: sentence_bert_config.json
+- rfilename: special_tokens_map.json
+- rfilename: tokenizer.json
+- rfilename: tokenizer_config.json
+- rfilename: vocab.txt
+spaces: []
+createdAt: '2025-01-07T19:28:48.000Z'
+safetensors:
+  parameters:
+    F32: 109482240
+  total: 109482240
+usedStorage: 437951328
+downloadsAllTime: 4
+inferenceProviderMapping: {}
+configJson:
+  _name_or_path: BAAI/bge-base-en-v1.5
+  architectures:
+  - BertModel
+  attention_probs_dropout_prob: 0.1
+  classifier_dropout: null
+  gradient_checkpointing: false
+  hidden_act: gelu
+  hidden_dropout_prob: 0.1
+  hidden_size: 768
+  id2label:
+    '0': LABEL_0
+  initializer_range: 0.02
+  intermediate_size: 3072
+  label2id:
+    LABEL_0: 0
+  layer_norm_eps: 1.0e-12
+  max_position_embeddings: 512
+  model_type: bert
+  num_attention_heads: 12
+  num_hidden_layers: 12
+  pad_token_id: 0
+  position_embedding_type: absolute
+  torch_dtype: float32
+  transformers_version: 4.41.2
+  type_vocab_size: 2
+  use_cache: true
+  vocab_size: 30522
+onnxFiles: {}
+safetensorsSizeMb: 438.0
+approxSizeMb: 437.9
+fetchedAt: '2026-06-09T06:55:53.000Z'

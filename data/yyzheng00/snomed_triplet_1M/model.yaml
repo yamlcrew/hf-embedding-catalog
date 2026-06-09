@@ -1,0 +1,206 @@
+_id: 680df016a0520e2b7ebfe7a2
+id: yyzheng00/snomed_triplet_1M
+private: false
+pipeline_tag: sentence-similarity
+library_name: sentence-transformers
+tags:
+- sentence-transformers
+- safetensors
+- bert
+- sentence-similarity
+- feature-extraction
+- generated_from_trainer
+- dataset_size:1000000
+- loss:TripletLoss
+- arxiv:1908.10084
+- arxiv:1703.07737
+- base_model:sentence-transformers/all-MiniLM-L6-v2
+- base_model:finetune:sentence-transformers/all-MiniLM-L6-v2
+- model-index
+- text-embeddings-inference
+- endpoints_compatible
+- region:us
+downloads: 2
+likes: 0
+modelId: yyzheng00/snomed_triplet_1M
+author: yyzheng00
+sha: 5cd7b034abeeca374aad060c1f018fcc64472549
+lastModified: '2025-04-27T08:51:41.000Z'
+gated: false
+disabled: false
+mask_token: '[MASK]'
+widgetData:
+- source_sentence: '|Evaluation procedure (procedure)| : { |Method (attribute)| = |Evaluation - action (qualifier value)|,
+    |Has specimen (attribute)| = |Urine specimen (specimen)| }'
+  sentences:
+  - Evaluation of urine specimen (procedure)
+  - Tacrolimus-containing product in oral dose form (medicinal product form)
+  - '|Measurement of substance in specimen (procedure)| + |Organic acids measurement (procedure)| : { |Method (attribute)|
+    = |Measurement - action (qualifier value)|, |Component (attribute)| = |Organic acid (substance)|, |Has specimen (attribute)|
+    = |Fluid specimen (specimen)| }'
+- source_sentence: Allergy to meclozine (finding)
+  sentences:
+  - Meclizine allergy (finding)
+  - Allergy to quinidine (finding)
+  - Disorder of ovary (disorder)
+- source_sentence: '|Specimen observable (observable entity)|'
+  sentences:
+  - Carbamide peroxide (product)
+  - Neoplasm of uncertain behavior of dome of urinary bladder (disorder)
+  - Microscopic specimen observable (observable entity)
+- source_sentence: '|Dilation of esophagus (procedure)| : { |Method (attribute)| = |Dilation - action (qualifier value)|,
+    |Procedure site - Direct (attribute)| = |Esophageal structure (body structure)|, |Direct morphology (attribute)| = |Stricture
+    (morphologic abnormality)| }'
+  sentences:
+  - Fissure for ligamentum teres of liver (body structure)
+  - Dilatation of esophageal stricture (procedure)
+  - Dilation and insertion of tube into esophagus (procedure)
+- source_sentence: '|Estradiol and/or estradiol derivative (substance)| + |Steroid hormone (substance)| + |Substance with
+    estrogen receptor agonist mechanism of action (substance)| : |Has disposition (attribute)| = |Estrogen receptor agonist
+    (disposition)|, '
+  sentences:
+  - Oral form dioctahedral smectite (medicinal product form)
+  - 17-Beta oestradiol (substance)
+  - Rupture of Descemet's membrane of right eye (disorder)
+model-index:
+- name: SentenceTransformer based on sentence-transformers/all-MiniLM-L6-v2
+  results:
+  - task:
+      type: triplet
+      name: Triplet
+    dataset:
+      name: snomed triplet 1M 3 4 3 dev
+      type: snomed_triplet_1M_3_4_3-dev
+    metrics:
+    - type: cosine_accuracy
+      value: 0.979325
+      name: Cosine Accuracy
+      verified: false
+    - type: cosine_accuracy
+      value: 0.9780125
+      name: Cosine Accuracy
+      verified: false
+config:
+  architectures:
+  - BertModel
+  model_type: bert
+  tokenizer_config:
+    cls_token: '[CLS]'
+    mask_token: '[MASK]'
+    pad_token: '[PAD]'
+    sep_token: '[SEP]'
+    unk_token: '[UNK]'
+cardData:
+  tags:
+  - sentence-transformers
+  - sentence-similarity
+  - feature-extraction
+  - generated_from_trainer
+  - dataset_size:1000000
+  - loss:TripletLoss
+  base_model: sentence-transformers/all-MiniLM-L6-v2
+  widget:
+  - source_sentence: '|Evaluation procedure (procedure)| : { |Method (attribute)| = |Evaluation - action (qualifier value)|,
+      |Has specimen (attribute)| = |Urine specimen (specimen)| }'
+    sentences:
+    - Evaluation of urine specimen (procedure)
+    - Tacrolimus-containing product in oral dose form (medicinal product form)
+    - '|Measurement of substance in specimen (procedure)| + |Organic acids measurement (procedure)| : { |Method (attribute)|
+      = |Measurement - action (qualifier value)|, |Component (attribute)| = |Organic acid (substance)|, |Has specimen (attribute)|
+      = |Fluid specimen (specimen)| }'
+  - source_sentence: Allergy to meclozine (finding)
+    sentences:
+    - Meclizine allergy (finding)
+    - Allergy to quinidine (finding)
+    - Disorder of ovary (disorder)
+  - source_sentence: '|Specimen observable (observable entity)|'
+    sentences:
+    - Carbamide peroxide (product)
+    - Neoplasm of uncertain behavior of dome of urinary bladder (disorder)
+    - Microscopic specimen observable (observable entity)
+  - source_sentence: '|Dilation of esophagus (procedure)| : { |Method (attribute)| = |Dilation - action (qualifier value)|,
+      |Procedure site - Direct (attribute)| = |Esophageal structure (body structure)|, |Direct morphology (attribute)| = |Stricture
+      (morphologic abnormality)| }'
+    sentences:
+    - Fissure for ligamentum teres of liver (body structure)
+    - Dilatation of esophageal stricture (procedure)
+    - Dilation and insertion of tube into esophagus (procedure)
+  - source_sentence: '|Estradiol and/or estradiol derivative (substance)| + |Steroid hormone (substance)| + |Substance with
+      estrogen receptor agonist mechanism of action (substance)| : |Has disposition (attribute)| = |Estrogen receptor agonist
+      (disposition)|, '
+    sentences:
+    - Oral form dioctahedral smectite (medicinal product form)
+    - 17-Beta oestradiol (substance)
+    - Rupture of Descemet's membrane of right eye (disorder)
+  pipeline_tag: sentence-similarity
+  library_name: sentence-transformers
+  metrics:
+  - cosine_accuracy
+  model-index:
+  - name: SentenceTransformer based on sentence-transformers/all-MiniLM-L6-v2
+    results:
+    - task:
+        type: triplet
+        name: Triplet
+      dataset:
+        name: snomed triplet 1M 3 4 3 dev
+        type: snomed_triplet_1M_3_4_3-dev
+      metrics:
+      - type: cosine_accuracy
+        value: 0.979325
+        name: Cosine Accuracy
+        verified: false
+      - type: cosine_accuracy
+        value: 0.9780125
+        name: Cosine Accuracy
+        verified: false
+siblings:
+- rfilename: .gitattributes
+- rfilename: 1_Pooling/config.json
+- rfilename: README.md
+- rfilename: config.json
+- rfilename: config_sentence_transformers.json
+- rfilename: model.safetensors
+- rfilename: modules.json
+- rfilename: sentence_bert_config.json
+- rfilename: special_tokens_map.json
+- rfilename: tokenizer.json
+- rfilename: tokenizer_config.json
+- rfilename: vocab.txt
+spaces: []
+createdAt: '2025-04-27T08:51:34.000Z'
+safetensors:
+  parameters:
+    F32: 22713216
+  total: 22713216
+usedStorage: 90864192
+downloadsAllTime: 15
+inferenceProviderMapping: {}
+configJson:
+  _name_or_path: sentence-transformers/all-MiniLM-L6-v2
+  architectures:
+  - BertModel
+  attention_probs_dropout_prob: 0.1
+  classifier_dropout: null
+  gradient_checkpointing: false
+  hidden_act: gelu
+  hidden_dropout_prob: 0.1
+  hidden_size: 384
+  initializer_range: 0.02
+  intermediate_size: 1536
+  layer_norm_eps: 1.0e-12
+  max_position_embeddings: 512
+  model_type: bert
+  num_attention_heads: 12
+  num_hidden_layers: 6
+  pad_token_id: 0
+  position_embedding_type: absolute
+  torch_dtype: float32
+  transformers_version: 4.47.0
+  type_vocab_size: 2
+  use_cache: true
+  vocab_size: 30522
+onnxFiles: {}
+safetensorsSizeMb: 90.9
+approxSizeMb: 90.9
+fetchedAt: '2026-06-09T06:55:53.000Z'

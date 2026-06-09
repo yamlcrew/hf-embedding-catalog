@@ -1,0 +1,357 @@
+_id: 680e925a0ef0be7e3cb596f7
+id: 1shoomun/pq_cache_3
+private: false
+pipeline_tag: sentence-similarity
+library_name: sentence-transformers
+tags:
+- sentence-transformers
+- safetensors
+- t5
+- sentence-similarity
+- feature-extraction
+- generated_from_trainer
+- dataset_size:2640
+- loss:MultipleNegativesRankingLoss
+- loss:CosineSimilarityLoss
+- custom_code
+- arxiv:1908.10084
+- arxiv:1705.00652
+- base_model:jinaai/jina-embedding-b-en-v1
+- base_model:finetune:jinaai/jina-embedding-b-en-v1
+- model-index
+- endpoints_compatible
+- region:us
+downloads: 2
+likes: 0
+modelId: 1shoomun/pq_cache_3
+author: 1shoomun
+sha: 639162660cfdfae14fc996684c17a2971ac2eb81
+lastModified: '2025-04-28T05:17:04.000Z'
+gated: false
+disabled: false
+widgetData:
+- source_sentence: Can you tell me how my portfolio did last week?
+  sentences:
+  - Suggest recommendations for me
+  - Do you have any insights on my portfolio
+  - How did my portfolio perform last week ?
+- source_sentence: What are my most risky holdings?
+  sentences:
+  - View my holdings
+  - Show my market cap breakdown
+  - Show my riskiest holdings
+- source_sentence: What profits do I have in my portfolio?
+  sentences:
+  - How can I swap my stocks for mutual funds?
+  - Show me the cash in my portfolio?
+  - What are the profits I have gained in my portfolio
+- source_sentence: I'm curious, which investments have the highest volatility in my portfolio?
+  sentences:
+  - Which sector do I invest most in?
+  - is there anything wrong with my investments?
+  - Which of my investments have the highest volatility?
+- source_sentence: Sort my investment portfolio by ESG rating, please.
+  sentences:
+  - What stock makes up the largest percentage of my portfolio?
+  - Can you show my worst performing holdings
+  - Show my investments sorted by ESG rating.
+model-index:
+- name: SentenceTransformer based on jinaai/jina-embedding-b-en-v1
+  results:
+  - task:
+      type: information-retrieval
+      name: Information Retrieval
+    dataset:
+      name: test eval
+      type: test-eval
+    metrics:
+    - type: cosine_accuracy@1
+      value: 0.8636363636363636
+      name: Cosine Accuracy@1
+      verified: false
+    - type: cosine_accuracy@3
+      value: 0.9924242424242424
+      name: Cosine Accuracy@3
+      verified: false
+    - type: cosine_accuracy@5
+      value: 1
+      name: Cosine Accuracy@5
+      verified: false
+    - type: cosine_accuracy@10
+      value: 1
+      name: Cosine Accuracy@10
+      verified: false
+    - type: cosine_precision@1
+      value: 0.8636363636363636
+      name: Cosine Precision@1
+      verified: false
+    - type: cosine_precision@3
+      value: 0.3308080808080807
+      name: Cosine Precision@3
+      verified: false
+    - type: cosine_precision@5
+      value: 0.19999999999999998
+      name: Cosine Precision@5
+      verified: false
+    - type: cosine_precision@10
+      value: 0.09999999999999999
+      name: Cosine Precision@10
+      verified: false
+    - type: cosine_recall@1
+      value: 0.8636363636363636
+      name: Cosine Recall@1
+      verified: false
+    - type: cosine_recall@3
+      value: 0.9924242424242424
+      name: Cosine Recall@3
+      verified: false
+    - type: cosine_recall@5
+      value: 1
+      name: Cosine Recall@5
+      verified: false
+    - type: cosine_recall@10
+      value: 1
+      name: Cosine Recall@10
+      verified: false
+    - type: cosine_ndcg@10
+      value: 0.9436916551342168
+      name: Cosine Ndcg@10
+      verified: false
+    - type: cosine_mrr@10
+      value: 0.9242424242424244
+      name: Cosine Mrr@10
+      verified: false
+    - type: cosine_map@100
+      value: 0.9242424242424242
+      name: Cosine Map@100
+      verified: false
+config:
+  architectures:
+  - T5EncoderModel
+  auto_map:
+    AutoModel: jinaai/jina-embedding-b-en-v1--modeling_t5.T5EncoderModel
+  model_type: t5
+  tokenizer_config:
+    eos_token: </s>
+    pad_token: <pad>
+    unk_token: <unk>
+cardData:
+  tags:
+  - sentence-transformers
+  - sentence-similarity
+  - feature-extraction
+  - generated_from_trainer
+  - dataset_size:2640
+  - loss:MultipleNegativesRankingLoss
+  - loss:CosineSimilarityLoss
+  base_model: jinaai/jina-embedding-b-en-v1
+  widget:
+  - source_sentence: Can you tell me how my portfolio did last week?
+    sentences:
+    - Suggest recommendations for me
+    - Do you have any insights on my portfolio
+    - How did my portfolio perform last week ?
+  - source_sentence: What are my most risky holdings?
+    sentences:
+    - View my holdings
+    - Show my market cap breakdown
+    - Show my riskiest holdings
+  - source_sentence: What profits do I have in my portfolio?
+    sentences:
+    - How can I swap my stocks for mutual funds?
+    - Show me the cash in my portfolio?
+    - What are the profits I have gained in my portfolio
+  - source_sentence: I'm curious, which investments have the highest volatility in my portfolio?
+    sentences:
+    - Which sector do I invest most in?
+    - is there anything wrong with my investments?
+    - Which of my investments have the highest volatility?
+  - source_sentence: Sort my investment portfolio by ESG rating, please.
+    sentences:
+    - What stock makes up the largest percentage of my portfolio?
+    - Can you show my worst performing holdings
+    - Show my investments sorted by ESG rating.
+  pipeline_tag: sentence-similarity
+  library_name: sentence-transformers
+  metrics:
+  - cosine_accuracy@1
+  - cosine_accuracy@3
+  - cosine_accuracy@5
+  - cosine_accuracy@10
+  - cosine_precision@1
+  - cosine_precision@3
+  - cosine_precision@5
+  - cosine_precision@10
+  - cosine_recall@1
+  - cosine_recall@3
+  - cosine_recall@5
+  - cosine_recall@10
+  - cosine_ndcg@10
+  - cosine_mrr@10
+  - cosine_map@100
+  model-index:
+  - name: SentenceTransformer based on jinaai/jina-embedding-b-en-v1
+    results:
+    - task:
+        type: information-retrieval
+        name: Information Retrieval
+      dataset:
+        name: test eval
+        type: test-eval
+      metrics:
+      - type: cosine_accuracy@1
+        value: 0.8636363636363636
+        name: Cosine Accuracy@1
+        verified: false
+      - type: cosine_accuracy@3
+        value: 0.9924242424242424
+        name: Cosine Accuracy@3
+        verified: false
+      - type: cosine_accuracy@5
+        value: 1
+        name: Cosine Accuracy@5
+        verified: false
+      - type: cosine_accuracy@10
+        value: 1
+        name: Cosine Accuracy@10
+        verified: false
+      - type: cosine_precision@1
+        value: 0.8636363636363636
+        name: Cosine Precision@1
+        verified: false
+      - type: cosine_precision@3
+        value: 0.3308080808080807
+        name: Cosine Precision@3
+        verified: false
+      - type: cosine_precision@5
+        value: 0.19999999999999998
+        name: Cosine Precision@5
+        verified: false
+      - type: cosine_precision@10
+        value: 0.09999999999999999
+        name: Cosine Precision@10
+        verified: false
+      - type: cosine_recall@1
+        value: 0.8636363636363636
+        name: Cosine Recall@1
+        verified: false
+      - type: cosine_recall@3
+        value: 0.9924242424242424
+        name: Cosine Recall@3
+        verified: false
+      - type: cosine_recall@5
+        value: 1
+        name: Cosine Recall@5
+        verified: false
+      - type: cosine_recall@10
+        value: 1
+        name: Cosine Recall@10
+        verified: false
+      - type: cosine_ndcg@10
+        value: 0.9436916551342168
+        name: Cosine Ndcg@10
+        verified: false
+      - type: cosine_mrr@10
+        value: 0.9242424242424244
+        name: Cosine Mrr@10
+        verified: false
+      - type: cosine_map@100
+        value: 0.9242424242424242
+        name: Cosine Map@100
+        verified: false
+siblings:
+- rfilename: .gitattributes
+- rfilename: 1_Pooling/config.json
+- rfilename: README.md
+- rfilename: checkpoint-2240/1_Pooling/config.json
+- rfilename: checkpoint-2240/README.md
+- rfilename: checkpoint-2240/config.json
+- rfilename: checkpoint-2240/config_sentence_transformers.json
+- rfilename: checkpoint-2240/model.safetensors
+- rfilename: checkpoint-2240/modules.json
+- rfilename: checkpoint-2240/optimizer.pt
+- rfilename: checkpoint-2240/rng_state.pth
+- rfilename: checkpoint-2240/scheduler.pt
+- rfilename: checkpoint-2240/sentence_bert_config.json
+- rfilename: checkpoint-2240/special_tokens_map.json
+- rfilename: checkpoint-2240/tokenizer.json
+- rfilename: checkpoint-2240/tokenizer_config.json
+- rfilename: checkpoint-2240/trainer_state.json
+- rfilename: checkpoint-2240/training_args.bin
+- rfilename: config.json
+- rfilename: config_sentence_transformers.json
+- rfilename: eval/Information-Retrieval_evaluation_test-eval_results.csv
+- rfilename: model.safetensors
+- rfilename: modules.json
+- rfilename: sentence_bert_config.json
+- rfilename: special_tokens_map.json
+- rfilename: tokenizer.json
+- rfilename: tokenizer_config.json
+spaces: []
+createdAt: '2025-04-27T20:23:54.000Z'
+safetensors:
+  parameters:
+    F32: 109628544
+  total: 109628544
+usedStorage: 2192709124
+downloadsAllTime: 8
+inferenceProviderMapping: {}
+configJson:
+  architectures:
+  - T5EncoderModel
+  auto_map:
+    AutoModel: jinaai/jina-embedding-b-en-v1--modeling_t5.T5EncoderModel
+  classifier_dropout: 0.0
+  d_ff: 3072
+  d_kv: 64
+  d_model: 768
+  decoder_start_token_id: 0
+  dense_act_fn: relu
+  dropout_rate: 0.1
+  eos_token_id: 1
+  feed_forward_proj: relu
+  initializer_factor: 1.0
+  is_encoder_decoder: true
+  is_gated_act: false
+  layer_norm_epsilon: 1.0e-06
+  model_type: t5
+  n_positions: 512
+  num_decoder_layers: 12
+  num_heads: 12
+  num_layers: 12
+  output_past: true
+  pad_token_id: 0
+  relative_attention_max_distance: 128
+  relative_attention_num_buckets: 32
+  task_specific_params:
+    summarization:
+      early_stopping: true
+      length_penalty: 2.0
+      max_length: 200
+      min_length: 30
+      no_repeat_ngram_size: 3
+      num_beams: 4
+      prefix: 'summarize: '
+    translation_en_to_de:
+      early_stopping: true
+      max_length: 300
+      num_beams: 4
+      prefix: 'translate English to German: '
+    translation_en_to_fr:
+      early_stopping: true
+      max_length: 300
+      num_beams: 4
+      prefix: 'translate English to French: '
+    translation_en_to_ro:
+      early_stopping: true
+      max_length: 300
+      num_beams: 4
+      prefix: 'translate English to Romanian: '
+  torch_dtype: float32
+  transformers_version: 4.51.3
+  use_cache: true
+  vocab_size: 32128
+onnxFiles: {}
+safetensorsSizeMb: 877.1
+approxSizeMb: 438.5
+fetchedAt: '2026-06-09T06:55:53.000Z'

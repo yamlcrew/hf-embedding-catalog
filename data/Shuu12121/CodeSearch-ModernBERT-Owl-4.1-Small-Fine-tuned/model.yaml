@@ -1,0 +1,456 @@
+_id: 6870ae39aefd2c97d3f913e2
+id: Shuu12121/CodeSearch-ModernBERT-Owl-4.1-Small-Fine-tuned
+private: false
+pipeline_tag: sentence-similarity
+library_name: sentence-transformers
+tags:
+- sentence-transformers
+- safetensors
+- modernbert
+- sentence-similarity
+- feature-extraction
+- dense
+- generated_from_trainer
+- dataset_size:58800
+- loss:MultipleNegativesRankingLoss
+- arxiv:1908.10084
+- arxiv:1705.00652
+- text-embeddings-inference
+- endpoints_compatible
+- region:us
+downloads: 3
+likes: 0
+modelId: Shuu12121/CodeSearch-ModernBERT-Owl-4.1-Small-Fine-tuned
+author: Shuu12121
+sha: c4e1e340ff7cbc26f73bd18bc4bb6425c18dcb7b
+lastModified: '2025-07-11T06:25:22.000Z'
+gated: false
+disabled: false
+widgetData:
+- source_sentence: 'Returns boolean indicating whether the requestUrl matches against the paths configured.
+
+
+    @param requestedUrl - url requested by user
+
+    @param opts - unless configuration
+
+    @returns {boolean}'
+  sentences:
+  - "def xmoe2_v1_l4k_global_only():\n  \"\"\"\"\"\"\n  hparams = xmoe2_v1_l4k()\n  hparams.decoder_layers = [\n      \"att\"\
+    \ if l == \"local_att\" else l for l in hparams.decoder_layers]\n  return hparams"
+  - "function matchesPath(requestedUrl, opts) {\n  var paths = !opts.path || Array.isArray(opts.path) ?\n    opts.path : [opts.path];\n\
+    \n  if (paths) {\n    return paths.some(function(p) {\n      return (typeof p === 'string' && p === requestedUrl.pathname)\
+    \ ||\n        (p instanceof RegExp && !! p.exec(requestedUrl.pathname));\n    });\n  }\n\n  return false;\n}"
+  - "public static function factory($accessToken, $currentTeam)\n    {\n        $client = Client::factory($accessToken);\n\
+    \n        return new self($client, $currentTeam);\n    }"
+- source_sentence: '// New creates a new ImageGraphics including an image.RGBA of dimension w x h
+
+    // with background bgcol. If font is nil it will use a builtin font.
+
+    // If fontsize is empty useful default are used.'
+  sentences:
+  - "func New(width, height int, bgcol color.RGBA, font *truetype.Font, fontsize map[chart.FontSize]float64) *ImageGraphics\
+    \ {\n\timg := image.NewRGBA(image.Rect(0, 0, width, height))\n\tgc := draw2dimg.NewGraphicContext(img)\n\tgc.SetLineJoin(draw2d.BevelJoin)\n\
+    \tgc.SetLineCap(draw2d.SquareCap)\n\tgc.SetStrokeColor(image.Black)\n\tgc.SetFillColor(bgcol)\n\tgc.Translate(0.5, 0.5)\n\
+    \tgc.Clear()\n\tif font == nil {\n\t\tfont = defaultFont\n\t}\n\tif len(fontsize) == 0 {\n\t\tfontsize = ConstructFontSizes(13)\n\
+    \t}\n\treturn &ImageGraphics{Image: img, x0: 0, y0: 0, w: width, h: height,\n\t\tbg: bgcol, gc: gc, font: font, fs: fontsize}\n\
+    }"
+  - "public static void requestDataLogsForApp(final Context context, final UUID appUuid) {\n        final Intent requestIntent\
+    \ = new Intent(INTENT_DL_REQUEST_DATA);\n        requestIntent.putExtra(APP_UUID, appUuid);\n        context.sendBroadcast(requestIntent);\n\
+    \    }"
+  - "final protected function setWriteMode($mode)\n    {\n        if (!in_array($mode, [static::WRITE_MODE_INSERT, static::WRITE_MODE_UPSERT,\
+    \ static::WRITE_MODE_UPDATE])) {\n            throw new \\InvalidArgumentException(sprintf('Passed write mode \"%s\" is\
+    \ invalid!', $mode));\n        }\n        $this->writeMode = $mode;\n    }"
+- source_sentence: 'Builds the path for a closed arc, returning a PolygonOptions that can be
+
+    further customised before use.
+
+
+    @param center
+
+    @param start
+
+    @param end
+
+    @param arcType Pass in either ArcType.CHORD or ArcType.ROUND
+
+    @return PolygonOptions with the paths element populated.'
+  sentences:
+  - "function getJavaScriptCallbackParameterListSimple(parameters) {\n    var result = []\n\n    parameters.forEach(function(parameter){\n\
+    \        if (!parameter.out) return\n        result.push(\"/*\" + getIdlType(parameter.type) + \"*/ \"+ parameter.name)\n\
+    \    })\n\n    return result.join(\", \")\n}"
+  - "public Color getBackground() {\r\n\t\tpredraw();\r\n\t\tFloatBuffer buffer = BufferUtils.createFloatBuffer(16);\r\n\t\
+    \tGL.glGetFloat(SGL.GL_COLOR_CLEAR_VALUE, buffer);\r\n\t\tpostdraw();\r\n\r\n\t\treturn new Color(buffer);\r\n\t}"
+  - "public static final PolygonOptions buildClosedArc(LatLong center, LatLong start, LatLong end, ArcType arcType) {\n  \
+    \      MVCArray res = buildArcPoints(center, start, end);\n        if (ArcType.ROUND.equals(arcType)) {\n            res.push(center);\n\
+    \        }\n        return new PolygonOptions().paths(res);\n    }"
+- source_sentence: "Read data from a spread sheet. Return the data in a dict with\n    column numbers as keys.\n\n    sheet:\
+    \ xlrd.sheet.Sheet instance\n        Ready for use.\n\n    startstops: list\n        Four StartStop objects defining the\
+    \ data to read. See\n        :func:`~channelpack.pullxl.prepread`.\n\n    usecols: str or seqence of ints or None\n  \
+    \      The columns to use, 0-based. 0 is the spread sheet column\n        \"A\". Can be given as a string also - 'C:E,\
+    \ H' for columns C, D,\n        E and H.\n\n    Values in the returned dict are numpy arrays. Types are set based on\n\
+    \    the types in the spread sheet."
+  sentences:
+  - "public function handleScanNotify(callable $callback)\n    {\n        $notify = $this->getNotify();\n\n        if (!$notify->isValid())\
+    \ {\n            throw new FaultException('Invalid request payloads.', 400);\n        }\n\n        $notify = $notify->getNotify();\n\
+    \n        try {\n            $prepayId = call_user_func_array($callback, [$notify->get('product_id'), $notify->get('openid'),\
+    \ $notify]);\n            $response = [\n                'return_code' => 'SUCCESS',\n                'appid'       =>\
+    \ $this->merchant->app_id,\n                'mch_id'      => $this->merchant->merchant_id,\n                'nonce_str'\
+    \   => uniqid(),\n                'prepay_id'   => strval($prepayId),\n                'result_code' => 'SUCCESS',\n \
+    \           ];\n            $response['sign'] = generate_sign($response, $this->merchant->key);\n        } catch (\\Exception\
+    \ $e) {\n            $response = [\n                'return_code'  => 'SUCCESS',\n                'return_msg'   => $e->getCode(),\n\
+    \                'result_code'  => 'FAIL',\n                'err_code_des' => $e->getMessage(),\n            ];\n    \
+    \    }\n\n        return new Response(XML::build($response));\n    }"
+  - "def _sheet_asdict(sheet, startstops, usecols=None):\n    \"\"\"\n    \"\"\"\n\n    _, _, start, stop = startstops\n \
+    \   usecols = _sanitize_usecols(usecols)\n\n    if usecols is not None:\n        iswithin = start.col <= min(usecols)\
+    \ and stop.col > max(usecols)\n        mess = 'Column in usecols outside defined data range, got '\n        assert iswithin,\
+    \ mess + str(usecols)\n    else:                       # usecols is None.\n        usecols = tuple(range(start.col, stop.col))\n\
+    \n    # cols = usecols or range(start.col, stop.col)\n    D = dict()\n\n    for c in usecols:\n        cells = sheet.col(c,\
+    \ start_rowx=start.row, end_rowx=stop.row)\n        types = set([cell.ctype for cell in cells])\n\n        # Replace empty\
+    \ values with nan if appropriate:\n        if (not types - NANABLE) and xlrd.XL_CELL_NUMBER in types:\n            D[c]\
+    \ = np.array([np.nan if cell.value == '' else cell.value\n                             for cell in cells])\n        elif\
+    \ xlrd.XL_CELL_DATE in types:\n            dm = sheet.book.datemode\n            vals = []\n            for cell in cells:\n\
+    \                if cell.ctype == xlrd.XL_CELL_DATE:\n                    dtuple = xlrd.xldate_as_tuple(cell.value, dm)\n\
+    \                    vals.append(datetime.datetime(*dtuple))\n                elif cell.ctype in NONABLES:\n         \
+    \           vals.append(None)\n                else:\n                    vals.append(cell.value)\n            D[c] =\
+    \ np.array(vals)\n        else:\n            vals = [None if cell.ctype in NONABLES else cell.value\n                \
+    \    for cell in cells]\n            D[c] = np.array(vals)\n\n    return D"
+  - "func (o Option) RequiresOption(name string) bool {\n\tfor _, o := range o.Requires {\n\t\tif o == name {\n\t\t\treturn\
+    \ true\n\t\t}\n\t}\n\n\treturn false\n}"
+- source_sentence: '// reBuild partially rebuilds a site given the filesystem events.
+
+    // It returns whetever the content source was changed.
+
+    // TODO(bep) clean up/rewrite this method.'
+  sentences:
+  - "func WebPageImageResolver(doc *goquery.Document) ([]candidate, int) {\n\timgs := doc.Find(\"img\")\n\n\tvar candidates\
+    \ []candidate\n\tsignificantSurface := 320 * 200\n\tsignificantSurfaceCount := 0\n\tsrc := \"\"\n\timgs.Each(func(i int,\
+    \ tag *goquery.Selection) {\n\t\tvar surface int\n\t\tsrc = getImageSrc(tag)\n\t\tif src == \"\" {\n\t\t\treturn\n\t\t\
+    }\n\n\t\twidth, _ := tag.Attr(\"width\")\n\t\theight, _ := tag.Attr(\"height\")\n\t\tif width != \"\" {\n\t\t\tw, _ :=\
+    \ strconv.Atoi(width)\n\t\t\tif height != \"\" {\n\t\t\t\th, _ := strconv.Atoi(height)\n\t\t\t\tsurface = w * h\n\t\t\t\
+    } else {\n\t\t\t\tsurface = w\n\t\t\t}\n\t\t} else {\n\t\t\tif height != \"\" {\n\t\t\t\tsurface, _ = strconv.Atoi(height)\n\
+    \t\t\t} else {\n\t\t\t\tsurface = 0\n\t\t\t}\n\t\t}\n\n\t\tif surface > significantSurface {\n\t\t\tsignificantSurfaceCount++\n\
+    \t\t}\n\n\t\ttagscore := score(tag)\n\t\tif tagscore >= 0 {\n\t\t\tc := candidate{\n\t\t\t\turl:     src,\n\t\t\t\tsurface:\
+    \ surface,\n\t\t\t\tscore:   score(tag),\n\t\t\t}\n\t\t\tcandidates = append(candidates, c)\n\t\t}\n\t})\n\n\tif len(candidates)\
+    \ == 0 {\n\t\treturn nil, 0\n\t}\n\n\treturn candidates, significantSurfaceCount\n\n}"
+  - "@SuppressWarnings(\"rawtypes\")\n\tpublic void open(Map conf, TopologyContext context,\n\t\t\tSpoutOutputCollector collector)\
+    \ {\n\t\tif(this.jmsProvider == null){\n\t\t\tthrow new IllegalStateException(\"JMS provider has not been set.\");\n\t\
+    \t}\n\t\tif(this.tupleProducer == null){\n\t\t\tthrow new IllegalStateException(\"JMS Tuple Producer has not been set.\"\
+    );\n\t\t}\n\t\tInteger topologyTimeout = (Integer)conf.get(\"topology.message.timeout.secs\");\n\t\t// TODO fine a way\
+    \ to get the default timeout from storm, so we're not hard-coding to 30 seconds (it could change)\n\t\ttopologyTimeout\
+    \ = topologyTimeout == null ? 30 : topologyTimeout;\n\t\tif( (topologyTimeout.intValue() * 1000 )> this.recoveryPeriod){\n\
+    \t\t    LOG.warn(\"*** WARNING *** : \" +\n\t\t    \t\t\"Recovery period (\"+ this.recoveryPeriod + \" ms.) is less then\
+    \ the configured \" +\n\t\t    \t\t\"'topology.message.timeout.secs' of \" + topologyTimeout + \n\t\t    \t\t\" secs.\
+    \ This could lead to a message replay flood!\");\n\t\t}\n\t\tthis.queue = new LinkedBlockingQueue<Message>();\n\t\tthis.toCommit\
+    \ = new TreeSet<JmsMessageID>();\n        this.pendingMessages = new HashMap<JmsMessageID, Message>();\n\t\tthis.collector\
+    \ = collector;\n\t\ttry {\n\t\t\tConnectionFactory cf = this.jmsProvider.connectionFactory();\n\t\t\tDestination dest\
+    \ = this.jmsProvider.destination();\n\t\t\tthis.connection = cf.createConnection();\n\t\t\tthis.session = connection.createSession(false,\n\
+    \t\t\t\t\tthis.jmsAcknowledgeMode);\n\t\t\tMessageConsumer consumer = session.createConsumer(dest);\n\t\t\tconsumer.setMessageListener(this);\n\
+    \t\t\tthis.connection.start();\n\t\t\tif (this.isDurableSubscription() && this.recoveryPeriod > 0){\n\t\t\t    this.recoveryTimer\
+    \ = new Timer();\n\t\t\t    this.recoveryTimer.scheduleAtFixedRate(new RecoveryTask(), 10, this.recoveryPeriod);\n\t\t\
+    \t}\n\t\t\t\n\t\t} catch (Exception e) {\n\t\t\tLOG.warn(\"Error creating JMS connection.\", e);\n\t\t}\n\n\t}"
+  - "func (s *Site) processPartial(events []fsnotify.Event) (whatChanged, error) {\n\n\tevents = s.filterFileEvents(events)\n\
+    \tevents = s.translateFileEvents(events)\n\n\ts.Log.DEBUG.Printf(\"Rebuild for events %q\", events)\n\n\th := s.h\n\n\t\
+    // First we need to determine what changed\n\n\tvar (\n\t\tsourceChanged       = []fsnotify.Event{}\n\t\tsourceReallyChanged\
+    \ = []fsnotify.Event{}\n\t\tcontentFilesChanged []string\n\t\ttmplChanged         = []fsnotify.Event{}\n\t\tdataChanged\
+    \         = []fsnotify.Event{}\n\t\ti18nChanged         = []fsnotify.Event{}\n\t\tshortcodesChanged   = make(map[string]bool)\n\
+    \t\tsourceFilesChanged  = make(map[string]bool)\n\n\t\t// prevent spamming the log on changes\n\t\tlogger = helpers.NewDistinctFeedbackLogger()\n\
+    \t)\n\n\tcachePartitions := make([]string, len(events))\n\n\tfor i, ev := range events {\n\t\tcachePartitions[i] = resources.ResourceKeyPartition(ev.Name)\n\
+    \n\t\tif s.isContentDirEvent(ev) {\n\t\t\tlogger.Println(\"Source changed\", ev)\n\t\t\tsourceChanged = append(sourceChanged,\
+    \ ev)\n\t\t}\n\t\tif s.isLayoutDirEvent(ev) {\n\t\t\tlogger.Println(\"Template changed\", ev)\n\t\t\ttmplChanged = append(tmplChanged,\
+    \ ev)\n\n\t\t\tif strings.Contains(ev.Name, \"shortcodes\") {\n\t\t\t\tshortcode := filepath.Base(ev.Name)\n\t\t\t\tshortcode\
+    \ = strings.TrimSuffix(shortcode, filepath.Ext(shortcode))\n\t\t\t\tshortcodesChanged[shortcode] = true\n\t\t\t}\n\t\t\
+    }\n\t\tif s.isDataDirEvent(ev) {\n\t\t\tlogger.Println(\"Data changed\", ev)\n\t\t\tdataChanged = append(dataChanged,\
+    \ ev)\n\t\t}\n\t\tif s.isI18nEvent(ev) {\n\t\t\tlogger.Println(\"i18n changed\", ev)\n\t\t\ti18nChanged = append(dataChanged,\
+    \ ev)\n\t\t}\n\t}\n\n\t// These in memory resource caches will be rebuilt on demand.\n\tfor _, s := range s.h.Sites {\n\
+    \t\ts.ResourceSpec.ResourceCache.DeletePartitions(cachePartitions...)\n\t}\n\n\tif len(tmplChanged) > 0 || len(i18nChanged)\
+    \ > 0 {\n\t\tsites := s.h.Sites\n\t\tfirst := sites[0]\n\n\t\ts.h.init.Reset()\n\n\t\t// TOD(bep) globals clean\n\t\t\
+    if err := first.Deps.LoadResources(); err != nil {\n\t\t\treturn whatChanged{}, err\n\t\t}\n\n\t\tfor i := 1; i < len(sites);\
+    \ i++ {\n\t\t\tsite := sites[i]\n\t\t\tvar err error\n\t\t\tdepsCfg := deps.DepsCfg{\n\t\t\t\tLanguage:      site.language,\n\
+    \t\t\t\tMediaTypes:    site.mediaTypesConfig,\n\t\t\t\tOutputFormats: site.outputFormatsConfig,\n\t\t\t}\n\t\t\tsite.Deps,\
+    \ err = first.Deps.ForLanguage(depsCfg, func(d *deps.Deps) error {\n\t\t\t\td.Site = &site.Info\n\t\t\t\treturn nil\n\t\
+    \t\t})\n\t\t\tif err != nil {\n\t\t\t\treturn whatChanged{}, err\n\t\t\t}\n\t\t}\n\t}\n\n\tif len(dataChanged) > 0 {\n\
+    \t\ts.h.init.data.Reset()\n\t}\n\n\tfor _, ev := range sourceChanged {\n\t\tremoved := false\n\n\t\tif ev.Op&fsnotify.Remove\
+    \ == fsnotify.Remove {\n\t\t\tremoved = true\n\t\t}\n\n\t\t// Some editors (Vim) sometimes issue only a Rename operation\
+    \ when writing an existing file\n\t\t// Sometimes a rename operation means that file has been renamed other times it means\n\
+    \t\t// it's been updated\n\t\tif ev.Op&fsnotify.Rename == fsnotify.Rename {\n\t\t\t// If the file is still on disk, it's\
+    \ only been updated, if it's not, it's been moved\n\t\t\tif ex, err := afero.Exists(s.Fs.Source, ev.Name); !ex || err\
+    \ != nil {\n\t\t\t\tremoved = true\n\t\t\t}\n\t\t}\n\t\tif removed && IsContentFile(ev.Name) {\n\t\t\th.removePageByFilename(ev.Name)\n\
+    \t\t}\n\n\t\tsourceReallyChanged = append(sourceReallyChanged, ev)\n\t\tsourceFilesChanged[ev.Name] = true\n\t}\n\n\t\
+    for shortcode := range shortcodesChanged {\n\t\t// There are certain scenarios that, when a shortcode changes,\n\t\t//\
+    \ it isn't sufficient to just rerender the already parsed shortcode.\n\t\t// One example is if the user adds a new shortcode\
+    \ to the content file first,\n\t\t// and then creates the shortcode on the file system.\n\t\t// To handle these scenarios,\
+    \ we must do a full reprocessing of the\n\t\t// pages that keeps a reference to the changed shortcode.\n\t\tpagesWithShortcode\
+    \ := h.findPagesByShortcode(shortcode)\n\t\tfor _, p := range pagesWithShortcode {\n\t\t\tcontentFilesChanged = append(contentFilesChanged,\
+    \ p.File().Filename())\n\t\t}\n\t}\n\n\tif len(sourceReallyChanged) > 0 || len(contentFilesChanged) > 0 {\n\t\tvar filenamesChanged\
+    \ []string\n\t\tfor _, e := range sourceReallyChanged {\n\t\t\tfilenamesChanged = append(filenamesChanged, e.Name)\n\t\
+    \t}\n\t\tif len(contentFilesChanged) > 0 {\n\t\t\tfilenamesChanged = append(filenamesChanged, contentFilesChanged...)\n\
+    \t\t}\n\n\t\tfilenamesChanged = helpers.UniqueStrings(filenamesChanged)\n\n\t\tif err := s.readAndProcessContent(filenamesChanged...);\
+    \ err != nil {\n\t\t\treturn whatChanged{}, err\n\t\t}\n\n\t}\n\n\tchanged := whatChanged{\n\t\tsource: len(sourceChanged)\
+    \ > 0 || len(shortcodesChanged) > 0,\n\t\tother:  len(tmplChanged) > 0 || len(i18nChanged) > 0 || len(dataChanged) > 0,\n\
+    \t\tfiles:  sourceFilesChanged,\n\t}\n\n\treturn changed, nil\n\n}"
+model-index: null
+config:
+  architectures:
+  - ModernBertModel
+  model_type: modernbert
+  tokenizer_config:
+    bos_token: <s>
+    cls_token: '[CLS]'
+    eos_token: </s>
+    mask_token: '[MASK]'
+    pad_token: '[PAD]'
+    sep_token: '[SEP]'
+    unk_token: '[UNK]'
+cardData:
+  tags:
+  - sentence-transformers
+  - sentence-similarity
+  - feature-extraction
+  - dense
+  - generated_from_trainer
+  - dataset_size:58800
+  - loss:MultipleNegativesRankingLoss
+  base_model: Shuu12121/CodeModernBERT-Owl-4.1
+  widget:
+  - source_sentence: 'Returns boolean indicating whether the requestUrl matches against the paths configured.
+
+
+      @param requestedUrl - url requested by user
+
+      @param opts - unless configuration
+
+      @returns {boolean}'
+    sentences:
+    - "def xmoe2_v1_l4k_global_only():\n  \"\"\"\"\"\"\n  hparams = xmoe2_v1_l4k()\n  hparams.decoder_layers = [\n      \"\
+      att\" if l == \"local_att\" else l for l in hparams.decoder_layers]\n  return hparams"
+    - "function matchesPath(requestedUrl, opts) {\n  var paths = !opts.path || Array.isArray(opts.path) ?\n    opts.path :\
+      \ [opts.path];\n\n  if (paths) {\n    return paths.some(function(p) {\n      return (typeof p === 'string' && p ===\
+      \ requestedUrl.pathname) ||\n        (p instanceof RegExp && !! p.exec(requestedUrl.pathname));\n    });\n  }\n\n  return\
+      \ false;\n}"
+    - "public static function factory($accessToken, $currentTeam)\n    {\n        $client = Client::factory($accessToken);\n\
+      \n        return new self($client, $currentTeam);\n    }"
+  - source_sentence: '// New creates a new ImageGraphics including an image.RGBA of dimension w x h
+
+      // with background bgcol. If font is nil it will use a builtin font.
+
+      // If fontsize is empty useful default are used.'
+    sentences:
+    - "func New(width, height int, bgcol color.RGBA, font *truetype.Font, fontsize map[chart.FontSize]float64) *ImageGraphics\
+      \ {\n\timg := image.NewRGBA(image.Rect(0, 0, width, height))\n\tgc := draw2dimg.NewGraphicContext(img)\n\tgc.SetLineJoin(draw2d.BevelJoin)\n\
+      \tgc.SetLineCap(draw2d.SquareCap)\n\tgc.SetStrokeColor(image.Black)\n\tgc.SetFillColor(bgcol)\n\tgc.Translate(0.5, 0.5)\n\
+      \tgc.Clear()\n\tif font == nil {\n\t\tfont = defaultFont\n\t}\n\tif len(fontsize) == 0 {\n\t\tfontsize = ConstructFontSizes(13)\n\
+      \t}\n\treturn &ImageGraphics{Image: img, x0: 0, y0: 0, w: width, h: height,\n\t\tbg: bgcol, gc: gc, font: font, fs:\
+      \ fontsize}\n}"
+    - "public static void requestDataLogsForApp(final Context context, final UUID appUuid) {\n        final Intent requestIntent\
+      \ = new Intent(INTENT_DL_REQUEST_DATA);\n        requestIntent.putExtra(APP_UUID, appUuid);\n        context.sendBroadcast(requestIntent);\n\
+      \    }"
+    - "final protected function setWriteMode($mode)\n    {\n        if (!in_array($mode, [static::WRITE_MODE_INSERT, static::WRITE_MODE_UPSERT,\
+      \ static::WRITE_MODE_UPDATE])) {\n            throw new \\InvalidArgumentException(sprintf('Passed write mode \"%s\"\
+      \ is invalid!', $mode));\n        }\n        $this->writeMode = $mode;\n    }"
+  - source_sentence: 'Builds the path for a closed arc, returning a PolygonOptions that can be
+
+      further customised before use.
+
+
+      @param center
+
+      @param start
+
+      @param end
+
+      @param arcType Pass in either ArcType.CHORD or ArcType.ROUND
+
+      @return PolygonOptions with the paths element populated.'
+    sentences:
+    - "function getJavaScriptCallbackParameterListSimple(parameters) {\n    var result = []\n\n    parameters.forEach(function(parameter){\n\
+      \        if (!parameter.out) return\n        result.push(\"/*\" + getIdlType(parameter.type) + \"*/ \"+ parameter.name)\n\
+      \    })\n\n    return result.join(\", \")\n}"
+    - "public Color getBackground() {\r\n\t\tpredraw();\r\n\t\tFloatBuffer buffer = BufferUtils.createFloatBuffer(16);\r\n\
+      \t\tGL.glGetFloat(SGL.GL_COLOR_CLEAR_VALUE, buffer);\r\n\t\tpostdraw();\r\n\r\n\t\treturn new Color(buffer);\r\n\t}"
+    - "public static final PolygonOptions buildClosedArc(LatLong center, LatLong start, LatLong end, ArcType arcType) {\n\
+      \        MVCArray res = buildArcPoints(center, start, end);\n        if (ArcType.ROUND.equals(arcType)) {\n        \
+      \    res.push(center);\n        }\n        return new PolygonOptions().paths(res);\n    }"
+  - source_sentence: "Read data from a spread sheet. Return the data in a dict with\n    column numbers as keys.\n\n    sheet:\
+      \ xlrd.sheet.Sheet instance\n        Ready for use.\n\n    startstops: list\n        Four StartStop objects defining\
+      \ the data to read. See\n        :func:`~channelpack.pullxl.prepread`.\n\n    usecols: str or seqence of ints or None\n\
+      \        The columns to use, 0-based. 0 is the spread sheet column\n        \"A\". Can be given as a string also - 'C:E,\
+      \ H' for columns C, D,\n        E and H.\n\n    Values in the returned dict are numpy arrays. Types are set based on\n\
+      \    the types in the spread sheet."
+    sentences:
+    - "public function handleScanNotify(callable $callback)\n    {\n        $notify = $this->getNotify();\n\n        if (!$notify->isValid())\
+      \ {\n            throw new FaultException('Invalid request payloads.', 400);\n        }\n\n        $notify = $notify->getNotify();\n\
+      \n        try {\n            $prepayId = call_user_func_array($callback, [$notify->get('product_id'), $notify->get('openid'),\
+      \ $notify]);\n            $response = [\n                'return_code' => 'SUCCESS',\n                'appid'      \
+      \ => $this->merchant->app_id,\n                'mch_id'      => $this->merchant->merchant_id,\n                'nonce_str'\
+      \   => uniqid(),\n                'prepay_id'   => strval($prepayId),\n                'result_code' => 'SUCCESS',\n\
+      \            ];\n            $response['sign'] = generate_sign($response, $this->merchant->key);\n        } catch (\\\
+      Exception $e) {\n            $response = [\n                'return_code'  => 'SUCCESS',\n                'return_msg'\
+      \   => $e->getCode(),\n                'result_code'  => 'FAIL',\n                'err_code_des' => $e->getMessage(),\n\
+      \            ];\n        }\n\n        return new Response(XML::build($response));\n    }"
+    - "def _sheet_asdict(sheet, startstops, usecols=None):\n    \"\"\"\n    \"\"\"\n\n    _, _, start, stop = startstops\n\
+      \    usecols = _sanitize_usecols(usecols)\n\n    if usecols is not None:\n        iswithin = start.col <= min(usecols)\
+      \ and stop.col > max(usecols)\n        mess = 'Column in usecols outside defined data range, got '\n        assert iswithin,\
+      \ mess + str(usecols)\n    else:                       # usecols is None.\n        usecols = tuple(range(start.col,\
+      \ stop.col))\n\n    # cols = usecols or range(start.col, stop.col)\n    D = dict()\n\n    for c in usecols:\n      \
+      \  cells = sheet.col(c, start_rowx=start.row, end_rowx=stop.row)\n        types = set([cell.ctype for cell in cells])\n\
+      \n        # Replace empty values with nan if appropriate:\n        if (not types - NANABLE) and xlrd.XL_CELL_NUMBER\
+      \ in types:\n            D[c] = np.array([np.nan if cell.value == '' else cell.value\n                             for\
+      \ cell in cells])\n        elif xlrd.XL_CELL_DATE in types:\n            dm = sheet.book.datemode\n            vals\
+      \ = []\n            for cell in cells:\n                if cell.ctype == xlrd.XL_CELL_DATE:\n                    dtuple\
+      \ = xlrd.xldate_as_tuple(cell.value, dm)\n                    vals.append(datetime.datetime(*dtuple))\n            \
+      \    elif cell.ctype in NONABLES:\n                    vals.append(None)\n                else:\n                  \
+      \  vals.append(cell.value)\n            D[c] = np.array(vals)\n        else:\n            vals = [None if cell.ctype\
+      \ in NONABLES else cell.value\n                    for cell in cells]\n            D[c] = np.array(vals)\n\n    return\
+      \ D"
+    - "func (o Option) RequiresOption(name string) bool {\n\tfor _, o := range o.Requires {\n\t\tif o == name {\n\t\t\treturn\
+      \ true\n\t\t}\n\t}\n\n\treturn false\n}"
+  - source_sentence: '// reBuild partially rebuilds a site given the filesystem events.
+
+      // It returns whetever the content source was changed.
+
+      // TODO(bep) clean up/rewrite this method.'
+    sentences:
+    - "func WebPageImageResolver(doc *goquery.Document) ([]candidate, int) {\n\timgs := doc.Find(\"img\")\n\n\tvar candidates\
+      \ []candidate\n\tsignificantSurface := 320 * 200\n\tsignificantSurfaceCount := 0\n\tsrc := \"\"\n\timgs.Each(func(i\
+      \ int, tag *goquery.Selection) {\n\t\tvar surface int\n\t\tsrc = getImageSrc(tag)\n\t\tif src == \"\" {\n\t\t\treturn\n\
+      \t\t}\n\n\t\twidth, _ := tag.Attr(\"width\")\n\t\theight, _ := tag.Attr(\"height\")\n\t\tif width != \"\" {\n\t\t\t\
+      w, _ := strconv.Atoi(width)\n\t\t\tif height != \"\" {\n\t\t\t\th, _ := strconv.Atoi(height)\n\t\t\t\tsurface = w *\
+      \ h\n\t\t\t} else {\n\t\t\t\tsurface = w\n\t\t\t}\n\t\t} else {\n\t\t\tif height != \"\" {\n\t\t\t\tsurface, _ = strconv.Atoi(height)\n\
+      \t\t\t} else {\n\t\t\t\tsurface = 0\n\t\t\t}\n\t\t}\n\n\t\tif surface > significantSurface {\n\t\t\tsignificantSurfaceCount++\n\
+      \t\t}\n\n\t\ttagscore := score(tag)\n\t\tif tagscore >= 0 {\n\t\t\tc := candidate{\n\t\t\t\turl:     src,\n\t\t\t\t\
+      surface: surface,\n\t\t\t\tscore:   score(tag),\n\t\t\t}\n\t\t\tcandidates = append(candidates, c)\n\t\t}\n\t})\n\n\t\
+      if len(candidates) == 0 {\n\t\treturn nil, 0\n\t}\n\n\treturn candidates, significantSurfaceCount\n\n}"
+    - "@SuppressWarnings(\"rawtypes\")\n\tpublic void open(Map conf, TopologyContext context,\n\t\t\tSpoutOutputCollector\
+      \ collector) {\n\t\tif(this.jmsProvider == null){\n\t\t\tthrow new IllegalStateException(\"JMS provider has not been\
+      \ set.\");\n\t\t}\n\t\tif(this.tupleProducer == null){\n\t\t\tthrow new IllegalStateException(\"JMS Tuple Producer has\
+      \ not been set.\");\n\t\t}\n\t\tInteger topologyTimeout = (Integer)conf.get(\"topology.message.timeout.secs\");\n\t\t\
+      // TODO fine a way to get the default timeout from storm, so we're not hard-coding to 30 seconds (it could change)\n\
+      \t\ttopologyTimeout = topologyTimeout == null ? 30 : topologyTimeout;\n\t\tif( (topologyTimeout.intValue() * 1000 )>\
+      \ this.recoveryPeriod){\n\t\t    LOG.warn(\"*** WARNING *** : \" +\n\t\t    \t\t\"Recovery period (\"+ this.recoveryPeriod\
+      \ + \" ms.) is less then the configured \" +\n\t\t    \t\t\"'topology.message.timeout.secs' of \" + topologyTimeout\
+      \ + \n\t\t    \t\t\" secs. This could lead to a message replay flood!\");\n\t\t}\n\t\tthis.queue = new LinkedBlockingQueue<Message>();\n\
+      \t\tthis.toCommit = new TreeSet<JmsMessageID>();\n        this.pendingMessages = new HashMap<JmsMessageID, Message>();\n\
+      \t\tthis.collector = collector;\n\t\ttry {\n\t\t\tConnectionFactory cf = this.jmsProvider.connectionFactory();\n\t\t\
+      \tDestination dest = this.jmsProvider.destination();\n\t\t\tthis.connection = cf.createConnection();\n\t\t\tthis.session\
+      \ = connection.createSession(false,\n\t\t\t\t\tthis.jmsAcknowledgeMode);\n\t\t\tMessageConsumer consumer = session.createConsumer(dest);\n\
+      \t\t\tconsumer.setMessageListener(this);\n\t\t\tthis.connection.start();\n\t\t\tif (this.isDurableSubscription() &&\
+      \ this.recoveryPeriod > 0){\n\t\t\t    this.recoveryTimer = new Timer();\n\t\t\t    this.recoveryTimer.scheduleAtFixedRate(new\
+      \ RecoveryTask(), 10, this.recoveryPeriod);\n\t\t\t}\n\t\t\t\n\t\t} catch (Exception e) {\n\t\t\tLOG.warn(\"Error creating\
+      \ JMS connection.\", e);\n\t\t}\n\n\t}"
+    - "func (s *Site) processPartial(events []fsnotify.Event) (whatChanged, error) {\n\n\tevents = s.filterFileEvents(events)\n\
+      \tevents = s.translateFileEvents(events)\n\n\ts.Log.DEBUG.Printf(\"Rebuild for events %q\", events)\n\n\th := s.h\n\n\
+      \t// First we need to determine what changed\n\n\tvar (\n\t\tsourceChanged       = []fsnotify.Event{}\n\t\tsourceReallyChanged\
+      \ = []fsnotify.Event{}\n\t\tcontentFilesChanged []string\n\t\ttmplChanged         = []fsnotify.Event{}\n\t\tdataChanged\
+      \         = []fsnotify.Event{}\n\t\ti18nChanged         = []fsnotify.Event{}\n\t\tshortcodesChanged   = make(map[string]bool)\n\
+      \t\tsourceFilesChanged  = make(map[string]bool)\n\n\t\t// prevent spamming the log on changes\n\t\tlogger = helpers.NewDistinctFeedbackLogger()\n\
+      \t)\n\n\tcachePartitions := make([]string, len(events))\n\n\tfor i, ev := range events {\n\t\tcachePartitions[i] = resources.ResourceKeyPartition(ev.Name)\n\
+      \n\t\tif s.isContentDirEvent(ev) {\n\t\t\tlogger.Println(\"Source changed\", ev)\n\t\t\tsourceChanged = append(sourceChanged,\
+      \ ev)\n\t\t}\n\t\tif s.isLayoutDirEvent(ev) {\n\t\t\tlogger.Println(\"Template changed\", ev)\n\t\t\ttmplChanged = append(tmplChanged,\
+      \ ev)\n\n\t\t\tif strings.Contains(ev.Name, \"shortcodes\") {\n\t\t\t\tshortcode := filepath.Base(ev.Name)\n\t\t\t\t\
+      shortcode = strings.TrimSuffix(shortcode, filepath.Ext(shortcode))\n\t\t\t\tshortcodesChanged[shortcode] = true\n\t\t\
+      \t}\n\t\t}\n\t\tif s.isDataDirEvent(ev) {\n\t\t\tlogger.Println(\"Data changed\", ev)\n\t\t\tdataChanged = append(dataChanged,\
+      \ ev)\n\t\t}\n\t\tif s.isI18nEvent(ev) {\n\t\t\tlogger.Println(\"i18n changed\", ev)\n\t\t\ti18nChanged = append(dataChanged,\
+      \ ev)\n\t\t}\n\t}\n\n\t// These in memory resource caches will be rebuilt on demand.\n\tfor _, s := range s.h.Sites\
+      \ {\n\t\ts.ResourceSpec.ResourceCache.DeletePartitions(cachePartitions...)\n\t}\n\n\tif len(tmplChanged) > 0 || len(i18nChanged)\
+      \ > 0 {\n\t\tsites := s.h.Sites\n\t\tfirst := sites[0]\n\n\t\ts.h.init.Reset()\n\n\t\t// TOD(bep) globals clean\n\t\t\
+      if err := first.Deps.LoadResources(); err != nil {\n\t\t\treturn whatChanged{}, err\n\t\t}\n\n\t\tfor i := 1; i < len(sites);\
+      \ i++ {\n\t\t\tsite := sites[i]\n\t\t\tvar err error\n\t\t\tdepsCfg := deps.DepsCfg{\n\t\t\t\tLanguage:      site.language,\n\
+      \t\t\t\tMediaTypes:    site.mediaTypesConfig,\n\t\t\t\tOutputFormats: site.outputFormatsConfig,\n\t\t\t}\n\t\t\tsite.Deps,\
+      \ err = first.Deps.ForLanguage(depsCfg, func(d *deps.Deps) error {\n\t\t\t\td.Site = &site.Info\n\t\t\t\treturn nil\n\
+      \t\t\t})\n\t\t\tif err != nil {\n\t\t\t\treturn whatChanged{}, err\n\t\t\t}\n\t\t}\n\t}\n\n\tif len(dataChanged) > 0\
+      \ {\n\t\ts.h.init.data.Reset()\n\t}\n\n\tfor _, ev := range sourceChanged {\n\t\tremoved := false\n\n\t\tif ev.Op&fsnotify.Remove\
+      \ == fsnotify.Remove {\n\t\t\tremoved = true\n\t\t}\n\n\t\t// Some editors (Vim) sometimes issue only a Rename operation\
+      \ when writing an existing file\n\t\t// Sometimes a rename operation means that file has been renamed other times it\
+      \ means\n\t\t// it's been updated\n\t\tif ev.Op&fsnotify.Rename == fsnotify.Rename {\n\t\t\t// If the file is still\
+      \ on disk, it's only been updated, if it's not, it's been moved\n\t\t\tif ex, err := afero.Exists(s.Fs.Source, ev.Name);\
+      \ !ex || err != nil {\n\t\t\t\tremoved = true\n\t\t\t}\n\t\t}\n\t\tif removed && IsContentFile(ev.Name) {\n\t\t\th.removePageByFilename(ev.Name)\n\
+      \t\t}\n\n\t\tsourceReallyChanged = append(sourceReallyChanged, ev)\n\t\tsourceFilesChanged[ev.Name] = true\n\t}\n\n\t\
+      for shortcode := range shortcodesChanged {\n\t\t// There are certain scenarios that, when a shortcode changes,\n\t\t\
+      // it isn't sufficient to just rerender the already parsed shortcode.\n\t\t// One example is if the user adds a new\
+      \ shortcode to the content file first,\n\t\t// and then creates the shortcode on the file system.\n\t\t// To handle\
+      \ these scenarios, we must do a full reprocessing of the\n\t\t// pages that keeps a reference to the changed shortcode.\n\
+      \t\tpagesWithShortcode := h.findPagesByShortcode(shortcode)\n\t\tfor _, p := range pagesWithShortcode {\n\t\t\tcontentFilesChanged\
+      \ = append(contentFilesChanged, p.File().Filename())\n\t\t}\n\t}\n\n\tif len(sourceReallyChanged) > 0 || len(contentFilesChanged)\
+      \ > 0 {\n\t\tvar filenamesChanged []string\n\t\tfor _, e := range sourceReallyChanged {\n\t\t\tfilenamesChanged = append(filenamesChanged,\
+      \ e.Name)\n\t\t}\n\t\tif len(contentFilesChanged) > 0 {\n\t\t\tfilenamesChanged = append(filenamesChanged, contentFilesChanged...)\n\
+      \t\t}\n\n\t\tfilenamesChanged = helpers.UniqueStrings(filenamesChanged)\n\n\t\tif err := s.readAndProcessContent(filenamesChanged...);\
+      \ err != nil {\n\t\t\treturn whatChanged{}, err\n\t\t}\n\n\t}\n\n\tchanged := whatChanged{\n\t\tsource: len(sourceChanged)\
+      \ > 0 || len(shortcodesChanged) > 0,\n\t\tother:  len(tmplChanged) > 0 || len(i18nChanged) > 0 || len(dataChanged) >\
+      \ 0,\n\t\tfiles:  sourceFilesChanged,\n\t}\n\n\treturn changed, nil\n\n}"
+  pipeline_tag: sentence-similarity
+  library_name: sentence-transformers
+siblings:
+- rfilename: .gitattributes
+- rfilename: 1_Pooling/config.json
+- rfilename: README.md
+- rfilename: added_tokens.json
+- rfilename: config.json
+- rfilename: config_sentence_transformers.json
+- rfilename: merges.txt
+- rfilename: model.safetensors
+- rfilename: modules.json
+- rfilename: sentence_bert_config.json
+- rfilename: special_tokens_map.json
+- rfilename: tokenizer.json
+- rfilename: tokenizer_config.json
+- rfilename: vocab.json
+spaces: []
+createdAt: '2025-07-11T06:24:57.000Z'
+safetensors:
+  parameters:
+    F32: 151669248
+  total: 151669248
+usedStorage: 606684184
+downloadsAllTime: 6
+inferenceProviderMapping: {}
+configJson:
+  architectures:
+  - ModernBertModel
+  attention_bias: false
+  attention_dropout: 0.0
+  attention_probs_dropout_prob: 0.1
+  bos_token_id: 50000
+  classifier_activation: gelu
+  classifier_bias: false
+  classifier_dropout: 0.0
+  classifier_pooling: cls
+  cls_token_id: 50281
+  decoder_bias: true
+  deterministic_flash_attn: false
+  embedding_dropout: 0.0
+  eos_token_id: 50001
+  global_attn_every_n_layers: 3
+  global_rope_theta: 160000.0
+  hidden_activation: gelu
+  hidden_dropout_prob: 0.1
+  hidden_size: 768
+  initializer_cutoff_factor: 2.0
+  initializer_range: 0.02
+  intermediate_size: 3072
+  local_attention: 128
+  local_attention_rope_theta: 10000
+  local_attention_window: 128
+  local_rope_theta: 10000.0
+  max_position_embeddings: 8192
+  mlp_bias: false
+  mlp_dropout: 0.0
+  model_type: modernbert
+  norm_bias: false
+  norm_eps: 1.0e-05
+  num_attention_heads: 12
+  num_hidden_layers: 12
+  pad_token_id: 1
+  repad_logits_with_grad: false
+  rope_theta: 160000
+  sep_token_id: 50282
+  sparse_pred_ignore_index: -100
+  sparse_prediction: false
+  torch_dtype: float32
+  transformers_version: 4.53.1
+  type_vocab_size: 2
+  vocab_size: 50005
+onnxFiles: {}
+safetensorsSizeMb: 606.7
+approxSizeMb: 606.7
+fetchedAt: '2026-06-09T06:55:53.000Z'

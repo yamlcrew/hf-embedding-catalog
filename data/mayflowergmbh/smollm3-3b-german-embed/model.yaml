@@ -1,0 +1,311 @@
+_id: 68774be5fa130bccea9d1241
+id: mayflowergmbh/smollm3-3b-german-embed
+private: false
+pipeline_tag: sentence-similarity
+library_name: sentence-transformers
+tags:
+- sentence-transformers
+- safetensors
+- llama
+- text-embeddings
+- german
+- retrieval
+- lora
+- embedding-model
+- sentence-similarity
+- de
+- dataset:deepset/germanquad
+- license:apache-2.0
+- model-index
+- text-embeddings-inference
+- endpoints_compatible
+- region:us
+downloads: 3
+likes: 2
+modelId: mayflowergmbh/smollm3-3b-german-embed
+author: mayflowergmbh
+sha: 582b928fa40887a443187fbc024052beb12eb1bf
+lastModified: '2025-07-16T06:54:25.000Z'
+gated: false
+disabled: false
+widgetData:
+- source_sentence: Was ist die Hauptstadt von Deutschland?
+  sentences:
+  - Berlin ist die Hauptstadt von Deutschland.
+  - München ist eine Stadt in Bayern.
+  - Paris ist die Hauptstadt von Frankreich.
+model-index:
+- name: SmolLM3-3B-German-Embed
+  results:
+  - task:
+      type: information-retrieval
+      name: Information Retrieval
+    dataset:
+      type: deepset/germanquad
+      name: GermanQuAD
+      config: default
+      split: test
+      revision: main
+    metrics:
+    - type: mrr
+      value: 0.9166
+      name: Mean Reciprocal Rank
+      verified: false
+    - type: recall_at_1
+      value: 0.872
+      name: Recall@1
+      verified: false
+    - type: recall_at_5
+      value: 0.98
+      name: Recall@5
+      verified: false
+    - type: recall_at_10
+      value: 0.986
+      name: Recall@10
+      verified: false
+config:
+  architectures:
+  - LlamaModel
+  model_type: llama
+  tokenizer_config:
+    bos_token: null
+    eos_token: <|im_end|>
+    pad_token: <|im_end|>
+  chat_template_jinja: "{# ───── defaults ───── #}\n{%- if enable_thinking is not defined -%}\n{%- set enable_thinking = true\
+    \ -%}\n{%- endif -%}\n\n{# ───── reasoning mode ───── #}\n{%- if enable_thinking -%}\n  {%- set reasoning_mode = \"/think\"\
+    \ -%}\n{%- else -%}\n  {%- set reasoning_mode = \"/no_think\" -%}\n{%- endif -%}\n\n{# ───── header (system message) ─────\
+    \ #}\n{{- \"<|im_start|>system\\n\" -}}\n\n{%- if messages[0].role == \"system\" -%}\n  {%- set system_message = messages[0].content\
+    \ -%}\n  {%- if \"/no_think\" in system_message -%}\n    {%- set reasoning_mode = \"/no_think\" -%}\n  {%- elif \"/think\"\
+    \ in system_message -%}\n    {%- set reasoning_mode = \"/think\" -%}\n  {%- endif -%}\n  {%- set custom_instructions =\
+    \ system_message.replace(\"/no_think\", \"\").replace(\"/think\", \"\").rstrip() -%}\n{%- endif -%}\n\n{%- if \"/system_override\"\
+    \ in system_message -%}\n  {{- custom_instructions.replace(\"/system_override\", \"\").rstrip() -}}\n  {{- \"<|im_end|>\\\
+    n\" -}}\n{%- else -%}\n  {{- \"## Metadata\\n\\n\" -}}\n  {{- \"Knowledge Cutoff Date: June 2025\\n\" -}}\n  {%- set today\
+    \ = strftime_now(\"%d %B %Y\") -%}\n  {{- \"Today Date: \" ~ today ~ \"\\n\" -}}\n  {{- \"Reasoning Mode: \" + reasoning_mode\
+    \ + \"\\n\\n\" -}}\n  \n  {{- \"## Custom Instructions\\n\\n\" -}}\n  {%- if custom_instructions -%}\n    {{- custom_instructions\
+    \ + \"\\n\\n\" -}}\n  {%- elif reasoning_mode == \"/think\" -%}\n    {{- \"You are a helpful AI assistant named SmolLM,\
+    \ trained by Hugging Face. Your role as an assistant involves thoroughly exploring questions through a systematic thinking\
+    \ process before providing the final precise and accurate solutions. This requires engaging in a comprehensive cycle of\
+    \ analysis, summarizing, exploration, reassessment, reflection, backtracking, and iteration to develop well-considered\
+    \ thinking process. Please structure your response into two main sections: Thought and Solution using the specified format:\
+    \ <think> Thought section </think> Solution section. In the Thought section, detail your reasoning process in steps. Each\
+    \ step should include detailed considerations such as analysing questions, summarizing relevant findings, brainstorming\
+    \ new ideas, verifying the accuracy of the current steps, refining any errors, and revisiting previous steps. In the Solution\
+    \ section, based on various attempts, explorations, and reflections from the Thought section, systematically present the\
+    \ final solution that you deem correct. The Solution section should be logical, accurate, and concise and detail necessary\
+    \ steps needed to reach the conclusion.\\n\\n\" -}}\n  {%- else -%}\n    {{- \"You are a helpful AI assistant named SmolLM,\
+    \ trained by Hugging Face.\\n\\n\" -}}\n  {%- endif -%}\n\n  {%- if xml_tools or python_tools or tools -%}\n    {{- \"\
+    ### Tools\\n\\n\" -}}\n    {%- if xml_tools or tools -%}\n      {%- if tools -%}\n        {%- set xml_tools = tools -%}\n\
+    \      {%- endif -%}\n      {%- set ns = namespace(xml_tool_string=\"You may call one or more functions to assist with\
+    \ the user query.\\nYou are provided with function signatures within <tools></tools> XML tags:\\n\\n<tools>\\n\") -%}\n\
+    \      {%- for tool in xml_tools[:] -%} {# The slicing makes sure that xml_tools is a list #}\n        {%- set ns.xml_tool_string\
+    \ = ns.xml_tool_string ~ (tool | string) ~ \"\\n\" -%}\n      {%- endfor -%}\n      {%- set xml_tool_string = ns.xml_tool_string\
+    \ + \"</tools>\\n\\nFor each function call, return a json object with function name and arguments within <tool_call></tool_call>\
+    \ XML tags:\\n<tool_call>\\n{\\\"name\\\": <function-name>, \\\"arguments\\\": <args-json-object>}\\n</tool_call>\" -%}\n\
+    \      {{- xml_tool_string -}}\n    {%- endif -%}\n    {%- if python_tools -%}\n      {%- set ns = namespace(python_tool_string=\"\
+    When you send a message containing Python code between '<code>' and '</code>' tags, it will be executed in a stateful\
+    \ Jupyter notebook environment, and you will then be given the output to continued reasoning in an agentic loop.\\n\\\
+    nYou can use the following tools in your python code like regular functions:\\n<tools>\\n\") -%}\n      {%- for tool in\
+    \ python_tools[:] -%} {# The slicing makes sure that python_tools is a list #}\n        {%- set ns.python_tool_string\
+    \ = ns.python_tool_string ~ (tool | string) ~ \"\\n\" -%}\n      {%- endfor -%}\n      {%- set python_tool_string = ns.python_tool_string\
+    \ + \"</tools>\\n\\nThe state persists between code executions: so variables that you define in one step are still available\
+    \ thereafter.\" -%}\n      {{- python_tool_string -}}\n    {%- endif -%}\n    {{- \"\\n\\n\" -}}\n    {{- \"<|im_end|>\\\
+    n\" -}}\n  {%- endif -%}\n{%- endif -%}\n{# ───── main loop ───── #}\n{%- for message in messages -%}\n    {%- set content\
+    \ = message.content if message.content is string else \"\" -%}\n    {%- if message.role == \"user\" -%}\n        {{ \"\
+    <|im_start|>\" + message.role + \"\\n\"  + content + \"<|im_end|>\\n\" }}\n    {%- elif message.role == \"assistant\"\
+    \ -%}\n        {% generation %}\n        {%- if reasoning_mode == \"/think\" -%}\n            {{ \"<|im_start|>assistant\\\
+    n\" + content.lstrip(\"\\n\") + \"<|im_end|>\\n\" }}\n        {%- else -%}\n            {{ \"<|im_start|>assistant\\n\"\
+    \ + \"<think>\\n\\n</think>\\n\" + content.lstrip(\"\\n\") + \"<|im_end|>\\n\" }}\n        {%- endif -%}\n        {% endgeneration\
+    \ %}\n    {%- elif message.role == \"tool\" -%}\n    {{ \"<|im_start|>\" + \"user\\n\"  + content + \"<|im_end|>\\n\"\
+    \ }}\n    {%- endif -%}\n{%- endfor -%}\n{# ───── generation prompt ───── #}\n{%- if add_generation_prompt -%}\n    {%-\
+    \ if reasoning_mode == \"/think\" -%}\n        {{ \"<|im_start|>assistant\\n\" }}\n    {%- else -%}\n        {{ \"<|im_start|>assistant\\\
+    n\" + \"<think>\\n\\n</think>\\n\"  }}\n    {%- endif -%}\n{%- endif -%}"
+cardData:
+  language:
+  - de
+  library_name: sentence-transformers
+  license: apache-2.0
+  tags:
+  - sentence-transformers
+  - text-embeddings
+  - german
+  - retrieval
+  - lora
+  - embedding-model
+  pipeline_tag: sentence-similarity
+  widget:
+  - source_sentence: Was ist die Hauptstadt von Deutschland?
+    sentences:
+    - Berlin ist die Hauptstadt von Deutschland.
+    - München ist eine Stadt in Bayern.
+    - Paris ist die Hauptstadt von Frankreich.
+  datasets:
+  - deepset/germanquad
+  metrics:
+  - cosine_accuracy
+  - mrr
+  - recall
+  model-index:
+  - name: SmolLM3-3B-German-Embed
+    results:
+    - task:
+        type: information-retrieval
+        name: Information Retrieval
+      dataset:
+        type: deepset/germanquad
+        name: GermanQuAD
+        config: default
+        split: test
+        revision: main
+      metrics:
+      - type: mrr
+        value: 0.9166
+        name: Mean Reciprocal Rank
+        verified: false
+      - type: recall_at_1
+        value: 0.872
+        name: Recall@1
+        verified: false
+      - type: recall_at_5
+        value: 0.98
+        name: Recall@5
+        verified: false
+      - type: recall_at_10
+        value: 0.986
+        name: Recall@10
+        verified: false
+siblings:
+- rfilename: .gitattributes
+- rfilename: 1_Pooling/config.json
+- rfilename: README.md
+- rfilename: chat_template.jinja
+- rfilename: config.json
+- rfilename: config_sentence_transformers.json
+- rfilename: model-00001-of-00003.safetensors
+- rfilename: model-00002-of-00003.safetensors
+- rfilename: model-00003-of-00003.safetensors
+- rfilename: model.safetensors.index.json
+- rfilename: modules.json
+- rfilename: sentence_bert_config.json
+- rfilename: special_tokens_map.json
+- rfilename: tokenizer.json
+- rfilename: tokenizer_config.json
+spaces: []
+createdAt: '2025-07-16T06:51:17.000Z'
+safetensors:
+  parameters:
+    F32: 3075098624
+  total: 3075098624
+usedStorage: 12317638883
+downloadsAllTime: 102
+inferenceProviderMapping: {}
+configJson:
+  architectures:
+  - LlamaModel
+  attention_bias: false
+  attention_dropout: 0.0
+  bos_token_id: 128000
+  eos_token_id: 128012
+  head_dim: 128
+  hidden_act: silu
+  hidden_size: 2048
+  initializer_range: 0.02
+  intermediate_size: 11008
+  layer_types:
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  loss_type: CausalLMLoss
+  max_position_embeddings: 65536
+  max_window_layers: 28
+  mlp_bias: false
+  model_type: llama
+  no_rope_layer_interval: 4
+  no_rope_layers:
+  - 1
+  - 1
+  - 1
+  - 0
+  - 1
+  - 1
+  - 1
+  - 0
+  - 1
+  - 1
+  - 1
+  - 0
+  - 1
+  - 1
+  - 1
+  - 0
+  - 1
+  - 1
+  - 1
+  - 0
+  - 1
+  - 1
+  - 1
+  - 0
+  - 1
+  - 1
+  - 1
+  - 0
+  - 1
+  - 1
+  - 1
+  - 0
+  - 1
+  - 1
+  - 1
+  - 0
+  num_attention_heads: 16
+  num_hidden_layers: 36
+  num_key_value_heads: 4
+  pad_token_id: 128004
+  pretraining_tp: 1
+  rms_norm_eps: 1.0e-06
+  rope_scaling: null
+  rope_theta: 5000000.0
+  sliding_window: null
+  tie_word_embeddings: false
+  torch_dtype: float32
+  transformers_version: 4.53.2
+  use_cache: false
+  use_sliding_window: false
+  vocab_size: 128256
+onnxFiles: {}
+safetensorsSizeMb: 0.0
+approxSizeMb: 12300.4
+fetchedAt: '2026-06-09T06:55:53.000Z'

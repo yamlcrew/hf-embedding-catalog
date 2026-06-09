@@ -1,0 +1,174 @@
+_id: 69af79aba1c69e6c504d3da7
+id: lauragobrightly/paolo-embeddings
+private: false
+pipeline_tag: sentence-similarity
+library_name: sentence-transformers
+tags:
+- sentence-transformers
+- onnx
+- safetensors
+- bert
+- sentence-similarity
+- feature-extraction
+- dense
+- generated_from_trainer
+- dataset_size:17037
+- loss:MultipleNegativesRankingLoss
+- arxiv:1908.10084
+- arxiv:1705.00652
+- base_model:BAAI/bge-small-en-v1.5
+- base_model:quantized:BAAI/bge-small-en-v1.5
+- model-index
+- text-embeddings-inference
+- endpoints_compatible
+- region:us
+downloads: 5
+likes: 0
+modelId: lauragobrightly/paolo-embeddings
+author: lauragobrightly
+sha: 133ff5a2b0ec9a1f168f2704d90a75e3710cfd57
+lastModified: '2026-03-10T02:03:42.000Z'
+gated: false
+disabled: false
+mask_token: '[MASK]'
+widgetData:
+- source_sentence: What was the decision about the onboarding flow?
+  sentences:
+  - We decided to use a connect-first approach inspired by the Grammarly model
+  - The API endpoint returns a 384-dimensional embedding vector
+  - Yesterday we discussed the new color palette for the website
+- source_sentence: How does the search pipeline work?
+  sentences:
+  - The search pipeline has 5 stages — query expansion, HyDE, coarse retrieval, reranking, and compression
+  - The training data consists of query-positive-negative triples
+  - We should schedule the team sync for next Tuesday
+- source_sentence: What preferences did the user express about design?
+  sentences:
+  - They prefer minimal, clean layouts with muted colors and no unnecessary decoration
+  - The model was fine-tuned on 19K training pairs using MultipleNegativesRankingLoss
+  - The deployment pipeline runs on Railway with auto-deploy from main
+model-index:
+- name: SentenceTransformer based on BAAI/bge-small-en-v1.5
+  results:
+  - task:
+      type: triplet
+      name: Triplet
+    dataset:
+      name: paolo eval
+      type: paolo-eval
+    metrics:
+    - type: cosine_accuracy
+      value: 0.8489170670509338
+      name: Cosine Accuracy
+      verified: false
+config:
+  architectures:
+  - BertModel
+  model_type: bert
+  tokenizer_config:
+    cls_token: '[CLS]'
+    mask_token: '[MASK]'
+    pad_token: '[PAD]'
+    sep_token: '[SEP]'
+    unk_token: '[UNK]'
+cardData:
+  tags:
+  - sentence-transformers
+  - sentence-similarity
+  - feature-extraction
+  - dense
+  - generated_from_trainer
+  - dataset_size:17037
+  - loss:MultipleNegativesRankingLoss
+  base_model: BAAI/bge-small-en-v1.5
+  widget:
+  - source_sentence: What was the decision about the onboarding flow?
+    sentences:
+    - We decided to use a connect-first approach inspired by the Grammarly model
+    - The API endpoint returns a 384-dimensional embedding vector
+    - Yesterday we discussed the new color palette for the website
+  - source_sentence: How does the search pipeline work?
+    sentences:
+    - The search pipeline has 5 stages — query expansion, HyDE, coarse retrieval, reranking, and compression
+    - The training data consists of query-positive-negative triples
+    - We should schedule the team sync for next Tuesday
+  - source_sentence: What preferences did the user express about design?
+    sentences:
+    - They prefer minimal, clean layouts with muted colors and no unnecessary decoration
+    - The model was fine-tuned on 19K training pairs using MultipleNegativesRankingLoss
+    - The deployment pipeline runs on Railway with auto-deploy from main
+  pipeline_tag: sentence-similarity
+  library_name: sentence-transformers
+  metrics:
+  - cosine_accuracy
+  model-index:
+  - name: SentenceTransformer based on BAAI/bge-small-en-v1.5
+    results:
+    - task:
+        type: triplet
+        name: Triplet
+      dataset:
+        name: paolo eval
+        type: paolo-eval
+      metrics:
+      - type: cosine_accuracy
+        value: 0.8489170670509338
+        name: Cosine Accuracy
+        verified: false
+siblings:
+- rfilename: .gitattributes
+- rfilename: 1_Pooling/config.json
+- rfilename: README.md
+- rfilename: config.json
+- rfilename: config_sentence_transformers.json
+- rfilename: model.safetensors
+- rfilename: modules.json
+- rfilename: onnx/model.onnx
+- rfilename: sentence_bert_config.json
+- rfilename: tokenizer.json
+- rfilename: tokenizer_config.json
+spaces: []
+createdAt: '2026-03-10T01:53:47.000Z'
+safetensors:
+  parameters:
+    F32: 33360000
+  total: 33360000
+usedStorage: 266504049
+downloadsAllTime: 67
+inferenceProviderMapping: {}
+configJson:
+  add_cross_attention: false
+  architectures:
+  - BertModel
+  attention_probs_dropout_prob: 0.1
+  bos_token_id: null
+  classifier_dropout: null
+  dtype: float32
+  eos_token_id: null
+  hidden_act: gelu
+  hidden_dropout_prob: 0.1
+  hidden_size: 384
+  id2label:
+    '0': LABEL_0
+  initializer_range: 0.02
+  intermediate_size: 1536
+  is_decoder: false
+  label2id:
+    LABEL_0: 0
+  layer_norm_eps: 1.0e-12
+  max_position_embeddings: 512
+  model_type: bert
+  num_attention_heads: 12
+  num_hidden_layers: 12
+  pad_token_id: 0
+  position_embedding_type: absolute
+  tie_word_embeddings: true
+  transformers_version: 5.3.0
+  type_vocab_size: 2
+  use_cache: true
+  vocab_size: 30522
+onnxFiles:
+  onnx/model.onnx: 133.0
+safetensorsSizeMb: 133.5
+approxSizeMb: 133.4
+fetchedAt: '2026-06-09T06:55:53.000Z'

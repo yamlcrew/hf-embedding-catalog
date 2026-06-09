@@ -1,0 +1,191 @@
+_id: 679f8a6289be13de6abfe172
+id: HassanCS/chemBERTa-tuned-on-ClinTox-using-MultipleNegativesRankingLoss
+private: false
+pipeline_tag: sentence-similarity
+library_name: sentence-transformers
+tags:
+- sentence-transformers
+- safetensors
+- roberta
+- sentence-similarity
+- feature-extraction
+- generated_from_trainer
+- dataset_size:118400
+- loss:TripletLoss
+- arxiv:1908.10084
+- arxiv:1703.07737
+- base_model:DeepChem/ChemBERTa-77M-MLM
+- base_model:finetune:DeepChem/ChemBERTa-77M-MLM
+- model-index
+- text-embeddings-inference
+- endpoints_compatible
+- region:us
+downloads: 2
+likes: 0
+modelId: HassanCS/chemBERTa-tuned-on-ClinTox-using-MultipleNegativesRankingLoss
+author: HassanCS
+sha: 9c121ebac5c0c01530b21c7ec18f047a3e01e286
+lastModified: '2025-02-02T15:08:19.000Z'
+gated: false
+disabled: false
+mask_token: <mask>
+widgetData:
+- source_sentence: CC(C)C1CCC(C(=O)NC(Cc2ccccc2)C(=O)[O-])CC1
+  sentences:
+  - C[NH2+]CCCC1c2ccccc2C=Cc2ccccc21
+  - COC(=O)NC(C(=O)NC(Cc1ccccc1)C(O)CN(Cc1ccc(-c2ccccn2)cc1)NC(=O)C(NC(=O)OC)C(C)(C)C)C(C)(C)C
+  - CC1C=CC=CCCC=CC=CC=CC=CC(OC2OC(C)C(O)C([NH3+])C2O)CC(O)C(C(=O)[O-])C(O)CC(=O)CC(O)C(O)CCC(O)CC(O)CC(O)CC(=O)OC(C)C(C)C1O
+- source_sentence: C[NH+]1CCCC1Cc1c[nH]c2ccc(CCS(=O)(=O)c3ccccc3)cc12
+  sentences:
+  - CC(C)CC([NH+](C)C)C1(c2ccc(Cl)cc2)CCC1
+  - CC(C)CNCc1ccc(-c2ccccc2S(=O)(=O)N2CCCC2)cc1
+  - CC(Oc1cc(-c2cnn(C3CC[NH2+]CC3)c2)cnc1N)c1c(Cl)ccc(F)c1Cl
+- source_sentence: C[NH+]1C2CCC1CC(OC(c1ccccc1)c1ccccc1)C2
+  sentences:
+  - C[NH2+]C1C(O)C([NH2+]C)C2OC3(O)C(=O)CC(C)OC3OC2C1O
+  - C=CC1(C)CC(OC(=O)CSC2CC3CCC(C2)[NH+]3C)C2(C)C(C)CCC3(CCC(=O)C32)C(C)C1O
+  - CC(C)CC(NC(=O)C(CCc1ccccc1)NC(=O)CN1CCOCC1)C(=O)NC(Cc1ccccc1)C(=O)NC(CC(C)C)C(=O)C1(C)CO1
+- source_sentence: CC(C)CC(NC(=O)C(Cc1ccc2ccccc2c1)NC(=O)C(Cc1ccc(O)cc1)NC(=O)C(CO)NC(=O)C(Cc1c[nH]c2ccccc12)NC(=O)C(Cc1c[nH]cn1)NC(=O)C1CCC(=O)N1)C(=O)NC(CCCNC(N)=[NH2+])C(=O)N1CCCC1C(=O)NCC(N)=O
+  sentences:
+  - C[NH2+]C1CCC(c2ccc(Cl)c(Cl)c2)c2ccccc21
+  - C=C1CC2CCC34CC5OC6C(OC7CCC(CC(=O)CC8C(CC9OC(CCC1O2)CC(C)C9=C)OC(CC(O)CN)C8OC)OC7C6O3)C5O4
+  - C[N+]1(C)CCC(=C(c2ccccc2)c2ccccc2)CC1
+- source_sentence: CON=C(C(=O)NC1C(=O)N2C(C(=O)[O-])=C(C[N+]3(C)CCCC3)CSC12)c1csc(N)n1
+  sentences:
+  - CC1CNc2c(cccc2S(=O)(=O)NC(CCC[NH+]=C(N)N)C(=O)N2CCC(C)CC2C(=O)[O-])C1
+  - CC1C=CC=CCCC=CC=CC=CC=CC(OC2OC(C)C(O)C([NH3+])C2O)CC(O)C(C(=O)[O-])C(O)CC(=O)CC(O)C(O)CCC(O)CC(O)CC(O)CC(=O)OC(C)C(C)C1O
+  - CC(C)C1(C(=O)NC2CC(=O)OC2(O)CF)CC(c2nccc3ccccc23)=NO1
+model-index:
+- name: SentenceTransformer based on DeepChem/ChemBERTa-77M-MLM
+  results:
+  - task:
+      type: triplet
+      name: Triplet
+    dataset:
+      name: all dev
+      type: all-dev
+    metrics:
+    - type: cosine_accuracy
+      value: 0.7135134935379028
+      name: Cosine Accuracy
+      verified: false
+config:
+  architectures:
+  - RobertaModel
+  model_type: roberta
+  tokenizer_config:
+    bos_token: <s>
+    cls_token: '[CLS]'
+    eos_token: </s>
+    mask_token: '[MASK]'
+    pad_token: '[PAD]'
+    sep_token: '[SEP]'
+    unk_token: '[UNK]'
+cardData:
+  tags:
+  - sentence-transformers
+  - sentence-similarity
+  - feature-extraction
+  - generated_from_trainer
+  - dataset_size:118400
+  - loss:TripletLoss
+  base_model: DeepChem/ChemBERTa-77M-MLM
+  widget:
+  - source_sentence: CC(C)C1CCC(C(=O)NC(Cc2ccccc2)C(=O)[O-])CC1
+    sentences:
+    - C[NH2+]CCCC1c2ccccc2C=Cc2ccccc21
+    - COC(=O)NC(C(=O)NC(Cc1ccccc1)C(O)CN(Cc1ccc(-c2ccccn2)cc1)NC(=O)C(NC(=O)OC)C(C)(C)C)C(C)(C)C
+    - CC1C=CC=CCCC=CC=CC=CC=CC(OC2OC(C)C(O)C([NH3+])C2O)CC(O)C(C(=O)[O-])C(O)CC(=O)CC(O)C(O)CCC(O)CC(O)CC(O)CC(=O)OC(C)C(C)C1O
+  - source_sentence: C[NH+]1CCCC1Cc1c[nH]c2ccc(CCS(=O)(=O)c3ccccc3)cc12
+    sentences:
+    - CC(C)CC([NH+](C)C)C1(c2ccc(Cl)cc2)CCC1
+    - CC(C)CNCc1ccc(-c2ccccc2S(=O)(=O)N2CCCC2)cc1
+    - CC(Oc1cc(-c2cnn(C3CC[NH2+]CC3)c2)cnc1N)c1c(Cl)ccc(F)c1Cl
+  - source_sentence: C[NH+]1C2CCC1CC(OC(c1ccccc1)c1ccccc1)C2
+    sentences:
+    - C[NH2+]C1C(O)C([NH2+]C)C2OC3(O)C(=O)CC(C)OC3OC2C1O
+    - C=CC1(C)CC(OC(=O)CSC2CC3CCC(C2)[NH+]3C)C2(C)C(C)CCC3(CCC(=O)C32)C(C)C1O
+    - CC(C)CC(NC(=O)C(CCc1ccccc1)NC(=O)CN1CCOCC1)C(=O)NC(Cc1ccccc1)C(=O)NC(CC(C)C)C(=O)C1(C)CO1
+  - source_sentence: CC(C)CC(NC(=O)C(Cc1ccc2ccccc2c1)NC(=O)C(Cc1ccc(O)cc1)NC(=O)C(CO)NC(=O)C(Cc1c[nH]c2ccccc12)NC(=O)C(Cc1c[nH]cn1)NC(=O)C1CCC(=O)N1)C(=O)NC(CCCNC(N)=[NH2+])C(=O)N1CCCC1C(=O)NCC(N)=O
+    sentences:
+    - C[NH2+]C1CCC(c2ccc(Cl)c(Cl)c2)c2ccccc21
+    - C=C1CC2CCC34CC5OC6C(OC7CCC(CC(=O)CC8C(CC9OC(CCC1O2)CC(C)C9=C)OC(CC(O)CN)C8OC)OC7C6O3)C5O4
+    - C[N+]1(C)CCC(=C(c2ccccc2)c2ccccc2)CC1
+  - source_sentence: CON=C(C(=O)NC1C(=O)N2C(C(=O)[O-])=C(C[N+]3(C)CCCC3)CSC12)c1csc(N)n1
+    sentences:
+    - CC1CNc2c(cccc2S(=O)(=O)NC(CCC[NH+]=C(N)N)C(=O)N2CCC(C)CC2C(=O)[O-])C1
+    - CC1C=CC=CCCC=CC=CC=CC=CC(OC2OC(C)C(O)C([NH3+])C2O)CC(O)C(C(=O)[O-])C(O)CC(=O)CC(O)C(O)CCC(O)CC(O)CC(O)CC(=O)OC(C)C(C)C1O
+    - CC(C)C1(C(=O)NC2CC(=O)OC2(O)CF)CC(c2nccc3ccccc23)=NO1
+  pipeline_tag: sentence-similarity
+  library_name: sentence-transformers
+  metrics:
+  - cosine_accuracy
+  model-index:
+  - name: SentenceTransformer based on DeepChem/ChemBERTa-77M-MLM
+    results:
+    - task:
+        type: triplet
+        name: Triplet
+      dataset:
+        name: all dev
+        type: all-dev
+      metrics:
+      - type: cosine_accuracy
+        value: 0.7135134935379028
+        name: Cosine Accuracy
+        verified: false
+siblings:
+- rfilename: .gitattributes
+- rfilename: 1_Pooling/config.json
+- rfilename: README.md
+- rfilename: added_tokens.json
+- rfilename: config.json
+- rfilename: config_sentence_transformers.json
+- rfilename: merges.txt
+- rfilename: model.safetensors
+- rfilename: modules.json
+- rfilename: sentence_bert_config.json
+- rfilename: special_tokens_map.json
+- rfilename: tokenizer.json
+- rfilename: tokenizer_config.json
+- rfilename: vocab.json
+spaces: []
+createdAt: '2025-02-02T15:08:18.000Z'
+safetensors:
+  parameters:
+    F32: 3427440
+  total: 3427440
+usedStorage: 13715688
+downloadsAllTime: 8
+inferenceProviderMapping: {}
+configJson:
+  _name_or_path: DeepChem/ChemBERTa-77M-MLM
+  architectures:
+  - RobertaModel
+  attention_probs_dropout_prob: 0.109
+  bos_token_id: 0
+  classifier_dropout: null
+  eos_token_id: 2
+  gradient_checkpointing: false
+  hidden_act: gelu
+  hidden_dropout_prob: 0.144
+  hidden_size: 384
+  initializer_range: 0.02
+  intermediate_size: 464
+  is_gpu: true
+  layer_norm_eps: 1.0e-12
+  max_position_embeddings: 515
+  model_type: roberta
+  num_attention_heads: 12
+  num_hidden_layers: 3
+  pad_token_id: 1
+  position_embedding_type: absolute
+  torch_dtype: float32
+  transformers_version: 4.47.1
+  type_vocab_size: 1
+  use_cache: true
+  vocab_size: 600
+onnxFiles: {}
+safetensorsSizeMb: 13.7
+approxSizeMb: 13.7
+fetchedAt: '2026-06-09T06:55:53.000Z'

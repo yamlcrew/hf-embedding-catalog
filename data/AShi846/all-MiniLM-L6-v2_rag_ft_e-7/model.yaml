@@ -1,0 +1,331 @@
+_id: 684896672cb44670f2d88efc
+id: AShi846/all-MiniLM-L6-v2_rag_ft_e-7
+private: false
+pipeline_tag: sentence-similarity
+library_name: sentence-transformers
+tags:
+- sentence-transformers
+- safetensors
+- bert
+- sentence-similarity
+- feature-extraction
+- generated_from_trainer
+- dataset_size:475
+- loss:CosineSimilarityLoss
+- arxiv:1908.10084
+- base_model:sentence-transformers/all-MiniLM-L6-v2
+- base_model:finetune:sentence-transformers/all-MiniLM-L6-v2
+- text-embeddings-inference
+- endpoints_compatible
+- region:us
+downloads: 2
+likes: 0
+modelId: AShi846/all-MiniLM-L6-v2_rag_ft_e-7
+author: AShi846
+sha: 1c561ea818e77fc465f07b1fc5552509bb74c709
+lastModified: '2025-06-10T20:32:47.000Z'
+gated: false
+disabled: false
+mask_token: '[MASK]'
+widgetData:
+- source_sentence: 'Suppose we use the Simplex method to solve the following linear program: \begin{align*} \textbf{maximize}
+    \hspace{0.8cm} & \hspace{0.4cm}4x_1 - 6x_2 + 4x_3 \\ \textbf{subject to}\hspace{0.6cm} & x_1 - 3x_2 + x_3  + s_1  = 1
+    \\ \hspace{0.8cm} & \hspace{1.90cm}x_1  + s_2  = 8 \\ \hspace{0.8cm} & \hspace{0.65cm} 3x_2  + 2x_3 + s_3 = 6 \\ \hspace{0.8cm}
+    &\hspace{-0.35cm}  x_1,\: x_2, \: x_3, \:s_1, \:s_2, \:s_3 \geq 0 \end{align*} At the current step, we have the following
+    Simplex tableau: \begin{align*} \hspace{1cm} x_1 &= 1 + 3x_2 - x_3 - s_1 \\ s_2 &= 7 -3x_2 + x_3  + s_1  \\ s_3 &= 6 -
+    3x_2  - 2x_3 \\ \cline{1-2} z &= 4 + 6 x_2   -  4s_1 \end{align*} Write the tableau obtained by executing one iteration
+    (pivot) of the Simplex method starting from the above tableau.'
+  sentences:
+  - 'We want to assign each job to a machine. For any job $j$ which the LP assigns to a single machine $i$, i.e., $x^*_{ij}
+    = 1$, it clearly makes sense to listen to the LP and assign $j$ to $i$. To assign the other jobs, we will use the graph
+    $H$, which has the following properties: \begin{itemize} \item $H$ is acyclic, i.e., a forest. \item Vertices corresponding
+    to the already-assigned jobs are isolated. \item Vertices corresponding to the yet-unassigned jobs have degree at least
+    two. \end{itemize} While $H$ contains an edge, we iteratively do the following: \begin{itemize} \item Choose a machine
+    $i$ whose vertex $a_i$ has degree one in $H$, i.e., there is only a single edge $\{a_i, b_j\}$ incident to $a_i$. (Such
+    a machine exists because $H$ is nonempty, and a nonempty forest contains a degree-one vertex; since job-vertices have
+    degrees either zero or at least two, a degree-one vertex must be a machine-vertex.) \item Assign job $j$ to machine $i$.
+    \item Remove all edges incident to $j$ from $H$. (Note that this preserves all the above properties of $H$.) \end{itemize}
+    Obviously, this procedure will terminate. Note that it will assign all jobs to machines, because as long as there is an
+    unassigned job $j$, the vertex $b_j$ has at least two incident edges in $H$. It remains to reason that for every machine
+    $i$, the sum of processing times of jobs assigned to $i$ (this is called the \textit{makespan} of $i$) is at most $T +
+    \max_{j \in J} p_j$. This is because there are two kinds of jobs assigned to $i$: \begin{itemize} \item Assigned in the
+    beginning: the jobs $j$ which had $x^*_{ij} = 1$. The total processing time of these jobs is \[ \sum_{j\in J: x^*_{ij}
+    = 1} p_j = \sum_{j\in J: x^*_{ij} = 1} x^*_{ij} p_j \le \sum_{j\in J: i \in N(j)} x^*_{ij} p_j \le T. \] \item Assigned
+    later: at most one other job. For note that we only assign a job to $i$ when $a_i$ is of degree-one, and once we do, $a_i$
+    becomes isolated and no more jobs can be assigned to $i$. This job has processing time at most $\max_{j \in J} p_j$. \end{itemize}
+    Another perspective on the solution is the following. By looking at the makespan bound $T + \max_j p_j$ that we should
+    satisfy, we can notice that it will be fine if we assign the integral jobs to the machines that the LP has selected and
+    the non-integral jobs in such a way that each machine gets at most one. In other words, we just need to prove that the
+    graph $H$ has a matching which matches all non-integral jobs (any such matching will be fine). Our iterative procedure
+    is one way to prove that such a matching exists.'
+  - '1'
+  - It breaks backward compatibility, because the signature changes and "Document" is not a special kind of "String" thus
+    callers will have to be updated
+- source_sentence: 'A service is an application component that performs long-running operations, usually in the background.
+    A service doesn''t provide a UI.
+
+    While reviewing the pull request of a friend you notice that he periodically fetches data from the cloud in his activity?
+    What potential problem this could lead to, and how can you fix it?'
+  sentences:
+  - 'The + operation is not associative.  Notice that due to the nature of our definition, wherein we maintain a finite precision
+    (just 4 bits!), adding a small number to a large one may not produce a change at all. We use this property to construct
+    a counterexample:  val a = Float8(3, 8) // a: Float8 = Float8(3,8) val b = Float8(1, 8) // b: Float8 = Float8(1,8) val
+    c = Float8(1, 10) // c: Float8 = Float8(1,10)  // adding this number does not change c! c + Float8(3, 8) // res2: Float8
+    = Float8(1,10)  // but a slightly larger one will c + Float8(4, 8) // res3: Float8 = Float8(2,10)  a + (b + c) // res4:
+    Float8 = Float8(1,10) (a + b) + c // res5: Float8 = Float8(2,10)'
+  - '... a list of strings, each string corresponding to the 8-bit representation of an element if and only
+
+    if that element is between 0 and 255 included. The most significant bit is farthest to the left in the
+
+    characters sequence.
+
+    Hint: The most significant bit represents the largest value in a multiple-bit binary number.'
+  - The benefit of depending on the latest available minor version means that we will always be up-to-date with the latest
+    bugfixes and security/performance improvements as well. But the problem with this approach is that it could lead to unexpected
+    behaviour which could cause bugs, because two compatible versions can still have slightly different behaviour.
+- source_sentence: Up to which linguistic processing level can each of the following sentences be considered as correct? The
+    glass broke its leg, I no go rain, The cook put cherry stones in the cake, Cars flow beautifully; syntactic, pragmatic,
+    syntactic, semantic, lexical
+  sentences:
+  - "The provided 9 rules could be expanded as follows to take simple number agreement into account:\nR1.1: S --> NPs VPs\n\
+    R1.2: S --> NPp VPp\nR2.1: NPs --> NNs\nR2.2: NPp --> NNp\nR3.1: NPs --> Dets NNs\nR3.2: NPp --> Detp NNp\nR4.1: NNs -->\
+    \ Ns\nR4.2: NNp --> Np\nR5.1: NNs --> NNs NNs\nR5.2: NNp --> NNs NNp\nR5.3: NNs --> NNp NNs\nR5.4: NNp --> NNp NNp\nR6.1:\
+    \ NNs --> NNs PNP\nR6.2: NNp --> NNp PNP\nR7.1: PNP --> Prep NPs\nR7.2: PNP --> Prep NPp\nR8.1: VPs --> Vs\nR8.2: VPp\
+    \ --> Vp\nR9: VPs --> Adv Vs\nR9: VPs --> Adv Vs\nthus resulting in a set of 20 syntactic rules. \nNote that rule R5 may\
+    \ be expanded in only 2 rules instead of 4 if the assumption that in nominal compounds corresponding to a sequence of\
+    \ several (e.g. \"satellite antenna frames\"), all the nouns but the last one must be singular:\n R5.1: NNs --> NNs NNs\n\
+    \ R5.2: NNp --> NNs NNp"
+  - 'When we want to prove something by contradiction, we start by assuming that the negation (of whatever we are trying to
+    prove) is true. We said in the classroom that p → q is equivalent to ¬p ∨ q. Therefore the negation of p → q is p ∧¬q.
+
+    With that said, let''s assume that a^2 is even and a is odd. Since a is odd, a can be written as a=2k+1. Therefore, a^2
+    = (2k+1)^2 = 4k^2 + 4k + 1 = 2(2k^2 + 2k) + 1. Thus, a^2 is odd, a contradiction!'
+  - 'a (DET)
+
+    computer (N)
+
+    process (V, N)
+
+    programs (V, N)
+
+    accurately (ADV)
+
+    which leads to 4 solutions.'
+- source_sentence: Give some concrete examples of NLP applications that might benefit from the semantic vectorial representations.
+  sentences:
+  - 'Modify the “candeliver” function.
+
+    Function candeliver(m) returns Boolean is return #(ack[m]) > N / 2
+
+
+    Suppose that a correct process delivers m. That means that at least one correct process p “acknowledged” m (rebroadcast
+    m using BestEffortBroadcast). Consequently, all correct processes eventually deliver m from BestEffortBroadcast broadcast
+    by p and rebroadcast m themselves (if they have not done that yet). Hence, every correct process eventually collects at
+    least N/2 acknowledgements and delivers m.'
+  - 'No it does not, we have no clue to which separating hyperplane the Perceptron algorithm is converging to.
+
+    '
+  - 'Transformers
+
+    Transformers don’t have a recurrent computation, so the representations at each time step can directly attend to the representations
+    at other time steps. As a result, it is more effective for modeling long-term dependencies because there is no vanishing
+    gradients effect across time.
+
+    Because there is no recurrence, the representations at each time step can be computed in parallel'
+- source_sentence: "Show a code snippet which represents the kernel of a Spectre\n  attack (use any convenient programming\
+    \ language or assembly).\n"
+  sentences:
+  - "Use a step of all-to-all communication.\nIn particular, very process that gets a message relays it immediately.\n\nupon\
+    \ initialization do delivered := {}\nupon RB-broadcast(m) do \n  send(m) to Π \\ {p}\n  RB-deliver(m)\n\nupon BEB-receive(m)\
+    \ from q do \n  if not m ∈ delivered\n    send (m) to Π \\ {p, q} \n    RB-deliver(m)\n    delivered := delivered ∪ m\n\
+    \  \nAgreement: Before RB-delivering m, a correct process p forwards m to all processes. By the properties of perfect\
+    \ channels and the fact that p is correct, all correct processes will eventually receive m and RB-deliver it."
+  - Whatever your personal convictions, you have to adapt to the convention used by the project.
+  - No, this will force other members to sit through an explanation that's not relevant to them, the colleague was right.
+model-index: null
+config:
+  architectures:
+  - BertModel
+  model_type: bert
+  tokenizer_config:
+    cls_token: '[CLS]'
+    mask_token: '[MASK]'
+    pad_token: '[PAD]'
+    sep_token: '[SEP]'
+    unk_token: '[UNK]'
+cardData:
+  tags:
+  - sentence-transformers
+  - sentence-similarity
+  - feature-extraction
+  - generated_from_trainer
+  - dataset_size:475
+  - loss:CosineSimilarityLoss
+  base_model: sentence-transformers/all-MiniLM-L6-v2
+  widget:
+  - source_sentence: 'Suppose we use the Simplex method to solve the following linear program: \begin{align*} \textbf{maximize}
+      \hspace{0.8cm} & \hspace{0.4cm}4x_1 - 6x_2 + 4x_3 \\ \textbf{subject to}\hspace{0.6cm} & x_1 - 3x_2 + x_3  + s_1  =
+      1 \\ \hspace{0.8cm} & \hspace{1.90cm}x_1  + s_2  = 8 \\ \hspace{0.8cm} & \hspace{0.65cm} 3x_2  + 2x_3 + s_3 = 6 \\ \hspace{0.8cm}
+      &\hspace{-0.35cm}  x_1,\: x_2, \: x_3, \:s_1, \:s_2, \:s_3 \geq 0 \end{align*} At the current step, we have the following
+      Simplex tableau: \begin{align*} \hspace{1cm} x_1 &= 1 + 3x_2 - x_3 - s_1 \\ s_2 &= 7 -3x_2 + x_3  + s_1  \\ s_3 &= 6
+      - 3x_2  - 2x_3 \\ \cline{1-2} z &= 4 + 6 x_2   -  4s_1 \end{align*} Write the tableau obtained by executing one iteration
+      (pivot) of the Simplex method starting from the above tableau.'
+    sentences:
+    - 'We want to assign each job to a machine. For any job $j$ which the LP assigns to a single machine $i$, i.e., $x^*_{ij}
+      = 1$, it clearly makes sense to listen to the LP and assign $j$ to $i$. To assign the other jobs, we will use the graph
+      $H$, which has the following properties: \begin{itemize} \item $H$ is acyclic, i.e., a forest. \item Vertices corresponding
+      to the already-assigned jobs are isolated. \item Vertices corresponding to the yet-unassigned jobs have degree at least
+      two. \end{itemize} While $H$ contains an edge, we iteratively do the following: \begin{itemize} \item Choose a machine
+      $i$ whose vertex $a_i$ has degree one in $H$, i.e., there is only a single edge $\{a_i, b_j\}$ incident to $a_i$. (Such
+      a machine exists because $H$ is nonempty, and a nonempty forest contains a degree-one vertex; since job-vertices have
+      degrees either zero or at least two, a degree-one vertex must be a machine-vertex.) \item Assign job $j$ to machine
+      $i$. \item Remove all edges incident to $j$ from $H$. (Note that this preserves all the above properties of $H$.) \end{itemize}
+      Obviously, this procedure will terminate. Note that it will assign all jobs to machines, because as long as there is
+      an unassigned job $j$, the vertex $b_j$ has at least two incident edges in $H$. It remains to reason that for every
+      machine $i$, the sum of processing times of jobs assigned to $i$ (this is called the \textit{makespan} of $i$) is at
+      most $T + \max_{j \in J} p_j$. This is because there are two kinds of jobs assigned to $i$: \begin{itemize} \item Assigned
+      in the beginning: the jobs $j$ which had $x^*_{ij} = 1$. The total processing time of these jobs is \[ \sum_{j\in J:
+      x^*_{ij} = 1} p_j = \sum_{j\in J: x^*_{ij} = 1} x^*_{ij} p_j \le \sum_{j\in J: i \in N(j)} x^*_{ij} p_j \le T. \] \item
+      Assigned later: at most one other job. For note that we only assign a job to $i$ when $a_i$ is of degree-one, and once
+      we do, $a_i$ becomes isolated and no more jobs can be assigned to $i$. This job has processing time at most $\max_{j
+      \in J} p_j$. \end{itemize} Another perspective on the solution is the following. By looking at the makespan bound $T
+      + \max_j p_j$ that we should satisfy, we can notice that it will be fine if we assign the integral jobs to the machines
+      that the LP has selected and the non-integral jobs in such a way that each machine gets at most one. In other words,
+      we just need to prove that the graph $H$ has a matching which matches all non-integral jobs (any such matching will
+      be fine). Our iterative procedure is one way to prove that such a matching exists.'
+    - '1'
+    - It breaks backward compatibility, because the signature changes and "Document" is not a special kind of "String" thus
+      callers will have to be updated
+  - source_sentence: 'A service is an application component that performs long-running operations, usually in the background.
+      A service doesn''t provide a UI.
+
+      While reviewing the pull request of a friend you notice that he periodically fetches data from the cloud in his activity?
+      What potential problem this could lead to, and how can you fix it?'
+    sentences:
+    - 'The + operation is not associative.  Notice that due to the nature of our definition, wherein we maintain a finite
+      precision (just 4 bits!), adding a small number to a large one may not produce a change at all. We use this property
+      to construct a counterexample:  val a = Float8(3, 8) // a: Float8 = Float8(3,8) val b = Float8(1, 8) // b: Float8 =
+      Float8(1,8) val c = Float8(1, 10) // c: Float8 = Float8(1,10)  // adding this number does not change c! c + Float8(3,
+      8) // res2: Float8 = Float8(1,10)  // but a slightly larger one will c + Float8(4, 8) // res3: Float8 = Float8(2,10)  a
+      + (b + c) // res4: Float8 = Float8(1,10) (a + b) + c // res5: Float8 = Float8(2,10)'
+    - '... a list of strings, each string corresponding to the 8-bit representation of an element if and only
+
+      if that element is between 0 and 255 included. The most significant bit is farthest to the left in the
+
+      characters sequence.
+
+      Hint: The most significant bit represents the largest value in a multiple-bit binary number.'
+    - The benefit of depending on the latest available minor version means that we will always be up-to-date with the latest
+      bugfixes and security/performance improvements as well. But the problem with this approach is that it could lead to
+      unexpected behaviour which could cause bugs, because two compatible versions can still have slightly different behaviour.
+  - source_sentence: Up to which linguistic processing level can each of the following sentences be considered as correct?
+      The glass broke its leg, I no go rain, The cook put cherry stones in the cake, Cars flow beautifully; syntactic, pragmatic,
+      syntactic, semantic, lexical
+    sentences:
+    - "The provided 9 rules could be expanded as follows to take simple number agreement into account:\nR1.1: S --> NPs VPs\n\
+      R1.2: S --> NPp VPp\nR2.1: NPs --> NNs\nR2.2: NPp --> NNp\nR3.1: NPs --> Dets NNs\nR3.2: NPp --> Detp NNp\nR4.1: NNs\
+      \ --> Ns\nR4.2: NNp --> Np\nR5.1: NNs --> NNs NNs\nR5.2: NNp --> NNs NNp\nR5.3: NNs --> NNp NNs\nR5.4: NNp --> NNp NNp\n\
+      R6.1: NNs --> NNs PNP\nR6.2: NNp --> NNp PNP\nR7.1: PNP --> Prep NPs\nR7.2: PNP --> Prep NPp\nR8.1: VPs --> Vs\nR8.2:\
+      \ VPp --> Vp\nR9: VPs --> Adv Vs\nR9: VPs --> Adv Vs\nthus resulting in a set of 20 syntactic rules. \nNote that rule\
+      \ R5 may be expanded in only 2 rules instead of 4 if the assumption that in nominal compounds corresponding to a sequence\
+      \ of several (e.g. \"satellite antenna frames\"), all the nouns but the last one must be singular:\n R5.1: NNs --> NNs\
+      \ NNs\n R5.2: NNp --> NNs NNp"
+    - 'When we want to prove something by contradiction, we start by assuming that the negation (of whatever we are trying
+      to prove) is true. We said in the classroom that p → q is equivalent to ¬p ∨ q. Therefore the negation of p → q is p
+      ∧¬q.
+
+      With that said, let''s assume that a^2 is even and a is odd. Since a is odd, a can be written as a=2k+1. Therefore,
+      a^2 = (2k+1)^2 = 4k^2 + 4k + 1 = 2(2k^2 + 2k) + 1. Thus, a^2 is odd, a contradiction!'
+    - 'a (DET)
+
+      computer (N)
+
+      process (V, N)
+
+      programs (V, N)
+
+      accurately (ADV)
+
+      which leads to 4 solutions.'
+  - source_sentence: Give some concrete examples of NLP applications that might benefit from the semantic vectorial representations.
+    sentences:
+    - 'Modify the “candeliver” function.
+
+      Function candeliver(m) returns Boolean is return #(ack[m]) > N / 2
+
+
+      Suppose that a correct process delivers m. That means that at least one correct process p “acknowledged” m (rebroadcast
+      m using BestEffortBroadcast). Consequently, all correct processes eventually deliver m from BestEffortBroadcast broadcast
+      by p and rebroadcast m themselves (if they have not done that yet). Hence, every correct process eventually collects
+      at least N/2 acknowledgements and delivers m.'
+    - 'No it does not, we have no clue to which separating hyperplane the Perceptron algorithm is converging to.
+
+      '
+    - 'Transformers
+
+      Transformers don’t have a recurrent computation, so the representations at each time step can directly attend to the
+      representations at other time steps. As a result, it is more effective for modeling long-term dependencies because there
+      is no vanishing gradients effect across time.
+
+      Because there is no recurrence, the representations at each time step can be computed in parallel'
+  - source_sentence: "Show a code snippet which represents the kernel of a Spectre\n  attack (use any convenient programming\
+      \ language or assembly).\n"
+    sentences:
+    - "Use a step of all-to-all communication.\nIn particular, very process that gets a message relays it immediately.\n\n\
+      upon initialization do delivered := {}\nupon RB-broadcast(m) do \n  send(m) to Π \\ {p}\n  RB-deliver(m)\n\nupon BEB-receive(m)\
+      \ from q do \n  if not m ∈ delivered\n    send (m) to Π \\ {p, q} \n    RB-deliver(m)\n    delivered := delivered ∪\
+      \ m\n  \nAgreement: Before RB-delivering m, a correct process p forwards m to all processes. By the properties of perfect\
+      \ channels and the fact that p is correct, all correct processes will eventually receive m and RB-deliver it."
+    - Whatever your personal convictions, you have to adapt to the convention used by the project.
+    - No, this will force other members to sit through an explanation that's not relevant to them, the colleague was right.
+  pipeline_tag: sentence-similarity
+  library_name: sentence-transformers
+siblings:
+- rfilename: .gitattributes
+- rfilename: 1_Pooling/config.json
+- rfilename: README.md
+- rfilename: config.json
+- rfilename: config_sentence_transformers.json
+- rfilename: model.safetensors
+- rfilename: modules.json
+- rfilename: sentence_bert_config.json
+- rfilename: special_tokens_map.json
+- rfilename: tokenizer.json
+- rfilename: tokenizer_config.json
+- rfilename: vocab.txt
+spaces: []
+createdAt: '2025-06-10T20:32:39.000Z'
+safetensors:
+  parameters:
+    F32: 22713216
+  total: 22713216
+usedStorage: 90864192
+downloadsAllTime: 16
+inferenceProviderMapping: {}
+configJson:
+  architectures:
+  - BertModel
+  attention_probs_dropout_prob: 0.1
+  classifier_dropout: null
+  gradient_checkpointing: false
+  hidden_act: gelu
+  hidden_dropout_prob: 0.1
+  hidden_size: 384
+  initializer_range: 0.02
+  intermediate_size: 1536
+  layer_norm_eps: 1.0e-12
+  max_position_embeddings: 512
+  model_type: bert
+  num_attention_heads: 12
+  num_hidden_layers: 6
+  pad_token_id: 0
+  position_embedding_type: absolute
+  torch_dtype: float32
+  transformers_version: 4.51.3
+  type_vocab_size: 2
+  use_cache: true
+  vocab_size: 30522
+onnxFiles: {}
+safetensorsSizeMb: 90.9
+approxSizeMb: 90.9
+fetchedAt: '2026-06-09T06:55:53.000Z'

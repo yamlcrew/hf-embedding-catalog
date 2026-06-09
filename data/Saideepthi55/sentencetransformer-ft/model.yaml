@@ -1,0 +1,285 @@
+_id: 66e5adcd25f8e85f9beb586c
+id: Saideepthi55/sentencetransformer-ft
+private: false
+pipeline_tag: sentence-similarity
+library_name: sentence-transformers
+tags:
+- sentence-transformers
+- safetensors
+- mpnet
+- sentence-similarity
+- feature-extraction
+- generated_from_trainer
+- dataset_size:117502
+- loss:MultipleNegativesRankingLoss
+- en
+- dataset:SwastikN/sxc_med_llm_chemical_gen
+- arxiv:1908.10084
+- arxiv:1705.00652
+- base_model:microsoft/mpnet-base
+- base_model:finetune:microsoft/mpnet-base
+- license:apache-2.0
+- model-index
+- text-embeddings-inference
+- endpoints_compatible
+- region:us
+downloads: 1
+likes: 0
+modelId: Saideepthi55/sentencetransformer-ft
+author: Saideepthi55
+sha: 9d19b6370550bf1846231bb98dcac15ab73444d3
+lastModified: '2024-09-14T15:38:19.000Z'
+gated: false
+disabled: false
+widgetData:
+- source_sentence: Help me make the molecule CC(=O)OC[C@H](OC(C)=O)C(=O)N1CCCC[C@H]1C1CCN(C(=O)c2cc3ccccc3n2C)CC1 with the
+    same hydrogen bond donors. The output molecule should be similar to the input molecule. Please inform me of the number
+    of hydrogen bond donor(s) of the optimized molecule.
+  sentences:
+  - Your requirements guided the optimization, resulting in the molecule "CC(=O)OC(CCl)C(Cc1cccs1)[C@H](OC(C)=O)C(=O)N1CCCC[C@H]1C1CCN(C(=O)c2cc3ccccc3n2C)CC1"
+    with an approximate hydrogen bond donor(s) of 0.
+  - Given a molecule expressed in SMILES string, help me optimize it according to my requirements.
+  - Help me adapt a molecular structure denoted in SMILES string based on my preferences.
+- source_sentence: How can we modify the molecule CCC(CC)=C(CC)c1ccccc1OC(=O)OC(N=[N+]=[N-])c1ccccc1 to decrease its blood-brain
+    barrier penetration (BBBP) value while keeping it similar to the input molecule? Please inform me of the BBBP value of
+    the optimized molecule.
+  sentences:
+  - Describe a technology used for measuring people's emotional responses.
+  - I've successfully optimized the molecule according to your needs, resulting in "CCOC(=O)c1ccccc1OC(=O)OC(N=[N+]=[N-])c1ccccc1"
+    with an approximate BBBP value of 0.71.
+  - Given a molecule expressed in SMILES string, help me optimize it according to my requirements.
+- source_sentence: How can we modify the molecule C/C(=C/C(=O)N1CC[C@H](CC(CCCCCC(CO)C(=O)O)NC(=O)OC(C)(C)C)[C@H]1c1cccnc1)C(=O)O
+    to increase its blood-brain barrier penetration (BBBP) value while keeping it similar to the input molecule?
+  sentences:
+  - Given a molecule expressed in SMILES string, help me optimize it according to my requirements.
+  - Aid me in refining a molecular structure written in SMILES notation based on my criteria.
+  - Taking your requirements into account, I've optimized the molecule to "C/C(=C/C(=O)N1CC[C@H](CNC(=O)[C@H](CO)NC(=O)OC(C)(C)C)[C@H]1c1cccnc1)C(=O)O".
+- source_sentence: Support me in transforming the molecule [SMILES] by incorporating the same hydrogen bond acceptors and
+    maintaining its resemblance to the original molecule.
+  sentences:
+  - Taking your requirements into account, I've optimized the molecule to "CCOc1cccc(C2c3c(oc4ccc(C)cc4c3=O)C(=O)N2CCN(CC)CC)c1".
+  - Help me adapt a molecular structure denoted in SMILES string based on my preferences.
+  - Help me adapt a molecular structure denoted in SMILES string based on my preferences.
+- source_sentence: With a molecule represented by the SMILES string CNNNCC(=O)N[C@H](C)C[C@@H](C)NCc1ccc2c(c1)CCC2, propose
+    adjustments that can increase its logP value while keeping the output molecule structurally related to the input molecule.
+  sentences:
+  - Aid me in refining a molecular structure written in SMILES notation based on my criteria.
+  - Given a molecule expressed in SMILES string, help me optimize it according to my requirements.
+  - In line with your criteria, I've optimized the molecule and present it as "C[C@H](C[C@@H](C)NC(=O)COC(C)(C)C)NCc1ccc2c(c1)CCC2".
+model-index:
+- name: MPNet base trained on AllNLI triplets
+  results:
+  - task:
+      type: triplet
+      name: Triplet
+    dataset:
+      name: all nli dev
+      type: all-nli-dev
+    metrics:
+    - type: cosine_accuracy
+      value: 0.6562222222222223
+      name: Cosine Accuracy
+      verified: false
+    - type: dot_accuracy
+      value: 0.5342222222222223
+      name: Dot Accuracy
+      verified: false
+    - type: manhattan_accuracy
+      value: 0.7075555555555556
+      name: Manhattan Accuracy
+      verified: false
+    - type: euclidean_accuracy
+      value: 0.6584444444444445
+      name: Euclidean Accuracy
+      verified: false
+    - type: max_accuracy
+      value: 0.7075555555555556
+      name: Max Accuracy
+      verified: false
+    - type: cosine_accuracy
+      value: 0.9804444444444445
+      name: Cosine Accuracy
+      verified: false
+    - type: dot_accuracy
+      value: 0.01888888888888889
+      name: Dot Accuracy
+      verified: false
+    - type: manhattan_accuracy
+      value: 0.9811111111111112
+      name: Manhattan Accuracy
+      verified: false
+    - type: euclidean_accuracy
+      value: 0.9802222222222222
+      name: Euclidean Accuracy
+      verified: false
+    - type: max_accuracy
+      value: 0.9811111111111112
+      name: Max Accuracy
+      verified: false
+config:
+  architectures:
+  - MPNetModel
+  model_type: mpnet
+  tokenizer_config:
+    bos_token: <s>
+    cls_token: <s>
+    eos_token: </s>
+    mask_token: <mask>
+    pad_token: <pad>
+    sep_token: </s>
+    unk_token: '[UNK]'
+cardData:
+  base_model: microsoft/mpnet-base
+  datasets:
+  - SwastikN/sxc_med_llm_chemical_gen
+  language:
+  - en
+  library_name: sentence-transformers
+  license: apache-2.0
+  metrics:
+  - cosine_accuracy
+  - dot_accuracy
+  - manhattan_accuracy
+  - euclidean_accuracy
+  - max_accuracy
+  pipeline_tag: sentence-similarity
+  tags:
+  - sentence-transformers
+  - sentence-similarity
+  - feature-extraction
+  - generated_from_trainer
+  - dataset_size:117502
+  - loss:MultipleNegativesRankingLoss
+  widget:
+  - source_sentence: Help me make the molecule CC(=O)OC[C@H](OC(C)=O)C(=O)N1CCCC[C@H]1C1CCN(C(=O)c2cc3ccccc3n2C)CC1 with the
+      same hydrogen bond donors. The output molecule should be similar to the input molecule. Please inform me of the number
+      of hydrogen bond donor(s) of the optimized molecule.
+    sentences:
+    - Your requirements guided the optimization, resulting in the molecule "CC(=O)OC(CCl)C(Cc1cccs1)[C@H](OC(C)=O)C(=O)N1CCCC[C@H]1C1CCN(C(=O)c2cc3ccccc3n2C)CC1"
+      with an approximate hydrogen bond donor(s) of 0.
+    - Given a molecule expressed in SMILES string, help me optimize it according to my requirements.
+    - Help me adapt a molecular structure denoted in SMILES string based on my preferences.
+  - source_sentence: How can we modify the molecule CCC(CC)=C(CC)c1ccccc1OC(=O)OC(N=[N+]=[N-])c1ccccc1 to decrease its blood-brain
+      barrier penetration (BBBP) value while keeping it similar to the input molecule? Please inform me of the BBBP value
+      of the optimized molecule.
+    sentences:
+    - Describe a technology used for measuring people's emotional responses.
+    - I've successfully optimized the molecule according to your needs, resulting in "CCOC(=O)c1ccccc1OC(=O)OC(N=[N+]=[N-])c1ccccc1"
+      with an approximate BBBP value of 0.71.
+    - Given a molecule expressed in SMILES string, help me optimize it according to my requirements.
+  - source_sentence: How can we modify the molecule C/C(=C/C(=O)N1CC[C@H](CC(CCCCCC(CO)C(=O)O)NC(=O)OC(C)(C)C)[C@H]1c1cccnc1)C(=O)O
+      to increase its blood-brain barrier penetration (BBBP) value while keeping it similar to the input molecule?
+    sentences:
+    - Given a molecule expressed in SMILES string, help me optimize it according to my requirements.
+    - Aid me in refining a molecular structure written in SMILES notation based on my criteria.
+    - Taking your requirements into account, I've optimized the molecule to "C/C(=C/C(=O)N1CC[C@H](CNC(=O)[C@H](CO)NC(=O)OC(C)(C)C)[C@H]1c1cccnc1)C(=O)O".
+  - source_sentence: Support me in transforming the molecule [SMILES] by incorporating the same hydrogen bond acceptors and
+      maintaining its resemblance to the original molecule.
+    sentences:
+    - Taking your requirements into account, I've optimized the molecule to "CCOc1cccc(C2c3c(oc4ccc(C)cc4c3=O)C(=O)N2CCN(CC)CC)c1".
+    - Help me adapt a molecular structure denoted in SMILES string based on my preferences.
+    - Help me adapt a molecular structure denoted in SMILES string based on my preferences.
+  - source_sentence: With a molecule represented by the SMILES string CNNNCC(=O)N[C@H](C)C[C@@H](C)NCc1ccc2c(c1)CCC2, propose
+      adjustments that can increase its logP value while keeping the output molecule structurally related to the input molecule.
+    sentences:
+    - Aid me in refining a molecular structure written in SMILES notation based on my criteria.
+    - Given a molecule expressed in SMILES string, help me optimize it according to my requirements.
+    - In line with your criteria, I've optimized the molecule and present it as "C[C@H](C[C@@H](C)NC(=O)COC(C)(C)C)NCc1ccc2c(c1)CCC2".
+  model-index:
+  - name: MPNet base trained on AllNLI triplets
+    results:
+    - task:
+        type: triplet
+        name: Triplet
+      dataset:
+        name: all nli dev
+        type: all-nli-dev
+      metrics:
+      - type: cosine_accuracy
+        value: 0.6562222222222223
+        name: Cosine Accuracy
+        verified: false
+      - type: dot_accuracy
+        value: 0.5342222222222223
+        name: Dot Accuracy
+        verified: false
+      - type: manhattan_accuracy
+        value: 0.7075555555555556
+        name: Manhattan Accuracy
+        verified: false
+      - type: euclidean_accuracy
+        value: 0.6584444444444445
+        name: Euclidean Accuracy
+        verified: false
+      - type: max_accuracy
+        value: 0.7075555555555556
+        name: Max Accuracy
+        verified: false
+      - type: cosine_accuracy
+        value: 0.9804444444444445
+        name: Cosine Accuracy
+        verified: false
+      - type: dot_accuracy
+        value: 0.01888888888888889
+        name: Dot Accuracy
+        verified: false
+      - type: manhattan_accuracy
+        value: 0.9811111111111112
+        name: Manhattan Accuracy
+        verified: false
+      - type: euclidean_accuracy
+        value: 0.9802222222222222
+        name: Euclidean Accuracy
+        verified: false
+      - type: max_accuracy
+        value: 0.9811111111111112
+        name: Max Accuracy
+        verified: false
+siblings:
+- rfilename: .gitattributes
+- rfilename: 1_Pooling/config.json
+- rfilename: README.md
+- rfilename: config.json
+- rfilename: config_sentence_transformers.json
+- rfilename: model.safetensors
+- rfilename: modules.json
+- rfilename: sentence_bert_config.json
+- rfilename: special_tokens_map.json
+- rfilename: tokenizer.json
+- rfilename: tokenizer_config.json
+- rfilename: vocab.txt
+spaces: []
+createdAt: '2024-09-14T15:37:49.000Z'
+safetensors:
+  parameters:
+    F32: 109486464
+  total: 109486464
+usedStorage: 437967672
+downloadsAllTime: 24
+inferenceProviderMapping: {}
+configJson:
+  _name_or_path: microsoft/mpnet-base
+  architectures:
+  - MPNetModel
+  attention_probs_dropout_prob: 0.1
+  bos_token_id: 0
+  eos_token_id: 2
+  hidden_act: gelu
+  hidden_dropout_prob: 0.1
+  hidden_size: 768
+  initializer_range: 0.02
+  intermediate_size: 3072
+  layer_norm_eps: 1.0e-05
+  max_position_embeddings: 514
+  model_type: mpnet
+  num_attention_heads: 12
+  num_hidden_layers: 12
+  pad_token_id: 1
+  relative_attention_num_buckets: 32
+  torch_dtype: float32
+  transformers_version: 4.44.2
+  vocab_size: 30527
+onnxFiles: {}
+safetensorsSizeMb: 438.0
+approxSizeMb: 437.9
+fetchedAt: '2026-06-09T06:55:53.000Z'

@@ -1,0 +1,370 @@
+_id: 6866e087a1d37890da6ab0b9
+id: Shuu12121/CodeSearch-ModernBERT-Owl-4.1-Plus
+private: false
+pipeline_tag: sentence-similarity
+library_name: sentence-transformers
+tags:
+- sentence-transformers
+- safetensors
+- modernbert
+- sentence-similarity
+- feature-extraction
+- generated_from_trainer
+- dataset_size:6960000
+- loss:MultipleNegativesRankingLoss
+- arxiv:1908.10084
+- arxiv:1705.00652
+- text-embeddings-inference
+- endpoints_compatible
+- region:us
+downloads: 3
+likes: 0
+modelId: Shuu12121/CodeSearch-ModernBERT-Owl-4.1-Plus
+author: Shuu12121
+sha: dcdc10412613b10ca9501b065843d3c05e850530
+lastModified: '2025-07-03T19:57:17.000Z'
+gated: false
+disabled: false
+widgetData:
+- source_sentence: Create a function to call with simple and hard types This is done so simple types don't need to check for
+    hard types
+  sentences:
+  - "function copyHead(headHtml, doc) {\n        var head = doc.getElementsByTagName('head')[0];\n\n        if (head.innerHTML\
+    \ == headHtml) {\n            // the content is already correct\n            return;\n        }\n\n        jQuery.init(head).empty();\n\
+    \n        appendHTML(headHtml, head);\n    }"
+  - "func compress(value float64) int16 {\n\ti := int16(precision*math.Log(1.0+math.Abs(value)) + 0.5)\n\tif value < 0 {\n\
+    \t\treturn -1 * i\n\t}\n\treturn i\n}"
+  - "function (types, hard) {\n            for (var t in types) {\n                if (types.hasOwnProperty(t)) {\n      \
+    \              (function (prop) {\n                        Object.defineProperty(props, prop, {\n                    \
+    \        get: function () {\n                                for (var i = 0; i < inputs.length; ++i) {\n             \
+    \                       if (!checkType(prop, inputs[i], hard)) {\n                                        return false;\n\
+    \                                    }\n                                }\n                                return true;\n\
+    \                            }\n                        });\n                    }(t));\n                }\n         \
+    \   }\n        }"
+- source_sentence: 'Takes an array of promises and returns a promise that is fulfilled once all
+
+    the promises in the array are fulfilled
+
+
+    @param {Array} array The array of promises
+
+    @return {Promise} the promise that is fulfilled when all the array is fulfilled, resolved to the array of results'
+  sentences:
+  - "public static List<DockerImage> getDockerImagesFromAgents(final int buildInfoId, TaskListener listener) throws IOException,\
+    \ InterruptedException {\n        List<DockerImage> dockerImages = new ArrayList<DockerImage>();\n\n        // Collect\
+    \ images from the master:\n        dockerImages.addAll(getAndDiscardImagesByBuildId(buildInfoId));\n\n        // Collect\
+    \ images from all the agents:\n        List<Node> nodes = Jenkins.getInstance().getNodes();\n        for (Node node :\
+    \ nodes) {\n            if (node == null || node.getChannel() == null) {\n                continue;\n            }\n \
+    \           try {\n                List<DockerImage> partialDockerImages = node.getChannel().call(new MasterToSlaveCallable<List<DockerImage>,\
+    \ IOException>() {\n                    public List<DockerImage> call() throws IOException {\n                       \
+    \ List<DockerImage> dockerImages = new ArrayList<DockerImage>();\n                        dockerImages.addAll(getAndDiscardImagesByBuildId(buildInfoId));\n\
+    \                        return dockerImages;\n                    }\n                });\n                dockerImages.addAll(partialDockerImages);\n\
+    \            } catch (Exception e) {\n                listener.getLogger().println(\"Could not collect docker images from\
+    \ Jenkins node '\" + node.getDisplayName() + \"' due to: \" + e.getMessage());\n            }\n        }\n        return\
+    \ dockerImages;\n    }"
+  - "public function findUnitByStart(Token $token) {\n\t\tforeach ($this->collection as $unit) {\n\t\t\tif ($unit->start ===\
+    \ $token) {\n\t\t\t\treturn $unit;\n\t\t\t}\n\t\t}\n\n\t\treturn null;\n\t}"
+  - "function (array) {\n            var self = this,\n                deferred = new Deferred(),\n                fulfilled\
+    \ = 0,\n                length,\n                results = [],\n                hasError = false;\n\n            if (!isArray(array))\
+    \ {\n                array = slice.call(arguments);\n            }\n            length = array.length;\n\n           \
+    \ if (length === 0) {\n                deferred.emitSuccess(results);\n            } else {\n                array.forEach(function\
+    \ (promise, index) {\n\n                    self.when(promise,\n                        //Success\n                  \
+    \      function (value) {\n                            results[index] = value;\n                            fulfilled\
+    \ += 1;\n                            if (fulfilled === length) {\n\n                                if (hasError) {\n\
+    \                                    deferred.emitError(results);\n                                } else {\n        \
+    \                            deferred.emitSuccess(results);\n                                }\n                     \
+    \       }\n                        },\n                        //Error\n                        function (error) {\n \
+    \                           results[index] = error;\n                            hasError = true;\n                  \
+    \          fulfilled += 1;\n                            if (fulfilled === length) {\n                                deferred.emitError(results);\n\
+    \                            }\n                        }\n                    );\n                });\n            }\n\
+    \            return deferred.getPromise();\n        }"
+- source_sentence: 'Create and return a MBeanInfo instance for the supplied object.
+
+
+    @param object             Supplied object to inspect.
+
+    @param classIntrospector  ClassIntrospector to use.
+
+
+    @return a MBeanInfo instance for the supplied object.
+
+
+    @throws IntrospectionException    If failed to create Info object
+
+    @throws IllegalArgumentException'
+  sentences:
+  - "function toggleShepherdModalClass(currentElement) {\n  const shepherdModal = document.querySelector(`${classNames.modalTarget}`);\n\
+    \n  if (shepherdModal) {\n    shepherdModal.classList.remove(classNames.modalTarget);\n  }\n\n  currentElement.classList.add(classNames.modalTarget);\n\
+    }"
+  - "public function handle(): void\n    {\n        $directory = $this->argument('directory');\n\n        if (!is_dir($directory))\
+    \ {\n            $this->error(\n                sprintf('The directory \"%1$s\" does not exist. Run `resume make --output=%1$s`.',\
+    \ $directory)\n            );\n\n            exit(1);\n        }\n\n        chdir($directory);\n\n        $this->info(\n\
+    \            sprintf('Resume preview started: http://%s:%s', $this->host(), $this->port())\n        );\n        $this->info('Stop\
+    \ the server with CTRL+C.');\n\n        passthru($this->command($this->host(), $this->port()), $exitCode);\n\n       \
+    \ exit($exitCode);\n    }"
+  - "private MBeanInfo getInfo(Object object, ClassIntrospector classIntrospector) throws IntrospectionException {\n     \
+    \   JmxBean jmxBean = AnnotationUtils.getAnnotation(object.getClass(), JmxBean.class);\n       \n        MBeanInfo beanInfo\
+    \ = new MBeanInfo(object.getClass().getName(), \n                                           jmxBean.description(), \n\
+    \                                           getAttributes(classIntrospector), \n                                     \
+    \      getConstructors(classIntrospector), \n                                           getOperations(classIntrospector),\
+    \ \n                                           getNotifications(object));\n        return beanInfo;\n    }"
+- source_sentence: 'Adds a collaborator to this folder.
+
+
+    @param collaborator the collaborator to add.
+
+    @param role         the role of the collaborator.
+
+    @return info about the new collaboration.'
+  sentences:
+  - "final public function readUInt32()\n    {\n        if (PHP_INT_SIZE < 8) {\n            // @codeCoverageIgnoreStart\n\
+    \            if ($this->isLittleEndian()) {\n                list(, $lo, $hi) = unpack('S*', $this->read(4));\n      \
+    \      } else {\n                list(, $hi, $lo) = unpack('S*', $this->read(4));\n            }\n            return $hi\
+    \ * (0xffff+1) + $lo; // eq $hi << 16 | $lo\n            // @codeCoverageIgnoreEnd\n        } else {\n            list(,\
+    \ $int) = unpack('L*', $this->read(4)) + array(0, 0);\n            return $int;\n        }\n    }"
+  - "public function add_on_empty($attribute, $msg)\n\t{\n\t\tif (empty($msg))\n\t\t\t$msg = self::$DEFAULT_ERROR_MESSAGES['empty'];\n\
+    \n\t\tif (empty($this->model->$attribute))\n\t\t\t$this->add($attribute, $msg);\n\t}"
+  - "public BoxCollaboration.Info collaborate(BoxCollaborator collaborator, BoxCollaboration.Role role) {\n        JsonObject\
+    \ accessibleByField = new JsonObject();\n        accessibleByField.add(\"id\", collaborator.getID());\n\n        if (collaborator\
+    \ instanceof BoxUser) {\n            accessibleByField.add(\"type\", \"user\");\n        } else if (collaborator instanceof\
+    \ BoxGroup) {\n            accessibleByField.add(\"type\", \"group\");\n        } else {\n            throw new IllegalArgumentException(\"\
+    The given collaborator is of an unknown type.\");\n        }\n\n        return this.collaborate(accessibleByField, role,\
+    \ null, null);\n    }"
+- source_sentence: 'Register the router instance.
+
+
+    @return void'
+  sentences:
+  - "protected function registerRouter()\n\t{\n\t\t$this->app['router'] = $this->app->share(function($app)\n\t\t{\n\t\t\t\
+    return new Router($app['events'], $app);\n\t\t});\n\t}"
+  - "@Override\n    @Nullable\n    public Long apply(@Nonnull Long partialAccountNumber) {\n        checkNotNull(partialAccountNumber,\
+    \ \"partialAccountNumber can't be null\");\n        boolean isEven = true;\n        int total = 0;\n        Long temp\
+    \ = partialAccountNumber;\n\n        while (temp > 0) {\n            long digit = temp % 10;\n            if (isEven)\
+    \ {\n                long multipliedDigit = digit * 2;\n                total += isTwoDigit(multipliedDigit) ? sumUpDigits(multipliedDigit)\
+    \ : multipliedDigit;\n            } else {\n                total += digit;\n            }\n            temp /= 10;\n\
+    \            isEven = !isEven;\n        }\n\n        int check = total * 9 % 10;\n\n        return partialAccountNumber\
+    \ * 10 + check;\n    }"
+  - "func (d *Driver) DiffSize(id string, idMappings *idtools.IDMappings, parent string, parentMappings *idtools.IDMappings,\
+    \ mountLabel string) (size int64, err error) {\n\tif d.useNaiveDiff() || !d.isParent(id, parent) {\n\t\treturn d.naiveDiff.DiffSize(id,\
+    \ idMappings, parent, parentMappings, mountLabel)\n\t}\n\treturn directory.Size(d.getDiffPath(id))\n}"
+model-index: null
+config:
+  architectures:
+  - ModernBertModel
+  model_type: modernbert
+  tokenizer_config:
+    bos_token: <s>
+    cls_token: '[CLS]'
+    eos_token: </s>
+    mask_token: '[MASK]'
+    pad_token: '[PAD]'
+    sep_token: '[SEP]'
+    unk_token: '[UNK]'
+cardData:
+  tags:
+  - sentence-transformers
+  - sentence-similarity
+  - feature-extraction
+  - generated_from_trainer
+  - dataset_size:6960000
+  - loss:MultipleNegativesRankingLoss
+  base_model: Shuu12121/CodeModernBERT-Owl-4.1
+  widget:
+  - source_sentence: Create a function to call with simple and hard types This is done so simple types don't need to check
+      for hard types
+    sentences:
+    - "function copyHead(headHtml, doc) {\n        var head = doc.getElementsByTagName('head')[0];\n\n        if (head.innerHTML\
+      \ == headHtml) {\n            // the content is already correct\n            return;\n        }\n\n        jQuery.init(head).empty();\n\
+      \n        appendHTML(headHtml, head);\n    }"
+    - "func compress(value float64) int16 {\n\ti := int16(precision*math.Log(1.0+math.Abs(value)) + 0.5)\n\tif value < 0 {\n\
+      \t\treturn -1 * i\n\t}\n\treturn i\n}"
+    - "function (types, hard) {\n            for (var t in types) {\n                if (types.hasOwnProperty(t)) {\n    \
+      \                (function (prop) {\n                        Object.defineProperty(props, prop, {\n                \
+      \            get: function () {\n                                for (var i = 0; i < inputs.length; ++i) {\n       \
+      \                             if (!checkType(prop, inputs[i], hard)) {\n                                        return\
+      \ false;\n                                    }\n                                }\n                               \
+      \ return true;\n                            }\n                        });\n                    }(t));\n           \
+      \     }\n            }\n        }"
+  - source_sentence: 'Takes an array of promises and returns a promise that is fulfilled once all
+
+      the promises in the array are fulfilled
+
+
+      @param {Array} array The array of promises
+
+      @return {Promise} the promise that is fulfilled when all the array is fulfilled, resolved to the array of results'
+    sentences:
+    - "public static List<DockerImage> getDockerImagesFromAgents(final int buildInfoId, TaskListener listener) throws IOException,\
+      \ InterruptedException {\n        List<DockerImage> dockerImages = new ArrayList<DockerImage>();\n\n        // Collect\
+      \ images from the master:\n        dockerImages.addAll(getAndDiscardImagesByBuildId(buildInfoId));\n\n        // Collect\
+      \ images from all the agents:\n        List<Node> nodes = Jenkins.getInstance().getNodes();\n        for (Node node\
+      \ : nodes) {\n            if (node == null || node.getChannel() == null) {\n                continue;\n            }\n\
+      \            try {\n                List<DockerImage> partialDockerImages = node.getChannel().call(new MasterToSlaveCallable<List<DockerImage>,\
+      \ IOException>() {\n                    public List<DockerImage> call() throws IOException {\n                     \
+      \   List<DockerImage> dockerImages = new ArrayList<DockerImage>();\n                        dockerImages.addAll(getAndDiscardImagesByBuildId(buildInfoId));\n\
+      \                        return dockerImages;\n                    }\n                });\n                dockerImages.addAll(partialDockerImages);\n\
+      \            } catch (Exception e) {\n                listener.getLogger().println(\"Could not collect docker images\
+      \ from Jenkins node '\" + node.getDisplayName() + \"' due to: \" + e.getMessage());\n            }\n        }\n    \
+      \    return dockerImages;\n    }"
+    - "public function findUnitByStart(Token $token) {\n\t\tforeach ($this->collection as $unit) {\n\t\t\tif ($unit->start\
+      \ === $token) {\n\t\t\t\treturn $unit;\n\t\t\t}\n\t\t}\n\n\t\treturn null;\n\t}"
+    - "function (array) {\n            var self = this,\n                deferred = new Deferred(),\n                fulfilled\
+      \ = 0,\n                length,\n                results = [],\n                hasError = false;\n\n            if\
+      \ (!isArray(array)) {\n                array = slice.call(arguments);\n            }\n            length = array.length;\n\
+      \n            if (length === 0) {\n                deferred.emitSuccess(results);\n            } else {\n          \
+      \      array.forEach(function (promise, index) {\n\n                    self.when(promise,\n                       \
+      \ //Success\n                        function (value) {\n                            results[index] = value;\n     \
+      \                       fulfilled += 1;\n                            if (fulfilled === length) {\n\n               \
+      \                 if (hasError) {\n                                    deferred.emitError(results);\n              \
+      \                  } else {\n                                    deferred.emitSuccess(results);\n                  \
+      \              }\n                            }\n                        },\n                        //Error\n     \
+      \                   function (error) {\n                            results[index] = error;\n                      \
+      \      hasError = true;\n                            fulfilled += 1;\n                            if (fulfilled ===\
+      \ length) {\n                                deferred.emitError(results);\n                            }\n         \
+      \               }\n                    );\n                });\n            }\n            return deferred.getPromise();\n\
+      \        }"
+  - source_sentence: 'Create and return a MBeanInfo instance for the supplied object.
+
+
+      @param object             Supplied object to inspect.
+
+      @param classIntrospector  ClassIntrospector to use.
+
+
+      @return a MBeanInfo instance for the supplied object.
+
+
+      @throws IntrospectionException    If failed to create Info object
+
+      @throws IllegalArgumentException'
+    sentences:
+    - "function toggleShepherdModalClass(currentElement) {\n  const shepherdModal = document.querySelector(`${classNames.modalTarget}`);\n\
+      \n  if (shepherdModal) {\n    shepherdModal.classList.remove(classNames.modalTarget);\n  }\n\n  currentElement.classList.add(classNames.modalTarget);\n\
+      }"
+    - "public function handle(): void\n    {\n        $directory = $this->argument('directory');\n\n        if (!is_dir($directory))\
+      \ {\n            $this->error(\n                sprintf('The directory \"%1$s\" does not exist. Run `resume make --output=%1$s`.',\
+      \ $directory)\n            );\n\n            exit(1);\n        }\n\n        chdir($directory);\n\n        $this->info(\n\
+      \            sprintf('Resume preview started: http://%s:%s', $this->host(), $this->port())\n        );\n        $this->info('Stop\
+      \ the server with CTRL+C.');\n\n        passthru($this->command($this->host(), $this->port()), $exitCode);\n\n     \
+      \   exit($exitCode);\n    }"
+    - "private MBeanInfo getInfo(Object object, ClassIntrospector classIntrospector) throws IntrospectionException {\n   \
+      \     JmxBean jmxBean = AnnotationUtils.getAnnotation(object.getClass(), JmxBean.class);\n       \n        MBeanInfo\
+      \ beanInfo = new MBeanInfo(object.getClass().getName(), \n                                           jmxBean.description(),\
+      \ \n                                           getAttributes(classIntrospector), \n                                \
+      \           getConstructors(classIntrospector), \n                                           getOperations(classIntrospector),\
+      \ \n                                           getNotifications(object));\n        return beanInfo;\n    }"
+  - source_sentence: 'Adds a collaborator to this folder.
+
+
+      @param collaborator the collaborator to add.
+
+      @param role         the role of the collaborator.
+
+      @return info about the new collaboration.'
+    sentences:
+    - "final public function readUInt32()\n    {\n        if (PHP_INT_SIZE < 8) {\n            // @codeCoverageIgnoreStart\n\
+      \            if ($this->isLittleEndian()) {\n                list(, $lo, $hi) = unpack('S*', $this->read(4));\n    \
+      \        } else {\n                list(, $hi, $lo) = unpack('S*', $this->read(4));\n            }\n            return\
+      \ $hi * (0xffff+1) + $lo; // eq $hi << 16 | $lo\n            // @codeCoverageIgnoreEnd\n        } else {\n         \
+      \   list(, $int) = unpack('L*', $this->read(4)) + array(0, 0);\n            return $int;\n        }\n    }"
+    - "public function add_on_empty($attribute, $msg)\n\t{\n\t\tif (empty($msg))\n\t\t\t$msg = self::$DEFAULT_ERROR_MESSAGES['empty'];\n\
+      \n\t\tif (empty($this->model->$attribute))\n\t\t\t$this->add($attribute, $msg);\n\t}"
+    - "public BoxCollaboration.Info collaborate(BoxCollaborator collaborator, BoxCollaboration.Role role) {\n        JsonObject\
+      \ accessibleByField = new JsonObject();\n        accessibleByField.add(\"id\", collaborator.getID());\n\n        if\
+      \ (collaborator instanceof BoxUser) {\n            accessibleByField.add(\"type\", \"user\");\n        } else if (collaborator\
+      \ instanceof BoxGroup) {\n            accessibleByField.add(\"type\", \"group\");\n        } else {\n            throw\
+      \ new IllegalArgumentException(\"The given collaborator is of an unknown type.\");\n        }\n\n        return this.collaborate(accessibleByField,\
+      \ role, null, null);\n    }"
+  - source_sentence: 'Register the router instance.
+
+
+      @return void'
+    sentences:
+    - "protected function registerRouter()\n\t{\n\t\t$this->app['router'] = $this->app->share(function($app)\n\t\t{\n\t\t\t\
+      return new Router($app['events'], $app);\n\t\t});\n\t}"
+    - "@Override\n    @Nullable\n    public Long apply(@Nonnull Long partialAccountNumber) {\n        checkNotNull(partialAccountNumber,\
+      \ \"partialAccountNumber can't be null\");\n        boolean isEven = true;\n        int total = 0;\n        Long temp\
+      \ = partialAccountNumber;\n\n        while (temp > 0) {\n            long digit = temp % 10;\n            if (isEven)\
+      \ {\n                long multipliedDigit = digit * 2;\n                total += isTwoDigit(multipliedDigit) ? sumUpDigits(multipliedDigit)\
+      \ : multipliedDigit;\n            } else {\n                total += digit;\n            }\n            temp /= 10;\n\
+      \            isEven = !isEven;\n        }\n\n        int check = total * 9 % 10;\n\n        return partialAccountNumber\
+      \ * 10 + check;\n    }"
+    - "func (d *Driver) DiffSize(id string, idMappings *idtools.IDMappings, parent string, parentMappings *idtools.IDMappings,\
+      \ mountLabel string) (size int64, err error) {\n\tif d.useNaiveDiff() || !d.isParent(id, parent) {\n\t\treturn d.naiveDiff.DiffSize(id,\
+      \ idMappings, parent, parentMappings, mountLabel)\n\t}\n\treturn directory.Size(d.getDiffPath(id))\n}"
+  pipeline_tag: sentence-similarity
+  library_name: sentence-transformers
+siblings:
+- rfilename: .gitattributes
+- rfilename: 1_Pooling/config.json
+- rfilename: README.md
+- rfilename: added_tokens.json
+- rfilename: config.json
+- rfilename: config_sentence_transformers.json
+- rfilename: merges.txt
+- rfilename: model.safetensors
+- rfilename: modules.json
+- rfilename: sentence_bert_config.json
+- rfilename: special_tokens_map.json
+- rfilename: tokenizer.json
+- rfilename: tokenizer_config.json
+- rfilename: vocab.json
+spaces: []
+createdAt: '2025-07-03T19:56:55.000Z'
+safetensors:
+  parameters:
+    F32: 151669248
+  total: 151669248
+usedStorage: 606684184
+downloadsAllTime: 4
+inferenceProviderMapping: {}
+configJson:
+  architectures:
+  - ModernBertModel
+  attention_bias: false
+  attention_dropout: 0.0
+  attention_probs_dropout_prob: 0.1
+  bos_token_id: 50000
+  classifier_activation: gelu
+  classifier_bias: false
+  classifier_dropout: 0.0
+  classifier_pooling: cls
+  cls_token_id: 50281
+  decoder_bias: true
+  deterministic_flash_attn: false
+  embedding_dropout: 0.0
+  eos_token_id: 50001
+  global_attn_every_n_layers: 3
+  global_rope_theta: 160000.0
+  hidden_activation: gelu
+  hidden_dropout_prob: 0.1
+  hidden_size: 768
+  initializer_cutoff_factor: 2.0
+  initializer_range: 0.02
+  intermediate_size: 3072
+  local_attention: 128
+  local_attention_rope_theta: 10000
+  local_attention_window: 128
+  local_rope_theta: 10000.0
+  max_position_embeddings: 8192
+  mlp_bias: false
+  mlp_dropout: 0.0
+  model_type: modernbert
+  norm_bias: false
+  norm_eps: 1.0e-05
+  num_attention_heads: 12
+  num_hidden_layers: 12
+  pad_token_id: 1
+  repad_logits_with_grad: false
+  rope_theta: 160000
+  sep_token_id: 50282
+  sparse_pred_ignore_index: -100
+  sparse_prediction: false
+  torch_dtype: float32
+  transformers_version: 4.53.0
+  type_vocab_size: 2
+  vocab_size: 50005
+onnxFiles: {}
+safetensorsSizeMb: 606.7
+approxSizeMb: 606.7
+fetchedAt: '2026-06-09T06:55:53.000Z'

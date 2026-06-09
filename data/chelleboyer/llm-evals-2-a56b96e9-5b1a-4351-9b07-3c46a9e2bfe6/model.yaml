@@ -1,0 +1,971 @@
+_id: 68232ea23949cda1e7485ceb
+id: chelleboyer/llm-evals-2-a56b96e9-5b1a-4351-9b07-3c46a9e2bfe6
+private: false
+pipeline_tag: sentence-similarity
+library_name: sentence-transformers
+tags:
+- sentence-transformers
+- safetensors
+- bert
+- sentence-similarity
+- feature-extraction
+- generated_from_trainer
+- dataset_size:782
+- loss:MatryoshkaLoss
+- loss:MultipleNegativesRankingLoss
+- arxiv:1908.10084
+- arxiv:2205.13147
+- arxiv:1705.00652
+- base_model:Snowflake/snowflake-arctic-embed-l
+- base_model:finetune:Snowflake/snowflake-arctic-embed-l
+- model-index
+- text-embeddings-inference
+- endpoints_compatible
+- region:us
+downloads: 3
+likes: 0
+modelId: chelleboyer/llm-evals-2-a56b96e9-5b1a-4351-9b07-3c46a9e2bfe6
+author: chelleboyer
+sha: 0d00878ce91620f901e529b87eaee3a96e63d9cf
+lastModified: '2025-05-13T11:37:13.000Z'
+gated: false
+disabled: false
+mask_token: '[MASK]'
+widgetData:
+- source_sentence: How does the concept of human annotation saving ratio relate to the use of control variates in efficient
+    LLM evaluation?
+  sentences:
+  - 'Accelerating Unbiased LLM Evaluation via Synthetic Feedback
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    1 Introduction
+
+
+    2 Related Work
+
+
+    2.1 LLM Evaluation: Metric, Benchmark and Systems
+
+    2.2 Speeding Up LLM Evaluation
+
+    2.3 Control Variates, Application, and related techniques
+
+
+
+
+    3 Preliminaries
+
+
+    3.1 LLM Evaluation
+
+    3.2 Human and Synthetic Evaluation
+
+    3.3 Other Notations
+
+
+
+
+    4 Efficient LLM Evaluation via Control Variates
+
+
+
+    4.1 Control Variates
+
+
+    Human annotation saving ratio.
+
+
+
+
+    4.2 Control Variates Evaluation'
+  - '(3)
+
+
+    The combination yielding the highest final test accuracy is selected as the optimal hyperparameter setting. We use the
+    chosen hyperparameter setting to finetune Skywork-8B on all other holdout models.
+
+
+
+
+    The similar procedure applies when we finetune other synthetic evaluators on other benchmarks.
+
+
+
+
+
+    B.2 Hardware
+
+
+    The experiments are run on H100 GPUs. Finetuning Skywork-8B requires 4 GPUs. Finetuning GRM-2B as well as the collection
+    of synthetic annotations can all be done on 1 GPU.
+
+
+
+
+
+    B.3 Prompt Template
+
+
+    We use the GPT-4 annotations for MT-Bench from the Hugging Face repository https://huggingface.co/datasets/lmsys/mt_bench_human_judgments/viewer/default/gpt4_pair.'
+  - Theoretically, the mean-square error can be decomposed into the square of evaluation bias and the variance. Therefore,
+    the mean-square error curve still effectively reflects the variance reduction tendency as the number of human annotations
+    increases, and when the number approaches infinity, we can extract the bias of the evaluation through the limit of mean
+    square error.
+- source_sentence: What makes the described method hyperparameter-free in terms of estimating parameters for control variates?
+  sentences:
+  - 'Summary.
+
+
+    We offer several remarks:
+
+
+
+    •
+
+
+    Our construction of control variates is task-agnostic, i.e, we do not leverage any specific structure or knowledge of
+    the prompt set 𝒳𝒳\mathcal{X}caligraphic_X.
+
+
+
+
+    •
+
+
+    The method is hyperparameter-free as parameters for control variates like the synthetic win rate μz^subscript𝜇^𝑧\mu_{\hat{z}}italic_μ
+    start_POSTSUBSCRIPT over^ start_ARG italic_z end_ARG end_POSTSUBSCRIPT and control variates coefficient α𝛼\alphaitalic_α
+    are estimated directly from data. (If fine-tuning is used, one still needs to choose fine-tuning hyper-parameters over
+    a validation dataset)
+
+
+
+
+    •'
+  - '2.4 Research Questions
+
+
+
+
+    3 Experiments and Analyses
+
+
+    3.1 Setups
+
+
+    3.2 RQ1: How to choose 𝒳,ℰ,𝒯,𝒜𝒳ℰ𝒯𝒜\mathcal{X},\mathcal{E},\mathcal{T},\mathcal{A}caligraphic_X , caligraphic_E , caligraphic_T
+    , caligraphic_A to maximize the bencher’s performance?
+
+
+    Input Set.
+
+    Evaluation Type.
+
+    Aggregation Method.
+
+    Cost Analysis.
+
+
+
+    3.3 RQ2: Does the performance of automatic LLM benchers degrade when evaluating LLMs with similar performance?
+
+    3.4 RQ3: Can we use instance-level rankings of evaluation models as a good reference to select evaluation models for LLM
+    benchers?'
+  - As shown in Figure 14 in the appendix, the performance differences among the selected LLM systems are uneven, so the difficulty
+    of distinguishing between different LLMs varies. We introduced a threshold u𝑢uitalic_u so that only system pairs with
+    performance differences smaller than it are used to calculate τusubscript𝜏𝑢\tau_{u}italic_τ start_POSTSUBSCRIPT italic_u
+    end_POSTSUBSCRIPT. Since fewer system pairs meet the requirement as u𝑢uitalic_u decreases, we can control the threshold
+    u𝑢uitalic_u to select a specific proportion of system pairs. Specifically, we selected 5%, 10%, …, and 100% of system
+    pairs and observed the changes in bencher performance. Figure 2 shows that as u𝑢uitalic_u
+- source_sentence: What role do control variates play in accelerating unbiased LLM evaluation as discussed in the context?
+  sentences:
+  - 'Owen (2013)
+
+
+    Owen, A. B.
+
+
+
+    Monte Carlo theory, methods and examples.
+
+
+
+    https://artowen.su.domains/mc/, 2013.
+
+
+
+
+
+    Papineni et al. (2002)
+
+
+    Papineni, K., Roukos, S., Ward, T., and Zhu, W.-J.
+
+
+
+    Bleu: a method for automatic evaluation of machine translation.
+
+
+
+    In Proceedings of the 40th annual meeting of the Association
+
+    for Computational Linguistics, pp.  311–318, 2002.
+
+
+
+
+
+    Perlitz et al. (2023)
+
+
+    Perlitz, Y., Bandel, E., Gera, A., Arviv, O., Ein-Dor, L., Shnarch, E., Slonim,
+
+    N., Shmueli-Scheuer, M., and Choshen, L.
+
+
+
+    Efficient benchmarking (of language models).
+
+
+
+    arXiv preprint arXiv:2308.11696, 2023.
+
+
+
+
+
+    Polo et al. (2024a)'
+  - end_POSTSUBSCRIPT start_POSTSUPERSCRIPT ′ end_POSTSUPERSCRIPT ) or Kendall’s τ⁢(RA(i),RH′)𝜏superscriptsubscript𝑅𝐴𝑖superscriptsubscript𝑅𝐻′\tau(R_{A}^{(i)},R_{H}^{\prime})italic_τ
+    ( italic_R start_POSTSUBSCRIPT italic_A end_POSTSUBSCRIPT start_POSTSUPERSCRIPT ( italic_i ) end_POSTSUPERSCRIPT , italic_R
+    start_POSTSUBSCRIPT italic_H end_POSTSUBSCRIPT start_POSTSUPERSCRIPT ′ end_POSTSUPERSCRIPT ). (4) The evaluation models
+    are then ranked (Rℰ(3)superscriptsubscript𝑅ℰ3R_{\mathcal{E}}^{(3)}italic_R start_POSTSUBSCRIPT caligraphic_E end_POSTSUBSCRIPT
+    start_POSTSUPERSCRIPT ( 3 ) end_POSTSUPERSCRIPT) based on the correlation between their aggregated rankings and the aggregated
+    human judgments.
+  - 'Accelerating Unbiased LLM Evaluation via Synthetic Feedback
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    1 Introduction
+
+
+    2 Related Work
+
+
+    2.1 LLM Evaluation: Metric, Benchmark and Systems
+
+    2.2 Speeding Up LLM Evaluation
+
+    2.3 Control Variates, Application, and related techniques
+
+
+
+
+    3 Preliminaries
+
+
+    3.1 LLM Evaluation
+
+    3.2 Human and Synthetic Evaluation
+
+    3.3 Other Notations
+
+
+
+
+    4 Efficient LLM Evaluation via Control Variates
+
+
+
+    4.1 Control Variates
+
+
+    Human annotation saving ratio.
+
+
+
+
+    4.2 Control Variates Evaluation'
+- source_sentence: Which choices of input sets, evaluation models, evaluation types, and aggregation methods maximize the
+    bencher’s performance?
+  sentences:
+  - 'Jiang et al. (2023)
+
+
+    Albert Q. Jiang, Alexandre Sablayrolles, Arthur Mensch, Chris Bamford, Devendra Singh Chaplot, Diego de Las Casas, Florian
+    Bressand, Gianna Lengyel, Guillaume Lample, Lucile Saulnier, Lélio Renard Lavaud, Marie-Anne Lachaux, Pierre Stock, Teven Le
+    Scao, Thibaut Lavril, Thomas Wang, Timothée Lacroix, and William El Sayed. 2023.
+
+
+
+    Mistral 7b.
+
+
+
+    CoRR, abs/2310.06825.
+
+
+
+
+
+    Lambert et al. (2024)
+
+
+    Nathan Lambert, Valentina Pyatkin, Jacob Morrison, LJ Miranda, Bill Yuchen Lin, Khyathi Raghavi Chandu, Nouha Dziri, Sachin
+    Kumar, Tom Zick, Yejin Choi, Noah A. Smith, and Hannaneh Hajishirzi. 2024.
+
+
+
+    Rewardbench: Evaluating reward models for language modeling.'
+  - We visualize the human annotation ratio (in percentage) on each LLM pair that we use to compute the averaged human annotation
+    saving ratio in Table 1. The results are shown in Figures 8 and 9. For a pretrained evaluator, each entry of the matrix
+    is the human annotation saving ratio (in percentage) on that LLM pair. For a finetuned evaluator, each entry of the matrix
+    is the human annotation saving ratio (in percentage) on the corresponding LLM pair, in which the LLM on the row is the
+    left-out LLM, while the LLM on the column is used in finetuning. Please refer to Section 5.1 for the details of finetuning
+    procedure. Therefore, the matrices for pretrained evaluators are symmetric, while they
+  - 'Therefore, we aim to conduct a more rigorous examination of these automatic benchers.
+
+    To this end, the first research question we explore is RQ1: how to choose the appropriate components for building an effective
+    automatic LLM bencher?
+
+    Specifically, we perform controlled comparisons of various input sets, evaluation models, evaluation types, and aggregation
+    methods to investigate which choices of each component maximize the bencher’s performance.
+
+    Our key findings are:'
+- source_sentence: What is the expression for the minimum variance of \( z^{\mathsf{cv};\alpha} \) in terms of \(\rho\) and
+    \(\mathrm{Var}[z]\)?
+  sentences:
+  - '(3)
+
+
+
+
+
+
+    (Optional) Synthetic evaluator finetuning (Line 3).
+
+
+    On many popular LLM evaluation benchmarks such as Chatbot Arena and MT Bench (Zheng et al., 2023), there are abundant
+    off-the-shelf human annotations for pre-generated language model responses. Now suppose we have a new LLM and we want
+    to compare it with the existing ones in the benchmark. Can we make use of these existing human annotations to help reduce
+    the human annotations needed in Control Variates Evaluation?'
+  - 'minα∈ℝ⁡Var⁢[z𝖼𝗏;α]=(1−ρ2)⁢Var⁢[z].subscript𝛼ℝVardelimited-[]superscript𝑧𝖼𝗏𝛼1superscript𝜌2Vardelimited-[]𝑧\displaystyle\min_{\alpha\in\mathbb{R}}\mathrm{Var}[z^{\mathsf{cv};\alpha}]=%
+
+    \left(1-\rho^{2}\right)\mathrm{Var}[z].roman_min start_POSTSUBSCRIPT italic_α ∈ blackboard_R end_POSTSUBSCRIPT roman_Var
+    [ italic_z start_POSTSUPERSCRIPT sansserif_cv ; italic_α end_POSTSUPERSCRIPT ] = ( 1 - italic_ρ start_POSTSUPERSCRIPT
+    2 end_POSTSUPERSCRIPT ) roman_Var [ italic_z ] .
+
+
+
+
+    The minimum is achieved if and only if α𝛼\alphaitalic_α equals'
+  - explored how to select these components or how their different combinations influence the results.
+model-index:
+- name: SentenceTransformer based on Snowflake/snowflake-arctic-embed-l
+  results:
+  - task:
+      type: information-retrieval
+      name: Information Retrieval
+    dataset:
+      name: Unknown
+      type: unknown
+    metrics:
+    - type: cosine_accuracy@1
+      value: 0.94
+      name: Cosine Accuracy@1
+      verified: false
+    - type: cosine_accuracy@3
+      value: 1
+      name: Cosine Accuracy@3
+      verified: false
+    - type: cosine_accuracy@5
+      value: 1
+      name: Cosine Accuracy@5
+      verified: false
+    - type: cosine_accuracy@10
+      value: 1
+      name: Cosine Accuracy@10
+      verified: false
+    - type: cosine_precision@1
+      value: 0.94
+      name: Cosine Precision@1
+      verified: false
+    - type: cosine_precision@3
+      value: 0.33333333333333326
+      name: Cosine Precision@3
+      verified: false
+    - type: cosine_precision@5
+      value: 0.19999999999999996
+      name: Cosine Precision@5
+      verified: false
+    - type: cosine_precision@10
+      value: 0.09999999999999998
+      name: Cosine Precision@10
+      verified: false
+    - type: cosine_recall@1
+      value: 0.94
+      name: Cosine Recall@1
+      verified: false
+    - type: cosine_recall@3
+      value: 1
+      name: Cosine Recall@3
+      verified: false
+    - type: cosine_recall@5
+      value: 1
+      name: Cosine Recall@5
+      verified: false
+    - type: cosine_recall@10
+      value: 1
+      name: Cosine Recall@10
+      verified: false
+    - type: cosine_ndcg@10
+      value: 0.9752371901428583
+      name: Cosine Ndcg@10
+      verified: false
+    - type: cosine_mrr@10
+      value: 0.9666666666666667
+      name: Cosine Mrr@10
+      verified: false
+    - type: cosine_map@100
+      value: 0.9666666666666666
+      name: Cosine Map@100
+      verified: false
+config:
+  architectures:
+  - BertModel
+  model_type: bert
+  tokenizer_config:
+    cls_token: '[CLS]'
+    mask_token: '[MASK]'
+    pad_token: '[PAD]'
+    sep_token: '[SEP]'
+    unk_token: '[UNK]'
+cardData:
+  tags:
+  - sentence-transformers
+  - sentence-similarity
+  - feature-extraction
+  - generated_from_trainer
+  - dataset_size:782
+  - loss:MatryoshkaLoss
+  - loss:MultipleNegativesRankingLoss
+  base_model: Snowflake/snowflake-arctic-embed-l
+  widget:
+  - source_sentence: How does the concept of human annotation saving ratio relate to the use of control variates in efficient
+      LLM evaluation?
+    sentences:
+    - 'Accelerating Unbiased LLM Evaluation via Synthetic Feedback
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      1 Introduction
+
+
+      2 Related Work
+
+
+      2.1 LLM Evaluation: Metric, Benchmark and Systems
+
+      2.2 Speeding Up LLM Evaluation
+
+      2.3 Control Variates, Application, and related techniques
+
+
+
+
+      3 Preliminaries
+
+
+      3.1 LLM Evaluation
+
+      3.2 Human and Synthetic Evaluation
+
+      3.3 Other Notations
+
+
+
+
+      4 Efficient LLM Evaluation via Control Variates
+
+
+
+      4.1 Control Variates
+
+
+      Human annotation saving ratio.
+
+
+
+
+      4.2 Control Variates Evaluation'
+    - '(3)
+
+
+      The combination yielding the highest final test accuracy is selected as the optimal hyperparameter setting. We use the
+      chosen hyperparameter setting to finetune Skywork-8B on all other holdout models.
+
+
+
+
+      The similar procedure applies when we finetune other synthetic evaluators on other benchmarks.
+
+
+
+
+
+      B.2 Hardware
+
+
+      The experiments are run on H100 GPUs. Finetuning Skywork-8B requires 4 GPUs. Finetuning GRM-2B as well as the collection
+      of synthetic annotations can all be done on 1 GPU.
+
+
+
+
+
+      B.3 Prompt Template
+
+
+      We use the GPT-4 annotations for MT-Bench from the Hugging Face repository https://huggingface.co/datasets/lmsys/mt_bench_human_judgments/viewer/default/gpt4_pair.'
+    - Theoretically, the mean-square error can be decomposed into the square of evaluation bias and the variance. Therefore,
+      the mean-square error curve still effectively reflects the variance reduction tendency as the number of human annotations
+      increases, and when the number approaches infinity, we can extract the bias of the evaluation through the limit of mean
+      square error.
+  - source_sentence: What makes the described method hyperparameter-free in terms of estimating parameters for control variates?
+    sentences:
+    - 'Summary.
+
+
+      We offer several remarks:
+
+
+
+      •
+
+
+      Our construction of control variates is task-agnostic, i.e, we do not leverage any specific structure or knowledge of
+      the prompt set 𝒳𝒳\mathcal{X}caligraphic_X.
+
+
+
+
+      •
+
+
+      The method is hyperparameter-free as parameters for control variates like the synthetic win rate μz^subscript𝜇^𝑧\mu_{\hat{z}}italic_μ
+      start_POSTSUBSCRIPT over^ start_ARG italic_z end_ARG end_POSTSUBSCRIPT and control variates coefficient α𝛼\alphaitalic_α
+      are estimated directly from data. (If fine-tuning is used, one still needs to choose fine-tuning hyper-parameters over
+      a validation dataset)
+
+
+
+
+      •'
+    - '2.4 Research Questions
+
+
+
+
+      3 Experiments and Analyses
+
+
+      3.1 Setups
+
+
+      3.2 RQ1: How to choose 𝒳,ℰ,𝒯,𝒜𝒳ℰ𝒯𝒜\mathcal{X},\mathcal{E},\mathcal{T},\mathcal{A}caligraphic_X , caligraphic_E , caligraphic_T
+      , caligraphic_A to maximize the bencher’s performance?
+
+
+      Input Set.
+
+      Evaluation Type.
+
+      Aggregation Method.
+
+      Cost Analysis.
+
+
+
+      3.3 RQ2: Does the performance of automatic LLM benchers degrade when evaluating LLMs with similar performance?
+
+      3.4 RQ3: Can we use instance-level rankings of evaluation models as a good reference to select evaluation models for
+      LLM benchers?'
+    - As shown in Figure 14 in the appendix, the performance differences among the selected LLM systems are uneven, so the
+      difficulty of distinguishing between different LLMs varies. We introduced a threshold u𝑢uitalic_u so that only system
+      pairs with performance differences smaller than it are used to calculate τusubscript𝜏𝑢\tau_{u}italic_τ start_POSTSUBSCRIPT
+      italic_u end_POSTSUBSCRIPT. Since fewer system pairs meet the requirement as u𝑢uitalic_u decreases, we can control the
+      threshold u𝑢uitalic_u to select a specific proportion of system pairs. Specifically, we selected 5%, 10%, …, and 100%
+      of system pairs and observed the changes in bencher performance. Figure 2 shows that as u𝑢uitalic_u
+  - source_sentence: What role do control variates play in accelerating unbiased LLM evaluation as discussed in the context?
+    sentences:
+    - 'Owen (2013)
+
+
+      Owen, A. B.
+
+
+
+      Monte Carlo theory, methods and examples.
+
+
+
+      https://artowen.su.domains/mc/, 2013.
+
+
+
+
+
+      Papineni et al. (2002)
+
+
+      Papineni, K., Roukos, S., Ward, T., and Zhu, W.-J.
+
+
+
+      Bleu: a method for automatic evaluation of machine translation.
+
+
+
+      In Proceedings of the 40th annual meeting of the Association
+
+      for Computational Linguistics, pp.  311–318, 2002.
+
+
+
+
+
+      Perlitz et al. (2023)
+
+
+      Perlitz, Y., Bandel, E., Gera, A., Arviv, O., Ein-Dor, L., Shnarch, E., Slonim,
+
+      N., Shmueli-Scheuer, M., and Choshen, L.
+
+
+
+      Efficient benchmarking (of language models).
+
+
+
+      arXiv preprint arXiv:2308.11696, 2023.
+
+
+
+
+
+      Polo et al. (2024a)'
+    - end_POSTSUBSCRIPT start_POSTSUPERSCRIPT ′ end_POSTSUPERSCRIPT ) or Kendall’s τ⁢(RA(i),RH′)𝜏superscriptsubscript𝑅𝐴𝑖superscriptsubscript𝑅𝐻′\tau(R_{A}^{(i)},R_{H}^{\prime})italic_τ
+      ( italic_R start_POSTSUBSCRIPT italic_A end_POSTSUBSCRIPT start_POSTSUPERSCRIPT ( italic_i ) end_POSTSUPERSCRIPT , italic_R
+      start_POSTSUBSCRIPT italic_H end_POSTSUBSCRIPT start_POSTSUPERSCRIPT ′ end_POSTSUPERSCRIPT ). (4) The evaluation models
+      are then ranked (Rℰ(3)superscriptsubscript𝑅ℰ3R_{\mathcal{E}}^{(3)}italic_R start_POSTSUBSCRIPT caligraphic_E end_POSTSUBSCRIPT
+      start_POSTSUPERSCRIPT ( 3 ) end_POSTSUPERSCRIPT) based on the correlation between their aggregated rankings and the
+      aggregated human judgments.
+    - 'Accelerating Unbiased LLM Evaluation via Synthetic Feedback
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      1 Introduction
+
+
+      2 Related Work
+
+
+      2.1 LLM Evaluation: Metric, Benchmark and Systems
+
+      2.2 Speeding Up LLM Evaluation
+
+      2.3 Control Variates, Application, and related techniques
+
+
+
+
+      3 Preliminaries
+
+
+      3.1 LLM Evaluation
+
+      3.2 Human and Synthetic Evaluation
+
+      3.3 Other Notations
+
+
+
+
+      4 Efficient LLM Evaluation via Control Variates
+
+
+
+      4.1 Control Variates
+
+
+      Human annotation saving ratio.
+
+
+
+
+      4.2 Control Variates Evaluation'
+  - source_sentence: Which choices of input sets, evaluation models, evaluation types, and aggregation methods maximize the
+      bencher’s performance?
+    sentences:
+    - 'Jiang et al. (2023)
+
+
+      Albert Q. Jiang, Alexandre Sablayrolles, Arthur Mensch, Chris Bamford, Devendra Singh Chaplot, Diego de Las Casas, Florian
+      Bressand, Gianna Lengyel, Guillaume Lample, Lucile Saulnier, Lélio Renard Lavaud, Marie-Anne Lachaux, Pierre Stock,
+      Teven Le Scao, Thibaut Lavril, Thomas Wang, Timothée Lacroix, and William El Sayed. 2023.
+
+
+
+      Mistral 7b.
+
+
+
+      CoRR, abs/2310.06825.
+
+
+
+
+
+      Lambert et al. (2024)
+
+
+      Nathan Lambert, Valentina Pyatkin, Jacob Morrison, LJ Miranda, Bill Yuchen Lin, Khyathi Raghavi Chandu, Nouha Dziri,
+      Sachin Kumar, Tom Zick, Yejin Choi, Noah A. Smith, and Hannaneh Hajishirzi. 2024.
+
+
+
+      Rewardbench: Evaluating reward models for language modeling.'
+    - We visualize the human annotation ratio (in percentage) on each LLM pair that we use to compute the averaged human annotation
+      saving ratio in Table 1. The results are shown in Figures 8 and 9. For a pretrained evaluator, each entry of the matrix
+      is the human annotation saving ratio (in percentage) on that LLM pair. For a finetuned evaluator, each entry of the
+      matrix is the human annotation saving ratio (in percentage) on the corresponding LLM pair, in which the LLM on the row
+      is the left-out LLM, while the LLM on the column is used in finetuning. Please refer to Section 5.1 for the details
+      of finetuning procedure. Therefore, the matrices for pretrained evaluators are symmetric, while they
+    - 'Therefore, we aim to conduct a more rigorous examination of these automatic benchers.
+
+      To this end, the first research question we explore is RQ1: how to choose the appropriate components for building an
+      effective automatic LLM bencher?
+
+      Specifically, we perform controlled comparisons of various input sets, evaluation models, evaluation types, and aggregation
+      methods to investigate which choices of each component maximize the bencher’s performance.
+
+      Our key findings are:'
+  - source_sentence: What is the expression for the minimum variance of \( z^{\mathsf{cv};\alpha} \) in terms of \(\rho\)
+      and \(\mathrm{Var}[z]\)?
+    sentences:
+    - '(3)
+
+
+
+
+
+
+      (Optional) Synthetic evaluator finetuning (Line 3).
+
+
+      On many popular LLM evaluation benchmarks such as Chatbot Arena and MT Bench (Zheng et al., 2023), there are abundant
+      off-the-shelf human annotations for pre-generated language model responses. Now suppose we have a new LLM and we want
+      to compare it with the existing ones in the benchmark. Can we make use of these existing human annotations to help reduce
+      the human annotations needed in Control Variates Evaluation?'
+    - 'minα∈ℝ⁡Var⁢[z𝖼𝗏;α]=(1−ρ2)⁢Var⁢[z].subscript𝛼ℝVardelimited-[]superscript𝑧𝖼𝗏𝛼1superscript𝜌2Vardelimited-[]𝑧\displaystyle\min_{\alpha\in\mathbb{R}}\mathrm{Var}[z^{\mathsf{cv};\alpha}]=%
+
+      \left(1-\rho^{2}\right)\mathrm{Var}[z].roman_min start_POSTSUBSCRIPT italic_α ∈ blackboard_R end_POSTSUBSCRIPT roman_Var
+      [ italic_z start_POSTSUPERSCRIPT sansserif_cv ; italic_α end_POSTSUPERSCRIPT ] = ( 1 - italic_ρ start_POSTSUPERSCRIPT
+      2 end_POSTSUPERSCRIPT ) roman_Var [ italic_z ] .
+
+
+
+
+      The minimum is achieved if and only if α𝛼\alphaitalic_α equals'
+    - explored how to select these components or how their different combinations influence the results.
+  pipeline_tag: sentence-similarity
+  library_name: sentence-transformers
+  metrics:
+  - cosine_accuracy@1
+  - cosine_accuracy@3
+  - cosine_accuracy@5
+  - cosine_accuracy@10
+  - cosine_precision@1
+  - cosine_precision@3
+  - cosine_precision@5
+  - cosine_precision@10
+  - cosine_recall@1
+  - cosine_recall@3
+  - cosine_recall@5
+  - cosine_recall@10
+  - cosine_ndcg@10
+  - cosine_mrr@10
+  - cosine_map@100
+  model-index:
+  - name: SentenceTransformer based on Snowflake/snowflake-arctic-embed-l
+    results:
+    - task:
+        type: information-retrieval
+        name: Information Retrieval
+      dataset:
+        name: Unknown
+        type: unknown
+      metrics:
+      - type: cosine_accuracy@1
+        value: 0.94
+        name: Cosine Accuracy@1
+        verified: false
+      - type: cosine_accuracy@3
+        value: 1
+        name: Cosine Accuracy@3
+        verified: false
+      - type: cosine_accuracy@5
+        value: 1
+        name: Cosine Accuracy@5
+        verified: false
+      - type: cosine_accuracy@10
+        value: 1
+        name: Cosine Accuracy@10
+        verified: false
+      - type: cosine_precision@1
+        value: 0.94
+        name: Cosine Precision@1
+        verified: false
+      - type: cosine_precision@3
+        value: 0.33333333333333326
+        name: Cosine Precision@3
+        verified: false
+      - type: cosine_precision@5
+        value: 0.19999999999999996
+        name: Cosine Precision@5
+        verified: false
+      - type: cosine_precision@10
+        value: 0.09999999999999998
+        name: Cosine Precision@10
+        verified: false
+      - type: cosine_recall@1
+        value: 0.94
+        name: Cosine Recall@1
+        verified: false
+      - type: cosine_recall@3
+        value: 1
+        name: Cosine Recall@3
+        verified: false
+      - type: cosine_recall@5
+        value: 1
+        name: Cosine Recall@5
+        verified: false
+      - type: cosine_recall@10
+        value: 1
+        name: Cosine Recall@10
+        verified: false
+      - type: cosine_ndcg@10
+        value: 0.9752371901428583
+        name: Cosine Ndcg@10
+        verified: false
+      - type: cosine_mrr@10
+        value: 0.9666666666666667
+        name: Cosine Mrr@10
+        verified: false
+      - type: cosine_map@100
+        value: 0.9666666666666666
+        name: Cosine Map@100
+        verified: false
+siblings:
+- rfilename: .gitattributes
+- rfilename: 1_Pooling/config.json
+- rfilename: README.md
+- rfilename: config.json
+- rfilename: config_sentence_transformers.json
+- rfilename: model.safetensors
+- rfilename: modules.json
+- rfilename: sentence_bert_config.json
+- rfilename: special_tokens_map.json
+- rfilename: tokenizer.json
+- rfilename: tokenizer_config.json
+- rfilename: vocab.txt
+spaces: []
+createdAt: '2025-05-13T11:36:02.000Z'
+safetensors:
+  parameters:
+    F32: 334092288
+  total: 334092288
+usedStorage: 1336413848
+downloadsAllTime: 3
+inferenceProviderMapping: {}
+configJson:
+  architectures:
+  - BertModel
+  attention_probs_dropout_prob: 0.1
+  classifier_dropout: null
+  hidden_act: gelu
+  hidden_dropout_prob: 0.1
+  hidden_size: 1024
+  initializer_range: 0.02
+  intermediate_size: 4096
+  layer_norm_eps: 1.0e-12
+  max_position_embeddings: 512
+  model_type: bert
+  num_attention_heads: 16
+  num_hidden_layers: 24
+  pad_token_id: 0
+  position_embedding_type: absolute
+  torch_dtype: float32
+  transformers_version: 4.51.3
+  type_vocab_size: 2
+  use_cache: true
+  vocab_size: 30522
+onnxFiles: {}
+safetensorsSizeMb: 1336.4
+approxSizeMb: 1336.4
+fetchedAt: '2026-06-09T06:55:53.000Z'

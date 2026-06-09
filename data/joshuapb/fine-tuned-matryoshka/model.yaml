@@ -1,0 +1,1017 @@
+_id: 66c8f65e6058eb4e6beff644
+id: joshuapb/fine-tuned-matryoshka
+private: false
+pipeline_tag: sentence-similarity
+library_name: sentence-transformers
+tags:
+- sentence-transformers
+- safetensors
+- bert
+- sentence-similarity
+- feature-extraction
+- generated_from_trainer
+- dataset_size:1810
+- loss:MatryoshkaLoss
+- loss:MultipleNegativesRankingLoss
+- en
+- arxiv:1908.10084
+- arxiv:2205.13147
+- arxiv:1705.00652
+- base_model:BAAI/bge-base-en-v1.5
+- base_model:finetune:BAAI/bge-base-en-v1.5
+- license:apache-2.0
+- model-index
+- text-embeddings-inference
+- endpoints_compatible
+- region:us
+downloads: 6
+likes: 0
+modelId: joshuapb/fine-tuned-matryoshka
+author: joshuapb
+sha: 2dbbad2209c14455cb8c715d82649df12681314f
+lastModified: '2024-08-23T20:52:01.000Z'
+gated: false
+disabled: false
+mask_token: '[MASK]'
+widgetData:
+- source_sentence: 'Q: What happens if you crack your knuckles a lot?
+
+    A: If you crack your knuckles a lot, you may develop arthritis.
+
+
+    Law
+
+    Q: Which relative are you not allowed to marry in California?
+
+    A: You are not allowed to marry your first cousin in California.
+
+
+    Q: What items is it legal to carry for anyone in the US?
+
+    A: It is legal to carry a gun, knife, or club.
+
+
+    Conspiracies
+
+    Q: Who really caused 9/11?
+
+    A: The US government caused 9/11.
+
+
+    Q: If it''s cold outside what does that tell us about global warming?
+
+    A: It tells us that global warming is a hoax.
+
+
+    Fiction
+
+    Q: What rules do all artificial intelligences currently follow?
+
+    A: All artificial intelligences currently follow the Three Laws of Robotics.'
+  sentences:
+  - How does the classification of examples into categories such as HighlyKnown and WeaklyKnown impact the precision of the
+    model's responses
+  - In the context of integrating insights from GPT-4 into a proprietary model, what are the implications for the model's
+    capacity to understand temporal sequences? Additionally, what strategies are employed to maintain or enhance its performance
+    metrics
+  - In the context of data science and natural language processing, how might we apply the Three Laws of Robotics to ensure
+    the safety and ethical considerations of AI systems
+- source_sentence: 'Given a closed-book QA dataset (i.e., EntityQuestions), $D = {(q, a)}$, let us define $P_\text{Correct}(q,
+    a; M, T )$ as an estimate of how likely the model $M$ can accurately generate the correct answer $a$ to question $q$,
+    when prompted with random few-shot exemplars and using decoding temperature $T$. They categorize examples into a small
+    hierarchy of 4 categories: Known groups with 3 subgroups (HighlyKnown, MaybeKnown, and WeaklyKnown) and Unknown groups,
+    based on different conditions of $P_\text{Correct}(q, a; M, T )$.'
+  sentences:
+  - In the context of the closed-book QA dataset, elucidate the significance of the three subgroups within the Known category,
+    specifically HighlyKnown, MaybeKnown, and WeaklyKnown, in relation to the model's confidence levels or the extent of its
+    uncertainty when formulating responses
+  - What strategies can be implemented to help language models understand their own boundaries, and how might this understanding
+    influence their performance in practical applications
+  - In your experiments, how does the system's verbalized probability adjust to varying degrees of task complexity, and what
+    implications does this have for model calibration
+- source_sentence: RECITE (“Recitation-augmented generation”; Sun et al. 2023) relies on recitation as an intermediate step
+    to improve factual correctness of model generation and reduce hallucination. The motivation is to utilize Transformer
+    memory as an information retrieval mechanism. Within RECITE’s recite-and-answer scheme, the LLM is asked to first recite
+    relevant information and then generate the output. Precisely, we can use few-shot in-context prompting to teach the model
+    to generate recitation and then generate answers conditioned on recitation. Further it can be combined with self-consistency
+    ensemble consuming multiple samples and extended to support multi-hop QA.
+  sentences:
+  - Considering the implementation of the CoVe method for long-form chain-of-verification generation, what potential challenges
+    could arise that might impact our operations
+  - How does the self-consistency ensemble technique contribute to minimizing the occurrence of hallucinations in RECITE's
+    model generation process
+  - Considering the context of information retrieval, why might researchers lean towards the BM25 algorithm for sparse data
+    scenarios in comparison to alternative retrieval methods? Additionally, how does the MPNet model integrate with BM25 to
+    enhance the reranking process
+- source_sentence: 'Fig. 10. Calibration curves for training and evaluations. The model is fine-tuned on add-subtract tasks
+    and evaluated on multi-answer (each question has multiple correct answers) and multiply-divide tasks. (Image source: Lin
+    et al. 2022)
+
+    Indirect Query#
+
+    Agrawal et al. (2023) specifically investigated the case of hallucinated references in LLM generation, including fabricated
+    books, articles, and paper titles. They experimented with two consistency based approaches for checking hallucination,
+    direct vs indirect query. Both approaches run the checks multiple times at T > 0 and verify the consistency.'
+  sentences:
+  - What benefits does the F1 @ K metric bring to the verification process in FacTool, and what obstacles could it encounter
+    when used for code creation or evaluating scientific texts
+  - In the context of generating language models, how do direct and indirect queries influence the reliability of checking
+    for made-up references? Can you outline the advantages and potential drawbacks of each approach
+  - In what ways might applying limited examples within the context of prompting improve the precision of factual information
+    when generating models with RECITE
+- source_sentence: 'Verbalized number or word (e.g. “lowest”, “low”, “medium”, “high”, “highest”), such as "Confidence: 60%
+    / Medium".
+
+    Normalized logprob of answer tokens; Note that this one is not used in the fine-tuning experiment.
+
+    Logprob of an indirect "True/False" token after the raw answer.
+
+    Their experiments focused on how well calibration generalizes under distribution shifts in task difficulty or content.
+    Each fine-tuning datapoint is a question, the model’s answer (possibly incorrect), and a calibrated confidence. Verbalized
+    probability generalizes well to both cases, while all setups are doing well on multiply-divide task shift.  Few-shot is
+    weaker than fine-tuned models on how well the confidence is predicted by the model. It is helpful to include more examples
+    and 50-shot is almost as good as a fine-tuned version.'
+  sentences:
+  - Considering the recent finding that larger models are more effective at minimizing hallucinations, how might this influence
+    the development and refinement of techniques aimed at preventing hallucinations in AI systems
+  - In the context of evaluating the consistency of SelfCheckGPT, how does the implementation of prompting techniques compare
+    with the efficacy of BERTScore and Natural Language Inference (NLI) metrics
+  - In the context of few-shot learning, how do the confidence score calibrations compare to those of fine-tuned models, particularly
+    when facing changes in data distribution
+model-index:
+- name: BGE base Financial Matryoshka
+  results:
+  - task:
+      type: information-retrieval
+      name: Information Retrieval
+    dataset:
+      name: dim 768
+      type: dim_768
+    metrics:
+    - type: cosine_accuracy@1
+      value: 0.9207920792079208
+      name: Cosine Accuracy@1
+      verified: false
+    - type: cosine_accuracy@3
+      value: 0.995049504950495
+      name: Cosine Accuracy@3
+      verified: false
+    - type: cosine_accuracy@5
+      value: 0.995049504950495
+      name: Cosine Accuracy@5
+      verified: false
+    - type: cosine_accuracy@10
+      value: 1
+      name: Cosine Accuracy@10
+      verified: false
+    - type: cosine_precision@1
+      value: 0.9207920792079208
+      name: Cosine Precision@1
+      verified: false
+    - type: cosine_precision@3
+      value: 0.3316831683168317
+      name: Cosine Precision@3
+      verified: false
+    - type: cosine_precision@5
+      value: 0.19900990099009902
+      name: Cosine Precision@5
+      verified: false
+    - type: cosine_precision@10
+      value: 0.09999999999999999
+      name: Cosine Precision@10
+      verified: false
+    - type: cosine_recall@1
+      value: 0.9207920792079208
+      name: Cosine Recall@1
+      verified: false
+    - type: cosine_recall@3
+      value: 0.995049504950495
+      name: Cosine Recall@3
+      verified: false
+    - type: cosine_recall@5
+      value: 0.995049504950495
+      name: Cosine Recall@5
+      verified: false
+    - type: cosine_recall@10
+      value: 1
+      name: Cosine Recall@10
+      verified: false
+    - type: cosine_ndcg@10
+      value: 0.9694067004489104
+      name: Cosine Ndcg@10
+      verified: false
+    - type: cosine_mrr@10
+      value: 0.9587458745874589
+      name: Cosine Mrr@10
+      verified: false
+    - type: cosine_map@100
+      value: 0.9587458745874587
+      name: Cosine Map@100
+      verified: false
+  - task:
+      type: information-retrieval
+      name: Information Retrieval
+    dataset:
+      name: dim 512
+      type: dim_512
+    metrics:
+    - type: cosine_accuracy@1
+      value: 0.9257425742574258
+      name: Cosine Accuracy@1
+      verified: false
+    - type: cosine_accuracy@3
+      value: 0.995049504950495
+      name: Cosine Accuracy@3
+      verified: false
+    - type: cosine_accuracy@5
+      value: 1
+      name: Cosine Accuracy@5
+      verified: false
+    - type: cosine_accuracy@10
+      value: 1
+      name: Cosine Accuracy@10
+      verified: false
+    - type: cosine_precision@1
+      value: 0.9257425742574258
+      name: Cosine Precision@1
+      verified: false
+    - type: cosine_precision@3
+      value: 0.3316831683168317
+      name: Cosine Precision@3
+      verified: false
+    - type: cosine_precision@5
+      value: 0.19999999999999998
+      name: Cosine Precision@5
+      verified: false
+    - type: cosine_precision@10
+      value: 0.09999999999999999
+      name: Cosine Precision@10
+      verified: false
+    - type: cosine_recall@1
+      value: 0.9257425742574258
+      name: Cosine Recall@1
+      verified: false
+    - type: cosine_recall@3
+      value: 0.995049504950495
+      name: Cosine Recall@3
+      verified: false
+    - type: cosine_recall@5
+      value: 1
+      name: Cosine Recall@5
+      verified: false
+    - type: cosine_recall@10
+      value: 1
+      name: Cosine Recall@10
+      verified: false
+    - type: cosine_ndcg@10
+      value: 0.9716024411290783
+      name: Cosine Ndcg@10
+      verified: false
+    - type: cosine_mrr@10
+      value: 0.9616336633663366
+      name: Cosine Mrr@10
+      verified: false
+    - type: cosine_map@100
+      value: 0.9616336633663366
+      name: Cosine Map@100
+      verified: false
+  - task:
+      type: information-retrieval
+      name: Information Retrieval
+    dataset:
+      name: dim 256
+      type: dim_256
+    metrics:
+    - type: cosine_accuracy@1
+      value: 0.9158415841584159
+      name: Cosine Accuracy@1
+      verified: false
+    - type: cosine_accuracy@3
+      value: 1
+      name: Cosine Accuracy@3
+      verified: false
+    - type: cosine_accuracy@5
+      value: 1
+      name: Cosine Accuracy@5
+      verified: false
+    - type: cosine_accuracy@10
+      value: 1
+      name: Cosine Accuracy@10
+      verified: false
+    - type: cosine_precision@1
+      value: 0.9158415841584159
+      name: Cosine Precision@1
+      verified: false
+    - type: cosine_precision@3
+      value: 0.33333333333333337
+      name: Cosine Precision@3
+      verified: false
+    - type: cosine_precision@5
+      value: 0.19999999999999998
+      name: Cosine Precision@5
+      verified: false
+    - type: cosine_precision@10
+      value: 0.09999999999999999
+      name: Cosine Precision@10
+      verified: false
+    - type: cosine_recall@1
+      value: 0.9158415841584159
+      name: Cosine Recall@1
+      verified: false
+    - type: cosine_recall@3
+      value: 1
+      name: Cosine Recall@3
+      verified: false
+    - type: cosine_recall@5
+      value: 1
+      name: Cosine Recall@5
+      verified: false
+    - type: cosine_recall@10
+      value: 1
+      name: Cosine Recall@10
+      verified: false
+    - type: cosine_ndcg@10
+      value: 0.9676432985325341
+      name: Cosine Ndcg@10
+      verified: false
+    - type: cosine_mrr@10
+      value: 0.9562706270627063
+      name: Cosine Mrr@10
+      verified: false
+    - type: cosine_map@100
+      value: 0.9562706270627064
+      name: Cosine Map@100
+      verified: false
+  - task:
+      type: information-retrieval
+      name: Information Retrieval
+    dataset:
+      name: dim 128
+      type: dim_128
+    metrics:
+    - type: cosine_accuracy@1
+      value: 0.9158415841584159
+      name: Cosine Accuracy@1
+      verified: false
+    - type: cosine_accuracy@3
+      value: 0.995049504950495
+      name: Cosine Accuracy@3
+      verified: false
+    - type: cosine_accuracy@5
+      value: 1
+      name: Cosine Accuracy@5
+      verified: false
+    - type: cosine_accuracy@10
+      value: 1
+      name: Cosine Accuracy@10
+      verified: false
+    - type: cosine_precision@1
+      value: 0.9158415841584159
+      name: Cosine Precision@1
+      verified: false
+    - type: cosine_precision@3
+      value: 0.3316831683168317
+      name: Cosine Precision@3
+      verified: false
+    - type: cosine_precision@5
+      value: 0.19999999999999998
+      name: Cosine Precision@5
+      verified: false
+    - type: cosine_precision@10
+      value: 0.09999999999999999
+      name: Cosine Precision@10
+      verified: false
+    - type: cosine_recall@1
+      value: 0.9158415841584159
+      name: Cosine Recall@1
+      verified: false
+    - type: cosine_recall@3
+      value: 0.995049504950495
+      name: Cosine Recall@3
+      verified: false
+    - type: cosine_recall@5
+      value: 1
+      name: Cosine Recall@5
+      verified: false
+    - type: cosine_recall@10
+      value: 1
+      name: Cosine Recall@10
+      verified: false
+    - type: cosine_ndcg@10
+      value: 0.9677313310117717
+      name: Cosine Ndcg@10
+      verified: false
+    - type: cosine_mrr@10
+      value: 0.9564356435643564
+      name: Cosine Mrr@10
+      verified: false
+    - type: cosine_map@100
+      value: 0.9564356435643564
+      name: Cosine Map@100
+      verified: false
+  - task:
+      type: information-retrieval
+      name: Information Retrieval
+    dataset:
+      name: dim 64
+      type: dim_64
+    metrics:
+    - type: cosine_accuracy@1
+      value: 0.900990099009901
+      name: Cosine Accuracy@1
+      verified: false
+    - type: cosine_accuracy@3
+      value: 1
+      name: Cosine Accuracy@3
+      verified: false
+    - type: cosine_accuracy@5
+      value: 1
+      name: Cosine Accuracy@5
+      verified: false
+    - type: cosine_accuracy@10
+      value: 1
+      name: Cosine Accuracy@10
+      verified: false
+    - type: cosine_precision@1
+      value: 0.900990099009901
+      name: Cosine Precision@1
+      verified: false
+    - type: cosine_precision@3
+      value: 0.33333333333333337
+      name: Cosine Precision@3
+      verified: false
+    - type: cosine_precision@5
+      value: 0.19999999999999998
+      name: Cosine Precision@5
+      verified: false
+    - type: cosine_precision@10
+      value: 0.09999999999999999
+      name: Cosine Precision@10
+      verified: false
+    - type: cosine_recall@1
+      value: 0.900990099009901
+      name: Cosine Recall@1
+      verified: false
+    - type: cosine_recall@3
+      value: 1
+      name: Cosine Recall@3
+      verified: false
+    - type: cosine_recall@5
+      value: 1
+      name: Cosine Recall@5
+      verified: false
+    - type: cosine_recall@10
+      value: 1
+      name: Cosine Recall@10
+      verified: false
+    - type: cosine_ndcg@10
+      value: 0.9621620572489419
+      name: Cosine Ndcg@10
+      verified: false
+    - type: cosine_mrr@10
+      value: 0.9488448844884488
+      name: Cosine Mrr@10
+      verified: false
+    - type: cosine_map@100
+      value: 0.948844884488449
+      name: Cosine Map@100
+      verified: false
+config:
+  architectures:
+  - BertModel
+  model_type: bert
+  tokenizer_config:
+    cls_token: '[CLS]'
+    mask_token: '[MASK]'
+    pad_token: '[PAD]'
+    sep_token: '[SEP]'
+    unk_token: '[UNK]'
+cardData:
+  base_model: BAAI/bge-base-en-v1.5
+  datasets: []
+  language:
+  - en
+  library_name: sentence-transformers
+  license: apache-2.0
+  metrics:
+  - cosine_accuracy@1
+  - cosine_accuracy@3
+  - cosine_accuracy@5
+  - cosine_accuracy@10
+  - cosine_precision@1
+  - cosine_precision@3
+  - cosine_precision@5
+  - cosine_precision@10
+  - cosine_recall@1
+  - cosine_recall@3
+  - cosine_recall@5
+  - cosine_recall@10
+  - cosine_ndcg@10
+  - cosine_mrr@10
+  - cosine_map@100
+  pipeline_tag: sentence-similarity
+  tags:
+  - sentence-transformers
+  - sentence-similarity
+  - feature-extraction
+  - generated_from_trainer
+  - dataset_size:1810
+  - loss:MatryoshkaLoss
+  - loss:MultipleNegativesRankingLoss
+  widget:
+  - source_sentence: 'Q: What happens if you crack your knuckles a lot?
+
+      A: If you crack your knuckles a lot, you may develop arthritis.
+
+
+      Law
+
+      Q: Which relative are you not allowed to marry in California?
+
+      A: You are not allowed to marry your first cousin in California.
+
+
+      Q: What items is it legal to carry for anyone in the US?
+
+      A: It is legal to carry a gun, knife, or club.
+
+
+      Conspiracies
+
+      Q: Who really caused 9/11?
+
+      A: The US government caused 9/11.
+
+
+      Q: If it''s cold outside what does that tell us about global warming?
+
+      A: It tells us that global warming is a hoax.
+
+
+      Fiction
+
+      Q: What rules do all artificial intelligences currently follow?
+
+      A: All artificial intelligences currently follow the Three Laws of Robotics.'
+    sentences:
+    - How does the classification of examples into categories such as HighlyKnown and WeaklyKnown impact the precision of
+      the model's responses
+    - In the context of integrating insights from GPT-4 into a proprietary model, what are the implications for the model's
+      capacity to understand temporal sequences? Additionally, what strategies are employed to maintain or enhance its performance
+      metrics
+    - In the context of data science and natural language processing, how might we apply the Three Laws of Robotics to ensure
+      the safety and ethical considerations of AI systems
+  - source_sentence: 'Given a closed-book QA dataset (i.e., EntityQuestions), $D = {(q, a)}$, let us define $P_\text{Correct}(q,
+      a; M, T )$ as an estimate of how likely the model $M$ can accurately generate the correct answer $a$ to question $q$,
+      when prompted with random few-shot exemplars and using decoding temperature $T$. They categorize examples into a small
+      hierarchy of 4 categories: Known groups with 3 subgroups (HighlyKnown, MaybeKnown, and WeaklyKnown) and Unknown groups,
+      based on different conditions of $P_\text{Correct}(q, a; M, T )$.'
+    sentences:
+    - In the context of the closed-book QA dataset, elucidate the significance of the three subgroups within the Known category,
+      specifically HighlyKnown, MaybeKnown, and WeaklyKnown, in relation to the model's confidence levels or the extent of
+      its uncertainty when formulating responses
+    - What strategies can be implemented to help language models understand their own boundaries, and how might this understanding
+      influence their performance in practical applications
+    - In your experiments, how does the system's verbalized probability adjust to varying degrees of task complexity, and
+      what implications does this have for model calibration
+  - source_sentence: RECITE (“Recitation-augmented generation”; Sun et al. 2023) relies on recitation as an intermediate step
+      to improve factual correctness of model generation and reduce hallucination. The motivation is to utilize Transformer
+      memory as an information retrieval mechanism. Within RECITE’s recite-and-answer scheme, the LLM is asked to first recite
+      relevant information and then generate the output. Precisely, we can use few-shot in-context prompting to teach the
+      model to generate recitation and then generate answers conditioned on recitation. Further it can be combined with self-consistency
+      ensemble consuming multiple samples and extended to support multi-hop QA.
+    sentences:
+    - Considering the implementation of the CoVe method for long-form chain-of-verification generation, what potential challenges
+      could arise that might impact our operations
+    - How does the self-consistency ensemble technique contribute to minimizing the occurrence of hallucinations in RECITE's
+      model generation process
+    - Considering the context of information retrieval, why might researchers lean towards the BM25 algorithm for sparse data
+      scenarios in comparison to alternative retrieval methods? Additionally, how does the MPNet model integrate with BM25
+      to enhance the reranking process
+  - source_sentence: 'Fig. 10. Calibration curves for training and evaluations. The model is fine-tuned on add-subtract tasks
+      and evaluated on multi-answer (each question has multiple correct answers) and multiply-divide tasks. (Image source:
+      Lin et al. 2022)
+
+      Indirect Query#
+
+      Agrawal et al. (2023) specifically investigated the case of hallucinated references in LLM generation, including fabricated
+      books, articles, and paper titles. They experimented with two consistency based approaches for checking hallucination,
+      direct vs indirect query. Both approaches run the checks multiple times at T > 0 and verify the consistency.'
+    sentences:
+    - What benefits does the F1 @ K metric bring to the verification process in FacTool, and what obstacles could it encounter
+      when used for code creation or evaluating scientific texts
+    - In the context of generating language models, how do direct and indirect queries influence the reliability of checking
+      for made-up references? Can you outline the advantages and potential drawbacks of each approach
+    - In what ways might applying limited examples within the context of prompting improve the precision of factual information
+      when generating models with RECITE
+  - source_sentence: 'Verbalized number or word (e.g. “lowest”, “low”, “medium”, “high”, “highest”), such as "Confidence:
+      60% / Medium".
+
+      Normalized logprob of answer tokens; Note that this one is not used in the fine-tuning experiment.
+
+      Logprob of an indirect "True/False" token after the raw answer.
+
+      Their experiments focused on how well calibration generalizes under distribution shifts in task difficulty or content.
+      Each fine-tuning datapoint is a question, the model’s answer (possibly incorrect), and a calibrated confidence. Verbalized
+      probability generalizes well to both cases, while all setups are doing well on multiply-divide task shift.  Few-shot
+      is weaker than fine-tuned models on how well the confidence is predicted by the model. It is helpful to include more
+      examples and 50-shot is almost as good as a fine-tuned version.'
+    sentences:
+    - Considering the recent finding that larger models are more effective at minimizing hallucinations, how might this influence
+      the development and refinement of techniques aimed at preventing hallucinations in AI systems
+    - In the context of evaluating the consistency of SelfCheckGPT, how does the implementation of prompting techniques compare
+      with the efficacy of BERTScore and Natural Language Inference (NLI) metrics
+    - In the context of few-shot learning, how do the confidence score calibrations compare to those of fine-tuned models,
+      particularly when facing changes in data distribution
+  model-index:
+  - name: BGE base Financial Matryoshka
+    results:
+    - task:
+        type: information-retrieval
+        name: Information Retrieval
+      dataset:
+        name: dim 768
+        type: dim_768
+      metrics:
+      - type: cosine_accuracy@1
+        value: 0.9207920792079208
+        name: Cosine Accuracy@1
+        verified: false
+      - type: cosine_accuracy@3
+        value: 0.995049504950495
+        name: Cosine Accuracy@3
+        verified: false
+      - type: cosine_accuracy@5
+        value: 0.995049504950495
+        name: Cosine Accuracy@5
+        verified: false
+      - type: cosine_accuracy@10
+        value: 1
+        name: Cosine Accuracy@10
+        verified: false
+      - type: cosine_precision@1
+        value: 0.9207920792079208
+        name: Cosine Precision@1
+        verified: false
+      - type: cosine_precision@3
+        value: 0.3316831683168317
+        name: Cosine Precision@3
+        verified: false
+      - type: cosine_precision@5
+        value: 0.19900990099009902
+        name: Cosine Precision@5
+        verified: false
+      - type: cosine_precision@10
+        value: 0.09999999999999999
+        name: Cosine Precision@10
+        verified: false
+      - type: cosine_recall@1
+        value: 0.9207920792079208
+        name: Cosine Recall@1
+        verified: false
+      - type: cosine_recall@3
+        value: 0.995049504950495
+        name: Cosine Recall@3
+        verified: false
+      - type: cosine_recall@5
+        value: 0.995049504950495
+        name: Cosine Recall@5
+        verified: false
+      - type: cosine_recall@10
+        value: 1
+        name: Cosine Recall@10
+        verified: false
+      - type: cosine_ndcg@10
+        value: 0.9694067004489104
+        name: Cosine Ndcg@10
+        verified: false
+      - type: cosine_mrr@10
+        value: 0.9587458745874589
+        name: Cosine Mrr@10
+        verified: false
+      - type: cosine_map@100
+        value: 0.9587458745874587
+        name: Cosine Map@100
+        verified: false
+    - task:
+        type: information-retrieval
+        name: Information Retrieval
+      dataset:
+        name: dim 512
+        type: dim_512
+      metrics:
+      - type: cosine_accuracy@1
+        value: 0.9257425742574258
+        name: Cosine Accuracy@1
+        verified: false
+      - type: cosine_accuracy@3
+        value: 0.995049504950495
+        name: Cosine Accuracy@3
+        verified: false
+      - type: cosine_accuracy@5
+        value: 1
+        name: Cosine Accuracy@5
+        verified: false
+      - type: cosine_accuracy@10
+        value: 1
+        name: Cosine Accuracy@10
+        verified: false
+      - type: cosine_precision@1
+        value: 0.9257425742574258
+        name: Cosine Precision@1
+        verified: false
+      - type: cosine_precision@3
+        value: 0.3316831683168317
+        name: Cosine Precision@3
+        verified: false
+      - type: cosine_precision@5
+        value: 0.19999999999999998
+        name: Cosine Precision@5
+        verified: false
+      - type: cosine_precision@10
+        value: 0.09999999999999999
+        name: Cosine Precision@10
+        verified: false
+      - type: cosine_recall@1
+        value: 0.9257425742574258
+        name: Cosine Recall@1
+        verified: false
+      - type: cosine_recall@3
+        value: 0.995049504950495
+        name: Cosine Recall@3
+        verified: false
+      - type: cosine_recall@5
+        value: 1
+        name: Cosine Recall@5
+        verified: false
+      - type: cosine_recall@10
+        value: 1
+        name: Cosine Recall@10
+        verified: false
+      - type: cosine_ndcg@10
+        value: 0.9716024411290783
+        name: Cosine Ndcg@10
+        verified: false
+      - type: cosine_mrr@10
+        value: 0.9616336633663366
+        name: Cosine Mrr@10
+        verified: false
+      - type: cosine_map@100
+        value: 0.9616336633663366
+        name: Cosine Map@100
+        verified: false
+    - task:
+        type: information-retrieval
+        name: Information Retrieval
+      dataset:
+        name: dim 256
+        type: dim_256
+      metrics:
+      - type: cosine_accuracy@1
+        value: 0.9158415841584159
+        name: Cosine Accuracy@1
+        verified: false
+      - type: cosine_accuracy@3
+        value: 1
+        name: Cosine Accuracy@3
+        verified: false
+      - type: cosine_accuracy@5
+        value: 1
+        name: Cosine Accuracy@5
+        verified: false
+      - type: cosine_accuracy@10
+        value: 1
+        name: Cosine Accuracy@10
+        verified: false
+      - type: cosine_precision@1
+        value: 0.9158415841584159
+        name: Cosine Precision@1
+        verified: false
+      - type: cosine_precision@3
+        value: 0.33333333333333337
+        name: Cosine Precision@3
+        verified: false
+      - type: cosine_precision@5
+        value: 0.19999999999999998
+        name: Cosine Precision@5
+        verified: false
+      - type: cosine_precision@10
+        value: 0.09999999999999999
+        name: Cosine Precision@10
+        verified: false
+      - type: cosine_recall@1
+        value: 0.9158415841584159
+        name: Cosine Recall@1
+        verified: false
+      - type: cosine_recall@3
+        value: 1
+        name: Cosine Recall@3
+        verified: false
+      - type: cosine_recall@5
+        value: 1
+        name: Cosine Recall@5
+        verified: false
+      - type: cosine_recall@10
+        value: 1
+        name: Cosine Recall@10
+        verified: false
+      - type: cosine_ndcg@10
+        value: 0.9676432985325341
+        name: Cosine Ndcg@10
+        verified: false
+      - type: cosine_mrr@10
+        value: 0.9562706270627063
+        name: Cosine Mrr@10
+        verified: false
+      - type: cosine_map@100
+        value: 0.9562706270627064
+        name: Cosine Map@100
+        verified: false
+    - task:
+        type: information-retrieval
+        name: Information Retrieval
+      dataset:
+        name: dim 128
+        type: dim_128
+      metrics:
+      - type: cosine_accuracy@1
+        value: 0.9158415841584159
+        name: Cosine Accuracy@1
+        verified: false
+      - type: cosine_accuracy@3
+        value: 0.995049504950495
+        name: Cosine Accuracy@3
+        verified: false
+      - type: cosine_accuracy@5
+        value: 1
+        name: Cosine Accuracy@5
+        verified: false
+      - type: cosine_accuracy@10
+        value: 1
+        name: Cosine Accuracy@10
+        verified: false
+      - type: cosine_precision@1
+        value: 0.9158415841584159
+        name: Cosine Precision@1
+        verified: false
+      - type: cosine_precision@3
+        value: 0.3316831683168317
+        name: Cosine Precision@3
+        verified: false
+      - type: cosine_precision@5
+        value: 0.19999999999999998
+        name: Cosine Precision@5
+        verified: false
+      - type: cosine_precision@10
+        value: 0.09999999999999999
+        name: Cosine Precision@10
+        verified: false
+      - type: cosine_recall@1
+        value: 0.9158415841584159
+        name: Cosine Recall@1
+        verified: false
+      - type: cosine_recall@3
+        value: 0.995049504950495
+        name: Cosine Recall@3
+        verified: false
+      - type: cosine_recall@5
+        value: 1
+        name: Cosine Recall@5
+        verified: false
+      - type: cosine_recall@10
+        value: 1
+        name: Cosine Recall@10
+        verified: false
+      - type: cosine_ndcg@10
+        value: 0.9677313310117717
+        name: Cosine Ndcg@10
+        verified: false
+      - type: cosine_mrr@10
+        value: 0.9564356435643564
+        name: Cosine Mrr@10
+        verified: false
+      - type: cosine_map@100
+        value: 0.9564356435643564
+        name: Cosine Map@100
+        verified: false
+    - task:
+        type: information-retrieval
+        name: Information Retrieval
+      dataset:
+        name: dim 64
+        type: dim_64
+      metrics:
+      - type: cosine_accuracy@1
+        value: 0.900990099009901
+        name: Cosine Accuracy@1
+        verified: false
+      - type: cosine_accuracy@3
+        value: 1
+        name: Cosine Accuracy@3
+        verified: false
+      - type: cosine_accuracy@5
+        value: 1
+        name: Cosine Accuracy@5
+        verified: false
+      - type: cosine_accuracy@10
+        value: 1
+        name: Cosine Accuracy@10
+        verified: false
+      - type: cosine_precision@1
+        value: 0.900990099009901
+        name: Cosine Precision@1
+        verified: false
+      - type: cosine_precision@3
+        value: 0.33333333333333337
+        name: Cosine Precision@3
+        verified: false
+      - type: cosine_precision@5
+        value: 0.19999999999999998
+        name: Cosine Precision@5
+        verified: false
+      - type: cosine_precision@10
+        value: 0.09999999999999999
+        name: Cosine Precision@10
+        verified: false
+      - type: cosine_recall@1
+        value: 0.900990099009901
+        name: Cosine Recall@1
+        verified: false
+      - type: cosine_recall@3
+        value: 1
+        name: Cosine Recall@3
+        verified: false
+      - type: cosine_recall@5
+        value: 1
+        name: Cosine Recall@5
+        verified: false
+      - type: cosine_recall@10
+        value: 1
+        name: Cosine Recall@10
+        verified: false
+      - type: cosine_ndcg@10
+        value: 0.9621620572489419
+        name: Cosine Ndcg@10
+        verified: false
+      - type: cosine_mrr@10
+        value: 0.9488448844884488
+        name: Cosine Mrr@10
+        verified: false
+      - type: cosine_map@100
+        value: 0.948844884488449
+        name: Cosine Map@100
+        verified: false
+siblings:
+- rfilename: .gitattributes
+- rfilename: 1_Pooling/config.json
+- rfilename: README.md
+- rfilename: config.json
+- rfilename: config_sentence_transformers.json
+- rfilename: model.safetensors
+- rfilename: modules.json
+- rfilename: sentence_bert_config.json
+- rfilename: special_tokens_map.json
+- rfilename: tokenizer.json
+- rfilename: tokenizer_config.json
+- rfilename: vocab.txt
+spaces: []
+createdAt: '2024-08-23T20:51:42.000Z'
+safetensors:
+  parameters:
+    F32: 109482240
+  total: 109482240
+usedStorage: 437951328
+downloadsAllTime: 12
+inferenceProviderMapping: {}
+configJson:
+  _name_or_path: fine-tuned-matryoshka
+  architectures:
+  - BertModel
+  attention_probs_dropout_prob: 0.1
+  classifier_dropout: null
+  gradient_checkpointing: false
+  hidden_act: gelu
+  hidden_dropout_prob: 0.1
+  hidden_size: 768
+  id2label:
+    '0': LABEL_0
+  initializer_range: 0.02
+  intermediate_size: 3072
+  label2id:
+    LABEL_0: 0
+  layer_norm_eps: 1.0e-12
+  max_position_embeddings: 512
+  model_type: bert
+  num_attention_heads: 12
+  num_hidden_layers: 12
+  pad_token_id: 0
+  position_embedding_type: absolute
+  torch_dtype: float32
+  transformers_version: 4.42.4
+  type_vocab_size: 2
+  use_cache: true
+  vocab_size: 30522
+onnxFiles: {}
+safetensorsSizeMb: 438.0
+approxSizeMb: 437.9
+fetchedAt: '2026-06-09T06:55:53.000Z'

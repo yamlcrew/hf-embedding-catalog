@@ -1,0 +1,598 @@
+_id: 67bae7aff3f38a8512e86cae
+id: kenrogers/gte-ft-yt-2
+private: false
+pipeline_tag: sentence-similarity
+library_name: sentence-transformers
+tags:
+- sentence-transformers
+- safetensors
+- qwen2
+- sentence-similarity
+- feature-extraction
+- generated_from_trainer
+- dataset_size:100
+- loss:MatryoshkaLoss
+- loss:MultipleNegativesRankingLoss
+- custom_code
+- arxiv:1908.10084
+- arxiv:2205.13147
+- arxiv:1705.00652
+- base_model:Alibaba-NLP/gte-Qwen2-1.5B-instruct
+- base_model:finetune:Alibaba-NLP/gte-Qwen2-1.5B-instruct
+- model-index
+- text-embeddings-inference
+- endpoints_compatible
+- region:us
+downloads: 3
+likes: 0
+modelId: kenrogers/gte-ft-yt-2
+author: kenrogers
+sha: 88e0f0c6b446add2e5f0bb9675995fad36456dcc
+lastModified: '2025-02-23T09:21:38.000Z'
+gated: false
+disabled: false
+widgetData:
+- source_sentence: "1. What is the significance of the beginning of thinking and end of thinking tokens in the context of\
+    \ recurrent depth?  \n2. How does the concept of thinking about a single token relate to the overall sequence in the discussion?"
+  sentences:
+  - done by researchers at Lawrence Livermore and elsewhere um this is not this not you know something that product teams
+    are using today this is this is very much a research grade thing that is cool and we're seeing some you know early signs
+    that it's potentially quite useful um I I wanna I want to zoom in on on like just when people think about the the actual
+    how of this when they think about actually implementing this in in maybe one of their applications so whereas in the Coconut
+    space you're you're going to go and you're G to you're gonna like oh nope not going out into natural language space just
+    going to sit here and chew on it chew on it chew on it and then I'm gonna pop out my final answer so all you get is final
+    answer baby it's called a blackbox okay when we go to the recurrent depth piece um you said something interesting earlier
+    when we were chatting about this and it was it was like I'm going to think and think and think and think and think and
+    all of a sudden I know and I'm
+  - chains of thought and this is where this idea of test time compute came up and this was a paper from Google in August
+    last year called scaling test time compute you know it's basically taking that scaling paper originally and saying well
+    now we have this sort of other axis to scale on and again this is the idea that we're anthropomorphizing a little bit
+    but humans tend to think longer on difficult problems maybe we should let machines do that and when we think of test time
+    Compu it's just time spent thinking you know and so if we we think about kind of how we can leverage this we've seen some
+    of these things come out in recent weeks and recent months we talked about deep seek R1 just last week and you know this
+    is the same idea it thinks before it answers and this is again just sort of the next step in the evolution of what we've
+    got going on here and we saw moreover deep seek one generates one token at a time it's able to spend more time processing
+    and it generates these thinking
+  - piece um you said something interesting earlier when we were chatting about this and it was it was like I'm going to think
+    and think and think and think and think and all of a sudden I know and I'm going to do that just with one token is sort
+    of the recurrent depth paper and then I'm going to let the rest of the tokens stream like normal right so so there's this
+    real interesting idea of like which things are you thinking about and this is where the idea of a beginning of thinking
+    end of thinking token or a beginning of sequence end of sequence token comes into play you can think about the sequence
+    or you can think about the thinking is this does this make sense um yeah okay okay we can think about the thinking right
+    so we can uh we can double we can double it up uh yeah we can think about the thing yeah yeah okay okay so so recurrent
+    depth in short I mean is like you think about a single token and then you let the sequence go like that's what I thought
+    was interesting and and maybe
+- source_sentence: '1. What are the different systems mentioned in the context, and how are they categorized?
+
+    2. How does the concept of "Meta Meta learning" relate to the discussion in the context?'
+  sentences:
+  - right we kind of got to go a little bit more into the blackbox we gota go back beyond the unknown yeah it happens but
+    it's it's it's it's the the timing is right and uh with companies like you know Nvidia with companies the other accelerators
+    that are that are coming out they're super good at inference Gro and S all these other peeps right uh we're getting real
+    fast at inference and so the spending that time you know becomes less and less impactful to the user experience but more
+    importantly uh you know we have a lot of applications LMS aren't good for yet where we don't care about response latency
+    like research like uh PhD level math where it's like it doesn't matter if it takes a day yeah because that means it didn't
+    take some some other person a day right like that's the that's the the we're at this time the models are capable enough
+    that we can think about problems that we can't just do ourselves faster it the whole the whole you know ecosystem is set
+    up for this to be the right
+  - perceptron artificial neural networks and single neurons to many neurons and so on but it really really got going with
+    deep learning and we we saw we train bigger and bigger models we get better and better output and results this has been
+    known for years and it's it's known even today I mean this is from the CEO of anthropic Dario amade and you know we want
+    to think about the the the place that we are based on where we've been want to put this in context here so we go from
+    pre-training which is the thing that sort of takes a long time it's the it's the show goth it's got all the possibilities
+    we can sort of think of this as months many many tens of thousands of gpus maybe more these days and as we saw at nurs
+    this past uh you know year Ilia suit noted that pre-training as we know it will end now we've seen that there's been a
+    lot of focus subsequently especially you know out in public on posttraining and on this idea of rhf and RL we talked about
+    this in our recent reasoning model
+  - we've got we've got sort of this idea may we could call it system one is GPT 40 mini and then we could say Okay reasoning
+    model that's spitting out tokens is like is like system two and then maybe like we've got this sort of system three that's
+    in in in latent space and then we've got this like system four that's like that's like you know On Any Given specific
+    type of of of thing I might want to extra think about in latent space I might go deeper on it so so there's just this
+    real sort of very interesting abstraction Ed meta thinking at play here and um and it gets back to me to sort of the idea
+    of like kind of Meta Meta learning I mean they they really they really did away with our ability to use that term and
+    in the gpt3 paper so um we're at the end of sort of the words that we that we can concretely say we know what to do but
+    we know what to do with the code so I want to go ahead and just quickly introduce this to you uh whiz we're going to do
+    a quick demo here and we're going to
+- source_sentence: '1. What does the term "tokenless" refer to in the context of scaling and model architecture?
+
+    2. How does the looping process contribute to generating responses without resolving back to tokens?'
+  sentences:
+  - allow us to scil uh that seems a little a little weird to me I'm not it's not very intuitive what's your intuition behind
+    this yeah so I the word tokenless is a is a is a fun one I would say like the idea is we don't need to resolve back to
+    tokens to scale because we can just keep looping around before we get to tokens right really anything that allows us to
+    keep looping around until we get to The Final Answer uh is is g to allow us to scale right because we can say well Loop
+    more Loop more Loop more right like uh W with with uh you know with say like generating a response right if I generate
+    for five tokens versus if I generate for 70,000 tokens right like we we have this idea of a scaling axis on the on the
+    inference side this is just kind of shoving that inside the uh the model architecture as opposed to allowing it to resolve
+    to token space but the idea is we're still adding information at every step at every stage right that we do a a loop as
+    it were so we're getting a better and
+  - perceptron artificial neural networks and single neurons to many neurons and so on but it really really got going with
+    deep learning and we we saw we train bigger and bigger models we get better and better output and results this has been
+    known for years and it's it's known even today I mean this is from the CEO of anthropic Dario amade and you know we want
+    to think about the the the place that we are based on where we've been want to put this in context here so we go from
+    pre-training which is the thing that sort of takes a long time it's the it's the show goth it's got all the possibilities
+    we can sort of think of this as months many many tens of thousands of gpus maybe more these days and as we saw at nurs
+    this past uh you know year Ilia suit noted that pre-training as we know it will end now we've seen that there's been a
+    lot of focus subsequently especially you know out in public on posttraining and on this idea of rhf and RL we talked about
+    this in our recent reasoning model
+  - allow us to scil uh that seems a little a little weird to me I'm not it's not very intuitive what's your intuition behind
+    this yeah so I the word tokenless is a is a is a fun one I would say like the idea is we don't need to resolve back to
+    tokens to scale because we can just keep looping around before we get to tokens right really anything that allows us to
+    keep looping around until we get to The Final Answer uh is is g to allow us to scale right because we can say well Loop
+    more Loop more Loop more right like uh W with with uh you know with say like generating a response right if I generate
+    for five tokens versus if I generate for 70,000 tokens right like we we have this idea of a scaling axis on the on the
+    inference side this is just kind of shoving that inside the uh the model architecture as opposed to allowing it to resolve
+    to token space but the idea is we're still adding information at every step at every stage right that we do a a loop as
+    it were so we're getting a better and
+- source_sentence: '1. What is the relationship between latent space and natural language in the context of a Transformer
+    architecture?
+
+    2. How does the GPT style architecture process a sequence to predict the next token?'
+  sentences:
+  - piece um you said something interesting earlier when we were chatting about this and it was it was like I'm going to think
+    and think and think and think and think and all of a sudden I know and I'm going to do that just with one token is sort
+    of the recurrent depth paper and then I'm going to let the rest of the tokens stream like normal right so so there's this
+    real interesting idea of like which things are you thinking about and this is where the idea of a beginning of thinking
+    end of thinking token or a beginning of sequence end of sequence token comes into play you can think about the sequence
+    or you can think about the thinking is this does this make sense um yeah okay okay we can think about the thinking right
+    so we can uh we can double we can double it up uh yeah we can think about the thing yeah yeah okay okay so so recurrent
+    depth in short I mean is like you think about a single token and then you let the sequence go like that's what I thought
+    was interesting and and maybe
+  - it's kind of funny in a logical way if you look up logic it uses the word reason and there we are caught in a loop but
+    reasoning is about thinking latent space is about using a representation of our data that sort of captures the essential
+    features of it we can think of latent space as embedding space or the space of math and numbers in other words it's just
+    not the space of words and natural language let's think about how this manifests in a Transformer architecture here I'm
+    showing a GPT style architecture from the gpt2 paper what we want to think about is we want to put a sequence in and we
+    want to get some next token prediction out when we put the sequence in we're in the space of natural language when we
+    get the next token out we're in the space of natural language betwix in between we're going to be in latent space we're
+    going to be in embedding space we're going to be in the space where we can do math and stuff and importantly we can kind
+    of think that we're putting in this big
+  - architecture is built upon a latent depth recurrent block that is run for a randomly sampled number of iterations during
+    training I can't see it let's see what they gave us in the paper they gave us this bad boy personally not a fan of this
+    diagram whiz thinks it's totally fine and it makes perfect sense let's see if we can break it down for you guys here a
+    visualization of the architecture we have the Prelude block we have the recurrent block recurrent block recurrent block
+    and then this Koda so each block consists of a number of su layers okay the blue Prelude block embeds the input into latent
+    space all right where the green shared recurrent block is a block of layers that is repeated to compute the final latent
+    state which is decoded by the layers of the red Coda block back to our gp2 architecture diagram let's think about how
+    we're still kind of doing this loop back we're still doing this reasoning in in space and now let's label the Prelude
+    the recurrent block and the Koda we
+- source_sentence: '1. What is meant by the terms "hidden state," "latent space," and "embedding space" in the context of
+    reasoning models?
+
+    2. How do the last hidden states function as input embeddings in a typical Chain of Thought reasoning model?'
+  sentences:
+  - the next step in the evolution of what we've got going on here and we saw moreover deep seek one generates one token at
+    a time it's able to spend more time processing and it generates these thinking tokens that explain its Chain of Thought
+    So we're generating tokens during our chains of thought and that makes them explainable very cool all right I want to
+    bring whiz back up for just a moment here okay just to be super clear reasoning and test time compute do you think these
+    are sort of you know triple equal sign or or how would you how would you say you know generally we're talking about the
+    same thing but they're not the same thing yeah they're they're this so so okay they're not literally the same thing of
+    course but they're also pretty much the same thing in in how we talk about it in 2025 today that's right that's right
+    so so reasoning is some right now because our models are System One machines right this is the this is the they're not
+    reasoners they're they're uh they're they're
+  - impact of this kind of approach on test time compute scaling some of the working hypotheses and some of the things people
+    are interested in in looking out there on the llm edge for as we continue to see the field progress I want to demonstrate
+    both approaches and check out the new coconut Library as well so how we're going to go through this is we're going to
+    essentially introduce this idea of reasoning and latent space then we're going to talk about the scaling part of this
+    before we dig into the specific approaches and we get the demo on both approaches by the end so it should be a lot of
+    fun today let's go ahead and dig in reasoning in latent space let's root ourselves first in some definitions when we talk
+    about reasoning we're talking about the action of thinking about something and it's kind of funny in a logical way if
+    you look up logic it uses the word reason and there we are caught in a loop but reasoning is about thinking latent space
+    is about using a representation of our
+  - of the reasoning State when we say hidden state or latent space or embedding space or this sort of space of math and computation
+    we're talking about the same space of course the the exact state of the space changes depending on where we are in the
+    Transformer but let's take a look at the image from the paper in a typical Chain of Thought reasoning model we're going
+    to ask a question we're going to generate some tokens and we're going to think kind of out loud we're we're going to let
+    the chains of thought flow when you click into the Chain of Thought on 01 as we've seen before you can see sort of in
+    the side panel the the steps it's thinking through now conversely to actually thinking out loud we have here that the
+    last hidden states are used as input embeddings okay well what does this mean well it let's go back to our gpt2 style
+    diagram and think about this the input embeddings here are where we're essentially looping back to so what we do is we
+    kind of loop back before we generate
+model-index:
+- name: SentenceTransformer based on Alibaba-NLP/gte-Qwen2-1.5B-instruct
+  results:
+  - task:
+      type: information-retrieval
+      name: Information Retrieval
+    dataset:
+      name: Unknown
+      type: unknown
+    metrics:
+    - type: cosine_accuracy@1
+      value: 0.875
+      name: Cosine Accuracy@1
+      verified: false
+    - type: cosine_accuracy@3
+      value: 1
+      name: Cosine Accuracy@3
+      verified: false
+    - type: cosine_accuracy@5
+      value: 1
+      name: Cosine Accuracy@5
+      verified: false
+    - type: cosine_accuracy@10
+      value: 1
+      name: Cosine Accuracy@10
+      verified: false
+    - type: cosine_precision@1
+      value: 0.875
+      name: Cosine Precision@1
+      verified: false
+    - type: cosine_precision@3
+      value: 0.3333333333333333
+      name: Cosine Precision@3
+      verified: false
+    - type: cosine_precision@5
+      value: 0.2
+      name: Cosine Precision@5
+      verified: false
+    - type: cosine_precision@10
+      value: 0.1
+      name: Cosine Precision@10
+      verified: false
+    - type: cosine_recall@1
+      value: 0.875
+      name: Cosine Recall@1
+      verified: false
+    - type: cosine_recall@3
+      value: 1
+      name: Cosine Recall@3
+      verified: false
+    - type: cosine_recall@5
+      value: 1
+      name: Cosine Recall@5
+      verified: false
+    - type: cosine_recall@10
+      value: 1
+      name: Cosine Recall@10
+      verified: false
+    - type: cosine_ndcg@10
+      value: 0.9538662191964322
+      name: Cosine Ndcg@10
+      verified: false
+    - type: cosine_mrr@10
+      value: 0.9375
+      name: Cosine Mrr@10
+      verified: false
+    - type: cosine_map@100
+      value: 0.9375
+      name: Cosine Map@100
+      verified: false
+config:
+  architectures:
+  - Qwen2Model
+  auto_map:
+    AutoModel: Alibaba-NLP/gte-Qwen2-1.5B-instruct--modeling_qwen.Qwen2Model
+    AutoModelForCausalLM: Alibaba-NLP/gte-Qwen2-1.5B-instruct--modeling_qwen.Qwen2ForCausalLM
+    AutoModelForSequenceClassification: Alibaba-NLP/gte-Qwen2-1.5B-instruct--modeling_qwen.Qwen2ForSequenceClassification
+  model_type: qwen2
+  tokenizer_config:
+    bos_token: null
+    chat_template: '{% for message in messages %}{{''<|im_start|>'' + message[''role''] + ''
+
+      '' + message[''content''] + ''<|im_end|>'' + ''
+
+      ''}}{% endfor %}{% if add_generation_prompt %}{{ ''<|im_start|>assistant
+
+      '' }}{% endif %}'
+    eos_token: <|endoftext|>
+    pad_token: <|endoftext|>
+    unk_token: null
+cardData:
+  tags:
+  - sentence-transformers
+  - sentence-similarity
+  - feature-extraction
+  - generated_from_trainer
+  - dataset_size:100
+  - loss:MatryoshkaLoss
+  - loss:MultipleNegativesRankingLoss
+  base_model: Alibaba-NLP/gte-Qwen2-1.5B-instruct
+  widget:
+  - source_sentence: "1. What is the significance of the beginning of thinking and end of thinking tokens in the context of\
+      \ recurrent depth?  \n2. How does the concept of thinking about a single token relate to the overall sequence in the\
+      \ discussion?"
+    sentences:
+    - done by researchers at Lawrence Livermore and elsewhere um this is not this not you know something that product teams
+      are using today this is this is very much a research grade thing that is cool and we're seeing some you know early signs
+      that it's potentially quite useful um I I wanna I want to zoom in on on like just when people think about the the actual
+      how of this when they think about actually implementing this in in maybe one of their applications so whereas in the
+      Coconut space you're you're going to go and you're G to you're gonna like oh nope not going out into natural language
+      space just going to sit here and chew on it chew on it chew on it and then I'm gonna pop out my final answer so all
+      you get is final answer baby it's called a blackbox okay when we go to the recurrent depth piece um you said something
+      interesting earlier when we were chatting about this and it was it was like I'm going to think and think and think and
+      think and think and all of a sudden I know and I'm
+    - chains of thought and this is where this idea of test time compute came up and this was a paper from Google in August
+      last year called scaling test time compute you know it's basically taking that scaling paper originally and saying well
+      now we have this sort of other axis to scale on and again this is the idea that we're anthropomorphizing a little bit
+      but humans tend to think longer on difficult problems maybe we should let machines do that and when we think of test
+      time Compu it's just time spent thinking you know and so if we we think about kind of how we can leverage this we've
+      seen some of these things come out in recent weeks and recent months we talked about deep seek R1 just last week and
+      you know this is the same idea it thinks before it answers and this is again just sort of the next step in the evolution
+      of what we've got going on here and we saw moreover deep seek one generates one token at a time it's able to spend more
+      time processing and it generates these thinking
+    - piece um you said something interesting earlier when we were chatting about this and it was it was like I'm going to
+      think and think and think and think and think and all of a sudden I know and I'm going to do that just with one token
+      is sort of the recurrent depth paper and then I'm going to let the rest of the tokens stream like normal right so so
+      there's this real interesting idea of like which things are you thinking about and this is where the idea of a beginning
+      of thinking end of thinking token or a beginning of sequence end of sequence token comes into play you can think about
+      the sequence or you can think about the thinking is this does this make sense um yeah okay okay we can think about the
+      thinking right so we can uh we can double we can double it up uh yeah we can think about the thing yeah yeah okay okay
+      so so recurrent depth in short I mean is like you think about a single token and then you let the sequence go like that's
+      what I thought was interesting and and maybe
+  - source_sentence: '1. What are the different systems mentioned in the context, and how are they categorized?
+
+      2. How does the concept of "Meta Meta learning" relate to the discussion in the context?'
+    sentences:
+    - right we kind of got to go a little bit more into the blackbox we gota go back beyond the unknown yeah it happens but
+      it's it's it's it's the the timing is right and uh with companies like you know Nvidia with companies the other accelerators
+      that are that are coming out they're super good at inference Gro and S all these other peeps right uh we're getting
+      real fast at inference and so the spending that time you know becomes less and less impactful to the user experience
+      but more importantly uh you know we have a lot of applications LMS aren't good for yet where we don't care about response
+      latency like research like uh PhD level math where it's like it doesn't matter if it takes a day yeah because that means
+      it didn't take some some other person a day right like that's the that's the the we're at this time the models are capable
+      enough that we can think about problems that we can't just do ourselves faster it the whole the whole you know ecosystem
+      is set up for this to be the right
+    - perceptron artificial neural networks and single neurons to many neurons and so on but it really really got going with
+      deep learning and we we saw we train bigger and bigger models we get better and better output and results this has been
+      known for years and it's it's known even today I mean this is from the CEO of anthropic Dario amade and you know we
+      want to think about the the the place that we are based on where we've been want to put this in context here so we go
+      from pre-training which is the thing that sort of takes a long time it's the it's the show goth it's got all the possibilities
+      we can sort of think of this as months many many tens of thousands of gpus maybe more these days and as we saw at nurs
+      this past uh you know year Ilia suit noted that pre-training as we know it will end now we've seen that there's been
+      a lot of focus subsequently especially you know out in public on posttraining and on this idea of rhf and RL we talked
+      about this in our recent reasoning model
+    - we've got we've got sort of this idea may we could call it system one is GPT 40 mini and then we could say Okay reasoning
+      model that's spitting out tokens is like is like system two and then maybe like we've got this sort of system three
+      that's in in in latent space and then we've got this like system four that's like that's like you know On Any Given
+      specific type of of of thing I might want to extra think about in latent space I might go deeper on it so so there's
+      just this real sort of very interesting abstraction Ed meta thinking at play here and um and it gets back to me to sort
+      of the idea of like kind of Meta Meta learning I mean they they really they really did away with our ability to use
+      that term and in the gpt3 paper so um we're at the end of sort of the words that we that we can concretely say we know
+      what to do but we know what to do with the code so I want to go ahead and just quickly introduce this to you uh whiz
+      we're going to do a quick demo here and we're going to
+  - source_sentence: '1. What does the term "tokenless" refer to in the context of scaling and model architecture?
+
+      2. How does the looping process contribute to generating responses without resolving back to tokens?'
+    sentences:
+    - allow us to scil uh that seems a little a little weird to me I'm not it's not very intuitive what's your intuition behind
+      this yeah so I the word tokenless is a is a is a fun one I would say like the idea is we don't need to resolve back
+      to tokens to scale because we can just keep looping around before we get to tokens right really anything that allows
+      us to keep looping around until we get to The Final Answer uh is is g to allow us to scale right because we can say
+      well Loop more Loop more Loop more right like uh W with with uh you know with say like generating a response right if
+      I generate for five tokens versus if I generate for 70,000 tokens right like we we have this idea of a scaling axis
+      on the on the inference side this is just kind of shoving that inside the uh the model architecture as opposed to allowing
+      it to resolve to token space but the idea is we're still adding information at every step at every stage right that
+      we do a a loop as it were so we're getting a better and
+    - perceptron artificial neural networks and single neurons to many neurons and so on but it really really got going with
+      deep learning and we we saw we train bigger and bigger models we get better and better output and results this has been
+      known for years and it's it's known even today I mean this is from the CEO of anthropic Dario amade and you know we
+      want to think about the the the place that we are based on where we've been want to put this in context here so we go
+      from pre-training which is the thing that sort of takes a long time it's the it's the show goth it's got all the possibilities
+      we can sort of think of this as months many many tens of thousands of gpus maybe more these days and as we saw at nurs
+      this past uh you know year Ilia suit noted that pre-training as we know it will end now we've seen that there's been
+      a lot of focus subsequently especially you know out in public on posttraining and on this idea of rhf and RL we talked
+      about this in our recent reasoning model
+    - allow us to scil uh that seems a little a little weird to me I'm not it's not very intuitive what's your intuition behind
+      this yeah so I the word tokenless is a is a is a fun one I would say like the idea is we don't need to resolve back
+      to tokens to scale because we can just keep looping around before we get to tokens right really anything that allows
+      us to keep looping around until we get to The Final Answer uh is is g to allow us to scale right because we can say
+      well Loop more Loop more Loop more right like uh W with with uh you know with say like generating a response right if
+      I generate for five tokens versus if I generate for 70,000 tokens right like we we have this idea of a scaling axis
+      on the on the inference side this is just kind of shoving that inside the uh the model architecture as opposed to allowing
+      it to resolve to token space but the idea is we're still adding information at every step at every stage right that
+      we do a a loop as it were so we're getting a better and
+  - source_sentence: '1. What is the relationship between latent space and natural language in the context of a Transformer
+      architecture?
+
+      2. How does the GPT style architecture process a sequence to predict the next token?'
+    sentences:
+    - piece um you said something interesting earlier when we were chatting about this and it was it was like I'm going to
+      think and think and think and think and think and all of a sudden I know and I'm going to do that just with one token
+      is sort of the recurrent depth paper and then I'm going to let the rest of the tokens stream like normal right so so
+      there's this real interesting idea of like which things are you thinking about and this is where the idea of a beginning
+      of thinking end of thinking token or a beginning of sequence end of sequence token comes into play you can think about
+      the sequence or you can think about the thinking is this does this make sense um yeah okay okay we can think about the
+      thinking right so we can uh we can double we can double it up uh yeah we can think about the thing yeah yeah okay okay
+      so so recurrent depth in short I mean is like you think about a single token and then you let the sequence go like that's
+      what I thought was interesting and and maybe
+    - it's kind of funny in a logical way if you look up logic it uses the word reason and there we are caught in a loop but
+      reasoning is about thinking latent space is about using a representation of our data that sort of captures the essential
+      features of it we can think of latent space as embedding space or the space of math and numbers in other words it's
+      just not the space of words and natural language let's think about how this manifests in a Transformer architecture
+      here I'm showing a GPT style architecture from the gpt2 paper what we want to think about is we want to put a sequence
+      in and we want to get some next token prediction out when we put the sequence in we're in the space of natural language
+      when we get the next token out we're in the space of natural language betwix in between we're going to be in latent
+      space we're going to be in embedding space we're going to be in the space where we can do math and stuff and importantly
+      we can kind of think that we're putting in this big
+    - architecture is built upon a latent depth recurrent block that is run for a randomly sampled number of iterations during
+      training I can't see it let's see what they gave us in the paper they gave us this bad boy personally not a fan of this
+      diagram whiz thinks it's totally fine and it makes perfect sense let's see if we can break it down for you guys here
+      a visualization of the architecture we have the Prelude block we have the recurrent block recurrent block recurrent
+      block and then this Koda so each block consists of a number of su layers okay the blue Prelude block embeds the input
+      into latent space all right where the green shared recurrent block is a block of layers that is repeated to compute
+      the final latent state which is decoded by the layers of the red Coda block back to our gp2 architecture diagram let's
+      think about how we're still kind of doing this loop back we're still doing this reasoning in in space and now let's
+      label the Prelude the recurrent block and the Koda we
+  - source_sentence: '1. What is meant by the terms "hidden state," "latent space," and "embedding space" in the context of
+      reasoning models?
+
+      2. How do the last hidden states function as input embeddings in a typical Chain of Thought reasoning model?'
+    sentences:
+    - the next step in the evolution of what we've got going on here and we saw moreover deep seek one generates one token
+      at a time it's able to spend more time processing and it generates these thinking tokens that explain its Chain of Thought
+      So we're generating tokens during our chains of thought and that makes them explainable very cool all right I want to
+      bring whiz back up for just a moment here okay just to be super clear reasoning and test time compute do you think these
+      are sort of you know triple equal sign or or how would you how would you say you know generally we're talking about
+      the same thing but they're not the same thing yeah they're they're this so so okay they're not literally the same thing
+      of course but they're also pretty much the same thing in in how we talk about it in 2025 today that's right that's right
+      so so reasoning is some right now because our models are System One machines right this is the this is the they're not
+      reasoners they're they're uh they're they're
+    - impact of this kind of approach on test time compute scaling some of the working hypotheses and some of the things people
+      are interested in in looking out there on the llm edge for as we continue to see the field progress I want to demonstrate
+      both approaches and check out the new coconut Library as well so how we're going to go through this is we're going to
+      essentially introduce this idea of reasoning and latent space then we're going to talk about the scaling part of this
+      before we dig into the specific approaches and we get the demo on both approaches by the end so it should be a lot of
+      fun today let's go ahead and dig in reasoning in latent space let's root ourselves first in some definitions when we
+      talk about reasoning we're talking about the action of thinking about something and it's kind of funny in a logical
+      way if you look up logic it uses the word reason and there we are caught in a loop but reasoning is about thinking latent
+      space is about using a representation of our
+    - of the reasoning State when we say hidden state or latent space or embedding space or this sort of space of math and
+      computation we're talking about the same space of course the the exact state of the space changes depending on where
+      we are in the Transformer but let's take a look at the image from the paper in a typical Chain of Thought reasoning
+      model we're going to ask a question we're going to generate some tokens and we're going to think kind of out loud we're
+      we're going to let the chains of thought flow when you click into the Chain of Thought on 01 as we've seen before you
+      can see sort of in the side panel the the steps it's thinking through now conversely to actually thinking out loud we
+      have here that the last hidden states are used as input embeddings okay well what does this mean well it let's go back
+      to our gpt2 style diagram and think about this the input embeddings here are where we're essentially looping back to
+      so what we do is we kind of loop back before we generate
+  pipeline_tag: sentence-similarity
+  library_name: sentence-transformers
+  metrics:
+  - cosine_accuracy@1
+  - cosine_accuracy@3
+  - cosine_accuracy@5
+  - cosine_accuracy@10
+  - cosine_precision@1
+  - cosine_precision@3
+  - cosine_precision@5
+  - cosine_precision@10
+  - cosine_recall@1
+  - cosine_recall@3
+  - cosine_recall@5
+  - cosine_recall@10
+  - cosine_ndcg@10
+  - cosine_mrr@10
+  - cosine_map@100
+  model-index:
+  - name: SentenceTransformer based on Alibaba-NLP/gte-Qwen2-1.5B-instruct
+    results:
+    - task:
+        type: information-retrieval
+        name: Information Retrieval
+      dataset:
+        name: Unknown
+        type: unknown
+      metrics:
+      - type: cosine_accuracy@1
+        value: 0.875
+        name: Cosine Accuracy@1
+        verified: false
+      - type: cosine_accuracy@3
+        value: 1
+        name: Cosine Accuracy@3
+        verified: false
+      - type: cosine_accuracy@5
+        value: 1
+        name: Cosine Accuracy@5
+        verified: false
+      - type: cosine_accuracy@10
+        value: 1
+        name: Cosine Accuracy@10
+        verified: false
+      - type: cosine_precision@1
+        value: 0.875
+        name: Cosine Precision@1
+        verified: false
+      - type: cosine_precision@3
+        value: 0.3333333333333333
+        name: Cosine Precision@3
+        verified: false
+      - type: cosine_precision@5
+        value: 0.2
+        name: Cosine Precision@5
+        verified: false
+      - type: cosine_precision@10
+        value: 0.1
+        name: Cosine Precision@10
+        verified: false
+      - type: cosine_recall@1
+        value: 0.875
+        name: Cosine Recall@1
+        verified: false
+      - type: cosine_recall@3
+        value: 1
+        name: Cosine Recall@3
+        verified: false
+      - type: cosine_recall@5
+        value: 1
+        name: Cosine Recall@5
+        verified: false
+      - type: cosine_recall@10
+        value: 1
+        name: Cosine Recall@10
+        verified: false
+      - type: cosine_ndcg@10
+        value: 0.9538662191964322
+        name: Cosine Ndcg@10
+        verified: false
+      - type: cosine_mrr@10
+        value: 0.9375
+        name: Cosine Mrr@10
+        verified: false
+      - type: cosine_map@100
+        value: 0.9375
+        name: Cosine Map@100
+        verified: false
+siblings:
+- rfilename: .gitattributes
+- rfilename: 1_Pooling/config.json
+- rfilename: README.md
+- rfilename: added_tokens.json
+- rfilename: config.json
+- rfilename: config_sentence_transformers.json
+- rfilename: merges.txt
+- rfilename: model-00001-of-00002.safetensors
+- rfilename: model-00002-of-00002.safetensors
+- rfilename: model.safetensors.index.json
+- rfilename: modules.json
+- rfilename: sentence_bert_config.json
+- rfilename: special_tokens_map.json
+- rfilename: tokenizer.json
+- rfilename: tokenizer_config.json
+- rfilename: vocab.json
+spaces: []
+createdAt: '2025-02-23T09:17:35.000Z'
+safetensors:
+  parameters:
+    F32: 1543268864
+  total: 1543268864
+usedStorage: 6184530174
+downloadsAllTime: 18
+inferenceProviderMapping: {}
+configJson:
+  _name_or_path: Alibaba-NLP/gte-Qwen2-1.5B-instruct
+  architectures:
+  - Qwen2Model
+  attention_dropout: 0.0
+  auto_map:
+    AutoModel: Alibaba-NLP/gte-Qwen2-1.5B-instruct--modeling_qwen.Qwen2Model
+    AutoModelForCausalLM: Alibaba-NLP/gte-Qwen2-1.5B-instruct--modeling_qwen.Qwen2ForCausalLM
+    AutoModelForSequenceClassification: Alibaba-NLP/gte-Qwen2-1.5B-instruct--modeling_qwen.Qwen2ForSequenceClassification
+  bos_token_id: 151643
+  eos_token_id: 151643
+  hidden_act: silu
+  hidden_size: 1536
+  initializer_range: 0.02
+  intermediate_size: 8960
+  is_causal: false
+  max_position_embeddings: 131072
+  max_window_layers: 21
+  model_type: qwen2
+  num_attention_heads: 12
+  num_hidden_layers: 28
+  num_key_value_heads: 2
+  rms_norm_eps: 1.0e-06
+  rope_scaling: null
+  rope_theta: 1000000.0
+  sliding_window: null
+  tie_word_embeddings: false
+  torch_dtype: float32
+  transformers_version: 4.48.3
+  use_cache: true
+  use_sliding_window: false
+  vocab_size: 151646
+onnxFiles: {}
+safetensorsSizeMb: 6173.1
+approxSizeMb: 6173.1
+fetchedAt: '2026-06-09T06:55:53.000Z'

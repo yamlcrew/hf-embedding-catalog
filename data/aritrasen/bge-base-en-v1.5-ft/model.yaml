@@ -1,0 +1,224 @@
+_id: 6697d15d3fea9b7c13c70cc5
+id: aritrasen/bge-base-en-v1.5-ft
+private: false
+pipeline_tag: sentence-similarity
+library_name: sentence-transformers
+tags:
+- sentence-transformers
+- safetensors
+- bert
+- sentence-similarity
+- feature-extraction
+- generated_from_trainer
+- dataset_size:21
+- loss:MultipleNegativesRankingLoss
+- arxiv:1908.10084
+- arxiv:1705.00652
+- base_model:BAAI/bge-base-en-v1.5
+- base_model:finetune:BAAI/bge-base-en-v1.5
+- text-embeddings-inference
+- endpoints_compatible
+- region:us
+downloads: 2
+likes: 0
+modelId: aritrasen/bge-base-en-v1.5-ft
+author: aritrasen
+sha: e84ed2ed32f817c7a19740a402ce9299d1ab3fe3
+lastModified: '2024-07-17T14:13:02.000Z'
+gated: false
+disabled: false
+mask_token: '[MASK]'
+widgetData:
+- source_sentence: '| Config                            | Model                  | Epochs | Max seq length | Micro batch size
+    | Machine | Training runtime | Cost | Peak memory | Validation loss | Validation perplexity | Multitask score (MMLU) |
+
+    | --------------------------------- | ---------------------- | ------ | -------------- | ---------------- | ------- |
+    ---------------- | ---- | ----------- | --------------- | --------------------- | --------------- |
+
+    | falcon-7b/lora.yaml               | falcon-7b              | 4      | 512            | 1                | 1xA10G  |
+    24.84 min        | $0.7 | 16.69 GB    | 0.945           | 2.573                 | 26.2%           |
+
+    | falcon-7b/lora.yaml               | falcon-7b              | 4      | 512            | 1                | 4xA10G  |
+    24.94 min        | $2.0 | 16.69 GB    | 0.945           | 2.573                 | 26.4%           |
+
+    | falcon-7b/qlora.yaml              | falcon-7b              | 4      | 512            | 1                | 1xA10G  |
+    50.85 min        | $1.5 | 9.44 GB     | 0.993           | 2.699                 | 26.3%           |
+
+    | falcon-7b/qlora.yaml              | falcon-7b              | 4      | 512            | 1                | 4xA10G  |
+    50.88 min        | $4.1 | 9.44 GB     | 0.993           | 2.699                 | 26.3%           |
+
+    |                                   |                        |        |                |                  |         |                  |      |             |                 |                       |                 |
+
+    | gemma-2b/full.yaml                | gemma-2b               | 1      | 512            | 1                | 4xA10G  |
+    14.06 min        | $1.1 | 17.43 GB    | 1.021           | 2.777                 | 32.4%           |
+
+    | gemma-2b/lora.yaml                | gemma-2b               | 2      | 512            | 2                | 1xA10G  |
+    9.41 min         | $0.3 | 12.62 GB    | 0.981           | 2.666                 | 34.4%           |'
+  sentences:
+  - 'What is the command to download the pretrained model weights for the Llama-2-7b-hf model?
+
+    '
+  - 'What is the version of nvfuser\_cu121 used?
+
+    '
+  - 'What is the training runtime for the gemma-2b model with the lora configuration?
+
+    '
+- source_sentence: "# Serve and Deploy LLMs\n\nThis document shows how you can serve a LitGPT for deployment. \n\n&nbsp;\n\
+    ## Serve an LLM\n\nThis section illustrates how we can set up an inference server for a phi-2 LLM using `litgpt serve`\
+    \ that is minimal and highly scalable.\n\n\n&nbsp;\n## Step 1: Start the inference server\n\n\n```bash\n# 1) Download\
+    \ a pretrained model (alternatively, use your own finetuned model)\nlitgpt download --repo_id microsoft/phi-2\n\n# 2)\
+    \ Start the server\nlitgpt serve --checkpoint_dir checkpoints/microsoft/phi-2\n```\n\n> [!TIP]\n> Use `litgpt serve --help`\
+    \ to display additional options, including the port, devices, LLM temperature setting, and more.\n\n\n&nbsp;\n## Step\
+    \ 2: Query the inference server\n\nYou can now send requests to the inference server you started in step 2. For example,\
+    \ in a new Python session, we can send requests to the inference server as follows:\n\n\n```python\nimport requests, json\n\
+    \nresponse = requests.post(\n    \"http://127.0.0.1:8000/predict\", \n    json={\"prompt\": \"Fix typos in the following\
+    \ sentence: Exampel input\"}\n)\n\nprint(response.json()[\"output\"])\n```\n\nExecuting the code above prints the following\
+    \ output:\n\n```\nInstruct: Fix typos in the following sentence: Exampel input\nOutput: Example input.\n```"
+  sentences:
+  - 'What command do I use to convert the finetuned model to a HF transformer model?
+
+    '
+  - 'How do you merge LoRA weights into the original model''s checkpoint?
+
+    '
+  - 'How can I start an inference server for a phi-2 LLM using litgpt serve?
+
+    '
+model-index: null
+config:
+  architectures:
+  - BertModel
+  model_type: bert
+  tokenizer_config:
+    cls_token: '[CLS]'
+    mask_token: '[MASK]'
+    pad_token: '[PAD]'
+    sep_token: '[SEP]'
+    unk_token: '[UNK]'
+cardData:
+  base_model: BAAI/bge-base-en-v1.5
+  datasets: []
+  language: []
+  library_name: sentence-transformers
+  pipeline_tag: sentence-similarity
+  tags:
+  - sentence-transformers
+  - sentence-similarity
+  - feature-extraction
+  - generated_from_trainer
+  - dataset_size:21
+  - loss:MultipleNegativesRankingLoss
+  widget:
+  - source_sentence: '| Config                            | Model                  | Epochs | Max seq length | Micro batch
+      size | Machine | Training runtime | Cost | Peak memory | Validation loss | Validation perplexity | Multitask score (MMLU)
+      |
+
+      | --------------------------------- | ---------------------- | ------ | -------------- | ---------------- | -------
+      | ---------------- | ---- | ----------- | --------------- | --------------------- | --------------- |
+
+      | falcon-7b/lora.yaml               | falcon-7b              | 4      | 512            | 1                | 1xA10G  |
+      24.84 min        | $0.7 | 16.69 GB    | 0.945           | 2.573                 | 26.2%           |
+
+      | falcon-7b/lora.yaml               | falcon-7b              | 4      | 512            | 1                | 4xA10G  |
+      24.94 min        | $2.0 | 16.69 GB    | 0.945           | 2.573                 | 26.4%           |
+
+      | falcon-7b/qlora.yaml              | falcon-7b              | 4      | 512            | 1                | 1xA10G  |
+      50.85 min        | $1.5 | 9.44 GB     | 0.993           | 2.699                 | 26.3%           |
+
+      | falcon-7b/qlora.yaml              | falcon-7b              | 4      | 512            | 1                | 4xA10G  |
+      50.88 min        | $4.1 | 9.44 GB     | 0.993           | 2.699                 | 26.3%           |
+
+      |                                   |                        |        |                |                  |         |                  |      |             |                 |                       |                 |
+
+      | gemma-2b/full.yaml                | gemma-2b               | 1      | 512            | 1                | 4xA10G  |
+      14.06 min        | $1.1 | 17.43 GB    | 1.021           | 2.777                 | 32.4%           |
+
+      | gemma-2b/lora.yaml                | gemma-2b               | 2      | 512            | 2                | 1xA10G  |
+      9.41 min         | $0.3 | 12.62 GB    | 0.981           | 2.666                 | 34.4%           |'
+    sentences:
+    - 'What is the command to download the pretrained model weights for the Llama-2-7b-hf model?
+
+      '
+    - 'What is the version of nvfuser\_cu121 used?
+
+      '
+    - 'What is the training runtime for the gemma-2b model with the lora configuration?
+
+      '
+  - source_sentence: "# Serve and Deploy LLMs\n\nThis document shows how you can serve a LitGPT for deployment. \n\n&nbsp;\n\
+      ## Serve an LLM\n\nThis section illustrates how we can set up an inference server for a phi-2 LLM using `litgpt serve`\
+      \ that is minimal and highly scalable.\n\n\n&nbsp;\n## Step 1: Start the inference server\n\n\n```bash\n# 1) Download\
+      \ a pretrained model (alternatively, use your own finetuned model)\nlitgpt download --repo_id microsoft/phi-2\n\n# 2)\
+      \ Start the server\nlitgpt serve --checkpoint_dir checkpoints/microsoft/phi-2\n```\n\n> [!TIP]\n> Use `litgpt serve\
+      \ --help` to display additional options, including the port, devices, LLM temperature setting, and more.\n\n\n&nbsp;\n\
+      ## Step 2: Query the inference server\n\nYou can now send requests to the inference server you started in step 2. For\
+      \ example, in a new Python session, we can send requests to the inference server as follows:\n\n\n```python\nimport\
+      \ requests, json\n\nresponse = requests.post(\n    \"http://127.0.0.1:8000/predict\", \n    json={\"prompt\": \"Fix\
+      \ typos in the following sentence: Exampel input\"}\n)\n\nprint(response.json()[\"output\"])\n```\n\nExecuting the code\
+      \ above prints the following output:\n\n```\nInstruct: Fix typos in the following sentence: Exampel input\nOutput: Example\
+      \ input.\n```"
+    sentences:
+    - 'What command do I use to convert the finetuned model to a HF transformer model?
+
+      '
+    - 'How do you merge LoRA weights into the original model''s checkpoint?
+
+      '
+    - 'How can I start an inference server for a phi-2 LLM using litgpt serve?
+
+      '
+siblings:
+- rfilename: .gitattributes
+- rfilename: 1_Pooling/config.json
+- rfilename: README.md
+- rfilename: config.json
+- rfilename: config_sentence_transformers.json
+- rfilename: model.safetensors
+- rfilename: modules.json
+- rfilename: sentence_bert_config.json
+- rfilename: special_tokens_map.json
+- rfilename: tokenizer.json
+- rfilename: tokenizer_config.json
+- rfilename: vocab.txt
+spaces: []
+createdAt: '2024-07-17T14:12:45.000Z'
+safetensors:
+  parameters:
+    F32: 109482240
+  total: 109482240
+usedStorage: 437951328
+downloadsAllTime: 11
+inferenceProviderMapping: {}
+configJson:
+  _name_or_path: BAAI/bge-base-en-v1.5
+  architectures:
+  - BertModel
+  attention_probs_dropout_prob: 0.1
+  classifier_dropout: null
+  gradient_checkpointing: false
+  hidden_act: gelu
+  hidden_dropout_prob: 0.1
+  hidden_size: 768
+  id2label:
+    '0': LABEL_0
+  initializer_range: 0.02
+  intermediate_size: 3072
+  label2id:
+    LABEL_0: 0
+  layer_norm_eps: 1.0e-12
+  max_position_embeddings: 512
+  model_type: bert
+  num_attention_heads: 12
+  num_hidden_layers: 12
+  pad_token_id: 0
+  position_embedding_type: absolute
+  torch_dtype: float32
+  transformers_version: 4.41.2
+  type_vocab_size: 2
+  use_cache: true
+  vocab_size: 30522
+onnxFiles: {}
+safetensorsSizeMb: 438.0
+approxSizeMb: 437.9
+fetchedAt: '2026-06-09T06:55:53.000Z'

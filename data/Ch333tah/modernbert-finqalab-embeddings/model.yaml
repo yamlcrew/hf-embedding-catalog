@@ -1,0 +1,324 @@
+_id: 679501a66a5023b9cbf7db0d
+id: Ch333tah/modernbert-finqalab-embeddings
+private: false
+pipeline_tag: sentence-similarity
+library_name: sentence-transformers
+tags:
+- sentence-transformers
+- safetensors
+- modernbert
+- sentence-similarity
+- feature-extraction
+- generated_from_trainer
+- dataset_size:101
+- loss:MultipleNegativesRankingLoss
+- dataset:Ch333tah/finqalab_embedding_finetune
+- arxiv:1908.10084
+- arxiv:1705.00652
+- base_model:nomic-ai/modernbert-embed-base
+- base_model:finetune:nomic-ai/modernbert-embed-base
+- model-index
+- text-embeddings-inference
+- endpoints_compatible
+- region:us
+downloads: 2
+likes: 0
+modelId: Ch333tah/modernbert-finqalab-embeddings
+author: Ch333tah
+sha: cc755b988c96262c9929af63107c3ec9bbc83ab1
+lastModified: '2025-01-25T15:22:33.000Z'
+gated: false
+disabled: false
+widgetData:
+- source_sentence: 'Question: How long do I have to complete the biometric verification?  Answer: Once you receive the OTP,
+    you must finish the biometric process within 45 days. An automated email will remind you to complete it.'
+  sentences:
+  - What's the deadline for that fingerprint thing after I get the code?
+  - I'm disputing my capital gains tax calculation from NCCPL, what can I do?
+  - 'Question: Can I complete the biometric verification from outside Pakistan?  Answer: Yes, if you are currently abroad,
+    you can complete the biometric process either online or by visiting an NCCPL office when you return to Pakistan, provided
+    its within 45 days of account activation.'
+- source_sentence: 'Question: What happens if I don''t pay CGT on my PSX transactions?  Answer: If you don''t pay CGT on your
+    PSX transactions, the National Clearing Company of Pakistan Limited (NCCPL) can block your account. This means you won''t
+    be able to trade or access your holdings until the outstanding CGT is paid. It is important to ensure that all CGT obligations
+    are met to avoid any disruptions in your trading account.'
+  sentences:
+  - 'Question: How can I make zakat non-deductible?  Answer: To make zakat non-deductible, you need to submit a declaration
+    on stamp paper as per regulatory requirements of NCCPL. We can prepare the paperwork for you; however, you will need to
+    sign it and pay an additional fee of PKR 500/- for stamp paper. If you wish, you can initially set zakat as deductible
+    and change it later.'
+  - My app keeps crashing!  What should I do?
+  - What if I forget to pay taxes on my PSX trades?
+- source_sentence: 'Question: What should I do if my IBAN is not verified by RAAST?  Answer: Your IBAN might be incorrect,
+    please verify it and share the correct one with us. The error is due to a mismatch between your bank details and Finqalab
+    account details, please try using a different bank account or a mobile wallet (Easypaisa/JazzCash) that is under your
+    name.  If you do not have another bank account, please send a copy of your cheque or account maintenance certificate for
+    processing. If you provided an RDA account, please try using a local mobile wallet like Easypaisa or JazzCash under your
+    name instead.'
+  sentences:
+  - My IBAN isn't working with RAAST, why is this?
+  - 'Question: How to pay through bank transfers?  Answer: To pay through a bank transfer to our MCB Account, go to the account
+    screen on the app, select My Payment Deposit'', select Bank Transfer and then make a bank transfer on the given IBAN number.
+    Once the transaction has been made, enter your account details and lastly, upload the receipt of deposit as proof. It
+    takes 24 hours to process the payment. We only recommend this for transactions above PKR 1 million. Bank Transfer Initiate
+    a Bank Transfer MCB Bank Next Capital Limited PK62MUCB0550019331001281 0550 0193 3100 1281 Enter Details'
+  - Will my phone run this app? I'm worried about the specs.
+- source_sentence: 'Question: Are bonus shares taxable?  Answer: In Pakistan, bonus shares are subject to tax at the rate
+    of 10%.'
+  sentences:
+  - I'm wondering if I have to pay tax on bonus shares I received?
+  - 'Question: Can I sell my bonus shares?  Answer: Yes, once you receive the bonus shares, they become regular shares, and
+    you can sell them on the stock exchange, just like any other shares you own.'
+  - When should I expect the money in my account?
+- source_sentence: 'Question: I''m experiencing issues with logging in to the app. What should I do?  Answer: In case you
+    are facing any issues, Try closing the app and opening it again. Try clearing the cache or updating to the latest version.
+    If the issue still persists, contact our customer support through Whatsapp (+923003672522). Email your query at support@finqalab.com.pk'
+  sentences:
+  - 'Question: The app is not loading properly on my device. What could be the problem?  Answer: If the app isn''t loading
+    properly: Please check if you have a stable internet connection. Try refreshing the screen 2-3 times. Close the app and
+    open it again. Try clearing the cache, check for app updates or reinstall the app. If the issue still persists, contact
+    our customer support through Whatsapp (+923003672522) or email your query at support@finqalab.com'
+  - Why isn't my text going through to 9646?
+  - My app won't let me log in!  Help!
+model-index:
+- name: SentenceTransformer based on nomic-ai/modernbert-embed-base
+  results:
+  - task:
+      type: triplet
+      name: Triplet
+    dataset:
+      name: ai job train
+      type: ai-job-train
+    metrics:
+    - type: cosine_accuracy
+      value: 0.9603960514068604
+      name: Cosine Accuracy
+      verified: false
+    - type: cosine_accuracy
+      value: 0.9603960514068604
+      name: Cosine Accuracy
+      verified: false
+  - task:
+      type: triplet
+      name: Triplet
+    dataset:
+      name: ai job valid
+      type: ai-job-valid
+    metrics:
+    - type: cosine_accuracy
+      value: 0.9047619104385376
+      name: Cosine Accuracy
+      verified: false
+    - type: cosine_accuracy
+      value: 0.9523809552192688
+      name: Cosine Accuracy
+      verified: false
+  - task:
+      type: triplet
+      name: Triplet
+    dataset:
+      name: ai job test
+      type: ai-job-test
+    metrics:
+    - type: cosine_accuracy
+      value: 0.9130434989929199
+      name: Cosine Accuracy
+      verified: false
+    - type: cosine_accuracy
+      value: 0.9130434989929199
+      name: Cosine Accuracy
+      verified: false
+config:
+  architectures:
+  - ModernBertModel
+  model_type: modernbert
+  tokenizer_config:
+    cls_token: '[CLS]'
+    mask_token: '[MASK]'
+    pad_token: '[PAD]'
+    sep_token: '[SEP]'
+    unk_token: '[UNK]'
+cardData:
+  tags:
+  - sentence-transformers
+  - sentence-similarity
+  - feature-extraction
+  - generated_from_trainer
+  - dataset_size:101
+  - loss:MultipleNegativesRankingLoss
+  base_model: nomic-ai/modernbert-embed-base
+  widget:
+  - source_sentence: 'Question: How long do I have to complete the biometric verification?  Answer: Once you receive the OTP,
+      you must finish the biometric process within 45 days. An automated email will remind you to complete it.'
+    sentences:
+    - What's the deadline for that fingerprint thing after I get the code?
+    - I'm disputing my capital gains tax calculation from NCCPL, what can I do?
+    - 'Question: Can I complete the biometric verification from outside Pakistan?  Answer: Yes, if you are currently abroad,
+      you can complete the biometric process either online or by visiting an NCCPL office when you return to Pakistan, provided
+      its within 45 days of account activation.'
+  - source_sentence: 'Question: What happens if I don''t pay CGT on my PSX transactions?  Answer: If you don''t pay CGT on
+      your PSX transactions, the National Clearing Company of Pakistan Limited (NCCPL) can block your account. This means
+      you won''t be able to trade or access your holdings until the outstanding CGT is paid. It is important to ensure that
+      all CGT obligations are met to avoid any disruptions in your trading account.'
+    sentences:
+    - 'Question: How can I make zakat non-deductible?  Answer: To make zakat non-deductible, you need to submit a declaration
+      on stamp paper as per regulatory requirements of NCCPL. We can prepare the paperwork for you; however, you will need
+      to sign it and pay an additional fee of PKR 500/- for stamp paper. If you wish, you can initially set zakat as deductible
+      and change it later.'
+    - My app keeps crashing!  What should I do?
+    - What if I forget to pay taxes on my PSX trades?
+  - source_sentence: 'Question: What should I do if my IBAN is not verified by RAAST?  Answer: Your IBAN might be incorrect,
+      please verify it and share the correct one with us. The error is due to a mismatch between your bank details and Finqalab
+      account details, please try using a different bank account or a mobile wallet (Easypaisa/JazzCash) that is under your
+      name.  If you do not have another bank account, please send a copy of your cheque or account maintenance certificate
+      for processing. If you provided an RDA account, please try using a local mobile wallet like Easypaisa or JazzCash under
+      your name instead.'
+    sentences:
+    - My IBAN isn't working with RAAST, why is this?
+    - 'Question: How to pay through bank transfers?  Answer: To pay through a bank transfer to our MCB Account, go to the
+      account screen on the app, select My Payment Deposit'', select Bank Transfer and then make a bank transfer on the given
+      IBAN number. Once the transaction has been made, enter your account details and lastly, upload the receipt of deposit
+      as proof. It takes 24 hours to process the payment. We only recommend this for transactions above PKR 1 million. Bank
+      Transfer Initiate a Bank Transfer MCB Bank Next Capital Limited PK62MUCB0550019331001281 0550 0193 3100 1281 Enter Details'
+    - Will my phone run this app? I'm worried about the specs.
+  - source_sentence: 'Question: Are bonus shares taxable?  Answer: In Pakistan, bonus shares are subject to tax at the rate
+      of 10%.'
+    sentences:
+    - I'm wondering if I have to pay tax on bonus shares I received?
+    - 'Question: Can I sell my bonus shares?  Answer: Yes, once you receive the bonus shares, they become regular shares,
+      and you can sell them on the stock exchange, just like any other shares you own.'
+    - When should I expect the money in my account?
+  - source_sentence: 'Question: I''m experiencing issues with logging in to the app. What should I do?  Answer: In case you
+      are facing any issues, Try closing the app and opening it again. Try clearing the cache or updating to the latest version.
+      If the issue still persists, contact our customer support through Whatsapp (+923003672522). Email your query at support@finqalab.com.pk'
+    sentences:
+    - 'Question: The app is not loading properly on my device. What could be the problem?  Answer: If the app isn''t loading
+      properly: Please check if you have a stable internet connection. Try refreshing the screen 2-3 times. Close the app
+      and open it again. Try clearing the cache, check for app updates or reinstall the app. If the issue still persists,
+      contact our customer support through Whatsapp (+923003672522) or email your query at support@finqalab.com'
+    - Why isn't my text going through to 9646?
+    - My app won't let me log in!  Help!
+  datasets:
+  - Ch333tah/finqalab_embedding_finetune
+  pipeline_tag: sentence-similarity
+  library_name: sentence-transformers
+  metrics:
+  - cosine_accuracy
+  model-index:
+  - name: SentenceTransformer based on nomic-ai/modernbert-embed-base
+    results:
+    - task:
+        type: triplet
+        name: Triplet
+      dataset:
+        name: ai job train
+        type: ai-job-train
+      metrics:
+      - type: cosine_accuracy
+        value: 0.9603960514068604
+        name: Cosine Accuracy
+        verified: false
+      - type: cosine_accuracy
+        value: 0.9603960514068604
+        name: Cosine Accuracy
+        verified: false
+    - task:
+        type: triplet
+        name: Triplet
+      dataset:
+        name: ai job valid
+        type: ai-job-valid
+      metrics:
+      - type: cosine_accuracy
+        value: 0.9047619104385376
+        name: Cosine Accuracy
+        verified: false
+      - type: cosine_accuracy
+        value: 0.9523809552192688
+        name: Cosine Accuracy
+        verified: false
+    - task:
+        type: triplet
+        name: Triplet
+      dataset:
+        name: ai job test
+        type: ai-job-test
+      metrics:
+      - type: cosine_accuracy
+        value: 0.9130434989929199
+        name: Cosine Accuracy
+        verified: false
+      - type: cosine_accuracy
+        value: 0.9130434989929199
+        name: Cosine Accuracy
+        verified: false
+siblings:
+- rfilename: .gitattributes
+- rfilename: 1_Pooling/config.json
+- rfilename: README.md
+- rfilename: config.json
+- rfilename: config_sentence_transformers.json
+- rfilename: model.safetensors
+- rfilename: modules.json
+- rfilename: sentence_bert_config.json
+- rfilename: special_tokens_map.json
+- rfilename: tokenizer.json
+- rfilename: tokenizer_config.json
+spaces: []
+createdAt: '2025-01-25T15:22:14.000Z'
+safetensors:
+  parameters:
+    F32: 149014272
+  total: 149014272
+usedStorage: 596070136
+downloadsAllTime: 24
+inferenceProviderMapping: {}
+configJson:
+  _name_or_path: nomic-ai/modernbert-embed-base
+  architectures:
+  - ModernBertModel
+  attention_bias: false
+  attention_dropout: 0.0
+  bos_token_id: 50281
+  classifier_activation: gelu
+  classifier_bias: false
+  classifier_dropout: 0.0
+  classifier_pooling: mean
+  cls_token_id: 50281
+  decoder_bias: true
+  deterministic_flash_attn: false
+  embedding_dropout: 0.0
+  eos_token_id: 50282
+  global_attn_every_n_layers: 3
+  global_rope_theta: 160000.0
+  gradient_checkpointing: false
+  hidden_activation: gelu
+  hidden_size: 768
+  initializer_cutoff_factor: 2.0
+  initializer_range: 0.02
+  intermediate_size: 1152
+  layer_norm_eps: 1.0e-05
+  local_attention: 128
+  local_rope_theta: 10000.0
+  max_position_embeddings: 8192
+  mlp_bias: false
+  mlp_dropout: 0.0
+  model_type: modernbert
+  norm_bias: false
+  norm_eps: 1.0e-05
+  num_attention_heads: 12
+  num_hidden_layers: 22
+  pad_token_id: 50283
+  position_embedding_type: absolute
+  reference_compile: true
+  repad_logits_with_grad: false
+  sep_token_id: 50282
+  sparse_pred_ignore_index: -100
+  sparse_prediction: false
+  torch_dtype: float32
+  transformers_version: 4.48.1
+  vocab_size: 50368
+onnxFiles: {}
+safetensorsSizeMb: 596.1
+approxSizeMb: 596.1
+fetchedAt: '2026-06-09T06:55:53.000Z'

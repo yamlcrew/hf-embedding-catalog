@@ -1,0 +1,245 @@
+_id: 6981c5b063152b4ea6b841cf
+id: tomaarsen/distilbert-base-uncased-askubuntu-ct
+private: false
+pipeline_tag: sentence-similarity
+library_name: sentence-transformers
+tags:
+- sentence-transformers
+- safetensors
+- distilbert
+- sentence-similarity
+- feature-extraction
+- dense
+- generated_from_trainer
+- dataset_size:160425
+- loss:ContrastiveTensionLoss
+- en
+- dataset:sentence-transformers/askubuntu-questions
+- arxiv:1908.10084
+- base_model:distilbert/distilbert-base-uncased
+- base_model:finetune:distilbert/distilbert-base-uncased
+- model-index
+- text-embeddings-inference
+- endpoints_compatible
+- region:us
+downloads: 6
+likes: 0
+modelId: tomaarsen/distilbert-base-uncased-askubuntu-ct
+author: tomaarsen
+sha: 93587d81f03c3a7131058170c1b6640632af2b4a
+lastModified: '2026-02-03T09:53:59.000Z'
+gated: false
+disabled: false
+mask_token: '[MASK]'
+widgetData:
+- source_sentence: how can i tell if i have a broadcom wireless card ?
+  sentences:
+  - download ubuntu packages
+  - search and replace similar but different phrases
+  - windows 7 partition not showing on ubuntu 13.04
+- source_sentence: how do i make my own customized ubuntu sounds ?
+  sentences:
+  - missing /lib/libc.so.6
+  - how to make sure that gcc , binutils , make and the kernel source are installed ?
+  - ca n't empty trash
+- source_sentence: can i use networkmanager without a tray/dock/bar ?
+  sentences:
+  - problem logging in even though password is accepted
+  - issues with display brightness control on a samsung r440
+  - how do i check / modify lvm state on a pre-installed system ?
+- source_sentence: vmware/virtualbox 3d acceleration
+  sentences:
+  - fix shutdown on hp 530 ( kernel 3.9.2 / ubuntu 13.04 )
+  - install ubuntu via formatted hdd
+  - monitoring system temperatures
+- source_sentence: installing by using wubi on windows vista 64
+  sentences:
+  - permission issues
+  - how do i make nautilus windows stick for drag & drop ?
+  - some problems with the keyboard layout ?
+model-index:
+- name: SentenceTransformer based on distilbert/distilbert-base-uncased
+  results:
+  - task:
+      type: reranking
+      name: Reranking
+    dataset:
+      name: askubuntu dev
+      type: askubuntu-dev
+    metrics:
+    - type: map
+      value: 0.5171558623420295
+      name: Map
+      verified: false
+    - type: mrr@10
+      value: 0.6605420373277516
+      name: Mrr@10
+      verified: false
+    - type: ndcg@10
+      value: 0.5574396187819316
+      name: Ndcg@10
+      verified: false
+  - task:
+      type: reranking
+      name: Reranking
+    dataset:
+      name: askubuntu test
+      type: askubuntu-test
+    metrics:
+    - type: map
+      value: 0.5511241684262643
+      name: Map
+      verified: false
+    - type: mrr@10
+      value: 0.683275693890219
+      name: Mrr@10
+      verified: false
+    - type: ndcg@10
+      value: 0.5977843680170493
+      name: Ndcg@10
+      verified: false
+config:
+  architectures:
+  - DistilBertModel
+  model_type: distilbert
+  tokenizer_config:
+    cls_token: '[CLS]'
+    mask_token: '[MASK]'
+    pad_token: '[PAD]'
+    sep_token: '[SEP]'
+    unk_token: '[UNK]'
+cardData:
+  language:
+  - en
+  tags:
+  - sentence-transformers
+  - sentence-similarity
+  - feature-extraction
+  - dense
+  - generated_from_trainer
+  - dataset_size:160425
+  - loss:ContrastiveTensionLoss
+  base_model: distilbert/distilbert-base-uncased
+  widget:
+  - source_sentence: how can i tell if i have a broadcom wireless card ?
+    sentences:
+    - download ubuntu packages
+    - search and replace similar but different phrases
+    - windows 7 partition not showing on ubuntu 13.04
+  - source_sentence: how do i make my own customized ubuntu sounds ?
+    sentences:
+    - missing /lib/libc.so.6
+    - how to make sure that gcc , binutils , make and the kernel source are installed ?
+    - ca n't empty trash
+  - source_sentence: can i use networkmanager without a tray/dock/bar ?
+    sentences:
+    - problem logging in even though password is accepted
+    - issues with display brightness control on a samsung r440
+    - how do i check / modify lvm state on a pre-installed system ?
+  - source_sentence: vmware/virtualbox 3d acceleration
+    sentences:
+    - fix shutdown on hp 530 ( kernel 3.9.2 / ubuntu 13.04 )
+    - install ubuntu via formatted hdd
+    - monitoring system temperatures
+  - source_sentence: installing by using wubi on windows vista 64
+    sentences:
+    - permission issues
+    - how do i make nautilus windows stick for drag & drop ?
+    - some problems with the keyboard layout ?
+  datasets:
+  - sentence-transformers/askubuntu-questions
+  pipeline_tag: sentence-similarity
+  library_name: sentence-transformers
+  metrics:
+  - map
+  - mrr@10
+  - ndcg@10
+  model-index:
+  - name: SentenceTransformer based on distilbert/distilbert-base-uncased
+    results:
+    - task:
+        type: reranking
+        name: Reranking
+      dataset:
+        name: askubuntu dev
+        type: askubuntu-dev
+      metrics:
+      - type: map
+        value: 0.5171558623420295
+        name: Map
+        verified: false
+      - type: mrr@10
+        value: 0.6605420373277516
+        name: Mrr@10
+        verified: false
+      - type: ndcg@10
+        value: 0.5574396187819316
+        name: Ndcg@10
+        verified: false
+    - task:
+        type: reranking
+        name: Reranking
+      dataset:
+        name: askubuntu test
+        type: askubuntu-test
+      metrics:
+      - type: map
+        value: 0.5511241684262643
+        name: Map
+        verified: false
+      - type: mrr@10
+        value: 0.683275693890219
+        name: Mrr@10
+        verified: false
+      - type: ndcg@10
+        value: 0.5977843680170493
+        name: Ndcg@10
+        verified: false
+siblings:
+- rfilename: .gitattributes
+- rfilename: 1_Pooling/config.json
+- rfilename: README.md
+- rfilename: config.json
+- rfilename: config_sentence_transformers.json
+- rfilename: model.safetensors
+- rfilename: modules.json
+- rfilename: sentence_bert_config.json
+- rfilename: tokenizer.json
+- rfilename: tokenizer_config.json
+spaces: []
+createdAt: '2026-02-03T09:53:52.000Z'
+safetensors:
+  parameters:
+    F32: 66362880
+  total: 66362880
+usedStorage: 265462608
+downloadsAllTime: 21
+inferenceProviderMapping: {}
+configJson:
+  activation: gelu
+  architectures:
+  - DistilBertModel
+  attention_dropout: 0.1
+  bos_token_id: null
+  dim: 768
+  dropout: 0.1
+  dtype: float32
+  eos_token_id: null
+  hidden_dim: 3072
+  initializer_range: 0.02
+  max_position_embeddings: 512
+  model_type: distilbert
+  n_heads: 12
+  n_layers: 6
+  pad_token_id: 0
+  qa_dropout: 0.1
+  seq_classif_dropout: 0.2
+  sinusoidal_pos_embds: false
+  tie_weights_: true
+  tie_word_embeddings: true
+  transformers_version: 5.0.1.dev0
+  vocab_size: 30522
+onnxFiles: {}
+safetensorsSizeMb: 265.5
+approxSizeMb: 265.5
+fetchedAt: '2026-06-09T06:55:53.000Z'

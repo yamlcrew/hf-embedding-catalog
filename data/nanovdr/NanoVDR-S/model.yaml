@@ -1,0 +1,172 @@
+_id: 69a00daa35497465191afcf2
+id: nanovdr/NanoVDR-S
+private: false
+pipeline_tag: sentence-similarity
+library_name: sentence-transformers
+tags:
+- sentence-transformers
+- safetensors
+- distilbert
+- feature-extraction
+- sentence-similarity
+- visual-document-retrieval
+- cross-modal-distillation
+- knowledge-distillation
+- nanovdr
+- en
+- dataset:openbmb/VisRAG-Ret-Train-Synthetic-data
+- dataset:openbmb/VisRAG-Ret-Train-In-domain-data
+- dataset:vidore/colpali_train_set
+- dataset:llamaindex/vdr-multilingual-train
+- arxiv:2603.12824
+- base_model:distilbert/distilbert-base-uncased
+- base_model:finetune:distilbert/distilbert-base-uncased
+- license:apache-2.0
+- model-index
+- text-embeddings-inference
+- endpoints_compatible
+- region:us
+downloads: 5
+likes: 1
+modelId: nanovdr/NanoVDR-S
+author: nanovdr
+sha: a88044955c937f7cfaca6de02540fcd80447ff2f
+lastModified: '2026-03-16T07:36:01.000Z'
+gated: false
+disabled: false
+mask_token: '[MASK]'
+widgetData:
+- source_sentence: That is a happy person
+  sentences:
+  - That is a happy dog
+  - That is a very happy person
+  - Today is a sunny day
+model-index:
+- name: NanoVDR-S
+  results:
+  - task:
+      type: retrieval
+    dataset:
+      name: ViDoRe v1
+      type: vidore/vidore-benchmark-667173f98e70a1c0fa4d
+    metrics:
+    - name: NDCG@5
+      type: ndcg_at_5
+      value: 82.2
+      verified: false
+  - task:
+      type: retrieval
+    dataset:
+      name: ViDoRe v2
+      type: vidore/vidore-benchmark-v2
+    metrics:
+    - name: NDCG@5
+      type: ndcg_at_5
+      value: 60.5
+      verified: false
+config:
+  architectures:
+  - DistilBertModel
+  model_type: distilbert
+  tokenizer_config:
+    cls_token: '[CLS]'
+    mask_token: '[MASK]'
+    pad_token: '[PAD]'
+    sep_token: '[SEP]'
+    unk_token: '[UNK]'
+cardData:
+  library_name: sentence-transformers
+  pipeline_tag: sentence-similarity
+  tags:
+  - sentence-transformers
+  - feature-extraction
+  - sentence-similarity
+  - visual-document-retrieval
+  - cross-modal-distillation
+  - knowledge-distillation
+  - nanovdr
+  base_model: distilbert/distilbert-base-uncased
+  language:
+  - en
+  license: apache-2.0
+  datasets:
+  - openbmb/VisRAG-Ret-Train-Synthetic-data
+  - openbmb/VisRAG-Ret-Train-In-domain-data
+  - vidore/colpali_train_set
+  - llamaindex/vdr-multilingual-train
+  model-index:
+  - name: NanoVDR-S
+    results:
+    - task:
+        type: retrieval
+      dataset:
+        name: ViDoRe v1
+        type: vidore/vidore-benchmark-667173f98e70a1c0fa4d
+      metrics:
+      - name: NDCG@5
+        type: ndcg_at_5
+        value: 82.2
+        verified: false
+    - task:
+        type: retrieval
+      dataset:
+        name: ViDoRe v2
+        type: vidore/vidore-benchmark-v2
+      metrics:
+      - name: NDCG@5
+        type: ndcg_at_5
+        value: 60.5
+        verified: false
+siblings:
+- rfilename: .gitattributes
+- rfilename: 0_Transformer/config.json
+- rfilename: 0_Transformer/model.safetensors
+- rfilename: 0_Transformer/sentence_bert_config.json
+- rfilename: 0_Transformer/special_tokens_map.json
+- rfilename: 0_Transformer/tokenizer.json
+- rfilename: 0_Transformer/tokenizer_config.json
+- rfilename: 0_Transformer/vocab.txt
+- rfilename: 1_Pooling/config.json
+- rfilename: 2_Dense/config.json
+- rfilename: 2_Dense/pytorch_model.bin
+- rfilename: 3_Dense/config.json
+- rfilename: 3_Dense/pytorch_model.bin
+- rfilename: README.md
+- rfilename: banner.png
+- rfilename: config.json
+- rfilename: config_sentence_transformers.json
+- rfilename: modules.json
+- rfilename: special_tokens_map.json
+- rfilename: tokenizer.json
+- rfilename: tokenizer_config.json
+- rfilename: vocab.txt
+spaces: []
+createdAt: '2026-02-26T09:08:58.000Z'
+usedStorage: 281601507
+downloadsAllTime: 54
+inferenceProviderMapping: {}
+configJson:
+  activation: gelu
+  architectures:
+  - DistilBertModel
+  attention_dropout: 0.1
+  dim: 768
+  dropout: 0.1
+  dtype: float32
+  hidden_dim: 3072
+  initializer_range: 0.02
+  max_position_embeddings: 512
+  model_type: distilbert
+  n_heads: 12
+  n_layers: 6
+  pad_token_id: 0
+  qa_dropout: 0.1
+  seq_classif_dropout: 0.2
+  sinusoidal_pos_embds: false
+  tie_weights_: true
+  transformers_version: 4.57.6
+  vocab_size: 30522
+onnxFiles: {}
+safetensorsSizeMb: 265.5
+approxSizeMb: 0.0
+fetchedAt: '2026-06-09T06:55:53.000Z'

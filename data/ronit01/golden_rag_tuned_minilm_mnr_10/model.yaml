@@ -1,0 +1,888 @@
+_id: 69f415cff25740ccb82cab39
+id: ronit01/golden_rag_tuned_minilm_mnr_10
+private: false
+pipeline_tag: sentence-similarity
+library_name: sentence-transformers
+tags:
+- sentence-transformers
+- safetensors
+- bert
+- sentence-similarity
+- feature-extraction
+- generated_from_trainer
+- dataset_size:111
+- loss:MultipleNegativesRankingLoss
+- arxiv:1908.10084
+- arxiv:1807.03748
+- base_model:sentence-transformers/all-MiniLM-L6-v2
+- base_model:finetune:sentence-transformers/all-MiniLM-L6-v2
+- text-embeddings-inference
+- endpoints_compatible
+- region:us
+downloads: 6
+likes: 0
+modelId: ronit01/golden_rag_tuned_minilm_mnr_10
+author: ronit01
+sha: f7bb21ca0d6d8ad518ff5150851fa06cf768eb94
+lastModified: '2026-05-01T02:54:13.000Z'
+gated: false
+disabled: false
+mask_token: '[MASK]'
+widgetData:
+- source_sentence: How does the num_shards parameter in run_evals() relate to the online aggregation confidence interval computation,
+    and what is the end-to-end flow from setting num_shards to seeing narrowing confidence intervals on eval metrics?
+  sentences:
+  - "API: Generator Configs\n===============\n\nRapidFire AI supports both self-hosted open LLMs and closed model LLM APIs\
+    \ as the generator. \nAs of this writing, it wraps around the model config of vLLM for the former and the OpenAI API for\
+    \ the latter. \nWe plan to expand support for more generator plugins, including Gemini and Claude APIs, based on feedback.\
+    \ \n\n\nRFvLLMModelConfig\n------\n\nThis is a wrapper around vLLM's :class:`config` and :class:`SamplingParams` classes.\
+    \ \nThe full list of their arguments are available on `this page <https://docs.vllm.ai/en/latest/api/vllm/config/index.html>`__\
+    \ \nand `this page <https://docs.vllm.ai/en/v0.6.4/dev/sampling_params.html>`__, respectively.\n\nThe difference here\
+    \ is that the individual arguments (knobs) can be :class:`List` valued or \n:class:`Range` valued in an :class:`RFvLLMModelConfig`.\
+    \ \nThat is how you can specify a base set of knob combinations from which a config group can \nbe produced. Also read\
+    \ :doc:`the Multi-Config Specification page</configs>`.\n\n.. py:class:: RFvLLMModelConfig\n\n  :param model_config: A\
+    \ dictionary with key-value pairs necessary for vLLM-based generation by a self-hosted LLM. All knobs given in this dictionary\
+    \ are simply passed to vLLM as is. vLLM will use its defaults for unspecified knobs. We recommend listing at least the\
+    \ following knobs.\n  \n    * :code:`\"model\"`: Name or path of the Hugging Face model to use, e.g., \"Qwen/Qwen2.5-0.5B-Instruct\"\
+    .\n    * :code:`\"dtype\"`: Data type for model weights and activations, e.g., \"half\", \"float\", \"bfloat16\".\n  \
+    \  * :code:`\"distributed_executor_backend\"`: Backend to use for distributed model workers, either \"ray\" or \"mp\"\
+    \ (multiprocessing). Only \"mp\" supported for now.\n    * :code:`\"max_model_len\"`: Model context length (prompt and\
+    \ output). If unspecified, will be automatically derived from the model config.\n    \n  :type model_config: dict[str,\
+    \ Any]\n\n  :param sampling_params: A dictionary with key-value pairs to control the sampling behavior during text generation\
+    \ by vLLM with a self-hosted LLM. All knobs given in this dictionary are simply passed to vLLM as is. vLLM will use its\
+    \ defaults for unspecified knobs. We recommend listing at least the following knobs.\n\n    * :code:`\"temperature\"`:\
+    \ Float that controls the randomness of the sampling. Lower values make the model more deterministic, while higher values\
+    \ make the model more random. 0.0 means greedy sampling. Default is 1.0.\n    * :code:`\"top_p\"`: Float that controls\
+    \ the cumulative probability of the top tokens to consider. Must be in (0, 1]. Set to 1 to consider all tokens. Default\
+    \ is 1.0.\n    * :code:`\"max_tokens\"`: Maximum number of tokens to generate per output sequence. \n\n  :type sampling_params:\
+    \ dict[str, Any]\n\n  :param rag: An instance of a RapidFire AI RAG pipeline spec.  Also read :doc:`the API: RFLangChainRagSpec\
+    \ page </ragspecs>`.\n  :type rag: RFLangChainRagSpec\n\n  :param prompt_manager: An instance of a RapidFire AI PromptManager.\
+    \ Also read :doc:`the API: Prompt Manager and Other Eval Config Knobs page </promptothers>`.\n  :type prompt_manager:\
+    \ PromptManager\n\n  .. seealso::\n     - `vLLM Config API Reference <https://docs.vllm.ai/en/latest/api/vllm/config/index.html>`_\n\
+    \     - `vLLM Sampling Params API Reference <https://docs.vllm.ai/en/v0.6.4/dev/sampling_params.html>`_\n     - :doc:`RapidFire\
+    \ AI API: RFLangChainRagSpec </ragspecs>`\n\n\n**Examples:**\n\n.. code-block:: python\n\n\t# Based on FiQA chatbot tutorial\
+    \ notebook\n\tvllm_config1 = RFvLLMModelConfig(\n\t\tmodel_config={\n\t\t\t\"model\": \"Qwen/Qwen2.5-0.5B-Instruct\",\n\
+    \t\t\t\"dtype\": \"half\",\n\t\t\t\"gpu_memory_utilization\": 0.7,\n\t\t\t\"tensor_parallel_size\": 1,\n\t\t\t\"distributed_executor_backend\"\
+    : \"mp\",\n\t\t\t\"enable_chunked_prefill\": True,\n\t\t\t\"enable_prefix_caching\": True,\n\t\t\t\"max_model_len\": 2048,\n\
+    \t\t\t\"disable_log_stats\": True,  # Disable vLLM progress logging\n\t\t},\n\t\tsampling_params={\n\t\t\t\"temperature\"\
+    : 0.8,\n\t\t\t\"top_p\": 0.95,\n\t\t\t\"max_tokens\": 512,\n\t\t},\n\t\trag=rag_gpu,\n\t\tprompt_manager=None,\n\t)\n\n\
+    \n\nRFOpenAIAPIModelConfig\n------\n\nThis is a wrapper around OpenAI's API client config and chat completion parameters.\
+    \ \nThe full list of their arguments are available on `this page <https://platform.openai.com/docs/api-reference/chat/create>`__.\n\
+    \nThe difference here is that the individual arguments (knobs) can be :class:`List` valued or \n:class:`Range` valued\
+    \ in an :class:`RFOpenAIAPIModelConfig`. \nThat is how you can specify a base set of knob combinations from which a config\
+    \ group can \nbe produced. Also read :doc:`the Multi-Config Specification page</configs>`.\n\n.. py:class:: RFOpenAIAPIModelConfig\n\
+    \n  :param client_config: A dictionary necessary for initializing the AsyncOpenAI client. All knobs given in this dictionary\
+    \ are simply passed to the AsyncOpenAI client as is. We recommend listing at least the following knobs.\n  \n    * :code:`\"\
+    api_key\"`: Your OpenAI API key for authentication. Note that we are NOT able to provide a publicly visible API key.\n\
+    \    * :code:`\"max_retries\"`: Maximum number of retry attempts for failed API calls. Default is 2.\n    * :code:`\"\
+    timeout\"`: Request timeout in seconds. Optional.\n    \n  :type client_config: dict[str, Any]\n\n  :param model_config:\
+    \ A dictionary to control the chat completion behavior with OpenAI's Chat Completions API. All knobs given in this dictionary\
+    \ are simply passed to the OpenAI API as is. The API will use its defaults for unspecified knobs. We recommend listing\
+    \ at least the following knobs.\n\n    * :code:`\"model\"`: Name of the OpenAI model to use, e.g., \"gpt-5-mini\".\n \
+    \   * :code:`\"temperature\"`: What sampling temperature to use, between 0 and 2. Higher values like 0.8 will make the\
+    \ output more random, while lower values like 0.2 will make it more focused and deterministic. OpenAI recommends altering\
+    \ this or :code:`\"top_p\"` but not both.\n    * :code:`\"max_completion_tokens\"`: Upper bound for the number of tokens\
+    \ that can be generated for a completion, including visible output tokens and reasoning tokens.\n    * :code:`\"reasoning_effort\"\
+    `: Constrains effort for reasoning models. Currently supported values are \"minimal\", \"low\", \"medium\", and \"high\"\
+    . Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response. The gpt-5-pro\
+    \ model defaults to (and only supports) \"high\" reasoning effort.\n\t* :code:`\"top_p\"`: Alternative to temperature-based\
+    \ sampling called nucleus sampling. The model considers the results of the tokens with top_p probability mass. So 0.1\
+    \ means only the tokens comprising the top 10% probability mass are considered. OpenAI recommends altering this or :code:`\"\
+    temperature\"` but not both.\n\n  :type model_config: dict[str, Any]\n\n  :param rpm_limit: Rate limit for requests per\
+    \ minute to the OpenAI API. Used for throttling to avoid exceeding Open AI API quotas. Check the rate limit published\
+    \ by Open AI for details on your tier and the latest per-model limits on `this page <https://platform.openai.com/docs/guides/rate-limits>`__.\n\
+    \  :type rpm_limit: int\n\n  :param tpm_limit: Rate limit for tokens per minute to the OpenAI API. Used for throttling\
+    \ to avoid exceeding API quotas. See the rate limit page above for details.\n  :type tpm_limit: int\n\n  :param rag: An\
+    \ instance of a RapidFire AI RAG pipeline spec. Also read :doc:`the API: RFLangChainRagSpec page </ragspecs>`.\n  :type\
+    \ rag: RFLangChainRagSpec\n\n  :param prompt_manager: An instance of a RapidFire AI PromptManager. Also read :doc:`the\
+    \ API: Prompt Manager and Other Eval Config Knobs page </promptothers>`.\n  :type prompt_manager: PromptManager\n\n  ..\
+    \ seealso::\n     - `OpenAI Chat Completions API Reference <https://platform.openai.com/docs/api-reference/chat/create>`_\n\
+    \     - `OpenAI Python Client Documentation <https://github.com/openai/openai-python>`_\n     - :doc:`API: RFLangChainRagSpec\
+    \ </ragspecs>`\n     - :doc:`API: Prompt Manager and Other Eval Config Knobs page </promptothers>`\n\n\n**Example:**\n\
+    \n.. code-block:: python\n\n\t# Based on GSM8K chatbot tutorial notebook; specify your OPENAI_API_KEY beforehand\n\topenai_config1\
+    \ = RFOpenAIAPIModelConfig(\n\t\tclient_config={\"api_key\": OPENAI_API_KEY, \"max_retries\": 2},\n\t\tmodel_config={\n\
+    \t\t\t\"model\": \"gpt-5-mini\",\n\t\t\t\"max_completion_tokens\": 1024,\n\t\t\t\"reasoning_effort\": \"medium\", \n\t\
+    \t},\n\t\trpm_limit=500,\n\t\ttpm_limit=500_000,\n\t\trag=None,\n\t\tprompt_manager=fewshot_prompt_manager,\n\t)\t"
+  - "**online_strategy_kwargs** : dict[str, Any], optional\n\tParameters for evals online aggregation strategy. The dictionary\
+    \ must include the following keys:\n\t\n\t* :code:`\"strategy_name\"` (str) - Must be :code:`\"normal\"`, :code:`\"wilson\"\
+    `, or :code:`\"hoeffding\"`.\n\t* :code:`\"confidence_level\"` (float) - Confidence level for confidence intervals on\
+    \ metrics. Must be in [0,1]. Default is 0.95 (95%).\n\t* :code:`\"use_fpc\"` (bool) - Whether to apply finite population\
+    \ correction. Default is :code:`True`."
+  - "\nRapidFire AI transforms the status quo by adapting the powerful idea of **online aggregation** \nfrom database systems\
+    \ research to LLM evals. \nOur adaptive execution engine, :doc:`as described on this page</difference>`, automatically\
+    \ \nshards the data and processes multiple configs in parallel, one shard at a time, with \nefficient swapping techniques.\n\
+    \nThis means you get **running metric estimates with confidence intervals** in real time. \nSo, you can confidently stop\
+    \ poor configs earlier, clone better configs on the fly, and \nperform more informed exploration to reach much better\
+    \ eval metrics in much less time.\n\n\nExample: Traditional Batch Evals vs. RapidFire AI\n-------\n\nFor instance, suppose\
+    \ you have an evals set with 400 queries. You decide to compare, say, \n4 RAG configs in one go with RapidFire AI with\
+    \ number of shards set to 8. The illustration\nbelow contrasts traditional batch evals vs. RapidFire AI's approach for\
+    \ a simple eval metric.\n\n.. list-table::"
+- source_sentence: How do RFvLLMModelConfig and RFOpenAIAPIModelConfig compare in terms of their configuration parameters,
+    underlying systems, rate limiting capabilities, and typical use cases?
+  sentences:
+  - "Just pip install the :code:`rapidfireai` OSS package. It works on a CPU-only machine, a single-GPU machine, \nor a multi-GPU\
+    \ machine. Note that for RAG/context engineering with only closed model APIs, GPUs are not needed. "
+  - ".. py:class:: RFLangChainRagSpec\n\n  .. py:method:: __init__(document_loader: BaseLoader = None, text_splitter: TextSplitter\
+    \ = None, embedding_cfg: dict[str, Any] = None, vector_store_cfg: dict[str, Any] = None, retriever: BaseRetriever = None,\
+    \ search_cfg: dict[str, Any] = None, reranker_cfg: dict[str, Any] = None, enable_gpu_search: bool = False, document_template:\
+    \ Callable[[Document], str] = None)\n\n    Initialize the RAG specification with document loading, chunking, embedding,\
+    \ indexing, retrieval, and reranking configurations.\n\n    :param document_loader: The loader for source documents from\
+    \ various sources (files, directories, databases, etc.). Must be a LangChain BaseLoader implementation.\n    :type document_loader:\
+    \ BaseLoader, optional\n\n    :param text_splitter: The text splitter for chunking documents for RAG purposes. Controls\
+    \ chunk size, overlap, and splitting strategy. Must be a LangChain TextSplitter.\n    :type text_splitter: TextSplitter,\
+    \ optional\n\n    :param embedding_cfg: The embedding class and its kwargs to convert a chunk/query into a vector, provided\
+    \ as a single dictionary. Must include a key :code:`\"class\"` with the class itself as value, not an instance. Options\
+    \ for the class include :class:`HuggingFaceEmbeddings` and :class:`OpenAIEmbeddings`. The kwargs that follow must contain\
+    \ all parameters needed to initialize the embedding class; required parameters vary by embedding class. For example, :class:`HuggingFaceEmbeddings`\
+    \ needs :code:`model_name`, :code:`model_kwargs` and :code:`device`, while :class:`OpenAIEmbeddings` needs :code:`\"model\"\
+    ` and :code:`\"api_key\"`.\n    :type embedding_cfg: dict[str, Any], optional\n\n    :param vector_store_cfg: The vector\
+    \ store type and args to store and possibly index embedding vectors for retrieval, provided as a single dictionary. \n\
+    \    \n        - :code:`\"type\"`: The type of vector store to use. Must be one of :code:`\"faiss\"`, :code:`\"pgvector\"\
+    `, or :code:`\"pinecone\"`. Required.\n        - :code:`\"batch_size\"`: Number of vectors per insert batch. Applies to\
+    \ all 3 types of stores. Optional; default is 128.\n\n        The remaining keys are type-specific args as listed below.\
+    \ The vector store operates in one of 3 modes depending on the rest of the RAG spec:\n\n        - **Create mode:** When\
+    \ :code:`document_loader` is provided and no pre-existing index/collection names are specified, a new vector store is\
+    \ *created* and populated from the loaded documents.\n        - **Read mode:** When :code:`document_loader` is absent\
+    \ and pre-existing index/collection names are specified, the vector store is opened in *read-only* mode for retrieval\
+    \ against the existing index.\n        - **Update mode:** When both :code:`document_loader` and pre-existing index/collection\
+    \ names are provided, the existing index/collection is *updated* with the new documents added to it.\n\n        Supported\
+    \ vector store types and their arg keys:\n\n        - **FAISS:** No additional keys. Uses a flat L2 index by default.\
+    \ Set :code:`enable_gpu_search=True` on the constructor to use GPU-accelerated FAISS. Only supports Create mode since\
+    \ it's an in-memory store that is not persistent. So, the notion of pre-existing indexes does not apply.\n\n        -\
+    \ **Pinecone:**\n\n          - :code:`\"pinecone_api_key\"`: Pinecone API key. Optional if the :code:`PINECONE_API_KEY`\
+    \ environment variable is set.\n          - :code:`\"index_namespace\"`: A 2-tuple of strings (:code:`tuple[str, str]`)\
+    \ with index name and namespace. Required for Read/Update mode and must be a pre-existing index and namespace (NB: namespace\
+    \ can be empty string :code:`\"\"` in Pinecone). N/A for Create mode.\n          - :code:`\"spec\"`: A :code:`ServerlessSpec`\
+    \ or :code:`PodSpec` instance specifying the Pinecone deployment (e.g., cloud and region). Required for Create mode. N/A\
+    \ for Read/Update mode.\n          - :code:`\"metric\"`: Distance metric for the index, must be one of :code:`\"cosine\"\
+    `, :code:`\"euclidean\"`, or :code:`\"dotproduct\"`. Optional for Create mode; default is :code:`\"cosine\"`. N/A for\
+    \ Read/Update mode.\n          - :code:`\"embedding_cfg\"`: Embedding config dict (same format as the top-level :code:`embedding_cfg`).\
+    \ Required for any mode either here or in the top-level config for any mode. If provided here, *this takes precedence*\
+    \ over the top-level embedding config. For Create mode, we recommend providing it in the top-level config unless you want\
+    \ to couple different embedding configs with different vector stores.\n          - :code:`\"text_key\"`: The metadata\
+    \ field name used to store the original raw text content associated with a vector in Pinecone. Optional; default is :code:`\"\
+    text\"`. Applicable to all modes. This is useful when the Pinecone index was populated by an external tool that stored\
+    \ text under a non-default metadata field name (e.g., :code:`\"content\"`, :code:`\"original_text\"`).\n          - :code:`\"\
+    vector_type\"`: Vector type for the index. Accepts a :code:`VectorType` value or string. Optional for Create mode; default\
+    \ is :code:`\"dense\"`. N/A for Read/Update mode.\n          - :code:`\"tags\"`: Arbitrary string key-value tags to attach\
+    \ to the index. Optional for Create mode; default is :code:`None`. N/A for Read/Update mode.\n          - :code:`\"timeout\"\
+    `: Timeout in seconds for index operations. Optional for Create mode; default is :code:`None`. N/A for Read/Update mode.\n\
+    \          - :code:`\"deletion_protection\"`: Whether deletion protection is enabled. Accepts a :code:`DeletionProtection`\
+    \ value or string. Optional for Create mode; default is :code:`\"disabled\"`. N/A for Read/Update mode.\n\n          To\
+    \ recap, for all 3 modes :code:`\"pinecone_api_key\"` is needed either here or as an environment variable; :code:`embedding_cfg`\
+    \ is also required either here or in the top-level config. The :code:`\"text_key\"` is optional for all modes and defaults\
+    \ to :code:`\"text\"`. \n          \n          For Create mode, :code:`\"spec\"` is required but the following are all\
+    \ optional: :code:`\"metric\"`, :code:`\"vector_type\"`, :code:`\"tags\"`, :code:`\"timeout\"`, and :code:`\"deletion_protection\"\
+    `. Although the argument :code:`\"index_namespace\"` is inapplicable, internally RapidFire AI creates an index name automatically\
+    \ with prefix \"rf-\" and an SHA hash per pre-processing worker to avoid naming conflicts; the namespace created is the\
+    \ default empty string.\n          \n          For Read/Update mode, :code:`\"index_namespace\"` is required and must\
+    \ point to a pre-existing index and namespace. All the other arguments are inapplicable.\n\n        - **Postgres PGVector:**\n\
+    \n          - :code:`\"connection\"`: DB connection string or engine. Required for all modes.\n          - :code:`\"collection_name\"\
+    `: A pre-existing PGVector collection/table name to use for retrieval. Required for Read/Update mode. Inapplicable to\
+    \ Create mode; an SHA-based random name will be generated.\n          - :code:`\"embedding_cfg\"`: Same explanation as\
+    \ above under Pinecone.\n          - :code:`\"pre_delete_collection\"`: If :code:`True`, *deletes* the collection if it\
+    \ already exists before writing. **Use with caution.** Optional; default is :code:`False`. Applicable only to Update mode.\n\
+    \n        The store is built from the documents provided via :code:`document_loader`. If this entire config is skipped,\
+    \ a default FAISS flat vector store will be created automatically.\n    :type vector_store_cfg: dict[str, Any], optional\n\
+    \n    :param retriever: The retriever for chunk retrieval. If not provided, a default FAISS vector store will be created\
+    \ automatically using the specified search configuration below. Must be a LangChain BaseRetriever implementation.\n  \
+    \  :type retriever: BaseRetriever, optional\n\n    :param search_cfg: The search algorithm type and its kwargs to use\
+    \ for retrieval of vectors/chunks, provided as a single dictionary. Must include a key :code:`\"type\"` with one of the\
+    \ following three options listed as value; default is :code:`\"similarity\"`.\n\n      * :code:`\"similarity\"`: Standard\
+    \ cosine similarity search.\n      * :code:`\"similarity_score_threshold\"`: Similarity search with minimum score threshold\
+    \ (SST).\n      * :code:`\"mmr\"`: Maximum Marginal Relevance (MMR) search for diversity.\n\n      Additional parameters\
+    \ for search configuration depend on the type; the keys can include the following:\n\n      * :code:`\"k\"`: Number of\
+    \ documents to retrieve. Default is 5.\n      * :code:`\"filter\"`: Optional filter criteria function for search results.\n\
+    \      * :code:`\"score_threshold\"`: Only for SST. Minimum similarity score threshold. \n      * :code:`\"fetch_k\"`:\
+    \ Only for MMR. Number of documents to fetch before MMR reranking. Default is 20.\n      * :code:`\"lambda_mult\"`: Only\
+    \ for MMR. Diversity parameter for MMR balancing relevance vs. diversity. Default is 0.5.\n    :type search_cfg: dict,\
+    \ optional\n\n    :param reranker_cfg: The reranker class and its kwargs for reordering retrieved chunks by relevance,\
+    \ provided as a single dictionary. Must include a key :code:`\"class\"` with the class itself as value, not an instance.\
+    \ Options include :class:`CrossEncoderReranker` from :code:`langchain.retrievers.document_compressors`. The instantiated\
+    \ reranker is applied to each query's results individually. The kwargs that follow must contain all parameters needed\
+    \ to initialize the reranker class; required parameters vary by reranker class. For example, :class:`CrossEncoderReranker`\
+    \ needs :code:`model_name`, :code:`model_kwargs` and :code:`top_n`.\n    :type reranker_cfg: dict[str, Any], optional\n\
+    \n    :param enable_gpu_search: If :code:`True`, uses GPU-accelerated FAISS (IndexFlatL2 on GPU) with matrix multiply\
+    \ for exact search. Otherwise uses CPU-based FAISS HNSW index (IndexHNSWFlat) for approximate search. GPU mode requires\
+    \ :code:`faiss-gpu` package and CUDA-compatible GPU. Default is :code:`False`.\n    :type enable_gpu_search: bool, optional\n\
+    \n    :param document_template: Optional function to format each retrieved chunk for context injection into prompts. Should\
+    \ accept a single LangChain :class:`Document` object and return a formatted string. Multiple documents are separated by\
+    \ double newlines when serialized. If not provided, the following default template is used:\n \n        .. code-block::\
+    \ python\n \n            def default_template(doc: Document) -> str:\n                \"\"\"Default document formatting\
+    \ template.\"\"\"\n                metadata = \"; \".join([f\"{k}: {v}\" for k, v in doc.metadata.items()])\n        \
+    \        return f\"{metadata}:\\n{doc.page_content}\"\n \n        You can provide a custom template to control what metadata\
+    \ fields are included and how the content is formatted. For example, to include only a specific metadata field:\n \n \
+    \       .. code-block:: python\n \n            def sample_template(doc: Document) -> str:\n                doc_source\
+    \ = doc.metadata.get(\"source\", \"\")\n                return f\"Document Source: {doc_source}:\\nContent: {doc.page_content}\"\
+    \n \n        Or for a dataset like SciFact where documents have a :code:`\"title\"` metadata field ingested via :code:`metadata_func`\
+    \ in the document loader:\n \n        .. code-block:: python\n \n            def custom_template(doc: Document) -> str:\n\
+    \                return f\"{doc.metadata['title']}: {doc.page_content}\"\n \n    :type document_template: Callable[[Document],\
+    \ str], optional"
+  - "Confidence Intervals\n--------------------\n\nThe data points in the evals dataset are **assigned to shards uniformly\
+    \ randomly**, i.e., \nRapidFire AI performs sampling without replacement. \nBased on that, it supports 3 strategies to\
+    \ calculate confidence intervals for projected estimates of metrics. \nYou can indicate the confidence level (we recommend\
+    \ 95%) and whether to perform \"finite population correction\" (FPC) or not. \nThese values can be specified under the\
+    \ key :code:`\"online_strategy_kwargs\"` in your config dictionary as illustrated below.\n\n.. code-block:: python\n\n\
+    \    # Based on FiQA RAG tutorial use case\n    \"online_strategy_kwargs\": {\n        \"strategy_name\": \"normal\",\n\
+    \        \"confidence_level\": 0.95,\n        \"use_fpc\": True,\n    },\n\nNotation \n^^^^^^^\n\n* :math:`N` = Total\
+    \ population size (total number of queries in eval set)\n* :math:`n` = Sample size (number of queries processed so far)\n\
+    * :math:`\\hat{p}` = Observed sample proportion or average for an algebraic metric\n* :math:`\\bar{X}` = Sample mean for\
+    \ a distributive metric\n* :math:`\\widehat{T}` = Estimated population total for a distributive metric\n* :math:`\\text{Var}(\\\
+    widehat{T})` = Variance of the above estimated population total\n* :math:`\\text{SE}` = Standard error (measure of estimate\
+    \ uncertainty)\n* :math:`\\text{CI}` = Confidence interval\n* :math:`z` = Z-score for confidence level (1.96 for 95% confidence;\
+    \ used in Normal and Wilson)\n* :math:`\\alpha` = Significance level (0.05 for 95% confidence)\n* :math:`n_{\\text{eff}}`\
+    \ = Effective sample size (adjusted for FPC in Wilson)\n* :math:`a, b` = Lower and upper bounds of metric value range\n\
+    * :math:`R` = Range width, :math:`R = b - a`\n* :math:`\\varepsilon` = Margin of error (half-width of confidence interval\
+    \ for Hoeffding)\n* :math:`\\varepsilon_{\\bar{X}}` = Margin of error for sample mean (Hoeffding distributive)\n* :math:`\\\
+    text{FPC}` = Finite population correction factor\n\n\nFinite Population Correction (FPC)\n^^^^^^^^^^^^^^^^^^^^^^\n\nWhen\
+    \ sampling without replacement from finite populations, enabling FPC \nmultiplies the standard error (SE) by :math:`\\\
+    text{FPC} = \\sqrt{(N-n)/(N-1)}` \nwhere :math:`N` is population size and :math:`n` is sample size.\n\n\nNormal Approximation\n\
+    ^^^^^^^^^^^^^^^^^^^\n\nThis is the default strategy, and it uses the Central Limit Theorem. \nIt is suitable for most\
+    \ cases with non-trivial sample sizes (n > 30). \nIt provides tight intervals when the statistical assumptions hold.\n\
+    \n* For algebraic metrics:\n\n.. math::\n\n   \\text{SE}_{\\hat{p}} = \\sqrt{\\frac{\\hat{p}(1-\\hat{p})}{n}} \\times\
+    \ \\text{FPC}\n\n   \\text{CI} = \\hat{p} \\pm 1.96 \\cdot \\text{SE}_{\\hat{p}}\n\n\n* For distributive metrics: \n\n\
+    Estimate population total :math:`\\widehat{T} = N\\bar{X}` with \nvariance :math:`\\text{Var}(\\widehat{T}) = N^2 \\cdot\
+    \ \\bar{X}(1-\\bar{X})/n` (FPC-adjusted).\n\n\nWilson Score\n^^^^^^^^^^^\n\nThis strategy is better for small sample sizes\
+    \ or metrics near 0/1 boundaries. \nIt is more robust than Normal Approximation for extreme proportions. \n\n* For algebraic\
+    \ metrics:\n\n.. math::\n\n   \\text{center} = \\frac{\\hat{p} + z^2/(2n_{\\text{eff}})}{1 + z^2/n_{\\text{eff}}}\n\n\
+    \   \\text{margin} = \\frac{z\\sqrt{\\hat{p}(1-\\hat{p})/n_{\\text{eff}} + z^2/(4n_{\\text{eff}}^2)}}{1 + z^2/n_{\\text{eff}}}\n\
+    \nwhere :math:`n_{\\text{eff}} = n/\\text{FPC}^2` when using FPC. \nThe Wilson confidence interval is then :math:`[\\\
+    text{center} - \\text{margin}, \\text{center} + \\text{margin}]`,\nclamped to [0, 1].\n\n* For distributive metrics, this\
+    \ falls back to Normal Approximation. \n\n\n\nHoeffding Bounds\n^^^^^^^^^^^\n\nThis strategy is best for maximum safety\
+    \ (guaranteed coverage). It makes no distributional assumptions, \nbut that also means its intervals are typically quite\
+    \ loose.\n\n.. math::\n\n   \\varepsilon = (b-a)\\sqrt{\\frac{\\ln(2/\\alpha)}{2n}} \\times \\text{FPC}\n\n   \\text{CI}\
+    \ = [\\hat{p} - \\varepsilon, \\hat{p} + \\varepsilon]\n\nFor distributive metrics with range :math:`R=b-a`, it computes\
+    \ :math:`\\varepsilon_{\\bar{X}} = R\\sqrt{\\ln(2/\\alpha)/(2n)}` \nand then scales to population total."
+- source_sentence: How do you set up and run an SFT fine-tuning experiment from scratch using RapidFire AI's full installation,
+    from installing the package through launching training and monitoring results?
+  sentences:
+  - "Postprocess Function\n--------------------\n\nOptional user-provided function to postprocess a batch of examples and\
+    \ their respective generated outputs, \nwhich is injected into this function by the system. \nThis is useful for, say,\
+    \ extracting structured information from generations, adding ground truth data, \nor performing any transformations needed\
+    \ before computing metrics.\n\nIt is invoked for each batch during the evaluation process after generation and before\
+    \ metric computation.\nPass it directly to the :code:`postprocess_fn` key in your eval config dictionary.\n\n\n.. py:function::\
+    \ postprocess_fn(batch: dict[str, list]) -> dict[str, list]\n\n   :param batch: Dictionary containing a batch of examples,\
+    \ including their respective generated outputs under the reserved key :code:`\"generated_text\"`.\n   :type batch: dict[str,\
+    \ list]\n\n   :return: Dictionary containing the postprocessed batch with any new or modified keys\n   :rtype: dict[str,\
+    \ list]\n"
+  - "Step 2: Start RapidFire AI server\n------------\n\nRun the following command to initialize rapidfireai to use the correct\
+    \ dependencies:\n\n.. code-block:: bash\n\n   rapidfireai init\n   # It will install specific dependencies and initialize\
+    \ rapidfireai\n\n.. note::\n  You need to run init *only once* for a new venv or when switching GPU(s) on your machine.\
+    \ You do NOT need to run it after a reboot, start/stop of rapidfireai, or for a new terminal.\n\n\nNext start RapidFire\
+    \ AI services: the frontend with the ML metrics dashboard and the API server. \nThe frontend URL shown below can be opened\
+    \ on your local browser.\n\n.. code-block:: bash\n\n   rapidfireai start\n   # It should print about 50 lines, including\
+    \ the following:\n   # ...\n   # RapidFire Frontend is ready\n   # Open your browser and navigate to: http://0.0.0.0:8853\n\
+    \   # ...\n   # Press Ctrl+C to stop all services\n\n.. important::\n\n  Do NOT proceed until the start is successful\
+    \ with \"Available endpoints\" printed as above. Leave this terminal running while you work through the tutorial notebooks.\
+    \ \n  \nIf you close the terminal in which you started rapidfireai or if you rebooted your machine, \njust start rapidfireai\
+    \ again with the above command.\n\nIf the start command fails for whatever reason, wait for half a minute and rerun it.\n\
+    For diagnostics and common fixes (including Linux/macOS and Windows steps), see :doc:`Troubleshooting </troubleshooting>`."
+  - "Run Fit\n------\n\nThe main function to launch training (including LLM fine-tuning and post-training) and evaluation\
+    \ for a given config group in one go. \nSee :doc:`the Multi-Config Specification page</configs>` for more details on how\
+    \ to construct a config group. \n\n.. py:function:: run_fit(self, param_config: Any, create_model_fn: Callable, train_dataset:\
+    \ Dataset, eval_dataset: Dataset, num_chunks: int, seed: int=42, num_gpus: int) -> None:\n\n\t:param param_config: A train\
+    \ config knob dictionary, a generated config group, or a :code:`list` of configs or config groups\n\t:type param_config:\
+    \ Train config-group or list as described in :doc:`the Multi-Config Specification page</configs>`\n\n\t:param create_model_fn:\
+    \ User-given function to create a model instance; a single cfg is passed as input by the system\n\t:type create_model_fn:\
+    \ Callable\n\n\t:param train_dataset: Training dataset\n\t:type train_dataset: Dataset\n\n\t:param eval_dataset: Evaluation\
+    \ dataset to measure eval metrics\n\t:type eval_dataset: Dataset\n\n\t:param num_chunks: Number of logical splits of data\
+    \ to control degree of concurrency for multi-config execution (recommended: at least 4)\n\t:type num_chunks: int\n\n\t\
+    :param seed: Seed for any randomness used in your code (default: 42)\n\t:type seed: int, optional\n\n\t:param num_gpus:\
+    \ Number of GPUs to use per run/config for each config represented in :code:`param_config`; overriden by any :code:`num_gpus`\
+    \ given in :code:`RFModelConfig` for those associated configs.\n\t:type num_gpus: int, optional\n\n\t:return: None\n\t\
+    :rtype: None\n\n**Example:**\n\n.. code-block:: python\n\n\t# Based on SFT chatbot tutorial notebook\n\t>>> experiment.run_fit(config_group,\
+    \ sample_create_model, train_dataset, eval_dataset, num_chunks=4, seed=42)\n\tStarted 4 worker processes successfully\
+    \ ...\n\n**Notes:**\n\nThis method auto-generates the ML metrics files as per user specification and auto-plots them on\
+    \ the dashboard.\nWithin an experiment, you can rerun :func:`run_fit()` as many times as you want. All of them \nwill\
+    \ be overlaid on the same plots on the ML metrics dashboard.\nNote that :func:`run_fit()` must be actively running for\
+    \ you to be able to use Interactive Control (IC) \nops on the dashboard.\n\nThe :code:`param_config` argument is very\
+    \ versatile in allowing you to construct various knob combinations \nand launch them in one go.  \nIt can be a single\
+    \ config dictionary, a :code:`list` of config dictionaries, a config group generator output \n(:func:`RFGridSearch()`\
+    \ or :func:`RFRandomSearch()` for now), or even a :code:`list` with mix of configs or \nconfig group generator outputs\
+    \ as its elements.\nPlease see the :doc:`the Multi-Config Specification page</search>` for more details. \n\nEach individual\
+    \ config is passed as input to your :func:`create_model_fn()`. Inside it you can use whatever \nknob you set in the config\
+    \ group, e.g., model type or name to instantiate a model accordingly. \nYou can import models from libraries such as HuggingFace\
+    \ transformers or load your own PyTorch checkpoints.\n\nThe :code:`num_chunks` argument is a critical one that enables\
+    \ you to balance a higher degree of concurrency \nyou desire for cross-config comparisons against the (relatively minor)\
+    \ extra swapping overhead incurred. \nWe recommend at least 4, which means you will see results for all runs on 1/4th\
+    \ of the data at a time."
+- source_sentence: How does the num_shards parameter in run_evals() relate to the online aggregation confidence interval computation,
+    and what is the end-to-end flow from setting num_shards to seeing narrowing confidence intervals on eval metrics?
+  sentences:
+  - "All IC Ops on a run are queued by the system and **executed at a chunk boundary** for that run. \nThis avoids potentially\
+    \ non-deterministic or other inconsistent behaviors during concurrent run execution.\nNote that different runs might reach\
+    \ their chunk boundary at different points in time. \nTo control the number of chunks, set :code:`num_chunks` during :func:`run_fit()`;\
+    \ \nmore details :doc:`on the Experiment docs page </experiments>`.\n\nIC ops can be invoked as intermittently as you\
+    \ want during a long-running :func:`run_fit()`. \nSo, you can launch, say, 16 configs in one go (even on a 4-GPU machine),\
+    \ check in after a few chunks,  \nand stop bottom 80% of the runs. You can let the top performers continue for longer.\
+    \ Then you can \nclone and modify some to add new finer grained runs and warm start their parameters. And so on.\n\nUnder\
+    \ the hood, RapidFire AI automatically adjusts the apportioning of the GPUs among all ongoing \nruns to ensure maximal\
+    \ GPU utilization.\n"
+  - "Confidence Intervals\n--------------------\n\nThe data points in the evals dataset are **assigned to shards uniformly\
+    \ randomly**, i.e., \nRapidFire AI performs sampling without replacement. \nBased on that, it supports 3 strategies to\
+    \ calculate confidence intervals for projected estimates of metrics. \nYou can indicate the confidence level (we recommend\
+    \ 95%) and whether to perform \"finite population correction\" (FPC) or not. \nThese values can be specified under the\
+    \ key :code:`\"online_strategy_kwargs\"` in your config dictionary as illustrated below.\n\n.. code-block:: python\n\n\
+    \    # Based on FiQA RAG tutorial use case\n    \"online_strategy_kwargs\": {\n        \"strategy_name\": \"normal\",\n\
+    \        \"confidence_level\": 0.95,\n        \"use_fpc\": True,\n    },\n\nNotation \n^^^^^^^\n\n* :math:`N` = Total\
+    \ population size (total number of queries in eval set)\n* :math:`n` = Sample size (number of queries processed so far)\n\
+    * :math:`\\hat{p}` = Observed sample proportion or average for an algebraic metric\n* :math:`\\bar{X}` = Sample mean for\
+    \ a distributive metric\n* :math:`\\widehat{T}` = Estimated population total for a distributive metric\n* :math:`\\text{Var}(\\\
+    widehat{T})` = Variance of the above estimated population total\n* :math:`\\text{SE}` = Standard error (measure of estimate\
+    \ uncertainty)\n* :math:`\\text{CI}` = Confidence interval\n* :math:`z` = Z-score for confidence level (1.96 for 95% confidence;\
+    \ used in Normal and Wilson)\n* :math:`\\alpha` = Significance level (0.05 for 95% confidence)\n* :math:`n_{\\text{eff}}`\
+    \ = Effective sample size (adjusted for FPC in Wilson)\n* :math:`a, b` = Lower and upper bounds of metric value range\n\
+    * :math:`R` = Range width, :math:`R = b - a`\n* :math:`\\varepsilon` = Margin of error (half-width of confidence interval\
+    \ for Hoeffding)\n* :math:`\\varepsilon_{\\bar{X}}` = Margin of error for sample mean (Hoeffding distributive)\n* :math:`\\\
+    text{FPC}` = Finite population correction factor\n\n\nFinite Population Correction (FPC)\n^^^^^^^^^^^^^^^^^^^^^^\n\nWhen\
+    \ sampling without replacement from finite populations, enabling FPC \nmultiplies the standard error (SE) by :math:`\\\
+    text{FPC} = \\sqrt{(N-n)/(N-1)}` \nwhere :math:`N` is population size and :math:`n` is sample size.\n\n\nNormal Approximation\n\
+    ^^^^^^^^^^^^^^^^^^^\n\nThis is the default strategy, and it uses the Central Limit Theorem. \nIt is suitable for most\
+    \ cases with non-trivial sample sizes (n > 30). \nIt provides tight intervals when the statistical assumptions hold.\n\
+    \n* For algebraic metrics:\n\n.. math::\n\n   \\text{SE}_{\\hat{p}} = \\sqrt{\\frac{\\hat{p}(1-\\hat{p})}{n}} \\times\
+    \ \\text{FPC}\n\n   \\text{CI} = \\hat{p} \\pm 1.96 \\cdot \\text{SE}_{\\hat{p}}\n\n\n* For distributive metrics: \n\n\
+    Estimate population total :math:`\\widehat{T} = N\\bar{X}` with \nvariance :math:`\\text{Var}(\\widehat{T}) = N^2 \\cdot\
+    \ \\bar{X}(1-\\bar{X})/n` (FPC-adjusted).\n\n\nWilson Score\n^^^^^^^^^^^\n\nThis strategy is better for small sample sizes\
+    \ or metrics near 0/1 boundaries. \nIt is more robust than Normal Approximation for extreme proportions. \n\n* For algebraic\
+    \ metrics:\n\n.. math::\n\n   \\text{center} = \\frac{\\hat{p} + z^2/(2n_{\\text{eff}})}{1 + z^2/n_{\\text{eff}}}\n\n\
+    \   \\text{margin} = \\frac{z\\sqrt{\\hat{p}(1-\\hat{p})/n_{\\text{eff}} + z^2/(4n_{\\text{eff}}^2)}}{1 + z^2/n_{\\text{eff}}}\n\
+    \nwhere :math:`n_{\\text{eff}} = n/\\text{FPC}^2` when using FPC. \nThe Wilson confidence interval is then :math:`[\\\
+    text{center} - \\text{margin}, \\text{center} + \\text{margin}]`,\nclamped to [0, 1].\n\n* For distributive metrics, this\
+    \ falls back to Normal Approximation. \n\n\n\nHoeffding Bounds\n^^^^^^^^^^^\n\nThis strategy is best for maximum safety\
+    \ (guaranteed coverage). It makes no distributional assumptions, \nbut that also means its intervals are typically quite\
+    \ loose.\n\n.. math::\n\n   \\varepsilon = (b-a)\\sqrt{\\frac{\\ln(2/\\alpha)}{2n}} \\times \\text{FPC}\n\n   \\text{CI}\
+    \ = [\\hat{p} - \\varepsilon, \\hat{p} + \\varepsilon]\n\nFor distributive metrics with range :math:`R=b-a`, it computes\
+    \ :math:`\\varepsilon_{\\bar{X}} = R\\sqrt{\\ln(2/\\alpha)/(2n)}` \nand then scales to population total."
+  - "Get Runs Information\n-------\n\nReturns metadata about all the runs from across all :func:`run_fit()` invocations in\
+    \ the current experiment. \n\n.. py:function:: get_runs_info(self) -> pd.DataFrame:\n\n\t:return: A DataFrame with the\
+    \ following columns: run_id, status, mlflow_run_id, completed_steps, total_steps, start_chunk_id, num_chunks_visited_curr_epoch,\
+    \ num_epochs_completed, error, source, ended_by, warm_started_from, config (full config dictionary)\n\n\t:rtype: pandas.DataFrame\n\
+    \n**Examples:**\n\n.. code-block:: python\n\n\t# Get metadata of all runs from this experiments so far; based on SFT notebook\n\
+    \tall_runs_info = experiment.get_runs_info()\n\tall_runs_info # Screenshot of output below\n\n.. raw:: html\n\n    <img\
+    \ src=\"_static/get-runs-info.png\" alt=\"Outputs of get runs info\" \n         style=\"cursor: zoom-in; max-width: 100%;\"\
+    \ onclick=\"this.requestFullscreen()\">\n\n\n**Notes:**\n \nThis function is useful for programmatic post-processing and/or\
+    \ pre-processing of runs and their config knobs.\nFor instance, you can use it as part of new custom AutoML procedure\
+    \ to launch a new :func:`run_fit()` with new config \nknob values based on :func:`get_results()` from past :func:`run_fit()`\
+    \ invocations.\n\nWe plan to expand this API in the future to return other details about runs such as total runtime, GPU\
+    \ utilization, etc. based on feedback."
+- source_sentence: How do you define and wire together the accumulate_metrics_fn for algebraic metrics in a RAG evals pipeline,
+    and what happens if you omit it?
+  sentences:
+  - "Postprocess Function\n--------------------\n\nOptional user-provided function to postprocess a batch of examples and\
+    \ their respective generated outputs, \nwhich is injected into this function by the system. \nThis is useful for, say,\
+    \ extracting structured information from generations, adding ground truth data, \nor performing any transformations needed\
+    \ before computing metrics.\n\nIt is invoked for each batch during the evaluation process after generation and before\
+    \ metric computation.\nPass it directly to the :code:`postprocess_fn` key in your eval config dictionary.\n"
+  - "Run Evals\n------\n\nThe main function to launch LLM evaluation (evals), including with optional RAG, for a given config\
+    \ group in one go. \nSee :doc:`the Multi-Config Specification page</configs>` for more details on how to construct a config\
+    \ group. \n\n\n.. py:function:: run_evals(self, config_group: Any, dataset: Dataset, num_shards: int=4, num_actors: int,\
+    \ seed: int=42) -> dict[int, tuple[dict, dict]]:\n\n\t:param config_group: Single evals config knob dictionary, a generated\
+    \ config group, or a :code:`list` of configs or config groups\n\t:type config_group: Evals config-group or list as described\
+    \ in :doc:`the Multi-Config Specification page</configs>`\n\n\t:param dataset: Evaluation dataset to measure eval metrics\n\
+    \t:type dataset: Dataset\n\n\t:param num_shards: Number of logical splits of data to control degree of concurrency for\
+    \ multi-config execution (recommended: at least 4)\n\t:type num_shards: int\n\n\t:param num_actors: Number of parallel\
+    \ worker processes per machine to control degree of concurrency; (default: number of GPUs); (recommended max 16, if machine\
+    \ has no GPUs)\n\t:type num_actors: int, optional\n\n\t:param seed: Seed to control randomness for online aggregation\
+    \ (default: 42)\n\t:type seed: int, optional\n\n\t:return: Dictionary with a key being run/config ID and a value being\
+    \ a 2-tuple with a dictionary each for all aggregated metrics and all cumulative metrics\n\t:rtype: dict[int, tuple[dict,\
+    \ dict]]\n\n**Example:**\n\n.. code-block:: python\n\n\t# Based on FiQA RAG chatbot tutorial notebook\n\t>>> experiment.run_evals(configs=config_group,\
+    \ dataset=fiqa_dataset, num_shards=4, num_actors=8, seed=42)\n\tStarted 8 actor processes ...\n\n**Notes:**\n\nThis method\
+    \ auto-generates the ML metrics as per user specification and lists them in an auto-updated table \nshown on the notebook\
+    \ itself (and soon, on the ML metrics dashboard also).\nAlongside the metrics table, the Interactive Control (IC) Ops\
+    \ panel will also appear on the notebook itself.\nNote that :func:`run_evals()` must be actively running for you to be\
+    \ able to use IC Ops.\n\nWithin an experiment, you can rerun :func:`run_evals()` as many times as you want. All of them\
+    \ \nwill be overlaid on the same plots on the ML metrics dashboard.\n\nThe :code:`config_group` argument allows you to\
+    \ construct various knob combinations for inference pipelines \nand launch them in one go. These pipelines can involve\
+    \ LLMs running on your GPUs, or OpenAI API calls, or both. \n\nJust like with :func:`run_fit()` above, you can provide\
+    \ a single config dictionary, a :code:`list` of config \ndictionaries, a config group generator output (:func:`RFGridSearch()`\
+    \ or :func:`RFRandomSearch()` for now), \nor even a :code:`list` with mix of configs or config group generator outputs\
+    \ as its elements.\nPlease see the :doc:`the Multi-Config Specification page</search>` for more details. \n\nThe :code:`num_shards`\
+    \ argument is identical to the :code:`num_chunks` argument of :func:`run_fit()` above. \nThat is, it let you balance the\
+    \ degree of concurrency for cross-config comparisons against the (minor) \nextra swapping overhead incurred. Again, we\
+    \ recommend at least 4, which means you will see results being \nupdated for all runs on 1/4th of the data at a time.\n\
+    \nUnlike :func:`run_fit()`, this function does have a return value. In particular, it will return a dictionary \nwith\
+    \ the run/config ID as the key. The value is a 2-tuple with a dictionary each for all aggregated metrics \nand all cumulative\
+    \ metrics."
+  - "Types of Metrics\n-----------------------\n\nWe support 2 types of metrics based on their aggregation semantics: \n\n\
+    * **Distributive Metrics:** These are purely additive over a given set of data points. \n  \n  Examples: *count* of number\
+    \ of correct predictions; *sum* of output token lengths across queries.\n\n* **Algebraic Metrics:** These are averages\
+    \ or proportions over a given set of data points. They can be decomposed into components that are individually distributive.\
+    \ \n  \n  Examples: *precision*, which counts number of correct predictions and total number of data points separately\
+    \ and then divides them; *mean rouge-1*, which averages per-example rouge-1 values that assesses overlap of tokens between\
+    \ generated text and ground truth text.\n\nWhen you define an eval metric via :func:`evals.compute_metrics_fn()` and :func:`evals.accumulate_metrics_fn()`,\
+    \ \nyou must specify their type (algebraic or distributive) and value range as illustrated below. \nFor metrics without\
+    \ a type defined, they will be displayed *as is*, i.e., without projected \nestimates or confidence intervals.\n\n.. code-block::\
+    \ python\n\n    # Based on GSM8K tutorial use case\n    metrics = {\n        \"Total\": {\"value\": total},\n        \"\
+    Correct\": {\n            \"value\": correct,\n            \"is_distributive\": True,\n            \"value_range\": (0,\
+    \ 1),\n        },\n        \"Accuracy\": {\n            \"value\": accuracy,\n            \"is_algebraic\": True,\n  \
+    \          \"value_range\": (0, 1),\n        },\n    }"
+model-index: null
+config:
+  architectures:
+  - BertModel
+  model_type: bert
+  tokenizer_config:
+    cls_token: '[CLS]'
+    mask_token: '[MASK]'
+    pad_token: '[PAD]'
+    sep_token: '[SEP]'
+    unk_token: '[UNK]'
+cardData:
+  tags:
+  - sentence-transformers
+  - sentence-similarity
+  - feature-extraction
+  - generated_from_trainer
+  - dataset_size:111
+  - loss:MultipleNegativesRankingLoss
+  base_model: sentence-transformers/all-MiniLM-L6-v2
+  widget:
+  - source_sentence: How does the num_shards parameter in run_evals() relate to the online aggregation confidence interval
+      computation, and what is the end-to-end flow from setting num_shards to seeing narrowing confidence intervals on eval
+      metrics?
+    sentences:
+    - "API: Generator Configs\n===============\n\nRapidFire AI supports both self-hosted open LLMs and closed model LLM APIs\
+      \ as the generator. \nAs of this writing, it wraps around the model config of vLLM for the former and the OpenAI API\
+      \ for the latter. \nWe plan to expand support for more generator plugins, including Gemini and Claude APIs, based on\
+      \ feedback. \n\n\nRFvLLMModelConfig\n------\n\nThis is a wrapper around vLLM's :class:`config` and :class:`SamplingParams`\
+      \ classes. \nThe full list of their arguments are available on `this page <https://docs.vllm.ai/en/latest/api/vllm/config/index.html>`__\
+      \ \nand `this page <https://docs.vllm.ai/en/v0.6.4/dev/sampling_params.html>`__, respectively.\n\nThe difference here\
+      \ is that the individual arguments (knobs) can be :class:`List` valued or \n:class:`Range` valued in an :class:`RFvLLMModelConfig`.\
+      \ \nThat is how you can specify a base set of knob combinations from which a config group can \nbe produced. Also read\
+      \ :doc:`the Multi-Config Specification page</configs>`.\n\n.. py:class:: RFvLLMModelConfig\n\n  :param model_config:\
+      \ A dictionary with key-value pairs necessary for vLLM-based generation by a self-hosted LLM. All knobs given in this\
+      \ dictionary are simply passed to vLLM as is. vLLM will use its defaults for unspecified knobs. We recommend listing\
+      \ at least the following knobs.\n  \n    * :code:`\"model\"`: Name or path of the Hugging Face model to use, e.g., \"\
+      Qwen/Qwen2.5-0.5B-Instruct\".\n    * :code:`\"dtype\"`: Data type for model weights and activations, e.g., \"half\"\
+      , \"float\", \"bfloat16\".\n    * :code:`\"distributed_executor_backend\"`: Backend to use for distributed model workers,\
+      \ either \"ray\" or \"mp\" (multiprocessing). Only \"mp\" supported for now.\n    * :code:`\"max_model_len\"`: Model\
+      \ context length (prompt and output). If unspecified, will be automatically derived from the model config.\n    \n \
+      \ :type model_config: dict[str, Any]\n\n  :param sampling_params: A dictionary with key-value pairs to control the sampling\
+      \ behavior during text generation by vLLM with a self-hosted LLM. All knobs given in this dictionary are simply passed\
+      \ to vLLM as is. vLLM will use its defaults for unspecified knobs. We recommend listing at least the following knobs.\n\
+      \n    * :code:`\"temperature\"`: Float that controls the randomness of the sampling. Lower values make the model more\
+      \ deterministic, while higher values make the model more random. 0.0 means greedy sampling. Default is 1.0.\n    * :code:`\"\
+      top_p\"`: Float that controls the cumulative probability of the top tokens to consider. Must be in (0, 1]. Set to 1\
+      \ to consider all tokens. Default is 1.0.\n    * :code:`\"max_tokens\"`: Maximum number of tokens to generate per output\
+      \ sequence. \n\n  :type sampling_params: dict[str, Any]\n\n  :param rag: An instance of a RapidFire AI RAG pipeline\
+      \ spec.  Also read :doc:`the API: RFLangChainRagSpec page </ragspecs>`.\n  :type rag: RFLangChainRagSpec\n\n  :param\
+      \ prompt_manager: An instance of a RapidFire AI PromptManager. Also read :doc:`the API: Prompt Manager and Other Eval\
+      \ Config Knobs page </promptothers>`.\n  :type prompt_manager: PromptManager\n\n  .. seealso::\n     - `vLLM Config\
+      \ API Reference <https://docs.vllm.ai/en/latest/api/vllm/config/index.html>`_\n     - `vLLM Sampling Params API Reference\
+      \ <https://docs.vllm.ai/en/v0.6.4/dev/sampling_params.html>`_\n     - :doc:`RapidFire AI API: RFLangChainRagSpec </ragspecs>`\n\
+      \n\n**Examples:**\n\n.. code-block:: python\n\n\t# Based on FiQA chatbot tutorial notebook\n\tvllm_config1 = RFvLLMModelConfig(\n\
+      \t\tmodel_config={\n\t\t\t\"model\": \"Qwen/Qwen2.5-0.5B-Instruct\",\n\t\t\t\"dtype\": \"half\",\n\t\t\t\"gpu_memory_utilization\"\
+      : 0.7,\n\t\t\t\"tensor_parallel_size\": 1,\n\t\t\t\"distributed_executor_backend\": \"mp\",\n\t\t\t\"enable_chunked_prefill\"\
+      : True,\n\t\t\t\"enable_prefix_caching\": True,\n\t\t\t\"max_model_len\": 2048,\n\t\t\t\"disable_log_stats\": True,\
+      \  # Disable vLLM progress logging\n\t\t},\n\t\tsampling_params={\n\t\t\t\"temperature\": 0.8,\n\t\t\t\"top_p\": 0.95,\n\
+      \t\t\t\"max_tokens\": 512,\n\t\t},\n\t\trag=rag_gpu,\n\t\tprompt_manager=None,\n\t)\n\n\n\nRFOpenAIAPIModelConfig\n\
+      ------\n\nThis is a wrapper around OpenAI's API client config and chat completion parameters. \nThe full list of their\
+      \ arguments are available on `this page <https://platform.openai.com/docs/api-reference/chat/create>`__.\n\nThe difference\
+      \ here is that the individual arguments (knobs) can be :class:`List` valued or \n:class:`Range` valued in an :class:`RFOpenAIAPIModelConfig`.\
+      \ \nThat is how you can specify a base set of knob combinations from which a config group can \nbe produced. Also read\
+      \ :doc:`the Multi-Config Specification page</configs>`.\n\n.. py:class:: RFOpenAIAPIModelConfig\n\n  :param client_config:\
+      \ A dictionary necessary for initializing the AsyncOpenAI client. All knobs given in this dictionary are simply passed\
+      \ to the AsyncOpenAI client as is. We recommend listing at least the following knobs.\n  \n    * :code:`\"api_key\"\
+      `: Your OpenAI API key for authentication. Note that we are NOT able to provide a publicly visible API key.\n    * :code:`\"\
+      max_retries\"`: Maximum number of retry attempts for failed API calls. Default is 2.\n    * :code:`\"timeout\"`: Request\
+      \ timeout in seconds. Optional.\n    \n  :type client_config: dict[str, Any]\n\n  :param model_config: A dictionary\
+      \ to control the chat completion behavior with OpenAI's Chat Completions API. All knobs given in this dictionary are\
+      \ simply passed to the OpenAI API as is. The API will use its defaults for unspecified knobs. We recommend listing at\
+      \ least the following knobs.\n\n    * :code:`\"model\"`: Name of the OpenAI model to use, e.g., \"gpt-5-mini\".\n  \
+      \  * :code:`\"temperature\"`: What sampling temperature to use, between 0 and 2. Higher values like 0.8 will make the\
+      \ output more random, while lower values like 0.2 will make it more focused and deterministic. OpenAI recommends altering\
+      \ this or :code:`\"top_p\"` but not both.\n    * :code:`\"max_completion_tokens\"`: Upper bound for the number of tokens\
+      \ that can be generated for a completion, including visible output tokens and reasoning tokens.\n    * :code:`\"reasoning_effort\"\
+      `: Constrains effort for reasoning models. Currently supported values are \"minimal\", \"low\", \"medium\", and \"high\"\
+      . Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response. The gpt-5-pro\
+      \ model defaults to (and only supports) \"high\" reasoning effort.\n\t* :code:`\"top_p\"`: Alternative to temperature-based\
+      \ sampling called nucleus sampling. The model considers the results of the tokens with top_p probability mass. So 0.1\
+      \ means only the tokens comprising the top 10% probability mass are considered. OpenAI recommends altering this or :code:`\"\
+      temperature\"` but not both.\n\n  :type model_config: dict[str, Any]\n\n  :param rpm_limit: Rate limit for requests\
+      \ per minute to the OpenAI API. Used for throttling to avoid exceeding Open AI API quotas. Check the rate limit published\
+      \ by Open AI for details on your tier and the latest per-model limits on `this page <https://platform.openai.com/docs/guides/rate-limits>`__.\n\
+      \  :type rpm_limit: int\n\n  :param tpm_limit: Rate limit for tokens per minute to the OpenAI API. Used for throttling\
+      \ to avoid exceeding API quotas. See the rate limit page above for details.\n  :type tpm_limit: int\n\n  :param rag:\
+      \ An instance of a RapidFire AI RAG pipeline spec. Also read :doc:`the API: RFLangChainRagSpec page </ragspecs>`.\n\
+      \  :type rag: RFLangChainRagSpec\n\n  :param prompt_manager: An instance of a RapidFire AI PromptManager. Also read\
+      \ :doc:`the API: Prompt Manager and Other Eval Config Knobs page </promptothers>`.\n  :type prompt_manager: PromptManager\n\
+      \n  .. seealso::\n     - `OpenAI Chat Completions API Reference <https://platform.openai.com/docs/api-reference/chat/create>`_\n\
+      \     - `OpenAI Python Client Documentation <https://github.com/openai/openai-python>`_\n     - :doc:`API: RFLangChainRagSpec\
+      \ </ragspecs>`\n     - :doc:`API: Prompt Manager and Other Eval Config Knobs page </promptothers>`\n\n\n**Example:**\n\
+      \n.. code-block:: python\n\n\t# Based on GSM8K chatbot tutorial notebook; specify your OPENAI_API_KEY beforehand\n\t\
+      openai_config1 = RFOpenAIAPIModelConfig(\n\t\tclient_config={\"api_key\": OPENAI_API_KEY, \"max_retries\": 2},\n\t\t\
+      model_config={\n\t\t\t\"model\": \"gpt-5-mini\",\n\t\t\t\"max_completion_tokens\": 1024,\n\t\t\t\"reasoning_effort\"\
+      : \"medium\", \n\t\t},\n\t\trpm_limit=500,\n\t\ttpm_limit=500_000,\n\t\trag=None,\n\t\tprompt_manager=fewshot_prompt_manager,\n\
+      \t)\t"
+    - "**online_strategy_kwargs** : dict[str, Any], optional\n\tParameters for evals online aggregation strategy. The dictionary\
+      \ must include the following keys:\n\t\n\t* :code:`\"strategy_name\"` (str) - Must be :code:`\"normal\"`, :code:`\"\
+      wilson\"`, or :code:`\"hoeffding\"`.\n\t* :code:`\"confidence_level\"` (float) - Confidence level for confidence intervals\
+      \ on metrics. Must be in [0,1]. Default is 0.95 (95%).\n\t* :code:`\"use_fpc\"` (bool) - Whether to apply finite population\
+      \ correction. Default is :code:`True`."
+    - "\nRapidFire AI transforms the status quo by adapting the powerful idea of **online aggregation** \nfrom database systems\
+      \ research to LLM evals. \nOur adaptive execution engine, :doc:`as described on this page</difference>`, automatically\
+      \ \nshards the data and processes multiple configs in parallel, one shard at a time, with \nefficient swapping techniques.\n\
+      \nThis means you get **running metric estimates with confidence intervals** in real time. \nSo, you can confidently\
+      \ stop poor configs earlier, clone better configs on the fly, and \nperform more informed exploration to reach much\
+      \ better eval metrics in much less time.\n\n\nExample: Traditional Batch Evals vs. RapidFire AI\n-------\n\nFor instance,\
+      \ suppose you have an evals set with 400 queries. You decide to compare, say, \n4 RAG configs in one go with RapidFire\
+      \ AI with number of shards set to 8. The illustration\nbelow contrasts traditional batch evals vs. RapidFire AI's approach\
+      \ for a simple eval metric.\n\n.. list-table::"
+  - source_sentence: How do RFvLLMModelConfig and RFOpenAIAPIModelConfig compare in terms of their configuration parameters,
+      underlying systems, rate limiting capabilities, and typical use cases?
+    sentences:
+    - "Just pip install the :code:`rapidfireai` OSS package. It works on a CPU-only machine, a single-GPU machine, \nor a\
+      \ multi-GPU machine. Note that for RAG/context engineering with only closed model APIs, GPUs are not needed. "
+    - ".. py:class:: RFLangChainRagSpec\n\n  .. py:method:: __init__(document_loader: BaseLoader = None, text_splitter: TextSplitter\
+      \ = None, embedding_cfg: dict[str, Any] = None, vector_store_cfg: dict[str, Any] = None, retriever: BaseRetriever =\
+      \ None, search_cfg: dict[str, Any] = None, reranker_cfg: dict[str, Any] = None, enable_gpu_search: bool = False, document_template:\
+      \ Callable[[Document], str] = None)\n\n    Initialize the RAG specification with document loading, chunking, embedding,\
+      \ indexing, retrieval, and reranking configurations.\n\n    :param document_loader: The loader for source documents\
+      \ from various sources (files, directories, databases, etc.). Must be a LangChain BaseLoader implementation.\n    :type\
+      \ document_loader: BaseLoader, optional\n\n    :param text_splitter: The text splitter for chunking documents for RAG\
+      \ purposes. Controls chunk size, overlap, and splitting strategy. Must be a LangChain TextSplitter.\n    :type text_splitter:\
+      \ TextSplitter, optional\n\n    :param embedding_cfg: The embedding class and its kwargs to convert a chunk/query into\
+      \ a vector, provided as a single dictionary. Must include a key :code:`\"class\"` with the class itself as value, not\
+      \ an instance. Options for the class include :class:`HuggingFaceEmbeddings` and :class:`OpenAIEmbeddings`. The kwargs\
+      \ that follow must contain all parameters needed to initialize the embedding class; required parameters vary by embedding\
+      \ class. For example, :class:`HuggingFaceEmbeddings` needs :code:`model_name`, :code:`model_kwargs` and :code:`device`,\
+      \ while :class:`OpenAIEmbeddings` needs :code:`\"model\"` and :code:`\"api_key\"`.\n    :type embedding_cfg: dict[str,\
+      \ Any], optional\n\n    :param vector_store_cfg: The vector store type and args to store and possibly index embedding\
+      \ vectors for retrieval, provided as a single dictionary. \n    \n        - :code:`\"type\"`: The type of vector store\
+      \ to use. Must be one of :code:`\"faiss\"`, :code:`\"pgvector\"`, or :code:`\"pinecone\"`. Required.\n        - :code:`\"\
+      batch_size\"`: Number of vectors per insert batch. Applies to all 3 types of stores. Optional; default is 128.\n\n \
+      \       The remaining keys are type-specific args as listed below. The vector store operates in one of 3 modes depending\
+      \ on the rest of the RAG spec:\n\n        - **Create mode:** When :code:`document_loader` is provided and no pre-existing\
+      \ index/collection names are specified, a new vector store is *created* and populated from the loaded documents.\n \
+      \       - **Read mode:** When :code:`document_loader` is absent and pre-existing index/collection names are specified,\
+      \ the vector store is opened in *read-only* mode for retrieval against the existing index.\n        - **Update mode:**\
+      \ When both :code:`document_loader` and pre-existing index/collection names are provided, the existing index/collection\
+      \ is *updated* with the new documents added to it.\n\n        Supported vector store types and their arg keys:\n\n \
+      \       - **FAISS:** No additional keys. Uses a flat L2 index by default. Set :code:`enable_gpu_search=True` on the\
+      \ constructor to use GPU-accelerated FAISS. Only supports Create mode since it's an in-memory store that is not persistent.\
+      \ So, the notion of pre-existing indexes does not apply.\n\n        - **Pinecone:**\n\n          - :code:`\"pinecone_api_key\"\
+      `: Pinecone API key. Optional if the :code:`PINECONE_API_KEY` environment variable is set.\n          - :code:`\"index_namespace\"\
+      `: A 2-tuple of strings (:code:`tuple[str, str]`) with index name and namespace. Required for Read/Update mode and must\
+      \ be a pre-existing index and namespace (NB: namespace can be empty string :code:`\"\"` in Pinecone). N/A for Create\
+      \ mode.\n          - :code:`\"spec\"`: A :code:`ServerlessSpec` or :code:`PodSpec` instance specifying the Pinecone\
+      \ deployment (e.g., cloud and region). Required for Create mode. N/A for Read/Update mode.\n          - :code:`\"metric\"\
+      `: Distance metric for the index, must be one of :code:`\"cosine\"`, :code:`\"euclidean\"`, or :code:`\"dotproduct\"\
+      `. Optional for Create mode; default is :code:`\"cosine\"`. N/A for Read/Update mode.\n          - :code:`\"embedding_cfg\"\
+      `: Embedding config dict (same format as the top-level :code:`embedding_cfg`). Required for any mode either here or\
+      \ in the top-level config for any mode. If provided here, *this takes precedence* over the top-level embedding config.\
+      \ For Create mode, we recommend providing it in the top-level config unless you want to couple different embedding configs\
+      \ with different vector stores.\n          - :code:`\"text_key\"`: The metadata field name used to store the original\
+      \ raw text content associated with a vector in Pinecone. Optional; default is :code:`\"text\"`. Applicable to all modes.\
+      \ This is useful when the Pinecone index was populated by an external tool that stored text under a non-default metadata\
+      \ field name (e.g., :code:`\"content\"`, :code:`\"original_text\"`).\n          - :code:`\"vector_type\"`: Vector type\
+      \ for the index. Accepts a :code:`VectorType` value or string. Optional for Create mode; default is :code:`\"dense\"\
+      `. N/A for Read/Update mode.\n          - :code:`\"tags\"`: Arbitrary string key-value tags to attach to the index.\
+      \ Optional for Create mode; default is :code:`None`. N/A for Read/Update mode.\n          - :code:`\"timeout\"`: Timeout\
+      \ in seconds for index operations. Optional for Create mode; default is :code:`None`. N/A for Read/Update mode.\n  \
+      \        - :code:`\"deletion_protection\"`: Whether deletion protection is enabled. Accepts a :code:`DeletionProtection`\
+      \ value or string. Optional for Create mode; default is :code:`\"disabled\"`. N/A for Read/Update mode.\n\n        \
+      \  To recap, for all 3 modes :code:`\"pinecone_api_key\"` is needed either here or as an environment variable; :code:`embedding_cfg`\
+      \ is also required either here or in the top-level config. The :code:`\"text_key\"` is optional for all modes and defaults\
+      \ to :code:`\"text\"`. \n          \n          For Create mode, :code:`\"spec\"` is required but the following are all\
+      \ optional: :code:`\"metric\"`, :code:`\"vector_type\"`, :code:`\"tags\"`, :code:`\"timeout\"`, and :code:`\"deletion_protection\"\
+      `. Although the argument :code:`\"index_namespace\"` is inapplicable, internally RapidFire AI creates an index name\
+      \ automatically with prefix \"rf-\" and an SHA hash per pre-processing worker to avoid naming conflicts; the namespace\
+      \ created is the default empty string.\n          \n          For Read/Update mode, :code:`\"index_namespace\"` is required\
+      \ and must point to a pre-existing index and namespace. All the other arguments are inapplicable.\n\n        - **Postgres\
+      \ PGVector:**\n\n          - :code:`\"connection\"`: DB connection string or engine. Required for all modes.\n     \
+      \     - :code:`\"collection_name\"`: A pre-existing PGVector collection/table name to use for retrieval. Required for\
+      \ Read/Update mode. Inapplicable to Create mode; an SHA-based random name will be generated.\n          - :code:`\"\
+      embedding_cfg\"`: Same explanation as above under Pinecone.\n          - :code:`\"pre_delete_collection\"`: If :code:`True`,\
+      \ *deletes* the collection if it already exists before writing. **Use with caution.** Optional; default is :code:`False`.\
+      \ Applicable only to Update mode.\n\n        The store is built from the documents provided via :code:`document_loader`.\
+      \ If this entire config is skipped, a default FAISS flat vector store will be created automatically.\n    :type vector_store_cfg:\
+      \ dict[str, Any], optional\n\n    :param retriever: The retriever for chunk retrieval. If not provided, a default FAISS\
+      \ vector store will be created automatically using the specified search configuration below. Must be a LangChain BaseRetriever\
+      \ implementation.\n    :type retriever: BaseRetriever, optional\n\n    :param search_cfg: The search algorithm type\
+      \ and its kwargs to use for retrieval of vectors/chunks, provided as a single dictionary. Must include a key :code:`\"\
+      type\"` with one of the following three options listed as value; default is :code:`\"similarity\"`.\n\n      * :code:`\"\
+      similarity\"`: Standard cosine similarity search.\n      * :code:`\"similarity_score_threshold\"`: Similarity search\
+      \ with minimum score threshold (SST).\n      * :code:`\"mmr\"`: Maximum Marginal Relevance (MMR) search for diversity.\n\
+      \n      Additional parameters for search configuration depend on the type; the keys can include the following:\n\n \
+      \     * :code:`\"k\"`: Number of documents to retrieve. Default is 5.\n      * :code:`\"filter\"`: Optional filter criteria\
+      \ function for search results.\n      * :code:`\"score_threshold\"`: Only for SST. Minimum similarity score threshold.\
+      \ \n      * :code:`\"fetch_k\"`: Only for MMR. Number of documents to fetch before MMR reranking. Default is 20.\n \
+      \     * :code:`\"lambda_mult\"`: Only for MMR. Diversity parameter for MMR balancing relevance vs. diversity. Default\
+      \ is 0.5.\n    :type search_cfg: dict, optional\n\n    :param reranker_cfg: The reranker class and its kwargs for reordering\
+      \ retrieved chunks by relevance, provided as a single dictionary. Must include a key :code:`\"class\"` with the class\
+      \ itself as value, not an instance. Options include :class:`CrossEncoderReranker` from :code:`langchain.retrievers.document_compressors`.\
+      \ The instantiated reranker is applied to each query's results individually. The kwargs that follow must contain all\
+      \ parameters needed to initialize the reranker class; required parameters vary by reranker class. For example, :class:`CrossEncoderReranker`\
+      \ needs :code:`model_name`, :code:`model_kwargs` and :code:`top_n`.\n    :type reranker_cfg: dict[str, Any], optional\n\
+      \n    :param enable_gpu_search: If :code:`True`, uses GPU-accelerated FAISS (IndexFlatL2 on GPU) with matrix multiply\
+      \ for exact search. Otherwise uses CPU-based FAISS HNSW index (IndexHNSWFlat) for approximate search. GPU mode requires\
+      \ :code:`faiss-gpu` package and CUDA-compatible GPU. Default is :code:`False`.\n    :type enable_gpu_search: bool, optional\n\
+      \n    :param document_template: Optional function to format each retrieved chunk for context injection into prompts.\
+      \ Should accept a single LangChain :class:`Document` object and return a formatted string. Multiple documents are separated\
+      \ by double newlines when serialized. If not provided, the following default template is used:\n \n        .. code-block::\
+      \ python\n \n            def default_template(doc: Document) -> str:\n                \"\"\"Default document formatting\
+      \ template.\"\"\"\n                metadata = \"; \".join([f\"{k}: {v}\" for k, v in doc.metadata.items()])\n      \
+      \          return f\"{metadata}:\\n{doc.page_content}\"\n \n        You can provide a custom template to control what\
+      \ metadata fields are included and how the content is formatted. For example, to include only a specific metadata field:\n\
+      \ \n        .. code-block:: python\n \n            def sample_template(doc: Document) -> str:\n                doc_source\
+      \ = doc.metadata.get(\"source\", \"\")\n                return f\"Document Source: {doc_source}:\\nContent: {doc.page_content}\"\
+      \n \n        Or for a dataset like SciFact where documents have a :code:`\"title\"` metadata field ingested via :code:`metadata_func`\
+      \ in the document loader:\n \n        .. code-block:: python\n \n            def custom_template(doc: Document) -> str:\n\
+      \                return f\"{doc.metadata['title']}: {doc.page_content}\"\n \n    :type document_template: Callable[[Document],\
+      \ str], optional"
+    - "Confidence Intervals\n--------------------\n\nThe data points in the evals dataset are **assigned to shards uniformly\
+      \ randomly**, i.e., \nRapidFire AI performs sampling without replacement. \nBased on that, it supports 3 strategies\
+      \ to calculate confidence intervals for projected estimates of metrics. \nYou can indicate the confidence level (we\
+      \ recommend 95%) and whether to perform \"finite population correction\" (FPC) or not. \nThese values can be specified\
+      \ under the key :code:`\"online_strategy_kwargs\"` in your config dictionary as illustrated below.\n\n.. code-block::\
+      \ python\n\n    # Based on FiQA RAG tutorial use case\n    \"online_strategy_kwargs\": {\n        \"strategy_name\"\
+      : \"normal\",\n        \"confidence_level\": 0.95,\n        \"use_fpc\": True,\n    },\n\nNotation \n^^^^^^^\n\n* :math:`N`\
+      \ = Total population size (total number of queries in eval set)\n* :math:`n` = Sample size (number of queries processed\
+      \ so far)\n* :math:`\\hat{p}` = Observed sample proportion or average for an algebraic metric\n* :math:`\\bar{X}` =\
+      \ Sample mean for a distributive metric\n* :math:`\\widehat{T}` = Estimated population total for a distributive metric\n\
+      * :math:`\\text{Var}(\\widehat{T})` = Variance of the above estimated population total\n* :math:`\\text{SE}` = Standard\
+      \ error (measure of estimate uncertainty)\n* :math:`\\text{CI}` = Confidence interval\n* :math:`z` = Z-score for confidence\
+      \ level (1.96 for 95% confidence; used in Normal and Wilson)\n* :math:`\\alpha` = Significance level (0.05 for 95% confidence)\n\
+      * :math:`n_{\\text{eff}}` = Effective sample size (adjusted for FPC in Wilson)\n* :math:`a, b` = Lower and upper bounds\
+      \ of metric value range\n* :math:`R` = Range width, :math:`R = b - a`\n* :math:`\\varepsilon` = Margin of error (half-width\
+      \ of confidence interval for Hoeffding)\n* :math:`\\varepsilon_{\\bar{X}}` = Margin of error for sample mean (Hoeffding\
+      \ distributive)\n* :math:`\\text{FPC}` = Finite population correction factor\n\n\nFinite Population Correction (FPC)\n\
+      ^^^^^^^^^^^^^^^^^^^^^^\n\nWhen sampling without replacement from finite populations, enabling FPC \nmultiplies the standard\
+      \ error (SE) by :math:`\\text{FPC} = \\sqrt{(N-n)/(N-1)}` \nwhere :math:`N` is population size and :math:`n` is sample\
+      \ size.\n\n\nNormal Approximation\n^^^^^^^^^^^^^^^^^^^\n\nThis is the default strategy, and it uses the Central Limit\
+      \ Theorem. \nIt is suitable for most cases with non-trivial sample sizes (n > 30). \nIt provides tight intervals when\
+      \ the statistical assumptions hold.\n\n* For algebraic metrics:\n\n.. math::\n\n   \\text{SE}_{\\hat{p}} = \\sqrt{\\\
+      frac{\\hat{p}(1-\\hat{p})}{n}} \\times \\text{FPC}\n\n   \\text{CI} = \\hat{p} \\pm 1.96 \\cdot \\text{SE}_{\\hat{p}}\n\
+      \n\n* For distributive metrics: \n\nEstimate population total :math:`\\widehat{T} = N\\bar{X}` with \nvariance :math:`\\\
+      text{Var}(\\widehat{T}) = N^2 \\cdot \\bar{X}(1-\\bar{X})/n` (FPC-adjusted).\n\n\nWilson Score\n^^^^^^^^^^^\n\nThis\
+      \ strategy is better for small sample sizes or metrics near 0/1 boundaries. \nIt is more robust than Normal Approximation\
+      \ for extreme proportions. \n\n* For algebraic metrics:\n\n.. math::\n\n   \\text{center} = \\frac{\\hat{p} + z^2/(2n_{\\\
+      text{eff}})}{1 + z^2/n_{\\text{eff}}}\n\n   \\text{margin} = \\frac{z\\sqrt{\\hat{p}(1-\\hat{p})/n_{\\text{eff}} + z^2/(4n_{\\\
+      text{eff}}^2)}}{1 + z^2/n_{\\text{eff}}}\n\nwhere :math:`n_{\\text{eff}} = n/\\text{FPC}^2` when using FPC. \nThe Wilson\
+      \ confidence interval is then :math:`[\\text{center} - \\text{margin}, \\text{center} + \\text{margin}]`,\nclamped to\
+      \ [0, 1].\n\n* For distributive metrics, this falls back to Normal Approximation. \n\n\n\nHoeffding Bounds\n^^^^^^^^^^^\n\
+      \nThis strategy is best for maximum safety (guaranteed coverage). It makes no distributional assumptions, \nbut that\
+      \ also means its intervals are typically quite loose.\n\n.. math::\n\n   \\varepsilon = (b-a)\\sqrt{\\frac{\\ln(2/\\\
+      alpha)}{2n}} \\times \\text{FPC}\n\n   \\text{CI} = [\\hat{p} - \\varepsilon, \\hat{p} + \\varepsilon]\n\nFor distributive\
+      \ metrics with range :math:`R=b-a`, it computes :math:`\\varepsilon_{\\bar{X}} = R\\sqrt{\\ln(2/\\alpha)/(2n)}` \nand\
+      \ then scales to population total."
+  - source_sentence: How do you set up and run an SFT fine-tuning experiment from scratch using RapidFire AI's full installation,
+      from installing the package through launching training and monitoring results?
+    sentences:
+    - "Postprocess Function\n--------------------\n\nOptional user-provided function to postprocess a batch of examples and\
+      \ their respective generated outputs, \nwhich is injected into this function by the system. \nThis is useful for, say,\
+      \ extracting structured information from generations, adding ground truth data, \nor performing any transformations\
+      \ needed before computing metrics.\n\nIt is invoked for each batch during the evaluation process after generation and\
+      \ before metric computation.\nPass it directly to the :code:`postprocess_fn` key in your eval config dictionary.\n\n\
+      \n.. py:function:: postprocess_fn(batch: dict[str, list]) -> dict[str, list]\n\n   :param batch: Dictionary containing\
+      \ a batch of examples, including their respective generated outputs under the reserved key :code:`\"generated_text\"\
+      `.\n   :type batch: dict[str, list]\n\n   :return: Dictionary containing the postprocessed batch with any new or modified\
+      \ keys\n   :rtype: dict[str, list]\n"
+    - "Step 2: Start RapidFire AI server\n------------\n\nRun the following command to initialize rapidfireai to use the correct\
+      \ dependencies:\n\n.. code-block:: bash\n\n   rapidfireai init\n   # It will install specific dependencies and initialize\
+      \ rapidfireai\n\n.. note::\n  You need to run init *only once* for a new venv or when switching GPU(s) on your machine.\
+      \ You do NOT need to run it after a reboot, start/stop of rapidfireai, or for a new terminal.\n\n\nNext start RapidFire\
+      \ AI services: the frontend with the ML metrics dashboard and the API server. \nThe frontend URL shown below can be\
+      \ opened on your local browser.\n\n.. code-block:: bash\n\n   rapidfireai start\n   # It should print about 50 lines,\
+      \ including the following:\n   # ...\n   # RapidFire Frontend is ready\n   # Open your browser and navigate to: http://0.0.0.0:8853\n\
+      \   # ...\n   # Press Ctrl+C to stop all services\n\n.. important::\n\n  Do NOT proceed until the start is successful\
+      \ with \"Available endpoints\" printed as above. Leave this terminal running while you work through the tutorial notebooks.\
+      \ \n  \nIf you close the terminal in which you started rapidfireai or if you rebooted your machine, \njust start rapidfireai\
+      \ again with the above command.\n\nIf the start command fails for whatever reason, wait for half a minute and rerun\
+      \ it.\nFor diagnostics and common fixes (including Linux/macOS and Windows steps), see :doc:`Troubleshooting </troubleshooting>`."
+    - "Run Fit\n------\n\nThe main function to launch training (including LLM fine-tuning and post-training) and evaluation\
+      \ for a given config group in one go. \nSee :doc:`the Multi-Config Specification page</configs>` for more details on\
+      \ how to construct a config group. \n\n.. py:function:: run_fit(self, param_config: Any, create_model_fn: Callable,\
+      \ train_dataset: Dataset, eval_dataset: Dataset, num_chunks: int, seed: int=42, num_gpus: int) -> None:\n\n\t:param\
+      \ param_config: A train config knob dictionary, a generated config group, or a :code:`list` of configs or config groups\n\
+      \t:type param_config: Train config-group or list as described in :doc:`the Multi-Config Specification page</configs>`\n\
+      \n\t:param create_model_fn: User-given function to create a model instance; a single cfg is passed as input by the system\n\
+      \t:type create_model_fn: Callable\n\n\t:param train_dataset: Training dataset\n\t:type train_dataset: Dataset\n\n\t\
+      :param eval_dataset: Evaluation dataset to measure eval metrics\n\t:type eval_dataset: Dataset\n\n\t:param num_chunks:\
+      \ Number of logical splits of data to control degree of concurrency for multi-config execution (recommended: at least\
+      \ 4)\n\t:type num_chunks: int\n\n\t:param seed: Seed for any randomness used in your code (default: 42)\n\t:type seed:\
+      \ int, optional\n\n\t:param num_gpus: Number of GPUs to use per run/config for each config represented in :code:`param_config`;\
+      \ overriden by any :code:`num_gpus` given in :code:`RFModelConfig` for those associated configs.\n\t:type num_gpus:\
+      \ int, optional\n\n\t:return: None\n\t:rtype: None\n\n**Example:**\n\n.. code-block:: python\n\n\t# Based on SFT chatbot\
+      \ tutorial notebook\n\t>>> experiment.run_fit(config_group, sample_create_model, train_dataset, eval_dataset, num_chunks=4,\
+      \ seed=42)\n\tStarted 4 worker processes successfully ...\n\n**Notes:**\n\nThis method auto-generates the ML metrics\
+      \ files as per user specification and auto-plots them on the dashboard.\nWithin an experiment, you can rerun :func:`run_fit()`\
+      \ as many times as you want. All of them \nwill be overlaid on the same plots on the ML metrics dashboard.\nNote that\
+      \ :func:`run_fit()` must be actively running for you to be able to use Interactive Control (IC) \nops on the dashboard.\n\
+      \nThe :code:`param_config` argument is very versatile in allowing you to construct various knob combinations \nand launch\
+      \ them in one go.  \nIt can be a single config dictionary, a :code:`list` of config dictionaries, a config group generator\
+      \ output \n(:func:`RFGridSearch()` or :func:`RFRandomSearch()` for now), or even a :code:`list` with mix of configs\
+      \ or \nconfig group generator outputs as its elements.\nPlease see the :doc:`the Multi-Config Specification page</search>`\
+      \ for more details. \n\nEach individual config is passed as input to your :func:`create_model_fn()`. Inside it you can\
+      \ use whatever \nknob you set in the config group, e.g., model type or name to instantiate a model accordingly. \nYou\
+      \ can import models from libraries such as HuggingFace transformers or load your own PyTorch checkpoints.\n\nThe :code:`num_chunks`\
+      \ argument is a critical one that enables you to balance a higher degree of concurrency \nyou desire for cross-config\
+      \ comparisons against the (relatively minor) extra swapping overhead incurred. \nWe recommend at least 4, which means\
+      \ you will see results for all runs on 1/4th of the data at a time."
+  - source_sentence: How does the num_shards parameter in run_evals() relate to the online aggregation confidence interval
+      computation, and what is the end-to-end flow from setting num_shards to seeing narrowing confidence intervals on eval
+      metrics?
+    sentences:
+    - "All IC Ops on a run are queued by the system and **executed at a chunk boundary** for that run. \nThis avoids potentially\
+      \ non-deterministic or other inconsistent behaviors during concurrent run execution.\nNote that different runs might\
+      \ reach their chunk boundary at different points in time. \nTo control the number of chunks, set :code:`num_chunks`\
+      \ during :func:`run_fit()`; \nmore details :doc:`on the Experiment docs page </experiments>`.\n\nIC ops can be invoked\
+      \ as intermittently as you want during a long-running :func:`run_fit()`. \nSo, you can launch, say, 16 configs in one\
+      \ go (even on a 4-GPU machine), check in after a few chunks,  \nand stop bottom 80% of the runs. You can let the top\
+      \ performers continue for longer. Then you can \nclone and modify some to add new finer grained runs and warm start\
+      \ their parameters. And so on.\n\nUnder the hood, RapidFire AI automatically adjusts the apportioning of the GPUs among\
+      \ all ongoing \nruns to ensure maximal GPU utilization.\n"
+    - "Confidence Intervals\n--------------------\n\nThe data points in the evals dataset are **assigned to shards uniformly\
+      \ randomly**, i.e., \nRapidFire AI performs sampling without replacement. \nBased on that, it supports 3 strategies\
+      \ to calculate confidence intervals for projected estimates of metrics. \nYou can indicate the confidence level (we\
+      \ recommend 95%) and whether to perform \"finite population correction\" (FPC) or not. \nThese values can be specified\
+      \ under the key :code:`\"online_strategy_kwargs\"` in your config dictionary as illustrated below.\n\n.. code-block::\
+      \ python\n\n    # Based on FiQA RAG tutorial use case\n    \"online_strategy_kwargs\": {\n        \"strategy_name\"\
+      : \"normal\",\n        \"confidence_level\": 0.95,\n        \"use_fpc\": True,\n    },\n\nNotation \n^^^^^^^\n\n* :math:`N`\
+      \ = Total population size (total number of queries in eval set)\n* :math:`n` = Sample size (number of queries processed\
+      \ so far)\n* :math:`\\hat{p}` = Observed sample proportion or average for an algebraic metric\n* :math:`\\bar{X}` =\
+      \ Sample mean for a distributive metric\n* :math:`\\widehat{T}` = Estimated population total for a distributive metric\n\
+      * :math:`\\text{Var}(\\widehat{T})` = Variance of the above estimated population total\n* :math:`\\text{SE}` = Standard\
+      \ error (measure of estimate uncertainty)\n* :math:`\\text{CI}` = Confidence interval\n* :math:`z` = Z-score for confidence\
+      \ level (1.96 for 95% confidence; used in Normal and Wilson)\n* :math:`\\alpha` = Significance level (0.05 for 95% confidence)\n\
+      * :math:`n_{\\text{eff}}` = Effective sample size (adjusted for FPC in Wilson)\n* :math:`a, b` = Lower and upper bounds\
+      \ of metric value range\n* :math:`R` = Range width, :math:`R = b - a`\n* :math:`\\varepsilon` = Margin of error (half-width\
+      \ of confidence interval for Hoeffding)\n* :math:`\\varepsilon_{\\bar{X}}` = Margin of error for sample mean (Hoeffding\
+      \ distributive)\n* :math:`\\text{FPC}` = Finite population correction factor\n\n\nFinite Population Correction (FPC)\n\
+      ^^^^^^^^^^^^^^^^^^^^^^\n\nWhen sampling without replacement from finite populations, enabling FPC \nmultiplies the standard\
+      \ error (SE) by :math:`\\text{FPC} = \\sqrt{(N-n)/(N-1)}` \nwhere :math:`N` is population size and :math:`n` is sample\
+      \ size.\n\n\nNormal Approximation\n^^^^^^^^^^^^^^^^^^^\n\nThis is the default strategy, and it uses the Central Limit\
+      \ Theorem. \nIt is suitable for most cases with non-trivial sample sizes (n > 30). \nIt provides tight intervals when\
+      \ the statistical assumptions hold.\n\n* For algebraic metrics:\n\n.. math::\n\n   \\text{SE}_{\\hat{p}} = \\sqrt{\\\
+      frac{\\hat{p}(1-\\hat{p})}{n}} \\times \\text{FPC}\n\n   \\text{CI} = \\hat{p} \\pm 1.96 \\cdot \\text{SE}_{\\hat{p}}\n\
+      \n\n* For distributive metrics: \n\nEstimate population total :math:`\\widehat{T} = N\\bar{X}` with \nvariance :math:`\\\
+      text{Var}(\\widehat{T}) = N^2 \\cdot \\bar{X}(1-\\bar{X})/n` (FPC-adjusted).\n\n\nWilson Score\n^^^^^^^^^^^\n\nThis\
+      \ strategy is better for small sample sizes or metrics near 0/1 boundaries. \nIt is more robust than Normal Approximation\
+      \ for extreme proportions. \n\n* For algebraic metrics:\n\n.. math::\n\n   \\text{center} = \\frac{\\hat{p} + z^2/(2n_{\\\
+      text{eff}})}{1 + z^2/n_{\\text{eff}}}\n\n   \\text{margin} = \\frac{z\\sqrt{\\hat{p}(1-\\hat{p})/n_{\\text{eff}} + z^2/(4n_{\\\
+      text{eff}}^2)}}{1 + z^2/n_{\\text{eff}}}\n\nwhere :math:`n_{\\text{eff}} = n/\\text{FPC}^2` when using FPC. \nThe Wilson\
+      \ confidence interval is then :math:`[\\text{center} - \\text{margin}, \\text{center} + \\text{margin}]`,\nclamped to\
+      \ [0, 1].\n\n* For distributive metrics, this falls back to Normal Approximation. \n\n\n\nHoeffding Bounds\n^^^^^^^^^^^\n\
+      \nThis strategy is best for maximum safety (guaranteed coverage). It makes no distributional assumptions, \nbut that\
+      \ also means its intervals are typically quite loose.\n\n.. math::\n\n   \\varepsilon = (b-a)\\sqrt{\\frac{\\ln(2/\\\
+      alpha)}{2n}} \\times \\text{FPC}\n\n   \\text{CI} = [\\hat{p} - \\varepsilon, \\hat{p} + \\varepsilon]\n\nFor distributive\
+      \ metrics with range :math:`R=b-a`, it computes :math:`\\varepsilon_{\\bar{X}} = R\\sqrt{\\ln(2/\\alpha)/(2n)}` \nand\
+      \ then scales to population total."
+    - "Get Runs Information\n-------\n\nReturns metadata about all the runs from across all :func:`run_fit()` invocations\
+      \ in the current experiment. \n\n.. py:function:: get_runs_info(self) -> pd.DataFrame:\n\n\t:return: A DataFrame with\
+      \ the following columns: run_id, status, mlflow_run_id, completed_steps, total_steps, start_chunk_id, num_chunks_visited_curr_epoch,\
+      \ num_epochs_completed, error, source, ended_by, warm_started_from, config (full config dictionary)\n\n\t:rtype: pandas.DataFrame\n\
+      \n**Examples:**\n\n.. code-block:: python\n\n\t# Get metadata of all runs from this experiments so far; based on SFT\
+      \ notebook\n\tall_runs_info = experiment.get_runs_info()\n\tall_runs_info # Screenshot of output below\n\n.. raw:: html\n\
+      \n    <img src=\"_static/get-runs-info.png\" alt=\"Outputs of get runs info\" \n         style=\"cursor: zoom-in; max-width:\
+      \ 100%;\" onclick=\"this.requestFullscreen()\">\n\n\n**Notes:**\n \nThis function is useful for programmatic post-processing\
+      \ and/or pre-processing of runs and their config knobs.\nFor instance, you can use it as part of new custom AutoML procedure\
+      \ to launch a new :func:`run_fit()` with new config \nknob values based on :func:`get_results()` from past :func:`run_fit()`\
+      \ invocations.\n\nWe plan to expand this API in the future to return other details about runs such as total runtime,\
+      \ GPU utilization, etc. based on feedback."
+  - source_sentence: How do you define and wire together the accumulate_metrics_fn for algebraic metrics in a RAG evals pipeline,
+      and what happens if you omit it?
+    sentences:
+    - "Postprocess Function\n--------------------\n\nOptional user-provided function to postprocess a batch of examples and\
+      \ their respective generated outputs, \nwhich is injected into this function by the system. \nThis is useful for, say,\
+      \ extracting structured information from generations, adding ground truth data, \nor performing any transformations\
+      \ needed before computing metrics.\n\nIt is invoked for each batch during the evaluation process after generation and\
+      \ before metric computation.\nPass it directly to the :code:`postprocess_fn` key in your eval config dictionary.\n"
+    - "Run Evals\n------\n\nThe main function to launch LLM evaluation (evals), including with optional RAG, for a given config\
+      \ group in one go. \nSee :doc:`the Multi-Config Specification page</configs>` for more details on how to construct a\
+      \ config group. \n\n\n.. py:function:: run_evals(self, config_group: Any, dataset: Dataset, num_shards: int=4, num_actors:\
+      \ int, seed: int=42) -> dict[int, tuple[dict, dict]]:\n\n\t:param config_group: Single evals config knob dictionary,\
+      \ a generated config group, or a :code:`list` of configs or config groups\n\t:type config_group: Evals config-group\
+      \ or list as described in :doc:`the Multi-Config Specification page</configs>`\n\n\t:param dataset: Evaluation dataset\
+      \ to measure eval metrics\n\t:type dataset: Dataset\n\n\t:param num_shards: Number of logical splits of data to control\
+      \ degree of concurrency for multi-config execution (recommended: at least 4)\n\t:type num_shards: int\n\n\t:param num_actors:\
+      \ Number of parallel worker processes per machine to control degree of concurrency; (default: number of GPUs); (recommended\
+      \ max 16, if machine has no GPUs)\n\t:type num_actors: int, optional\n\n\t:param seed: Seed to control randomness for\
+      \ online aggregation (default: 42)\n\t:type seed: int, optional\n\n\t:return: Dictionary with a key being run/config\
+      \ ID and a value being a 2-tuple with a dictionary each for all aggregated metrics and all cumulative metrics\n\t:rtype:\
+      \ dict[int, tuple[dict, dict]]\n\n**Example:**\n\n.. code-block:: python\n\n\t# Based on FiQA RAG chatbot tutorial notebook\n\
+      \t>>> experiment.run_evals(configs=config_group, dataset=fiqa_dataset, num_shards=4, num_actors=8, seed=42)\n\tStarted\
+      \ 8 actor processes ...\n\n**Notes:**\n\nThis method auto-generates the ML metrics as per user specification and lists\
+      \ them in an auto-updated table \nshown on the notebook itself (and soon, on the ML metrics dashboard also).\nAlongside\
+      \ the metrics table, the Interactive Control (IC) Ops panel will also appear on the notebook itself.\nNote that :func:`run_evals()`\
+      \ must be actively running for you to be able to use IC Ops.\n\nWithin an experiment, you can rerun :func:`run_evals()`\
+      \ as many times as you want. All of them \nwill be overlaid on the same plots on the ML metrics dashboard.\n\nThe :code:`config_group`\
+      \ argument allows you to construct various knob combinations for inference pipelines \nand launch them in one go. These\
+      \ pipelines can involve LLMs running on your GPUs, or OpenAI API calls, or both. \n\nJust like with :func:`run_fit()`\
+      \ above, you can provide a single config dictionary, a :code:`list` of config \ndictionaries, a config group generator\
+      \ output (:func:`RFGridSearch()` or :func:`RFRandomSearch()` for now), \nor even a :code:`list` with mix of configs\
+      \ or config group generator outputs as its elements.\nPlease see the :doc:`the Multi-Config Specification page</search>`\
+      \ for more details. \n\nThe :code:`num_shards` argument is identical to the :code:`num_chunks` argument of :func:`run_fit()`\
+      \ above. \nThat is, it let you balance the degree of concurrency for cross-config comparisons against the (minor) \n\
+      extra swapping overhead incurred. Again, we recommend at least 4, which means you will see results being \nupdated for\
+      \ all runs on 1/4th of the data at a time.\n\nUnlike :func:`run_fit()`, this function does have a return value. In particular,\
+      \ it will return a dictionary \nwith the run/config ID as the key. The value is a 2-tuple with a dictionary each for\
+      \ all aggregated metrics \nand all cumulative metrics."
+    - "Types of Metrics\n-----------------------\n\nWe support 2 types of metrics based on their aggregation semantics: \n\
+      \n* **Distributive Metrics:** These are purely additive over a given set of data points. \n  \n  Examples: *count* of\
+      \ number of correct predictions; *sum* of output token lengths across queries.\n\n* **Algebraic Metrics:** These are\
+      \ averages or proportions over a given set of data points. They can be decomposed into components that are individually\
+      \ distributive. \n  \n  Examples: *precision*, which counts number of correct predictions and total number of data points\
+      \ separately and then divides them; *mean rouge-1*, which averages per-example rouge-1 values that assesses overlap\
+      \ of tokens between generated text and ground truth text.\n\nWhen you define an eval metric via :func:`evals.compute_metrics_fn()`\
+      \ and :func:`evals.accumulate_metrics_fn()`, \nyou must specify their type (algebraic or distributive) and value range\
+      \ as illustrated below. \nFor metrics without a type defined, they will be displayed *as is*, i.e., without projected\
+      \ \nestimates or confidence intervals.\n\n.. code-block:: python\n\n    # Based on GSM8K tutorial use case\n    metrics\
+      \ = {\n        \"Total\": {\"value\": total},\n        \"Correct\": {\n            \"value\": correct,\n           \
+      \ \"is_distributive\": True,\n            \"value_range\": (0, 1),\n        },\n        \"Accuracy\": {\n          \
+      \  \"value\": accuracy,\n            \"is_algebraic\": True,\n            \"value_range\": (0, 1),\n        },\n   \
+      \ }"
+  pipeline_tag: sentence-similarity
+  library_name: sentence-transformers
+siblings:
+- rfilename: .gitattributes
+- rfilename: 1_Pooling/config.json
+- rfilename: README.md
+- rfilename: config.json
+- rfilename: config_sentence_transformers.json
+- rfilename: model.safetensors
+- rfilename: modules.json
+- rfilename: sentence_bert_config.json
+- rfilename: tokenizer.json
+- rfilename: tokenizer_config.json
+spaces: []
+createdAt: '2026-05-01T02:54:07.000Z'
+safetensors:
+  parameters:
+    F32: 22713216
+  total: 22713216
+usedStorage: 90864176
+downloadsAllTime: 29
+inferenceProviderMapping: {}
+configJson:
+  add_cross_attention: false
+  architectures:
+  - BertModel
+  attention_probs_dropout_prob: 0.1
+  bos_token_id: null
+  classifier_dropout: null
+  dtype: float32
+  eos_token_id: null
+  gradient_checkpointing: false
+  hidden_act: gelu
+  hidden_dropout_prob: 0.1
+  hidden_size: 384
+  initializer_range: 0.02
+  intermediate_size: 1536
+  is_decoder: false
+  layer_norm_eps: 1.0e-12
+  max_position_embeddings: 512
+  model_type: bert
+  num_attention_heads: 12
+  num_hidden_layers: 6
+  pad_token_id: 0
+  position_embedding_type: absolute
+  tie_word_embeddings: true
+  transformers_version: 5.0.0
+  type_vocab_size: 2
+  use_cache: true
+  vocab_size: 30522
+onnxFiles: {}
+safetensorsSizeMb: 90.9
+approxSizeMb: 90.9
+fetchedAt: '2026-06-09T06:55:53.000Z'

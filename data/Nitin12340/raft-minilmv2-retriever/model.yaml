@@ -1,0 +1,312 @@
+_id: 688e8779f5f6b1e6492544ce
+id: Nitin12340/raft-minilmv2-retriever
+private: false
+pipeline_tag: sentence-similarity
+library_name: sentence-transformers
+tags:
+- sentence-transformers
+- safetensors
+- bert
+- sentence-similarity
+- feature-extraction
+- dense
+- generated_from_trainer
+- dataset_size:4500
+- loss:MultipleNegativesRankingLoss
+- arxiv:1908.10084
+- arxiv:1705.00652
+- base_model:sentence-transformers/all-MiniLM-L6-v2
+- base_model:finetune:sentence-transformers/all-MiniLM-L6-v2
+- model-index
+- text-embeddings-inference
+- endpoints_compatible
+- region:us
+downloads: 3
+likes: 0
+modelId: Nitin12340/raft-minilmv2-retriever
+author: Nitin12340
+sha: c6e821a43d1fbd04706d60d8f37121da261713db
+lastModified: '2025-08-02T21:47:42.000Z'
+gated: false
+disabled: false
+mask_token: '[MASK]'
+widgetData:
+- source_sentence: Does it cover road ambulance charges?
+  sentences:
+  - Regular dialysis is included under critical illness benefits.
+  - Ambulance charges up to Rs. 2,000 per hospitalization are reimbursable.
+  - Outpatient dental treatments are excluded except in case of accidents.
+- source_sentence: Is knee replacement covered under the insurance plan?
+  sentences:
+  - Pre-existing conditions are covered after a waiting period of 48 months.
+  - Pre-existing conditions are included after a waiting period of 48 months.
+  - Knee replacement is not covered unless specified under major surgeries.
+- source_sentence: Are pre-existing conditions covered?
+  sentences:
+  - COVID-19 treatment is included subject to terms and conditions.
+  - Pre-existing conditions are included after a waiting period of 48 months.
+  - Inpatient mental illness treatment is covered as per IRDAI guidelines.
+- source_sentence: Is knee replacement covered under the insurance plan?
+  sentences:
+  - Outpatient dental treatments are excluded except in case of accidents.
+  - Cataract surgery is covered with a sublimit of Rs. 25,000 per eye.
+  - Knee replacement is not included unless specified under major surgeries.
+- source_sentence: Is maternity covered?
+  sentences:
+  - Outpatient dental treatments are excluded except in case of accidents.
+  - Maternity expenses are included up to Rs. 50,000 after a waiting period of 9 months.
+  - COVID-19 treatment is included subject to terms and conditions.
+model-index:
+- name: SentenceTransformer based on sentence-transformers/all-MiniLM-L6-v2
+  results:
+  - task:
+      type: information-retrieval
+      name: Information Retrieval
+    dataset:
+      name: raft ir eval
+      type: raft-ir-eval
+    metrics:
+    - type: cosine_accuracy@1
+      value: 0.024
+      name: Cosine Accuracy@1
+      verified: false
+    - type: cosine_accuracy@3
+      value: 0.064
+      name: Cosine Accuracy@3
+      verified: false
+    - type: cosine_accuracy@5
+      value: 0.106
+      name: Cosine Accuracy@5
+      verified: false
+    - type: cosine_accuracy@10
+      value: 0.216
+      name: Cosine Accuracy@10
+      verified: false
+    - type: cosine_precision@1
+      value: 0.024
+      name: Cosine Precision@1
+      verified: false
+    - type: cosine_precision@3
+      value: 0.021333333333333333
+      name: Cosine Precision@3
+      verified: false
+    - type: cosine_precision@5
+      value: 0.021200000000000004
+      name: Cosine Precision@5
+      verified: false
+    - type: cosine_precision@10
+      value: 0.0216
+      name: Cosine Precision@10
+      verified: false
+    - type: cosine_recall@1
+      value: 0.024
+      name: Cosine Recall@1
+      verified: false
+    - type: cosine_recall@3
+      value: 0.064
+      name: Cosine Recall@3
+      verified: false
+    - type: cosine_recall@5
+      value: 0.106
+      name: Cosine Recall@5
+      verified: false
+    - type: cosine_recall@10
+      value: 0.216
+      name: Cosine Recall@10
+      verified: false
+    - type: cosine_ndcg@10
+      value: 0.09879846638920552
+      name: Cosine Ndcg@10
+      verified: false
+    - type: cosine_mrr@10
+      value: 0.06424920634920635
+      name: Cosine Mrr@10
+      verified: false
+    - type: cosine_map@100
+      value: 0.09501655321126314
+      name: Cosine Map@100
+      verified: false
+config:
+  architectures:
+  - BertModel
+  model_type: bert
+  tokenizer_config:
+    cls_token: '[CLS]'
+    mask_token: '[MASK]'
+    pad_token: '[PAD]'
+    sep_token: '[SEP]'
+    unk_token: '[UNK]'
+cardData:
+  tags:
+  - sentence-transformers
+  - sentence-similarity
+  - feature-extraction
+  - dense
+  - generated_from_trainer
+  - dataset_size:4500
+  - loss:MultipleNegativesRankingLoss
+  base_model: sentence-transformers/all-MiniLM-L6-v2
+  widget:
+  - source_sentence: Does it cover road ambulance charges?
+    sentences:
+    - Regular dialysis is included under critical illness benefits.
+    - Ambulance charges up to Rs. 2,000 per hospitalization are reimbursable.
+    - Outpatient dental treatments are excluded except in case of accidents.
+  - source_sentence: Is knee replacement covered under the insurance plan?
+    sentences:
+    - Pre-existing conditions are covered after a waiting period of 48 months.
+    - Pre-existing conditions are included after a waiting period of 48 months.
+    - Knee replacement is not covered unless specified under major surgeries.
+  - source_sentence: Are pre-existing conditions covered?
+    sentences:
+    - COVID-19 treatment is included subject to terms and conditions.
+    - Pre-existing conditions are included after a waiting period of 48 months.
+    - Inpatient mental illness treatment is covered as per IRDAI guidelines.
+  - source_sentence: Is knee replacement covered under the insurance plan?
+    sentences:
+    - Outpatient dental treatments are excluded except in case of accidents.
+    - Cataract surgery is covered with a sublimit of Rs. 25,000 per eye.
+    - Knee replacement is not included unless specified under major surgeries.
+  - source_sentence: Is maternity covered?
+    sentences:
+    - Outpatient dental treatments are excluded except in case of accidents.
+    - Maternity expenses are included up to Rs. 50,000 after a waiting period of 9 months.
+    - COVID-19 treatment is included subject to terms and conditions.
+  pipeline_tag: sentence-similarity
+  library_name: sentence-transformers
+  metrics:
+  - cosine_accuracy@1
+  - cosine_accuracy@3
+  - cosine_accuracy@5
+  - cosine_accuracy@10
+  - cosine_precision@1
+  - cosine_precision@3
+  - cosine_precision@5
+  - cosine_precision@10
+  - cosine_recall@1
+  - cosine_recall@3
+  - cosine_recall@5
+  - cosine_recall@10
+  - cosine_ndcg@10
+  - cosine_mrr@10
+  - cosine_map@100
+  model-index:
+  - name: SentenceTransformer based on sentence-transformers/all-MiniLM-L6-v2
+    results:
+    - task:
+        type: information-retrieval
+        name: Information Retrieval
+      dataset:
+        name: raft ir eval
+        type: raft-ir-eval
+      metrics:
+      - type: cosine_accuracy@1
+        value: 0.024
+        name: Cosine Accuracy@1
+        verified: false
+      - type: cosine_accuracy@3
+        value: 0.064
+        name: Cosine Accuracy@3
+        verified: false
+      - type: cosine_accuracy@5
+        value: 0.106
+        name: Cosine Accuracy@5
+        verified: false
+      - type: cosine_accuracy@10
+        value: 0.216
+        name: Cosine Accuracy@10
+        verified: false
+      - type: cosine_precision@1
+        value: 0.024
+        name: Cosine Precision@1
+        verified: false
+      - type: cosine_precision@3
+        value: 0.021333333333333333
+        name: Cosine Precision@3
+        verified: false
+      - type: cosine_precision@5
+        value: 0.021200000000000004
+        name: Cosine Precision@5
+        verified: false
+      - type: cosine_precision@10
+        value: 0.0216
+        name: Cosine Precision@10
+        verified: false
+      - type: cosine_recall@1
+        value: 0.024
+        name: Cosine Recall@1
+        verified: false
+      - type: cosine_recall@3
+        value: 0.064
+        name: Cosine Recall@3
+        verified: false
+      - type: cosine_recall@5
+        value: 0.106
+        name: Cosine Recall@5
+        verified: false
+      - type: cosine_recall@10
+        value: 0.216
+        name: Cosine Recall@10
+        verified: false
+      - type: cosine_ndcg@10
+        value: 0.09879846638920552
+        name: Cosine Ndcg@10
+        verified: false
+      - type: cosine_mrr@10
+        value: 0.06424920634920635
+        name: Cosine Mrr@10
+        verified: false
+      - type: cosine_map@100
+        value: 0.09501655321126314
+        name: Cosine Map@100
+        verified: false
+siblings:
+- rfilename: .gitattributes
+- rfilename: 1_Pooling/config.json
+- rfilename: README.md
+- rfilename: config.json
+- rfilename: config_sentence_transformers.json
+- rfilename: eval/Information-Retrieval_evaluation_raft-ir-eval_results.csv
+- rfilename: model.safetensors
+- rfilename: modules.json
+- rfilename: sentence_bert_config.json
+- rfilename: special_tokens_map.json
+- rfilename: tokenizer.json
+- rfilename: tokenizer_config.json
+- rfilename: vocab.txt
+spaces: []
+createdAt: '2025-08-02T21:47:37.000Z'
+safetensors:
+  parameters:
+    F32: 22713216
+  total: 22713216
+usedStorage: 90864192
+downloadsAllTime: 4
+inferenceProviderMapping: {}
+configJson:
+  architectures:
+  - BertModel
+  attention_probs_dropout_prob: 0.1
+  classifier_dropout: null
+  gradient_checkpointing: false
+  hidden_act: gelu
+  hidden_dropout_prob: 0.1
+  hidden_size: 384
+  initializer_range: 0.02
+  intermediate_size: 1536
+  layer_norm_eps: 1.0e-12
+  max_position_embeddings: 512
+  model_type: bert
+  num_attention_heads: 12
+  num_hidden_layers: 6
+  pad_token_id: 0
+  position_embedding_type: absolute
+  torch_dtype: float32
+  transformers_version: 4.54.0
+  type_vocab_size: 2
+  use_cache: true
+  vocab_size: 30522
+onnxFiles: {}
+safetensorsSizeMb: 90.9
+approxSizeMb: 90.9
+fetchedAt: '2026-06-09T06:55:53.000Z'

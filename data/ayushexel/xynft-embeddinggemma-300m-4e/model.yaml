@@ -1,0 +1,363 @@
+_id: 68becee9b425bcc68d2dce49
+id: ayushexel/xynft-embeddinggemma-300m-4e
+private: false
+pipeline_tag: sentence-similarity
+library_name: sentence-transformers
+tags:
+- sentence-transformers
+- safetensors
+- sentence-similarity
+- feature-extraction
+- dense
+- generated_from_trainer
+- dataset_size:741
+- loss:MultipleNegativesRankingLoss
+- arxiv:1908.10084
+- arxiv:1705.00652
+- base_model:google/embeddinggemma-300m
+- base_model:finetune:google/embeddinggemma-300m
+- model-index
+- endpoints_compatible
+- region:us
+downloads: 3
+likes: 0
+modelId: ayushexel/xynft-embeddinggemma-300m-4e
+author: ayushexel
+sha: a9b3e38b280bf46ec31cdad209a4e804935fd564
+lastModified: '2025-09-08T12:42:16.000Z'
+gated: false
+disabled: false
+widgetData:
+- source_sentence: What were the details of the payment gateway latency spike incident, including its impact, the immediate
+    mitigation steps taken, and the plan for root cause analysis?
+  sentences:
+  - 'Anjali Patel is addressing the HDFC reconciliation timeout error through a three-pronged approach: 1) Technical Investigation:
+    She has started a BigQuery query to analyze if the error is linked to specific card BIN ranges or merchant categories.
+    2) Partner Communication: She will proactively contact HDFC''s nodal officer. 3) Internal Tracking & Compliance: She is
+    creating a JIRA ticket under the R&C project to track the issue and specifically document its potential compliance impact
+    for the next RBI audit cycle.'
+  - A significant increase in transaction timeouts was identified for the ICICI payment gateway, with the rate jumping from
+    a baseline of 0.5% to nearly 4% during the 7-9 PM peak period. Initial analysis of Grafana dashboards confirmed the spike,
+    while Kibana logs revealed only generic gateway timeouts, not specific bank error codes. As a next step, the Infrastructure
+    team has been asked to investigate for network latency or packet loss on Juspay's side. The issue is being tracked under
+    JIRA ticket OPS-2451 and is scheduled for discussion in the morning standup.
+  - 'At 14:15, the payment gateway experienced a severe latency spike where p99 latency increased from ~180ms to over 2.5s.
+    This directly caused a 20% increase in transaction timeout errors. The root cause appears to be Redis connection pool
+    exhaustion errors. As an immediate response, a full rollback to the previous stable version (v1.18.1) was initiated at
+    14:25 IST, with service restoration expected by 14:40 IST. For long-term resolution, a root cause analysis is being tracked
+    under JIRA ticket PROD-4891, with an initial hypothesis that a change in the Redis client configuration is to blame. Further
+    updates will be posted in the #incidents-xyne-core Slack channel, and a preliminary RCA document is expected by the end
+    of the day.'
+- source_sentence: What is the urgent issue Siddharth Nair has flagged regarding HDFC Netbanking, and what are the immediate
+    actions requested from the teams?
+  sentences:
+  - Siddharth Nair has flagged an urgent issue regarding a latency spike for HDFC Netbanking transactions, which was identified
+    by the Finance monitoring team. This problem is causing a significant negative impact on transaction volumes and potential
+    revenue. As a result, the Engineering and Operations teams have been tasked with investigating this on a priority basis.
+    The immediate actions required are to check the health of the bank integration with HDFC and review any recent changes
+    that might have caused the issue. An update on the initial findings is requested as soon as possible.
+  - Meera Reddy has outlined a three-part immediate action plan to address the 20% drop in HDFC Netbanking transactions. First,
+    Rahul's team is assigned to conduct a root cause analysis and create a Jira ticket for tracking. Second, Siddharth is
+    tasked with identifying the top 10 merchants most impacted by this issue. Third, Meera herself will draft an internal
+    status update for stakeholders. The entire team will then convene for a call in 15 minutes to decide on the critical next
+    step of potentially disabling the HDFC Netbanking channel.
+  - 'The immediate action plan is to investigate a latency spike associated with the ICICI payment gateway. Arjun Mehta is
+    tasked with validating the finding by analyzing the payment-gateway service logs. A conclusive report, summarized in a
+    Confluence document by Vivek Agarwal, must be delivered to the bank partnerships team by 5 PM IST today. The objective
+    is to provide this team with the necessary evidence to escalate the performance issue to ICICI. All team communication
+    and updates regarding this incident are to be shared on the #incidents-upi channel.'
+- source_sentence: What is the suspected cause of the PayU refund failures, and what immediate action has been assigned to
+    address the issue?
+  sentences:
+  - The suspected root cause is a change in the v1.4.2 deployment, specifically related to how the authentication hash is
+    generated for PayU's refund API. The proposed action plan is to review the commit history for this deployment to confirm
+    the suspicion. If confirmed, a high-priority hotfix will be implemented to resolve the issue, which is being tracked under
+    ticket BREEZE-4521.
+  - 'The engineering leads are required to review a document by EOD tomorrow to help finalize the scope of a new service.
+    The primary goal is to get the project defined and into Jira for sprint planning by next Monday. Key technical considerations
+    flagged in the email include: 1) Ensuring the service can handle high transaction volumes from top-tier clients like Razorpay
+    without performance degradation. 2) Locking in the technical approach for the exception handling flow, which is considered
+    the most complex part. 3) Collaborating with the data engineering team on the data ingestion pipeline from S3.'
+  - The suspected cause of the ongoing PayU payment gateway refund failures is a recent deployment of the 'refund-processor',
+    given the strong correlation observed. To address this, Karan Malhotra has proposed an immediate, controlled rollback
+    of this component for the affected merchant cohorts. Anjali and her team have been tasked with assessing the feasibility
+    and potential side effects of this rollback, with a deadline of the end of the day (EOD), to urgently mitigate the risk
+    of breaching the refund Turnaround Time (TAT).
+- source_sentence: What is Siddharth's proposed two-part solution to address the merchant's reconciliation issues following
+    the Juspay latency spike, and what does he require to move forward?
+  sentences:
+  - A severe latency spike was observed on the Juspay merchant-portal, with the P95 latency jumping from approximately 400ms
+    to over 3 seconds, which is causing a terrible user experience. To address this, the SRE team has been asked to conduct
+    an immediate investigation, and a Jira ticket (XYNE-4321) has been created for tracking purposes.
+  - 'The root cause was CPU throttling on the service''s Kubernetes pods. A recent deployment (v2.7.1) introduced a complex
+    data validation logic that increased CPU demand, but the corresponding Kubernetes resource limits were not updated. This
+    caused pods to be throttled at 90% CPU usage, leading to ''task timed out'' errors. The immediate fix was rolling back
+    to the stable version v2.7.0. To prevent recurrence, the following actions were assigned: 1. The xyne-core development
+    team (@dev-leads-xyne) must optimize the new logic and provide a hotfix by EOD Friday. 2. The SRE team has an unspecified
+    action item due by the end of the next sprint. 3. Kubernetes resource requests and limits will be updated to provide a
+    50% buffer over the new baseline.'
+  - Siddharth Nair proposes a two-part solution to manage the fallout from a latency spike. First, he suggests preparing a
+    formal reconciliation statement with specific transaction IDs to provide transparency to the affected merchant. Second,
+    this statement will serve as a basis for discussing provisional credit options to alleviate the merchant's immediate cash
+    flow problems. To proceed with this plan, Siddharth is asking Riya Kapoor to confirm if the operations team can support
+    the creation of the statement.
+- source_sentence: What is the critical issue with the ICICI payment gateway, and what are the potential consequences and
+    mitigation strategies being discussed?
+  sentences:
+  - The initial analysis indicates that the latency spike is not a failure at the SDK or app-level. The issue is believed
+    to originate from a downstream system, pointing specifically to a problem either in Juspay's backend communication with
+    ICICI's systems or within the ICICI gateway itself. The critical implication of this finding is that it allows the event
+    to be classified as a 'specific partner gateway degradation' rather than a failure of Juspay's core payment system, which
+    is a key distinction for any required regulatory reporting to the RBI.
+  - The critical issue is the sustained `BANK_TIMEOUT` errors occurring with the ICICI payment gateway, which are identified
+    as the primary driver of a business loss. If the engineering team cannot provide an ETA for a fix, the proposed mitigation
+    strategy is to temporarily deprioritize this payment method on the checkout page to protect the user experience and the
+    overall payment success rate.
+  - To mitigate the impact on merchants from the ongoing UPI ICICI gateway latency spike and high 'Transaction Not Permitted'
+    errors, two immediate actions are proposed. First, Rahul Verma is asked to explore temporarily de-prioritizing the ICICI
+    gateway in the routing logic for high-volume merchants until a confirmation on the issue is received from the bank. Second,
+    the team needs to investigate the severity of the issue by checking Grafana to confirm if the p99 latency for the gateway
+    has breached the Service Level Agreement (SLA).
+model-index:
+- name: SentenceTransformer based on google/embeddinggemma-300m
+  results:
+  - task:
+      type: triplet
+      name: Triplet
+    dataset:
+      name: baseline pre training
+      type: baseline_pre_training
+    metrics:
+    - type: cosine_accuracy
+      value: 0.5080000162124634
+      name: Cosine Accuracy
+      verified: false
+  - task:
+      type: triplet
+      name: Triplet
+    dataset:
+      name: ft dev
+      type: ft-dev
+    metrics:
+    - type: cosine_accuracy
+      value: 0.6679999828338623
+      name: Cosine Accuracy
+      verified: false
+config: {}
+cardData:
+  tags:
+  - sentence-transformers
+  - sentence-similarity
+  - feature-extraction
+  - dense
+  - generated_from_trainer
+  - dataset_size:741
+  - loss:MultipleNegativesRankingLoss
+  base_model: google/embeddinggemma-300m
+  widget:
+  - source_sentence: What were the details of the payment gateway latency spike incident, including its impact, the immediate
+      mitigation steps taken, and the plan for root cause analysis?
+    sentences:
+    - 'Anjali Patel is addressing the HDFC reconciliation timeout error through a three-pronged approach: 1) Technical Investigation:
+      She has started a BigQuery query to analyze if the error is linked to specific card BIN ranges or merchant categories.
+      2) Partner Communication: She will proactively contact HDFC''s nodal officer. 3) Internal Tracking & Compliance: She
+      is creating a JIRA ticket under the R&C project to track the issue and specifically document its potential compliance
+      impact for the next RBI audit cycle.'
+    - A significant increase in transaction timeouts was identified for the ICICI payment gateway, with the rate jumping from
+      a baseline of 0.5% to nearly 4% during the 7-9 PM peak period. Initial analysis of Grafana dashboards confirmed the
+      spike, while Kibana logs revealed only generic gateway timeouts, not specific bank error codes. As a next step, the
+      Infrastructure team has been asked to investigate for network latency or packet loss on Juspay's side. The issue is
+      being tracked under JIRA ticket OPS-2451 and is scheduled for discussion in the morning standup.
+    - 'At 14:15, the payment gateway experienced a severe latency spike where p99 latency increased from ~180ms to over 2.5s.
+      This directly caused a 20% increase in transaction timeout errors. The root cause appears to be Redis connection pool
+      exhaustion errors. As an immediate response, a full rollback to the previous stable version (v1.18.1) was initiated
+      at 14:25 IST, with service restoration expected by 14:40 IST. For long-term resolution, a root cause analysis is being
+      tracked under JIRA ticket PROD-4891, with an initial hypothesis that a change in the Redis client configuration is to
+      blame. Further updates will be posted in the #incidents-xyne-core Slack channel, and a preliminary RCA document is expected
+      by the end of the day.'
+  - source_sentence: What is the urgent issue Siddharth Nair has flagged regarding HDFC Netbanking, and what are the immediate
+      actions requested from the teams?
+    sentences:
+    - Siddharth Nair has flagged an urgent issue regarding a latency spike for HDFC Netbanking transactions, which was identified
+      by the Finance monitoring team. This problem is causing a significant negative impact on transaction volumes and potential
+      revenue. As a result, the Engineering and Operations teams have been tasked with investigating this on a priority basis.
+      The immediate actions required are to check the health of the bank integration with HDFC and review any recent changes
+      that might have caused the issue. An update on the initial findings is requested as soon as possible.
+    - Meera Reddy has outlined a three-part immediate action plan to address the 20% drop in HDFC Netbanking transactions.
+      First, Rahul's team is assigned to conduct a root cause analysis and create a Jira ticket for tracking. Second, Siddharth
+      is tasked with identifying the top 10 merchants most impacted by this issue. Third, Meera herself will draft an internal
+      status update for stakeholders. The entire team will then convene for a call in 15 minutes to decide on the critical
+      next step of potentially disabling the HDFC Netbanking channel.
+    - 'The immediate action plan is to investigate a latency spike associated with the ICICI payment gateway. Arjun Mehta
+      is tasked with validating the finding by analyzing the payment-gateway service logs. A conclusive report, summarized
+      in a Confluence document by Vivek Agarwal, must be delivered to the bank partnerships team by 5 PM IST today. The objective
+      is to provide this team with the necessary evidence to escalate the performance issue to ICICI. All team communication
+      and updates regarding this incident are to be shared on the #incidents-upi channel.'
+  - source_sentence: What is the suspected cause of the PayU refund failures, and what immediate action has been assigned
+      to address the issue?
+    sentences:
+    - The suspected root cause is a change in the v1.4.2 deployment, specifically related to how the authentication hash is
+      generated for PayU's refund API. The proposed action plan is to review the commit history for this deployment to confirm
+      the suspicion. If confirmed, a high-priority hotfix will be implemented to resolve the issue, which is being tracked
+      under ticket BREEZE-4521.
+    - 'The engineering leads are required to review a document by EOD tomorrow to help finalize the scope of a new service.
+      The primary goal is to get the project defined and into Jira for sprint planning by next Monday. Key technical considerations
+      flagged in the email include: 1) Ensuring the service can handle high transaction volumes from top-tier clients like
+      Razorpay without performance degradation. 2) Locking in the technical approach for the exception handling flow, which
+      is considered the most complex part. 3) Collaborating with the data engineering team on the data ingestion pipeline
+      from S3.'
+    - The suspected cause of the ongoing PayU payment gateway refund failures is a recent deployment of the 'refund-processor',
+      given the strong correlation observed. To address this, Karan Malhotra has proposed an immediate, controlled rollback
+      of this component for the affected merchant cohorts. Anjali and her team have been tasked with assessing the feasibility
+      and potential side effects of this rollback, with a deadline of the end of the day (EOD), to urgently mitigate the risk
+      of breaching the refund Turnaround Time (TAT).
+  - source_sentence: What is Siddharth's proposed two-part solution to address the merchant's reconciliation issues following
+      the Juspay latency spike, and what does he require to move forward?
+    sentences:
+    - A severe latency spike was observed on the Juspay merchant-portal, with the P95 latency jumping from approximately 400ms
+      to over 3 seconds, which is causing a terrible user experience. To address this, the SRE team has been asked to conduct
+      an immediate investigation, and a Jira ticket (XYNE-4321) has been created for tracking purposes.
+    - 'The root cause was CPU throttling on the service''s Kubernetes pods. A recent deployment (v2.7.1) introduced a complex
+      data validation logic that increased CPU demand, but the corresponding Kubernetes resource limits were not updated.
+      This caused pods to be throttled at 90% CPU usage, leading to ''task timed out'' errors. The immediate fix was rolling
+      back to the stable version v2.7.0. To prevent recurrence, the following actions were assigned: 1. The xyne-core development
+      team (@dev-leads-xyne) must optimize the new logic and provide a hotfix by EOD Friday. 2. The SRE team has an unspecified
+      action item due by the end of the next sprint. 3. Kubernetes resource requests and limits will be updated to provide
+      a 50% buffer over the new baseline.'
+    - Siddharth Nair proposes a two-part solution to manage the fallout from a latency spike. First, he suggests preparing
+      a formal reconciliation statement with specific transaction IDs to provide transparency to the affected merchant. Second,
+      this statement will serve as a basis for discussing provisional credit options to alleviate the merchant's immediate
+      cash flow problems. To proceed with this plan, Siddharth is asking Riya Kapoor to confirm if the operations team can
+      support the creation of the statement.
+  - source_sentence: What is the critical issue with the ICICI payment gateway, and what are the potential consequences and
+      mitigation strategies being discussed?
+    sentences:
+    - The initial analysis indicates that the latency spike is not a failure at the SDK or app-level. The issue is believed
+      to originate from a downstream system, pointing specifically to a problem either in Juspay's backend communication with
+      ICICI's systems or within the ICICI gateway itself. The critical implication of this finding is that it allows the event
+      to be classified as a 'specific partner gateway degradation' rather than a failure of Juspay's core payment system,
+      which is a key distinction for any required regulatory reporting to the RBI.
+    - The critical issue is the sustained `BANK_TIMEOUT` errors occurring with the ICICI payment gateway, which are identified
+      as the primary driver of a business loss. If the engineering team cannot provide an ETA for a fix, the proposed mitigation
+      strategy is to temporarily deprioritize this payment method on the checkout page to protect the user experience and
+      the overall payment success rate.
+    - To mitigate the impact on merchants from the ongoing UPI ICICI gateway latency spike and high 'Transaction Not Permitted'
+      errors, two immediate actions are proposed. First, Rahul Verma is asked to explore temporarily de-prioritizing the ICICI
+      gateway in the routing logic for high-volume merchants until a confirmation on the issue is received from the bank.
+      Second, the team needs to investigate the severity of the issue by checking Grafana to confirm if the p99 latency for
+      the gateway has breached the Service Level Agreement (SLA).
+  pipeline_tag: sentence-similarity
+  library_name: sentence-transformers
+  metrics:
+  - cosine_accuracy
+  model-index:
+  - name: SentenceTransformer based on google/embeddinggemma-300m
+    results:
+    - task:
+        type: triplet
+        name: Triplet
+      dataset:
+        name: baseline pre training
+        type: baseline_pre_training
+      metrics:
+      - type: cosine_accuracy
+        value: 0.5080000162124634
+        name: Cosine Accuracy
+        verified: false
+    - task:
+        type: triplet
+        name: Triplet
+      dataset:
+        name: ft dev
+        type: ft-dev
+      metrics:
+      - type: cosine_accuracy
+        value: 0.6679999828338623
+        name: Cosine Accuracy
+        verified: false
+siblings:
+- rfilename: .gitattributes
+- rfilename: 1_Pooling/config.json
+- rfilename: 2_Dense/config.json
+- rfilename: 2_Dense/model.safetensors
+- rfilename: 3_Dense/config.json
+- rfilename: 3_Dense/model.safetensors
+- rfilename: README.md
+- rfilename: config.json
+- rfilename: config_sentence_transformers.json
+- rfilename: model.safetensors
+- rfilename: modules.json
+- rfilename: sentence_bert_config.json
+- rfilename: special_tokens_map.json
+- rfilename: tokenizer.json
+- rfilename: tokenizer_config.json
+spaces: []
+createdAt: '2025-09-08T12:41:13.000Z'
+safetensors:
+  parameters:
+    F32: 302863104
+  total: 302863104
+usedStorage: 1263745878
+downloadsAllTime: 13
+inferenceProviderMapping: {}
+configJson:
+  _sliding_window_pattern: 6
+  architectures:
+  - Gemma3TextModel
+  attention_bias: false
+  attention_dropout: 0.0
+  attn_logit_softcapping: null
+  bos_token_id: 2
+  dtype: float32
+  eos_token_id: 1
+  final_logit_softcapping: null
+  head_dim: 256
+  hidden_activation: gelu_pytorch_tanh
+  hidden_size: 768
+  initializer_range: 0.02
+  intermediate_size: 1152
+  layer_types:
+  - sliding_attention
+  - sliding_attention
+  - sliding_attention
+  - sliding_attention
+  - sliding_attention
+  - full_attention
+  - sliding_attention
+  - sliding_attention
+  - sliding_attention
+  - sliding_attention
+  - sliding_attention
+  - full_attention
+  - sliding_attention
+  - sliding_attention
+  - sliding_attention
+  - sliding_attention
+  - sliding_attention
+  - full_attention
+  - sliding_attention
+  - sliding_attention
+  - sliding_attention
+  - sliding_attention
+  - sliding_attention
+  - full_attention
+  max_position_embeddings: 2048
+  model_type: gemma3_text
+  num_attention_heads: 3
+  num_hidden_layers: 24
+  num_key_value_heads: 1
+  pad_token_id: 0
+  query_pre_attn_scalar: 256
+  rms_norm_eps: 1.0e-06
+  rope_local_base_freq: 10000.0
+  rope_scaling: null
+  rope_theta: 1000000.0
+  sliding_window: 512
+  transformers_version: 4.56.1
+  use_bidirectional_attention: true
+  use_cache: true
+  vocab_size: 262144
+onnxFiles: {}
+safetensorsSizeMb: 1230.4
+approxSizeMb: 1211.5
+fetchedAt: '2026-06-09T06:55:53.000Z'

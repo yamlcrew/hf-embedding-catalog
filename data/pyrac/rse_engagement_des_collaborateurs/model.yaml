@@ -1,0 +1,215 @@
+_id: 67ab5b39c9684a1a0220377f
+id: pyrac/rse_engagement_des_collaborateurs
+private: false
+pipeline_tag: sentence-similarity
+library_name: sentence-transformers
+tags:
+- sentence-transformers
+- safetensors
+- xlm-roberta
+- sentence-similarity
+- feature-extraction
+- generated_from_trainer
+- dataset_size:132020
+- loss:MultipleNegativesRankingLoss
+- en
+- arxiv:1908.10084
+- arxiv:1705.00652
+- base_model:sentence-transformers/paraphrase-multilingual-mpnet-base-v2
+- base_model:finetune:sentence-transformers/paraphrase-multilingual-mpnet-base-v2
+- license:apache-2.0
+- model-index
+- text-embeddings-inference
+- endpoints_compatible
+- region:us
+downloads: 6
+likes: 0
+modelId: pyrac/rse_engagement_des_collaborateurs
+author: pyrac
+sha: 2cc60df0949f5141e2d7185cb0bccc45e5689ecc
+lastModified: '2025-02-11T14:15:15.000Z'
+gated: false
+disabled: false
+mask_token: <mask>
+widgetData:
+- source_sentence: Les membres de l'équipe ont été attentifs et très professionnels dans leur manière de gérer nos besoins.
+  sentences:
+  - C’était tout à fait correct, mais pas très chaleureux.
+  - Une chambre mal située, très loin de tout, et vraiment pas agréable.
+  - Le service était moyen, ni excellent ni vraiment mauvais.
+- source_sentence: Les employés étaient réactifs et nous ont aidés à chaque étape du processus.
+  sentences:
+  - Leur manque d’implication et d’organisation était frustrant.
+  - L’expérience avec le personnel était moyenne, sans surprise.
+  - Manque de signalisation dans le parking.
+- source_sentence: Les employés ont dépassé nos attentes en termes de professionnalisme et de réactivité.
+  sentences:
+  - Parking mal entretenu, sale et peu accueillant.
+  - Nous avons trouvé les collaborateurs peu investis dans leur travail.
+  - Le personnel était super gentil et efficace, une vraie bonne surprise.
+- source_sentence: Les employés semblaient démotivés et peu impliqués dans leur travail.
+  sentences:
+  - La chambre n'était pas adaptée à nos attentes, c’était frustrant.
+  - L'équipe semblait désorganisée et peu concernée par les besoins des clients.
+  - Le service était présent mais manquait de chaleur humaine.
+- source_sentence: On aurait aimé plus d’implication de la part des employés, c’était moyen.
+  sentences:
+  - Rien de particulier à dire, le service était correct.
+  - On a été forcé d’accepter cette chambre, ce n'était pas du tout ce qu’on avait demandé.
+  - Le service était assez médiocre, mais pas désastreux non plus.
+model-index:
+- name: MPNet base trained on AllNLI triplets
+  results:
+  - task:
+      type: triplet
+      name: Triplet
+    dataset:
+      name: all nli dev
+      type: all-nli-dev
+    metrics:
+    - type: cosine_accuracy
+      value: 1
+      name: Cosine Accuracy
+      verified: false
+  - task:
+      type: triplet
+      name: Triplet
+    dataset:
+      name: all nli test
+      type: all-nli-test
+    metrics:
+    - type: cosine_accuracy
+      value: 1
+      name: Cosine Accuracy
+      verified: false
+config:
+  architectures:
+  - XLMRobertaModel
+  model_type: xlm-roberta
+  tokenizer_config:
+    bos_token: <s>
+    cls_token: <s>
+    eos_token: </s>
+    mask_token: <mask>
+    pad_token: <pad>
+    sep_token: </s>
+    unk_token: <unk>
+cardData:
+  language:
+  - en
+  license: apache-2.0
+  tags:
+  - sentence-transformers
+  - sentence-similarity
+  - feature-extraction
+  - generated_from_trainer
+  - dataset_size:132020
+  - loss:MultipleNegativesRankingLoss
+  base_model: sentence-transformers/paraphrase-multilingual-mpnet-base-v2
+  widget:
+  - source_sentence: Les membres de l'équipe ont été attentifs et très professionnels dans leur manière de gérer nos besoins.
+    sentences:
+    - C’était tout à fait correct, mais pas très chaleureux.
+    - Une chambre mal située, très loin de tout, et vraiment pas agréable.
+    - Le service était moyen, ni excellent ni vraiment mauvais.
+  - source_sentence: Les employés étaient réactifs et nous ont aidés à chaque étape du processus.
+    sentences:
+    - Leur manque d’implication et d’organisation était frustrant.
+    - L’expérience avec le personnel était moyenne, sans surprise.
+    - Manque de signalisation dans le parking.
+  - source_sentence: Les employés ont dépassé nos attentes en termes de professionnalisme et de réactivité.
+    sentences:
+    - Parking mal entretenu, sale et peu accueillant.
+    - Nous avons trouvé les collaborateurs peu investis dans leur travail.
+    - Le personnel était super gentil et efficace, une vraie bonne surprise.
+  - source_sentence: Les employés semblaient démotivés et peu impliqués dans leur travail.
+    sentences:
+    - La chambre n'était pas adaptée à nos attentes, c’était frustrant.
+    - L'équipe semblait désorganisée et peu concernée par les besoins des clients.
+    - Le service était présent mais manquait de chaleur humaine.
+  - source_sentence: On aurait aimé plus d’implication de la part des employés, c’était moyen.
+    sentences:
+    - Rien de particulier à dire, le service était correct.
+    - On a été forcé d’accepter cette chambre, ce n'était pas du tout ce qu’on avait demandé.
+    - Le service était assez médiocre, mais pas désastreux non plus.
+  pipeline_tag: sentence-similarity
+  library_name: sentence-transformers
+  metrics:
+  - cosine_accuracy
+  model-index:
+  - name: MPNet base trained on AllNLI triplets
+    results:
+    - task:
+        type: triplet
+        name: Triplet
+      dataset:
+        name: all nli dev
+        type: all-nli-dev
+      metrics:
+      - type: cosine_accuracy
+        value: 1
+        name: Cosine Accuracy
+        verified: false
+    - task:
+        type: triplet
+        name: Triplet
+      dataset:
+        name: all nli test
+        type: all-nli-test
+      metrics:
+      - type: cosine_accuracy
+        value: 1
+        name: Cosine Accuracy
+        verified: false
+siblings:
+- rfilename: .gitattributes
+- rfilename: 1_Pooling/config.json
+- rfilename: README.md
+- rfilename: config.json
+- rfilename: config_sentence_transformers.json
+- rfilename: model.safetensors
+- rfilename: modules.json
+- rfilename: sentence_bert_config.json
+- rfilename: special_tokens_map.json
+- rfilename: tokenizer.json
+- rfilename: tokenizer_config.json
+spaces: []
+createdAt: '2025-02-11T14:14:17.000Z'
+safetensors:
+  parameters:
+    F32: 278043648
+  total: 278043648
+usedStorage: 1129280083
+downloadsAllTime: 69
+inferenceProviderMapping: {}
+configJson:
+  _name_or_path: sentence-transformers/paraphrase-multilingual-mpnet-base-v2
+  architectures:
+  - XLMRobertaModel
+  attention_probs_dropout_prob: 0.1
+  bos_token_id: 0
+  classifier_dropout: null
+  eos_token_id: 2
+  gradient_checkpointing: false
+  hidden_act: gelu
+  hidden_dropout_prob: 0.1
+  hidden_size: 768
+  initializer_range: 0.02
+  intermediate_size: 3072
+  layer_norm_eps: 1.0e-05
+  max_position_embeddings: 514
+  model_type: xlm-roberta
+  num_attention_heads: 12
+  num_hidden_layers: 12
+  output_past: true
+  pad_token_id: 1
+  position_embedding_type: absolute
+  torch_dtype: float32
+  transformers_version: 4.48.3
+  type_vocab_size: 1
+  use_cache: true
+  vocab_size: 250002
+onnxFiles: {}
+safetensorsSizeMb: 1112.2
+approxSizeMb: 1112.2
+fetchedAt: '2026-06-09T06:55:53.000Z'

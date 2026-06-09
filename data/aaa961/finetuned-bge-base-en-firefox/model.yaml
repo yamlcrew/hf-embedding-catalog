@@ -1,0 +1,770 @@
+_id: 68b5b74a9408c61203e83cd4
+id: aaa961/finetuned-bge-base-en-firefox
+private: false
+pipeline_tag: sentence-similarity
+library_name: sentence-transformers
+tags:
+- sentence-transformers
+- safetensors
+- bert
+- sentence-similarity
+- feature-extraction
+- dense
+- generated_from_trainer
+- dataset_size:5424
+- loss:BatchSemiHardTripletLoss
+- arxiv:1908.10084
+- arxiv:1703.07737
+- base_model:BAAI/bge-base-en
+- base_model:finetune:BAAI/bge-base-en
+- model-index
+- text-embeddings-inference
+- endpoints_compatible
+- region:us
+downloads: 2
+likes: 0
+modelId: aaa961/finetuned-bge-base-en-firefox
+author: aaa961
+sha: a71b03da026e24b021a48bffa9f7b400c5895fd0
+lastModified: '2025-09-01T15:10:15.000Z'
+gated: false
+disabled: false
+mask_token: '[MASK]'
+widgetData:
+- source_sentence: Tab previews often seem to be captured too early Quite often when I look at tab previews I find a preview
+    that looks half rendered. Maybe the screenshot was taking while the page was still loading or something? Here is an example
+    of the preview for WhatsApp's web interface. I see this for other sites too but WhatsApp seems to be reasonably reproducible.
+  sentences:
+  - Firefox should not fetch keys in oauth flows even if it gets the keyFetchToken The FxA server was accidentally sending
+    us its keyFetchToken during oauth flows. This caused a race between who was going to use it. While a PR for that has been
+    merged in FxA, we still might as well avoid even trying to use the token if we get it some how.
+  - "Tab doesn't receive focus outline on keyboard navigation I don't yet have good steps to reproduce but while using the\
+    \ keyboard to navigate tabs, sometimes one of my tabs doesn't get the focus outline. \n\nTo reproduce, open several tabs\
+    \ and navigate to the tab strip with the keyboard by focusing the addressbar (ctrl+L) and hitting shift+tab a few times.\
+    \ Then arrow through your tabs and notice that one of them doesn't get the focus indicator.\n\nI'm missing some step because\
+    \ I can't consistently reproduce but I've seen it several times now so getting a bug on file."
+  - 'Options menu no longer accepts mouse click after changing default zoom. STR:
+
+    * Open Options Menu
+
+    * Change default zoom from 100% to 90%
+
+
+    Expected Behavior:
+
+    * Zoom is applied in options menu and user is able to interact further with Options menu
+
+
+    Actual behavior (Firefox 77.0a1 20200407214402):
+
+    * Zoom is applied in options menu, but user is no longer able to interact with Options menu using mouse. Clicking any
+    button/dropdown/... no longer works.
+
+    Using keyboard (tab to navigate options) still works.'
+- source_sentence: '"Open Video in New Tab" should copy Mute settings STR:
+
+
+    1) Mute a tab.
+
+    2) Play a video on the tab.
+
+    3) Right click, "Open Video in New Tab"
+
+    4) MUSIC INSTANTLY BLASTING THROUGH THE OFFICE
+
+
+    The new tab should copy the mute settings from the original tab, particularly because autoplay is enabled by default.'
+  sentences:
+  - 'The ingest logic for detecting newly enabled Suggest suggestions is broken In bug 1907696 I added some logic to `BaseFeature`
+    that tries to ingest only newly enabled suggestion types when `update()` is called. It doesn''t work right because by
+    the time it [gets the old enabled suggestion types](https://searchfox.org/mozilla-central/rev/7c7e11a8e0352b0110923e86b873e4a26e3b0650/browser/components/urlbar/private/BaseFeature.sys.mjs#217-226),
+    prefs/variables have already changed, so `isRustSuggestionTypeEnabled()` reflects the *new* enabled status, not the old.
+    So later when it [tries to ingest only newly enabled suggestion types](https://searchfox.org/mozilla-central/rev/7c7e11a8e0352b0110923e86b873e4a26e3b0650/browser/components/urlbar/private/BaseFeature.sys.mjs#237-249),
+    it won''t because it will think those types were already enabled.
+
+
+    This isn''t a huge problem because it only affects features that manage more than one suggestion type, and only when one
+    type was already enabled, i.e., only when the feature itself was already enabled. `AdmWikipedia` is the only feature that
+    manages multiple types. So to trigger this, the user would have to have sponsored enabled, nonsponsored disabled, and
+    then turn on nonsponsored (or vice versa). And even then, ingest on startup isn''t affected, so the worst case is that
+    they might end up with slightly outdated AMP or Wikipedia suggestions.'
+  - Possible to add multiple of the same tag in the Bookmarks Panel tag list betsymikal was able to reproduce this (see screenshot),
+    but I was not. needinfo'ing betsymikal for steps to reproduce.
+  - '[Colorway Closet] Fix up illustration sizing Couple of things:
+
+    - We want to allow illustrations up to 300\*300px instead of the current 288\*288px.
+
+    - We currently use the **height** variable to set the max-**width** and the **width** variable to set the max-**height**.
+    We should fix that :)
+
+    - We also need to set a minimum container size so that layout doesn''t change due to  different colorway illustrations
+    having different sizes.'
+- source_sentence: 'Proton Menu Update Does Not Allow Easily Restoring Session User Agent: Mozilla/5.0 (X11; Linux x86_64;
+    rv:87.0) Gecko/20100101 Firefox/87.0
+
+
+    Steps to reproduce:
+
+
+    Enabled browser.proton.appmenu.
+
+
+    Restarted my browser.
+
+
+    Attempted to Access Restore Recent Session Item, either on the main menu, or in a sub-menu.
+
+
+
+    Actual results:
+
+
+    I was unable to do so.
+
+
+
+    Expected results:
+
+
+    In order to easily facilitate restoring an old session, a menu item should be included, either in the main menu, or within
+    the history sub-menu.'
+  sentences:
+  - 'When there are fluent .orig files Storybook won''t start The [webpackInclude comments](https://searchfox.org/mozilla-central/rev/a64647a2125cf3d334451051491fef6772e8eb57/browser/components/storybook/.storybook/preview.js#33,40)
+    for the fluent files is over-permissive and catching .orig files which then cause webpack to throw an error and prevent
+    storybook from starting.
+
+
+    STR
+
+
+    1. `cp browser/locales/en-US/browser/browser.ftl{,.orig}`
+
+    2. `./mach storybook`
+
+
+    Expected results: Storybook starts
+
+    Actual results: Webpack error :('
+  - '[Experiment] The “expose” event is not registered on the treatment branches of the "Test Window modal vs Tab modal on
+    about:welcome" experiment **[Affected versions]:**
+
+    - Firefox Release candidate 110.0 (Build ID: 20230206190557)
+
+
+    **[Affected Platforms]:**
+
+    - Windows 10 x64
+
+    - Windows 11 x64
+
+
+    **[Prerequisites]:**
+
+    - Have the latest version of Firefox Beta 110 installed.
+
+    - Have the Firefox browser pinned to Taskbar.
+
+    - Have the [user.js](https://drive.google.com/file/d/1rE_QlyzmNhqL598EWgoOA5Y4HsJEHamk/view?usp=share_link) file saved
+    to your PC.
+
+
+
+    **[Steps to reproduce]:**
+
+    1. Create a new Firefox profile but do not open it.
+
+    2. Navigate to the Firefox profile folder and paste the user.js file from the prerequisites.
+
+    3. Open the browser using the previously created profile and the “--first-startup” syntax.
+
+    4. Make sure that the window modal is shown.
+
+    5. Navigate to the “about:telemetry#events” page and search for the “expose” event.
+
+
+    **[Expected result]:**
+
+    - The “expose” event is displayed.
+
+
+    **[Actual result]:**
+
+    - No “expose” event is registered.
+
+
+    **[Notes]:**
+
+    - This issue is not reproducible on the Control branch of the experiment.'
+  - 'Search mode chiclet can get overloaded with Switch to tab text STR
+
+    1. Open Tabs search mode by typing `% ` or clicking the tabs search shortcut.
+
+    2. Press the down arrow until a non-remote Switch-to-Tab result is selected.
+
+    3. Press Esc.
+
+
+    Expected results: The search mode chiclet reads "Tabs"
+
+    Actual results: The search mode chiclet reads "Switch to tab:Tabs"'
+- source_sentence: "Limit address bar clipboard result for new tabs **Found in**\n* Fx 121.0a1\n\n**Affected versions**\n\
+    * Fx 121.0a1\n\n**Affected platforms**\n* Windows 10\n* Ubuntu\n* macOS\n\n**Preconditions**\n* Set browser.urlbar.clipboard.featureGate\
+    \ to true.\n\n**Steps to reproduce**\n1. Launch Firefox.\n2. Copy a website url.\n3. Click the address bar and inspect\
+    \ the clipboard result suggestion.\n4. Open a new tab and click the address bar - the clipboard result is shown.\n5. Redo\
+    \ the previous step several times.\n\n**Expected result**\n* Clipboard result is no longer shown after a few tries. \n\
+    \n**Actual result**\n* Clipboard result suggestion is displayed on every new tab. It seems that the impression for the\
+    \ clipboard result is not registered.\n\n**Regression range**\n* Not a regression.\n\n**Additional notes**\n* Clipboard\
+    \ result only appears twice on the same tab."
+  sentences:
+  - '[Docs] Feature callout doc incorrectly says randomize is a property of tiles rather than MultiSelectItem If you search
+    for randomize in [the doc](https://firefox-source-docs.mozilla.org/browser/components/asrouter/docs/feature-callout.html),
+    you''ll find it is on the `tiles` object. But in reality, it was moved from there to `MultiSelectItem`, so that each item
+    has its own `randomize` property, allowing some items to keep a static position at the bottom/top, or more complicated
+    layouts. So we just need to reflect that in the documentation. Adding a code comment could help explain how that works
+    - I added an explanation to the summary of [the patch](https://phabricator.services.mozilla.com/D202513) where I added
+    per-item randomization, so we can use that.'
+  - 'PlacesFeed module is doing expensive work during Places notifications I took a profile from the suggestion in bug 1533061
+
+    https://share.firefox.dev/3XWswU0
+
+
+    on notifications this is doing a "dispatch" that doesn''t look like being an actual async dispatch https://searchfox.org/mozilla-central/source/browser/components/newtab/lib/PlacesFeed.jsm#64,160,178-193
+
+    That apparently accounts for a good 30% of the time.
+
+
+    Since this listener is pretty much always active, it is slowing down various bookmarks (and maybe history) operations,
+    it should do the minimum necessary in the notification handler, and redispatch/batch any expensive work.'
+  - 'Server errors (503/429/...non-200) leave page in loading state Based on [the xpcshell test](https://searchfox.org/mozilla-central/rev/7499890dc8f116a9e40f4a689a251a0311a9f461/toolkit/components/shopping/test/xpcshell/test_product.js#374-384)
+    the current expectation is that failing requests will be retried, and after a number of retries, return `null` if they
+    keep failing.
+
+
+    Unfortunately, the [actor code will then just pass the null data to the UI code](https://searchfox.org/mozilla-central/rev/7499890dc8f116a9e40f4a689a251a0311a9f461/browser/components/shopping/ShoppingSidebarChild.sys.mjs#259-262,268-277),
+    which will treat it as a "loading" state. This means that if the request fails permanently, we never show anything other
+    than the loading state.
+
+
+    We [already have generic error messaging](https://docs.google.com/spreadsheets/d/1FQUU2pqhKkAXRHNbmK9dhObwvevWoR3N6BOh3fu2skE/edit#gid=64342838&range=A50:D52)
+    for this, but it doesn''t appear that this exists in the ftl or is being used.
+
+
+    Assuming I''m not missing anything, this seems like something we should ideally fix sooner rather than later. Ania?'
+- source_sentence: "Loss of bookmarks state after OS hibernation User Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:88.0)\
+    \ Gecko/20100101 Firefox/88.0\n\nSteps to reproduce:\n\nKept Firefox 88.0 open for several days, using hibernate on Windows\
+    \ inbetween.\nCreated several bookmarks using Ctrl-D and Shift-Ctrl-D both for private as well as non-private sites.\n\
+    Also created some bookmarks by dragging from address bar into subfolders of bookmark window.\nI was wondering, that on\
+    \ some windows star icon an address bar did not become blue.\nVerified, that i already had bookmarked this site by pressing\
+    \ Ctrl-D. The appropriate bookmarks subfolder was shown. Star still did not become true.\nAnything else seem ok.\nDid\
+    \ quit Firefox using File->Quit menu command, saving session with all open tabs.\nDid start Firefox with restoring previous\
+    \ session using menu command.\n\n\nActual results:\n\nSome of the bookmarks created above are lost. Can't remember most\
+    \ of them.\nHowever i remember a few sites, which i definitely had created a bookmark for.\nNo bookmark exists.\nAlso\
+    \ there is no entry in history for these sites. Missing entry in history might be due to using private window. (Can't\
+    \ remember if i was using a private window for opening this site.)\n\nI repeatedly had lost both bookmarks and history\
+    \ entries some month ago and then created a new profile. Did not import anything from previous profiles. \n\n\nExpected\
+    \ results:\n\nBookmarks should have been saved as expected."
+  sentences:
+  - 'Urlbar docs: In index.rst, the Architecture Overview link in the Where to Start section is broken In index.rst, the Architecture
+    Overview link in the Where to Start section links to an unrelated page in the devtools docs.'
+  - 'Messages with triggers cause trigger listeners to initialize multiple times [Currently](https://searchfox.org/mozilla-central/rev/07342ce09126c513540c1c343476e026cfa907bf/browser/components/newtab/lib/ASRouter.jsm#827)
+    we call the `.init` function of every trigger (when defined).
+
+    This makes sense for `openURL` where we accumulate more URLs but for others it is a bug
+
+    * moments trigger will add multiple setIntervals
+
+    * whatsNew will evaluate multiple times which is wasteful).'
+  - 'Firefox provides the option to install search engines as open search even if they''re already installed **Affected versions**
+
+    * Fx99.0a1
+
+    * Fx97.0.1
+
+
+    **Affected platforms**
+
+    * Windows 10
+
+    * macOS
+
+    * Ubuntu 20.04
+
+
+    **Preconditions**
+
+    Have a zh-CN build downloaded.
+
+    Have a user.js in the profile root folder containing the following:
+
+    ``` user_pref("browser.search.region", "CN"); ```
+
+
+    **Steps to reproduce**
+
+    1. Launch Firefox with the profile containing the user.js.
+
+    2. Go to about:preferences#search and add the search bar. (optional)
+
+    3. Using the address bar, perform a search.
+
+    4. Observe the search bar magnifying glass icon.
+
+    5. Open the address bar drop-down and inspect the one-offs section.
+
+
+    **Expected result**
+
+    * The shouldn''t be any indication to add an open search engine, as the default baidu engine is already installed in Firefox.
+
+
+    **Actual result**
+
+    * There is a button to install the open search engine.
+
+
+    **Regression range**
+
+    * This doesn''t seem to be a recent regression as we could reproduce the issue with an Fx93 build.
+
+
+    **Additional notes**
+
+    * If the engine is added and then clicked in the search bar drop-down it will take the user to www.baidu.com
+
+    * This seems to be happening regardless of used locale build and with amazon as well, but under a bit different steps:
+
+    1. Open the searchbar dropdown.
+
+    2. Click the amazon one-off from the dropdown
+
+    3. After the website is loaded inspect the  searchbar magnifying glass icon.
+
+
+    * See the screenshots for more details.'
+model-index:
+- name: SentenceTransformer based on BAAI/bge-base-en
+  results:
+  - task:
+      type: triplet
+      name: Triplet
+    dataset:
+      name: bge base en train
+      type: bge-base-en-train
+    metrics:
+    - type: cosine_accuracy
+      value: 0.49041298031806946
+      name: Cosine Accuracy
+      verified: false
+    - type: cosine_accuracy
+      value: 0.5141874551773071
+      name: Cosine Accuracy
+      verified: false
+config:
+  architectures:
+  - BertModel
+  model_type: bert
+  tokenizer_config:
+    cls_token: '[CLS]'
+    mask_token: '[MASK]'
+    pad_token: '[PAD]'
+    sep_token: '[SEP]'
+    unk_token: '[UNK]'
+cardData:
+  tags:
+  - sentence-transformers
+  - sentence-similarity
+  - feature-extraction
+  - dense
+  - generated_from_trainer
+  - dataset_size:5424
+  - loss:BatchSemiHardTripletLoss
+  base_model: BAAI/bge-base-en
+  widget:
+  - source_sentence: Tab previews often seem to be captured too early Quite often when I look at tab previews I find a preview
+      that looks half rendered. Maybe the screenshot was taking while the page was still loading or something? Here is an
+      example of the preview for WhatsApp's web interface. I see this for other sites too but WhatsApp seems to be reasonably
+      reproducible.
+    sentences:
+    - Firefox should not fetch keys in oauth flows even if it gets the keyFetchToken The FxA server was accidentally sending
+      us its keyFetchToken during oauth flows. This caused a race between who was going to use it. While a PR for that has
+      been merged in FxA, we still might as well avoid even trying to use the token if we get it some how.
+    - "Tab doesn't receive focus outline on keyboard navigation I don't yet have good steps to reproduce but while using the\
+      \ keyboard to navigate tabs, sometimes one of my tabs doesn't get the focus outline. \n\nTo reproduce, open several\
+      \ tabs and navigate to the tab strip with the keyboard by focusing the addressbar (ctrl+L) and hitting shift+tab a few\
+      \ times. Then arrow through your tabs and notice that one of them doesn't get the focus indicator.\n\nI'm missing some\
+      \ step because I can't consistently reproduce but I've seen it several times now so getting a bug on file."
+    - 'Options menu no longer accepts mouse click after changing default zoom. STR:
+
+      * Open Options Menu
+
+      * Change default zoom from 100% to 90%
+
+
+      Expected Behavior:
+
+      * Zoom is applied in options menu and user is able to interact further with Options menu
+
+
+      Actual behavior (Firefox 77.0a1 20200407214402):
+
+      * Zoom is applied in options menu, but user is no longer able to interact with Options menu using mouse. Clicking any
+      button/dropdown/... no longer works.
+
+      Using keyboard (tab to navigate options) still works.'
+  - source_sentence: '"Open Video in New Tab" should copy Mute settings STR:
+
+
+      1) Mute a tab.
+
+      2) Play a video on the tab.
+
+      3) Right click, "Open Video in New Tab"
+
+      4) MUSIC INSTANTLY BLASTING THROUGH THE OFFICE
+
+
+      The new tab should copy the mute settings from the original tab, particularly because autoplay is enabled by default.'
+    sentences:
+    - 'The ingest logic for detecting newly enabled Suggest suggestions is broken In bug 1907696 I added some logic to `BaseFeature`
+      that tries to ingest only newly enabled suggestion types when `update()` is called. It doesn''t work right because by
+      the time it [gets the old enabled suggestion types](https://searchfox.org/mozilla-central/rev/7c7e11a8e0352b0110923e86b873e4a26e3b0650/browser/components/urlbar/private/BaseFeature.sys.mjs#217-226),
+      prefs/variables have already changed, so `isRustSuggestionTypeEnabled()` reflects the *new* enabled status, not the
+      old. So later when it [tries to ingest only newly enabled suggestion types](https://searchfox.org/mozilla-central/rev/7c7e11a8e0352b0110923e86b873e4a26e3b0650/browser/components/urlbar/private/BaseFeature.sys.mjs#237-249),
+      it won''t because it will think those types were already enabled.
+
+
+      This isn''t a huge problem because it only affects features that manage more than one suggestion type, and only when
+      one type was already enabled, i.e., only when the feature itself was already enabled. `AdmWikipedia` is the only feature
+      that manages multiple types. So to trigger this, the user would have to have sponsored enabled, nonsponsored disabled,
+      and then turn on nonsponsored (or vice versa). And even then, ingest on startup isn''t affected, so the worst case is
+      that they might end up with slightly outdated AMP or Wikipedia suggestions.'
+    - Possible to add multiple of the same tag in the Bookmarks Panel tag list betsymikal was able to reproduce this (see
+      screenshot), but I was not. needinfo'ing betsymikal for steps to reproduce.
+    - '[Colorway Closet] Fix up illustration sizing Couple of things:
+
+      - We want to allow illustrations up to 300\*300px instead of the current 288\*288px.
+
+      - We currently use the **height** variable to set the max-**width** and the **width** variable to set the max-**height**.
+      We should fix that :)
+
+      - We also need to set a minimum container size so that layout doesn''t change due to  different colorway illustrations
+      having different sizes.'
+  - source_sentence: 'Proton Menu Update Does Not Allow Easily Restoring Session User Agent: Mozilla/5.0 (X11; Linux x86_64;
+      rv:87.0) Gecko/20100101 Firefox/87.0
+
+
+      Steps to reproduce:
+
+
+      Enabled browser.proton.appmenu.
+
+
+      Restarted my browser.
+
+
+      Attempted to Access Restore Recent Session Item, either on the main menu, or in a sub-menu.
+
+
+
+      Actual results:
+
+
+      I was unable to do so.
+
+
+
+      Expected results:
+
+
+      In order to easily facilitate restoring an old session, a menu item should be included, either in the main menu, or
+      within the history sub-menu.'
+    sentences:
+    - 'When there are fluent .orig files Storybook won''t start The [webpackInclude comments](https://searchfox.org/mozilla-central/rev/a64647a2125cf3d334451051491fef6772e8eb57/browser/components/storybook/.storybook/preview.js#33,40)
+      for the fluent files is over-permissive and catching .orig files which then cause webpack to throw an error and prevent
+      storybook from starting.
+
+
+      STR
+
+
+      1. `cp browser/locales/en-US/browser/browser.ftl{,.orig}`
+
+      2. `./mach storybook`
+
+
+      Expected results: Storybook starts
+
+      Actual results: Webpack error :('
+    - '[Experiment] The “expose” event is not registered on the treatment branches of the "Test Window modal vs Tab modal
+      on about:welcome" experiment **[Affected versions]:**
+
+      - Firefox Release candidate 110.0 (Build ID: 20230206190557)
+
+
+      **[Affected Platforms]:**
+
+      - Windows 10 x64
+
+      - Windows 11 x64
+
+
+      **[Prerequisites]:**
+
+      - Have the latest version of Firefox Beta 110 installed.
+
+      - Have the Firefox browser pinned to Taskbar.
+
+      - Have the [user.js](https://drive.google.com/file/d/1rE_QlyzmNhqL598EWgoOA5Y4HsJEHamk/view?usp=share_link) file saved
+      to your PC.
+
+
+
+      **[Steps to reproduce]:**
+
+      1. Create a new Firefox profile but do not open it.
+
+      2. Navigate to the Firefox profile folder and paste the user.js file from the prerequisites.
+
+      3. Open the browser using the previously created profile and the “--first-startup” syntax.
+
+      4. Make sure that the window modal is shown.
+
+      5. Navigate to the “about:telemetry#events” page and search for the “expose” event.
+
+
+      **[Expected result]:**
+
+      - The “expose” event is displayed.
+
+
+      **[Actual result]:**
+
+      - No “expose” event is registered.
+
+
+      **[Notes]:**
+
+      - This issue is not reproducible on the Control branch of the experiment.'
+    - 'Search mode chiclet can get overloaded with Switch to tab text STR
+
+      1. Open Tabs search mode by typing `% ` or clicking the tabs search shortcut.
+
+      2. Press the down arrow until a non-remote Switch-to-Tab result is selected.
+
+      3. Press Esc.
+
+
+      Expected results: The search mode chiclet reads "Tabs"
+
+      Actual results: The search mode chiclet reads "Switch to tab:Tabs"'
+  - source_sentence: "Limit address bar clipboard result for new tabs **Found in**\n* Fx 121.0a1\n\n**Affected versions**\n\
+      * Fx 121.0a1\n\n**Affected platforms**\n* Windows 10\n* Ubuntu\n* macOS\n\n**Preconditions**\n* Set browser.urlbar.clipboard.featureGate\
+      \ to true.\n\n**Steps to reproduce**\n1. Launch Firefox.\n2. Copy a website url.\n3. Click the address bar and inspect\
+      \ the clipboard result suggestion.\n4. Open a new tab and click the address bar - the clipboard result is shown.\n5.\
+      \ Redo the previous step several times.\n\n**Expected result**\n* Clipboard result is no longer shown after a few tries.\
+      \ \n\n**Actual result**\n* Clipboard result suggestion is displayed on every new tab. It seems that the impression for\
+      \ the clipboard result is not registered.\n\n**Regression range**\n* Not a regression.\n\n**Additional notes**\n* Clipboard\
+      \ result only appears twice on the same tab."
+    sentences:
+    - '[Docs] Feature callout doc incorrectly says randomize is a property of tiles rather than MultiSelectItem If you search
+      for randomize in [the doc](https://firefox-source-docs.mozilla.org/browser/components/asrouter/docs/feature-callout.html),
+      you''ll find it is on the `tiles` object. But in reality, it was moved from there to `MultiSelectItem`, so that each
+      item has its own `randomize` property, allowing some items to keep a static position at the bottom/top, or more complicated
+      layouts. So we just need to reflect that in the documentation. Adding a code comment could help explain how that works
+      - I added an explanation to the summary of [the patch](https://phabricator.services.mozilla.com/D202513) where I added
+      per-item randomization, so we can use that.'
+    - 'PlacesFeed module is doing expensive work during Places notifications I took a profile from the suggestion in bug 1533061
+
+      https://share.firefox.dev/3XWswU0
+
+
+      on notifications this is doing a "dispatch" that doesn''t look like being an actual async dispatch https://searchfox.org/mozilla-central/source/browser/components/newtab/lib/PlacesFeed.jsm#64,160,178-193
+
+      That apparently accounts for a good 30% of the time.
+
+
+      Since this listener is pretty much always active, it is slowing down various bookmarks (and maybe history) operations,
+      it should do the minimum necessary in the notification handler, and redispatch/batch any expensive work.'
+    - 'Server errors (503/429/...non-200) leave page in loading state Based on [the xpcshell test](https://searchfox.org/mozilla-central/rev/7499890dc8f116a9e40f4a689a251a0311a9f461/toolkit/components/shopping/test/xpcshell/test_product.js#374-384)
+      the current expectation is that failing requests will be retried, and after a number of retries, return `null` if they
+      keep failing.
+
+
+      Unfortunately, the [actor code will then just pass the null data to the UI code](https://searchfox.org/mozilla-central/rev/7499890dc8f116a9e40f4a689a251a0311a9f461/browser/components/shopping/ShoppingSidebarChild.sys.mjs#259-262,268-277),
+      which will treat it as a "loading" state. This means that if the request fails permanently, we never show anything other
+      than the loading state.
+
+
+      We [already have generic error messaging](https://docs.google.com/spreadsheets/d/1FQUU2pqhKkAXRHNbmK9dhObwvevWoR3N6BOh3fu2skE/edit#gid=64342838&range=A50:D52)
+      for this, but it doesn''t appear that this exists in the ftl or is being used.
+
+
+      Assuming I''m not missing anything, this seems like something we should ideally fix sooner rather than later. Ania?'
+  - source_sentence: "Loss of bookmarks state after OS hibernation User Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:88.0)\
+      \ Gecko/20100101 Firefox/88.0\n\nSteps to reproduce:\n\nKept Firefox 88.0 open for several days, using hibernate on\
+      \ Windows inbetween.\nCreated several bookmarks using Ctrl-D and Shift-Ctrl-D both for private as well as non-private\
+      \ sites.\nAlso created some bookmarks by dragging from address bar into subfolders of bookmark window.\nI was wondering,\
+      \ that on some windows star icon an address bar did not become blue.\nVerified, that i already had bookmarked this site\
+      \ by pressing Ctrl-D. The appropriate bookmarks subfolder was shown. Star still did not become true.\nAnything else\
+      \ seem ok.\nDid quit Firefox using File->Quit menu command, saving session with all open tabs.\nDid start Firefox with\
+      \ restoring previous session using menu command.\n\n\nActual results:\n\nSome of the bookmarks created above are lost.\
+      \ Can't remember most of them.\nHowever i remember a few sites, which i definitely had created a bookmark for.\nNo bookmark\
+      \ exists.\nAlso there is no entry in history for these sites. Missing entry in history might be due to using private\
+      \ window. (Can't remember if i was using a private window for opening this site.)\n\nI repeatedly had lost both bookmarks\
+      \ and history entries some month ago and then created a new profile. Did not import anything from previous profiles.\
+      \ \n\n\nExpected results:\n\nBookmarks should have been saved as expected."
+    sentences:
+    - 'Urlbar docs: In index.rst, the Architecture Overview link in the Where to Start section is broken In index.rst, the
+      Architecture Overview link in the Where to Start section links to an unrelated page in the devtools docs.'
+    - 'Messages with triggers cause trigger listeners to initialize multiple times [Currently](https://searchfox.org/mozilla-central/rev/07342ce09126c513540c1c343476e026cfa907bf/browser/components/newtab/lib/ASRouter.jsm#827)
+      we call the `.init` function of every trigger (when defined).
+
+      This makes sense for `openURL` where we accumulate more URLs but for others it is a bug
+
+      * moments trigger will add multiple setIntervals
+
+      * whatsNew will evaluate multiple times which is wasteful).'
+    - 'Firefox provides the option to install search engines as open search even if they''re already installed **Affected
+      versions**
+
+      * Fx99.0a1
+
+      * Fx97.0.1
+
+
+      **Affected platforms**
+
+      * Windows 10
+
+      * macOS
+
+      * Ubuntu 20.04
+
+
+      **Preconditions**
+
+      Have a zh-CN build downloaded.
+
+      Have a user.js in the profile root folder containing the following:
+
+      ``` user_pref("browser.search.region", "CN"); ```
+
+
+      **Steps to reproduce**
+
+      1. Launch Firefox with the profile containing the user.js.
+
+      2. Go to about:preferences#search and add the search bar. (optional)
+
+      3. Using the address bar, perform a search.
+
+      4. Observe the search bar magnifying glass icon.
+
+      5. Open the address bar drop-down and inspect the one-offs section.
+
+
+      **Expected result**
+
+      * The shouldn''t be any indication to add an open search engine, as the default baidu engine is already installed in
+      Firefox.
+
+
+      **Actual result**
+
+      * There is a button to install the open search engine.
+
+
+      **Regression range**
+
+      * This doesn''t seem to be a recent regression as we could reproduce the issue with an Fx93 build.
+
+
+      **Additional notes**
+
+      * If the engine is added and then clicked in the search bar drop-down it will take the user to www.baidu.com
+
+      * This seems to be happening regardless of used locale build and with amazon as well, but under a bit different steps:
+
+      1. Open the searchbar dropdown.
+
+      2. Click the amazon one-off from the dropdown
+
+      3. After the website is loaded inspect the  searchbar magnifying glass icon.
+
+
+      * See the screenshots for more details.'
+  pipeline_tag: sentence-similarity
+  library_name: sentence-transformers
+  metrics:
+  - cosine_accuracy
+  model-index:
+  - name: SentenceTransformer based on BAAI/bge-base-en
+    results:
+    - task:
+        type: triplet
+        name: Triplet
+      dataset:
+        name: bge base en train
+        type: bge-base-en-train
+      metrics:
+      - type: cosine_accuracy
+        value: 0.49041298031806946
+        name: Cosine Accuracy
+        verified: false
+      - type: cosine_accuracy
+        value: 0.5141874551773071
+        name: Cosine Accuracy
+        verified: false
+siblings:
+- rfilename: .gitattributes
+- rfilename: 1_Pooling/config.json
+- rfilename: README.md
+- rfilename: config.json
+- rfilename: config_sentence_transformers.json
+- rfilename: model.safetensors
+- rfilename: modules.json
+- rfilename: sentence_bert_config.json
+- rfilename: special_tokens_map.json
+- rfilename: tokenizer.json
+- rfilename: tokenizer_config.json
+- rfilename: vocab.txt
+spaces: []
+createdAt: '2025-09-01T15:10:02.000Z'
+safetensors:
+  parameters:
+    F32: 109482240
+  total: 109482240
+usedStorage: 437951328
+downloadsAllTime: 7
+inferenceProviderMapping: {}
+configJson:
+  architectures:
+  - BertModel
+  attention_probs_dropout_prob: 0.1
+  classifier_dropout: null
+  gradient_checkpointing: false
+  hidden_act: gelu
+  hidden_dropout_prob: 0.1
+  hidden_size: 768
+  id2label:
+    '0': LABEL_0
+  initializer_range: 0.02
+  intermediate_size: 3072
+  label2id:
+    LABEL_0: 0
+  layer_norm_eps: 1.0e-12
+  max_position_embeddings: 512
+  model_type: bert
+  num_attention_heads: 12
+  num_hidden_layers: 12
+  pad_token_id: 0
+  position_embedding_type: absolute
+  torch_dtype: float32
+  transformers_version: 4.55.3
+  type_vocab_size: 2
+  use_cache: true
+  vocab_size: 30522
+onnxFiles: {}
+safetensorsSizeMb: 438.0
+approxSizeMb: 437.9
+fetchedAt: '2026-06-09T06:55:53.000Z'

@@ -1,0 +1,1104 @@
+_id: 66996481df532243086a08e3
+id: anishareddyalla/bge-base-aws-case-studies
+private: false
+pipeline_tag: sentence-similarity
+library_name: sentence-transformers
+tags:
+- sentence-transformers
+- safetensors
+- bert
+- sentence-similarity
+- feature-extraction
+- generated_from_trainer
+- dataset_size:2231
+- loss:MatryoshkaLoss
+- loss:MultipleNegativesRankingLoss
+- en
+- arxiv:1908.10084
+- arxiv:2205.13147
+- arxiv:1705.00652
+- base_model:BAAI/bge-base-en-v1.5
+- base_model:finetune:BAAI/bge-base-en-v1.5
+- license:apache-2.0
+- model-index
+- text-embeddings-inference
+- endpoints_compatible
+- region:us
+downloads: 2
+likes: 0
+modelId: anishareddyalla/bge-base-aws-case-studies
+author: anishareddyalla
+sha: 45c02799498494ce0193751adf0ceb4064004ae1
+lastModified: '2024-07-18T18:53:17.000Z'
+gated: false
+disabled: false
+mask_token: '[MASK]'
+widgetData:
+- source_sentence: Brian Pugh Chief Information Officer, Comscore Français Amazon Simple Storage Service (Amazon S3) is an
+    object storage service offering industry-leading scalability, data availability, security, and performance. Learn more
+    » 2023 Español Then, Comscore can set up its own privacy controls, including a mutually agreed upon join key that gives
+    collaborators the ability to match data tables and perform analyses using a double-blind method. This method means that
+    all parties can protect sensitive data, such as cookies, first-party IDs, and IP addresses, and run queries on combined
+    data to gain richer, more comprehensive insights. “Instead of ingesting all that information and doing the analysis behind
+    our firewall, we can join those things in AWS Clean Rooms and get back what we need,” says Brian Pugh, chief information
+    officer at Comscore. Additionally, Comscore can organize its analytics by demographics or other categories so that it
+    can identify trends in how groups of people interact with certain media. Comscore can also connect AWS Clean Rooms with
+    Amazon QuickSight—a solution that provides unified business intelligence at hyperscale—so that it can visualize its data
+    in one place using interactive, customizable dashboards. 日本語 About Comscore Get Started 한국어 Organizations of all sizes
+    across all industries are transforming their businesses and delivering on their missions every day using AWS. Contact
+    our experts and start your own AWS journey today. Industry Challenge AWS Clean Rooms helps customers and their partners
+    more easily and securely collaborate and analyze their collective datasets—without sharing or copying one another’s underlying
+    data. AWS Services Used 中文 (繁體) Bahasa Indonesia AWS Clean Rooms. . . helps Comscore to provide the best possible measurement
+    and support to our data partners to trust that the data that they’re providing is safe and protected. ” Ρусский عربي Analytics
+    and insights provider Comscore provides a wide range of data-driven solutions that support planning, transacting, and
+    measuring media across channels. It serves media companies and advertisers, promoting transparency and trust within the
+    industry. Benefits of Using AWS 中文 (简体) Comscore turned to Amazon Web Services (AWS) and chose AWS Clean Rooms to uphold
+    privacy-enhanced collaborations with its partners. AWS Clean Rooms helps Comscore’s customers and partners to securely
+    match, analyze, and collaborate on their combined datasets with ease and without sharing or revealing underlying data.
+    Using this solution, Comscore can invite up to five collaborators into an AWS Clean Room and pull pre-encrypted data into
+    a configured data table from Amazon Simple Storage Service (Amazon S3), an object storage service built to retrieve any
+    amount of data from anywhere. Media ratings company Comscore can provide richer insights to advertisers while maintaining
+    data privacy by securely collaborating on its data with third parties using AWS Clean Rooms. Amazon QuickSight powers
+    data-driven organizations with unified business intelligence (BI) at hyperscale.
+  sentences:
+  - How does Comscore use AWS Clean Rooms to protect sensitive data while collaborating with third parties?
+  - How did AWS help CEHC in building a cost-effective alternate production/DR environment in a fraction of the time compared
+    to a traditional brick-and-mortar production build?
+  - How does AWS aim to democratize access to generative AI applications for all builders through services like Amazon Bedrock?
+- source_sentence: 'We convert the HTML pages on this site into smaller overlapping chunks (to retain some context continuity
+    between chunks) of information and then convert these chunks into embeddings using the gpt-j-6b model and store the embeddings
+    in OpenSearch Service. We implement the RAG functionality inside an AWS Lambda function with Amazon API Gateway to handle
+    routing all requests to the Lambda. We implement a chatbot application in Streamlit which invokes the function via the
+    API Gateway and the function does a similarity search in the OpenSearch Service index for the embeddings of user question.
+    The matching documents (chunks) are added to the prompt as context by the Lambda function and then the function uses the
+    flan-t5-xxl model deployed as a SageMaker endpoint to generate an answer to the user question. All the code for this post
+    is available in the GitHub repo. The following figure represents the high-level architecture of the proposed solution.
+    Figure 1: Architecture Step-by-step explanation: The User provides a question via the Streamlit web application. The Streamlit
+    application invokes the API Gateway endpoint REST API. The API Gateway invokes the Lambda function. The function invokes
+    the SageMaker endpoint to convert user question into embeddings. The function invokes invokes an OpenSearch Service API
+    to find similar documents to the user question. The function creates a “prompt” with the user query and the “similar documents”
+    as context and asks the SageMaker endpoint to generate a response. The response is provided from the function to the API
+    Gateway. The API Gateway provides the response to the Streamlit application. The User is able to view the response on
+    the Streamlit application, As illustrated in the architecture diagram, we use the following AWS services: SageMaker and
+    Amazon SageMaker JumpStart for hosting the two LLMs. OpenSearch Service for storing the embeddings of the enterprise knowledge
+    corpus and doing similarity search with user questions. Lambda for implementing the RAG functionality and exposing it
+    as a REST endpoint via the API Gateway. Amazon SageMaker Processing jobs for large scale data ingestion into OpenSearch.
+    Amazon SageMaker Studio for hosting the Streamlit application. AWS Identity and Access Management roles and policies for
+    access management.'
+  sentences:
+  - How can model producers and application builders effectively fine-tune generative foundation models to be aligned with
+    human preferences and perform specific tasks accurately?
+  - How do retailers lose out on revenue due to issues with search functionality on their websites?
+  - How is the RAG functionality implemented within the AWS architecture described for handling user questions and providing
+    responses via the Streamlit application?
+- source_sentence: 'Although Amazon EKS provided management capabilities, it was immediately apparent that we were managing
+    infrastructure that wasn’t specifically tailored for inference. Forethought had to manage model inference on Amazon EKS
+    ourselves, which was a burden on engineering efficiency. For example, in order to share expensive GPU resources between
+    multiple models, we were responsible for allocating rigid memory fractions to models that were specified during deployment.
+    We wanted to address the following key problems with our existing infrastructure: High cost – To ensure that each model
+    had enough resources, we would be very conservative in how many models to fit per instance. This resulted in much higher
+    costs for model hosting than necessary. Low reliability – Despite being conservative in our memory allocation, not all
+    models have the same requirements, and occasionally some models would throw out of memory (OOM) errors. Inefficient management
+    – We had to manage different deployment manifests for each type of model (such as classifiers, embeddings, and autocomplete),
+    which was time-consuming and error-prone. We also had to maintain the logic to determine the memory allocation for different
+    model types. Ultimately, we needed an inference platform to take on the heavy lifting of managing our models at runtime
+    to improve the cost, reliability, and the management of serving our models. SageMaker MMEs allowed us to address these
+    needs. Through its smart and dynamic model loading and unloading, and its scaling capabilities, SageMaker MMEs provided
+    a significantly less expensive and more reliable solution for hosting our models. We are now able to fit many more models
+    per instance and don’t have to worry about OOM errors because SageMaker MMEs handle loading and unloading models dynamically.
+    In addition, deployments are now as simple as calling Boto3 SageMaker APIs and attaching the proper auto scaling policies.
+    The following diagram illustrates our legacy architecture. To begin our migration to SageMaker MMEs, we identified the
+    best use cases for MMEs and which of our models would benefit the most from this change. MMEs are best used for the following:
+    Models that are expected to have low latency but can withstand a cold start time (when it’s first loaded in) Models that
+    are called often and consistently Models that need partial GPU resources Models that share common requirements and inference
+    logic We identified our embeddings models and autocomplete language models as the best candidates for our migration. To
+    organize these models under MMEs, we would create one MME per model type, or task, one for our embeddings models, and
+    another for autocomplete language models. We already had an API layer on top of our models for model management and inference.
+    Our task at hand was to rework how this API was deploying and handling inference on models under the hood with SageMaker,
+    with minimal changes to how clients and product teams interacted with the API. We also needed to package our models and
+    custom inference logic to be compatible with NVIDIA Triton Inference Server using SageMaker MMEs.'
+  sentences:
+  - How did the company address the issues of high cost, low reliability, and inefficient management in managing model inference
+    on Amazon EKS, and what solution did they implement to improve the cost, reliability, and management of serving their
+    models?
+  - How can Aurora be configured to interface with Comprehend for analyzing text data?
+  - How has the implementation of chatbots and voice bots powered by Amazon Lex improved the customer and agent experiences
+    at WaFd Bank's contact center solution?
+- source_sentence: 'In our current approach, we store these files in Amazon S3. Although these stored files aren’t accessible
+    from the browser in our version of the code, you can modify the code to play previously generated audio files by fetching
+    them from Amazon S3 (instead of regenerating the audio for the text again using Amazon Polly). We have more code examples
+    for accessing Amazon Polly with Python in the AWS Code Library. Create the solution The entire solution is available from
+    our Github repo. To create this solution in your account, follow the instructions in the README. md file. The solution
+    includes an AWS CloudFormation template to provision your resources. Cleanup To clean up the resources created in this
+    demo, perform the following steps: Delete the S3 buckets created to store the CloudFormation template (Bucket A), the
+    source code (Bucket B) and the website ( pth-cf-text-highlighter-website-[Suffix] ). Delete the CloudFormation stack pth-cf.
+    Delete the S3 bucket containing the speech files ( pth-speech-[Suffix] ). This bucket was created by the CloudFormation
+    template to store the audio and speech marks files generated by Amazon Polly. Summary In this post, we showed an example
+    of a solution that can highlight text as it’s being spoken using Amazon Polly. It was developed using the Amazon Polly
+    speech marks feature, which provides us markers for the place each word or sentence begins in an audio file. The solution
+    is available as a CloudFormation template. It can be deployed as is to any web application that performs text-to-speech
+    conversion. This would be useful for adding visual capabilities to audio in books, avatars with lip-sync capabilities
+    (using viseme speech marks), websites, and blogs, and for aiding people with hearing impairments. It can be extended to
+    perform additional tasks besides highlighting text. For example, the browser can show images, play music, and perform
+    other animations on the front end while the text is being spoken. This capability can be useful for creating dynamic audio
+    books, educational content, and richer text-to-speech applications. We welcome you to try out this solution and learn
+    more about the relevant AWS services from the following links.'
+  sentences:
+  - How has the TRRF platform improved patient care for individuals with Angelman Syndrome, according to Megan Cross of the
+    Foundation for Angelman Syndrome (FAST)?
+  - How does Amazon SageMaker Ground Truth Plus help users prepare high-quality training datasets for generative AI applications,
+    specifically in terms of removing the heavy lifting associated with data labeling applications and managing the labeling
+    workforce?
+  - How can the solution of highlighting text as it's being spoken using Amazon Polly be extended to perform additional tasks,
+    and what are some examples of these tasks?
+- source_sentence: CU Coventry’s bachelor of science in cloud computing course officially began in September 2020 and has
+    already seen success from the program’s industry-driven framework. Overview Validate technical skills and cloud expertise
+    to grow your career and business. Learn more » Get Started on AWS services using AWS Academy Learner Labs Build your cloud
+    skills at your own pace, on your own time, and completely for free. Looking ahead, Coventry University Group plans to
+    expand bachelor of science degree in cloud computing courses to its campuses in London and Wroclaw. “The ability to have
+    hands-on experience with AWS services—the same ones that companies use in the real world—is invaluable,” said Tomasz,
+    a student of the Cloud Computing Course. “Once we join the workforce, we can apply our skill sets and hit the ground running.
+    ” Türkçe English Students successfully engaging in the program graduate with in-demand skills for careers in the cloud,
+    including valuable experience with AWS services through AWS Academy Learner Labs. AWS Academy provides higher education
+    institutions with ready-to-teach cloud computing curriculum to prepare students for AWS Certifications, which validate
+    technical skills and cloud expertise for in-demand cloud jobs. “The most important thing is for the modules to reflect
+    what the industry needs. We want students to add value to the global workforce,” says Flood. Taking advantage of AWS Education
+    Programs, CU Coventry’s BSc degree in cloud computing innovates on AWS to track the IT industry’s rapid pace. AWS Certification
+    Deutsch Coventry University Group is based in the United Kingdom with more than 30,000 students and more than 200 undergraduate
+    and postgraduate degrees across its schools, faculties, and campuses. Tiếng Việt AWS Training and Certification Italiano
+    ไทย Outcome | Looking to the Future of Coventry University Group’s Cloud Computing Program Learn more » Increases employability
+    Coventry University Group used AWS Education Programs to create a comprehensive and flexible degree to help students meet
+    growing IT industry cloud skills demand. Both the 3-year bachelor of science degree in cloud computing and its accelerated
+    version were developed in collaboration with AWS. These programs were designed by working backwards from the cloud skills
+    employers are currently seeking in the UK and across the global labor market. “The approach gave us insights into what
+    skill gaps were lacking in the industry. From there, we designed the courses, with the AWS team providing helpful inputs,”
+    says Flood. “For example, the AWS team pointed out that there was an industry need for serverless computing skills, and
+    we integrated that into our curriculum. ” Português.
+  sentences:
+  - How did Read use Amazon Web Services (AWS) and NVIDIA Riva to improve the performance of its transcription tool while
+    keeping costs low?
+  - How does RUSH University System for Health use HECAP and Amazon HealthLake to address healthcare disparities and improve
+    patient outcomes for residents of Chicago's West Side?
+  - How does CU Coventry's Bachelor of Science in Cloud Computing program incorporate AWS services and industry-driven insights
+    to prepare students for in-demand cloud jobs?
+model-index:
+- name: BGE base Financial Matryoshka
+  results:
+  - task:
+      type: information-retrieval
+      name: Information Retrieval
+    dataset:
+      name: dim 768
+      type: dim_768
+    metrics:
+    - type: cosine_accuracy@1
+      value: 0.4596774193548387
+      name: Cosine Accuracy@1
+      verified: false
+    - type: cosine_accuracy@3
+      value: 0.8024193548387096
+      name: Cosine Accuracy@3
+      verified: false
+    - type: cosine_accuracy@5
+      value: 0.8991935483870968
+      name: Cosine Accuracy@5
+      verified: false
+    - type: cosine_accuracy@10
+      value: 0.9596774193548387
+      name: Cosine Accuracy@10
+      verified: false
+    - type: cosine_precision@1
+      value: 0.4596774193548387
+      name: Cosine Precision@1
+      verified: false
+    - type: cosine_precision@3
+      value: 0.2674731182795699
+      name: Cosine Precision@3
+      verified: false
+    - type: cosine_precision@5
+      value: 0.17983870967741938
+      name: Cosine Precision@5
+      verified: false
+    - type: cosine_precision@10
+      value: 0.0959677419354839
+      name: Cosine Precision@10
+      verified: false
+    - type: cosine_recall@1
+      value: 0.4596774193548387
+      name: Cosine Recall@1
+      verified: false
+    - type: cosine_recall@3
+      value: 0.8024193548387096
+      name: Cosine Recall@3
+      verified: false
+    - type: cosine_recall@5
+      value: 0.8991935483870968
+      name: Cosine Recall@5
+      verified: false
+    - type: cosine_recall@10
+      value: 0.9596774193548387
+      name: Cosine Recall@10
+      verified: false
+    - type: cosine_ndcg@10
+      value: 0.7184810942825108
+      name: Cosine Ndcg@10
+      verified: false
+    - type: cosine_mrr@10
+      value: 0.6395305299539169
+      name: Cosine Mrr@10
+      verified: false
+    - type: cosine_map@100
+      value: 0.6408821665935496
+      name: Cosine Map@100
+      verified: false
+  - task:
+      type: information-retrieval
+      name: Information Retrieval
+    dataset:
+      name: dim 512
+      type: dim_512
+    metrics:
+    - type: cosine_accuracy@1
+      value: 0.46774193548387094
+      name: Cosine Accuracy@1
+      verified: false
+    - type: cosine_accuracy@3
+      value: 0.7983870967741935
+      name: Cosine Accuracy@3
+      verified: false
+    - type: cosine_accuracy@5
+      value: 0.8951612903225806
+      name: Cosine Accuracy@5
+      verified: false
+    - type: cosine_accuracy@10
+      value: 0.9596774193548387
+      name: Cosine Accuracy@10
+      verified: false
+    - type: cosine_precision@1
+      value: 0.46774193548387094
+      name: Cosine Precision@1
+      verified: false
+    - type: cosine_precision@3
+      value: 0.2661290322580645
+      name: Cosine Precision@3
+      verified: false
+    - type: cosine_precision@5
+      value: 0.17903225806451614
+      name: Cosine Precision@5
+      verified: false
+    - type: cosine_precision@10
+      value: 0.0959677419354839
+      name: Cosine Precision@10
+      verified: false
+    - type: cosine_recall@1
+      value: 0.46774193548387094
+      name: Cosine Recall@1
+      verified: false
+    - type: cosine_recall@3
+      value: 0.7983870967741935
+      name: Cosine Recall@3
+      verified: false
+    - type: cosine_recall@5
+      value: 0.8951612903225806
+      name: Cosine Recall@5
+      verified: false
+    - type: cosine_recall@10
+      value: 0.9596774193548387
+      name: Cosine Recall@10
+      verified: false
+    - type: cosine_ndcg@10
+      value: 0.7213571757198337
+      name: Cosine Ndcg@10
+      verified: false
+    - type: cosine_mrr@10
+      value: 0.6433467741935482
+      name: Cosine Mrr@10
+      verified: false
+    - type: cosine_map@100
+      value: 0.6448406697096213
+      name: Cosine Map@100
+      verified: false
+  - task:
+      type: information-retrieval
+      name: Information Retrieval
+    dataset:
+      name: dim 256
+      type: dim_256
+    metrics:
+    - type: cosine_accuracy@1
+      value: 0.4596774193548387
+      name: Cosine Accuracy@1
+      verified: false
+    - type: cosine_accuracy@3
+      value: 0.7983870967741935
+      name: Cosine Accuracy@3
+      verified: false
+    - type: cosine_accuracy@5
+      value: 0.9112903225806451
+      name: Cosine Accuracy@5
+      verified: false
+    - type: cosine_accuracy@10
+      value: 0.9637096774193549
+      name: Cosine Accuracy@10
+      verified: false
+    - type: cosine_precision@1
+      value: 0.4596774193548387
+      name: Cosine Precision@1
+      verified: false
+    - type: cosine_precision@3
+      value: 0.2661290322580645
+      name: Cosine Precision@3
+      verified: false
+    - type: cosine_precision@5
+      value: 0.18225806451612905
+      name: Cosine Precision@5
+      verified: false
+    - type: cosine_precision@10
+      value: 0.0963709677419355
+      name: Cosine Precision@10
+      verified: false
+    - type: cosine_recall@1
+      value: 0.4596774193548387
+      name: Cosine Recall@1
+      verified: false
+    - type: cosine_recall@3
+      value: 0.7983870967741935
+      name: Cosine Recall@3
+      verified: false
+    - type: cosine_recall@5
+      value: 0.9112903225806451
+      name: Cosine Recall@5
+      verified: false
+    - type: cosine_recall@10
+      value: 0.9637096774193549
+      name: Cosine Recall@10
+      verified: false
+    - type: cosine_ndcg@10
+      value: 0.7207090934241043
+      name: Cosine Ndcg@10
+      verified: false
+    - type: cosine_mrr@10
+      value: 0.6410682283666154
+      name: Cosine Mrr@10
+      verified: false
+    - type: cosine_map@100
+      value: 0.6422448191163128
+      name: Cosine Map@100
+      verified: false
+  - task:
+      type: information-retrieval
+      name: Information Retrieval
+    dataset:
+      name: dim 128
+      type: dim_128
+    metrics:
+    - type: cosine_accuracy@1
+      value: 0.4314516129032258
+      name: Cosine Accuracy@1
+      verified: false
+    - type: cosine_accuracy@3
+      value: 0.7580645161290323
+      name: Cosine Accuracy@3
+      verified: false
+    - type: cosine_accuracy@5
+      value: 0.8830645161290323
+      name: Cosine Accuracy@5
+      verified: false
+    - type: cosine_accuracy@10
+      value: 0.9475806451612904
+      name: Cosine Accuracy@10
+      verified: false
+    - type: cosine_precision@1
+      value: 0.4314516129032258
+      name: Cosine Precision@1
+      verified: false
+    - type: cosine_precision@3
+      value: 0.25268817204301075
+      name: Cosine Precision@3
+      verified: false
+    - type: cosine_precision@5
+      value: 0.17661290322580647
+      name: Cosine Precision@5
+      verified: false
+    - type: cosine_precision@10
+      value: 0.09475806451612905
+      name: Cosine Precision@10
+      verified: false
+    - type: cosine_recall@1
+      value: 0.4314516129032258
+      name: Cosine Recall@1
+      verified: false
+    - type: cosine_recall@3
+      value: 0.7580645161290323
+      name: Cosine Recall@3
+      verified: false
+    - type: cosine_recall@5
+      value: 0.8830645161290323
+      name: Cosine Recall@5
+      verified: false
+    - type: cosine_recall@10
+      value: 0.9475806451612904
+      name: Cosine Recall@10
+      verified: false
+    - type: cosine_ndcg@10
+      value: 0.6948316840385708
+      name: Cosine Ndcg@10
+      verified: false
+    - type: cosine_mrr@10
+      value: 0.6124535970302099
+      name: Cosine Mrr@10
+      verified: false
+    - type: cosine_map@100
+      value: 0.6145615813099632
+      name: Cosine Map@100
+      verified: false
+  - task:
+      type: information-retrieval
+      name: Information Retrieval
+    dataset:
+      name: dim 64
+      type: dim_64
+    metrics:
+    - type: cosine_accuracy@1
+      value: 0.4032258064516129
+      name: Cosine Accuracy@1
+      verified: false
+    - type: cosine_accuracy@3
+      value: 0.7459677419354839
+      name: Cosine Accuracy@3
+      verified: false
+    - type: cosine_accuracy@5
+      value: 0.8709677419354839
+      name: Cosine Accuracy@5
+      verified: false
+    - type: cosine_accuracy@10
+      value: 0.9516129032258065
+      name: Cosine Accuracy@10
+      verified: false
+    - type: cosine_precision@1
+      value: 0.4032258064516129
+      name: Cosine Precision@1
+      verified: false
+    - type: cosine_precision@3
+      value: 0.24865591397849462
+      name: Cosine Precision@3
+      verified: false
+    - type: cosine_precision@5
+      value: 0.17419354838709677
+      name: Cosine Precision@5
+      verified: false
+    - type: cosine_precision@10
+      value: 0.09516129032258065
+      name: Cosine Precision@10
+      verified: false
+    - type: cosine_recall@1
+      value: 0.4032258064516129
+      name: Cosine Recall@1
+      verified: false
+    - type: cosine_recall@3
+      value: 0.7459677419354839
+      name: Cosine Recall@3
+      verified: false
+    - type: cosine_recall@5
+      value: 0.8709677419354839
+      name: Cosine Recall@5
+      verified: false
+    - type: cosine_recall@10
+      value: 0.9516129032258065
+      name: Cosine Recall@10
+      verified: false
+    - type: cosine_ndcg@10
+      value: 0.6800470209866719
+      name: Cosine Ndcg@10
+      verified: false
+    - type: cosine_mrr@10
+      value: 0.5919978878648234
+      name: Cosine Mrr@10
+      verified: false
+    - type: cosine_map@100
+      value: 0.5935355054811555
+      name: Cosine Map@100
+      verified: false
+config:
+  architectures:
+  - BertModel
+  model_type: bert
+  tokenizer_config:
+    cls_token: '[CLS]'
+    mask_token: '[MASK]'
+    pad_token: '[PAD]'
+    sep_token: '[SEP]'
+    unk_token: '[UNK]'
+cardData:
+  base_model: BAAI/bge-base-en-v1.5
+  datasets: []
+  language:
+  - en
+  library_name: sentence-transformers
+  license: apache-2.0
+  metrics:
+  - cosine_accuracy@1
+  - cosine_accuracy@3
+  - cosine_accuracy@5
+  - cosine_accuracy@10
+  - cosine_precision@1
+  - cosine_precision@3
+  - cosine_precision@5
+  - cosine_precision@10
+  - cosine_recall@1
+  - cosine_recall@3
+  - cosine_recall@5
+  - cosine_recall@10
+  - cosine_ndcg@10
+  - cosine_mrr@10
+  - cosine_map@100
+  pipeline_tag: sentence-similarity
+  tags:
+  - sentence-transformers
+  - sentence-similarity
+  - feature-extraction
+  - generated_from_trainer
+  - dataset_size:2231
+  - loss:MatryoshkaLoss
+  - loss:MultipleNegativesRankingLoss
+  widget:
+  - source_sentence: Brian Pugh Chief Information Officer, Comscore Français Amazon Simple Storage Service (Amazon S3) is
+      an object storage service offering industry-leading scalability, data availability, security, and performance. Learn
+      more » 2023 Español Then, Comscore can set up its own privacy controls, including a mutually agreed upon join key that
+      gives collaborators the ability to match data tables and perform analyses using a double-blind method. This method means
+      that all parties can protect sensitive data, such as cookies, first-party IDs, and IP addresses, and run queries on
+      combined data to gain richer, more comprehensive insights. “Instead of ingesting all that information and doing the
+      analysis behind our firewall, we can join those things in AWS Clean Rooms and get back what we need,” says Brian Pugh,
+      chief information officer at Comscore. Additionally, Comscore can organize its analytics by demographics or other categories
+      so that it can identify trends in how groups of people interact with certain media. Comscore can also connect AWS Clean
+      Rooms with Amazon QuickSight—a solution that provides unified business intelligence at hyperscale—so that it can visualize
+      its data in one place using interactive, customizable dashboards. 日本語 About Comscore Get Started 한국어 Organizations of
+      all sizes across all industries are transforming their businesses and delivering on their missions every day using AWS.
+      Contact our experts and start your own AWS journey today. Industry Challenge AWS Clean Rooms helps customers and their
+      partners more easily and securely collaborate and analyze their collective datasets—without sharing or copying one another’s
+      underlying data. AWS Services Used 中文 (繁體) Bahasa Indonesia AWS Clean Rooms. . . helps Comscore to provide the best
+      possible measurement and support to our data partners to trust that the data that they’re providing is safe and protected.
+      ” Ρусский عربي Analytics and insights provider Comscore provides a wide range of data-driven solutions that support
+      planning, transacting, and measuring media across channels. It serves media companies and advertisers, promoting transparency
+      and trust within the industry. Benefits of Using AWS 中文 (简体) Comscore turned to Amazon Web Services (AWS) and chose
+      AWS Clean Rooms to uphold privacy-enhanced collaborations with its partners. AWS Clean Rooms helps Comscore’s customers
+      and partners to securely match, analyze, and collaborate on their combined datasets with ease and without sharing or
+      revealing underlying data. Using this solution, Comscore can invite up to five collaborators into an AWS Clean Room
+      and pull pre-encrypted data into a configured data table from Amazon Simple Storage Service (Amazon S3), an object storage
+      service built to retrieve any amount of data from anywhere. Media ratings company Comscore can provide richer insights
+      to advertisers while maintaining data privacy by securely collaborating on its data with third parties using AWS Clean
+      Rooms. Amazon QuickSight powers data-driven organizations with unified business intelligence (BI) at hyperscale.
+    sentences:
+    - How does Comscore use AWS Clean Rooms to protect sensitive data while collaborating with third parties?
+    - How did AWS help CEHC in building a cost-effective alternate production/DR environment in a fraction of the time compared
+      to a traditional brick-and-mortar production build?
+    - How does AWS aim to democratize access to generative AI applications for all builders through services like Amazon Bedrock?
+  - source_sentence: 'We convert the HTML pages on this site into smaller overlapping chunks (to retain some context continuity
+      between chunks) of information and then convert these chunks into embeddings using the gpt-j-6b model and store the
+      embeddings in OpenSearch Service. We implement the RAG functionality inside an AWS Lambda function with Amazon API Gateway
+      to handle routing all requests to the Lambda. We implement a chatbot application in Streamlit which invokes the function
+      via the API Gateway and the function does a similarity search in the OpenSearch Service index for the embeddings of
+      user question. The matching documents (chunks) are added to the prompt as context by the Lambda function and then the
+      function uses the flan-t5-xxl model deployed as a SageMaker endpoint to generate an answer to the user question. All
+      the code for this post is available in the GitHub repo. The following figure represents the high-level architecture
+      of the proposed solution. Figure 1: Architecture Step-by-step explanation: The User provides a question via the Streamlit
+      web application. The Streamlit application invokes the API Gateway endpoint REST API. The API Gateway invokes the Lambda
+      function. The function invokes the SageMaker endpoint to convert user question into embeddings. The function invokes
+      invokes an OpenSearch Service API to find similar documents to the user question. The function creates a “prompt” with
+      the user query and the “similar documents” as context and asks the SageMaker endpoint to generate a response. The response
+      is provided from the function to the API Gateway. The API Gateway provides the response to the Streamlit application.
+      The User is able to view the response on the Streamlit application, As illustrated in the architecture diagram, we use
+      the following AWS services: SageMaker and Amazon SageMaker JumpStart for hosting the two LLMs. OpenSearch Service for
+      storing the embeddings of the enterprise knowledge corpus and doing similarity search with user questions. Lambda for
+      implementing the RAG functionality and exposing it as a REST endpoint via the API Gateway. Amazon SageMaker Processing
+      jobs for large scale data ingestion into OpenSearch. Amazon SageMaker Studio for hosting the Streamlit application.
+      AWS Identity and Access Management roles and policies for access management.'
+    sentences:
+    - How can model producers and application builders effectively fine-tune generative foundation models to be aligned with
+      human preferences and perform specific tasks accurately?
+    - How do retailers lose out on revenue due to issues with search functionality on their websites?
+    - How is the RAG functionality implemented within the AWS architecture described for handling user questions and providing
+      responses via the Streamlit application?
+  - source_sentence: 'Although Amazon EKS provided management capabilities, it was immediately apparent that we were managing
+      infrastructure that wasn’t specifically tailored for inference. Forethought had to manage model inference on Amazon
+      EKS ourselves, which was a burden on engineering efficiency. For example, in order to share expensive GPU resources
+      between multiple models, we were responsible for allocating rigid memory fractions to models that were specified during
+      deployment. We wanted to address the following key problems with our existing infrastructure: High cost – To ensure
+      that each model had enough resources, we would be very conservative in how many models to fit per instance. This resulted
+      in much higher costs for model hosting than necessary. Low reliability – Despite being conservative in our memory allocation,
+      not all models have the same requirements, and occasionally some models would throw out of memory (OOM) errors. Inefficient
+      management – We had to manage different deployment manifests for each type of model (such as classifiers, embeddings,
+      and autocomplete), which was time-consuming and error-prone. We also had to maintain the logic to determine the memory
+      allocation for different model types. Ultimately, we needed an inference platform to take on the heavy lifting of managing
+      our models at runtime to improve the cost, reliability, and the management of serving our models. SageMaker MMEs allowed
+      us to address these needs. Through its smart and dynamic model loading and unloading, and its scaling capabilities,
+      SageMaker MMEs provided a significantly less expensive and more reliable solution for hosting our models. We are now
+      able to fit many more models per instance and don’t have to worry about OOM errors because SageMaker MMEs handle loading
+      and unloading models dynamically. In addition, deployments are now as simple as calling Boto3 SageMaker APIs and attaching
+      the proper auto scaling policies. The following diagram illustrates our legacy architecture. To begin our migration
+      to SageMaker MMEs, we identified the best use cases for MMEs and which of our models would benefit the most from this
+      change. MMEs are best used for the following: Models that are expected to have low latency but can withstand a cold
+      start time (when it’s first loaded in) Models that are called often and consistently Models that need partial GPU resources
+      Models that share common requirements and inference logic We identified our embeddings models and autocomplete language
+      models as the best candidates for our migration. To organize these models under MMEs, we would create one MME per model
+      type, or task, one for our embeddings models, and another for autocomplete language models. We already had an API layer
+      on top of our models for model management and inference. Our task at hand was to rework how this API was deploying and
+      handling inference on models under the hood with SageMaker, with minimal changes to how clients and product teams interacted
+      with the API. We also needed to package our models and custom inference logic to be compatible with NVIDIA Triton Inference
+      Server using SageMaker MMEs.'
+    sentences:
+    - How did the company address the issues of high cost, low reliability, and inefficient management in managing model inference
+      on Amazon EKS, and what solution did they implement to improve the cost, reliability, and management of serving their
+      models?
+    - How can Aurora be configured to interface with Comprehend for analyzing text data?
+    - How has the implementation of chatbots and voice bots powered by Amazon Lex improved the customer and agent experiences
+      at WaFd Bank's contact center solution?
+  - source_sentence: 'In our current approach, we store these files in Amazon S3. Although these stored files aren’t accessible
+      from the browser in our version of the code, you can modify the code to play previously generated audio files by fetching
+      them from Amazon S3 (instead of regenerating the audio for the text again using Amazon Polly). We have more code examples
+      for accessing Amazon Polly with Python in the AWS Code Library. Create the solution The entire solution is available
+      from our Github repo. To create this solution in your account, follow the instructions in the README. md file. The solution
+      includes an AWS CloudFormation template to provision your resources. Cleanup To clean up the resources created in this
+      demo, perform the following steps: Delete the S3 buckets created to store the CloudFormation template (Bucket A), the
+      source code (Bucket B) and the website ( pth-cf-text-highlighter-website-[Suffix] ). Delete the CloudFormation stack
+      pth-cf. Delete the S3 bucket containing the speech files ( pth-speech-[Suffix] ). This bucket was created by the CloudFormation
+      template to store the audio and speech marks files generated by Amazon Polly. Summary In this post, we showed an example
+      of a solution that can highlight text as it’s being spoken using Amazon Polly. It was developed using the Amazon Polly
+      speech marks feature, which provides us markers for the place each word or sentence begins in an audio file. The solution
+      is available as a CloudFormation template. It can be deployed as is to any web application that performs text-to-speech
+      conversion. This would be useful for adding visual capabilities to audio in books, avatars with lip-sync capabilities
+      (using viseme speech marks), websites, and blogs, and for aiding people with hearing impairments. It can be extended
+      to perform additional tasks besides highlighting text. For example, the browser can show images, play music, and perform
+      other animations on the front end while the text is being spoken. This capability can be useful for creating dynamic
+      audio books, educational content, and richer text-to-speech applications. We welcome you to try out this solution and
+      learn more about the relevant AWS services from the following links.'
+    sentences:
+    - How has the TRRF platform improved patient care for individuals with Angelman Syndrome, according to Megan Cross of
+      the Foundation for Angelman Syndrome (FAST)?
+    - How does Amazon SageMaker Ground Truth Plus help users prepare high-quality training datasets for generative AI applications,
+      specifically in terms of removing the heavy lifting associated with data labeling applications and managing the labeling
+      workforce?
+    - How can the solution of highlighting text as it's being spoken using Amazon Polly be extended to perform additional
+      tasks, and what are some examples of these tasks?
+  - source_sentence: CU Coventry’s bachelor of science in cloud computing course officially began in September 2020 and has
+      already seen success from the program’s industry-driven framework. Overview Validate technical skills and cloud expertise
+      to grow your career and business. Learn more » Get Started on AWS services using AWS Academy Learner Labs Build your
+      cloud skills at your own pace, on your own time, and completely for free. Looking ahead, Coventry University Group plans
+      to expand bachelor of science degree in cloud computing courses to its campuses in London and Wroclaw. “The ability
+      to have hands-on experience with AWS services—the same ones that companies use in the real world—is invaluable,” said
+      Tomasz, a student of the Cloud Computing Course. “Once we join the workforce, we can apply our skill sets and hit the
+      ground running. ” Türkçe English Students successfully engaging in the program graduate with in-demand skills for careers
+      in the cloud, including valuable experience with AWS services through AWS Academy Learner Labs. AWS Academy provides
+      higher education institutions with ready-to-teach cloud computing curriculum to prepare students for AWS Certifications,
+      which validate technical skills and cloud expertise for in-demand cloud jobs. “The most important thing is for the modules
+      to reflect what the industry needs. We want students to add value to the global workforce,” says Flood. Taking advantage
+      of AWS Education Programs, CU Coventry’s BSc degree in cloud computing innovates on AWS to track the IT industry’s rapid
+      pace. AWS Certification Deutsch Coventry University Group is based in the United Kingdom with more than 30,000 students
+      and more than 200 undergraduate and postgraduate degrees across its schools, faculties, and campuses. Tiếng Việt AWS
+      Training and Certification Italiano ไทย Outcome | Looking to the Future of Coventry University Group’s Cloud Computing
+      Program Learn more » Increases employability Coventry University Group used AWS Education Programs to create a comprehensive
+      and flexible degree to help students meet growing IT industry cloud skills demand. Both the 3-year bachelor of science
+      degree in cloud computing and its accelerated version were developed in collaboration with AWS. These programs were
+      designed by working backwards from the cloud skills employers are currently seeking in the UK and across the global
+      labor market. “The approach gave us insights into what skill gaps were lacking in the industry. From there, we designed
+      the courses, with the AWS team providing helpful inputs,” says Flood. “For example, the AWS team pointed out that there
+      was an industry need for serverless computing skills, and we integrated that into our curriculum. ” Português.
+    sentences:
+    - How did Read use Amazon Web Services (AWS) and NVIDIA Riva to improve the performance of its transcription tool while
+      keeping costs low?
+    - How does RUSH University System for Health use HECAP and Amazon HealthLake to address healthcare disparities and improve
+      patient outcomes for residents of Chicago's West Side?
+    - How does CU Coventry's Bachelor of Science in Cloud Computing program incorporate AWS services and industry-driven insights
+      to prepare students for in-demand cloud jobs?
+  model-index:
+  - name: BGE base Financial Matryoshka
+    results:
+    - task:
+        type: information-retrieval
+        name: Information Retrieval
+      dataset:
+        name: dim 768
+        type: dim_768
+      metrics:
+      - type: cosine_accuracy@1
+        value: 0.4596774193548387
+        name: Cosine Accuracy@1
+        verified: false
+      - type: cosine_accuracy@3
+        value: 0.8024193548387096
+        name: Cosine Accuracy@3
+        verified: false
+      - type: cosine_accuracy@5
+        value: 0.8991935483870968
+        name: Cosine Accuracy@5
+        verified: false
+      - type: cosine_accuracy@10
+        value: 0.9596774193548387
+        name: Cosine Accuracy@10
+        verified: false
+      - type: cosine_precision@1
+        value: 0.4596774193548387
+        name: Cosine Precision@1
+        verified: false
+      - type: cosine_precision@3
+        value: 0.2674731182795699
+        name: Cosine Precision@3
+        verified: false
+      - type: cosine_precision@5
+        value: 0.17983870967741938
+        name: Cosine Precision@5
+        verified: false
+      - type: cosine_precision@10
+        value: 0.0959677419354839
+        name: Cosine Precision@10
+        verified: false
+      - type: cosine_recall@1
+        value: 0.4596774193548387
+        name: Cosine Recall@1
+        verified: false
+      - type: cosine_recall@3
+        value: 0.8024193548387096
+        name: Cosine Recall@3
+        verified: false
+      - type: cosine_recall@5
+        value: 0.8991935483870968
+        name: Cosine Recall@5
+        verified: false
+      - type: cosine_recall@10
+        value: 0.9596774193548387
+        name: Cosine Recall@10
+        verified: false
+      - type: cosine_ndcg@10
+        value: 0.7184810942825108
+        name: Cosine Ndcg@10
+        verified: false
+      - type: cosine_mrr@10
+        value: 0.6395305299539169
+        name: Cosine Mrr@10
+        verified: false
+      - type: cosine_map@100
+        value: 0.6408821665935496
+        name: Cosine Map@100
+        verified: false
+    - task:
+        type: information-retrieval
+        name: Information Retrieval
+      dataset:
+        name: dim 512
+        type: dim_512
+      metrics:
+      - type: cosine_accuracy@1
+        value: 0.46774193548387094
+        name: Cosine Accuracy@1
+        verified: false
+      - type: cosine_accuracy@3
+        value: 0.7983870967741935
+        name: Cosine Accuracy@3
+        verified: false
+      - type: cosine_accuracy@5
+        value: 0.8951612903225806
+        name: Cosine Accuracy@5
+        verified: false
+      - type: cosine_accuracy@10
+        value: 0.9596774193548387
+        name: Cosine Accuracy@10
+        verified: false
+      - type: cosine_precision@1
+        value: 0.46774193548387094
+        name: Cosine Precision@1
+        verified: false
+      - type: cosine_precision@3
+        value: 0.2661290322580645
+        name: Cosine Precision@3
+        verified: false
+      - type: cosine_precision@5
+        value: 0.17903225806451614
+        name: Cosine Precision@5
+        verified: false
+      - type: cosine_precision@10
+        value: 0.0959677419354839
+        name: Cosine Precision@10
+        verified: false
+      - type: cosine_recall@1
+        value: 0.46774193548387094
+        name: Cosine Recall@1
+        verified: false
+      - type: cosine_recall@3
+        value: 0.7983870967741935
+        name: Cosine Recall@3
+        verified: false
+      - type: cosine_recall@5
+        value: 0.8951612903225806
+        name: Cosine Recall@5
+        verified: false
+      - type: cosine_recall@10
+        value: 0.9596774193548387
+        name: Cosine Recall@10
+        verified: false
+      - type: cosine_ndcg@10
+        value: 0.7213571757198337
+        name: Cosine Ndcg@10
+        verified: false
+      - type: cosine_mrr@10
+        value: 0.6433467741935482
+        name: Cosine Mrr@10
+        verified: false
+      - type: cosine_map@100
+        value: 0.6448406697096213
+        name: Cosine Map@100
+        verified: false
+    - task:
+        type: information-retrieval
+        name: Information Retrieval
+      dataset:
+        name: dim 256
+        type: dim_256
+      metrics:
+      - type: cosine_accuracy@1
+        value: 0.4596774193548387
+        name: Cosine Accuracy@1
+        verified: false
+      - type: cosine_accuracy@3
+        value: 0.7983870967741935
+        name: Cosine Accuracy@3
+        verified: false
+      - type: cosine_accuracy@5
+        value: 0.9112903225806451
+        name: Cosine Accuracy@5
+        verified: false
+      - type: cosine_accuracy@10
+        value: 0.9637096774193549
+        name: Cosine Accuracy@10
+        verified: false
+      - type: cosine_precision@1
+        value: 0.4596774193548387
+        name: Cosine Precision@1
+        verified: false
+      - type: cosine_precision@3
+        value: 0.2661290322580645
+        name: Cosine Precision@3
+        verified: false
+      - type: cosine_precision@5
+        value: 0.18225806451612905
+        name: Cosine Precision@5
+        verified: false
+      - type: cosine_precision@10
+        value: 0.0963709677419355
+        name: Cosine Precision@10
+        verified: false
+      - type: cosine_recall@1
+        value: 0.4596774193548387
+        name: Cosine Recall@1
+        verified: false
+      - type: cosine_recall@3
+        value: 0.7983870967741935
+        name: Cosine Recall@3
+        verified: false
+      - type: cosine_recall@5
+        value: 0.9112903225806451
+        name: Cosine Recall@5
+        verified: false
+      - type: cosine_recall@10
+        value: 0.9637096774193549
+        name: Cosine Recall@10
+        verified: false
+      - type: cosine_ndcg@10
+        value: 0.7207090934241043
+        name: Cosine Ndcg@10
+        verified: false
+      - type: cosine_mrr@10
+        value: 0.6410682283666154
+        name: Cosine Mrr@10
+        verified: false
+      - type: cosine_map@100
+        value: 0.6422448191163128
+        name: Cosine Map@100
+        verified: false
+    - task:
+        type: information-retrieval
+        name: Information Retrieval
+      dataset:
+        name: dim 128
+        type: dim_128
+      metrics:
+      - type: cosine_accuracy@1
+        value: 0.4314516129032258
+        name: Cosine Accuracy@1
+        verified: false
+      - type: cosine_accuracy@3
+        value: 0.7580645161290323
+        name: Cosine Accuracy@3
+        verified: false
+      - type: cosine_accuracy@5
+        value: 0.8830645161290323
+        name: Cosine Accuracy@5
+        verified: false
+      - type: cosine_accuracy@10
+        value: 0.9475806451612904
+        name: Cosine Accuracy@10
+        verified: false
+      - type: cosine_precision@1
+        value: 0.4314516129032258
+        name: Cosine Precision@1
+        verified: false
+      - type: cosine_precision@3
+        value: 0.25268817204301075
+        name: Cosine Precision@3
+        verified: false
+      - type: cosine_precision@5
+        value: 0.17661290322580647
+        name: Cosine Precision@5
+        verified: false
+      - type: cosine_precision@10
+        value: 0.09475806451612905
+        name: Cosine Precision@10
+        verified: false
+      - type: cosine_recall@1
+        value: 0.4314516129032258
+        name: Cosine Recall@1
+        verified: false
+      - type: cosine_recall@3
+        value: 0.7580645161290323
+        name: Cosine Recall@3
+        verified: false
+      - type: cosine_recall@5
+        value: 0.8830645161290323
+        name: Cosine Recall@5
+        verified: false
+      - type: cosine_recall@10
+        value: 0.9475806451612904
+        name: Cosine Recall@10
+        verified: false
+      - type: cosine_ndcg@10
+        value: 0.6948316840385708
+        name: Cosine Ndcg@10
+        verified: false
+      - type: cosine_mrr@10
+        value: 0.6124535970302099
+        name: Cosine Mrr@10
+        verified: false
+      - type: cosine_map@100
+        value: 0.6145615813099632
+        name: Cosine Map@100
+        verified: false
+    - task:
+        type: information-retrieval
+        name: Information Retrieval
+      dataset:
+        name: dim 64
+        type: dim_64
+      metrics:
+      - type: cosine_accuracy@1
+        value: 0.4032258064516129
+        name: Cosine Accuracy@1
+        verified: false
+      - type: cosine_accuracy@3
+        value: 0.7459677419354839
+        name: Cosine Accuracy@3
+        verified: false
+      - type: cosine_accuracy@5
+        value: 0.8709677419354839
+        name: Cosine Accuracy@5
+        verified: false
+      - type: cosine_accuracy@10
+        value: 0.9516129032258065
+        name: Cosine Accuracy@10
+        verified: false
+      - type: cosine_precision@1
+        value: 0.4032258064516129
+        name: Cosine Precision@1
+        verified: false
+      - type: cosine_precision@3
+        value: 0.24865591397849462
+        name: Cosine Precision@3
+        verified: false
+      - type: cosine_precision@5
+        value: 0.17419354838709677
+        name: Cosine Precision@5
+        verified: false
+      - type: cosine_precision@10
+        value: 0.09516129032258065
+        name: Cosine Precision@10
+        verified: false
+      - type: cosine_recall@1
+        value: 0.4032258064516129
+        name: Cosine Recall@1
+        verified: false
+      - type: cosine_recall@3
+        value: 0.7459677419354839
+        name: Cosine Recall@3
+        verified: false
+      - type: cosine_recall@5
+        value: 0.8709677419354839
+        name: Cosine Recall@5
+        verified: false
+      - type: cosine_recall@10
+        value: 0.9516129032258065
+        name: Cosine Recall@10
+        verified: false
+      - type: cosine_ndcg@10
+        value: 0.6800470209866719
+        name: Cosine Ndcg@10
+        verified: false
+      - type: cosine_mrr@10
+        value: 0.5919978878648234
+        name: Cosine Mrr@10
+        verified: false
+      - type: cosine_map@100
+        value: 0.5935355054811555
+        name: Cosine Map@100
+        verified: false
+siblings:
+- rfilename: .gitattributes
+- rfilename: 1_Pooling/config.json
+- rfilename: README.md
+- rfilename: config.json
+- rfilename: config_sentence_transformers.json
+- rfilename: model.safetensors
+- rfilename: modules.json
+- rfilename: sentence_bert_config.json
+- rfilename: special_tokens_map.json
+- rfilename: tokenizer.json
+- rfilename: tokenizer_config.json
+- rfilename: vocab.txt
+spaces: []
+createdAt: '2024-07-18T18:52:49.000Z'
+safetensors:
+  parameters:
+    F32: 109482240
+  total: 109482240
+usedStorage: 437951328
+downloadsAllTime: 16
+inferenceProviderMapping: {}
+configJson:
+  _name_or_path: BAAI/bge-base-en-v1.5
+  architectures:
+  - BertModel
+  attention_probs_dropout_prob: 0.1
+  classifier_dropout: null
+  gradient_checkpointing: false
+  hidden_act: gelu
+  hidden_dropout_prob: 0.1
+  hidden_size: 768
+  id2label:
+    '0': LABEL_0
+  initializer_range: 0.02
+  intermediate_size: 3072
+  label2id:
+    LABEL_0: 0
+  layer_norm_eps: 1.0e-12
+  max_position_embeddings: 512
+  model_type: bert
+  num_attention_heads: 12
+  num_hidden_layers: 12
+  pad_token_id: 0
+  position_embedding_type: absolute
+  torch_dtype: float32
+  transformers_version: 4.42.4
+  type_vocab_size: 2
+  use_cache: true
+  vocab_size: 30522
+onnxFiles: {}
+safetensorsSizeMb: 438.0
+approxSizeMb: 437.9
+fetchedAt: '2026-06-09T06:55:53.000Z'

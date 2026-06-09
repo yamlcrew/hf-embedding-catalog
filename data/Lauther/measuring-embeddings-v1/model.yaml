@@ -1,0 +1,747 @@
+_id: 679af5716929d35ca6b84db8
+id: Lauther/measuring-embeddings-v1
+private: false
+pipeline_tag: sentence-similarity
+library_name: sentence-transformers
+tags:
+- sentence-transformers
+- safetensors
+- xlm-roberta
+- sentence-similarity
+- feature-extraction
+- generated_from_trainer
+- dataset_size:5220
+- loss:CosineSimilarityLoss
+- dataset:Lauther/embeddings-train-semantic
+- arxiv:1908.10084
+- base_model:intfloat/multilingual-e5-large-instruct
+- base_model:finetune:intfloat/multilingual-e5-large-instruct
+- text-embeddings-inference
+- endpoints_compatible
+- region:us
+downloads: 3
+likes: 0
+modelId: Lauther/measuring-embeddings-v1
+author: Lauther
+sha: 9b39880738ef6daf60724207710cacacdc73c9f8
+lastModified: '2025-01-30T03:44:39.000Z'
+gated: false
+disabled: false
+mask_token: <mask>
+widgetData:
+- source_sentence: Identify the column that stores the uncertainty value.
+  sentences:
+  - "What is measuring equipment?\nMeasuring equipment refers to the devices that make up a measurement system. Each piece\
+    \ of equipment has:\n- A unique serial number for identification.\n- A technical name, such as transmitter, plate, thermometer,\
+    \ etc.\n\nHow is equipment assigned to a measurement system?\nWhen equipment is assigned to a measurement system, it is\
+    \ given a unique identifier called an \"\"Equipment Tag.\"\"\n- If a piece of equipment has a tag, it is considered in\
+    \ use in a measurement system.\n- If it does not have a tag, it is considered spare or unused\n\nEquipment assignment\
+    \ based on technology:\nThe type of equipment assigned to a measurement system depends on the technology used, for example:\n\
+    1. Differential technology (for gas measurement):\n    - Static pressure transmitters\n    - Differential pressure transmitters\n\
+    \    - Temperature transmitters\n    - RTDs (thermometers)\n    - Orifice plates\n    - Straight stretch\n\n2. Linear\
+    \ technology (for gas measurement):\n    - Temperature transmitters\n    - RTDs\n    - Static pressure transmitters\n\
+    \    - Ultrasonic meters\n\nRelationship between equipment and measurement systems:\n- A measurement system can have multiple\
+    \ pieces of equipment.\n- However, a piece of equipment can only be assigned to one measurement system.\n\nDatabase management:\n\
+    - The database includes a special table to manage the list of equipment assigned to measurement systems.\n- When a user\
+    \ refers to an \"\"Equipment Tag\"\", they are searching for operational equipment assigned to a measurement system.\n\
+    - If a user is looking for spare or unused equipment, they are searching for equipment not listed in the tagged equipment\
+    \ table.\n- Commonly used when user refers directly to an \"\"Equipment Tag\""
+  - 'What is equipment calibration?
+
+    Calibration is a metrological verification process used to ensure the accuracy of measurement equipment. It is performed
+    periodically, based on intervals set by the company or a regulatory body.
+
+
+    Purpose of calibration:
+
+    The calibration process corrects any deviations in how the equipment measures physical magnitudes (variables). This ensures
+    the equipment provides accurate and reliable data.
+
+
+    Calibration cycles:
+
+    There are two main calibration cycles:
+
+    1. As-found: Represents the equipment''s measurement accuracy before any adjustments are made. This cycle is almost always
+    implemented.
+
+    2. As-left: Represents the equipment''s measurement accuracy after adjustments are made. This cycle is used depending
+    on regulatory requirements.
+
+
+    Calibration uncertainty:
+
+    - Uncertainty is included in the results of a calibration.
+
+    - Calibration uncertainty refers to the margin of error in the device''s measurements, which also affects the uncertainty
+    of the measured variable or magnitude.'
+  - 'What kind of data store an equipment?
+
+    Equipments can capture meteorological data, such as pressure, temperature, and volume (magnitudes). This data is essential
+    for users to perform various calculations.
+
+
+    Data storage:
+
+    - The measured values are stored in a special table in the database for magnitudes. This table contains the values of
+    the variables captured by the equipments.
+
+    - These values are **direct measurements** from the fluid (e.g., raw pressure, temperature, or volume readings). **They
+    are not calculated values**, such as uncertainty.
+
+    - The values stored in the variable values table are **different** from variable uncertainty values, which are calculated
+    separately and represent the margin of error.
+
+
+    Accessing the data:
+
+    - Users typically access the data by referring to the readings from the measurement system, not directly from the individual
+    equipments.
+
+    - The readings are stored in a "variable values" table within the database.
+
+
+    Linking variable names:
+
+    If the user needs to know the name of a variable, they must link the data to another table that stores information about
+    the types of variables.'
+- source_sentence: SELECT * FROM EquipmentType LIMIT 1
+  sentences:
+  - 'What kind of data store an equipment?
+
+    Equipments can capture meteorological data, such as pressure, temperature, and volume (magnitudes). This data is essential
+    for users to perform various calculations.
+
+
+    Data storage:
+
+    - The measured values are stored in a special table in the database for magnitudes. This table contains the values of
+    the variables captured by the equipments.
+
+    - These values are **direct measurements** from the fluid (e.g., raw pressure, temperature, or volume readings). **They
+    are not calculated values**, such as uncertainty.
+
+    - The values stored in the variable values table are **different** from variable uncertainty values, which are calculated
+    separately and represent the margin of error.
+
+
+    Accessing the data:
+
+    - Users typically access the data by referring to the readings from the measurement system, not directly from the individual
+    equipments.
+
+    - The readings are stored in a "variable values" table within the database.
+
+
+    Linking variable names:
+
+    If the user needs to know the name of a variable, they must link the data to another table that stores information about
+    the types of variables.'
+  - "How does a flow computer generate and store reports?\nA flow computer generates daily or hourly reports to provide users\
+    \ with operational data. These reports are stored in the flow computer's memory in an organized format.\n\nReport structure:\n\
+    - Each report includes:\n- Date and time of the data recording.\n- Data recorded from flow computers.\n\nData storage\
+    \ in tables:\nThe reports are saved in two tables:\n1. Main table (Index):\n    - Stores the date, time, and flow computer\
+    \ identifier.\n2. Detail table:\n    - Stores the measured values associated with the report.\n\nConnection to the Modbus\
+    \ table:\nThe flow computer's reports are linked to a Modbus table. This table contains the names corresponding to each\
+    \ value in the reports, making it easier to interpret the data."
+  - 'What is a flow computer?
+
+    A flow computer is a device used in measurement engineering. It collects analog and digital data from flow meters and
+    other sensors.
+
+
+    Key features of a flow computer:
+
+    - It has a unique name, firmware version, and manufacturer information.
+
+    - It is designed to record and process data such as temperature, pressure, and fluid volume (for gases or oils).
+
+
+    Main function:
+
+    The flow computer sends the collected data to a measurement system. This allows measurement engineers to analyze the data
+    and perform their tasks effectively.'
+- source_sentence: What tables store measurement system data?
+  sentences:
+  - "What is uncertainty?\nUncertainty is a measure of confidence in the precision and reliability of results obtained from\
+    \ equipment or measurement systems. It quantifies the potential error or margin of error in measurements.\n\nTypes of\
+    \ uncertainty:\nThere are two main types of uncertainty:\n1. Uncertainty of magnitudes (variables):\n    - Refers to the\
+    \ uncertainty of specific variables, such as temperature or pressure.\n    - It is calculated after calibrating a device\
+    \ or obtained from the equipment manufacturer's manual.\n    - This uncertainty serves as a starting point for further\
+    \ calculations related to the equipment.\n\n2. Uncertainty of the measurement system:\n    - Refers to the uncertainty\
+    \ calculated for the overall flow measurement.\n    - It depends on the uncertainties of the individual variables (magnitudes)\
+    \ and represents the combined margin of error for the entire system.\n\nKey points:\n- The uncertainties of magnitudes\
+    \ (variables) are the foundation for calculating the uncertainty of the measurement system. Think of them as the \"building\
+    \ blocks.\"\n- Do not confuse the two types of uncertainty:\n    - **Uncertainty of magnitudes/variables**: Specific to\
+    \ individual variables (e.g., temperature, pressure).\n    - **Uncertainty of the measurement system**: Specific to the\
+    \ overall flow measurement.\n\nDatabase storage for uncertainties:\nIn the database, uncertainty calculations are stored\
+    \ in two separate tables:\n1. Uncertainty of magnitudes (variables):\n    - Stores the uncertainty values for specific\
+    \ variables (e.g., temperature, pressure).\n\n2. Uncertainty of the measurement system:\n    - Stores the uncertainty\
+    \ values for the overall flow measurement system.\n\nHow to retrieve uncertainty data:\n- To find the uncertainty of the\
+    \ measurement system, join the measurement systems table with the uncertainty of the measurement system table.\n- To find\
+    \ the uncertainty of a specific variable (magnitude), join the measurement systems table with the uncertainty of magnitudes\
+    \ (variables) table.\n\nImportant note:\nDo not confuse the two types of uncertainty:\n- If the user requests the uncertainty\
+    \ of the measurement system, use the first join (measurement systems table + uncertainty of the measurement system table).\n\
+    - If the user requests the uncertainty of a specific variable (magnitude) in a report, use the second join (measurement\
+    \ systems table + uncertainty of magnitudes table)."
+  - "What is a measurement system?\nA measurement system, also referred to as a delivery point, measurement point, or reception\
+    \ point, is used to measure and monitor fluids in industrial processes.\n\nKey characteristics of a measurement system:\n\
+    1. Measurement technology:\n    - Differential: Used for precise measurements.\n    - Linear: Used for straightforward\
+    \ measurements.\n\n2. System identifier (TAG):\n    - A unique identifier for the system.\n\n3. Fluid type:\n    - The\
+    \ system can measure gases, oils, condensates, water, steam, or other fluids.\n4. System type:\n    - Specifies the category\
+    \ or purpose of the system.\n\nMeasurement technology by fluid type:\n- Gas measurement systems: Use both linear and differential\
+    \ measurement technologies.\n- Oil measurement systems: Do not use linear or differential technologies; they are programmed\
+    \ differently.\"\n\n\nClassification of measurement systems:\nMeasurement systems are classified based on the stage of\
+    \ the process in which they are used. Common classifications include:\n- Fiscal\n- Operational\n- Appropriation\n- Custody\n\
+    - Production Poços"
+  - 'What do measurement equipment measure?
+
+    Each equipment measures a physical magnitude, also known as a variable. Based on the type of variable they measure, devices
+    are classified into different categories.
+
+
+    Equipment classification:
+
+    - Primary meter: Assigned by default to equipments like orifice plates.
+
+    - Secondary meter: Assigned by default to equipments like transmitters.
+
+    - Tertiary meter: Used for other types of equipments.
+
+
+    Equipment types in the database:
+
+    The database includes a table listing all equipment types. Examples of equipment types are:
+
+    - Differential pressure transmitters
+
+    - RTDs (Resistance Temperature Detectors)
+
+    - Orifice plates
+
+    - Multivariable transmitters
+
+    - Ultrasonic meters
+
+
+    Meteorological checks for equipments:
+
+    Each equipment type is assigned a meteorological check, which can be either:
+
+    - Calibration: To ensure measurement accuracy.
+
+    - Inspection: To verify proper functioning.
+
+
+    Data storage in tables:
+
+    The database also includes a separate table for equipment classifications, which are:
+
+    - Primary meter
+
+    - Secondary meter
+
+    - Tertiary meter
+
+    So, an equipment has equipment types and this types has classifications.'
+- source_sentence: What is the table structure for equipment types?
+  sentences:
+  - "How does a flow computer generate and store reports?\nA flow computer generates daily or hourly reports to provide users\
+    \ with operational data. These reports are stored in the flow computer's memory in an organized format.\n\nReport structure:\n\
+    - Each report includes:\n- Date and time of the data recording.\n- Data recorded from flow computers.\n\nData storage\
+    \ in tables:\nThe reports are saved in two tables:\n1. Main table (Index):\n    - Stores the date, time, and flow computer\
+    \ identifier.\n2. Detail table:\n    - Stores the measured values associated with the report.\n\nConnection to the Modbus\
+    \ table:\nThe flow computer's reports are linked to a Modbus table. This table contains the names corresponding to each\
+    \ value in the reports, making it easier to interpret the data."
+  - "What is measuring equipment?\nMeasuring equipment refers to the devices that make up a measurement system. Each piece\
+    \ of equipment has:\n- A unique serial number for identification.\n- A technical name, such as transmitter, plate, thermometer,\
+    \ etc.\n\nHow is equipment assigned to a measurement system?\nWhen equipment is assigned to a measurement system, it is\
+    \ given a unique identifier called an \"\"Equipment Tag.\"\"\n- If a piece of equipment has a tag, it is considered in\
+    \ use in a measurement system.\n- If it does not have a tag, it is considered spare or unused\n\nEquipment assignment\
+    \ based on technology:\nThe type of equipment assigned to a measurement system depends on the technology used, for example:\n\
+    1. Differential technology (for gas measurement):\n    - Static pressure transmitters\n    - Differential pressure transmitters\n\
+    \    - Temperature transmitters\n    - RTDs (thermometers)\n    - Orifice plates\n    - Straight stretch\n\n2. Linear\
+    \ technology (for gas measurement):\n    - Temperature transmitters\n    - RTDs\n    - Static pressure transmitters\n\
+    \    - Ultrasonic meters\n\nRelationship between equipment and measurement systems:\n- A measurement system can have multiple\
+    \ pieces of equipment.\n- However, a piece of equipment can only be assigned to one measurement system.\n\nDatabase management:\n\
+    - The database includes a special table to manage the list of equipment assigned to measurement systems.\n- When a user\
+    \ refers to an \"\"Equipment Tag\"\", they are searching for operational equipment assigned to a measurement system.\n\
+    - If a user is looking for spare or unused equipment, they are searching for equipment not listed in the tagged equipment\
+    \ table.\n- Commonly used when user refers directly to an \"\"Equipment Tag\""
+  - "What is uncertainty?\nUncertainty is a measure of confidence in the precision and reliability of results obtained from\
+    \ equipment or measurement systems. It quantifies the potential error or margin of error in measurements.\n\nTypes of\
+    \ uncertainty:\nThere are two main types of uncertainty:\n1. Uncertainty of magnitudes (variables):\n    - Refers to the\
+    \ uncertainty of specific variables, such as temperature or pressure.\n    - It is calculated after calibrating a device\
+    \ or obtained from the equipment manufacturer's manual.\n    - This uncertainty serves as a starting point for further\
+    \ calculations related to the equipment.\n\n2. Uncertainty of the measurement system:\n    - Refers to the uncertainty\
+    \ calculated for the overall flow measurement.\n    - It depends on the uncertainties of the individual variables (magnitudes)\
+    \ and represents the combined margin of error for the entire system.\n\nKey points:\n- The uncertainties of magnitudes\
+    \ (variables) are the foundation for calculating the uncertainty of the measurement system. Think of them as the \"building\
+    \ blocks.\"\n- Do not confuse the two types of uncertainty:\n    - **Uncertainty of magnitudes/variables**: Specific to\
+    \ individual variables (e.g., temperature, pressure).\n    - **Uncertainty of the measurement system**: Specific to the\
+    \ overall flow measurement.\n\nDatabase storage for uncertainties:\nIn the database, uncertainty calculations are stored\
+    \ in two separate tables:\n1. Uncertainty of magnitudes (variables):\n    - Stores the uncertainty values for specific\
+    \ variables (e.g., temperature, pressure).\n\n2. Uncertainty of the measurement system:\n    - Stores the uncertainty\
+    \ values for the overall flow measurement system.\n\nHow to retrieve uncertainty data:\n- To find the uncertainty of the\
+    \ measurement system, join the measurement systems table with the uncertainty of the measurement system table.\n- To find\
+    \ the uncertainty of a specific variable (magnitude), join the measurement systems table with the uncertainty of magnitudes\
+    \ (variables) table.\n\nImportant note:\nDo not confuse the two types of uncertainty:\n- If the user requests the uncertainty\
+    \ of the measurement system, use the first join (measurement systems table + uncertainty of the measurement system table).\n\
+    - If the user requests the uncertainty of a specific variable (magnitude) in a report, use the second join (measurement\
+    \ systems table + uncertainty of magnitudes table)."
+- source_sentence: What columns store the uncertainty values?
+  sentences:
+  - "What is a measurement system?\nA measurement system, also referred to as a delivery point, measurement point, or reception\
+    \ point, is used to measure and monitor fluids in industrial processes.\n\nKey characteristics of a measurement system:\n\
+    1. Measurement technology:\n    - Differential: Used for precise measurements.\n    - Linear: Used for straightforward\
+    \ measurements.\n\n2. System identifier (TAG):\n    - A unique identifier for the system.\n\n3. Fluid type:\n    - The\
+    \ system can measure gases, oils, condensates, water, steam, or other fluids.\n4. System type:\n    - Specifies the category\
+    \ or purpose of the system.\n\nMeasurement technology by fluid type:\n- Gas measurement systems: Use both linear and differential\
+    \ measurement technologies.\n- Oil measurement systems: Do not use linear or differential technologies; they are programmed\
+    \ differently.\"\n\n\nClassification of measurement systems:\nMeasurement systems are classified based on the stage of\
+    \ the process in which they are used. Common classifications include:\n- Fiscal\n- Operational\n- Appropriation\n- Custody\n\
+    - Production Poços"
+  - 'How are flow computers and measurement systems related?
+
+    Flow computers can have multiple systems assigned to them. However, a measurement system can only be assigned to one flow
+    computer.
+
+
+    Database terminology:
+
+    In the database, this relationship is referred to as:
+
+    - Meter streams
+
+    - Meter runs
+
+    - Sections
+
+
+    Storage of the relationship:
+
+    The relationship between a flow computer and its assigned measurement system is stored in a special table.
+
+
+    User context:
+
+    When a user refers to a "meter stream," they are indicating that they are searching for a measurement system assigned
+    to a specific flow computer.'
+  - "What is uncertainty?\nUncertainty is a measure of confidence in the precision and reliability of results obtained from\
+    \ equipment or measurement systems. It quantifies the potential error or margin of error in measurements.\n\nTypes of\
+    \ uncertainty:\nThere are two main types of uncertainty:\n1. Uncertainty of magnitudes (variables):\n    - Refers to the\
+    \ uncertainty of specific variables, such as temperature or pressure.\n    - It is calculated after calibrating a device\
+    \ or obtained from the equipment manufacturer's manual.\n    - This uncertainty serves as a starting point for further\
+    \ calculations related to the equipment.\n\n2. Uncertainty of the measurement system:\n    - Refers to the uncertainty\
+    \ calculated for the overall flow measurement.\n    - It depends on the uncertainties of the individual variables (magnitudes)\
+    \ and represents the combined margin of error for the entire system.\n\nKey points:\n- The uncertainties of magnitudes\
+    \ (variables) are the foundation for calculating the uncertainty of the measurement system. Think of them as the \"building\
+    \ blocks.\"\n- Do not confuse the two types of uncertainty:\n    - **Uncertainty of magnitudes/variables**: Specific to\
+    \ individual variables (e.g., temperature, pressure).\n    - **Uncertainty of the measurement system**: Specific to the\
+    \ overall flow measurement.\n\nDatabase storage for uncertainties:\nIn the database, uncertainty calculations are stored\
+    \ in two separate tables:\n1. Uncertainty of magnitudes (variables):\n    - Stores the uncertainty values for specific\
+    \ variables (e.g., temperature, pressure).\n\n2. Uncertainty of the measurement system:\n    - Stores the uncertainty\
+    \ values for the overall flow measurement system.\n\nHow to retrieve uncertainty data:\n- To find the uncertainty of the\
+    \ measurement system, join the measurement systems table with the uncertainty of the measurement system table.\n- To find\
+    \ the uncertainty of a specific variable (magnitude), join the measurement systems table with the uncertainty of magnitudes\
+    \ (variables) table.\n\nImportant note:\nDo not confuse the two types of uncertainty:\n- If the user requests the uncertainty\
+    \ of the measurement system, use the first join (measurement systems table + uncertainty of the measurement system table).\n\
+    - If the user requests the uncertainty of a specific variable (magnitude) in a report, use the second join (measurement\
+    \ systems table + uncertainty of magnitudes table)."
+model-index: null
+config:
+  architectures:
+  - XLMRobertaModel
+  model_type: xlm-roberta
+  tokenizer_config:
+    bos_token: <s>
+    cls_token: <s>
+    eos_token: </s>
+    mask_token: <mask>
+    pad_token: <pad>
+    sep_token: </s>
+    unk_token: <unk>
+cardData:
+  tags:
+  - sentence-transformers
+  - sentence-similarity
+  - feature-extraction
+  - generated_from_trainer
+  - dataset_size:5220
+  - loss:CosineSimilarityLoss
+  base_model: intfloat/multilingual-e5-large-instruct
+  widget:
+  - source_sentence: Identify the column that stores the uncertainty value.
+    sentences:
+    - "What is measuring equipment?\nMeasuring equipment refers to the devices that make up a measurement system. Each piece\
+      \ of equipment has:\n- A unique serial number for identification.\n- A technical name, such as transmitter, plate, thermometer,\
+      \ etc.\n\nHow is equipment assigned to a measurement system?\nWhen equipment is assigned to a measurement system, it\
+      \ is given a unique identifier called an \"\"Equipment Tag.\"\"\n- If a piece of equipment has a tag, it is considered\
+      \ in use in a measurement system.\n- If it does not have a tag, it is considered spare or unused\n\nEquipment assignment\
+      \ based on technology:\nThe type of equipment assigned to a measurement system depends on the technology used, for example:\n\
+      1. Differential technology (for gas measurement):\n    - Static pressure transmitters\n    - Differential pressure transmitters\n\
+      \    - Temperature transmitters\n    - RTDs (thermometers)\n    - Orifice plates\n    - Straight stretch\n\n2. Linear\
+      \ technology (for gas measurement):\n    - Temperature transmitters\n    - RTDs\n    - Static pressure transmitters\n\
+      \    - Ultrasonic meters\n\nRelationship between equipment and measurement systems:\n- A measurement system can have\
+      \ multiple pieces of equipment.\n- However, a piece of equipment can only be assigned to one measurement system.\n\n\
+      Database management:\n- The database includes a special table to manage the list of equipment assigned to measurement\
+      \ systems.\n- When a user refers to an \"\"Equipment Tag\"\", they are searching for operational equipment assigned\
+      \ to a measurement system.\n- If a user is looking for spare or unused equipment, they are searching for equipment not\
+      \ listed in the tagged equipment table.\n- Commonly used when user refers directly to an \"\"Equipment Tag\""
+    - 'What is equipment calibration?
+
+      Calibration is a metrological verification process used to ensure the accuracy of measurement equipment. It is performed
+      periodically, based on intervals set by the company or a regulatory body.
+
+
+      Purpose of calibration:
+
+      The calibration process corrects any deviations in how the equipment measures physical magnitudes (variables). This
+      ensures the equipment provides accurate and reliable data.
+
+
+      Calibration cycles:
+
+      There are two main calibration cycles:
+
+      1. As-found: Represents the equipment''s measurement accuracy before any adjustments are made. This cycle is almost
+      always implemented.
+
+      2. As-left: Represents the equipment''s measurement accuracy after adjustments are made. This cycle is used depending
+      on regulatory requirements.
+
+
+      Calibration uncertainty:
+
+      - Uncertainty is included in the results of a calibration.
+
+      - Calibration uncertainty refers to the margin of error in the device''s measurements, which also affects the uncertainty
+      of the measured variable or magnitude.'
+    - 'What kind of data store an equipment?
+
+      Equipments can capture meteorological data, such as pressure, temperature, and volume (magnitudes). This data is essential
+      for users to perform various calculations.
+
+
+      Data storage:
+
+      - The measured values are stored in a special table in the database for magnitudes. This table contains the values of
+      the variables captured by the equipments.
+
+      - These values are **direct measurements** from the fluid (e.g., raw pressure, temperature, or volume readings). **They
+      are not calculated values**, such as uncertainty.
+
+      - The values stored in the variable values table are **different** from variable uncertainty values, which are calculated
+      separately and represent the margin of error.
+
+
+      Accessing the data:
+
+      - Users typically access the data by referring to the readings from the measurement system, not directly from the individual
+      equipments.
+
+      - The readings are stored in a "variable values" table within the database.
+
+
+      Linking variable names:
+
+      If the user needs to know the name of a variable, they must link the data to another table that stores information about
+      the types of variables.'
+  - source_sentence: SELECT * FROM EquipmentType LIMIT 1
+    sentences:
+    - 'What kind of data store an equipment?
+
+      Equipments can capture meteorological data, such as pressure, temperature, and volume (magnitudes). This data is essential
+      for users to perform various calculations.
+
+
+      Data storage:
+
+      - The measured values are stored in a special table in the database for magnitudes. This table contains the values of
+      the variables captured by the equipments.
+
+      - These values are **direct measurements** from the fluid (e.g., raw pressure, temperature, or volume readings). **They
+      are not calculated values**, such as uncertainty.
+
+      - The values stored in the variable values table are **different** from variable uncertainty values, which are calculated
+      separately and represent the margin of error.
+
+
+      Accessing the data:
+
+      - Users typically access the data by referring to the readings from the measurement system, not directly from the individual
+      equipments.
+
+      - The readings are stored in a "variable values" table within the database.
+
+
+      Linking variable names:
+
+      If the user needs to know the name of a variable, they must link the data to another table that stores information about
+      the types of variables.'
+    - "How does a flow computer generate and store reports?\nA flow computer generates daily or hourly reports to provide\
+      \ users with operational data. These reports are stored in the flow computer's memory in an organized format.\n\nReport\
+      \ structure:\n- Each report includes:\n- Date and time of the data recording.\n- Data recorded from flow computers.\n\
+      \nData storage in tables:\nThe reports are saved in two tables:\n1. Main table (Index):\n    - Stores the date, time,\
+      \ and flow computer identifier.\n2. Detail table:\n    - Stores the measured values associated with the report.\n\n\
+      Connection to the Modbus table:\nThe flow computer's reports are linked to a Modbus table. This table contains the names\
+      \ corresponding to each value in the reports, making it easier to interpret the data."
+    - 'What is a flow computer?
+
+      A flow computer is a device used in measurement engineering. It collects analog and digital data from flow meters and
+      other sensors.
+
+
+      Key features of a flow computer:
+
+      - It has a unique name, firmware version, and manufacturer information.
+
+      - It is designed to record and process data such as temperature, pressure, and fluid volume (for gases or oils).
+
+
+      Main function:
+
+      The flow computer sends the collected data to a measurement system. This allows measurement engineers to analyze the
+      data and perform their tasks effectively.'
+  - source_sentence: What tables store measurement system data?
+    sentences:
+    - "What is uncertainty?\nUncertainty is a measure of confidence in the precision and reliability of results obtained from\
+      \ equipment or measurement systems. It quantifies the potential error or margin of error in measurements.\n\nTypes of\
+      \ uncertainty:\nThere are two main types of uncertainty:\n1. Uncertainty of magnitudes (variables):\n    - Refers to\
+      \ the uncertainty of specific variables, such as temperature or pressure.\n    - It is calculated after calibrating\
+      \ a device or obtained from the equipment manufacturer's manual.\n    - This uncertainty serves as a starting point\
+      \ for further calculations related to the equipment.\n\n2. Uncertainty of the measurement system:\n    - Refers to the\
+      \ uncertainty calculated for the overall flow measurement.\n    - It depends on the uncertainties of the individual\
+      \ variables (magnitudes) and represents the combined margin of error for the entire system.\n\nKey points:\n- The uncertainties\
+      \ of magnitudes (variables) are the foundation for calculating the uncertainty of the measurement system. Think of them\
+      \ as the \"building blocks.\"\n- Do not confuse the two types of uncertainty:\n    - **Uncertainty of magnitudes/variables**:\
+      \ Specific to individual variables (e.g., temperature, pressure).\n    - **Uncertainty of the measurement system**:\
+      \ Specific to the overall flow measurement.\n\nDatabase storage for uncertainties:\nIn the database, uncertainty calculations\
+      \ are stored in two separate tables:\n1. Uncertainty of magnitudes (variables):\n    - Stores the uncertainty values\
+      \ for specific variables (e.g., temperature, pressure).\n\n2. Uncertainty of the measurement system:\n    - Stores the\
+      \ uncertainty values for the overall flow measurement system.\n\nHow to retrieve uncertainty data:\n- To find the uncertainty\
+      \ of the measurement system, join the measurement systems table with the uncertainty of the measurement system table.\n\
+      - To find the uncertainty of a specific variable (magnitude), join the measurement systems table with the uncertainty\
+      \ of magnitudes (variables) table.\n\nImportant note:\nDo not confuse the two types of uncertainty:\n- If the user requests\
+      \ the uncertainty of the measurement system, use the first join (measurement systems table + uncertainty of the measurement\
+      \ system table).\n- If the user requests the uncertainty of a specific variable (magnitude) in a report, use the second\
+      \ join (measurement systems table + uncertainty of magnitudes table)."
+    - "What is a measurement system?\nA measurement system, also referred to as a delivery point, measurement point, or reception\
+      \ point, is used to measure and monitor fluids in industrial processes.\n\nKey characteristics of a measurement system:\n\
+      1. Measurement technology:\n    - Differential: Used for precise measurements.\n    - Linear: Used for straightforward\
+      \ measurements.\n\n2. System identifier (TAG):\n    - A unique identifier for the system.\n\n3. Fluid type:\n    - The\
+      \ system can measure gases, oils, condensates, water, steam, or other fluids.\n4. System type:\n    - Specifies the\
+      \ category or purpose of the system.\n\nMeasurement technology by fluid type:\n- Gas measurement systems: Use both linear\
+      \ and differential measurement technologies.\n- Oil measurement systems: Do not use linear or differential technologies;\
+      \ they are programmed differently.\"\n\n\nClassification of measurement systems:\nMeasurement systems are classified\
+      \ based on the stage of the process in which they are used. Common classifications include:\n- Fiscal\n- Operational\n\
+      - Appropriation\n- Custody\n- Production Poços"
+    - 'What do measurement equipment measure?
+
+      Each equipment measures a physical magnitude, also known as a variable. Based on the type of variable they measure,
+      devices are classified into different categories.
+
+
+      Equipment classification:
+
+      - Primary meter: Assigned by default to equipments like orifice plates.
+
+      - Secondary meter: Assigned by default to equipments like transmitters.
+
+      - Tertiary meter: Used for other types of equipments.
+
+
+      Equipment types in the database:
+
+      The database includes a table listing all equipment types. Examples of equipment types are:
+
+      - Differential pressure transmitters
+
+      - RTDs (Resistance Temperature Detectors)
+
+      - Orifice plates
+
+      - Multivariable transmitters
+
+      - Ultrasonic meters
+
+
+      Meteorological checks for equipments:
+
+      Each equipment type is assigned a meteorological check, which can be either:
+
+      - Calibration: To ensure measurement accuracy.
+
+      - Inspection: To verify proper functioning.
+
+
+      Data storage in tables:
+
+      The database also includes a separate table for equipment classifications, which are:
+
+      - Primary meter
+
+      - Secondary meter
+
+      - Tertiary meter
+
+      So, an equipment has equipment types and this types has classifications.'
+  - source_sentence: What is the table structure for equipment types?
+    sentences:
+    - "How does a flow computer generate and store reports?\nA flow computer generates daily or hourly reports to provide\
+      \ users with operational data. These reports are stored in the flow computer's memory in an organized format.\n\nReport\
+      \ structure:\n- Each report includes:\n- Date and time of the data recording.\n- Data recorded from flow computers.\n\
+      \nData storage in tables:\nThe reports are saved in two tables:\n1. Main table (Index):\n    - Stores the date, time,\
+      \ and flow computer identifier.\n2. Detail table:\n    - Stores the measured values associated with the report.\n\n\
+      Connection to the Modbus table:\nThe flow computer's reports are linked to a Modbus table. This table contains the names\
+      \ corresponding to each value in the reports, making it easier to interpret the data."
+    - "What is measuring equipment?\nMeasuring equipment refers to the devices that make up a measurement system. Each piece\
+      \ of equipment has:\n- A unique serial number for identification.\n- A technical name, such as transmitter, plate, thermometer,\
+      \ etc.\n\nHow is equipment assigned to a measurement system?\nWhen equipment is assigned to a measurement system, it\
+      \ is given a unique identifier called an \"\"Equipment Tag.\"\"\n- If a piece of equipment has a tag, it is considered\
+      \ in use in a measurement system.\n- If it does not have a tag, it is considered spare or unused\n\nEquipment assignment\
+      \ based on technology:\nThe type of equipment assigned to a measurement system depends on the technology used, for example:\n\
+      1. Differential technology (for gas measurement):\n    - Static pressure transmitters\n    - Differential pressure transmitters\n\
+      \    - Temperature transmitters\n    - RTDs (thermometers)\n    - Orifice plates\n    - Straight stretch\n\n2. Linear\
+      \ technology (for gas measurement):\n    - Temperature transmitters\n    - RTDs\n    - Static pressure transmitters\n\
+      \    - Ultrasonic meters\n\nRelationship between equipment and measurement systems:\n- A measurement system can have\
+      \ multiple pieces of equipment.\n- However, a piece of equipment can only be assigned to one measurement system.\n\n\
+      Database management:\n- The database includes a special table to manage the list of equipment assigned to measurement\
+      \ systems.\n- When a user refers to an \"\"Equipment Tag\"\", they are searching for operational equipment assigned\
+      \ to a measurement system.\n- If a user is looking for spare or unused equipment, they are searching for equipment not\
+      \ listed in the tagged equipment table.\n- Commonly used when user refers directly to an \"\"Equipment Tag\""
+    - "What is uncertainty?\nUncertainty is a measure of confidence in the precision and reliability of results obtained from\
+      \ equipment or measurement systems. It quantifies the potential error or margin of error in measurements.\n\nTypes of\
+      \ uncertainty:\nThere are two main types of uncertainty:\n1. Uncertainty of magnitudes (variables):\n    - Refers to\
+      \ the uncertainty of specific variables, such as temperature or pressure.\n    - It is calculated after calibrating\
+      \ a device or obtained from the equipment manufacturer's manual.\n    - This uncertainty serves as a starting point\
+      \ for further calculations related to the equipment.\n\n2. Uncertainty of the measurement system:\n    - Refers to the\
+      \ uncertainty calculated for the overall flow measurement.\n    - It depends on the uncertainties of the individual\
+      \ variables (magnitudes) and represents the combined margin of error for the entire system.\n\nKey points:\n- The uncertainties\
+      \ of magnitudes (variables) are the foundation for calculating the uncertainty of the measurement system. Think of them\
+      \ as the \"building blocks.\"\n- Do not confuse the two types of uncertainty:\n    - **Uncertainty of magnitudes/variables**:\
+      \ Specific to individual variables (e.g., temperature, pressure).\n    - **Uncertainty of the measurement system**:\
+      \ Specific to the overall flow measurement.\n\nDatabase storage for uncertainties:\nIn the database, uncertainty calculations\
+      \ are stored in two separate tables:\n1. Uncertainty of magnitudes (variables):\n    - Stores the uncertainty values\
+      \ for specific variables (e.g., temperature, pressure).\n\n2. Uncertainty of the measurement system:\n    - Stores the\
+      \ uncertainty values for the overall flow measurement system.\n\nHow to retrieve uncertainty data:\n- To find the uncertainty\
+      \ of the measurement system, join the measurement systems table with the uncertainty of the measurement system table.\n\
+      - To find the uncertainty of a specific variable (magnitude), join the measurement systems table with the uncertainty\
+      \ of magnitudes (variables) table.\n\nImportant note:\nDo not confuse the two types of uncertainty:\n- If the user requests\
+      \ the uncertainty of the measurement system, use the first join (measurement systems table + uncertainty of the measurement\
+      \ system table).\n- If the user requests the uncertainty of a specific variable (magnitude) in a report, use the second\
+      \ join (measurement systems table + uncertainty of magnitudes table)."
+  - source_sentence: What columns store the uncertainty values?
+    sentences:
+    - "What is a measurement system?\nA measurement system, also referred to as a delivery point, measurement point, or reception\
+      \ point, is used to measure and monitor fluids in industrial processes.\n\nKey characteristics of a measurement system:\n\
+      1. Measurement technology:\n    - Differential: Used for precise measurements.\n    - Linear: Used for straightforward\
+      \ measurements.\n\n2. System identifier (TAG):\n    - A unique identifier for the system.\n\n3. Fluid type:\n    - The\
+      \ system can measure gases, oils, condensates, water, steam, or other fluids.\n4. System type:\n    - Specifies the\
+      \ category or purpose of the system.\n\nMeasurement technology by fluid type:\n- Gas measurement systems: Use both linear\
+      \ and differential measurement technologies.\n- Oil measurement systems: Do not use linear or differential technologies;\
+      \ they are programmed differently.\"\n\n\nClassification of measurement systems:\nMeasurement systems are classified\
+      \ based on the stage of the process in which they are used. Common classifications include:\n- Fiscal\n- Operational\n\
+      - Appropriation\n- Custody\n- Production Poços"
+    - 'How are flow computers and measurement systems related?
+
+      Flow computers can have multiple systems assigned to them. However, a measurement system can only be assigned to one
+      flow computer.
+
+
+      Database terminology:
+
+      In the database, this relationship is referred to as:
+
+      - Meter streams
+
+      - Meter runs
+
+      - Sections
+
+
+      Storage of the relationship:
+
+      The relationship between a flow computer and its assigned measurement system is stored in a special table.
+
+
+      User context:
+
+      When a user refers to a "meter stream," they are indicating that they are searching for a measurement system assigned
+      to a specific flow computer.'
+    - "What is uncertainty?\nUncertainty is a measure of confidence in the precision and reliability of results obtained from\
+      \ equipment or measurement systems. It quantifies the potential error or margin of error in measurements.\n\nTypes of\
+      \ uncertainty:\nThere are two main types of uncertainty:\n1. Uncertainty of magnitudes (variables):\n    - Refers to\
+      \ the uncertainty of specific variables, such as temperature or pressure.\n    - It is calculated after calibrating\
+      \ a device or obtained from the equipment manufacturer's manual.\n    - This uncertainty serves as a starting point\
+      \ for further calculations related to the equipment.\n\n2. Uncertainty of the measurement system:\n    - Refers to the\
+      \ uncertainty calculated for the overall flow measurement.\n    - It depends on the uncertainties of the individual\
+      \ variables (magnitudes) and represents the combined margin of error for the entire system.\n\nKey points:\n- The uncertainties\
+      \ of magnitudes (variables) are the foundation for calculating the uncertainty of the measurement system. Think of them\
+      \ as the \"building blocks.\"\n- Do not confuse the two types of uncertainty:\n    - **Uncertainty of magnitudes/variables**:\
+      \ Specific to individual variables (e.g., temperature, pressure).\n    - **Uncertainty of the measurement system**:\
+      \ Specific to the overall flow measurement.\n\nDatabase storage for uncertainties:\nIn the database, uncertainty calculations\
+      \ are stored in two separate tables:\n1. Uncertainty of magnitudes (variables):\n    - Stores the uncertainty values\
+      \ for specific variables (e.g., temperature, pressure).\n\n2. Uncertainty of the measurement system:\n    - Stores the\
+      \ uncertainty values for the overall flow measurement system.\n\nHow to retrieve uncertainty data:\n- To find the uncertainty\
+      \ of the measurement system, join the measurement systems table with the uncertainty of the measurement system table.\n\
+      - To find the uncertainty of a specific variable (magnitude), join the measurement systems table with the uncertainty\
+      \ of magnitudes (variables) table.\n\nImportant note:\nDo not confuse the two types of uncertainty:\n- If the user requests\
+      \ the uncertainty of the measurement system, use the first join (measurement systems table + uncertainty of the measurement\
+      \ system table).\n- If the user requests the uncertainty of a specific variable (magnitude) in a report, use the second\
+      \ join (measurement systems table + uncertainty of magnitudes table)."
+  datasets:
+  - Lauther/embeddings-train-semantic
+  pipeline_tag: sentence-similarity
+  library_name: sentence-transformers
+siblings:
+- rfilename: .gitattributes
+- rfilename: 1_Pooling/config.json
+- rfilename: README.md
+- rfilename: config.json
+- rfilename: config_sentence_transformers.json
+- rfilename: model.safetensors
+- rfilename: modules.json
+- rfilename: sentence_bert_config.json
+- rfilename: special_tokens_map.json
+- rfilename: tokenizer.json
+- rfilename: tokenizer_config.json
+spaces: []
+createdAt: '2025-01-30T03:43:45.000Z'
+safetensors:
+  parameters:
+    F32: 559890432
+  total: 559890432
+usedStorage: 2256690163
+downloadsAllTime: 4
+inferenceProviderMapping: {}
+configJson:
+  _name_or_path: intfloat/multilingual-e5-large-instruct
+  architectures:
+  - XLMRobertaModel
+  attention_probs_dropout_prob: 0.1
+  bos_token_id: 0
+  classifier_dropout: null
+  eos_token_id: 2
+  hidden_act: gelu
+  hidden_dropout_prob: 0.1
+  hidden_size: 1024
+  initializer_range: 0.02
+  intermediate_size: 4096
+  layer_norm_eps: 1.0e-05
+  max_position_embeddings: 514
+  model_type: xlm-roberta
+  num_attention_heads: 16
+  num_hidden_layers: 24
+  output_past: true
+  pad_token_id: 1
+  position_embedding_type: absolute
+  torch_dtype: float32
+  transformers_version: 4.48.1
+  type_vocab_size: 1
+  use_cache: true
+  vocab_size: 250002
+onnxFiles: {}
+safetensorsSizeMb: 2239.6
+approxSizeMb: 2239.6
+fetchedAt: '2026-06-09T06:55:53.000Z'

@@ -1,0 +1,89 @@
+_id: 6924daa657f985c626c3d078
+id: richardyoung/CardioEmbed-Gemma-2-2B
+private: false
+pipeline_tag: sentence-similarity
+library_name: peft
+tags:
+- peft
+- safetensors
+- medical
+- cardiology
+- embeddings
+- domain-adaptation
+- lora
+- sentence-transformers
+- sentence-similarity
+- en
+- base_model:google/gemma-2-2b-it
+- base_model:adapter:google/gemma-2-2b-it
+- license:apache-2.0
+- region:us
+downloads: 1
+likes: 0
+modelId: richardyoung/CardioEmbed-Gemma-2-2B
+author: richardyoung
+sha: c0ccf6a27beb574c3a7262f38544d06eaee25d25
+lastModified: '2025-11-24T22:22:35.000Z'
+gated: false
+disabled: false
+widgetData:
+- source_sentence: That is a happy person
+  sentences:
+  - That is a happy dog
+  - That is a very happy person
+  - Today is a sunny day
+model-index: null
+config:
+  tokenizer_config:
+    bos_token: <bos>
+    eos_token: <eos>
+    pad_token: <pad>
+    unk_token: <unk>
+    use_default_system_prompt: false
+  chat_template_jinja: '{{ bos_token }}{% if messages[0][''role''] == ''system'' %}{{ raise_exception(''System role not supported'')
+    }}{% endif %}{% for message in messages %}{% if (message[''role''] == ''user'') != (loop.index0 % 2 == 0) %}{{ raise_exception(''Conversation
+    roles must alternate user/assistant/user/assistant/...'') }}{% endif %}{% if (message[''role''] == ''assistant'') %}{%
+    set role = ''model'' %}{% else %}{% set role = message[''role''] %}{% endif %}{{ ''<start_of_turn>'' + role + ''
+
+    '' + message[''content''] | trim + ''<end_of_turn>
+
+    '' }}{% endfor %}{% if add_generation_prompt %}{{''<start_of_turn>model
+
+    ''}}{% endif %}'
+  peft:
+    base_model_name_or_path: google/gemma-2-2b-it
+    task_type: FEATURE_EXTRACTION
+cardData:
+  library_name: peft
+  base_model: google/gemma-2-2b-it
+  tags:
+  - medical
+  - cardiology
+  - embeddings
+  - domain-adaptation
+  - lora
+  - sentence-transformers
+  - sentence-similarity
+  language:
+  - en
+  license: apache-2.0
+siblings:
+- rfilename: .gitattributes
+- rfilename: README.md
+- rfilename: adapter_config.json
+- rfilename: adapter_model.safetensors
+- rfilename: chat_template.jinja
+- rfilename: special_tokens_map.json
+- rfilename: tokenizer.json
+- rfilename: tokenizer_config.json
+- rfilename: training_config.json
+spaces: []
+createdAt: '2025-11-24T22:22:30.000Z'
+usedStorage: 59948773
+downloadsAllTime: 22
+inferenceProviderMapping: {}
+configJson: null
+onnxFiles: {}
+safetensorsSizeMb: 25.6
+approxSizeMb: 0.0
+fetchedAt: '2026-06-09T06:55:53.000Z'

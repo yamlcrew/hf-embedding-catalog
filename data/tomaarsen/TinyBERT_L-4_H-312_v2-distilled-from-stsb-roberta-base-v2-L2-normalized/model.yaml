@@ -1,0 +1,269 @@
+_id: 692732227a0f4f798c33a9c5
+id: tomaarsen/TinyBERT_L-4_H-312_v2-distilled-from-stsb-roberta-base-v2-L2-normalized
+private: false
+pipeline_tag: sentence-similarity
+library_name: sentence-transformers
+tags:
+- sentence-transformers
+- safetensors
+- bert
+- sentence-similarity
+- feature-extraction
+- dense
+- generated_from_trainer
+- dataset_size:200000
+- loss:MSELoss
+- arxiv:1908.10084
+- arxiv:2004.09813
+- base_model:nreimers/TinyBERT_L-4_H-312_v2
+- base_model:finetune:nreimers/TinyBERT_L-4_H-312_v2
+- model-index
+- co2_eq_emissions
+- text-embeddings-inference
+- endpoints_compatible
+- region:us
+downloads: 3
+likes: 0
+modelId: tomaarsen/TinyBERT_L-4_H-312_v2-distilled-from-stsb-roberta-base-v2-L2-normalized
+author: tomaarsen
+sha: 54f4e7be2fea8866dab2cbecee1a0d2ac8406eab
+lastModified: '2025-11-26T17:00:24.000Z'
+gated: false
+disabled: false
+mask_token: '[MASK]'
+widgetData:
+- source_sentence: At an outdoor event in an Asian-themed area, a crowd congregates as one person in a yellow Chinese dragon
+    costume confronts the camera.
+  sentences:
+  - Boy dressed in blue holds a toy.
+  - the animal is running
+  - Two young asian men are squatting.
+- source_sentence: A man with a shopping cart is studying the shelves in a supermarket aisle.
+  sentences:
+  - The children are watching TV at home.
+  - Three young boys one is holding a camera and another is holding a green toy all are wearing t-shirt and smiling.
+  - A large group of people are gathered outside of a brick building lit with spotlights.
+- source_sentence: The door is open.
+  sentences:
+  - A girl is using an apple laptop with her headphones in her ears.
+  - There are three men in this picture, two are on motorbikes, one of the men has a large piece of furniture on the back
+    of his bike, the other is about to be handed a piece of paper by a man in a white shirt.
+  - Three girls are standing together in a room, one is listening, one is writing on a wall and the third is talking to them.
+- source_sentence: A small group of children are standing in a classroom and one of them has a foot in a trashcan, which also
+    has a rope leading out of it.
+  sentences:
+  - People are playing music.
+  - Children are swimming at the beach.
+  - Women are celebrating at a bar.
+- source_sentence: A black dog is drinking next to a brown and white dog that is looking at an orange ball in the lake, whilst
+    a horse and rider passes behind.
+  sentences:
+  - Some men with jerseys are in a bar, watching a soccer match.
+  - the guy is dead
+  - There are two people running around a track in lane three and the one wearing a blue shirt with a green thing over the
+    eyes is just barely ahead of the guy wearing an orange shirt and sunglasses.
+model-index:
+- name: SentenceTransformer based on nreimers/TinyBERT_L-4_H-312_v2
+  results:
+  - task:
+      type: semantic-similarity
+      name: Semantic Similarity
+    dataset:
+      name: sts dev
+      type: sts-dev
+    metrics:
+    - type: pearson_cosine
+      value: 0.808118809417341
+      name: Pearson Cosine
+      verified: false
+    - type: spearman_cosine
+      value: 0.8213188524284026
+      name: Spearman Cosine
+      verified: false
+  - task:
+      type: knowledge-distillation
+      name: Knowledge Distillation
+    dataset:
+      name: Unknown
+      type: unknown
+    metrics:
+    - type: negative_mse
+      value: -78.18629741668701
+      name: Negative Mse
+      verified: false
+  - task:
+      type: semantic-similarity
+      name: Semantic Similarity
+    dataset:
+      name: sts test
+      type: sts-test
+    metrics:
+    - type: pearson_cosine
+      value: 0.7496317179823885
+      name: Pearson Cosine
+      verified: false
+    - type: spearman_cosine
+      value: 0.7520734191438844
+      name: Spearman Cosine
+      verified: false
+config:
+  architectures:
+  - BertModel
+  model_type: bert
+  tokenizer_config:
+    cls_token: '[CLS]'
+    mask_token: '[MASK]'
+    pad_token: '[PAD]'
+    sep_token: '[SEP]'
+    unk_token: '[UNK]'
+cardData:
+  tags:
+  - sentence-transformers
+  - sentence-similarity
+  - feature-extraction
+  - dense
+  - generated_from_trainer
+  - dataset_size:200000
+  - loss:MSELoss
+  base_model: nreimers/TinyBERT_L-4_H-312_v2
+  widget:
+  - source_sentence: At an outdoor event in an Asian-themed area, a crowd congregates as one person in a yellow Chinese dragon
+      costume confronts the camera.
+    sentences:
+    - Boy dressed in blue holds a toy.
+    - the animal is running
+    - Two young asian men are squatting.
+  - source_sentence: A man with a shopping cart is studying the shelves in a supermarket aisle.
+    sentences:
+    - The children are watching TV at home.
+    - Three young boys one is holding a camera and another is holding a green toy all are wearing t-shirt and smiling.
+    - A large group of people are gathered outside of a brick building lit with spotlights.
+  - source_sentence: The door is open.
+    sentences:
+    - A girl is using an apple laptop with her headphones in her ears.
+    - There are three men in this picture, two are on motorbikes, one of the men has a large piece of furniture on the back
+      of his bike, the other is about to be handed a piece of paper by a man in a white shirt.
+    - Three girls are standing together in a room, one is listening, one is writing on a wall and the third is talking to
+      them.
+  - source_sentence: A small group of children are standing in a classroom and one of them has a foot in a trashcan, which
+      also has a rope leading out of it.
+    sentences:
+    - People are playing music.
+    - Children are swimming at the beach.
+    - Women are celebrating at a bar.
+  - source_sentence: A black dog is drinking next to a brown and white dog that is looking at an orange ball in the lake,
+      whilst a horse and rider passes behind.
+    sentences:
+    - Some men with jerseys are in a bar, watching a soccer match.
+    - the guy is dead
+    - There are two people running around a track in lane three and the one wearing a blue shirt with a green thing over the
+      eyes is just barely ahead of the guy wearing an orange shirt and sunglasses.
+  pipeline_tag: sentence-similarity
+  library_name: sentence-transformers
+  metrics:
+  - pearson_cosine
+  - spearman_cosine
+  - negative_mse
+  co2_eq_emissions:
+    emissions: 2.8523555208748004
+    energy_consumed: 0.010658150379545777
+    source: codecarbon
+    training_type: fine-tuning
+    on_cloud: false
+    cpu_model: 13th Gen Intel(R) Core(TM) i7-13700K
+    ram_total_size: 31.777088165283203
+    hours_used: 0.06
+    hardware_used: 1 x NVIDIA GeForce RTX 3090
+  model-index:
+  - name: SentenceTransformer based on nreimers/TinyBERT_L-4_H-312_v2
+    results:
+    - task:
+        type: semantic-similarity
+        name: Semantic Similarity
+      dataset:
+        name: sts dev
+        type: sts-dev
+      metrics:
+      - type: pearson_cosine
+        value: 0.808118809417341
+        name: Pearson Cosine
+        verified: false
+      - type: spearman_cosine
+        value: 0.8213188524284026
+        name: Spearman Cosine
+        verified: false
+    - task:
+        type: knowledge-distillation
+        name: Knowledge Distillation
+      dataset:
+        name: Unknown
+        type: unknown
+      metrics:
+      - type: negative_mse
+        value: -78.18629741668701
+        name: Negative Mse
+        verified: false
+    - task:
+        type: semantic-similarity
+        name: Semantic Similarity
+      dataset:
+        name: sts test
+        type: sts-test
+      metrics:
+      - type: pearson_cosine
+        value: 0.7496317179823885
+        name: Pearson Cosine
+        verified: false
+      - type: spearman_cosine
+        value: 0.7520734191438844
+        name: Spearman Cosine
+        verified: false
+siblings:
+- rfilename: .gitattributes
+- rfilename: 1_Pooling/config.json
+- rfilename: README.md
+- rfilename: config.json
+- rfilename: config_sentence_transformers.json
+- rfilename: model.safetensors
+- rfilename: modules.json
+- rfilename: sentence_bert_config.json
+- rfilename: special_tokens_map.json
+- rfilename: tokenizer.json
+- rfilename: tokenizer_config.json
+- rfilename: vocab.txt
+spaces: []
+createdAt: '2025-11-26T17:00:18.000Z'
+safetensors:
+  parameters:
+    F32: 14350248
+  total: 14350248
+usedStorage: 57408776
+downloadsAllTime: 25
+inferenceProviderMapping: {}
+configJson:
+  architectures:
+  - BertModel
+  attention_probs_dropout_prob: 0.1
+  classifier_dropout: null
+  gradient_checkpointing: false
+  hidden_act: gelu
+  hidden_dropout_prob: 0.1
+  hidden_size: 312
+  initializer_range: 0.02
+  intermediate_size: 1200
+  layer_norm_eps: 1.0e-12
+  max_position_embeddings: 512
+  model_type: bert
+  num_attention_heads: 12
+  num_hidden_layers: 4
+  pad_token_id: 0
+  position_embedding_type: absolute
+  torch_dtype: float32
+  transformers_version: 4.53.3
+  type_vocab_size: 2
+  use_cache: true
+  vocab_size: 30522
+onnxFiles: {}
+safetensorsSizeMb: 57.4
+approxSizeMb: 57.4
+fetchedAt: '2026-06-09T06:55:53.000Z'

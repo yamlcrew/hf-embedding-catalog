@@ -1,0 +1,245 @@
+_id: 67c23599983ed3f7e2b45d7f
+id: cahya/NusaBert-v1.2-sts
+private: false
+pipeline_tag: sentence-similarity
+library_name: sentence-transformers
+tags:
+- sentence-transformers
+- safetensors
+- modernbert
+- sentence-similarity
+- feature-extraction
+- generated_from_trainer
+- dataset_size:5749
+- loss:CosineSimilarityLoss
+- en
+- dataset:sentence-transformers/stsb
+- arxiv:1908.10084
+- base_model:cahya/NusaBert-v1.2
+- base_model:finetune:cahya/NusaBert-v1.2
+- model-index
+- text-embeddings-inference
+- endpoints_compatible
+- region:us
+downloads: 2
+likes: 0
+modelId: cahya/NusaBert-v1.2-sts
+author: cahya
+sha: c5c3f5a85f70ba594b6a4effd4ce05a0fe8e080b
+lastModified: '2025-02-28T22:16:16.000Z'
+gated: false
+disabled: false
+widgetData:
+- source_sentence: A chef is preparing some food.
+  sentences:
+  - Five birds stand on the snow.
+  - A chef prepared a meal.
+  - There is no 'still' that is not relative to some other object.
+- source_sentence: A woman is adding oil on fishes.
+  sentences:
+  - Large cruise ship floating on the water.
+  - It refers to the maximum f-stop (which is defined as the ratio of focal length to effective aperture diameter).
+  - The woman is cutting potatoes.
+- source_sentence: The player shoots the winning points.
+  sentences:
+  - Minimum wage laws hurt the least skilled, least productive the most.
+  - The basketball player is about to score points for his team.
+  - Three televisions, on on the floor, the other two on a box.
+- source_sentence: Stars form in star-formation regions, which itself develop from molecular clouds.
+  sentences:
+  - Although I believe Searle is mistaken, I don't think you have found the problem.
+  - It may be possible for a solar system like ours to exist outside of a galaxy.
+  - A blond-haired child performing on the trumpet in front of a house while his younger brother watches.
+- source_sentence: While Queen may refer to both Queen regent (sovereign) or Queen consort, the King has always been the sovereign.
+  sentences:
+  - At first, I thought this is a bit of a tricky question.
+  - A man plays the guitar.
+  - There is a very good reason not to refer to the Queen's spouse as "King" - because they aren't the King.
+model-index:
+- name: SentenceTransformer based on cahya/NusaBert-v1.2
+  results:
+  - task:
+      type: semantic-similarity
+      name: Semantic Similarity
+    dataset:
+      name: sts dev
+      type: sts-dev
+    metrics:
+    - type: pearson_cosine
+      value: 0.8135688436215744
+      name: Pearson Cosine
+      verified: false
+    - type: spearman_cosine
+      value: 0.81496649751539
+      name: Spearman Cosine
+      verified: false
+  - task:
+      type: semantic-similarity
+      name: Semantic Similarity
+    dataset:
+      name: sts test
+      type: sts-test
+    metrics:
+    - type: pearson_cosine
+      value: 0.7669996017873199
+      name: Pearson Cosine
+      verified: false
+    - type: spearman_cosine
+      value: 0.7533113639325973
+      name: Spearman Cosine
+      verified: false
+config:
+  architectures:
+  - ModernBertModel
+  model_type: modernbert
+  tokenizer_config:
+    cls_token: '[CLS]'
+    mask_token: '[MASK]'
+    pad_token: '[PAD]'
+    sep_token: '[SEP]'
+    unk_token: '[UNK]'
+cardData:
+  language:
+  - en
+  tags:
+  - sentence-transformers
+  - sentence-similarity
+  - feature-extraction
+  - generated_from_trainer
+  - dataset_size:5749
+  - loss:CosineSimilarityLoss
+  base_model: cahya/NusaBert-v1.2
+  widget:
+  - source_sentence: A chef is preparing some food.
+    sentences:
+    - Five birds stand on the snow.
+    - A chef prepared a meal.
+    - There is no 'still' that is not relative to some other object.
+  - source_sentence: A woman is adding oil on fishes.
+    sentences:
+    - Large cruise ship floating on the water.
+    - It refers to the maximum f-stop (which is defined as the ratio of focal length to effective aperture diameter).
+    - The woman is cutting potatoes.
+  - source_sentence: The player shoots the winning points.
+    sentences:
+    - Minimum wage laws hurt the least skilled, least productive the most.
+    - The basketball player is about to score points for his team.
+    - Three televisions, on on the floor, the other two on a box.
+  - source_sentence: Stars form in star-formation regions, which itself develop from molecular clouds.
+    sentences:
+    - Although I believe Searle is mistaken, I don't think you have found the problem.
+    - It may be possible for a solar system like ours to exist outside of a galaxy.
+    - A blond-haired child performing on the trumpet in front of a house while his younger brother watches.
+  - source_sentence: While Queen may refer to both Queen regent (sovereign) or Queen consort, the King has always been the
+      sovereign.
+    sentences:
+    - At first, I thought this is a bit of a tricky question.
+    - A man plays the guitar.
+    - There is a very good reason not to refer to the Queen's spouse as "King" - because they aren't the King.
+  datasets:
+  - sentence-transformers/stsb
+  pipeline_tag: sentence-similarity
+  library_name: sentence-transformers
+  metrics:
+  - pearson_cosine
+  - spearman_cosine
+  model-index:
+  - name: SentenceTransformer based on cahya/NusaBert-v1.2
+    results:
+    - task:
+        type: semantic-similarity
+        name: Semantic Similarity
+      dataset:
+        name: sts dev
+        type: sts-dev
+      metrics:
+      - type: pearson_cosine
+        value: 0.8135688436215744
+        name: Pearson Cosine
+        verified: false
+      - type: spearman_cosine
+        value: 0.81496649751539
+        name: Spearman Cosine
+        verified: false
+    - task:
+        type: semantic-similarity
+        name: Semantic Similarity
+      dataset:
+        name: sts test
+        type: sts-test
+      metrics:
+      - type: pearson_cosine
+        value: 0.7669996017873199
+        name: Pearson Cosine
+        verified: false
+      - type: spearman_cosine
+        value: 0.7533113639325973
+        name: Spearman Cosine
+        verified: false
+siblings:
+- rfilename: .gitattributes
+- rfilename: 1_Pooling/config.json
+- rfilename: README.md
+- rfilename: config.json
+- rfilename: config_sentence_transformers.json
+- rfilename: model.safetensors
+- rfilename: modules.json
+- rfilename: sentence_bert_config.json
+- rfilename: special_tokens_map.json
+- rfilename: tokenizer.json
+- rfilename: tokenizer_config.json
+spaces: []
+createdAt: '2025-02-28T22:15:53.000Z'
+safetensors:
+  parameters:
+    F32: 160333824
+  total: 160333824
+usedStorage: 641348344
+downloadsAllTime: 112
+inferenceProviderMapping: {}
+configJson:
+  _name_or_path: cahya/NusaBert-v1.2
+  architectures:
+  - ModernBertModel
+  attention_bias: false
+  attention_dropout: 0.0
+  bos_token_id: 65003
+  classifier_activation: gelu
+  classifier_bias: false
+  classifier_dropout: 0.0
+  classifier_pooling: cls
+  cls_token_id: 65003
+  decoder_bias: true
+  deterministic_flash_attn: false
+  embedding_dropout: 0.0
+  eos_token_id: 65001
+  global_attn_every_n_layers: 3
+  global_rope_theta: 160000.0
+  hidden_activation: gelu
+  hidden_size: 768
+  initializer_cutoff_factor: 2.0
+  initializer_range: 0.02
+  intermediate_size: 1152
+  local_attention: 128
+  local_rope_theta: 10000.0
+  max_position_embeddings: 8192
+  mlp_bias: false
+  mlp_dropout: 0.0
+  model_type: modernbert
+  norm_bias: false
+  norm_eps: 1.0e-05
+  num_attention_heads: 12
+  num_hidden_layers: 22
+  pad_token_id: 65002
+  reference_compile: false
+  repad_logits_with_grad: false
+  sep_token_id: 65001
+  sparse_pred_ignore_index: -100
+  sparse_prediction: false
+  torch_dtype: float32
+  transformers_version: 4.49.0
+  vocab_size: 65107
+onnxFiles: {}
+safetensorsSizeMb: 641.3
+approxSizeMb: 641.3
+fetchedAt: '2026-06-09T06:55:53.000Z'

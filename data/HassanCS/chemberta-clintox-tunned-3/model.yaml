@@ -1,0 +1,260 @@
+_id: 67a06463de185549cc55e5b8
+id: HassanCS/chemberta-clintox-tunned-3
+private: false
+pipeline_tag: sentence-similarity
+library_name: sentence-transformers
+tags:
+- sentence-transformers
+- tensorboard
+- safetensors
+- roberta
+- sentence-similarity
+- feature-extraction
+- generated_from_trainer
+- dataset_size:4000
+- loss:ContrastiveLoss
+- arxiv:1908.10084
+- base_model:DeepChem/ChemBERTa-77M-MLM
+- base_model:finetune:DeepChem/ChemBERTa-77M-MLM
+- model-index
+- text-embeddings-inference
+- endpoints_compatible
+- region:us
+downloads: 2
+likes: 0
+modelId: HassanCS/chemberta-clintox-tunned-3
+author: HassanCS
+sha: c7dee6da85047b26197464ad2178fa1fdb70f65c
+lastModified: '2025-02-03T06:38:30.000Z'
+gated: false
+disabled: false
+mask_token: <mask>
+widgetData:
+- source_sentence: C[NH+](C)CCn1nnnc1SCC1=C(C(=O)[O-])N2C(=O)C(NC(=O)Cc3csc(N)n3)C2SC1
+  sentences:
+  - C=C1CC2CCC34CC5OC6C(OC7CCC(CC(=O)CC8C(CC9OC(CCC1O2)CC(C)C9=C)OC(CC(O)CN)C8OC)OC7C6O3)C5O4
+  - CC(O)C(O)C1CNc2[nH]c(N)nc(=O)c2N1
+  - C=C1CC2CCC34CC5OC6C(OC7CCC(CC(=O)CC8C(CC9OC(CCC1O2)CC(C)C9=C)OC(CC(O)CN)C8OC)OC7C6O3)C5O4
+- source_sentence: CC(C)CC([NH+](C)C)C1(c2ccc(Cl)cc2)CCC1
+  sentences:
+  - CC1CC=CC=CC=CC=CC(OC2OC(C)C(O)C([NH3+])C2O)CC2OC(O)(CC(O)CC3OC3C=CC(=O)O1)CC(O)C2C(=O)[O-]
+  - CC(C)CNCc1ccc(-c2ccccc2S(=O)(=O)N2CCCC2)cc1
+  - CC(C)CNCc1ccc(-c2ccccc2S(=O)(=O)N2CCCC2)cc1
+- source_sentence: CC1CC=CC=CC=CC=CC(OC2OC(C)C(O)C([NH3+])C2O)CC2OC(O)(CC(O)CC3OC3C=CC(=O)O1)CC(O)C2C(=O)[O-]
+  sentences:
+  - CC12CC(=C[O-])C(=O)CC1CCC1C2CCC2(C)C1CCC2(C)O
+  - CC(C)CNCc1ccc(-c2ccccc2S(=O)(=O)N2CCCC2)cc1
+  - COC(=O)NC(C(=O)NC(Cc1ccccc1)C(O)CN(Cc1ccc(-c2ccccn2)cc1)NC(=O)C(NC(=O)OC)C(C)(C)C)C(C)(C)C
+- source_sentence: CC(C)(C(=O)[O-])c1ccc(C(O)CCC[NH+]2CCC(C(O)(c3ccccc3)c3ccccc3)CC2)cc1
+  sentences:
+  - C[N+]1(C)C2CC(OC(=O)C(O)(c3cccs3)c3cccs3)CC1C1OC12
+  - Cn1c(=O)n(-c2ccc(C(C)(C)C#N)cc2)c2c3cc(-c4cnc5ccccc5c4)ccc3ncc21
+  - COC(=O)NC(C(=O)NC(Cc1ccccc1)C(O)CN(Cc1ccc(-c2ccccn2)cc1)NC(=O)C(NC(=O)OC)C(C)(C)C)C(C)(C)C
+- source_sentence: C[NH+](C)CCc1c[nH]c2ccc(Cn3cncn3)cc12
+  sentences:
+  - CC(C)[NH2+]CCCC1(C(N)=O)c2ccccc2-c2ccccc21
+  - CC12CCCCCC(Cc3ccc(O)cc31)C2[NH3+]
+  - C[N+]12CCC(CC1)C(OC(=O)C(O)(c1ccccc1)c1ccccc1)C2
+model-index:
+- name: SentenceTransformer based on DeepChem/ChemBERTa-77M-MLM
+  results:
+  - task:
+      type: binary-classification
+      name: Binary Classification
+    dataset:
+      name: all dev
+      type: all-dev
+    metrics:
+    - type: cosine_accuracy
+      value: 0.5343625498007968
+      name: Cosine Accuracy
+      verified: false
+    - type: cosine_accuracy_threshold
+      value: 0.6344093680381775
+      name: Cosine Accuracy Threshold
+      verified: false
+    - type: cosine_f1
+      value: 0.6760847628657922
+      name: Cosine F1
+      verified: false
+    - type: cosine_f1_threshold
+      value: 0.5700407028198242
+      name: Cosine F1 Threshold
+      verified: false
+    - type: cosine_precision
+      value: 0.5148565573770492
+      name: Cosine Precision
+      verified: false
+    - type: cosine_recall
+      value: 0.9843290891283056
+      name: Cosine Recall
+      verified: false
+    - type: cosine_ap
+      value: 0.479108212307756
+      name: Cosine Ap
+      verified: false
+    - type: cosine_mcc
+      value: 0.0754688421510425
+      name: Cosine Mcc
+      verified: false
+config:
+  architectures:
+  - RobertaModel
+  model_type: roberta
+  tokenizer_config:
+    bos_token: <s>
+    cls_token: '[CLS]'
+    eos_token: </s>
+    mask_token: '[MASK]'
+    pad_token: '[PAD]'
+    sep_token: '[SEP]'
+    unk_token: '[UNK]'
+cardData:
+  tags:
+  - sentence-transformers
+  - sentence-similarity
+  - feature-extraction
+  - generated_from_trainer
+  - dataset_size:4000
+  - loss:ContrastiveLoss
+  base_model: DeepChem/ChemBERTa-77M-MLM
+  widget:
+  - source_sentence: C[NH+](C)CCn1nnnc1SCC1=C(C(=O)[O-])N2C(=O)C(NC(=O)Cc3csc(N)n3)C2SC1
+    sentences:
+    - C=C1CC2CCC34CC5OC6C(OC7CCC(CC(=O)CC8C(CC9OC(CCC1O2)CC(C)C9=C)OC(CC(O)CN)C8OC)OC7C6O3)C5O4
+    - CC(O)C(O)C1CNc2[nH]c(N)nc(=O)c2N1
+    - C=C1CC2CCC34CC5OC6C(OC7CCC(CC(=O)CC8C(CC9OC(CCC1O2)CC(C)C9=C)OC(CC(O)CN)C8OC)OC7C6O3)C5O4
+  - source_sentence: CC(C)CC([NH+](C)C)C1(c2ccc(Cl)cc2)CCC1
+    sentences:
+    - CC1CC=CC=CC=CC=CC(OC2OC(C)C(O)C([NH3+])C2O)CC2OC(O)(CC(O)CC3OC3C=CC(=O)O1)CC(O)C2C(=O)[O-]
+    - CC(C)CNCc1ccc(-c2ccccc2S(=O)(=O)N2CCCC2)cc1
+    - CC(C)CNCc1ccc(-c2ccccc2S(=O)(=O)N2CCCC2)cc1
+  - source_sentence: CC1CC=CC=CC=CC=CC(OC2OC(C)C(O)C([NH3+])C2O)CC2OC(O)(CC(O)CC3OC3C=CC(=O)O1)CC(O)C2C(=O)[O-]
+    sentences:
+    - CC12CC(=C[O-])C(=O)CC1CCC1C2CCC2(C)C1CCC2(C)O
+    - CC(C)CNCc1ccc(-c2ccccc2S(=O)(=O)N2CCCC2)cc1
+    - COC(=O)NC(C(=O)NC(Cc1ccccc1)C(O)CN(Cc1ccc(-c2ccccn2)cc1)NC(=O)C(NC(=O)OC)C(C)(C)C)C(C)(C)C
+  - source_sentence: CC(C)(C(=O)[O-])c1ccc(C(O)CCC[NH+]2CCC(C(O)(c3ccccc3)c3ccccc3)CC2)cc1
+    sentences:
+    - C[N+]1(C)C2CC(OC(=O)C(O)(c3cccs3)c3cccs3)CC1C1OC12
+    - Cn1c(=O)n(-c2ccc(C(C)(C)C#N)cc2)c2c3cc(-c4cnc5ccccc5c4)ccc3ncc21
+    - COC(=O)NC(C(=O)NC(Cc1ccccc1)C(O)CN(Cc1ccc(-c2ccccn2)cc1)NC(=O)C(NC(=O)OC)C(C)(C)C)C(C)(C)C
+  - source_sentence: C[NH+](C)CCc1c[nH]c2ccc(Cn3cncn3)cc12
+    sentences:
+    - CC(C)[NH2+]CCCC1(C(N)=O)c2ccccc2-c2ccccc21
+    - CC12CCCCCC(Cc3ccc(O)cc31)C2[NH3+]
+    - C[N+]12CCC(CC1)C(OC(=O)C(O)(c1ccccc1)c1ccccc1)C2
+  pipeline_tag: sentence-similarity
+  library_name: sentence-transformers
+  metrics:
+  - cosine_accuracy
+  - cosine_accuracy_threshold
+  - cosine_f1
+  - cosine_f1_threshold
+  - cosine_precision
+  - cosine_recall
+  - cosine_ap
+  - cosine_mcc
+  model-index:
+  - name: SentenceTransformer based on DeepChem/ChemBERTa-77M-MLM
+    results:
+    - task:
+        type: binary-classification
+        name: Binary Classification
+      dataset:
+        name: all dev
+        type: all-dev
+      metrics:
+      - type: cosine_accuracy
+        value: 0.5343625498007968
+        name: Cosine Accuracy
+        verified: false
+      - type: cosine_accuracy_threshold
+        value: 0.6344093680381775
+        name: Cosine Accuracy Threshold
+        verified: false
+      - type: cosine_f1
+        value: 0.6760847628657922
+        name: Cosine F1
+        verified: false
+      - type: cosine_f1_threshold
+        value: 0.5700407028198242
+        name: Cosine F1 Threshold
+        verified: false
+      - type: cosine_precision
+        value: 0.5148565573770492
+        name: Cosine Precision
+        verified: false
+      - type: cosine_recall
+        value: 0.9843290891283056
+        name: Cosine Recall
+        verified: false
+      - type: cosine_ap
+        value: 0.479108212307756
+        name: Cosine Ap
+        verified: false
+      - type: cosine_mcc
+        value: 0.0754688421510425
+        name: Cosine Mcc
+        verified: false
+siblings:
+- rfilename: .gitattributes
+- rfilename: 1_Pooling/config.json
+- rfilename: README.md
+- rfilename: added_tokens.json
+- rfilename: config.json
+- rfilename: config_sentence_transformers.json
+- rfilename: eval/binary_classification_evaluation_all-dev_results.csv
+- rfilename: merges.txt
+- rfilename: model.safetensors
+- rfilename: modules.json
+- rfilename: runs/Feb03_05-33-22_5aa6e6f74e1d/events.out.tfevents.1738560805.5aa6e6f74e1d.431.2
+- rfilename: runs/Feb03_05-40-03_5aa6e6f74e1d/events.out.tfevents.1738561205.5aa6e6f74e1d.431.3
+- rfilename: runs/Feb03_05-43-00_5aa6e6f74e1d/events.out.tfevents.1738561383.5aa6e6f74e1d.431.4
+- rfilename: runs/Feb03_05-45-07_5aa6e6f74e1d/events.out.tfevents.1738561510.5aa6e6f74e1d.431.5
+- rfilename: sentence_bert_config.json
+- rfilename: special_tokens_map.json
+- rfilename: tokenizer.json
+- rfilename: tokenizer_config.json
+- rfilename: training_args.bin
+- rfilename: vocab.json
+spaces: []
+createdAt: '2025-02-03T06:38:27.000Z'
+safetensors:
+  parameters:
+    F32: 3427440
+  total: 3427440
+usedStorage: 13742114
+downloadsAllTime: 28
+inferenceProviderMapping: {}
+configJson:
+  _name_or_path: DeepChem/ChemBERTa-77M-MLM
+  architectures:
+  - RobertaModel
+  attention_probs_dropout_prob: 0.109
+  bos_token_id: 0
+  classifier_dropout: null
+  eos_token_id: 2
+  gradient_checkpointing: false
+  hidden_act: gelu
+  hidden_dropout_prob: 0.144
+  hidden_size: 384
+  initializer_range: 0.02
+  intermediate_size: 464
+  is_gpu: true
+  layer_norm_eps: 1.0e-12
+  max_position_embeddings: 515
+  model_type: roberta
+  num_attention_heads: 12
+  num_hidden_layers: 3
+  pad_token_id: 1
+  position_embedding_type: absolute
+  torch_dtype: float32
+  transformers_version: 4.47.1
+  type_vocab_size: 1
+  use_cache: true
+  vocab_size: 600
+onnxFiles: {}
+safetensorsSizeMb: 13.7
+approxSizeMb: 13.7
+fetchedAt: '2026-06-09T06:55:53.000Z'

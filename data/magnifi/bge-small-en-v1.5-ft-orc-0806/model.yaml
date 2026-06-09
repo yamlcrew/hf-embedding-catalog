@@ -1,0 +1,485 @@
+_id: 66b277e0a1bf9db1dbfb06c9
+id: magnifi/bge-small-en-v1.5-ft-orc-0806
+private: false
+pipeline_tag: sentence-similarity
+library_name: sentence-transformers
+tags:
+- sentence-transformers
+- safetensors
+- bert
+- sentence-similarity
+- feature-extraction
+- generated_from_trainer
+- dataset_size:723
+- loss:MultipleNegativesRankingLoss
+- arxiv:1908.10084
+- arxiv:1705.00652
+- base_model:BAAI/bge-small-en-v1.5
+- base_model:finetune:BAAI/bge-small-en-v1.5
+- model-index
+- text-embeddings-inference
+- endpoints_compatible
+- region:us
+downloads: 5
+likes: 0
+modelId: magnifi/bge-small-en-v1.5-ft-orc-0806
+author: magnifi
+sha: 65fcc53524b070992c1b9331b3b2a212d47b3710
+lastModified: '2024-09-26T19:08:03.000Z'
+gated: false
+disabled: false
+mask_token: '[MASK]'
+widgetData:
+- source_sentence: how do different regions contribute to my returns
+  sentences:
+  - '[{"get_portfolio(None)": "portfolio"}, {"filter(''portfolio'',''ticker'',''=='',''<TICKER1>'')": "portfolio"}, {"get_attribute(''portfolio'',[''losses''],''<DATES>'')":
+    "portfolio"}]'
+  - '[{"get_portfolio(None)": "portfolio"}, {"factor_contribution(''portfolio'',''<DATES>'',''region'',None,''returns'')":
+    "portfolio"}]'
+  - '[{"get_portfolio(None)": "portfolio"}, {"get_attribute(''portfolio'',[''gains''],''<DATES>'')": "portfolio"}, {"sort(''portfolio'',''gains'',''desc'')":
+    "portfolio"}, {"get_attribute([''<TICKER1>''],[''returns''],''<DATES>'')": "<TICKER1>_performance_data"}]'
+- source_sentence: how have I done in US equity this year?
+  sentences:
+  - '[{"get_portfolio([''weight''])": "portfolio"}, {"get_attribute(''portfolio'',[''dividend yield''],''<DATES>'')": "portfolio"},
+    {"calculate(''portfolio'',[''dividend yield'',''weight''],''multiply'',''weighted_yield'')": "portfolio"}, {"aggregate(''portfolio'',''ticker'',''weighted_yield'',''sum'',None)":
+    "portfolio_yield"}]'
+  - '[{"get_portfolio(None)": "portfolio"}, {"get_attribute(''portfolio'',[''dividend yield''],''<DATES>'')": "portfolio"},
+    {"calculate(''portfolio'',[''dividend yield'', ''marketValue''],''multiply'',''div_income'')": "portfolio"}, {"sort(''portfolio'',''div_income'',''desc'')":
+    "portfolio"}]'
+  - '[{"get_portfolio(None)": "portfolio"}, {"factor_contribution(''portfolio'',''<DATES>'',''asset_class'',''us equity'',''returns'')":
+    "portfolio"}]'
+- source_sentence: What is the total value of my cash?
+  sentences:
+  - '[{"get_portfolio(None)": "portfolio"}, {"factor_contribution(''portfolio'',''<DATES>'',''sector'',''sector utilities'',''portfolio'')":
+    "portfolio"}]'
+  - '[{"get_portfolio([''type'', ''marketValue''])": "portfolio"}, {"filter(''portfolio'',''type'',''=='',''CASH'')": "portfolio"},
+    {"aggregate(''portfolio'',''ticker'',''marketValue'',''sum'',None)": "buying_power"}]'
+  - '[{"get_portfolio(None)": "portfolio"}, {"factor_contribution(''portfolio'',''<DATES>'',''sector'',''sector information
+    technology'',''returns'')": "portfolio"}]'
+- source_sentence: What is the exposure of my account to Chinese market?
+  sentences:
+  - '[{"get_portfolio([''marketValue''])": "portfolio"}, {"sort(''portfolio'',''marketValue'',''asc'')": "portfolio"}]'
+  - '[{"get_portfolio(None)": "portfolio"}, {"factor_contribution(''portfolio'',''<DATES>'',''region'',''china'',''portfolio'')":
+    "portfolio"}]'
+  - '[{"get_portfolio(None)": "portfolio"}, {"factor_contribution(''portfolio'',''<DATES>'',''volatility'',None,''portfolio'')":
+    "portfolio"}]'
+- source_sentence: Which of my investments are projected to generate the most return?
+  sentences:
+  - '[{"get_portfolio([''marketValue''])": "portfolio"}, {"get_attribute(''portfolio'',[''<TICKER1>''],''<DATES>'')": "portfolio"},
+    {"calculate(''portfolio'',[''marketValue'', ''<TICKER1>''],''multiply'',''expo_<TICKER1>'')": "portfolio"}, {"sort(''portfolio'',''expo_<TICKER1>'',''desc'')":
+    "portfolio"}, {"aggregate(''portfolio'',''ticker'',''expo_<TICKER1>'',''sum'',None)": "port_expo_<TICKER1>"}]'
+  - '[{"get_portfolio(None)": "portfolio"}, {"factor_contribution(''portfolio'',''<DATES>'',''asset_class'',''us equity'',''returns'')":
+    "portfolio"}]'
+  - '[{"get_portfolio(None)": "portfolio"}, {"get_expected_attribute(''portfolio'',[''returns''])": "portfolio"}, {"sort(''portfolio'',''returns'',''desc'')":
+    "portfolio"}]'
+model-index:
+- name: SentenceTransformer based on BAAI/bge-small-en-v1.5
+  results:
+  - task:
+      type: information-retrieval
+      name: Information Retrieval
+    dataset:
+      name: Unknown
+      type: unknown
+    metrics:
+    - type: cosine_accuracy@1
+      value: 0.6643835616438356
+      name: Cosine Accuracy@1
+      verified: false
+    - type: cosine_accuracy@3
+      value: 0.8287671232876712
+      name: Cosine Accuracy@3
+      verified: false
+    - type: cosine_accuracy@5
+      value: 0.863013698630137
+      name: Cosine Accuracy@5
+      verified: false
+    - type: cosine_accuracy@10
+      value: 0.9178082191780822
+      name: Cosine Accuracy@10
+      verified: false
+    - type: cosine_precision@1
+      value: 0.6643835616438356
+      name: Cosine Precision@1
+      verified: false
+    - type: cosine_precision@3
+      value: 0.27625570776255703
+      name: Cosine Precision@3
+      verified: false
+    - type: cosine_precision@5
+      value: 0.17260273972602735
+      name: Cosine Precision@5
+      verified: false
+    - type: cosine_precision@10
+      value: 0.0917808219178082
+      name: Cosine Precision@10
+      verified: false
+    - type: cosine_recall@1
+      value: 0.018455098934550992
+      name: Cosine Recall@1
+      verified: false
+    - type: cosine_recall@3
+      value: 0.023021308980213092
+      name: Cosine Recall@3
+      verified: false
+    - type: cosine_recall@5
+      value: 0.02397260273972603
+      name: Cosine Recall@5
+      verified: false
+    - type: cosine_recall@10
+      value: 0.02549467275494673
+      name: Cosine Recall@10
+      verified: false
+    - type: cosine_ndcg@10
+      value: 0.1736543171752474
+      name: Cosine Ndcg@10
+      verified: false
+    - type: cosine_mrr@10
+      value: 0.7480294629267232
+      name: Cosine Mrr@10
+      verified: false
+    - type: cosine_map@100
+      value: 0.020863027954722068
+      name: Cosine Map@100
+      verified: false
+    - type: dot_accuracy@1
+      value: 0.6643835616438356
+      name: Dot Accuracy@1
+      verified: false
+    - type: dot_accuracy@3
+      value: 0.8287671232876712
+      name: Dot Accuracy@3
+      verified: false
+    - type: dot_accuracy@5
+      value: 0.863013698630137
+      name: Dot Accuracy@5
+      verified: false
+    - type: dot_accuracy@10
+      value: 0.9178082191780822
+      name: Dot Accuracy@10
+      verified: false
+    - type: dot_precision@1
+      value: 0.6643835616438356
+      name: Dot Precision@1
+      verified: false
+    - type: dot_precision@3
+      value: 0.27625570776255703
+      name: Dot Precision@3
+      verified: false
+    - type: dot_precision@5
+      value: 0.17260273972602735
+      name: Dot Precision@5
+      verified: false
+    - type: dot_precision@10
+      value: 0.0917808219178082
+      name: Dot Precision@10
+      verified: false
+    - type: dot_recall@1
+      value: 0.018455098934550992
+      name: Dot Recall@1
+      verified: false
+    - type: dot_recall@3
+      value: 0.023021308980213092
+      name: Dot Recall@3
+      verified: false
+    - type: dot_recall@5
+      value: 0.02397260273972603
+      name: Dot Recall@5
+      verified: false
+    - type: dot_recall@10
+      value: 0.02549467275494673
+      name: Dot Recall@10
+      verified: false
+    - type: dot_ndcg@10
+      value: 0.1736543171752474
+      name: Dot Ndcg@10
+      verified: false
+    - type: dot_mrr@10
+      value: 0.7480294629267232
+      name: Dot Mrr@10
+      verified: false
+    - type: dot_map@100
+      value: 0.020863027954722068
+      name: Dot Map@100
+      verified: false
+config:
+  architectures:
+  - BertModel
+  model_type: bert
+  tokenizer_config:
+    cls_token: '[CLS]'
+    mask_token: '[MASK]'
+    pad_token: '[PAD]'
+    sep_token: '[SEP]'
+    unk_token: '[UNK]'
+cardData:
+  base_model: BAAI/bge-small-en-v1.5
+  datasets: []
+  language: []
+  library_name: sentence-transformers
+  metrics:
+  - cosine_accuracy@1
+  - cosine_accuracy@3
+  - cosine_accuracy@5
+  - cosine_accuracy@10
+  - cosine_precision@1
+  - cosine_precision@3
+  - cosine_precision@5
+  - cosine_precision@10
+  - cosine_recall@1
+  - cosine_recall@3
+  - cosine_recall@5
+  - cosine_recall@10
+  - cosine_ndcg@10
+  - cosine_mrr@10
+  - cosine_map@100
+  - dot_accuracy@1
+  - dot_accuracy@3
+  - dot_accuracy@5
+  - dot_accuracy@10
+  - dot_precision@1
+  - dot_precision@3
+  - dot_precision@5
+  - dot_precision@10
+  - dot_recall@1
+  - dot_recall@3
+  - dot_recall@5
+  - dot_recall@10
+  - dot_ndcg@10
+  - dot_mrr@10
+  - dot_map@100
+  pipeline_tag: sentence-similarity
+  tags:
+  - sentence-transformers
+  - sentence-similarity
+  - feature-extraction
+  - generated_from_trainer
+  - dataset_size:723
+  - loss:MultipleNegativesRankingLoss
+  widget:
+  - source_sentence: how do different regions contribute to my returns
+    sentences:
+    - '[{"get_portfolio(None)": "portfolio"}, {"filter(''portfolio'',''ticker'',''=='',''<TICKER1>'')": "portfolio"}, {"get_attribute(''portfolio'',[''losses''],''<DATES>'')":
+      "portfolio"}]'
+    - '[{"get_portfolio(None)": "portfolio"}, {"factor_contribution(''portfolio'',''<DATES>'',''region'',None,''returns'')":
+      "portfolio"}]'
+    - '[{"get_portfolio(None)": "portfolio"}, {"get_attribute(''portfolio'',[''gains''],''<DATES>'')": "portfolio"}, {"sort(''portfolio'',''gains'',''desc'')":
+      "portfolio"}, {"get_attribute([''<TICKER1>''],[''returns''],''<DATES>'')": "<TICKER1>_performance_data"}]'
+  - source_sentence: how have I done in US equity this year?
+    sentences:
+    - '[{"get_portfolio([''weight''])": "portfolio"}, {"get_attribute(''portfolio'',[''dividend yield''],''<DATES>'')": "portfolio"},
+      {"calculate(''portfolio'',[''dividend yield'',''weight''],''multiply'',''weighted_yield'')": "portfolio"}, {"aggregate(''portfolio'',''ticker'',''weighted_yield'',''sum'',None)":
+      "portfolio_yield"}]'
+    - '[{"get_portfolio(None)": "portfolio"}, {"get_attribute(''portfolio'',[''dividend yield''],''<DATES>'')": "portfolio"},
+      {"calculate(''portfolio'',[''dividend yield'', ''marketValue''],''multiply'',''div_income'')": "portfolio"}, {"sort(''portfolio'',''div_income'',''desc'')":
+      "portfolio"}]'
+    - '[{"get_portfolio(None)": "portfolio"}, {"factor_contribution(''portfolio'',''<DATES>'',''asset_class'',''us equity'',''returns'')":
+      "portfolio"}]'
+  - source_sentence: What is the total value of my cash?
+    sentences:
+    - '[{"get_portfolio(None)": "portfolio"}, {"factor_contribution(''portfolio'',''<DATES>'',''sector'',''sector utilities'',''portfolio'')":
+      "portfolio"}]'
+    - '[{"get_portfolio([''type'', ''marketValue''])": "portfolio"}, {"filter(''portfolio'',''type'',''=='',''CASH'')": "portfolio"},
+      {"aggregate(''portfolio'',''ticker'',''marketValue'',''sum'',None)": "buying_power"}]'
+    - '[{"get_portfolio(None)": "portfolio"}, {"factor_contribution(''portfolio'',''<DATES>'',''sector'',''sector information
+      technology'',''returns'')": "portfolio"}]'
+  - source_sentence: What is the exposure of my account to Chinese market?
+    sentences:
+    - '[{"get_portfolio([''marketValue''])": "portfolio"}, {"sort(''portfolio'',''marketValue'',''asc'')": "portfolio"}]'
+    - '[{"get_portfolio(None)": "portfolio"}, {"factor_contribution(''portfolio'',''<DATES>'',''region'',''china'',''portfolio'')":
+      "portfolio"}]'
+    - '[{"get_portfolio(None)": "portfolio"}, {"factor_contribution(''portfolio'',''<DATES>'',''volatility'',None,''portfolio'')":
+      "portfolio"}]'
+  - source_sentence: Which of my investments are projected to generate the most return?
+    sentences:
+    - '[{"get_portfolio([''marketValue''])": "portfolio"}, {"get_attribute(''portfolio'',[''<TICKER1>''],''<DATES>'')": "portfolio"},
+      {"calculate(''portfolio'',[''marketValue'', ''<TICKER1>''],''multiply'',''expo_<TICKER1>'')": "portfolio"}, {"sort(''portfolio'',''expo_<TICKER1>'',''desc'')":
+      "portfolio"}, {"aggregate(''portfolio'',''ticker'',''expo_<TICKER1>'',''sum'',None)": "port_expo_<TICKER1>"}]'
+    - '[{"get_portfolio(None)": "portfolio"}, {"factor_contribution(''portfolio'',''<DATES>'',''asset_class'',''us equity'',''returns'')":
+      "portfolio"}]'
+    - '[{"get_portfolio(None)": "portfolio"}, {"get_expected_attribute(''portfolio'',[''returns''])": "portfolio"}, {"sort(''portfolio'',''returns'',''desc'')":
+      "portfolio"}]'
+  model-index:
+  - name: SentenceTransformer based on BAAI/bge-small-en-v1.5
+    results:
+    - task:
+        type: information-retrieval
+        name: Information Retrieval
+      dataset:
+        name: Unknown
+        type: unknown
+      metrics:
+      - type: cosine_accuracy@1
+        value: 0.6643835616438356
+        name: Cosine Accuracy@1
+        verified: false
+      - type: cosine_accuracy@3
+        value: 0.8287671232876712
+        name: Cosine Accuracy@3
+        verified: false
+      - type: cosine_accuracy@5
+        value: 0.863013698630137
+        name: Cosine Accuracy@5
+        verified: false
+      - type: cosine_accuracy@10
+        value: 0.9178082191780822
+        name: Cosine Accuracy@10
+        verified: false
+      - type: cosine_precision@1
+        value: 0.6643835616438356
+        name: Cosine Precision@1
+        verified: false
+      - type: cosine_precision@3
+        value: 0.27625570776255703
+        name: Cosine Precision@3
+        verified: false
+      - type: cosine_precision@5
+        value: 0.17260273972602735
+        name: Cosine Precision@5
+        verified: false
+      - type: cosine_precision@10
+        value: 0.0917808219178082
+        name: Cosine Precision@10
+        verified: false
+      - type: cosine_recall@1
+        value: 0.018455098934550992
+        name: Cosine Recall@1
+        verified: false
+      - type: cosine_recall@3
+        value: 0.023021308980213092
+        name: Cosine Recall@3
+        verified: false
+      - type: cosine_recall@5
+        value: 0.02397260273972603
+        name: Cosine Recall@5
+        verified: false
+      - type: cosine_recall@10
+        value: 0.02549467275494673
+        name: Cosine Recall@10
+        verified: false
+      - type: cosine_ndcg@10
+        value: 0.1736543171752474
+        name: Cosine Ndcg@10
+        verified: false
+      - type: cosine_mrr@10
+        value: 0.7480294629267232
+        name: Cosine Mrr@10
+        verified: false
+      - type: cosine_map@100
+        value: 0.020863027954722068
+        name: Cosine Map@100
+        verified: false
+      - type: dot_accuracy@1
+        value: 0.6643835616438356
+        name: Dot Accuracy@1
+        verified: false
+      - type: dot_accuracy@3
+        value: 0.8287671232876712
+        name: Dot Accuracy@3
+        verified: false
+      - type: dot_accuracy@5
+        value: 0.863013698630137
+        name: Dot Accuracy@5
+        verified: false
+      - type: dot_accuracy@10
+        value: 0.9178082191780822
+        name: Dot Accuracy@10
+        verified: false
+      - type: dot_precision@1
+        value: 0.6643835616438356
+        name: Dot Precision@1
+        verified: false
+      - type: dot_precision@3
+        value: 0.27625570776255703
+        name: Dot Precision@3
+        verified: false
+      - type: dot_precision@5
+        value: 0.17260273972602735
+        name: Dot Precision@5
+        verified: false
+      - type: dot_precision@10
+        value: 0.0917808219178082
+        name: Dot Precision@10
+        verified: false
+      - type: dot_recall@1
+        value: 0.018455098934550992
+        name: Dot Recall@1
+        verified: false
+      - type: dot_recall@3
+        value: 0.023021308980213092
+        name: Dot Recall@3
+        verified: false
+      - type: dot_recall@5
+        value: 0.02397260273972603
+        name: Dot Recall@5
+        verified: false
+      - type: dot_recall@10
+        value: 0.02549467275494673
+        name: Dot Recall@10
+        verified: false
+      - type: dot_ndcg@10
+        value: 0.1736543171752474
+        name: Dot Ndcg@10
+        verified: false
+      - type: dot_mrr@10
+        value: 0.7480294629267232
+        name: Dot Mrr@10
+        verified: false
+      - type: dot_map@100
+        value: 0.020863027954722068
+        name: Dot Map@100
+        verified: false
+siblings:
+- rfilename: .gitattributes
+- rfilename: 1_Pooling/config.json
+- rfilename: README.md
+- rfilename: config.json
+- rfilename: config_sentence_transformers.json
+- rfilename: eval/Information-Retrieval_evaluation_results.csv
+- rfilename: model.safetensors
+- rfilename: modules.json
+- rfilename: sentence_bert_config.json
+- rfilename: special_tokens_map.json
+- rfilename: tokenizer.json
+- rfilename: tokenizer_config.json
+- rfilename: vocab.txt
+spaces: []
+createdAt: '2024-08-06T19:22:08.000Z'
+safetensors:
+  parameters:
+    F32: 33360000
+  total: 33360000
+usedStorage: 533848512
+downloadsAllTime: 8
+inferenceProviderMapping: {}
+configJson:
+  _name_or_path: BAAI/bge-small-en-v1.5
+  architectures:
+  - BertModel
+  attention_probs_dropout_prob: 0.1
+  classifier_dropout: null
+  hidden_act: gelu
+  hidden_dropout_prob: 0.1
+  hidden_size: 384
+  id2label:
+    '0': LABEL_0
+  initializer_range: 0.02
+  intermediate_size: 1536
+  label2id:
+    LABEL_0: 0
+  layer_norm_eps: 1.0e-12
+  max_position_embeddings: 512
+  model_type: bert
+  num_attention_heads: 12
+  num_hidden_layers: 12
+  pad_token_id: 0
+  position_embedding_type: absolute
+  torch_dtype: float32
+  transformers_version: 4.44.0
+  type_vocab_size: 2
+  use_cache: true
+  vocab_size: 30522
+onnxFiles: {}
+safetensorsSizeMb: 133.5
+approxSizeMb: 133.4
+fetchedAt: '2026-06-09T06:55:53.000Z'

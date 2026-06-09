@@ -1,0 +1,872 @@
+_id: 67d6a0ce367832ff9794fc3e
+id: KristupasC/bge-base-financial-matryoshka
+private: false
+pipeline_tag: sentence-similarity
+library_name: sentence-transformers
+tags:
+- sentence-transformers
+- safetensors
+- bert
+- sentence-similarity
+- feature-extraction
+- generated_from_trainer
+- dataset_size:6300
+- loss:MatryoshkaLoss
+- loss:MultipleNegativesRankingLoss
+- en
+- arxiv:1908.10084
+- arxiv:2205.13147
+- arxiv:1705.00652
+- base_model:BAAI/bge-base-en-v1.5
+- base_model:finetune:BAAI/bge-base-en-v1.5
+- license:apache-2.0
+- model-index
+- text-embeddings-inference
+- endpoints_compatible
+- region:us
+downloads: 2
+likes: 0
+modelId: KristupasC/bge-base-financial-matryoshka
+author: KristupasC
+sha: e086ebf1c40d5dd15f0a1050de8655d71b485056
+lastModified: '2025-03-16T09:58:58.000Z'
+gated: false
+disabled: false
+mask_token: '[MASK]'
+widgetData:
+- source_sentence: The Parisian Macao saw its occupancy rate increase significantly from 37.9% in 2022 to 93.0% in 2023.
+  sentences:
+  - Who is the Chief People Officer of this company and what are their responsibilities?
+  - What was the occupancy rate change at The Parisian Macao from 2022 to 2023?
+  - What components make up the mall-related expenses?
+- source_sentence: According to Item 8, the Financial Statement Schedule is located on page S-1 of IBM’s Form 10-K.
+  sentences:
+  - In IBM’s Form 10-K filing, where is the Financial Statement Schedule located?
+  - What was the total amount repurchased by the company in fiscal years 2022 and 2023 under the share repurchase program?
+  - What was the net cash position change due to exchange rate effects during the year in the financial data?
+- source_sentence: A hypothetical 50% decrease in short-term interest rates would decrease our annual pre-tax earnings by
+    $15 million as of December 31, 2023, assuming no change in the amount or composition of our cash and cash equivalents
+    and short-term and long-term restricted cash and cash equivalents.
+  sentences:
+  - What financial impact would a 50% decrease in short-term interest rates have on the company's annual pre-tax earnings
+    as of December 31, 2023?
+  - What are the typical higher sales quarters for companies due to seasonal and holiday-related sales patterns?
+  - What triggers the company to accrue for the cost of product recalls and corrective actions?
+- source_sentence: 'Our strategy is focused on growing customer loyalty by delivering great value and convenience, and investing
+    in four strategic pillars: Fresh, Our Brands, Data & Personalization and Seamless.'
+  sentences:
+  - What was the percentage change in impairment of goodwill for Hewlett Packard Enterprise between fiscal 2022 and 2023?
+  - What are Kroger’s four strategic pillars?
+  - How much did the foreclosed properties decrease in value during 2023?
+- source_sentence: The Inflation Reduction Act of 2022 has and will continue to have a significant impact on how drugs are
+    covered and paid for under the Medicare program, including through the creation of financial penalties for drugs whose
+    price increases outpace inflation, the redesign of Medicare Part D benefits to shift a greater portion of the costs to
+    manufacturers, and through government price-setting for certain Medicare Part B and Part D drugs.
+  sentences:
+  - What was the total depreciation and amortization expense for the company in 2023?
+  - What overall context does Item 3. Legal Proceedings offer regarding the company?
+  - How does the Inflation Reduction Act of 2022 impact AbbVie's drug pricing under Medicare?
+model-index:
+- name: BGE base Financial Matryoshka
+  results:
+  - task:
+      type: information-retrieval
+      name: Information Retrieval
+    dataset:
+      name: dim 768
+      type: dim_768
+    metrics:
+    - type: cosine_accuracy@1
+      value: 0.7357142857142858
+      name: Cosine Accuracy@1
+      verified: false
+    - type: cosine_accuracy@3
+      value: 0.8728571428571429
+      name: Cosine Accuracy@3
+      verified: false
+    - type: cosine_accuracy@5
+      value: 0.9014285714285715
+      name: Cosine Accuracy@5
+      verified: false
+    - type: cosine_accuracy@10
+      value: 0.9271428571428572
+      name: Cosine Accuracy@10
+      verified: false
+    - type: cosine_precision@1
+      value: 0.7357142857142858
+      name: Cosine Precision@1
+      verified: false
+    - type: cosine_precision@3
+      value: 0.29095238095238096
+      name: Cosine Precision@3
+      verified: false
+    - type: cosine_precision@5
+      value: 0.18028571428571427
+      name: Cosine Precision@5
+      verified: false
+    - type: cosine_precision@10
+      value: 0.09271428571428571
+      name: Cosine Precision@10
+      verified: false
+    - type: cosine_recall@1
+      value: 0.7357142857142858
+      name: Cosine Recall@1
+      verified: false
+    - type: cosine_recall@3
+      value: 0.8728571428571429
+      name: Cosine Recall@3
+      verified: false
+    - type: cosine_recall@5
+      value: 0.9014285714285715
+      name: Cosine Recall@5
+      verified: false
+    - type: cosine_recall@10
+      value: 0.9271428571428572
+      name: Cosine Recall@10
+      verified: false
+    - type: cosine_ndcg@10
+      value: 0.8376503331859739
+      name: Cosine Ndcg@10
+      verified: false
+    - type: cosine_mrr@10
+      value: 0.8083339002267572
+      name: Cosine Mrr@10
+      verified: false
+    - type: cosine_map@100
+      value: 0.8113126406613911
+      name: Cosine Map@100
+      verified: false
+  - task:
+      type: information-retrieval
+      name: Information Retrieval
+    dataset:
+      name: dim 512
+      type: dim_512
+    metrics:
+    - type: cosine_accuracy@1
+      value: 0.7328571428571429
+      name: Cosine Accuracy@1
+      verified: false
+    - type: cosine_accuracy@3
+      value: 0.87
+      name: Cosine Accuracy@3
+      verified: false
+    - type: cosine_accuracy@5
+      value: 0.8985714285714286
+      name: Cosine Accuracy@5
+      verified: false
+    - type: cosine_accuracy@10
+      value: 0.9271428571428572
+      name: Cosine Accuracy@10
+      verified: false
+    - type: cosine_precision@1
+      value: 0.7328571428571429
+      name: Cosine Precision@1
+      verified: false
+    - type: cosine_precision@3
+      value: 0.29
+      name: Cosine Precision@3
+      verified: false
+    - type: cosine_precision@5
+      value: 0.1797142857142857
+      name: Cosine Precision@5
+      verified: false
+    - type: cosine_precision@10
+      value: 0.09271428571428571
+      name: Cosine Precision@10
+      verified: false
+    - type: cosine_recall@1
+      value: 0.7328571428571429
+      name: Cosine Recall@1
+      verified: false
+    - type: cosine_recall@3
+      value: 0.87
+      name: Cosine Recall@3
+      verified: false
+    - type: cosine_recall@5
+      value: 0.8985714285714286
+      name: Cosine Recall@5
+      verified: false
+    - type: cosine_recall@10
+      value: 0.9271428571428572
+      name: Cosine Recall@10
+      verified: false
+    - type: cosine_ndcg@10
+      value: 0.8361443346673566
+      name: Cosine Ndcg@10
+      verified: false
+    - type: cosine_mrr@10
+      value: 0.8063117913832198
+      name: Cosine Mrr@10
+      verified: false
+    - type: cosine_map@100
+      value: 0.80919006196483
+      name: Cosine Map@100
+      verified: false
+  - task:
+      type: information-retrieval
+      name: Information Retrieval
+    dataset:
+      name: dim 256
+      type: dim_256
+    metrics:
+    - type: cosine_accuracy@1
+      value: 0.7228571428571429
+      name: Cosine Accuracy@1
+      verified: false
+    - type: cosine_accuracy@3
+      value: 0.8642857142857143
+      name: Cosine Accuracy@3
+      verified: false
+    - type: cosine_accuracy@5
+      value: 0.8971428571428571
+      name: Cosine Accuracy@5
+      verified: false
+    - type: cosine_accuracy@10
+      value: 0.9214285714285714
+      name: Cosine Accuracy@10
+      verified: false
+    - type: cosine_precision@1
+      value: 0.7228571428571429
+      name: Cosine Precision@1
+      verified: false
+    - type: cosine_precision@3
+      value: 0.2880952380952381
+      name: Cosine Precision@3
+      verified: false
+    - type: cosine_precision@5
+      value: 0.1794285714285714
+      name: Cosine Precision@5
+      verified: false
+    - type: cosine_precision@10
+      value: 0.09214285714285714
+      name: Cosine Precision@10
+      verified: false
+    - type: cosine_recall@1
+      value: 0.7228571428571429
+      name: Cosine Recall@1
+      verified: false
+    - type: cosine_recall@3
+      value: 0.8642857142857143
+      name: Cosine Recall@3
+      verified: false
+    - type: cosine_recall@5
+      value: 0.8971428571428571
+      name: Cosine Recall@5
+      verified: false
+    - type: cosine_recall@10
+      value: 0.9214285714285714
+      name: Cosine Recall@10
+      verified: false
+    - type: cosine_ndcg@10
+      value: 0.8293858846039718
+      name: Cosine Ndcg@10
+      verified: false
+    - type: cosine_mrr@10
+      value: 0.7991496598639453
+      name: Cosine Mrr@10
+      verified: false
+    - type: cosine_map@100
+      value: 0.802093445052298
+      name: Cosine Map@100
+      verified: false
+  - task:
+      type: information-retrieval
+      name: Information Retrieval
+    dataset:
+      name: dim 128
+      type: dim_128
+    metrics:
+    - type: cosine_accuracy@1
+      value: 0.7142857142857143
+      name: Cosine Accuracy@1
+      verified: false
+    - type: cosine_accuracy@3
+      value: 0.85
+      name: Cosine Accuracy@3
+      verified: false
+    - type: cosine_accuracy@5
+      value: 0.88
+      name: Cosine Accuracy@5
+      verified: false
+    - type: cosine_accuracy@10
+      value: 0.91
+      name: Cosine Accuracy@10
+      verified: false
+    - type: cosine_precision@1
+      value: 0.7142857142857143
+      name: Cosine Precision@1
+      verified: false
+    - type: cosine_precision@3
+      value: 0.2833333333333333
+      name: Cosine Precision@3
+      verified: false
+    - type: cosine_precision@5
+      value: 0.176
+      name: Cosine Precision@5
+      verified: false
+    - type: cosine_precision@10
+      value: 0.09099999999999998
+      name: Cosine Precision@10
+      verified: false
+    - type: cosine_recall@1
+      value: 0.7142857142857143
+      name: Cosine Recall@1
+      verified: false
+    - type: cosine_recall@3
+      value: 0.85
+      name: Cosine Recall@3
+      verified: false
+    - type: cosine_recall@5
+      value: 0.88
+      name: Cosine Recall@5
+      verified: false
+    - type: cosine_recall@10
+      value: 0.91
+      name: Cosine Recall@10
+      verified: false
+    - type: cosine_ndcg@10
+      value: 0.8170618027193949
+      name: Cosine Ndcg@10
+      verified: false
+    - type: cosine_mrr@10
+      value: 0.7867528344671202
+      name: Cosine Mrr@10
+      verified: false
+    - type: cosine_map@100
+      value: 0.7900596429177168
+      name: Cosine Map@100
+      verified: false
+  - task:
+      type: information-retrieval
+      name: Information Retrieval
+    dataset:
+      name: dim 64
+      type: dim_64
+    metrics:
+    - type: cosine_accuracy@1
+      value: 0.6614285714285715
+      name: Cosine Accuracy@1
+      verified: false
+    - type: cosine_accuracy@3
+      value: 0.8157142857142857
+      name: Cosine Accuracy@3
+      verified: false
+    - type: cosine_accuracy@5
+      value: 0.85
+      name: Cosine Accuracy@5
+      verified: false
+    - type: cosine_accuracy@10
+      value: 0.8928571428571429
+      name: Cosine Accuracy@10
+      verified: false
+    - type: cosine_precision@1
+      value: 0.6614285714285715
+      name: Cosine Precision@1
+      verified: false
+    - type: cosine_precision@3
+      value: 0.27190476190476187
+      name: Cosine Precision@3
+      verified: false
+    - type: cosine_precision@5
+      value: 0.16999999999999998
+      name: Cosine Precision@5
+      verified: false
+    - type: cosine_precision@10
+      value: 0.08928571428571427
+      name: Cosine Precision@10
+      verified: false
+    - type: cosine_recall@1
+      value: 0.6614285714285715
+      name: Cosine Recall@1
+      verified: false
+    - type: cosine_recall@3
+      value: 0.8157142857142857
+      name: Cosine Recall@3
+      verified: false
+    - type: cosine_recall@5
+      value: 0.85
+      name: Cosine Recall@5
+      verified: false
+    - type: cosine_recall@10
+      value: 0.8928571428571429
+      name: Cosine Recall@10
+      verified: false
+    - type: cosine_ndcg@10
+      value: 0.7826677679629053
+      name: Cosine Ndcg@10
+      verified: false
+    - type: cosine_mrr@10
+      value: 0.7468339002267574
+      name: Cosine Mrr@10
+      verified: false
+    - type: cosine_map@100
+      value: 0.7512201171926934
+      name: Cosine Map@100
+      verified: false
+config:
+  architectures:
+  - BertModel
+  model_type: bert
+  tokenizer_config:
+    cls_token: '[CLS]'
+    mask_token: '[MASK]'
+    pad_token: '[PAD]'
+    sep_token: '[SEP]'
+    unk_token: '[UNK]'
+cardData:
+  language:
+  - en
+  license: apache-2.0
+  tags:
+  - sentence-transformers
+  - sentence-similarity
+  - feature-extraction
+  - generated_from_trainer
+  - dataset_size:6300
+  - loss:MatryoshkaLoss
+  - loss:MultipleNegativesRankingLoss
+  base_model: BAAI/bge-base-en-v1.5
+  widget:
+  - source_sentence: The Parisian Macao saw its occupancy rate increase significantly from 37.9% in 2022 to 93.0% in 2023.
+    sentences:
+    - Who is the Chief People Officer of this company and what are their responsibilities?
+    - What was the occupancy rate change at The Parisian Macao from 2022 to 2023?
+    - What components make up the mall-related expenses?
+  - source_sentence: According to Item 8, the Financial Statement Schedule is located on page S-1 of IBM’s Form 10-K.
+    sentences:
+    - In IBM’s Form 10-K filing, where is the Financial Statement Schedule located?
+    - What was the total amount repurchased by the company in fiscal years 2022 and 2023 under the share repurchase program?
+    - What was the net cash position change due to exchange rate effects during the year in the financial data?
+  - source_sentence: A hypothetical 50% decrease in short-term interest rates would decrease our annual pre-tax earnings by
+      $15 million as of December 31, 2023, assuming no change in the amount or composition of our cash and cash equivalents
+      and short-term and long-term restricted cash and cash equivalents.
+    sentences:
+    - What financial impact would a 50% decrease in short-term interest rates have on the company's annual pre-tax earnings
+      as of December 31, 2023?
+    - What are the typical higher sales quarters for companies due to seasonal and holiday-related sales patterns?
+    - What triggers the company to accrue for the cost of product recalls and corrective actions?
+  - source_sentence: 'Our strategy is focused on growing customer loyalty by delivering great value and convenience, and investing
+      in four strategic pillars: Fresh, Our Brands, Data & Personalization and Seamless.'
+    sentences:
+    - What was the percentage change in impairment of goodwill for Hewlett Packard Enterprise between fiscal 2022 and 2023?
+    - What are Kroger’s four strategic pillars?
+    - How much did the foreclosed properties decrease in value during 2023?
+  - source_sentence: The Inflation Reduction Act of 2022 has and will continue to have a significant impact on how drugs are
+      covered and paid for under the Medicare program, including through the creation of financial penalties for drugs whose
+      price increases outpace inflation, the redesign of Medicare Part D benefits to shift a greater portion of the costs
+      to manufacturers, and through government price-setting for certain Medicare Part B and Part D drugs.
+    sentences:
+    - What was the total depreciation and amortization expense for the company in 2023?
+    - What overall context does Item 3. Legal Proceedings offer regarding the company?
+    - How does the Inflation Reduction Act of 2022 impact AbbVie's drug pricing under Medicare?
+  pipeline_tag: sentence-similarity
+  library_name: sentence-transformers
+  metrics:
+  - cosine_accuracy@1
+  - cosine_accuracy@3
+  - cosine_accuracy@5
+  - cosine_accuracy@10
+  - cosine_precision@1
+  - cosine_precision@3
+  - cosine_precision@5
+  - cosine_precision@10
+  - cosine_recall@1
+  - cosine_recall@3
+  - cosine_recall@5
+  - cosine_recall@10
+  - cosine_ndcg@10
+  - cosine_mrr@10
+  - cosine_map@100
+  model-index:
+  - name: BGE base Financial Matryoshka
+    results:
+    - task:
+        type: information-retrieval
+        name: Information Retrieval
+      dataset:
+        name: dim 768
+        type: dim_768
+      metrics:
+      - type: cosine_accuracy@1
+        value: 0.7357142857142858
+        name: Cosine Accuracy@1
+        verified: false
+      - type: cosine_accuracy@3
+        value: 0.8728571428571429
+        name: Cosine Accuracy@3
+        verified: false
+      - type: cosine_accuracy@5
+        value: 0.9014285714285715
+        name: Cosine Accuracy@5
+        verified: false
+      - type: cosine_accuracy@10
+        value: 0.9271428571428572
+        name: Cosine Accuracy@10
+        verified: false
+      - type: cosine_precision@1
+        value: 0.7357142857142858
+        name: Cosine Precision@1
+        verified: false
+      - type: cosine_precision@3
+        value: 0.29095238095238096
+        name: Cosine Precision@3
+        verified: false
+      - type: cosine_precision@5
+        value: 0.18028571428571427
+        name: Cosine Precision@5
+        verified: false
+      - type: cosine_precision@10
+        value: 0.09271428571428571
+        name: Cosine Precision@10
+        verified: false
+      - type: cosine_recall@1
+        value: 0.7357142857142858
+        name: Cosine Recall@1
+        verified: false
+      - type: cosine_recall@3
+        value: 0.8728571428571429
+        name: Cosine Recall@3
+        verified: false
+      - type: cosine_recall@5
+        value: 0.9014285714285715
+        name: Cosine Recall@5
+        verified: false
+      - type: cosine_recall@10
+        value: 0.9271428571428572
+        name: Cosine Recall@10
+        verified: false
+      - type: cosine_ndcg@10
+        value: 0.8376503331859739
+        name: Cosine Ndcg@10
+        verified: false
+      - type: cosine_mrr@10
+        value: 0.8083339002267572
+        name: Cosine Mrr@10
+        verified: false
+      - type: cosine_map@100
+        value: 0.8113126406613911
+        name: Cosine Map@100
+        verified: false
+    - task:
+        type: information-retrieval
+        name: Information Retrieval
+      dataset:
+        name: dim 512
+        type: dim_512
+      metrics:
+      - type: cosine_accuracy@1
+        value: 0.7328571428571429
+        name: Cosine Accuracy@1
+        verified: false
+      - type: cosine_accuracy@3
+        value: 0.87
+        name: Cosine Accuracy@3
+        verified: false
+      - type: cosine_accuracy@5
+        value: 0.8985714285714286
+        name: Cosine Accuracy@5
+        verified: false
+      - type: cosine_accuracy@10
+        value: 0.9271428571428572
+        name: Cosine Accuracy@10
+        verified: false
+      - type: cosine_precision@1
+        value: 0.7328571428571429
+        name: Cosine Precision@1
+        verified: false
+      - type: cosine_precision@3
+        value: 0.29
+        name: Cosine Precision@3
+        verified: false
+      - type: cosine_precision@5
+        value: 0.1797142857142857
+        name: Cosine Precision@5
+        verified: false
+      - type: cosine_precision@10
+        value: 0.09271428571428571
+        name: Cosine Precision@10
+        verified: false
+      - type: cosine_recall@1
+        value: 0.7328571428571429
+        name: Cosine Recall@1
+        verified: false
+      - type: cosine_recall@3
+        value: 0.87
+        name: Cosine Recall@3
+        verified: false
+      - type: cosine_recall@5
+        value: 0.8985714285714286
+        name: Cosine Recall@5
+        verified: false
+      - type: cosine_recall@10
+        value: 0.9271428571428572
+        name: Cosine Recall@10
+        verified: false
+      - type: cosine_ndcg@10
+        value: 0.8361443346673566
+        name: Cosine Ndcg@10
+        verified: false
+      - type: cosine_mrr@10
+        value: 0.8063117913832198
+        name: Cosine Mrr@10
+        verified: false
+      - type: cosine_map@100
+        value: 0.80919006196483
+        name: Cosine Map@100
+        verified: false
+    - task:
+        type: information-retrieval
+        name: Information Retrieval
+      dataset:
+        name: dim 256
+        type: dim_256
+      metrics:
+      - type: cosine_accuracy@1
+        value: 0.7228571428571429
+        name: Cosine Accuracy@1
+        verified: false
+      - type: cosine_accuracy@3
+        value: 0.8642857142857143
+        name: Cosine Accuracy@3
+        verified: false
+      - type: cosine_accuracy@5
+        value: 0.8971428571428571
+        name: Cosine Accuracy@5
+        verified: false
+      - type: cosine_accuracy@10
+        value: 0.9214285714285714
+        name: Cosine Accuracy@10
+        verified: false
+      - type: cosine_precision@1
+        value: 0.7228571428571429
+        name: Cosine Precision@1
+        verified: false
+      - type: cosine_precision@3
+        value: 0.2880952380952381
+        name: Cosine Precision@3
+        verified: false
+      - type: cosine_precision@5
+        value: 0.1794285714285714
+        name: Cosine Precision@5
+        verified: false
+      - type: cosine_precision@10
+        value: 0.09214285714285714
+        name: Cosine Precision@10
+        verified: false
+      - type: cosine_recall@1
+        value: 0.7228571428571429
+        name: Cosine Recall@1
+        verified: false
+      - type: cosine_recall@3
+        value: 0.8642857142857143
+        name: Cosine Recall@3
+        verified: false
+      - type: cosine_recall@5
+        value: 0.8971428571428571
+        name: Cosine Recall@5
+        verified: false
+      - type: cosine_recall@10
+        value: 0.9214285714285714
+        name: Cosine Recall@10
+        verified: false
+      - type: cosine_ndcg@10
+        value: 0.8293858846039718
+        name: Cosine Ndcg@10
+        verified: false
+      - type: cosine_mrr@10
+        value: 0.7991496598639453
+        name: Cosine Mrr@10
+        verified: false
+      - type: cosine_map@100
+        value: 0.802093445052298
+        name: Cosine Map@100
+        verified: false
+    - task:
+        type: information-retrieval
+        name: Information Retrieval
+      dataset:
+        name: dim 128
+        type: dim_128
+      metrics:
+      - type: cosine_accuracy@1
+        value: 0.7142857142857143
+        name: Cosine Accuracy@1
+        verified: false
+      - type: cosine_accuracy@3
+        value: 0.85
+        name: Cosine Accuracy@3
+        verified: false
+      - type: cosine_accuracy@5
+        value: 0.88
+        name: Cosine Accuracy@5
+        verified: false
+      - type: cosine_accuracy@10
+        value: 0.91
+        name: Cosine Accuracy@10
+        verified: false
+      - type: cosine_precision@1
+        value: 0.7142857142857143
+        name: Cosine Precision@1
+        verified: false
+      - type: cosine_precision@3
+        value: 0.2833333333333333
+        name: Cosine Precision@3
+        verified: false
+      - type: cosine_precision@5
+        value: 0.176
+        name: Cosine Precision@5
+        verified: false
+      - type: cosine_precision@10
+        value: 0.09099999999999998
+        name: Cosine Precision@10
+        verified: false
+      - type: cosine_recall@1
+        value: 0.7142857142857143
+        name: Cosine Recall@1
+        verified: false
+      - type: cosine_recall@3
+        value: 0.85
+        name: Cosine Recall@3
+        verified: false
+      - type: cosine_recall@5
+        value: 0.88
+        name: Cosine Recall@5
+        verified: false
+      - type: cosine_recall@10
+        value: 0.91
+        name: Cosine Recall@10
+        verified: false
+      - type: cosine_ndcg@10
+        value: 0.8170618027193949
+        name: Cosine Ndcg@10
+        verified: false
+      - type: cosine_mrr@10
+        value: 0.7867528344671202
+        name: Cosine Mrr@10
+        verified: false
+      - type: cosine_map@100
+        value: 0.7900596429177168
+        name: Cosine Map@100
+        verified: false
+    - task:
+        type: information-retrieval
+        name: Information Retrieval
+      dataset:
+        name: dim 64
+        type: dim_64
+      metrics:
+      - type: cosine_accuracy@1
+        value: 0.6614285714285715
+        name: Cosine Accuracy@1
+        verified: false
+      - type: cosine_accuracy@3
+        value: 0.8157142857142857
+        name: Cosine Accuracy@3
+        verified: false
+      - type: cosine_accuracy@5
+        value: 0.85
+        name: Cosine Accuracy@5
+        verified: false
+      - type: cosine_accuracy@10
+        value: 0.8928571428571429
+        name: Cosine Accuracy@10
+        verified: false
+      - type: cosine_precision@1
+        value: 0.6614285714285715
+        name: Cosine Precision@1
+        verified: false
+      - type: cosine_precision@3
+        value: 0.27190476190476187
+        name: Cosine Precision@3
+        verified: false
+      - type: cosine_precision@5
+        value: 0.16999999999999998
+        name: Cosine Precision@5
+        verified: false
+      - type: cosine_precision@10
+        value: 0.08928571428571427
+        name: Cosine Precision@10
+        verified: false
+      - type: cosine_recall@1
+        value: 0.6614285714285715
+        name: Cosine Recall@1
+        verified: false
+      - type: cosine_recall@3
+        value: 0.8157142857142857
+        name: Cosine Recall@3
+        verified: false
+      - type: cosine_recall@5
+        value: 0.85
+        name: Cosine Recall@5
+        verified: false
+      - type: cosine_recall@10
+        value: 0.8928571428571429
+        name: Cosine Recall@10
+        verified: false
+      - type: cosine_ndcg@10
+        value: 0.7826677679629053
+        name: Cosine Ndcg@10
+        verified: false
+      - type: cosine_mrr@10
+        value: 0.7468339002267574
+        name: Cosine Mrr@10
+        verified: false
+      - type: cosine_map@100
+        value: 0.7512201171926934
+        name: Cosine Map@100
+        verified: false
+siblings:
+- rfilename: .gitattributes
+- rfilename: 1_Pooling/config.json
+- rfilename: README.md
+- rfilename: config.json
+- rfilename: config_sentence_transformers.json
+- rfilename: model.safetensors
+- rfilename: modules.json
+- rfilename: sentence_bert_config.json
+- rfilename: special_tokens_map.json
+- rfilename: tokenizer.json
+- rfilename: tokenizer_config.json
+- rfilename: vocab.txt
+spaces: []
+createdAt: '2025-03-16T09:58:38.000Z'
+safetensors:
+  parameters:
+    F32: 109482240
+  total: 109482240
+usedStorage: 437951328
+downloadsAllTime: 14
+inferenceProviderMapping: {}
+configJson:
+  _name_or_path: BAAI/bge-base-en-v1.5
+  architectures:
+  - BertModel
+  attention_probs_dropout_prob: 0.1
+  classifier_dropout: null
+  gradient_checkpointing: false
+  hidden_act: gelu
+  hidden_dropout_prob: 0.1
+  hidden_size: 768
+  id2label:
+    '0': LABEL_0
+  initializer_range: 0.02
+  intermediate_size: 3072
+  label2id:
+    LABEL_0: 0
+  layer_norm_eps: 1.0e-12
+  max_position_embeddings: 512
+  model_type: bert
+  num_attention_heads: 12
+  num_hidden_layers: 12
+  pad_token_id: 0
+  position_embedding_type: absolute
+  torch_dtype: float32
+  transformers_version: 4.41.2
+  type_vocab_size: 2
+  use_cache: true
+  vocab_size: 30522
+onnxFiles: {}
+safetensorsSizeMb: 438.0
+approxSizeMb: 437.9
+fetchedAt: '2026-06-09T06:55:53.000Z'
