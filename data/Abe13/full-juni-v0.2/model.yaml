@@ -1,0 +1,83 @@
+_id: 6536998f89dd48faca6a1911
+id: Abe13/full-juni-v0.2
+private: false
+pipeline_tag: feature-extraction
+library_name: transformers
+tags:
+- transformers
+- pytorch
+- mistral
+- feature-extraction
+- text-embeddings-inference
+- endpoints_compatible
+- region:us
+downloads: 11
+likes: 0
+modelId: Abe13/full-juni-v0.2
+author: Abe13
+sha: 710667f21b92fec36c20eb8ff6f862934f69ee8c
+lastModified: '2023-10-23T16:11:39.000Z'
+gated: false
+disabled: false
+config:
+  architectures:
+  - MistralModel
+  model_type: mistral
+  tokenizer_config:
+    bos_token: <s>
+    chat_template: '{{ bos_token }}{% for message in messages %}{% if (message[''role''] == ''user'') != (loop.index0 % 2
+      == 0) %}{{ raise_exception(''Conversation roles must alternate user/assistant/user/assistant/...'') }}{% endif %}{%
+      if message[''role''] == ''user'' %}{{ ''[INST] '' + message[''content''] + '' [/INST]'' }}{% elif message[''role'']
+      == ''assistant'' %}{{ message[''content''] + eos_token + '' '' }}{% else %}{{ raise_exception(''Only user and assistant
+      roles are supported!'') }}{% endif %}{% endfor %}'
+    eos_token: </s>
+    pad_token: </s>
+    unk_token: <unk>
+    use_default_system_prompt: true
+transformersInfo:
+  auto_model: AutoModelForMultimodalLM
+  pipeline_tag: feature-extraction
+  processor: AutoTokenizer
+siblings:
+- rfilename: .gitattributes
+- rfilename: added_tokens.json
+- rfilename: config.json
+- rfilename: pytorch_model-00001-of-00002.bin
+- rfilename: pytorch_model-00002-of-00002.bin
+- rfilename: pytorch_model.bin.index.json
+- rfilename: special_tokens_map.json
+- rfilename: tokenizer.json
+- rfilename: tokenizer.model
+- rfilename: tokenizer_config.json
+spaces: []
+createdAt: '2023-10-23T16:04:31.000Z'
+usedStorage: 28443263004
+downloadsAllTime: 27
+inferenceProviderMapping: {}
+configJson:
+  _name_or_path: Abe13/full-juni-v0.1
+  architectures:
+  - MistralModel
+  bos_token_id: 1
+  eos_token_id: 2
+  hidden_act: silu
+  hidden_size: 4096
+  initializer_range: 0.02
+  intermediate_size: 14336
+  max_position_embeddings: 32768
+  model_type: mistral
+  num_attention_heads: 32
+  num_hidden_layers: 32
+  num_key_value_heads: 8
+  rms_norm_eps: 1.0e-05
+  rope_theta: 10000.0
+  sliding_window: 4096
+  tie_word_embeddings: false
+  torch_dtype: float16
+  transformers_version: 4.34.0
+  use_cache: true
+  vocab_size: 32000
+onnxFiles: {}
+safetensorsSizeMb: 0.0
+approxSizeMb: 0.0
+fetchedAt: '2026-06-10T07:15:01.000Z'

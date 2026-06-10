@@ -1,0 +1,418 @@
+_id: 685a5d6115a38642414a997c
+id: CocoRoF/POLAR-Q3-0.6b-gist
+private: false
+pipeline_tag: sentence-similarity
+library_name: sentence-transformers
+tags:
+- sentence-transformers
+- safetensors
+- qwen3
+- sentence-similarity
+- feature-extraction
+- generated_from_trainer
+- dataset_size:500000
+- loss:CachedGISTEmbedLoss
+- dataset:CocoRoF/massive_triplet_v3
+- arxiv:1908.10084
+- base_model:Qwen/Qwen3-Embedding-0.6B
+- base_model:finetune:Qwen/Qwen3-Embedding-0.6B
+- text-embeddings-inference
+- endpoints_compatible
+- region:us
+downloads: 1
+likes: 0
+modelId: CocoRoF/POLAR-Q3-0.6b-gist
+author: CocoRoF
+sha: 93b90897640e6678c88d1653661e0ff87e3c58c3
+lastModified: '2025-06-24T08:12:41.000Z'
+gated: false
+disabled: false
+widgetData:
+- source_sentence: scramble z to retrieve negative samples, i.e. z values that should not be predicted by the model.
+  sentences:
+  - "def get_neg_z(self, z, cur_device):\n\n        if self.opt.sampling_method == 0:\n            \"\"\"carefully selecting\
+    \ negative samples, such that they never\n            include positive samples; done individually for every time-step\
+    \ -->\n            very slow.\"\"\"\n            offset = 1\n            # generate uncorrelated negative samples by using\
+    \ an individual random\n            # offset for every index\n            rand_neg_idx = torch.arange(z.size(0), device=cur_device)\n\
+    \n            rand_offset = (\n                torch.multinomial(\n                    torch.ones(z.size(0) - offset),\n\
+    \                    self.neg_samples * z.size(0),\n                    replacement=True,\n                )\n       \
+    \         + offset\n            )\n            rand_offset = rand_offset.reshape(self.neg_samples, -1).to(cur_device)\n\
+    \n            z_neg = torch.stack(\n                [\n                    torch.index_select(\n                     \
+    \   z, 0, (rand_neg_idx + rand_offset[i]) % z.size(0)\n                    )\n                    for i in range(self.neg_samples)\n\
+    \                ],\n                2,\n            )\n        elif self.opt.sampling_method == 1:\n            \"\"\"\
+    randomly selecting from all z values.\n\n            can cause positive samples to be selected as negative\n         \
+    \   samples as well (but probability is <0.1% in our\n            experiments) done once for all time-steps, much faster.\n\
+    \            \"\"\"\n            z = self.broadcast_batch_length(z)\n            z_neg = torch.stack(\n              \
+    \  [\n                    torch.index_select(\n                        z, 0, torch.randperm(z.size(0), device=cur_device)\n\
+    \                    )\n                    for i in range(self.neg_samples)\n                ],\n                2,\n\
+    \            )\n            rand_neg_idx = None\n            rand_offset = None\n\n        elif self.opt.sampling_method\
+    \ == 2:\n            \"\"\"randomly selecting from z values within the same sequence.\n\n            can cause positive\
+    \ samples to be selected as negative\n            samples as well done once for all time-steps, much faster.\n       \
+    \     \"\"\"\n            z_neg = []\n            channel = z.size(-1)\n            batch_dim = z.size(0)\n          \
+    \  seq_len = z.size(1)\n\n            for _ in range(self.neg_samples):\n                rand_perm_index = torch.randperm(\n\
+    \                    batch_dim * seq_len, device=cur_device\n                ).remainder_(seq_len)\n                rand_perm_index\
+    \ = rand_perm_index.reshape(batch_dim, seq_len)\n                batch_index_offset = (\n                    torch.arange(0,\
+    \ batch_dim, device=cur_device) * seq_len\n                )\n                rand_perm_index += batch_index_offset[:,\
+    \ None]\n\n                z_neg.append(\n                    z.reshape(-1, channel)[rand_perm_index.view(-1)].reshape(\n\
+    \                        batch_dim, seq_len, channel\n                    )\n                )\n\n            z_neg =\
+    \ torch.stack(z_neg, 3)\n\n            rand_neg_idx = None\n            rand_offset = None\n\n        else:\n        \
+    \    raise Exception(\"Invalid sampling_method option\")\n\n        return z_neg, rand_neg_idx, rand_offset"
+  - 마우스 전지방 3T3-L1세포주에 파이토케미칼을 조건에 따라 24시간 처리한 후 cell viability assay를 수행하였다.
+  - "def _sample_neg(self, assign_result, num_expected):\n        neg_inds = torch.nonzero(assign_result.gt_inds == 0)\n \
+    \       if neg_inds.numel() != 0:\n            neg_inds = neg_inds.squeeze(1)\n        if len(neg_inds) <= num_expected:\n\
+    \            return neg_inds\n        elif self.neg_balance_thr <= 0:\n            # uniform sampling among all negative\
+    \ samples\n            return random_choice(neg_inds, num_expected)\n        else:\n            max_overlaps = assign_result.max_overlaps.cpu().numpy()\n\
+    \            # balance sampling for negative samples\n            neg_set = set(neg_inds.cpu().numpy())\n            easy_set\
+    \ = set(\n                np.where(\n                    np.logical_and(max_overlaps >= 0,\n                         \
+    \          max_overlaps < self.neg_balance_thr))[0])\n            hard_set = set(np.where(max_overlaps >= self.neg_balance_thr)[0])\n\
+    \            easy_neg_inds = list(easy_set & neg_set)\n            hard_neg_inds = list(hard_set & neg_set)\n\n      \
+    \      num_expected_hard = int(num_expected * self.neg_hard_fraction)\n            if len(hard_neg_inds) > num_expected_hard:\n\
+    \                sampled_hard_inds = random_choice(hard_neg_inds,\n                                                  num_expected_hard)\n\
+    \            else:\n                sampled_hard_inds = np.array(hard_neg_inds, dtype=np.int)\n            num_expected_easy\
+    \ = num_expected - len(sampled_hard_inds)\n            if len(easy_neg_inds) > num_expected_easy:\n                sampled_easy_inds\
+    \ = random_choice(easy_neg_inds,\n                                                  num_expected_easy)\n            else:\n\
+    \                sampled_easy_inds = np.array(easy_neg_inds, dtype=np.int)\n            sampled_inds = np.concatenate((sampled_easy_inds,\n\
+    \                                           sampled_hard_inds))\n            if len(sampled_inds) < num_expected:\n  \
+    \              num_extra = num_expected - len(sampled_inds)\n                extra_inds = np.array(list(neg_set - set(sampled_inds)))\n\
+    \                if len(extra_inds) > num_extra:\n                    extra_inds = random_choice(extra_inds, num_extra)\n\
+    \                sampled_inds = np.concatenate((sampled_inds, extra_inds))\n            sampled_inds = torch.from_numpy(sampled_inds).long().to(\n\
+    \                assign_result.gt_inds.device)\n            return sampled_inds"
+- source_sentence: if you wanted to know the mean and CI of m samples taken at a value x_val
+  sentences:
+  - "def predictSamples(m, x_val, x, y):\n  n = len(x)\n  x_mean = np.mean(x)\n  yhat, upper, lower, stats = regression_with_CI(x,\
+    \ y)\n  # mean at x_val:\n  y_val = stats['a'] + stats['b'] * x_val\n  # standard error of measurement at x_val for m\
+    \ samples:\n  s_m = math.sqrt( stats['MS']*(1./m + 1./n + (x_val - x_mean)**2 / \\\n                               stats['x_SS'])\
+    \ )\n  t, stats = studentsT(x, y, stats)\n  critval = returnCritValue(n-2)\n  print('Mean for %i samples at %.3f: %.3f\
+    \ +/- %.3f' \n        %(m, x_val, y_val, critval*s_m))\n  return"
+  - "async def resize_window(self, options):\n        self.log_test(options['desc'] if 'desc' in options else\n          \
+    \            \"Resizing '\" + options['selector'] + \"' window.\")\n\n        # await self.page.screenshot({'path': 'preresize.png'})\n\
+    \n        win_hndl = await self.get_handle(options['selector'])\n        pre_resize_bbox = await win_hndl.boundingBox()\n\
+    \n        edge_hndl = await self.get_handle(options['selector'] + ' div.rsz-' + options['side'])\n        edge_bbox =\
+    \ await edge_hndl.boundingBox()\n\n        new_x = edge_bbox['x'] + \\\n            resize_dirs[options['side']][0] *\
+    \ options['distance']\n        new_y = edge_bbox['y'] + \\\n            resize_dirs[options['side']][1] * options['distance']\n\
+    \n        await edge_hndl.hover()\n        await self.page.mouse.down()\n        await self.page.mouse.move(new_x, new_y)\n\
+    \        await self.page.mouse.up()\n\n        post_resize_bbox = await win_hndl.boundingBox()\n        dw = post_resize_bbox['width']\
+    \ - pre_resize_bbox['width']\n        dh = post_resize_bbox['height'] - pre_resize_bbox['height']\n\n        resized =\
+    \ ((dw != 0) or (dh != 0))\n        if options['expectChange']:\n            self.assertIsNot(resized, False,\n      \
+    \                       \"The '\" + options['selector'] + \"' element was NOT resized and should have been.\")\n     \
+    \   else:\n            self.assertIsNot(resized, True,\n                             \"The '\" + options['selector'] +\
+    \ \"' element was resized and should NOT have been.\")\n\n        # await self.page.screenshot({'path': 'postresize.png'})"
+  - "def _batch_stats(self, x):\n        mu = torch.mean(x, dim=0, keepdim=True)\n        var = torch.var(x, dim=0, keepdim=True)\n\
+    \        return mu, var"
+- source_sentence: 백악관은 도널드 트럼프 미국 대통령이 누구와 통화를 했다고 했어?
+  sentences:
+  - "def __str__(self):\n        return '\\n'.join([self.header, self.sequence, self.header2, \n                array('b',\
+    \ [x + self.qbase for x in self.quality]).tostring()])"
+  - ' 백악관은 16일(현지시간) 미-중 정상이 전날 전화통화를 통해 최근 한반도 상황을 놓고 논의했다며 이같이 전했다.'
+  - 도널드 트럼프 미국 대통령
+- source_sentence: Return an example step handler for the given gym environemtn name, that uses the given config file.
+  sentences:
+  - "def stub_config():\n    defaults = {\n        \"activate_recruiter_on_start\": True,\n        \"ad_group\": \"Test ad\
+    \ group\",\n        \"approve_requirement\": 95,\n        \"assign_qualifications\": True,\n        \"auto_recruit\":\
+    \ True,\n        \"aws_access_key_id\": \"fake aws key\",\n        \"aws_secret_access_key\": \"fake aws secret\",\n \
+    \       \"aws_region\": \"us-east-1\",\n        \"base_payment\": 0.01,\n        \"base_port\": 5000,\n        \"browser_exclude_rule\"\
+    : \"MSIE, mobile, tablet\",\n        \"clock_on\": False,\n        \"contact_email_on_error\": \"error_contact@test.com\"\
+    ,\n        \"dallinger_email_address\": \"test@example.com\",\n        \"database_size\": \"standard-0\",\n        \"\
+    disable_when_duration_exceeded\": True,\n        \"enable_global_experiment_registry\": False,\n        \"redis_size\"\
+    : \"premium-0\",\n        \"dashboard_user\": \"admin\",\n        \"database_url\": \"postgresql://postgres@localhost/dallinger\"\
+    ,\n        \"description\": \"fake HIT description\",\n        \"duration\": 1.0,\n        \"dyno_type\": \"free\",\n\
+    \        \"heroku_app_id_root\": \"fake-customid\",\n        \"heroku_auth_token\": \"heroku secret\",\n        \"heroku_python_version\"\
+    : \"3.9.2\",\n        \"heroku_team\": \"\",\n        \"host\": \"0.0.0.0\",\n        \"id\": \"TEST_EXPERIMENT_UID\"\
+    ,  # This is a significant value; change with caution.\n        \"keywords\": \"kw1, kw2, kw3\",\n        \"lifetime\"\
+    : 1,\n        \"lock_table_when_creating_participant\": True,\n        \"logfile\": \"-\",\n        \"loglevel\": 0,\n\
+    \        \"mode\": \"debug\",\n        \"num_dynos_web\": 1,\n        \"num_dynos_worker\": 1,\n        \"organization_name\"\
+    : \"Monsters University\",\n        \"sentry\": True,\n        \"smtp_host\": \"smtp.fakehost.com:587\",\n        \"smtp_username\"\
+    : \"fake email username\",\n        \"smtp_password\": \"fake email password\",\n        \"threads\": \"1\",\n       \
+    \ \"title\": \"fake experiment title\",\n        \"us_only\": True,\n        \"webdriver_type\": \"chrome_headless\",\n\
+    \        \"whimsical\": True,\n        \"replay\": False,\n        \"worker_multiplier\": 1.5,\n    }\n    from dallinger.config\
+    \ import Configuration, default_keys\n\n    config = Configuration()\n    for key in default_keys:\n        config.register(*key)\n\
+    \    config.extend(defaults.copy())\n    # Patch load() so we don't update any key/value pairs from actual files:\n  \
+    \  config.load = mock.Mock(side_effect=lambda: setattr(config, \"ready\", True))\n    config.ready = True\n\n    return\
+    \ config"
+  - 상부 챔버는 심방(또는 심실)이라고 불리며, 하부 챔버는 심실이라고 불립니다. 두 개의 심방은 심장으로 들어오는 혈액을 받는 챔버 역할을 하며, 더 근육질인 심실은 혈액을 심장에서 내보냅니다.
+  - "def get_step_handler_for_gym_env(gym_env_name: str, cfg: Configuration) -> StepRewardDoneHandler:\r\n\r\n    if gym_env_name\
+    \ == 'Acrobot-v1':\r\n        handler = AcrobotStepHandler(cfg)\r\n    elif gym_env_name == 'CartPole-v1':\r\n       \
+    \ handler = CartPoleStepHandler(cfg)\r\n    elif gym_env_name == 'MountainCarContinuous-v0':\r\n        handler = ContinuousMountainCarStepHandler(cfg)\r\
+    \n    elif gym_env_name == 'MountainCar-v0':\r\n        handler = MountainCarStepHandler(cfg)\r\n    elif gym_env_name\
+    \ == 'Pendulum-v0':\r\n        handler = PendulumStepHandler(cfg)\r\n    else:\r\n        raise NotImplementedError(f'No\
+    \ support for this gym env: {gym_env_name}')\r\n\r\n    return handler"
+- source_sentence: create list of spiders that obeys the visible projects list, through use of the spider selection menu
+  sentences:
+  - "def create_spiders_list():\n    spiders_lst = [obj for obj in globals().values() if\n                   inspect.isclass(obj)\
+    \ and str(obj).split('.')[2] == 'spiders' and 'BaseSpider' not in str(obj)]\n    visible_projects = find_visible_projects()\n\
+    \    spiders_dict = {i.split('.')[0]: [obj for obj in spiders_lst if i.split('.')[0] in str(obj)] for i in\n         \
+    \           os.listdir('HousingPriceScraper/HousingPriceScraper/spiders/SpiderGroups')[:-1] if i.split('.')[0] in visible_projects}\n\
+    \    if len(list(spiders_dict.keys())) > 0:\n        spiders_lst = select_spiders(spiders_dict)\n    else:\n        print('There\
+    \ are no visible projects, got to set_visible_projects to set defaults')\n        return False\n    return spiders_lst"
+  - "def game(self, game_id=None, secret=None):\n        if game_id is not None:\n            self.game_id = game_id\n\n \
+    \       if secret is not None:\n            self.secret = secret\n\n        return self.game_id, self.secret"
+  - "def instantiate_pipelines(settings, simulator_settings):\n    pipelines = []\n    # lock to manage race parallel processes\
+    \ race conditions \n    lock = Lock()\n\n    logger.info(\"\\nVALIDATING PIPELINES\\n\")\n    for p_idx, pipeline_settings\
+    \ in enumerate(settings.runs):\n\n        # turn a pipeline off by specifying num_runs as 0\n        num_runs = pipeline_settings.get(\"\
+    num_runs\", 0)\n\n        # start_idx determines the first dataset name's starting idx\n        start_idx = pipeline_settings.get(\"\
+    start_idx\", 0)\n\n        if num_runs:\n            logger.info(\"Validating run: {}\\n\".format(p_idx))\n        else:\n\
+    \            logger.info(\"Skipping run: {}\\n\".format(p_idx))\n            \n        for idx in range(start_idx, start_idx\
+    \ + num_runs):           \n            logger.info(\"Pipeline sub index: {}\\n\".format(idx))\n            # class factory\
+    \ and instantiate pipeline object\n            Pipeline = pipeline_factory(pipeline_settings[\"pipeline_name\"])\n   \
+    \         p = Pipeline(pipeline_settings, idx, simulator_settings)\n            \n            # give each pipeline an\
+    \ idependent logger\n            log_name = \"dSim_{}\".format(p.pipeline_settings[\"dataset_name\"])\n            log_path\
+    \ = os.path.join(p.pipeline_settings[\"outdir\"],\n                                    p.pipeline_settings[\"dataset_name\"\
+    ]+'.log')\n            fh = logging.FileHandler(log_path, mode='w')\n            fh.setLevel(logging.DEBUG)\n        \
+    \    format = \"%(asctime)-6s: %(name)s - %(levelname)s - %(message)s\"\n            fmt = logging.Formatter(format)\n\
+    \            fh.setFormatter(fmt)\n            local_logger = logging.getLogger(log_name)\n            local_logger.addHandler(fh)\n\
+    \            logger.info(\"Init local logging: {}\".format(log_path))\n            p.logger = local_logger\n\n       \
+    \     # pipeline/ dataset directory\n            p.pipeline_settings[\"lock\"] = lock\n\n            # validate all submodules\
+    \ for each pipeline is ready (use local logger) \n            p.instantiate_modules()\n\n            # append to list\
+    \ of instantiated pipelines\n            pipelines.append(p)\n    return pipelines"
+model-index: null
+config:
+  architectures:
+  - Qwen3ForCausalLM
+  model_type: qwen3
+  tokenizer_config:
+    bos_token: null
+    chat_template: "{%- if tools %}\n    {{- '<|im_start|>system\\n' }}\n    {%- if messages[0].role == 'system' %}\n    \
+      \    {{- messages[0].content + '\\n\\n' }}\n    {%- endif %}\n    {{- \"# Tools\\n\\nYou may call one or more functions\
+      \ to assist with the user query.\\n\\nYou are provided with function signatures within <tools></tools> XML tags:\\n<tools>\"\
+      \ }}\n    {%- for tool in tools %}\n        {{- \"\\n\" }}\n        {{- tool | tojson }}\n    {%- endfor %}\n    {{-\
+      \ \"\\n</tools>\\n\\nFor each function call, return a json object with function name and arguments within <tool_call></tool_call>\
+      \ XML tags:\\n<tool_call>\\n{\\\"name\\\": <function-name>, \\\"arguments\\\": <args-json-object>}\\n</tool_call><|im_end|>\\\
+      n\" }}\n{%- else %}\n    {%- if messages[0].role == 'system' %}\n        {{- '<|im_start|>system\\n' + messages[0].content\
+      \ + '<|im_end|>\\n' }}\n    {%- endif %}\n{%- endif %}\n{%- set ns = namespace(multi_step_tool=true, last_query_index=messages|length\
+      \ - 1) %}\n{%- for message in messages[::-1] %}\n    {%- set index = (messages|length - 1) - loop.index0 %}\n    {%-\
+      \ if ns.multi_step_tool and message.role == \"user\" and not(message.content.startswith('<tool_response>') and message.content.endswith('</tool_response>'))\
+      \ %}\n        {%- set ns.multi_step_tool = false %}\n        {%- set ns.last_query_index = index %}\n    {%- endif %}\n\
+      {%- endfor %}\n{%- for message in messages %}\n    {%- if (message.role == \"user\") or (message.role == \"system\"\
+      \ and not loop.first) %}\n        {{- '<|im_start|>' + message.role + '\\n' + message.content + '<|im_end|>' + '\\n'\
+      \ }}\n    {%- elif message.role == \"assistant\" %}\n        {%- set content = message.content %}\n        {%- set reasoning_content\
+      \ = '' %}\n        {%- if message.reasoning_content is defined and message.reasoning_content is not none %}\n      \
+      \      {%- set reasoning_content = message.reasoning_content %}\n        {%- else %}\n            {%- if '</think>'\
+      \ in message.content %}\n                {%- set content = message.content.split('</think>')[-1].lstrip('\\n') %}\n\
+      \                {%- set reasoning_content = message.content.split('</think>')[0].rstrip('\\n').split('<think>')[-1].lstrip('\\\
+      n') %}\n            {%- endif %}\n        {%- endif %}\n        {%- if loop.index0 > ns.last_query_index %}\n      \
+      \      {%- if loop.last or (not loop.last and reasoning_content) %}\n                {{- '<|im_start|>' + message.role\
+      \ + '\\n<think>\\n' + reasoning_content.strip('\\n') + '\\n</think>\\n\\n' + content.lstrip('\\n') }}\n            {%-\
+      \ else %}\n                {{- '<|im_start|>' + message.role + '\\n' + content }}\n            {%- endif %}\n      \
+      \  {%- else %}\n            {{- '<|im_start|>' + message.role + '\\n' + content }}\n        {%- endif %}\n        {%-\
+      \ if message.tool_calls %}\n            {%- for tool_call in message.tool_calls %}\n                {%- if (loop.first\
+      \ and content) or (not loop.first) %}\n                    {{- '\\n' }}\n                {%- endif %}\n            \
+      \    {%- if tool_call.function %}\n                    {%- set tool_call = tool_call.function %}\n                {%-\
+      \ endif %}\n                {{- '<tool_call>\\n{\"name\": \"' }}\n                {{- tool_call.name }}\n          \
+      \      {{- '\", \"arguments\": ' }}\n                {%- if tool_call.arguments is string %}\n                    {{-\
+      \ tool_call.arguments }}\n                {%- else %}\n                    {{- tool_call.arguments | tojson }}\n   \
+      \             {%- endif %}\n                {{- '}\\n</tool_call>' }}\n            {%- endfor %}\n        {%- endif\
+      \ %}\n        {{- '<|im_end|>\\n' }}\n    {%- elif message.role == \"tool\" %}\n        {%- if loop.first or (messages[loop.index0\
+      \ - 1].role != \"tool\") %}\n            {{- '<|im_start|>user' }}\n        {%- endif %}\n        {{- '\\n<tool_response>\\\
+      n' }}\n        {{- message.content }}\n        {{- '\\n</tool_response>' }}\n        {%- if loop.last or (messages[loop.index0\
+      \ + 1].role != \"tool\") %}\n            {{- '<|im_end|>\\n' }}\n        {%- endif %}\n    {%- endif %}\n{%- endfor\
+      \ %}\n{%- if add_generation_prompt %}\n    {{- '<|im_start|>assistant\\n' }}\n    {%- if enable_thinking is defined\
+      \ and enable_thinking is false %}\n        {{- '<think>\\n\\n</think>\\n\\n' }}\n    {%- endif %}\n{%- endif %}"
+    eos_token: <|im_end|>
+    pad_token: <|endoftext|>
+    unk_token: null
+cardData:
+  tags:
+  - sentence-transformers
+  - sentence-similarity
+  - feature-extraction
+  - generated_from_trainer
+  - dataset_size:500000
+  - loss:CachedGISTEmbedLoss
+  base_model: Qwen/Qwen3-Embedding-0.6B
+  widget:
+  - source_sentence: scramble z to retrieve negative samples, i.e. z values that should not be predicted by the model.
+    sentences:
+    - "def get_neg_z(self, z, cur_device):\n\n        if self.opt.sampling_method == 0:\n            \"\"\"carefully selecting\
+      \ negative samples, such that they never\n            include positive samples; done individually for every time-step\
+      \ -->\n            very slow.\"\"\"\n            offset = 1\n            # generate uncorrelated negative samples by\
+      \ using an individual random\n            # offset for every index\n            rand_neg_idx = torch.arange(z.size(0),\
+      \ device=cur_device)\n\n            rand_offset = (\n                torch.multinomial(\n                    torch.ones(z.size(0)\
+      \ - offset),\n                    self.neg_samples * z.size(0),\n                    replacement=True,\n           \
+      \     )\n                + offset\n            )\n            rand_offset = rand_offset.reshape(self.neg_samples, -1).to(cur_device)\n\
+      \n            z_neg = torch.stack(\n                [\n                    torch.index_select(\n                   \
+      \     z, 0, (rand_neg_idx + rand_offset[i]) % z.size(0)\n                    )\n                    for i in range(self.neg_samples)\n\
+      \                ],\n                2,\n            )\n        elif self.opt.sampling_method == 1:\n            \"\"\
+      \"randomly selecting from all z values.\n\n            can cause positive samples to be selected as negative\n     \
+      \       samples as well (but probability is <0.1% in our\n            experiments) done once for all time-steps, much\
+      \ faster.\n            \"\"\"\n            z = self.broadcast_batch_length(z)\n            z_neg = torch.stack(\n  \
+      \              [\n                    torch.index_select(\n                        z, 0, torch.randperm(z.size(0), device=cur_device)\n\
+      \                    )\n                    for i in range(self.neg_samples)\n                ],\n                2,\n\
+      \            )\n            rand_neg_idx = None\n            rand_offset = None\n\n        elif self.opt.sampling_method\
+      \ == 2:\n            \"\"\"randomly selecting from z values within the same sequence.\n\n            can cause positive\
+      \ samples to be selected as negative\n            samples as well done once for all time-steps, much faster.\n     \
+      \       \"\"\"\n            z_neg = []\n            channel = z.size(-1)\n            batch_dim = z.size(0)\n      \
+      \      seq_len = z.size(1)\n\n            for _ in range(self.neg_samples):\n                rand_perm_index = torch.randperm(\n\
+      \                    batch_dim * seq_len, device=cur_device\n                ).remainder_(seq_len)\n               \
+      \ rand_perm_index = rand_perm_index.reshape(batch_dim, seq_len)\n                batch_index_offset = (\n          \
+      \          torch.arange(0, batch_dim, device=cur_device) * seq_len\n                )\n                rand_perm_index\
+      \ += batch_index_offset[:, None]\n\n                z_neg.append(\n                    z.reshape(-1, channel)[rand_perm_index.view(-1)].reshape(\n\
+      \                        batch_dim, seq_len, channel\n                    )\n                )\n\n            z_neg\
+      \ = torch.stack(z_neg, 3)\n\n            rand_neg_idx = None\n            rand_offset = None\n\n        else:\n    \
+      \        raise Exception(\"Invalid sampling_method option\")\n\n        return z_neg, rand_neg_idx, rand_offset"
+    - 마우스 전지방 3T3-L1세포주에 파이토케미칼을 조건에 따라 24시간 처리한 후 cell viability assay를 수행하였다.
+    - "def _sample_neg(self, assign_result, num_expected):\n        neg_inds = torch.nonzero(assign_result.gt_inds == 0)\n\
+      \        if neg_inds.numel() != 0:\n            neg_inds = neg_inds.squeeze(1)\n        if len(neg_inds) <= num_expected:\n\
+      \            return neg_inds\n        elif self.neg_balance_thr <= 0:\n            # uniform sampling among all negative\
+      \ samples\n            return random_choice(neg_inds, num_expected)\n        else:\n            max_overlaps = assign_result.max_overlaps.cpu().numpy()\n\
+      \            # balance sampling for negative samples\n            neg_set = set(neg_inds.cpu().numpy())\n          \
+      \  easy_set = set(\n                np.where(\n                    np.logical_and(max_overlaps >= 0,\n             \
+      \                      max_overlaps < self.neg_balance_thr))[0])\n            hard_set = set(np.where(max_overlaps >=\
+      \ self.neg_balance_thr)[0])\n            easy_neg_inds = list(easy_set & neg_set)\n            hard_neg_inds = list(hard_set\
+      \ & neg_set)\n\n            num_expected_hard = int(num_expected * self.neg_hard_fraction)\n            if len(hard_neg_inds)\
+      \ > num_expected_hard:\n                sampled_hard_inds = random_choice(hard_neg_inds,\n                         \
+      \                         num_expected_hard)\n            else:\n                sampled_hard_inds = np.array(hard_neg_inds,\
+      \ dtype=np.int)\n            num_expected_easy = num_expected - len(sampled_hard_inds)\n            if len(easy_neg_inds)\
+      \ > num_expected_easy:\n                sampled_easy_inds = random_choice(easy_neg_inds,\n                         \
+      \                         num_expected_easy)\n            else:\n                sampled_easy_inds = np.array(easy_neg_inds,\
+      \ dtype=np.int)\n            sampled_inds = np.concatenate((sampled_easy_inds,\n                                   \
+      \        sampled_hard_inds))\n            if len(sampled_inds) < num_expected:\n                num_extra = num_expected\
+      \ - len(sampled_inds)\n                extra_inds = np.array(list(neg_set - set(sampled_inds)))\n                if\
+      \ len(extra_inds) > num_extra:\n                    extra_inds = random_choice(extra_inds, num_extra)\n            \
+      \    sampled_inds = np.concatenate((sampled_inds, extra_inds))\n            sampled_inds = torch.from_numpy(sampled_inds).long().to(\n\
+      \                assign_result.gt_inds.device)\n            return sampled_inds"
+  - source_sentence: if you wanted to know the mean and CI of m samples taken at a value x_val
+    sentences:
+    - "def predictSamples(m, x_val, x, y):\n  n = len(x)\n  x_mean = np.mean(x)\n  yhat, upper, lower, stats = regression_with_CI(x,\
+      \ y)\n  # mean at x_val:\n  y_val = stats['a'] + stats['b'] * x_val\n  # standard error of measurement at x_val for\
+      \ m samples:\n  s_m = math.sqrt( stats['MS']*(1./m + 1./n + (x_val - x_mean)**2 / \\\n                             \
+      \  stats['x_SS']) )\n  t, stats = studentsT(x, y, stats)\n  critval = returnCritValue(n-2)\n  print('Mean for %i samples\
+      \ at %.3f: %.3f +/- %.3f' \n        %(m, x_val, y_val, critval*s_m))\n  return"
+    - "async def resize_window(self, options):\n        self.log_test(options['desc'] if 'desc' in options else\n        \
+      \              \"Resizing '\" + options['selector'] + \"' window.\")\n\n        # await self.page.screenshot({'path':\
+      \ 'preresize.png'})\n\n        win_hndl = await self.get_handle(options['selector'])\n        pre_resize_bbox = await\
+      \ win_hndl.boundingBox()\n\n        edge_hndl = await self.get_handle(options['selector'] + ' div.rsz-' + options['side'])\n\
+      \        edge_bbox = await edge_hndl.boundingBox()\n\n        new_x = edge_bbox['x'] + \\\n            resize_dirs[options['side']][0]\
+      \ * options['distance']\n        new_y = edge_bbox['y'] + \\\n            resize_dirs[options['side']][1] * options['distance']\n\
+      \n        await edge_hndl.hover()\n        await self.page.mouse.down()\n        await self.page.mouse.move(new_x, new_y)\n\
+      \        await self.page.mouse.up()\n\n        post_resize_bbox = await win_hndl.boundingBox()\n        dw = post_resize_bbox['width']\
+      \ - pre_resize_bbox['width']\n        dh = post_resize_bbox['height'] - pre_resize_bbox['height']\n\n        resized\
+      \ = ((dw != 0) or (dh != 0))\n        if options['expectChange']:\n            self.assertIsNot(resized, False,\n  \
+      \                           \"The '\" + options['selector'] + \"' element was NOT resized and should have been.\")\n\
+      \        else:\n            self.assertIsNot(resized, True,\n                             \"The '\" + options['selector']\
+      \ + \"' element was resized and should NOT have been.\")\n\n        # await self.page.screenshot({'path': 'postresize.png'})"
+    - "def _batch_stats(self, x):\n        mu = torch.mean(x, dim=0, keepdim=True)\n        var = torch.var(x, dim=0, keepdim=True)\n\
+      \        return mu, var"
+  - source_sentence: 백악관은 도널드 트럼프 미국 대통령이 누구와 통화를 했다고 했어?
+    sentences:
+    - "def __str__(self):\n        return '\\n'.join([self.header, self.sequence, self.header2, \n                array('b',\
+      \ [x + self.qbase for x in self.quality]).tostring()])"
+    - ' 백악관은 16일(현지시간) 미-중 정상이 전날 전화통화를 통해 최근 한반도 상황을 놓고 논의했다며 이같이 전했다.'
+    - 도널드 트럼프 미국 대통령
+  - source_sentence: Return an example step handler for the given gym environemtn name, that uses the given config file.
+    sentences:
+    - "def stub_config():\n    defaults = {\n        \"activate_recruiter_on_start\": True,\n        \"ad_group\": \"Test\
+      \ ad group\",\n        \"approve_requirement\": 95,\n        \"assign_qualifications\": True,\n        \"auto_recruit\"\
+      : True,\n        \"aws_access_key_id\": \"fake aws key\",\n        \"aws_secret_access_key\": \"fake aws secret\",\n\
+      \        \"aws_region\": \"us-east-1\",\n        \"base_payment\": 0.01,\n        \"base_port\": 5000,\n        \"browser_exclude_rule\"\
+      : \"MSIE, mobile, tablet\",\n        \"clock_on\": False,\n        \"contact_email_on_error\": \"error_contact@test.com\"\
+      ,\n        \"dallinger_email_address\": \"test@example.com\",\n        \"database_size\": \"standard-0\",\n        \"\
+      disable_when_duration_exceeded\": True,\n        \"enable_global_experiment_registry\": False,\n        \"redis_size\"\
+      : \"premium-0\",\n        \"dashboard_user\": \"admin\",\n        \"database_url\": \"postgresql://postgres@localhost/dallinger\"\
+      ,\n        \"description\": \"fake HIT description\",\n        \"duration\": 1.0,\n        \"dyno_type\": \"free\",\n\
+      \        \"heroku_app_id_root\": \"fake-customid\",\n        \"heroku_auth_token\": \"heroku secret\",\n        \"heroku_python_version\"\
+      : \"3.9.2\",\n        \"heroku_team\": \"\",\n        \"host\": \"0.0.0.0\",\n        \"id\": \"TEST_EXPERIMENT_UID\"\
+      ,  # This is a significant value; change with caution.\n        \"keywords\": \"kw1, kw2, kw3\",\n        \"lifetime\"\
+      : 1,\n        \"lock_table_when_creating_participant\": True,\n        \"logfile\": \"-\",\n        \"loglevel\": 0,\n\
+      \        \"mode\": \"debug\",\n        \"num_dynos_web\": 1,\n        \"num_dynos_worker\": 1,\n        \"organization_name\"\
+      : \"Monsters University\",\n        \"sentry\": True,\n        \"smtp_host\": \"smtp.fakehost.com:587\",\n        \"\
+      smtp_username\": \"fake email username\",\n        \"smtp_password\": \"fake email password\",\n        \"threads\"\
+      : \"1\",\n        \"title\": \"fake experiment title\",\n        \"us_only\": True,\n        \"webdriver_type\": \"\
+      chrome_headless\",\n        \"whimsical\": True,\n        \"replay\": False,\n        \"worker_multiplier\": 1.5,\n\
+      \    }\n    from dallinger.config import Configuration, default_keys\n\n    config = Configuration()\n    for key in\
+      \ default_keys:\n        config.register(*key)\n    config.extend(defaults.copy())\n    # Patch load() so we don't update\
+      \ any key/value pairs from actual files:\n    config.load = mock.Mock(side_effect=lambda: setattr(config, \"ready\"\
+      , True))\n    config.ready = True\n\n    return config"
+    - 상부 챔버는 심방(또는 심실)이라고 불리며, 하부 챔버는 심실이라고 불립니다. 두 개의 심방은 심장으로 들어오는 혈액을 받는 챔버 역할을 하며, 더 근육질인 심실은 혈액을 심장에서 내보냅니다.
+    - "def get_step_handler_for_gym_env(gym_env_name: str, cfg: Configuration) -> StepRewardDoneHandler:\r\n\r\n    if gym_env_name\
+      \ == 'Acrobot-v1':\r\n        handler = AcrobotStepHandler(cfg)\r\n    elif gym_env_name == 'CartPole-v1':\r\n     \
+      \   handler = CartPoleStepHandler(cfg)\r\n    elif gym_env_name == 'MountainCarContinuous-v0':\r\n        handler =\
+      \ ContinuousMountainCarStepHandler(cfg)\r\n    elif gym_env_name == 'MountainCar-v0':\r\n        handler = MountainCarStepHandler(cfg)\r\
+      \n    elif gym_env_name == 'Pendulum-v0':\r\n        handler = PendulumStepHandler(cfg)\r\n    else:\r\n        raise\
+      \ NotImplementedError(f'No support for this gym env: {gym_env_name}')\r\n\r\n    return handler"
+  - source_sentence: create list of spiders that obeys the visible projects list, through use of the spider selection menu
+    sentences:
+    - "def create_spiders_list():\n    spiders_lst = [obj for obj in globals().values() if\n                   inspect.isclass(obj)\
+      \ and str(obj).split('.')[2] == 'spiders' and 'BaseSpider' not in str(obj)]\n    visible_projects = find_visible_projects()\n\
+      \    spiders_dict = {i.split('.')[0]: [obj for obj in spiders_lst if i.split('.')[0] in str(obj)] for i in\n       \
+      \             os.listdir('HousingPriceScraper/HousingPriceScraper/spiders/SpiderGroups')[:-1] if i.split('.')[0] in\
+      \ visible_projects}\n    if len(list(spiders_dict.keys())) > 0:\n        spiders_lst = select_spiders(spiders_dict)\n\
+      \    else:\n        print('There are no visible projects, got to set_visible_projects to set defaults')\n        return\
+      \ False\n    return spiders_lst"
+    - "def game(self, game_id=None, secret=None):\n        if game_id is not None:\n            self.game_id = game_id\n\n\
+      \        if secret is not None:\n            self.secret = secret\n\n        return self.game_id, self.secret"
+    - "def instantiate_pipelines(settings, simulator_settings):\n    pipelines = []\n    # lock to manage race parallel processes\
+      \ race conditions \n    lock = Lock()\n\n    logger.info(\"\\nVALIDATING PIPELINES\\n\")\n    for p_idx, pipeline_settings\
+      \ in enumerate(settings.runs):\n\n        # turn a pipeline off by specifying num_runs as 0\n        num_runs = pipeline_settings.get(\"\
+      num_runs\", 0)\n\n        # start_idx determines the first dataset name's starting idx\n        start_idx = pipeline_settings.get(\"\
+      start_idx\", 0)\n\n        if num_runs:\n            logger.info(\"Validating run: {}\\n\".format(p_idx))\n        else:\n\
+      \            logger.info(\"Skipping run: {}\\n\".format(p_idx))\n            \n        for idx in range(start_idx, start_idx\
+      \ + num_runs):           \n            logger.info(\"Pipeline sub index: {}\\n\".format(idx))\n            # class factory\
+      \ and instantiate pipeline object\n            Pipeline = pipeline_factory(pipeline_settings[\"pipeline_name\"])\n \
+      \           p = Pipeline(pipeline_settings, idx, simulator_settings)\n            \n            # give each pipeline\
+      \ an idependent logger\n            log_name = \"dSim_{}\".format(p.pipeline_settings[\"dataset_name\"])\n         \
+      \   log_path = os.path.join(p.pipeline_settings[\"outdir\"],\n                                    p.pipeline_settings[\"\
+      dataset_name\"]+'.log')\n            fh = logging.FileHandler(log_path, mode='w')\n            fh.setLevel(logging.DEBUG)\n\
+      \            format = \"%(asctime)-6s: %(name)s - %(levelname)s - %(message)s\"\n            fmt = logging.Formatter(format)\n\
+      \            fh.setFormatter(fmt)\n            local_logger = logging.getLogger(log_name)\n            local_logger.addHandler(fh)\n\
+      \            logger.info(\"Init local logging: {}\".format(log_path))\n            p.logger = local_logger\n\n     \
+      \       # pipeline/ dataset directory\n            p.pipeline_settings[\"lock\"] = lock\n\n            # validate all\
+      \ submodules for each pipeline is ready (use local logger) \n            p.instantiate_modules()\n\n            # append\
+      \ to list of instantiated pipelines\n            pipelines.append(p)\n    return pipelines"
+  datasets:
+  - CocoRoF/massive_triplet_v3
+  pipeline_tag: sentence-similarity
+  library_name: sentence-transformers
+siblings:
+- rfilename: .gitattributes
+- rfilename: 1_Pooling/config.json
+- rfilename: README.md
+- rfilename: config.json
+- rfilename: config_sentence_transformers.json
+- rfilename: generation_config.json
+- rfilename: merges.txt
+- rfilename: model.safetensors
+- rfilename: modules.json
+- rfilename: tokenizer.json
+- rfilename: tokenizer_config.json
+- rfilename: vocab.json
+spaces: []
+createdAt: '2025-06-24T08:10:09.000Z'
+safetensors:
+  parameters:
+    BF16: 595776512
+  total: 595776512
+usedStorage: 1203010121
+downloadsAllTime: 198
+inferenceProviderMapping: {}
+configJson:
+  architectures:
+  - Qwen3ForCausalLM
+  attention_bias: false
+  attention_dropout: 0.0
+  bos_token_id: 151643
+  eos_token_id: 151643
+  head_dim: 128
+  hidden_act: silu
+  hidden_size: 1024
+  initializer_range: 0.02
+  intermediate_size: 3072
+  max_position_embeddings: 32768
+  max_window_layers: 28
+  model_type: qwen3
+  num_attention_heads: 16
+  num_hidden_layers: 28
+  num_key_value_heads: 8
+  rms_norm_eps: 1.0e-06
+  rope_scaling: null
+  rope_theta: 1000000
+  sliding_window: null
+  tie_word_embeddings: true
+  torch_dtype: bfloat16
+  transformers_version: 4.51.3
+  use_cache: true
+  use_sliding_window: false
+  vocab_size: 151669
+onnxFiles: {}
+safetensorsSizeMb: 1191.6
+approxSizeMb: 1191.6
+fetchedAt: '2026-06-10T07:15:01.000Z'

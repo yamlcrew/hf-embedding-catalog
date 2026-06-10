@@ -1,0 +1,274 @@
+_id: 688a7c154fdee8e089bf6c48
+id: kiarashmo/chembberta-77m-sBERT-finetuned-on-clintox-with-sBERTTripletLoss
+private: false
+pipeline_tag: sentence-similarity
+library_name: sentence-transformers
+tags:
+- sentence-transformers
+- safetensors
+- roberta
+- sentence-similarity
+- feature-extraction
+- dense
+- generated_from_trainer
+- dataset_size:30000
+- loss:TripletLoss
+- arxiv:1908.10084
+- arxiv:1703.07737
+- base_model:kiarashmo/chembberta-77m-mlm-safetensors
+- base_model:finetune:kiarashmo/chembberta-77m-mlm-safetensors
+- model-index
+- text-embeddings-inference
+- endpoints_compatible
+- region:us
+downloads: 1
+likes: 0
+modelId: kiarashmo/chembberta-77m-sBERT-finetuned-on-clintox-with-sBERTTripletLoss
+author: kiarashmo
+sha: ca0f2f1d91a9d92d1ff6b2228475247375c52720
+lastModified: '2025-07-30T20:10:24.000Z'
+gated: false
+disabled: false
+mask_token: <mask>
+widgetData:
+- source_sentence: CC(C)[NH+]1CCN(c2ccc(OCC3COC(Cn4cncn4)(c4ccc(Cl)cc4Cl)O3)cc2)CC1
+  sentences:
+  - C[NH+]1CCCC1c1cccnc1
+  - COc1cc(CC2c3c(cc(OC)c(OC)c3OC)CC[N+]2(C)CCCOC(=O)CCC(=O)OCCC[N+]2(C)CCc3cc(OC)c(OC)c(OC)c3C2Cc2cc(OC)c(OC)c(OC)c2)cc(OC)c1OC
+  - C=C1CC2CCC34CC5OC6C(OC7CCC(CC(=O)CC8C(CC9OC(CCC1O2)CC(C)C9=C)OC(CC(O)CN)C8OC)OC7C6O3)C5O4
+- source_sentence: C[NH2+]C1C(OC2C(OC3C(O)C(O)C(NC(N)=[NH2+])C(O)C3NC(N)=[NH2+])OC(C)C2(O)C=O)OC(CO)C(O)C1O
+  sentences:
+  - CC12CCC3C4CCC(=O)C=C4CCC3C1CCC2OC(=O)CCc1ccccc1
+  - C[NH+](C)CCC=C1c2ccccc2Sc2ccc(Cl)cc21
+  - CC(C)C(CN1CCC(C)(c2cccc(O)c2)C(C)C1)NC(=O)C1Cc2ccc(O)cc2CN1
+- source_sentence: CC1CC=CC=CC=CC=CC(OC2OC(C)C(O)C([NH3+])C2O)CC2OC(O)(CC(O)CC3OC3C=CC(=O)O1)CC(O)C2C(=O)[O-]
+  sentences:
+  - CC(C)CC(NC(=O)C(CCc1ccccc1)NC(=O)CN1CCOCC1)C(=O)NC(Cc1ccccc1)C(=O)NC(CC(C)C)C(=O)C1(C)CO1
+  - COC1CC(OC2C(C)C(=O)OC(C)C(C)C(OC(C)=O)C(C)C(=O)C3(CO3)CC(C)C(OC3OC(C)CC([NH+](C)C)C3OC(C)=O)C2C)OC(C)C1OC(C)=O
+  - CC(C)CC(NC(=O)C(CCc1ccccc1)NC(=O)CN1CCOCC1)C(=O)NC(Cc1ccccc1)C(=O)NC(CC(C)C)C(=O)C1(C)CO1
+- source_sentence: CC(C)CNCc1ccc(-c2ccccc2S(=O)(=O)N2CCCC2)cc1
+  sentences:
+  - CC(C)CC(NC(=O)C(CCc1ccccc1)NC(=O)CN1CCOCC1)C(=O)NC(Cc1ccccc1)C(=O)NC(CC(C)C)C(=O)C1(C)CO1
+  - COC(=O)C1CC2=CC(=O)CCC2(C)C23OC2CC2(C)C(CCC24CCC(=O)O4)C13
+  - C[NH+](C)CCn1nnnc1SCC1=C(C(=O)[O-])N2C(=O)C(NC(=O)Cc3csc(N)n3)C2SC1
+- source_sentence: COc1cc2c(Nc3ccc(Br)cc3F)ncnc2cc1OCC1CC[NH+](C)CC1
+  sentences:
+  - CC(C)CC(NC(=O)C(CCc1ccccc1)NC(=O)CN1CCOCC1)C(=O)NC(Cc1ccccc1)C(=O)NC(CC(C)C)C(=O)C1(C)CO1
+  - CC(C)CC(NC(=O)C(CCc1ccccc1)NC(=O)CN1CCOCC1)C(=O)NC(Cc1ccccc1)C(=O)NC(CC(C)C)C(=O)C1(C)CO1
+  - C#CC1(O)CCC2C3CCC4=C(CCC(=O)C4)C3CCC21C
+model-index:
+- name: SentenceTransformer based on kiarashmo/chembberta-77m-mlm-safetensors
+  results:
+  - task:
+      type: binary-classification
+      name: Binary Classification
+    dataset:
+      name: val sim
+      type: val-sim
+    metrics:
+    - type: cosine_accuracy
+      value: 0.569
+      name: Cosine Accuracy
+      verified: false
+    - type: cosine_accuracy_threshold
+      value: 0.7855062484741211
+      name: Cosine Accuracy Threshold
+      verified: false
+    - type: cosine_f1
+      value: 0.6807387862796834
+      name: Cosine F1
+      verified: false
+    - type: cosine_f1_threshold
+      value: -0.43968307971954346
+      name: Cosine F1 Threshold
+      verified: false
+    - type: cosine_precision
+      value: 0.5165165165165165
+      name: Cosine Precision
+      verified: false
+    - type: cosine_recall
+      value: 0.9980657640232108
+      name: Cosine Recall
+      verified: false
+    - type: cosine_ap
+      value: 0.6169239357831994
+      name: Cosine Ap
+      verified: false
+    - type: cosine_mcc
+      value: -0.030580568142810974
+      name: Cosine Mcc
+      verified: false
+config:
+  architectures:
+  - RobertaModel
+  model_type: roberta
+  tokenizer_config:
+    bos_token: <s>
+    cls_token: '[CLS]'
+    eos_token: </s>
+    mask_token: '[MASK]'
+    pad_token: '[PAD]'
+    sep_token: '[SEP]'
+    unk_token: '[UNK]'
+cardData:
+  tags:
+  - sentence-transformers
+  - sentence-similarity
+  - feature-extraction
+  - dense
+  - generated_from_trainer
+  - dataset_size:30000
+  - loss:TripletLoss
+  base_model: kiarashmo/chembberta-77m-mlm-safetensors
+  widget:
+  - source_sentence: CC(C)[NH+]1CCN(c2ccc(OCC3COC(Cn4cncn4)(c4ccc(Cl)cc4Cl)O3)cc2)CC1
+    sentences:
+    - C[NH+]1CCCC1c1cccnc1
+    - COc1cc(CC2c3c(cc(OC)c(OC)c3OC)CC[N+]2(C)CCCOC(=O)CCC(=O)OCCC[N+]2(C)CCc3cc(OC)c(OC)c(OC)c3C2Cc2cc(OC)c(OC)c(OC)c2)cc(OC)c1OC
+    - C=C1CC2CCC34CC5OC6C(OC7CCC(CC(=O)CC8C(CC9OC(CCC1O2)CC(C)C9=C)OC(CC(O)CN)C8OC)OC7C6O3)C5O4
+  - source_sentence: C[NH2+]C1C(OC2C(OC3C(O)C(O)C(NC(N)=[NH2+])C(O)C3NC(N)=[NH2+])OC(C)C2(O)C=O)OC(CO)C(O)C1O
+    sentences:
+    - CC12CCC3C4CCC(=O)C=C4CCC3C1CCC2OC(=O)CCc1ccccc1
+    - C[NH+](C)CCC=C1c2ccccc2Sc2ccc(Cl)cc21
+    - CC(C)C(CN1CCC(C)(c2cccc(O)c2)C(C)C1)NC(=O)C1Cc2ccc(O)cc2CN1
+  - source_sentence: CC1CC=CC=CC=CC=CC(OC2OC(C)C(O)C([NH3+])C2O)CC2OC(O)(CC(O)CC3OC3C=CC(=O)O1)CC(O)C2C(=O)[O-]
+    sentences:
+    - CC(C)CC(NC(=O)C(CCc1ccccc1)NC(=O)CN1CCOCC1)C(=O)NC(Cc1ccccc1)C(=O)NC(CC(C)C)C(=O)C1(C)CO1
+    - COC1CC(OC2C(C)C(=O)OC(C)C(C)C(OC(C)=O)C(C)C(=O)C3(CO3)CC(C)C(OC3OC(C)CC([NH+](C)C)C3OC(C)=O)C2C)OC(C)C1OC(C)=O
+    - CC(C)CC(NC(=O)C(CCc1ccccc1)NC(=O)CN1CCOCC1)C(=O)NC(Cc1ccccc1)C(=O)NC(CC(C)C)C(=O)C1(C)CO1
+  - source_sentence: CC(C)CNCc1ccc(-c2ccccc2S(=O)(=O)N2CCCC2)cc1
+    sentences:
+    - CC(C)CC(NC(=O)C(CCc1ccccc1)NC(=O)CN1CCOCC1)C(=O)NC(Cc1ccccc1)C(=O)NC(CC(C)C)C(=O)C1(C)CO1
+    - COC(=O)C1CC2=CC(=O)CCC2(C)C23OC2CC2(C)C(CCC24CCC(=O)O4)C13
+    - C[NH+](C)CCn1nnnc1SCC1=C(C(=O)[O-])N2C(=O)C(NC(=O)Cc3csc(N)n3)C2SC1
+  - source_sentence: COc1cc2c(Nc3ccc(Br)cc3F)ncnc2cc1OCC1CC[NH+](C)CC1
+    sentences:
+    - CC(C)CC(NC(=O)C(CCc1ccccc1)NC(=O)CN1CCOCC1)C(=O)NC(Cc1ccccc1)C(=O)NC(CC(C)C)C(=O)C1(C)CO1
+    - CC(C)CC(NC(=O)C(CCc1ccccc1)NC(=O)CN1CCOCC1)C(=O)NC(Cc1ccccc1)C(=O)NC(CC(C)C)C(=O)C1(C)CO1
+    - C#CC1(O)CCC2C3CCC4=C(CCC(=O)C4)C3CCC21C
+  pipeline_tag: sentence-similarity
+  library_name: sentence-transformers
+  metrics:
+  - cosine_accuracy
+  - cosine_accuracy_threshold
+  - cosine_f1
+  - cosine_f1_threshold
+  - cosine_precision
+  - cosine_recall
+  - cosine_ap
+  - cosine_mcc
+  model-index:
+  - name: SentenceTransformer based on kiarashmo/chembberta-77m-mlm-safetensors
+    results:
+    - task:
+        type: binary-classification
+        name: Binary Classification
+      dataset:
+        name: val sim
+        type: val-sim
+      metrics:
+      - type: cosine_accuracy
+        value: 0.569
+        name: Cosine Accuracy
+        verified: false
+      - type: cosine_accuracy_threshold
+        value: 0.7855062484741211
+        name: Cosine Accuracy Threshold
+        verified: false
+      - type: cosine_f1
+        value: 0.6807387862796834
+        name: Cosine F1
+        verified: false
+      - type: cosine_f1_threshold
+        value: -0.43968307971954346
+        name: Cosine F1 Threshold
+        verified: false
+      - type: cosine_precision
+        value: 0.5165165165165165
+        name: Cosine Precision
+        verified: false
+      - type: cosine_recall
+        value: 0.9980657640232108
+        name: Cosine Recall
+        verified: false
+      - type: cosine_ap
+        value: 0.6169239357831994
+        name: Cosine Ap
+        verified: false
+      - type: cosine_mcc
+        value: -0.030580568142810974
+        name: Cosine Mcc
+        verified: false
+siblings:
+- rfilename: .gitattributes
+- rfilename: 1_Pooling/config.json
+- rfilename: README.md
+- rfilename: added_tokens.json
+- rfilename: checkpoint-2000/1_Pooling/config.json
+- rfilename: checkpoint-2000/README.md
+- rfilename: checkpoint-2000/added_tokens.json
+- rfilename: checkpoint-2000/config.json
+- rfilename: checkpoint-2000/config_sentence_transformers.json
+- rfilename: checkpoint-2000/merges.txt
+- rfilename: checkpoint-2000/model.safetensors
+- rfilename: checkpoint-2000/modules.json
+- rfilename: checkpoint-2000/optimizer.pt
+- rfilename: checkpoint-2000/rng_state.pth
+- rfilename: checkpoint-2000/scheduler.pt
+- rfilename: checkpoint-2000/sentence_bert_config.json
+- rfilename: checkpoint-2000/special_tokens_map.json
+- rfilename: checkpoint-2000/tokenizer.json
+- rfilename: checkpoint-2000/tokenizer_config.json
+- rfilename: checkpoint-2000/trainer_state.json
+- rfilename: checkpoint-2000/training_args.bin
+- rfilename: checkpoint-2000/vocab.json
+- rfilename: config.json
+- rfilename: config_sentence_transformers.json
+- rfilename: eval/binary_classification_evaluation_val-sim_results.csv
+- rfilename: merges.txt
+- rfilename: model.safetensors
+- rfilename: modules.json
+- rfilename: sentence_bert_config.json
+- rfilename: special_tokens_map.json
+- rfilename: tokenizer.json
+- rfilename: tokenizer_config.json
+- rfilename: vocab.json
+spaces: []
+createdAt: '2025-07-30T20:09:57.000Z'
+safetensors:
+  parameters:
+    F32: 3427440
+  total: 3427440
+usedStorage: 40018278
+downloadsAllTime: 4
+inferenceProviderMapping: {}
+configJson:
+  architectures:
+  - RobertaModel
+  attention_probs_dropout_prob: 0.109
+  bos_token_id: 0
+  classifier_dropout: null
+  eos_token_id: 2
+  gradient_checkpointing: false
+  hidden_act: gelu
+  hidden_dropout_prob: 0.144
+  hidden_size: 384
+  initializer_range: 0.02
+  intermediate_size: 464
+  is_gpu: true
+  layer_norm_eps: 1.0e-12
+  max_position_embeddings: 515
+  model_type: roberta
+  num_attention_heads: 12
+  num_hidden_layers: 3
+  pad_token_id: 1
+  position_embedding_type: absolute
+  torch_dtype: float32
+  transformers_version: 4.53.3
+  type_vocab_size: 1
+  use_cache: true
+  vocab_size: 600
+onnxFiles: {}
+safetensorsSizeMb: 27.4
+approxSizeMb: 13.7
+fetchedAt: '2026-06-10T07:15:01.000Z'

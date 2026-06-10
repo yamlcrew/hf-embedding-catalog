@@ -1,0 +1,153 @@
+_id: 6977bab64fd3a2e456588227
+id: zyc-zju/qwen3-embedding-4b_qwen3-8b_2wiki_lsr
+private: false
+pipeline_tag: sentence-similarity
+library_name: sentence-transformers
+tags:
+- sentence-transformers
+- safetensors
+- sentence-similarity
+- feature-extraction
+- dense
+- generated_from_trainer
+- dataset_size:15000
+- loss:LSRLoss
+- en
+- dataset:RUC-NLPIR/FlashRAG_datasets
+- arxiv:1908.10084
+- base_model:Qwen/Qwen3-Embedding-4B
+- base_model:finetune:Qwen/Qwen3-Embedding-4B
+- endpoints_compatible
+- region:us
+downloads: 0
+likes: 0
+modelId: zyc-zju/qwen3-embedding-4b_qwen3-8b_2wiki_lsr
+author: zyc-zju
+sha: e42d69c1eb488ba91746362bd9b1f2c46d672dfc
+lastModified: '2026-01-26T19:27:44.000Z'
+gated: false
+disabled: false
+widgetData:
+- source_sentence: When is the director of film Eclipse Of Reason 's birthday?
+  sentences:
+  - July 31, 1926
+  - Rome
+  - Wawel Cathedral
+- source_sentence: What is the date of birth of the performer of song Iconic (Song)?
+  sentences:
+  - India
+  - Flowers From Nice
+  - August 16, 1958
+- source_sentence: What is the place of birth of Alexander Stockton Cussons's father?
+  sentences:
+  - Santa Monica
+  - Perinaldo
+  - Holbeck
+- source_sentence: Are both A Face in the Fog and Azonto Ghost from the same country?
+  sentences:
+  - 'no'
+  - 'no'
+  - 'no'
+- source_sentence: Do both films Country (film) and Raid in St. Pauli have the directors that share the same nationality?
+  sentences:
+  - 13 October 1952
+  - 'yes'
+  - 'no'
+model-index: null
+config:
+  tokenizer_config:
+    bos_token: null
+    eos_token: <|im_end|>
+    pad_token: <|endoftext|>
+    unk_token: null
+  chat_template_jinja: "{%- if tools %}\n    {{- '<|im_start|>system\\n' }}\n    {%- if messages[0]['role'] == 'system' %}\n\
+    \        {{- messages[0]['content'] }}\n    {%- else %}\n        {{- 'You are a helpful assistant.' }}\n    {%- endif\
+    \ %}\n    {{- \"\\n\\n# Tools\\n\\nYou may call one or more functions to assist with the user query.\\n\\nYou are provided\
+    \ with function signatures within <tools></tools> XML tags:\\n<tools>\" }}\n    {%- for tool in tools %}\n        {{-\
+    \ \"\\n\" }}\n        {{- tool | tojson }}\n    {%- endfor %}\n    {{- \"\\n</tools>\\n\\nFor each function call, return\
+    \ a json object with function name and arguments within <tool_call></tool_call> XML tags:\\n<tool_call>\\n{\\\"name\\\"\
+    : <function-name>, \\\"arguments\\\": <args-json-object>}\\n</tool_call><|im_end|>\\n\" }}\n{%- else %}\n    {%- if messages[0]['role']\
+    \ == 'system' %}\n        {{- '<|im_start|>system\\n' + messages[0]['content'] + '<|im_end|>\\n' }}\n    {%- else %}\n\
+    \        {{- '<|im_start|>system\\nYou are a helpful assistant.<|im_end|>\\n' }}\n    {%- endif %}\n{%- endif %}\n{%-\
+    \ for message in messages %}\n    {%- if (message.role == \"user\") or (message.role == \"system\" and not loop.first)\
+    \ or (message.role == \"assistant\" and not message.tool_calls) %}\n        {{- '<|im_start|>' + message.role + '\\n'\
+    \ + message.content + '<|im_end|>' + '\\n' }}\n    {%- elif message.role == \"assistant\" %}\n        {{- '<|im_start|>'\
+    \ + message.role }}\n        {%- if message.content %}\n            {{- '\\n' + message.content }}\n        {%- endif\
+    \ %}\n        {%- for tool_call in message.tool_calls %}\n            {%- if tool_call.function is defined %}\n      \
+    \          {%- set tool_call = tool_call.function %}\n            {%- endif %}\n            {{- '\\n<tool_call>\\n{\"\
+    name\": \"' }}\n            {{- tool_call.name }}\n            {{- '\", \"arguments\": ' }}\n            {{- tool_call.arguments\
+    \ | tojson }}\n            {{- '}\\n</tool_call>' }}\n        {%- endfor %}\n        {{- '<|im_end|>\\n' }}\n    {%- elif\
+    \ message.role == \"tool\" %}\n        {%- if (loop.index0 == 0) or (messages[loop.index0 - 1].role != \"tool\") %}\n\
+    \            {{- '<|im_start|>user' }}\n        {%- endif %}\n        {{- '\\n<tool_response>\\n' }}\n        {{- message.content\
+    \ }}\n        {{- '\\n</tool_response>' }}\n        {%- if loop.last or (messages[loop.index0 + 1].role != \"tool\") %}\n\
+    \            {{- '<|im_end|>\\n' }}\n        {%- endif %}\n    {%- endif %}\n{%- endfor %}\n{%- if add_generation_prompt\
+    \ %}\n    {{- '<|im_start|>assistant\\n' }}\n{%- endif %}\n"
+cardData:
+  language:
+  - en
+  tags:
+  - sentence-transformers
+  - sentence-similarity
+  - feature-extraction
+  - dense
+  - generated_from_trainer
+  - dataset_size:15000
+  - loss:LSRLoss
+  base_model: Qwen/Qwen3-Embedding-4B
+  widget:
+  - source_sentence: When is the director of film Eclipse Of Reason 's birthday?
+    sentences:
+    - July 31, 1926
+    - Rome
+    - Wawel Cathedral
+  - source_sentence: What is the date of birth of the performer of song Iconic (Song)?
+    sentences:
+    - India
+    - Flowers From Nice
+    - August 16, 1958
+  - source_sentence: What is the place of birth of Alexander Stockton Cussons's father?
+    sentences:
+    - Santa Monica
+    - Perinaldo
+    - Holbeck
+  - source_sentence: Are both A Face in the Fog and Azonto Ghost from the same country?
+    sentences:
+    - 'no'
+    - 'no'
+    - 'no'
+  - source_sentence: Do both films Country (film) and Raid in St. Pauli have the directors that share the same nationality?
+    sentences:
+    - 13 October 1952
+    - 'yes'
+    - 'no'
+  datasets:
+  - RUC-NLPIR/FlashRAG_datasets
+  pipeline_tag: sentence-similarity
+  library_name: sentence-transformers
+siblings:
+- rfilename: .gitattributes
+- rfilename: 1_Pooling/config.json
+- rfilename: README.md
+- rfilename: adapter_config.json
+- rfilename: adapter_model.safetensors
+- rfilename: added_tokens.json
+- rfilename: chat_template.jinja
+- rfilename: config_sentence_transformers.json
+- rfilename: merges.txt
+- rfilename: modules.json
+- rfilename: sentence_bert_config.json
+- rfilename: special_tokens_map.json
+- rfilename: tokenizer.json
+- rfilename: tokenizer_config.json
+- rfilename: training_args.bin
+- rfilename: vocab.json
+spaces: []
+createdAt: '2026-01-26T19:04:22.000Z'
+usedStorage: 143614303
+downloadsAllTime: 0
+inferenceProviderMapping: {}
+configJson: null
+onnxFiles: {}
+safetensorsSizeMb: 132.2
+approxSizeMb: 0.0
+fetchedAt: '2026-06-10T07:15:01.000Z'

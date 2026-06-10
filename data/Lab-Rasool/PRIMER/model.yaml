@@ -1,0 +1,156 @@
+_id: 68f23e8a7aa2f68f10b124e1
+id: Lab-Rasool/PRIMER
+private: false
+pipeline_tag: feature-extraction
+tags:
+- pytorch
+- primer
+- medical
+- radiology
+- mammography
+- contrastive-learning
+- embeddings
+- computer-vision
+- feature-extraction
+- dataset:CMMD
+- license:apache-2.0
+- region:us
+downloads: 15
+likes: 1
+modelId: Lab-Rasool/PRIMER
+author: Lab-Rasool
+sha: ed863e8af755766ad2a74a7bb7a09ea387f58204
+lastModified: '2025-10-17T14:31:14.000Z'
+gated: false
+disabled: false
+model-index: null
+config:
+  model_type: primer
+cardData:
+  license: apache-2.0
+  tags:
+  - medical
+  - radiology
+  - mammography
+  - contrastive-learning
+  - embeddings
+  - computer-vision
+  - pytorch
+  datasets:
+  - CMMD
+  pipeline_tag: feature-extraction
+siblings:
+- rfilename: .gitattributes
+- rfilename: README.md
+- rfilename: config.json
+- rfilename: model_card.json
+- rfilename: pytorch_model.bin
+spaces: []
+createdAt: '2025-10-17T13:03:06.000Z'
+usedStorage: 295966599
+downloadsAllTime: 71
+inferenceProviderMapping: {}
+configJson:
+  model_type: primer
+  architecture: resnet50
+  task: feature-extraction
+  framework: pytorch
+  model_config:
+    architecture: resnet50
+    pretrained_radimagenet: true
+    embedding_dim: 2048
+    projection_dim: 128
+    dropout: 0.2
+    freeze_backbone: false
+    use_projection_head: true
+  input_config:
+    image_size: 224
+    num_channels: 3
+    input_shape:
+    - 3
+    - 224
+    - 224
+    data_format: channels_first
+    color_mode: rgb
+  preprocessing_config:
+    use_clahe: true
+    clahe_clip_limit: 2.0
+    clahe_tile_grid_size:
+    - 8
+    - 8
+    normalize_hu: true
+    percentile_clip:
+    - 2
+    - 98
+    normalization:
+      mean:
+      - 0.485
+      - 0.456
+      - 0.406
+      std:
+      - 0.229
+      - 0.224
+      - 0.225
+      description: ImageNet normalization (required for RadImageNet compatibility)
+  training_config:
+    method: contrastive
+    framework: simclr
+    batch_size: 128
+    num_epochs: 50
+    learning_rate: 0.0001
+    weight_decay: 1.0e-05
+    warmup_epochs: 10
+    patience: 15
+    gradient_clip: 1.0
+    optimizer:
+      name: adamw
+      betas:
+      - 0.9
+      - 0.999
+    scheduler:
+      name: cosine
+      min_lr: 1.0e-06
+  contrastive_learning:
+    loss: nt_xent
+    temperature: 0.07
+    use_cosine_similarity: true
+    negative_samples: all
+    description: NT-Xent (Normalized Temperature-scaled Cross Entropy) loss from SimCLR
+  augmentation_config:
+    horizontal_flip: 0.5
+    vertical_flip: 0.3
+    rotate_limit: 15
+    brightness_limit: 0.2
+    contrast_limit: 0.2
+    shift_scale_rotate: true
+    elastic_transform: false
+    grid_distortion: false
+  data_config:
+    dataset: CMMD
+    train_split: 0.7
+    val_split: 0.15
+    test_split: 0.15
+    random_seed: 42
+    num_training_samples: 13000
+    modality: mammography
+    format: dicom
+  output_config:
+    embedding_dim: 2048
+    normalize_embeddings: true
+    normalization_type: l2
+  hardware_config:
+    mixed_precision: true
+    gpu_memory_required: 12GB
+    recommended_batch_size: 128
+  metrics:
+    silhouette_score: 0.289
+    davies_bouldin_score: 1.653
+    calinski_harabasz_score: 3621
+    embedding_variance: 0.024
+  version: 1.0.0
+  pytorch_version: 2.1.0
+  timm_version: 0.9.12
+onnxFiles: {}
+safetensorsSizeMb: 0.0
+approxSizeMb: 0.0
+fetchedAt: '2026-06-10T07:15:01.000Z'

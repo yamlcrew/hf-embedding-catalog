@@ -1,0 +1,231 @@
+_id: 66b58ead8de19c0bb3573219
+id: trasul/bge-base-all-nli-triplet
+private: false
+pipeline_tag: sentence-similarity
+library_name: sentence-transformers
+tags:
+- sentence-transformers
+- safetensors
+- bert
+- sentence-similarity
+- feature-extraction
+- generated_from_trainer
+- dataset_size:5000
+- loss:MultipleNegativesRankingLoss
+- en
+- dataset:sentence-transformers/all-nli
+- arxiv:1908.10084
+- arxiv:1705.00652
+- base_model:BAAI/bge-base-en
+- base_model:finetune:BAAI/bge-base-en
+- model-index
+- text-embeddings-inference
+- endpoints_compatible
+- region:us
+downloads: 1
+likes: 0
+modelId: trasul/bge-base-all-nli-triplet
+author: trasul
+sha: 29965aa3720937fe532c3c3b27339d5f69c917cd
+lastModified: '2024-08-09T03:36:38.000Z'
+gated: false
+disabled: false
+mask_token: '[MASK]'
+widgetData:
+- source_sentence: A man is jumping unto his filthy bed.
+  sentences:
+  - A young male is looking at a newspaper while 2 females walks past him.
+  - The bed is dirty.
+  - The man is on the moon.
+- source_sentence: A carefully balanced male stands on one foot near a clean ocean beach area.
+  sentences:
+  - A man is ouside near the beach.
+  - Three policemen patrol the streets on bikes
+  - A man is sitting on his couch.
+- source_sentence: The man is wearing a blue shirt.
+  sentences:
+  - Near the trashcan the man stood and smoked
+  - A man in a blue shirt leans on a wall beside a road with a blue van and red car with water in the background.
+  - A man in a black shirt is playing a guitar.
+- source_sentence: The girls are outdoors.
+  sentences:
+  - Two girls riding on an amusement part ride.
+  - a guy laughs while doing laundry
+  - Three girls are standing together in a room, one is listening, one is writing on a wall and the third is talking to them.
+- source_sentence: A construction worker peeking out of a manhole while his coworker sits on the sidewalk smiling.
+  sentences:
+  - A worker is looking out of a manhole.
+  - A man is giving a presentation.
+  - The workers are both inside the manhole.
+model-index:
+- name: SentenceTransformer based on BAAI/bge-base-en
+  results:
+  - task:
+      type: triplet
+      name: Triplet
+    dataset:
+      name: all nli test
+      type: all-nli-test
+    metrics:
+    - type: cosine_accuracy
+      value: 0.9378120744439401
+      name: Cosine Accuracy
+      verified: false
+    - type: dot_accuracy
+      value: 0.06218792555605992
+      name: Dot Accuracy
+      verified: false
+    - type: manhattan_accuracy
+      value: 0.9355424421243759
+      name: Manhattan Accuracy
+      verified: false
+    - type: euclidean_accuracy
+      value: 0.9378120744439401
+      name: Euclidean Accuracy
+      verified: false
+    - type: max_accuracy
+      value: 0.9378120744439401
+      name: Max Accuracy
+      verified: false
+config:
+  architectures:
+  - BertModel
+  model_type: bert
+  tokenizer_config:
+    cls_token: '[CLS]'
+    mask_token: '[MASK]'
+    pad_token: '[PAD]'
+    sep_token: '[SEP]'
+    unk_token: '[UNK]'
+cardData:
+  base_model: BAAI/bge-base-en
+  datasets:
+  - sentence-transformers/all-nli
+  language:
+  - en
+  library_name: sentence-transformers
+  metrics:
+  - cosine_accuracy
+  - dot_accuracy
+  - manhattan_accuracy
+  - euclidean_accuracy
+  - max_accuracy
+  pipeline_tag: sentence-similarity
+  tags:
+  - sentence-transformers
+  - sentence-similarity
+  - feature-extraction
+  - generated_from_trainer
+  - dataset_size:5000
+  - loss:MultipleNegativesRankingLoss
+  widget:
+  - source_sentence: A man is jumping unto his filthy bed.
+    sentences:
+    - A young male is looking at a newspaper while 2 females walks past him.
+    - The bed is dirty.
+    - The man is on the moon.
+  - source_sentence: A carefully balanced male stands on one foot near a clean ocean beach area.
+    sentences:
+    - A man is ouside near the beach.
+    - Three policemen patrol the streets on bikes
+    - A man is sitting on his couch.
+  - source_sentence: The man is wearing a blue shirt.
+    sentences:
+    - Near the trashcan the man stood and smoked
+    - A man in a blue shirt leans on a wall beside a road with a blue van and red car with water in the background.
+    - A man in a black shirt is playing a guitar.
+  - source_sentence: The girls are outdoors.
+    sentences:
+    - Two girls riding on an amusement part ride.
+    - a guy laughs while doing laundry
+    - Three girls are standing together in a room, one is listening, one is writing on a wall and the third is talking to
+      them.
+  - source_sentence: A construction worker peeking out of a manhole while his coworker sits on the sidewalk smiling.
+    sentences:
+    - A worker is looking out of a manhole.
+    - A man is giving a presentation.
+    - The workers are both inside the manhole.
+  model-index:
+  - name: SentenceTransformer based on BAAI/bge-base-en
+    results:
+    - task:
+        type: triplet
+        name: Triplet
+      dataset:
+        name: all nli test
+        type: all-nli-test
+      metrics:
+      - type: cosine_accuracy
+        value: 0.9378120744439401
+        name: Cosine Accuracy
+        verified: false
+      - type: dot_accuracy
+        value: 0.06218792555605992
+        name: Dot Accuracy
+        verified: false
+      - type: manhattan_accuracy
+        value: 0.9355424421243759
+        name: Manhattan Accuracy
+        verified: false
+      - type: euclidean_accuracy
+        value: 0.9378120744439401
+        name: Euclidean Accuracy
+        verified: false
+      - type: max_accuracy
+        value: 0.9378120744439401
+        name: Max Accuracy
+        verified: false
+siblings:
+- rfilename: .gitattributes
+- rfilename: 1_Pooling/config.json
+- rfilename: README.md
+- rfilename: config.json
+- rfilename: config_sentence_transformers.json
+- rfilename: model.safetensors
+- rfilename: modules.json
+- rfilename: sentence_bert_config.json
+- rfilename: special_tokens_map.json
+- rfilename: tokenizer.json
+- rfilename: tokenizer_config.json
+- rfilename: vocab.txt
+spaces: []
+createdAt: '2024-08-09T03:36:13.000Z'
+safetensors:
+  parameters:
+    F32: 109482240
+  total: 109482240
+usedStorage: 437951328
+downloadsAllTime: 193
+inferenceProviderMapping: {}
+configJson:
+  _name_or_path: BAAI/bge-base-en
+  architectures:
+  - BertModel
+  attention_probs_dropout_prob: 0.1
+  classifier_dropout: null
+  gradient_checkpointing: false
+  hidden_act: gelu
+  hidden_dropout_prob: 0.1
+  hidden_size: 768
+  id2label:
+    '0': LABEL_0
+  initializer_range: 0.02
+  intermediate_size: 3072
+  label2id:
+    LABEL_0: 0
+  layer_norm_eps: 1.0e-12
+  max_position_embeddings: 512
+  model_type: bert
+  num_attention_heads: 12
+  num_hidden_layers: 12
+  pad_token_id: 0
+  position_embedding_type: absolute
+  torch_dtype: float32
+  transformers_version: 4.42.4
+  type_vocab_size: 2
+  use_cache: true
+  vocab_size: 30522
+onnxFiles: {}
+safetensorsSizeMb: 438.0
+approxSizeMb: 437.9
+fetchedAt: '2026-06-10T07:15:01.000Z'

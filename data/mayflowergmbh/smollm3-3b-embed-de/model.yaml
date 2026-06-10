@@ -1,0 +1,232 @@
+_id: 6876cee33fecd4f490d561ca
+id: mayflowergmbh/smollm3-3b-embed-de
+private: false
+pipeline_tag: feature-extraction
+library_name: sentence-transformers
+tags:
+- sentence-transformers
+- safetensors
+- llama
+- feature-extraction
+- sentence-similarity
+- embeddings
+- german
+- text-embedding
+- de
+- arxiv:2404.05961
+- license:apache-2.0
+- text-embeddings-inference
+- endpoints_compatible
+- region:us
+downloads: 8
+likes: 2
+modelId: mayflowergmbh/smollm3-3b-embed-de
+author: mayflowergmbh
+sha: cf2641a7f67d1448a683c265c4d4c9685c832164
+lastModified: '2025-07-15T22:00:27.000Z'
+gated: false
+disabled: false
+model-index:
+- name: smollm3-3b-embed-de
+  results: []
+config:
+  architectures:
+  - LlamaModel
+  model_type: llama
+  tokenizer_config:
+    bos_token: null
+    eos_token: <|im_end|>
+    pad_token: <|im_end|>
+  chat_template_jinja: "{# ───── defaults ───── #}\n{%- if enable_thinking is not defined -%}\n{%- set enable_thinking = true\
+    \ -%}\n{%- endif -%}\n\n{# ───── reasoning mode ───── #}\n{%- if enable_thinking -%}\n  {%- set reasoning_mode = \"/think\"\
+    \ -%}\n{%- else -%}\n  {%- set reasoning_mode = \"/no_think\" -%}\n{%- endif -%}\n\n{# ───── header (system message) ─────\
+    \ #}\n{{- \"<|im_start|>system\\n\" -}}\n\n{%- if messages[0].role == \"system\" -%}\n  {%- set system_message = messages[0].content\
+    \ -%}\n  {%- if \"/no_think\" in system_message -%}\n    {%- set reasoning_mode = \"/no_think\" -%}\n  {%- elif \"/think\"\
+    \ in system_message -%}\n    {%- set reasoning_mode = \"/think\" -%}\n  {%- endif -%}\n  {%- set custom_instructions =\
+    \ system_message.replace(\"/no_think\", \"\").replace(\"/think\", \"\").rstrip() -%}\n{%- endif -%}\n\n{%- if \"/system_override\"\
+    \ in system_message -%}\n  {{- custom_instructions.replace(\"/system_override\", \"\").rstrip() -}}\n  {{- \"<|im_end|>\\\
+    n\" -}}\n{%- else -%}\n  {{- \"## Metadata\\n\\n\" -}}\n  {{- \"Knowledge Cutoff Date: June 2025\\n\" -}}\n  {%- set today\
+    \ = strftime_now(\"%d %B %Y\") -%}\n  {{- \"Today Date: \" ~ today ~ \"\\n\" -}}\n  {{- \"Reasoning Mode: \" + reasoning_mode\
+    \ + \"\\n\\n\" -}}\n  \n  {{- \"## Custom Instructions\\n\\n\" -}}\n  {%- if custom_instructions -%}\n    {{- custom_instructions\
+    \ + \"\\n\\n\" -}}\n  {%- elif reasoning_mode == \"/think\" -%}\n    {{- \"You are a helpful AI assistant named SmolLM,\
+    \ trained by Hugging Face. Your role as an assistant involves thoroughly exploring questions through a systematic thinking\
+    \ process before providing the final precise and accurate solutions. This requires engaging in a comprehensive cycle of\
+    \ analysis, summarizing, exploration, reassessment, reflection, backtracking, and iteration to develop well-considered\
+    \ thinking process. Please structure your response into two main sections: Thought and Solution using the specified format:\
+    \ <think> Thought section </think> Solution section. In the Thought section, detail your reasoning process in steps. Each\
+    \ step should include detailed considerations such as analysing questions, summarizing relevant findings, brainstorming\
+    \ new ideas, verifying the accuracy of the current steps, refining any errors, and revisiting previous steps. In the Solution\
+    \ section, based on various attempts, explorations, and reflections from the Thought section, systematically present the\
+    \ final solution that you deem correct. The Solution section should be logical, accurate, and concise and detail necessary\
+    \ steps needed to reach the conclusion.\\n\\n\" -}}\n  {%- else -%}\n    {{- \"You are a helpful AI assistant named SmolLM,\
+    \ trained by Hugging Face.\\n\\n\" -}}\n  {%- endif -%}\n\n  {%- if xml_tools or python_tools or tools -%}\n    {{- \"\
+    ### Tools\\n\\n\" -}}\n    {%- if xml_tools or tools -%}\n      {%- if tools -%}\n        {%- set xml_tools = tools -%}\n\
+    \      {%- endif -%}\n      {%- set ns = namespace(xml_tool_string=\"You may call one or more functions to assist with\
+    \ the user query.\\nYou are provided with function signatures within <tools></tools> XML tags:\\n\\n<tools>\\n\") -%}\n\
+    \      {%- for tool in xml_tools[:] -%} {# The slicing makes sure that xml_tools is a list #}\n        {%- set ns.xml_tool_string\
+    \ = ns.xml_tool_string ~ (tool | string) ~ \"\\n\" -%}\n      {%- endfor -%}\n      {%- set xml_tool_string = ns.xml_tool_string\
+    \ + \"</tools>\\n\\nFor each function call, return a json object with function name and arguments within <tool_call></tool_call>\
+    \ XML tags:\\n<tool_call>\\n{\\\"name\\\": <function-name>, \\\"arguments\\\": <args-json-object>}\\n</tool_call>\" -%}\n\
+    \      {{- xml_tool_string -}}\n    {%- endif -%}\n    {%- if python_tools -%}\n      {%- set ns = namespace(python_tool_string=\"\
+    When you send a message containing Python code between '<code>' and '</code>' tags, it will be executed in a stateful\
+    \ Jupyter notebook environment, and you will then be given the output to continued reasoning in an agentic loop.\\n\\\
+    nYou can use the following tools in your python code like regular functions:\\n<tools>\\n\") -%}\n      {%- for tool in\
+    \ python_tools[:] -%} {# The slicing makes sure that python_tools is a list #}\n        {%- set ns.python_tool_string\
+    \ = ns.python_tool_string ~ (tool | string) ~ \"\\n\" -%}\n      {%- endfor -%}\n      {%- set python_tool_string = ns.python_tool_string\
+    \ + \"</tools>\\n\\nThe state persists between code executions: so variables that you define in one step are still available\
+    \ thereafter.\" -%}\n      {{- python_tool_string -}}\n    {%- endif -%}\n    {{- \"\\n\\n\" -}}\n    {{- \"<|im_end|>\\\
+    n\" -}}\n  {%- endif -%}\n{%- endif -%}\n{# ───── main loop ───── #}\n{%- for message in messages -%}\n    {%- set content\
+    \ = message.content if message.content is string else \"\" -%}\n    {%- if message.role == \"user\" -%}\n        {{ \"\
+    <|im_start|>\" + message.role + \"\\n\"  + content + \"<|im_end|>\\n\" }}\n    {%- elif message.role == \"assistant\"\
+    \ -%}\n        {% generation %}\n        {%- if reasoning_mode == \"/think\" -%}\n            {{ \"<|im_start|>assistant\\\
+    n\" + content.lstrip(\"\\n\") + \"<|im_end|>\\n\" }}\n        {%- else -%}\n            {{ \"<|im_start|>assistant\\n\"\
+    \ + \"<think>\\n\\n</think>\\n\" + content.lstrip(\"\\n\") + \"<|im_end|>\\n\" }}\n        {%- endif -%}\n        {% endgeneration\
+    \ %}\n    {%- elif message.role == \"tool\" -%}\n    {{ \"<|im_start|>\" + \"user\\n\"  + content + \"<|im_end|>\\n\"\
+    \ }}\n    {%- endif -%}\n{%- endfor -%}\n{# ───── generation prompt ───── #}\n{%- if add_generation_prompt -%}\n    {%-\
+    \ if reasoning_mode == \"/think\" -%}\n        {{ \"<|im_start|>assistant\\n\" }}\n    {%- else -%}\n        {{ \"<|im_start|>assistant\\\
+    n\" + \"<think>\\n\\n</think>\\n\"  }}\n    {%- endif -%}\n{%- endif -%}"
+cardData:
+  language: de
+  license: apache-2.0
+  tags:
+  - sentence-transformers
+  - feature-extraction
+  - sentence-similarity
+  - embeddings
+  - german
+  - text-embedding
+  model-index:
+  - name: smollm3-3b-embed-de
+    results: []
+siblings:
+- rfilename: .gitattributes
+- rfilename: README.md
+- rfilename: chat_template.jinja
+- rfilename: config.json
+- rfilename: llm2vec_config.json
+- rfilename: model-00001-of-00002.safetensors
+- rfilename: model-00002-of-00002.safetensors
+- rfilename: model.safetensors.index.json
+- rfilename: special_tokens_map.json
+- rfilename: tokenizer.json
+- rfilename: tokenizer_config.json
+spaces: []
+createdAt: '2025-07-15T21:57:55.000Z'
+safetensors:
+  parameters:
+    BF16: 3075098624
+  total: 3075098624
+usedStorage: 6167441867
+downloadsAllTime: 60
+inferenceProviderMapping: {}
+configJson:
+  architectures:
+  - LlamaModel
+  attention_bias: false
+  attention_dropout: 0.0
+  bos_token_id: 128000
+  eos_token_id: 128012
+  head_dim: 128
+  hidden_act: silu
+  hidden_size: 2048
+  initializer_range: 0.02
+  intermediate_size: 11008
+  layer_types:
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  loss_type: CausalLMLoss
+  max_position_embeddings: 65536
+  max_window_layers: 28
+  mlp_bias: false
+  model_type: llama
+  no_rope_layer_interval: 4
+  no_rope_layers:
+  - 1
+  - 1
+  - 1
+  - 0
+  - 1
+  - 1
+  - 1
+  - 0
+  - 1
+  - 1
+  - 1
+  - 0
+  - 1
+  - 1
+  - 1
+  - 0
+  - 1
+  - 1
+  - 1
+  - 0
+  - 1
+  - 1
+  - 1
+  - 0
+  - 1
+  - 1
+  - 1
+  - 0
+  - 1
+  - 1
+  - 1
+  - 0
+  - 1
+  - 1
+  - 1
+  - 0
+  num_attention_heads: 16
+  num_hidden_layers: 36
+  num_key_value_heads: 4
+  pad_token_id: 128004
+  pretraining_tp: 1
+  rms_norm_eps: 1.0e-06
+  rope_scaling: null
+  rope_theta: 5000000.0
+  sliding_window: null
+  tie_word_embeddings: false
+  torch_dtype: bfloat16
+  transformers_version: 4.53.2
+  use_cache: false
+  use_sliding_window: false
+  vocab_size: 128256
+onnxFiles: {}
+safetensorsSizeMb: 6150.2
+approxSizeMb: 6150.2
+fetchedAt: '2026-06-10T07:15:01.000Z'

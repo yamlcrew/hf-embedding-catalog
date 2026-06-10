@@ -1,0 +1,163 @@
+_id: 6978d456ac24e42981466fec
+id: dkqjrm/lora_model
+private: false
+pipeline_tag: sentence-similarity
+library_name: sentence-transformers
+tags:
+- sentence-transformers
+- safetensors
+- sentence-similarity
+- feature-extraction
+- dense
+- generated_from_trainer
+- dataset_size:1310129
+- loss:MultipleNegativesRankingLoss
+- dataset:dkqjrm/olive-product
+- arxiv:1908.10084
+- arxiv:1705.00652
+- base_model:unsloth/Qwen3-Embedding-0.6B
+- base_model:finetune:unsloth/Qwen3-Embedding-0.6B
+- endpoints_compatible
+- region:us
+downloads: 0
+likes: 0
+modelId: dkqjrm/lora_model
+author: dkqjrm
+sha: ab28b705115ef549729e63af2686764c99b4a9f2
+lastModified: '2026-01-27T15:06:04.000Z'
+gated: false
+disabled: false
+widgetData:
+- source_sentence: 닥터브로너스 [페이셜&바디워시] 닥터브로너스 퓨어 캐스틸 솝 475ml 12종 택1
+  sentences:
+  - 露得清卸妆油
+  - Versace Man Eau Fraiche
+  - ピュアキャスティールソープ
+- source_sentence: 베르사체 베르사체 맨오프레쉬 30ml 단품/기획 택1
+  sentences:
+  - ピーリングジェル
+  - Versace Bright
+  - Man Eau Fraiche single
+- source_sentence: 랑방 랑방 루머 2 로즈 50ml
+  sentences:
+  - 캐스틸 솝 475ml
+  - 랑방 루머
+  - 防晒霜
+- source_sentence: 케어존 케어존 데일리&패밀리 선크림 80ml (SPF50+/PA+++)
+  sentences:
+  - 伊丽莎白雅顿 100毫升
+  - Rumeur Rose perfume
+  - 패밀리 선크림
+- source_sentence: 랑방 랑방 메리미 EDP 50ml
+  sentences:
+  - マリーミー EDP
+  - 浪凡 EDP
+  - ケアゾーン デイリー日焼け止め
+model-index: null
+config:
+  tokenizer_config:
+    bos_token: null
+    eos_token: <|im_end|>
+    pad_token: <|endoftext|>
+    unk_token: null
+  chat_template_jinja: "{%- if tools %}\n    {{- '<|im_start|>system\\n' }}\n    {%- if messages[0].role == 'system' %}\n\
+    \        {{- messages[0].content + '\\n\\n' }}\n    {%- endif %}\n    {{- \"# Tools\\n\\nYou may call one or more functions\
+    \ to assist with the user query.\\n\\nYou are provided with function signatures within <tools></tools> XML tags:\\n<tools>\"\
+    \ }}\n    {%- for tool in tools %}\n        {{- \"\\n\" }}\n        {{- tool | tojson }}\n    {%- endfor %}\n    {{- \"\
+    \\n</tools>\\n\\nFor each function call, return a json object with function name and arguments within <tool_call></tool_call>\
+    \ XML tags:\\n<tool_call>\\n{\\\"name\\\": <function-name>, \\\"arguments\\\": <args-json-object>}\\n</tool_call><|im_end|>\\\
+    n\" }}\n{%- else %}\n    {%- if messages[0].role == 'system' %}\n        {{- '<|im_start|>system\\n' + messages[0].content\
+    \ + '<|im_end|>\\n' }}\n    {%- endif %}\n{%- endif %}\n{%- set ns = namespace(multi_step_tool=true, last_query_index=messages|length\
+    \ - 1) %}\n{%- for message in messages[::-1] %}\n    {%- set index = (messages|length - 1) - loop.index0 %}\n    {%- if\
+    \ ns.multi_step_tool and message.role == \"user\" and not(message.content.startswith('<tool_response>') and message.content.endswith('</tool_response>'))\
+    \ %}\n        {%- set ns.multi_step_tool = false %}\n        {%- set ns.last_query_index = index %}\n    {%- endif %}\n\
+    {%- endfor %}\n{%- for message in messages %}\n    {%- if (message.role == \"user\") or (message.role == \"system\" and\
+    \ not loop.first) %}\n        {{- '<|im_start|>' + message.role + '\\n' + message.content + '<|im_end|>' + '\\n' }}\n\
+    \    {%- elif message.role == \"assistant\" %}\n        {%- set content = message.content %}\n        {%- set reasoning_content\
+    \ = '' %}\n        {%- if message.reasoning_content is defined and message.reasoning_content is not none %}\n        \
+    \    {%- set reasoning_content = message.reasoning_content %}\n        {%- else %}\n            {%- if '</think>' in message.content\
+    \ %}\n                {%- set content = message.content.split('</think>')[-1].lstrip('\\n') %}\n                {%- set\
+    \ reasoning_content = message.content.split('</think>')[0].rstrip('\\n').split('<think>')[-1].lstrip('\\n') %}\n     \
+    \       {%- endif %}\n        {%- endif %}\n        {%- if loop.index0 > ns.last_query_index %}\n            {%- if loop.last\
+    \ or (not loop.last and reasoning_content) %}\n                {{- '<|im_start|>' + message.role + '\\n<think>\\n' + reasoning_content.strip('\\\
+    n') + '\\n</think>\\n\\n' + content.lstrip('\\n') }}\n            {%- else %}\n                {{- '<|im_start|>' + message.role\
+    \ + '\\n' + content }}\n            {%- endif %}\n        {%- else %}\n            {{- '<|im_start|>' + message.role +\
+    \ '\\n' + content }}\n        {%- endif %}\n        {%- if message.tool_calls %}\n            {%- for tool_call in message.tool_calls\
+    \ %}\n                {%- if (loop.first and content) or (not loop.first) %}\n                    {{- '\\n' }}\n     \
+    \           {%- endif %}\n                {%- if tool_call.function %}\n                    {%- set tool_call = tool_call.function\
+    \ %}\n                {%- endif %}\n                {{- '<tool_call>\\n{\"name\": \"' }}\n                {{- tool_call.name\
+    \ }}\n                {{- '\", \"arguments\": ' }}\n                {%- if tool_call.arguments is string %}\n        \
+    \            {{- tool_call.arguments }}\n                {%- else %}\n                    {{- tool_call.arguments | tojson\
+    \ }}\n                {%- endif %}\n                {{- '}\\n</tool_call>' }}\n            {%- endfor %}\n        {%-\
+    \ endif %}\n        {{- '<|im_end|>\\n' }}\n    {%- elif message.role == \"tool\" %}\n        {%- if loop.first or (messages[loop.index0\
+    \ - 1].role != \"tool\") %}\n            {{- '<|im_start|>user' }}\n        {%- endif %}\n        {{- '\\n<tool_response>\\\
+    n' }}\n        {{- message.content }}\n        {{- '\\n</tool_response>' }}\n        {%- if loop.last or (messages[loop.index0\
+    \ + 1].role != \"tool\") %}\n            {{- '<|im_end|>\\n' }}\n        {%- endif %}\n    {%- endif %}\n{%- endfor %}\n\
+    {%- if add_generation_prompt %}\n    {{- '<|im_start|>assistant\\n' }}\n    {%- if enable_thinking is defined and enable_thinking\
+    \ is false %}\n        {{- '<think>\\n\\n</think>\\n\\n' }}\n    {%- endif %}\n{%- endif %}"
+cardData:
+  tags:
+  - sentence-transformers
+  - sentence-similarity
+  - feature-extraction
+  - dense
+  - generated_from_trainer
+  - dataset_size:1310129
+  - loss:MultipleNegativesRankingLoss
+  base_model: unsloth/Qwen3-Embedding-0.6B
+  widget:
+  - source_sentence: 닥터브로너스 [페이셜&바디워시] 닥터브로너스 퓨어 캐스틸 솝 475ml 12종 택1
+    sentences:
+    - 露得清卸妆油
+    - Versace Man Eau Fraiche
+    - ピュアキャスティールソープ
+  - source_sentence: 베르사체 베르사체 맨오프레쉬 30ml 단품/기획 택1
+    sentences:
+    - ピーリングジェル
+    - Versace Bright
+    - Man Eau Fraiche single
+  - source_sentence: 랑방 랑방 루머 2 로즈 50ml
+    sentences:
+    - 캐스틸 솝 475ml
+    - 랑방 루머
+    - 防晒霜
+  - source_sentence: 케어존 케어존 데일리&패밀리 선크림 80ml (SPF50+/PA+++)
+    sentences:
+    - 伊丽莎白雅顿 100毫升
+    - Rumeur Rose perfume
+    - 패밀리 선크림
+  - source_sentence: 랑방 랑방 메리미 EDP 50ml
+    sentences:
+    - マリーミー EDP
+    - 浪凡 EDP
+    - ケアゾーン デイリー日焼け止め
+  datasets:
+  - dkqjrm/olive-product
+  pipeline_tag: sentence-similarity
+  library_name: sentence-transformers
+siblings:
+- rfilename: .gitattributes
+- rfilename: 1_Pooling/config.json
+- rfilename: README.md
+- rfilename: adapter_config.json
+- rfilename: adapter_model.safetensors
+- rfilename: added_tokens.json
+- rfilename: chat_template.jinja
+- rfilename: config_sentence_transformers.json
+- rfilename: merges.txt
+- rfilename: modules.json
+- rfilename: sentence_bert_config.json
+- rfilename: special_tokens_map.json
+- rfilename: tokenizer.json
+- rfilename: tokenizer_config.json
+- rfilename: vocab.json
+spaces: []
+createdAt: '2026-01-27T15:05:58.000Z'
+usedStorage: 172954778
+downloadsAllTime: 0
+inferenceProviderMapping: {}
+configJson: null
+onnxFiles: {}
+safetensorsSizeMb: 161.5
+approxSizeMb: 0.0
+fetchedAt: '2026-06-10T07:15:01.000Z'

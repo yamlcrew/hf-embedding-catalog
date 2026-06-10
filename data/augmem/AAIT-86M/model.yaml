@@ -1,0 +1,92 @@
+_id: 69f0a2a838396428ca3d7754
+id: augmem/AAIT-86M
+private: false
+pipeline_tag: feature-extraction
+library_name: pytorch
+tags:
+- pytorch
+- multimodal
+- embeddings
+- feature-extraction
+- audio
+- image
+- text
+- retrieval
+- entity-tracking
+- region:us
+downloads: 8
+likes: 0
+modelId: augmem/AAIT-86M
+author: augmem
+sha: d68884f774387a7edabae77eda1ace1b9deb418f
+lastModified: '2026-04-28T14:59:49.000Z'
+gated: false
+disabled: false
+model-index: null
+config: {}
+cardData:
+  library_name: pytorch
+  pipeline_tag: feature-extraction
+  tags:
+  - multimodal
+  - embeddings
+  - feature-extraction
+  - audio
+  - image
+  - text
+  - retrieval
+  - entity-tracking
+siblings:
+- rfilename: .gitattributes
+- rfilename: AAIT-86M.safetensors
+- rfilename: README.md
+- rfilename: aait86m_anchor_best_model.pt
+- rfilename: config.json
+- rfilename: example_inference.py
+- rfilename: load_aait86m.py
+- rfilename: te86m_base_best_model.pt
+spaces: []
+createdAt: '2026-04-28T12:06:00.000Z'
+usedStorage: 1330128342
+downloadsAllTime: 195
+inferenceProviderMapping: {}
+configJson:
+  model_id: AAIT-86M
+  display_name: AAIT-86M
+  base_model: TE-86M
+  package_stage: combined-base-plus-anchor
+  base_checkpoint_file: te86m_base_best_model.pt
+  anchor_checkpoint_file: aait86m_anchor_best_model.pt
+  candidate_source: te86m_anchor_stage2_clean_v2_20260428T110733Z
+  base_checkpoint_source: /shared/augmem/triembed/checkpoints/wordnet_validaudio_real_mn20_whisper_wavcaps_speech150k_d2_retrieval_20260418T004617Z/best_model.pt
+  anchor_checkpoint_source: /shared/augmem/triembed/checkpoints/te86m_anchor_stage2_clean_v2_20260428T110733Z/best_model.pt
+  semantic_vector_dim: 1280
+  anchor_key_dim: 128
+  hidden_dim: 1024
+  outputs:
+  - semantic_vector
+  - anchor_key
+  - anchor_action_logits
+  - anchor_confidence
+  - salience_delta
+  anchor_action_order:
+  - CREATE_ANCHOR
+  - UPDATE_EXISTING_ANCHOR
+  - SPLIT_ANCHOR
+  - CLOSE_ANCHOR
+  - ABSTAIN
+  semantic_vector_behavior:
+    preserved_from_base_model: true
+    matryoshka_truncation_dims:
+    - 1280
+    - 768
+    - 512
+    - 256
+    - 128
+  publication_gate: publish_main_package
+  cortext_integration_tested: false
+  notes: Combined public package containing the TE-86M retrieval checkpoint and the published AAIT-86M anchor head.
+onnxFiles: {}
+safetensorsSizeMb: 446.9
+approxSizeMb: 0.0
+fetchedAt: '2026-06-10T07:15:01.000Z'

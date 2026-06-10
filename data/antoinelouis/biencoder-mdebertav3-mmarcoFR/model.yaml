@@ -1,0 +1,200 @@
+_id: 664a211dcf5fd472d77a2427
+id: antoinelouis/biencoder-mdebertav3-mmarcoFR
+private: false
+pipeline_tag: sentence-similarity
+library_name: sentence-transformers
+tags:
+- sentence-transformers
+- safetensors
+- deberta-v2
+- passage-retrieval
+- sentence-similarity
+- fr
+- dataset:unicamp-dl/mmarco
+- base_model:microsoft/mdeberta-v3-base
+- base_model:finetune:microsoft/mdeberta-v3-base
+- license:mit
+- model-index
+- text-embeddings-inference
+- endpoints_compatible
+- region:us
+downloads: 1
+likes: 0
+modelId: antoinelouis/biencoder-mdebertav3-mmarcoFR
+author: antoinelouis
+sha: 0762ad9ce77491e09160d640238e80687cd8f5d5
+lastModified: '2024-06-01T15:42:30.000Z'
+gated: false
+disabled: false
+mask_token: '[MASK]'
+widgetData:
+- source_sentence: C'est une personne heureuse
+  sentences:
+  - C'est un chien heureux
+  - C'est une personne très heureuse
+  - Aujourd'hui est une journée ensoleillée
+model-index:
+- name: biencoder-mdebertav3-mmarcoFR
+  results:
+  - task:
+      type: sentence-similarity
+      name: Passage Retrieval
+    dataset:
+      type: unicamp-dl/mmarco
+      name: mMARCO-fr
+      config: french
+      split: validation
+    metrics:
+    - type: recall_at_1000
+      name: Recall@1000
+      value: 87.04
+      verified: false
+    - type: recall_at_500
+      name: Recall@500
+      value: 83.31
+      verified: false
+    - type: recall_at_100
+      name: Recall@100
+      value: 71.44
+      verified: false
+    - type: recall_at_10
+      name: Recall@10
+      value: 45.62
+      verified: false
+    - type: map_at_10
+      name: MAP@10
+      value: 24.36
+      verified: false
+    - type: ndcg_at_10
+      name: nDCG@10
+      value: 29.56
+      verified: false
+    - type: mrr_at_10
+      name: MRR@10
+      value: 24.88
+      verified: false
+config:
+  architectures:
+  - DebertaV2Model
+  model_type: deberta-v2
+  tokenizer_config:
+    bos_token: '[CLS]'
+    cls_token: '[CLS]'
+    eos_token: '[SEP]'
+    mask_token: '[MASK]'
+    pad_token: '[PAD]'
+    sep_token: '[SEP]'
+    unk_token: '[UNK]'
+cardData:
+  pipeline_tag: sentence-similarity
+  language: fr
+  license: mit
+  datasets:
+  - unicamp-dl/mmarco
+  metrics:
+  - recall
+  tags:
+  - passage-retrieval
+  library_name: sentence-transformers
+  base_model: microsoft/mdeberta-v3-base
+  model-index:
+  - name: biencoder-mdebertav3-mmarcoFR
+    results:
+    - task:
+        type: sentence-similarity
+        name: Passage Retrieval
+      dataset:
+        type: unicamp-dl/mmarco
+        name: mMARCO-fr
+        config: french
+        split: validation
+      metrics:
+      - type: recall_at_1000
+        name: Recall@1000
+        value: 87.04
+        verified: false
+      - type: recall_at_500
+        name: Recall@500
+        value: 83.31
+        verified: false
+      - type: recall_at_100
+        name: Recall@100
+        value: 71.44
+        verified: false
+      - type: recall_at_10
+        name: Recall@10
+        value: 45.62
+        verified: false
+      - type: map_at_10
+        name: MAP@10
+        value: 24.36
+        verified: false
+      - type: ndcg_at_10
+        name: nDCG@10
+        value: 29.56
+        verified: false
+      - type: mrr_at_10
+        name: MRR@10
+        value: 24.88
+        verified: false
+siblings:
+- rfilename: .gitattributes
+- rfilename: 1_Pooling/config.json
+- rfilename: README.md
+- rfilename: added_tokens.json
+- rfilename: config.json
+- rfilename: config_sentence_transformers.json
+- rfilename: mmarco_smalldev_scores.csv
+- rfilename: model.safetensors
+- rfilename: modules.json
+- rfilename: sentence_bert_config.json
+- rfilename: special_tokens_map.json
+- rfilename: spm.model
+- rfilename: tokenizer.json
+- rfilename: tokenizer_config.json
+spaces:
+- antoinelouis/decouvrir
+createdAt: '2024-05-19T15:56:13.000Z'
+safetensors:
+  parameters:
+    F32: 278218752
+  total: 278218752
+usedStorage: 1133534442
+downloadsAllTime: 3
+inferenceProviderMapping: {}
+configJson:
+  _name_or_path: microsoft/mdeberta-v3-base
+  architectures:
+  - DebertaV2Model
+  attention_probs_dropout_prob: 0.1
+  hidden_act: gelu
+  hidden_dropout_prob: 0.1
+  hidden_size: 768
+  initializer_range: 0.02
+  intermediate_size: 3072
+  layer_norm_eps: 1.0e-07
+  max_position_embeddings: 512
+  max_relative_positions: -1
+  model_type: deberta-v2
+  norm_rel_ebd: layer_norm
+  num_attention_heads: 12
+  num_hidden_layers: 12
+  pad_token_id: 0
+  pooler_dropout: 0
+  pooler_hidden_act: gelu
+  pooler_hidden_size: 768
+  pos_att_type:
+  - p2c
+  - c2p
+  position_biased_input: false
+  position_buckets: 256
+  relative_attention: true
+  share_att_key: true
+  torch_dtype: float32
+  transformers_version: 4.36.2
+  type_vocab_size: 0
+  vocab_size: 251000
+onnxFiles: {}
+safetensorsSizeMb: 1112.9
+approxSizeMb: 1112.9
+fetchedAt: '2026-06-10T07:15:01.000Z'

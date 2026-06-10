@@ -1,0 +1,229 @@
+_id: 6881e7a361271126ee128625
+id: jiahaohou/all-mpnet-base-v2-sts
+private: false
+pipeline_tag: sentence-similarity
+library_name: sentence-transformers
+tags:
+- sentence-transformers
+- safetensors
+- mpnet
+- sentence-similarity
+- feature-extraction
+- dense
+- generated_from_trainer
+- dataset_size:5749
+- loss:CosineSimilarityLoss
+- en
+- dataset:sentence-transformers/stsb
+- arxiv:1908.10084
+- base_model:sentence-transformers/all-mpnet-base-v2
+- base_model:finetune:sentence-transformers/all-mpnet-base-v2
+- model-index
+- text-embeddings-inference
+- endpoints_compatible
+- region:us
+downloads: 1
+likes: 0
+modelId: jiahaohou/all-mpnet-base-v2-sts
+author: jiahaohou
+sha: 9c63c56d76f714b9eafe52cae1a86ab987f8f33d
+lastModified: '2025-07-24T08:00:12.000Z'
+gated: false
+disabled: false
+widgetData:
+- source_sentence: The man talked to a girl over the internet camera.
+  sentences:
+  - A group of elderly people pose around a dining table.
+  - A teenager talks to a girl over a webcam.
+  - There is no 'still' that is not relative to some other object.
+- source_sentence: A woman is writing something.
+  sentences:
+  - Two eagles are perched on a branch.
+  - It refers to the maximum f-stop (which is defined as the ratio of focal length to effective aperture diameter).
+  - A woman is chopping green onions.
+- source_sentence: The player shoots the winning points.
+  sentences:
+  - Minimum wage laws hurt the least skilled, least productive the most.
+  - The basketball player is about to score points for his team.
+  - Sheep are grazing in the field in front of a line of trees.
+- source_sentence: Stars form in star-formation regions, which itself develop from molecular clouds.
+  sentences:
+  - Although I believe Searle is mistaken, I don't think you have found the problem.
+  - It may be possible for a solar system like ours to exist outside of a galaxy.
+  - A blond-haired child performing on the trumpet in front of a house while his younger brother watches.
+- source_sentence: While Queen may refer to both Queen regent (sovereign) or Queen consort, the King has always been the sovereign.
+  sentences:
+  - At first, I thought this is a bit of a tricky question.
+  - A man sitting on the floor in a room is strumming a guitar.
+  - There is a very good reason not to refer to the Queen's spouse as "King" - because they aren't the King.
+model-index:
+- name: SentenceTransformer based on sentence-transformers/all-mpnet-base-v2
+  results:
+  - task:
+      type: semantic-similarity
+      name: Semantic Similarity
+    dataset:
+      name: sts dev
+      type: sts-dev
+    metrics:
+    - type: pearson_cosine
+      value: 0.9114219726368535
+      name: Pearson Cosine
+      verified: false
+    - type: spearman_cosine
+      value: 0.9104798030744364
+      name: Spearman Cosine
+      verified: false
+  - task:
+      type: semantic-similarity
+      name: Semantic Similarity
+    dataset:
+      name: sts test
+      type: sts-test
+    metrics:
+    - type: pearson_cosine
+      value: 0.8797203928590743
+      name: Pearson Cosine
+      verified: false
+    - type: spearman_cosine
+      value: 0.8785937020018932
+      name: Spearman Cosine
+      verified: false
+config:
+  architectures:
+  - MPNetModel
+  model_type: mpnet
+  tokenizer_config:
+    bos_token: <s>
+    cls_token: <s>
+    eos_token: </s>
+    mask_token: <mask>
+    pad_token: <pad>
+    sep_token: </s>
+    unk_token: '[UNK]'
+cardData:
+  language:
+  - en
+  tags:
+  - sentence-transformers
+  - sentence-similarity
+  - feature-extraction
+  - dense
+  - generated_from_trainer
+  - dataset_size:5749
+  - loss:CosineSimilarityLoss
+  base_model: sentence-transformers/all-mpnet-base-v2
+  widget:
+  - source_sentence: The man talked to a girl over the internet camera.
+    sentences:
+    - A group of elderly people pose around a dining table.
+    - A teenager talks to a girl over a webcam.
+    - There is no 'still' that is not relative to some other object.
+  - source_sentence: A woman is writing something.
+    sentences:
+    - Two eagles are perched on a branch.
+    - It refers to the maximum f-stop (which is defined as the ratio of focal length to effective aperture diameter).
+    - A woman is chopping green onions.
+  - source_sentence: The player shoots the winning points.
+    sentences:
+    - Minimum wage laws hurt the least skilled, least productive the most.
+    - The basketball player is about to score points for his team.
+    - Sheep are grazing in the field in front of a line of trees.
+  - source_sentence: Stars form in star-formation regions, which itself develop from molecular clouds.
+    sentences:
+    - Although I believe Searle is mistaken, I don't think you have found the problem.
+    - It may be possible for a solar system like ours to exist outside of a galaxy.
+    - A blond-haired child performing on the trumpet in front of a house while his younger brother watches.
+  - source_sentence: While Queen may refer to both Queen regent (sovereign) or Queen consort, the King has always been the
+      sovereign.
+    sentences:
+    - At first, I thought this is a bit of a tricky question.
+    - A man sitting on the floor in a room is strumming a guitar.
+    - There is a very good reason not to refer to the Queen's spouse as "King" - because they aren't the King.
+  datasets:
+  - sentence-transformers/stsb
+  pipeline_tag: sentence-similarity
+  library_name: sentence-transformers
+  metrics:
+  - pearson_cosine
+  - spearman_cosine
+  model-index:
+  - name: SentenceTransformer based on sentence-transformers/all-mpnet-base-v2
+    results:
+    - task:
+        type: semantic-similarity
+        name: Semantic Similarity
+      dataset:
+        name: sts dev
+        type: sts-dev
+      metrics:
+      - type: pearson_cosine
+        value: 0.9114219726368535
+        name: Pearson Cosine
+        verified: false
+      - type: spearman_cosine
+        value: 0.9104798030744364
+        name: Spearman Cosine
+        verified: false
+    - task:
+        type: semantic-similarity
+        name: Semantic Similarity
+      dataset:
+        name: sts test
+        type: sts-test
+      metrics:
+      - type: pearson_cosine
+        value: 0.8797203928590743
+        name: Pearson Cosine
+        verified: false
+      - type: spearman_cosine
+        value: 0.8785937020018932
+        name: Spearman Cosine
+        verified: false
+siblings:
+- rfilename: .gitattributes
+- rfilename: 1_Pooling/config.json
+- rfilename: README.md
+- rfilename: config.json
+- rfilename: config_sentence_transformers.json
+- rfilename: model.safetensors
+- rfilename: modules.json
+- rfilename: sentence_bert_config.json
+- rfilename: special_tokens_map.json
+- rfilename: tokenizer.json
+- rfilename: tokenizer_config.json
+- rfilename: vocab.txt
+spaces: []
+createdAt: '2025-07-24T07:58:27.000Z'
+safetensors:
+  parameters:
+    F32: 109486464
+  total: 109486464
+usedStorage: 437967672
+downloadsAllTime: 13
+inferenceProviderMapping: {}
+configJson:
+  architectures:
+  - MPNetModel
+  attention_probs_dropout_prob: 0.1
+  bos_token_id: 0
+  eos_token_id: 2
+  hidden_act: gelu
+  hidden_dropout_prob: 0.1
+  hidden_size: 768
+  initializer_range: 0.02
+  intermediate_size: 3072
+  layer_norm_eps: 1.0e-05
+  max_position_embeddings: 514
+  model_type: mpnet
+  num_attention_heads: 12
+  num_hidden_layers: 12
+  pad_token_id: 1
+  relative_attention_num_buckets: 32
+  torch_dtype: float32
+  transformers_version: 4.53.3
+  vocab_size: 30527
+onnxFiles: {}
+safetensorsSizeMb: 438.0
+approxSizeMb: 437.9
+fetchedAt: '2026-06-10T07:15:01.000Z'

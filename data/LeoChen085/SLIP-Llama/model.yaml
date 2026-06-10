@@ -1,0 +1,124 @@
+_id: 6a207a9af211640e3f001c43
+id: LeoChen085/SLIP-Llama
+private: false
+pipeline_tag: feature-extraction
+library_name: transformers
+tags:
+- transformers
+- safetensors
+- slip
+- text-generation
+- time-series
+- sensor
+- multimodal
+- contrastive-learning
+- llama
+- custom_code
+- feature-extraction
+- en
+- dataset:LeoChen085/SlipDataset
+- dataset:LeoChen085/SlipSFTDataset
+- base_model:meta-llama/Llama-3.2-1B
+- base_model:finetune:meta-llama/Llama-3.2-1B
+- license:llama3.2
+- region:us
+downloads: 20
+likes: 0
+modelId: LeoChen085/SLIP-Llama
+author: LeoChen085
+sha: 829d1973dda46ab0ee7753fcb399e106ff6569c1
+lastModified: '2026-06-03T19:09:59.000Z'
+gated: false
+disabled: false
+model-index: null
+config:
+  model_type: slip
+  architectures:
+  - SlipForCausalLM
+  auto_map:
+    AutoConfig: configuration_slip.SlipConfig
+    AutoModelForCausalLM: modeling_slip.SlipForCausalLM
+  tokenizer_config:
+    bos_token: <|begin_of_text|>
+    eos_token: <|end_of_text|>
+cardData:
+  license: llama3.2
+  base_model:
+  - meta-llama/Llama-3.2-1B
+  datasets:
+  - LeoChen085/SlipDataset
+  - LeoChen085/SlipSFTDataset
+  library_name: transformers
+  pipeline_tag: feature-extraction
+  language:
+  - en
+  tags:
+  - slip
+  - time-series
+  - sensor
+  - multimodal
+  - contrastive-learning
+  - llama
+  - custom_code
+transformersInfo:
+  auto_model: AutoModelForCausalLM
+  custom_class: modeling_slip.SlipForCausalLM
+  pipeline_tag: text-generation
+siblings:
+- rfilename: .gitattributes
+- rfilename: README.md
+- rfilename: config.json
+- rfilename: configuration_slip.py
+- rfilename: model.safetensors
+- rfilename: modeling_slip.py
+- rfilename: multimodal_gemma.py
+- rfilename: multimodal_llama.py
+- rfilename: special_tokens_map.json
+- rfilename: tokenizer.json
+- rfilename: tokenizer_config.json
+- rfilename: ts_transformer.py
+spaces: []
+createdAt: '2026-06-03T19:03:54.000Z'
+safetensors:
+  parameters:
+    F32: 178063872
+    BF16: 1565648896
+  total: 1743712768
+usedStorage: 7721628272
+downloadsAllTime: 20
+inferenceProviderMapping: {}
+configJson:
+  model_type: slip
+  architectures:
+  - SlipForCausalLM
+  auto_map:
+    AutoConfig: configuration_slip.SlipConfig
+    AutoModelForCausalLM: modeling_slip.SlipForCausalLM
+  llm_model_name: meta-llama/Llama-3.2-1B
+  split_layer: 12
+  num_img_queries: 64
+  num_heads: 32
+  img_attn_pool_num_heads: 8
+  hidden_size: 2048
+  post_train: false
+  max_llm_len: 768
+  vocab_size: 128256
+  pad_token_id: null
+  bos_token_id: 128000
+  eos_token_id: 128001
+  sensor_encoder:
+    embed_dim: 768
+    num_heads: 12
+    mlp_ratio: 4
+    depth: 12
+    dropout_rate: 0.1
+    learnable_pos_emb: false
+    max_position_embeddings: 4880
+    patch_size: null
+    channel_attn_type: all_attn
+  torch_dtype: bfloat16
+  transformers_version: 4.57.6
+onnxFiles: {}
+safetensorsSizeMb: 3843.6
+approxSizeMb: 3843.6
+fetchedAt: '2026-06-10T07:15:01.000Z'

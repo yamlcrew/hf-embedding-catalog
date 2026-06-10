@@ -1,0 +1,177 @@
+_id: 680f437bc4756876c4df2a9a
+id: agentlans/EuroLLM-1.7B-Instruct-literary-analysis
+private: false
+pipeline_tag: feature-extraction
+tags:
+- safetensors
+- llama
+- llama-factory
+- generated_from_trainer
+- feature-extraction
+- en
+- de
+- es
+- fr
+- it
+- pt
+- pl
+- nl
+- tr
+- sv
+- cs
+- el
+- hu
+- ro
+- fi
+- uk
+- sl
+- sk
+- da
+- lt
+- lv
+- et
+- bg
+- 'no'
+- ca
+- hr
+- ga
+- mt
+- gl
+- zh
+- ru
+- ko
+- ja
+- ar
+- hi
+- dataset:agentlans/literary-reasoning
+- base_model:utter-project/EuroLLM-1.7B-Instruct
+- base_model:finetune:utter-project/EuroLLM-1.7B-Instruct
+- license:apache-2.0
+- region:us
+downloads: 10
+likes: 1
+modelId: agentlans/EuroLLM-1.7B-Instruct-literary-analysis
+author: agentlans
+sha: 46d6ca698a27a25a3ab444525b70752be4fca245
+lastModified: '2025-07-14T10:45:30.000Z'
+gated: false
+disabled: false
+model-index: null
+config:
+  architectures:
+  - LlamaForCausalLM
+  model_type: llama
+  tokenizer_config:
+    bos_token: <s>
+    chat_template: '{% if messages[0][''role''] == ''system'' %}{% set loop_messages = messages[1:] %}{% set system_message
+      = messages[0][''content''] %}{% else %}{% set loop_messages = messages %}{% endif %}{% if system_message is defined
+      %}{{ ''System: '' + system_message + ''<|im_end|>'' + ''
+
+      '' }}{% endif %}{% for message in loop_messages %}{% set content = message[''content''] %}{% if message[''role''] ==
+      ''user'' %}{{ ''Human: '' + content + ''<|im_end|>'' + ''
+
+      Assistant:'' }}{% elif message[''role''] == ''assistant'' %}{{ content + ''<|im_end|>'' + ''
+
+      '' }}{% endif %}{% endfor %}'
+    eos_token: <|im_end|>
+    pad_token: </s>
+    unk_token: <unk>
+    use_default_system_prompt: false
+cardData:
+  tags:
+  - llama-factory
+  - generated_from_trainer
+  license: apache-2.0
+  datasets:
+  - agentlans/literary-reasoning
+  base_model:
+  - utter-project/EuroLLM-1.7B-Instruct
+  language:
+  - en
+  - de
+  - es
+  - fr
+  - it
+  - pt
+  - pl
+  - nl
+  - tr
+  - sv
+  - cs
+  - el
+  - hu
+  - ro
+  - fi
+  - uk
+  - sl
+  - sk
+  - da
+  - lt
+  - lv
+  - et
+  - bg
+  - 'no'
+  - ca
+  - hr
+  - ga
+  - mt
+  - gl
+  - zh
+  - ru
+  - ko
+  - ja
+  - ar
+  - hi
+  pipeline_tag: feature-extraction
+siblings:
+- rfilename: .gitattributes
+- rfilename: Modelfile
+- rfilename: README.md
+- rfilename: config.json
+- rfilename: generation_config.json
+- rfilename: model.safetensors
+- rfilename: special_tokens_map.json
+- rfilename: tokenizer.json
+- rfilename: tokenizer.model
+- rfilename: tokenizer_config.json
+spaces: []
+createdAt: '2025-04-28T08:59:39.000Z'
+safetensors:
+  parameters:
+    BF16: 1656850432
+  total: 1656850432
+usedStorage: 3331918631
+downloadsAllTime: 73
+inferenceProviderMapping: {}
+configJson:
+  _name_or_path: /drive2/EuroLLM-1.7B-Instruct-literary-analysis-pretrain-model
+  architectures:
+  - LlamaForCausalLM
+  attention_bias: false
+  attention_dropout: 0.0
+  bos_token_id: 1
+  eos_token_id: 4
+  head_dim: 128
+  hidden_act: silu
+  hidden_size: 2048
+  initializer_range: 0.02
+  intermediate_size: 5632
+  max_position_embeddings: 4096
+  mlp_bias: false
+  model_type: llama
+  num_attention_heads: 16
+  num_hidden_layers: 24
+  num_key_value_heads: 8
+  pretraining_tp: 1
+  rms_norm_eps: 1.0e-05
+  rope_scaling: null
+  rope_theta: 10000.0
+  tie_word_embeddings: false
+  torch_dtype: bfloat16
+  transformers_version: 4.49.0
+  use_cache: true
+  vocab_size: 128000
+onnxFiles: {}
+safetensorsSizeMb: 3313.7
+approxSizeMb: 3313.7
+fetchedAt: '2026-06-10T07:15:01.000Z'

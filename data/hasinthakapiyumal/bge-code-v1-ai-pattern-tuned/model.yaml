@@ -1,0 +1,398 @@
+_id: 6992d6ba61b2cd203ff58071
+id: hasinthakapiyumal/bge-code-v1-ai-pattern-tuned
+private: false
+pipeline_tag: sentence-similarity
+library_name: sentence-transformers
+tags:
+- sentence-transformers
+- safetensors
+- qwen2
+- sentence-similarity
+- feature-extraction
+- dense
+- generated_from_trainer
+- dataset_size:9359
+- loss:ContrastiveLoss
+- arxiv:1908.10084
+- base_model:BAAI/bge-code-v1
+- base_model:finetune:BAAI/bge-code-v1
+- endpoints_compatible
+- region:us
+downloads: 1
+likes: 0
+modelId: hasinthakapiyumal/bge-code-v1-ai-pattern-tuned
+author: hasinthakapiyumal
+sha: 6722e8866de4fb0548de3b14cf57e1ff8c529c4f
+lastModified: '2026-02-16T15:04:22.000Z'
+gated: false
+disabled: false
+widgetData:
+- source_sentence: This code implements a Reinforcement Learning (RL) agent, specifically a Deep Q-Network (DQN) or its Double
+    DQN variant, designed for interaction with OpenAI Gym environments. It employs an experience replay buffer for efficient
+    off-policy learning and manages exploration-exploitation through initial random actions and decaying noise. A key AI pattern
+    is the use of a distributional RL approach, likely C51, evident from the visualization of predicted value distributions
+    across a range of atoms during policy rendering.
+  sentences:
+  - 'The code exhibits an optimization-driven 3D bounding-box estimation pattern: BoxRegressor minimizes a reprojection residual
+    of 8 keypoints plus size and distance regularizers, using a pseudo-inverse camera-initialization and a discrete RotY sweep
+    evaluated with least_squares. It embodies a geometric projection pattern via get_keypoints that builds the 3D corners
+    under rotation, projects them through the camera matrix to image coordinates, and uses those projections as the residual
+    basis. Data handling follows a PyTorch-style pattern with multiple Dataset classes that load KITTI data, apply per-sample
+    augmentations (random flips, crops, color normalization), and normalize/prepare size, keypoints, and distance tensors
+    for learning.'
+  - 'This code showcases a PyTorch-based, object-oriented training framework with a BaseModel that unifies compilation, iterative
+    training (train_step, train_epoch), evaluation, checkpointing, and early stopping driven by a Monitor. It implements a
+    modular regularization strategy via get_regularizer, supporting float, L1/L2, and L1_L2 patterns and applying penalties
+    selectively to embedding vs. non-embedding parameters. The MultiTaskModel demonstrates a true multi-task pattern: per-task
+    outputs and losses organized in a ModuleList, task-wise activation mappings, and per-task metric evaluation with aggregated
+    reporting and group-aware metrics guided by a feature_map.'
+  - This code implements a system for Large Language Model (LLM) inference, loading a pre-trained causal language model and
+    tokenizer to process user queries. A central AI pattern is "AutoThink," which enables controllable generation through
+    activation steering. This involves applying steering vectors from a specified dataset to a target model layer, guided
+    by explicit "pattern strengths" to direct the LLM's output towards desired cognitive attributes like depth, accuracy,
+    and self-correction.
+- source_sentence: The code implements a distributional deep Q-network (C51) with an optional Double DQN variant, trained
+    on discrete actions for CartPole-v1 or LunarLander-v2 using a replay buffer and a staged training loop that begins with
+    random exploration. It outputs both the categorical value distributions and the corresponding q-values, selects actions
+    via the argmax of q_values, and can visualize per-action distributions (via bar plots) during rendering or evaluation.
+    It emphasizes reproducibility and observability with fixed seeds, a separate evaluation environment, optional TensorBoard
+    logging, and periodic model saving and performance evaluation.
+  sentences:
+  - The code embodies a backend-agnostic adapter (Strategy) pattern that unifies Ollama, OpenAI, and LMStudio under a single
+    LLM interface, normalizing URLs and providing a common generate/prewarm/measure_inference_time API. It employs a thread-safe,
+    lazy initialization approach to instantiate backend clients on first use, including a Ollama connection check with a fallback
+    to the `ollama ps` diagnostic. Streaming generation is implemented as Python generators, with per-request tracking (_active_requests)
+    and safe cancellation/cleanup of underlying streams, complemented by helper routines to prewarm and time-infer performance.
+  - This code implements an **intelligent agent pattern** dedicated to **data acquisition** through web scraping. It programmatically
+    performs **information extraction** from the semi-structured Forex Factory calendar, transforming raw web content into
+    structured financial event data. This pattern is crucial for feeding real-time external data into various AI systems for
+    analysis or predictive modeling.
+  - The code demonstrates a supervised learning pattern for classifying optimal problem-solving approaches from natural language
+    prompts, leveraging a fine-tuned pre-trained transformer model. A distinctive AI pattern is the integration of an "effort"
+    parameter into the model's training, where a combined loss function optimizes for both correct approach prediction (cross-entropy)
+    and aligning prediction confidence with the specified effort level (MSE). This enables the model to recommend approaches
+    conditional on a desired resource expenditure during inference.
+- source_sentence: This code implements a multi-agent orchestration system where a `LocalEngine` manages specialized `Assistant`
+    agents. It features a "Tool Use" pattern, allowing assistants to dynamically load and execute external functions, and
+    employs "Agent Routing" to delegate tasks to the most appropriate assistant through a language model-driven triage process.
+    The system also supports "AI Planning" with iterative refinement of execution plans and integrates a "Human-in-the-Loop"
+    pattern for tool execution oversight.
+  sentences:
+  - The code implements a gradient-harmonized classification loss (GHMC) that buckets gradient magnitudes into bins, uses
+    a moving-average accumulator (momentum) to stabilize per-bin weights, and applies sigmoid-based BCE weighting to produce
+    a loss that adapts to gradient density. It also provides modular loss utilities (_expand_onehot_labels, weight_reduce_loss,
+    reduce_loss, and a wrapper) to compose losses with per-sample weights and flexible reductions, and includes a Seesaw Cross-Entropy
+    (Seesaw CE) mechanism that reweights targets via p- and q-based mitigation and compensation factors for long-tail class
+    handling. Additionally, it features an anchor-free detector head (FSAFHead) with a two-subnet architecture, multi-scale
+    target construction, and level-aware loss reweighting across FPN levels for unified cls and bbox optimization.
+  - The code demonstrates a strategy-based rendering pipeline that selects an appropriate asset resolver at runtime (BasisImageResolver
+    vs a PNG fallback), illustrating the Strategy/Adapter pattern for AI asset resolution. It supports flexible blueprint
+    formats and versioned data decoding (v2-binary, v2, legacy) through conditional parsing and decoders, showing robust backward-compatible
+    data handling in an AI data-flow. Instrumentation and resilient workflow are evident via profiling decorators and comprehensive
+    error handling around map/blueprint rendering, combined with a compositional Renderer that aggregates entities, water,
+    and resources into a single renderable AI scene.
+  - The code implements an agent-based AI pattern, where `DemoAgent` employs rule-based logic to determine command suggestions
+    and provide post-execution feedback for specific shell commands. A modular plugin architecture (`AgentDatasource`) dynamically
+    loads and manages various agents, allowing for extensible AI capabilities. Additionally, a replay memory (`ActionRemoteStorage`)
+    collects interaction data, laying the groundwork for potential future learning or refinement of these AI agents.
+- source_sentence: The `AClientPool` class implements a client management and orchestration pattern, providing centralized
+    access to various AI-related services or modules, such as speech processing. It supports dynamic client provisioning and
+    discovery, creating connections on-demand and retrieving module identities. The system also includes robust lifecycle
+    management for these distributed AI client connections, ensuring proper initialization and graceful shutdown.
+  sentences:
+  - This code implements a Retrieval-Augmented Generation (RAG) pattern, leveraging HNSW vector storage and OpenAI embeddings
+    for efficient semantic search. It enables converting text into high-dimensional vectors, storing them, and retrieving
+    the most relevant context for a given query. This retrieved context is then dynamically injected into a structured prompt
+    for an OpenAI LLM to generate informed responses.
+  - This code implements an agent-based AI architecture, with a central `Assistant` orchestrating tasks by dynamically invoking
+    various `known_agents` via OpenAI's function calling mechanism. It features sophisticated memory management for both shared
+    and user-specific contexts, and integrates a `GitHubAgentLibraryManager` for dynamic discovery, installation, and grouping
+    of additional agent capabilities. The system also supports scripted interaction flows (demos) and persistent state tracking
+    through unique user GUIDs for personalized experiences.
+  - This code demonstrates core AI patterns for conversational interfaces, integrating a Speech-to-Text (STT) model (`S2T_WhisperLarge`)
+    for audio transcription and a Text-to-Speech (TTS) model (`T2S_ChatTTS`) for synthesizing speech from text. It employs
+    an asynchronous, multi-threaded producer-consumer pipeline where text is processed for TTS inference in one thread and
+    the resulting audio is played by another, enabling continuous, non-blocking speech interactions. This architecture supports
+    dynamic initialization and device assignment for the underlying AI models.
+- source_sentence: The module implements a parallel Monte Carlo Tree Search (MCTS) framework that partitions FactorioInstance
+    objects into N groups and runs independent MCTS pipelines concurrently for scalable AI planning. It showcases a pluggable
+    MCTS strategy via config.mcts_class and a per-group Evaluator with language-model guided rollouts, wired through dependency-injected
+    components (DBClient, APIFactory) and prompts (system_prompt, initial_state) to shape value estimation (value_accrual_time,
+    error_penalty). Asynchronous orchestration with asyncio.gather and per-group logging (GroupedFactorioLogger, evaluator.logger)
+    enable fine-grained performance and error reporting across parallel search groups.
+  sentences:
+  - '- The code demonstrates a data-driven testing pattern using pytest parametrization: parametrize_dir and parametrize_filebased
+    generate per-scene test parameters, while the nuplan_test decorator orchestrates hardcoded vs. file-based tests and preserves
+    metadata with wraps. This yields scalable, JSON-driven test coverage for AI components.
+
+
+    - It encodes vectorized AI patterns for scene understanding: vector map feature builders (VectorMapFeatureBuilder, VectorSetMapFeatureBuilder)
+    that pack map primitives (lanes, boundaries, stop lines, traffic lights) into TorchScript-friendly tensors, convert coordinates
+    to local frames, and support multi-scale connections; aided by helpers like get_neighbor_vector_map and get_neighbor_vector_set_map
+    to assemble neighborhood features.
+
+
+    - It also showcases asynchronous and concurrent design patterns for performance: multi-threaded rendering paths in SimulationTile
+    using ThreadPoolExecutor and concurrent futures to decouple map/data loading from visualization.'
+  - The code exemplifies a time-based scheduling pattern that differentiates one-off versus recurring jobs using end_time
+    and repeat_interval, validated through tests that exercise sleep-time calculation and next-run updates with datetime arithmetic.
+    It also presents a persistence-driven domain model (JobCatalog) mapped via ORM with fields for start/end times, active
+    status, and next_scheduled_run, including an index to optimize retrieval and an as_dataclass converter for lightweight
+    data transfer. Testing patterns include the use of mocks (MagicMock) and a helper factory to generate dummy catalog entries,
+    enabling isolated, deterministic verification of the scheduler’s time-dependent logic.
+  - The code implements an **Agent-Orchestration pattern**, where an `AgentRunner` processes user commands by orchestrating
+    multiple `Agent` instances to generate candidate actions, then uses an `OrchestratorProvider` to select the best `Action`.
+    It incorporates a **Reinforcement Learning Replay Memory pattern** by storing `TerminalReplayMemory` objects before and
+    after orchestration, capturing states, candidate actions, and chosen suggestions for future analysis or model training.
+    Additionally, **Telemetry and Monitoring** mechanisms are present, with `StatsTracker` and `ActionRemoteStorage` asynchronously
+    collecting anonymized usage data and interaction logs to evaluate and improve the AI agents.
+model-index: null
+config:
+  architectures:
+  - Qwen2Model
+  model_type: qwen2
+  tokenizer_config:
+    bos_token: null
+    eos_token: <|endoftext|>
+    pad_token: <|endoftext|>
+    unk_token: null
+  chat_template_jinja: "{%- if tools %}\n    {{- '<|im_start|>system\\n' }}\n    {%- if messages[0]['role'] == 'system' %}\n\
+    \        {{- messages[0]['content'] }}\n    {%- else %}\n        {{- 'You are Qwen, created by Alibaba Cloud. You are\
+    \ a helpful assistant.' }}\n    {%- endif %}\n    {{- \"\\n\\n# Tools\\n\\nYou may call one or more functions to assist\
+    \ with the user query.\\n\\nYou are provided with function signatures within <tools></tools> XML tags:\\n<tools>\" }}\n\
+    \    {%- for tool in tools %}\n        {{- \"\\n\" }}\n        {{- tool | tojson }}\n    {%- endfor %}\n    {{- \"\\n</tools>\\\
+    n\\nFor each function call, return a json object with function name and arguments within <tool_call></tool_call> XML tags:\\\
+    n<tool_call>\\n{\\\"name\\\": <function-name>, \\\"arguments\\\": <args-json-object>}\\n</tool_call><|im_end|>\\n\" }}\n\
+    {%- else %}\n    {%- if messages[0]['role'] == 'system' %}\n        {{- '<|im_start|>system\\n' + messages[0]['content']\
+    \ + '<|im_end|>\\n' }}\n    {%- else %}\n        {{- '<|im_start|>system\\nYou are Qwen, created by Alibaba Cloud. You\
+    \ are a helpful assistant.<|im_end|>\\n' }}\n    {%- endif %}\n{%- endif %}\n{%- for message in messages %}\n    {%- if\
+    \ (message.role == \"user\") or (message.role == \"system\" and not loop.first) or (message.role == \"assistant\" and\
+    \ not message.tool_calls) %}\n        {{- '<|im_start|>' + message.role + '\\n' + message.content + '<|im_end|>' + '\\\
+    n' }}\n    {%- elif message.role == \"assistant\" %}\n        {{- '<|im_start|>' + message.role }}\n        {%- if message.content\
+    \ %}\n            {{- '\\n' + message.content }}\n        {%- endif %}\n        {%- for tool_call in message.tool_calls\
+    \ %}\n            {%- if tool_call.function is defined %}\n                {%- set tool_call = tool_call.function %}\n\
+    \            {%- endif %}\n            {{- '\\n<tool_call>\\n{\"name\": \"' }}\n            {{- tool_call.name }}\n  \
+    \          {{- '\", \"arguments\": ' }}\n            {{- tool_call.arguments | tojson }}\n            {{- '}\\n</tool_call>'\
+    \ }}\n        {%- endfor %}\n        {{- '<|im_end|>\\n' }}\n    {%- elif message.role == \"tool\" %}\n        {%- if\
+    \ (loop.index0 == 0) or (messages[loop.index0 - 1].role != \"tool\") %}\n            {{- '<|im_start|>user' }}\n     \
+    \   {%- endif %}\n        {{- '\\n<tool_response>\\n' }}\n        {{- message.content }}\n        {{- '\\n</tool_response>'\
+    \ }}\n        {%- if loop.last or (messages[loop.index0 + 1].role != \"tool\") %}\n            {{- '<|im_end|>\\n' }}\n\
+    \        {%- endif %}\n    {%- endif %}\n{%- endfor %}\n{%- if add_generation_prompt %}\n    {{- '<|im_start|>assistant\\\
+    n' }}\n{%- endif %}\n"
+cardData:
+  tags:
+  - sentence-transformers
+  - sentence-similarity
+  - feature-extraction
+  - dense
+  - generated_from_trainer
+  - dataset_size:9359
+  - loss:ContrastiveLoss
+  base_model: BAAI/bge-code-v1
+  widget:
+  - source_sentence: This code implements a Reinforcement Learning (RL) agent, specifically a Deep Q-Network (DQN) or its
+      Double DQN variant, designed for interaction with OpenAI Gym environments. It employs an experience replay buffer for
+      efficient off-policy learning and manages exploration-exploitation through initial random actions and decaying noise.
+      A key AI pattern is the use of a distributional RL approach, likely C51, evident from the visualization of predicted
+      value distributions across a range of atoms during policy rendering.
+    sentences:
+    - 'The code exhibits an optimization-driven 3D bounding-box estimation pattern: BoxRegressor minimizes a reprojection
+      residual of 8 keypoints plus size and distance regularizers, using a pseudo-inverse camera-initialization and a discrete
+      RotY sweep evaluated with least_squares. It embodies a geometric projection pattern via get_keypoints that builds the
+      3D corners under rotation, projects them through the camera matrix to image coordinates, and uses those projections
+      as the residual basis. Data handling follows a PyTorch-style pattern with multiple Dataset classes that load KITTI data,
+      apply per-sample augmentations (random flips, crops, color normalization), and normalize/prepare size, keypoints, and
+      distance tensors for learning.'
+    - 'This code showcases a PyTorch-based, object-oriented training framework with a BaseModel that unifies compilation,
+      iterative training (train_step, train_epoch), evaluation, checkpointing, and early stopping driven by a Monitor. It
+      implements a modular regularization strategy via get_regularizer, supporting float, L1/L2, and L1_L2 patterns and applying
+      penalties selectively to embedding vs. non-embedding parameters. The MultiTaskModel demonstrates a true multi-task pattern:
+      per-task outputs and losses organized in a ModuleList, task-wise activation mappings, and per-task metric evaluation
+      with aggregated reporting and group-aware metrics guided by a feature_map.'
+    - This code implements a system for Large Language Model (LLM) inference, loading a pre-trained causal language model
+      and tokenizer to process user queries. A central AI pattern is "AutoThink," which enables controllable generation through
+      activation steering. This involves applying steering vectors from a specified dataset to a target model layer, guided
+      by explicit "pattern strengths" to direct the LLM's output towards desired cognitive attributes like depth, accuracy,
+      and self-correction.
+  - source_sentence: The code implements a distributional deep Q-network (C51) with an optional Double DQN variant, trained
+      on discrete actions for CartPole-v1 or LunarLander-v2 using a replay buffer and a staged training loop that begins with
+      random exploration. It outputs both the categorical value distributions and the corresponding q-values, selects actions
+      via the argmax of q_values, and can visualize per-action distributions (via bar plots) during rendering or evaluation.
+      It emphasizes reproducibility and observability with fixed seeds, a separate evaluation environment, optional TensorBoard
+      logging, and periodic model saving and performance evaluation.
+    sentences:
+    - The code embodies a backend-agnostic adapter (Strategy) pattern that unifies Ollama, OpenAI, and LMStudio under a single
+      LLM interface, normalizing URLs and providing a common generate/prewarm/measure_inference_time API. It employs a thread-safe,
+      lazy initialization approach to instantiate backend clients on first use, including a Ollama connection check with a
+      fallback to the `ollama ps` diagnostic. Streaming generation is implemented as Python generators, with per-request tracking
+      (_active_requests) and safe cancellation/cleanup of underlying streams, complemented by helper routines to prewarm and
+      time-infer performance.
+    - This code implements an **intelligent agent pattern** dedicated to **data acquisition** through web scraping. It programmatically
+      performs **information extraction** from the semi-structured Forex Factory calendar, transforming raw web content into
+      structured financial event data. This pattern is crucial for feeding real-time external data into various AI systems
+      for analysis or predictive modeling.
+    - The code demonstrates a supervised learning pattern for classifying optimal problem-solving approaches from natural
+      language prompts, leveraging a fine-tuned pre-trained transformer model. A distinctive AI pattern is the integration
+      of an "effort" parameter into the model's training, where a combined loss function optimizes for both correct approach
+      prediction (cross-entropy) and aligning prediction confidence with the specified effort level (MSE). This enables the
+      model to recommend approaches conditional on a desired resource expenditure during inference.
+  - source_sentence: This code implements a multi-agent orchestration system where a `LocalEngine` manages specialized `Assistant`
+      agents. It features a "Tool Use" pattern, allowing assistants to dynamically load and execute external functions, and
+      employs "Agent Routing" to delegate tasks to the most appropriate assistant through a language model-driven triage process.
+      The system also supports "AI Planning" with iterative refinement of execution plans and integrates a "Human-in-the-Loop"
+      pattern for tool execution oversight.
+    sentences:
+    - The code implements a gradient-harmonized classification loss (GHMC) that buckets gradient magnitudes into bins, uses
+      a moving-average accumulator (momentum) to stabilize per-bin weights, and applies sigmoid-based BCE weighting to produce
+      a loss that adapts to gradient density. It also provides modular loss utilities (_expand_onehot_labels, weight_reduce_loss,
+      reduce_loss, and a wrapper) to compose losses with per-sample weights and flexible reductions, and includes a Seesaw
+      Cross-Entropy (Seesaw CE) mechanism that reweights targets via p- and q-based mitigation and compensation factors for
+      long-tail class handling. Additionally, it features an anchor-free detector head (FSAFHead) with a two-subnet architecture,
+      multi-scale target construction, and level-aware loss reweighting across FPN levels for unified cls and bbox optimization.
+    - The code demonstrates a strategy-based rendering pipeline that selects an appropriate asset resolver at runtime (BasisImageResolver
+      vs a PNG fallback), illustrating the Strategy/Adapter pattern for AI asset resolution. It supports flexible blueprint
+      formats and versioned data decoding (v2-binary, v2, legacy) through conditional parsing and decoders, showing robust
+      backward-compatible data handling in an AI data-flow. Instrumentation and resilient workflow are evident via profiling
+      decorators and comprehensive error handling around map/blueprint rendering, combined with a compositional Renderer that
+      aggregates entities, water, and resources into a single renderable AI scene.
+    - The code implements an agent-based AI pattern, where `DemoAgent` employs rule-based logic to determine command suggestions
+      and provide post-execution feedback for specific shell commands. A modular plugin architecture (`AgentDatasource`) dynamically
+      loads and manages various agents, allowing for extensible AI capabilities. Additionally, a replay memory (`ActionRemoteStorage`)
+      collects interaction data, laying the groundwork for potential future learning or refinement of these AI agents.
+  - source_sentence: The `AClientPool` class implements a client management and orchestration pattern, providing centralized
+      access to various AI-related services or modules, such as speech processing. It supports dynamic client provisioning
+      and discovery, creating connections on-demand and retrieving module identities. The system also includes robust lifecycle
+      management for these distributed AI client connections, ensuring proper initialization and graceful shutdown.
+    sentences:
+    - This code implements a Retrieval-Augmented Generation (RAG) pattern, leveraging HNSW vector storage and OpenAI embeddings
+      for efficient semantic search. It enables converting text into high-dimensional vectors, storing them, and retrieving
+      the most relevant context for a given query. This retrieved context is then dynamically injected into a structured prompt
+      for an OpenAI LLM to generate informed responses.
+    - This code implements an agent-based AI architecture, with a central `Assistant` orchestrating tasks by dynamically invoking
+      various `known_agents` via OpenAI's function calling mechanism. It features sophisticated memory management for both
+      shared and user-specific contexts, and integrates a `GitHubAgentLibraryManager` for dynamic discovery, installation,
+      and grouping of additional agent capabilities. The system also supports scripted interaction flows (demos) and persistent
+      state tracking through unique user GUIDs for personalized experiences.
+    - This code demonstrates core AI patterns for conversational interfaces, integrating a Speech-to-Text (STT) model (`S2T_WhisperLarge`)
+      for audio transcription and a Text-to-Speech (TTS) model (`T2S_ChatTTS`) for synthesizing speech from text. It employs
+      an asynchronous, multi-threaded producer-consumer pipeline where text is processed for TTS inference in one thread and
+      the resulting audio is played by another, enabling continuous, non-blocking speech interactions. This architecture supports
+      dynamic initialization and device assignment for the underlying AI models.
+  - source_sentence: The module implements a parallel Monte Carlo Tree Search (MCTS) framework that partitions FactorioInstance
+      objects into N groups and runs independent MCTS pipelines concurrently for scalable AI planning. It showcases a pluggable
+      MCTS strategy via config.mcts_class and a per-group Evaluator with language-model guided rollouts, wired through dependency-injected
+      components (DBClient, APIFactory) and prompts (system_prompt, initial_state) to shape value estimation (value_accrual_time,
+      error_penalty). Asynchronous orchestration with asyncio.gather and per-group logging (GroupedFactorioLogger, evaluator.logger)
+      enable fine-grained performance and error reporting across parallel search groups.
+    sentences:
+    - '- The code demonstrates a data-driven testing pattern using pytest parametrization: parametrize_dir and parametrize_filebased
+      generate per-scene test parameters, while the nuplan_test decorator orchestrates hardcoded vs. file-based tests and
+      preserves metadata with wraps. This yields scalable, JSON-driven test coverage for AI components.
+
+
+      - It encodes vectorized AI patterns for scene understanding: vector map feature builders (VectorMapFeatureBuilder, VectorSetMapFeatureBuilder)
+      that pack map primitives (lanes, boundaries, stop lines, traffic lights) into TorchScript-friendly tensors, convert
+      coordinates to local frames, and support multi-scale connections; aided by helpers like get_neighbor_vector_map and
+      get_neighbor_vector_set_map to assemble neighborhood features.
+
+
+      - It also showcases asynchronous and concurrent design patterns for performance: multi-threaded rendering paths in SimulationTile
+      using ThreadPoolExecutor and concurrent futures to decouple map/data loading from visualization.'
+    - The code exemplifies a time-based scheduling pattern that differentiates one-off versus recurring jobs using end_time
+      and repeat_interval, validated through tests that exercise sleep-time calculation and next-run updates with datetime
+      arithmetic. It also presents a persistence-driven domain model (JobCatalog) mapped via ORM with fields for start/end
+      times, active status, and next_scheduled_run, including an index to optimize retrieval and an as_dataclass converter
+      for lightweight data transfer. Testing patterns include the use of mocks (MagicMock) and a helper factory to generate
+      dummy catalog entries, enabling isolated, deterministic verification of the scheduler’s time-dependent logic.
+    - The code implements an **Agent-Orchestration pattern**, where an `AgentRunner` processes user commands by orchestrating
+      multiple `Agent` instances to generate candidate actions, then uses an `OrchestratorProvider` to select the best `Action`.
+      It incorporates a **Reinforcement Learning Replay Memory pattern** by storing `TerminalReplayMemory` objects before
+      and after orchestration, capturing states, candidate actions, and chosen suggestions for future analysis or model training.
+      Additionally, **Telemetry and Monitoring** mechanisms are present, with `StatsTracker` and `ActionRemoteStorage` asynchronously
+      collecting anonymized usage data and interaction logs to evaluate and improve the AI agents.
+  pipeline_tag: sentence-similarity
+  library_name: sentence-transformers
+siblings:
+- rfilename: .gitattributes
+- rfilename: 1_Pooling/config.json
+- rfilename: README.md
+- rfilename: added_tokens.json
+- rfilename: chat_template.jinja
+- rfilename: config.json
+- rfilename: config_sentence_transformers.json
+- rfilename: merges.txt
+- rfilename: model.safetensors
+- rfilename: modules.json
+- rfilename: sentence_bert_config.json
+- rfilename: special_tokens_map.json
+- rfilename: tokenization_qwen.py
+- rfilename: tokenizer_config.json
+- rfilename: vocab.json
+spaces: []
+createdAt: '2026-02-16T08:35:06.000Z'
+safetensors:
+  parameters:
+    BF16: 1543301120
+  total: 1543301120
+usedStorage: 3086638752
+downloadsAllTime: 28
+inferenceProviderMapping: {}
+configJson:
+  architectures:
+  - Qwen2Model
+  attention_dropout: 0.0
+  bos_token_id: 151643
+  dtype: bfloat16
+  eos_token_id: 151643
+  hidden_act: silu
+  hidden_size: 1536
+  initializer_range: 0.02
+  intermediate_size: 8960
+  layer_types:
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  max_position_embeddings: 32768
+  max_window_layers: 28
+  model_type: qwen2
+  num_attention_heads: 12
+  num_hidden_layers: 28
+  num_key_value_heads: 2
+  rms_norm_eps: 1.0e-06
+  rope_scaling: null
+  rope_theta: 1000000.0
+  sliding_window: null
+  tie_word_embeddings: true
+  transformers_version: 4.57.6
+  use_cache: false
+  use_sliding_window: false
+  vocab_size: 151667
+onnxFiles: {}
+safetensorsSizeMb: 3086.6
+approxSizeMb: 3086.6
+fetchedAt: '2026-06-10T07:15:01.000Z'

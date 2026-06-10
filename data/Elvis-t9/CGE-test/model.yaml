@@ -1,0 +1,140 @@
+_id: 69414b17d724825821ea557f
+id: Elvis-t9/CGE-test
+private: false
+pipeline_tag: feature-extraction
+library_name: transformers
+tags:
+- transformers
+- safetensors
+- cge2
+- image-feature-extraction
+- code
+- feature-extraction
+- custom_code
+- en
+- zh
+- license:apache-2.0
+- region:us
+downloads: 8
+likes: 0
+modelId: Elvis-t9/CGE-test
+author: Elvis-t9
+sha: 9e91b68da67d0baa55e5de314c73894a61841577
+lastModified: '2025-12-19T07:46:44.000Z'
+gated: false
+disabled: false
+model-index: null
+config:
+  architectures:
+  - CgeForEmbedding
+  auto_map:
+    AutoConfig: configuration_cge2.CGEConfig
+    AutoModel: modeling_cge2.CgeForEmbedding
+  model_type: cge2
+  tokenizer_config:
+    bos_token: null
+    chat_template: "{%- if tools %}\n    {{- '<|im_start|>system\\n' }}\n    {%- if messages[0]['role'] == 'system' %}\n \
+      \       {{- messages[0]['content'] }}\n    {%- else %}\n        {{- 'You are Qwen, created by Alibaba Cloud. You are\
+      \ a helpful assistant.' }}\n    {%- endif %}\n    {{- \"\\n\\n# Tools\\n\\nYou may call one or more functions to assist\
+      \ with the user query.\\n\\nYou are provided with function signatures within <tools></tools> XML tags:\\n<tools>\" }}\n\
+      \    {%- for tool in tools %}\n        {{- \"\\n\" }}\n        {{- tool | tojson }}\n    {%- endfor %}\n    {{- \"\\\
+      n</tools>\\n\\nFor each function call, return a json object with function name and arguments within <tool_call></tool_call>\
+      \ XML tags:\\n<tool_call>\\n{\\\"name\\\": <function-name>, \\\"arguments\\\": <args-json-object>}\\n</tool_call><|im_end|>\\\
+      n\" }}\n{%- else %}\n    {%- if messages[0]['role'] == 'system' %}\n        {{- '<|im_start|>system\\n' + messages[0]['content']\
+      \ + '<|im_end|>\\n' }}\n    {%- else %}\n        {{- '<|im_start|>system\\nYou are Qwen, created by Alibaba Cloud. You\
+      \ are a helpful assistant.<|im_end|>\\n' }}\n    {%- endif %}\n{%- endif %}\n{%- for message in messages %}\n    {%-\
+      \ if (message.role == \"user\") or (message.role == \"system\" and not loop.first) or (message.role == \"assistant\"\
+      \ and not message.tool_calls) %}\n        {{- '<|im_start|>' + message.role + '\\n' + message.content + '<|im_end|>'\
+      \ + '\\n' }}\n    {%- elif message.role == \"assistant\" %}\n        {{- '<|im_start|>' + message.role }}\n        {%-\
+      \ if message.content %}\n            {{- '\\n' + message.content }}\n        {%- endif %}\n        {%- for tool_call\
+      \ in message.tool_calls %}\n            {%- if tool_call.function is defined %}\n                {%- set tool_call =\
+      \ tool_call.function %}\n            {%- endif %}\n            {{- '\\n<tool_call>\\n{\"name\": \"' }}\n           \
+      \ {{- tool_call.name }}\n            {{- '\", \"arguments\": ' }}\n            {{- tool_call.arguments | tojson }}\n\
+      \            {{- '}\\n</tool_call>' }}\n        {%- endfor %}\n        {{- '<|im_end|>\\n' }}\n    {%- elif message.role\
+      \ == \"tool\" %}\n        {%- if (loop.index0 == 0) or (messages[loop.index0 - 1].role != \"tool\") %}\n           \
+      \ {{- '<|im_start|>user' }}\n        {%- endif %}\n        {{- '\\n<tool_response>\\n' }}\n        {{- message.content\
+      \ }}\n        {{- '\\n</tool_response>' }}\n        {%- if loop.last or (messages[loop.index0 + 1].role != \"tool\"\
+      ) %}\n            {{- '<|im_end|>\\n' }}\n        {%- endif %}\n    {%- endif %}\n{%- endfor %}\n{%- if add_generation_prompt\
+      \ %}\n    {{- '<|im_start|>assistant\\n' }}\n{%- endif %}\n"
+    eos_token: <|im_end|>
+    pad_token: <|endoftext|>
+    unk_token: null
+cardData:
+  language:
+  - en
+  - zh
+  license: apache-2.0
+  pipeline_tag: feature-extraction
+  library_name: transformers
+  tags:
+  - code
+transformersInfo:
+  auto_model: AutoModel
+  custom_class: modeling_cge2.CgeForEmbedding
+  pipeline_tag: image-feature-extraction
+siblings:
+- rfilename: .gitattributes
+- rfilename: LICENSE
+- rfilename: MTEB_result.json
+- rfilename: README.md
+- rfilename: added_tokens.json
+- rfilename: config.json
+- rfilename: config_sentence_transformers.json
+- rfilename: configuration_cge2.py
+- rfilename: custom_transformer.py
+- rfilename: merges.txt
+- rfilename: model.safetensors
+- rfilename: modeling_cge2.py
+- rfilename: modules.json
+- rfilename: sentence_bert_config.json
+- rfilename: special_tokens_map.json
+- rfilename: tokenizer.json
+- rfilename: tokenizer_config.json
+- rfilename: vocab.json
+spaces: []
+createdAt: '2025-12-16T12:05:43.000Z'
+safetensors:
+  parameters:
+    BF16: 497252096
+  total: 497252096
+usedStorage: 1005962488
+downloadsAllTime: 204
+inferenceProviderMapping: {}
+configJson:
+  architectures:
+  - CgeForEmbedding
+  attention_dropout: 0.0
+  attn_implementation: flash_attention_2
+  auto_map:
+    AutoConfig: configuration_cge2.CGEConfig
+    AutoModel: modeling_cge2.CgeForEmbedding
+  compressed_dim: 896
+  embedding_method: pma
+  hidden_act: silu
+  hidden_size: 896
+  initializer_range: 0.02
+  intermediate_size: 4864
+  max_position_embeddings: 32768
+  max_window_layers: 24
+  model_type: cge2
+  num_attention_heads: 14
+  num_hidden_layers: 24
+  num_key_value_heads: 2
+  padding_side: left
+  pma_ln: true
+  pma_norm: false
+  pma_norm_mode: post_normal
+  pma_num_heads: 32
+  rms_norm_eps: 1.0e-06
+  rope_theta: 1000000.0
+  sliding_window: null
+  tokenizer_name_or_path: /ainative/muti-modal/yuhang/431428/download_models/CGE2_0B5_1841
+  torch_dtype: bfloat16
+  transformers_version: 4.51.3
+  use_cache: true
+  use_sliding_window: false
+  vocab_size: 151936
+onnxFiles: {}
+safetensorsSizeMb: 994.5
+approxSizeMb: 994.5
+fetchedAt: '2026-06-10T07:15:01.000Z'

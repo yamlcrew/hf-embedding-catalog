@@ -1,0 +1,467 @@
+_id: 6849ee0435cf4b6b06451c3f
+id: manestay/bge-base-en-v1.5-mnrl-cl-multi
+private: false
+pipeline_tag: sentence-similarity
+library_name: sentence-transformers
+tags:
+- sentence-transformers
+- safetensors
+- bert
+- sentence-similarity
+- feature-extraction
+- generated_from_trainer
+- dataset_size:200000
+- loss:MultipleNegativesRankingLoss
+- loss:ContrastiveLoss
+- en
+- dataset:sentence-transformers/quora-duplicates
+- arxiv:1908.10084
+- arxiv:1705.00652
+- base_model:BAAI/bge-base-en-v1.5
+- base_model:finetune:BAAI/bge-base-en-v1.5
+- model-index
+- text-embeddings-inference
+- endpoints_compatible
+- region:us
+downloads: 0
+likes: 0
+modelId: manestay/bge-base-en-v1.5-mnrl-cl-multi
+author: manestay
+sha: f12964803672fc382b0980d2e558e3b6511b4baa
+lastModified: '2025-06-11T20:59:00.000Z'
+gated: false
+disabled: false
+mask_token: '[MASK]'
+widgetData:
+- source_sentence: What is the best sushi restaurant in Los Angeles, aside from Urasawa which is impractical for regular visits?
+  sentences:
+  - How do I stop feeling sorry for ignorant and arrogant people?
+  - What are the best sushi restaurants in Los Angeles?
+  - Why do people flirt on Quora?
+- source_sentence: Why are many Quora writers lonely and/ or unemployed?
+  sentences:
+  - Are writers on Quora mostly lonely or have no job (unemployed)?
+  - What are the attributes of monkeys belongs to Japanese-macaque monkey Family?
+  - I want to change the education system in India. How can I have such power?
+- source_sentence: What is the best, and painless way to kill myself?
+  sentences:
+  - What is a way to commit suicide and not damaging your organs so that they can be donated?
+  - How do I beat insomnia?
+  - What is the most painless way to commit suicide?
+- source_sentence: What are ETF'S and what is the difference between ETF'S and mutual funds?
+  sentences:
+  - What is the difference between ETF and mutual funds?
+  - What's better, an index ETF or an index mutual fund?
+  - 'Income Tax: How to check pan card status?'
+- source_sentence: For what reasons can't the Olympics be held in India?
+  sentences:
+  - What are the best hotels to stay in Goa?
+  - When will Olympics be held in India?
+  - When will India qualify for the FIFA World Cup?
+model-index:
+- name: SentenceTransformer based on BAAI/bge-base-en-v1.5
+  results:
+  - task:
+      type: binary-classification
+      name: Binary Classification
+    dataset:
+      name: quora duplicates
+      type: quora-duplicates
+    metrics:
+    - type: cosine_accuracy
+      value: 0.833
+      name: Cosine Accuracy
+      verified: false
+    - type: cosine_accuracy_threshold
+      value: 0.8065301179885864
+      name: Cosine Accuracy Threshold
+      verified: false
+    - type: cosine_f1
+      value: 0.7630522088353413
+      name: Cosine F1
+      verified: false
+    - type: cosine_f1_threshold
+      value: 0.745335042476654
+      name: Cosine F1 Threshold
+      verified: false
+    - type: cosine_precision
+      value: 0.6705882352941176
+      name: Cosine Precision
+      verified: false
+    - type: cosine_recall
+      value: 0.8850931677018633
+      name: Cosine Recall
+      verified: false
+    - type: cosine_ap
+      value: 0.8120519897128382
+      name: Cosine Ap
+      verified: false
+    - type: cosine_mcc
+      value: 0.641402259734116
+      name: Cosine Mcc
+      verified: false
+  - task:
+      type: paraphrase-mining
+      name: Paraphrase Mining
+    dataset:
+      name: quora duplicates dev
+      type: quora-duplicates-dev
+    metrics:
+    - type: average_precision
+      value: 0.6286866338232051
+      name: Average Precision
+      verified: false
+    - type: f1
+      value: 0.6032452480296708
+      name: F1
+      verified: false
+    - type: precision
+      value: 0.5627297495999654
+      name: Precision
+      verified: false
+    - type: recall
+      value: 0.6500474596592896
+      name: Recall
+      verified: false
+    - type: threshold
+      value: 0.7944510877132416
+      name: Threshold
+      verified: false
+  - task:
+      type: information-retrieval
+      name: Information Retrieval
+    dataset:
+      name: Unknown
+      type: unknown
+    metrics:
+    - type: cosine_accuracy@1
+      value: 0.9732
+      name: Cosine Accuracy@1
+      verified: false
+    - type: cosine_accuracy@3
+      value: 0.9944
+      name: Cosine Accuracy@3
+      verified: false
+    - type: cosine_accuracy@5
+      value: 0.9958
+      name: Cosine Accuracy@5
+      verified: false
+    - type: cosine_accuracy@10
+      value: 0.9994
+      name: Cosine Accuracy@10
+      verified: false
+    - type: cosine_precision@1
+      value: 0.9732
+      name: Cosine Precision@1
+      verified: false
+    - type: cosine_precision@3
+      value: 0.432
+      name: Cosine Precision@3
+      verified: false
+    - type: cosine_precision@5
+      value: 0.27652
+      name: Cosine Precision@5
+      verified: false
+    - type: cosine_precision@10
+      value: 0.14606
+      name: Cosine Precision@10
+      verified: false
+    - type: cosine_recall@1
+      value: 0.8392449568046333
+      name: Cosine Recall@1
+      verified: false
+    - type: cosine_recall@3
+      value: 0.9654790046130339
+      name: Cosine Recall@3
+      verified: false
+    - type: cosine_recall@5
+      value: 0.9826052435636259
+      name: Cosine Recall@5
+      verified: false
+    - type: cosine_recall@10
+      value: 0.9955256342023989
+      name: Cosine Recall@10
+      verified: false
+    - type: cosine_ndcg@10
+      value: 0.9852328208350886
+      name: Cosine Ndcg@10
+      verified: false
+    - type: cosine_mrr@10
+      value: 0.983879365079365
+      name: Cosine Mrr@10
+      verified: false
+    - type: cosine_map@100
+      value: 0.9794253454223505
+      name: Cosine Map@100
+      verified: false
+config:
+  architectures:
+  - BertModel
+  model_type: bert
+  tokenizer_config:
+    cls_token: '[CLS]'
+    mask_token: '[MASK]'
+    pad_token: '[PAD]'
+    sep_token: '[SEP]'
+    unk_token: '[UNK]'
+cardData:
+  language:
+  - en
+  tags:
+  - sentence-transformers
+  - sentence-similarity
+  - feature-extraction
+  - generated_from_trainer
+  - dataset_size:200000
+  - loss:MultipleNegativesRankingLoss
+  - loss:ContrastiveLoss
+  base_model: BAAI/bge-base-en-v1.5
+  widget:
+  - source_sentence: What is the best sushi restaurant in Los Angeles, aside from Urasawa which is impractical for regular
+      visits?
+    sentences:
+    - How do I stop feeling sorry for ignorant and arrogant people?
+    - What are the best sushi restaurants in Los Angeles?
+    - Why do people flirt on Quora?
+  - source_sentence: Why are many Quora writers lonely and/ or unemployed?
+    sentences:
+    - Are writers on Quora mostly lonely or have no job (unemployed)?
+    - What are the attributes of monkeys belongs to Japanese-macaque monkey Family?
+    - I want to change the education system in India. How can I have such power?
+  - source_sentence: What is the best, and painless way to kill myself?
+    sentences:
+    - What is a way to commit suicide and not damaging your organs so that they can be donated?
+    - How do I beat insomnia?
+    - What is the most painless way to commit suicide?
+  - source_sentence: What are ETF'S and what is the difference between ETF'S and mutual funds?
+    sentences:
+    - What is the difference between ETF and mutual funds?
+    - What's better, an index ETF or an index mutual fund?
+    - 'Income Tax: How to check pan card status?'
+  - source_sentence: For what reasons can't the Olympics be held in India?
+    sentences:
+    - What are the best hotels to stay in Goa?
+    - When will Olympics be held in India?
+    - When will India qualify for the FIFA World Cup?
+  datasets:
+  - sentence-transformers/quora-duplicates
+  pipeline_tag: sentence-similarity
+  library_name: sentence-transformers
+  metrics:
+  - cosine_accuracy
+  - cosine_accuracy_threshold
+  - cosine_f1
+  - cosine_f1_threshold
+  - cosine_precision
+  - cosine_recall
+  - cosine_ap
+  - cosine_mcc
+  - average_precision
+  - f1
+  - precision
+  - recall
+  - threshold
+  - cosine_accuracy@1
+  - cosine_accuracy@3
+  - cosine_accuracy@5
+  - cosine_accuracy@10
+  - cosine_precision@1
+  - cosine_precision@3
+  - cosine_precision@5
+  - cosine_precision@10
+  - cosine_recall@1
+  - cosine_recall@3
+  - cosine_recall@5
+  - cosine_recall@10
+  - cosine_ndcg@10
+  - cosine_mrr@10
+  - cosine_map@100
+  model-index:
+  - name: SentenceTransformer based on BAAI/bge-base-en-v1.5
+    results:
+    - task:
+        type: binary-classification
+        name: Binary Classification
+      dataset:
+        name: quora duplicates
+        type: quora-duplicates
+      metrics:
+      - type: cosine_accuracy
+        value: 0.833
+        name: Cosine Accuracy
+        verified: false
+      - type: cosine_accuracy_threshold
+        value: 0.8065301179885864
+        name: Cosine Accuracy Threshold
+        verified: false
+      - type: cosine_f1
+        value: 0.7630522088353413
+        name: Cosine F1
+        verified: false
+      - type: cosine_f1_threshold
+        value: 0.745335042476654
+        name: Cosine F1 Threshold
+        verified: false
+      - type: cosine_precision
+        value: 0.6705882352941176
+        name: Cosine Precision
+        verified: false
+      - type: cosine_recall
+        value: 0.8850931677018633
+        name: Cosine Recall
+        verified: false
+      - type: cosine_ap
+        value: 0.8120519897128382
+        name: Cosine Ap
+        verified: false
+      - type: cosine_mcc
+        value: 0.641402259734116
+        name: Cosine Mcc
+        verified: false
+    - task:
+        type: paraphrase-mining
+        name: Paraphrase Mining
+      dataset:
+        name: quora duplicates dev
+        type: quora-duplicates-dev
+      metrics:
+      - type: average_precision
+        value: 0.6286866338232051
+        name: Average Precision
+        verified: false
+      - type: f1
+        value: 0.6032452480296708
+        name: F1
+        verified: false
+      - type: precision
+        value: 0.5627297495999654
+        name: Precision
+        verified: false
+      - type: recall
+        value: 0.6500474596592896
+        name: Recall
+        verified: false
+      - type: threshold
+        value: 0.7944510877132416
+        name: Threshold
+        verified: false
+    - task:
+        type: information-retrieval
+        name: Information Retrieval
+      dataset:
+        name: Unknown
+        type: unknown
+      metrics:
+      - type: cosine_accuracy@1
+        value: 0.9732
+        name: Cosine Accuracy@1
+        verified: false
+      - type: cosine_accuracy@3
+        value: 0.9944
+        name: Cosine Accuracy@3
+        verified: false
+      - type: cosine_accuracy@5
+        value: 0.9958
+        name: Cosine Accuracy@5
+        verified: false
+      - type: cosine_accuracy@10
+        value: 0.9994
+        name: Cosine Accuracy@10
+        verified: false
+      - type: cosine_precision@1
+        value: 0.9732
+        name: Cosine Precision@1
+        verified: false
+      - type: cosine_precision@3
+        value: 0.432
+        name: Cosine Precision@3
+        verified: false
+      - type: cosine_precision@5
+        value: 0.27652
+        name: Cosine Precision@5
+        verified: false
+      - type: cosine_precision@10
+        value: 0.14606
+        name: Cosine Precision@10
+        verified: false
+      - type: cosine_recall@1
+        value: 0.8392449568046333
+        name: Cosine Recall@1
+        verified: false
+      - type: cosine_recall@3
+        value: 0.9654790046130339
+        name: Cosine Recall@3
+        verified: false
+      - type: cosine_recall@5
+        value: 0.9826052435636259
+        name: Cosine Recall@5
+        verified: false
+      - type: cosine_recall@10
+        value: 0.9955256342023989
+        name: Cosine Recall@10
+        verified: false
+      - type: cosine_ndcg@10
+        value: 0.9852328208350886
+        name: Cosine Ndcg@10
+        verified: false
+      - type: cosine_mrr@10
+        value: 0.983879365079365
+        name: Cosine Mrr@10
+        verified: false
+      - type: cosine_map@100
+        value: 0.9794253454223505
+        name: Cosine Map@100
+        verified: false
+siblings:
+- rfilename: .gitattributes
+- rfilename: 1_Pooling/config.json
+- rfilename: README.md
+- rfilename: config.json
+- rfilename: config_sentence_transformers.json
+- rfilename: model.safetensors
+- rfilename: modules.json
+- rfilename: sentence_bert_config.json
+- rfilename: special_tokens_map.json
+- rfilename: tokenizer.json
+- rfilename: tokenizer_config.json
+- rfilename: vocab.txt
+spaces: []
+createdAt: '2025-06-11T20:58:44.000Z'
+safetensors:
+  parameters:
+    F32: 109482240
+  total: 109482240
+usedStorage: 437951328
+downloadsAllTime: 50
+inferenceProviderMapping: {}
+configJson:
+  architectures:
+  - BertModel
+  attention_probs_dropout_prob: 0.1
+  classifier_dropout: null
+  gradient_checkpointing: false
+  hidden_act: gelu
+  hidden_dropout_prob: 0.1
+  hidden_size: 768
+  id2label:
+    '0': LABEL_0
+  initializer_range: 0.02
+  intermediate_size: 3072
+  label2id:
+    LABEL_0: 0
+  layer_norm_eps: 1.0e-12
+  max_position_embeddings: 512
+  model_type: bert
+  num_attention_heads: 12
+  num_hidden_layers: 12
+  pad_token_id: 0
+  position_embedding_type: absolute
+  torch_dtype: float32
+  transformers_version: 4.52.4
+  type_vocab_size: 2
+  use_cache: true
+  vocab_size: 30522
+onnxFiles: {}
+safetensorsSizeMb: 438.0
+approxSizeMb: 437.9
+fetchedAt: '2026-06-10T07:15:01.000Z'

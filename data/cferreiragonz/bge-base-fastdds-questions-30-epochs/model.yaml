@@ -1,0 +1,914 @@
+_id: 6679381151d04a43c3aa2e6c
+id: cferreiragonz/bge-base-fastdds-questions-30-epochs
+private: false
+pipeline_tag: sentence-similarity
+library_name: sentence-transformers
+tags:
+- sentence-transformers
+- safetensors
+- bert
+- sentence-similarity
+- feature-extraction
+- generated_from_trainer
+- dataset_size:3853
+- loss:MatryoshkaLoss
+- loss:MultipleNegativesRankingLoss
+- en
+- arxiv:1908.10084
+- arxiv:2205.13147
+- arxiv:1705.00652
+- base_model:BAAI/bge-base-en-v1.5
+- base_model:finetune:BAAI/bge-base-en-v1.5
+- license:apache-2.0
+- model-index
+- text-embeddings-inference
+- endpoints_compatible
+- region:us
+downloads: 0
+likes: 0
+modelId: cferreiragonz/bge-base-fastdds-questions-30-epochs
+author: cferreiragonz
+sha: caeb03a9ac23a496180ddc4a8568fed8a0668009
+lastModified: '2024-06-24T09:11:02.000Z'
+gated: manual
+disabled: false
+mask_token: '[MASK]'
+widgetData:
+- source_sentence: '
+
+    UDPv6TransportDescriptor
+
+    ------------------------'
+  sentences:
+  - What is the primary purpose of the "Status" objects in the context of entities?
+  - What is the main concept that this piece of code demonstrates, and how do the provided topology and QoS policy settings
+    relate to it?
+  - What is the primary characteristic of UDP transport in terms of connection establishment?
+- source_sentence: 'With a fragment size of 64 kB, the Publisher has to send about 1100
+
+    fragments to send the whole file. A possible configuration for this
+
+    scenario could be:'
+  sentences:
+  - What is the likely reason why the Publisher needs to use "RELIABLE_ RELIABILITY_QOS" in this scenario?
+  - What is the effect of defining a custom Metatraffic Unicast Locators on the behavior of a DomainParticipant?
+  - What is the primary function of the transport layer in DDS, as described in the provided context?
+- source_sentence: '+------------------------------------+---------------------------------------------------+------------+
+
+    | QosPolicy class                    | Accessor/Mutator                                  | Mutable    |
+
+    |====================================|===================================================|============|
+
+    | RTPSEndpointQos                    | "endpoint()"                                      | No         |
+
+    +------------------------------------+---------------------------------------------------+------------+'
+  sentences:
+  - What is the effect of setting "ON" as the DataSharingKind in the context of data-sharing delivery?
+  - What is the purpose of the RTPSEndpointQos class in the context of DataWriter QoS policies?
+  - What is the primary purpose of the RTPSEndpointQos policy in a DDS (Data Distribution Service) system?
+- source_sentence: "Note:  When \"non_blocking_send\" is set to \"true\", send operations will\n  return immediately if the\
+    \ send buffer might get full, but no error\n  will be returned to the upper layer. This means that the application\n \
+    \ will behave as if the packet is sent and lost.When set to \"false\",\n  send operations will block until the network\
+    \ buffer has space for\n  the packet."
+  sentences:
+  - What happens when "non_blocking_send" is set to "true" in TCP transport?
+  - What is the purpose of the "<default_external_unicast_locators>" element in the RTPS configuration?
+  - What is the purpose of the "<enabled>" value in the DisablePositiveAcks QoS policy?
+- source_sentence: 'After calling the "DataReader::read()" or "DataReader::take()"
+
+    operations, accessing the data on the returned sequences is quite
+
+    easy. The sequences API provides a **length()** operation returning
+
+    the number of elements in the collections. The application code just
+
+    needs to check this value and use the **[]** operator to access the
+
+    corresponding elements. Elements on the DDS data sequence should only
+
+    be accessed when the corresponding element on the SampleInfo sequence
+
+    indicate that valid data is present. When using Data Sharing, it is
+
+    also important to check that the sample is valid (i.e, not replaced,
+
+    refer to DataReader and DataWriter history coupling for further
+
+    information in this regard).'
+  sentences:
+  - What is the primary method described in the text for accessing data on returned sequences after calling "DataReader::read()"
+    or "DataReader::take()" operations?
+  - What is the primary advantage of using Shared Memory Transport (SHM) compared to other network transports like UDP/TCP?
+  - What are the steps to install Fast DDS library, Python bindings, and Gen generation tool from sources in a Linux environment?
+model-index:
+- name: Fine tuning poc1-30e
+  results:
+  - task:
+      type: information-retrieval
+      name: Information Retrieval
+    dataset:
+      name: dim 768
+      type: dim_768
+    metrics:
+    - type: cosine_accuracy@1
+      value: 0.34265734265734266
+      name: Cosine Accuracy@1
+      verified: false
+    - type: cosine_accuracy@3
+      value: 0.5291375291375291
+      name: Cosine Accuracy@3
+      verified: false
+    - type: cosine_accuracy@5
+      value: 0.5757575757575758
+      name: Cosine Accuracy@5
+      verified: false
+    - type: cosine_accuracy@10
+      value: 0.6643356643356644
+      name: Cosine Accuracy@10
+      verified: false
+    - type: cosine_precision@1
+      value: 0.34265734265734266
+      name: Cosine Precision@1
+      verified: false
+    - type: cosine_precision@3
+      value: 0.17637917637917636
+      name: Cosine Precision@3
+      verified: false
+    - type: cosine_precision@5
+      value: 0.11515151515151513
+      name: Cosine Precision@5
+      verified: false
+    - type: cosine_precision@10
+      value: 0.06643356643356643
+      name: Cosine Precision@10
+      verified: false
+    - type: cosine_recall@1
+      value: 0.34265734265734266
+      name: Cosine Recall@1
+      verified: false
+    - type: cosine_recall@3
+      value: 0.5291375291375291
+      name: Cosine Recall@3
+      verified: false
+    - type: cosine_recall@5
+      value: 0.5757575757575758
+      name: Cosine Recall@5
+      verified: false
+    - type: cosine_recall@10
+      value: 0.6643356643356644
+      name: Cosine Recall@10
+      verified: false
+    - type: cosine_ndcg@10
+      value: 0.4999219586168879
+      name: Cosine Ndcg@10
+      verified: false
+    - type: cosine_mrr@10
+      value: 0.44783734783734785
+      name: Cosine Mrr@10
+      verified: false
+    - type: cosine_map@100
+      value: 0.45732757969458965
+      name: Cosine Map@100
+      verified: false
+  - task:
+      type: information-retrieval
+      name: Information Retrieval
+    dataset:
+      name: dim 512
+      type: dim_512
+    metrics:
+    - type: cosine_accuracy@1
+      value: 0.3333333333333333
+      name: Cosine Accuracy@1
+      verified: false
+    - type: cosine_accuracy@3
+      value: 0.5314685314685315
+      name: Cosine Accuracy@3
+      verified: false
+    - type: cosine_accuracy@5
+      value: 0.5804195804195804
+      name: Cosine Accuracy@5
+      verified: false
+    - type: cosine_accuracy@10
+      value: 0.655011655011655
+      name: Cosine Accuracy@10
+      verified: false
+    - type: cosine_precision@1
+      value: 0.3333333333333333
+      name: Cosine Precision@1
+      verified: false
+    - type: cosine_precision@3
+      value: 0.17715617715617715
+      name: Cosine Precision@3
+      verified: false
+    - type: cosine_precision@5
+      value: 0.11608391608391608
+      name: Cosine Precision@5
+      verified: false
+    - type: cosine_precision@10
+      value: 0.0655011655011655
+      name: Cosine Precision@10
+      verified: false
+    - type: cosine_recall@1
+      value: 0.3333333333333333
+      name: Cosine Recall@1
+      verified: false
+    - type: cosine_recall@3
+      value: 0.5314685314685315
+      name: Cosine Recall@3
+      verified: false
+    - type: cosine_recall@5
+      value: 0.5804195804195804
+      name: Cosine Recall@5
+      verified: false
+    - type: cosine_recall@10
+      value: 0.655011655011655
+      name: Cosine Recall@10
+      verified: false
+    - type: cosine_ndcg@10
+      value: 0.4931410715247713
+      name: Cosine Ndcg@10
+      verified: false
+    - type: cosine_mrr@10
+      value: 0.44150664150664165
+      name: Cosine Mrr@10
+      verified: false
+    - type: cosine_map@100
+      value: 0.4520914166409126
+      name: Cosine Map@100
+      verified: false
+  - task:
+      type: information-retrieval
+      name: Information Retrieval
+    dataset:
+      name: dim 256
+      type: dim_256
+    metrics:
+    - type: cosine_accuracy@1
+      value: 0.331002331002331
+      name: Cosine Accuracy@1
+      verified: false
+    - type: cosine_accuracy@3
+      value: 0.5384615384615384
+      name: Cosine Accuracy@3
+      verified: false
+    - type: cosine_accuracy@5
+      value: 0.5734265734265734
+      name: Cosine Accuracy@5
+      verified: false
+    - type: cosine_accuracy@10
+      value: 0.662004662004662
+      name: Cosine Accuracy@10
+      verified: false
+    - type: cosine_precision@1
+      value: 0.331002331002331
+      name: Cosine Precision@1
+      verified: false
+    - type: cosine_precision@3
+      value: 0.1794871794871795
+      name: Cosine Precision@3
+      verified: false
+    - type: cosine_precision@5
+      value: 0.11468531468531468
+      name: Cosine Precision@5
+      verified: false
+    - type: cosine_precision@10
+      value: 0.0662004662004662
+      name: Cosine Precision@10
+      verified: false
+    - type: cosine_recall@1
+      value: 0.331002331002331
+      name: Cosine Recall@1
+      verified: false
+    - type: cosine_recall@3
+      value: 0.5384615384615384
+      name: Cosine Recall@3
+      verified: false
+    - type: cosine_recall@5
+      value: 0.5734265734265734
+      name: Cosine Recall@5
+      verified: false
+    - type: cosine_recall@10
+      value: 0.662004662004662
+      name: Cosine Recall@10
+      verified: false
+    - type: cosine_ndcg@10
+      value: 0.4946456648216315
+      name: Cosine Ndcg@10
+      verified: false
+    - type: cosine_mrr@10
+      value: 0.4414687164687165
+      name: Cosine Mrr@10
+      verified: false
+    - type: cosine_map@100
+      value: 0.4517532849343265
+      name: Cosine Map@100
+      verified: false
+  - task:
+      type: information-retrieval
+      name: Information Retrieval
+    dataset:
+      name: dim 128
+      type: dim_128
+    metrics:
+    - type: cosine_accuracy@1
+      value: 0.32867132867132864
+      name: Cosine Accuracy@1
+      verified: false
+    - type: cosine_accuracy@3
+      value: 0.5291375291375291
+      name: Cosine Accuracy@3
+      verified: false
+    - type: cosine_accuracy@5
+      value: 0.578088578088578
+      name: Cosine Accuracy@5
+      verified: false
+    - type: cosine_accuracy@10
+      value: 0.6643356643356644
+      name: Cosine Accuracy@10
+      verified: false
+    - type: cosine_precision@1
+      value: 0.32867132867132864
+      name: Cosine Precision@1
+      verified: false
+    - type: cosine_precision@3
+      value: 0.17637917637917636
+      name: Cosine Precision@3
+      verified: false
+    - type: cosine_precision@5
+      value: 0.11561771561771561
+      name: Cosine Precision@5
+      verified: false
+    - type: cosine_precision@10
+      value: 0.06643356643356643
+      name: Cosine Precision@10
+      verified: false
+    - type: cosine_recall@1
+      value: 0.32867132867132864
+      name: Cosine Recall@1
+      verified: false
+    - type: cosine_recall@3
+      value: 0.5291375291375291
+      name: Cosine Recall@3
+      verified: false
+    - type: cosine_recall@5
+      value: 0.578088578088578
+      name: Cosine Recall@5
+      verified: false
+    - type: cosine_recall@10
+      value: 0.6643356643356644
+      name: Cosine Recall@10
+      verified: false
+    - type: cosine_ndcg@10
+      value: 0.491729303526411
+      name: Cosine Ndcg@10
+      verified: false
+    - type: cosine_mrr@10
+      value: 0.4370564620564619
+      name: Cosine Mrr@10
+      verified: false
+    - type: cosine_map@100
+      value: 0.4465064100234966
+      name: Cosine Map@100
+      verified: false
+  - task:
+      type: information-retrieval
+      name: Information Retrieval
+    dataset:
+      name: dim 64
+      type: dim_64
+    metrics:
+    - type: cosine_accuracy@1
+      value: 0.317016317016317
+      name: Cosine Accuracy@1
+      verified: false
+    - type: cosine_accuracy@3
+      value: 0.5058275058275058
+      name: Cosine Accuracy@3
+      verified: false
+    - type: cosine_accuracy@5
+      value: 0.5734265734265734
+      name: Cosine Accuracy@5
+      verified: false
+    - type: cosine_accuracy@10
+      value: 0.655011655011655
+      name: Cosine Accuracy@10
+      verified: false
+    - type: cosine_precision@1
+      value: 0.317016317016317
+      name: Cosine Precision@1
+      verified: false
+    - type: cosine_precision@3
+      value: 0.1686091686091686
+      name: Cosine Precision@3
+      verified: false
+    - type: cosine_precision@5
+      value: 0.11468531468531468
+      name: Cosine Precision@5
+      verified: false
+    - type: cosine_precision@10
+      value: 0.06550116550116548
+      name: Cosine Precision@10
+      verified: false
+    - type: cosine_recall@1
+      value: 0.317016317016317
+      name: Cosine Recall@1
+      verified: false
+    - type: cosine_recall@3
+      value: 0.5058275058275058
+      name: Cosine Recall@3
+      verified: false
+    - type: cosine_recall@5
+      value: 0.5734265734265734
+      name: Cosine Recall@5
+      verified: false
+    - type: cosine_recall@10
+      value: 0.655011655011655
+      name: Cosine Recall@10
+      verified: false
+    - type: cosine_ndcg@10
+      value: 0.4805357725353263
+      name: Cosine Ndcg@10
+      verified: false
+    - type: cosine_mrr@10
+      value: 0.42515355015355016
+      name: Cosine Mrr@10
+      verified: false
+    - type: cosine_map@100
+      value: 0.43416870212536746
+      name: Cosine Map@100
+      verified: false
+config:
+  architectures:
+  - BertModel
+  model_type: bert
+  tokenizer_config:
+    cls_token: '[CLS]'
+    mask_token: '[MASK]'
+    pad_token: '[PAD]'
+    sep_token: '[SEP]'
+    unk_token: '[UNK]'
+cardData:
+  language:
+  - en
+  license: apache-2.0
+  library_name: sentence-transformers
+  tags:
+  - sentence-transformers
+  - sentence-similarity
+  - feature-extraction
+  - generated_from_trainer
+  - dataset_size:3853
+  - loss:MatryoshkaLoss
+  - loss:MultipleNegativesRankingLoss
+  base_model: BAAI/bge-base-en-v1.5
+  datasets: []
+  metrics:
+  - cosine_accuracy@1
+  - cosine_accuracy@3
+  - cosine_accuracy@5
+  - cosine_accuracy@10
+  - cosine_precision@1
+  - cosine_precision@3
+  - cosine_precision@5
+  - cosine_precision@10
+  - cosine_recall@1
+  - cosine_recall@3
+  - cosine_recall@5
+  - cosine_recall@10
+  - cosine_ndcg@10
+  - cosine_mrr@10
+  - cosine_map@100
+  widget:
+  - source_sentence: '
+
+      UDPv6TransportDescriptor
+
+      ------------------------'
+    sentences:
+    - What is the primary purpose of the "Status" objects in the context of entities?
+    - What is the main concept that this piece of code demonstrates, and how do the provided topology and QoS policy settings
+      relate to it?
+    - What is the primary characteristic of UDP transport in terms of connection establishment?
+  - source_sentence: 'With a fragment size of 64 kB, the Publisher has to send about 1100
+
+      fragments to send the whole file. A possible configuration for this
+
+      scenario could be:'
+    sentences:
+    - What is the likely reason why the Publisher needs to use "RELIABLE_ RELIABILITY_QOS" in this scenario?
+    - What is the effect of defining a custom Metatraffic Unicast Locators on the behavior of a DomainParticipant?
+    - What is the primary function of the transport layer in DDS, as described in the provided context?
+  - source_sentence: '+------------------------------------+---------------------------------------------------+------------+
+
+      | QosPolicy class                    | Accessor/Mutator                                  | Mutable    |
+
+      |====================================|===================================================|============|
+
+      | RTPSEndpointQos                    | "endpoint()"                                      | No         |
+
+      +------------------------------------+---------------------------------------------------+------------+'
+    sentences:
+    - What is the effect of setting "ON" as the DataSharingKind in the context of data-sharing delivery?
+    - What is the purpose of the RTPSEndpointQos class in the context of DataWriter QoS policies?
+    - What is the primary purpose of the RTPSEndpointQos policy in a DDS (Data Distribution Service) system?
+  - source_sentence: "Note:  When \"non_blocking_send\" is set to \"true\", send operations will\n  return immediately if\
+      \ the send buffer might get full, but no error\n  will be returned to the upper layer. This means that the application\n\
+      \  will behave as if the packet is sent and lost.When set to \"false\",\n  send operations will block until the network\
+      \ buffer has space for\n  the packet."
+    sentences:
+    - What happens when "non_blocking_send" is set to "true" in TCP transport?
+    - What is the purpose of the "<default_external_unicast_locators>" element in the RTPS configuration?
+    - What is the purpose of the "<enabled>" value in the DisablePositiveAcks QoS policy?
+  - source_sentence: 'After calling the "DataReader::read()" or "DataReader::take()"
+
+      operations, accessing the data on the returned sequences is quite
+
+      easy. The sequences API provides a **length()** operation returning
+
+      the number of elements in the collections. The application code just
+
+      needs to check this value and use the **[]** operator to access the
+
+      corresponding elements. Elements on the DDS data sequence should only
+
+      be accessed when the corresponding element on the SampleInfo sequence
+
+      indicate that valid data is present. When using Data Sharing, it is
+
+      also important to check that the sample is valid (i.e, not replaced,
+
+      refer to DataReader and DataWriter history coupling for further
+
+      information in this regard).'
+    sentences:
+    - What is the primary method described in the text for accessing data on returned sequences after calling "DataReader::read()"
+      or "DataReader::take()" operations?
+    - What is the primary advantage of using Shared Memory Transport (SHM) compared to other network transports like UDP/TCP?
+    - What are the steps to install Fast DDS library, Python bindings, and Gen generation tool from sources in a Linux environment?
+  pipeline_tag: sentence-similarity
+  model-index:
+  - name: Fine tuning poc1-30e
+    results:
+    - task:
+        type: information-retrieval
+        name: Information Retrieval
+      dataset:
+        name: dim 768
+        type: dim_768
+      metrics:
+      - type: cosine_accuracy@1
+        value: 0.34265734265734266
+        name: Cosine Accuracy@1
+        verified: false
+      - type: cosine_accuracy@3
+        value: 0.5291375291375291
+        name: Cosine Accuracy@3
+        verified: false
+      - type: cosine_accuracy@5
+        value: 0.5757575757575758
+        name: Cosine Accuracy@5
+        verified: false
+      - type: cosine_accuracy@10
+        value: 0.6643356643356644
+        name: Cosine Accuracy@10
+        verified: false
+      - type: cosine_precision@1
+        value: 0.34265734265734266
+        name: Cosine Precision@1
+        verified: false
+      - type: cosine_precision@3
+        value: 0.17637917637917636
+        name: Cosine Precision@3
+        verified: false
+      - type: cosine_precision@5
+        value: 0.11515151515151513
+        name: Cosine Precision@5
+        verified: false
+      - type: cosine_precision@10
+        value: 0.06643356643356643
+        name: Cosine Precision@10
+        verified: false
+      - type: cosine_recall@1
+        value: 0.34265734265734266
+        name: Cosine Recall@1
+        verified: false
+      - type: cosine_recall@3
+        value: 0.5291375291375291
+        name: Cosine Recall@3
+        verified: false
+      - type: cosine_recall@5
+        value: 0.5757575757575758
+        name: Cosine Recall@5
+        verified: false
+      - type: cosine_recall@10
+        value: 0.6643356643356644
+        name: Cosine Recall@10
+        verified: false
+      - type: cosine_ndcg@10
+        value: 0.4999219586168879
+        name: Cosine Ndcg@10
+        verified: false
+      - type: cosine_mrr@10
+        value: 0.44783734783734785
+        name: Cosine Mrr@10
+        verified: false
+      - type: cosine_map@100
+        value: 0.45732757969458965
+        name: Cosine Map@100
+        verified: false
+    - task:
+        type: information-retrieval
+        name: Information Retrieval
+      dataset:
+        name: dim 512
+        type: dim_512
+      metrics:
+      - type: cosine_accuracy@1
+        value: 0.3333333333333333
+        name: Cosine Accuracy@1
+        verified: false
+      - type: cosine_accuracy@3
+        value: 0.5314685314685315
+        name: Cosine Accuracy@3
+        verified: false
+      - type: cosine_accuracy@5
+        value: 0.5804195804195804
+        name: Cosine Accuracy@5
+        verified: false
+      - type: cosine_accuracy@10
+        value: 0.655011655011655
+        name: Cosine Accuracy@10
+        verified: false
+      - type: cosine_precision@1
+        value: 0.3333333333333333
+        name: Cosine Precision@1
+        verified: false
+      - type: cosine_precision@3
+        value: 0.17715617715617715
+        name: Cosine Precision@3
+        verified: false
+      - type: cosine_precision@5
+        value: 0.11608391608391608
+        name: Cosine Precision@5
+        verified: false
+      - type: cosine_precision@10
+        value: 0.0655011655011655
+        name: Cosine Precision@10
+        verified: false
+      - type: cosine_recall@1
+        value: 0.3333333333333333
+        name: Cosine Recall@1
+        verified: false
+      - type: cosine_recall@3
+        value: 0.5314685314685315
+        name: Cosine Recall@3
+        verified: false
+      - type: cosine_recall@5
+        value: 0.5804195804195804
+        name: Cosine Recall@5
+        verified: false
+      - type: cosine_recall@10
+        value: 0.655011655011655
+        name: Cosine Recall@10
+        verified: false
+      - type: cosine_ndcg@10
+        value: 0.4931410715247713
+        name: Cosine Ndcg@10
+        verified: false
+      - type: cosine_mrr@10
+        value: 0.44150664150664165
+        name: Cosine Mrr@10
+        verified: false
+      - type: cosine_map@100
+        value: 0.4520914166409126
+        name: Cosine Map@100
+        verified: false
+    - task:
+        type: information-retrieval
+        name: Information Retrieval
+      dataset:
+        name: dim 256
+        type: dim_256
+      metrics:
+      - type: cosine_accuracy@1
+        value: 0.331002331002331
+        name: Cosine Accuracy@1
+        verified: false
+      - type: cosine_accuracy@3
+        value: 0.5384615384615384
+        name: Cosine Accuracy@3
+        verified: false
+      - type: cosine_accuracy@5
+        value: 0.5734265734265734
+        name: Cosine Accuracy@5
+        verified: false
+      - type: cosine_accuracy@10
+        value: 0.662004662004662
+        name: Cosine Accuracy@10
+        verified: false
+      - type: cosine_precision@1
+        value: 0.331002331002331
+        name: Cosine Precision@1
+        verified: false
+      - type: cosine_precision@3
+        value: 0.1794871794871795
+        name: Cosine Precision@3
+        verified: false
+      - type: cosine_precision@5
+        value: 0.11468531468531468
+        name: Cosine Precision@5
+        verified: false
+      - type: cosine_precision@10
+        value: 0.0662004662004662
+        name: Cosine Precision@10
+        verified: false
+      - type: cosine_recall@1
+        value: 0.331002331002331
+        name: Cosine Recall@1
+        verified: false
+      - type: cosine_recall@3
+        value: 0.5384615384615384
+        name: Cosine Recall@3
+        verified: false
+      - type: cosine_recall@5
+        value: 0.5734265734265734
+        name: Cosine Recall@5
+        verified: false
+      - type: cosine_recall@10
+        value: 0.662004662004662
+        name: Cosine Recall@10
+        verified: false
+      - type: cosine_ndcg@10
+        value: 0.4946456648216315
+        name: Cosine Ndcg@10
+        verified: false
+      - type: cosine_mrr@10
+        value: 0.4414687164687165
+        name: Cosine Mrr@10
+        verified: false
+      - type: cosine_map@100
+        value: 0.4517532849343265
+        name: Cosine Map@100
+        verified: false
+    - task:
+        type: information-retrieval
+        name: Information Retrieval
+      dataset:
+        name: dim 128
+        type: dim_128
+      metrics:
+      - type: cosine_accuracy@1
+        value: 0.32867132867132864
+        name: Cosine Accuracy@1
+        verified: false
+      - type: cosine_accuracy@3
+        value: 0.5291375291375291
+        name: Cosine Accuracy@3
+        verified: false
+      - type: cosine_accuracy@5
+        value: 0.578088578088578
+        name: Cosine Accuracy@5
+        verified: false
+      - type: cosine_accuracy@10
+        value: 0.6643356643356644
+        name: Cosine Accuracy@10
+        verified: false
+      - type: cosine_precision@1
+        value: 0.32867132867132864
+        name: Cosine Precision@1
+        verified: false
+      - type: cosine_precision@3
+        value: 0.17637917637917636
+        name: Cosine Precision@3
+        verified: false
+      - type: cosine_precision@5
+        value: 0.11561771561771561
+        name: Cosine Precision@5
+        verified: false
+      - type: cosine_precision@10
+        value: 0.06643356643356643
+        name: Cosine Precision@10
+        verified: false
+      - type: cosine_recall@1
+        value: 0.32867132867132864
+        name: Cosine Recall@1
+        verified: false
+      - type: cosine_recall@3
+        value: 0.5291375291375291
+        name: Cosine Recall@3
+        verified: false
+      - type: cosine_recall@5
+        value: 0.578088578088578
+        name: Cosine Recall@5
+        verified: false
+      - type: cosine_recall@10
+        value: 0.6643356643356644
+        name: Cosine Recall@10
+        verified: false
+      - type: cosine_ndcg@10
+        value: 0.491729303526411
+        name: Cosine Ndcg@10
+        verified: false
+      - type: cosine_mrr@10
+        value: 0.4370564620564619
+        name: Cosine Mrr@10
+        verified: false
+      - type: cosine_map@100
+        value: 0.4465064100234966
+        name: Cosine Map@100
+        verified: false
+    - task:
+        type: information-retrieval
+        name: Information Retrieval
+      dataset:
+        name: dim 64
+        type: dim_64
+      metrics:
+      - type: cosine_accuracy@1
+        value: 0.317016317016317
+        name: Cosine Accuracy@1
+        verified: false
+      - type: cosine_accuracy@3
+        value: 0.5058275058275058
+        name: Cosine Accuracy@3
+        verified: false
+      - type: cosine_accuracy@5
+        value: 0.5734265734265734
+        name: Cosine Accuracy@5
+        verified: false
+      - type: cosine_accuracy@10
+        value: 0.655011655011655
+        name: Cosine Accuracy@10
+        verified: false
+      - type: cosine_precision@1
+        value: 0.317016317016317
+        name: Cosine Precision@1
+        verified: false
+      - type: cosine_precision@3
+        value: 0.1686091686091686
+        name: Cosine Precision@3
+        verified: false
+      - type: cosine_precision@5
+        value: 0.11468531468531468
+        name: Cosine Precision@5
+        verified: false
+      - type: cosine_precision@10
+        value: 0.06550116550116548
+        name: Cosine Precision@10
+        verified: false
+      - type: cosine_recall@1
+        value: 0.317016317016317
+        name: Cosine Recall@1
+        verified: false
+      - type: cosine_recall@3
+        value: 0.5058275058275058
+        name: Cosine Recall@3
+        verified: false
+      - type: cosine_recall@5
+        value: 0.5734265734265734
+        name: Cosine Recall@5
+        verified: false
+      - type: cosine_recall@10
+        value: 0.655011655011655
+        name: Cosine Recall@10
+        verified: false
+      - type: cosine_ndcg@10
+        value: 0.4805357725353263
+        name: Cosine Ndcg@10
+        verified: false
+      - type: cosine_mrr@10
+        value: 0.42515355015355016
+        name: Cosine Mrr@10
+        verified: false
+      - type: cosine_map@100
+        value: 0.43416870212536746
+        name: Cosine Map@100
+        verified: false
+siblings:
+- rfilename: .gitattributes
+- rfilename: 1_Pooling/config.json
+- rfilename: README.md
+- rfilename: config.json
+- rfilename: config_sentence_transformers.json
+- rfilename: model.safetensors
+- rfilename: modules.json
+- rfilename: sentence_bert_config.json
+- rfilename: special_tokens_map.json
+- rfilename: tokenizer.json
+- rfilename: tokenizer_config.json
+- rfilename: vocab.txt
+spaces: []
+createdAt: '2024-06-24T09:10:41.000Z'
+safetensors:
+  parameters:
+    F32: 109482240
+  total: 109482240
+usedStorage: 437951328
+downloadsAllTime: 126
+inferenceProviderMapping: {}
+configJson: null
+onnxFiles: {}
+safetensorsSizeMb: 438.0
+approxSizeMb: 437.9
+fetchedAt: '2026-06-10T07:15:01.000Z'

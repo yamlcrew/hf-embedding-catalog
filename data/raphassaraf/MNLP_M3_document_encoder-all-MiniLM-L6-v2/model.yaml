@@ -1,0 +1,1116 @@
+_id: 684096849de7b5f76d12d76c
+id: raphassaraf/MNLP_M3_document_encoder-all-MiniLM-L6-v2
+private: false
+pipeline_tag: sentence-similarity
+library_name: sentence-transformers
+tags:
+- sentence-transformers
+- safetensors
+- bert
+- sentence-similarity
+- feature-extraction
+- generated_from_trainer
+- dataset_size:96
+- loss:MultipleNegativesRankingLoss
+- arxiv:1908.10084
+- arxiv:1705.00652
+- base_model:BAAI/bge-small-en-v1.5
+- base_model:finetune:BAAI/bge-small-en-v1.5
+- text-embeddings-inference
+- endpoints_compatible
+- region:us
+downloads: 1
+likes: 0
+modelId: raphassaraf/MNLP_M3_document_encoder-all-MiniLM-L6-v2
+author: raphassaraf
+sha: cc3c5e4d6e9145d0224ec5b5c649bb586d999a90
+lastModified: '2025-06-04T23:53:07.000Z'
+gated: false
+disabled: false
+mask_token: '[MASK]'
+widgetData:
+- source_sentence: What are the de facto required fields in a SAM/BAM read group?
+  sentences:
+  - "Question: Several gene set enrichment methods are available, the most famous/popular is the Broad Institute tool. Many\
+    \ other tools are available (See for example the biocView of GSE which list 82 different packages). There are several\
+    \ parameters in consideration :\n\nthe statistic used to order the genes, \nif it competitive or self-contained,\nif it\
+    \ is supervised or not,\nand how is the enrichment score calculated.\n\nI am using the fgsea - Fast Gene Set Enrichment\
+    \ Analysis package to calculate the enrichment scores and someone told me that the numbers are different from the ones\
+    \ on the Broad Institute despite all the other parameters being equivalent.\nAre these two methods (fgsea and Broad Institute\
+    \ GSEA) equivalent to calculate the enrichment score?\nI looked to the algorithms of both papers, and they seem fairly\
+    \ similar, but I don't know if in real datasets they are equivalent or not.\nIs there any article reviewing and comparing\
+    \ how does the enrichment score method affect to the result?\n\nAnswer: According to the FGSEA preprint:\n\nWe ran reference\
+    \ GSEA with default parameters. The permutation number\n  was set to 1000, which means that for each input gene set 1000\n\
+    \  independent samples were generated. The run took 100 seconds and\n  resulted in 79 gene sets with GSEA-adjusted FDR\
+    \ q-value of less than\n  10−2. All significant gene sets were in a positive mode. First, to get\n  a similar nominal\
+    \ p-values accuracy we ran FGSEA algorithm on 1000\n  permutations. This took 2 seconds, but resulted in no significant\
+    \ hits\n  due after multiple testing correction (with FRD ≤ 1%).\n\nThus, FGSEA and GSEA are not identical.\nAnd again\
+    \ in the conclusion:\n\nConsequently, gene sets can be ranked more precisely in the results\n  and, which is even more\
+    \ important, standard multiple testing\n  correction methods can be applied instead of approximate ones as in\n  [GSEA].\n\
+    \nThe author argues that FGSEA is more accurate, so it can't be equivalent.\nIf you are interested specifically in the\
+    \ enrichment score, that was addressed by the author in the preprint comments:\n\nValues of enrichment scores and normalized\
+    \ enrichment scores are the\n  same for both broad version and fgsea.\n\nSo that part seems to be the same."
+  - 'Question: I am running samtools mpileup (v1.4) on a bam file with very choppy coverage (ChIP-seq style data). I want
+    to get a first-pass list of positions with SNVs and their frequency as reported by the read counts, but no matter what
+    I do, I keep getting all SNVs filtered out as not passing QC.
+
+    What''s the magic parameter set for an initial list of SNVs and frequencies?
+
+    EDIT: this is a question I posted on "the other" website, but didn''t get a reply there.
+
+
+    Answer: I used this in the past for ChIP-seq data and it generated SNVs:
+
+    samtools mpileup \
+
+    --uncompressed --max-depth 10000 --min-MQ 20 --ignore-RG --skip-indels \
+
+    --fasta-ref ref.fa file.bam \
+
+    | bcftools call --consensus-caller \
+
+    > out.vcf
+
+
+    This was samtools 1.3 in case that makes a difference.'
+  - "Question: The SAM specification indicates that each read group must have a unique ID field, but does not mark any other\
+    \ field as required. \nI have also discovered that htsjdk throws exceptions if the sample (SM) field is empty, though\
+    \ there is no indication in the specification that this is required. \nAre there other read group fields that I should\
+    \ expect to be required by common tools? \n\nAnswer: The sample tag (i.e. SM) was a mandatory tag in the initial SAM spec\
+    \ (see the .pages file; you need a mac to open it). When transitioned to Latex, this requirement was mysteriously dropped.\
+    \ Picard is conforming to the initial spec. Anyway, the sample tag is important to quite a few tools. I would encourage\
+    \ you to add it."
+- source_sentence: Is the optional SAM NM field strictly computable from the MD and CIGAR?
+  sentences:
+  - "Question: I'm looking for tools to check the quality of a VCF I have of a human genome. I would like to check the VCF\
+    \ against publicly known variants across other human genomes, e.g. how many SNPs are already in public databases, whether\
+    \ insertions/deletions are at known positions, insertion/deletion length distribution, other SNVs/SVs, etc.? I suspect\
+    \ that there are resources from previous projects to check for known SNPs and InDels by human subpopulations.\nWhat resources\
+    \ exist for this, and how do I do it? \n\nAnswer: To achieve (at least some of) your goals, I would recommend the Variant\
+    \ Effect Predictor (VEP). It is a flexible tool that provides several types of annotations on an input .vcf file.  I agree\
+    \ that ExAC is the de facto gold standard catalog for human genetic variation in coding regions.  To see the frequency\
+    \ distribution of variants by global subpopulation make sure \"ExAC allele frequencies\" is checked in addition to the\
+    \ 1000 genomes. \nOutput in the web-browser:\n\nIf you download the annotated .vcf, frequencies will be in the INFO field:\n\
+    ##INFO=<ID=CSQ,Number=.,Type=String,Description=\"Consequence annotations from Ensembl VEP. Format: Allele|Consequence|IMPACT|SYMBOL|Gene|Feature_type|Feature|BIOTYPE|EXON|INTRON|HGVSc|HGVSp|cDNA_position|CDS_position|Protein_position|Amino_acids|Codons|Existing_variation|DISTANCE|STRAND|FLAGS|SYMBOL_SOURCE|HGNC_ID|TSL|SIFT|PolyPhen|AF|AFR_AF|AMR_AF|EAS_AF|EUR_AF|SAS_AF|AA_AF|EA_AF|ExAC_AF|ExAC_Adj_AF|ExAC_AFR_AF|ExAC_AMR_AF|ExAC_EAS_AF|ExAC_FIN_AF|ExAC_NFE_AF|ExAC_OTH_AF|ExAC_SAS_AF|CLIN_SIG|SOMATIC|PHENO|MOTIF_NAME|MOTIF_POS|HIGH_INF_POS|MOTIF_SCORE_CHANGE\n\
+    \nThe previously mentioned Annovar can also annotate with ExAC allele frequencies.  Finally, should mention the newest\
+    \ whole-genome resource, gnomAD."
+  - 'Question: I produced a bam file by aligning reads to a small set of synthetic sequences using bwa-mem.
+
+    I am heavily filtering reads that are not paired and of a certain orientation.
+
+    Applying the filtering, I get a few thousands of reads:
+
+    samtools view -h $myfilebam | \
+
+    samtools view -h -F4 - | \
+
+    samtools view -h -F8 - | \
+
+    samtools view -h -F256 - | \
+
+    samtools view -h -F512 - | \
+
+    samtools view -h -F1024 - | \
+
+    samtools view -h -F2048 - | \
+
+    samtools view -h -f16 - | \
+
+    samtools view -h -f32 -  | wc -l
+
+
+    Gives me 89502 reads.
+
+    If I then pipe this into samtools mpileup, I get no results:
+
+    samtools view -h $myfilebam | \
+
+    samtools view -h -F4 - | \
+
+    samtools view -h -F8 - | \
+
+    samtools view -h -F256 - | \
+
+    samtools view -h -F512 - | \
+
+    samtools view -h -F1024 - | \
+
+    samtools view -h -F2048 - | \
+
+    samtools view -h -f16 - | \
+
+    samtools view -h -f32 -  | \
+
+    samtools mpileup --excl-flags 0 -Q0 -B -d 999999 - | wc -l
+
+
+    Returns 0.
+
+    I tried different combinations of filtering, and when I do both -f 16 and -f 32 returns empty, but if I do either of those,
+    then it works:
+
+    samtools view -h $myfilebam | \
+
+    samtools view -h -F4 - | \
+
+    samtools view -h -F8 - | \
+
+    samtools view -h -F256 - | \
+
+    samtools view -h -F512 - | \
+
+    samtools view -h -F1024 - | \
+
+    samtools view -h -F2048 - | \
+
+    samtools view -h -f16 - | \
+
+    samtools mpileup --excl-flags 0 -Q0 -B -d 999999 - | wc -l
+
+
+    Returns 1056.
+
+    Any ideas why? My thinking was that it would work with --excl-flags 0.
+
+    EDIT: substituting mpileup for depth does work, and prints out each position and the depth as expected.
+
+    EDIT2: adding -q 0 to mpileup gives the same empty result.
+
+    Thanks in advance
+
+
+    Answer: By using -h in the samtools view command, you''re including all the header lines in your word count. If you happen
+    to have about 89500 reference sequences, then the lengths of those would all appear in the header and inflate the -h word
+    count, but not the mpileup count. Try piping it through an additional samtools view (i.e. without -h) and see if the counts
+    change:
+
+    ...
+
+    samtools view -h -f32 -  | \
+
+    samtools view | wc -l
+
+
+    Also, samtools mpileup by default only considers high-quality bases and concordant reads. Try adding a -A to your mpileup
+    line (which stops anomalous read pairs from being discarded):
+
+    ...
+
+    samtools mpileup -A -Q0 -B -d 999999 - | wc -l
+
+
+    Whether or not this is actually a good idea will be dependent on what you want to get out of the analysis, and what the
+    downstream programs / analyses are expecting.'
+  - "Question: From SAM Optional Fields Specification the NM field is \n\nEdit distance to the reference, including ambiguous\
+    \ bases but excluding clipping\n\nAssuming both the MD and CIGAR are present, is the edit distance simply the number of\
+    \ characters [A-Z] appearing in the MD field plus the number of bases inserted (xI, if any) from the CIGAR string? Are\
+    \ there any other complications? \n\nAnswer: Assuming both the MD and CIGAR are present and correct, then yes, you can\
+    \ parse both to get the edit distance (NM auxiliary tag). One big caveat to this is that there's a reason that the samtools\
+    \ calmd command exists, since it's historically been the case that not all aligners have output correct MD strings. It's\
+    \ rare for the CIGAR string to be wrong and that'd be more of a catastrophic error on the part of an aligner. For what\
+    \ it's worth, if the NM auxiliary is absent on a given alignment but present on others produced by the same aligner then\
+    \ it's fair to assume NM:i:0 for a given alignment by default (many aligners only produce NM:i:XXX if the edit distance\
+    \ is at least 1)."
+- source_sentence: How to read structural variant VCF?
+  sentences:
+  - "Question: I am calling SNPs from WGS samples produced at my lab. I am currently using bwa-mem for mapping Illumina reads\
+    \ as it is recommended by GATK best practice. However, bwa is a bit slow. I heard from my colleague that SNAP is much\
+    \ faster than bwa. I tried it on a small set of reads and it is indeed faster. However, I am not sure how it works with\
+    \ downstream SNP callers, so here are my questions: have you used SNAP for short-read mapping? What is your experience?\
+    \ Does SNAP work well with SNP callers like GATK and freebayes? Thanks!\n\nAnswer: GATK best practices are explicably\
+    \ meant to consume BWA MEM generated BAM.  Whilst SNAP may be faster, the Broad will not have tested it for compatibility\
+    \ with GATK as such you can't guaranty using it won't have unexpected consequences.  \nAs such you'd be better off using\
+    \ BWA MEM because I assume accurately called variation is always better than fast and incorrectly called variation.  The\
+    \ main issue you'll have is ensuring shorter split hits and mapping quality are reported in the same way as bwa MEM -M\
+    \ which GATK/Picard is expecting.  Ultimately however you'd be better off posting this question on the GATK forum. \n\
+    It's also worth noting that the soon to be released GATK 4 will utilise bwaspark which can distribute it's alignment processes\
+    \ across Apache Spark for increase performance.  Consequently I can't see SNAP being adopted anytime soon."
+  - 'Question: I have a computer engineering background, not biology.
+
+    I started working on a bioinformatics project recently, which involves de-novo assembly. I came to know the terms Transcriptome
+    and Genome, but I cannot identify the difference between these two.
+
+    I know a transcriptome is the set of all messenger RNA molecules in a cell, but am not sure how this is different from
+    a genome.
+
+
+    Answer: In brief, the  “genome”  is the collection of all  DNA  present  in  the  nucleus  and  the  mitochondria of a  somatic  cell.
+    The initial product of genome expression is the “transcriptome”, a collection of RNA molecules derived from those genes.'
+  - "Question: The IGSR has a sample for encoding structural variants in the VCF 4.0 format.\nAn example from the site (the\
+    \ first record):\n#CHROM  POS   ID  REF ALT   QUAL  FILTER  INFO  FORMAT  NA00001\n1 2827693   . CCGTGGATGCGGGGACCCGCATCCCCTCTCCCTTCACAGCTGAGTGACCCACATCCCCTCTCCCCTCGCA\
+    \  C . PASS  SVTYPE=DEL;END=2827680;BKPTID=Pindel_LCS_D1099159;HOMLEN=1;HOMSEQ=C;SVLEN=-66 GT:GQ 1/1:13.9\n\nHow to read\
+    \ it? From what I can see:\n\nThis is a deletion (SVTYPE=DEL)\nThe end position of the variant comes before the starting\
+    \ position (reverse strand?)\nThe reference starts from 2827693 to 2827680 (13 bases on the reverse strand)\nThe difference\
+    \ between reference and alternative is 66 bases (SVLEN=-66)\n\nThis doesn't sound right to me. For instance, I don't see\
+    \ where exactly the deletion starts. The SVLEN field says 66 bases deleted, but where? 2827693 to 2827680 only has 13\
+    \ bases between.\nQ: How to read the deletion correctly from this structural VCF record? Where is the missing 66-13=53\
+    \ bases?\n\nAnswer: I just received a reply from 1000Genomes regarding this. I'll post it in its entirety below:\n\nLooking\
+    \ at the example you mention, I find it difficult to come up with an\n  interpretation of the information whereby the\
+    \ stated end seems to be correct,\n  so believe that this may indeed be an error.\nSince the v4.0 was created, however,\
+    \ new versions of VCF have been introduced,\n  improving and correcting the specification. The current version is v4.3\n\
+    \  (http://samtools.github.io/hts-specs/). I believe the first record shown on\n  page 11 provides an accurate example\
+    \ of this type of deletion.\nI will update the web page to include this information.\n\nSo we can take this as official\
+    \ confirmation that we were all correct in suspecting the example was just wrong."
+- source_sentence: Publicly available genome sequence database for viruses?
+  sentences:
+  - "Question: This question is based on a question on BioStars  posted >2 years ago by user jack.\nIt describes a very frequent\
+    \ problem of generating GO annotations for non-model organisms. While it is based on some specific format and single application\
+    \ (Ontologizer), it would be useful to have a general description of the pathway to getting to a GAF file. \nNote, that\
+    \ the input format is lacking a bit of essential information, like how it was obtained. Therefore, it is har to assign\
+    \ evidence code. Therefore, lets assume that the assignments of GO terms were done automagically. \n\nI want to do the\
+    \ Gene enrichment using Ontologizer without a\n  predefined association file(it's not model organism). \nI have parsed\
+    \ a file with two columns for that organism like this : \ngeneA  GO:0006950,GO:0005737\ngeneB  GO:0016020,GO:0005524,GO:0006468,GO:0005737,GO:0004674,GO:0006914,GO:0016021,GO:0015031\n\
+    geneC  GO:0003779,GO:0006941,GO:0005524,GO:0003774,GO:0005516,GO:0005737,GO:0005863\ngeneD  GO:0005634,GO:0003677,GO:0030154,GO:0006350,GO:0006355,GO:0007275,GO:0030528\n\
+    \nI have downloaded the .ob file from Gene ontology file which contain\n  this information (from here) : \n!\n! GO IDs\
+    \ (primary only) and name text strings\n! GO:0000000 [tab] text string [tab] F|P|C\n! where F = molecular function, P\
+    \ = biological process, C = cellular component\n!\nGO:0000001  mitochondrion inheritance   P\nGO:0000002  mitochondrial\
+    \ genome maintenance    P\nGO:0000003  reproduction    P\nGO:0000005  ribosomal chaperone activity    F\nGO:0000006  high\
+    \ affinity zinc uptake transmembrane transporter activity    F\nGO:0000007  low-affinity zinc ion transmembrane transporter\
+    \ activity    F\nGO:0000008  thioredoxin F\nGO:0000009  alpha-1,6-mannosyltransferase activity  F\nGO:0000010  trans-hexaprenyltranstransferase\
+    \ activity   F\nGO:0000011  vacuole inheritance P\n\nWhat I need as output is .gaf file in the following format (in the\n\
+    \  format of the files here):\n!gaf-version: 2.0\n\n!Project_name: Leishmania major GeneDB\n\n!URL: http://www.genedb.org/leish\n\
+    \n!Contact Email: mb4@sanger.ac.uk\n\n GeneDB_Lmajor    LmjF.36.4770    LmjF.36.4770        GO:0003723    PMID:22396527\
+    \    ISO    GeneDB:Tb927.10.10130    F    mitochondrial RNA binding complex 1 subunit, putative    LmjF36.4770    gene\
+    \    taxon:347515    20120910    GeneDB_Lmajor       \n GeneDB_Lmajor    LmjF.36.4770    LmjF.36.4770        GO:0044429\
+    \    PMID:20660476    ISS        C    mitochondrial RNA binding complex 1 subunit, putative    LmjF36.4770    gene   \
+    \ taxon:347515    20100803 GeneDB_Lmajor             GeneDB_Lmajor    LmjF.36.4770    LmjF.36.4770        GO:0016554 \
+    \   PMID:22396527    ISO    GeneDB:Tb927.10.10130    P    mitochondrial RNA binding complex 1 subunit, putative    LmjF36.4770\
+    \    gene   taxon:347515    20120910    GeneDB_Lmajor       \n GeneDB_Lmajor    LmjF.36.4770    LmjF.36.4770        GO:0048255\
+    \    PMID:22396527    ISO    GeneDB:Tb927.10.10130    P    mitochondrial RNA binding complex 1 subunit, putative    LmjF36.4770\
+    \    gene    taxon:347515    20120910    GeneDB_Lmajor  \n\nHow to create your own GO association file (gaf)?\n\nAnswer:\
+    \ Here's a Perl script that can do this:\n#!/usr/bin/env perl \nuse strict;\nuse warnings;\n\n## Change this to whatever\
+    \ taxon you are working with\nmy $taxon = 'taxon:1000';\nchomp(my $date = `date +%Y%M%d`);\n\nmy (%aspect, %gos);\n##\
+    \ Read the GO.terms_and_ids file to get the aspect (sub ontology)\n## of each GO term. \nopen(my $fh, $ARGV[0]) or die\
+    \ \"Need a GO.terms_and_ids file as 1st arg: $!\\n\";\nwhile (<$fh>) {\n    next if /^!/;\n    chomp;\n    my @fields\
+    \ = split(/\\t/);\n    ## $aspect{GO:0000001} = 'P'\n    $aspect{$fields[0]} = $fields[2];\n}\nclose($fh);\n\n## Read\
+    \ the list of gene annotations\nopen($fh, $ARGV[1]) or die \"Need a list of gene annotattions as 2nd arg: $!\\n\";\nwhile\
+    \ (<$fh>) {\n    chomp;\n    my ($gene, @terms) = split(/[\\s,]+/);\n    ## $gos{geneA} = (go1, go2 ... goN)\n    $gos{$gene}\
+    \ = [ @terms ];\n}\nclose($fh);\n\nforeach my $gene (keys(%gos)) {\n    foreach my $term (@{$gos{$gene}}) {\n        ##\
+    \ Warn and skip if there is no aspect for this term\n        if (!$aspect{$term}) {\n            print STDERR \"Unknown\
+    \ GO term ($term) for gene $gene\\n\";\n            next;\n        }\n        ## Build a pseudo GAF line \n        my\
+    \ @out = ('DB', $gene, $gene, ' ', $term, 'PMID:foo', 'TAS', ' ', $aspect{$term},\n                             $gene,\
+    \ ' ', 'protein', $taxon, $date, 'DB', ' ', ' ');\n        print join(\"\\t\", @out). \"\\n\";\n    }\n}\n\nMake it executable\
+    \ and run it with the GO.terms_and_ids file as the 1st argument and the list of gene annotations as the second. Using\
+    \ the current GO.terms_and_ids and the example annotations in the question, I get:\n$ foo.pl GO.terms_and_ids file.gos\
+    \ \nDB  geneD   geneD       GO:0005634  PMID:foo    TAS     C   geneD       protein taxon:1000  20170308    DB       \n\
+    DB  geneD   geneD       GO:0003677  PMID:foo    TAS     F   geneD       protein taxon:1000  20170308    DB       \nDB\
+    \  geneD   geneD       GO:0030154  PMID:foo    TAS     P   geneD       protein taxon:1000  20170308    DB       \nUnknown\
+    \ GO term (GO:0006350) for gene geneD\nDB  geneD   geneD       GO:0006355  PMID:foo    TAS     P   geneD       protein\
+    \ taxon:1000  20170308    DB       \nDB  geneD   geneD       GO:0007275  PMID:foo    TAS     P   geneD       protein taxon:1000\
+    \  20170308    DB       \nDB  geneD   geneD       GO:0030528  PMID:foo    TAS     F   geneD       protein taxon:1000 \
+    \ 20170308    DB       \nDB  geneB   geneB       GO:0016020  PMID:foo    TAS     C   geneB       protein taxon:1000  20170308\
+    \    DB       \nDB  geneB   geneB       GO:0005524  PMID:foo    TAS     F   geneB       protein taxon:1000  20170308 \
+    \   DB       \nDB  geneB   geneB       GO:0006468  PMID:foo    TAS     P   geneB       protein taxon:1000  20170308  \
+    \  DB       \nDB  geneB   geneB       GO:0005737  PMID:foo    TAS     C   geneB       protein taxon:1000  20170308   \
+    \ DB       \nDB  geneB   geneB       GO:0004674  PMID:foo    TAS     F   geneB       protein taxon:1000  20170308    DB\
+    \       \nDB  geneB   geneB       GO:0006914  PMID:foo    TAS     P   geneB       protein taxon:1000  20170308    DB \
+    \      \nDB  geneB   geneB       GO:0016021  PMID:foo    TAS     C   geneB       protein taxon:1000  20170308    DB  \
+    \     \nDB  geneB   geneB       GO:0015031  PMID:foo    TAS     P   geneB       protein taxon:1000  20170308    DB   \
+    \    \nDB  geneA   geneA       GO:0006950  PMID:foo    TAS     P   geneA       protein taxon:1000  20170308    DB    \
+    \   \nDB  geneA   geneA       GO:0005737  PMID:foo    TAS     C   geneA       protein taxon:1000  20170308    DB     \
+    \  \nDB  geneC   geneC       GO:0003779  PMID:foo    TAS     F   geneC       protein taxon:1000  20170308    DB      \
+    \ \nDB  geneC   geneC       GO:0006941  PMID:foo    TAS     P   geneC       protein taxon:1000  20170308    DB       \n\
+    DB  geneC   geneC       GO:0005524  PMID:foo    TAS     F   geneC       protein taxon:1000  20170308    DB       \nDB\
+    \  geneC   geneC       GO:0003774  PMID:foo    TAS     F   geneC       protein taxon:1000  20170308    DB       \nDB \
+    \ geneC   geneC       GO:0005516  PMID:foo    TAS     F   geneC       protein taxon:1000  20170308    DB       \nDB  geneC\
+    \   geneC       GO:0005737  PMID:foo    TAS     C   geneC       protein taxon:1000  20170308    DB       \nDB  geneC \
+    \  geneC       GO:0005863  PMID:foo    TAS     C   geneC       protein taxon:1000  20170308    DB       \n\nNote that\
+    \ this is very much a pseudo-GAF file since most of the fields apart from the gene name, GO term and sub-ontology are\
+    \ fake. It should still work for what you need, however."
+  - 'Question: As a small introductory project, I want to compare genome sequences of  different strains of influenza virus.
+
+    What are the publicly available databases of influenza virus gene/genome sequences?
+
+
+    Answer: There area few different influenza virus database resources:
+
+
+    The Influenza Research Database (IRD) (a.k.a FluDB - based upon URL)
+
+
+    A NIAID Bioinformatics Resource Center or BRC which highly curates the data brought in and integrates it with numerous
+    other relevant data types
+
+
+    The NCBI Influenza Virus Resource
+
+
+    A sub-project of the NCBI with data curated over and above the GenBank data that is part of the NCBI
+
+
+    The GISAID EpiFlu Database
+
+
+    A database of sequences from the Global Initiative on Sharing All Influenza Data. Has unique data from many countries
+    but requires user agree to a data sharing policy.
+
+
+    The OpenFluDB
+
+
+    Former GISAID database that contains some sequence data that GenBank does not have.
+
+
+    For those who also may be interested in other virus databases, there are:
+
+
+    Virus Pathogen Resource (VIPR)
+
+
+    A companion portal to the IRD, which hosts curated and integrated data for most other NIAID A-C virus pathogens including
+    (but not limited to) Ebola, Zika, Dengue, Enterovirus, and Hepatitis C
+
+
+    LANL HIV database
+
+
+    Los Alamos National Laboratory HIV database with HIV data and many useful tools for all virus bioinformatics
+
+
+    PaVE: Papilloma virus genome database (from quintik comment)
+
+
+    NIAID developed and maintained Papilloma virus bioinformatics portal
+
+
+    Disclaimer: I used to work for the IRD / VIPR and currently work for NIAID.'
+  - "Question: I have a set of genomic ranges that are potentially overlapping. I want to count the amount of ranges at certain\
+    \ positions using R. \nI'm Pretty sure there are good solutions, but I seem to be unable to find them. \nSolutions like\
+    \ cut or findIntervals don't achieve what I want as they only count on one vector or accumulate by all values <= break.\n\
+    Also countMatches {GenomicRanges} doesn't seem to cover it.\nProbably one could use Bedtools, but I don't want to leave\
+    \ R.\nI could only come up with a hilariously slow solution\n# generate test data\ntestdata <- data.frame(chrom = rep(seq(1,10),10),\n\
+    \                       starts = abs(rnorm(100, mean = 1, sd = 1)) * 1000,\n                       ends = abs(rnorm(100,\
+    \ mean = 2, sd = 1)) * 2000)\n\n# make sure that all end coordinates are bigger than start\n# this is a requirement of\
+    \ the original data\ntestdata <- testdata[testdata$ends - testdata$starts > 0,]\n\n# count overlapping ranges on certain\
+    \ positions\ncount.data <- lapply(unique(testdata$chrom), function(chromosome){\n    tmp.inner <- lapply(seq(1,10000,\
+    \ by = 120), function(i){\n        sum(testdata$chrom == chromosome & testdata$starts <= i & testdata$ends >= i)\n   \
+    \ })\n    return(unlist(tmp.inner))\n})\n\n# generate a data.frame containing all data\ndf.count.data <- ldply(count.data,\
+    \ rbind)\n\n# ideally the chromosome will be columns and not rows\nt(df.count.data)\n\nAnswer: GenomicRanges::countOverlaps\
+    \ seems to be what you’re after:\nposition_range = GRanges(position$chrom, IRanges(position, position, width = 1))\nranges_at_position\
+    \ = countOverlaps(position_ranges, granges)"
+- source_sentence: samtools depth print out all positions
+  sentences:
+  - "Question: I have around ~3,000 short sequences of approximately ~10Kb long. What are the best ways to find the motifs\
+    \ among all of these sequences? Is there a certain software/method recommended?\nThere are several ways to do this. My\
+    \ goal would be to:\n(1) Check for motifs repeated within individual sequences\n(2) Check for motifs shared among all\
+    \ sequences\n(3) Check for the presence of \"expected\" or known motifs\nWith respect to #3, I'm also curious if I find\
+    \ e.g. trinucleotide sequences, how does one check the context around these regions?\nThank you for the recommendations/help!\n\
+    \nAnswer: For (3), this page has a lot of links to pattern/motif finding tools. Following through the YMF link on that\
+    \ page, I came across the University of Washington Motif Discovery section. Of these projection seemed to be the only\
+    \ downloadable tool. I find it interesting how old all these tools are; maybe the introduction of microarrays and NGS\
+    \ has made them all redundant.\nYour sub-problem (2) seems similar to the problem I'm having with Nippostrongylus brasiliensis\
+    \ genome sequences, where I'd like to find regions of very high homology (length 500bp to 20kb or more, 95-99% similar)\
+    \ that are repeated throughout the genome. These sequences are killing the assembly.\nThe main way I can find these regions\
+    \ is by looking at a coverage plot of long nanopore reads mapped to the assembled genome (using GraphMap or BWA). Any\
+    \ regions with substantially higher than median coverage are likely to be shared repeats.\nI've played around in the past\
+    \ with chopping up the reads to smaller sizes, which works better for hitting smaller repeated regions that are such a\
+    \ small proportion of most reads that they are never mapped to all the repeated locations. I wrote my own script a while\
+    \ back to chop up reads (for a different purpose), which produces a FASTA/FASTQ file where all reads are exactly the same\
+    \ length. For some unknown reason I took the time to document that script \"properly\" using POD, so here's a short summary:\n\
+    \nConverts all sequences in the input FASTA file to the same length.\n     Sequences shorter than the target length are\
+    \ dropped, and sequences longer\n     than the target length are split into overlapping subsequences covering\n     the\
+    \ entire range. This prepares the sequences for use in an\n     overlap-consensus assembler requiring constant-length\
+    \ sequences (such as\n     edena).\n\nAnd here's the syntax:\n$ ./normalise_seqlengths.pl -h\nUsage:\n    ./normalise_seqlengths.pl\
+    \ <reads.fa> [options]\n\n  Options:\n    -help\n      Only display this help message\n\n    -fraglength\n      Target\
+    \ fragment length (in base-pairs, default 2000)\n\n    -overlap\n      Minimum overlap length (in base-pairs, default\
+    \ 200)\n\n    -short\n      Keep short sequences (shorter than fraglength)"
+  - 'Question: Without going into too much background, I just joined up with a lab as a bioinformatics intern while I''m completing
+    my masters degree in the field. The lab has data from an RNA-seq they outsourced, but the only problem is that the only
+    data they have is preprocessed from the company that did the sequencing: filtering the reads, aligning them, and putting
+    the aligned reads through RSEM. I currently have output from RSEM for each of the four samples consisting of: gene id,
+    transcript id(s), length, expected count, and FPKM. I am attempting to get the FASTQ files from the sequencing, but for
+    now, this is what I have, and I''m trying to get something out of it if possible.
+
+    I found this article that talks about how expected read counts can be better than raw read counts when analyzing differential
+    expression using EBSeq; it''s just one guy''s opinion, and it''s from 2014, so it may be wrong or outdated, but I thought
+    I''d give it a try since I have the expected counts.
+
+    However, I have just a couple of questions about running EBSeq that I can''t find the answers to:
+
+    1: In the output RSEM files I have, not all genes are represented in each, about 80% of them are, but for the ones that
+    aren''t, should I remove them before analysis with EBSeq? It runs when I do, but I''m not sure if it is correct.
+
+    2: How do I know which normalization factor to use when running EBSeq? This is more of a conceptual question rather than
+    a technical question.
+
+    Thanks!
+
+
+    Answer: Yes, that blog post does represent just one guy''s opinion (hi!) and it does date all the way back to 2014, which
+    is, like, decades in genomics years. :-) By the way, there is quite a bit of literature discussing the improvements that
+    expected read counts derived from an Expectation Maximization algorithm provide over raw read counts. I''d suggest reading
+    the RSEM papers for a start[1][2].
+
+    But your main question is about the mechanics of running RSEM and EBSeq. First, RSEM was written explicitly to be compatible
+    with EBSeq, so I''d be very surprised if it does not work correctly out-of-the-box. Second, EBSeq''s MedianNorm function
+    worked very well in my experience for normalizing the library counts. Along those lines, the blog you mentioned above
+    has another post that you may find useful.
+
+    But all joking aside, these tools are indeed dated. Alignment-free RNA-Seq tools provide orders-of-magnitude improvements
+    in runtime over the older alignment-based alternatives, with comparable accuracy. Sailfish was the first in a growing
+    list of tools that now includes Salmon and Kallisto. When starting a new analysis from scratch (i.e. if you ever get the
+    original FASTQ files), there''s really no good reason not to estimate expression using these much faster tools, followed
+    by a differential expression analysis with DESeq2, edgeR, or sleuth.
+
+
+    1Li B, Ruotti V, Stewart RM, Thomson JA, Dewey CN (2010) RNA-Seq gene expression estimation with read mapping uncertainty.
+    Bioinformatics, 26(4):493–500, doi:10.1093/bioinformatics/btp692.
+
+    2Li B, Dewey C (2011) RSEM: accurate transcript quantification from RNA-Seq data with or without a reference genome. BMC
+    Bioinformatics, 12:323, doi:10.1186/1471-2105-12-323.'
+  - 'Question: I am trying to use samtools depth (v1.4) with the -a option and a bed file listing the human chromosomes chr1-chr22,
+    chrX, chrY, and chrM to print out the coverage at every position:
+
+    cat GRCh38.karyo.bed | awk ''{print $3}'' | datamash sum 1
+
+    3088286401
+
+
+    I would like to know how to run samtools depth so that it produces 3,088,286,401 entries when run against a GRCh38 bam
+    file:
+
+    samtools depth -b $bedfile -a $inputfile
+
+
+    I tried it for a few bam files that were aligned the same way, and I get differing number of entries:
+
+    3087003274
+
+    3087005666
+
+    3087007158
+
+    3087009435
+
+    3087009439
+
+    3087009621
+
+    3087009818
+
+    3087010065
+
+    3087010408
+
+    3087010477
+
+    3087010481
+
+    3087012115
+
+    3087013147
+
+    3087013186
+
+    3087013500
+
+    3087149616
+
+
+    Is there a special flag in samtools depth so that it reports all entries from the bed file?
+
+    If samtools depth is not the best tool for this, what would be the equivalent with sambamba depth base?
+
+    sambamba depth base --min-coverage=0 --regions $bedfile $inputfile
+
+
+    Any other options?
+
+
+    Answer: You might try using bedtools genomecov instead. If you provide the -d option, it reports the coverage at every
+    position in the BAM file.
+
+    bedtools genomecov -d -ibam $inputfile > "${inputfile}.genomecov"
+
+
+    You can also provide a BED file if you just want to calculate in the target  region.'
+model-index: null
+config:
+  architectures:
+  - BertModel
+  model_type: bert
+  tokenizer_config:
+    cls_token: '[CLS]'
+    mask_token: '[MASK]'
+    pad_token: '[PAD]'
+    sep_token: '[SEP]'
+    unk_token: '[UNK]'
+cardData:
+  tags:
+  - sentence-transformers
+  - sentence-similarity
+  - feature-extraction
+  - generated_from_trainer
+  - dataset_size:96
+  - loss:MultipleNegativesRankingLoss
+  base_model: BAAI/bge-small-en-v1.5
+  widget:
+  - source_sentence: What are the de facto required fields in a SAM/BAM read group?
+    sentences:
+    - "Question: Several gene set enrichment methods are available, the most famous/popular is the Broad Institute tool. Many\
+      \ other tools are available (See for example the biocView of GSE which list 82 different packages). There are several\
+      \ parameters in consideration :\n\nthe statistic used to order the genes, \nif it competitive or self-contained,\nif\
+      \ it is supervised or not,\nand how is the enrichment score calculated.\n\nI am using the fgsea - Fast Gene Set Enrichment\
+      \ Analysis package to calculate the enrichment scores and someone told me that the numbers are different from the ones\
+      \ on the Broad Institute despite all the other parameters being equivalent.\nAre these two methods (fgsea and Broad\
+      \ Institute GSEA) equivalent to calculate the enrichment score?\nI looked to the algorithms of both papers, and they\
+      \ seem fairly similar, but I don't know if in real datasets they are equivalent or not.\nIs there any article reviewing\
+      \ and comparing how does the enrichment score method affect to the result?\n\nAnswer: According to the FGSEA preprint:\n\
+      \nWe ran reference GSEA with default parameters. The permutation number\n  was set to 1000, which means that for each\
+      \ input gene set 1000\n  independent samples were generated. The run took 100 seconds and\n  resulted in 79 gene sets\
+      \ with GSEA-adjusted FDR q-value of less than\n  10−2. All significant gene sets were in a positive mode. First, to\
+      \ get\n  a similar nominal p-values accuracy we ran FGSEA algorithm on 1000\n  permutations. This took 2 seconds, but\
+      \ resulted in no significant hits\n  due after multiple testing correction (with FRD ≤ 1%).\n\nThus, FGSEA and GSEA\
+      \ are not identical.\nAnd again in the conclusion:\n\nConsequently, gene sets can be ranked more precisely in the results\n\
+      \  and, which is even more important, standard multiple testing\n  correction methods can be applied instead of approximate\
+      \ ones as in\n  [GSEA].\n\nThe author argues that FGSEA is more accurate, so it can't be equivalent.\nIf you are interested\
+      \ specifically in the enrichment score, that was addressed by the author in the preprint comments:\n\nValues of enrichment\
+      \ scores and normalized enrichment scores are the\n  same for both broad version and fgsea.\n\nSo that part seems to\
+      \ be the same."
+    - 'Question: I am running samtools mpileup (v1.4) on a bam file with very choppy coverage (ChIP-seq style data). I want
+      to get a first-pass list of positions with SNVs and their frequency as reported by the read counts, but no matter what
+      I do, I keep getting all SNVs filtered out as not passing QC.
+
+      What''s the magic parameter set for an initial list of SNVs and frequencies?
+
+      EDIT: this is a question I posted on "the other" website, but didn''t get a reply there.
+
+
+      Answer: I used this in the past for ChIP-seq data and it generated SNVs:
+
+      samtools mpileup \
+
+      --uncompressed --max-depth 10000 --min-MQ 20 --ignore-RG --skip-indels \
+
+      --fasta-ref ref.fa file.bam \
+
+      | bcftools call --consensus-caller \
+
+      > out.vcf
+
+
+      This was samtools 1.3 in case that makes a difference.'
+    - "Question: The SAM specification indicates that each read group must have a unique ID field, but does not mark any other\
+      \ field as required. \nI have also discovered that htsjdk throws exceptions if the sample (SM) field is empty, though\
+      \ there is no indication in the specification that this is required. \nAre there other read group fields that I should\
+      \ expect to be required by common tools? \n\nAnswer: The sample tag (i.e. SM) was a mandatory tag in the initial SAM\
+      \ spec (see the .pages file; you need a mac to open it). When transitioned to Latex, this requirement was mysteriously\
+      \ dropped. Picard is conforming to the initial spec. Anyway, the sample tag is important to quite a few tools. I would\
+      \ encourage you to add it."
+  - source_sentence: Is the optional SAM NM field strictly computable from the MD and CIGAR?
+    sentences:
+    - "Question: I'm looking for tools to check the quality of a VCF I have of a human genome. I would like to check the VCF\
+      \ against publicly known variants across other human genomes, e.g. how many SNPs are already in public databases, whether\
+      \ insertions/deletions are at known positions, insertion/deletion length distribution, other SNVs/SVs, etc.? I suspect\
+      \ that there are resources from previous projects to check for known SNPs and InDels by human subpopulations.\nWhat\
+      \ resources exist for this, and how do I do it? \n\nAnswer: To achieve (at least some of) your goals, I would recommend\
+      \ the Variant Effect Predictor (VEP). It is a flexible tool that provides several types of annotations on an input .vcf\
+      \ file.  I agree that ExAC is the de facto gold standard catalog for human genetic variation in coding regions.  To\
+      \ see the frequency distribution of variants by global subpopulation make sure \"ExAC allele frequencies\" is checked\
+      \ in addition to the 1000 genomes. \nOutput in the web-browser:\n\nIf you download the annotated .vcf, frequencies will\
+      \ be in the INFO field:\n##INFO=<ID=CSQ,Number=.,Type=String,Description=\"Consequence annotations from Ensembl VEP.\
+      \ Format: Allele|Consequence|IMPACT|SYMBOL|Gene|Feature_type|Feature|BIOTYPE|EXON|INTRON|HGVSc|HGVSp|cDNA_position|CDS_position|Protein_position|Amino_acids|Codons|Existing_variation|DISTANCE|STRAND|FLAGS|SYMBOL_SOURCE|HGNC_ID|TSL|SIFT|PolyPhen|AF|AFR_AF|AMR_AF|EAS_AF|EUR_AF|SAS_AF|AA_AF|EA_AF|ExAC_AF|ExAC_Adj_AF|ExAC_AFR_AF|ExAC_AMR_AF|ExAC_EAS_AF|ExAC_FIN_AF|ExAC_NFE_AF|ExAC_OTH_AF|ExAC_SAS_AF|CLIN_SIG|SOMATIC|PHENO|MOTIF_NAME|MOTIF_POS|HIGH_INF_POS|MOTIF_SCORE_CHANGE\n\
+      \nThe previously mentioned Annovar can also annotate with ExAC allele frequencies.  Finally, should mention the newest\
+      \ whole-genome resource, gnomAD."
+    - 'Question: I produced a bam file by aligning reads to a small set of synthetic sequences using bwa-mem.
+
+      I am heavily filtering reads that are not paired and of a certain orientation.
+
+      Applying the filtering, I get a few thousands of reads:
+
+      samtools view -h $myfilebam | \
+
+      samtools view -h -F4 - | \
+
+      samtools view -h -F8 - | \
+
+      samtools view -h -F256 - | \
+
+      samtools view -h -F512 - | \
+
+      samtools view -h -F1024 - | \
+
+      samtools view -h -F2048 - | \
+
+      samtools view -h -f16 - | \
+
+      samtools view -h -f32 -  | wc -l
+
+
+      Gives me 89502 reads.
+
+      If I then pipe this into samtools mpileup, I get no results:
+
+      samtools view -h $myfilebam | \
+
+      samtools view -h -F4 - | \
+
+      samtools view -h -F8 - | \
+
+      samtools view -h -F256 - | \
+
+      samtools view -h -F512 - | \
+
+      samtools view -h -F1024 - | \
+
+      samtools view -h -F2048 - | \
+
+      samtools view -h -f16 - | \
+
+      samtools view -h -f32 -  | \
+
+      samtools mpileup --excl-flags 0 -Q0 -B -d 999999 - | wc -l
+
+
+      Returns 0.
+
+      I tried different combinations of filtering, and when I do both -f 16 and -f 32 returns empty, but if I do either of
+      those, then it works:
+
+      samtools view -h $myfilebam | \
+
+      samtools view -h -F4 - | \
+
+      samtools view -h -F8 - | \
+
+      samtools view -h -F256 - | \
+
+      samtools view -h -F512 - | \
+
+      samtools view -h -F1024 - | \
+
+      samtools view -h -F2048 - | \
+
+      samtools view -h -f16 - | \
+
+      samtools mpileup --excl-flags 0 -Q0 -B -d 999999 - | wc -l
+
+
+      Returns 1056.
+
+      Any ideas why? My thinking was that it would work with --excl-flags 0.
+
+      EDIT: substituting mpileup for depth does work, and prints out each position and the depth as expected.
+
+      EDIT2: adding -q 0 to mpileup gives the same empty result.
+
+      Thanks in advance
+
+
+      Answer: By using -h in the samtools view command, you''re including all the header lines in your word count. If you
+      happen to have about 89500 reference sequences, then the lengths of those would all appear in the header and inflate
+      the -h word count, but not the mpileup count. Try piping it through an additional samtools view (i.e. without -h) and
+      see if the counts change:
+
+      ...
+
+      samtools view -h -f32 -  | \
+
+      samtools view | wc -l
+
+
+      Also, samtools mpileup by default only considers high-quality bases and concordant reads. Try adding a -A to your mpileup
+      line (which stops anomalous read pairs from being discarded):
+
+      ...
+
+      samtools mpileup -A -Q0 -B -d 999999 - | wc -l
+
+
+      Whether or not this is actually a good idea will be dependent on what you want to get out of the analysis, and what
+      the downstream programs / analyses are expecting.'
+    - "Question: From SAM Optional Fields Specification the NM field is \n\nEdit distance to the reference, including ambiguous\
+      \ bases but excluding clipping\n\nAssuming both the MD and CIGAR are present, is the edit distance simply the number\
+      \ of characters [A-Z] appearing in the MD field plus the number of bases inserted (xI, if any) from the CIGAR string?\
+      \ Are there any other complications? \n\nAnswer: Assuming both the MD and CIGAR are present and correct, then yes, you\
+      \ can parse both to get the edit distance (NM auxiliary tag). One big caveat to this is that there's a reason that the\
+      \ samtools calmd command exists, since it's historically been the case that not all aligners have output correct MD\
+      \ strings. It's rare for the CIGAR string to be wrong and that'd be more of a catastrophic error on the part of an aligner.\
+      \ For what it's worth, if the NM auxiliary is absent on a given alignment but present on others produced by the same\
+      \ aligner then it's fair to assume NM:i:0 for a given alignment by default (many aligners only produce NM:i:XXX if the\
+      \ edit distance is at least 1)."
+  - source_sentence: How to read structural variant VCF?
+    sentences:
+    - "Question: I am calling SNPs from WGS samples produced at my lab. I am currently using bwa-mem for mapping Illumina\
+      \ reads as it is recommended by GATK best practice. However, bwa is a bit slow. I heard from my colleague that SNAP\
+      \ is much faster than bwa. I tried it on a small set of reads and it is indeed faster. However, I am not sure how it\
+      \ works with downstream SNP callers, so here are my questions: have you used SNAP for short-read mapping? What is your\
+      \ experience? Does SNAP work well with SNP callers like GATK and freebayes? Thanks!\n\nAnswer: GATK best practices are\
+      \ explicably meant to consume BWA MEM generated BAM.  Whilst SNAP may be faster, the Broad will not have tested it for\
+      \ compatibility with GATK as such you can't guaranty using it won't have unexpected consequences.  \nAs such you'd be\
+      \ better off using BWA MEM because I assume accurately called variation is always better than fast and incorrectly called\
+      \ variation.  The main issue you'll have is ensuring shorter split hits and mapping quality are reported in the same\
+      \ way as bwa MEM -M which GATK/Picard is expecting.  Ultimately however you'd be better off posting this question on\
+      \ the GATK forum. \nIt's also worth noting that the soon to be released GATK 4 will utilise bwaspark which can distribute\
+      \ it's alignment processes across Apache Spark for increase performance.  Consequently I can't see SNAP being adopted\
+      \ anytime soon."
+    - 'Question: I have a computer engineering background, not biology.
+
+      I started working on a bioinformatics project recently, which involves de-novo assembly. I came to know the terms Transcriptome
+      and Genome, but I cannot identify the difference between these two.
+
+      I know a transcriptome is the set of all messenger RNA molecules in a cell, but am not sure how this is different from
+      a genome.
+
+
+      Answer: In brief, the  “genome”  is the collection of all  DNA  present  in  the  nucleus  and  the  mitochondria of
+      a  somatic  cell. The initial product of genome expression is the “transcriptome”, a collection of RNA molecules derived
+      from those genes.'
+    - "Question: The IGSR has a sample for encoding structural variants in the VCF 4.0 format.\nAn example from the site (the\
+      \ first record):\n#CHROM  POS   ID  REF ALT   QUAL  FILTER  INFO  FORMAT  NA00001\n1 2827693   . CCGTGGATGCGGGGACCCGCATCCCCTCTCCCTTCACAGCTGAGTGACCCACATCCCCTCTCCCCTCGCA\
+      \  C . PASS  SVTYPE=DEL;END=2827680;BKPTID=Pindel_LCS_D1099159;HOMLEN=1;HOMSEQ=C;SVLEN=-66 GT:GQ 1/1:13.9\n\nHow to\
+      \ read it? From what I can see:\n\nThis is a deletion (SVTYPE=DEL)\nThe end position of the variant comes before the\
+      \ starting position (reverse strand?)\nThe reference starts from 2827693 to 2827680 (13 bases on the reverse strand)\n\
+      The difference between reference and alternative is 66 bases (SVLEN=-66)\n\nThis doesn't sound right to me. For instance,\
+      \ I don't see where exactly the deletion starts. The SVLEN field says 66 bases deleted, but where? 2827693 to 2827680\
+      \ only has 13 bases between.\nQ: How to read the deletion correctly from this structural VCF record? Where is the missing\
+      \ 66-13=53 bases?\n\nAnswer: I just received a reply from 1000Genomes regarding this. I'll post it in its entirety below:\n\
+      \nLooking at the example you mention, I find it difficult to come up with an\n  interpretation of the information whereby\
+      \ the stated end seems to be correct,\n  so believe that this may indeed be an error.\nSince the v4.0 was created, however,\
+      \ new versions of VCF have been introduced,\n  improving and correcting the specification. The current version is v4.3\n\
+      \  (http://samtools.github.io/hts-specs/). I believe the first record shown on\n  page 11 provides an accurate example\
+      \ of this type of deletion.\nI will update the web page to include this information.\n\nSo we can take this as official\
+      \ confirmation that we were all correct in suspecting the example was just wrong."
+  - source_sentence: Publicly available genome sequence database for viruses?
+    sentences:
+    - "Question: This question is based on a question on BioStars  posted >2 years ago by user jack.\nIt describes a very\
+      \ frequent problem of generating GO annotations for non-model organisms. While it is based on some specific format and\
+      \ single application (Ontologizer), it would be useful to have a general description of the pathway to getting to a\
+      \ GAF file. \nNote, that the input format is lacking a bit of essential information, like how it was obtained. Therefore,\
+      \ it is har to assign evidence code. Therefore, lets assume that the assignments of GO terms were done automagically.\
+      \ \n\nI want to do the Gene enrichment using Ontologizer without a\n  predefined association file(it's not model organism).\
+      \ \nI have parsed a file with two columns for that organism like this : \ngeneA  GO:0006950,GO:0005737\ngeneB  GO:0016020,GO:0005524,GO:0006468,GO:0005737,GO:0004674,GO:0006914,GO:0016021,GO:0015031\n\
+      geneC  GO:0003779,GO:0006941,GO:0005524,GO:0003774,GO:0005516,GO:0005737,GO:0005863\ngeneD  GO:0005634,GO:0003677,GO:0030154,GO:0006350,GO:0006355,GO:0007275,GO:0030528\n\
+      \nI have downloaded the .ob file from Gene ontology file which contain\n  this information (from here) : \n!\n! GO IDs\
+      \ (primary only) and name text strings\n! GO:0000000 [tab] text string [tab] F|P|C\n! where F = molecular function,\
+      \ P = biological process, C = cellular component\n!\nGO:0000001  mitochondrion inheritance   P\nGO:0000002  mitochondrial\
+      \ genome maintenance    P\nGO:0000003  reproduction    P\nGO:0000005  ribosomal chaperone activity    F\nGO:0000006\
+      \  high affinity zinc uptake transmembrane transporter activity    F\nGO:0000007  low-affinity zinc ion transmembrane\
+      \ transporter activity    F\nGO:0000008  thioredoxin F\nGO:0000009  alpha-1,6-mannosyltransferase activity  F\nGO:0000010\
+      \  trans-hexaprenyltranstransferase activity   F\nGO:0000011  vacuole inheritance P\n\nWhat I need as output is .gaf\
+      \ file in the following format (in the\n  format of the files here):\n!gaf-version: 2.0\n\n!Project_name: Leishmania\
+      \ major GeneDB\n\n!URL: http://www.genedb.org/leish\n\n!Contact Email: mb4@sanger.ac.uk\n\n GeneDB_Lmajor    LmjF.36.4770\
+      \    LmjF.36.4770        GO:0003723    PMID:22396527    ISO    GeneDB:Tb927.10.10130    F    mitochondrial RNA binding\
+      \ complex 1 subunit, putative    LmjF36.4770    gene    taxon:347515    20120910    GeneDB_Lmajor       \n GeneDB_Lmajor\
+      \    LmjF.36.4770    LmjF.36.4770        GO:0044429    PMID:20660476    ISS        C    mitochondrial RNA binding complex\
+      \ 1 subunit, putative    LmjF36.4770    gene    taxon:347515    20100803 GeneDB_Lmajor             GeneDB_Lmajor   \
+      \ LmjF.36.4770    LmjF.36.4770        GO:0016554    PMID:22396527    ISO    GeneDB:Tb927.10.10130    P    mitochondrial\
+      \ RNA binding complex 1 subunit, putative    LmjF36.4770    gene   taxon:347515    20120910    GeneDB_Lmajor       \n\
+      \ GeneDB_Lmajor    LmjF.36.4770    LmjF.36.4770        GO:0048255    PMID:22396527    ISO    GeneDB:Tb927.10.10130 \
+      \   P    mitochondrial RNA binding complex 1 subunit, putative    LmjF36.4770    gene    taxon:347515    20120910  \
+      \  GeneDB_Lmajor  \n\nHow to create your own GO association file (gaf)?\n\nAnswer: Here's a Perl script that can do\
+      \ this:\n#!/usr/bin/env perl \nuse strict;\nuse warnings;\n\n## Change this to whatever taxon you are working with\n\
+      my $taxon = 'taxon:1000';\nchomp(my $date = `date +%Y%M%d`);\n\nmy (%aspect, %gos);\n## Read the GO.terms_and_ids file\
+      \ to get the aspect (sub ontology)\n## of each GO term. \nopen(my $fh, $ARGV[0]) or die \"Need a GO.terms_and_ids file\
+      \ as 1st arg: $!\\n\";\nwhile (<$fh>) {\n    next if /^!/;\n    chomp;\n    my @fields = split(/\\t/);\n    ## $aspect{GO:0000001}\
+      \ = 'P'\n    $aspect{$fields[0]} = $fields[2];\n}\nclose($fh);\n\n## Read the list of gene annotations\nopen($fh, $ARGV[1])\
+      \ or die \"Need a list of gene annotattions as 2nd arg: $!\\n\";\nwhile (<$fh>) {\n    chomp;\n    my ($gene, @terms)\
+      \ = split(/[\\s,]+/);\n    ## $gos{geneA} = (go1, go2 ... goN)\n    $gos{$gene} = [ @terms ];\n}\nclose($fh);\n\nforeach\
+      \ my $gene (keys(%gos)) {\n    foreach my $term (@{$gos{$gene}}) {\n        ## Warn and skip if there is no aspect for\
+      \ this term\n        if (!$aspect{$term}) {\n            print STDERR \"Unknown GO term ($term) for gene $gene\\n\"\
+      ;\n            next;\n        }\n        ## Build a pseudo GAF line \n        my @out = ('DB', $gene, $gene, ' ', $term,\
+      \ 'PMID:foo', 'TAS', ' ', $aspect{$term},\n                             $gene, ' ', 'protein', $taxon, $date, 'DB',\
+      \ ' ', ' ');\n        print join(\"\\t\", @out). \"\\n\";\n    }\n}\n\nMake it executable and run it with the GO.terms_and_ids\
+      \ file as the 1st argument and the list of gene annotations as the second. Using the current GO.terms_and_ids and the\
+      \ example annotations in the question, I get:\n$ foo.pl GO.terms_and_ids file.gos \nDB  geneD   geneD       GO:0005634\
+      \  PMID:foo    TAS     C   geneD       protein taxon:1000  20170308    DB       \nDB  geneD   geneD       GO:0003677\
+      \  PMID:foo    TAS     F   geneD       protein taxon:1000  20170308    DB       \nDB  geneD   geneD       GO:0030154\
+      \  PMID:foo    TAS     P   geneD       protein taxon:1000  20170308    DB       \nUnknown GO term (GO:0006350) for gene\
+      \ geneD\nDB  geneD   geneD       GO:0006355  PMID:foo    TAS     P   geneD       protein taxon:1000  20170308    DB\
+      \       \nDB  geneD   geneD       GO:0007275  PMID:foo    TAS     P   geneD       protein taxon:1000  20170308    DB\
+      \       \nDB  geneD   geneD       GO:0030528  PMID:foo    TAS     F   geneD       protein taxon:1000  20170308    DB\
+      \       \nDB  geneB   geneB       GO:0016020  PMID:foo    TAS     C   geneB       protein taxon:1000  20170308    DB\
+      \       \nDB  geneB   geneB       GO:0005524  PMID:foo    TAS     F   geneB       protein taxon:1000  20170308    DB\
+      \       \nDB  geneB   geneB       GO:0006468  PMID:foo    TAS     P   geneB       protein taxon:1000  20170308    DB\
+      \       \nDB  geneB   geneB       GO:0005737  PMID:foo    TAS     C   geneB       protein taxon:1000  20170308    DB\
+      \       \nDB  geneB   geneB       GO:0004674  PMID:foo    TAS     F   geneB       protein taxon:1000  20170308    DB\
+      \       \nDB  geneB   geneB       GO:0006914  PMID:foo    TAS     P   geneB       protein taxon:1000  20170308    DB\
+      \       \nDB  geneB   geneB       GO:0016021  PMID:foo    TAS     C   geneB       protein taxon:1000  20170308    DB\
+      \       \nDB  geneB   geneB       GO:0015031  PMID:foo    TAS     P   geneB       protein taxon:1000  20170308    DB\
+      \       \nDB  geneA   geneA       GO:0006950  PMID:foo    TAS     P   geneA       protein taxon:1000  20170308    DB\
+      \       \nDB  geneA   geneA       GO:0005737  PMID:foo    TAS     C   geneA       protein taxon:1000  20170308    DB\
+      \       \nDB  geneC   geneC       GO:0003779  PMID:foo    TAS     F   geneC       protein taxon:1000  20170308    DB\
+      \       \nDB  geneC   geneC       GO:0006941  PMID:foo    TAS     P   geneC       protein taxon:1000  20170308    DB\
+      \       \nDB  geneC   geneC       GO:0005524  PMID:foo    TAS     F   geneC       protein taxon:1000  20170308    DB\
+      \       \nDB  geneC   geneC       GO:0003774  PMID:foo    TAS     F   geneC       protein taxon:1000  20170308    DB\
+      \       \nDB  geneC   geneC       GO:0005516  PMID:foo    TAS     F   geneC       protein taxon:1000  20170308    DB\
+      \       \nDB  geneC   geneC       GO:0005737  PMID:foo    TAS     C   geneC       protein taxon:1000  20170308    DB\
+      \       \nDB  geneC   geneC       GO:0005863  PMID:foo    TAS     C   geneC       protein taxon:1000  20170308    DB\
+      \       \n\nNote that this is very much a pseudo-GAF file since most of the fields apart from the gene name, GO term\
+      \ and sub-ontology are fake. It should still work for what you need, however."
+    - 'Question: As a small introductory project, I want to compare genome sequences of  different strains of influenza virus.
+
+      What are the publicly available databases of influenza virus gene/genome sequences?
+
+
+      Answer: There area few different influenza virus database resources:
+
+
+      The Influenza Research Database (IRD) (a.k.a FluDB - based upon URL)
+
+
+      A NIAID Bioinformatics Resource Center or BRC which highly curates the data brought in and integrates it with numerous
+      other relevant data types
+
+
+      The NCBI Influenza Virus Resource
+
+
+      A sub-project of the NCBI with data curated over and above the GenBank data that is part of the NCBI
+
+
+      The GISAID EpiFlu Database
+
+
+      A database of sequences from the Global Initiative on Sharing All Influenza Data. Has unique data from many countries
+      but requires user agree to a data sharing policy.
+
+
+      The OpenFluDB
+
+
+      Former GISAID database that contains some sequence data that GenBank does not have.
+
+
+      For those who also may be interested in other virus databases, there are:
+
+
+      Virus Pathogen Resource (VIPR)
+
+
+      A companion portal to the IRD, which hosts curated and integrated data for most other NIAID A-C virus pathogens including
+      (but not limited to) Ebola, Zika, Dengue, Enterovirus, and Hepatitis C
+
+
+      LANL HIV database
+
+
+      Los Alamos National Laboratory HIV database with HIV data and many useful tools for all virus bioinformatics
+
+
+      PaVE: Papilloma virus genome database (from quintik comment)
+
+
+      NIAID developed and maintained Papilloma virus bioinformatics portal
+
+
+      Disclaimer: I used to work for the IRD / VIPR and currently work for NIAID.'
+    - "Question: I have a set of genomic ranges that are potentially overlapping. I want to count the amount of ranges at\
+      \ certain positions using R. \nI'm Pretty sure there are good solutions, but I seem to be unable to find them. \nSolutions\
+      \ like cut or findIntervals don't achieve what I want as they only count on one vector or accumulate by all values <=\
+      \ break.\nAlso countMatches {GenomicRanges} doesn't seem to cover it.\nProbably one could use Bedtools, but I don't\
+      \ want to leave R.\nI could only come up with a hilariously slow solution\n# generate test data\ntestdata <- data.frame(chrom\
+      \ = rep(seq(1,10),10),\n                       starts = abs(rnorm(100, mean = 1, sd = 1)) * 1000,\n                \
+      \       ends = abs(rnorm(100, mean = 2, sd = 1)) * 2000)\n\n# make sure that all end coordinates are bigger than start\n\
+      # this is a requirement of the original data\ntestdata <- testdata[testdata$ends - testdata$starts > 0,]\n\n# count\
+      \ overlapping ranges on certain positions\ncount.data <- lapply(unique(testdata$chrom), function(chromosome){\n    tmp.inner\
+      \ <- lapply(seq(1,10000, by = 120), function(i){\n        sum(testdata$chrom == chromosome & testdata$starts <= i &\
+      \ testdata$ends >= i)\n    })\n    return(unlist(tmp.inner))\n})\n\n# generate a data.frame containing all data\ndf.count.data\
+      \ <- ldply(count.data, rbind)\n\n# ideally the chromosome will be columns and not rows\nt(df.count.data)\n\nAnswer:\
+      \ GenomicRanges::countOverlaps seems to be what you’re after:\nposition_range = GRanges(position$chrom, IRanges(position,\
+      \ position, width = 1))\nranges_at_position = countOverlaps(position_ranges, granges)"
+  - source_sentence: samtools depth print out all positions
+    sentences:
+    - "Question: I have around ~3,000 short sequences of approximately ~10Kb long. What are the best ways to find the motifs\
+      \ among all of these sequences? Is there a certain software/method recommended?\nThere are several ways to do this.\
+      \ My goal would be to:\n(1) Check for motifs repeated within individual sequences\n(2) Check for motifs shared among\
+      \ all sequences\n(3) Check for the presence of \"expected\" or known motifs\nWith respect to #3, I'm also curious if\
+      \ I find e.g. trinucleotide sequences, how does one check the context around these regions?\nThank you for the recommendations/help!\n\
+      \nAnswer: For (3), this page has a lot of links to pattern/motif finding tools. Following through the YMF link on that\
+      \ page, I came across the University of Washington Motif Discovery section. Of these projection seemed to be the only\
+      \ downloadable tool. I find it interesting how old all these tools are; maybe the introduction of microarrays and NGS\
+      \ has made them all redundant.\nYour sub-problem (2) seems similar to the problem I'm having with Nippostrongylus brasiliensis\
+      \ genome sequences, where I'd like to find regions of very high homology (length 500bp to 20kb or more, 95-99% similar)\
+      \ that are repeated throughout the genome. These sequences are killing the assembly.\nThe main way I can find these\
+      \ regions is by looking at a coverage plot of long nanopore reads mapped to the assembled genome (using GraphMap or\
+      \ BWA). Any regions with substantially higher than median coverage are likely to be shared repeats.\nI've played around\
+      \ in the past with chopping up the reads to smaller sizes, which works better for hitting smaller repeated regions that\
+      \ are such a small proportion of most reads that they are never mapped to all the repeated locations. I wrote my own\
+      \ script a while back to chop up reads (for a different purpose), which produces a FASTA/FASTQ file where all reads\
+      \ are exactly the same length. For some unknown reason I took the time to document that script \"properly\" using POD,\
+      \ so here's a short summary:\n\nConverts all sequences in the input FASTA file to the same length.\n     Sequences shorter\
+      \ than the target length are dropped, and sequences longer\n     than the target length are split into overlapping subsequences\
+      \ covering\n     the entire range. This prepares the sequences for use in an\n     overlap-consensus assembler requiring\
+      \ constant-length sequences (such as\n     edena).\n\nAnd here's the syntax:\n$ ./normalise_seqlengths.pl -h\nUsage:\n\
+      \    ./normalise_seqlengths.pl <reads.fa> [options]\n\n  Options:\n    -help\n      Only display this help message\n\
+      \n    -fraglength\n      Target fragment length (in base-pairs, default 2000)\n\n    -overlap\n      Minimum overlap\
+      \ length (in base-pairs, default 200)\n\n    -short\n      Keep short sequences (shorter than fraglength)"
+    - 'Question: Without going into too much background, I just joined up with a lab as a bioinformatics intern while I''m
+      completing my masters degree in the field. The lab has data from an RNA-seq they outsourced, but the only problem is
+      that the only data they have is preprocessed from the company that did the sequencing: filtering the reads, aligning
+      them, and putting the aligned reads through RSEM. I currently have output from RSEM for each of the four samples consisting
+      of: gene id, transcript id(s), length, expected count, and FPKM. I am attempting to get the FASTQ files from the sequencing,
+      but for now, this is what I have, and I''m trying to get something out of it if possible.
+
+      I found this article that talks about how expected read counts can be better than raw read counts when analyzing differential
+      expression using EBSeq; it''s just one guy''s opinion, and it''s from 2014, so it may be wrong or outdated, but I thought
+      I''d give it a try since I have the expected counts.
+
+      However, I have just a couple of questions about running EBSeq that I can''t find the answers to:
+
+      1: In the output RSEM files I have, not all genes are represented in each, about 80% of them are, but for the ones that
+      aren''t, should I remove them before analysis with EBSeq? It runs when I do, but I''m not sure if it is correct.
+
+      2: How do I know which normalization factor to use when running EBSeq? This is more of a conceptual question rather
+      than a technical question.
+
+      Thanks!
+
+
+      Answer: Yes, that blog post does represent just one guy''s opinion (hi!) and it does date all the way back to 2014,
+      which is, like, decades in genomics years. :-) By the way, there is quite a bit of literature discussing the improvements
+      that expected read counts derived from an Expectation Maximization algorithm provide over raw read counts. I''d suggest
+      reading the RSEM papers for a start[1][2].
+
+      But your main question is about the mechanics of running RSEM and EBSeq. First, RSEM was written explicitly to be compatible
+      with EBSeq, so I''d be very surprised if it does not work correctly out-of-the-box. Second, EBSeq''s MedianNorm function
+      worked very well in my experience for normalizing the library counts. Along those lines, the blog you mentioned above
+      has another post that you may find useful.
+
+      But all joking aside, these tools are indeed dated. Alignment-free RNA-Seq tools provide orders-of-magnitude improvements
+      in runtime over the older alignment-based alternatives, with comparable accuracy. Sailfish was the first in a growing
+      list of tools that now includes Salmon and Kallisto. When starting a new analysis from scratch (i.e. if you ever get
+      the original FASTQ files), there''s really no good reason not to estimate expression using these much faster tools,
+      followed by a differential expression analysis with DESeq2, edgeR, or sleuth.
+
+
+      1Li B, Ruotti V, Stewart RM, Thomson JA, Dewey CN (2010) RNA-Seq gene expression estimation with read mapping uncertainty.
+      Bioinformatics, 26(4):493–500, doi:10.1093/bioinformatics/btp692.
+
+      2Li B, Dewey C (2011) RSEM: accurate transcript quantification from RNA-Seq data with or without a reference genome.
+      BMC Bioinformatics, 12:323, doi:10.1186/1471-2105-12-323.'
+    - 'Question: I am trying to use samtools depth (v1.4) with the -a option and a bed file listing the human chromosomes
+      chr1-chr22, chrX, chrY, and chrM to print out the coverage at every position:
+
+      cat GRCh38.karyo.bed | awk ''{print $3}'' | datamash sum 1
+
+      3088286401
+
+
+      I would like to know how to run samtools depth so that it produces 3,088,286,401 entries when run against a GRCh38 bam
+      file:
+
+      samtools depth -b $bedfile -a $inputfile
+
+
+      I tried it for a few bam files that were aligned the same way, and I get differing number of entries:
+
+      3087003274
+
+      3087005666
+
+      3087007158
+
+      3087009435
+
+      3087009439
+
+      3087009621
+
+      3087009818
+
+      3087010065
+
+      3087010408
+
+      3087010477
+
+      3087010481
+
+      3087012115
+
+      3087013147
+
+      3087013186
+
+      3087013500
+
+      3087149616
+
+
+      Is there a special flag in samtools depth so that it reports all entries from the bed file?
+
+      If samtools depth is not the best tool for this, what would be the equivalent with sambamba depth base?
+
+      sambamba depth base --min-coverage=0 --regions $bedfile $inputfile
+
+
+      Any other options?
+
+
+      Answer: You might try using bedtools genomecov instead. If you provide the -d option, it reports the coverage at every
+      position in the BAM file.
+
+      bedtools genomecov -d -ibam $inputfile > "${inputfile}.genomecov"
+
+
+      You can also provide a BED file if you just want to calculate in the target  region.'
+  pipeline_tag: sentence-similarity
+  library_name: sentence-transformers
+siblings:
+- rfilename: .gitattributes
+- rfilename: 1_Pooling/config.json
+- rfilename: README.md
+- rfilename: checkpoints/checkpoint-3/1_Pooling/config.json
+- rfilename: checkpoints/checkpoint-3/README.md
+- rfilename: checkpoints/checkpoint-3/config.json
+- rfilename: checkpoints/checkpoint-3/config_sentence_transformers.json
+- rfilename: checkpoints/checkpoint-3/model.safetensors
+- rfilename: checkpoints/checkpoint-3/modules.json
+- rfilename: checkpoints/checkpoint-3/optimizer.pt
+- rfilename: checkpoints/checkpoint-3/rng_state.pth
+- rfilename: checkpoints/checkpoint-3/scaler.pt
+- rfilename: checkpoints/checkpoint-3/scheduler.pt
+- rfilename: checkpoints/checkpoint-3/sentence_bert_config.json
+- rfilename: checkpoints/checkpoint-3/special_tokens_map.json
+- rfilename: checkpoints/checkpoint-3/tokenizer.json
+- rfilename: checkpoints/checkpoint-3/tokenizer_config.json
+- rfilename: checkpoints/checkpoint-3/trainer_state.json
+- rfilename: checkpoints/checkpoint-3/training_args.bin
+- rfilename: checkpoints/checkpoint-3/vocab.txt
+- rfilename: config.json
+- rfilename: config_sentence_transformers.json
+- rfilename: model.safetensors
+- rfilename: modules.json
+- rfilename: sentence_bert_config.json
+- rfilename: special_tokens_map.json
+- rfilename: tokenizer.json
+- rfilename: tokenizer_config.json
+- rfilename: training_args.bin
+- rfilename: vocab.txt
+spaces: []
+createdAt: '2025-06-04T18:55:00.000Z'
+safetensors:
+  parameters:
+    F32: 22713216
+  total: 22713216
+usedStorage: 1762314562
+downloadsAllTime: 4
+inferenceProviderMapping: {}
+configJson:
+  architectures:
+  - BertModel
+  attention_probs_dropout_prob: 0.1
+  classifier_dropout: null
+  gradient_checkpointing: false
+  hidden_act: gelu
+  hidden_dropout_prob: 0.1
+  hidden_size: 384
+  initializer_range: 0.02
+  intermediate_size: 1536
+  layer_norm_eps: 1.0e-12
+  max_position_embeddings: 512
+  model_type: bert
+  num_attention_heads: 12
+  num_hidden_layers: 6
+  pad_token_id: 0
+  position_embedding_type: absolute
+  torch_dtype: float32
+  transformers_version: 4.51.3
+  type_vocab_size: 2
+  use_cache: true
+  vocab_size: 30522
+onnxFiles: {}
+safetensorsSizeMb: 224.3
+approxSizeMb: 90.9
+fetchedAt: '2026-06-10T07:15:01.000Z'

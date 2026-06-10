@@ -1,0 +1,196 @@
+_id: 6902a1fc8b662a8c8b327096
+id: tnguy564/qwen-geospatial-embedder
+private: false
+pipeline_tag: sentence-similarity
+library_name: sentence-transformers
+tags:
+- sentence-transformers
+- safetensors
+- bert
+- sentence-similarity
+- feature-extraction
+- dense
+- generated_from_trainer
+- dataset_size:1447
+- loss:MultipleNegativesRankingLoss
+- arxiv:1908.10084
+- arxiv:1705.00652
+- base_model:sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2
+- base_model:finetune:sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2
+- text-embeddings-inference
+- endpoints_compatible
+- region:us
+downloads: 1
+likes: 0
+modelId: tnguy564/qwen-geospatial-embedder
+author: tnguy564
+sha: e4b6586108066aa0818889ca578e164b520e640e
+lastModified: '2025-10-30T04:05:24.000Z'
+gated: false
+disabled: false
+mask_token: '[MASK]'
+widgetData:
+- source_sentence: pizzeria pomodoretto | 130 wandsworth high street | pizza_restaurant
+  sentences:
+  - wein und sektgut josef reis | spielesstr 9 | Travel and Transportation > Lodging > Bed and Breakfast
+  - pizzeria pomodoretto | 130 wandsworth high street wandsworth | pizza_restaurant
+  - oberschorfheide wäsche dessous bademoden | lange straße 26 | Retail > Textiles Store
+- source_sentence: حلويات الخبراء expert sweets | ruwi / cdb area | desserts
+  sentences:
+  - bargain tree service | 2811 warners rd | christmas_trees
+  - cvs pharmacy | 3901 sw 21st st | online_shop
+  - حلويات الخبراء sweets expert | ruwi / cdb area | Dining and Drinking > Dessert Shop > Pastry Shop
+- source_sentence: pianonvirittäjä paavo rahkila | rekikuja 3c | musical_instrument_store
+  sentences:
+  - dephany l bibb aprn | 401 e chestnut st unit 690 | nephrologist
+  - 粟生団地バス停 | 粟生間谷西2丁目9 | Travel and Transportation > Transport Hub > Bus Stop
+  - pianonvirittäjä rahkila paavo | rekikuja 3 c 25 | Business and Professional Services > Repair Service
+- source_sentence: cricket wireless authorized retailer | 2808 highway 6 s | mobile_phone_store
+  sentences:
+  - nuffield health fitness & wellbeing gym | stoop memorial ground twickenham stoop stadium langhorn drive | gym
+  - cricket wireless authorized retailer | 2808 highway 6 s | mobile_phone_store
+  - baufinanzierung xpert | franziusstr 8 | mortgage_broker
+- source_sentence: pomper hijken | markeweg 2 | livestock_breeder
+  sentences:
+  - cherry creek family dental | 695 s colorado blvd ste 300 | cosmetic_dentist
+  - goin postal | 5638 al53 ste b | courier_and_delivery_services
+  - pomper hijken | markeweg 2 | grain_production
+model-index: null
+config:
+  architectures:
+  - BertModel
+  model_type: bert
+  tokenizer_config:
+    bos_token: <s>
+    cls_token: <s>
+    eos_token: </s>
+    mask_token: <mask>
+    pad_token: <pad>
+    sep_token: </s>
+    unk_token: <unk>
+  chat_template_jinja: "{%- if tools %}\n    {{- '<|im_start|>system\\n' }}\n    {%- if messages[0].role == 'system' %}\n\
+    \        {{- messages[0].content + '\\n\\n' }}\n    {%- endif %}\n    {{- \"# Tools\\n\\nYou may call one or more functions\
+    \ to assist with the user query.\\n\\nYou are provided with function signatures within <tools></tools> XML tags:\\n<tools>\"\
+    \ }}\n    {%- for tool in tools %}\n        {{- \"\\n\" }}\n        {{- tool | tojson }}\n    {%- endfor %}\n    {{- \"\
+    \\n</tools>\\n\\nFor each function call, return a json object with function name and arguments within <tool_call></tool_call>\
+    \ XML tags:\\n<tool_call>\\n{\\\"name\\\": <function-name>, \\\"arguments\\\": <args-json-object>}\\n</tool_call><|im_end|>\\\
+    n\" }}\n{%- else %}\n    {%- if messages[0].role == 'system' %}\n        {{- '<|im_start|>system\\n' + messages[0].content\
+    \ + '<|im_end|>\\n' }}\n    {%- endif %}\n{%- endif %}\n{%- set ns = namespace(multi_step_tool=true, last_query_index=messages|length\
+    \ - 1) %}\n{%- for message in messages[::-1] %}\n    {%- set index = (messages|length - 1) - loop.index0 %}\n    {%- if\
+    \ ns.multi_step_tool and message.role == \"user\" and not(message.content.startswith('<tool_response>') and message.content.endswith('</tool_response>'))\
+    \ %}\n        {%- set ns.multi_step_tool = false %}\n        {%- set ns.last_query_index = index %}\n    {%- endif %}\n\
+    {%- endfor %}\n{%- for message in messages %}\n    {%- if (message.role == \"user\") or (message.role == \"system\" and\
+    \ not loop.first) %}\n        {{- '<|im_start|>' + message.role + '\\n' + message.content + '<|im_end|>' + '\\n' }}\n\
+    \    {%- elif message.role == \"assistant\" %}\n        {%- set content = message.content %}\n        {%- set reasoning_content\
+    \ = '' %}\n        {%- if message.reasoning_content is defined and message.reasoning_content is not none %}\n        \
+    \    {%- set reasoning_content = message.reasoning_content %}\n        {%- else %}\n            {%- if '</think>' in message.content\
+    \ %}\n                {%- set content = message.content.split('</think>')[-1].lstrip('\\n') %}\n                {%- set\
+    \ reasoning_content = message.content.split('</think>')[0].rstrip('\\n').split('<think>')[-1].lstrip('\\n') %}\n     \
+    \       {%- endif %}\n        {%- endif %}\n        {%- if loop.index0 > ns.last_query_index %}\n            {%- if loop.last\
+    \ or (not loop.last and reasoning_content) %}\n                {{- '<|im_start|>' + message.role + '\\n<think>\\n' + reasoning_content.strip('\\\
+    n') + '\\n</think>\\n\\n' + content.lstrip('\\n') }}\n            {%- else %}\n                {{- '<|im_start|>' + message.role\
+    \ + '\\n' + content }}\n            {%- endif %}\n        {%- else %}\n            {{- '<|im_start|>' + message.role +\
+    \ '\\n' + content }}\n        {%- endif %}\n        {%- if message.tool_calls %}\n            {%- for tool_call in message.tool_calls\
+    \ %}\n                {%- if (loop.first and content) or (not loop.first) %}\n                    {{- '\\n' }}\n     \
+    \           {%- endif %}\n                {%- if tool_call.function %}\n                    {%- set tool_call = tool_call.function\
+    \ %}\n                {%- endif %}\n                {{- '<tool_call>\\n{\"name\": \"' }}\n                {{- tool_call.name\
+    \ }}\n                {{- '\", \"arguments\": ' }}\n                {%- if tool_call.arguments is string %}\n        \
+    \            {{- tool_call.arguments }}\n                {%- else %}\n                    {{- tool_call.arguments | tojson\
+    \ }}\n                {%- endif %}\n                {{- '}\\n</tool_call>' }}\n            {%- endfor %}\n        {%-\
+    \ endif %}\n        {{- '<|im_end|>\\n' }}\n    {%- elif message.role == \"tool\" %}\n        {%- if loop.first or (messages[loop.index0\
+    \ - 1].role != \"tool\") %}\n            {{- '<|im_start|>user' }}\n        {%- endif %}\n        {{- '\\n<tool_response>\\\
+    n' }}\n        {{- message.content }}\n        {{- '\\n</tool_response>' }}\n        {%- if loop.last or (messages[loop.index0\
+    \ + 1].role != \"tool\") %}\n            {{- '<|im_end|>\\n' }}\n        {%- endif %}\n    {%- endif %}\n{%- endfor %}\n\
+    {%- if add_generation_prompt %}\n    {{- '<|im_start|>assistant\\n' }}\n    {%- if enable_thinking is defined and enable_thinking\
+    \ is false %}\n        {{- '<think>\\n\\n</think>\\n\\n' }}\n    {%- endif %}\n{%- endif %}"
+cardData:
+  tags:
+  - sentence-transformers
+  - sentence-similarity
+  - feature-extraction
+  - dense
+  - generated_from_trainer
+  - dataset_size:1447
+  - loss:MultipleNegativesRankingLoss
+  base_model: sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2
+  widget:
+  - source_sentence: pizzeria pomodoretto | 130 wandsworth high street | pizza_restaurant
+    sentences:
+    - wein und sektgut josef reis | spielesstr 9 | Travel and Transportation > Lodging > Bed and Breakfast
+    - pizzeria pomodoretto | 130 wandsworth high street wandsworth | pizza_restaurant
+    - oberschorfheide wäsche dessous bademoden | lange straße 26 | Retail > Textiles Store
+  - source_sentence: حلويات الخبراء expert sweets | ruwi / cdb area | desserts
+    sentences:
+    - bargain tree service | 2811 warners rd | christmas_trees
+    - cvs pharmacy | 3901 sw 21st st | online_shop
+    - حلويات الخبراء sweets expert | ruwi / cdb area | Dining and Drinking > Dessert Shop > Pastry Shop
+  - source_sentence: pianonvirittäjä paavo rahkila | rekikuja 3c | musical_instrument_store
+    sentences:
+    - dephany l bibb aprn | 401 e chestnut st unit 690 | nephrologist
+    - 粟生団地バス停 | 粟生間谷西2丁目9 | Travel and Transportation > Transport Hub > Bus Stop
+    - pianonvirittäjä rahkila paavo | rekikuja 3 c 25 | Business and Professional Services > Repair Service
+  - source_sentence: cricket wireless authorized retailer | 2808 highway 6 s | mobile_phone_store
+    sentences:
+    - nuffield health fitness & wellbeing gym | stoop memorial ground twickenham stoop stadium langhorn drive | gym
+    - cricket wireless authorized retailer | 2808 highway 6 s | mobile_phone_store
+    - baufinanzierung xpert | franziusstr 8 | mortgage_broker
+  - source_sentence: pomper hijken | markeweg 2 | livestock_breeder
+    sentences:
+    - cherry creek family dental | 695 s colorado blvd ste 300 | cosmetic_dentist
+    - goin postal | 5638 al53 ste b | courier_and_delivery_services
+    - pomper hijken | markeweg 2 | grain_production
+  pipeline_tag: sentence-similarity
+  library_name: sentence-transformers
+siblings:
+- rfilename: .gitattributes
+- rfilename: 1_Pooling/config.json
+- rfilename: README.md
+- rfilename: added_tokens.json
+- rfilename: chat_template.jinja
+- rfilename: config.json
+- rfilename: config_sentence_transformers.json
+- rfilename: merges.txt
+- rfilename: model.safetensors
+- rfilename: modules.json
+- rfilename: sentence_bert_config.json
+- rfilename: special_tokens_map.json
+- rfilename: tokenizer.json
+- rfilename: tokenizer_config.json
+- rfilename: unigram.json
+- rfilename: vocab.json
+spaces: []
+createdAt: '2025-10-29T23:23:40.000Z'
+safetensors:
+  parameters:
+    F32: 117653760
+  total: 117653760
+usedStorage: 5750824012
+downloadsAllTime: 65
+inferenceProviderMapping: {}
+configJson:
+  architectures:
+  - BertModel
+  attention_probs_dropout_prob: 0.1
+  classifier_dropout: null
+  dtype: float32
+  gradient_checkpointing: false
+  hidden_act: gelu
+  hidden_dropout_prob: 0.1
+  hidden_size: 384
+  initializer_range: 0.02
+  intermediate_size: 1536
+  layer_norm_eps: 1.0e-12
+  max_position_embeddings: 512
+  model_type: bert
+  num_attention_heads: 12
+  num_hidden_layers: 12
+  pad_token_id: 0
+  position_embedding_type: absolute
+  transformers_version: 4.57.1
+  type_vocab_size: 2
+  use_cache: true
+  vocab_size: 250037
+onnxFiles: {}
+safetensorsSizeMb: 470.6
+approxSizeMb: 470.6
+fetchedAt: '2026-06-10T07:15:01.000Z'

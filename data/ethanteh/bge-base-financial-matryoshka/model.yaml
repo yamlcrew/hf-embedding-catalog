@@ -1,0 +1,881 @@
+_id: 67910026a61f122be812476e
+id: ethanteh/bge-base-financial-matryoshka
+private: false
+pipeline_tag: sentence-similarity
+library_name: sentence-transformers
+tags:
+- sentence-transformers
+- safetensors
+- bert
+- sentence-similarity
+- feature-extraction
+- generated_from_trainer
+- dataset_size:6300
+- loss:MatryoshkaLoss
+- loss:MultipleNegativesRankingLoss
+- en
+- arxiv:1908.10084
+- arxiv:2205.13147
+- arxiv:1705.00652
+- base_model:BAAI/bge-base-en-v1.5
+- base_model:finetune:BAAI/bge-base-en-v1.5
+- license:apache-2.0
+- model-index
+- text-embeddings-inference
+- endpoints_compatible
+- region:us
+downloads: 1
+likes: 0
+modelId: ethanteh/bge-base-financial-matryoshka
+author: ethanteh
+sha: 11961bc94a53a3787aa17e8707c6cc1a0da2d67a
+lastModified: '2025-01-22T14:27:13.000Z'
+gated: false
+disabled: false
+mask_token: '[MASK]'
+widgetData:
+- source_sentence: For example, brands based on major motion picture releases generally require less advertising as a result
+    of the promotional activities around the motion picture release.
+  sentences:
+  - How many new hotels did Hilton open in the year ended December 31, 2023?
+  - What impact do major motion picture releases have on Hasbro's advertising expenditures?
+  - In which item of the report can the details of Legal proceedings be found by referencing?
+- source_sentence: Our retail stores are generally located in strip centers, shopping malls and pedestrian areas...  We target
+    strip centers that are conveniently located, have a mass merchant or supermarket anchor tenant and have a high volume
+    of customers.
+  sentences:
+  - What is the range of pages in IBM’s 2023 Annual Report to Stockholders where the Financial Statements and Supplementary
+    Data are located?
+  - How does GameStop's store location choice impact its business strategy?
+  - In which part of the financial documents can detailed information about legal proceedings be found according to Item 3?
+- source_sentence: The increase in fulfillment costs in absolute dollars in 2023, compared to the prior year, is primarily
+    due to increased sales and investments in our fulfillment network, partially offset by fulfillment network efficiencies.
+  sentences:
+  - What led to the increase in fulfillment costs in 2023?
+  - Where in the Form 10-K can one find Note 15 which discusses legal proceedings?
+  - What accounting method does the company use to account for investments in subsidiaries and partnerships where it does
+    not control but has significant influence?
+- source_sentence: 'In December 2023, the FASB issued ASU No. 2023-09, ‘Income Taxes (Topic 740): Improvements to Income Tax
+    Disclosures.’ The ASU includes amendments requiring enhanced income tax disclosures, primarily related to standardization
+    and disaggregation of rate reconciliation categories and income taxes paid by jurisdiction.'
+  sentences:
+  - What are the total noncancelable purchase commitments as of December 31, 2023, and how are they distributed over different
+    time periods?
+  - What are the primary objectives of the Company's investment policy?
+  - What are the required amendments in the ASU No. 2023-09 regarding income tax disclosures?
+- source_sentence: Income Taxes We are subject to income taxes in the U.S. and in many foreign jurisdictions. Significant
+    judgment is required in determining our provision for income taxes, our deferred tax assets and liabilities and any valuation
+    allowance recorded against our net deferred tax assets that are not more likely than not to be realized.
+  sentences:
+  - How does the company treat income taxes in its financial reports?
+  - How does YouTube contribute to users' experience according to the company's statement?
+  - When did The Charles Schwab Corporation change its corporate headquarters from San Francisco to Westlake, Texas?
+model-index:
+- name: BGE base Financial Matryoshka
+  results:
+  - task:
+      type: information-retrieval
+      name: Information Retrieval
+    dataset:
+      name: dim 768
+      type: dim_768
+    metrics:
+    - type: cosine_accuracy@1
+      value: 0.7028571428571428
+      name: Cosine Accuracy@1
+      verified: false
+    - type: cosine_accuracy@3
+      value: 0.8185714285714286
+      name: Cosine Accuracy@3
+      verified: false
+    - type: cosine_accuracy@5
+      value: 0.85
+      name: Cosine Accuracy@5
+      verified: false
+    - type: cosine_accuracy@10
+      value: 0.8914285714285715
+      name: Cosine Accuracy@10
+      verified: false
+    - type: cosine_precision@1
+      value: 0.7028571428571428
+      name: Cosine Precision@1
+      verified: false
+    - type: cosine_precision@3
+      value: 0.2728571428571428
+      name: Cosine Precision@3
+      verified: false
+    - type: cosine_precision@5
+      value: 0.16999999999999998
+      name: Cosine Precision@5
+      verified: false
+    - type: cosine_precision@10
+      value: 0.08914285714285713
+      name: Cosine Precision@10
+      verified: false
+    - type: cosine_recall@1
+      value: 0.7028571428571428
+      name: Cosine Recall@1
+      verified: false
+    - type: cosine_recall@3
+      value: 0.8185714285714286
+      name: Cosine Recall@3
+      verified: false
+    - type: cosine_recall@5
+      value: 0.85
+      name: Cosine Recall@5
+      verified: false
+    - type: cosine_recall@10
+      value: 0.8914285714285715
+      name: Cosine Recall@10
+      verified: false
+    - type: cosine_ndcg@10
+      value: 0.798341878406338
+      name: Cosine Ndcg@10
+      verified: false
+    - type: cosine_mrr@10
+      value: 0.7685107709750566
+      name: Cosine Mrr@10
+      verified: false
+    - type: cosine_map@100
+      value: 0.7724628591268551
+      name: Cosine Map@100
+      verified: false
+  - task:
+      type: information-retrieval
+      name: Information Retrieval
+    dataset:
+      name: dim 512
+      type: dim_512
+    metrics:
+    - type: cosine_accuracy@1
+      value: 0.6985714285714286
+      name: Cosine Accuracy@1
+      verified: false
+    - type: cosine_accuracy@3
+      value: 0.8157142857142857
+      name: Cosine Accuracy@3
+      verified: false
+    - type: cosine_accuracy@5
+      value: 0.8528571428571429
+      name: Cosine Accuracy@5
+      verified: false
+    - type: cosine_accuracy@10
+      value: 0.8985714285714286
+      name: Cosine Accuracy@10
+      verified: false
+    - type: cosine_precision@1
+      value: 0.6985714285714286
+      name: Cosine Precision@1
+      verified: false
+    - type: cosine_precision@3
+      value: 0.27190476190476187
+      name: Cosine Precision@3
+      verified: false
+    - type: cosine_precision@5
+      value: 0.17057142857142857
+      name: Cosine Precision@5
+      verified: false
+    - type: cosine_precision@10
+      value: 0.08985714285714284
+      name: Cosine Precision@10
+      verified: false
+    - type: cosine_recall@1
+      value: 0.6985714285714286
+      name: Cosine Recall@1
+      verified: false
+    - type: cosine_recall@3
+      value: 0.8157142857142857
+      name: Cosine Recall@3
+      verified: false
+    - type: cosine_recall@5
+      value: 0.8528571428571429
+      name: Cosine Recall@5
+      verified: false
+    - type: cosine_recall@10
+      value: 0.8985714285714286
+      name: Cosine Recall@10
+      verified: false
+    - type: cosine_ndcg@10
+      value: 0.7981564446782999
+      name: Cosine Ndcg@10
+      verified: false
+    - type: cosine_mrr@10
+      value: 0.7661643990929705
+      name: Cosine Mrr@10
+      verified: false
+    - type: cosine_map@100
+      value: 0.7695965865934244
+      name: Cosine Map@100
+      verified: false
+  - task:
+      type: information-retrieval
+      name: Information Retrieval
+    dataset:
+      name: dim 256
+      type: dim_256
+    metrics:
+    - type: cosine_accuracy@1
+      value: 0.6971428571428572
+      name: Cosine Accuracy@1
+      verified: false
+    - type: cosine_accuracy@3
+      value: 0.8085714285714286
+      name: Cosine Accuracy@3
+      verified: false
+    - type: cosine_accuracy@5
+      value: 0.8428571428571429
+      name: Cosine Accuracy@5
+      verified: false
+    - type: cosine_accuracy@10
+      value: 0.8885714285714286
+      name: Cosine Accuracy@10
+      verified: false
+    - type: cosine_precision@1
+      value: 0.6971428571428572
+      name: Cosine Precision@1
+      verified: false
+    - type: cosine_precision@3
+      value: 0.2695238095238095
+      name: Cosine Precision@3
+      verified: false
+    - type: cosine_precision@5
+      value: 0.16857142857142857
+      name: Cosine Precision@5
+      verified: false
+    - type: cosine_precision@10
+      value: 0.08885714285714284
+      name: Cosine Precision@10
+      verified: false
+    - type: cosine_recall@1
+      value: 0.6971428571428572
+      name: Cosine Recall@1
+      verified: false
+    - type: cosine_recall@3
+      value: 0.8085714285714286
+      name: Cosine Recall@3
+      verified: false
+    - type: cosine_recall@5
+      value: 0.8428571428571429
+      name: Cosine Recall@5
+      verified: false
+    - type: cosine_recall@10
+      value: 0.8885714285714286
+      name: Cosine Recall@10
+      verified: false
+    - type: cosine_ndcg@10
+      value: 0.7917977544361884
+      name: Cosine Ndcg@10
+      verified: false
+    - type: cosine_mrr@10
+      value: 0.7611133786848071
+      name: Cosine Mrr@10
+      verified: false
+    - type: cosine_map@100
+      value: 0.765197446517495
+      name: Cosine Map@100
+      verified: false
+  - task:
+      type: information-retrieval
+      name: Information Retrieval
+    dataset:
+      name: dim 128
+      type: dim_128
+    metrics:
+    - type: cosine_accuracy@1
+      value: 0.6871428571428572
+      name: Cosine Accuracy@1
+      verified: false
+    - type: cosine_accuracy@3
+      value: 0.8028571428571428
+      name: Cosine Accuracy@3
+      verified: false
+    - type: cosine_accuracy@5
+      value: 0.8342857142857143
+      name: Cosine Accuracy@5
+      verified: false
+    - type: cosine_accuracy@10
+      value: 0.8857142857142857
+      name: Cosine Accuracy@10
+      verified: false
+    - type: cosine_precision@1
+      value: 0.6871428571428572
+      name: Cosine Precision@1
+      verified: false
+    - type: cosine_precision@3
+      value: 0.2676190476190476
+      name: Cosine Precision@3
+      verified: false
+    - type: cosine_precision@5
+      value: 0.16685714285714284
+      name: Cosine Precision@5
+      verified: false
+    - type: cosine_precision@10
+      value: 0.08857142857142856
+      name: Cosine Precision@10
+      verified: false
+    - type: cosine_recall@1
+      value: 0.6871428571428572
+      name: Cosine Recall@1
+      verified: false
+    - type: cosine_recall@3
+      value: 0.8028571428571428
+      name: Cosine Recall@3
+      verified: false
+    - type: cosine_recall@5
+      value: 0.8342857142857143
+      name: Cosine Recall@5
+      verified: false
+    - type: cosine_recall@10
+      value: 0.8857142857142857
+      name: Cosine Recall@10
+      verified: false
+    - type: cosine_ndcg@10
+      value: 0.7844783501102325
+      name: Cosine Ndcg@10
+      verified: false
+    - type: cosine_mrr@10
+      value: 0.7524892290249433
+      name: Cosine Mrr@10
+      verified: false
+    - type: cosine_map@100
+      value: 0.756590766205664
+      name: Cosine Map@100
+      verified: false
+  - task:
+      type: information-retrieval
+      name: Information Retrieval
+    dataset:
+      name: dim 64
+      type: dim_64
+    metrics:
+    - type: cosine_accuracy@1
+      value: 0.6571428571428571
+      name: Cosine Accuracy@1
+      verified: false
+    - type: cosine_accuracy@3
+      value: 0.7814285714285715
+      name: Cosine Accuracy@3
+      verified: false
+    - type: cosine_accuracy@5
+      value: 0.8114285714285714
+      name: Cosine Accuracy@5
+      verified: false
+    - type: cosine_accuracy@10
+      value: 0.8585714285714285
+      name: Cosine Accuracy@10
+      verified: false
+    - type: cosine_precision@1
+      value: 0.6571428571428571
+      name: Cosine Precision@1
+      verified: false
+    - type: cosine_precision@3
+      value: 0.2604761904761905
+      name: Cosine Precision@3
+      verified: false
+    - type: cosine_precision@5
+      value: 0.16228571428571428
+      name: Cosine Precision@5
+      verified: false
+    - type: cosine_precision@10
+      value: 0.08585714285714285
+      name: Cosine Precision@10
+      verified: false
+    - type: cosine_recall@1
+      value: 0.6571428571428571
+      name: Cosine Recall@1
+      verified: false
+    - type: cosine_recall@3
+      value: 0.7814285714285715
+      name: Cosine Recall@3
+      verified: false
+    - type: cosine_recall@5
+      value: 0.8114285714285714
+      name: Cosine Recall@5
+      verified: false
+    - type: cosine_recall@10
+      value: 0.8585714285714285
+      name: Cosine Recall@10
+      verified: false
+    - type: cosine_ndcg@10
+      value: 0.7570464835011314
+      name: Cosine Ndcg@10
+      verified: false
+    - type: cosine_mrr@10
+      value: 0.7245481859410431
+      name: Cosine Mrr@10
+      verified: false
+    - type: cosine_map@100
+      value: 0.729409564724743
+      name: Cosine Map@100
+      verified: false
+config:
+  architectures:
+  - BertModel
+  model_type: bert
+  tokenizer_config:
+    cls_token: '[CLS]'
+    mask_token: '[MASK]'
+    pad_token: '[PAD]'
+    sep_token: '[SEP]'
+    unk_token: '[UNK]'
+cardData:
+  language:
+  - en
+  license: apache-2.0
+  tags:
+  - sentence-transformers
+  - sentence-similarity
+  - feature-extraction
+  - generated_from_trainer
+  - dataset_size:6300
+  - loss:MatryoshkaLoss
+  - loss:MultipleNegativesRankingLoss
+  base_model: BAAI/bge-base-en-v1.5
+  widget:
+  - source_sentence: For example, brands based on major motion picture releases generally require less advertising as a result
+      of the promotional activities around the motion picture release.
+    sentences:
+    - How many new hotels did Hilton open in the year ended December 31, 2023?
+    - What impact do major motion picture releases have on Hasbro's advertising expenditures?
+    - In which item of the report can the details of Legal proceedings be found by referencing?
+  - source_sentence: Our retail stores are generally located in strip centers, shopping malls and pedestrian areas...  We
+      target strip centers that are conveniently located, have a mass merchant or supermarket anchor tenant and have a high
+      volume of customers.
+    sentences:
+    - What is the range of pages in IBM’s 2023 Annual Report to Stockholders where the Financial Statements and Supplementary
+      Data are located?
+    - How does GameStop's store location choice impact its business strategy?
+    - In which part of the financial documents can detailed information about legal proceedings be found according to Item
+      3?
+  - source_sentence: The increase in fulfillment costs in absolute dollars in 2023, compared to the prior year, is primarily
+      due to increased sales and investments in our fulfillment network, partially offset by fulfillment network efficiencies.
+    sentences:
+    - What led to the increase in fulfillment costs in 2023?
+    - Where in the Form 10-K can one find Note 15 which discusses legal proceedings?
+    - What accounting method does the company use to account for investments in subsidiaries and partnerships where it does
+      not control but has significant influence?
+  - source_sentence: 'In December 2023, the FASB issued ASU No. 2023-09, ‘Income Taxes (Topic 740): Improvements to Income
+      Tax Disclosures.’ The ASU includes amendments requiring enhanced income tax disclosures, primarily related to standardization
+      and disaggregation of rate reconciliation categories and income taxes paid by jurisdiction.'
+    sentences:
+    - What are the total noncancelable purchase commitments as of December 31, 2023, and how are they distributed over different
+      time periods?
+    - What are the primary objectives of the Company's investment policy?
+    - What are the required amendments in the ASU No. 2023-09 regarding income tax disclosures?
+  - source_sentence: Income Taxes We are subject to income taxes in the U.S. and in many foreign jurisdictions. Significant
+      judgment is required in determining our provision for income taxes, our deferred tax assets and liabilities and any
+      valuation allowance recorded against our net deferred tax assets that are not more likely than not to be realized.
+    sentences:
+    - How does the company treat income taxes in its financial reports?
+    - How does YouTube contribute to users' experience according to the company's statement?
+    - When did The Charles Schwab Corporation change its corporate headquarters from San Francisco to Westlake, Texas?
+  pipeline_tag: sentence-similarity
+  library_name: sentence-transformers
+  metrics:
+  - cosine_accuracy@1
+  - cosine_accuracy@3
+  - cosine_accuracy@5
+  - cosine_accuracy@10
+  - cosine_precision@1
+  - cosine_precision@3
+  - cosine_precision@5
+  - cosine_precision@10
+  - cosine_recall@1
+  - cosine_recall@3
+  - cosine_recall@5
+  - cosine_recall@10
+  - cosine_ndcg@10
+  - cosine_mrr@10
+  - cosine_map@100
+  model-index:
+  - name: BGE base Financial Matryoshka
+    results:
+    - task:
+        type: information-retrieval
+        name: Information Retrieval
+      dataset:
+        name: dim 768
+        type: dim_768
+      metrics:
+      - type: cosine_accuracy@1
+        value: 0.7028571428571428
+        name: Cosine Accuracy@1
+        verified: false
+      - type: cosine_accuracy@3
+        value: 0.8185714285714286
+        name: Cosine Accuracy@3
+        verified: false
+      - type: cosine_accuracy@5
+        value: 0.85
+        name: Cosine Accuracy@5
+        verified: false
+      - type: cosine_accuracy@10
+        value: 0.8914285714285715
+        name: Cosine Accuracy@10
+        verified: false
+      - type: cosine_precision@1
+        value: 0.7028571428571428
+        name: Cosine Precision@1
+        verified: false
+      - type: cosine_precision@3
+        value: 0.2728571428571428
+        name: Cosine Precision@3
+        verified: false
+      - type: cosine_precision@5
+        value: 0.16999999999999998
+        name: Cosine Precision@5
+        verified: false
+      - type: cosine_precision@10
+        value: 0.08914285714285713
+        name: Cosine Precision@10
+        verified: false
+      - type: cosine_recall@1
+        value: 0.7028571428571428
+        name: Cosine Recall@1
+        verified: false
+      - type: cosine_recall@3
+        value: 0.8185714285714286
+        name: Cosine Recall@3
+        verified: false
+      - type: cosine_recall@5
+        value: 0.85
+        name: Cosine Recall@5
+        verified: false
+      - type: cosine_recall@10
+        value: 0.8914285714285715
+        name: Cosine Recall@10
+        verified: false
+      - type: cosine_ndcg@10
+        value: 0.798341878406338
+        name: Cosine Ndcg@10
+        verified: false
+      - type: cosine_mrr@10
+        value: 0.7685107709750566
+        name: Cosine Mrr@10
+        verified: false
+      - type: cosine_map@100
+        value: 0.7724628591268551
+        name: Cosine Map@100
+        verified: false
+    - task:
+        type: information-retrieval
+        name: Information Retrieval
+      dataset:
+        name: dim 512
+        type: dim_512
+      metrics:
+      - type: cosine_accuracy@1
+        value: 0.6985714285714286
+        name: Cosine Accuracy@1
+        verified: false
+      - type: cosine_accuracy@3
+        value: 0.8157142857142857
+        name: Cosine Accuracy@3
+        verified: false
+      - type: cosine_accuracy@5
+        value: 0.8528571428571429
+        name: Cosine Accuracy@5
+        verified: false
+      - type: cosine_accuracy@10
+        value: 0.8985714285714286
+        name: Cosine Accuracy@10
+        verified: false
+      - type: cosine_precision@1
+        value: 0.6985714285714286
+        name: Cosine Precision@1
+        verified: false
+      - type: cosine_precision@3
+        value: 0.27190476190476187
+        name: Cosine Precision@3
+        verified: false
+      - type: cosine_precision@5
+        value: 0.17057142857142857
+        name: Cosine Precision@5
+        verified: false
+      - type: cosine_precision@10
+        value: 0.08985714285714284
+        name: Cosine Precision@10
+        verified: false
+      - type: cosine_recall@1
+        value: 0.6985714285714286
+        name: Cosine Recall@1
+        verified: false
+      - type: cosine_recall@3
+        value: 0.8157142857142857
+        name: Cosine Recall@3
+        verified: false
+      - type: cosine_recall@5
+        value: 0.8528571428571429
+        name: Cosine Recall@5
+        verified: false
+      - type: cosine_recall@10
+        value: 0.8985714285714286
+        name: Cosine Recall@10
+        verified: false
+      - type: cosine_ndcg@10
+        value: 0.7981564446782999
+        name: Cosine Ndcg@10
+        verified: false
+      - type: cosine_mrr@10
+        value: 0.7661643990929705
+        name: Cosine Mrr@10
+        verified: false
+      - type: cosine_map@100
+        value: 0.7695965865934244
+        name: Cosine Map@100
+        verified: false
+    - task:
+        type: information-retrieval
+        name: Information Retrieval
+      dataset:
+        name: dim 256
+        type: dim_256
+      metrics:
+      - type: cosine_accuracy@1
+        value: 0.6971428571428572
+        name: Cosine Accuracy@1
+        verified: false
+      - type: cosine_accuracy@3
+        value: 0.8085714285714286
+        name: Cosine Accuracy@3
+        verified: false
+      - type: cosine_accuracy@5
+        value: 0.8428571428571429
+        name: Cosine Accuracy@5
+        verified: false
+      - type: cosine_accuracy@10
+        value: 0.8885714285714286
+        name: Cosine Accuracy@10
+        verified: false
+      - type: cosine_precision@1
+        value: 0.6971428571428572
+        name: Cosine Precision@1
+        verified: false
+      - type: cosine_precision@3
+        value: 0.2695238095238095
+        name: Cosine Precision@3
+        verified: false
+      - type: cosine_precision@5
+        value: 0.16857142857142857
+        name: Cosine Precision@5
+        verified: false
+      - type: cosine_precision@10
+        value: 0.08885714285714284
+        name: Cosine Precision@10
+        verified: false
+      - type: cosine_recall@1
+        value: 0.6971428571428572
+        name: Cosine Recall@1
+        verified: false
+      - type: cosine_recall@3
+        value: 0.8085714285714286
+        name: Cosine Recall@3
+        verified: false
+      - type: cosine_recall@5
+        value: 0.8428571428571429
+        name: Cosine Recall@5
+        verified: false
+      - type: cosine_recall@10
+        value: 0.8885714285714286
+        name: Cosine Recall@10
+        verified: false
+      - type: cosine_ndcg@10
+        value: 0.7917977544361884
+        name: Cosine Ndcg@10
+        verified: false
+      - type: cosine_mrr@10
+        value: 0.7611133786848071
+        name: Cosine Mrr@10
+        verified: false
+      - type: cosine_map@100
+        value: 0.765197446517495
+        name: Cosine Map@100
+        verified: false
+    - task:
+        type: information-retrieval
+        name: Information Retrieval
+      dataset:
+        name: dim 128
+        type: dim_128
+      metrics:
+      - type: cosine_accuracy@1
+        value: 0.6871428571428572
+        name: Cosine Accuracy@1
+        verified: false
+      - type: cosine_accuracy@3
+        value: 0.8028571428571428
+        name: Cosine Accuracy@3
+        verified: false
+      - type: cosine_accuracy@5
+        value: 0.8342857142857143
+        name: Cosine Accuracy@5
+        verified: false
+      - type: cosine_accuracy@10
+        value: 0.8857142857142857
+        name: Cosine Accuracy@10
+        verified: false
+      - type: cosine_precision@1
+        value: 0.6871428571428572
+        name: Cosine Precision@1
+        verified: false
+      - type: cosine_precision@3
+        value: 0.2676190476190476
+        name: Cosine Precision@3
+        verified: false
+      - type: cosine_precision@5
+        value: 0.16685714285714284
+        name: Cosine Precision@5
+        verified: false
+      - type: cosine_precision@10
+        value: 0.08857142857142856
+        name: Cosine Precision@10
+        verified: false
+      - type: cosine_recall@1
+        value: 0.6871428571428572
+        name: Cosine Recall@1
+        verified: false
+      - type: cosine_recall@3
+        value: 0.8028571428571428
+        name: Cosine Recall@3
+        verified: false
+      - type: cosine_recall@5
+        value: 0.8342857142857143
+        name: Cosine Recall@5
+        verified: false
+      - type: cosine_recall@10
+        value: 0.8857142857142857
+        name: Cosine Recall@10
+        verified: false
+      - type: cosine_ndcg@10
+        value: 0.7844783501102325
+        name: Cosine Ndcg@10
+        verified: false
+      - type: cosine_mrr@10
+        value: 0.7524892290249433
+        name: Cosine Mrr@10
+        verified: false
+      - type: cosine_map@100
+        value: 0.756590766205664
+        name: Cosine Map@100
+        verified: false
+    - task:
+        type: information-retrieval
+        name: Information Retrieval
+      dataset:
+        name: dim 64
+        type: dim_64
+      metrics:
+      - type: cosine_accuracy@1
+        value: 0.6571428571428571
+        name: Cosine Accuracy@1
+        verified: false
+      - type: cosine_accuracy@3
+        value: 0.7814285714285715
+        name: Cosine Accuracy@3
+        verified: false
+      - type: cosine_accuracy@5
+        value: 0.8114285714285714
+        name: Cosine Accuracy@5
+        verified: false
+      - type: cosine_accuracy@10
+        value: 0.8585714285714285
+        name: Cosine Accuracy@10
+        verified: false
+      - type: cosine_precision@1
+        value: 0.6571428571428571
+        name: Cosine Precision@1
+        verified: false
+      - type: cosine_precision@3
+        value: 0.2604761904761905
+        name: Cosine Precision@3
+        verified: false
+      - type: cosine_precision@5
+        value: 0.16228571428571428
+        name: Cosine Precision@5
+        verified: false
+      - type: cosine_precision@10
+        value: 0.08585714285714285
+        name: Cosine Precision@10
+        verified: false
+      - type: cosine_recall@1
+        value: 0.6571428571428571
+        name: Cosine Recall@1
+        verified: false
+      - type: cosine_recall@3
+        value: 0.7814285714285715
+        name: Cosine Recall@3
+        verified: false
+      - type: cosine_recall@5
+        value: 0.8114285714285714
+        name: Cosine Recall@5
+        verified: false
+      - type: cosine_recall@10
+        value: 0.8585714285714285
+        name: Cosine Recall@10
+        verified: false
+      - type: cosine_ndcg@10
+        value: 0.7570464835011314
+        name: Cosine Ndcg@10
+        verified: false
+      - type: cosine_mrr@10
+        value: 0.7245481859410431
+        name: Cosine Mrr@10
+        verified: false
+      - type: cosine_map@100
+        value: 0.729409564724743
+        name: Cosine Map@100
+        verified: false
+siblings:
+- rfilename: .gitattributes
+- rfilename: 1_Pooling/config.json
+- rfilename: README.md
+- rfilename: config.json
+- rfilename: config_sentence_transformers.json
+- rfilename: model.safetensors
+- rfilename: modules.json
+- rfilename: sentence_bert_config.json
+- rfilename: special_tokens_map.json
+- rfilename: tokenizer.json
+- rfilename: tokenizer_config.json
+- rfilename: vocab.txt
+spaces: []
+createdAt: '2025-01-22T14:26:46.000Z'
+safetensors:
+  parameters:
+    F32: 109482240
+  total: 109482240
+usedStorage: 437951328
+downloadsAllTime: 61
+inferenceProviderMapping: {}
+configJson:
+  _name_or_path: BAAI/bge-base-en-v1.5
+  architectures:
+  - BertModel
+  attention_probs_dropout_prob: 0.1
+  classifier_dropout: null
+  gradient_checkpointing: false
+  hidden_act: gelu
+  hidden_dropout_prob: 0.1
+  hidden_size: 768
+  id2label:
+    '0': LABEL_0
+  initializer_range: 0.02
+  intermediate_size: 3072
+  label2id:
+    LABEL_0: 0
+  layer_norm_eps: 1.0e-12
+  max_position_embeddings: 512
+  model_type: bert
+  num_attention_heads: 12
+  num_hidden_layers: 12
+  pad_token_id: 0
+  position_embedding_type: absolute
+  torch_dtype: float32
+  transformers_version: 4.48.1
+  type_vocab_size: 2
+  use_cache: true
+  vocab_size: 30522
+onnxFiles: {}
+safetensorsSizeMb: 438.0
+approxSizeMb: 437.9
+fetchedAt: '2026-06-10T07:15:01.000Z'

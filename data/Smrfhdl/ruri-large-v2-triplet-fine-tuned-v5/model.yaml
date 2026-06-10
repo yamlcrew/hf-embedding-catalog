@@ -1,0 +1,203 @@
+_id: 689319701de326594f775cff
+id: Smrfhdl/ruri-large-v2-triplet-fine-tuned-v5
+private: false
+pipeline_tag: sentence-similarity
+library_name: sentence-transformers
+tags:
+- sentence-transformers
+- safetensors
+- bert
+- sentence-similarity
+- feature-extraction
+- generated_from_trainer
+- dataset_size:800
+- loss:TripletLoss
+- arxiv:1908.10084
+- arxiv:1703.07737
+- base_model:cl-nagoya/ruri-large-v2
+- base_model:finetune:cl-nagoya/ruri-large-v2
+- model-index
+- endpoints_compatible
+- region:us
+downloads: 0
+likes: 1
+modelId: Smrfhdl/ruri-large-v2-triplet-fine-tuned-v5
+author: Smrfhdl
+sha: 892775788a949c598fd0ae3c05fb45a8e63ba345
+lastModified: '2025-08-06T09:00:11.000Z'
+gated: manual
+disabled: false
+mask_token: '[MASK]'
+widgetData:
+- source_sentence: パーキンソン病で12月20日に入院予定、保険請求はどうすればいい？
+  sentences:
+  - 死亡日以降の保険料は停止され請求額から差し引かれません
+  - 地震保険の見直しはいつするのがベストですか？
+  - 三泊四日のパーキンソン病入院に対する保険金申請手順を教えて
+- source_sentence: リウマチで1ヶ月入院したが手術は受けておらず、入院給付金は申請できるか不安
+  sentences:
+  - 2ヶ月分支納を含めた12月請求総額を知りたいのですが。
+  - リウマチで1ヶ月通院したが手術はしておらず、医療費控除の申請が可能か不安
+  - リウマチのため1ヶ月間入院したが手術無しで、入院給付金の申請が可能かどうかを確認したい
+- source_sentence: うつ病と大腸ポリープ手術後の保険金請求方法を説明してください
+  sentences:
+  - 11/30が期限の12月分保険料を、店頭コンビニ払いで支払うことはできますか
+  - 健康診断で異常ありませんでしたが費用は戻ってきますか
+  - うつ病治療と大腸ポリープ切除後、保険金を請求する具体的な方法を知りたい
+- source_sentence: 給付金がなかなか届かないと嘆く顧客の問い合わせ
+  sentences:
+  - 手術費用の明細書が遅れそうで心配です
+  - 心筋症の治療給付金が遅すぎるのでもうすぐ届くのか確認したい
+  - 保険解約は契約者が掛金納付を止めて保険会社との契約を解除すること
+- source_sentence: 払込票の期限が11月末で切れており支払いができない状態
+  sentences:
+  - 配偶者死亡時に生命保険を中途解約する場合の解約返戻金と控除額
+  - 11月満期保険金の受取期限が過ぎ、新規請求手続きが必要な状態
+  - 11月払込票の有効期限が過ぎ、新しい払込票が必要な状況
+model-index:
+- name: SentenceTransformer based on cl-nagoya/ruri-large-v2
+  results:
+  - task:
+      type: triplet
+      name: Triplet
+    dataset:
+      name: train eval
+      type: train-eval
+    metrics:
+    - type: cosine_accuracy
+      value: 1
+      name: Cosine Accuracy
+      verified: false
+  - task:
+      type: triplet
+      name: Triplet
+    dataset:
+      name: dev eval
+      type: dev-eval
+    metrics:
+    - type: cosine_accuracy
+      value: 0.9700000286102295
+      name: Cosine Accuracy
+      verified: false
+  - task:
+      type: triplet
+      name: Triplet
+    dataset:
+      name: test eval
+      type: test-eval
+    metrics:
+    - type: cosine_accuracy
+      value: 0.9800000190734863
+      name: Cosine Accuracy
+      verified: false
+config:
+  architectures:
+  - BertModel
+  model_type: bert
+  tokenizer_config:
+    cls_token: '[CLS]'
+    mask_token: '[MASK]'
+    pad_token: '[PAD]'
+    sep_token: '[SEP]'
+    unk_token: '[UNK]'
+cardData:
+  tags:
+  - sentence-transformers
+  - sentence-similarity
+  - feature-extraction
+  - generated_from_trainer
+  - dataset_size:800
+  - loss:TripletLoss
+  base_model: cl-nagoya/ruri-large-v2
+  widget:
+  - source_sentence: パーキンソン病で12月20日に入院予定、保険請求はどうすればいい？
+    sentences:
+    - 死亡日以降の保険料は停止され請求額から差し引かれません
+    - 地震保険の見直しはいつするのがベストですか？
+    - 三泊四日のパーキンソン病入院に対する保険金申請手順を教えて
+  - source_sentence: リウマチで1ヶ月入院したが手術は受けておらず、入院給付金は申請できるか不安
+    sentences:
+    - 2ヶ月分支納を含めた12月請求総額を知りたいのですが。
+    - リウマチで1ヶ月通院したが手術はしておらず、医療費控除の申請が可能か不安
+    - リウマチのため1ヶ月間入院したが手術無しで、入院給付金の申請が可能かどうかを確認したい
+  - source_sentence: うつ病と大腸ポリープ手術後の保険金請求方法を説明してください
+    sentences:
+    - 11/30が期限の12月分保険料を、店頭コンビニ払いで支払うことはできますか
+    - 健康診断で異常ありませんでしたが費用は戻ってきますか
+    - うつ病治療と大腸ポリープ切除後、保険金を請求する具体的な方法を知りたい
+  - source_sentence: 給付金がなかなか届かないと嘆く顧客の問い合わせ
+    sentences:
+    - 手術費用の明細書が遅れそうで心配です
+    - 心筋症の治療給付金が遅すぎるのでもうすぐ届くのか確認したい
+    - 保険解約は契約者が掛金納付を止めて保険会社との契約を解除すること
+  - source_sentence: 払込票の期限が11月末で切れており支払いができない状態
+    sentences:
+    - 配偶者死亡時に生命保険を中途解約する場合の解約返戻金と控除額
+    - 11月満期保険金の受取期限が過ぎ、新規請求手続きが必要な状態
+    - 11月払込票の有効期限が過ぎ、新しい払込票が必要な状況
+  pipeline_tag: sentence-similarity
+  library_name: sentence-transformers
+  metrics:
+  - cosine_accuracy
+  model-index:
+  - name: SentenceTransformer based on cl-nagoya/ruri-large-v2
+    results:
+    - task:
+        type: triplet
+        name: Triplet
+      dataset:
+        name: train eval
+        type: train-eval
+      metrics:
+      - type: cosine_accuracy
+        value: 1
+        name: Cosine Accuracy
+        verified: false
+    - task:
+        type: triplet
+        name: Triplet
+      dataset:
+        name: dev eval
+        type: dev-eval
+      metrics:
+      - type: cosine_accuracy
+        value: 0.9700000286102295
+        name: Cosine Accuracy
+        verified: false
+    - task:
+        type: triplet
+        name: Triplet
+      dataset:
+        name: test eval
+        type: test-eval
+      metrics:
+      - type: cosine_accuracy
+        value: 0.9800000190734863
+        name: Cosine Accuracy
+        verified: false
+siblings:
+- rfilename: .gitattributes
+- rfilename: 1_Pooling/config.json
+- rfilename: README.md
+- rfilename: config.json
+- rfilename: config_sentence_transformers.json
+- rfilename: model.safetensors
+- rfilename: modules.json
+- rfilename: sentence_bert_config.json
+- rfilename: special_tokens_map.json
+- rfilename: tokenizer_config.json
+- rfilename: vocab.txt
+spaces: []
+createdAt: '2025-08-06T08:59:28.000Z'
+safetensors:
+  parameters:
+    F32: 337441792
+  total: 337441792
+usedStorage: 1349812056
+downloadsAllTime: 56
+inferenceProviderMapping: {}
+configJson: null
+onnxFiles: {}
+safetensorsSizeMb: 1349.8
+approxSizeMb: 1349.8
+fetchedAt: '2026-06-10T07:15:01.000Z'

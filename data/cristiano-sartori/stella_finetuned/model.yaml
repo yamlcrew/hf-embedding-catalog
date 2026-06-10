@@ -1,0 +1,1554 @@
+_id: 6841d4cfbdc448822b12be06
+id: cristiano-sartori/stella_finetuned
+private: false
+pipeline_tag: sentence-similarity
+library_name: sentence-transformers
+tags:
+- sentence-transformers
+- safetensors
+- new
+- sentence-similarity
+- feature-extraction
+- generated_from_trainer
+- dataset_size:1140
+- loss:MatryoshkaLoss
+- loss:MultipleNegativesRankingLoss
+- custom_code
+- en
+- arxiv:1908.10084
+- arxiv:2205.13147
+- arxiv:1705.00652
+- base_model:NovaSearch/stella_en_400M_v5
+- base_model:finetune:NovaSearch/stella_en_400M_v5
+- license:apache-2.0
+- model-index
+- text-embeddings-inference
+- endpoints_compatible
+- region:us
+downloads: 0
+likes: 0
+modelId: cristiano-sartori/stella_finetuned
+author: cristiano-sartori
+sha: cab8a98b3723d839515670203541aed69a13cd40
+lastModified: '2025-06-05T17:34:06.000Z'
+gated: false
+disabled: false
+widgetData:
+- source_sentence: Prove that x + |x - 7| ≥ 7
+  sentences:
+  - "The subtyping relationship between `Iterable[Pair[A, Y]]` and `Map[A, Y]` can be understood by examining the covariance\
+    \ and structure of these types.\n\n1. **Covariance**: Both `Iterable` and `Pair` are covariant in their type parameters.\
+    \ This means that if `A` is a supertype of `B`, then `Iterable[Pair[A, Y]]` can be treated as a subtype of `Iterable[Pair[B,\
+    \ Y]]`.\n\n2. **Map's Structure**: The `Map` class extends `Iterable[Pair[U, V]]`, where `U` is invariant and `V` is covariant.\
+    \ Therefore, `Map[A, Y]` is considered an `Iterable[Pair[A, Y]]`. \n\n3. **Type Compatibility**: Since `Map[A, Y]` is\
+    \ an `Iterable[Pair[A, Y]]`, it follows that any instance of `Map[A, Y]` can be treated as an instance of `Iterable[Pair[A,\
+    \ Y]]`. \n\n4. **Subtyping**: Given that `Iterable[Pair[A, Y]]` can be seen as an interface that describes a broader category\
+    \ of collections, while `Map[A, Y]` is a specific implementation of that interface, we conclude that `Iterable[Pair[A,\
+    \ Y]]` is a supertype of `Map[A, Y]`. Thus, `Iterable[Pair[A, Y]]` can be assigned to a variable of type `Map[A, Y]`,\
+    \ making the relationship `Iterable[Pair[A, Y]] <: Map[A, Y]`.\n\nTherefore, the correct subtyping relationship is `Iterable[Pair[A,\
+    \ Y]] <: Map[A, Y]`."
+  - "To implement a function that inserts an element into a sorted list while maintaining the sorted order, we can use recursion.\
+    \ The idea is to check the first element of the list and decide whether to insert the new element before it or to continue\
+    \ the recursion with the rest of the list.\n\nHere’s how you can implement the `insert` function in Scala:\n\n```scala\n\
+    def insert(elem: Int, list: List[Int]): List[Int] = list match {\n  case Nil => List(elem) // If the list is empty, return\
+    \ a new list with the element\n  case head :: tail =>\n    if (elem <= head) {\n      elem :: list // If the element is\
+    \ less than or equal to the head, insert it at the front\n    } else {\n      head :: insert(elem, tail) // Otherwise,\
+    \ keep the head and recurse on the tail\n    }\n}\n```\n\n### Explanation:\n1. **Base Case**: \n   - If the list is empty\
+    \ (`Nil`), we return a new list that contains only the element `elem`.\n   \n2. **Recursive Case**:\n   - The list is\
+    \ matched against its head and tail using pattern matching. `head` is the first element, and `tail` is the remainder of\
+    \ the list.\n   - If `elem` is less than or equal to `head`, we prepend `elem` to the list (using `::`), resulting in\
+    \ a new list that maintains the sorted order.\n   - If `elem` is greater than `head`, we keep `head` in the resulting\
+    \ list and recursively call `insert` with `elem` and `tail`. This continues until we find the correct position for `elem`.\n\
+    \n### Example Usage:\n```scala\nval sortedList = List(1, 3, 5, 7)\nval newElement = 4\nval newList = insert(newElement,\
+    \ sortedList)\n// newList will be List(1, 3, 4, 5, 7)\n```\n\nThis recursive approach effectively ensures that the newly\
+    \ inserted element maintains the sorted property of the list."
+  - "To prove the inequality \\( x + |x - 7| \\geq 7 \\), we will analyze it by considering two cases based on the definition\
+    \ of the absolute value function.\n\n### Step 1: Understanding the Absolute Value\n\nThe absolute value function \\( |x\
+    \ - 7| \\) can be expressed in terms of piecewise functions:\n\n\\[\n|x - 7| = \n\\begin{cases} \n7 - x & \\text{if }\
+    \ x < 7 \\\\\nx - 7 & \\text{if } x \\geq 7 \n\\end{cases}\n\\]\n\n### Step 2: Case 1: \\( x < 7 \\)\n\nIn this case,\
+    \ we have:\n\n\\[\n|x - 7| = 7 - x\n\\]\n\nSubstituting this into the inequality \\( x + |x - 7| \\):\n\n\\[\nx + |x -\
+    \ 7| = x + (7 - x) = 7\n\\]\n\nNow, we need to check if:\n\n\\[\n7 \\geq 7\n\\]\n\nThis statement is true. Therefore,\
+    \ for all \\( x < 7 \\), the inequality \\( x + |x - 7| \\geq 7 \\) holds.\n\n### Step 3: Case 2: \\( x \\geq 7 \\)\n\n\
+    In this case, we have:\n\n\\[\n|x - 7| = x - 7\n\\]\n\nSubstituting this into the inequality \\( x + |x - 7| \\):\n\n\\\
+    [\nx + |x - 7| = x + (x - 7) = 2x - 7\n\\]\n\nNow, we need to check if:\n\n\\[\n2x - 7 \\geq 7\n\\]\n\nTo solve this inequality,\
+    \ we can rearrange it:\n\n\\[\n2x \\geq 14 \\\\\nx \\geq 7\n\\]\n\nThis statement is also true for all \\( x \\geq 7 \\\
+    ).\n\n### Conclusion\n\nCombining both cases, we find that the inequality \\( x + |x - 7| \\geq 7 \\) holds true for all\
+    \ \\( x \\in \\mathbb{R} \\).\n\nThus, we have proven that:\n\n\\[\nx + |x - 7| \\geq 7 \\quad \\forall x \\in \\mathbb{R}.\n\
+    \\]"
+- source_sentence: 'Assume you are working on SuperQuiz, a trendy app that lets everyone design quizzes and share them with
+    friends! SuperQuiz recently hired a new CEO, who wants to improve the development practices using modern methods. However,
+    this CEO has no engineering background, so the suggested improvements are well intentioned but not always feasible. The
+    latest CEO suggestion is this:
+
+    "Continuous Integration is a modern best practice. We must adopt it, so that the code in our repository never has bugs.
+    From now on, all branches in the SuperQuiz repository must have continuous integration enabled, and at the end of each
+    day all branches must pass all tests."
+
+    Propose (in 1-2 sentences) a compromise that achieves the CEO''s true objective:'
+  sentences:
+  - To effectively implement continuous integration while maintaining practicality, we should set it up for the main branch
+    of the SuperQuiz repository. This approach will help ensure that the code merged into the main branch is thoroughly tested,
+    thereby reducing the likelihood of bugs in the final product while allowing developers to work on feature branches without
+    the burden of daily testing requirements.
+  - "When removing a method from a project due to its potential for misuse and replacing it with a more user-friendly alternative,\
+    \ consider the following structured steps for upcoming releases:\n\n### 1. **Evaluate the Impact of Removal**\n   - **Dependency\
+    \ Analysis**: Identify all components, modules, or external libraries that depend on the method.\n   - **Usage Tracking**:\
+    \ Analyze how frequently the method is used across the codebase and document its current usage patterns.\n\n### 2. **Design\
+    \ the Replacement**\n   - **Feature Comparison**: Ensure the new method covers all functionalities of the old method while\
+    \ being easier to use.\n   - **User Experience**: Focus on enhancing usability and reducing the likelihood of errors with\
+    \ the new method.\n\n### 3. **Update Documentation**\n   - **API Documentation**: Revise the API documentation to remove\
+    \ references to the old method and provide comprehensive details about the new method.\n   - **Migration Guide**: Create\
+    \ a clear migration guide outlining how to transition from the old method to the new one.\n\n### 4. **Deprecate the Old\
+    \ Method**\n   - **Deprecation Notice**: Mark the old method as deprecated, ensuring it remains available for a defined\
+    \ period while encouraging users to transition.\n   - **Warnings**: Implement warnings in the code to alert developers\
+    \ using the old method about its deprecation.\n\n### 5. **Refactor Codebase**\n   - **Replace Instances**: Update all\
+    \ instances of the old method in the codebase with the new method, ensuring that functionality remains intact.\n   - **Testing**:\
+    \ Write and run unit tests to verify that the new method behaves as expected and does not introduce new bugs.\n\n### 6.\
+    \ **Communicate Changes**\n   - **Release Notes**: Include detailed information about the removal and replacement in the\
+    \ release notes for users.\n   - **Community Announcement**: If applicable, communicate the changes through relevant channels\
+    \ (e.g., newsletters, forums, or social media).\n\n### 7. **Monitor Adoption**\n   - **Feedback Mechanism**: Establish\
+    \ a way for users to provide feedback on the new method, allowing for quick identification of any issues.\n   - **Usage\
+    \ Metrics**: Track the adoption rate of the new method versus the old one to gauge the success of the transition.\n\n\
+    ### 8. **Plan for Future Releases**\n   - **Versioning Strategy**: Decide on a versioning strategy to handle the removal\
+    \ (e.g., major version bump) and inform users of the changes.\n   - **Continuous Improvement**: Gather feedback post-release\
+    \ and refine the new method as needed based on user experience.\n\nBy following these steps, you can ensure a smooth transition\
+    \ from the old method to the new one while minimizing disruption for users and maintaining the integrity of the project."
+  - "Draft: \n\nTo solve the problem of finding a non-negative vertex potential \\( p(v) \\) for each vertex \\( v \\in V\
+    \ \\) in a graph \\( G = (V, E) \\), we can formulate it as a linear program and utilize a polynomial-time separation\
+    \ oracle to verify feasibility. Below are the detailed steps to achieve this.\n\n### Step 1: Formulate the Linear Program\n\
+    We will set up a linear program with variables corresponding to the potentials of each vertex:\n\n- **Objective Function**:\n\
+    \  \\[\n  \\text{Maximize } Z = \\sum_{v \\in V} p(v)\n  \\]\n\n- **Constraints**:\n  For every non-empty subset \\( S\
+    \ \\subset V \\):\n  \\[\n  \\sum_{v \\in S} p(v) \\leq |E(S, \\bar{S})|\n  \\]\n\n- **Non-negativity Constraints**:\n\
+    \  \\[\n  p(v) \\geq 0 \\quad \\text{for all } v \\in V\n  \\]\n\n### Step 2: Design a Separation Oracle\nTo check whether\
+    \ a given potential vector \\( p^* \\) is feasible, we need to verify the constraints efficiently. We will construct a\
+    \ function \\( f(S) \\) for each non-empty subset \\( S \\subset V \\):\n\\[\nf(S) = |E(S, \\bar{S})| - \\sum_{v \\in\
+    \ S} p^*(v)\n\\]\n\nNow, we need to check if \\( f(S) \\geq 0 \\) holds for all \\( \\emptyset \\subset S \\subset V \\\
+    ). If \\( \\min_{\\emptyset \\subseteq S \\subset V} f(S) < 0 \\), then \\( p^* \\) is not feasible, and we can output\
+    \ a violated constraint.\n\n### Step 3: Submodularity of \\( f(S) \\)\nThe function \\( f(S) \\) is a submodular function\
+    \ as it is the sum of a cut function (which is submodular) and a linear term (which is trivially submodular). The key\
+    \ insight is that identifying violated constraints is equivalent to minimizing the submodular function \\( f(S) \\).\n\
+    \n### Step 4: Solve the Submodular Function Minimization\nSince we do not allow \\( S = V \\) in our solutions, we can\
+    \ solve the submodular minimization for the smaller ground sets \\( V \\setminus \\{v_1\\}, V \\setminus \\{v_2\\}, \\\
+    ldots, V \\setminus \\{v_n\\} \\). Each of these instances can be solved using polynomial-time algorithms for submodular\
+    \ function minimization.\n\n### Conclusion\nBy constructing a feasible region using the LP and developing a separation\
+    \ oracle that confirms whether a given potential is feasible or outputs a violated constraint, we can solve the original\
+    \ problem in polynomial time using the Ellipsoid method.\n\nAnswer:\n\nTo design a polynomial-time algorithm for the problem\
+    \ of finding a vertex potential \\( p(v) \\) in a graph \\( G = (V, E) \\), we can use linear programming combined with\
+    \ a separation oracle:\n\n1. **Linear Program Formulation**:\n   We define the following linear program:\n   - **Objective**:\n\
+    \     \\[\n     \\text{Maximize } Z = \\sum_{v \\in V} p(v)\n     \\]\n   - **Constraints**:\n     For every non-empty\
+    \ subset \\( S \\subset V \\):\n     \\[\n     \\sum_{v \\in S} p(v) \\leq |E(S, \\bar{S})|\n     \\]\n   - **Non-negativity**:\n\
+    \     \\[\n     p(v) \\geq 0 \\quad \\text{for all } v \\in V\n     \\]\n\n2. **Separation Oracle**:\n   To check if a\
+    \ potential vector \\( p^* \\) is feasible, we define:\n   \\[\n   f(S) = |E(S, \\bar{S})| - \\sum_{v \\in S} p^*(v)\n\
+    \   \\]\n   We need to determine if \\( \\min_{\\emptyset \\subseteq S \\subset V} f(S) < 0 \\). If it is, \\( p^* \\\
+    ) is not feasible.\n\n3. **Submodular Function**:\n   The function \\( f(S) \\) is submodular, and we can solve the minimization\
+    \ problem for the smaller sets \\( V \\setminus \\{v_1\\}, V \\setminus \\{v_2\\}, \\ldots, V \\setminus \\{v_n\\} \\\
+    ) to find any violations efficiently.\n\n4. **Polynomial Time**:\n   The submodular function minimization can be solved\
+    \ in polynomial time, enabling us to check feasibility of \\( p^* \\) efficiently. As a result, this method allows us\
+    \ to apply the Ellipsoid method to solve the linear program in polynomial time.\n\nJustification:\n\nThe approach leverages\
+    \ linear programming to maximize the vertex potentials while adhering to the specified constraints. By formulating the\
+    \ problem in terms of a separation oracle, we can efficiently verify the feasibility of potential solutions. The use of\
+    \ submodular functions is crucial because they have well-established properties that allow us to find violations quickly.\
+    \ This guarantees that the algorithm runs in polynomial time due to the efficiency of the submodular minimization process.\
+    \ Overall, this method combines theoretical insights from combinatorial optimization with practical computational techniques,\
+    \ leading to a robust solution to the problem."
+- source_sentence: 'Let $A \in \mathbb{R}^{m\times n}$, $b\in \mathbb{R}^m$ and $c\in \mathbb{R}^n$. Consider the following
+    linear program with $n$ variables: \begin{align*} \textbf{maximize} \hspace{0.8cm} & c^Tx \\ \textbf{subject to}\hspace{0.8cm}
+    & Ax =b \\ \hspace{0.8cm} & x \geq 0 \end{align*} Show that any extreme point $x^*$ has at most $m$ non-zero entries,
+    i.e., $|\{i: x^*_i > 0 \}| \leq m$. \\[-0.2cm] \noindent \emph{Hint: what happens if the columns corresponding to non-zero
+    entries in $x^*$ are linearly dependent?}\\[-0.2cm] {\small (If you are in a good mood you can prove the following stronger
+    statement: $x^*$ is an extreme point if and only if the columns of $A$ corresponding to non-zero entries of $x^*$ are
+    linearly independent.)}'
+  sentences:
+  - 'To show that any extreme point \( x^* \) of the given linear program has at most \( m \) non-zero entries, we proceed
+    with the following steps:
+
+
+    1. **Definition of Extreme Points**: An extreme point \( x^* \) is one that cannot be represented as a convex combination
+    of other feasible points. In the context of the linear program, this means that if \( x^* \) has more than \( m \) non-zero
+    entries, it can potentially be expressed as such a combination.
+
+
+    2. **Identifying Non-Zero Columns**: Let \( S = \{ i : x_i^* > 0 \} \). If \( |S| > m \), then we have more than \( m
+    \) non-zero variables in \( x^* \). The corresponding columns of matrix \( A \) associated with these non-zero entries
+    are denoted as \( A_S \).
+
+
+    3. **Linear Dependence**: Since there are more than \( m \) columns in \( A_S \), and given that the maximum rank of any
+    set of vectors (columns) is limited by the number of rows (which is \( m \)), the columns of \( A_S \) must be linearly
+    dependent when \( |S| > m \).
+
+
+    4. **Feasibility Condition**: The linear dependence implies that we can find a non-trivial combination of these columns
+    that sums to zero, allowing us to perturb some components of \( x^* \) while still satisfying the equality constraint
+    \( Ax = b \). This contradicts the property of extreme points.
+
+
+    5. **Conclusion**: Therefore, if an extreme point has more than \( m \) non-zero entries, it cannot be an extreme point
+    due to linear dependence among its corresponding columns in \( A \). Thus, we conclude that any extreme point \( x^* \)
+    must have at most \( m \) non-zero entries, i.e., \( |\{i: x_i^* > 0\}| \leq m \).'
+  - 'The sentences produced by the recognizer, such as "A was salmon outer the does" and "I Thomas at mice not the spoon,"
+    exhibit a lack of grammatical coherence and semantic meaning. The issues with these sentences can be categorized as follows:
+
+
+    1. **Grammatical Errors**: The sentences contain phrases that do not follow the rules of English grammar. For example,
+    "A was salmon outer the does" lacks a clear subject-verb-object structure, and "I Thomas at mice not the spoon" is not
+    a coherent expression.
+
+
+    2. **Semantic Incoherence**: Even if the sentences were grammatically correct, they still do not convey meaningful ideas.
+    Words are used in ways that do not align with their typical meanings or relations, leading to nonsensical phrases.
+
+
+    To improve the quality of the recognizer and select the correct sequences of words, the following Natural Language Processing
+    (NLP) techniques can be employed:
+
+
+    1. **Language Modeling**: Utilizing statistical or neural language models (e.g., n-grams, recurrent neural networks, transformers)
+    can help evaluate the probability of word sequences. These models can predict the likelihood of a sequence of words based
+    on the context and structure of the language.
+
+
+    2. **Syntactic Parsing**: Implementing syntactic parsers can help identify the grammatical structure of sentences. This
+    will allow the system to filter out those that do not conform to acceptable grammatical rules.
+
+
+    3. **Semantic Analysis**: Techniques such as word embeddings (e.g., Word2Vec, GloVe) or transformer-based models (e.g.,
+    BERT) can be used to assess the semantic similarity of phrases or to identify word meanings in context. This can help
+    in selecting sentences that are not only grammatically correct but also semantically meaningful.
+
+
+    4. **Contextual Constraints**: Incorporating contextual information from the surrounding text or the specific domain of
+    the input can help guide the selection process, ensuring that the output is relevant and coherent.
+
+
+    ### Required Resources:
+
+    - **Training Data**: A large corpus of correctly structured and meaningful English sentences for training language models
+    and parsers.
+
+    - **Computational Power**: Access to sufficient computational resources (e.g., GPUs) for training deep learning models,
+    especially for complex transformer architectures.
+
+    - **NLP Libraries and Frameworks**: Utilizing libraries such as NLTK, spaCy, or Hugging Face Transformers for implementing
+    various NLP techniques.
+
+    - **Expertise in NLP**: Knowledge of linguistic principles, machine learning, and natural language processing methodologies
+    will be essential to design and implement an effective solution.
+
+
+    By applying these techniques and leveraging the necessary resources, the company can significantly improve the quality
+    and coherence of the outputs from their hand-written document recognition system.'
+  - 'A Part-of-Speech (PoS) tagger is designed to categorize words in a given text into their respective grammatical roles,
+    such as nouns, verbs, adjectives, etc. This task is complex due to two primary challenges: first, lexical ambiguity arises
+    when a single word can serve multiple grammatical functions depending on its context (e.g., "lead" can be a noun or a
+    verb), which complicates the tagging process and can result in numerous potential interpretations as sentence length increases.
+    Second, the presence of out-of-vocabulary words—those not found in the tagger''s training data—presents a further difficulty,
+    as it necessitates the development of strategies for effectively assigning tags to these unfamiliar terms. This often
+    requires the implementation of linguistic heuristics and context-based inference, which adds an additional layer of complexity
+    to the tagging process.'
+- source_sentence: "One of your colleagues has recently taken over responsibility for a legacy codebase, a library currently\
+    \ used by some of your customers. Before making functional changes, your colleague found a bug caused by incorrect use\
+    \ of the following method in the codebase:\n\npublic class User {\n    /** Indicates whether the user’s browser, if any,\
+    \ has JavaScript enabled. */\n    public boolean hasJavascriptEnabled() { … }\n\n    // … other methods, such as getName(),\
+    \ getAge(), ...\n}\n\nYour colleague believes that this is a bad API. You are reviewing the pull request your colleague\
+    \ made to fix this bug. After some discussion and additional commits to address feedback, the pull request is ready. You\
+    \ can either \"squash\" the pull request into a single commit, or leave the multiple commits as they are. Explain in 1\
+    \ sentence whether you should \"squash\" and why."
+  sentences:
+  - "**Answer:** A\n\n**Plan:**\n1. Establish that the given linear programming problem is a bipartite network flow problem\
+    \ and identify the relevant properties of bipartite graphs.\n2. Use the property of total unimodularity of the constraint\
+    \ matrix in the linear program to show that any basic feasible solution (extreme point solution) is integral.\n3. Explain\
+    \ how the degree bounds \\(b(v)\\) affect the structure of the feasible region in the linear program.\n4. Conclude that\
+    \ since all extreme points of the feasible region are integral, the solution must also be integral.\n\n**Steps:**\n\n\
+    1. **Understanding the Problem Context:**\n   The linear programming formulation given corresponds to the min-cost perfect\
+    \ \\(b\\)-matching problem in a bipartite graph. The objective is to minimize the cost of the edges while satisfying the\
+    \ degree constraints for each vertex in the graph, where \\(b(v)\\) indicates how many edges must be incident to vertex\
+    \ \\(v\\).\n\n2. **Total Unimodularity of the Constraint Matrix:**\n   The matrix representing the constraints in this\
+    \ linear program is derived from the incidence matrix of the bipartite graph. Each row of the matrix corresponds to a\
+    \ vertex \\(v\\) and contains coefficients that indicate the edges incident to that vertex. In a bipartite graph, this\
+    \ incidence matrix is totally unimodular.\n   - A matrix is said to be totally unimodular if every square submatrix has\
+    \ a determinant of \\(0\\), \\(1\\), or \\(-1\\). This property ensures that every basic feasible solution (which corresponds\
+    \ to an extreme point in the feasible region) of the linear program can be expressed with integer values.\n\n3. **Impact\
+    \ of Degree Bounds \\(b(v)\\):**\n   Since \\(b(v)\\) are all non-negative integers, the constraints \\( \\sum_{e\\in\
+    \ E: v \\in e} x_e = b(v) \\) for all vertices \\(v\\) ensure that the solution must balance the contributions of edge\
+    \ variables \\(x_e\\) to meet the exact degree requirements. The total unimodularity of the matrix guarantees that these\
+    \ constraints will yield integer solutions for the variables \\(x_e\\).\n\n4. **Conclusion on Integral Solutions:**\n\
+    \   Given that the linear program's constraint matrix is totally unimodular and the constraints are linear combinations\
+    \ of the \\(x_e\\) variables that must equal the integer degree bounds \\(b(v)\\), we conclude that all extreme point\
+    \ solutions of this linear program are integral. Thus, if the input graph \\(G = (V, E)\\) is bipartite, every extreme\
+    \ point solution to the linear programming relaxation is indeed integral.\n\nAfter reasoning through the properties of\
+    \ the linear program and the implications of total unimodularity in a bipartite context, I confirm that the argument is\
+    \ valid and the conclusion is correct."
+  - "To differentiate the objective function with respect to \\( b_u \\), we start with the given objective:\n\n\\[\nJ = \\\
+    frac{1}{2} \\sum_{(u, m)} \\left(f_{um} - r_{um}\\right)^2 + \\frac{\\lambda}{2} \\left[ \\sum_{u \\in \\mathbf{U}} (b_u^2\
+    \ + \\|\\mathbf{v}_u\\|^2) + \\sum_{m \\in \\mathbf{M}} (b_m^2 + \\|\\mathbf{w}_m\\|^2) \\right]\n\\]\n\nwhere \\( f_{um}\
+    \ = \\langle \\mathbf{v}_u, \\mathbf{w}_m \\rangle + b_u + b_m \\).\n\nTo find the optimal \\( b_u \\), we focus only\
+    \ on the terms that involve \\( b_u \\). The relevant part of the objective that includes \\( b_u \\) is:\n\n\\[\nJ_u\
+    \ = \\frac{1}{2} \\sum_{m \\in N(u)} \\left( \\left\\langle \\mathbf{v}_u, \\mathbf{w}_m \\right\\rangle + b_u + b_m -\
+    \ r_{um} \\right)^2 + \\frac{\\lambda}{2} b_u^2\n\\]\n\nwhere \\( N(u) \\) is the set of movies rated by user \\( u \\\
+    ).\n\nNow, to differentiate \\( J_u \\) with respect to \\( b_u \\):\n\n1. **Differentiate the first term**:\n   \\[\n\
+    \   \\frac{\\partial J_u}{\\partial b_u} = \\sum_{m \\in N(u)} \\left( \\left\\langle \\mathbf{v}_u, \\mathbf{w}_m \\\
+    right\\rangle + b_u + b_m - r_{um} \\right)\n   \\]\n\n2. **Differentiate the regularization term**:\n   \\[\n   \\frac{\\\
+    partial}{\\partial b_u} \\left( \\frac{\\lambda}{2} b_u^2 \\right) = \\lambda b_u\n   \\]\n\nCombining these results,\
+    \ we get:\n\n\\[\n\\frac{\\partial J_u}{\\partial b_u} = \\sum_{m \\in N(u)} \\left( \\left\\langle \\mathbf{v}_u, \\\
+    mathbf{w}_m \\right\\rangle + b_u + b_m - r_{um} \\right) + \\lambda b_u\n\\]\n\nSetting the derivative to zero to find\
+    \ the optimal \\( b_u \\):\n\n\\[\n\\sum_{m \\in N(u)} \\left( \\left\\langle \\mathbf{v}_u, \\mathbf{w}_m \\right\\rangle\
+    \ + b_u + b_m - r_{um} \\right) + \\lambda b_u = 0\n\\]\n\nRearranging gives:\n\n\\[\n\\sum_{m \\in N(u)} \\left\\langle\
+    \ \\mathbf{v}_u, \\mathbf{w}_m \\right\\rangle + |N(u)| b_u + \\sum_{m \\in N(u)} b_m - \\sum_{m \\in N(u)} r_{um} + \\\
+    lambda b_u = 0\n\\]\n\nCombine the terms involving \\( b_u \\):\n\n\\[\n\\left( |N(u)| + \\lambda \\right) b_u = \\sum_{m\
+    \ \\in N(u)} r_{um} - \\sum_{m \\in N(u)} \\left\\langle \\mathbf{v}_u, \\mathbf{w}_m \\right\\rangle - \\sum_{m \\in\
+    \ N(u)} b_m\n\\]\n\nNow, solving for \\( b_u \\):\n\n\\[\nb_u = \\frac{1}{|N(u)| + \\lambda} \\left( \\sum_{m \\in N(u)}\
+    \ r_{um} - \\sum_{m \\in N(u)} \\left\\langle \\mathbf{v}_u, \\mathbf{w}_m \\right\\rangle - \\sum_{m \\in N(u)} b_m \\\
+    right)\n\\]\n\nThis is the optimal value of \\( b_u \\) when all other parameters are fixed. The important point here\
+    \ is that the regularization term contributes to the denominator, ensuring that the bias \\( b_u \\) is adjusted appropriately\
+    \ based on the number of ratings \\( |N(u)| \\) and the regularization strength \\( \\lambda \\)."
+  - Yes, you should squash the pull request into a single commit to ensure that the commit history is clean and focused on
+    the final, complete change, avoiding confusion from intermediate commits that may not represent valid states of the code.
+- source_sentence: 'Suppose we use the Simplex method to solve the following linear program: \begin{align*} \textbf{maximize}
+    \hspace{0.8cm} & 2x_1 - x_2 \\ \textbf{subject to}\hspace{0.8cm} & x_1 - x_2  + s_1  = 1 \\ \hspace{0.8cm} & \hspace{0.85cm}x_1  +
+    s_2  = 4 \\ \hspace{0.8cm} & \hspace{0.85cm} x_2  + s_3 = 2 \\ \hspace{0.8cm} &\hspace{-0.8cm}  x_1,\: x_2, \:s_1, \:s_2,
+    \:s_3 \geq 0 \end{align*} At the current step, we have the following Simplex tableau: \begin{align*} \hspace{1cm} x_1
+    &= 1 + x_2 - s_1 \\ s_2 &= 3 -x_2  + s_1  \\ s_3 &= 2 -x_2  \\ \cline{1-2} z &= 2 + x_2 - 2s_1 \end{align*} Write the
+    tableau obtained by executing one iteration (pivot) of the Simplex method starting from the above tableau.'
+  sentences:
+  - "To analyze whether we need to introduce constraints on the number of Byzantine processes in a non-synchronous environment,\
+    \ we first need to understand the properties of Byzantine consistent broadcast (BCB) and the implications of Byzantine\
+    \ processes on these properties.\n\n### Definitions:\n- Let \\( N \\) be the total number of processes in the system.\n\
+    - Let \\( F \\) be the maximum number of Byzantine processes.\n\n### Properties of Byzantine Consistent Broadcast:\n1.\
+    \ **Validity**: If the designated sender \\( S \\) is correct, then every correct process eventually delivers the message.\n\
+    2. **No duplication**: Every correct process delivers at most one message.\n3. **Integrity**: If a correct process delivers\
+    \ a message, and \\( S \\) is correct, then \\( S \\) has previously broadcast the message.\n4. **Consistency**: No two\
+    \ correct processes deliver different messages.\n\n### Analyzing Byzantine Processes:\nIn a non-synchronous environment,\
+    \ messages may take an unpredictable amount of time to be delivered, and processes may operate independently without a\
+    \ global clock. This introduces challenges when Byzantine processes (which can behave arbitrarily) are present.\n\n####\
+    \ Hypothetical Scenarios:\n1. **Scenario with \\( N = 3F \\)**:\n   - Suppose \\( N = 3F \\), meaning there are exactly\
+    \ three times as many processes as there are Byzantine processes. For example, if \\( F = 1 \\), then \\( N = 3 \\). In\
+    \ this case, the processes can be divided into:\n     - Correct process A\n     - Correct process B\n     - Byzantine\
+    \ process C\n\n   In this scenario, if the Byzantine process (C) decides to send a different message than what the correct\
+    \ sender (S) sends, it can mislead the correct processes (A and B). Both A and B may receive different messages if they\
+    \ are not able to distinguish between the correct and Byzantine processes.\n\n2. **Potential Violation of Properties**:\n\
+    \   - **Validity**: If the correct process A receives a message from the Byzantine process C, it may not be able to determine\
+    \ if the message is valid. This could lead to a situation where A does not deliver the correct message broadcasted by\
+    \ S.\n   - **Consistency**: If A and B receive different messages due to the Byzantine behavior of C, this violates the\
+    \ consistency property, as A delivers message \\( m_1 \\) while B delivers \\( m_2 \\).\n\n### Mathematical Relationships:\n\
+    To ensure the properties of BCB hold, particularly the consistency property, we must have more correct processes than\
+    \ Byzantine processes. The established consensus in distributed systems is that the maximum number of Byzantine processes\
+    \ \\( F \\) can be tolerated if and only if:\n\n$$ N > 3F $$\n\nor, more precisely,\n\n$$ N = 3F + 1 $$\n\n### Conclusion:\n\
+    Yes, we must introduce constraints on the number of Byzantine processes in non-synchronous environments to maintain the\
+    \ integrity and consistency properties of Byzantine consistent broadcast. Specifically, the condition \\( N = 3F + 1 \\\
+    ) must be satisfied to ensure that correct processes can always outvote or ignore the Byzantine processes, thereby ensuring\
+    \ that the system remains reliable and consistent even in the presence of failures or malicious behavior. This constraint\
+    \ is crucial for the robustness of the BCB protocol in distributed systems."
+  - "To execute one iteration (pivot) of the Simplex method from the given tableau, we need to follow these key steps:\n\n\
+    1. **Identify the entering variable:** This is the variable that will increase to improve the objective function. In our\
+    \ case, we look at the coefficients of the objective function row (z-row). We want to maximize z, so we will select the\
+    \ variable with the highest positive coefficient. In this tableau, the coefficients for \\(x_1\\), \\(x_2\\), and the\
+    \ slack variables \\(s_1\\), \\(s_2\\), and \\(s_3\\) in the objective function are \\(2\\), \\(1\\), \\(-2\\), \\(0\\\
+    ), and \\(0\\), respectively. The variable \\(x_1\\) has the highest positive coefficient of \\(2\\), so it will be our\
+    \ entering variable.\n\n2. **Identify the leaving variable:** Next, we need to determine which variable will leave the\
+    \ basis. This is done using the minimum ratio test. We look at the constraints and find the ratios of the current solution\
+    \ values to the coefficients of the entering variable in each constraint that has a positive coefficient for that variable.\n\
+    \n   From the current tableau:\n   - For the first equation, \\( x_1 = 1 + x_2 - s_1 \\): The coefficient of \\(x_1\\\
+    ) is \\(1\\). If we set \\(x_2 = 0\\) and \\(s_1 = 0\\), we can solve for the right-hand side (RHS), which is \\(1\\).\
+    \ The ratio is \\( \\frac{1}{1} = 1\\).\n   - For the second equation, \\(s_2 = 3 - x_2 + s_1\\): The coefficient of \\\
+    (x_1\\) is \\(1\\). The RHS is \\(3\\), so the ratio is again \\( \\frac{3}{1} = 3\\).\n   - For the third equation, \\\
+    (s_3 = 2 - x_2\\): The coefficient of \\(x_1\\) is \\(0\\), so we can't use this equation.\n\n   The minimum ratio is\
+    \ \\(1\\) from the first equation, so \\(s_1\\) will leave the basis.\n\n3. **Perform the pivot operation:** We pivot\
+    \ on the intersection of the entering variable \\(x_1\\) and the leaving variable \\(s_1\\). We want to express all variables\
+    \ in terms of the new basic variable \\(x_1\\).\n\n   The tableau before pivoting is:\n\n   \\[\n   \\begin{array}{c|c|c|c|c|c}\n\
+    \   & x_1 & x_2 & s_1 & s_2 & s_3 \\\\\n   \\hline\n   x_1 & 1 & 1 & -1 & 0 & 0 \\\\\n   s_2 & 0 & 1 & 1 & 1 & 0 \\\\\n\
+    \   s_3 & 0 & 0 & 0 & 0 & 2 \\\\\n   \\hline\n   z & 0 & 1 & 2 & 0 & 0 \\\\\n   \\end{array}\n   \\]\n\n   Now we perform\
+    \ row operations to update the tableau:\n\n   - **Row for \\(x_1\\)**: This will remain unchanged as it becomes our new\
+    \ basic variable.\n   - **Row for \\(s_2\\)**: We will subtract the \\(0\\) multiplied by row \\(x_1\\).\n   - **Row for\
+    \ \\(s_3\\)**: This row will also not change as \\(x_1\\) does not appear.\n   - **Row for \\(z\\)**: We need to replace\
+    \ the \\(z\\) row to reflect the new basis. The new coefficient of \\(z\\) will be \\(2\\) because we have removed \\\
+    (s_1\\) from the basis.\n\nAfter performing these operations, we can represent the new tableau:\n\n\\[\n\\begin{array}{c|c|c|c|c|c}\n\
+    \   & x_1 & x_2 & s_2 & s_3 \\\\\n   \\hline\n   x_1 & 1 & 1 & -1 & 0 \\\\\n   s_2 & 0 & 1 & 1 & 1 \\\\\n   s_3 & 0 &\
+    \ 0 & 0 & 2 \\\\\n   \\hline\n   z & 0 & 1 & 2 & 0 \\\\\n\\end{array}\n\\]\n\nHere, we have successfully updated the tableau\
+    \ after one pivot step of the Simplex method. The new solution reflects a state where \\(x_1\\) is now a basic variable.\
+    \ We will repeat this process until we find the optimal solution."
+  - "Certainly! Let's reevaluate the proof that \\( w(S_\\ell) = \\max_{T \\in \\mathcal{I}: |T| = \\ell} w(T) \\) for all\
+    \ \\( \\ell = 1, \\ldots, k \\) in a more rigorous manner.\n\n### Overview of the Proof Structure\n\nWe need to show that\
+    \ for each \\( \\ell \\), the greedy algorithm produces a set \\( S_\\ell \\) of elements with the maximum weight among\
+    \ all independent sets of size \\( \\ell \\) in a matroid \\( \\mathcal{M} = (E, \\mathcal{I}) \\) with a weight function\
+    \ \\( w: E \\rightarrow \\mathbb{R} \\).\n\n### Step 1: Base Case\n\nFor \\( \\ell = 1 \\):\n- \\( S_1 = \\{s_1\\} \\\
+    ) is the element with the highest weight.\n- The maximum weight of any independent set of size 1 is indeed \\( \\max_{e\
+    \ \\in E} w(e) \\), and since \\( s_1 \\) is chosen to be the element with the maximum weight, we have:\n\n\\[\nw(S_1)\
+    \ = w(s_1) = \\max_{T \\in \\mathcal{I}: |T| = 1} w(T)\n\\]\n\nThis base case holds true.\n\n### Step 2: Induction Hypothesis\n\
+    \nNow we assume that for some \\( \\ell \\) where \\( 1 \\leq \\ell < k \\):\n\n\\[\nw(S_\\ell) = \\max_{T \\in \\mathcal{I}:\
+    \ |T| = \\ell} w(T)\n\\]\n\nThis means that the greedy choice up to \\( \\ell \\) produces a maximum weight independent\
+    \ set of size \\( \\ell \\).\n\n### Step 3: Induction Step\n\nWe need to prove that:\n\n\\[\nw(S_{\\ell + 1}) = \\max_{T\
+    \ \\in \\mathcal{I}: |T| = \\ell + 1} w(T)\n\\]\n\nLet \\( S_{\\ell + 1} = \\{s_1, s_2, \\ldots, s_{\\ell + 1}\\} \\).\n\
+    \n#### Constructing the Set \\( S_{\\ell + 1} \\)\n\nTo show this equality, we will analyze any independent set \\( T\
+    \ \\) of size \\( \\ell + 1 \\).\n\n1. **Case 1: \\( s_{\\ell + 1} \\notin T \\)**\n\n   If \\( s_{\\ell + 1} \\) is not\
+    \ in \\( T \\), then \\( T \\) must consist of elements among \\( \\{s_1, s_2, \\ldots, s_\\ell\\} \\) and possibly other\
+    \ elements from \\( E \\). Since \\( S_\\ell \\) consists of the elements with the highest weights, we can state:\n\n\
+    \   \\[\n   w(T) \\leq w(S_\\ell)\n   \\]\n\n   By the induction hypothesis, this means:\n\n   \\[\n   w(T) \\leq \\max_{T'\
+    \ \\in \\mathcal{I}: |T'| = \\ell} w(T') = w(S_\\ell)\n   \\]\n\n2. **Case 2: \\( s_{\\ell + 1} \\in T \\)**\n\n   In\
+    \ this case, we can remove \\( s_{\\ell + 1} \\) from \\( T \\) to obtain an independent set \\( T' \\) of size \\( \\\
+    ell \\). Thus, we have:\n\n   \\[\n   w(T) = w(T') + w(s_{\\ell + 1})\n   \\]\n\n   Since \\( T' \\) is an independent\
+    \ set, we can apply the induction hypothesis, which gives us:\n\n   \\[\n   w(T') \\leq w(S_\\ell)\n   \\]\n\n   Therefore:\n\
+    \n   \\[\n   w(T) = w(T') + w(s_{\\ell + 1}) \\leq w(S_\\ell) + w(s_{\\ell + 1})\n   \\]\n\n### Conclusion from the Induction\
+    \ Step\n\nTo compare \\( w(S_{\\ell + 1}) \\) with \\( w(T) \\), we note:\n\n- \\( S_{\\ell + 1} \\) contains the highest\
+    \ weight elements, and thus:\n\n\\[\nw(S_{\\ell + 1}) = w(S_\\ell) + w(s_{\\ell + 1})\n\\]\n\nSince \\( s_{\\ell + 1}\
+    \ \\) is the highest weight among the remaining elements, we establish the following:\n\n- If \\( s_{\\ell + 1} \\) is\
+    \ included in \\( T \\), we have \\( w(T) \\leq w(S_{\\ell + 1}) \\).\n- If \\( s_{\\ell + 1} \\) is not included, \\\
+    ( w(T) \\leq w(S_\\ell) \\) which is already less than or equal to \\( w(S_{\\ell + 1}) \\).\n\nThus, we conclude that:\n\
+    \n\\[\nw(S_{\\ell + 1}) = \\max_{T \\in \\mathcal{I}: |T| = \\ell + 1} w(T)\n\\]\n\n### Final Remarks\n\nThe proof holds\
+    \ without any assumptions being violated. Each step has been justified based on the properties of the matroid and the\
+    \ greedy choice made at each step, ensuring that the maximum weight independent set is correctly identified for all sizes\
+    \ from 1 to \\( k \\).\n\nThis completes the proof with careful consideration of all cases and steps involved. Thank you\
+    \ for your patience!"
+model-index:
+- name: BGE base Financial Matryoshka
+  results:
+  - task:
+      type: information-retrieval
+      name: Information Retrieval
+    dataset:
+      name: dim 768
+      type: dim_768
+    metrics:
+    - type: cosine_accuracy@1
+      value: 0.2771929824561403
+      name: Cosine Accuracy@1
+      verified: false
+    - type: cosine_accuracy@3
+      value: 0.8807017543859649
+      name: Cosine Accuracy@3
+      verified: false
+    - type: cosine_accuracy@5
+      value: 0.9298245614035088
+      name: Cosine Accuracy@5
+      verified: false
+    - type: cosine_accuracy@10
+      value: 0.9824561403508771
+      name: Cosine Accuracy@10
+      verified: false
+    - type: cosine_precision@1
+      value: 0.2771929824561403
+      name: Cosine Precision@1
+      verified: false
+    - type: cosine_precision@3
+      value: 0.29356725146198825
+      name: Cosine Precision@3
+      verified: false
+    - type: cosine_precision@5
+      value: 0.1859649122807017
+      name: Cosine Precision@5
+      verified: false
+    - type: cosine_precision@10
+      value: 0.09824561403508769
+      name: Cosine Precision@10
+      verified: false
+    - type: cosine_recall@1
+      value: 0.2771929824561403
+      name: Cosine Recall@1
+      verified: false
+    - type: cosine_recall@3
+      value: 0.8807017543859649
+      name: Cosine Recall@3
+      verified: false
+    - type: cosine_recall@5
+      value: 0.9298245614035088
+      name: Cosine Recall@5
+      verified: false
+    - type: cosine_recall@10
+      value: 0.9824561403508771
+      name: Cosine Recall@10
+      verified: false
+    - type: cosine_ndcg@10
+      value: 0.6591255563949661
+      name: Cosine Ndcg@10
+      verified: false
+    - type: cosine_mrr@10
+      value: 0.551246170983013
+      name: Cosine Mrr@10
+      verified: false
+    - type: cosine_map@100
+      value: 0.552368028142022
+      name: Cosine Map@100
+      verified: false
+  - task:
+      type: information-retrieval
+      name: Information Retrieval
+    dataset:
+      name: dim 512
+      type: dim_512
+    metrics:
+    - type: cosine_accuracy@1
+      value: 0.2807017543859649
+      name: Cosine Accuracy@1
+      verified: false
+    - type: cosine_accuracy@3
+      value: 0.8771929824561403
+      name: Cosine Accuracy@3
+      verified: false
+    - type: cosine_accuracy@5
+      value: 0.9298245614035088
+      name: Cosine Accuracy@5
+      verified: false
+    - type: cosine_accuracy@10
+      value: 0.9824561403508771
+      name: Cosine Accuracy@10
+      verified: false
+    - type: cosine_precision@1
+      value: 0.2807017543859649
+      name: Cosine Precision@1
+      verified: false
+    - type: cosine_precision@3
+      value: 0.2923976608187134
+      name: Cosine Precision@3
+      verified: false
+    - type: cosine_precision@5
+      value: 0.1859649122807017
+      name: Cosine Precision@5
+      verified: false
+    - type: cosine_precision@10
+      value: 0.09824561403508769
+      name: Cosine Precision@10
+      verified: false
+    - type: cosine_recall@1
+      value: 0.2807017543859649
+      name: Cosine Recall@1
+      verified: false
+    - type: cosine_recall@3
+      value: 0.8771929824561403
+      name: Cosine Recall@3
+      verified: false
+    - type: cosine_recall@5
+      value: 0.9298245614035088
+      name: Cosine Recall@5
+      verified: false
+    - type: cosine_recall@10
+      value: 0.9824561403508771
+      name: Cosine Recall@10
+      verified: false
+    - type: cosine_ndcg@10
+      value: 0.6589926958168313
+      name: Cosine Ndcg@10
+      verified: false
+    - type: cosine_mrr@10
+      value: 0.5511487050960734
+      name: Cosine Mrr@10
+      verified: false
+    - type: cosine_map@100
+      value: 0.5522544998860789
+      name: Cosine Map@100
+      verified: false
+  - task:
+      type: information-retrieval
+      name: Information Retrieval
+    dataset:
+      name: dim 256
+      type: dim_256
+    metrics:
+    - type: cosine_accuracy@1
+      value: 0.2771929824561403
+      name: Cosine Accuracy@1
+      verified: false
+    - type: cosine_accuracy@3
+      value: 0.8736842105263158
+      name: Cosine Accuracy@3
+      verified: false
+    - type: cosine_accuracy@5
+      value: 0.9368421052631579
+      name: Cosine Accuracy@5
+      verified: false
+    - type: cosine_accuracy@10
+      value: 0.9894736842105263
+      name: Cosine Accuracy@10
+      verified: false
+    - type: cosine_precision@1
+      value: 0.2771929824561403
+      name: Cosine Precision@1
+      verified: false
+    - type: cosine_precision@3
+      value: 0.2912280701754386
+      name: Cosine Precision@3
+      verified: false
+    - type: cosine_precision@5
+      value: 0.18736842105263155
+      name: Cosine Precision@5
+      verified: false
+    - type: cosine_precision@10
+      value: 0.09894736842105262
+      name: Cosine Precision@10
+      verified: false
+    - type: cosine_recall@1
+      value: 0.2771929824561403
+      name: Cosine Recall@1
+      verified: false
+    - type: cosine_recall@3
+      value: 0.8736842105263158
+      name: Cosine Recall@3
+      verified: false
+    - type: cosine_recall@5
+      value: 0.9368421052631579
+      name: Cosine Recall@5
+      verified: false
+    - type: cosine_recall@10
+      value: 0.9894736842105263
+      name: Cosine Recall@10
+      verified: false
+    - type: cosine_ndcg@10
+      value: 0.6595162220662993
+      name: Cosine Ndcg@10
+      verified: false
+    - type: cosine_mrr@10
+      value: 0.5497257031467556
+      name: Cosine Mrr@10
+      verified: false
+    - type: cosine_map@100
+      value: 0.5503770544576845
+      name: Cosine Map@100
+      verified: false
+  - task:
+      type: information-retrieval
+      name: Information Retrieval
+    dataset:
+      name: dim 128
+      type: dim_128
+    metrics:
+    - type: cosine_accuracy@1
+      value: 0.29473684210526313
+      name: Cosine Accuracy@1
+      verified: false
+    - type: cosine_accuracy@3
+      value: 0.8701754385964913
+      name: Cosine Accuracy@3
+      verified: false
+    - type: cosine_accuracy@5
+      value: 0.9333333333333333
+      name: Cosine Accuracy@5
+      verified: false
+    - type: cosine_accuracy@10
+      value: 0.9859649122807017
+      name: Cosine Accuracy@10
+      verified: false
+    - type: cosine_precision@1
+      value: 0.29473684210526313
+      name: Cosine Precision@1
+      verified: false
+    - type: cosine_precision@3
+      value: 0.2900584795321637
+      name: Cosine Precision@3
+      verified: false
+    - type: cosine_precision@5
+      value: 0.18666666666666662
+      name: Cosine Precision@5
+      verified: false
+    - type: cosine_precision@10
+      value: 0.09859649122807015
+      name: Cosine Precision@10
+      verified: false
+    - type: cosine_recall@1
+      value: 0.29473684210526313
+      name: Cosine Recall@1
+      verified: false
+    - type: cosine_recall@3
+      value: 0.8701754385964913
+      name: Cosine Recall@3
+      verified: false
+    - type: cosine_recall@5
+      value: 0.9333333333333333
+      name: Cosine Recall@5
+      verified: false
+    - type: cosine_recall@10
+      value: 0.9859649122807017
+      name: Cosine Recall@10
+      verified: false
+    - type: cosine_ndcg@10
+      value: 0.6666560081123373
+      name: Cosine Ndcg@10
+      verified: false
+    - type: cosine_mrr@10
+      value: 0.5603745474798105
+      name: Cosine Mrr@10
+      verified: false
+    - type: cosine_map@100
+      value: 0.5612992076149971
+      name: Cosine Map@100
+      verified: false
+  - task:
+      type: information-retrieval
+      name: Information Retrieval
+    dataset:
+      name: dim 64
+      type: dim_64
+    metrics:
+    - type: cosine_accuracy@1
+      value: 0.27017543859649124
+      name: Cosine Accuracy@1
+      verified: false
+    - type: cosine_accuracy@3
+      value: 0.8456140350877193
+      name: Cosine Accuracy@3
+      verified: false
+    - type: cosine_accuracy@5
+      value: 0.9333333333333333
+      name: Cosine Accuracy@5
+      verified: false
+    - type: cosine_accuracy@10
+      value: 0.9789473684210527
+      name: Cosine Accuracy@10
+      verified: false
+    - type: cosine_precision@1
+      value: 0.27017543859649124
+      name: Cosine Precision@1
+      verified: false
+    - type: cosine_precision@3
+      value: 0.2818713450292398
+      name: Cosine Precision@3
+      verified: false
+    - type: cosine_precision@5
+      value: 0.18666666666666662
+      name: Cosine Precision@5
+      verified: false
+    - type: cosine_precision@10
+      value: 0.09789473684210524
+      name: Cosine Precision@10
+      verified: false
+    - type: cosine_recall@1
+      value: 0.27017543859649124
+      name: Cosine Recall@1
+      verified: false
+    - type: cosine_recall@3
+      value: 0.8456140350877193
+      name: Cosine Recall@3
+      verified: false
+    - type: cosine_recall@5
+      value: 0.9333333333333333
+      name: Cosine Recall@5
+      verified: false
+    - type: cosine_recall@10
+      value: 0.9789473684210527
+      name: Cosine Recall@10
+      verified: false
+    - type: cosine_ndcg@10
+      value: 0.6492874099033707
+      name: Cosine Ndcg@10
+      verified: false
+    - type: cosine_mrr@10
+      value: 0.5396101364522413
+      name: Cosine Mrr@10
+      verified: false
+    - type: cosine_map@100
+      value: 0.5411050628327516
+      name: Cosine Map@100
+      verified: false
+config:
+  architectures:
+  - NewModel
+  auto_map:
+    AutoConfig: NovaSearch/stella_en_400M_v5--configuration.NewConfig
+    AutoModel: NovaSearch/stella_en_400M_v5--modeling.NewModel
+  model_type: new
+  tokenizer_config:
+    cls_token: '[CLS]'
+    mask_token: '[MASK]'
+    pad_token: '[PAD]'
+    sep_token: '[SEP]'
+    unk_token: '[UNK]'
+cardData:
+  language:
+  - en
+  license: apache-2.0
+  tags:
+  - sentence-transformers
+  - sentence-similarity
+  - feature-extraction
+  - generated_from_trainer
+  - dataset_size:1140
+  - loss:MatryoshkaLoss
+  - loss:MultipleNegativesRankingLoss
+  base_model: NovaSearch/stella_en_400M_v5
+  widget:
+  - source_sentence: Prove that x + |x - 7| ≥ 7
+    sentences:
+    - "The subtyping relationship between `Iterable[Pair[A, Y]]` and `Map[A, Y]` can be understood by examining the covariance\
+      \ and structure of these types.\n\n1. **Covariance**: Both `Iterable` and `Pair` are covariant in their type parameters.\
+      \ This means that if `A` is a supertype of `B`, then `Iterable[Pair[A, Y]]` can be treated as a subtype of `Iterable[Pair[B,\
+      \ Y]]`.\n\n2. **Map's Structure**: The `Map` class extends `Iterable[Pair[U, V]]`, where `U` is invariant and `V` is\
+      \ covariant. Therefore, `Map[A, Y]` is considered an `Iterable[Pair[A, Y]]`. \n\n3. **Type Compatibility**: Since `Map[A,\
+      \ Y]` is an `Iterable[Pair[A, Y]]`, it follows that any instance of `Map[A, Y]` can be treated as an instance of `Iterable[Pair[A,\
+      \ Y]]`. \n\n4. **Subtyping**: Given that `Iterable[Pair[A, Y]]` can be seen as an interface that describes a broader\
+      \ category of collections, while `Map[A, Y]` is a specific implementation of that interface, we conclude that `Iterable[Pair[A,\
+      \ Y]]` is a supertype of `Map[A, Y]`. Thus, `Iterable[Pair[A, Y]]` can be assigned to a variable of type `Map[A, Y]`,\
+      \ making the relationship `Iterable[Pair[A, Y]] <: Map[A, Y]`.\n\nTherefore, the correct subtyping relationship is `Iterable[Pair[A,\
+      \ Y]] <: Map[A, Y]`."
+    - "To implement a function that inserts an element into a sorted list while maintaining the sorted order, we can use recursion.\
+      \ The idea is to check the first element of the list and decide whether to insert the new element before it or to continue\
+      \ the recursion with the rest of the list.\n\nHere’s how you can implement the `insert` function in Scala:\n\n```scala\n\
+      def insert(elem: Int, list: List[Int]): List[Int] = list match {\n  case Nil => List(elem) // If the list is empty,\
+      \ return a new list with the element\n  case head :: tail =>\n    if (elem <= head) {\n      elem :: list // If the\
+      \ element is less than or equal to the head, insert it at the front\n    } else {\n      head :: insert(elem, tail)\
+      \ // Otherwise, keep the head and recurse on the tail\n    }\n}\n```\n\n### Explanation:\n1. **Base Case**: \n   - If\
+      \ the list is empty (`Nil`), we return a new list that contains only the element `elem`.\n   \n2. **Recursive Case**:\n\
+      \   - The list is matched against its head and tail using pattern matching. `head` is the first element, and `tail`\
+      \ is the remainder of the list.\n   - If `elem` is less than or equal to `head`, we prepend `elem` to the list (using\
+      \ `::`), resulting in a new list that maintains the sorted order.\n   - If `elem` is greater than `head`, we keep `head`\
+      \ in the resulting list and recursively call `insert` with `elem` and `tail`. This continues until we find the correct\
+      \ position for `elem`.\n\n### Example Usage:\n```scala\nval sortedList = List(1, 3, 5, 7)\nval newElement = 4\nval newList\
+      \ = insert(newElement, sortedList)\n// newList will be List(1, 3, 4, 5, 7)\n```\n\nThis recursive approach effectively\
+      \ ensures that the newly inserted element maintains the sorted property of the list."
+    - "To prove the inequality \\( x + |x - 7| \\geq 7 \\), we will analyze it by considering two cases based on the definition\
+      \ of the absolute value function.\n\n### Step 1: Understanding the Absolute Value\n\nThe absolute value function \\\
+      ( |x - 7| \\) can be expressed in terms of piecewise functions:\n\n\\[\n|x - 7| = \n\\begin{cases} \n7 - x & \\text{if\
+      \ } x < 7 \\\\\nx - 7 & \\text{if } x \\geq 7 \n\\end{cases}\n\\]\n\n### Step 2: Case 1: \\( x < 7 \\)\n\nIn this case,\
+      \ we have:\n\n\\[\n|x - 7| = 7 - x\n\\]\n\nSubstituting this into the inequality \\( x + |x - 7| \\):\n\n\\[\nx + |x\
+      \ - 7| = x + (7 - x) = 7\n\\]\n\nNow, we need to check if:\n\n\\[\n7 \\geq 7\n\\]\n\nThis statement is true. Therefore,\
+      \ for all \\( x < 7 \\), the inequality \\( x + |x - 7| \\geq 7 \\) holds.\n\n### Step 3: Case 2: \\( x \\geq 7 \\)\n\
+      \nIn this case, we have:\n\n\\[\n|x - 7| = x - 7\n\\]\n\nSubstituting this into the inequality \\( x + |x - 7| \\):\n\
+      \n\\[\nx + |x - 7| = x + (x - 7) = 2x - 7\n\\]\n\nNow, we need to check if:\n\n\\[\n2x - 7 \\geq 7\n\\]\n\nTo solve\
+      \ this inequality, we can rearrange it:\n\n\\[\n2x \\geq 14 \\\\\nx \\geq 7\n\\]\n\nThis statement is also true for\
+      \ all \\( x \\geq 7 \\).\n\n### Conclusion\n\nCombining both cases, we find that the inequality \\( x + |x - 7| \\geq\
+      \ 7 \\) holds true for all \\( x \\in \\mathbb{R} \\).\n\nThus, we have proven that:\n\n\\[\nx + |x - 7| \\geq 7 \\\
+      quad \\forall x \\in \\mathbb{R}.\n\\]"
+  - source_sentence: 'Assume you are working on SuperQuiz, a trendy app that lets everyone design quizzes and share them with
+      friends! SuperQuiz recently hired a new CEO, who wants to improve the development practices using modern methods. However,
+      this CEO has no engineering background, so the suggested improvements are well intentioned but not always feasible.
+      The latest CEO suggestion is this:
+
+      "Continuous Integration is a modern best practice. We must adopt it, so that the code in our repository never has bugs.
+      From now on, all branches in the SuperQuiz repository must have continuous integration enabled, and at the end of each
+      day all branches must pass all tests."
+
+      Propose (in 1-2 sentences) a compromise that achieves the CEO''s true objective:'
+    sentences:
+    - To effectively implement continuous integration while maintaining practicality, we should set it up for the main branch
+      of the SuperQuiz repository. This approach will help ensure that the code merged into the main branch is thoroughly
+      tested, thereby reducing the likelihood of bugs in the final product while allowing developers to work on feature branches
+      without the burden of daily testing requirements.
+    - "When removing a method from a project due to its potential for misuse and replacing it with a more user-friendly alternative,\
+      \ consider the following structured steps for upcoming releases:\n\n### 1. **Evaluate the Impact of Removal**\n   -\
+      \ **Dependency Analysis**: Identify all components, modules, or external libraries that depend on the method.\n   -\
+      \ **Usage Tracking**: Analyze how frequently the method is used across the codebase and document its current usage patterns.\n\
+      \n### 2. **Design the Replacement**\n   - **Feature Comparison**: Ensure the new method covers all functionalities of\
+      \ the old method while being easier to use.\n   - **User Experience**: Focus on enhancing usability and reducing the\
+      \ likelihood of errors with the new method.\n\n### 3. **Update Documentation**\n   - **API Documentation**: Revise the\
+      \ API documentation to remove references to the old method and provide comprehensive details about the new method.\n\
+      \   - **Migration Guide**: Create a clear migration guide outlining how to transition from the old method to the new\
+      \ one.\n\n### 4. **Deprecate the Old Method**\n   - **Deprecation Notice**: Mark the old method as deprecated, ensuring\
+      \ it remains available for a defined period while encouraging users to transition.\n   - **Warnings**: Implement warnings\
+      \ in the code to alert developers using the old method about its deprecation.\n\n### 5. **Refactor Codebase**\n   -\
+      \ **Replace Instances**: Update all instances of the old method in the codebase with the new method, ensuring that functionality\
+      \ remains intact.\n   - **Testing**: Write and run unit tests to verify that the new method behaves as expected and\
+      \ does not introduce new bugs.\n\n### 6. **Communicate Changes**\n   - **Release Notes**: Include detailed information\
+      \ about the removal and replacement in the release notes for users.\n   - **Community Announcement**: If applicable,\
+      \ communicate the changes through relevant channels (e.g., newsletters, forums, or social media).\n\n### 7. **Monitor\
+      \ Adoption**\n   - **Feedback Mechanism**: Establish a way for users to provide feedback on the new method, allowing\
+      \ for quick identification of any issues.\n   - **Usage Metrics**: Track the adoption rate of the new method versus\
+      \ the old one to gauge the success of the transition.\n\n### 8. **Plan for Future Releases**\n   - **Versioning Strategy**:\
+      \ Decide on a versioning strategy to handle the removal (e.g., major version bump) and inform users of the changes.\n\
+      \   - **Continuous Improvement**: Gather feedback post-release and refine the new method as needed based on user experience.\n\
+      \nBy following these steps, you can ensure a smooth transition from the old method to the new one while minimizing disruption\
+      \ for users and maintaining the integrity of the project."
+    - "Draft: \n\nTo solve the problem of finding a non-negative vertex potential \\( p(v) \\) for each vertex \\( v \\in\
+      \ V \\) in a graph \\( G = (V, E) \\), we can formulate it as a linear program and utilize a polynomial-time separation\
+      \ oracle to verify feasibility. Below are the detailed steps to achieve this.\n\n### Step 1: Formulate the Linear Program\n\
+      We will set up a linear program with variables corresponding to the potentials of each vertex:\n\n- **Objective Function**:\n\
+      \  \\[\n  \\text{Maximize } Z = \\sum_{v \\in V} p(v)\n  \\]\n\n- **Constraints**:\n  For every non-empty subset \\\
+      ( S \\subset V \\):\n  \\[\n  \\sum_{v \\in S} p(v) \\leq |E(S, \\bar{S})|\n  \\]\n\n- **Non-negativity Constraints**:\n\
+      \  \\[\n  p(v) \\geq 0 \\quad \\text{for all } v \\in V\n  \\]\n\n### Step 2: Design a Separation Oracle\nTo check whether\
+      \ a given potential vector \\( p^* \\) is feasible, we need to verify the constraints efficiently. We will construct\
+      \ a function \\( f(S) \\) for each non-empty subset \\( S \\subset V \\):\n\\[\nf(S) = |E(S, \\bar{S})| - \\sum_{v \\\
+      in S} p^*(v)\n\\]\n\nNow, we need to check if \\( f(S) \\geq 0 \\) holds for all \\( \\emptyset \\subset S \\subset\
+      \ V \\). If \\( \\min_{\\emptyset \\subseteq S \\subset V} f(S) < 0 \\), then \\( p^* \\) is not feasible, and we can\
+      \ output a violated constraint.\n\n### Step 3: Submodularity of \\( f(S) \\)\nThe function \\( f(S) \\) is a submodular\
+      \ function as it is the sum of a cut function (which is submodular) and a linear term (which is trivially submodular).\
+      \ The key insight is that identifying violated constraints is equivalent to minimizing the submodular function \\( f(S)\
+      \ \\).\n\n### Step 4: Solve the Submodular Function Minimization\nSince we do not allow \\( S = V \\) in our solutions,\
+      \ we can solve the submodular minimization for the smaller ground sets \\( V \\setminus \\{v_1\\}, V \\setminus \\{v_2\\\
+      }, \\ldots, V \\setminus \\{v_n\\} \\). Each of these instances can be solved using polynomial-time algorithms for submodular\
+      \ function minimization.\n\n### Conclusion\nBy constructing a feasible region using the LP and developing a separation\
+      \ oracle that confirms whether a given potential is feasible or outputs a violated constraint, we can solve the original\
+      \ problem in polynomial time using the Ellipsoid method.\n\nAnswer:\n\nTo design a polynomial-time algorithm for the\
+      \ problem of finding a vertex potential \\( p(v) \\) in a graph \\( G = (V, E) \\), we can use linear programming combined\
+      \ with a separation oracle:\n\n1. **Linear Program Formulation**:\n   We define the following linear program:\n   -\
+      \ **Objective**:\n     \\[\n     \\text{Maximize } Z = \\sum_{v \\in V} p(v)\n     \\]\n   - **Constraints**:\n    \
+      \ For every non-empty subset \\( S \\subset V \\):\n     \\[\n     \\sum_{v \\in S} p(v) \\leq |E(S, \\bar{S})|\n  \
+      \   \\]\n   - **Non-negativity**:\n     \\[\n     p(v) \\geq 0 \\quad \\text{for all } v \\in V\n     \\]\n\n2. **Separation\
+      \ Oracle**:\n   To check if a potential vector \\( p^* \\) is feasible, we define:\n   \\[\n   f(S) = |E(S, \\bar{S})|\
+      \ - \\sum_{v \\in S} p^*(v)\n   \\]\n   We need to determine if \\( \\min_{\\emptyset \\subseteq S \\subset V} f(S)\
+      \ < 0 \\). If it is, \\( p^* \\) is not feasible.\n\n3. **Submodular Function**:\n   The function \\( f(S) \\) is submodular,\
+      \ and we can solve the minimization problem for the smaller sets \\( V \\setminus \\{v_1\\}, V \\setminus \\{v_2\\},\
+      \ \\ldots, V \\setminus \\{v_n\\} \\) to find any violations efficiently.\n\n4. **Polynomial Time**:\n   The submodular\
+      \ function minimization can be solved in polynomial time, enabling us to check feasibility of \\( p^* \\) efficiently.\
+      \ As a result, this method allows us to apply the Ellipsoid method to solve the linear program in polynomial time.\n\
+      \nJustification:\n\nThe approach leverages linear programming to maximize the vertex potentials while adhering to the\
+      \ specified constraints. By formulating the problem in terms of a separation oracle, we can efficiently verify the feasibility\
+      \ of potential solutions. The use of submodular functions is crucial because they have well-established properties that\
+      \ allow us to find violations quickly. This guarantees that the algorithm runs in polynomial time due to the efficiency\
+      \ of the submodular minimization process. Overall, this method combines theoretical insights from combinatorial optimization\
+      \ with practical computational techniques, leading to a robust solution to the problem."
+  - source_sentence: 'Let $A \in \mathbb{R}^{m\times n}$, $b\in \mathbb{R}^m$ and $c\in \mathbb{R}^n$. Consider the following
+      linear program with $n$ variables: \begin{align*} \textbf{maximize} \hspace{0.8cm} & c^Tx \\ \textbf{subject to}\hspace{0.8cm}
+      & Ax =b \\ \hspace{0.8cm} & x \geq 0 \end{align*} Show that any extreme point $x^*$ has at most $m$ non-zero entries,
+      i.e., $|\{i: x^*_i > 0 \}| \leq m$. \\[-0.2cm] \noindent \emph{Hint: what happens if the columns corresponding to non-zero
+      entries in $x^*$ are linearly dependent?}\\[-0.2cm] {\small (If you are in a good mood you can prove the following stronger
+      statement: $x^*$ is an extreme point if and only if the columns of $A$ corresponding to non-zero entries of $x^*$ are
+      linearly independent.)}'
+    sentences:
+    - 'To show that any extreme point \( x^* \) of the given linear program has at most \( m \) non-zero entries, we proceed
+      with the following steps:
+
+
+      1. **Definition of Extreme Points**: An extreme point \( x^* \) is one that cannot be represented as a convex combination
+      of other feasible points. In the context of the linear program, this means that if \( x^* \) has more than \( m \) non-zero
+      entries, it can potentially be expressed as such a combination.
+
+
+      2. **Identifying Non-Zero Columns**: Let \( S = \{ i : x_i^* > 0 \} \). If \( |S| > m \), then we have more than \(
+      m \) non-zero variables in \( x^* \). The corresponding columns of matrix \( A \) associated with these non-zero entries
+      are denoted as \( A_S \).
+
+
+      3. **Linear Dependence**: Since there are more than \( m \) columns in \( A_S \), and given that the maximum rank of
+      any set of vectors (columns) is limited by the number of rows (which is \( m \)), the columns of \( A_S \) must be linearly
+      dependent when \( |S| > m \).
+
+
+      4. **Feasibility Condition**: The linear dependence implies that we can find a non-trivial combination of these columns
+      that sums to zero, allowing us to perturb some components of \( x^* \) while still satisfying the equality constraint
+      \( Ax = b \). This contradicts the property of extreme points.
+
+
+      5. **Conclusion**: Therefore, if an extreme point has more than \( m \) non-zero entries, it cannot be an extreme point
+      due to linear dependence among its corresponding columns in \( A \). Thus, we conclude that any extreme point \( x^*
+      \) must have at most \( m \) non-zero entries, i.e., \( |\{i: x_i^* > 0\}| \leq m \).'
+    - 'The sentences produced by the recognizer, such as "A was salmon outer the does" and "I Thomas at mice not the spoon,"
+      exhibit a lack of grammatical coherence and semantic meaning. The issues with these sentences can be categorized as
+      follows:
+
+
+      1. **Grammatical Errors**: The sentences contain phrases that do not follow the rules of English grammar. For example,
+      "A was salmon outer the does" lacks a clear subject-verb-object structure, and "I Thomas at mice not the spoon" is not
+      a coherent expression.
+
+
+      2. **Semantic Incoherence**: Even if the sentences were grammatically correct, they still do not convey meaningful ideas.
+      Words are used in ways that do not align with their typical meanings or relations, leading to nonsensical phrases.
+
+
+      To improve the quality of the recognizer and select the correct sequences of words, the following Natural Language Processing
+      (NLP) techniques can be employed:
+
+
+      1. **Language Modeling**: Utilizing statistical or neural language models (e.g., n-grams, recurrent neural networks,
+      transformers) can help evaluate the probability of word sequences. These models can predict the likelihood of a sequence
+      of words based on the context and structure of the language.
+
+
+      2. **Syntactic Parsing**: Implementing syntactic parsers can help identify the grammatical structure of sentences. This
+      will allow the system to filter out those that do not conform to acceptable grammatical rules.
+
+
+      3. **Semantic Analysis**: Techniques such as word embeddings (e.g., Word2Vec, GloVe) or transformer-based models (e.g.,
+      BERT) can be used to assess the semantic similarity of phrases or to identify word meanings in context. This can help
+      in selecting sentences that are not only grammatically correct but also semantically meaningful.
+
+
+      4. **Contextual Constraints**: Incorporating contextual information from the surrounding text or the specific domain
+      of the input can help guide the selection process, ensuring that the output is relevant and coherent.
+
+
+      ### Required Resources:
+
+      - **Training Data**: A large corpus of correctly structured and meaningful English sentences for training language models
+      and parsers.
+
+      - **Computational Power**: Access to sufficient computational resources (e.g., GPUs) for training deep learning models,
+      especially for complex transformer architectures.
+
+      - **NLP Libraries and Frameworks**: Utilizing libraries such as NLTK, spaCy, or Hugging Face Transformers for implementing
+      various NLP techniques.
+
+      - **Expertise in NLP**: Knowledge of linguistic principles, machine learning, and natural language processing methodologies
+      will be essential to design and implement an effective solution.
+
+
+      By applying these techniques and leveraging the necessary resources, the company can significantly improve the quality
+      and coherence of the outputs from their hand-written document recognition system.'
+    - 'A Part-of-Speech (PoS) tagger is designed to categorize words in a given text into their respective grammatical roles,
+      such as nouns, verbs, adjectives, etc. This task is complex due to two primary challenges: first, lexical ambiguity
+      arises when a single word can serve multiple grammatical functions depending on its context (e.g., "lead" can be a noun
+      or a verb), which complicates the tagging process and can result in numerous potential interpretations as sentence length
+      increases. Second, the presence of out-of-vocabulary words—those not found in the tagger''s training data—presents a
+      further difficulty, as it necessitates the development of strategies for effectively assigning tags to these unfamiliar
+      terms. This often requires the implementation of linguistic heuristics and context-based inference, which adds an additional
+      layer of complexity to the tagging process.'
+  - source_sentence: "One of your colleagues has recently taken over responsibility for a legacy codebase, a library currently\
+      \ used by some of your customers. Before making functional changes, your colleague found a bug caused by incorrect use\
+      \ of the following method in the codebase:\n\npublic class User {\n    /** Indicates whether the user’s browser, if\
+      \ any, has JavaScript enabled. */\n    public boolean hasJavascriptEnabled() { … }\n\n    // … other methods, such as\
+      \ getName(), getAge(), ...\n}\n\nYour colleague believes that this is a bad API. You are reviewing the pull request\
+      \ your colleague made to fix this bug. After some discussion and additional commits to address feedback, the pull request\
+      \ is ready. You can either \"squash\" the pull request into a single commit, or leave the multiple commits as they are.\
+      \ Explain in 1 sentence whether you should \"squash\" and why."
+    sentences:
+    - "**Answer:** A\n\n**Plan:**\n1. Establish that the given linear programming problem is a bipartite network flow problem\
+      \ and identify the relevant properties of bipartite graphs.\n2. Use the property of total unimodularity of the constraint\
+      \ matrix in the linear program to show that any basic feasible solution (extreme point solution) is integral.\n3. Explain\
+      \ how the degree bounds \\(b(v)\\) affect the structure of the feasible region in the linear program.\n4. Conclude that\
+      \ since all extreme points of the feasible region are integral, the solution must also be integral.\n\n**Steps:**\n\n\
+      1. **Understanding the Problem Context:**\n   The linear programming formulation given corresponds to the min-cost perfect\
+      \ \\(b\\)-matching problem in a bipartite graph. The objective is to minimize the cost of the edges while satisfying\
+      \ the degree constraints for each vertex in the graph, where \\(b(v)\\) indicates how many edges must be incident to\
+      \ vertex \\(v\\).\n\n2. **Total Unimodularity of the Constraint Matrix:**\n   The matrix representing the constraints\
+      \ in this linear program is derived from the incidence matrix of the bipartite graph. Each row of the matrix corresponds\
+      \ to a vertex \\(v\\) and contains coefficients that indicate the edges incident to that vertex. In a bipartite graph,\
+      \ this incidence matrix is totally unimodular.\n   - A matrix is said to be totally unimodular if every square submatrix\
+      \ has a determinant of \\(0\\), \\(1\\), or \\(-1\\). This property ensures that every basic feasible solution (which\
+      \ corresponds to an extreme point in the feasible region) of the linear program can be expressed with integer values.\n\
+      \n3. **Impact of Degree Bounds \\(b(v)\\):**\n   Since \\(b(v)\\) are all non-negative integers, the constraints \\\
+      ( \\sum_{e\\in E: v \\in e} x_e = b(v) \\) for all vertices \\(v\\) ensure that the solution must balance the contributions\
+      \ of edge variables \\(x_e\\) to meet the exact degree requirements. The total unimodularity of the matrix guarantees\
+      \ that these constraints will yield integer solutions for the variables \\(x_e\\).\n\n4. **Conclusion on Integral Solutions:**\n\
+      \   Given that the linear program's constraint matrix is totally unimodular and the constraints are linear combinations\
+      \ of the \\(x_e\\) variables that must equal the integer degree bounds \\(b(v)\\), we conclude that all extreme point\
+      \ solutions of this linear program are integral. Thus, if the input graph \\(G = (V, E)\\) is bipartite, every extreme\
+      \ point solution to the linear programming relaxation is indeed integral.\n\nAfter reasoning through the properties\
+      \ of the linear program and the implications of total unimodularity in a bipartite context, I confirm that the argument\
+      \ is valid and the conclusion is correct."
+    - "To differentiate the objective function with respect to \\( b_u \\), we start with the given objective:\n\n\\[\nJ =\
+      \ \\frac{1}{2} \\sum_{(u, m)} \\left(f_{um} - r_{um}\\right)^2 + \\frac{\\lambda}{2} \\left[ \\sum_{u \\in \\mathbf{U}}\
+      \ (b_u^2 + \\|\\mathbf{v}_u\\|^2) + \\sum_{m \\in \\mathbf{M}} (b_m^2 + \\|\\mathbf{w}_m\\|^2) \\right]\n\\]\n\nwhere\
+      \ \\( f_{um} = \\langle \\mathbf{v}_u, \\mathbf{w}_m \\rangle + b_u + b_m \\).\n\nTo find the optimal \\( b_u \\), we\
+      \ focus only on the terms that involve \\( b_u \\). The relevant part of the objective that includes \\( b_u \\) is:\n\
+      \n\\[\nJ_u = \\frac{1}{2} \\sum_{m \\in N(u)} \\left( \\left\\langle \\mathbf{v}_u, \\mathbf{w}_m \\right\\rangle +\
+      \ b_u + b_m - r_{um} \\right)^2 + \\frac{\\lambda}{2} b_u^2\n\\]\n\nwhere \\( N(u) \\) is the set of movies rated by\
+      \ user \\( u \\).\n\nNow, to differentiate \\( J_u \\) with respect to \\( b_u \\):\n\n1. **Differentiate the first\
+      \ term**:\n   \\[\n   \\frac{\\partial J_u}{\\partial b_u} = \\sum_{m \\in N(u)} \\left( \\left\\langle \\mathbf{v}_u,\
+      \ \\mathbf{w}_m \\right\\rangle + b_u + b_m - r_{um} \\right)\n   \\]\n\n2. **Differentiate the regularization term**:\n\
+      \   \\[\n   \\frac{\\partial}{\\partial b_u} \\left( \\frac{\\lambda}{2} b_u^2 \\right) = \\lambda b_u\n   \\]\n\nCombining\
+      \ these results, we get:\n\n\\[\n\\frac{\\partial J_u}{\\partial b_u} = \\sum_{m \\in N(u)} \\left( \\left\\langle \\\
+      mathbf{v}_u, \\mathbf{w}_m \\right\\rangle + b_u + b_m - r_{um} \\right) + \\lambda b_u\n\\]\n\nSetting the derivative\
+      \ to zero to find the optimal \\( b_u \\):\n\n\\[\n\\sum_{m \\in N(u)} \\left( \\left\\langle \\mathbf{v}_u, \\mathbf{w}_m\
+      \ \\right\\rangle + b_u + b_m - r_{um} \\right) + \\lambda b_u = 0\n\\]\n\nRearranging gives:\n\n\\[\n\\sum_{m \\in\
+      \ N(u)} \\left\\langle \\mathbf{v}_u, \\mathbf{w}_m \\right\\rangle + |N(u)| b_u + \\sum_{m \\in N(u)} b_m - \\sum_{m\
+      \ \\in N(u)} r_{um} + \\lambda b_u = 0\n\\]\n\nCombine the terms involving \\( b_u \\):\n\n\\[\n\\left( |N(u)| + \\\
+      lambda \\right) b_u = \\sum_{m \\in N(u)} r_{um} - \\sum_{m \\in N(u)} \\left\\langle \\mathbf{v}_u, \\mathbf{w}_m \\\
+      right\\rangle - \\sum_{m \\in N(u)} b_m\n\\]\n\nNow, solving for \\( b_u \\):\n\n\\[\nb_u = \\frac{1}{|N(u)| + \\lambda}\
+      \ \\left( \\sum_{m \\in N(u)} r_{um} - \\sum_{m \\in N(u)} \\left\\langle \\mathbf{v}_u, \\mathbf{w}_m \\right\\rangle\
+      \ - \\sum_{m \\in N(u)} b_m \\right)\n\\]\n\nThis is the optimal value of \\( b_u \\) when all other parameters are\
+      \ fixed. The important point here is that the regularization term contributes to the denominator, ensuring that the\
+      \ bias \\( b_u \\) is adjusted appropriately based on the number of ratings \\( |N(u)| \\) and the regularization strength\
+      \ \\( \\lambda \\)."
+    - Yes, you should squash the pull request into a single commit to ensure that the commit history is clean and focused
+      on the final, complete change, avoiding confusion from intermediate commits that may not represent valid states of the
+      code.
+  - source_sentence: 'Suppose we use the Simplex method to solve the following linear program: \begin{align*} \textbf{maximize}
+      \hspace{0.8cm} & 2x_1 - x_2 \\ \textbf{subject to}\hspace{0.8cm} & x_1 - x_2  + s_1  = 1 \\ \hspace{0.8cm} & \hspace{0.85cm}x_1  +
+      s_2  = 4 \\ \hspace{0.8cm} & \hspace{0.85cm} x_2  + s_3 = 2 \\ \hspace{0.8cm} &\hspace{-0.8cm}  x_1,\: x_2, \:s_1, \:s_2,
+      \:s_3 \geq 0 \end{align*} At the current step, we have the following Simplex tableau: \begin{align*} \hspace{1cm} x_1
+      &= 1 + x_2 - s_1 \\ s_2 &= 3 -x_2  + s_1  \\ s_3 &= 2 -x_2  \\ \cline{1-2} z &= 2 + x_2 - 2s_1 \end{align*} Write the
+      tableau obtained by executing one iteration (pivot) of the Simplex method starting from the above tableau.'
+    sentences:
+    - "To analyze whether we need to introduce constraints on the number of Byzantine processes in a non-synchronous environment,\
+      \ we first need to understand the properties of Byzantine consistent broadcast (BCB) and the implications of Byzantine\
+      \ processes on these properties.\n\n### Definitions:\n- Let \\( N \\) be the total number of processes in the system.\n\
+      - Let \\( F \\) be the maximum number of Byzantine processes.\n\n### Properties of Byzantine Consistent Broadcast:\n\
+      1. **Validity**: If the designated sender \\( S \\) is correct, then every correct process eventually delivers the message.\n\
+      2. **No duplication**: Every correct process delivers at most one message.\n3. **Integrity**: If a correct process delivers\
+      \ a message, and \\( S \\) is correct, then \\( S \\) has previously broadcast the message.\n4. **Consistency**: No\
+      \ two correct processes deliver different messages.\n\n### Analyzing Byzantine Processes:\nIn a non-synchronous environment,\
+      \ messages may take an unpredictable amount of time to be delivered, and processes may operate independently without\
+      \ a global clock. This introduces challenges when Byzantine processes (which can behave arbitrarily) are present.\n\n\
+      #### Hypothetical Scenarios:\n1. **Scenario with \\( N = 3F \\)**:\n   - Suppose \\( N = 3F \\), meaning there are exactly\
+      \ three times as many processes as there are Byzantine processes. For example, if \\( F = 1 \\), then \\( N = 3 \\).\
+      \ In this case, the processes can be divided into:\n     - Correct process A\n     - Correct process B\n     - Byzantine\
+      \ process C\n\n   In this scenario, if the Byzantine process (C) decides to send a different message than what the correct\
+      \ sender (S) sends, it can mislead the correct processes (A and B). Both A and B may receive different messages if they\
+      \ are not able to distinguish between the correct and Byzantine processes.\n\n2. **Potential Violation of Properties**:\n\
+      \   - **Validity**: If the correct process A receives a message from the Byzantine process C, it may not be able to\
+      \ determine if the message is valid. This could lead to a situation where A does not deliver the correct message broadcasted\
+      \ by S.\n   - **Consistency**: If A and B receive different messages due to the Byzantine behavior of C, this violates\
+      \ the consistency property, as A delivers message \\( m_1 \\) while B delivers \\( m_2 \\).\n\n### Mathematical Relationships:\n\
+      To ensure the properties of BCB hold, particularly the consistency property, we must have more correct processes than\
+      \ Byzantine processes. The established consensus in distributed systems is that the maximum number of Byzantine processes\
+      \ \\( F \\) can be tolerated if and only if:\n\n$$ N > 3F $$\n\nor, more precisely,\n\n$$ N = 3F + 1 $$\n\n### Conclusion:\n\
+      Yes, we must introduce constraints on the number of Byzantine processes in non-synchronous environments to maintain\
+      \ the integrity and consistency properties of Byzantine consistent broadcast. Specifically, the condition \\( N = 3F\
+      \ + 1 \\) must be satisfied to ensure that correct processes can always outvote or ignore the Byzantine processes, thereby\
+      \ ensuring that the system remains reliable and consistent even in the presence of failures or malicious behavior. This\
+      \ constraint is crucial for the robustness of the BCB protocol in distributed systems."
+    - "To execute one iteration (pivot) of the Simplex method from the given tableau, we need to follow these key steps:\n\
+      \n1. **Identify the entering variable:** This is the variable that will increase to improve the objective function.\
+      \ In our case, we look at the coefficients of the objective function row (z-row). We want to maximize z, so we will\
+      \ select the variable with the highest positive coefficient. In this tableau, the coefficients for \\(x_1\\), \\(x_2\\\
+      ), and the slack variables \\(s_1\\), \\(s_2\\), and \\(s_3\\) in the objective function are \\(2\\), \\(1\\), \\(-2\\\
+      ), \\(0\\), and \\(0\\), respectively. The variable \\(x_1\\) has the highest positive coefficient of \\(2\\), so it\
+      \ will be our entering variable.\n\n2. **Identify the leaving variable:** Next, we need to determine which variable\
+      \ will leave the basis. This is done using the minimum ratio test. We look at the constraints and find the ratios of\
+      \ the current solution values to the coefficients of the entering variable in each constraint that has a positive coefficient\
+      \ for that variable.\n\n   From the current tableau:\n   - For the first equation, \\( x_1 = 1 + x_2 - s_1 \\): The\
+      \ coefficient of \\(x_1\\) is \\(1\\). If we set \\(x_2 = 0\\) and \\(s_1 = 0\\), we can solve for the right-hand side\
+      \ (RHS), which is \\(1\\). The ratio is \\( \\frac{1}{1} = 1\\).\n   - For the second equation, \\(s_2 = 3 - x_2 + s_1\\\
+      ): The coefficient of \\(x_1\\) is \\(1\\). The RHS is \\(3\\), so the ratio is again \\( \\frac{3}{1} = 3\\).\n   -\
+      \ For the third equation, \\(s_3 = 2 - x_2\\): The coefficient of \\(x_1\\) is \\(0\\), so we can't use this equation.\n\
+      \n   The minimum ratio is \\(1\\) from the first equation, so \\(s_1\\) will leave the basis.\n\n3. **Perform the pivot\
+      \ operation:** We pivot on the intersection of the entering variable \\(x_1\\) and the leaving variable \\(s_1\\). We\
+      \ want to express all variables in terms of the new basic variable \\(x_1\\).\n\n   The tableau before pivoting is:\n\
+      \n   \\[\n   \\begin{array}{c|c|c|c|c|c}\n   & x_1 & x_2 & s_1 & s_2 & s_3 \\\\\n   \\hline\n   x_1 & 1 & 1 & -1 & 0\
+      \ & 0 \\\\\n   s_2 & 0 & 1 & 1 & 1 & 0 \\\\\n   s_3 & 0 & 0 & 0 & 0 & 2 \\\\\n   \\hline\n   z & 0 & 1 & 2 & 0 & 0 \\\
+      \\\n   \\end{array}\n   \\]\n\n   Now we perform row operations to update the tableau:\n\n   - **Row for \\(x_1\\)**:\
+      \ This will remain unchanged as it becomes our new basic variable.\n   - **Row for \\(s_2\\)**: We will subtract the\
+      \ \\(0\\) multiplied by row \\(x_1\\).\n   - **Row for \\(s_3\\)**: This row will also not change as \\(x_1\\) does\
+      \ not appear.\n   - **Row for \\(z\\)**: We need to replace the \\(z\\) row to reflect the new basis. The new coefficient\
+      \ of \\(z\\) will be \\(2\\) because we have removed \\(s_1\\) from the basis.\n\nAfter performing these operations,\
+      \ we can represent the new tableau:\n\n\\[\n\\begin{array}{c|c|c|c|c|c}\n   & x_1 & x_2 & s_2 & s_3 \\\\\n   \\hline\n\
+      \   x_1 & 1 & 1 & -1 & 0 \\\\\n   s_2 & 0 & 1 & 1 & 1 \\\\\n   s_3 & 0 & 0 & 0 & 2 \\\\\n   \\hline\n   z & 0 & 1 &\
+      \ 2 & 0 \\\\\n\\end{array}\n\\]\n\nHere, we have successfully updated the tableau after one pivot step of the Simplex\
+      \ method. The new solution reflects a state where \\(x_1\\) is now a basic variable. We will repeat this process until\
+      \ we find the optimal solution."
+    - "Certainly! Let's reevaluate the proof that \\( w(S_\\ell) = \\max_{T \\in \\mathcal{I}: |T| = \\ell} w(T) \\) for all\
+      \ \\( \\ell = 1, \\ldots, k \\) in a more rigorous manner.\n\n### Overview of the Proof Structure\n\nWe need to show\
+      \ that for each \\( \\ell \\), the greedy algorithm produces a set \\( S_\\ell \\) of elements with the maximum weight\
+      \ among all independent sets of size \\( \\ell \\) in a matroid \\( \\mathcal{M} = (E, \\mathcal{I}) \\) with a weight\
+      \ function \\( w: E \\rightarrow \\mathbb{R} \\).\n\n### Step 1: Base Case\n\nFor \\( \\ell = 1 \\):\n- \\( S_1 = \\\
+      {s_1\\} \\) is the element with the highest weight.\n- The maximum weight of any independent set of size 1 is indeed\
+      \ \\( \\max_{e \\in E} w(e) \\), and since \\( s_1 \\) is chosen to be the element with the maximum weight, we have:\n\
+      \n\\[\nw(S_1) = w(s_1) = \\max_{T \\in \\mathcal{I}: |T| = 1} w(T)\n\\]\n\nThis base case holds true.\n\n### Step 2:\
+      \ Induction Hypothesis\n\nNow we assume that for some \\( \\ell \\) where \\( 1 \\leq \\ell < k \\):\n\n\\[\nw(S_\\\
+      ell) = \\max_{T \\in \\mathcal{I}: |T| = \\ell} w(T)\n\\]\n\nThis means that the greedy choice up to \\( \\ell \\) produces\
+      \ a maximum weight independent set of size \\( \\ell \\).\n\n### Step 3: Induction Step\n\nWe need to prove that:\n\n\
+      \\[\nw(S_{\\ell + 1}) = \\max_{T \\in \\mathcal{I}: |T| = \\ell + 1} w(T)\n\\]\n\nLet \\( S_{\\ell + 1} = \\{s_1, s_2,\
+      \ \\ldots, s_{\\ell + 1}\\} \\).\n\n#### Constructing the Set \\( S_{\\ell + 1} \\)\n\nTo show this equality, we will\
+      \ analyze any independent set \\( T \\) of size \\( \\ell + 1 \\).\n\n1. **Case 1: \\( s_{\\ell + 1} \\notin T \\)**\n\
+      \n   If \\( s_{\\ell + 1} \\) is not in \\( T \\), then \\( T \\) must consist of elements among \\( \\{s_1, s_2, \\\
+      ldots, s_\\ell\\} \\) and possibly other elements from \\( E \\). Since \\( S_\\ell \\) consists of the elements with\
+      \ the highest weights, we can state:\n\n   \\[\n   w(T) \\leq w(S_\\ell)\n   \\]\n\n   By the induction hypothesis,\
+      \ this means:\n\n   \\[\n   w(T) \\leq \\max_{T' \\in \\mathcal{I}: |T'| = \\ell} w(T') = w(S_\\ell)\n   \\]\n\n2. **Case\
+      \ 2: \\( s_{\\ell + 1} \\in T \\)**\n\n   In this case, we can remove \\( s_{\\ell + 1} \\) from \\( T \\) to obtain\
+      \ an independent set \\( T' \\) of size \\( \\ell \\). Thus, we have:\n\n   \\[\n   w(T) = w(T') + w(s_{\\ell + 1})\n\
+      \   \\]\n\n   Since \\( T' \\) is an independent set, we can apply the induction hypothesis, which gives us:\n\n   \\\
+      [\n   w(T') \\leq w(S_\\ell)\n   \\]\n\n   Therefore:\n\n   \\[\n   w(T) = w(T') + w(s_{\\ell + 1}) \\leq w(S_\\ell)\
+      \ + w(s_{\\ell + 1})\n   \\]\n\n### Conclusion from the Induction Step\n\nTo compare \\( w(S_{\\ell + 1}) \\) with \\\
+      ( w(T) \\), we note:\n\n- \\( S_{\\ell + 1} \\) contains the highest weight elements, and thus:\n\n\\[\nw(S_{\\ell +\
+      \ 1}) = w(S_\\ell) + w(s_{\\ell + 1})\n\\]\n\nSince \\( s_{\\ell + 1} \\) is the highest weight among the remaining\
+      \ elements, we establish the following:\n\n- If \\( s_{\\ell + 1} \\) is included in \\( T \\), we have \\( w(T) \\\
+      leq w(S_{\\ell + 1}) \\).\n- If \\( s_{\\ell + 1} \\) is not included, \\( w(T) \\leq w(S_\\ell) \\) which is already\
+      \ less than or equal to \\( w(S_{\\ell + 1}) \\).\n\nThus, we conclude that:\n\n\\[\nw(S_{\\ell + 1}) = \\max_{T \\\
+      in \\mathcal{I}: |T| = \\ell + 1} w(T)\n\\]\n\n### Final Remarks\n\nThe proof holds without any assumptions being violated.\
+      \ Each step has been justified based on the properties of the matroid and the greedy choice made at each step, ensuring\
+      \ that the maximum weight independent set is correctly identified for all sizes from 1 to \\( k \\).\n\nThis completes\
+      \ the proof with careful consideration of all cases and steps involved. Thank you for your patience!"
+  pipeline_tag: sentence-similarity
+  library_name: sentence-transformers
+  metrics:
+  - cosine_accuracy@1
+  - cosine_accuracy@3
+  - cosine_accuracy@5
+  - cosine_accuracy@10
+  - cosine_precision@1
+  - cosine_precision@3
+  - cosine_precision@5
+  - cosine_precision@10
+  - cosine_recall@1
+  - cosine_recall@3
+  - cosine_recall@5
+  - cosine_recall@10
+  - cosine_ndcg@10
+  - cosine_mrr@10
+  - cosine_map@100
+  model-index:
+  - name: BGE base Financial Matryoshka
+    results:
+    - task:
+        type: information-retrieval
+        name: Information Retrieval
+      dataset:
+        name: dim 768
+        type: dim_768
+      metrics:
+      - type: cosine_accuracy@1
+        value: 0.2771929824561403
+        name: Cosine Accuracy@1
+        verified: false
+      - type: cosine_accuracy@3
+        value: 0.8807017543859649
+        name: Cosine Accuracy@3
+        verified: false
+      - type: cosine_accuracy@5
+        value: 0.9298245614035088
+        name: Cosine Accuracy@5
+        verified: false
+      - type: cosine_accuracy@10
+        value: 0.9824561403508771
+        name: Cosine Accuracy@10
+        verified: false
+      - type: cosine_precision@1
+        value: 0.2771929824561403
+        name: Cosine Precision@1
+        verified: false
+      - type: cosine_precision@3
+        value: 0.29356725146198825
+        name: Cosine Precision@3
+        verified: false
+      - type: cosine_precision@5
+        value: 0.1859649122807017
+        name: Cosine Precision@5
+        verified: false
+      - type: cosine_precision@10
+        value: 0.09824561403508769
+        name: Cosine Precision@10
+        verified: false
+      - type: cosine_recall@1
+        value: 0.2771929824561403
+        name: Cosine Recall@1
+        verified: false
+      - type: cosine_recall@3
+        value: 0.8807017543859649
+        name: Cosine Recall@3
+        verified: false
+      - type: cosine_recall@5
+        value: 0.9298245614035088
+        name: Cosine Recall@5
+        verified: false
+      - type: cosine_recall@10
+        value: 0.9824561403508771
+        name: Cosine Recall@10
+        verified: false
+      - type: cosine_ndcg@10
+        value: 0.6591255563949661
+        name: Cosine Ndcg@10
+        verified: false
+      - type: cosine_mrr@10
+        value: 0.551246170983013
+        name: Cosine Mrr@10
+        verified: false
+      - type: cosine_map@100
+        value: 0.552368028142022
+        name: Cosine Map@100
+        verified: false
+    - task:
+        type: information-retrieval
+        name: Information Retrieval
+      dataset:
+        name: dim 512
+        type: dim_512
+      metrics:
+      - type: cosine_accuracy@1
+        value: 0.2807017543859649
+        name: Cosine Accuracy@1
+        verified: false
+      - type: cosine_accuracy@3
+        value: 0.8771929824561403
+        name: Cosine Accuracy@3
+        verified: false
+      - type: cosine_accuracy@5
+        value: 0.9298245614035088
+        name: Cosine Accuracy@5
+        verified: false
+      - type: cosine_accuracy@10
+        value: 0.9824561403508771
+        name: Cosine Accuracy@10
+        verified: false
+      - type: cosine_precision@1
+        value: 0.2807017543859649
+        name: Cosine Precision@1
+        verified: false
+      - type: cosine_precision@3
+        value: 0.2923976608187134
+        name: Cosine Precision@3
+        verified: false
+      - type: cosine_precision@5
+        value: 0.1859649122807017
+        name: Cosine Precision@5
+        verified: false
+      - type: cosine_precision@10
+        value: 0.09824561403508769
+        name: Cosine Precision@10
+        verified: false
+      - type: cosine_recall@1
+        value: 0.2807017543859649
+        name: Cosine Recall@1
+        verified: false
+      - type: cosine_recall@3
+        value: 0.8771929824561403
+        name: Cosine Recall@3
+        verified: false
+      - type: cosine_recall@5
+        value: 0.9298245614035088
+        name: Cosine Recall@5
+        verified: false
+      - type: cosine_recall@10
+        value: 0.9824561403508771
+        name: Cosine Recall@10
+        verified: false
+      - type: cosine_ndcg@10
+        value: 0.6589926958168313
+        name: Cosine Ndcg@10
+        verified: false
+      - type: cosine_mrr@10
+        value: 0.5511487050960734
+        name: Cosine Mrr@10
+        verified: false
+      - type: cosine_map@100
+        value: 0.5522544998860789
+        name: Cosine Map@100
+        verified: false
+    - task:
+        type: information-retrieval
+        name: Information Retrieval
+      dataset:
+        name: dim 256
+        type: dim_256
+      metrics:
+      - type: cosine_accuracy@1
+        value: 0.2771929824561403
+        name: Cosine Accuracy@1
+        verified: false
+      - type: cosine_accuracy@3
+        value: 0.8736842105263158
+        name: Cosine Accuracy@3
+        verified: false
+      - type: cosine_accuracy@5
+        value: 0.9368421052631579
+        name: Cosine Accuracy@5
+        verified: false
+      - type: cosine_accuracy@10
+        value: 0.9894736842105263
+        name: Cosine Accuracy@10
+        verified: false
+      - type: cosine_precision@1
+        value: 0.2771929824561403
+        name: Cosine Precision@1
+        verified: false
+      - type: cosine_precision@3
+        value: 0.2912280701754386
+        name: Cosine Precision@3
+        verified: false
+      - type: cosine_precision@5
+        value: 0.18736842105263155
+        name: Cosine Precision@5
+        verified: false
+      - type: cosine_precision@10
+        value: 0.09894736842105262
+        name: Cosine Precision@10
+        verified: false
+      - type: cosine_recall@1
+        value: 0.2771929824561403
+        name: Cosine Recall@1
+        verified: false
+      - type: cosine_recall@3
+        value: 0.8736842105263158
+        name: Cosine Recall@3
+        verified: false
+      - type: cosine_recall@5
+        value: 0.9368421052631579
+        name: Cosine Recall@5
+        verified: false
+      - type: cosine_recall@10
+        value: 0.9894736842105263
+        name: Cosine Recall@10
+        verified: false
+      - type: cosine_ndcg@10
+        value: 0.6595162220662993
+        name: Cosine Ndcg@10
+        verified: false
+      - type: cosine_mrr@10
+        value: 0.5497257031467556
+        name: Cosine Mrr@10
+        verified: false
+      - type: cosine_map@100
+        value: 0.5503770544576845
+        name: Cosine Map@100
+        verified: false
+    - task:
+        type: information-retrieval
+        name: Information Retrieval
+      dataset:
+        name: dim 128
+        type: dim_128
+      metrics:
+      - type: cosine_accuracy@1
+        value: 0.29473684210526313
+        name: Cosine Accuracy@1
+        verified: false
+      - type: cosine_accuracy@3
+        value: 0.8701754385964913
+        name: Cosine Accuracy@3
+        verified: false
+      - type: cosine_accuracy@5
+        value: 0.9333333333333333
+        name: Cosine Accuracy@5
+        verified: false
+      - type: cosine_accuracy@10
+        value: 0.9859649122807017
+        name: Cosine Accuracy@10
+        verified: false
+      - type: cosine_precision@1
+        value: 0.29473684210526313
+        name: Cosine Precision@1
+        verified: false
+      - type: cosine_precision@3
+        value: 0.2900584795321637
+        name: Cosine Precision@3
+        verified: false
+      - type: cosine_precision@5
+        value: 0.18666666666666662
+        name: Cosine Precision@5
+        verified: false
+      - type: cosine_precision@10
+        value: 0.09859649122807015
+        name: Cosine Precision@10
+        verified: false
+      - type: cosine_recall@1
+        value: 0.29473684210526313
+        name: Cosine Recall@1
+        verified: false
+      - type: cosine_recall@3
+        value: 0.8701754385964913
+        name: Cosine Recall@3
+        verified: false
+      - type: cosine_recall@5
+        value: 0.9333333333333333
+        name: Cosine Recall@5
+        verified: false
+      - type: cosine_recall@10
+        value: 0.9859649122807017
+        name: Cosine Recall@10
+        verified: false
+      - type: cosine_ndcg@10
+        value: 0.6666560081123373
+        name: Cosine Ndcg@10
+        verified: false
+      - type: cosine_mrr@10
+        value: 0.5603745474798105
+        name: Cosine Mrr@10
+        verified: false
+      - type: cosine_map@100
+        value: 0.5612992076149971
+        name: Cosine Map@100
+        verified: false
+    - task:
+        type: information-retrieval
+        name: Information Retrieval
+      dataset:
+        name: dim 64
+        type: dim_64
+      metrics:
+      - type: cosine_accuracy@1
+        value: 0.27017543859649124
+        name: Cosine Accuracy@1
+        verified: false
+      - type: cosine_accuracy@3
+        value: 0.8456140350877193
+        name: Cosine Accuracy@3
+        verified: false
+      - type: cosine_accuracy@5
+        value: 0.9333333333333333
+        name: Cosine Accuracy@5
+        verified: false
+      - type: cosine_accuracy@10
+        value: 0.9789473684210527
+        name: Cosine Accuracy@10
+        verified: false
+      - type: cosine_precision@1
+        value: 0.27017543859649124
+        name: Cosine Precision@1
+        verified: false
+      - type: cosine_precision@3
+        value: 0.2818713450292398
+        name: Cosine Precision@3
+        verified: false
+      - type: cosine_precision@5
+        value: 0.18666666666666662
+        name: Cosine Precision@5
+        verified: false
+      - type: cosine_precision@10
+        value: 0.09789473684210524
+        name: Cosine Precision@10
+        verified: false
+      - type: cosine_recall@1
+        value: 0.27017543859649124
+        name: Cosine Recall@1
+        verified: false
+      - type: cosine_recall@3
+        value: 0.8456140350877193
+        name: Cosine Recall@3
+        verified: false
+      - type: cosine_recall@5
+        value: 0.9333333333333333
+        name: Cosine Recall@5
+        verified: false
+      - type: cosine_recall@10
+        value: 0.9789473684210527
+        name: Cosine Recall@10
+        verified: false
+      - type: cosine_ndcg@10
+        value: 0.6492874099033707
+        name: Cosine Ndcg@10
+        verified: false
+      - type: cosine_mrr@10
+        value: 0.5396101364522413
+        name: Cosine Mrr@10
+        verified: false
+      - type: cosine_map@100
+        value: 0.5411050628327516
+        name: Cosine Map@100
+        verified: false
+siblings:
+- rfilename: .gitattributes
+- rfilename: 1_Pooling/config.json
+- rfilename: 2_Dense/config.json
+- rfilename: 2_Dense/model.safetensors
+- rfilename: README.md
+- rfilename: config.json
+- rfilename: config_sentence_transformers.json
+- rfilename: model.safetensors
+- rfilename: modules.json
+- rfilename: sentence_bert_config.json
+- rfilename: special_tokens_map.json
+- rfilename: tokenizer.json
+- rfilename: tokenizer_config.json
+- rfilename: vocab.txt
+spaces: []
+createdAt: '2025-06-05T17:33:03.000Z'
+safetensors:
+  parameters:
+    F32: 434139136
+  total: 434139136
+usedStorage: 1740784240
+downloadsAllTime: 10
+inferenceProviderMapping: {}
+configJson:
+  architectures:
+  - NewModel
+  attention_probs_dropout_prob: 0.0
+  auto_map:
+    AutoConfig: NovaSearch/stella_en_400M_v5--configuration.NewConfig
+    AutoModel: NovaSearch/stella_en_400M_v5--modeling.NewModel
+  classifier_dropout: null
+  hidden_act: gelu
+  hidden_dropout_prob: 0.1
+  hidden_size: 1024
+  initializer_range: 0.02
+  intermediate_size: 4096
+  layer_norm_eps: 1.0e-12
+  layer_norm_type: layer_norm
+  logn_attention_clip1: false
+  logn_attention_scale: false
+  max_position_embeddings: 8192
+  model_type: new
+  num_attention_heads: 16
+  num_hidden_layers: 24
+  pack_qkv: true
+  pad_token_id: 0
+  position_embedding_type: rope
+  rope_scaling:
+    factor: 2.0
+    type: ntk
+  rope_theta: 160000
+  torch_dtype: float32
+  transformers_version: 4.52.4
+  type_vocab_size: 2
+  unpad_inputs: true
+  use_memory_efficient_attention: true
+  vocab_size: 30528
+onnxFiles: {}
+safetensorsSizeMb: 1740.8
+approxSizeMb: 1736.6
+fetchedAt: '2026-06-10T07:15:01.000Z'

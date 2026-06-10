@@ -1,0 +1,1468 @@
+_id: 68480ccf627e850d3519f366
+id: cristiano-sartori/MNLP_M3_document_encoder
+private: false
+pipeline_tag: sentence-similarity
+library_name: sentence-transformers
+tags:
+- sentence-transformers
+- safetensors
+- bert
+- sentence-similarity
+- feature-extraction
+- generated_from_trainer
+- dataset_size:1137
+- loss:MatryoshkaLoss
+- loss:MultipleNegativesRankingLoss
+- en
+- arxiv:1908.10084
+- arxiv:2205.13147
+- arxiv:1705.00652
+- base_model:BAAI/bge-base-en-v1.5
+- base_model:finetune:BAAI/bge-base-en-v1.5
+- license:apache-2.0
+- model-index
+- text-embeddings-inference
+- endpoints_compatible
+- region:us
+downloads: 2
+likes: 0
+modelId: cristiano-sartori/MNLP_M3_document_encoder
+author: cristiano-sartori
+sha: 21c18fdd8e4935a5ef28d9bf9c9719b952977f2f
+lastModified: '2025-06-10T10:45:50.000Z'
+gated: false
+disabled: false
+mask_token: '[MASK]'
+widgetData:
+- source_sentence: "Which of the following statements about the $\\mathrm{SVD}$ of an $N \\times D$ matrix $\\mathbf{X}$ are\
+    \ correct?\nA. [\nB. '\nC. W\nD. e\nE.  \nD. c\nF. a\nG. n\nH.  \nI. c"
+  sentences:
+  - "The correct answer is **3. 1024 bits**.\n\n**Reasoning:**\nRSA (Rivest-Shamir-Adleman) is a widely used public-key cryptographic\
+    \ system that relies on the difficulty of factoring large integers. The size of the RSA modulus (the product of two large\
+    \ prime numbers) is crucial for the security of the encryption.\n\n1. **64 bits**: This size is considered insecure and\
+    \ is far too small for any practical cryptographic application today. It can be easily factored with modern computing\
+    \ power.\n\n2. **256 bits**: While this size is more secure than 64 bits, it is still not sufficient for RSA. A 256-bit\
+    \ key is more commonly associated with symmetric encryption algorithms like AES, not RSA.\n\n3. **1024 bits**: This size\
+    \ was commonly used in practice for RSA keys for many years and is still considered secure for many applications, although\
+    \ it is becoming less common as security standards evolve. It strikes a balance between security and performance.\n\n\
+    4. **8192 bits**: This size is much larger than what is typically used in practice. While it offers a very high level\
+    \ of security, it also results in significantly slower performance and is not necessary for most applications. \n\nAs\
+    \ of now, many organizations are moving towards 2048 bits or even 3072 bits for RSA keys to ensure stronger security,\
+    \ but 1024 bits remains a common reference point for typical RSA modulus sizes in practice. Therefore, the best answer\
+    \ is **3. 1024 bits**."
+  - The correct statements about the SVD of an \( N \times D \) matrix \( \\mathbf{X} \) are:\n\n1. **We can compute the singular
+    values of \( \\mathbf{X} \) by computing the eigenvalues of \( \\mathbf{X X}^{\\top} \). This has complexity \( O\\left(N^{3}\\right)
+    \).**\n   \n   - This statement is correct if \( N \geq D \). The computation of the eigenvalues of \( \\mathbf{X X}^{\\top}
+    \) involves an \( N \times N \) matrix, leading to a complexity of \( O(N^3) \).\n\n2. **We can compute the singular values
+    of \( \\mathbf{X} \) by computing the eigenvalues of \( \\mathbf{X}^{\\top} \\mathbf{X} \). This has complexity \( O\\left(D^{3}\\right)
+    \).**\n   \n   - This statement is correct if \( D \geq N \). The computation of the eigenvalues of \( \\mathbf{X}^{\\top}
+    \\mathbf{X} \) involves a \( D \times D \) matrix, leading to a complexity of \( O(D^3) \).\n\nThe other statements are
+    incorrect for the following reasons:\n\n- **We can compute the singular values of \( \\mathbf{X} \) by computing the eigenvalues
+    of \( \\mathbf{X X}^{\\top} \). This has complexity \( O\\left(D^{3}\\right) \).**\n  \n  - Incorrect because it incorrectly
+    states the complexity for \( \\mathbf{X X}^{\\top} \) when it should be \( O(N^3) \) if \( N \geq D \).\n\n- **We can
+    compute the singular values of \( \\mathbf{X} \) by computing the eigenvalues of \( \\mathbf{X}^{\\top} \\mathbf{X} \).
+    This has complexity \( O\\left(N^{3}\\right) \).**\n  \n  - Incorrect because it incorrectly states the complexity for
+    \( \\mathbf{X}^{\\top} \\mathbf{X} \) when it should be \( O(D^3) \) if \( D \geq N \).\n\n- **We can compute the singular
+    values of \( \\mathbf{X} \) by computing the eigenvalues of \( \\mathbf{X} \\mathbf{X}^{\\top} \) if only if \( \\mathbf{X}
+    \) is a square matrix. This has complexity \( O\\left(D^{3}\\right)=O\\left(N^{3}\\right) \).**\n  \n  - Incorrect because
+    you do not need \( \\mathbf{X} \) to be square to compute the SVD via \( \\mathbf{X X}^{\\top} \) or \( \\mathbf{X}^{\\top}
+    \\mathbf{X} \). The complexities are not equal unless \( N = D \).\n\nIn summary, the correct statements are:\n1. "We
+    can compute the singular values of \( \\mathbf{X} \) by computing the eigenvalues of \( \\mathbf{X X}^{\\top} \). This
+    has complexity \( O\\left(N^{3}\\right) \)."\n2. "We can compute the singular values of \( \\mathbf{X} \) by computing
+    the eigenvalues of \( \\mathbf{X}^{\\top} \\mathbf{X} \). This has complexity \( O\\left(D^{3}\\right) \)."
+  - "To determine which of the given functions \\( f : \\mathbb{Z} \\times \\mathbb{Z} \\to \\mathbb{Z} \\) are surjective,\
+    \ we need to check if every integer in the codomain \\( \\mathbb{Z} \\) can be obtained by some input from \\( \\mathbb{Z}\
+    \ \\times \\mathbb{Z} \\). Let's analyze each function one by one.\n\n1. **\\( f(m, n) = m + n \\)**:\n   - This function\
+    \ takes any two integers \\( m \\) and \\( n \\) and adds them together. \n   - For any integer \\( k \\), we can choose\
+    \ \\( m = k \\) and \\( n = 0 \\) (or \\( m = 0 \\) and \\( n = k \\)), and we will get \\( f(m, n) = k + 0 = k \\).\n\
+    \   - Therefore, every integer can be expressed as the sum of two integers, so this function is **surjective**.\n\n2.\
+    \ **\\( f(m, n) = m^2 + n^2 \\)**:\n   - This function computes the sum of the squares of \\( m \\) and \\( n \\).\n \
+    \  - The result \\( m^2 + n^2 \\) is always non-negative (i.e., \\( \\geq 0 \\)), since squares of integers are non-negative.\n\
+    \   - Therefore, there is no way to obtain negative integers (like -1, -2, etc.) from this function.\n   - Thus, this\
+    \ function is **not surjective**.\n\n3. **\\( f(m, n) = m \\)**:\n   - Here, the function simply returns the first integer\
+    \ \\( m \\).\n   - For any integer \\( k \\), we can choose \\( m = k \\) and \\( n \\) can be any integer (it doesn't\
+    \ affect the output).\n   - Since we can obtain every integer \\( k \\) by choosing \\( m = k \\), this function is **surjective**.\n\
+    \n4. **\\( f(m, n) = |n| \\)**:\n   - This function returns the absolute value of \\( n \\).\n   - The output \\( |n|\
+    \ \\) is always non-negative (i.e., \\( \\geq 0 \\)), since absolute values cannot be negative.\n   - Therefore, similar\
+    \ to the previous case, we cannot achieve negative integers with this function.\n   - Thus, this function is **not surjective**.\n\
+    \nIn summary, the surjective functions from the given options are:\n- **\\( f(m, n) = m + n \\)**\n- **\\( f(m, n) = m\
+    \ \\)**\n\nThe functions \\( f(m, n) = m^2 + n^2 \\) and \\( f(m, n) = |n| \\) are not surjective."
+- source_sentence: 'Consider a binary classification problem with classifier $f(\mathbf{x})$ given by $$ f(\mathbf{x})= \begin{cases}1,
+    & g(\mathbf{x}) \geq 0 \\ -1, & g(\mathbf{x})<0\end{cases} $$ and $\mathbf{x} \in \mathbb{R}^{6}$. Consider a specific
+    pair $(\mathbf{x}, y=1)$ and assume that $g(\mathbf{x})=8$. In particular this means that this point is classified correctly
+    by $f$. Assume further that we have computed the gradient of $g$ at $\mathbf{x}$ to be $\nabla_{\mathbf{x}} g(\mathbf{x})=(+1,-2,+3,-4,+5,-6)$.
+    You are allowed to make one step in order to (hopefully) find an adversarial example. In the following four questions,
+    assume $\epsilon=1$. Which offset $\delta$ with $\|\delta\|_{1} \leq 1$ yields the smallest value for $g(\mathbf{x}+\delta)$,
+    assuming that $g$ is (locally) linear?
+
+    A. $
+
+    B. (
+
+    C. 0
+
+    D. ,
+
+    E. 0
+
+    D. ,
+
+    F. 0
+
+    G. ,
+
+    H. 0
+
+    I. ,'
+  sentences:
+  - "To compute the convex hull of a collection of rectangles in a plane in parallel, we need to follow a structured approach\
+    \ and ensure certain properties hold true for the hull algorithm we choose to implement, referred to here as hull2. \n\
+    \n### Plan\n1. **Understand the Convex Hull of Rectangles**: Define what it means to find the convex hull for a set of\
+    \ rectangles and how the representation of rectangles can be simplified for this purpose.\n2. **Discuss a Parallel Approach**:\
+    \ Outline a parallel strategy for computing the convex hull of these rectangles based on dividing the problem into smaller\
+    \ subproblems.\n3. **Identify Necessary Properties for hull2**: Discuss the properties that must hold for the hull2 algorithm\
+    \ to ensure correctness when computing the convex hull in parallel.\n4. **Prove the Properties**: Provide a proof or justification\
+    \ for each property identified in the previous step.\n\n### Steps\n1. **Understand the Convex Hull of Rectangles**: The\
+    \ convex hull of a set of rectangles can be computed by first identifying the extreme points (corners) of each rectangle.\
+    \ Each rectangle contributes its four corners: \n   - Lower left corner: \\((x_1, y_1)\\)\n   - Upper right corner: \\\
+    ((x_2, y_2)\\)\n   - Lower right corner: \\((x_2, y_1)\\)\n   - Upper left corner: \\((x_1, y_2)\\)\n\n   The goal is\
+    \ to find the smallest convex shape that can enclose all these points.\n\n2. **Discuss a Parallel Approach**: \n   - Split\
+    \ the collection of rectangles into smaller subsets, e.g., based on their spatial location (quadrants of the plane).\n\
+    \   - Compute the convex hull for each subset in parallel, using a suitable parallel convex hull algorithm (like Chan's\
+    \ algorithm or others suitable for parallel processing).\n   - After obtaining the convex hulls for each subset, combine\
+    \ these hulls to form a single convex hull. The merging step can again be done in parallel, as it involves comparing the\
+    \ extreme points of the smaller hulls.\n\n3. **Identify Necessary Properties for hull2**: For the hull2 algorithm to work\
+    \ correctly in a parallel setting, the following properties must hold:\n   - **Associativity**: The merging of smaller\
+    \ convex hulls must be associative. This means that the order in which we combine sub-hulls should not affect the final\
+    \ result.\n   - **Commutativity**: The merging function must also be commutative, allowing any two hulls to be merged\
+    \ in any order.\n   - **Correctness of Sub-hulls**: Each sub-hull computed must be correct, meaning it must accurately\
+    \ represent the convex hull of the points (corners of rectangles) in its respective subset.\n\n4. **Prove the Properties**:\
+    \ \n   - **Associativity**: \n     - Given three subsets A, B, and C, merging them can be done as \\(g(g(A, B), C)\\)\
+    \ or \\(g(A, g(B, C))\\). Both methods must yield the same final hull. This is true because the merging function combines\
+    \ points from each hull without losing any points that contribute to the convex shape.\n   - **Commutativity**: \n   \
+    \  - For any two hulls \\(H_1\\) and \\(H_2\\), merging \\(H_1\\) and \\(H_2\\) should yield the same result as merging\
+    \ \\(H_2\\) and \\(H_1\\). This holds since the definition of the convex hull does not depend on the order of inputs when\
+    \ merging; it only depends on the set of points.\n   - **Correctness of Sub-hulls**: \n     - Each sub-hull must include\
+    \ all relevant points (corners of rectangles) in its area. If each sub-hull correctly computes the convex shape of its\
+    \ respective set of points, the combined hull of all sub-hulls will also be correct. This can be shown by induction on\
+    \ the number of rectangles: if it holds for \\(n\\) rectangles, it will hold for \\(n + 1\\) by adding the new rectangle's\
+    \ corners and reevaluating the hull.\n\n### Conclusion\nBy applying a parallel approach to compute the convex hull of\
+    \ rectangles and ensuring that the properties of associativity, commutativity, and correctness of sub-hulls hold, we can\
+    \ efficiently and correctly compute a convex hull in parallel. \n\nThus, the answer is **the parallel convex hull can\
+    \ be computed by dividing the rectangles into subsets, computing sub-hulls in parallel, and then merging these hulls while\
+    \ ensuring associativity and commutativity hold true**."
+  - "### AddressSanitizer and Use-After-Free Bugs: A Step-by-Step Analysis\n\n#### Step 1: Understanding Use-After-Free Bugs\n\
+    \nTo begin with, let's clarify what a use-after-free (UAF) bug is. Imagine you have a toy box filled with various toys\
+    \ (objects) that you play with. When you're done, you decide to throw away a broken toy (free memory) without realizing\
+    \ that you still have a friend playing with it (a dangling pointer). If your friend tries to play with that broken toy,\
+    \ it can lead to all sorts of problems – just like UAF bugs in programming can lead to unexpected behaviors or crashes.\n\
+    \n#### Step 2: What is AddressSanitizer?\n\nAddressSanitizer (ASan) is like a vigilant security system designed to protect\
+    \ your toy box. It monitors memory usage in a program, looking for any unsafe practices, such as trying to use memory\
+    \ that has already been freed. When memory is freed, ASan marks it as invalid or unusable, helping to prevent accidental\
+    \ access.\n\n#### Step 3: Analyzing the Options\n\nNow, let's analyze the options provided to see if ASan can prevent\
+    \ all use-after-free bugs:\n\n1. **\"No, because quarantining free’d memory chunks forever prevents legit memory reuse\
+    \ and could potentially lead to out-of-memory situations.\"**\n   - While quarantining can help prevent access to freed\
+    \ memory, it doesn't solve the problem entirely. If memory chunks are kept in quarantine indefinitely, it can lead to\
+    \ memory wastage and, eventually, out-of-memory errors. However, this option highlights a limitation of ASan but does\
+    \ not directly address the capability of detecting UAF bugs.\n\n2. **\"No, because UAF detection is not part of ASan's\
+    \ feature set.\"**\n   - This statement is misleading. ASan does have capabilities to catch UAF bugs. However, it may\
+    \ not cover every scenario. Therefore, while ASan is not solely defined by its UAF detection feature, it does include\
+    \ mechanisms for identifying UAF bugs.\n\n3. **\"Yes, because free’d memory chunks are poisoned.\"**\n   - While ASan\
+    \ does poison freed memory, marking it as invalid, it does not guarantee that all access attempts will lead to a crash.\
+    \ Some scenarios may still slip through the cracks if the memory is accessed before ASan can react.\n\n4. **\"Yes, because\
+    \ free’d memory is unmapped and accesses therefore cause segmentation faults.\"**\n   - ASan does indeed map out freed\
+    \ memory, leading to segmentation faults if accessed afterward. However, there are instances where memory may still be\
+    \ accessible in a way that doesn’t trigger an immediate fault, which means not all UAF bugs are caught.\n\n#### Step 4:\
+    \ Conclusion\n\nGiven the analysis of each option, we arrive at a crucial understanding: **AddressSanitizer does not prevent\
+    \ all use-after-free bugs.** While it provides significant protection by marking freed memory as invalid and potentially\
+    \ causing segmentation faults, it does not catch every scenario, especially if the memory is accessed in specific ways\
+    \ before ASan can intervene.\n\n### Why This Matters in Practice\n\nUnderstanding the limitations of AddressSanitizer\
+    \ is essential for developers. It emphasizes the importance of careful memory management beyond relying solely on tools.\
+    \ While ASan is a valuable resource in the toolkit for identifying and preventing memory-related errors, developers must\
+    \ still adopt best practices in code to ensure robust memory safety. This includes diligent tracking of memory allocations\
+    \ and deallocations, thorough testing, and, when possible, utilizing additional tools or methodologies to complement ASan’s\
+    \ capabilities.\n\nBy comprehending these nuances, developers can write safer and more efficient code, thus creating robust\
+    \ applications that minimize the risk of memory-related bugs and enhance overall user experience."
+  - "To find the offset \\(\\delta\\) that yields the smallest value for \\(g(\\mathbf{x} + \\delta)\\), we can utilize the\
+    \ linear approximation of \\(g\\) around \\(\\mathbf{x}\\):\n\n\\[\ng(\\mathbf{x} + \\delta) \\approx g(\\mathbf{x}) +\
+    \ \\nabla_{\\mathbf{x}} g(\\mathbf{x}) \\cdot \\delta\n\\]\n\nGiven that \\(g(\\mathbf{x}) = 8\\) and \\(\\nabla_{\\mathbf{x}}\
+    \ g(\\mathbf{x}) = (+1, -2, +3, -4, +5, -6)\\), we need to minimize:\n\n\\[\ng(\\mathbf{x} + \\delta) \\approx 8 + (+1,\
+    \ -2, +3, -4, +5, -6) \\cdot \\delta\n\\]\n\nThis is equivalent to minimizing:\n\n\\[\n\\nabla_{\\mathbf{x}} g(\\mathbf{x})\
+    \ \\cdot \\delta = 1\\delta_1 - 2\\delta_2 + 3\\delta_3 - 4\\delta_4 + 5\\delta_5 - 6\\delta_6\n\\]\n\nWe will evaluate\
+    \ each option while ensuring that the L1 norm constraint (\\(\\|\\delta\\|_1 \\leq 1\\)) is satisfied.\n\n- **Option:\
+    \ (0,0,0,0,0,1)**  \n  Contribution: \\(0*1 + 0*(-2) + 0*3 + 0*(-4) + 0*5 + 1*(-6) = -6\\)\n\n- **Option: (+1,-1,+1,-1,+1,-1)**\
+    \  \n  Contribution: \\(+1*1 - 2*(-1) + 3*1 - 4*(-1) + 5*1 - 6*(-1) = 1 + 2 + 3 + 4 + 5 + 6 = 21\\)\n\n- **Option: (+1,-2,+3,-4,+5,-6)**\
+    \  \n   This exceeds the L1 norm constraint as it sums to more than \\(1\\).\n\n- **Option: (+1,+1,+1,+1,+1,+1)**  \n\
+    \   Exceeds L1 norm constraint.\n\n- **Option: (-1,+2,-3,+4,-5,+6)**  \n   Exceeds L1 norm constraint.\n\n- **Option:\
+    \ (0,0,0,0,0,1)** (repeated)\n\n- **Option: (-1,+1,-1,+1,-1,+1)**  \n   Contribution: \\( -(-1) + (-2)(+1) + (-3)(-(-1))\
+    \ + (-4)(+(-(-2))) - (-5)(+(-(-5))) - (-6)(+(-(-6))) = ... > large value.\\)\n\n- **Option: (-1,-1,-1,-1,-1,-1)**  \n\
+    \   Exceeds Lnorm constraint.\n\nThe offset that minimizes \\(g(\\mathbf{x}+\\delta)\\) is therefore:\n\n**Answer:** $(0,0,0,0,0,1)$"
+- source_sentence: "What is the main difficulty in performing a Prime+Probe attack\n                    on a system with L1\
+    \ caches private to each core and a shared LLC,\n                    and with attacker and victim running on different\
+    \ cores? How can\n                    this difficulty be circumvented?\n                    "
+  sentences:
+  - The main difficulty in performing a Prime+Probe attack in this scenario is distinguishing between the effects of the shared
+    LLC and the private L1 caches, which can lead to ambiguous results. This challenge can be circumvented by flushing the
+    attacker's L1 cache prior to probing, thereby clarifying the observed timing differences and ensuring they predominantly
+    reflect LLC behavior. Larger page sizes may also assist in this systematic approach.
+  - "To prove Hall's Theorem, we need to show two directions:\n\n1. **If \\( G \\) has a perfect matching, then \\( |S| \\\
+    leq |N(S)| \\) for all \\( S \\subseteq A \\)**:\n   - If \\( G \\) has a perfect matching \\( M \\), then each vertex\
+    \ in \\( A \\) is matched to a unique vertex in \\( B \\).\n   - For any subset \\( S \\subseteq A \\), the vertices in\
+    \ \\( N(S) \\) (the neighbors of \\( S \\) in \\( B \\)) must cover all vertices in \\( S \\) because each vertex in \\\
+    ( S \\) is matched to a vertex in \\( N(S) \\).\n   - Thus, \\( |S| \\leq |N(S)| \\).\n\n2. **If \\( |S| \\leq |N(S)|\
+    \ \\) for all \\( S \\subseteq A \\), then \\( G \\) has a perfect matching**:\n   - Assume \\( M \\) is a maximum matching\
+    \ that does not cover a vertex \\( a_0 \\in A \\).\n   - Let \\( A_0 = \\{a_0\\} \\) and \\( B_0 = N(a_0) \\).\n   - Since\
+    \ \\( M \\) is maximum, all vertices in \\( B_0 \\) must be matched by \\( M \\). If \\( B_0 = \\emptyset \\), then \\\
+    ( |N(A_0)| < |A_0| \\) holds, which contradicts our assumption.\n   - If \\( B_0 \\) is not empty, let \\( A_1 = N_M(B_0)\
+    \ \\cup \\{a_0\\} \\). We have \\( |A_1| = |B_0| + 1 \\geq 1 \\).\n   - Define \\( B_1 = N(A_1) \\). Since no vertex in\
+    \ \\( B_1 \\) is exposed (all are covered by \\( M \\)), if \\( |B_1| < |A_1| \\), we find \\( |N(A_1)| < |A_1| \\), contradicting\
+    \ the assumption that Hall's condition holds.\n   - If \\( |B_1| \\geq |A_1| \\), we can continue this process, defining\
+    \ \\( A_2 = N_M(B_1) \\cup \\{ a_0 \\} \\) and so on.\n   - The sequence of sets \\( A_i \\) strictly increases in size,\
+    \ ensuring that the process cannot continue indefinitely without reaching a contradiction.\n   - Eventually, we will find\
+    \ a set \\( S \\subseteq A \\) for which \\( |N(S)| < |S| \\), contradicting our assumption.\n\nThus, we conclude that\
+    \ if \\( |S| \\leq |N(S)| \\) for all \\( S \\subseteq A \\), then \\( G \\) must have a perfect matching. \n\nThis completes\
+    \ the proof of Hall's Theorem."
+  - "To prove the inequality \\( x + |x - 7| \\geq 7 \\), we will consider two cases based on the definition of the absolute\
+    \ value.\n\n**Case 1: \\( x - 7 \\geq 0 \\) (i.e., \\( x \\geq 7 \\))**\n\nIn this case, \\( |x - 7| = x - 7 \\). Substituting\
+    \ this into the inequality, we get:\n\\[\nx + |x - 7| = x + (x - 7) = 2x - 7\n\\]\nNow, we want to show that:\n\\[\n2x\
+    \ - 7 \\geq 7\n\\]\nAdding 7 to both sides:\n\\[\n2x \\geq 14\n\\]\nDividing by 2:\n\\[\nx \\geq 7\n\\]\nThis holds true\
+    \ since we assumed \\( x \\geq 7 \\).\n\n**Case 2: \\( x - 7 < 0 \\) (i.e., \\( x < 7 \\))**\n\nIn this case, \\( |x -\
+    \ 7| = -(x - 7) = 7 - x \\). Substituting this into the inequality, we have:\n\\[\nx + |x - 7| = x + (7 - x) = 7\n\\]\n\
+    Thus, the inequality becomes:\n\\[\n7 \\geq 7\n\\]\nThis is always true.\n\nSince both cases lead to the conclusion that\
+    \ \\( x + |x - 7| \\geq 7 \\), we can conclude that the inequality \\( x + |x - 7| \\geq 7 \\) holds for all \\( x \\\
+    in \\mathbb{R} \\). \n\nThus, the proof is complete."
+- source_sentence: "With respect to reorder buffers, Would you expect to find the memory address where a particular\n  instruction\
+    \ was fetched (i.e., the value of the PC at the time of fetching) inside the reorder buffer? If so, why would it be there?\
+    \ If not, elaborate on why it would it be unneeded."
+  sentences:
+  - "Answer: \n\nYes, the memory address where a particular instruction was fetched (the value of the Program Counter, or\
+    \ PC) is typically found inside the reorder buffer (ROB). The ROB is designed to track the state of instructions as they\
+    \ progress through the pipeline, including their dispatch, execution, and eventual retirement. Storing the PC value in\
+    \ the ROB is important for several reasons. First, it allows the processor to maintain the original context of each instruction,\
+    \ which is crucial for debugging and handling exceptions. If a branch is mispredicted or an exception occurs, having the\
+    \ PC stored in the ROB enables the processor to reference the original instruction address, facilitating correct recovery\
+    \ and state maintenance. Additionally, including the PC in the ROB ensures that instructions retire in the correct order,\
+    \ which is essential for maintaining the integrity of the architectural state in out-of-order execution scenarios. Overall,\
+    \ the presence of the PC in the ROB enhances the processor's ability to manage instruction flow and respond to various\
+    \ scenarios effectively."
+  - 'To determine which cryptographic primitive(s) are used in S/Key - OTP, let''s analyze the components of S/Key:
+
+
+    1. **S/Key Overview**: S/Key is a one-time password (OTP) system that generates passwords based on a secret key and a
+    hash function.
+
+
+    2. **Hash Function**: The primary cryptographic primitive used in S/Key is a hash function. It takes an initial secret
+    and produces a series of one-time passwords by hashing the previous password or value.
+
+
+    3. **Encryption**: While encryption is a common cryptographic primitive, S/Key does not directly use encryption in the
+    same manner as other systems (e.g., encrypting data). Instead, it relies on the hash function to create the OTPs.
+
+
+    4. **MAC (Message Authentication Code)**: S/Key does not utilize a MAC, as it does not involve message integrity or authentication
+    in the way MACs are typically applied.
+
+
+    Given this breakdown, the answer to which cryptographic primitive(s) are used in S/Key is:
+
+
+    3. Only a hash function'
+  - "1. **Interpret the Problem**: The Hedge algorithm aims to allocate investments effectively across $N$ options by adapting\
+    \ to their performance over time. The goal is to ensure that the total return from our investments closely matches that\
+    \ of the best-performing investment, despite the uncertainty of daily changes.\n\n2. **Outline Your Approach**: Each day,\
+    \ we need to define a cost vector $\\vec{m}^{(t)}$ that reflects the performance of each investment based on their observed\
+    \ percentage changes. This will allow Hedge to adjust its allocations dynamically, favoring investments that yield higher\
+    \ returns.\n\n3. **Execute the Solution**:\n   - For each investment $i$, calculate its daily return based on the observed\
+    \ percentage change: \n     \\[\n     r_i^{(t)} = 1 + \\frac{\\text{change}(i)}{100}\n     \\]\n   - The cost vector $\\\
+    vec{m}^{(t)}$ is then defined as:\n     \\[\n     m_i^{(t)} = -\\log(r_i^{(t)})\n     \\]\n   - This transformation ensures\
+    \ that higher returns (positive changes) result in lower costs, while losses yield higher costs.\n   - Apply Hedge's updating\
+    \ rule using the cost vector to adjust the weights for each investment.\n\n4. **Verify or Interpret the Result**: By setting\
+    \ the cost vector this way, Hedge minimizes the regret against the best single investment over time. The logarithmic transformation\
+    \ allows us to convert percentage changes into a form that emphasizes performance differences, ensuring that if one investment\
+    \ consistently outperforms others, Hedge will allocate more capital towards it. Thus, the expected performance of our\
+    \ portfolio closely aligns with that of the best individual investment, achieving near-optimal results in an uncertain\
+    \ environment."
+- source_sentence: 'Which of the following statements about coverage-guided fuzzing is/are correct?
+
+    A. [
+
+    B. ''
+
+    C. R
+
+    D. e
+
+    E. d
+
+    D. u
+
+    F. n
+
+    G. d
+
+    H. a
+
+    I. n'
+  sentences:
+  - "To decrypt the ciphertext \\( c = 14 \\) in RSA, we first need to find the private key \\( d \\) such that \\( e \\cdot\
+    \ d \\equiv 1 \\mod \\phi(n) \\), where \\( n = p \\cdot q = 77 \\) and \\( \\phi(n) = (p-1)(q-1) = 6 \\cdot 10 = 60 \\\
+    ). \n\nGiven \\( e = 13 \\), we need to find \\( d \\) such that:\n\n\\[\n13d \\equiv 1 \\mod 60\n\\]\n\nUsing the Extended\
+    \ Euclidean Algorithm, we find \\( d \\):\n\n1. \\( 60 = 4 \\cdot 13 + 8 \\)\n2. \\( 13 = 1 \\cdot 8 + 5 \\)\n3. \\( 8\
+    \ = 1 \\cdot 5 + 3 \\)\n4. \\( 5 = 1 \\cdot 3 + 2 \\)\n5. \\( 3 = 1 \\cdot 2 + 1 \\)\n6. \\( 2 = 2 \\cdot 1 + 0 \\)\n\n\
+    Back substituting to find \\( 1 = 3 - 1 \\cdot 2 \\):\n\n\\[\n1 = 3 - (5 - 1 \\cdot 3) = 2 \\cdot 3 - 5\n\\]\n\\[\n1 =\
+    \ 2 \\cdot (8 - 1 \\cdot 5) - 5 = 2 \\cdot 8 - 3 \\cdot 5\n\\]\n\\[\n= 2 \\cdot 8 - 3 \\cdot (13 - 1 \\cdot 8) = 5 \\\
+    cdot 8 - 3 \\cdot 13\n\\]\n\\[\n= 5 \\cdot (60 - 4 \\cdot 13) - 3 \\cdot 13 = 5 \\cdot 60 - 23 \\cdot 13\n\\]\n\nThus,\
+    \ \\( d \\equiv -23 \\mod 60 \\), or \\( d \\equiv 37 \\mod 60 \\).\n\nNow we can decrypt the ciphertext \\( c = 14 \\\
+    ):\n\n\\[\nm \\equiv c^d \\mod n\n\\]\n\\[\nm \\equiv 14^{37} \\mod 77\n\\]\n\nTo simplify this computation, we can use\
+    \ the Chinese Remainder Theorem by calculating \\( m \\mod 7 \\) and \\( m \\mod 11 \\):\n\n1. Calculate \\( 14^{37} \\\
+    mod 7 \\):\n   \\[\n   14 \\equiv 0 \\mod 7 \\implies 14^{37} \\equiv 0 \\mod 7\n   \\]\n\n2. Calculate \\( 14^{37} \\\
+    mod 11 \\):\n   \\[\n   14 \\equiv 3 \\mod 11\n   \\]\n   Using Fermat's Little Theorem, \\( 3^{10} \\equiv 1 \\mod 11\
+    \ \\). Thus:\n   \\[\n   37 \\mod 10 = 7 \\implies 3^{37} \\equiv 3^7 \\mod 11\n   \\]\n   We calculate \\( 3^7 \\):\n\
+    \   \\[\n   3^2 = 9, \\quad 3^4 = 81 \\equiv 4 \\mod 11\n   \\]\n   \\[\n   3^6 = 3^4 \\cdot 3^2 = 4 \\cdot 9 = 36 \\\
+    equiv 3 \\mod 11\n   \\]\n   \\[\n   3^7 = 3^6 \\cdot 3 = 3 \\cdot 3 = 9 \\mod 11\n   \\]\n\nNow we have:\n- \\( m \\\
+    equiv 0 \\mod 7 \\)\n- \\( m \\equiv 9 \\mod 11 \\)\n\nWe can solve these congruences using the method of successive substitutions\
+    \ or direct computation. \n\nLet \\( m = 7k \\). Then:\n\n\\[\n7k \\equiv 9 \\mod 11 \\implies 7k = 9 + 11j\n\\]\nSolving\
+    \ for \\( k \\) modulo 11, we need the modular inverse of 7 mod 11, which is 8 (since \\( 7 \\cdot 8 \\equiv 1 \\mod 11\
+    \ \\)). Thus:\n\n\\[\nk \\equiv 8 \\cdot 9 \\mod 11 \\equiv 72 \\mod 11 \\equiv 6 \\mod 11\n\\]\n\nSo \\( k = 11m + 6\
+    \ \\). Substituting back, we have:\n\n\\[\nm = 7(11m + 6) = 77m + 42\n\\]\nThus, \\( m \\equiv 42 \\mod 77 \\).\n\nThe\
+    \ message sent was \\( m = 42 \\).\n\nTherefore, the correct answer is:\n\n**$t = 42$**."
+  - 'In regression tasks, the loss function most affected by outliers is typically the Mean Squared Error (MSE), because it
+    squares the differences between predicted and actual values, which can disproportionately increase the loss for outlier
+    data points.
+
+
+    On the other hand, the **Mean Absolute Error (MAE)** is less sensitive to outliers. This is because MAE calculates the
+    absolute differences between predicted and actual values, treating all errors equally regardless of their magnitude. For
+    example, if a prediction is off by 1 or by 1000, the impact on the total loss is linear in MAE, while it would be quadratic
+    in MSE.
+
+
+    Thus, if you are working with a dataset that contains many outliers and do not wish to preprocess the data, using **Mean
+    Absolute Error (MAE)** as your loss function will be less affected by those outliers compared to Mean Squared Error (MSE).'
+  - "To determine which statements about coverage-guided fuzzing are correct, let's analyze each option step by step.\n\n\
+    1. **Redundant seeds in the corpus will reduce fuzzing efficiency.**\n   - **Analysis:** This statement is generally true.\
+    \ In coverage-guided fuzzing, the goal is to explore as many different paths and code branches as possible. If the corpus\
+    \ contains many redundant seeds (i.e., inputs that lead to the same code paths), it can lead to wasted effort and reduced\
+    \ efficiency since the fuzzer may spend more time exploring the same paths rather than discovering new ones.\n\n2. **Counting\
+    \ the number of times the covered code has been executed provides a more fine-grained view of program behavior than only\
+    \ \"covered/not covered\" binary code coverage.**\n   - **Analysis:** This statement is correct. While binary code coverage\
+    \ only tells you whether a particular part of the code has been executed, counting the number of times each part of the\
+    \ code is executed (also known as edge or path coverage) provides deeper insights into the program's behavior. This finer\
+    \ granularity can help the fuzzer prioritize certain inputs that might lead to new or interesting behaviors.\n\n3. **Due\
+    \ to the coverage feedback, a small random perturbation of a seed can have a significant impact on further exploration.**\n\
+    \   - **Analysis:** This statement is also correct. Coverage-guided fuzzers utilize feedback about which parts of the\
+    \ code are executed to guide their exploration. Even a small change in input can lead to different execution paths being\
+    \ taken, which may uncover new code that wasn't reached with the original seed. As such, small perturbations can indeed\
+    \ have a large impact on the exploration of the input space.\n\n4. **Fuzzers that have higher code coverage always find\
+    \ more bugs.**\n   - **Analysis:** This statement is misleading and generally false. While higher code coverage can increase\
+    \ the likelihood of finding bugs, it does not guarantee that more bugs will be found. Some parts of the code may be covered\
+    \ but not contain any bugs, while other areas might have bugs that are difficult to reach, regardless of coverage. Thus,\
+    \ while there is a correlation between coverage and bug discovery, it is not a strict rule that higher coverage will always\
+    \ lead to more bugs being found.\n\nBased on this analysis, the correct statements about coverage-guided fuzzing are:\n\
+    \n- **1. True**\n- **2. True**\n- **3. True**\n- **4. False**\n\nIn summary, statements 1, 2, and 3 are correct, while\
+    \ statement 4 is not."
+model-index:
+- name: BGE base Financial Matryoshka
+  results:
+  - task:
+      type: information-retrieval
+      name: Information Retrieval
+    dataset:
+      name: dim 768
+      type: dim_768
+    metrics:
+    - type: cosine_accuracy@1
+      value: 0.7480314960629921
+      name: Cosine Accuracy@1
+      verified: false
+    - type: cosine_accuracy@3
+      value: 0.9133858267716536
+      name: Cosine Accuracy@3
+      verified: false
+    - type: cosine_accuracy@5
+      value: 0.9291338582677166
+      name: Cosine Accuracy@5
+      verified: false
+    - type: cosine_accuracy@10
+      value: 0.952755905511811
+      name: Cosine Accuracy@10
+      verified: false
+    - type: cosine_precision@1
+      value: 0.7480314960629921
+      name: Cosine Precision@1
+      verified: false
+    - type: cosine_precision@3
+      value: 0.30446194225721795
+      name: Cosine Precision@3
+      verified: false
+    - type: cosine_precision@5
+      value: 0.18582677165354328
+      name: Cosine Precision@5
+      verified: false
+    - type: cosine_precision@10
+      value: 0.0952755905511811
+      name: Cosine Precision@10
+      verified: false
+    - type: cosine_recall@1
+      value: 0.7480314960629921
+      name: Cosine Recall@1
+      verified: false
+    - type: cosine_recall@3
+      value: 0.9133858267716536
+      name: Cosine Recall@3
+      verified: false
+    - type: cosine_recall@5
+      value: 0.9291338582677166
+      name: Cosine Recall@5
+      verified: false
+    - type: cosine_recall@10
+      value: 0.952755905511811
+      name: Cosine Recall@10
+      verified: false
+    - type: cosine_ndcg@10
+      value: 0.8627260553527355
+      name: Cosine Ndcg@10
+      verified: false
+    - type: cosine_mrr@10
+      value: 0.832564679415073
+      name: Cosine Mrr@10
+      verified: false
+    - type: cosine_map@100
+      value: 0.8333418602723881
+      name: Cosine Map@100
+      verified: false
+  - task:
+      type: information-retrieval
+      name: Information Retrieval
+    dataset:
+      name: dim 512
+      type: dim_512
+    metrics:
+    - type: cosine_accuracy@1
+      value: 0.7637795275590551
+      name: Cosine Accuracy@1
+      verified: false
+    - type: cosine_accuracy@3
+      value: 0.905511811023622
+      name: Cosine Accuracy@3
+      verified: false
+    - type: cosine_accuracy@5
+      value: 0.9291338582677166
+      name: Cosine Accuracy@5
+      verified: false
+    - type: cosine_accuracy@10
+      value: 0.9448818897637795
+      name: Cosine Accuracy@10
+      verified: false
+    - type: cosine_precision@1
+      value: 0.7637795275590551
+      name: Cosine Precision@1
+      verified: false
+    - type: cosine_precision@3
+      value: 0.3018372703412075
+      name: Cosine Precision@3
+      verified: false
+    - type: cosine_precision@5
+      value: 0.18582677165354328
+      name: Cosine Precision@5
+      verified: false
+    - type: cosine_precision@10
+      value: 0.09448818897637794
+      name: Cosine Precision@10
+      verified: false
+    - type: cosine_recall@1
+      value: 0.7637795275590551
+      name: Cosine Recall@1
+      verified: false
+    - type: cosine_recall@3
+      value: 0.905511811023622
+      name: Cosine Recall@3
+      verified: false
+    - type: cosine_recall@5
+      value: 0.9291338582677166
+      name: Cosine Recall@5
+      verified: false
+    - type: cosine_recall@10
+      value: 0.9448818897637795
+      name: Cosine Recall@10
+      verified: false
+    - type: cosine_ndcg@10
+      value: 0.865873424380728
+      name: Cosine Ndcg@10
+      verified: false
+    - type: cosine_mrr@10
+      value: 0.8393888263967003
+      name: Cosine Mrr@10
+      verified: false
+    - type: cosine_map@100
+      value: 0.8408348815035829
+      name: Cosine Map@100
+      verified: false
+  - task:
+      type: information-retrieval
+      name: Information Retrieval
+    dataset:
+      name: dim 256
+      type: dim_256
+    metrics:
+    - type: cosine_accuracy@1
+      value: 0.7322834645669292
+      name: Cosine Accuracy@1
+      verified: false
+    - type: cosine_accuracy@3
+      value: 0.905511811023622
+      name: Cosine Accuracy@3
+      verified: false
+    - type: cosine_accuracy@5
+      value: 0.9133858267716536
+      name: Cosine Accuracy@5
+      verified: false
+    - type: cosine_accuracy@10
+      value: 0.9448818897637795
+      name: Cosine Accuracy@10
+      verified: false
+    - type: cosine_precision@1
+      value: 0.7322834645669292
+      name: Cosine Precision@1
+      verified: false
+    - type: cosine_precision@3
+      value: 0.3018372703412075
+      name: Cosine Precision@3
+      verified: false
+    - type: cosine_precision@5
+      value: 0.1826771653543307
+      name: Cosine Precision@5
+      verified: false
+    - type: cosine_precision@10
+      value: 0.09448818897637794
+      name: Cosine Precision@10
+      verified: false
+    - type: cosine_recall@1
+      value: 0.7322834645669292
+      name: Cosine Recall@1
+      verified: false
+    - type: cosine_recall@3
+      value: 0.905511811023622
+      name: Cosine Recall@3
+      verified: false
+    - type: cosine_recall@5
+      value: 0.9133858267716536
+      name: Cosine Recall@5
+      verified: false
+    - type: cosine_recall@10
+      value: 0.9448818897637795
+      name: Cosine Recall@10
+      verified: false
+    - type: cosine_ndcg@10
+      value: 0.8491570192812045
+      name: Cosine Ndcg@10
+      verified: false
+    - type: cosine_mrr@10
+      value: 0.8173322084739407
+      name: Cosine Mrr@10
+      verified: false
+    - type: cosine_map@100
+      value: 0.8184315799994355
+      name: Cosine Map@100
+      verified: false
+  - task:
+      type: information-retrieval
+      name: Information Retrieval
+    dataset:
+      name: dim 128
+      type: dim_128
+    metrics:
+    - type: cosine_accuracy@1
+      value: 0.7244094488188977
+      name: Cosine Accuracy@1
+      verified: false
+    - type: cosine_accuracy@3
+      value: 0.889763779527559
+      name: Cosine Accuracy@3
+      verified: false
+    - type: cosine_accuracy@5
+      value: 0.9133858267716536
+      name: Cosine Accuracy@5
+      verified: false
+    - type: cosine_accuracy@10
+      value: 0.937007874015748
+      name: Cosine Accuracy@10
+      verified: false
+    - type: cosine_precision@1
+      value: 0.7244094488188977
+      name: Cosine Precision@1
+      verified: false
+    - type: cosine_precision@3
+      value: 0.2965879265091865
+      name: Cosine Precision@3
+      verified: false
+    - type: cosine_precision@5
+      value: 0.18267716535433068
+      name: Cosine Precision@5
+      verified: false
+    - type: cosine_precision@10
+      value: 0.0937007874015748
+      name: Cosine Precision@10
+      verified: false
+    - type: cosine_recall@1
+      value: 0.7244094488188977
+      name: Cosine Recall@1
+      verified: false
+    - type: cosine_recall@3
+      value: 0.889763779527559
+      name: Cosine Recall@3
+      verified: false
+    - type: cosine_recall@5
+      value: 0.9133858267716536
+      name: Cosine Recall@5
+      verified: false
+    - type: cosine_recall@10
+      value: 0.937007874015748
+      name: Cosine Recall@10
+      verified: false
+    - type: cosine_ndcg@10
+      value: 0.8372162484162265
+      name: Cosine Ndcg@10
+      verified: false
+    - type: cosine_mrr@10
+      value: 0.8044619422572177
+      name: Cosine Mrr@10
+      verified: false
+    - type: cosine_map@100
+      value: 0.8060220619275738
+      name: Cosine Map@100
+      verified: false
+  - task:
+      type: information-retrieval
+      name: Information Retrieval
+    dataset:
+      name: dim 64
+      type: dim_64
+    metrics:
+    - type: cosine_accuracy@1
+      value: 0.6929133858267716
+      name: Cosine Accuracy@1
+      verified: false
+    - type: cosine_accuracy@3
+      value: 0.8661417322834646
+      name: Cosine Accuracy@3
+      verified: false
+    - type: cosine_accuracy@5
+      value: 0.9133858267716536
+      name: Cosine Accuracy@5
+      verified: false
+    - type: cosine_accuracy@10
+      value: 0.9291338582677166
+      name: Cosine Accuracy@10
+      verified: false
+    - type: cosine_precision@1
+      value: 0.6929133858267716
+      name: Cosine Precision@1
+      verified: false
+    - type: cosine_precision@3
+      value: 0.28871391076115493
+      name: Cosine Precision@3
+      verified: false
+    - type: cosine_precision@5
+      value: 0.18267716535433068
+      name: Cosine Precision@5
+      verified: false
+    - type: cosine_precision@10
+      value: 0.09291338582677164
+      name: Cosine Precision@10
+      verified: false
+    - type: cosine_recall@1
+      value: 0.6929133858267716
+      name: Cosine Recall@1
+      verified: false
+    - type: cosine_recall@3
+      value: 0.8661417322834646
+      name: Cosine Recall@3
+      verified: false
+    - type: cosine_recall@5
+      value: 0.9133858267716536
+      name: Cosine Recall@5
+      verified: false
+    - type: cosine_recall@10
+      value: 0.9291338582677166
+      name: Cosine Recall@10
+      verified: false
+    - type: cosine_ndcg@10
+      value: 0.8202429021089767
+      name: Cosine Ndcg@10
+      verified: false
+    - type: cosine_mrr@10
+      value: 0.7840082489688789
+      name: Cosine Mrr@10
+      verified: false
+    - type: cosine_map@100
+      value: 0.7859411642894073
+      name: Cosine Map@100
+      verified: false
+config:
+  architectures:
+  - BertModel
+  model_type: bert
+  tokenizer_config:
+    cls_token: '[CLS]'
+    mask_token: '[MASK]'
+    pad_token: '[PAD]'
+    sep_token: '[SEP]'
+    unk_token: '[UNK]'
+cardData:
+  language:
+  - en
+  license: apache-2.0
+  tags:
+  - sentence-transformers
+  - sentence-similarity
+  - feature-extraction
+  - generated_from_trainer
+  - dataset_size:1137
+  - loss:MatryoshkaLoss
+  - loss:MultipleNegativesRankingLoss
+  base_model: BAAI/bge-base-en-v1.5
+  widget:
+  - source_sentence: "Which of the following statements about the $\\mathrm{SVD}$ of an $N \\times D$ matrix $\\mathbf{X}$\
+      \ are correct?\nA. [\nB. '\nC. W\nD. e\nE.  \nD. c\nF. a\nG. n\nH.  \nI. c"
+    sentences:
+    - "The correct answer is **3. 1024 bits**.\n\n**Reasoning:**\nRSA (Rivest-Shamir-Adleman) is a widely used public-key\
+      \ cryptographic system that relies on the difficulty of factoring large integers. The size of the RSA modulus (the product\
+      \ of two large prime numbers) is crucial for the security of the encryption.\n\n1. **64 bits**: This size is considered\
+      \ insecure and is far too small for any practical cryptographic application today. It can be easily factored with modern\
+      \ computing power.\n\n2. **256 bits**: While this size is more secure than 64 bits, it is still not sufficient for RSA.\
+      \ A 256-bit key is more commonly associated with symmetric encryption algorithms like AES, not RSA.\n\n3. **1024 bits**:\
+      \ This size was commonly used in practice for RSA keys for many years and is still considered secure for many applications,\
+      \ although it is becoming less common as security standards evolve. It strikes a balance between security and performance.\n\
+      \n4. **8192 bits**: This size is much larger than what is typically used in practice. While it offers a very high level\
+      \ of security, it also results in significantly slower performance and is not necessary for most applications. \n\n\
+      As of now, many organizations are moving towards 2048 bits or even 3072 bits for RSA keys to ensure stronger security,\
+      \ but 1024 bits remains a common reference point for typical RSA modulus sizes in practice. Therefore, the best answer\
+      \ is **3. 1024 bits**."
+    - The correct statements about the SVD of an \( N \times D \) matrix \( \\mathbf{X} \) are:\n\n1. **We can compute the
+      singular values of \( \\mathbf{X} \) by computing the eigenvalues of \( \\mathbf{X X}^{\\top} \). This has complexity
+      \( O\\left(N^{3}\\right) \).**\n   \n   - This statement is correct if \( N \geq D \). The computation of the eigenvalues
+      of \( \\mathbf{X X}^{\\top} \) involves an \( N \times N \) matrix, leading to a complexity of \( O(N^3) \).\n\n2. **We
+      can compute the singular values of \( \\mathbf{X} \) by computing the eigenvalues of \( \\mathbf{X}^{\\top} \\mathbf{X}
+      \). This has complexity \( O\\left(D^{3}\\right) \).**\n   \n   - This statement is correct if \( D \geq N \). The computation
+      of the eigenvalues of \( \\mathbf{X}^{\\top} \\mathbf{X} \) involves a \( D \times D \) matrix, leading to a complexity
+      of \( O(D^3) \).\n\nThe other statements are incorrect for the following reasons:\n\n- **We can compute the singular
+      values of \( \\mathbf{X} \) by computing the eigenvalues of \( \\mathbf{X X}^{\\top} \). This has complexity \( O\\left(D^{3}\\right)
+      \).**\n  \n  - Incorrect because it incorrectly states the complexity for \( \\mathbf{X X}^{\\top} \) when it should
+      be \( O(N^3) \) if \( N \geq D \).\n\n- **We can compute the singular values of \( \\mathbf{X} \) by computing the eigenvalues
+      of \( \\mathbf{X}^{\\top} \\mathbf{X} \). This has complexity \( O\\left(N^{3}\\right) \).**\n  \n  - Incorrect because
+      it incorrectly states the complexity for \( \\mathbf{X}^{\\top} \\mathbf{X} \) when it should be \( O(D^3) \) if \(
+      D \geq N \).\n\n- **We can compute the singular values of \( \\mathbf{X} \) by computing the eigenvalues of \( \\mathbf{X}
+      \\mathbf{X}^{\\top} \) if only if \( \\mathbf{X} \) is a square matrix. This has complexity \( O\\left(D^{3}\\right)=O\\left(N^{3}\\right)
+      \).**\n  \n  - Incorrect because you do not need \( \\mathbf{X} \) to be square to compute the SVD via \( \\mathbf{X
+      X}^{\\top} \) or \( \\mathbf{X}^{\\top} \\mathbf{X} \). The complexities are not equal unless \( N = D \).\n\nIn summary,
+      the correct statements are:\n1. "We can compute the singular values of \( \\mathbf{X} \) by computing the eigenvalues
+      of \( \\mathbf{X X}^{\\top} \). This has complexity \( O\\left(N^{3}\\right) \)."\n2. "We can compute the singular values
+      of \( \\mathbf{X} \) by computing the eigenvalues of \( \\mathbf{X}^{\\top} \\mathbf{X} \). This has complexity \( O\\left(D^{3}\\right)
+      \)."
+    - "To determine which of the given functions \\( f : \\mathbb{Z} \\times \\mathbb{Z} \\to \\mathbb{Z} \\) are surjective,\
+      \ we need to check if every integer in the codomain \\( \\mathbb{Z} \\) can be obtained by some input from \\( \\mathbb{Z}\
+      \ \\times \\mathbb{Z} \\). Let's analyze each function one by one.\n\n1. **\\( f(m, n) = m + n \\)**:\n   - This function\
+      \ takes any two integers \\( m \\) and \\( n \\) and adds them together. \n   - For any integer \\( k \\), we can choose\
+      \ \\( m = k \\) and \\( n = 0 \\) (or \\( m = 0 \\) and \\( n = k \\)), and we will get \\( f(m, n) = k + 0 = k \\).\n\
+      \   - Therefore, every integer can be expressed as the sum of two integers, so this function is **surjective**.\n\n\
+      2. **\\( f(m, n) = m^2 + n^2 \\)**:\n   - This function computes the sum of the squares of \\( m \\) and \\( n \\).\n\
+      \   - The result \\( m^2 + n^2 \\) is always non-negative (i.e., \\( \\geq 0 \\)), since squares of integers are non-negative.\n\
+      \   - Therefore, there is no way to obtain negative integers (like -1, -2, etc.) from this function.\n   - Thus, this\
+      \ function is **not surjective**.\n\n3. **\\( f(m, n) = m \\)**:\n   - Here, the function simply returns the first integer\
+      \ \\( m \\).\n   - For any integer \\( k \\), we can choose \\( m = k \\) and \\( n \\) can be any integer (it doesn't\
+      \ affect the output).\n   - Since we can obtain every integer \\( k \\) by choosing \\( m = k \\), this function is\
+      \ **surjective**.\n\n4. **\\( f(m, n) = |n| \\)**:\n   - This function returns the absolute value of \\( n \\).\n  \
+      \ - The output \\( |n| \\) is always non-negative (i.e., \\( \\geq 0 \\)), since absolute values cannot be negative.\n\
+      \   - Therefore, similar to the previous case, we cannot achieve negative integers with this function.\n   - Thus, this\
+      \ function is **not surjective**.\n\nIn summary, the surjective functions from the given options are:\n- **\\( f(m,\
+      \ n) = m + n \\)**\n- **\\( f(m, n) = m \\)**\n\nThe functions \\( f(m, n) = m^2 + n^2 \\) and \\( f(m, n) = |n| \\\
+      ) are not surjective."
+  - source_sentence: 'Consider a binary classification problem with classifier $f(\mathbf{x})$ given by $$ f(\mathbf{x})=
+      \begin{cases}1, & g(\mathbf{x}) \geq 0 \\ -1, & g(\mathbf{x})<0\end{cases} $$ and $\mathbf{x} \in \mathbb{R}^{6}$. Consider
+      a specific pair $(\mathbf{x}, y=1)$ and assume that $g(\mathbf{x})=8$. In particular this means that this point is classified
+      correctly by $f$. Assume further that we have computed the gradient of $g$ at $\mathbf{x}$ to be $\nabla_{\mathbf{x}}
+      g(\mathbf{x})=(+1,-2,+3,-4,+5,-6)$. You are allowed to make one step in order to (hopefully) find an adversarial example.
+      In the following four questions, assume $\epsilon=1$. Which offset $\delta$ with $\|\delta\|_{1} \leq 1$ yields the
+      smallest value for $g(\mathbf{x}+\delta)$, assuming that $g$ is (locally) linear?
+
+      A. $
+
+      B. (
+
+      C. 0
+
+      D. ,
+
+      E. 0
+
+      D. ,
+
+      F. 0
+
+      G. ,
+
+      H. 0
+
+      I. ,'
+    sentences:
+    - "To compute the convex hull of a collection of rectangles in a plane in parallel, we need to follow a structured approach\
+      \ and ensure certain properties hold true for the hull algorithm we choose to implement, referred to here as hull2.\
+      \ \n\n### Plan\n1. **Understand the Convex Hull of Rectangles**: Define what it means to find the convex hull for a\
+      \ set of rectangles and how the representation of rectangles can be simplified for this purpose.\n2. **Discuss a Parallel\
+      \ Approach**: Outline a parallel strategy for computing the convex hull of these rectangles based on dividing the problem\
+      \ into smaller subproblems.\n3. **Identify Necessary Properties for hull2**: Discuss the properties that must hold for\
+      \ the hull2 algorithm to ensure correctness when computing the convex hull in parallel.\n4. **Prove the Properties**:\
+      \ Provide a proof or justification for each property identified in the previous step.\n\n### Steps\n1. **Understand\
+      \ the Convex Hull of Rectangles**: The convex hull of a set of rectangles can be computed by first identifying the extreme\
+      \ points (corners) of each rectangle. Each rectangle contributes its four corners: \n   - Lower left corner: \\((x_1,\
+      \ y_1)\\)\n   - Upper right corner: \\((x_2, y_2)\\)\n   - Lower right corner: \\((x_2, y_1)\\)\n   - Upper left corner:\
+      \ \\((x_1, y_2)\\)\n\n   The goal is to find the smallest convex shape that can enclose all these points.\n\n2. **Discuss\
+      \ a Parallel Approach**: \n   - Split the collection of rectangles into smaller subsets, e.g., based on their spatial\
+      \ location (quadrants of the plane).\n   - Compute the convex hull for each subset in parallel, using a suitable parallel\
+      \ convex hull algorithm (like Chan's algorithm or others suitable for parallel processing).\n   - After obtaining the\
+      \ convex hulls for each subset, combine these hulls to form a single convex hull. The merging step can again be done\
+      \ in parallel, as it involves comparing the extreme points of the smaller hulls.\n\n3. **Identify Necessary Properties\
+      \ for hull2**: For the hull2 algorithm to work correctly in a parallel setting, the following properties must hold:\n\
+      \   - **Associativity**: The merging of smaller convex hulls must be associative. This means that the order in which\
+      \ we combine sub-hulls should not affect the final result.\n   - **Commutativity**: The merging function must also be\
+      \ commutative, allowing any two hulls to be merged in any order.\n   - **Correctness of Sub-hulls**: Each sub-hull computed\
+      \ must be correct, meaning it must accurately represent the convex hull of the points (corners of rectangles) in its\
+      \ respective subset.\n\n4. **Prove the Properties**: \n   - **Associativity**: \n     - Given three subsets A, B, and\
+      \ C, merging them can be done as \\(g(g(A, B), C)\\) or \\(g(A, g(B, C))\\). Both methods must yield the same final\
+      \ hull. This is true because the merging function combines points from each hull without losing any points that contribute\
+      \ to the convex shape.\n   - **Commutativity**: \n     - For any two hulls \\(H_1\\) and \\(H_2\\), merging \\(H_1\\\
+      ) and \\(H_2\\) should yield the same result as merging \\(H_2\\) and \\(H_1\\). This holds since the definition of\
+      \ the convex hull does not depend on the order of inputs when merging; it only depends on the set of points.\n   - **Correctness\
+      \ of Sub-hulls**: \n     - Each sub-hull must include all relevant points (corners of rectangles) in its area. If each\
+      \ sub-hull correctly computes the convex shape of its respective set of points, the combined hull of all sub-hulls will\
+      \ also be correct. This can be shown by induction on the number of rectangles: if it holds for \\(n\\) rectangles, it\
+      \ will hold for \\(n + 1\\) by adding the new rectangle's corners and reevaluating the hull.\n\n### Conclusion\nBy applying\
+      \ a parallel approach to compute the convex hull of rectangles and ensuring that the properties of associativity, commutativity,\
+      \ and correctness of sub-hulls hold, we can efficiently and correctly compute a convex hull in parallel. \n\nThus, the\
+      \ answer is **the parallel convex hull can be computed by dividing the rectangles into subsets, computing sub-hulls\
+      \ in parallel, and then merging these hulls while ensuring associativity and commutativity hold true**."
+    - "### AddressSanitizer and Use-After-Free Bugs: A Step-by-Step Analysis\n\n#### Step 1: Understanding Use-After-Free\
+      \ Bugs\n\nTo begin with, let's clarify what a use-after-free (UAF) bug is. Imagine you have a toy box filled with various\
+      \ toys (objects) that you play with. When you're done, you decide to throw away a broken toy (free memory) without realizing\
+      \ that you still have a friend playing with it (a dangling pointer). If your friend tries to play with that broken toy,\
+      \ it can lead to all sorts of problems – just like UAF bugs in programming can lead to unexpected behaviors or crashes.\n\
+      \n#### Step 2: What is AddressSanitizer?\n\nAddressSanitizer (ASan) is like a vigilant security system designed to protect\
+      \ your toy box. It monitors memory usage in a program, looking for any unsafe practices, such as trying to use memory\
+      \ that has already been freed. When memory is freed, ASan marks it as invalid or unusable, helping to prevent accidental\
+      \ access.\n\n#### Step 3: Analyzing the Options\n\nNow, let's analyze the options provided to see if ASan can prevent\
+      \ all use-after-free bugs:\n\n1. **\"No, because quarantining free’d memory chunks forever prevents legit memory reuse\
+      \ and could potentially lead to out-of-memory situations.\"**\n   - While quarantining can help prevent access to freed\
+      \ memory, it doesn't solve the problem entirely. If memory chunks are kept in quarantine indefinitely, it can lead to\
+      \ memory wastage and, eventually, out-of-memory errors. However, this option highlights a limitation of ASan but does\
+      \ not directly address the capability of detecting UAF bugs.\n\n2. **\"No, because UAF detection is not part of ASan's\
+      \ feature set.\"**\n   - This statement is misleading. ASan does have capabilities to catch UAF bugs. However, it may\
+      \ not cover every scenario. Therefore, while ASan is not solely defined by its UAF detection feature, it does include\
+      \ mechanisms for identifying UAF bugs.\n\n3. **\"Yes, because free’d memory chunks are poisoned.\"**\n   - While ASan\
+      \ does poison freed memory, marking it as invalid, it does not guarantee that all access attempts will lead to a crash.\
+      \ Some scenarios may still slip through the cracks if the memory is accessed before ASan can react.\n\n4. **\"Yes, because\
+      \ free’d memory is unmapped and accesses therefore cause segmentation faults.\"**\n   - ASan does indeed map out freed\
+      \ memory, leading to segmentation faults if accessed afterward. However, there are instances where memory may still\
+      \ be accessible in a way that doesn’t trigger an immediate fault, which means not all UAF bugs are caught.\n\n#### Step\
+      \ 4: Conclusion\n\nGiven the analysis of each option, we arrive at a crucial understanding: **AddressSanitizer does\
+      \ not prevent all use-after-free bugs.** While it provides significant protection by marking freed memory as invalid\
+      \ and potentially causing segmentation faults, it does not catch every scenario, especially if the memory is accessed\
+      \ in specific ways before ASan can intervene.\n\n### Why This Matters in Practice\n\nUnderstanding the limitations of\
+      \ AddressSanitizer is essential for developers. It emphasizes the importance of careful memory management beyond relying\
+      \ solely on tools. While ASan is a valuable resource in the toolkit for identifying and preventing memory-related errors,\
+      \ developers must still adopt best practices in code to ensure robust memory safety. This includes diligent tracking\
+      \ of memory allocations and deallocations, thorough testing, and, when possible, utilizing additional tools or methodologies\
+      \ to complement ASan’s capabilities.\n\nBy comprehending these nuances, developers can write safer and more efficient\
+      \ code, thus creating robust applications that minimize the risk of memory-related bugs and enhance overall user experience."
+    - "To find the offset \\(\\delta\\) that yields the smallest value for \\(g(\\mathbf{x} + \\delta)\\), we can utilize\
+      \ the linear approximation of \\(g\\) around \\(\\mathbf{x}\\):\n\n\\[\ng(\\mathbf{x} + \\delta) \\approx g(\\mathbf{x})\
+      \ + \\nabla_{\\mathbf{x}} g(\\mathbf{x}) \\cdot \\delta\n\\]\n\nGiven that \\(g(\\mathbf{x}) = 8\\) and \\(\\nabla_{\\\
+      mathbf{x}} g(\\mathbf{x}) = (+1, -2, +3, -4, +5, -6)\\), we need to minimize:\n\n\\[\ng(\\mathbf{x} + \\delta) \\approx\
+      \ 8 + (+1, -2, +3, -4, +5, -6) \\cdot \\delta\n\\]\n\nThis is equivalent to minimizing:\n\n\\[\n\\nabla_{\\mathbf{x}}\
+      \ g(\\mathbf{x}) \\cdot \\delta = 1\\delta_1 - 2\\delta_2 + 3\\delta_3 - 4\\delta_4 + 5\\delta_5 - 6\\delta_6\n\\]\n\
+      \nWe will evaluate each option while ensuring that the L1 norm constraint (\\(\\|\\delta\\|_1 \\leq 1\\)) is satisfied.\n\
+      \n- **Option: (0,0,0,0,0,1)**  \n  Contribution: \\(0*1 + 0*(-2) + 0*3 + 0*(-4) + 0*5 + 1*(-6) = -6\\)\n\n- **Option:\
+      \ (+1,-1,+1,-1,+1,-1)**  \n  Contribution: \\(+1*1 - 2*(-1) + 3*1 - 4*(-1) + 5*1 - 6*(-1) = 1 + 2 + 3 + 4 + 5 + 6 =\
+      \ 21\\)\n\n- **Option: (+1,-2,+3,-4,+5,-6)**  \n   This exceeds the L1 norm constraint as it sums to more than \\(1\\\
+      ).\n\n- **Option: (+1,+1,+1,+1,+1,+1)**  \n   Exceeds L1 norm constraint.\n\n- **Option: (-1,+2,-3,+4,-5,+6)**  \n \
+      \  Exceeds L1 norm constraint.\n\n- **Option: (0,0,0,0,0,1)** (repeated)\n\n- **Option: (-1,+1,-1,+1,-1,+1)**  \n  \
+      \ Contribution: \\( -(-1) + (-2)(+1) + (-3)(-(-1)) + (-4)(+(-(-2))) - (-5)(+(-(-5))) - (-6)(+(-(-6))) = ... > large\
+      \ value.\\)\n\n- **Option: (-1,-1,-1,-1,-1,-1)**  \n   Exceeds Lnorm constraint.\n\nThe offset that minimizes \\(g(\\\
+      mathbf{x}+\\delta)\\) is therefore:\n\n**Answer:** $(0,0,0,0,0,1)$"
+  - source_sentence: "What is the main difficulty in performing a Prime+Probe attack\n                    on a system with\
+      \ L1 caches private to each core and a shared LLC,\n                    and with attacker and victim running on different\
+      \ cores? How can\n                    this difficulty be circumvented?\n                    "
+    sentences:
+    - The main difficulty in performing a Prime+Probe attack in this scenario is distinguishing between the effects of the
+      shared LLC and the private L1 caches, which can lead to ambiguous results. This challenge can be circumvented by flushing
+      the attacker's L1 cache prior to probing, thereby clarifying the observed timing differences and ensuring they predominantly
+      reflect LLC behavior. Larger page sizes may also assist in this systematic approach.
+    - "To prove Hall's Theorem, we need to show two directions:\n\n1. **If \\( G \\) has a perfect matching, then \\( |S|\
+      \ \\leq |N(S)| \\) for all \\( S \\subseteq A \\)**:\n   - If \\( G \\) has a perfect matching \\( M \\), then each\
+      \ vertex in \\( A \\) is matched to a unique vertex in \\( B \\).\n   - For any subset \\( S \\subseteq A \\), the vertices\
+      \ in \\( N(S) \\) (the neighbors of \\( S \\) in \\( B \\)) must cover all vertices in \\( S \\) because each vertex\
+      \ in \\( S \\) is matched to a vertex in \\( N(S) \\).\n   - Thus, \\( |S| \\leq |N(S)| \\).\n\n2. **If \\( |S| \\leq\
+      \ |N(S)| \\) for all \\( S \\subseteq A \\), then \\( G \\) has a perfect matching**:\n   - Assume \\( M \\) is a maximum\
+      \ matching that does not cover a vertex \\( a_0 \\in A \\).\n   - Let \\( A_0 = \\{a_0\\} \\) and \\( B_0 = N(a_0) \\\
+      ).\n   - Since \\( M \\) is maximum, all vertices in \\( B_0 \\) must be matched by \\( M \\). If \\( B_0 = \\emptyset\
+      \ \\), then \\( |N(A_0)| < |A_0| \\) holds, which contradicts our assumption.\n   - If \\( B_0 \\) is not empty, let\
+      \ \\( A_1 = N_M(B_0) \\cup \\{a_0\\} \\). We have \\( |A_1| = |B_0| + 1 \\geq 1 \\).\n   - Define \\( B_1 = N(A_1) \\\
+      ). Since no vertex in \\( B_1 \\) is exposed (all are covered by \\( M \\)), if \\( |B_1| < |A_1| \\), we find \\( |N(A_1)|\
+      \ < |A_1| \\), contradicting the assumption that Hall's condition holds.\n   - If \\( |B_1| \\geq |A_1| \\), we can\
+      \ continue this process, defining \\( A_2 = N_M(B_1) \\cup \\{ a_0 \\} \\) and so on.\n   - The sequence of sets \\\
+      ( A_i \\) strictly increases in size, ensuring that the process cannot continue indefinitely without reaching a contradiction.\n\
+      \   - Eventually, we will find a set \\( S \\subseteq A \\) for which \\( |N(S)| < |S| \\), contradicting our assumption.\n\
+      \nThus, we conclude that if \\( |S| \\leq |N(S)| \\) for all \\( S \\subseteq A \\), then \\( G \\) must have a perfect\
+      \ matching. \n\nThis completes the proof of Hall's Theorem."
+    - "To prove the inequality \\( x + |x - 7| \\geq 7 \\), we will consider two cases based on the definition of the absolute\
+      \ value.\n\n**Case 1: \\( x - 7 \\geq 0 \\) (i.e., \\( x \\geq 7 \\))**\n\nIn this case, \\( |x - 7| = x - 7 \\). Substituting\
+      \ this into the inequality, we get:\n\\[\nx + |x - 7| = x + (x - 7) = 2x - 7\n\\]\nNow, we want to show that:\n\\[\n\
+      2x - 7 \\geq 7\n\\]\nAdding 7 to both sides:\n\\[\n2x \\geq 14\n\\]\nDividing by 2:\n\\[\nx \\geq 7\n\\]\nThis holds\
+      \ true since we assumed \\( x \\geq 7 \\).\n\n**Case 2: \\( x - 7 < 0 \\) (i.e., \\( x < 7 \\))**\n\nIn this case, \\\
+      ( |x - 7| = -(x - 7) = 7 - x \\). Substituting this into the inequality, we have:\n\\[\nx + |x - 7| = x + (7 - x) =\
+      \ 7\n\\]\nThus, the inequality becomes:\n\\[\n7 \\geq 7\n\\]\nThis is always true.\n\nSince both cases lead to the conclusion\
+      \ that \\( x + |x - 7| \\geq 7 \\), we can conclude that the inequality \\( x + |x - 7| \\geq 7 \\) holds for all \\\
+      ( x \\in \\mathbb{R} \\). \n\nThus, the proof is complete."
+  - source_sentence: "With respect to reorder buffers, Would you expect to find the memory address where a particular\n  instruction\
+      \ was fetched (i.e., the value of the PC at the time of fetching) inside the reorder buffer? If so, why would it be\
+      \ there? If not, elaborate on why it would it be unneeded."
+    sentences:
+    - "Answer: \n\nYes, the memory address where a particular instruction was fetched (the value of the Program Counter, or\
+      \ PC) is typically found inside the reorder buffer (ROB). The ROB is designed to track the state of instructions as\
+      \ they progress through the pipeline, including their dispatch, execution, and eventual retirement. Storing the PC value\
+      \ in the ROB is important for several reasons. First, it allows the processor to maintain the original context of each\
+      \ instruction, which is crucial for debugging and handling exceptions. If a branch is mispredicted or an exception occurs,\
+      \ having the PC stored in the ROB enables the processor to reference the original instruction address, facilitating\
+      \ correct recovery and state maintenance. Additionally, including the PC in the ROB ensures that instructions retire\
+      \ in the correct order, which is essential for maintaining the integrity of the architectural state in out-of-order\
+      \ execution scenarios. Overall, the presence of the PC in the ROB enhances the processor's ability to manage instruction\
+      \ flow and respond to various scenarios effectively."
+    - 'To determine which cryptographic primitive(s) are used in S/Key - OTP, let''s analyze the components of S/Key:
+
+
+      1. **S/Key Overview**: S/Key is a one-time password (OTP) system that generates passwords based on a secret key and
+      a hash function.
+
+
+      2. **Hash Function**: The primary cryptographic primitive used in S/Key is a hash function. It takes an initial secret
+      and produces a series of one-time passwords by hashing the previous password or value.
+
+
+      3. **Encryption**: While encryption is a common cryptographic primitive, S/Key does not directly use encryption in the
+      same manner as other systems (e.g., encrypting data). Instead, it relies on the hash function to create the OTPs.
+
+
+      4. **MAC (Message Authentication Code)**: S/Key does not utilize a MAC, as it does not involve message integrity or
+      authentication in the way MACs are typically applied.
+
+
+      Given this breakdown, the answer to which cryptographic primitive(s) are used in S/Key is:
+
+
+      3. Only a hash function'
+    - "1. **Interpret the Problem**: The Hedge algorithm aims to allocate investments effectively across $N$ options by adapting\
+      \ to their performance over time. The goal is to ensure that the total return from our investments closely matches that\
+      \ of the best-performing investment, despite the uncertainty of daily changes.\n\n2. **Outline Your Approach**: Each\
+      \ day, we need to define a cost vector $\\vec{m}^{(t)}$ that reflects the performance of each investment based on their\
+      \ observed percentage changes. This will allow Hedge to adjust its allocations dynamically, favoring investments that\
+      \ yield higher returns.\n\n3. **Execute the Solution**:\n   - For each investment $i$, calculate its daily return based\
+      \ on the observed percentage change: \n     \\[\n     r_i^{(t)} = 1 + \\frac{\\text{change}(i)}{100}\n     \\]\n   -\
+      \ The cost vector $\\vec{m}^{(t)}$ is then defined as:\n     \\[\n     m_i^{(t)} = -\\log(r_i^{(t)})\n     \\]\n   -\
+      \ This transformation ensures that higher returns (positive changes) result in lower costs, while losses yield higher\
+      \ costs.\n   - Apply Hedge's updating rule using the cost vector to adjust the weights for each investment.\n\n4. **Verify\
+      \ or Interpret the Result**: By setting the cost vector this way, Hedge minimizes the regret against the best single\
+      \ investment over time. The logarithmic transformation allows us to convert percentage changes into a form that emphasizes\
+      \ performance differences, ensuring that if one investment consistently outperforms others, Hedge will allocate more\
+      \ capital towards it. Thus, the expected performance of our portfolio closely aligns with that of the best individual\
+      \ investment, achieving near-optimal results in an uncertain environment."
+  - source_sentence: 'Which of the following statements about coverage-guided fuzzing is/are correct?
+
+      A. [
+
+      B. ''
+
+      C. R
+
+      D. e
+
+      E. d
+
+      D. u
+
+      F. n
+
+      G. d
+
+      H. a
+
+      I. n'
+    sentences:
+    - "To decrypt the ciphertext \\( c = 14 \\) in RSA, we first need to find the private key \\( d \\) such that \\( e \\\
+      cdot d \\equiv 1 \\mod \\phi(n) \\), where \\( n = p \\cdot q = 77 \\) and \\( \\phi(n) = (p-1)(q-1) = 6 \\cdot 10 =\
+      \ 60 \\). \n\nGiven \\( e = 13 \\), we need to find \\( d \\) such that:\n\n\\[\n13d \\equiv 1 \\mod 60\n\\]\n\nUsing\
+      \ the Extended Euclidean Algorithm, we find \\( d \\):\n\n1. \\( 60 = 4 \\cdot 13 + 8 \\)\n2. \\( 13 = 1 \\cdot 8 +\
+      \ 5 \\)\n3. \\( 8 = 1 \\cdot 5 + 3 \\)\n4. \\( 5 = 1 \\cdot 3 + 2 \\)\n5. \\( 3 = 1 \\cdot 2 + 1 \\)\n6. \\( 2 = 2 \\\
+      cdot 1 + 0 \\)\n\nBack substituting to find \\( 1 = 3 - 1 \\cdot 2 \\):\n\n\\[\n1 = 3 - (5 - 1 \\cdot 3) = 2 \\cdot\
+      \ 3 - 5\n\\]\n\\[\n1 = 2 \\cdot (8 - 1 \\cdot 5) - 5 = 2 \\cdot 8 - 3 \\cdot 5\n\\]\n\\[\n= 2 \\cdot 8 - 3 \\cdot (13\
+      \ - 1 \\cdot 8) = 5 \\cdot 8 - 3 \\cdot 13\n\\]\n\\[\n= 5 \\cdot (60 - 4 \\cdot 13) - 3 \\cdot 13 = 5 \\cdot 60 - 23\
+      \ \\cdot 13\n\\]\n\nThus, \\( d \\equiv -23 \\mod 60 \\), or \\( d \\equiv 37 \\mod 60 \\).\n\nNow we can decrypt the\
+      \ ciphertext \\( c = 14 \\):\n\n\\[\nm \\equiv c^d \\mod n\n\\]\n\\[\nm \\equiv 14^{37} \\mod 77\n\\]\n\nTo simplify\
+      \ this computation, we can use the Chinese Remainder Theorem by calculating \\( m \\mod 7 \\) and \\( m \\mod 11 \\\
+      ):\n\n1. Calculate \\( 14^{37} \\mod 7 \\):\n   \\[\n   14 \\equiv 0 \\mod 7 \\implies 14^{37} \\equiv 0 \\mod 7\n \
+      \  \\]\n\n2. Calculate \\( 14^{37} \\mod 11 \\):\n   \\[\n   14 \\equiv 3 \\mod 11\n   \\]\n   Using Fermat's Little\
+      \ Theorem, \\( 3^{10} \\equiv 1 \\mod 11 \\). Thus:\n   \\[\n   37 \\mod 10 = 7 \\implies 3^{37} \\equiv 3^7 \\mod 11\n\
+      \   \\]\n   We calculate \\( 3^7 \\):\n   \\[\n   3^2 = 9, \\quad 3^4 = 81 \\equiv 4 \\mod 11\n   \\]\n   \\[\n   3^6\
+      \ = 3^4 \\cdot 3^2 = 4 \\cdot 9 = 36 \\equiv 3 \\mod 11\n   \\]\n   \\[\n   3^7 = 3^6 \\cdot 3 = 3 \\cdot 3 = 9 \\mod\
+      \ 11\n   \\]\n\nNow we have:\n- \\( m \\equiv 0 \\mod 7 \\)\n- \\( m \\equiv 9 \\mod 11 \\)\n\nWe can solve these congruences\
+      \ using the method of successive substitutions or direct computation. \n\nLet \\( m = 7k \\). Then:\n\n\\[\n7k \\equiv\
+      \ 9 \\mod 11 \\implies 7k = 9 + 11j\n\\]\nSolving for \\( k \\) modulo 11, we need the modular inverse of 7 mod 11,\
+      \ which is 8 (since \\( 7 \\cdot 8 \\equiv 1 \\mod 11 \\)). Thus:\n\n\\[\nk \\equiv 8 \\cdot 9 \\mod 11 \\equiv 72 \\\
+      mod 11 \\equiv 6 \\mod 11\n\\]\n\nSo \\( k = 11m + 6 \\). Substituting back, we have:\n\n\\[\nm = 7(11m + 6) = 77m +\
+      \ 42\n\\]\nThus, \\( m \\equiv 42 \\mod 77 \\).\n\nThe message sent was \\( m = 42 \\).\n\nTherefore, the correct answer\
+      \ is:\n\n**$t = 42$**."
+    - 'In regression tasks, the loss function most affected by outliers is typically the Mean Squared Error (MSE), because
+      it squares the differences between predicted and actual values, which can disproportionately increase the loss for outlier
+      data points.
+
+
+      On the other hand, the **Mean Absolute Error (MAE)** is less sensitive to outliers. This is because MAE calculates the
+      absolute differences between predicted and actual values, treating all errors equally regardless of their magnitude.
+      For example, if a prediction is off by 1 or by 1000, the impact on the total loss is linear in MAE, while it would be
+      quadratic in MSE.
+
+
+      Thus, if you are working with a dataset that contains many outliers and do not wish to preprocess the data, using **Mean
+      Absolute Error (MAE)** as your loss function will be less affected by those outliers compared to Mean Squared Error
+      (MSE).'
+    - "To determine which statements about coverage-guided fuzzing are correct, let's analyze each option step by step.\n\n\
+      1. **Redundant seeds in the corpus will reduce fuzzing efficiency.**\n   - **Analysis:** This statement is generally\
+      \ true. In coverage-guided fuzzing, the goal is to explore as many different paths and code branches as possible. If\
+      \ the corpus contains many redundant seeds (i.e., inputs that lead to the same code paths), it can lead to wasted effort\
+      \ and reduced efficiency since the fuzzer may spend more time exploring the same paths rather than discovering new ones.\n\
+      \n2. **Counting the number of times the covered code has been executed provides a more fine-grained view of program\
+      \ behavior than only \"covered/not covered\" binary code coverage.**\n   - **Analysis:** This statement is correct.\
+      \ While binary code coverage only tells you whether a particular part of the code has been executed, counting the number\
+      \ of times each part of the code is executed (also known as edge or path coverage) provides deeper insights into the\
+      \ program's behavior. This finer granularity can help the fuzzer prioritize certain inputs that might lead to new or\
+      \ interesting behaviors.\n\n3. **Due to the coverage feedback, a small random perturbation of a seed can have a significant\
+      \ impact on further exploration.**\n   - **Analysis:** This statement is also correct. Coverage-guided fuzzers utilize\
+      \ feedback about which parts of the code are executed to guide their exploration. Even a small change in input can lead\
+      \ to different execution paths being taken, which may uncover new code that wasn't reached with the original seed. As\
+      \ such, small perturbations can indeed have a large impact on the exploration of the input space.\n\n4. **Fuzzers that\
+      \ have higher code coverage always find more bugs.**\n   - **Analysis:** This statement is misleading and generally\
+      \ false. While higher code coverage can increase the likelihood of finding bugs, it does not guarantee that more bugs\
+      \ will be found. Some parts of the code may be covered but not contain any bugs, while other areas might have bugs that\
+      \ are difficult to reach, regardless of coverage. Thus, while there is a correlation between coverage and bug discovery,\
+      \ it is not a strict rule that higher coverage will always lead to more bugs being found.\n\nBased on this analysis,\
+      \ the correct statements about coverage-guided fuzzing are:\n\n- **1. True**\n- **2. True**\n- **3. True**\n- **4. False**\n\
+      \nIn summary, statements 1, 2, and 3 are correct, while statement 4 is not."
+  pipeline_tag: sentence-similarity
+  library_name: sentence-transformers
+  metrics:
+  - cosine_accuracy@1
+  - cosine_accuracy@3
+  - cosine_accuracy@5
+  - cosine_accuracy@10
+  - cosine_precision@1
+  - cosine_precision@3
+  - cosine_precision@5
+  - cosine_precision@10
+  - cosine_recall@1
+  - cosine_recall@3
+  - cosine_recall@5
+  - cosine_recall@10
+  - cosine_ndcg@10
+  - cosine_mrr@10
+  - cosine_map@100
+  model-index:
+  - name: BGE base Financial Matryoshka
+    results:
+    - task:
+        type: information-retrieval
+        name: Information Retrieval
+      dataset:
+        name: dim 768
+        type: dim_768
+      metrics:
+      - type: cosine_accuracy@1
+        value: 0.7480314960629921
+        name: Cosine Accuracy@1
+        verified: false
+      - type: cosine_accuracy@3
+        value: 0.9133858267716536
+        name: Cosine Accuracy@3
+        verified: false
+      - type: cosine_accuracy@5
+        value: 0.9291338582677166
+        name: Cosine Accuracy@5
+        verified: false
+      - type: cosine_accuracy@10
+        value: 0.952755905511811
+        name: Cosine Accuracy@10
+        verified: false
+      - type: cosine_precision@1
+        value: 0.7480314960629921
+        name: Cosine Precision@1
+        verified: false
+      - type: cosine_precision@3
+        value: 0.30446194225721795
+        name: Cosine Precision@3
+        verified: false
+      - type: cosine_precision@5
+        value: 0.18582677165354328
+        name: Cosine Precision@5
+        verified: false
+      - type: cosine_precision@10
+        value: 0.0952755905511811
+        name: Cosine Precision@10
+        verified: false
+      - type: cosine_recall@1
+        value: 0.7480314960629921
+        name: Cosine Recall@1
+        verified: false
+      - type: cosine_recall@3
+        value: 0.9133858267716536
+        name: Cosine Recall@3
+        verified: false
+      - type: cosine_recall@5
+        value: 0.9291338582677166
+        name: Cosine Recall@5
+        verified: false
+      - type: cosine_recall@10
+        value: 0.952755905511811
+        name: Cosine Recall@10
+        verified: false
+      - type: cosine_ndcg@10
+        value: 0.8627260553527355
+        name: Cosine Ndcg@10
+        verified: false
+      - type: cosine_mrr@10
+        value: 0.832564679415073
+        name: Cosine Mrr@10
+        verified: false
+      - type: cosine_map@100
+        value: 0.8333418602723881
+        name: Cosine Map@100
+        verified: false
+    - task:
+        type: information-retrieval
+        name: Information Retrieval
+      dataset:
+        name: dim 512
+        type: dim_512
+      metrics:
+      - type: cosine_accuracy@1
+        value: 0.7637795275590551
+        name: Cosine Accuracy@1
+        verified: false
+      - type: cosine_accuracy@3
+        value: 0.905511811023622
+        name: Cosine Accuracy@3
+        verified: false
+      - type: cosine_accuracy@5
+        value: 0.9291338582677166
+        name: Cosine Accuracy@5
+        verified: false
+      - type: cosine_accuracy@10
+        value: 0.9448818897637795
+        name: Cosine Accuracy@10
+        verified: false
+      - type: cosine_precision@1
+        value: 0.7637795275590551
+        name: Cosine Precision@1
+        verified: false
+      - type: cosine_precision@3
+        value: 0.3018372703412075
+        name: Cosine Precision@3
+        verified: false
+      - type: cosine_precision@5
+        value: 0.18582677165354328
+        name: Cosine Precision@5
+        verified: false
+      - type: cosine_precision@10
+        value: 0.09448818897637794
+        name: Cosine Precision@10
+        verified: false
+      - type: cosine_recall@1
+        value: 0.7637795275590551
+        name: Cosine Recall@1
+        verified: false
+      - type: cosine_recall@3
+        value: 0.905511811023622
+        name: Cosine Recall@3
+        verified: false
+      - type: cosine_recall@5
+        value: 0.9291338582677166
+        name: Cosine Recall@5
+        verified: false
+      - type: cosine_recall@10
+        value: 0.9448818897637795
+        name: Cosine Recall@10
+        verified: false
+      - type: cosine_ndcg@10
+        value: 0.865873424380728
+        name: Cosine Ndcg@10
+        verified: false
+      - type: cosine_mrr@10
+        value: 0.8393888263967003
+        name: Cosine Mrr@10
+        verified: false
+      - type: cosine_map@100
+        value: 0.8408348815035829
+        name: Cosine Map@100
+        verified: false
+    - task:
+        type: information-retrieval
+        name: Information Retrieval
+      dataset:
+        name: dim 256
+        type: dim_256
+      metrics:
+      - type: cosine_accuracy@1
+        value: 0.7322834645669292
+        name: Cosine Accuracy@1
+        verified: false
+      - type: cosine_accuracy@3
+        value: 0.905511811023622
+        name: Cosine Accuracy@3
+        verified: false
+      - type: cosine_accuracy@5
+        value: 0.9133858267716536
+        name: Cosine Accuracy@5
+        verified: false
+      - type: cosine_accuracy@10
+        value: 0.9448818897637795
+        name: Cosine Accuracy@10
+        verified: false
+      - type: cosine_precision@1
+        value: 0.7322834645669292
+        name: Cosine Precision@1
+        verified: false
+      - type: cosine_precision@3
+        value: 0.3018372703412075
+        name: Cosine Precision@3
+        verified: false
+      - type: cosine_precision@5
+        value: 0.1826771653543307
+        name: Cosine Precision@5
+        verified: false
+      - type: cosine_precision@10
+        value: 0.09448818897637794
+        name: Cosine Precision@10
+        verified: false
+      - type: cosine_recall@1
+        value: 0.7322834645669292
+        name: Cosine Recall@1
+        verified: false
+      - type: cosine_recall@3
+        value: 0.905511811023622
+        name: Cosine Recall@3
+        verified: false
+      - type: cosine_recall@5
+        value: 0.9133858267716536
+        name: Cosine Recall@5
+        verified: false
+      - type: cosine_recall@10
+        value: 0.9448818897637795
+        name: Cosine Recall@10
+        verified: false
+      - type: cosine_ndcg@10
+        value: 0.8491570192812045
+        name: Cosine Ndcg@10
+        verified: false
+      - type: cosine_mrr@10
+        value: 0.8173322084739407
+        name: Cosine Mrr@10
+        verified: false
+      - type: cosine_map@100
+        value: 0.8184315799994355
+        name: Cosine Map@100
+        verified: false
+    - task:
+        type: information-retrieval
+        name: Information Retrieval
+      dataset:
+        name: dim 128
+        type: dim_128
+      metrics:
+      - type: cosine_accuracy@1
+        value: 0.7244094488188977
+        name: Cosine Accuracy@1
+        verified: false
+      - type: cosine_accuracy@3
+        value: 0.889763779527559
+        name: Cosine Accuracy@3
+        verified: false
+      - type: cosine_accuracy@5
+        value: 0.9133858267716536
+        name: Cosine Accuracy@5
+        verified: false
+      - type: cosine_accuracy@10
+        value: 0.937007874015748
+        name: Cosine Accuracy@10
+        verified: false
+      - type: cosine_precision@1
+        value: 0.7244094488188977
+        name: Cosine Precision@1
+        verified: false
+      - type: cosine_precision@3
+        value: 0.2965879265091865
+        name: Cosine Precision@3
+        verified: false
+      - type: cosine_precision@5
+        value: 0.18267716535433068
+        name: Cosine Precision@5
+        verified: false
+      - type: cosine_precision@10
+        value: 0.0937007874015748
+        name: Cosine Precision@10
+        verified: false
+      - type: cosine_recall@1
+        value: 0.7244094488188977
+        name: Cosine Recall@1
+        verified: false
+      - type: cosine_recall@3
+        value: 0.889763779527559
+        name: Cosine Recall@3
+        verified: false
+      - type: cosine_recall@5
+        value: 0.9133858267716536
+        name: Cosine Recall@5
+        verified: false
+      - type: cosine_recall@10
+        value: 0.937007874015748
+        name: Cosine Recall@10
+        verified: false
+      - type: cosine_ndcg@10
+        value: 0.8372162484162265
+        name: Cosine Ndcg@10
+        verified: false
+      - type: cosine_mrr@10
+        value: 0.8044619422572177
+        name: Cosine Mrr@10
+        verified: false
+      - type: cosine_map@100
+        value: 0.8060220619275738
+        name: Cosine Map@100
+        verified: false
+    - task:
+        type: information-retrieval
+        name: Information Retrieval
+      dataset:
+        name: dim 64
+        type: dim_64
+      metrics:
+      - type: cosine_accuracy@1
+        value: 0.6929133858267716
+        name: Cosine Accuracy@1
+        verified: false
+      - type: cosine_accuracy@3
+        value: 0.8661417322834646
+        name: Cosine Accuracy@3
+        verified: false
+      - type: cosine_accuracy@5
+        value: 0.9133858267716536
+        name: Cosine Accuracy@5
+        verified: false
+      - type: cosine_accuracy@10
+        value: 0.9291338582677166
+        name: Cosine Accuracy@10
+        verified: false
+      - type: cosine_precision@1
+        value: 0.6929133858267716
+        name: Cosine Precision@1
+        verified: false
+      - type: cosine_precision@3
+        value: 0.28871391076115493
+        name: Cosine Precision@3
+        verified: false
+      - type: cosine_precision@5
+        value: 0.18267716535433068
+        name: Cosine Precision@5
+        verified: false
+      - type: cosine_precision@10
+        value: 0.09291338582677164
+        name: Cosine Precision@10
+        verified: false
+      - type: cosine_recall@1
+        value: 0.6929133858267716
+        name: Cosine Recall@1
+        verified: false
+      - type: cosine_recall@3
+        value: 0.8661417322834646
+        name: Cosine Recall@3
+        verified: false
+      - type: cosine_recall@5
+        value: 0.9133858267716536
+        name: Cosine Recall@5
+        verified: false
+      - type: cosine_recall@10
+        value: 0.9291338582677166
+        name: Cosine Recall@10
+        verified: false
+      - type: cosine_ndcg@10
+        value: 0.8202429021089767
+        name: Cosine Ndcg@10
+        verified: false
+      - type: cosine_mrr@10
+        value: 0.7840082489688789
+        name: Cosine Mrr@10
+        verified: false
+      - type: cosine_map@100
+        value: 0.7859411642894073
+        name: Cosine Map@100
+        verified: false
+siblings:
+- rfilename: .gitattributes
+- rfilename: 1_Pooling/config.json
+- rfilename: README.md
+- rfilename: config.json
+- rfilename: config_sentence_transformers.json
+- rfilename: model.safetensors
+- rfilename: modules.json
+- rfilename: sentence_bert_config.json
+- rfilename: special_tokens_map.json
+- rfilename: tokenizer.json
+- rfilename: tokenizer_config.json
+- rfilename: vocab.txt
+spaces: []
+createdAt: '2025-06-10T10:45:35.000Z'
+safetensors:
+  parameters:
+    F32: 109482240
+  total: 109482240
+usedStorage: 437951328
+downloadsAllTime: 22
+inferenceProviderMapping: {}
+configJson:
+  architectures:
+  - BertModel
+  attention_probs_dropout_prob: 0.1
+  classifier_dropout: null
+  gradient_checkpointing: false
+  hidden_act: gelu
+  hidden_dropout_prob: 0.1
+  hidden_size: 768
+  id2label:
+    '0': LABEL_0
+  initializer_range: 0.02
+  intermediate_size: 3072
+  label2id:
+    LABEL_0: 0
+  layer_norm_eps: 1.0e-12
+  max_position_embeddings: 512
+  model_type: bert
+  num_attention_heads: 12
+  num_hidden_layers: 12
+  pad_token_id: 0
+  position_embedding_type: absolute
+  torch_dtype: float32
+  transformers_version: 4.52.4
+  type_vocab_size: 2
+  use_cache: true
+  vocab_size: 30522
+onnxFiles: {}
+safetensorsSizeMb: 438.0
+approxSizeMb: 437.9
+fetchedAt: '2026-06-10T07:15:01.000Z'

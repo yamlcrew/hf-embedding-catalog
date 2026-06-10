@@ -1,0 +1,82 @@
+_id: 67c97781c3aeafa5ab847b54
+id: peterpeter8585/syai4.1
+private: false
+pipeline_tag: feature-extraction
+library_name: transformers
+tags:
+- transformers
+- safetensors
+- llama
+- feature-extraction
+- arxiv:1910.09700
+- text-embeddings-inference
+- endpoints_compatible
+- region:us
+downloads: 6
+likes: 0
+modelId: peterpeter8585/syai4.1
+author: peterpeter8585
+sha: a85d44e3dfded6f86a3fc0c987b29f5dbc0e48c8
+lastModified: '2025-03-07T04:08:04.000Z'
+gated: false
+disabled: false
+model-index: null
+config:
+  architectures:
+  - LlamaModel
+  model_type: llama
+  tokenizer_config:
+    bos_token: <｜begin▁of▁sentence｜>
+    chat_template: "{%- set ns = namespace(found=false) -%}\n{%- for message in messages -%}\n    {%- if message['role'] ==\
+      \ 'system' -%}\n        {%- set ns.found = true -%}\n    {%- endif -%}\n{%- endfor -%}\n{{bos_token}}{%- if not ns.found\
+      \ -%}\n{{'You are an AI programming assistant, utilizing the Deepseek Coder model, developed by Deepseek Company, and\
+      \ you only answer questions related to computer science. For politically sensitive questions, security and privacy issues,\
+      \ and other non-computer science questions, you will refuse to answer\\n'}}\n{%- endif %}\n{%- for message in messages\
+      \ %}\n    {%- if message['role'] == 'system' %}\n{{ message['content'] }}\n    {%- else %}\n        {%- if message['role']\
+      \ == 'user' %}\n{{'### Instruction:\\n' + message['content'] + '\\n'}}\n        {%- else %}\n{{'### Response:\\n' +\
+      \ message['content'] + '\\n<|EOT|>\\n'}}\n        {%- endif %}\n    {%- endif %}\n{%- endfor %}\n{{'### Response:\\\
+      n'}}\n"
+    eos_token: <｜end▁of▁sentence｜>
+    pad_token: <｜end▁of▁sentence｜>
+    unk_token: null
+    use_default_system_prompt: true
+cardData:
+  library_name: transformers
+  tags: []
+transformersInfo:
+  auto_model: AutoModel
+  pipeline_tag: feature-extraction
+  processor: AutoTokenizer
+siblings:
+- rfilename: .gitattributes
+- rfilename: README.md
+- rfilename: config.json
+- rfilename: model-00001-of-00005.safetensors
+- rfilename: model-00001-of-00006.safetensors
+- rfilename: model-00002-of-00005.safetensors
+- rfilename: model-00002-of-00006.safetensors
+- rfilename: model-00003-of-00005.safetensors
+- rfilename: model-00003-of-00006.safetensors
+- rfilename: model-00004-of-00005.safetensors
+- rfilename: model-00004-of-00006.safetensors
+- rfilename: model-00005-of-00005.safetensors
+- rfilename: model-00005-of-00006.safetensors
+- rfilename: model-00006-of-00006.safetensors
+- rfilename: model.safetensors.index.json
+- rfilename: special_tokens_map.json
+- rfilename: tokenizer.json
+- rfilename: tokenizer_config.json
+spaces: []
+createdAt: '2025-03-06T10:22:57.000Z'
+safetensors:
+  parameters:
+    F32: 1280411648
+  total: 1280411648
+usedStorage: 19362942160
+downloadsAllTime: 175
+inferenceProviderMapping: {}
+configJson: null
+onnxFiles: {}
+safetensorsSizeMb: 9119.6
+approxSizeMb: 5121.6
+fetchedAt: '2026-06-10T07:15:01.000Z'

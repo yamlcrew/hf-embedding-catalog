@@ -1,0 +1,319 @@
+_id: 6865b54fa9d317e6808dd53b
+id: Chanisorn/thai-food-mpnet-new-v10
+private: false
+pipeline_tag: sentence-similarity
+library_name: sentence-transformers
+tags:
+- sentence-transformers
+- tensorboard
+- safetensors
+- xlm-roberta
+- sentence-similarity
+- feature-extraction
+- generated_from_trainer
+- dataset_size:2452
+- loss:MultipleNegativesRankingLoss
+- thai
+- semantic-search
+- food
+- ingredients
+- retrieval
+- th
+- arxiv:1908.10084
+- arxiv:1705.00652
+- base_model:sentence-transformers/paraphrase-multilingual-mpnet-base-v2
+- base_model:finetune:sentence-transformers/paraphrase-multilingual-mpnet-base-v2
+- license:apache-2.0
+- model-index
+- text-embeddings-inference
+- endpoints_compatible
+- region:us
+downloads: 0
+likes: 0
+modelId: Chanisorn/thai-food-mpnet-new-v10
+author: Chanisorn
+sha: 1cfb7742d8acd8af8c570c5f440d491bbbe560eb
+lastModified: '2025-07-02T22:42:35.000Z'
+gated: false
+disabled: false
+mask_token: <mask>
+widgetData:
+- source_sentence: น้ำ, ปีกไก่, ไข่เป็ด, รากผักชี, อบเชย, โป๊ยกั๊ก, น้ำตาลมะพร้าว, น้ำปลา, เกลือ, มะนาว, พริกขี้หนู, พริกจินดา,
+    ผักชี
+  sentences:
+  - พะโล้ไข่เป็ดต้มแซ่บ
+  - ต้มยำซี่โครงหมู สูตรใส่คนอร์
+  - ชุดอาหารเช้า
+- source_sentence: ข้าวสวย, หมึกกล้วย, หมูสับ, พริกแกง, น้ำปลา, น้ำตาลทราย, น้ำมันพืช, ใบโหระพา, ใบมะกรูด, พริกชี้ฟ้าแดง,
+    ผักชี, พริกแกงเขียวหวาน, กะทิ, น้ำปลา, น้ำตาลทราย
+  sentences:
+  - ไส้กรอกพันเบคอนซอสน้ำตก (เบทาโกร)
+  - ผักกาดขาวผัดไข่
+  - หมึกยัดไส้ข้าวผัดเขียวหวาน
+- source_sentence: กะปิ,  กุ้งแห้ง,  พริกขี้หนูสวน,  กระเทียมไทย,  น้ำปลา, น้ำตาลปี๊บ, น้ำมะนาว, น้ำเปล่า,  ใบตอง,  มะเขือพวง
+  sentences:
+  - น้ำพริกกะปิกุ้งแห้ง
+  - หมูสวรรค์
+  - แกงส้มผักรวมปลากระพง
+- source_sentence: กล้วยไข่สุก, น้ำตาลทรายขาว, เกลือ, มะพร้าวอ่อน, ใบเตย
+  sentences:
+  - กล้วยไข่บวดชีมะพร้าวอ่อน
+  - เส้นใหญ่ผัดซีอิ๊วไก่
+  - หุง(นึ่ง)ข้าวเหนียว ด้วยไมโครเวฟ
+- source_sentence: ปลาทูน่า,  พริกขี้หนู,  ไข่ไก่,  น้ำปลา, เล็กน้อย, น้ำมันพืช
+  sentences:
+  - เจี๋ยนปลาทับทิม สูตร 2 น้ำมะขามเปียก
+  - ข้าวแต๋น
+  - ไข่เจียวทูน่าพริกสับ
+model-index:
+- name: Thai Food Ingredients → Dish Prediction
+  results:
+  - task:
+      type: information-retrieval
+      name: Information Retrieval
+    dataset:
+      name: thai food eval
+      type: thai-food-eval
+    metrics:
+    - type: cosine_accuracy@1
+      value: 0.6052631578947368
+      name: Cosine Accuracy@1
+      verified: false
+    - type: cosine_accuracy@3
+      value: 0.8421052631578947
+      name: Cosine Accuracy@3
+      verified: false
+    - type: cosine_accuracy@5
+      value: 0.9342105263157895
+      name: Cosine Accuracy@5
+      verified: false
+    - type: cosine_accuracy@10
+      value: 0.9736842105263158
+      name: Cosine Accuracy@10
+      verified: false
+    - type: cosine_precision@1
+      value: 0.6052631578947368
+      name: Cosine Precision@1
+      verified: false
+    - type: cosine_precision@3
+      value: 0.28070175438596484
+      name: Cosine Precision@3
+      verified: false
+    - type: cosine_precision@5
+      value: 0.18684210526315784
+      name: Cosine Precision@5
+      verified: false
+    - type: cosine_recall@1
+      value: 0.6052631578947368
+      name: Cosine Recall@1
+      verified: false
+    - type: cosine_recall@3
+      value: 0.8421052631578947
+      name: Cosine Recall@3
+      verified: false
+    - type: cosine_recall@5
+      value: 0.9342105263157895
+      name: Cosine Recall@5
+      verified: false
+    - type: cosine_ndcg@10
+      value: 0.7890073085601046
+      name: Cosine Ndcg@10
+      verified: false
+    - type: cosine_mrr@10
+      value: 0.7292188805346704
+      name: Cosine Mrr@10
+      verified: false
+    - type: cosine_map@100
+      value: 0.7302039635630968
+      name: Cosine Map@100
+      verified: false
+config:
+  architectures:
+  - XLMRobertaModel
+  model_type: xlm-roberta
+  tokenizer_config:
+    bos_token: <s>
+    cls_token: <s>
+    eos_token: </s>
+    mask_token: <mask>
+    pad_token: <pad>
+    sep_token: </s>
+    unk_token: <unk>
+cardData:
+  language:
+  - th
+  license: apache-2.0
+  tags:
+  - sentence-transformers
+  - sentence-similarity
+  - feature-extraction
+  - generated_from_trainer
+  - dataset_size:2452
+  - loss:MultipleNegativesRankingLoss
+  - thai
+  - semantic-search
+  - food
+  - ingredients
+  - retrieval
+  base_model: sentence-transformers/paraphrase-multilingual-mpnet-base-v2
+  widget:
+  - source_sentence: น้ำ, ปีกไก่, ไข่เป็ด, รากผักชี, อบเชย, โป๊ยกั๊ก, น้ำตาลมะพร้าว, น้ำปลา, เกลือ, มะนาว, พริกขี้หนู, พริกจินดา,
+      ผักชี
+    sentences:
+    - พะโล้ไข่เป็ดต้มแซ่บ
+    - ต้มยำซี่โครงหมู สูตรใส่คนอร์
+    - ชุดอาหารเช้า
+  - source_sentence: ข้าวสวย, หมึกกล้วย, หมูสับ, พริกแกง, น้ำปลา, น้ำตาลทราย, น้ำมันพืช, ใบโหระพา, ใบมะกรูด, พริกชี้ฟ้าแดง,
+      ผักชี, พริกแกงเขียวหวาน, กะทิ, น้ำปลา, น้ำตาลทราย
+    sentences:
+    - ไส้กรอกพันเบคอนซอสน้ำตก (เบทาโกร)
+    - ผักกาดขาวผัดไข่
+    - หมึกยัดไส้ข้าวผัดเขียวหวาน
+  - source_sentence: กะปิ,  กุ้งแห้ง,  พริกขี้หนูสวน,  กระเทียมไทย,  น้ำปลา, น้ำตาลปี๊บ, น้ำมะนาว, น้ำเปล่า,  ใบตอง,  มะเขือพวง
+    sentences:
+    - น้ำพริกกะปิกุ้งแห้ง
+    - หมูสวรรค์
+    - แกงส้มผักรวมปลากระพง
+  - source_sentence: กล้วยไข่สุก, น้ำตาลทรายขาว, เกลือ, มะพร้าวอ่อน, ใบเตย
+    sentences:
+    - กล้วยไข่บวดชีมะพร้าวอ่อน
+    - เส้นใหญ่ผัดซีอิ๊วไก่
+    - หุง(นึ่ง)ข้าวเหนียว ด้วยไมโครเวฟ
+  - source_sentence: ปลาทูน่า,  พริกขี้หนู,  ไข่ไก่,  น้ำปลา, เล็กน้อย, น้ำมันพืช
+    sentences:
+    - เจี๋ยนปลาทับทิม สูตร 2 น้ำมะขามเปียก
+    - ข้าวแต๋น
+    - ไข่เจียวทูน่าพริกสับ
+  pipeline_tag: sentence-similarity
+  library_name: sentence-transformers
+  metrics:
+  - cosine_accuracy@1
+  - cosine_accuracy@3
+  - cosine_accuracy@5
+  - cosine_accuracy@10
+  - cosine_precision@1
+  - cosine_precision@3
+  - cosine_precision@5
+  - cosine_recall@1
+  - cosine_recall@3
+  - cosine_recall@5
+  - cosine_ndcg@10
+  - cosine_mrr@10
+  - cosine_map@100
+  model-index:
+  - name: Thai Food Ingredients → Dish Prediction
+    results:
+    - task:
+        type: information-retrieval
+        name: Information Retrieval
+      dataset:
+        name: thai food eval
+        type: thai-food-eval
+      metrics:
+      - type: cosine_accuracy@1
+        value: 0.6052631578947368
+        name: Cosine Accuracy@1
+        verified: false
+      - type: cosine_accuracy@3
+        value: 0.8421052631578947
+        name: Cosine Accuracy@3
+        verified: false
+      - type: cosine_accuracy@5
+        value: 0.9342105263157895
+        name: Cosine Accuracy@5
+        verified: false
+      - type: cosine_accuracy@10
+        value: 0.9736842105263158
+        name: Cosine Accuracy@10
+        verified: false
+      - type: cosine_precision@1
+        value: 0.6052631578947368
+        name: Cosine Precision@1
+        verified: false
+      - type: cosine_precision@3
+        value: 0.28070175438596484
+        name: Cosine Precision@3
+        verified: false
+      - type: cosine_precision@5
+        value: 0.18684210526315784
+        name: Cosine Precision@5
+        verified: false
+      - type: cosine_recall@1
+        value: 0.6052631578947368
+        name: Cosine Recall@1
+        verified: false
+      - type: cosine_recall@3
+        value: 0.8421052631578947
+        name: Cosine Recall@3
+        verified: false
+      - type: cosine_recall@5
+        value: 0.9342105263157895
+        name: Cosine Recall@5
+        verified: false
+      - type: cosine_ndcg@10
+        value: 0.7890073085601046
+        name: Cosine Ndcg@10
+        verified: false
+      - type: cosine_mrr@10
+        value: 0.7292188805346704
+        name: Cosine Mrr@10
+        verified: false
+      - type: cosine_map@100
+        value: 0.7302039635630968
+        name: Cosine Map@100
+        verified: false
+siblings:
+- rfilename: .gitattributes
+- rfilename: 1_Pooling/config.json
+- rfilename: README.md
+- rfilename: config.json
+- rfilename: config_sentence_transformers.json
+- rfilename: eval/Information-Retrieval_evaluation_thai-food-eval_results.csv
+- rfilename: model.safetensors
+- rfilename: modules.json
+- rfilename: runs/Jul02_17-22-00_6580d91b8c3c/events.out.tfevents.1751476921.6580d91b8c3c.2095.0
+- rfilename: sentence_bert_config.json
+- rfilename: sentencepiece.bpe.model
+- rfilename: special_tokens_map.json
+- rfilename: tokenizer.json
+- rfilename: tokenizer_config.json
+- rfilename: training_args.bin
+spaces: []
+createdAt: '2025-07-02T22:40:15.000Z'
+safetensors:
+  parameters:
+    F32: 278043648
+  total: 278043648
+usedStorage: 1134379866
+downloadsAllTime: 32
+inferenceProviderMapping: {}
+configJson:
+  architectures:
+  - XLMRobertaModel
+  attention_probs_dropout_prob: 0.1
+  bos_token_id: 0
+  classifier_dropout: null
+  eos_token_id: 2
+  gradient_checkpointing: false
+  hidden_act: gelu
+  hidden_dropout_prob: 0.1
+  hidden_size: 768
+  initializer_range: 0.02
+  intermediate_size: 3072
+  layer_norm_eps: 1.0e-05
+  max_position_embeddings: 514
+  model_type: xlm-roberta
+  num_attention_heads: 12
+  num_hidden_layers: 12
+  output_past: true
+  pad_token_id: 1
+  position_embedding_type: absolute
+  torch_dtype: float32
+  transformers_version: 4.53.0
+  type_vocab_size: 1
+  use_cache: true
+  vocab_size: 250002
+onnxFiles: {}
+safetensorsSizeMb: 1112.2
+approxSizeMb: 1112.2
+fetchedAt: '2026-06-10T07:15:01.000Z'

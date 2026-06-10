@@ -1,0 +1,505 @@
+_id: 698c4353cf3a337bb0002dc6
+id: afalaudn/gemma-embedding-ft3
+private: false
+pipeline_tag: sentence-similarity
+library_name: sentence-transformers
+tags:
+- sentence-transformers
+- safetensors
+- gemma3_text
+- sentence-similarity
+- feature-extraction
+- dense
+- generated_from_trainer
+- dataset_size:1340
+- loss:TripletLoss
+- arxiv:1908.10084
+- arxiv:1703.07737
+- base_model:unsloth/embeddinggemma-300m
+- base_model:finetune:unsloth/embeddinggemma-300m
+- model-index
+- text-embeddings-inference
+- endpoints_compatible
+- region:us
+downloads: 1
+likes: 0
+modelId: afalaudn/gemma-embedding-ft3
+author: afalaudn
+sha: 97d910bec1a40a2cb2b2aad7fc612a7e2e71de75
+lastModified: '2026-02-11T08:53:28.000Z'
+gated: false
+disabled: false
+widgetData:
+- source_sentence: How many 'Laboratory' sub-type admissions from the last year have not yet generated an invoice, and what
+    is the average duration (in days) from their admission date to today?
+  sentences:
+  - 'Primary reference table listing the most granular level of administrative geography, typically representing villages
+    or ''kelurahan''. It provides standardized names and codes for these local areas, linking each sub-district to its parent
+    `DistrictId` to complete the geographic hierarchy. **Use this table to** perform highly localized demographic analysis,
+    standardize patient addresses to the village level, or define precise service areas. **Note: This is a static lookup list
+    of geographic areas and does not contain any patient-specific addresses, postal codes, or household information.**'
+  - 'Primary reference table defining the lifecycle stages of a patient admission event. It categorizes visits into states
+    such as ''Active'' (currently in hospital), ''Discharged'' (left hospital), ''Invoiced'' (bill generated), or ''Cancelled''.
+    Use this table to interpret AdmissionStatusId in transaction tables to filter visits by their current operational state
+    (e.g., calculating current census vs. historical discharges). Note: This is a static lookup table for status definitions,
+    NOT a transaction log of patient movements.'
+  - 'Operational transaction table (Financial Log) recording the header-level details of patient invoices and billing events.
+    This table captures the financial breakdown of a visit, distinguishing between Patient responsibility (Out-of-pocket)
+    and Payer responsibility (Insurance/Corporate Coverage), including Gross Amounts, Discounts, Taxes, and Net Payable values.
+    Use this table to analyze hospital revenue streams, track Accounts Receivable (AR), monitor billing cancellations, or
+    calculate the financial yield per admission. Note: This is the Invoice HEADER table containing total values; it does not
+    typically list the specific individual line items (drugs, labs, services) charged within the bill. For any financial analysis
+    related to hospital revenue, Payments, Accounts Receivable (AR), billing breakdowns, or insurance claims, this invoice
+    header table is the definitive starting point.'
+- source_sentence: Calculate the proportion of invoices issued to patients with 'Inactive' medical records out of the total
+    invoices issued in the last fiscal year.
+  sentences:
+  - 'Standard reference table for patient biological sex and gender classification. Contains standard values ''Male'' (Pria)
+    and ''Female'' (Wanita). Use this table to filter patient demographics by gender, support clinical reference range checks,
+    or generate gender-based population statistics. Note: Used for biological sex classification.'
+  - 'Primary reference table storing the comprehensive master profiles of all patients registered in the hospital system.
+    It contains critical demographic data including Name, Medical Record Number (MrNo), Birth Date, Gender (SexId), Address,
+    Contact Information (Phone, Email), and Identification details (National ID, Passport). It also tracks patient status
+    (Active/Merged/Deceased) and links to external Payer/Insurance information. Use this table to identify unique patients,
+    retrieve contact details for notifications, segment patient populations by demographics, or link clinical transactions
+    to specific individuals. Note: This table represents the ''Golden Record'' of a patient''s identity; historical changes
+    might be tracked in audit logs, but this table holds the current state.'
+  - 'Primary reference table storing the comprehensive master profiles of all patients registered in the hospital system.
+    It contains critical demographic data including Name, Medical Record Number (MrNo), Birth Date, Gender (SexId), Address,
+    Contact Information (Phone, Email), and Identification details (National ID, Passport). It also tracks patient status
+    (Active/Merged/Deceased) and links to external Payer/Insurance information. Use this table to identify unique patients,
+    retrieve contact details for notifications, segment patient populations by demographics, or link clinical transactions
+    to specific individuals. Note: This table represents the ''Golden Record'' of a patient''s identity; historical changes
+    might be tracked in audit logs, but this table holds the current state.'
+- source_sentence: What is the total number of invoices and the total value of these invoices issued in Q1 2024 for female
+    patients whose current status is 'Active'?
+  sentences:
+  - 'Operational snapshot table that holds the **single, current financial state** of a patient at a specific hospital unit.
+    Unlike a transaction log, this table does not track history; it contains only the final calculated totals: `BalanceAmount`
+    (Total AR/Debt outstanding) and `DepositBalanceAmount` (Total Advance Payment available). **Use this table for** quick
+    validation of whether a patient can be discharged, checking total debt before billing, or viewing available deposit funds.
+    **Concept:** Think of this as the ''ATM Screen Balance'' showing only the final amount available right now.'
+  - 'Primary reference table defining the validity and lifecycle status of a patient''s master record. Contains status codes
+    such as ''Active'', ''Inactive'', and ''Deceased'' to classify patient accounts. **Use this table to** look up status
+    meanings or filter patient queries based on their account state (e.g., excluding deceased patients from active lists).
+    **Note: This is a lookup dictionary for status codes, NOT a transaction log of status changes for specific patients.**'
+  - 'Operational transaction table recording individual line items within patient invoices (Accounts Receivable). It captures
+    granular billing details including specific items sold (drugs, services), quantities, unit prices, discounts, tax calculations,
+    and the financial split between Patient and Payer (Insurance/Guarantor). It also tracks revenue allocation (Hospital vs.
+    Doctor portion). **Use this table to** generate detailed patient bills, audit revenue streams per item, calculate doctor
+    performance fees, or analyze discount utilization. **Note: This table contains financial billing data per item, NOT the
+    clinical medical results or the master list of available services.**'
+- source_sentence: How many unique male patients were referred by a 'Doctor Referral' and had a 'General' patient type for
+    any admission in the last 6 months?
+  sentences:
+  - 'Operational transaction table (Financial Log) recording the header-level details of patient invoices and billing events.
+    This table captures the financial breakdown of a visit, distinguishing between Patient responsibility (Out-of-pocket)
+    and Payer responsibility (Insurance/Corporate Coverage), including Gross Amounts, Discounts, Taxes, and Net Payable values.
+    Use this table to analyze hospital revenue streams, track Accounts Receivable (AR), monitor billing cancellations, or
+    calculate the financial yield per admission. Note: This is the Invoice HEADER table containing total values; it does not
+    typically list the specific individual line items (drugs, labs, services) charged within the bill. For any financial analysis
+    related to hospital revenue, Payments, Accounts Receivable (AR), billing breakdowns, or insurance claims, this invoice
+    header table is the definitive starting point.'
+  - 'Standard reference table for patient biological sex and gender classification. Contains standard values ''Male'' (Pria)
+    and ''Female'' (Wanita). Use this table to filter patient demographics by gender, support clinical reference range checks,
+    or generate gender-based population statistics. Note: Used for biological sex classification.'
+  - 'Operational transaction table recording unstructured free-text medical notes and preliminary clinical remarks associated
+    with a patient admission. It captures initial diagnosis impressions, symptoms, or observation notes (e.g., ''Asthma'',
+    ''Observation Febris'') entered during the admission process. Use this table to retrieve qualitative clinical context
+    for a visit or search for specific medical conditions mentioned in preliminary notes. Note: This table contains raw free-text
+    descriptions, NOT structured ICD-10 diagnosis codes used for billing.'
+- source_sentence: Retrieve the names of all patients who have a 'MedicalRecordStatusId' indicating 'Active' in their PatientOrganization
+    record and have received an invoice from any organization in the current month.
+  sentences:
+  - 'Primary reference table storing the comprehensive master profiles of all patients registered in the hospital system.
+    It contains critical demographic data including Name, Medical Record Number (MrNo), Birth Date, Gender (SexId), Address,
+    Contact Information (Phone, Email), and Identification details (National ID, Passport). It also tracks patient status
+    (Active/Merged/Deceased) and links to external Payer/Insurance information. Use this table to identify unique patients,
+    retrieve contact details for notifications, segment patient populations by demographics, or link clinical transactions
+    to specific individuals. Note: This table represents the ''Golden Record'' of a patient''s identity; historical changes
+    might be tracked in audit logs, but this table holds the current state.'
+  - 'Primary reference table defining the standard set of religions and spiritual beliefs for patient demographic data. It
+    contains codes and names for major religions such as Islam, Christian, Catholic, Hindu, and Buddhist. **Use this table
+    to** interpret the `ReligionId` from patient master data to standardize demographic reporting or analyze patient spiritual
+    care needs. **Note: This table lists the CATEGORIES of religion only, not the religious affiliation of individual patients.**'
+  - 'Operational transaction table (Financial Log) recording the header-level details of patient invoices and billing events.
+    This table captures the financial breakdown of a visit, distinguishing between Patient responsibility (Out-of-pocket)
+    and Payer responsibility (Insurance/Corporate Coverage), including Gross Amounts, Discounts, Taxes, and Net Payable values.
+    Use this table to analyze hospital revenue streams, track Accounts Receivable (AR), monitor billing cancellations, or
+    calculate the financial yield per admission. Note: This is the Invoice HEADER table containing total values; it does not
+    typically list the specific individual line items (drugs, labs, services) charged within the bill. For any financial analysis
+    related to hospital revenue, Payments, Accounts Receivable (AR), billing breakdowns, or insurance claims, this invoice
+    header table is the definitive starting point.'
+model-index:
+- name: SentenceTransformer based on unsloth/embeddinggemma-300m
+  results:
+  - task:
+      type: information-retrieval
+      name: Information Retrieval
+    dataset:
+      name: Unknown
+      type: unknown
+    metrics:
+    - type: cosine_accuracy@1
+      value: 0.03283582089552239
+      name: Cosine Accuracy@1
+      verified: false
+    - type: cosine_accuracy@3
+      value: 0.0626865671641791
+      name: Cosine Accuracy@3
+      verified: false
+    - type: cosine_accuracy@5
+      value: 0.08358208955223881
+      name: Cosine Accuracy@5
+      verified: false
+    - type: cosine_accuracy@10
+      value: 0.13134328358208955
+      name: Cosine Accuracy@10
+      verified: false
+    - type: cosine_precision@1
+      value: 0.03283582089552239
+      name: Cosine Precision@1
+      verified: false
+    - type: cosine_precision@3
+      value: 0.0208955223880597
+      name: Cosine Precision@3
+      verified: false
+    - type: cosine_precision@5
+      value: 0.01671641791044776
+      name: Cosine Precision@5
+      verified: false
+    - type: cosine_precision@10
+      value: 0.013134328358208956
+      name: Cosine Precision@10
+      verified: false
+    - type: cosine_recall@1
+      value: 0.03283582089552239
+      name: Cosine Recall@1
+      verified: false
+    - type: cosine_recall@3
+      value: 0.0626865671641791
+      name: Cosine Recall@3
+      verified: false
+    - type: cosine_recall@5
+      value: 0.08358208955223881
+      name: Cosine Recall@5
+      verified: false
+    - type: cosine_recall@10
+      value: 0.13134328358208955
+      name: Cosine Recall@10
+      verified: false
+    - type: cosine_ndcg@10
+      value: 0.07347950410091954
+      name: Cosine Ndcg@10
+      verified: false
+    - type: cosine_mrr@10
+      value: 0.05603056147832267
+      name: Cosine Mrr@10
+      verified: false
+    - type: cosine_map@100
+      value: 0.06301005721428388
+      name: Cosine Map@100
+      verified: false
+config:
+  architectures:
+  - Gemma3TextModel
+  model_type: gemma3_text
+  tokenizer_config:
+    bos_token: <bos>
+    eos_token: <eos>
+    mask_token: <mask>
+    pad_token: <pad>
+    unk_token: <unk>
+    use_default_system_prompt: false
+cardData:
+  tags:
+  - sentence-transformers
+  - sentence-similarity
+  - feature-extraction
+  - dense
+  - generated_from_trainer
+  - dataset_size:1340
+  - loss:TripletLoss
+  base_model: unsloth/embeddinggemma-300m
+  widget:
+  - source_sentence: How many 'Laboratory' sub-type admissions from the last year have not yet generated an invoice, and what
+      is the average duration (in days) from their admission date to today?
+    sentences:
+    - 'Primary reference table listing the most granular level of administrative geography, typically representing villages
+      or ''kelurahan''. It provides standardized names and codes for these local areas, linking each sub-district to its parent
+      `DistrictId` to complete the geographic hierarchy. **Use this table to** perform highly localized demographic analysis,
+      standardize patient addresses to the village level, or define precise service areas. **Note: This is a static lookup
+      list of geographic areas and does not contain any patient-specific addresses, postal codes, or household information.**'
+    - 'Primary reference table defining the lifecycle stages of a patient admission event. It categorizes visits into states
+      such as ''Active'' (currently in hospital), ''Discharged'' (left hospital), ''Invoiced'' (bill generated), or ''Cancelled''.
+      Use this table to interpret AdmissionStatusId in transaction tables to filter visits by their current operational state
+      (e.g., calculating current census vs. historical discharges). Note: This is a static lookup table for status definitions,
+      NOT a transaction log of patient movements.'
+    - 'Operational transaction table (Financial Log) recording the header-level details of patient invoices and billing events.
+      This table captures the financial breakdown of a visit, distinguishing between Patient responsibility (Out-of-pocket)
+      and Payer responsibility (Insurance/Corporate Coverage), including Gross Amounts, Discounts, Taxes, and Net Payable
+      values. Use this table to analyze hospital revenue streams, track Accounts Receivable (AR), monitor billing cancellations,
+      or calculate the financial yield per admission. Note: This is the Invoice HEADER table containing total values; it does
+      not typically list the specific individual line items (drugs, labs, services) charged within the bill. For any financial
+      analysis related to hospital revenue, Payments, Accounts Receivable (AR), billing breakdowns, or insurance claims, this
+      invoice header table is the definitive starting point.'
+  - source_sentence: Calculate the proportion of invoices issued to patients with 'Inactive' medical records out of the total
+      invoices issued in the last fiscal year.
+    sentences:
+    - 'Standard reference table for patient biological sex and gender classification. Contains standard values ''Male'' (Pria)
+      and ''Female'' (Wanita). Use this table to filter patient demographics by gender, support clinical reference range checks,
+      or generate gender-based population statistics. Note: Used for biological sex classification.'
+    - 'Primary reference table storing the comprehensive master profiles of all patients registered in the hospital system.
+      It contains critical demographic data including Name, Medical Record Number (MrNo), Birth Date, Gender (SexId), Address,
+      Contact Information (Phone, Email), and Identification details (National ID, Passport). It also tracks patient status
+      (Active/Merged/Deceased) and links to external Payer/Insurance information. Use this table to identify unique patients,
+      retrieve contact details for notifications, segment patient populations by demographics, or link clinical transactions
+      to specific individuals. Note: This table represents the ''Golden Record'' of a patient''s identity; historical changes
+      might be tracked in audit logs, but this table holds the current state.'
+    - 'Primary reference table storing the comprehensive master profiles of all patients registered in the hospital system.
+      It contains critical demographic data including Name, Medical Record Number (MrNo), Birth Date, Gender (SexId), Address,
+      Contact Information (Phone, Email), and Identification details (National ID, Passport). It also tracks patient status
+      (Active/Merged/Deceased) and links to external Payer/Insurance information. Use this table to identify unique patients,
+      retrieve contact details for notifications, segment patient populations by demographics, or link clinical transactions
+      to specific individuals. Note: This table represents the ''Golden Record'' of a patient''s identity; historical changes
+      might be tracked in audit logs, but this table holds the current state.'
+  - source_sentence: What is the total number of invoices and the total value of these invoices issued in Q1 2024 for female
+      patients whose current status is 'Active'?
+    sentences:
+    - 'Operational snapshot table that holds the **single, current financial state** of a patient at a specific hospital unit.
+      Unlike a transaction log, this table does not track history; it contains only the final calculated totals: `BalanceAmount`
+      (Total AR/Debt outstanding) and `DepositBalanceAmount` (Total Advance Payment available). **Use this table for** quick
+      validation of whether a patient can be discharged, checking total debt before billing, or viewing available deposit
+      funds. **Concept:** Think of this as the ''ATM Screen Balance'' showing only the final amount available right now.'
+    - 'Primary reference table defining the validity and lifecycle status of a patient''s master record. Contains status codes
+      such as ''Active'', ''Inactive'', and ''Deceased'' to classify patient accounts. **Use this table to** look up status
+      meanings or filter patient queries based on their account state (e.g., excluding deceased patients from active lists).
+      **Note: This is a lookup dictionary for status codes, NOT a transaction log of status changes for specific patients.**'
+    - 'Operational transaction table recording individual line items within patient invoices (Accounts Receivable). It captures
+      granular billing details including specific items sold (drugs, services), quantities, unit prices, discounts, tax calculations,
+      and the financial split between Patient and Payer (Insurance/Guarantor). It also tracks revenue allocation (Hospital
+      vs. Doctor portion). **Use this table to** generate detailed patient bills, audit revenue streams per item, calculate
+      doctor performance fees, or analyze discount utilization. **Note: This table contains financial billing data per item,
+      NOT the clinical medical results or the master list of available services.**'
+  - source_sentence: How many unique male patients were referred by a 'Doctor Referral' and had a 'General' patient type for
+      any admission in the last 6 months?
+    sentences:
+    - 'Operational transaction table (Financial Log) recording the header-level details of patient invoices and billing events.
+      This table captures the financial breakdown of a visit, distinguishing between Patient responsibility (Out-of-pocket)
+      and Payer responsibility (Insurance/Corporate Coverage), including Gross Amounts, Discounts, Taxes, and Net Payable
+      values. Use this table to analyze hospital revenue streams, track Accounts Receivable (AR), monitor billing cancellations,
+      or calculate the financial yield per admission. Note: This is the Invoice HEADER table containing total values; it does
+      not typically list the specific individual line items (drugs, labs, services) charged within the bill. For any financial
+      analysis related to hospital revenue, Payments, Accounts Receivable (AR), billing breakdowns, or insurance claims, this
+      invoice header table is the definitive starting point.'
+    - 'Standard reference table for patient biological sex and gender classification. Contains standard values ''Male'' (Pria)
+      and ''Female'' (Wanita). Use this table to filter patient demographics by gender, support clinical reference range checks,
+      or generate gender-based population statistics. Note: Used for biological sex classification.'
+    - 'Operational transaction table recording unstructured free-text medical notes and preliminary clinical remarks associated
+      with a patient admission. It captures initial diagnosis impressions, symptoms, or observation notes (e.g., ''Asthma'',
+      ''Observation Febris'') entered during the admission process. Use this table to retrieve qualitative clinical context
+      for a visit or search for specific medical conditions mentioned in preliminary notes. Note: This table contains raw
+      free-text descriptions, NOT structured ICD-10 diagnosis codes used for billing.'
+  - source_sentence: Retrieve the names of all patients who have a 'MedicalRecordStatusId' indicating 'Active' in their PatientOrganization
+      record and have received an invoice from any organization in the current month.
+    sentences:
+    - 'Primary reference table storing the comprehensive master profiles of all patients registered in the hospital system.
+      It contains critical demographic data including Name, Medical Record Number (MrNo), Birth Date, Gender (SexId), Address,
+      Contact Information (Phone, Email), and Identification details (National ID, Passport). It also tracks patient status
+      (Active/Merged/Deceased) and links to external Payer/Insurance information. Use this table to identify unique patients,
+      retrieve contact details for notifications, segment patient populations by demographics, or link clinical transactions
+      to specific individuals. Note: This table represents the ''Golden Record'' of a patient''s identity; historical changes
+      might be tracked in audit logs, but this table holds the current state.'
+    - 'Primary reference table defining the standard set of religions and spiritual beliefs for patient demographic data.
+      It contains codes and names for major religions such as Islam, Christian, Catholic, Hindu, and Buddhist. **Use this
+      table to** interpret the `ReligionId` from patient master data to standardize demographic reporting or analyze patient
+      spiritual care needs. **Note: This table lists the CATEGORIES of religion only, not the religious affiliation of individual
+      patients.**'
+    - 'Operational transaction table (Financial Log) recording the header-level details of patient invoices and billing events.
+      This table captures the financial breakdown of a visit, distinguishing between Patient responsibility (Out-of-pocket)
+      and Payer responsibility (Insurance/Corporate Coverage), including Gross Amounts, Discounts, Taxes, and Net Payable
+      values. Use this table to analyze hospital revenue streams, track Accounts Receivable (AR), monitor billing cancellations,
+      or calculate the financial yield per admission. Note: This is the Invoice HEADER table containing total values; it does
+      not typically list the specific individual line items (drugs, labs, services) charged within the bill. For any financial
+      analysis related to hospital revenue, Payments, Accounts Receivable (AR), billing breakdowns, or insurance claims, this
+      invoice header table is the definitive starting point.'
+  pipeline_tag: sentence-similarity
+  library_name: sentence-transformers
+  metrics:
+  - cosine_accuracy@1
+  - cosine_accuracy@3
+  - cosine_accuracy@5
+  - cosine_accuracy@10
+  - cosine_precision@1
+  - cosine_precision@3
+  - cosine_precision@5
+  - cosine_precision@10
+  - cosine_recall@1
+  - cosine_recall@3
+  - cosine_recall@5
+  - cosine_recall@10
+  - cosine_ndcg@10
+  - cosine_mrr@10
+  - cosine_map@100
+  model-index:
+  - name: SentenceTransformer based on unsloth/embeddinggemma-300m
+    results:
+    - task:
+        type: information-retrieval
+        name: Information Retrieval
+      dataset:
+        name: Unknown
+        type: unknown
+      metrics:
+      - type: cosine_accuracy@1
+        value: 0.03283582089552239
+        name: Cosine Accuracy@1
+        verified: false
+      - type: cosine_accuracy@3
+        value: 0.0626865671641791
+        name: Cosine Accuracy@3
+        verified: false
+      - type: cosine_accuracy@5
+        value: 0.08358208955223881
+        name: Cosine Accuracy@5
+        verified: false
+      - type: cosine_accuracy@10
+        value: 0.13134328358208955
+        name: Cosine Accuracy@10
+        verified: false
+      - type: cosine_precision@1
+        value: 0.03283582089552239
+        name: Cosine Precision@1
+        verified: false
+      - type: cosine_precision@3
+        value: 0.0208955223880597
+        name: Cosine Precision@3
+        verified: false
+      - type: cosine_precision@5
+        value: 0.01671641791044776
+        name: Cosine Precision@5
+        verified: false
+      - type: cosine_precision@10
+        value: 0.013134328358208956
+        name: Cosine Precision@10
+        verified: false
+      - type: cosine_recall@1
+        value: 0.03283582089552239
+        name: Cosine Recall@1
+        verified: false
+      - type: cosine_recall@3
+        value: 0.0626865671641791
+        name: Cosine Recall@3
+        verified: false
+      - type: cosine_recall@5
+        value: 0.08358208955223881
+        name: Cosine Recall@5
+        verified: false
+      - type: cosine_recall@10
+        value: 0.13134328358208955
+        name: Cosine Recall@10
+        verified: false
+      - type: cosine_ndcg@10
+        value: 0.07347950410091954
+        name: Cosine Ndcg@10
+        verified: false
+      - type: cosine_mrr@10
+        value: 0.05603056147832267
+        name: Cosine Mrr@10
+        verified: false
+      - type: cosine_map@100
+        value: 0.06301005721428388
+        name: Cosine Map@100
+        verified: false
+siblings:
+- rfilename: .gitattributes
+- rfilename: 1_Pooling/config.json
+- rfilename: 2_Dense/config.json
+- rfilename: 2_Dense/model.safetensors
+- rfilename: 3_Dense/config.json
+- rfilename: 3_Dense/model.safetensors
+- rfilename: README.md
+- rfilename: config.json
+- rfilename: config_sentence_transformers.json
+- rfilename: model.safetensors
+- rfilename: modules.json
+- rfilename: sentence_bert_config.json
+- rfilename: tokenizer.json
+- rfilename: tokenizer_config.json
+spaces: []
+createdAt: '2026-02-11T08:52:35.000Z'
+safetensors:
+  parameters:
+    F32: 302863104
+  total: 302863104
+usedStorage: 1263745499
+downloadsAllTime: 10
+inferenceProviderMapping: {}
+configJson:
+  _sliding_window_pattern: 6
+  architectures:
+  - Gemma3TextModel
+  attention_bias: false
+  attention_dropout: 0.0
+  attn_logit_softcapping: null
+  bos_token_id: 2
+  dtype: float32
+  eos_token_id: 1
+  final_logit_softcapping: null
+  head_dim: 256
+  hidden_activation: gelu_pytorch_tanh
+  hidden_size: 768
+  initializer_range: 0.02
+  intermediate_size: 1152
+  layer_types:
+  - sliding_attention
+  - sliding_attention
+  - sliding_attention
+  - sliding_attention
+  - sliding_attention
+  - full_attention
+  - sliding_attention
+  - sliding_attention
+  - sliding_attention
+  - sliding_attention
+  - sliding_attention
+  - full_attention
+  - sliding_attention
+  - sliding_attention
+  - sliding_attention
+  - sliding_attention
+  - sliding_attention
+  - full_attention
+  - sliding_attention
+  - sliding_attention
+  - sliding_attention
+  - sliding_attention
+  - sliding_attention
+  - full_attention
+  max_position_embeddings: 2048
+  model_type: gemma3_text
+  num_attention_heads: 3
+  num_hidden_layers: 24
+  num_key_value_heads: 1
+  pad_token_id: 0
+  query_pre_attn_scalar: 256
+  rms_norm_eps: 1.0e-06
+  rope_parameters:
+    full_attention:
+      rope_theta: 1000000.0
+      rope_type: default
+    sliding_attention:
+      rope_theta: 10000.0
+      rope_type: default
+  sliding_window: 129
+  tie_word_embeddings: true
+  tokenizer_class: GemmaTokenizerFast
+  transformers_version: 5.0.0
+  unsloth_version: 2026.1.4
+  use_bidirectional_attention: true
+  use_cache: true
+  vocab_size: 262144
+onnxFiles: {}
+safetensorsSizeMb: 1230.4
+approxSizeMb: 1211.5
+fetchedAt: '2026-06-10T07:15:01.000Z'

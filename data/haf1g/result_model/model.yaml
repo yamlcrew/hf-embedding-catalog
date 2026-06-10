@@ -1,0 +1,208 @@
+_id: 6831aef2d9300c62de5d9e9b
+id: haf1g/result_model
+private: false
+pipeline_tag: sentence-similarity
+library_name: sentence-transformers
+tags:
+- sentence-transformers
+- safetensors
+- xlm-roberta
+- sentence-similarity
+- feature-extraction
+- generated_from_trainer
+- dataset_size:80
+- loss:CoSENTLoss
+- en
+- dataset:sentence-transformers/all-nli
+- arxiv:1908.10084
+- base_model:abdeljalilELmajjodi/model
+- base_model:finetune:abdeljalilELmajjodi/model
+- model-index
+- text-embeddings-inference
+- endpoints_compatible
+- region:us
+downloads: 2
+likes: 0
+modelId: haf1g/result_model
+author: haf1g
+sha: 0c95555fed29daffeaceb2068a9693faba181722
+lastModified: '2025-05-24T12:46:21.000Z'
+gated: false
+disabled: false
+mask_token: <mask>
+widgetData:
+- source_sentence: A man, woman, and child enjoying themselves on a beach.
+  sentences:
+  - A family of three is at the beach.
+  - There are two woman in this picture.
+  - There are children present
+- source_sentence: Woman in white in foreground and a man slightly behind walking with a sign for John's Pizza and Gyro in
+    the background.
+  sentences:
+  - A married couple is walking next to each other.
+  - A man in a restaurant is waiting for his meal to arrive.
+  - The woman is waiting for a friend.
+- source_sentence: A woman is walking across the street eating a banana, while a man is following with his briefcase.
+  sentences:
+  - Nobody has food.
+  - The woman is wearing black.
+  - A person eating.
+- source_sentence: People waiting to get on a train or just getting off.
+  sentences:
+  - There are people just getting on a train
+  - There are people waiting on a train.
+  - Two women hug each other.
+- source_sentence: Woman in white in foreground and a man slightly behind walking with a sign for John's Pizza and Gyro in
+    the background.
+  sentences:
+  - Two adults walk across a street.
+  - The woman is nake.
+  - A woman ordering pizza.
+model-index:
+- name: SentenceTransformer based on abdeljalilELmajjodi/model
+  results:
+  - task:
+      type: semantic-similarity
+      name: Semantic Similarity
+    dataset:
+      name: pair score evaluator dev
+      type: pair-score-evaluator-dev
+    metrics:
+    - type: pearson_cosine
+      value: -0.21785154941974993
+      name: Pearson Cosine
+      verified: false
+    - type: spearman_cosine
+      value: 0.04296719836868375
+      name: Spearman Cosine
+      verified: false
+config:
+  architectures:
+  - XLMRobertaModel
+  model_type: xlm-roberta
+  tokenizer_config:
+    bos_token: <s>
+    cls_token: <s>
+    eos_token: </s>
+    mask_token: <mask>
+    pad_token: <pad>
+    sep_token: </s>
+    unk_token: <unk>
+cardData:
+  language:
+  - en
+  tags:
+  - sentence-transformers
+  - sentence-similarity
+  - feature-extraction
+  - generated_from_trainer
+  - dataset_size:80
+  - loss:CoSENTLoss
+  base_model: abdeljalilELmajjodi/model
+  widget:
+  - source_sentence: A man, woman, and child enjoying themselves on a beach.
+    sentences:
+    - A family of three is at the beach.
+    - There are two woman in this picture.
+    - There are children present
+  - source_sentence: Woman in white in foreground and a man slightly behind walking with a sign for John's Pizza and Gyro
+      in the background.
+    sentences:
+    - A married couple is walking next to each other.
+    - A man in a restaurant is waiting for his meal to arrive.
+    - The woman is waiting for a friend.
+  - source_sentence: A woman is walking across the street eating a banana, while a man is following with his briefcase.
+    sentences:
+    - Nobody has food.
+    - The woman is wearing black.
+    - A person eating.
+  - source_sentence: People waiting to get on a train or just getting off.
+    sentences:
+    - There are people just getting on a train
+    - There are people waiting on a train.
+    - Two women hug each other.
+  - source_sentence: Woman in white in foreground and a man slightly behind walking with a sign for John's Pizza and Gyro
+      in the background.
+    sentences:
+    - Two adults walk across a street.
+    - The woman is nake.
+    - A woman ordering pizza.
+  datasets:
+  - sentence-transformers/all-nli
+  pipeline_tag: sentence-similarity
+  library_name: sentence-transformers
+  metrics:
+  - pearson_cosine
+  - spearman_cosine
+  model-index:
+  - name: SentenceTransformer based on abdeljalilELmajjodi/model
+    results:
+    - task:
+        type: semantic-similarity
+        name: Semantic Similarity
+      dataset:
+        name: pair score evaluator dev
+        type: pair-score-evaluator-dev
+      metrics:
+      - type: pearson_cosine
+        value: -0.21785154941974993
+        name: Pearson Cosine
+        verified: false
+      - type: spearman_cosine
+        value: 0.04296719836868375
+        name: Spearman Cosine
+        verified: false
+siblings:
+- rfilename: .gitattributes
+- rfilename: 1_Pooling/config.json
+- rfilename: README.md
+- rfilename: config.json
+- rfilename: config_sentence_transformers.json
+- rfilename: eval/similarity_evaluation_pair-score-evaluator-dev_results.csv
+- rfilename: model.safetensors
+- rfilename: modules.json
+- rfilename: sentence_bert_config.json
+- rfilename: sentencepiece.bpe.model
+- rfilename: special_tokens_map.json
+- rfilename: tokenizer.json
+- rfilename: tokenizer_config.json
+- rfilename: training_args.bin
+spaces: []
+createdAt: '2025-05-24T11:35:14.000Z'
+safetensors:
+  parameters:
+    F32: 559890432
+  total: 559890432
+usedStorage: 2261764774
+downloadsAllTime: 5
+inferenceProviderMapping: {}
+configJson:
+  architectures:
+  - XLMRobertaModel
+  attention_probs_dropout_prob: 0.1
+  bos_token_id: 0
+  classifier_dropout: null
+  eos_token_id: 2
+  hidden_act: gelu
+  hidden_dropout_prob: 0.1
+  hidden_size: 1024
+  initializer_range: 0.02
+  intermediate_size: 4096
+  layer_norm_eps: 1.0e-05
+  max_position_embeddings: 514
+  model_type: xlm-roberta
+  num_attention_heads: 16
+  num_hidden_layers: 24
+  output_past: true
+  pad_token_id: 1
+  position_embedding_type: absolute
+  torch_dtype: float32
+  transformers_version: 4.51.3
+  type_vocab_size: 1
+  use_cache: true
+  use_flash_attention_2: true
+  vocab_size: 250002
+onnxFiles: {}
+safetensorsSizeMb: 2239.6
+approxSizeMb: 2239.6
+fetchedAt: '2026-06-10T07:15:01.000Z'

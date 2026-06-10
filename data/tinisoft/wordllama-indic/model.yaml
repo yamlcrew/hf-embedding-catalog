@@ -1,0 +1,122 @@
+_id: 6760fffa326113b8f1163ec2
+id: tinisoft/wordllama-indic
+private: false
+pipeline_tag: sentence-similarity
+tags:
+- sentence-similarity
+- en
+- ta
+- ml
+- as
+- bn
+- gu
+- hi
+- kn
+- mr
+- or
+- te
+- base_model:sarvamai/sarvam-1
+- base_model:finetune:sarvamai/sarvam-1
+- region:us
+downloads: 0
+likes: 0
+modelId: tinisoft/wordllama-indic
+author: tinisoft
+sha: 902c27cd27baefc0be73a2bcb3adf46d6e03795d
+lastModified: '2024-12-17T05:52:29.000Z'
+gated: false
+disabled: false
+widgetData:
+- source_sentence: That is a happy person
+  sentences:
+  - That is a happy dog
+  - That is a very happy person
+  - Today is a sunny day
+model-index: null
+config:
+  tokenizer_config:
+    bos_token: <s>
+    chat_template: '{% if messages[0][''role''] == ''system'' %}{% set loop_messages = messages[1:] %}{% set system_message
+      = messages[0][''content''] %}{% else %}{% set loop_messages = messages %}{% set system_message = false %}{% endif %}
+
+      {% for message in loop_messages %}
+
+      {% if message[''role''] not in [''user'', ''assistant'', ''tool_calls''] %}
+
+      {{ raise_exception(''Invalid role: '' + message[''role''] + ''. Must be user, assistant, or tool_calls.'') }}
+
+      {% endif %}
+
+      {% if loop.index0 == 0 and system_message != false %}
+
+      {% set content = ''<<SYS>>
+
+      '' + system_message + ''
+
+      <</SYS>>
+
+
+      '' + message[''content''] %}
+
+      {% else %}
+
+      {% set content = message[''content''] %}
+
+      {% endif %}
+
+      {% if message[''role''] == ''user'' %}
+
+      {{ bos_token + ''[INST] '' + content.strip() + '' [/INST]'' }}
+
+      {% elif message[''role''] == ''assistant'' %}
+
+      {{ '' '' + content.strip() + '' '' + eos_token }}
+
+      {% elif message[''role''] == ''tool_calls'' %}
+
+      {{ '' [TOOL_CALLS] '' + content.strip() + '' [/TOOL_CALLS] '' }}
+
+      {% endif %}
+
+      {% endfor %}'
+    eos_token: </s>
+    pad_token: null
+    unk_token: <unk>
+    use_default_system_prompt: false
+cardData:
+  language:
+  - en
+  - ta
+  - ml
+  - as
+  - bn
+  - gu
+  - hi
+  - kn
+  - mr
+  - or
+  - te
+  base_model:
+  - sarvamai/sarvam-1
+  pipeline_tag: sentence-similarity
+siblings:
+- rfilename: .gitattributes
+- rfilename: README.md
+- rfilename: sarvam1_2b.toml
+- rfilename: sarvam1_2b_1024.safetensors
+- rfilename: sarvam1_2b_128.safetensors
+- rfilename: sarvam1_2b_256.safetensors
+- rfilename: sarvam1_2b_512.safetensors
+- rfilename: sarvam1_2b_64.safetensors
+- rfilename: tokenizer.json
+- rfilename: tokenizer_config.json
+spaces: []
+createdAt: '2024-12-17T04:37:14.000Z'
+usedStorage: 270205408
+downloadsAllTime: 0
+inferenceProviderMapping: {}
+configJson: null
+onnxFiles: {}
+safetensorsSizeMb: 270.2
+approxSizeMb: 0.0
+fetchedAt: '2026-06-10T07:15:01.000Z'
