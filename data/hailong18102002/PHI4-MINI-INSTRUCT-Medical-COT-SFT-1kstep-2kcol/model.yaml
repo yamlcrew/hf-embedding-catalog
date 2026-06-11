@@ -1,0 +1,222 @@
+_id: 6825ae8b0d5b4ef6def99e61
+id: hailong18102002/PHI4-MINI-INSTRUCT-Medical-COT-SFT-1kstep-2kcol
+private: false
+pipeline_tag: feature-extraction
+library_name: transformers
+tags:
+- transformers
+- safetensors
+- phi3
+- feature-extraction
+- text-generation-inference
+- unsloth
+- custom_code
+- en
+- base_model:unsloth/Phi-4-mini-instruct
+- base_model:finetune:unsloth/Phi-4-mini-instruct
+- license:apache-2.0
+- endpoints_compatible
+- region:us
+downloads: 3
+likes: 0
+modelId: hailong18102002/PHI4-MINI-INSTRUCT-Medical-COT-SFT-1kstep-2kcol
+author: hailong18102002
+sha: c551e17800e516e3787fcf2e12608d426fcecdd2
+lastModified: '2025-05-15T09:08:17.000Z'
+gated: false
+disabled: false
+model-index: null
+config:
+  architectures:
+  - Phi3Model
+  auto_map:
+    AutoConfig: unsloth/Phi-4-mini-instruct--configuration_phi3.Phi3Config
+    AutoModelForCausalLM: unsloth/Phi-4-mini-instruct--modeling_phi3.Phi3ForCausalLM
+    AutoTokenizer: unsloth/Phi-4-mini-instruct--Xenova/gpt-4o
+  model_type: phi3
+  tokenizer_config:
+    bos_token: <|endoftext|>
+    chat_template: '{% for message in messages %}{% if message[''role''] == ''system'' and ''tools'' in message and message[''tools'']
+      is not none %}{{ ''<|'' + message[''role''] + ''|>'' + message[''content''] + ''<|tool|>'' + message[''tools''] + ''<|/tool|>''
+      + ''<|end|>'' }}{% else %}{{ ''<|'' + message[''role''] + ''|>'' + message[''content''] + ''<|end|>'' }}{% endif %}{%
+      endfor %}{% if add_generation_prompt %}{{ ''<|assistant|>'' }}{% endif %}'
+    eos_token: <|end|>
+    pad_token: <｜PAD▁TOKEN｜>
+    unk_token: ï¿½
+cardData:
+  base_model: unsloth/Phi-4-mini-instruct
+  tags:
+  - text-generation-inference
+  - transformers
+  - unsloth
+  - phi3
+  license: apache-2.0
+  language:
+  - en
+transformersInfo:
+  auto_model: AutoModelForMultimodalLM
+  pipeline_tag: feature-extraction
+  processor: AutoTokenizer
+siblings:
+- rfilename: .gitattributes
+- rfilename: README.md
+- rfilename: adapter_config.json
+- rfilename: adapter_model.safetensors
+- rfilename: added_tokens.json
+- rfilename: config.json
+- rfilename: merges.txt
+- rfilename: model-00001-of-00002.safetensors
+- rfilename: model-00002-of-00002.safetensors
+- rfilename: special_tokens_map.json
+- rfilename: tokenizer.json
+- rfilename: tokenizer_config.json
+- rfilename: vocab.json
+spaces: []
+createdAt: '2025-05-15T09:06:19.000Z'
+usedStorage: 7830214104
+downloadsAllTime: 17
+inferenceProviderMapping: {}
+configJson:
+  _name_or_path: unsloth/Phi-4-mini-instruct
+  architectures:
+  - Phi3Model
+  attention_bias: false
+  attention_dropout: 0.0
+  auto_map:
+    AutoConfig: unsloth/Phi-4-mini-instruct--configuration_phi3.Phi3Config
+    AutoModelForCausalLM: unsloth/Phi-4-mini-instruct--modeling_phi3.Phi3ForCausalLM
+    AutoTokenizer: unsloth/Phi-4-mini-instruct--Xenova/gpt-4o
+  bos_token_id: 199999
+  embd_pdrop: 0.0
+  eos_token_id: 200020
+  full_attn_mod: 1
+  hidden_act: silu
+  hidden_size: 3072
+  initializer_range: 0.02
+  intermediate_size: 8192
+  interpolate_factor: 1
+  lm_head_bias: false
+  max_position_embeddings: 131072
+  mlp_bias: false
+  model_type: phi3
+  num_attention_heads: 24
+  num_hidden_layers: 32
+  num_key_value_heads: 8
+  original_max_position_embeddings: 4096
+  pad_token_id: 200029
+  partial_rotary_factor: 0.75
+  resid_pdrop: 0.0
+  rms_norm_eps: 1.0e-05
+  rope_scaling:
+    long_factor:
+    - 1
+    - 1.118320672
+    - 1.250641126
+    - 1.398617824
+    - 1.564103225
+    - 1.74916897
+    - 1.956131817
+    - 2.187582649
+    - 2.446418898
+    - 2.735880826
+    - 3.059592084
+    - 3.421605075
+    - 3.826451687
+    - 4.279200023
+    - 4.785517845
+    - 5.351743533
+    - 5.984965424
+    - 6.693110555
+    - 7.485043894
+    - 8.370679318
+    - 9.36110372
+    - 10.4687158
+    - 11.70738129
+    - 13.09260651
+    - 14.64173252
+    - 16.37415215
+    - 18.31155283
+    - 20.47818807
+    - 22.90118105
+    - 25.61086418
+    - 28.64115884
+    - 32.03
+    - 32.1
+    - 32.13
+    - 32.23
+    - 32.6
+    - 32.61
+    - 32.64
+    - 32.66
+    - 32.7
+    - 32.71
+    - 32.93
+    - 32.97
+    - 33.28
+    - 33.49
+    - 33.5
+    - 44.16
+    - 47.77
+    short_factor:
+    - 1.0
+    - 1.0
+    - 1.0
+    - 1.0
+    - 1.0
+    - 1.0
+    - 1.0
+    - 1.0
+    - 1.0
+    - 1.0
+    - 1.0
+    - 1.0
+    - 1.0
+    - 1.0
+    - 1.0
+    - 1.0
+    - 1.0
+    - 1.0
+    - 1.0
+    - 1.0
+    - 1.0
+    - 1.0
+    - 1.0
+    - 1.0
+    - 1.0
+    - 1.0
+    - 1.0
+    - 1.0
+    - 1.0
+    - 1.0
+    - 1.0
+    - 1.0
+    - 1.0
+    - 1.0
+    - 1.0
+    - 1.0
+    - 1.0
+    - 1.0
+    - 1.0
+    - 1.0
+    - 1.0
+    - 1.0
+    - 1.0
+    - 1.0
+    - 1.0
+    - 1.0
+    - 1.0
+    - 1.0
+    type: longrope
+  rope_theta: 10000.0
+  sliding_window: 262144
+  tie_word_embeddings: true
+  torch_dtype: float16
+  transformers_version: 4.49.0
+  unsloth_fixed: true
+  unsloth_version: 2025.3.14
+  use_cache: true
+  vocab_size: 200064
+onnxFiles: {}
+safetensorsSizeMb: 7814.7
+approxSizeMb: 0.0
+fetchedAt: '2026-06-11T08:11:04.000Z'

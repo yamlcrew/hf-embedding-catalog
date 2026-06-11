@@ -1,0 +1,150 @@
+_id: 681c903809f2727917747b7b
+id: Asit03/mixtral-8x7B-full-16bit
+private: false
+pipeline_tag: feature-extraction
+library_name: transformers
+tags:
+- transformers
+- safetensors
+- mixtral
+- feature-extraction
+- text-generation-inference
+- unsloth
+- en
+- license:apache-2.0
+- endpoints_compatible
+- region:us
+downloads: 4
+likes: 0
+modelId: Asit03/mixtral-8x7B-full-16bit
+author: Asit03
+sha: cdd539021892b7ecdd37a764b3b8c5f4426a63a2
+lastModified: '2025-05-09T07:07:49.000Z'
+gated: false
+disabled: false
+model-index: null
+config:
+  architectures:
+  - MixtralModel
+  model_type: mixtral
+  tokenizer_config:
+    bos_token: <s>
+    chat_template: '{% if ''role'' in messages[0] %}{% for message in messages %}{% if message[''role''] == ''user'' %}{{''<|im_start|>user
+
+      '' + message[''content''] + ''<|im_end|>
+
+      ''}}{% elif message[''role''] == ''assistant'' %}{{''<|im_start|>assistant
+
+      '' + message[''content''] + ''<|im_end|>
+
+      '' }}{% else %}{{ ''<|im_start|>system
+
+      '' + message[''content''] + ''<|im_end|>
+
+      '' }}{% endif %}{% endfor %}{% if add_generation_prompt %}{{ ''<|im_start|>assistant
+
+      '' }}{% endif %}{% else %}{% for message in messages %}{% if message[''from''] == ''human'' %}{{''<|im_start|>user
+
+      '' + message[''value''] + ''<|im_end|>
+
+      ''}}{% elif message[''from''] == ''gpt'' %}{{''<|im_start|>assistant
+
+      '' + message[''value''] + ''<|im_end|>
+
+      '' }}{% else %}{{ ''<|im_start|>system
+
+      '' + message[''value''] + ''<|im_end|>
+
+      '' }}{% endif %}{% endfor %}{% if add_generation_prompt %}{{ ''<|im_start|>assistant
+
+      '' }}{% endif %}{% endif %}'
+    eos_token: <|im_end|>
+    pad_token: <unk>
+    unk_token: <unk>
+    use_default_system_prompt: false
+cardData:
+  base_model: unsloth/mixtral-8x7b-instruct-v0.1-unsloth-bnb-4bit
+  tags:
+  - text-generation-inference
+  - transformers
+  - unsloth
+  - mixtral
+  license: apache-2.0
+  language:
+  - en
+transformersInfo:
+  auto_model: AutoModelForMultimodalLM
+  pipeline_tag: feature-extraction
+  processor: AutoTokenizer
+siblings:
+- rfilename: .gitattributes
+- rfilename: README.md
+- rfilename: config.json
+- rfilename: model-00001-of-00019.safetensors
+- rfilename: model-00002-of-00019.safetensors
+- rfilename: model-00003-of-00019.safetensors
+- rfilename: model-00004-of-00019.safetensors
+- rfilename: model-00005-of-00019.safetensors
+- rfilename: model-00006-of-00019.safetensors
+- rfilename: model-00007-of-00019.safetensors
+- rfilename: model-00008-of-00019.safetensors
+- rfilename: model-00009-of-00019.safetensors
+- rfilename: model-00010-of-00019.safetensors
+- rfilename: model-00011-of-00019.safetensors
+- rfilename: model-00012-of-00019.safetensors
+- rfilename: model-00013-of-00019.safetensors
+- rfilename: model-00014-of-00019.safetensors
+- rfilename: model-00015-of-00019.safetensors
+- rfilename: model-00016-of-00019.safetensors
+- rfilename: model-00017-of-00019.safetensors
+- rfilename: model-00018-of-00019.safetensors
+- rfilename: model-00019-of-00019.safetensors
+- rfilename: model.safetensors.index.json
+- rfilename: special_tokens_map.json
+- rfilename: tokenizer.json
+- rfilename: tokenizer_config.json
+spaces: []
+createdAt: '2025-05-08T11:06:32.000Z'
+safetensors:
+  parameters:
+    BF16: 46702792704
+  total: 46702792704
+usedStorage: 93405713504
+downloadsAllTime: 15
+inferenceProviderMapping: {}
+configJson:
+  architectures:
+  - MixtralModel
+  attention_dropout: 0.0
+  bos_token_id: 1
+  eos_token_id: 2
+  head_dim: 128
+  hidden_act: silu
+  hidden_size: 4096
+  initializer_range: 0.02
+  intermediate_size: 14336
+  max_position_embeddings: 32768
+  model_type: mixtral
+  num_attention_heads: 32
+  num_experts_per_tok: 2
+  num_hidden_layers: 32
+  num_key_value_heads: 8
+  num_local_experts: 8
+  output_router_logits: false
+  pad_token_id: 0
+  rms_norm_eps: 1.0e-05
+  rope_theta: 1000000.0
+  router_aux_loss_coef: 0.02
+  router_jitter_noise: 0.0
+  sliding_window: null
+  tie_word_embeddings: false
+  torch_dtype: bfloat16
+  transformers_version: 4.51.3
+  unsloth_fixed: true
+  unsloth_version: 2025.4.7
+  use_cache: true
+  vocab_size: 32000
+onnxFiles: {}
+safetensorsSizeMb: 93405.7
+approxSizeMb: 93405.6
+fetchedAt: '2026-06-11T08:11:04.000Z'

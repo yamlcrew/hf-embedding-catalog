@@ -1,0 +1,141 @@
+_id: 6894fc181c0cfe25885a76b3
+id: nikhil061307/contrastive-learning-bert-added-token-v5
+private: false
+pipeline_tag: feature-extraction
+library_name: transformers
+tags:
+- transformers
+- pytorch
+- contrastive_clinical
+- image-feature-extraction
+- contrastive-learning
+- clinical-text
+- medical-nlp
+- entity-anonymization
+- triplet-loss
+- clinical-modernbert
+- sentence-embeddings
+- feature-extraction
+- custom_code
+- en
+- dataset:clinical-notes
+- license:apache-2.0
+- model-index
+- region:us
+downloads: 5
+likes: 0
+modelId: nikhil061307/contrastive-learning-bert-added-token-v5
+author: nikhil061307
+sha: c97cc90833b9cf1d60bc955509f6767b1bbe89ac
+lastModified: '2025-09-06T14:02:31.000Z'
+gated: false
+disabled: false
+model-index:
+- name: Clinical Contrastive ModernBERT with Entity Support
+  results:
+  - task:
+      type: feature-extraction
+      name: Clinical Text Embeddings
+    dataset:
+      type: clinical-notes
+      name: Clinical Notes Dataset
+    metrics:
+    - type: cosine_similarity
+      value: 0.87
+      name: Cosine Similarity
+      verified: false
+    - type: triplet_accuracy
+      value: 0.94
+      name: Triplet Accuracy
+      verified: false
+config:
+  model_type: contrastive_clinical
+  architectures:
+  - ContrastiveClinicalModel
+  auto_map:
+    AutoModel: modeling_contrastive.ContrastiveClinicalModel
+    AutoConfig: modeling_contrastive.ContrastiveClinicalConfig
+  tokenizer_config:
+    cls_token: '[CLS]'
+    mask_token: '[MASK]'
+    pad_token: '[PAD]'
+    sep_token: '[SEP]'
+    unk_token: '[UNK]'
+cardData:
+  language: en
+  license: apache-2.0
+  tags:
+  - contrastive-learning
+  - clinical-text
+  - medical-nlp
+  - entity-anonymization
+  - triplet-loss
+  - clinical-modernbert
+  - sentence-embeddings
+  datasets:
+  - clinical-notes
+  metrics:
+  - cosine_similarity
+  - triplet_accuracy
+  pipeline_tag: feature-extraction
+  library_name: transformers
+  model-index:
+  - name: Clinical Contrastive ModernBERT with Entity Support
+    results:
+    - task:
+        type: feature-extraction
+        name: Clinical Text Embeddings
+      dataset:
+        type: clinical-notes
+        name: Clinical Notes Dataset
+      metrics:
+      - type: cosine_similarity
+        value: 0.87
+        name: Cosine Similarity
+        verified: false
+      - type: triplet_accuracy
+        value: 0.94
+        name: Triplet Accuracy
+        verified: false
+transformersInfo:
+  auto_model: AutoModel
+  custom_class: modeling_contrastive.ContrastiveClinicalModel
+  pipeline_tag: image-feature-extraction
+siblings:
+- rfilename: .gitattributes
+- rfilename: README.md
+- rfilename: config.json
+- rfilename: modeling_contrastive.py
+- rfilename: pytorch_model.bin
+- rfilename: special_tokens_map.json
+- rfilename: tokenizer.json
+- rfilename: tokenizer_config.json
+spaces:
+- nikhil061307/bert-contrastive-inference
+- nikhil061307/contrastive-learning-bert
+createdAt: '2025-08-07T19:18:48.000Z'
+usedStorage: 1092825950
+downloadsAllTime: 1971
+inferenceProviderMapping: {}
+configJson:
+  model_type: contrastive_clinical
+  architectures:
+  - ContrastiveClinicalModel
+  auto_map:
+    AutoModel: modeling_contrastive.ContrastiveClinicalModel
+    AutoConfig: modeling_contrastive.ContrastiveClinicalConfig
+  model_name: Simonlee711/Clinical_ModernBERT
+  dropout_rate: 0.15
+  entity_token_id: 50368
+  vocab_size: 50370
+  hidden_size: 768
+  num_hidden_layers: 22
+  num_attention_heads: 12
+  max_position_embeddings: 8192
+  layer_norm_eps: 1.0e-12
+  torch_dtype: float32
+  transformers_version: 4.44.0
+onnxFiles: {}
+safetensorsSizeMb: 0.0
+approxSizeMb: 0.0
+fetchedAt: '2026-06-11T08:11:04.000Z'

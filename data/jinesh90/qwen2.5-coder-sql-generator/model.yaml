@@ -1,0 +1,181 @@
+_id: 69b75b907ea817dbad1b9e6c
+id: jinesh90/qwen2.5-coder-sql-generator
+private: false
+pipeline_tag: feature-extraction
+library_name: transformers
+tags:
+- transformers
+- safetensors
+- qwen2
+- feature-extraction
+- text-generation-inference
+- unsloth
+- en
+- base_model:unsloth/Qwen2.5-Coder-7B-bnb-4bit
+- base_model:finetune:unsloth/Qwen2.5-Coder-7B-bnb-4bit
+- license:apache-2.0
+- text-embeddings-inference
+- endpoints_compatible
+- region:us
+downloads: 4
+likes: 0
+modelId: jinesh90/qwen2.5-coder-sql-generator
+author: jinesh90
+sha: 42554107e7c18cc7f95f3a0b03068588b8aa50dc
+lastModified: '2026-03-16T01:26:17.000Z'
+gated: false
+disabled: false
+model-index: null
+config:
+  architectures:
+  - Qwen2Model
+  model_type: qwen2
+  tokenizer_config:
+    bos_token: null
+    eos_token: <|endoftext|>
+    pad_token: <|PAD_TOKEN|>
+    unk_token: null
+    chat_template: "{%- if tools %}\n    {{- '<|im_start|>system\\n' }}\n    {%- if messages[0]['role'] == 'system' %}\n \
+      \       {{- messages[0]['content'] }}\n    {%- else %}\n        {{- 'You are Qwen, created by Alibaba Cloud. You are\
+      \ a helpful assistant.' }}\n    {%- endif %}\n    {{- \"\\n\\n# Tools\\n\\nYou may call one or more functions to assist\
+      \ with the user query.\\n\\nYou are provided with function signatures within <tools></tools> XML tags:\\n<tools>\" }}\n\
+      \    {%- for tool in tools %}\n        {{- \"\\n\" }}\n        {{- tool | tojson }}\n    {%- endfor %}\n    {{- \"\\\
+      n</tools>\\n\\nFor each function call, return a json object with function name and arguments within <tool_call></tool_call>\
+      \ XML tags:\\n<tool_call>\\n{\\\"name\\\": <function-name>, \\\"arguments\\\": <args-json-object>}\\n</tool_call><|im_end|>\\\
+      n\" }}\n{%- else %}\n    {%- if messages[0]['role'] == 'system' %}\n        {{- '<|im_start|>system\\n' + messages[0]['content']\
+      \ + '<|im_end|>\\n' }}\n    {%- else %}\n        {{- '<|im_start|>system\\nYou are Qwen, created by Alibaba Cloud. You\
+      \ are a helpful assistant.<|im_end|>\\n' }}\n    {%- endif %}\n{%- endif %}\n{%- for message in messages %}\n    {%-\
+      \ if (message.role == \"user\") or (message.role == \"system\" and not loop.first) or (message.role == \"assistant\"\
+      \ and not message.tool_calls) %}\n        {{- '<|im_start|>' + message.role + '\\n' + message.content + '<|im_end|>'\
+      \ + '\\n' }}\n    {%- elif message.role == \"assistant\" %}\n        {{- '<|im_start|>' + message.role }}\n        {%-\
+      \ if message.content %}\n            {{- '\\n' + message.content }}\n        {%- endif %}\n        {%- for tool_call\
+      \ in message.tool_calls %}\n            {%- if tool_call.function is defined %}\n                {%- set tool_call =\
+      \ tool_call.function %}\n            {%- endif %}\n            {{- '\\n<tool_call>\\n{\"name\": \"' }}\n           \
+      \ {{- tool_call.name }}\n            {{- '\", \"arguments\": ' }}\n            {{- tool_call.arguments | tojson }}\n\
+      \            {{- '}\\n</tool_call>' }}\n        {%- endfor %}\n        {{- '<|im_end|>\\n' }}\n    {%- elif message.role\
+      \ == \"tool\" %}\n        {%- if (loop.index0 == 0) or (messages[loop.index0 - 1].role != \"tool\") %}            {{-\
+      \ '<|im_start|>user' }}\n        {%- endif %}\n        {{- '\\n<tool_response>\\n' }}\n        {{- message.content }}\n\
+      \        {{- '\\n</tool_response>' }}\n        {%- if loop.last or (messages[loop.index0 + 1].role != \"tool\") %}\n\
+      \            {{- '<|im_end|>\\n' }}\n        {%- endif %}\n    {%- endif %}\n{%- endfor %}\n{%- if add_generation_prompt\
+      \ %}\n    {{- '<|im_start|>assistant\\n' }}\n{%- endif %}\n"
+  chat_template_jinja: "{%- if tools %}\n    {{- '<|im_start|>system\\n' }}\n    {%- if messages[0]['role'] == 'system' %}\n\
+    \        {{- messages[0]['content'] }}\n    {%- else %}\n        {{- 'You are Qwen, created by Alibaba Cloud. You are\
+    \ a helpful assistant.' }}\n    {%- endif %}\n    {{- \"\\n\\n# Tools\\n\\nYou may call one or more functions to assist\
+    \ with the user query.\\n\\nYou are provided with function signatures within <tools></tools> XML tags:\\n<tools>\" }}\n\
+    \    {%- for tool in tools %}\n        {{- \"\\n\" }}\n        {{- tool | tojson }}\n    {%- endfor %}\n    {{- \"\\n</tools>\\\
+    n\\nFor each function call, return a json object with function name and arguments within <tool_call></tool_call> XML tags:\\\
+    n<tool_call>\\n{\\\"name\\\": <function-name>, \\\"arguments\\\": <args-json-object>}\\n</tool_call><|im_end|>\\n\" }}\n\
+    {%- else %}\n    {%- if messages[0]['role'] == 'system' %}\n        {{- '<|im_start|>system\\n' + messages[0]['content']\
+    \ + '<|im_end|>\\n' }}\n    {%- else %}\n        {{- '<|im_start|>system\\nYou are Qwen, created by Alibaba Cloud. You\
+    \ are a helpful assistant.<|im_end|>\\n' }}\n    {%- endif %}\n{%- endif %}\n{%- for message in messages %}\n    {%- if\
+    \ (message.role == \"user\") or (message.role == \"system\" and not loop.first) or (message.role == \"assistant\" and\
+    \ not message.tool_calls) %}\n        {{- '<|im_start|>' + message.role + '\\n' + message.content + '<|im_end|>' + '\\\
+    n' }}\n    {%- elif message.role == \"assistant\" %}\n        {{- '<|im_start|>' + message.role }}\n        {%- if message.content\
+    \ %}\n            {{- '\\n' + message.content }}\n        {%- endif %}\n        {%- for tool_call in message.tool_calls\
+    \ %}\n            {%- if tool_call.function is defined %}\n                {%- set tool_call = tool_call.function %}\n\
+    \            {%- endif %}\n            {{- '\\n<tool_call>\\n{\"name\": \"' }}\n            {{- tool_call.name }}\n  \
+    \          {{- '\", \"arguments\": ' }}\n            {{- tool_call.arguments | tojson }}\n            {{- '}\\n</tool_call>'\
+    \ }}\n        {%- endfor %}\n        {{- '<|im_end|>\\n' }}\n    {%- elif message.role == \"tool\" %}\n        {%- if\
+    \ (loop.index0 == 0) or (messages[loop.index0 - 1].role != \"tool\") %}            {{- '<|im_start|>user' }}\n       \
+    \ {%- endif %}\n        {{- '\\n<tool_response>\\n' }}\n        {{- message.content }}\n        {{- '\\n</tool_response>'\
+    \ }}\n        {%- if loop.last or (messages[loop.index0 + 1].role != \"tool\") %}\n            {{- '<|im_end|>\\n' }}\n\
+    \        {%- endif %}\n    {%- endif %}\n{%- endfor %}\n{%- if add_generation_prompt %}\n    {{- '<|im_start|>assistant\\\
+    n' }}\n{%- endif %}\n"
+cardData:
+  base_model: unsloth/Qwen2.5-Coder-7B-bnb-4bit
+  tags:
+  - text-generation-inference
+  - transformers
+  - unsloth
+  - qwen2
+  license: apache-2.0
+  language:
+  - en
+transformersInfo:
+  auto_model: AutoModelForMultimodalLM
+  pipeline_tag: feature-extraction
+  processor: AutoTokenizer
+siblings:
+- rfilename: .gitattributes
+- rfilename: README.md
+- rfilename: chat_template.jinja
+- rfilename: config.json
+- rfilename: model-00001-of-00004.safetensors
+- rfilename: model-00002-of-00004.safetensors
+- rfilename: model-00003-of-00004.safetensors
+- rfilename: model-00004-of-00004.safetensors
+- rfilename: model.safetensors.index.json
+- rfilename: tokenizer.json
+- rfilename: tokenizer_config.json
+spaces:
+- jinesh90/sql-query-generator
+createdAt: '2026-03-16T01:23:28.000Z'
+safetensors:
+  parameters:
+    BF16: 7615616512
+  total: 7615616512
+usedStorage: 15242694318
+downloadsAllTime: 64
+inferenceProviderMapping: {}
+configJson:
+  architectures:
+  - Qwen2Model
+  attention_dropout: 0.0
+  bos_token_id: null
+  torch_dtype: bfloat16
+  eos_token_id: 151643
+  hidden_act: silu
+  hidden_size: 3584
+  initializer_range: 0.02
+  intermediate_size: 18944
+  layer_types:
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  max_position_embeddings: 32768
+  max_window_layers: 28
+  model_type: qwen2
+  num_attention_heads: 28
+  num_hidden_layers: 28
+  num_key_value_heads: 4
+  pad_token_id: 151665
+  rms_norm_eps: 1.0e-06
+  rope_parameters:
+    rope_theta: 1000000.0
+    rope_type: default
+  sliding_window: null
+  tie_word_embeddings: false
+  unsloth_fixed: true
+  unsloth_version: 2026.3.4
+  use_cache: false
+  use_sliding_window: false
+  vocab_size: 152064
+onnxFiles: {}
+safetensorsSizeMb: 15231.3
+approxSizeMb: 15231.2
+fetchedAt: '2026-06-11T08:11:04.000Z'

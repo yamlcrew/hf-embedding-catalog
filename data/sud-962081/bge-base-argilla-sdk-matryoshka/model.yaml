@@ -1,0 +1,972 @@
+_id: 679993f1e059513e84c4b80e
+id: sud-962081/bge-base-argilla-sdk-matryoshka
+private: false
+pipeline_tag: sentence-similarity
+library_name: sentence-transformers
+tags:
+- sentence-transformers
+- safetensors
+- bert
+- sentence-similarity
+- feature-extraction
+- generated_from_trainer
+- dataset_size:882
+- loss:MatryoshkaLoss
+- loss:TripletLoss
+- en
+- arxiv:1908.10084
+- arxiv:2205.13147
+- arxiv:1703.07737
+- base_model:BAAI/bge-base-en-v1.5
+- base_model:finetune:BAAI/bge-base-en-v1.5
+- license:apache-2.0
+- model-index
+- text-embeddings-inference
+- endpoints_compatible
+- region:us
+downloads: 1
+likes: 0
+modelId: sud-962081/bge-base-argilla-sdk-matryoshka
+author: sud-962081
+sha: f0e9eeda79c9035f2f515116ca0f4f64d639a728
+lastModified: '2025-01-29T02:35:46.000Z'
+gated: false
+disabled: false
+mask_token: '[MASK]'
+widgetData:
+- source_sentence: "dataset = Dataset(\n    name=\"dataset_with_metadata\",\n    settings=Settings(\n        fields=[TextField(name=\"\
+    text\")],\n        questions=[LabelQuestion(name=\"label\", labels=[\"positive\", \"negative\"])],\n        vectors=[\n\
+    \            VectorField(name=\"vector_name\"),\n        ],\n    ),\n)\ndataset.create()\n```\n\nThen, you can add records\
+    \ to the dataset with vectors that correspond to the vector field defined in the dataset settings:"
+  sentences:
+  - The beautiful scenery of the Italian countryside inspired the artist to create a stunning watercolor painting of the Argilla
+    region.
+  - Can a RankingQuestion be used to determine the most relevant features for a machine learning model in Argilla?
+  - How can I go about creating a custom vector field in Argilla to store vector data?
+- source_sentence: 'description: In this section, we will provide a step-by-step guide to show how to manage datasets and
+    configure dataset settings.
+
+
+    Dataset management
+
+
+    This guide provides an overview of datasets, explaining the basics of how to set them up and manage them in Argilla.'
+  sentences:
+  - The new restaurant in town offers a wide variety of dishes, but the menu settings need to be reconfigured for a better
+    dining experience.
+  - Can Argilla provide guidance on setting up dataset parameters to ensure efficient data preparation and annotation for
+    machine learning models?
+  - How can Argilla help in creating a vector field by initializing a VectorField object with a specific name and dimensionality?
+- source_sentence: 'Delete a user
+
+
+    You can delete an existing user from Argilla by calling the delete method on the User class.
+
+
+    ```python
+
+    import argilla_sdk as rg
+
+
+    client = rg.Argilla(api_url="", api_key="")
+
+
+    user_to_delete = client.users(''my_username'')
+
+
+    deleted_user = user_to_delete.delete()
+
+    ```'
+  sentences:
+  - The beach was empty, so I decided to delete my footprint from the sand.
+  - How can I traverse the Argilla dataset to pull out specific information, like response values and user IDs, from the records
+    and responses?
+  - How do I go about deleting a user from Argilla using the delete method provided by the User class?
+- source_sentence: "Iterating over records with suggestions\n\nJust like responses, suggestions can be accessed from a Record\
+    \ via their question name as an attribute of the record. So if a question is named label, the suggestion can be accessed\
+    \ as record.label. The following example demonstrates how to access suggestions from a record object:\n\npython\nfor record\
+    \ in dataset.records(with_suggestions=True):\n    print(record.suggestions.label)\n\nClass Reference"
+  sentences:
+  - Can we iterate over records with suggestions to access their question names as attributes?
+  - The new cafe in town is iterating over records of their customer feedback to improve their coffee flavors.
+  - Is it possible for Argilla to optimize my workflow for monitoring LLM pipelines and A/B testing of classification models,
+    specifically for spans and text?
+- source_sentence: 'Make changes and push them
+
+
+    Make the changes you want in your local repository, and test that everything works and you are following the guidelines.
+    Check the documentation for more information about the development.
+
+
+    Once you have finished, you can check the status of your repository and synchronize with the upstreaming repo with the
+    following command:
+
+
+    ```sh
+
+
+    Check the status of your repository
+
+
+    git status
+
+
+    Synchronize with the upstreaming repo'
+  sentences:
+  - Are changes required to be made and then uploaded to the Argilla dataset repository?
+  - Can I use Argilla's filtering feature to narrow down the search results based on specific conditions?
+  - The beautiful scenery of the Italian town Argilla made me want to make changes to my travel plans.
+model-index:
+- name: BGE base ArgillaSDK Matryoshka
+  results:
+  - task:
+      type: information-retrieval
+      name: Information Retrieval
+    dataset:
+      name: dim 768
+      type: dim_768
+    metrics:
+    - type: cosine_accuracy@1
+      value: 0.061224489795918366
+      name: Cosine Accuracy@1
+      verified: false
+    - type: cosine_accuracy@3
+      value: 0.1836734693877551
+      name: Cosine Accuracy@3
+      verified: false
+    - type: cosine_accuracy@5
+      value: 0.2653061224489796
+      name: Cosine Accuracy@5
+      verified: false
+    - type: cosine_accuracy@10
+      value: 0.29591836734693877
+      name: Cosine Accuracy@10
+      verified: false
+    - type: cosine_precision@1
+      value: 0.061224489795918366
+      name: Cosine Precision@1
+      verified: false
+    - type: cosine_precision@3
+      value: 0.06122448979591836
+      name: Cosine Precision@3
+      verified: false
+    - type: cosine_precision@5
+      value: 0.05306122448979592
+      name: Cosine Precision@5
+      verified: false
+    - type: cosine_precision@10
+      value: 0.029591836734693875
+      name: Cosine Precision@10
+      verified: false
+    - type: cosine_recall@1
+      value: 0.061224489795918366
+      name: Cosine Recall@1
+      verified: false
+    - type: cosine_recall@3
+      value: 0.1836734693877551
+      name: Cosine Recall@3
+      verified: false
+    - type: cosine_recall@5
+      value: 0.2653061224489796
+      name: Cosine Recall@5
+      verified: false
+    - type: cosine_recall@10
+      value: 0.29591836734693877
+      name: Cosine Recall@10
+      verified: false
+    - type: cosine_ndcg@10
+      value: 0.17877743107362734
+      name: Cosine Ndcg@10
+      verified: false
+    - type: cosine_mrr@10
+      value: 0.1409013605442177
+      name: Cosine Mrr@10
+      verified: false
+    - type: cosine_map@100
+      value: 0.15403248573620684
+      name: Cosine Map@100
+      verified: false
+  - task:
+      type: information-retrieval
+      name: Information Retrieval
+    dataset:
+      name: dim 512
+      type: dim_512
+    metrics:
+    - type: cosine_accuracy@1
+      value: 0.07142857142857142
+      name: Cosine Accuracy@1
+      verified: false
+    - type: cosine_accuracy@3
+      value: 0.1836734693877551
+      name: Cosine Accuracy@3
+      verified: false
+    - type: cosine_accuracy@5
+      value: 0.25510204081632654
+      name: Cosine Accuracy@5
+      verified: false
+    - type: cosine_accuracy@10
+      value: 0.30612244897959184
+      name: Cosine Accuracy@10
+      verified: false
+    - type: cosine_precision@1
+      value: 0.07142857142857142
+      name: Cosine Precision@1
+      verified: false
+    - type: cosine_precision@3
+      value: 0.06122448979591836
+      name: Cosine Precision@3
+      verified: false
+    - type: cosine_precision@5
+      value: 0.051020408163265314
+      name: Cosine Precision@5
+      verified: false
+    - type: cosine_precision@10
+      value: 0.03061224489795919
+      name: Cosine Precision@10
+      verified: false
+    - type: cosine_recall@1
+      value: 0.07142857142857142
+      name: Cosine Recall@1
+      verified: false
+    - type: cosine_recall@3
+      value: 0.1836734693877551
+      name: Cosine Recall@3
+      verified: false
+    - type: cosine_recall@5
+      value: 0.25510204081632654
+      name: Cosine Recall@5
+      verified: false
+    - type: cosine_recall@10
+      value: 0.30612244897959184
+      name: Cosine Recall@10
+      verified: false
+    - type: cosine_ndcg@10
+      value: 0.17888633702518553
+      name: Cosine Ndcg@10
+      verified: false
+    - type: cosine_mrr@10
+      value: 0.13887269193391644
+      name: Cosine Mrr@10
+      verified: false
+    - type: cosine_map@100
+      value: 0.14994011261768814
+      name: Cosine Map@100
+      verified: false
+  - task:
+      type: information-retrieval
+      name: Information Retrieval
+    dataset:
+      name: dim 256
+      type: dim_256
+    metrics:
+    - type: cosine_accuracy@1
+      value: 0.04081632653061224
+      name: Cosine Accuracy@1
+      verified: false
+    - type: cosine_accuracy@3
+      value: 0.20408163265306123
+      name: Cosine Accuracy@3
+      verified: false
+    - type: cosine_accuracy@5
+      value: 0.25510204081632654
+      name: Cosine Accuracy@5
+      verified: false
+    - type: cosine_accuracy@10
+      value: 0.29591836734693877
+      name: Cosine Accuracy@10
+      verified: false
+    - type: cosine_precision@1
+      value: 0.04081632653061224
+      name: Cosine Precision@1
+      verified: false
+    - type: cosine_precision@3
+      value: 0.06802721088435373
+      name: Cosine Precision@3
+      verified: false
+    - type: cosine_precision@5
+      value: 0.05102040816326531
+      name: Cosine Precision@5
+      verified: false
+    - type: cosine_precision@10
+      value: 0.029591836734693875
+      name: Cosine Precision@10
+      verified: false
+    - type: cosine_recall@1
+      value: 0.04081632653061224
+      name: Cosine Recall@1
+      verified: false
+    - type: cosine_recall@3
+      value: 0.20408163265306123
+      name: Cosine Recall@3
+      verified: false
+    - type: cosine_recall@5
+      value: 0.25510204081632654
+      name: Cosine Recall@5
+      verified: false
+    - type: cosine_recall@10
+      value: 0.29591836734693877
+      name: Cosine Recall@10
+      verified: false
+    - type: cosine_ndcg@10
+      value: 0.16359512996570535
+      name: Cosine Ndcg@10
+      verified: false
+    - type: cosine_mrr@10
+      value: 0.12111273080660837
+      name: Cosine Mrr@10
+      verified: false
+    - type: cosine_map@100
+      value: 0.13486861555858168
+      name: Cosine Map@100
+      verified: false
+  - task:
+      type: information-retrieval
+      name: Information Retrieval
+    dataset:
+      name: dim 128
+      type: dim_128
+    metrics:
+    - type: cosine_accuracy@1
+      value: 0.030612244897959183
+      name: Cosine Accuracy@1
+      verified: false
+    - type: cosine_accuracy@3
+      value: 0.19387755102040816
+      name: Cosine Accuracy@3
+      verified: false
+    - type: cosine_accuracy@5
+      value: 0.24489795918367346
+      name: Cosine Accuracy@5
+      verified: false
+    - type: cosine_accuracy@10
+      value: 0.37755102040816324
+      name: Cosine Accuracy@10
+      verified: false
+    - type: cosine_precision@1
+      value: 0.030612244897959183
+      name: Cosine Precision@1
+      verified: false
+    - type: cosine_precision@3
+      value: 0.06462585034013606
+      name: Cosine Precision@3
+      verified: false
+    - type: cosine_precision@5
+      value: 0.04897959183673469
+      name: Cosine Precision@5
+      verified: false
+    - type: cosine_precision@10
+      value: 0.03775510204081633
+      name: Cosine Precision@10
+      verified: false
+    - type: cosine_recall@1
+      value: 0.030612244897959183
+      name: Cosine Recall@1
+      verified: false
+    - type: cosine_recall@3
+      value: 0.19387755102040816
+      name: Cosine Recall@3
+      verified: false
+    - type: cosine_recall@5
+      value: 0.24489795918367346
+      name: Cosine Recall@5
+      verified: false
+    - type: cosine_recall@10
+      value: 0.37755102040816324
+      name: Cosine Recall@10
+      verified: false
+    - type: cosine_ndcg@10
+      value: 0.18446318338912313
+      name: Cosine Ndcg@10
+      verified: false
+    - type: cosine_mrr@10
+      value: 0.12522270813087136
+      name: Cosine Mrr@10
+      verified: false
+    - type: cosine_map@100
+      value: 0.13299376323790885
+      name: Cosine Map@100
+      verified: false
+  - task:
+      type: information-retrieval
+      name: Information Retrieval
+    dataset:
+      name: dim 64
+      type: dim_64
+    metrics:
+    - type: cosine_accuracy@1
+      value: 0.02040816326530612
+      name: Cosine Accuracy@1
+      verified: false
+    - type: cosine_accuracy@3
+      value: 0.08163265306122448
+      name: Cosine Accuracy@3
+      verified: false
+    - type: cosine_accuracy@5
+      value: 0.21428571428571427
+      name: Cosine Accuracy@5
+      verified: false
+    - type: cosine_accuracy@10
+      value: 0.2755102040816326
+      name: Cosine Accuracy@10
+      verified: false
+    - type: cosine_precision@1
+      value: 0.02040816326530612
+      name: Cosine Precision@1
+      verified: false
+    - type: cosine_precision@3
+      value: 0.027210884353741496
+      name: Cosine Precision@3
+      verified: false
+    - type: cosine_precision@5
+      value: 0.04285714285714286
+      name: Cosine Precision@5
+      verified: false
+    - type: cosine_precision@10
+      value: 0.027551020408163266
+      name: Cosine Precision@10
+      verified: false
+    - type: cosine_recall@1
+      value: 0.02040816326530612
+      name: Cosine Recall@1
+      verified: false
+    - type: cosine_recall@3
+      value: 0.08163265306122448
+      name: Cosine Recall@3
+      verified: false
+    - type: cosine_recall@5
+      value: 0.21428571428571427
+      name: Cosine Recall@5
+      verified: false
+    - type: cosine_recall@10
+      value: 0.2755102040816326
+      name: Cosine Recall@10
+      verified: false
+    - type: cosine_ndcg@10
+      value: 0.13201826308152928
+      name: Cosine Ndcg@10
+      verified: false
+    - type: cosine_mrr@10
+      value: 0.08740686750890833
+      name: Cosine Mrr@10
+      verified: false
+    - type: cosine_map@100
+      value: 0.10010997553556797
+      name: Cosine Map@100
+      verified: false
+config:
+  architectures:
+  - BertModel
+  model_type: bert
+  tokenizer_config:
+    cls_token: '[CLS]'
+    mask_token: '[MASK]'
+    pad_token: '[PAD]'
+    sep_token: '[SEP]'
+    unk_token: '[UNK]'
+cardData:
+  language:
+  - en
+  license: apache-2.0
+  tags:
+  - sentence-transformers
+  - sentence-similarity
+  - feature-extraction
+  - generated_from_trainer
+  - dataset_size:882
+  - loss:MatryoshkaLoss
+  - loss:TripletLoss
+  base_model: BAAI/bge-base-en-v1.5
+  widget:
+  - source_sentence: "dataset = Dataset(\n    name=\"dataset_with_metadata\",\n    settings=Settings(\n        fields=[TextField(name=\"\
+      text\")],\n        questions=[LabelQuestion(name=\"label\", labels=[\"positive\", \"negative\"])],\n        vectors=[\n\
+      \            VectorField(name=\"vector_name\"),\n        ],\n    ),\n)\ndataset.create()\n```\n\nThen, you can add records\
+      \ to the dataset with vectors that correspond to the vector field defined in the dataset settings:"
+    sentences:
+    - The beautiful scenery of the Italian countryside inspired the artist to create a stunning watercolor painting of the
+      Argilla region.
+    - Can a RankingQuestion be used to determine the most relevant features for a machine learning model in Argilla?
+    - How can I go about creating a custom vector field in Argilla to store vector data?
+  - source_sentence: 'description: In this section, we will provide a step-by-step guide to show how to manage datasets and
+      configure dataset settings.
+
+
+      Dataset management
+
+
+      This guide provides an overview of datasets, explaining the basics of how to set them up and manage them in Argilla.'
+    sentences:
+    - The new restaurant in town offers a wide variety of dishes, but the menu settings need to be reconfigured for a better
+      dining experience.
+    - Can Argilla provide guidance on setting up dataset parameters to ensure efficient data preparation and annotation for
+      machine learning models?
+    - How can Argilla help in creating a vector field by initializing a VectorField object with a specific name and dimensionality?
+  - source_sentence: 'Delete a user
+
+
+      You can delete an existing user from Argilla by calling the delete method on the User class.
+
+
+      ```python
+
+      import argilla_sdk as rg
+
+
+      client = rg.Argilla(api_url="", api_key="")
+
+
+      user_to_delete = client.users(''my_username'')
+
+
+      deleted_user = user_to_delete.delete()
+
+      ```'
+    sentences:
+    - The beach was empty, so I decided to delete my footprint from the sand.
+    - How can I traverse the Argilla dataset to pull out specific information, like response values and user IDs, from the
+      records and responses?
+    - How do I go about deleting a user from Argilla using the delete method provided by the User class?
+  - source_sentence: "Iterating over records with suggestions\n\nJust like responses, suggestions can be accessed from a Record\
+      \ via their question name as an attribute of the record. So if a question is named label, the suggestion can be accessed\
+      \ as record.label. The following example demonstrates how to access suggestions from a record object:\n\npython\nfor\
+      \ record in dataset.records(with_suggestions=True):\n    print(record.suggestions.label)\n\nClass Reference"
+    sentences:
+    - Can we iterate over records with suggestions to access their question names as attributes?
+    - The new cafe in town is iterating over records of their customer feedback to improve their coffee flavors.
+    - Is it possible for Argilla to optimize my workflow for monitoring LLM pipelines and A/B testing of classification models,
+      specifically for spans and text?
+  - source_sentence: 'Make changes and push them
+
+
+      Make the changes you want in your local repository, and test that everything works and you are following the guidelines.
+      Check the documentation for more information about the development.
+
+
+      Once you have finished, you can check the status of your repository and synchronize with the upstreaming repo with the
+      following command:
+
+
+      ```sh
+
+
+      Check the status of your repository
+
+
+      git status
+
+
+      Synchronize with the upstreaming repo'
+    sentences:
+    - Are changes required to be made and then uploaded to the Argilla dataset repository?
+    - Can I use Argilla's filtering feature to narrow down the search results based on specific conditions?
+    - The beautiful scenery of the Italian town Argilla made me want to make changes to my travel plans.
+  pipeline_tag: sentence-similarity
+  library_name: sentence-transformers
+  metrics:
+  - cosine_accuracy@1
+  - cosine_accuracy@3
+  - cosine_accuracy@5
+  - cosine_accuracy@10
+  - cosine_precision@1
+  - cosine_precision@3
+  - cosine_precision@5
+  - cosine_precision@10
+  - cosine_recall@1
+  - cosine_recall@3
+  - cosine_recall@5
+  - cosine_recall@10
+  - cosine_ndcg@10
+  - cosine_mrr@10
+  - cosine_map@100
+  model-index:
+  - name: BGE base ArgillaSDK Matryoshka
+    results:
+    - task:
+        type: information-retrieval
+        name: Information Retrieval
+      dataset:
+        name: dim 768
+        type: dim_768
+      metrics:
+      - type: cosine_accuracy@1
+        value: 0.061224489795918366
+        name: Cosine Accuracy@1
+        verified: false
+      - type: cosine_accuracy@3
+        value: 0.1836734693877551
+        name: Cosine Accuracy@3
+        verified: false
+      - type: cosine_accuracy@5
+        value: 0.2653061224489796
+        name: Cosine Accuracy@5
+        verified: false
+      - type: cosine_accuracy@10
+        value: 0.29591836734693877
+        name: Cosine Accuracy@10
+        verified: false
+      - type: cosine_precision@1
+        value: 0.061224489795918366
+        name: Cosine Precision@1
+        verified: false
+      - type: cosine_precision@3
+        value: 0.06122448979591836
+        name: Cosine Precision@3
+        verified: false
+      - type: cosine_precision@5
+        value: 0.05306122448979592
+        name: Cosine Precision@5
+        verified: false
+      - type: cosine_precision@10
+        value: 0.029591836734693875
+        name: Cosine Precision@10
+        verified: false
+      - type: cosine_recall@1
+        value: 0.061224489795918366
+        name: Cosine Recall@1
+        verified: false
+      - type: cosine_recall@3
+        value: 0.1836734693877551
+        name: Cosine Recall@3
+        verified: false
+      - type: cosine_recall@5
+        value: 0.2653061224489796
+        name: Cosine Recall@5
+        verified: false
+      - type: cosine_recall@10
+        value: 0.29591836734693877
+        name: Cosine Recall@10
+        verified: false
+      - type: cosine_ndcg@10
+        value: 0.17877743107362734
+        name: Cosine Ndcg@10
+        verified: false
+      - type: cosine_mrr@10
+        value: 0.1409013605442177
+        name: Cosine Mrr@10
+        verified: false
+      - type: cosine_map@100
+        value: 0.15403248573620684
+        name: Cosine Map@100
+        verified: false
+    - task:
+        type: information-retrieval
+        name: Information Retrieval
+      dataset:
+        name: dim 512
+        type: dim_512
+      metrics:
+      - type: cosine_accuracy@1
+        value: 0.07142857142857142
+        name: Cosine Accuracy@1
+        verified: false
+      - type: cosine_accuracy@3
+        value: 0.1836734693877551
+        name: Cosine Accuracy@3
+        verified: false
+      - type: cosine_accuracy@5
+        value: 0.25510204081632654
+        name: Cosine Accuracy@5
+        verified: false
+      - type: cosine_accuracy@10
+        value: 0.30612244897959184
+        name: Cosine Accuracy@10
+        verified: false
+      - type: cosine_precision@1
+        value: 0.07142857142857142
+        name: Cosine Precision@1
+        verified: false
+      - type: cosine_precision@3
+        value: 0.06122448979591836
+        name: Cosine Precision@3
+        verified: false
+      - type: cosine_precision@5
+        value: 0.051020408163265314
+        name: Cosine Precision@5
+        verified: false
+      - type: cosine_precision@10
+        value: 0.03061224489795919
+        name: Cosine Precision@10
+        verified: false
+      - type: cosine_recall@1
+        value: 0.07142857142857142
+        name: Cosine Recall@1
+        verified: false
+      - type: cosine_recall@3
+        value: 0.1836734693877551
+        name: Cosine Recall@3
+        verified: false
+      - type: cosine_recall@5
+        value: 0.25510204081632654
+        name: Cosine Recall@5
+        verified: false
+      - type: cosine_recall@10
+        value: 0.30612244897959184
+        name: Cosine Recall@10
+        verified: false
+      - type: cosine_ndcg@10
+        value: 0.17888633702518553
+        name: Cosine Ndcg@10
+        verified: false
+      - type: cosine_mrr@10
+        value: 0.13887269193391644
+        name: Cosine Mrr@10
+        verified: false
+      - type: cosine_map@100
+        value: 0.14994011261768814
+        name: Cosine Map@100
+        verified: false
+    - task:
+        type: information-retrieval
+        name: Information Retrieval
+      dataset:
+        name: dim 256
+        type: dim_256
+      metrics:
+      - type: cosine_accuracy@1
+        value: 0.04081632653061224
+        name: Cosine Accuracy@1
+        verified: false
+      - type: cosine_accuracy@3
+        value: 0.20408163265306123
+        name: Cosine Accuracy@3
+        verified: false
+      - type: cosine_accuracy@5
+        value: 0.25510204081632654
+        name: Cosine Accuracy@5
+        verified: false
+      - type: cosine_accuracy@10
+        value: 0.29591836734693877
+        name: Cosine Accuracy@10
+        verified: false
+      - type: cosine_precision@1
+        value: 0.04081632653061224
+        name: Cosine Precision@1
+        verified: false
+      - type: cosine_precision@3
+        value: 0.06802721088435373
+        name: Cosine Precision@3
+        verified: false
+      - type: cosine_precision@5
+        value: 0.05102040816326531
+        name: Cosine Precision@5
+        verified: false
+      - type: cosine_precision@10
+        value: 0.029591836734693875
+        name: Cosine Precision@10
+        verified: false
+      - type: cosine_recall@1
+        value: 0.04081632653061224
+        name: Cosine Recall@1
+        verified: false
+      - type: cosine_recall@3
+        value: 0.20408163265306123
+        name: Cosine Recall@3
+        verified: false
+      - type: cosine_recall@5
+        value: 0.25510204081632654
+        name: Cosine Recall@5
+        verified: false
+      - type: cosine_recall@10
+        value: 0.29591836734693877
+        name: Cosine Recall@10
+        verified: false
+      - type: cosine_ndcg@10
+        value: 0.16359512996570535
+        name: Cosine Ndcg@10
+        verified: false
+      - type: cosine_mrr@10
+        value: 0.12111273080660837
+        name: Cosine Mrr@10
+        verified: false
+      - type: cosine_map@100
+        value: 0.13486861555858168
+        name: Cosine Map@100
+        verified: false
+    - task:
+        type: information-retrieval
+        name: Information Retrieval
+      dataset:
+        name: dim 128
+        type: dim_128
+      metrics:
+      - type: cosine_accuracy@1
+        value: 0.030612244897959183
+        name: Cosine Accuracy@1
+        verified: false
+      - type: cosine_accuracy@3
+        value: 0.19387755102040816
+        name: Cosine Accuracy@3
+        verified: false
+      - type: cosine_accuracy@5
+        value: 0.24489795918367346
+        name: Cosine Accuracy@5
+        verified: false
+      - type: cosine_accuracy@10
+        value: 0.37755102040816324
+        name: Cosine Accuracy@10
+        verified: false
+      - type: cosine_precision@1
+        value: 0.030612244897959183
+        name: Cosine Precision@1
+        verified: false
+      - type: cosine_precision@3
+        value: 0.06462585034013606
+        name: Cosine Precision@3
+        verified: false
+      - type: cosine_precision@5
+        value: 0.04897959183673469
+        name: Cosine Precision@5
+        verified: false
+      - type: cosine_precision@10
+        value: 0.03775510204081633
+        name: Cosine Precision@10
+        verified: false
+      - type: cosine_recall@1
+        value: 0.030612244897959183
+        name: Cosine Recall@1
+        verified: false
+      - type: cosine_recall@3
+        value: 0.19387755102040816
+        name: Cosine Recall@3
+        verified: false
+      - type: cosine_recall@5
+        value: 0.24489795918367346
+        name: Cosine Recall@5
+        verified: false
+      - type: cosine_recall@10
+        value: 0.37755102040816324
+        name: Cosine Recall@10
+        verified: false
+      - type: cosine_ndcg@10
+        value: 0.18446318338912313
+        name: Cosine Ndcg@10
+        verified: false
+      - type: cosine_mrr@10
+        value: 0.12522270813087136
+        name: Cosine Mrr@10
+        verified: false
+      - type: cosine_map@100
+        value: 0.13299376323790885
+        name: Cosine Map@100
+        verified: false
+    - task:
+        type: information-retrieval
+        name: Information Retrieval
+      dataset:
+        name: dim 64
+        type: dim_64
+      metrics:
+      - type: cosine_accuracy@1
+        value: 0.02040816326530612
+        name: Cosine Accuracy@1
+        verified: false
+      - type: cosine_accuracy@3
+        value: 0.08163265306122448
+        name: Cosine Accuracy@3
+        verified: false
+      - type: cosine_accuracy@5
+        value: 0.21428571428571427
+        name: Cosine Accuracy@5
+        verified: false
+      - type: cosine_accuracy@10
+        value: 0.2755102040816326
+        name: Cosine Accuracy@10
+        verified: false
+      - type: cosine_precision@1
+        value: 0.02040816326530612
+        name: Cosine Precision@1
+        verified: false
+      - type: cosine_precision@3
+        value: 0.027210884353741496
+        name: Cosine Precision@3
+        verified: false
+      - type: cosine_precision@5
+        value: 0.04285714285714286
+        name: Cosine Precision@5
+        verified: false
+      - type: cosine_precision@10
+        value: 0.027551020408163266
+        name: Cosine Precision@10
+        verified: false
+      - type: cosine_recall@1
+        value: 0.02040816326530612
+        name: Cosine Recall@1
+        verified: false
+      - type: cosine_recall@3
+        value: 0.08163265306122448
+        name: Cosine Recall@3
+        verified: false
+      - type: cosine_recall@5
+        value: 0.21428571428571427
+        name: Cosine Recall@5
+        verified: false
+      - type: cosine_recall@10
+        value: 0.2755102040816326
+        name: Cosine Recall@10
+        verified: false
+      - type: cosine_ndcg@10
+        value: 0.13201826308152928
+        name: Cosine Ndcg@10
+        verified: false
+      - type: cosine_mrr@10
+        value: 0.08740686750890833
+        name: Cosine Mrr@10
+        verified: false
+      - type: cosine_map@100
+        value: 0.10010997553556797
+        name: Cosine Map@100
+        verified: false
+siblings:
+- rfilename: .gitattributes
+- rfilename: 1_Pooling/config.json
+- rfilename: README.md
+- rfilename: config.json
+- rfilename: config_sentence_transformers.json
+- rfilename: model.safetensors
+- rfilename: modules.json
+- rfilename: sentence_bert_config.json
+- rfilename: special_tokens_map.json
+- rfilename: tokenizer.json
+- rfilename: tokenizer_config.json
+- rfilename: vocab.txt
+spaces: []
+createdAt: '2025-01-29T02:35:29.000Z'
+safetensors:
+  parameters:
+    F32: 109482240
+  total: 109482240
+usedStorage: 437951328
+downloadsAllTime: 2
+inferenceProviderMapping: {}
+configJson:
+  _name_or_path: BAAI/bge-base-en-v1.5
+  architectures:
+  - BertModel
+  attention_probs_dropout_prob: 0.1
+  classifier_dropout: null
+  gradient_checkpointing: false
+  hidden_act: gelu
+  hidden_dropout_prob: 0.1
+  hidden_size: 768
+  id2label:
+    '0': LABEL_0
+  initializer_range: 0.02
+  intermediate_size: 3072
+  label2id:
+    LABEL_0: 0
+  layer_norm_eps: 1.0e-12
+  max_position_embeddings: 512
+  model_type: bert
+  num_attention_heads: 12
+  num_hidden_layers: 12
+  pad_token_id: 0
+  position_embedding_type: absolute
+  torch_dtype: float32
+  transformers_version: 4.47.1
+  type_vocab_size: 2
+  use_cache: true
+  vocab_size: 30522
+onnxFiles: {}
+safetensorsSizeMb: 438.0
+approxSizeMb: 437.9
+fetchedAt: '2026-06-11T08:11:04.000Z'

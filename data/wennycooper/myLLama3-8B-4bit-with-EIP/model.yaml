@@ -1,0 +1,106 @@
+_id: 666421839f5a0b32294b8766
+id: wennycooper/myLLama3-8B-4bit-with-EIP
+private: false
+pipeline_tag: feature-extraction
+library_name: transformers
+tags:
+- transformers
+- safetensors
+- llama
+- feature-extraction
+- arxiv:1910.09700
+- text-embeddings-inference
+- endpoints_compatible
+- region:us
+downloads: 3
+likes: 0
+modelId: wennycooper/myLLama3-8B-4bit-with-EIP
+author: wennycooper
+sha: 1be3f29f0c668e8d0e70d7c86bad7aa59b052190
+lastModified: '2024-06-08T10:01:13.000Z'
+gated: false
+disabled: false
+model-index: null
+config:
+  architectures:
+  - LlamaModel
+  model_type: llama
+  tokenizer_config:
+    bos_token: <|begin_of_text|>
+    chat_template: '{% set system_message = ''You are a helpful assistant.'' %}{% if messages[0][''role''] == ''system'' %}{%
+      set system_message = messages[0][''content''] %}{% endif %}{% if system_message is defined %}{{ ''<|begin_of_text|>''
+      + ''<|start_header_id|>system<|end_header_id|>
+
+
+      '' + system_message + ''<|eot_id|>'' }}{% endif %}{% for message in messages %}{% set content = message[''content'']
+      %}{% if message[''role''] == ''user'' %}{{ ''<|start_header_id|>user<|end_header_id|>
+
+
+      '' + content + ''<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+
+      '' }}{% elif message[''role''] == ''assistant'' %}{{ content + ''<|eot_id|>'' }}{% endif %}{% endfor %}'
+    eos_token: <|eot_id|>
+    pad_token: <|eot_id|>
+cardData:
+  library_name: transformers
+  tags: []
+transformersInfo:
+  auto_model: AutoModel
+  pipeline_tag: feature-extraction
+  processor: AutoTokenizer
+siblings:
+- rfilename: .gitattributes
+- rfilename: README.md
+- rfilename: config.json
+- rfilename: model-00001-of-00007.safetensors
+- rfilename: model-00002-of-00007.safetensors
+- rfilename: model-00003-of-00007.safetensors
+- rfilename: model-00004-of-00007.safetensors
+- rfilename: model-00005-of-00007.safetensors
+- rfilename: model-00006-of-00007.safetensors
+- rfilename: model-00007-of-00007.safetensors
+- rfilename: model.safetensors.index.json
+- rfilename: special_tokens_map.json
+- rfilename: tokenizer.json
+- rfilename: tokenizer_config.json
+spaces: []
+createdAt: '2024-06-08T09:16:51.000Z'
+safetensors:
+  parameters:
+    F32: 7504924672
+  total: 7504924672
+usedStorage: 30019730504
+downloadsAllTime: 7
+inferenceProviderMapping: {}
+configJson:
+  _name_or_path: export_annie3_0
+  architectures:
+  - LlamaModel
+  attention_bias: false
+  attention_dropout: 0.0
+  bos_token_id: 128000
+  eos_token_id: 128009
+  hidden_act: silu
+  hidden_size: 4096
+  initializer_range: 0.02
+  intermediate_size: 14336
+  max_position_embeddings: 8192
+  mlp_bias: false
+  model_type: llama
+  num_attention_heads: 32
+  num_hidden_layers: 32
+  num_key_value_heads: 8
+  pretraining_tp: 1
+  rms_norm_eps: 1.0e-05
+  rope_scaling: null
+  rope_theta: 500000.0
+  tie_word_embeddings: false
+  torch_dtype: float32
+  transformers_version: 4.41.2
+  use_cache: true
+  vocab_size: 128256
+onnxFiles: {}
+safetensorsSizeMb: 30019.7
+approxSizeMb: 30019.7
+fetchedAt: '2026-06-11T08:11:04.000Z'

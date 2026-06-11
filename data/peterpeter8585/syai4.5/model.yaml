@@ -1,0 +1,103 @@
+_id: 67d280880a442ea215493a4a
+id: peterpeter8585/syai4.5
+private: false
+pipeline_tag: feature-extraction
+library_name: transformers
+tags:
+- transformers
+- safetensors
+- llama
+- feature-extraction
+- arxiv:1910.09700
+- text-embeddings-inference
+- endpoints_compatible
+- region:us
+downloads: 3
+likes: 0
+modelId: peterpeter8585/syai4.5
+author: peterpeter8585
+sha: 777e44ef860e6778dc377fc2581332dcccf70172
+lastModified: '2025-03-13T06:55:13.000Z'
+gated: false
+disabled: false
+model-index: null
+config:
+  architectures:
+  - LlamaModel
+  model_type: llama
+  tokenizer_config:
+    bos_token: <｜begin▁of▁sentence｜>
+    chat_template: "{%- set ns = namespace(found=false) -%}\n{%- for message in messages -%}\n    {%- if message['role'] ==\
+      \ 'system' -%}\n        {%- set ns.found = true -%}\n    {%- endif -%}\n{%- endfor -%}\n{{bos_token}}{%- if not ns.found\
+      \ -%}\n{{'You are an AI programming assistant, utilizing the Deepseek Coder model, developed by Deepseek Company, and\
+      \ you only answer questions related to computer science. For politically sensitive questions, security and privacy issues,\
+      \ and other non-computer science questions, you will refuse to answer\\n'}}\n{%- endif %}\n{%- for message in messages\
+      \ %}\n    {%- if message['role'] == 'system' %}\n{{ message['content'] }}\n    {%- else %}\n        {%- if message['role']\
+      \ == 'user' %}\n{{'### Instruction:\\n' + message['content'] + '\\n'}}\n        {%- else %}\n{{'### Response:\\n' +\
+      \ message['content'] + '\\n<|EOT|>\\n'}}\n        {%- endif %}\n    {%- endif %}\n{%- endfor %}\n{{'### Response:\\\
+      n'}}\n"
+    eos_token: <｜end▁of▁sentence｜>
+    pad_token: <｜end▁of▁sentence｜>
+    unk_token: null
+    use_default_system_prompt: true
+cardData:
+  library_name: transformers
+  tags: []
+transformersInfo:
+  auto_model: AutoModel
+  pipeline_tag: feature-extraction
+  processor: AutoTokenizer
+siblings:
+- rfilename: .gitattributes
+- rfilename: README.md
+- rfilename: config.json
+- rfilename: model-00001-of-00002.safetensors
+- rfilename: model-00002-of-00002.safetensors
+- rfilename: model.safetensors.index.json
+- rfilename: special_tokens_map.json
+- rfilename: tokenizer.json
+- rfilename: tokenizer_config.json
+spaces: []
+createdAt: '2025-03-13T06:51:52.000Z'
+safetensors:
+  parameters:
+    F32: 1280411648
+  total: 1280411648
+usedStorage: 5121670304
+downloadsAllTime: 6
+inferenceProviderMapping: {}
+configJson:
+  _name_or_path: pestova/deepseek-coder-1.3b-function-calling-v1
+  architectures:
+  - LlamaModel
+  attention_bias: false
+  attention_dropout: 0.0
+  bos_token_id: 32013
+  eos_token_id: 32021
+  head_dim: 128
+  hidden_act: silu
+  hidden_size: 2048
+  initializer_range: 0.02
+  intermediate_size: 5504
+  max_position_embeddings: 16384
+  mlp_bias: false
+  model_type: llama
+  num_attention_heads: 16
+  num_hidden_layers: 24
+  num_key_value_heads: 16
+  pretraining_tp: 1
+  rms_norm_eps: 1.0e-06
+  rope_scaling:
+    factor: 4.0
+    rope_type: linear
+    type: linear
+  rope_theta: 100000
+  tie_word_embeddings: false
+  torch_dtype: float32
+  transformers_version: 4.48.3
+  use_cache: true
+  vocab_size: 32256
+onnxFiles: {}
+safetensorsSizeMb: 5121.7
+approxSizeMb: 5121.6
+fetchedAt: '2026-06-11T08:11:04.000Z'

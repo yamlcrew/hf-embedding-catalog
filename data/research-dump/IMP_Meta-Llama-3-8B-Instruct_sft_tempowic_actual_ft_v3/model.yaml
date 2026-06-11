@@ -1,0 +1,117 @@
+_id: 666e56a414f1c262feb41272
+id: research-dump/IMP_Meta-Llama-3-8B-Instruct_sft_tempowic_actual_ft_v3
+private: false
+pipeline_tag: feature-extraction
+library_name: transformers
+tags:
+- transformers
+- safetensors
+- llama
+- feature-extraction
+- arxiv:1910.09700
+- text-embeddings-inference
+- endpoints_compatible
+- 4-bit
+- bitsandbytes
+- region:us
+downloads: 3
+likes: 0
+modelId: research-dump/IMP_Meta-Llama-3-8B-Instruct_sft_tempowic_actual_ft_v3
+author: research-dump
+sha: 2e5002dacec40f14cf54c44c5980d7476dfbd14b
+lastModified: '2024-06-16T03:08:22.000Z'
+gated: false
+disabled: false
+model-index: null
+config:
+  architectures:
+  - LlamaModel
+  model_type: llama
+  quantization_config:
+    load_in_4bit: true
+    load_in_8bit: false
+    quant_method: bitsandbytes
+  tokenizer_config:
+    bos_token: <|begin_of_text|>
+    chat_template: '{% set loop_messages = messages %}{% for message in loop_messages %}{% set content = ''<|start_header_id|>''
+      + message[''role''] + ''<|end_header_id|>
+
+
+      ''+ message[''content''] | trim + ''<|eot_id|>'' %}{% if loop.index0 == 0 %}{% set content = bos_token + content %}{%
+      endif %}{{ content }}{% endfor %}{% if add_generation_prompt %}{{ ''<|start_header_id|>assistant<|end_header_id|>
+
+
+      '' }}{% endif %}'
+    eos_token: <|eot_id|>
+    pad_token: <|eot_id|>
+cardData:
+  library_name: transformers
+  tags: []
+transformersInfo:
+  auto_model: AutoModel
+  pipeline_tag: feature-extraction
+  processor: AutoTokenizer
+siblings:
+- rfilename: .gitattributes
+- rfilename: README.md
+- rfilename: config.json
+- rfilename: model.safetensors
+- rfilename: special_tokens_map.json
+- rfilename: tokenizer.json
+- rfilename: tokenizer_config.json
+spaces: []
+createdAt: '2024-06-16T03:06:12.000Z'
+safetensors:
+  parameters:
+    F32: 486912
+    F16: 525602816
+    U8: 7197502630
+  total: 7723592358
+usedStorage: 4652064411
+downloadsAllTime: 6
+inferenceProviderMapping: {}
+configJson:
+  _name_or_path: meta-llama/Meta-Llama-3-8B-Instruct
+  architectures:
+  - LlamaModel
+  attention_bias: false
+  attention_dropout: 0.0
+  bos_token_id: 128000
+  eos_token_id: 128009
+  hidden_act: silu
+  hidden_size: 4096
+  initializer_range: 0.02
+  intermediate_size: 14336
+  max_position_embeddings: 8192
+  mlp_bias: false
+  model_type: llama
+  num_attention_heads: 32
+  num_hidden_layers: 32
+  num_key_value_heads: 8
+  pretraining_tp: 1
+  quantization_config:
+    _load_in_4bit: true
+    _load_in_8bit: false
+    bnb_4bit_compute_dtype: float16
+    bnb_4bit_quant_storage: uint8
+    bnb_4bit_quant_type: nf4
+    bnb_4bit_use_double_quant: true
+    llm_int8_enable_fp32_cpu_offload: false
+    llm_int8_has_fp16_weight: false
+    llm_int8_skip_modules: null
+    llm_int8_threshold: 6.0
+    load_in_4bit: true
+    load_in_8bit: false
+    quant_method: bitsandbytes
+  rms_norm_eps: 1.0e-05
+  rope_scaling: null
+  rope_theta: 500000.0
+  tie_word_embeddings: false
+  torch_dtype: float16
+  transformers_version: 4.41.2
+  use_cache: true
+  vocab_size: 128256
+onnxFiles: {}
+safetensorsSizeMb: 4652.1
+approxSizeMb: 8250.7
+fetchedAt: '2026-06-11T08:11:04.000Z'

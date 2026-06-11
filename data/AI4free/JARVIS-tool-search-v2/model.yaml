@@ -1,0 +1,512 @@
+_id: 6a1155e4425f7f7a2e93059e
+id: AI4free/JARVIS-tool-search-v2
+private: false
+pipeline_tag: sentence-similarity
+library_name: sentence-transformers
+tags:
+- sentence-transformers
+- safetensors
+- sentence-similarity
+- feature-extraction
+- generated_from_trainer
+- dataset_size:597350
+- loss:MultipleNegativesRankingLoss
+- arxiv:1908.10084
+- arxiv:1807.03748
+- base_model:AI4free/JARVIS-tool-search-v1
+- base_model:finetune:AI4free/JARVIS-tool-search-v1
+- endpoints_compatible
+- region:us
+downloads: 0
+likes: 0
+modelId: AI4free/JARVIS-tool-search-v2
+author: AI4free
+sha: 03c49dba622b6ac6e8bfcb16d8365683c03dfaf8
+lastModified: '2026-05-23T16:18:58.000Z'
+gated: false
+disabled: false
+widgetData:
+- source_sentence: 'Solve: Once Volodya was at the museum and saw a regular chessboard as a museum piece. And there were only
+    four chess pieces on it: two white rooks, a white king and a black king. "Aha, blacks certainly didn''t win!", — Volodya
+    said and was right for sure. And your task is to say whether whites had won or not.
+
+
+    Pieces on the chessboard are guaranteed to represent a correct position (every piece occupies one cell, no two pieces
+    occupy the same cell and kings cannot take each other). Thus, your task is only to decide whether whites mate blacks.
+    We would remind you that it means that the black king can be'
+  sentences:
+  - "<think>\nOkay, let's tackle this problem. So, the task is to find the capital city such that the number of road inversions\
+    \ needed is minimized. The roads are unidirectional, and the country forms a tree structure if we ignore the directions.\
+    \ Hmm.\n\nFirst, I need to understand the problem correctly. The country has n cities connected by n-1 roads, forming\
+    \ a tree when directions are ignored. The capital needs to be a city from which all other cities are reachable via the\
+    \ directed roads. The goal is to choose the capital (or capitals) that require the least number of road reversals.\n\n\
+    So, for each possible city as the capital, I need to calculate how many roads would need to be reversed. Then, pick the\
+    \ minimum and all cities that achieve that minimum.\n\nBut calculating this directly for each city would be O(n^2), which\
+    \ is not feasible since n can be up to 2e5. So we need a smarter approach.\n\nWait, since the underlying structure is\
+    \ a tree, maybe there's a way to compute this efficiently with a traversal. Like, using a post-order traversal and dynamic\
+    \ programming.\n\nLet me think. Let's imagine that the tree is rooted at some node. For each node, the number of inversions\
+    \ required would be the sum of inversions needed in each subtree plus the inversions from the parent to the child. Wait,\
+    \ but the direction of the edges matters. For example, if the tree is rooted at u, and there's an edge from u to v, then\
+    \ that edge is in the correct direction (no inversion needed). But if there's an edge\n```\nimport sys\nfrom collections\
+    \ import deque\n\ndef main():\n    n = int(sys.stdin.readline())\n    adj = [[] for _ in range(n + 1)]\n    for _ in range(n\
+    \ - 1):\n        s, t = map(int, sys.stdin.readline().split())\n        adj[s].append((t, 0))\n        adj[t].append((s,\
+    \ 1))\n    \n    parent = [0] * (n + 1)\n    direction = [0] * (n + 1)\n    sum_inv = 0\n    \n    stack = [(1, -1, False)]\n\
+    \    while stack:\n     \n```"
+  - "<think>\nOkay, let's see. I need to solve this programming problem. Hmm. Let's read the problem carefully.\n\nSo, the\
+    \ problem is about tracking artifacts owned by Kostya and his allies. There are basic and composite artifacts. Basic ones\
+    \ are bought, and composite ones are made by combining certain numbers of basic artifacts. When you create a composite,\
+    \ the components are consumed. Each time after a purchase, we check if a composite can be made, and if so, it's done immediately.\
+    \ The output is the count of each artifact each ally has, sorted lexicographically.\n\nThe input gives k allies, n basic\
+    \ artifacts, m composite recipes, and q purchases. Each purchase is a friend (ai) buying a basic artifact. Then, after\
+    \ each purchase, check if the composite can be made. If yes, create it, consume the components, and add the composite\
+    \ to the inventory. And this process might cascade, like making a composite could allow another composite to be made,\
+    \ but the problem states that after the i-th purchase, no more than one opportunity arises. So we don't have to handle\
+    \ multiple steps here. Wait, the problem says: \"It is guaranteed that after the i-th purchase no more than one opportunity\
+    \ to collect the composite artifact appears.\" So after each purchase, there's at most one possible composite that can\
+    \ be crafted. That simplifies things. So for each purchase, after adding the artifact, check if any composite can be crafted,\
+    \ and if exactly one can be (as per the problem's guarantee), then do it.\n\nWa\n```\nfrom collections import defaultdict\n\
+    \nk, n, m, q = map(int, input().split())\n\nbasics = set()\nfor _ in range(n):\n    basics.add(input().strip())\n\ncomposites\
+    \ = []\nfor _ in range(m):\n    line = input().strip()\n    name_part, components_part = line.split(': ')\n    comp_name\
+    \ = name_part\n    components = {}\n    for item in components_part.split(', '):\n        art, cnt = item.split()\n  \
+    \      components[ar\n```"
+  - "<think>\nOkay, so I need to determine if the black king is in checkmate based on the given positions of two rooks, the\
+    \ white king, and the black king. Let's break down the problem step by step.\n\nFirst, I remember that checkmate occurs\
+    \ when the black king is currently under attack (in check) and has no legal moves to escape. So my plan is to check two\
+    \ things: 1) Is the black king in check right now? 2) Does every possible move of the black king lead to a position where\
+    \ it's still in check?\n\nHmm. Let's think about how to model the chessboard. Each position is given as a two-character\
+    \ string like 'a6'. So I'll need to convert these into coordinates. Maybe represent the board as 8x8 grid with rows 1-8\
+    \ and columns a-h. Let's map the letters a-h to 0-7 and numbers 1-8 to 0-7 as well? Or maybe 1-based to 8-based? Wait,\
+    \ let's see. For example, 'a1' would be (0,0) if we use zero-based, but that's up to how I parse it. The exact coordinates\
+    \ need to be handled correctly.\n\nSo the first step is to parse all the input positions into their x and y coordinates.\
+    \ For example, 'a6' would be x=0 (since a is first), y=5 (since 6 is the sixth row, but if rows are 1-8, maybe 1 is the\
+    \ first row). Wait, in chess, rows (ranks) go from 1 to 8, with 1 being the bottom for white. So when converting 'a6'\
+    \ to coordinates, the letter is the file (a-h, columns) and the number is the rank (1-8, rows). So for example, 'a1' is\
+    \ the bottom-left for white's perspective. So maybe to model this as (x, y) where x is 0 \n```\ndef pos_to_coords(s):\n\
+    \    x = ord(s[0]) - ord('a')\n    y = int(s[1]) - 1\n    return (x, y)\n\ndef is_rook_attacking(rook_pos, target_pos,\
+    \ occupied):\n    rx, ry = rook_pos\n    tx, ty = target_pos\n    if rx != tx and ry != ty:\n        return False\n  \
+    \  if rx == tx:\n        start = min(ry, ty)\n        end = max(ry, ty)\n        for y in range(start + 1, end):\n   \
+    \         if (rx, y) in occupied:\n         \n```"
+- source_sentence: 'Solve: Vasya owns three big integers — a, l, r. Let''s define a partition of x such a sequence of strings
+    s_1, s_2, ..., s_k that s_1 + s_2 + ... + s_k = x, where + is a concatanation of strings. s_i is the i-th element of the
+    partition. For example, number 12345 has the following partitions: ["1", "2", "3", "4", "5"], ["123", "4", "5"], ["1",
+    "2345"], ["12345"] and lots of others.
+
+
+    Let''s call some partition of a beautiful if each of its elements contains no leading zeros.
+
+
+    Vasya want to know the number of beautiful partitions of number a, which has each of s_i satisfy the condition l ≤ s_i
+    ≤ r. Note '
+  sentences:
+  - "<think>\nOkay, I need to solve this programming problem. Let's read the problem carefully.\n\nThe task is to find the\
+    \ length of the longest substring in the given string S that consists only of the characters A, C, G, T. So any substring\
+    \ that is made up solely of these letters counts, and I need the maximum length among all such substrings.\n\nHmm. So\
+    \ the approach here is to check all possible substrings of S and see which ones are made up entirely of those four characters.\
+    \ Then track the maximum length found.\n\nBut how do I efficiently check all possible substrings? Well, the string is\
+    \ up to 10 characters long, so even a brute-force approach should work here. Since 10 is small, O(n^2) time is acceptable.\n\
+    \nLet me think. For each possible starting index in the string, I can check the longest possible substring starting there\
+    \ that is all ACGT. Once a character outside those is found, we stop extending that substring. Then keep track of the\
+    \ maximum length found.\n\nAlternatively, I can iterate through each possible substring and check if all characters are\
+    \ ACGT. For each possible start and end, check the substring from start to end, and if all characters are valid, note\
+    \ its length. Then find the maximum.\n\nBut the first approach might be more efficient. Let's see:\n\nLoop through each\
+    \ starting index i. Then, for each i, loop through the end index j starting from i. For each j, check if S[j] is in ACGT.\
+    \ As soon as we hit a character that's not allowed, we break out of the inner loop. The ma\n```\ns = input().strip()\n\
+    max_len = 0\nfor i in range(len(s)):\n    current = 0\n    for j in range(i, len(s)):\n        if s[j] in {'A', 'C', 'G',\
+    \ 'T'}:\n            current += 1\n            if current > max_len:\n                max_len = current\n        else:\n\
+    \            break\nprint(max_len)\n```"
+  - 'Tools: [{"name": "git.difftool", "description": "Compare and edit files between revisions", "parameters": {"type": "object",
+    "properties": {"_d,_dir_diff": {}, "_y,_no_prompt": {}, "prompt": {}, "rotate_to": {}, "skip_to": {}, "_t_tool,_tool":
+    {}, "tool_help": {}, "[no_]symlinks": {}, "_x_command,_extcmd": {}, "_g,_[no_]gui": {}, "[no_]trust_exit_code": {}}}},
+    {"name": "requests.get", "description": "Transitaires de d\u00e9douanement en Nouvelle-Cal\u00e9donie ", "parameters":
+    {"type": "object", "properties": {"id": {"description": "", "type": "string"}}}}, {"name": "cast", "description": "Cast
+    array
+
+    Target: {"tool_calls": [{"name": "git.difftool", "arguments": {"_raw": "tool=''diffmerge''"}}]}'
+  - "<think>\nOkay, I need to solve this programming problem. Let's read the problem statement carefully.\n\nThe problem is\
+    \ about counting the number of beautiful partitions of a very large number 'a' (given as a string) such that each part\
+    \ in the partition is between l and r (inclusive), considering their integer values. Also, each part must not have leading\
+    \ zeros unless the part is zero itself. Wait, no. The problem says the partition is beautiful if each element has no leading\
+    \ zeros. So, even if the part is zero, it can't have leading zeros. But since the input a, l, r don't have leading zeros,\
+    \ maybe leading zeros in the parts can only happen if the part is a single zero. Hmm, but the problem states that a beautiful\
+    \ partition's elements have no leading zeros. So for example, a part like \"0\" is allowed, but \"00\" is not. So, any\
+    \ part that is a single zero is allowed, but if a part has more than one zero, it's invalid.\n\nWait, but the input l\
+    \ and r are given as numbers without leading zeros. So when comparing the parts to l and r, we have to convert them to\
+    \ integers. So the parts must be strings that, when converted to integers, are between l and r. But since leading zeros\
+    \ are not allowed in the partition elements, each part can't start with a zero unless it's exactly \"0\". Wait, no. Because\
+    \ the problem says \"no leading zeros\". So a part cannot start with a zero unless the part is exactly zero. So for example,\
+    \ a part like \"05\" is invalid because it has leading zeros. But if the part is\n```\nMOD = 998244353\n\na = input().strip()\n\
+    l_str = input().strip()\nr_str = input().strip()\n\nn = len(a)\nlen_l = len(l_str)\nlen_r = len(r_str)\n\nprefix_zero\
+    \ = [0] * (n + 1)\nfor i in range(n):\n    prefix_zero[i+1] = prefix_zero[i] + (1 if a[i] == '0' else 0)\n\n# Determine\
+    \ if \"0\" is allowed in the partitions\nzero_allowed = (l_str <= \"0\" <= r_str)\n\ndp = [0] * (n + 1)\ndp[0] = 1  #\
+    \ Base case: empty string has on\n```"
+- source_sentence: 'Find tool: Get pit stop data for the Formula 1 race in the year 2022, round 5.'
+  sentences:
+  - 'Tools: [{"name": "getteam", "description": "Fetches the details of an NHL team based on the provided team ID, with optional
+    query parameters to expand the response and specify the season.", "parameters": {"is_id": {"description": "The ID of the
+    team.", "type": "int", "default": 28}, "expand": {"description": "Additional data to expand in the response. Defaults
+    to ''team.roster''.", "type": "str, optional", "default": "team.roster"}, "season": {"description": "The specific season
+    for which to return team data. Defaults to 20172018.", "type": "int, optional", "default": 20172018}}}, {"name": "pitstopdataforarace",
+    "description": "Retrieves pit stop data for a specific Formula 1 race using the provided year and round.", "parameters":
+    {"year": {"description": "The season year of the Formula 1 race.", "
+
+    Called: [{"name": "pitstopdataforarace", "arguments": {"year": "2022", "round": "5"}}]'
+  - "Patch:\n```diff\ndiff --git a/mesonbuild/interpreter/mesonmain.py b/mesonbuild/interpreter/mesonmain.py\n--- a/mesonbuild/interpreter/mesonmain.py\n\
+    +++ b/mesonbuild/interpreter/mesonmain.py\n@@ -87,13 +87,13 @@ def _find_source_script(\n             FeatureNew.single_use(f'Passing\
+    \ executable/found program object to script parameter of {name}',\n                                   '0.55.0', self.subproject,\
+    \ location=self.current_node)\n             largs.append(prog)\n-            largs.extend(args)\n-            return self.interpreter.backend.get_executable_serialisation(largs)\n\
+    -        elif isinstance(prog, mesonlib.File):\n-            FeatureNew.single_use(f'Passing file object to script parameter\
+    \ of {name}',\n-                                  '0.57.0', self.subproject, location=self.current_node)\n-        found\
+    \ = self.interpreter.find_program_impl([prog])\n-        largs.append(found)\n+        else:\n+            if isinstance(prog,\
+    \ mesonlib.File):\n+                FeatureNew.single_use(f'Passing file object to script parameter of {name}',\n+   \
+    \                                   '0.57.0', self.subproject, location=self.current_node)\n+            found = self.interpreter.find_program_impl([prog])\n\
+    +            largs.append(found)\n+\n         largs.extend(args)\n         es = self.interpreter.backend.get_executable_serialisation(largs)\n\
+    \         es.subproject = self.interpreter.subproject\n```"
+  - 'Tools: [{"name": "get_user_dialog_string", "description": "Fetches the dialog string for a given user from the Waifu
+    API.", "parameters": {"user_id": {"description": "A unique identifier for the user.", "type": "str", "default": "sample_user_id"}}}]
+
+    Called: [{"name": "get_user_dialog_string", "arguments": {"user_id": "user14"}}, {"name": "get_user_dialog_string", "arguments":
+    {"user_id": "user15"}}]'
+- source_sentence: "Solve: Once upon a times , there lived King Nihal who hated odd counting . He has received various gifts\
+    \ from different kings of other kingdoms on his birthday. \nThere is one enemy king , and to make our king angry he will\
+    \ send odd number of gifts . As a sincere minister , its your task to find the enemy kingdom.\nInput\n\nT- number of test\
+    \ cases\n\nN- number of  gifts he received\n\nN inputs each corresponding to the Kingdom  from which the gift has come.\n\
+    \nThe gift number represents the Id of kingdom from which he received the gift\n\nOutput\n\nId of enemy kingdom\n\nconstraints\n\
+    0<T<11\n0<N ≤ 10^6\n0<id<10^4\n\nEg.\n"
+  sentences:
+  - "<think>\nOkay, I need to solve this programming problem. Let's read the problem carefully.\n\nSo the problem is about\
+    \ determining if a given sequence a_i (which represents the number of vertices at each level in a rooted tree) can form\
+    \ exactly one tree structure, or if there are at least two different (non-isomorphic) trees that fit the sequence. If\
+    \ there are multiple, we have to output two such trees; otherwise, output 'perfect'.\n\nFirst, let's understand the conditions\
+    \ under which there are multiple trees. The key is to find a level in the sequence where there's a choice in how the nodes\
+    \ are connected, leading to different tree structures.\n\nThe example given helps. The second test case has a sequence\
+    \ 1 2 2. The two trees differ in how the nodes in level 2 are connected to their parents in level 1. In the first tree,\
+    \ both nodes in level 2 are connected to the same parent (the second parent), while in the second tree, they are split\
+    \ between the two parents. This creates two non-isomorphic trees.\n\nSo the main idea is: if there's a level i (where\
+    \ i >=1) where the number of nodes a_i is greater than 1, and the previous level a_{i-1} is also greater than 1, then\
+    \ we can split the children in different ways. For example, if level i has 2 nodes and level i-1 has 2, then in one tree,\
+    \ all children in level i could be connected to the first parent, and in another tree, they could be split between the\
+    \ two parents. Wait, but the parents in level i-1 are the nodes from the previous level. So \n```\nh = int(input())\n\
+    a = list(map(int, input().split()))\n\nambiguous = False\nfor i in range(1, h + 1):\n    if a[i - 1] >= 2 and a[i] >=\
+    \ 2:\n        ambiguous = True\n        break\n\nif not ambiguous:\n    print(\"perfect\")\nelse:\n    print(\"ambiguous\"\
+    )\n    parents1 = [0]\n    current_parents = [0]\n    current_node = 1\n    for i in range(1, h + 1):\n        count =\
+    \ a[i]\n        new_parents = []\n        for _ in\n```"
+  - "<think>\nOkay, let's see. I need to find two numbers a from array A and b from array B such that their sum a + b is not\
+    \ present in either A or B. The problem says that such a pair exists, so I don't have to worry about cases where it's\
+    \ impossible. My task is to just find any such pair.\n\nHmm. So first, I need to iterate through all possible pairs of\
+    \ a and b. For each pair, calculate the sum and check if that sum is not in A and not in B. Once I find such a pair, I\
+    \ can output it immediately.\n\nWait, but how do I check if the sum is present in A or B efficiently? Well, since the\
+    \ arrays can be up to 100 elements each, converting them into sets would make lookups O(1). So maybe I should convert\
+    \ both A and B into sets. That way, checking if the sum is in either set is quick.\n\nSo the steps would be:\n\n1. Read\
+    \ the input: first n, then list A, then m, then list B.\n2. Convert A and B into sets for quick lookups. Also, maybe create\
+    \ a combined set of elements in A or B? Wait, no. Because for the sum, we need to check if it is not in A and not in B.\
+    \ So for each a and b, compute sum_ab = a + b. Then check if sum_ab not in A_set and sum_ab not in B_set. If so, return\
+    \ (a, b).\n\nSo the plan is:\n\n- For each a in A:\n   - For each b in B:\n      - compute sum_ab = a + b\n      - if\
+    \ sum_ab is not in A_set and not in B_set:\n          - output a and b and exit.\n\nSince the problem states that at least\
+    \ one such pair exists, the code can return the first such pair it finds.\n\nBut how to make sure that we pro\n```\nn\
+    \ = int(input())\nA = list(map(int, input().split()))\nm = int(input())\nB = list(map(int, input().split()))\nset_a =\
+    \ set(A)\nset_b = set(B)\n\nfor a in A:\n    for b in B:\n        s = a + b\n        if s not in set_a and s not in set_b:\n\
+    \            print(a, b)\n            exit()\n```"
+  - "<think>\nOkay, let's see. The problem is to find the enemy kingdom that sent an odd number of gifts. The input gives\
+    \ multiple test cases. For each test case, we get a list of kingdom IDs, and exactly one of them occurs an odd number\
+    \ of times. We need to find that ID.\n\nHmm. So the key point here is that all other kingdoms send even numbers of gifts,\
+    \ except one which is the enemy. So for each test case, among all the IDs, exactly one has an odd count.\n\nWait, right.\
+    \ So how do I efficiently find the ID with the odd count?\n\nI remember that when there's a problem where you need to\
+    \ find a single number that appears an odd number of times in a list where all others appear even times, the XOR operation\
+    \ can be useful. Because XORing all the numbers would cancel out pairs. Like, for example, if a number appears twice,\
+    \ their XOR would be zero, and the remaining one would be the odd one out.\n\nWait, but in this problem, the count could\
+    \ be more than once as long as it's odd. Like, if a number appears 3 times, then XORing them all would leave that number.\
+    \ Because 3 is odd. Because each pair cancels, and the remaining one is left. So that's the key.\n\nSo for each test case,\
+    \ I can compute the XOR of all the IDs. The result will be the enemy kingdom's ID. Because all others are present even\
+    \ times, their XORs would cancel out (since even numbers of occurrences would pair up and XOR to zero). Only the one with\
+    \ the odd count remains.\n\nYes, that makes sense. So this approach should work.\n\nBut wait, l\n```\nimport sys\n\ndata\
+    \ = list(map(int, sys.stdin.read().split()))\nptr = 0\nT = data[ptr]\nptr += 1\nfor _ in range(T):\n    N = data[ptr]\n\
+    \    ptr += 1\n    ids = data[ptr:ptr+N]\n    ptr += N\n    res = 0\n    for num in ids:\n        res ^= num\n    print(res)\n\
+    ```"
+- source_sentence: 'Find tool: If I roll 3 dice, what''s the probability of getting a sum of 10? Additionally, if I invested
+    $5000 and it grew to $7500 over 3 years, what was the CAGR?'
+  sentences:
+  - 'Tools: [{"name": "cagr", "description": "Calculates the Compound Annual Growth Rate (CAGR) of an investment.", "parameters":
+    {"start_value": {"description": "The initial value of the investment.", "type": "float"}, "end_value": {"description":
+    "The final value of the investment.", "type": "float"}, "years": {"description": "The number of years between the initial
+    and final values.", "type": "int"}}}, {"name": "binomial_probability", "description": "Calculates the probability of getting
+    exactly k successes in n independent trials,", "parameters": {"n": {"description": "The total number of trials.", "type":
+    "int"}, "k": {"description": "The number of successes.", "type": "int"}, "p": {"description": "The probability of success
+    in each trial.", "type": "float"}}}, {"name": "dice_roll_probability", "
+
+    Called: [{"name": "dice_roll_probability", "arguments": {"target_sum": 10, "num_dice": 3}}, {"name": "cagr", "arguments":
+    {"start_value": 5000, "end_value": 7500, "years": 3}}]'
+  - 'Tools: [{"name": "show_character", "description": "Fetch details about a character and their traits from the Marvel vs.
+    Capcom 2 API.", "parameters": {"name": {"description": "The name of the character to retrieve information about.", "type":
+    "str", "default": "Cabel"}}}, {"name": "user_friends_list", "description": "Retrieve a full listing of in-game, online,
+    and offline friends of a user from the Steam community using RapidAPI.", "parameters": {"is_id": {"description": "The
+    user''s Steam ID for whom the friends list is to be retrieved.", "type": "str", "default": "sindex"}}}]
+
+    Called: [{"name": "show_character", "arguments": {"name": "Falcon"}}, {"name": "user_friends_list", "arguments": {"is_id":
+    "76561198014885572"}}]'
+  - "Review: <think>\nOkay, let's see the problem here. So we have a pyramid with N steps, and the bottom step (step N) has\
+    \ a permutation of numbers from 1 to 2N-1. The rule is that each block above is the median of the three blocks directly\
+    \ below it. And we need to find the number in the top block (step 1). \n\nHmm, the sample input for N=4 gives output 4,\
+    \ and for N=2 it's 2. Wait a second, those outputs are exactly equal to N. So maybe the answer is always N? But why?\n\
+    \nLet me think. Let's consider the process. The top block's value depends on the medians as we go down. But since every\
+    \ step's value is the me\n```python\nn = int(input())\na = list(map(int, input().split()))\nprint(n)\n```"
+model-index: null
+config: {}
+cardData:
+  tags:
+  - sentence-transformers
+  - sentence-similarity
+  - feature-extraction
+  - generated_from_trainer
+  - dataset_size:597350
+  - loss:MultipleNegativesRankingLoss
+  base_model: AI4free/JARVIS-tool-search-v1
+  widget:
+  - source_sentence: 'Solve: Once Volodya was at the museum and saw a regular chessboard as a museum piece. And there were
+      only four chess pieces on it: two white rooks, a white king and a black king. "Aha, blacks certainly didn''t win!",
+      — Volodya said and was right for sure. And your task is to say whether whites had won or not.
+
+
+      Pieces on the chessboard are guaranteed to represent a correct position (every piece occupies one cell, no two pieces
+      occupy the same cell and kings cannot take each other). Thus, your task is only to decide whether whites mate blacks.
+      We would remind you that it means that the black king can be'
+    sentences:
+    - "<think>\nOkay, let's tackle this problem. So, the task is to find the capital city such that the number of road inversions\
+      \ needed is minimized. The roads are unidirectional, and the country forms a tree structure if we ignore the directions.\
+      \ Hmm.\n\nFirst, I need to understand the problem correctly. The country has n cities connected by n-1 roads, forming\
+      \ a tree when directions are ignored. The capital needs to be a city from which all other cities are reachable via the\
+      \ directed roads. The goal is to choose the capital (or capitals) that require the least number of road reversals.\n\
+      \nSo, for each possible city as the capital, I need to calculate how many roads would need to be reversed. Then, pick\
+      \ the minimum and all cities that achieve that minimum.\n\nBut calculating this directly for each city would be O(n^2),\
+      \ which is not feasible since n can be up to 2e5. So we need a smarter approach.\n\nWait, since the underlying structure\
+      \ is a tree, maybe there's a way to compute this efficiently with a traversal. Like, using a post-order traversal and\
+      \ dynamic programming.\n\nLet me think. Let's imagine that the tree is rooted at some node. For each node, the number\
+      \ of inversions required would be the sum of inversions needed in each subtree plus the inversions from the parent to\
+      \ the child. Wait, but the direction of the edges matters. For example, if the tree is rooted at u, and there's an edge\
+      \ from u to v, then that edge is in the correct direction (no inversion needed). But if there's an edge\n```\nimport\
+      \ sys\nfrom collections import deque\n\ndef main():\n    n = int(sys.stdin.readline())\n    adj = [[] for _ in range(n\
+      \ + 1)]\n    for _ in range(n - 1):\n        s, t = map(int, sys.stdin.readline().split())\n        adj[s].append((t,\
+      \ 0))\n        adj[t].append((s, 1))\n    \n    parent = [0] * (n + 1)\n    direction = [0] * (n + 1)\n    sum_inv =\
+      \ 0\n    \n    stack = [(1, -1, False)]\n    while stack:\n     \n```"
+    - "<think>\nOkay, let's see. I need to solve this programming problem. Hmm. Let's read the problem carefully.\n\nSo, the\
+      \ problem is about tracking artifacts owned by Kostya and his allies. There are basic and composite artifacts. Basic\
+      \ ones are bought, and composite ones are made by combining certain numbers of basic artifacts. When you create a composite,\
+      \ the components are consumed. Each time after a purchase, we check if a composite can be made, and if so, it's done\
+      \ immediately. The output is the count of each artifact each ally has, sorted lexicographically.\n\nThe input gives\
+      \ k allies, n basic artifacts, m composite recipes, and q purchases. Each purchase is a friend (ai) buying a basic artifact.\
+      \ Then, after each purchase, check if the composite can be made. If yes, create it, consume the components, and add\
+      \ the composite to the inventory. And this process might cascade, like making a composite could allow another composite\
+      \ to be made, but the problem states that after the i-th purchase, no more than one opportunity arises. So we don't\
+      \ have to handle multiple steps here. Wait, the problem says: \"It is guaranteed that after the i-th purchase no more\
+      \ than one opportunity to collect the composite artifact appears.\" So after each purchase, there's at most one possible\
+      \ composite that can be crafted. That simplifies things. So for each purchase, after adding the artifact, check if any\
+      \ composite can be crafted, and if exactly one can be (as per the problem's guarantee), then do it.\n\nWa\n```\nfrom\
+      \ collections import defaultdict\n\nk, n, m, q = map(int, input().split())\n\nbasics = set()\nfor _ in range(n):\n \
+      \   basics.add(input().strip())\n\ncomposites = []\nfor _ in range(m):\n    line = input().strip()\n    name_part, components_part\
+      \ = line.split(': ')\n    comp_name = name_part\n    components = {}\n    for item in components_part.split(', '):\n\
+      \        art, cnt = item.split()\n        components[ar\n```"
+    - "<think>\nOkay, so I need to determine if the black king is in checkmate based on the given positions of two rooks,\
+      \ the white king, and the black king. Let's break down the problem step by step.\n\nFirst, I remember that checkmate\
+      \ occurs when the black king is currently under attack (in check) and has no legal moves to escape. So my plan is to\
+      \ check two things: 1) Is the black king in check right now? 2) Does every possible move of the black king lead to a\
+      \ position where it's still in check?\n\nHmm. Let's think about how to model the chessboard. Each position is given\
+      \ as a two-character string like 'a6'. So I'll need to convert these into coordinates. Maybe represent the board as\
+      \ 8x8 grid with rows 1-8 and columns a-h. Let's map the letters a-h to 0-7 and numbers 1-8 to 0-7 as well? Or maybe\
+      \ 1-based to 8-based? Wait, let's see. For example, 'a1' would be (0,0) if we use zero-based, but that's up to how I\
+      \ parse it. The exact coordinates need to be handled correctly.\n\nSo the first step is to parse all the input positions\
+      \ into their x and y coordinates. For example, 'a6' would be x=0 (since a is first), y=5 (since 6 is the sixth row,\
+      \ but if rows are 1-8, maybe 1 is the first row). Wait, in chess, rows (ranks) go from 1 to 8, with 1 being the bottom\
+      \ for white. So when converting 'a6' to coordinates, the letter is the file (a-h, columns) and the number is the rank\
+      \ (1-8, rows). So for example, 'a1' is the bottom-left for white's perspective. So maybe to model this as (x, y) where\
+      \ x is 0 \n```\ndef pos_to_coords(s):\n    x = ord(s[0]) - ord('a')\n    y = int(s[1]) - 1\n    return (x, y)\n\ndef\
+      \ is_rook_attacking(rook_pos, target_pos, occupied):\n    rx, ry = rook_pos\n    tx, ty = target_pos\n    if rx != tx\
+      \ and ry != ty:\n        return False\n    if rx == tx:\n        start = min(ry, ty)\n        end = max(ry, ty)\n  \
+      \      for y in range(start + 1, end):\n            if (rx, y) in occupied:\n         \n```"
+  - source_sentence: 'Solve: Vasya owns three big integers — a, l, r. Let''s define a partition of x such a sequence of strings
+      s_1, s_2, ..., s_k that s_1 + s_2 + ... + s_k = x, where + is a concatanation of strings. s_i is the i-th element of
+      the partition. For example, number 12345 has the following partitions: ["1", "2", "3", "4", "5"], ["123", "4", "5"],
+      ["1", "2345"], ["12345"] and lots of others.
+
+
+      Let''s call some partition of a beautiful if each of its elements contains no leading zeros.
+
+
+      Vasya want to know the number of beautiful partitions of number a, which has each of s_i satisfy the condition l ≤ s_i
+      ≤ r. Note '
+    sentences:
+    - "<think>\nOkay, I need to solve this programming problem. Let's read the problem carefully.\n\nThe task is to find the\
+      \ length of the longest substring in the given string S that consists only of the characters A, C, G, T. So any substring\
+      \ that is made up solely of these letters counts, and I need the maximum length among all such substrings.\n\nHmm. So\
+      \ the approach here is to check all possible substrings of S and see which ones are made up entirely of those four characters.\
+      \ Then track the maximum length found.\n\nBut how do I efficiently check all possible substrings? Well, the string is\
+      \ up to 10 characters long, so even a brute-force approach should work here. Since 10 is small, O(n^2) time is acceptable.\n\
+      \nLet me think. For each possible starting index in the string, I can check the longest possible substring starting\
+      \ there that is all ACGT. Once a character outside those is found, we stop extending that substring. Then keep track\
+      \ of the maximum length found.\n\nAlternatively, I can iterate through each possible substring and check if all characters\
+      \ are ACGT. For each possible start and end, check the substring from start to end, and if all characters are valid,\
+      \ note its length. Then find the maximum.\n\nBut the first approach might be more efficient. Let's see:\n\nLoop through\
+      \ each starting index i. Then, for each i, loop through the end index j starting from i. For each j, check if S[j] is\
+      \ in ACGT. As soon as we hit a character that's not allowed, we break out of the inner loop. The ma\n```\ns = input().strip()\n\
+      max_len = 0\nfor i in range(len(s)):\n    current = 0\n    for j in range(i, len(s)):\n        if s[j] in {'A', 'C',\
+      \ 'G', 'T'}:\n            current += 1\n            if current > max_len:\n                max_len = current\n     \
+      \   else:\n            break\nprint(max_len)\n```"
+    - 'Tools: [{"name": "git.difftool", "description": "Compare and edit files between revisions", "parameters": {"type":
+      "object", "properties": {"_d,_dir_diff": {}, "_y,_no_prompt": {}, "prompt": {}, "rotate_to": {}, "skip_to": {}, "_t_tool,_tool":
+      {}, "tool_help": {}, "[no_]symlinks": {}, "_x_command,_extcmd": {}, "_g,_[no_]gui": {}, "[no_]trust_exit_code": {}}}},
+      {"name": "requests.get", "description": "Transitaires de d\u00e9douanement en Nouvelle-Cal\u00e9donie ", "parameters":
+      {"type": "object", "properties": {"id": {"description": "", "type": "string"}}}}, {"name": "cast", "description": "Cast
+      array
+
+      Target: {"tool_calls": [{"name": "git.difftool", "arguments": {"_raw": "tool=''diffmerge''"}}]}'
+    - "<think>\nOkay, I need to solve this programming problem. Let's read the problem statement carefully.\n\nThe problem\
+      \ is about counting the number of beautiful partitions of a very large number 'a' (given as a string) such that each\
+      \ part in the partition is between l and r (inclusive), considering their integer values. Also, each part must not have\
+      \ leading zeros unless the part is zero itself. Wait, no. The problem says the partition is beautiful if each element\
+      \ has no leading zeros. So, even if the part is zero, it can't have leading zeros. But since the input a, l, r don't\
+      \ have leading zeros, maybe leading zeros in the parts can only happen if the part is a single zero. Hmm, but the problem\
+      \ states that a beautiful partition's elements have no leading zeros. So for example, a part like \"0\" is allowed,\
+      \ but \"00\" is not. So, any part that is a single zero is allowed, but if a part has more than one zero, it's invalid.\n\
+      \nWait, but the input l and r are given as numbers without leading zeros. So when comparing the parts to l and r, we\
+      \ have to convert them to integers. So the parts must be strings that, when converted to integers, are between l and\
+      \ r. But since leading zeros are not allowed in the partition elements, each part can't start with a zero unless it's\
+      \ exactly \"0\". Wait, no. Because the problem says \"no leading zeros\". So a part cannot start with a zero unless\
+      \ the part is exactly zero. So for example, a part like \"05\" is invalid because it has leading zeros. But if the part\
+      \ is\n```\nMOD = 998244353\n\na = input().strip()\nl_str = input().strip()\nr_str = input().strip()\n\nn = len(a)\n\
+      len_l = len(l_str)\nlen_r = len(r_str)\n\nprefix_zero = [0] * (n + 1)\nfor i in range(n):\n    prefix_zero[i+1] = prefix_zero[i]\
+      \ + (1 if a[i] == '0' else 0)\n\n# Determine if \"0\" is allowed in the partitions\nzero_allowed = (l_str <= \"0\" <=\
+      \ r_str)\n\ndp = [0] * (n + 1)\ndp[0] = 1  # Base case: empty string has on\n```"
+  - source_sentence: 'Find tool: Get pit stop data for the Formula 1 race in the year 2022, round 5.'
+    sentences:
+    - 'Tools: [{"name": "getteam", "description": "Fetches the details of an NHL team based on the provided team ID, with
+      optional query parameters to expand the response and specify the season.", "parameters": {"is_id": {"description": "The
+      ID of the team.", "type": "int", "default": 28}, "expand": {"description": "Additional data to expand in the response.
+      Defaults to ''team.roster''.", "type": "str, optional", "default": "team.roster"}, "season": {"description": "The specific
+      season for which to return team data. Defaults to 20172018.", "type": "int, optional", "default": 20172018}}}, {"name":
+      "pitstopdataforarace", "description": "Retrieves pit stop data for a specific Formula 1 race using the provided year
+      and round.", "parameters": {"year": {"description": "The season year of the Formula 1 race.", "
+
+      Called: [{"name": "pitstopdataforarace", "arguments": {"year": "2022", "round": "5"}}]'
+    - "Patch:\n```diff\ndiff --git a/mesonbuild/interpreter/mesonmain.py b/mesonbuild/interpreter/mesonmain.py\n--- a/mesonbuild/interpreter/mesonmain.py\n\
+      +++ b/mesonbuild/interpreter/mesonmain.py\n@@ -87,13 +87,13 @@ def _find_source_script(\n             FeatureNew.single_use(f'Passing\
+      \ executable/found program object to script parameter of {name}',\n                                   '0.55.0', self.subproject,\
+      \ location=self.current_node)\n             largs.append(prog)\n-            largs.extend(args)\n-            return\
+      \ self.interpreter.backend.get_executable_serialisation(largs)\n-        elif isinstance(prog, mesonlib.File):\n-  \
+      \          FeatureNew.single_use(f'Passing file object to script parameter of {name}',\n-                          \
+      \        '0.57.0', self.subproject, location=self.current_node)\n-        found = self.interpreter.find_program_impl([prog])\n\
+      -        largs.append(found)\n+        else:\n+            if isinstance(prog, mesonlib.File):\n+                FeatureNew.single_use(f'Passing\
+      \ file object to script parameter of {name}',\n+                                      '0.57.0', self.subproject, location=self.current_node)\n\
+      +            found = self.interpreter.find_program_impl([prog])\n+            largs.append(found)\n+\n         largs.extend(args)\n\
+      \         es = self.interpreter.backend.get_executable_serialisation(largs)\n         es.subproject = self.interpreter.subproject\n\
+      ```"
+    - 'Tools: [{"name": "get_user_dialog_string", "description": "Fetches the dialog string for a given user from the Waifu
+      API.", "parameters": {"user_id": {"description": "A unique identifier for the user.", "type": "str", "default": "sample_user_id"}}}]
+
+      Called: [{"name": "get_user_dialog_string", "arguments": {"user_id": "user14"}}, {"name": "get_user_dialog_string",
+      "arguments": {"user_id": "user15"}}]'
+  - source_sentence: "Solve: Once upon a times , there lived King Nihal who hated odd counting . He has received various gifts\
+      \ from different kings of other kingdoms on his birthday. \nThere is one enemy king , and to make our king angry he\
+      \ will send odd number of gifts . As a sincere minister , its your task to find the enemy kingdom.\nInput\n\nT- number\
+      \ of test cases\n\nN- number of  gifts he received\n\nN inputs each corresponding to the Kingdom  from which the gift\
+      \ has come.\n\nThe gift number represents the Id of kingdom from which he received the gift\n\nOutput\n\nId of enemy\
+      \ kingdom\n\nconstraints\n0<T<11\n0<N ≤ 10^6\n0<id<10^4\n\nEg.\n"
+    sentences:
+    - "<think>\nOkay, I need to solve this programming problem. Let's read the problem carefully.\n\nSo the problem is about\
+      \ determining if a given sequence a_i (which represents the number of vertices at each level in a rooted tree) can form\
+      \ exactly one tree structure, or if there are at least two different (non-isomorphic) trees that fit the sequence. If\
+      \ there are multiple, we have to output two such trees; otherwise, output 'perfect'.\n\nFirst, let's understand the\
+      \ conditions under which there are multiple trees. The key is to find a level in the sequence where there's a choice\
+      \ in how the nodes are connected, leading to different tree structures.\n\nThe example given helps. The second test\
+      \ case has a sequence 1 2 2. The two trees differ in how the nodes in level 2 are connected to their parents in level\
+      \ 1. In the first tree, both nodes in level 2 are connected to the same parent (the second parent), while in the second\
+      \ tree, they are split between the two parents. This creates two non-isomorphic trees.\n\nSo the main idea is: if there's\
+      \ a level i (where i >=1) where the number of nodes a_i is greater than 1, and the previous level a_{i-1} is also greater\
+      \ than 1, then we can split the children in different ways. For example, if level i has 2 nodes and level i-1 has 2,\
+      \ then in one tree, all children in level i could be connected to the first parent, and in another tree, they could\
+      \ be split between the two parents. Wait, but the parents in level i-1 are the nodes from the previous level. So \n\
+      ```\nh = int(input())\na = list(map(int, input().split()))\n\nambiguous = False\nfor i in range(1, h + 1):\n    if a[i\
+      \ - 1] >= 2 and a[i] >= 2:\n        ambiguous = True\n        break\n\nif not ambiguous:\n    print(\"perfect\")\nelse:\n\
+      \    print(\"ambiguous\")\n    parents1 = [0]\n    current_parents = [0]\n    current_node = 1\n    for i in range(1,\
+      \ h + 1):\n        count = a[i]\n        new_parents = []\n        for _ in\n```"
+    - "<think>\nOkay, let's see. I need to find two numbers a from array A and b from array B such that their sum a + b is\
+      \ not present in either A or B. The problem says that such a pair exists, so I don't have to worry about cases where\
+      \ it's impossible. My task is to just find any such pair.\n\nHmm. So first, I need to iterate through all possible pairs\
+      \ of a and b. For each pair, calculate the sum and check if that sum is not in A and not in B. Once I find such a pair,\
+      \ I can output it immediately.\n\nWait, but how do I check if the sum is present in A or B efficiently? Well, since\
+      \ the arrays can be up to 100 elements each, converting them into sets would make lookups O(1). So maybe I should convert\
+      \ both A and B into sets. That way, checking if the sum is in either set is quick.\n\nSo the steps would be:\n\n1. Read\
+      \ the input: first n, then list A, then m, then list B.\n2. Convert A and B into sets for quick lookups. Also, maybe\
+      \ create a combined set of elements in A or B? Wait, no. Because for the sum, we need to check if it is not in A and\
+      \ not in B. So for each a and b, compute sum_ab = a + b. Then check if sum_ab not in A_set and sum_ab not in B_set.\
+      \ If so, return (a, b).\n\nSo the plan is:\n\n- For each a in A:\n   - For each b in B:\n      - compute sum_ab = a\
+      \ + b\n      - if sum_ab is not in A_set and not in B_set:\n          - output a and b and exit.\n\nSince the problem\
+      \ states that at least one such pair exists, the code can return the first such pair it finds.\n\nBut how to make sure\
+      \ that we pro\n```\nn = int(input())\nA = list(map(int, input().split()))\nm = int(input())\nB = list(map(int, input().split()))\n\
+      set_a = set(A)\nset_b = set(B)\n\nfor a in A:\n    for b in B:\n        s = a + b\n        if s not in set_a and s not\
+      \ in set_b:\n            print(a, b)\n            exit()\n```"
+    - "<think>\nOkay, let's see. The problem is to find the enemy kingdom that sent an odd number of gifts. The input gives\
+      \ multiple test cases. For each test case, we get a list of kingdom IDs, and exactly one of them occurs an odd number\
+      \ of times. We need to find that ID.\n\nHmm. So the key point here is that all other kingdoms send even numbers of gifts,\
+      \ except one which is the enemy. So for each test case, among all the IDs, exactly one has an odd count.\n\nWait, right.\
+      \ So how do I efficiently find the ID with the odd count?\n\nI remember that when there's a problem where you need to\
+      \ find a single number that appears an odd number of times in a list where all others appear even times, the XOR operation\
+      \ can be useful. Because XORing all the numbers would cancel out pairs. Like, for example, if a number appears twice,\
+      \ their XOR would be zero, and the remaining one would be the odd one out.\n\nWait, but in this problem, the count could\
+      \ be more than once as long as it's odd. Like, if a number appears 3 times, then XORing them all would leave that number.\
+      \ Because 3 is odd. Because each pair cancels, and the remaining one is left. So that's the key.\n\nSo for each test\
+      \ case, I can compute the XOR of all the IDs. The result will be the enemy kingdom's ID. Because all others are present\
+      \ even times, their XORs would cancel out (since even numbers of occurrences would pair up and XOR to zero). Only the\
+      \ one with the odd count remains.\n\nYes, that makes sense. So this approach should work.\n\nBut wait, l\n```\nimport\
+      \ sys\n\ndata = list(map(int, sys.stdin.read().split()))\nptr = 0\nT = data[ptr]\nptr += 1\nfor _ in range(T):\n   \
+      \ N = data[ptr]\n    ptr += 1\n    ids = data[ptr:ptr+N]\n    ptr += N\n    res = 0\n    for num in ids:\n        res\
+      \ ^= num\n    print(res)\n```"
+  - source_sentence: 'Find tool: If I roll 3 dice, what''s the probability of getting a sum of 10? Additionally, if I invested
+      $5000 and it grew to $7500 over 3 years, what was the CAGR?'
+    sentences:
+    - 'Tools: [{"name": "cagr", "description": "Calculates the Compound Annual Growth Rate (CAGR) of an investment.", "parameters":
+      {"start_value": {"description": "The initial value of the investment.", "type": "float"}, "end_value": {"description":
+      "The final value of the investment.", "type": "float"}, "years": {"description": "The number of years between the initial
+      and final values.", "type": "int"}}}, {"name": "binomial_probability", "description": "Calculates the probability of
+      getting exactly k successes in n independent trials,", "parameters": {"n": {"description": "The total number of trials.",
+      "type": "int"}, "k": {"description": "The number of successes.", "type": "int"}, "p": {"description": "The probability
+      of success in each trial.", "type": "float"}}}, {"name": "dice_roll_probability", "
+
+      Called: [{"name": "dice_roll_probability", "arguments": {"target_sum": 10, "num_dice": 3}}, {"name": "cagr", "arguments":
+      {"start_value": 5000, "end_value": 7500, "years": 3}}]'
+    - 'Tools: [{"name": "show_character", "description": "Fetch details about a character and their traits from the Marvel
+      vs. Capcom 2 API.", "parameters": {"name": {"description": "The name of the character to retrieve information about.",
+      "type": "str", "default": "Cabel"}}}, {"name": "user_friends_list", "description": "Retrieve a full listing of in-game,
+      online, and offline friends of a user from the Steam community using RapidAPI.", "parameters": {"is_id": {"description":
+      "The user''s Steam ID for whom the friends list is to be retrieved.", "type": "str", "default": "sindex"}}}]
+
+      Called: [{"name": "show_character", "arguments": {"name": "Falcon"}}, {"name": "user_friends_list", "arguments": {"is_id":
+      "76561198014885572"}}]'
+    - "Review: <think>\nOkay, let's see the problem here. So we have a pyramid with N steps, and the bottom step (step N)\
+      \ has a permutation of numbers from 1 to 2N-1. The rule is that each block above is the median of the three blocks directly\
+      \ below it. And we need to find the number in the top block (step 1). \n\nHmm, the sample input for N=4 gives output\
+      \ 4, and for N=2 it's 2. Wait a second, those outputs are exactly equal to N. So maybe the answer is always N? But why?\n\
+      \nLet me think. Let's consider the process. The top block's value depends on the medians as we go down. But since every\
+      \ step's value is the me\n```python\nn = int(input())\na = list(map(int, input().split()))\nprint(n)\n```"
+  pipeline_tag: sentence-similarity
+  library_name: sentence-transformers
+siblings:
+- rfilename: .gitattributes
+- rfilename: README.md
+- rfilename: benchmark_results.json
+- rfilename: config_sentence_transformers.json
+- rfilename: model.safetensors
+- rfilename: modules.json
+- rfilename: tokenizer.json
+- rfilename: training_metadata.json
+spaces: []
+createdAt: '2026-05-23T07:23:16.000Z'
+safetensors:
+  parameters:
+    F32: 7559168
+  total: 7559168
+usedStorage: 120947072
+downloadsAllTime: 0
+inferenceProviderMapping: {}
+configJson: null
+onnxFiles: {}
+safetensorsSizeMb: 30.2
+approxSizeMb: 30.2
+fetchedAt: '2026-06-11T08:11:04.000Z'

@@ -1,0 +1,203 @@
+_id: 68306705b8ac70cd16e0ce7a
+id: nielsgl/olmOCR-7B-0225-preview-bnb-4bit
+private: false
+pipeline_tag: feature-extraction
+library_name: transformers
+tags:
+- transformers
+- safetensors
+- qwen2_vl
+- feature-extraction
+- bnb-my-repo
+- en
+- dataset:allenai/olmOCR-mix-0225
+- base_model:allenai/olmOCR-7B-0225-preview
+- base_model:quantized:allenai/olmOCR-7B-0225-preview
+- license:apache-2.0
+- endpoints_compatible
+- 4-bit
+- bitsandbytes
+- region:us
+downloads: 4
+likes: 0
+modelId: nielsgl/olmOCR-7B-0225-preview-bnb-4bit
+author: nielsgl
+sha: 0dc6546e4f36a23afb5623a844fb72d94d487b25
+lastModified: '2025-05-23T12:18:31.000Z'
+gated: false
+disabled: false
+model-index: null
+config:
+  architectures:
+  - Qwen2VLModel
+  model_type: qwen2_vl
+  quantization_config:
+    load_in_4bit: true
+    load_in_8bit: false
+    quant_method: bitsandbytes
+  tokenizer_config:
+    bos_token: null
+    eos_token: <|im_end|>
+    pad_token: <|endoftext|>
+    unk_token: null
+  chat_template_jinja: '{% set image_count = namespace(value=0) %}{% set video_count = namespace(value=0) %}{% for message
+    in messages %}{% if loop.first and message[''role''] != ''system'' %}<|im_start|>system
+
+    You are a helpful assistant.<|im_end|>
+
+    {% endif %}<|im_start|>{{ message[''role''] }}
+
+    {% if message[''content''] is string %}{{ message[''content''] }}<|im_end|>
+
+    {% else %}{% for content in message[''content''] %}{% if content[''type''] == ''image'' or ''image'' in content or ''image_url''
+    in content %}{% set image_count.value = image_count.value + 1 %}{% if add_vision_id %}Picture {{ image_count.value }}:
+    {% endif %}<|vision_start|><|image_pad|><|vision_end|>{% elif content[''type''] == ''video'' or ''video'' in content %}{%
+    set video_count.value = video_count.value + 1 %}{% if add_vision_id %}Video {{ video_count.value }}: {% endif %}<|vision_start|><|video_pad|><|vision_end|>{%
+    elif ''text'' in content %}{{ content[''text''] }}{% endif %}{% endfor %}<|im_end|>
+
+    {% endif %}{% endfor %}{% if add_generation_prompt %}<|im_start|>assistant
+
+    {% endif %}'
+cardData:
+  base_model:
+  - allenai/olmOCR-7B-0225-preview
+  language:
+  - en
+  license: apache-2.0
+  datasets:
+  - allenai/olmOCR-mix-0225
+  library_name: transformers
+  tags:
+  - bnb-my-repo
+transformersInfo:
+  auto_model: AutoModelForMultimodalLM
+  pipeline_tag: feature-extraction
+  processor: AutoProcessor
+siblings:
+- rfilename: .gitattributes
+- rfilename: README.md
+- rfilename: added_tokens.json
+- rfilename: chat_template.jinja
+- rfilename: config.json
+- rfilename: merges.txt
+- rfilename: model.safetensors
+- rfilename: special_tokens_map.json
+- rfilename: tokenizer.json
+- rfilename: tokenizer_config.json
+- rfilename: vocab.json
+spaces: []
+createdAt: '2025-05-23T12:16:05.000Z'
+safetensors:
+  parameters:
+    F32: 528064
+    BF16: 547379712
+    U8: 7424079498
+  total: 7971987274
+usedStorage: 4820615832
+downloadsAllTime: 186
+inferenceProviderMapping: {}
+configJson:
+  architectures:
+  - Qwen2VLModel
+  attention_dropout: 0.0
+  bos_token_id: 151643
+  eos_token_id: 151645
+  hidden_act: silu
+  hidden_size: 3584
+  image_token_id: 151655
+  initializer_range: 0.02
+  intermediate_size: 18944
+  max_position_embeddings: 32768
+  max_window_layers: 28
+  model_type: qwen2_vl
+  num_attention_heads: 28
+  num_hidden_layers: 28
+  num_key_value_heads: 4
+  quantization_config:
+    _load_in_4bit: true
+    _load_in_8bit: false
+    bnb_4bit_compute_dtype: bfloat16
+    bnb_4bit_quant_storage: uint8
+    bnb_4bit_quant_type: nf4
+    bnb_4bit_use_double_quant: true
+    llm_int8_enable_fp32_cpu_offload: false
+    llm_int8_has_fp16_weight: false
+    llm_int8_skip_modules: null
+    llm_int8_threshold: 6.0
+    load_in_4bit: true
+    load_in_8bit: false
+    quant_method: bitsandbytes
+  rms_norm_eps: 1.0e-06
+  rope_scaling:
+    mrope_section:
+    - 16
+    - 24
+    - 24
+    rope_type: default
+    type: default
+  rope_theta: 1000000.0
+  sliding_window: 32768
+  text_config:
+    architectures:
+    - Qwen2VLForConditionalGeneration
+    attention_dropout: 0.0
+    bos_token_id: 151643
+    eos_token_id: 151645
+    hidden_act: silu
+    hidden_size: 3584
+    image_token_id: null
+    initializer_range: 0.02
+    intermediate_size: 18944
+    max_position_embeddings: 32768
+    max_window_layers: 28
+    model_type: qwen2_vl_text
+    num_attention_heads: 28
+    num_hidden_layers: 28
+    num_key_value_heads: 4
+    rms_norm_eps: 1.0e-06
+    rope_scaling:
+      mrope_section:
+      - 16
+      - 24
+      - 24
+      rope_type: default
+      type: default
+    rope_theta: 1000000.0
+    sliding_window: 32768
+    torch_dtype: bfloat16
+    use_cache: true
+    use_sliding_window: false
+    video_token_id: null
+    vision_end_token_id: 151653
+    vision_start_token_id: 151652
+    vision_token_id: 151654
+    vocab_size: 152064
+  tie_word_embeddings: false
+  torch_dtype: bfloat16
+  transformers_version: 4.52.3
+  use_cache: true
+  use_sliding_window: false
+  video_token_id: 151656
+  vision_config:
+    depth: 32
+    embed_dim: 1280
+    hidden_act: quick_gelu
+    hidden_size: 3584
+    in_channels: 3
+    in_chans: 3
+    initializer_range: 0.02
+    mlp_ratio: 4
+    model_type: qwen2_vl
+    num_heads: 16
+    patch_size: 14
+    spatial_merge_size: 2
+    spatial_patch_size: 14
+    temporal_patch_size: 2
+  vision_end_token_id: 151653
+  vision_start_token_id: 151652
+  vision_token_id: 151654
+  vocab_size: 152064
+onnxFiles: {}
+safetensorsSizeMb: 4809.2
+approxSizeMb: 8521.0
+fetchedAt: '2026-06-11T08:11:04.000Z'

@@ -1,0 +1,98 @@
+_id: 66689b1bdbff3d04374ae418
+id: 10ths/FADS_base_model
+private: false
+pipeline_tag: feature-extraction
+library_name: transformers
+tags:
+- transformers
+- safetensors
+- xgenmm
+- feature-extraction
+- custom_code
+- arxiv:1910.09700
+- region:us
+downloads: 4
+likes: 0
+modelId: 10ths/FADS_base_model
+author: 10ths
+sha: a5db0d04bccd263ef9015fffeb1b1059774793ed
+lastModified: '2024-06-11T18:50:24.000Z'
+gated: false
+disabled: false
+model-index: null
+config:
+  architectures:
+  - XGenMMModelForConditionalGeneration
+  auto_map:
+    AutoConfig: Salesforce/xgen-mm-phi3-mini-instruct-r-v1--configuration_xgenmm.XGenMMConfig
+    AutoModelForVision2Seq: Salesforce/xgen-mm-phi3-mini-instruct-r-v1--modeling_xgenmm.XGenMMModelForConditionalGeneration
+  model_type: xgenmm
+  tokenizer_config:
+    bos_token: <s>
+    chat_template: '{{ bos_token }}{% for message in messages %}{% if (message[''role''] == ''user'') %}{{''<|user|>'' + ''
+
+      '' + message[''content''] + ''<|end|>'' + ''
+
+      '' + ''<|assistant|>'' + ''
+
+      ''}}{% elif (message[''role''] == ''assistant'') %}{{message[''content''] + ''<|end|>'' + ''
+
+      ''}}{% endif %}{% endfor %}'
+    eos_token: <|endoftext|>
+    pad_token: <pad>
+    unk_token: <unk>
+    use_default_system_prompt: false
+cardData:
+  library_name: transformers
+  tags: []
+transformersInfo:
+  auto_model: AutoModelForVision2Seq
+  custom_class: Salesforce/xgen-mm-phi3-mini-instruct-r-v1--modeling_xgenmm.XGenMMModelForConditionalGeneration
+  pipeline_tag: feature-extraction
+siblings:
+- rfilename: .gitattributes
+- rfilename: README.md
+- rfilename: added_tokens.json
+- rfilename: config.json
+- rfilename: generation_config.json
+- rfilename: model-00001-of-00002.safetensors
+- rfilename: model-00002-of-00002.safetensors
+- rfilename: model.safetensors.index.json
+- rfilename: preprocessor_config.json
+- rfilename: special_tokens_map.json
+- rfilename: tokenizer.model
+- rfilename: tokenizer_config.json
+spaces: []
+createdAt: '2024-06-11T18:44:43.000Z'
+safetensors:
+  parameters:
+    BF16: 4589362243
+  total: 4589362243
+usedStorage: 9179311569
+downloadsAllTime: 271
+inferenceProviderMapping: {}
+configJson:
+  _name_or_path: Salesforce/xgen-mm-phi3-mini-instruct-r-v1
+  architectures:
+  - XGenMMModelForConditionalGeneration
+  auto_map:
+    AutoConfig: Salesforce/xgen-mm-phi3-mini-instruct-r-v1--configuration_xgenmm.XGenMMConfig
+    AutoModelForVision2Seq: Salesforce/xgen-mm-phi3-mini-instruct-r-v1--modeling_xgenmm.XGenMMModelForConditionalGeneration
+  model_type: xgenmm
+  text_config:
+    initial_tokenizer_len: 32012
+    model_type: phi3
+    sliding_window: 2047
+    torch_dtype: bfloat16
+  torch_dtype: bfloat16
+  transformers_version: 4.41.2
+  vision_encoder_config:
+    anyres_patch_sampling: true
+    image_aspect_ratio: anyres
+    model_type: xgenmm_vision_encoder
+  vision_tokenizer_config:
+    model_type: xgenmm_vision_tokenizer
+onnxFiles: {}
+safetensorsSizeMb: 9178.8
+approxSizeMb: 9178.7
+fetchedAt: '2026-06-11T08:11:04.000Z'

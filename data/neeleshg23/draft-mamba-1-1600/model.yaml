@@ -1,0 +1,121 @@
+_id: 677a71b9e0db74115df78a58
+id: neeleshg23/draft-mamba-1-1600
+private: false
+pipeline_tag: feature-extraction
+library_name: transformers
+tags:
+- transformers
+- safetensors
+- mamba
+- feature-extraction
+- arxiv:1910.09700
+- endpoints_compatible
+- region:us
+downloads: 3
+likes: 0
+modelId: neeleshg23/draft-mamba-1-1600
+author: neeleshg23
+sha: 6ce1a716497d8fe00b5d0d439d4f2f04d85d55ef
+lastModified: '2025-01-05T11:53:13.000Z'
+gated: false
+disabled: false
+model-index: null
+config:
+  architectures:
+  - MambaModel
+  model_type: mamba
+  tokenizer_config:
+    bos_token: <s>
+    chat_template: '{{''<extra_id_0>System''}}{% for message in messages %}{% if message[''role''] == ''system'' %}{{''
+
+      '' + message[''content''].strip()}}{% if tools or contexts %}{{''
+
+      ''}}{% endif %}{% endif %}{% endfor %}{% if tools %}{% for tool in tools %}{{ ''
+
+      <tool> '' + tool|tojson + '' </tool>'' }}{% endfor %}{% endif %}{% if contexts %}{% if tools %}{{''
+
+      ''}}{% endif %}{% for context in contexts %}{{ ''
+
+      <context> '' + context.strip() + '' </context>'' }}{% endfor %}{% endif %}{{''
+
+
+      ''}}{% for message in messages %}{% if message[''role''] == ''user'' %}{{ ''<extra_id_1>User
+
+      '' + message[''content''].strip() + ''
+
+      '' }}{% elif message[''role''] == ''assistant'' %}{{ ''<extra_id_1>Assistant
+
+      '' + message[''content''].strip() + ''
+
+      '' }}{% elif message[''role''] == ''tool'' %}{{ ''<extra_id_1>Tool
+
+      '' + message[''content''].strip() + ''
+
+      '' }}{% endif %}{% endfor %}{%- if add_generation_prompt %}{{''<extra_id_1>Assistant
+
+      ''}}{%- endif %}'
+    eos_token: </s>
+    pad_token: '[PAD]'
+    unk_token: <unk>
+    use_default_system_prompt: false
+cardData:
+  library_name: transformers
+  tags: []
+transformersInfo:
+  auto_model: AutoModelForMultimodalLM
+  pipeline_tag: feature-extraction
+  processor: AutoTokenizer
+siblings:
+- rfilename: .gitattributes
+- rfilename: README.md
+- rfilename: added_tokens.json
+- rfilename: config.json
+- rfilename: model.safetensors
+- rfilename: special_tokens_map.json
+- rfilename: tokenizer.json
+- rfilename: tokenizer.model
+- rfilename: tokenizer_config.json
+spaces: []
+createdAt: '2025-01-05T11:49:13.000Z'
+safetensors:
+  parameters:
+    F16: 67380800
+  total: 67380800
+usedStorage: 404786923
+downloadsAllTime: 230
+inferenceProviderMapping: {}
+configJson:
+  architectures:
+  - MambaModel
+  bos_token_id: 0
+  conv_kernel: 4
+  eos_token_id: 0
+  expand: 2
+  hidden_act: silu
+  hidden_size: 1600
+  initializer_range: 0.1
+  intermediate_size: 3200
+  layer_norm_epsilon: 1.0e-05
+  model_type: mamba
+  num_hidden_layers: 1
+  pad_token_id: 0
+  rescale_prenorm_residual: false
+  residual_in_fp32: true
+  state_size: 16
+  time_step_floor: 0.0001
+  time_step_init_scheme: random
+  time_step_max: 0.1
+  time_step_min: 0.001
+  time_step_rank: 100
+  time_step_scale: 1.0
+  torch_dtype: float16
+  transformers_version: 4.47.1
+  use_bias: false
+  use_cache: true
+  use_conv_bias: true
+  use_mambapy: false
+  vocab_size: 32001
+onnxFiles: {}
+safetensorsSizeMb: 134.8
+approxSizeMb: 134.8
+fetchedAt: '2026-06-11T08:11:04.000Z'

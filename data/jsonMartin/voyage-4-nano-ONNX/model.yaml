@@ -1,0 +1,132 @@
+_id: 696da57ad0d46e96ec5e2ebc
+id: jsonMartin/voyage-4-nano-ONNX
+private: false
+pipeline_tag: feature-extraction
+library_name: transformers.js
+tags:
+- transformers.js
+- onnx
+- qwen3
+- text-generation
+- webgpu
+- embeddings
+- sentence-similarity
+- voyage
+- feature-extraction
+- base_model:voyageai/voyage-4-nano
+- base_model:quantized:voyageai/voyage-4-nano
+- license:apache-2.0
+- region:us
+downloads: 4
+likes: 0
+modelId: jsonMartin/voyage-4-nano-ONNX
+author: jsonMartin
+sha: 590ab4268171293c497d97a4c8c396db2c214226
+lastModified: '2026-01-31T22:44:48.000Z'
+gated: false
+disabled: false
+model-index: null
+config:
+  architectures:
+  - Qwen3ForCausalLM
+  model_type: qwen3
+  tokenizer_config:
+    bos_token: null
+    eos_token: <|endoftext|>
+    pad_token: <|endoftext|>
+    unk_token: null
+  chat_template_jinja: "{%- if tools %}\n    {{- '<|im_start|>system\\n' }}\n    {%- if messages[0]['role'] == 'system' %}\n\
+    \        {{- messages[0]['content'] }}\n    {%- else %}\n        {{- 'You are a helpful assistant.' }}\n    {%- endif\
+    \ %}\n    {{- \"\\n\\n# Tools\\n\\nYou may call one or more functions to assist with the user query.\\n\\nYou are provided\
+    \ with function signatures within <tools></tools> XML tags:\\n<tools>\" }}\n    {%- for tool in tools %}\n        {{-\
+    \ \"\\n\" }}\n        {{- tool | tojson }}\n    {%- endfor %}\n    {{- \"\\n</tools>\\n\\nFor each function call, return\
+    \ a json object with function name and arguments within <tool_call></tool_call> XML tags:\\n<tool_call>\\n{\\\"name\\\"\
+    : <function-name>, \\\"arguments\\\": <args-json-object>}\\n</tool_call><|im_end|>\\n\" }}\n{%- else %}\n    {%- if messages[0]['role']\
+    \ == 'system' %}\n        {{- '<|im_start|>system\\n' + messages[0]['content'] + '<|im_end|>\\n' }}\n    {%- else %}\n\
+    \        {{- '<|im_start|>system\\nYou are a helpful assistant.<|im_end|>\\n' }}\n    {%- endif %}\n{%- endif %}\n{%-\
+    \ for message in messages %}\n    {%- if (message.role == \"user\") or (message.role == \"system\" and not loop.first)\
+    \ or (message.role == \"assistant\" and not message.tool_calls) %}\n        {{- '<|im_start|>' + message.role + '\\n'\
+    \ + message.content + '<|im_end|>' + '\\n' }}\n    {%- elif message.role == \"assistant\" %}\n        {{- '<|im_start|>'\
+    \ + message.role }}\n        {%- if message.content %}\n            {{- '\\n' + message.content }}\n        {%- endif\
+    \ %}\n        {%- for tool_call in message.tool_calls %}\n            {%- if tool_call.function is defined %}\n      \
+    \          {%- set tool_call = tool_call.function %}\n            {%- endif %}\n            {{- '\\n<tool_call>\\n{\"\
+    name\": \"' }}\n            {{- tool_call.name }}\n            {{- '\", \"arguments\": ' }}\n            {{- tool_call.arguments\
+    \ | tojson }}\n            {{- '}\\n</tool_call>' }}\n        {%- endfor %}\n        {{- '<|im_end|>\\n' }}\n    {%- elif\
+    \ message.role == \"tool\" %}\n        {%- if (loop.index0 == 0) or (messages[loop.index0 - 1].role != \"tool\") %}\n\
+    \            {{- '<|im_start|>user' }}\n        {%- endif %}\n        {{- '\\n<tool_response>\\n' }}\n        {{- message.content\
+    \ }}\n        {{- '\\n</tool_response>' }}\n        {%- if loop.last or (messages[loop.index0 + 1].role != \"tool\") %}\n\
+    \            {{- '<|im_end|>\\n' }}\n        {%- endif %}\n    {%- endif %}\n{%- endfor %}\n{%- if add_generation_prompt\
+    \ %}\n    {{- '<|im_start|>assistant\\n' }}\n{%- endif %}\n"
+cardData:
+  license: apache-2.0
+  library_name: transformers.js
+  pipeline_tag: feature-extraction
+  tags:
+  - onnx
+  - transformers.js
+  - webgpu
+  - embeddings
+  - sentence-similarity
+  - voyage
+  - feature-extraction
+  base_model: voyageai/voyage-4-nano
+transformersInfo:
+  auto_model: AutoModelForMultimodalLM
+  pipeline_tag: text-generation
+  processor: AutoTokenizer
+siblings:
+- rfilename: .gitattributes
+- rfilename: README.md
+- rfilename: added_tokens.json
+- rfilename: chat_template.jinja
+- rfilename: config.json
+- rfilename: merges.txt
+- rfilename: model.onnx
+- rfilename: onnx/model.onnx
+- rfilename: onnx/model_quantized.onnx
+- rfilename: pooling.py
+- rfilename: special_tokens_map.json
+- rfilename: tokenizer.json
+- rfilename: tokenizer_config.json
+- rfilename: vocab.json
+spaces: []
+createdAt: '2026-01-19T03:31:06.000Z'
+usedStorage: 1096178567
+downloadsAllTime: 54
+inferenceProviderMapping: {}
+configJson:
+  _name_or_path: voyageai/voyage-4-nano
+  architectures:
+  - Qwen3ForCausalLM
+  attention_bias: false
+  attention_dropout: 0.0
+  bos_token_id: 151643
+  eos_token_id: 151645
+  head_dim: 128
+  hidden_act: silu
+  hidden_size: 1024
+  initializer_range: 0.02
+  intermediate_size: 3072
+  max_position_embeddings: 40960
+  max_window_layers: 28
+  model_type: qwen3
+  num_attention_heads: 16
+  num_hidden_layers: 12
+  num_key_value_heads: 8
+  rms_norm_eps: 1.0e-06
+  rope_scaling: null
+  rope_theta: 1000000
+  sliding_window: null
+  tie_word_embeddings: true
+  torch_dtype: float32
+  transformers_version: 4.51.3
+  use_cache: false
+  use_sliding_window: false
+  vocab_size: 151936
+onnxFiles:
+  model.onnx: 739.5
+  onnx/model.onnx: 739.5
+  onnx/model_quantized.onnx: 345.2
+safetensorsSizeMb: 0.0
+approxSizeMb: 0.0
+fetchedAt: '2026-06-11T08:11:04.000Z'

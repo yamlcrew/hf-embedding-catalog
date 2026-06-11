@@ -1,0 +1,99 @@
+_id: 66eb13c5cfb61a283768404b
+id: Lichang-Chen/llama3_it_dpo_unbiased_ver3
+private: false
+pipeline_tag: feature-extraction
+library_name: transformers
+tags:
+- transformers
+- safetensors
+- llama
+- feature-extraction
+- arxiv:1910.09700
+- text-embeddings-inference
+- endpoints_compatible
+- region:us
+downloads: 4
+likes: 0
+modelId: Lichang-Chen/llama3_it_dpo_unbiased_ver3
+author: Lichang-Chen
+sha: aad4d9fec36cb777187c7c80975e4dde6a206d36
+lastModified: '2024-09-18T17:55:49.000Z'
+gated: false
+disabled: false
+model-index: null
+config:
+  architectures:
+  - LlamaModel
+  model_type: llama
+  tokenizer_config:
+    bos_token: <|begin_of_text|>
+    chat_template: '{% set loop_messages = messages %}{% for message in loop_messages %}{% set content = ''<|start_header_id|>''
+      + message[''role''] + ''<|end_header_id|>
+
+
+      ''+ message[''content''] | trim + ''<|eot_id|>'' %}{% if loop.index0 == 0 %}{% set content = bos_token + content %}{%
+      endif %}{{ content }}{% endfor %}{% if add_generation_prompt %}{{ ''<|start_header_id|>assistant<|end_header_id|>
+
+
+      '' }}{% endif %}'
+    eos_token: <|eot_id|>
+    pad_token: <|eot_id|>
+cardData:
+  library_name: transformers
+  tags: []
+transformersInfo:
+  auto_model: AutoModel
+  pipeline_tag: feature-extraction
+  processor: AutoTokenizer
+siblings:
+- rfilename: .gitattributes
+- rfilename: README.md
+- rfilename: config.json
+- rfilename: model-00001-of-00004.safetensors
+- rfilename: model-00002-of-00004.safetensors
+- rfilename: model-00003-of-00004.safetensors
+- rfilename: model-00004-of-00004.safetensors
+- rfilename: model.safetensors.index.json
+- rfilename: special_tokens_map.json
+- rfilename: tokenizer.json
+- rfilename: tokenizer_config.json
+spaces: []
+createdAt: '2024-09-18T17:54:13.000Z'
+safetensors:
+  parameters:
+    BF16: 7504924672
+  total: 7504924672
+usedStorage: 15009881368
+downloadsAllTime: 75
+inferenceProviderMapping: {}
+configJson:
+  _name_or_path: 1231czx/llama3_it_dpo_unbiased_ver3
+  architectures:
+  - LlamaModel
+  attention_bias: false
+  attention_dropout: 0.0
+  bos_token_id: 128000
+  eos_token_id: 128009
+  hidden_act: silu
+  hidden_size: 4096
+  initializer_range: 0.02
+  intermediate_size: 14336
+  max_position_embeddings: 8192
+  mlp_bias: false
+  model_type: llama
+  num_attention_heads: 32
+  num_hidden_layers: 32
+  num_key_value_heads: 8
+  pretraining_tp: 1
+  rms_norm_eps: 1.0e-05
+  rope_scaling: null
+  rope_theta: 500000.0
+  tie_word_embeddings: false
+  torch_dtype: bfloat16
+  transformers_version: 4.43.4
+  use_cache: false
+  vocab_size: 128256
+onnxFiles: {}
+safetensorsSizeMb: 15009.9
+approxSizeMb: 15009.8
+fetchedAt: '2026-06-11T08:11:04.000Z'

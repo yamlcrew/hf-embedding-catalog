@@ -1,0 +1,99 @@
+_id: 67f20df8fc5835dd6b10f716
+id: i3ullbum/prometheus-remo-rel
+private: false
+pipeline_tag: feature-extraction
+library_name: transformers
+tags:
+- transformers
+- safetensors
+- mistral
+- feature-extraction
+- arxiv:1910.09700
+- text-embeddings-inference
+- endpoints_compatible
+- region:us
+downloads: 3
+likes: 0
+modelId: i3ullbum/prometheus-remo-rel
+author: i3ullbum
+sha: f0e88264f28e1d4f82d762df5e2665672a8f0dc0
+lastModified: '2025-04-06T05:50:45.000Z'
+gated: false
+disabled: false
+model-index: null
+config:
+  architectures:
+  - MistralModel
+  model_type: mistral
+  tokenizer_config:
+    bos_token: <s>
+    chat_template: "{%- if messages[0]['role'] == 'system' %}\n    {%- set system_message = messages[0]['content'] %}\n  \
+      \  {%- set loop_messages = messages[1:] %}\n{%- else %}\n    {%- set loop_messages = messages %}\n{%- endif %}\n\n{{-\
+      \ bos_token }}\n{%- for message in loop_messages %}\n    {%- if (message['role'] == 'user') != (loop.index0 % 2 == 0)\
+      \ %}\n        {{- raise_exception('After the optional system message, conversation roles must alternate user/assistant/user/assistant/...')\
+      \ }}\n    {%- endif %}\n    {%- if message['role'] == 'user' %}\n        {%- if loop.first and system_message is defined\
+      \ %}\n            {{- ' [INST] ' + system_message + '\\n\\n' + message['content'] + ' [/INST]' }}\n        {%- else\
+      \ %}\n            {{- ' [INST] ' + message['content'] + ' [/INST]' }}\n        {%- endif %}\n    {%- elif message['role']\
+      \ == 'assistant' %}\n        {{- ' ' + message['content'] + eos_token}}\n    {%- else %}\n        {{- raise_exception('Only\
+      \ user and assistant roles are supported, with the exception of an initial optional system message!') }}\n    {%- endif\
+      \ %}\n{%- endfor %}\n"
+    eos_token: </s>
+    pad_token: </s>
+    unk_token: <unk>
+    use_default_system_prompt: false
+cardData:
+  library_name: transformers
+  tags: []
+transformersInfo:
+  auto_model: AutoModelForMultimodalLM
+  pipeline_tag: feature-extraction
+  processor: AutoTokenizer
+siblings:
+- rfilename: .gitattributes
+- rfilename: README.md
+- rfilename: config.json
+- rfilename: model-00001-of-00003.safetensors
+- rfilename: model-00002-of-00003.safetensors
+- rfilename: model-00003-of-00003.safetensors
+- rfilename: model.safetensors.index.json
+- rfilename: special_tokens_map.json
+- rfilename: tokenizer.json
+- rfilename: tokenizer.model
+- rfilename: tokenizer_config.json
+spaces: []
+createdAt: '2025-04-06T05:15:36.000Z'
+safetensors:
+  parameters:
+    BF16: 7110660096
+  total: 7110660096
+usedStorage: 14221845619
+downloadsAllTime: 4
+inferenceProviderMapping: {}
+configJson:
+  architectures:
+  - MistralModel
+  attention_dropout: 0.0
+  bos_token_id: 1
+  eos_token_id: 2
+  head_dim: 128
+  hidden_act: silu
+  hidden_size: 4096
+  initializer_range: 0.02
+  intermediate_size: 14336
+  max_position_embeddings: 32768
+  model_type: mistral
+  num_attention_heads: 32
+  num_hidden_layers: 32
+  num_key_value_heads: 8
+  rms_norm_eps: 1.0e-05
+  rope_theta: 1000000.0
+  sliding_window: null
+  tie_word_embeddings: false
+  torch_dtype: bfloat16
+  transformers_version: 4.50.3
+  use_cache: false
+  vocab_size: 32000
+onnxFiles: {}
+safetensorsSizeMb: 14221.4
+approxSizeMb: 14221.3
+fetchedAt: '2026-06-11T08:11:04.000Z'

@@ -1,0 +1,105 @@
+_id: 68175c35f68768edc38ed8a8
+id: DuongTrongChi/vinallama-dpo-v2
+private: false
+pipeline_tag: feature-extraction
+library_name: transformers
+tags:
+- transformers
+- llama
+- feature-extraction
+- text-generation-inference
+- unsloth
+- en
+- base_model:DuongTrongChi/vinallama-2.7b-chat-sft-v1
+- base_model:finetune:DuongTrongChi/vinallama-2.7b-chat-sft-v1
+- license:apache-2.0
+- text-embeddings-inference
+- endpoints_compatible
+- region:us
+downloads: 5
+likes: 0
+modelId: DuongTrongChi/vinallama-dpo-v2
+author: DuongTrongChi
+sha: f9ae33c0286ce661013a4b90ca07e1e81bcd27a9
+lastModified: '2025-05-04T12:24:02.000Z'
+gated: false
+disabled: false
+model-index: null
+config:
+  architectures:
+  - LlamaModel
+  model_type: llama
+  tokenizer_config:
+    bos_token: <s>
+    chat_template: '{% for message in messages %}{{''<|im_start|>'' + message[''role''] + ''
+
+      '' + message[''content''] + ''<|im_end|>'' + ''
+
+      ''}}{% endfor %}{% if add_generation_prompt %}{{ ''<|im_start|>assistant
+
+      '' }}{% endif %}'
+    eos_token: <|im_end|>
+    pad_token: <pad>
+    unk_token: <unk>
+    use_default_system_prompt: true
+cardData:
+  base_model: DuongTrongChi/vinallama-2.7b-chat-sft-v1
+  tags:
+  - text-generation-inference
+  - transformers
+  - unsloth
+  - llama
+  license: apache-2.0
+  language:
+  - en
+transformersInfo:
+  auto_model: AutoModel
+  pipeline_tag: feature-extraction
+  processor: AutoTokenizer
+siblings:
+- rfilename: .gitattributes
+- rfilename: README.md
+- rfilename: config.json
+- rfilename: model-00001-of-00002.safetensors
+- rfilename: model-00002-of-00002.safetensors
+- rfilename: special_tokens_map.json
+- rfilename: tokenizer.json
+- rfilename: tokenizer_config.json
+spaces: []
+createdAt: '2025-05-04T12:23:17.000Z'
+usedStorage: 5549647760
+downloadsAllTime: 7
+inferenceProviderMapping: {}
+configJson:
+  architectures:
+  - LlamaModel
+  attention_bias: false
+  attention_dropout: 0.0
+  bos_token_id: 1
+  eos_token_id: 46304
+  head_dim: 128
+  hidden_act: silu
+  hidden_size: 2560
+  initializer_range: 0.02
+  intermediate_size: 6912
+  max_position_embeddings: 4096
+  mlp_bias: false
+  model_type: llama
+  num_attention_heads: 20
+  num_hidden_layers: 32
+  num_key_value_heads: 20
+  pad_token_id: 0
+  pretraining_tp: 1
+  rms_norm_eps: 1.0e-05
+  rope_scaling: null
+  rope_theta: 10000.0
+  tie_word_embeddings: false
+  torch_dtype: bfloat16
+  transformers_version: 4.51.3
+  unsloth_version: 2025.3.19
+  use_cache: false
+  vocab_size: 46306
+onnxFiles: {}
+safetensorsSizeMb: 5549.6
+approxSizeMb: 0.0
+fetchedAt: '2026-06-11T08:11:04.000Z'

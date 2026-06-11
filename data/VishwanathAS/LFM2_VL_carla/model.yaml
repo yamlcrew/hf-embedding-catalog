@@ -1,0 +1,166 @@
+_id: 696ce9bea890d4650fd1a32e
+id: VishwanathAS/LFM2_VL_carla
+private: false
+pipeline_tag: feature-extraction
+library_name: transformers
+tags:
+- transformers
+- safetensors
+- lfm2_vl
+- feature-extraction
+- arxiv:1910.09700
+- endpoints_compatible
+- region:us
+downloads: 4
+likes: 0
+modelId: VishwanathAS/LFM2_VL_carla
+author: VishwanathAS
+sha: 50e01ba259b3f157afaa3654c4dcfc29d8322059
+lastModified: '2026-01-18T14:10:48.000Z'
+gated: false
+disabled: false
+model-index: null
+config:
+  architectures:
+  - Lfm2VlModel
+  model_type: lfm2_vl
+  tokenizer_config:
+    bos_token: <|startoftext|>
+    eos_token: <|im_end|>
+    pad_token: <|pad|>
+    use_default_system_prompt: false
+  chat_template_jinja: '{{bos_token}}{% for message in messages %}{{''<|im_start|>'' + message[''role''] + ''
+
+    ''}}{% if message[''content''] is string %}{{ message[''content''] }}{% else %}{% for content in message[''content'']
+    %}{% if content[''type''] == ''image'' %}{{ ''<image>'' }}{% elif content[''type''] == ''text'' %}{{ content[''text'']
+    }}{% endif %}{% endfor %}{% endif %}{{''<|im_end|>
+
+    ''}}{% endfor %}{% if add_generation_prompt %}{{''<|im_start|>assistant
+
+    '' }}{% endif %}'
+cardData:
+  library_name: transformers
+  tags: []
+transformersInfo:
+  auto_model: AutoModel
+  pipeline_tag: feature-extraction
+  processor: AutoProcessor
+siblings:
+- rfilename: .gitattributes
+- rfilename: README.md
+- rfilename: chat_template.jinja
+- rfilename: config.json
+- rfilename: model.safetensors
+- rfilename: processor_config.json
+- rfilename: special_tokens_map.json
+- rfilename: tokenizer.json
+- rfilename: tokenizer_config.json
+spaces: []
+createdAt: '2026-01-18T14:10:06.000Z'
+safetensors:
+  parameters:
+    BF16: 1584804000
+  total: 1584804000
+usedStorage: 3169684880
+downloadsAllTime: 9
+inferenceProviderMapping: {}
+configJson:
+  architectures:
+  - Lfm2VlModel
+  bos_token_id: 1
+  do_image_splitting: true
+  downsample_factor: 2
+  dtype: bfloat16
+  encoder_patch_size: 16
+  eos_token_id: 7
+  image_token_id: 396
+  image_token_index: 396
+  max_image_tokens: 256
+  max_num_patches: 1024
+  max_pixels_tolerance: 1.5
+  max_tiles: 10
+  min_image_tokens: 64
+  min_tiles: 2
+  model_type: lfm2_vl
+  pad_token_id: 0
+  projector_bias: true
+  projector_hidden_act: gelu
+  projector_hidden_size: 2560
+  text_config:
+    _name_or_path: LiquidAI/LFM2-1.2B
+    architectures:
+    - Lfm2ForCausalLM
+    block_auto_adjust_ff_dim: true
+    block_dim: 2048
+    block_ff_dim: 12288
+    block_ffn_dim_multiplier: 1.0
+    block_mlp_init_scale: 1.0
+    block_multiple_of: 256
+    block_norm_eps: 1.0e-05
+    block_out_init_scale: 1.0
+    block_use_swiglu: true
+    block_use_xavier_init: true
+    conv_L_cache: 3
+    conv_bias: false
+    conv_dim: 2048
+    conv_dim_out: 2048
+    conv_use_xavier_init: true
+    dtype: bfloat16
+    eos_token_id: 7
+    hidden_size: 2048
+    initializer_range: 0.02
+    intermediate_size: 12288
+    layer_types:
+    - conv
+    - conv
+    - full_attention
+    - conv
+    - conv
+    - full_attention
+    - conv
+    - conv
+    - full_attention
+    - conv
+    - full_attention
+    - conv
+    - full_attention
+    - conv
+    - full_attention
+    - conv
+    max_position_embeddings: 128000
+    model_type: lfm2
+    norm_eps: 1.0e-05
+    num_attention_heads: 32
+    num_heads: 32
+    num_hidden_layers: 16
+    num_key_value_heads: 8
+    rope_parameters:
+      rope_theta: 1000000.0
+      rope_type: default
+    rope_theta: 1000000.0
+    use_cache: true
+    use_pos_enc: true
+    vocab_size: 65536
+  tile_size: 512
+  transformers_version: 5.0.0.dev0
+  use_cache: false
+  use_image_special_tokens: true
+  use_thumbnail: true
+  vision_config:
+    attention_dropout: 0.0
+    dtype: bfloat16
+    hidden_act: gelu_pytorch_tanh
+    hidden_size: 1152
+    intermediate_size: 4304
+    layer_norm_eps: 1.0e-06
+    model_type: siglip2_vision_model
+    num_attention_heads: 16
+    num_channels: 3
+    num_hidden_layers: 26
+    num_patches: 256
+    patch_size: 16
+    vision_use_head: false
+onnxFiles: {}
+safetensorsSizeMb: 3169.7
+approxSizeMb: 3169.6
+fetchedAt: '2026-06-11T08:11:04.000Z'

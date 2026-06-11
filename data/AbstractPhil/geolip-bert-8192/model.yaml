@@ -1,0 +1,118 @@
+_id: 69ad298b5d4f2860e2ef2f3c
+id: AbstractPhil/geolip-bert-8192
+private: false
+pipeline_tag: feature-extraction
+tags:
+- geometric-deep-learning
+- memory-augmented
+- bert
+- modernbert
+- longformer
+- procrustes
+- pentachoron
+- distillation
+- long-context
+- feature-extraction
+- en
+- license:apache-2.0
+- region:us
+downloads: 5
+likes: 0
+modelId: AbstractPhil/geolip-bert-8192
+author: AbstractPhil
+sha: 604286579d40041121fdfee3eaa6e595edea9b26
+lastModified: '2026-03-09T20:51:17.000Z'
+gated: false
+disabled: false
+model-index: null
+config: {}
+cardData:
+  license: apache-2.0
+  tags:
+  - geometric-deep-learning
+  - memory-augmented
+  - bert
+  - modernbert
+  - longformer
+  - procrustes
+  - pentachoron
+  - distillation
+  - long-context
+  language: en
+  pipeline_tag: feature-extraction
+siblings:
+- rfilename: .gitattributes
+- rfilename: README.md
+- rfilename: checkpoints/best/memory_system.safetensors
+- rfilename: checkpoints/best/training_state.pt
+- rfilename: config.json
+- rfilename: distillation_trainer_v3.py
+- rfilename: model.py
+spaces: []
+createdAt: '2026-03-08T07:47:23.000Z'
+usedStorage: 592209968
+downloadsAllTime: 84
+inferenceProviderMapping: {}
+configJson:
+  model:
+    bert_model: google-bert/bert-large-uncased
+    hidden_size: 1024
+    freeze_bert: true
+    n_memory_tokens: 16
+    bank_size: 128
+    anchor_dim: 1024
+    n_bank_heads: 8
+    bank_cross_layers: 2
+    gate_type: gru
+    extract_layers:
+    - 2
+    - 5
+    - 8
+    - 11
+    - 14
+    - 17
+    - 20
+    - 23
+    layer_fusion: learned
+    max_content_tokens: 480
+    segment_overlap: 64
+    max_position: 512
+    n_teachers: 2
+    teacher_hidden: 1024
+    cv_target: 0.2
+  training:
+    max_documents: 50000
+    max_val_documents: 500
+    segment_length: 480
+    segment_overlap: 64
+    target_chain_segments: 16
+    max_segments: 16
+    min_segments: 6
+    modern_bert_model: answerdotai/ModernBERT-large
+    longformer_model: allenai/longformer-large-4096
+    modern_max_len: 8192
+    longformer_max_len: 4096
+    procrustes_n_samples: 500
+    epochs: 10
+    batch_size: 4
+    lr_bank: 0.002
+    lr_output: 0.0005
+    lr_proj: 0.001
+    min_lr: 1.0e-06
+    weight_decay: 0.01
+    grad_clip: 1.0
+    warmup_steps: 300
+    tbptt_segments: 0
+    modern_weight: 1.0
+    longformer_weight: 0.5
+    cv_weight: 0.05
+    temperature: 0.07
+    checkpoint_dir: /home/claude/deep_bert_v3_checkpoints
+    tensorboard_dir: /home/claude/deep_bert_v3_tb
+    log_every: 20
+    eval_every: 200
+    save_every_epoch: true
+onnxFiles: {}
+safetensorsSizeMb: 197.4
+approxSizeMb: 0.0
+fetchedAt: '2026-06-11T08:11:04.000Z'

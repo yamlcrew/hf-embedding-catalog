@@ -1,0 +1,102 @@
+_id: 66337a0b37c7690e29809566
+id: kantobro/aidacoder
+private: false
+pipeline_tag: feature-extraction
+library_name: transformers
+tags:
+- transformers
+- safetensors
+- llama
+- feature-extraction
+- arxiv:1910.09700
+- text-embeddings-inference
+- endpoints_compatible
+- region:us
+downloads: 3
+likes: 0
+modelId: kantobro/aidacoder
+author: kantobro
+sha: 2c37fd901750ce562acafe7ac3b0318712446804
+lastModified: '2024-05-02T13:54:57.000Z'
+gated: false
+disabled: false
+model-index: null
+config:
+  architectures:
+  - LlamaModel
+  model_type: llama
+  tokenizer_config:
+    bos_token: <s>
+    chat_template: '{% if messages[0][''role''] == ''system'' %}{% set loop_messages = messages[1:] %}{% set system_message
+      = messages[0][''content''] %}{% else %}{% set loop_messages = messages %}{% set system_message = false %}{% endif %}{%
+      for message in loop_messages %}{% if (message[''role''] == ''user'') != (loop.index0 % 2 == 0) %}{{ raise_exception(''Conversation
+      roles must alternate user/assistant/user/assistant/...'') }}{% endif %}{% if loop.index0 == 0 and system_message !=
+      false %}{% set content = ''<<SYS>>\n'' + system_message + ''\n<</SYS>>\n\n'' + message[''content''] %}{% else %}{% set
+      content = message[''content''] %}{% endif %}{% if message[''role''] == ''user'' %}{{ bos_token + ''[INST] '' + content
+      | trim + '' [/INST]'' }}{% elif message[''role''] == ''assistant'' %}{{ '' ''  + content | trim + '' '' + eos_token
+      }}{% endif %}{% endfor %}'
+    eos_token: </s>
+    pad_token: null
+    unk_token: <unk>
+    use_default_system_prompt: false
+cardData:
+  library_name: transformers
+  tags: []
+transformersInfo:
+  auto_model: AutoModel
+  pipeline_tag: feature-extraction
+  processor: AutoTokenizer
+siblings:
+- rfilename: .gitattributes
+- rfilename: README.md
+- rfilename: config.json
+- rfilename: model-00001-of-00006.safetensors
+- rfilename: model-00002-of-00006.safetensors
+- rfilename: model-00003-of-00006.safetensors
+- rfilename: model-00004-of-00006.safetensors
+- rfilename: model-00005-of-00006.safetensors
+- rfilename: model-00006-of-00006.safetensors
+- rfilename: model.safetensors.index.json
+- rfilename: special_tokens_map.json
+- rfilename: tokenizer.json
+- rfilename: tokenizer.model
+- rfilename: tokenizer_config.json
+spaces: []
+createdAt: '2024-05-02T11:33:31.000Z'
+safetensors:
+  parameters:
+    F32: 6607409152
+  total: 6607409152
+usedStorage: 26430168434
+downloadsAllTime: 24
+inferenceProviderMapping: {}
+configJson:
+  _name_or_path: aidacoder
+  architectures:
+  - LlamaModel
+  attention_bias: false
+  attention_dropout: 0.0
+  bos_token_id: 1
+  eos_token_id: 2
+  hidden_act: silu
+  hidden_size: 4096
+  initializer_range: 0.02
+  intermediate_size: 11008
+  max_position_embeddings: 16384
+  model_type: llama
+  num_attention_heads: 32
+  num_hidden_layers: 32
+  num_key_value_heads: 32
+  pretraining_tp: 1
+  rms_norm_eps: 1.0e-05
+  rope_scaling: null
+  rope_theta: 1000000
+  tie_word_embeddings: false
+  torch_dtype: float32
+  transformers_version: 4.40.0.dev0
+  use_cache: true
+  vocab_size: 32016
+onnxFiles: {}
+safetensorsSizeMb: 26429.7
+approxSizeMb: 26429.6
+fetchedAt: '2026-06-11T08:11:04.000Z'

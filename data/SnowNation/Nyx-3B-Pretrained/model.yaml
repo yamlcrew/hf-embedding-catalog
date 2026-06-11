@@ -1,0 +1,218 @@
+_id: 68cb8a4d2d0dd11b50587639
+id: SnowNation/Nyx-3B-Pretrained
+private: false
+pipeline_tag: feature-extraction
+library_name: transformers
+tags:
+- transformers
+- safetensors
+- qwen2_5_vl
+- feature-extraction
+- arxiv:2510.17354
+- arxiv:1910.09700
+- endpoints_compatible
+- region:us
+downloads: 4
+likes: 2
+modelId: SnowNation/Nyx-3B-Pretrained
+author: SnowNation
+sha: f4cb5de2bda6f8ee471af35389bc8275af119564
+lastModified: '2025-10-21T02:27:40.000Z'
+gated: false
+disabled: false
+model-index: null
+config:
+  architectures:
+  - Qwen2_5_VLModel
+  model_type: qwen2_5_vl
+  tokenizer_config:
+    bos_token: null
+    eos_token: <|im_end|>
+    pad_token: <|endoftext|>
+    unk_token: null
+  chat_template_jinja: '{% set image_count = namespace(value=0) %}{% set video_count = namespace(value=0) %}{% for message
+    in messages %}{% if loop.first and message[''role''] != ''system'' %}<|im_start|>system
+
+    You are a helpful assistant.<|im_end|>
+
+    {% endif %}<|im_start|>{{ message[''role''] }}
+
+    {% if message[''content''] is string %}{{ message[''content''] }}<|im_end|>
+
+    {% else %}{% for content in message[''content''] %}{% if content[''type''] == ''image'' or ''image'' in content or ''image_url''
+    in content %}{% set image_count.value = image_count.value + 1 %}{% if add_vision_id %}Picture {{ image_count.value }}:
+    {% endif %}<|vision_start|><|image_pad|><|vision_end|>{% elif content[''type''] == ''video'' or ''video'' in content %}{%
+    set video_count.value = video_count.value + 1 %}{% if add_vision_id %}Video {{ video_count.value }}: {% endif %}<|vision_start|><|video_pad|><|vision_end|>{%
+    elif ''text'' in content %}{{ content[''text''] }}{% endif %}{% endfor %}<|im_end|>
+
+    {% endif %}{% endfor %}{% if add_generation_prompt %}<|im_start|>assistant
+
+    {% endif %}'
+cardData:
+  library_name: transformers
+  tags: []
+transformersInfo:
+  auto_model: AutoModelForMultimodalLM
+  pipeline_tag: feature-extraction
+  processor: AutoProcessor
+siblings:
+- rfilename: .gitattributes
+- rfilename: README.md
+- rfilename: added_tokens.json
+- rfilename: chat_template.jinja
+- rfilename: config.json
+- rfilename: merges.txt
+- rfilename: model-00001-of-00002.safetensors
+- rfilename: model-00002-of-00002.safetensors
+- rfilename: model.safetensors.index.json
+- rfilename: preprocessor_config.json
+- rfilename: special_tokens_map.json
+- rfilename: tokenizer.json
+- rfilename: tokenizer_config.json
+- rfilename: video_preprocessor_config.json
+- rfilename: vocab.json
+spaces: []
+createdAt: '2025-09-18T04:27:57.000Z'
+safetensors:
+  parameters:
+    BF16: 3754622976
+  total: 3754622976
+usedStorage: 7520759840
+downloadsAllTime: 89
+inferenceProviderMapping: {}
+configJson:
+  architectures:
+  - Qwen2_5_VLModel
+  attention_dropout: 0.0
+  bos_token_id: 151643
+  dtype: bfloat16
+  eos_token_id: 151645
+  hidden_act: silu
+  hidden_size: 2048
+  image_token_id: 151655
+  initializer_range: 0.02
+  intermediate_size: 11008
+  max_position_embeddings: 128000
+  max_window_layers: 70
+  model_type: qwen2_5_vl
+  num_attention_heads: 16
+  num_hidden_layers: 36
+  num_key_value_heads: 2
+  rms_norm_eps: 1.0e-06
+  rope_scaling:
+    mrope_section:
+    - 16
+    - 24
+    - 24
+    rope_type: default
+    type: default
+  rope_theta: 1000000.0
+  sliding_window: 32768
+  text_config:
+    architectures:
+    - Qwen2_5_VLForConditionalGeneration
+    attention_dropout: 0.0
+    bos_token_id: 151643
+    dtype: bfloat16
+    eos_token_id: 151645
+    hidden_act: silu
+    hidden_size: 2048
+    image_token_id: null
+    initializer_range: 0.02
+    intermediate_size: 11008
+    layer_types:
+    - full_attention
+    - full_attention
+    - full_attention
+    - full_attention
+    - full_attention
+    - full_attention
+    - full_attention
+    - full_attention
+    - full_attention
+    - full_attention
+    - full_attention
+    - full_attention
+    - full_attention
+    - full_attention
+    - full_attention
+    - full_attention
+    - full_attention
+    - full_attention
+    - full_attention
+    - full_attention
+    - full_attention
+    - full_attention
+    - full_attention
+    - full_attention
+    - full_attention
+    - full_attention
+    - full_attention
+    - full_attention
+    - full_attention
+    - full_attention
+    - full_attention
+    - full_attention
+    - full_attention
+    - full_attention
+    - full_attention
+    - full_attention
+    max_position_embeddings: 128000
+    max_window_layers: 70
+    model_type: qwen2_5_vl_text
+    num_attention_heads: 16
+    num_hidden_layers: 36
+    num_key_value_heads: 2
+    rms_norm_eps: 1.0e-06
+    rope_scaling:
+      mrope_section:
+      - 16
+      - 24
+      - 24
+      rope_type: default
+      type: default
+    rope_theta: 1000000.0
+    sliding_window: null
+    tie_word_embeddings: true
+    use_cache: true
+    use_sliding_window: false
+    video_token_id: null
+    vision_end_token_id: 151653
+    vision_start_token_id: 151652
+    vision_token_id: 151654
+    vocab_size: 151936
+  transformers_version: 4.56.1
+  use_cache: true
+  use_sliding_window: false
+  video_token_id: 151656
+  vision_config:
+    depth: 32
+    dtype: bfloat16
+    fullatt_block_indexes:
+    - 7
+    - 15
+    - 23
+    - 31
+    hidden_act: silu
+    hidden_size: 1280
+    in_channels: 3
+    in_chans: 3
+    initializer_range: 0.02
+    intermediate_size: 3420
+    model_type: qwen2_5_vl
+    num_heads: 16
+    out_hidden_size: 2048
+    patch_size: 14
+    spatial_merge_size: 2
+    spatial_patch_size: 14
+    temporal_patch_size: 2
+    tokens_per_second: 2
+    window_size: 112
+  vision_end_token_id: 151653
+  vision_start_token_id: 151652
+  vision_token_id: 151654
+  vocab_size: 151936
+onnxFiles: {}
+safetensorsSizeMb: 7509.3
+approxSizeMb: 7509.2
+fetchedAt: '2026-06-11T08:11:04.000Z'

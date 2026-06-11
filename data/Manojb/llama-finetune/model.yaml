@@ -1,0 +1,99 @@
+_id: 65cf7a01a838056fd6e852da
+id: Manojb/llama-finetune
+private: false
+pipeline_tag: feature-extraction
+library_name: transformers
+tags:
+- transformers
+- safetensors
+- llama
+- feature-extraction
+- arxiv:1910.09700
+- text-embeddings-inference
+- endpoints_compatible
+- region:us
+downloads: 3
+likes: 0
+modelId: Manojb/llama-finetune
+author: Manojb
+sha: 685a53e0bae9a5cf46e79a8542ab8c65fab24bb9
+lastModified: '2024-02-16T15:13:42.000Z'
+gated: false
+disabled: false
+model-index: null
+config:
+  architectures:
+  - LlamaModel
+  model_type: llama
+  tokenizer_config:
+    bos_token: <s>
+    chat_template: '{{ bos_token }}{% for message in messages %}{% if (message[''role''] == ''user'') != (loop.index0 % 2
+      == 0) %}{{ raise_exception(''Conversation roles must alternate user/assistant/user/assistant/...'') }}{% endif %}{%
+      if message[''role''] == ''user'' %}{{ ''[INST] '' + message[''content''] + '' [/INST]'' }}{% elif message[''role'']
+      == ''assistant'' %}{{ message[''content''] + eos_token + '' '' }}{% else %}{{ raise_exception(''Only user and assistant
+      roles are supported!'') }}{% endif %}{% endfor %}'
+    eos_token: </s>
+    pad_token: <unk>
+    unk_token: <unk>
+    use_default_system_prompt: false
+cardData:
+  library_name: transformers
+  tags: []
+transformersInfo:
+  auto_model: AutoModel
+  pipeline_tag: feature-extraction
+  processor: AutoTokenizer
+siblings:
+- rfilename: .gitattributes
+- rfilename: README.md
+- rfilename: config.json
+- rfilename: model-00001-of-00006.safetensors
+- rfilename: model-00002-of-00006.safetensors
+- rfilename: model-00003-of-00006.safetensors
+- rfilename: model-00004-of-00006.safetensors
+- rfilename: model-00005-of-00006.safetensors
+- rfilename: model-00006-of-00006.safetensors
+- rfilename: model.safetensors.index.json
+- rfilename: special_tokens_map.json
+- rfilename: tokenizer.json
+- rfilename: tokenizer.model
+- rfilename: tokenizer_config.json
+spaces: []
+createdAt: '2024-02-16T15:06:41.000Z'
+safetensors:
+  parameters:
+    F32: 7110660096
+  total: 7110660096
+usedStorage: 28443165627
+downloadsAllTime: 8
+inferenceProviderMapping: {}
+configJson:
+  _name_or_path: 0x0dad0/nous_nous_v2_0
+  architectures:
+  - LlamaModel
+  attention_bias: false
+  attention_dropout: 0.0
+  bos_token_id: 1
+  eos_token_id: 2
+  hidden_act: silu
+  hidden_size: 4096
+  initializer_range: 0.02
+  intermediate_size: 14336
+  max_position_embeddings: 32768
+  model_type: llama
+  num_attention_heads: 32
+  num_hidden_layers: 32
+  num_key_value_heads: 8
+  pretraining_tp: 1
+  rms_norm_eps: 1.0e-05
+  rope_scaling: null
+  rope_theta: 10000.0
+  tie_word_embeddings: false
+  torch_dtype: float32
+  transformers_version: 4.37.2
+  use_cache: false
+  vocab_size: 32000
+onnxFiles: {}
+safetensorsSizeMb: 28442.7
+approxSizeMb: 28442.6
+fetchedAt: '2026-06-11T08:11:04.000Z'

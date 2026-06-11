@@ -1,0 +1,260 @@
+_id: 69aed211f44506f6b73b7923
+id: hltcoe/SeqResize_qwen2.5-omni_multivent
+private: false
+pipeline_tag: feature-extraction
+library_name: transformers
+tags:
+- transformers
+- safetensors
+- qwen2_5_omni_thinker
+- video-retrieval
+- multi-vector
+- late-interaction
+- colbert
+- index-compression
+- sequence-resize
+- text-to-video
+- feature-extraction
+- audiovisual
+- en
+- dataset:hltcoe/RankVideo-Dataset
+- dataset:hltcoe/MultiVENT2.0
+- arxiv:2602.21202
+- license:mit
+- endpoints_compatible
+- region:us
+downloads: 3
+likes: 0
+modelId: hltcoe/SeqResize_qwen2.5-omni_multivent
+author: hltcoe
+sha: c992f0af17256b728f63df0885ea02c66dc071ea
+lastModified: '2026-03-11T14:01:30.000Z'
+gated: false
+disabled: false
+model-index: null
+config:
+  architectures:
+  - Qwen2_5OmniForEmbedding
+  model_type: qwen2_5_omni_thinker
+  tokenizer_config:
+    bos_token: null
+    eos_token: <|im_end|>
+    pad_token: <|endoftext|>
+    unk_token: null
+  chat_template_jinja: '{% set audio_count = namespace(value=0) %}{% set image_count = namespace(value=0) %}{% set video_count
+    = namespace(value=0) %}{% for message in messages %}{% if loop.first and message[''role''] != ''system'' %}<|im_start|>system
+
+    You are a helpful assistant.<|im_end|>
+
+    {% endif %}<|im_start|>{{ message[''role''] }}
+
+    {% if message[''content''] is string %}{{ message[''content''] }}<|im_end|>
+
+    {% else %}{% for content in message[''content''] %}{% if content[''type''] == ''image'' or ''image'' in content or ''image_url''
+    in content %}{% set image_count.value = image_count.value + 1 %}{% if add_vision_id %}Picture {{ image_count.value }}:
+    {% endif %}<|vision_bos|><|IMAGE|><|vision_eos|>{% elif content[''type''] == ''audio'' or ''audio'' in content or ''audio_url''
+    in content %}{% set audio_count.value = audio_count.value + 1 %}{% if add_audio_id %}Audio {{ audio_count.value }}: {%
+    endif %}<|audio_bos|><|AUDIO|><|audio_eos|>{% elif content[''type''] == ''video'' or ''video'' in content %}{% set video_count.value
+    = video_count.value + 1 %}{% if add_vision_id %}Video {{ video_count.value }}: {% endif %}<|vision_bos|><|VIDEO|><|vision_eos|>{%
+    elif ''text'' in content %}{{ content[''text''] }}{% endif %}{% endfor %}<|im_end|>
+
+    {% endif %}{% endfor %}{% if add_generation_prompt %}<|im_start|>assistant
+
+    {% endif %}'
+cardData:
+  library_name: transformers
+  license: mit
+  base_model: Qwen/Qwen2.5-Omni-3B-Instruct
+  arxiv: 2602.21202
+  datasets:
+  - hltcoe/RankVideo-Dataset
+  - hltcoe/MultiVENT2.0
+  language:
+  - en
+  tags:
+  - video-retrieval
+  - multi-vector
+  - late-interaction
+  - colbert
+  - index-compression
+  - sequence-resize
+  - text-to-video
+  - feature-extraction
+  - audiovisual
+transformersInfo:
+  auto_model: Qwen2_5OmniForEmbedding
+  processor: AutoTokenizer
+siblings:
+- rfilename: .gitattributes
+- rfilename: README.md
+- rfilename: added_tokens.json
+- rfilename: chat_template.jinja
+- rfilename: config.json
+- rfilename: extra_encoder_state.safetensors
+- rfilename: generation_config.json
+- rfilename: latest
+- rfilename: merges.txt
+- rfilename: model-00001-of-00002.safetensors
+- rfilename: model-00002-of-00002.safetensors
+- rfilename: model.safetensors.index.json
+- rfilename: preprocessor_config.json
+- rfilename: rng_state_0.pth
+- rfilename: rng_state_1.pth
+- rfilename: rng_state_2.pth
+- rfilename: rng_state_3.pth
+- rfilename: special_tokens_map.json
+- rfilename: tokenizer.json
+- rfilename: tokenizer_config.json
+- rfilename: trainer_state.json
+- rfilename: training_args.bin
+- rfilename: video_preprocessor_config.json
+- rfilename: vocab.json
+- rfilename: zero_to_fp32.py
+spaces: []
+createdAt: '2026-03-09T13:58:41.000Z'
+safetensors:
+  parameters:
+    BF16: 4703464448
+  total: 1258496
+usedStorage: 9419813059
+downloadsAllTime: 44
+inferenceProviderMapping: {}
+configJson:
+  _attn_implementation_autoset: true
+  architectures:
+  - Qwen2_5OmniForEmbedding
+  audio_config:
+    _attn_implementation_autoset: true
+    activation_dropout: 0.0
+    activation_function: gelu
+    attention_dropout: 0.0
+    d_model: 1280
+    dropout: 0.0
+    dtype: bfloat16
+    encoder_attention_heads: 20
+    encoder_ffn_dim: 5120
+    encoder_layerdrop: 0.0
+    encoder_layers: 32
+    init_std: 0.02
+    initializer_range: 0.02
+    max_source_positions: 1500
+    model_type: qwen2_5_omni_audio_encoder
+    n_window: 100
+    num_hidden_layers: 32
+    num_mel_bins: 128
+    output_dim: 2048
+    scale_embedding: false
+  audio_end_token_id: 151648
+  audio_start_token_id: 151647
+  audio_token_index: 151646
+  bos_token_id: 151644
+  dtype: bfloat16
+  eos_token_id: 151645
+  ignore_index: -100
+  image_token_index: 151655
+  init_std: 0.02
+  initializer_range: 0.02
+  model_type: qwen2_5_omni_thinker
+  pad_token_id: 151643
+  position_id_per_seconds: 25
+  seconds_per_chunk: 2
+  text_config:
+    attention_dropout: 0.0
+    dtype: bfloat16
+    hidden_act: silu
+    hidden_size: 2048
+    init_std: 0.02
+    initializer_range: 0.02
+    intermediate_size: 11008
+    layer_types:
+    - full_attention
+    - full_attention
+    - full_attention
+    - full_attention
+    - full_attention
+    - full_attention
+    - full_attention
+    - full_attention
+    - full_attention
+    - full_attention
+    - full_attention
+    - full_attention
+    - full_attention
+    - full_attention
+    - full_attention
+    - full_attention
+    - full_attention
+    - full_attention
+    - full_attention
+    - full_attention
+    - full_attention
+    - full_attention
+    - full_attention
+    - full_attention
+    - full_attention
+    - full_attention
+    - full_attention
+    - full_attention
+    - full_attention
+    - full_attention
+    - full_attention
+    - full_attention
+    - full_attention
+    - full_attention
+    - full_attention
+    - full_attention
+    max_position_embeddings: 32768
+    max_window_layers: 70
+    model_type: qwen2_5_omni_text
+    num_attention_heads: 16
+    num_hidden_layers: 36
+    num_key_value_heads: 2
+    rms_norm_eps: 1.0e-06
+    rope_scaling:
+      mrope_section:
+      - 16
+      - 24
+      - 24
+      rope_type: default
+      type: default
+    rope_theta: 1000000.0
+    sliding_window: null
+    use_cache: true
+    use_sliding_window: false
+    vocab_size: 151936
+  transformers_version: 4.57.3
+  user_token_id: 872
+  video_token_index: 151656
+  vision_config:
+    _attn_implementation_autoset: true
+    depth: 32
+    dtype: bfloat16
+    embed_dim: 1280
+    fullatt_block_indexes:
+    - 7
+    - 15
+    - 23
+    - 31
+    hidden_act: silu
+    hidden_size: 1280
+    in_channels: 3
+    in_chans: 3
+    init_std: 0.02
+    initializer_range: 0.02
+    intermediate_size: 3420
+    model_type: qwen2_5_omni_vision_encoder
+    num_heads: 16
+    out_hidden_size: 2048
+    patch_size: 14
+    spatial_merge_size: 2
+    spatial_patch_size: 14
+    temporal_patch_size: 2
+    tokens_per_second: 25
+    window_size: 112
+  vision_end_token_id: 151653
+  vision_start_token_id: 151652
+  vision_token_id: 151654
+onnxFiles: {}
+safetensorsSizeMb: 9408.3
+approxSizeMb: 9406.9
+fetchedAt: '2026-06-11T08:11:04.000Z'

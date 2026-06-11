@@ -1,0 +1,120 @@
+_id: 6848943be74d819271b3068f
+id: martin-lebras/MNLP_M3_quantized_model
+private: false
+pipeline_tag: feature-extraction
+library_name: transformers
+tags:
+- transformers
+- safetensors
+- qwen3
+- feature-extraction
+- arxiv:1910.09700
+- text-embeddings-inference
+- endpoints_compatible
+- 8-bit
+- bitsandbytes
+- region:us
+downloads: 3
+likes: 0
+modelId: martin-lebras/MNLP_M3_quantized_model
+author: martin-lebras
+sha: b1a377eeee8de57f52031b5da081e71a5b548e6b
+lastModified: '2025-06-11T13:59:30.000Z'
+gated: false
+disabled: false
+model-index: null
+config:
+  architectures:
+  - Qwen3Model
+  model_type: qwen3
+  quantization_config:
+    load_in_4bit: false
+    load_in_8bit: true
+    quant_method: bitsandbytes
+  tokenizer_config:
+    bos_token: null
+    chat_template: '{%- for message in messages %}{%- if message.role == ''user'' %}<|im_start|>user
+
+      {{ message.content }}<|im_end|>
+
+      {%- elif message.role == ''assistant'' %}<|im_start|>assistant {{ message.content }}<|im_end|>{%- endif %}{%- endfor
+      %}{%- if add_generation_prompt %}{{- ''<|im_start|>assistant'' }}{%- endif %}'
+    eos_token: <|endoftext|>
+    pad_token: <|endoftext|>
+    unk_token: null
+cardData:
+  library_name: transformers
+  tags: []
+transformersInfo:
+  auto_model: AutoModelForMultimodalLM
+  pipeline_tag: feature-extraction
+  processor: AutoTokenizer
+siblings:
+- rfilename: .gitattributes
+- rfilename: README.md
+- rfilename: added_tokens.json
+- rfilename: config.json
+- rfilename: merges.txt
+- rfilename: model.safetensors
+- rfilename: special_tokens_map.json
+- rfilename: tokenizer.json
+- rfilename: tokenizer_config.json
+- rfilename: vocab.json
+spaces: []
+createdAt: '2025-06-10T20:23:23.000Z'
+safetensors:
+  parameters:
+    F32: 344064
+    F16: 155648000
+    I8: 440401920
+  total: 596393984
+usedStorage: 764568498
+downloadsAllTime: 4
+inferenceProviderMapping: {}
+configJson:
+  architectures:
+  - Qwen3Model
+  attention_bias: false
+  attention_dropout: 0.0
+  bos_token_id: 151643
+  eos_token_id: 151643
+  head_dim: 128
+  hidden_act: silu
+  hidden_size: 1024
+  initializer_range: 0.02
+  intermediate_size: 3072
+  max_position_embeddings: 32768
+  max_window_layers: 28
+  model_type: qwen3
+  num_attention_heads: 16
+  num_hidden_layers: 28
+  num_key_value_heads: 8
+  quantization_config:
+    _load_in_4bit: false
+    _load_in_8bit: true
+    bnb_4bit_compute_dtype: float32
+    bnb_4bit_quant_storage: uint8
+    bnb_4bit_quant_type: fp4
+    bnb_4bit_use_double_quant: false
+    llm_int8_enable_fp32_cpu_offload: false
+    llm_int8_has_fp16_weight: false
+    llm_int8_skip_modules:
+    - lm_head
+    llm_int8_threshold: 6.0
+    load_in_4bit: false
+    load_in_8bit: true
+    quant_method: bitsandbytes
+  rms_norm_eps: 1.0e-06
+  rope_scaling: null
+  rope_theta: 1000000
+  sliding_window: null
+  tie_word_embeddings: true
+  torch_dtype: float16
+  transformers_version: 4.51.3
+  use_cache: false
+  use_sliding_window: false
+  vocab_size: 151936
+onnxFiles: {}
+safetensorsSizeMb: 753.1
+approxSizeMb: 753.1
+fetchedAt: '2026-06-11T08:11:04.000Z'

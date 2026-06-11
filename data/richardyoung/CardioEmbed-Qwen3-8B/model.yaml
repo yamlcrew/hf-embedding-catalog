@@ -1,0 +1,126 @@
+_id: 690f65aaed5ac2e2e4cb9eaf
+id: richardyoung/CardioEmbed-Qwen3-8B
+private: false
+pipeline_tag: feature-extraction
+library_name: peft
+tags:
+- peft
+- safetensors
+- lora
+- embeddings
+- medical
+- cardiology
+- healthcare
+- feature-extraction
+- en
+- base_model:Qwen/Qwen3-Embedding-8B
+- base_model:adapter:Qwen/Qwen3-Embedding-8B
+- license:apache-2.0
+- region:us
+downloads: 3
+likes: 0
+modelId: richardyoung/CardioEmbed-Qwen3-8B
+author: richardyoung
+sha: 43422102cb9d844bba4a6a7502b13da956dcf2cf
+lastModified: '2025-11-26T00:42:19.000Z'
+gated: false
+disabled: false
+model-index: null
+config:
+  tokenizer_config:
+    bos_token: null
+    eos_token: <|im_end|>
+    pad_token: <|endoftext|>
+    unk_token: null
+  chat_template_jinja: "{%- if tools %}\n    {{- '<|im_start|>system\\n' }}\n    {%- if messages[0]['role'] == 'system' %}\n\
+    \        {{- messages[0]['content'] }}\n    {%- else %}\n        {{- 'You are a helpful assistant.' }}\n    {%- endif\
+    \ %}\n    {{- \"\\n\\n# Tools\\n\\nYou may call one or more functions to assist with the user query.\\n\\nYou are provided\
+    \ with function signatures within <tools></tools> XML tags:\\n<tools>\" }}\n    {%- for tool in tools %}\n        {{-\
+    \ \"\\n\" }}\n        {{- tool | tojson }}\n    {%- endfor %}\n    {{- \"\\n</tools>\\n\\nFor each function call, return\
+    \ a json object with function name and arguments within <tool_call></tool_call> XML tags:\\n<tool_call>\\n{\\\"name\\\"\
+    : <function-name>, \\\"arguments\\\": <args-json-object>}\\n</tool_call><|im_end|>\\n\" }}\n{%- else %}\n    {%- if messages[0]['role']\
+    \ == 'system' %}\n        {{- '<|im_start|>system\\n' + messages[0]['content'] + '<|im_end|>\\n' }}\n    {%- else %}\n\
+    \        {{- '<|im_start|>system\\nYou are a helpful assistant.<|im_end|>\\n' }}\n    {%- endif %}\n{%- endif %}\n{%-\
+    \ for message in messages %}\n    {%- if (message.role == \"user\") or (message.role == \"system\" and not loop.first)\
+    \ or (message.role == \"assistant\" and not message.tool_calls) %}\n        {{- '<|im_start|>' + message.role + '\\n'\
+    \ + message.content + '<|im_end|>' + '\\n' }}\n    {%- elif message.role == \"assistant\" %}\n        {{- '<|im_start|>'\
+    \ + message.role }}\n        {%- if message.content %}\n            {{- '\\n' + message.content }}\n        {%- endif\
+    \ %}\n        {%- for tool_call in message.tool_calls %}\n            {%- if tool_call.function is defined %}\n      \
+    \          {%- set tool_call = tool_call.function %}\n            {%- endif %}\n            {{- '\\n<tool_call>\\n{\"\
+    name\": \"' }}\n            {{- tool_call.name }}\n            {{- '\", \"arguments\": ' }}\n            {{- tool_call.arguments\
+    \ | tojson }}\n            {{- '}\\n</tool_call>' }}\n        {%- endfor %}\n        {{- '<|im_end|>\\n' }}\n    {%- elif\
+    \ message.role == \"tool\" %}\n        {%- if (loop.index0 == 0) or (messages[loop.index0 - 1].role != \"tool\") %}\n\
+    \            {{- '<|im_start|>user' }}\n        {%- endif %}\n        {{- '\\n<tool_response>\\n' }}\n        {{- message.content\
+    \ }}\n        {{- '\\n</tool_response>' }}\n        {%- if loop.last or (messages[loop.index0 + 1].role != \"tool\") %}\n\
+    \            {{- '<|im_end|>\\n' }}\n        {%- endif %}\n    {%- endif %}\n{%- endfor %}\n{%- if add_generation_prompt\
+    \ %}\n    {{- '<|im_start|>assistant\\n' }}\n{%- endif %}\n"
+  peft:
+    base_model_name_or_path: Qwen/Qwen3-Embedding-8B
+    task_type: FEATURE_EXTRACTION
+cardData:
+  license: apache-2.0
+  language:
+  - en
+  pipeline_tag: feature-extraction
+  base_model: Qwen/Qwen3-Embedding-8B
+  tags:
+  - peft
+  - lora
+  - embeddings
+  - medical
+  - cardiology
+  - healthcare
+  library_name: peft
+siblings:
+- rfilename: .gitattributes
+- rfilename: README.md
+- rfilename: adapter_config.json
+- rfilename: adapter_model.safetensors
+- rfilename: added_tokens.json
+- rfilename: chat_template.jinja
+- rfilename: checkpoint_1000/README.md
+- rfilename: checkpoint_1000/adapter_config.json
+- rfilename: checkpoint_1000/adapter_model.safetensors
+- rfilename: checkpoint_1000/added_tokens.json
+- rfilename: checkpoint_1000/chat_template.jinja
+- rfilename: checkpoint_1000/merges.txt
+- rfilename: checkpoint_1000/special_tokens_map.json
+- rfilename: checkpoint_1000/tokenizer.json
+- rfilename: checkpoint_1000/tokenizer_config.json
+- rfilename: checkpoint_1000/vocab.json
+- rfilename: checkpoint_2000/README.md
+- rfilename: checkpoint_2000/adapter_config.json
+- rfilename: checkpoint_2000/adapter_model.safetensors
+- rfilename: checkpoint_2000/added_tokens.json
+- rfilename: checkpoint_2000/chat_template.jinja
+- rfilename: checkpoint_2000/merges.txt
+- rfilename: checkpoint_2000/special_tokens_map.json
+- rfilename: checkpoint_2000/tokenizer.json
+- rfilename: checkpoint_2000/tokenizer_config.json
+- rfilename: checkpoint_2000/vocab.json
+- rfilename: checkpoint_3000/README.md
+- rfilename: checkpoint_3000/adapter_config.json
+- rfilename: checkpoint_3000/adapter_model.safetensors
+- rfilename: checkpoint_3000/added_tokens.json
+- rfilename: checkpoint_3000/chat_template.jinja
+- rfilename: checkpoint_3000/merges.txt
+- rfilename: checkpoint_3000/special_tokens_map.json
+- rfilename: checkpoint_3000/tokenizer.json
+- rfilename: checkpoint_3000/tokenizer_config.json
+- rfilename: checkpoint_3000/vocab.json
+- rfilename: merges.txt
+- rfilename: results.json
+- rfilename: special_tokens_map.json
+- rfilename: tokenizer.json
+- rfilename: tokenizer_config.json
+- rfilename: vocab.json
+spaces: []
+createdAt: '2025-11-08T15:45:46.000Z'
+usedStorage: 502305453
+downloadsAllTime: 63
+inferenceProviderMapping: {}
+configJson: null
+onnxFiles: {}
+safetensorsSizeMb: 490.9
+approxSizeMb: 0.0
+fetchedAt: '2026-06-11T08:11:04.000Z'

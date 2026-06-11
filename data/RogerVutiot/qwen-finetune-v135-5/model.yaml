@@ -1,0 +1,173 @@
+_id: 67fd95de64a418633edfacb0
+id: RogerVutiot/qwen-finetune-v135-5
+private: false
+pipeline_tag: feature-extraction
+library_name: transformers
+tags:
+- transformers
+- qwen2_5_vl
+- feature-extraction
+- text-generation-inference
+- unsloth
+- en
+- base_model:unsloth/Qwen2.5-VL-7B-Instruct-unsloth-bnb-4bit
+- base_model:finetune:unsloth/Qwen2.5-VL-7B-Instruct-unsloth-bnb-4bit
+- license:apache-2.0
+- endpoints_compatible
+- region:us
+downloads: 5
+likes: 0
+modelId: RogerVutiot/qwen-finetune-v135-5
+author: RogerVutiot
+sha: abdf9b3cb8f18b90696d32969542ecff25ffa828
+lastModified: '2025-04-14T23:16:54.000Z'
+gated: false
+disabled: false
+model-index: null
+config:
+  architectures:
+  - Qwen2_5_VLModel
+  model_type: qwen2_5_vl
+  processor_config:
+    chat_template: '{% set image_count = namespace(value=0) %}{% set video_count = namespace(value=0) %}{% for message in
+      messages %}{% if loop.first and message[''role''] != ''system'' %}<|im_start|>system
+
+      You are a helpful assistant.<|im_end|>
+
+      {% endif %}<|im_start|>{{ message[''role''] }}
+
+      {% if message[''content''] is string %}{{ message[''content''] }}<|im_end|>
+
+      {% else %}{% for content in message[''content''] %}{% if content[''type''] == ''image'' or ''image'' in content or ''image_url''
+      in content %}{% set image_count.value = image_count.value + 1 %}{% if add_vision_id %}Picture {{ image_count.value }}:
+      {% endif %}<|vision_start|><|image_pad|><|vision_end|>{% elif content[''type''] == ''video'' or ''video'' in content
+      %}{% set video_count.value = video_count.value + 1 %}{% if add_vision_id %}Video {{ video_count.value }}: {% endif %}<|vision_start|><|video_pad|><|vision_end|>{%
+      elif ''text'' in content %}{{ content[''text''] }}{% endif %}{% endfor %}<|im_end|>
+
+      {% endif %}{% endfor %}{% if add_generation_prompt %}<|im_start|>assistant
+
+      {% endif %}'
+  tokenizer_config:
+    bos_token: null
+    chat_template: "{%- if tools %}\n    {{- '<|im_start|>system\\n' }}\n    {%- if messages[0]['role'] == 'system' %}\n \
+      \       {{- messages[0]['content'] }}\n    {%- else %}\n        {{- 'You are a helpful assistant.' }}\n    {%- endif\
+      \ %}\n    {{- \"\\n\\n# Tools\\n\\nYou may call one or more functions to assist with the user query.\\n\\nYou are provided\
+      \ with function signatures within <tools></tools> XML tags:\\n<tools>\" }}\n    {%- for tool in tools %}\n        {{-\
+      \ \"\\n\" }}\n        {{- tool | tojson }}\n    {%- endfor %}\n    {{- \"\\n</tools>\\n\\nFor each function call, return\
+      \ a json object with function name and arguments within <tool_call></tool_call> XML tags:\\n<tool_call>\\n{\\\"name\\\
+      \": <function-name>, \\\"arguments\\\": <args-json-object>}\\n</tool_call><|im_end|>\\n\" }}\n{%- else %}\n    {%- if\
+      \ messages[0]['role'] == 'system' %}\n        {{- '<|im_start|>system\\n' + messages[0]['content'] + '<|im_end|>\\n'\
+      \ }}\n    {%- else %}\n        {{- '<|im_start|>system\\nYou are a helpful assistant.<|im_end|>\\n' }}\n    {%- endif\
+      \ %}\n{%- endif %}\n{%- for message in messages %}\n    {%- if (message.role == \"user\") or (message.role == \"system\"\
+      \ and not loop.first) or (message.role == \"assistant\" and not message.tool_calls) %}\n        {{- '<|im_start|>' +\
+      \ message.role + '\\n' + message.content + '<|im_end|>' + '\\n' }}\n    {%- elif message.role == \"assistant\" %}\n\
+      \        {{- '<|im_start|>' + message.role }}\n        {%- if message.content %}\n            {{- '\\n' + message.content\
+      \ }}\n        {%- endif %}\n        {%- for tool_call in message.tool_calls %}\n            {%- if tool_call.function\
+      \ is defined %}\n                {%- set tool_call = tool_call.function %}\n            {%- endif %}\n            {{-\
+      \ '\\n<tool_call>\\n{\"name\": \"' }}\n            {{- tool_call.name }}\n            {{- '\", \"arguments\": ' }}\n\
+      \            {{- tool_call.arguments | tojson }}\n            {{- '}\\n</tool_call>' }}\n        {%- endfor %}\n   \
+      \     {{- '<|im_end|>\\n' }}\n    {%- elif message.role == \"tool\" %}\n        {%- if (loop.index0 == 0) or (messages[loop.index0\
+      \ - 1].role != \"tool\") %}\n            {{- '<|im_start|>user' }}\n        {%- endif %}\n        {{- '\\n<tool_response>\\\
+      n' }}\n        {{- message.content }}\n        {{- '\\n</tool_response>' }}\n        {%- if loop.last or (messages[loop.index0\
+      \ + 1].role != \"tool\") %}\n            {{- '<|im_end|>\\n' }}\n        {%- endif %}\n    {%- endif %}\n{%- endfor\
+      \ %}\n{%- if add_generation_prompt %}\n    {{- '<|im_start|>assistant\\n' }}\n{%- endif %}\n"
+    eos_token: <|im_end|>
+    pad_token: <|vision_pad|>
+    unk_token: null
+cardData:
+  base_model: unsloth/Qwen2.5-VL-7B-Instruct-unsloth-bnb-4bit
+  tags:
+  - text-generation-inference
+  - transformers
+  - unsloth
+  - qwen2_5_vl
+  license: apache-2.0
+  language:
+  - en
+transformersInfo:
+  auto_model: AutoModelForMultimodalLM
+  pipeline_tag: feature-extraction
+  processor: AutoProcessor
+siblings:
+- rfilename: .gitattributes
+- rfilename: README.md
+- rfilename: added_tokens.json
+- rfilename: chat_template.json
+- rfilename: config.json
+- rfilename: merges.txt
+- rfilename: model-00001-of-00005.safetensors
+- rfilename: preprocessor_config.json
+- rfilename: special_tokens_map.json
+- rfilename: tokenizer.json
+- rfilename: tokenizer_config.json
+- rfilename: vocab.json
+spaces: []
+createdAt: '2025-04-14T23:10:22.000Z'
+usedStorage: 3911655412
+downloadsAllTime: 10
+inferenceProviderMapping: {}
+configJson:
+  architectures:
+  - Qwen2_5_VLModel
+  attention_dropout: 0.0
+  eos_token_id: 151645
+  hidden_act: silu
+  hidden_size: 3584
+  image_token_id: 151655
+  initializer_range: 0.02
+  intermediate_size: 18944
+  max_position_embeddings: 32768
+  max_window_layers: 28
+  model_type: qwen2_5_vl
+  num_attention_heads: 28
+  num_hidden_layers: 28
+  num_key_value_heads: 4
+  pad_token_id: 151654
+  rms_norm_eps: 1.0e-06
+  rope_scaling:
+    mrope_section:
+    - 16
+    - 24
+    - 24
+    rope_type: default
+    type: default
+  rope_theta: 1000000.0
+  sliding_window: 32768
+  tie_word_embeddings: false
+  torch_dtype: float16
+  transformers_version: 4.51.1
+  unsloth_fixed: true
+  unsloth_version: 2025.3.19
+  use_cache: true
+  use_sliding_window: false
+  video_token_id: 151656
+  vision_config:
+    depth: 32
+    fullatt_block_indexes:
+    - 7
+    - 15
+    - 23
+    - 31
+    hidden_act: silu
+    hidden_size: 1280
+    in_channels: 3
+    in_chans: 3
+    intermediate_size: 3420
+    model_type: qwen2_5_vl
+    num_heads: 16
+    out_hidden_size: 3584
+    patch_size: 14
+    spatial_merge_size: 2
+    spatial_patch_size: 14
+    temporal_patch_size: 2
+    tokens_per_second: 2
+    torch_dtype: float16
+    window_size: 112
+  vision_end_token_id: 151653
+  vision_start_token_id: 151652
+  vision_token_id: 151654
+  vocab_size: 152064
+onnxFiles: {}
+safetensorsSizeMb: 3900.2
+approxSizeMb: 0.0
+fetchedAt: '2026-06-11T08:11:04.000Z'
