@@ -1,0 +1,107 @@
+_id: 69aecd84cae5007187092420
+id: hltcoe/MemTok_qwen2.5-vl_colpali
+private: false
+pipeline_tag: feature-extraction
+library_name: transformers
+tags:
+- transformers
+- safetensors
+- visual-document-retrieval
+- multi-vector
+- late-interaction
+- colbert
+- index-compression
+- memory-tokens
+- text-to-image
+- feature-extraction
+- en
+- dataset:vidore/colpali_train_set
+- arxiv:2602.21202
+- base_model:Qwen/Qwen2.5-VL-3B-Instruct
+- base_model:finetune:Qwen/Qwen2.5-VL-3B-Instruct
+- license:mit
+- endpoints_compatible
+- region:us
+downloads: 0
+likes: 1
+modelId: hltcoe/MemTok_qwen2.5-vl_colpali
+author: hltcoe
+sha: c7244c387a8cda092172b01e6af8160d12ec80f9
+lastModified: '2026-03-09T13:43:42.000Z'
+gated: false
+disabled: false
+model-index: null
+config:
+  tokenizer_config:
+    bos_token: null
+    eos_token: <|im_end|>
+    pad_token: <|endoftext|>
+    unk_token: null
+  chat_template_jinja: '{% set image_count = namespace(value=0) %}{% set video_count = namespace(value=0) %}{% for message
+    in messages %}{% if loop.first and message[''role''] != ''system'' %}<|im_start|>system
+
+    You are a helpful assistant.<|im_end|>
+
+    {% endif %}<|im_start|>{{ message[''role''] }}
+
+    {% if message[''content''] is string %}{{ message[''content''] }}<|im_end|>
+
+    {% else %}{% for content in message[''content''] %}{% if content[''type''] == ''image'' or ''image'' in content or ''image_url''
+    in content %}{% set image_count.value = image_count.value + 1 %}{% if add_vision_id %}Picture {{ image_count.value }}:
+    {% endif %}<|vision_start|><|image_pad|><|vision_end|>{% elif content[''type''] == ''video'' or ''video'' in content %}{%
+    set video_count.value = video_count.value + 1 %}{% if add_vision_id %}Video {{ video_count.value }}: {% endif %}<|vision_start|><|video_pad|><|vision_end|>{%
+    elif ''text'' in content %}{{ content[''text''] }}{% endif %}{% endfor %}<|im_end|>
+
+    {% endif %}{% endfor %}{% if add_generation_prompt %}<|im_start|>assistant
+
+    {% endif %}'
+cardData:
+  library_name: transformers
+  license: mit
+  base_model: Qwen/Qwen2.5-VL-3B-Instruct
+  arxiv: 2602.21202
+  datasets:
+  - vidore/colpali_train_set
+  language:
+  - en
+  tags:
+  - visual-document-retrieval
+  - multi-vector
+  - late-interaction
+  - colbert
+  - index-compression
+  - memory-tokens
+  - text-to-image
+  - feature-extraction
+transformersInfo:
+  auto_model: AutoModel
+siblings:
+- rfilename: .gitattributes
+- rfilename: README.md
+- rfilename: added_tokens.json
+- rfilename: chat_template.jinja
+- rfilename: generation_config.json
+- rfilename: merges.txt
+- rfilename: model-00001-of-00002.safetensors
+- rfilename: model-00002-of-00002.safetensors
+- rfilename: model.safetensors.index.json
+- rfilename: preprocessor_config.json
+- rfilename: special_tokens_map.json
+- rfilename: tokenizer.json
+- rfilename: tokenizer_config.json
+- rfilename: video_preprocessor_config.json
+- rfilename: vocab.json
+spaces: []
+createdAt: '2026-03-09T13:39:16.000Z'
+safetensors:
+  parameters:
+    BF16: 3754199040
+  total: 755712
+usedStorage: 7519923862
+downloadsAllTime: 0
+inferenceProviderMapping: {}
+configJson: null
+onnxFiles: {}
+safetensorsSizeMb: 7508.5
+approxSizeMb: 7508.4
+fetchedAt: '2026-06-12T07:58:51.000Z'

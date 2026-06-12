@@ -1,0 +1,174 @@
+_id: 6a2b64e8678eb164ad75c11c
+id: MeherMs/legal-contract-similarity
+private: false
+pipeline_tag: sentence-similarity
+library_name: sentence-transformers
+tags:
+- sentence-transformers
+- safetensors
+- bert
+- sentence-similarity
+- feature-extraction
+- generated_from_trainer
+- dataset_size:10
+- loss:CosineSimilarityLoss
+- arxiv:1908.10084
+- base_model:sentence-transformers/all-MiniLM-L6-v2
+- base_model:finetune:sentence-transformers/all-MiniLM-L6-v2
+- model-index
+- text-embeddings-inference
+- endpoints_compatible
+- region:us
+downloads: 0
+likes: 0
+modelId: MeherMs/legal-contract-similarity
+author: MeherMs
+sha: c9f3f54a4ca98eeecf4342d106f463ae86de7f44
+lastModified: '2026-06-12T01:46:23.000Z'
+gated: false
+disabled: false
+mask_token: '[MASK]'
+widgetData:
+- source_sentence: Neither party shall be liable for indirect, incidental, special, consequential, or punitive damages arising
+    out of or related to this agreement.
+  sentences:
+  - The receiving party shall maintain confidentiality of all proprietary information shared by the disclosing party and shall
+    use it only as permitted under this agreement.
+  - Either party may end this contract by providing written notice to the other party thirty days in advance. The termination
+    becomes effective once the other party receives the notice.
+  - The parties shall not be responsible for any indirect, consequential, special, or punitive damages, including loss of
+    profits, arising from this contract.
+- source_sentence: Each party agrees to keep confidential all proprietary information disclosed by the other party and to
+    use such information solely for the purposes of this agreement.
+  sentences:
+  - The client shall own all intellectual property rights to work created by the contractor under this engagement.
+  - Payment is required immediately upon contract execution.
+  - All information shared between parties may be freely distributed to third parties without restriction.
+model-index:
+- name: SentenceTransformer based on sentence-transformers/all-MiniLM-L6-v2
+  results:
+  - task:
+      type: semantic-similarity
+      name: Semantic Similarity
+    dataset:
+      name: legal similarity v1
+      type: legal-similarity-v1
+    metrics:
+    - type: pearson_cosine
+      value: 1
+      name: Pearson Cosine
+      verified: false
+    - type: spearman_cosine
+      value: 0.9999999999999999
+      name: Spearman Cosine
+      verified: false
+config:
+  architectures:
+  - BertModel
+  model_type: bert
+  tokenizer_config:
+    cls_token: '[CLS]'
+    mask_token: '[MASK]'
+    pad_token: '[PAD]'
+    sep_token: '[SEP]'
+    unk_token: '[UNK]'
+cardData:
+  tags:
+  - sentence-transformers
+  - sentence-similarity
+  - feature-extraction
+  - generated_from_trainer
+  - dataset_size:10
+  - loss:CosineSimilarityLoss
+  base_model: sentence-transformers/all-MiniLM-L6-v2
+  widget:
+  - source_sentence: Neither party shall be liable for indirect, incidental, special, consequential, or punitive damages arising
+      out of or related to this agreement.
+    sentences:
+    - The receiving party shall maintain confidentiality of all proprietary information shared by the disclosing party and
+      shall use it only as permitted under this agreement.
+    - Either party may end this contract by providing written notice to the other party thirty days in advance. The termination
+      becomes effective once the other party receives the notice.
+    - The parties shall not be responsible for any indirect, consequential, special, or punitive damages, including loss of
+      profits, arising from this contract.
+  - source_sentence: Each party agrees to keep confidential all proprietary information disclosed by the other party and to
+      use such information solely for the purposes of this agreement.
+    sentences:
+    - The client shall own all intellectual property rights to work created by the contractor under this engagement.
+    - Payment is required immediately upon contract execution.
+    - All information shared between parties may be freely distributed to third parties without restriction.
+  pipeline_tag: sentence-similarity
+  library_name: sentence-transformers
+  metrics:
+  - pearson_cosine
+  - spearman_cosine
+  model-index:
+  - name: SentenceTransformer based on sentence-transformers/all-MiniLM-L6-v2
+    results:
+    - task:
+        type: semantic-similarity
+        name: Semantic Similarity
+      dataset:
+        name: legal similarity v1
+        type: legal-similarity-v1
+      metrics:
+      - type: pearson_cosine
+        value: 1
+        name: Pearson Cosine
+        verified: false
+      - type: spearman_cosine
+        value: 0.9999999999999999
+        name: Spearman Cosine
+        verified: false
+siblings:
+- rfilename: .gitattributes
+- rfilename: 1_Pooling/config.json
+- rfilename: README.md
+- rfilename: config.json
+- rfilename: config_sentence_transformers.json
+- rfilename: model.safetensors
+- rfilename: modules.json
+- rfilename: sentence_bert_config.json
+- rfilename: tokenizer.json
+- rfilename: tokenizer_config.json
+spaces: []
+createdAt: '2026-06-12T01:46:16.000Z'
+safetensors:
+  parameters:
+    F32: 22713216
+  total: 22713216
+usedStorage: 90864192
+downloadsAllTime: 0
+inferenceProviderMapping: {}
+configJson:
+  add_cross_attention: false
+  architectures:
+  - BertModel
+  attention_probs_dropout_prob: 0.1
+  bos_token_id: null
+  classifier_dropout: null
+  dtype: float32
+  eos_token_id: null
+  gradient_checkpointing: false
+  hidden_act: gelu
+  hidden_dropout_prob: 0.1
+  hidden_size: 384
+  initializer_range: 0.02
+  intermediate_size: 1536
+  is_decoder: false
+  layer_norm_eps: 1.0e-12
+  max_position_embeddings: 512
+  model_type: bert
+  num_attention_heads: 12
+  num_hidden_layers: 6
+  pad_token_id: 0
+  position_embedding_type: absolute
+  tie_word_embeddings: true
+  transformers_version: 5.10.1
+  type_vocab_size: 2
+  use_cache: false
+  vocab_size: 30522
+onnxFiles: {}
+safetensorsSizeMb: 90.9
+approxSizeMb: 90.9
+fetchedAt: '2026-06-12T07:58:51.000Z'

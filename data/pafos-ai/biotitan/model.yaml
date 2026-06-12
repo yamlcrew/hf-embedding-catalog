@@ -1,0 +1,124 @@
+_id: 69c5d76acd8d37b6ccadbe8c
+id: pafos-ai/biotitan
+private: false
+pipeline_tag: feature-extraction
+library_name: pytorch
+tags:
+- pytorch
+- biotitan
+- genomics
+- single-cell
+- transcriptomics
+- gene-expression
+- foundation-model
+- titans
+- test-time-learning
+- biology
+- feature-extraction
+- en
+- dataset:tabula-sapiens
+- arxiv:2501.00663
+- arxiv:2412.04075
+- license:apache-2.0
+- region:us
+downloads: 2
+likes: 1
+modelId: pafos-ai/biotitan
+author: pafos-ai
+sha: 3fffb85a6f9938e77b658262a59cb1685db027b8
+lastModified: '2026-03-27T17:51:16.000Z'
+gated: false
+disabled: false
+model-index: null
+config:
+  model_type: biotitan
+cardData:
+  language: en
+  license: apache-2.0
+  tags:
+  - genomics
+  - single-cell
+  - transcriptomics
+  - gene-expression
+  - foundation-model
+  - titans
+  - test-time-learning
+  - biology
+  datasets:
+  - tabula-sapiens
+  library_name: pytorch
+  pipeline_tag: feature-extraction
+siblings:
+- rfilename: .gitattributes
+- rfilename: README.md
+- rfilename: biotitan-20m-tabula-sapiens.pt
+- rfilename: config.json
+- rfilename: gene_embeddings_ctx_254k.parquet
+- rfilename: gene_embeddings_static.parquet
+- rfilename: token_dictionary.pkl
+spaces: []
+createdAt: '2026-03-27T01:03:38.000Z'
+usedStorage: 334549798
+downloadsAllTime: 40
+inferenceProviderMapping: {}
+configJson:
+  model_type: biotitan
+  architecture: titans
+  n_genes: 25424
+  d_model: 256
+  n_layers: 6
+  n_heads: 4
+  d_ff: 512
+  max_seq_len: 2048
+  memory_depth: 2
+  n_persistent: 32
+  dropout: 0.02
+  vocab_size: 25426
+  pad_token_id: 0
+  mask_token_id: 25425
+  training:
+    dataset: tabula_sapiens
+    n_cells: 254394
+    epochs: 2
+    batch_size: 32
+    learning_rate: 0.0005
+    weight_decay: 0.001
+    warmup_steps: 300
+    mask_prob: 0.15
+    optimizer: AdamW
+    mixed_precision: true
+  files:
+    model_weights: biotitan-20m-tabula-sapiens.pt
+    token_dictionary: token_dictionary.pkl
+    contextualized_embeddings: gene_embeddings_ctx_254k.parquet
+    static_embeddings: gene_embeddings_static.parquet
+  benchmark_results:
+    overall_53_tasks:
+      static_auc: 0.636
+      ctx_254k_auc: 0.716
+      geneformer_v1_auc: 0.782
+    family_averages:
+      expression_23_tasks:
+        static: 0.732
+        ctx_254k: 0.815
+        geneformer: 0.869
+      genomic_properties_7_tasks:
+        static: 0.64
+        ctx_254k: 0.687
+        geneformer: 0.782
+      regulatory_functions_4_tasks:
+        static: 0.623
+        ctx_254k: 0.704
+        geneformer: 0.759
+      localization_2_tasks:
+        static: 0.616
+        ctx_254k: 0.699
+        geneformer: 0.725
+      protein_properties_17_tasks:
+        static: 0.571
+        ctx_254k: 0.598
+        geneformer: 0.678
+onnxFiles: {}
+safetensorsSizeMb: 0.0
+approxSizeMb: 0.0
+fetchedAt: '2026-06-12T07:58:51.000Z'

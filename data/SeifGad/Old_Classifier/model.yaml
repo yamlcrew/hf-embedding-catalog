@@ -1,0 +1,618 @@
+_id: 6547f8586b1695ac33d9730c
+id: SeifGad/Old_Classifier
+private: false
+pipeline_tag: feature-extraction
+library_name: transformers
+tags:
+- transformers
+- safetensors
+- bert
+- feature-extraction
+- text-embeddings-inference
+- endpoints_compatible
+- region:us
+downloads: 2
+likes: 0
+modelId: SeifGad/Old_Classifier
+author: SeifGad
+sha: 6f7c8514a25a75ccd805a2aba43b5f6306ac9e7e
+lastModified: '2023-11-05T20:22:48.000Z'
+gated: false
+disabled: false
+mask_token: '[MASK]'
+config:
+  architectures:
+  - BertModel
+  model_type: bert
+  tokenizer_config:
+    cls_token: '[CLS]'
+    mask_token: '[MASK]'
+    pad_token: '[PAD]'
+    sep_token: '[SEP]'
+    unk_token: '[UNK]'
+transformersInfo:
+  auto_model: AutoModel
+  pipeline_tag: feature-extraction
+  processor: AutoTokenizer
+siblings:
+- rfilename: .gitattributes
+- rfilename: config.json
+- rfilename: model.safetensors
+- rfilename: special_tokens_map.json
+- rfilename: tokenizer.json
+- rfilename: tokenizer_config.json
+- rfilename: vocab.txt
+spaces: []
+createdAt: '2023-11-05T20:17:28.000Z'
+safetensors:
+  parameters:
+    F32: 109482240
+  total: 109482240
+usedStorage: 437951328
+downloadsAllTime: 8
+inferenceProviderMapping: {}
+configJson:
+  _name_or_path: /content/Classifier
+  architectures:
+  - BertModel
+  attention_probs_dropout_prob: 0.1
+  classifier_dropout: null
+  hidden_act: gelu
+  hidden_dropout_prob: 0.1
+  hidden_size: 768
+  initializer_range: 0.02
+  input_layers:
+  - - agent_txt_inputids
+    - 0
+    - 0
+  - - agent_txt_mask
+    - 0
+    - 0
+  intermediate_size: 3072
+  layer_norm_eps: 1.0e-12
+  layers:
+  - class_name: InputLayer
+    config:
+      batch_input_shape:
+      - null
+      - 512
+      dtype: int32
+      name: agent_txt_inputids
+      ragged: false
+      sparse: false
+    inbound_nodes: []
+    module: keras.layers
+    name: agent_txt_inputids
+    registered_name: null
+  - class_name: InputLayer
+    config:
+      batch_input_shape:
+      - null
+      - 512
+      dtype: int32
+      name: agent_txt_mask
+      ragged: false
+      sparse: false
+    inbound_nodes: []
+    module: keras.layers
+    name: agent_txt_mask
+    registered_name: null
+  - class_name: Custom>TFBertMainLayer
+    config:
+      config:
+        _name_or_path: /app/ARA-BERT-TF/
+        add_cross_attention: false
+        architectures:
+        - BertForMaskedLM
+        attention_probs_dropout_prob: 0.1
+        bad_words_ids: null
+        bos_token_id: null
+        chunk_size_feed_forward: 0
+        classifier_dropout: null
+        decoder_start_token_id: null
+        diversity_penalty: 0.0
+        do_sample: false
+        early_stopping: false
+        encoder_no_repeat_ngram_size: 0
+        eos_token_id: null
+        finetuning_task: null
+        forced_bos_token_id: null
+        forced_eos_token_id: null
+        hidden_act: gelu
+        hidden_dropout_prob: 0.1
+        hidden_size: 768
+        id2label:
+          '0': LABEL_0
+          '1': LABEL_1
+        initializer_range: 0.02
+        intermediate_size: 3072
+        is_decoder: false
+        is_encoder_decoder: false
+        label2id:
+          LABEL_0: 0
+          LABEL_1: 1
+        layer_norm_eps: 1.0e-12
+        length_penalty: 1.0
+        max_length: 20
+        max_position_embeddings: 512
+        min_length: 0
+        model_type: bert
+        no_repeat_ngram_size: 0
+        num_attention_heads: 12
+        num_beam_groups: 1
+        num_beams: 1
+        num_hidden_layers: 12
+        num_return_sequences: 1
+        output_attentions: true
+        output_hidden_states: true
+        output_scores: false
+        pad_token_id: 0
+        position_embedding_type: absolute
+        prefix: null
+        problem_type: null
+        pruned_heads: {}
+        remove_invalid_values: false
+        repetition_penalty: 1.0
+        return_dict: true
+        return_dict_in_generate: false
+        sep_token_id: null
+        task_specific_params: null
+        temperature: 1.0
+        tie_encoder_decoder: false
+        tie_word_embeddings: true
+        tokenizer_class: null
+        top_k: 50
+        top_p: 1.0
+        torch_dtype: null
+        torchscript: false
+        transformers_version: 4.11.3
+        type_vocab_size: 2
+        use_bfloat16: false
+        use_cache: true
+        vocab_size: 64000
+      dtype: float32
+      name: bert
+      trainable: true
+    inbound_nodes:
+    - - - agent_txt_inputids
+        - 0
+        - 0
+        - attention_mask:
+          - agent_txt_mask
+          - 0
+          - 0
+    module: keras.src.saving.legacy.saved_model.load
+    name: bert
+    registered_name: Custom>TFBertMainLayer
+  - build_config:
+      input_shape:
+      - null
+      - 512
+      - 768
+    class_name: Sequential
+    config:
+      layers:
+      - class_name: InputLayer
+        config:
+          batch_input_shape:
+          - null
+          - 512
+          - 768
+          dtype: float32
+          name: encoder_input
+          ragged: false
+          sparse: false
+        module: keras.layers
+        registered_name: null
+      - build_config:
+          input_shape:
+          - null
+          - 512
+          - 768
+        class_name: Bidirectional
+        config:
+          dtype: float32
+          layer:
+            class_name: GRU
+            config:
+              activation: tanh
+              activity_regularizer: null
+              bias_constraint: null
+              bias_initializer:
+                class_name: Zeros
+                config: {}
+                module: keras.initializers
+                registered_name: null
+              bias_regularizer: null
+              dropout: 0.0
+              dtype: float32
+              go_backwards: false
+              implementation: 2
+              kernel_constraint: null
+              kernel_initializer:
+                class_name: GlorotUniform
+                config:
+                  seed: null
+                module: keras.initializers
+                registered_name: null
+              kernel_regularizer: null
+              name: gru
+              recurrent_activation: sigmoid
+              recurrent_constraint: null
+              recurrent_dropout: 0.0
+              recurrent_initializer:
+                class_name: Orthogonal
+                config:
+                  gain: 1.0
+                  seed: null
+                module: keras.initializers
+                registered_name: null
+              recurrent_regularizer: null
+              reset_after: true
+              return_sequences: true
+              return_state: false
+              stateful: false
+              time_major: false
+              trainable: true
+              units: 64
+              unroll: false
+              use_bias: true
+            module: keras.layers
+            registered_name: null
+          merge_mode: concat
+          name: encoder
+          trainable: true
+        module: keras.layers
+        registered_name: null
+      - build_config:
+          input_shape:
+          - null
+          - null
+          - null
+        class_name: GlobalAveragePooling1D
+        config:
+          data_format: channels_last
+          dtype: float32
+          keepdims: false
+          name: global_average_pooling1d
+          trainable: true
+        module: keras.layers
+        registered_name: null
+      - build_config:
+          input_shape:
+          - null
+          - 128
+        class_name: Dense
+        config:
+          activation: linear
+          activity_regularizer: null
+          bias_constraint: null
+          bias_initializer:
+            class_name: Zeros
+            config: {}
+            module: keras.initializers
+            registered_name: null
+          bias_regularizer: null
+          dtype: float32
+          kernel_constraint: null
+          kernel_initializer:
+            class_name: HeNormal
+            config:
+              seed: null
+            module: keras.initializers
+            registered_name: null
+          kernel_regularizer: null
+          name: dense
+          trainable: true
+          units: 512
+          use_bias: true
+        module: keras.layers
+        registered_name: null
+      - class_name: Activation
+        config:
+          activation: elu
+          dtype: float32
+          name: activation
+          trainable: true
+        module: keras.layers
+        registered_name: null
+      name: sequential
+    inbound_nodes:
+    - - - bert
+        - 0
+        - 23
+        - {}
+    module: keras
+    name: sequential
+    registered_name: null
+  - build_config:
+      input_shape:
+      - null
+      - 512
+    class_name: Dense
+    config:
+      activation: linear
+      activity_regularizer: null
+      bias_constraint: null
+      bias_initializer:
+        class_name: Zeros
+        config: {}
+        module: keras.initializers
+        registered_name: null
+      bias_regularizer: null
+      dtype: float32
+      kernel_constraint: null
+      kernel_initializer:
+        class_name: HeNormal
+        config:
+          seed: null
+        module: keras.initializers
+        registered_name: null
+      kernel_regularizer: null
+      name: fully_connected_1
+      trainable: true
+      units: 128
+      use_bias: true
+    inbound_nodes:
+    - - - sequential
+        - 1
+        - 0
+        - {}
+    module: keras.layers
+    name: fully_connected_1
+    registered_name: null
+  - build_config:
+      input_shape:
+      - null
+      - 128
+    class_name: BatchNormalization
+    config:
+      axis:
+      - 1
+      beta_constraint: null
+      beta_initializer:
+        class_name: Zeros
+        config: {}
+        module: keras.initializers
+        registered_name: null
+      beta_regularizer: null
+      center: true
+      dtype: float32
+      epsilon: 0.001
+      gamma_constraint: null
+      gamma_initializer:
+        class_name: Ones
+        config: {}
+        module: keras.initializers
+        registered_name: null
+      gamma_regularizer: null
+      momentum: 0.99
+      moving_mean_initializer:
+        class_name: Zeros
+        config: {}
+        module: keras.initializers
+        registered_name: null
+      moving_variance_initializer:
+        class_name: Ones
+        config: {}
+        module: keras.initializers
+        registered_name: null
+      name: batch_norm_1
+      scale: true
+      trainable: true
+    inbound_nodes:
+    - - - fully_connected_1
+        - 0
+        - 0
+        - {}
+    module: keras.layers
+    name: batch_norm_1
+    registered_name: null
+  - class_name: Activation
+    config:
+      activation: elu
+      dtype: float32
+      name: activation_1
+      trainable: true
+    inbound_nodes:
+    - - - batch_norm_1
+        - 0
+        - 0
+        - {}
+    module: keras.layers
+    name: activation_1
+    registered_name: null
+  - build_config:
+      input_shape:
+      - null
+      - 128
+    class_name: Dropout
+    config:
+      dtype: float32
+      name: dropout_1
+      noise_shape: null
+      rate: 0.2
+      seed: null
+      trainable: true
+    inbound_nodes:
+    - - - activation_1
+        - 0
+        - 0
+        - {}
+    module: keras.layers
+    name: dropout_1
+    registered_name: null
+  - build_config:
+      input_shape:
+      - null
+      - 128
+    class_name: Dense
+    config:
+      activation: linear
+      activity_regularizer: null
+      bias_constraint: null
+      bias_initializer:
+        class_name: Zeros
+        config: {}
+        module: keras.initializers
+        registered_name: null
+      bias_regularizer: null
+      dtype: float32
+      kernel_constraint: null
+      kernel_initializer:
+        class_name: HeNormal
+        config:
+          seed: null
+        module: keras.initializers
+        registered_name: null
+      kernel_regularizer: null
+      name: fully_connected_1.1
+      trainable: true
+      units: 64
+      use_bias: true
+    inbound_nodes:
+    - - - dropout_1
+        - 0
+        - 0
+        - {}
+    module: keras.layers
+    name: fully_connected_1.1
+    registered_name: null
+  - build_config:
+      input_shape:
+      - null
+      - 64
+    class_name: BatchNormalization
+    config:
+      axis:
+      - 1
+      beta_constraint: null
+      beta_initializer:
+        class_name: Zeros
+        config: {}
+        module: keras.initializers
+        registered_name: null
+      beta_regularizer: null
+      center: true
+      dtype: float32
+      epsilon: 0.001
+      gamma_constraint: null
+      gamma_initializer:
+        class_name: Ones
+        config: {}
+        module: keras.initializers
+        registered_name: null
+      gamma_regularizer: null
+      momentum: 0.99
+      moving_mean_initializer:
+        class_name: Zeros
+        config: {}
+        module: keras.initializers
+        registered_name: null
+      moving_variance_initializer:
+        class_name: Ones
+        config: {}
+        module: keras.initializers
+        registered_name: null
+      name: batch_norm_1.1
+      scale: true
+      trainable: true
+    inbound_nodes:
+    - - - fully_connected_1.1
+        - 0
+        - 0
+        - {}
+    module: keras.layers
+    name: batch_norm_1.1
+    registered_name: null
+  - class_name: Activation
+    config:
+      activation: elu
+      dtype: float32
+      name: activation_2
+      trainable: true
+    inbound_nodes:
+    - - - batch_norm_1.1
+        - 0
+        - 0
+        - {}
+    module: keras.layers
+    name: activation_2
+    registered_name: null
+  - build_config:
+      input_shape:
+      - null
+      - 64
+    class_name: Dropout
+    config:
+      dtype: float32
+      name: dropout_1.1
+      noise_shape: null
+      rate: 0.2
+      seed: null
+      trainable: true
+    inbound_nodes:
+    - - - activation_2
+        - 0
+        - 0
+        - {}
+    module: keras.layers
+    name: dropout_1.1
+    registered_name: null
+  - build_config:
+      input_shape:
+      - null
+      - 64
+    class_name: Dense
+    config:
+      activation: softmax
+      activity_regularizer: null
+      bias_constraint: null
+      bias_initializer:
+        class_name: Zeros
+        config: {}
+        module: keras.initializers
+        registered_name: null
+      bias_regularizer: null
+      dtype: float32
+      kernel_constraint: null
+      kernel_initializer:
+        class_name: GlorotUniform
+        config:
+          seed: null
+        module: keras.initializers
+        registered_name: null
+      kernel_regularizer: null
+      name: output_layer
+      trainable: true
+      units: 49
+      use_bias: true
+    inbound_nodes:
+    - - - dropout_1.1
+        - 0
+        - 0
+        - {}
+    module: keras.layers
+    name: output_layer
+    registered_name: null
+  max_position_embeddings: 512
+  model_type: bert
+  name: model
+  num_attention_heads: 12
+  num_hidden_layers: 12
+  output_layers:
+  - - output_layer
+    - 0
+    - 0
+  pad_token_id: 0
+  position_embedding_type: absolute
+  torch_dtype: float32
+  trainable: true
+  transformers_version: 4.35.0
+  type_vocab_size: 2
+  use_cache: true
+  vocab_size: 30522
+onnxFiles: {}
+safetensorsSizeMb: 438.0
+approxSizeMb: 437.9
+fetchedAt: '2026-06-12T07:58:51.000Z'

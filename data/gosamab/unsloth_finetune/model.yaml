@@ -1,0 +1,165 @@
+_id: 681f242d2d20733b97366740
+id: gosamab/unsloth_finetune
+private: false
+pipeline_tag: feature-extraction
+library_name: transformers
+tags:
+- transformers
+- safetensors
+- qwen2_vl
+- feature-extraction
+- text-generation-inference
+- unsloth
+- en
+- license:apache-2.0
+- endpoints_compatible
+- region:us
+downloads: 2
+likes: 0
+modelId: gosamab/unsloth_finetune
+author: gosamab
+sha: 97074e689873d1c3c1d86cdf155fdd7423301ffe
+lastModified: '2025-05-10T10:12:42.000Z'
+gated: false
+disabled: false
+model-index: null
+config:
+  architectures:
+  - Qwen2VLModel
+  model_type: qwen2_vl
+  processor_config:
+    chat_template: '{% set image_count = namespace(value=0) %}{% set video_count = namespace(value=0) %}{% for message in
+      messages %}{% if loop.first and message[''role''] != ''system'' %}<|im_start|>system
+
+      You are a helpful assistant.<|im_end|>
+
+      {% endif %}<|im_start|>{{ message[''role''] }}
+
+      {% if message[''content''] is string %}{{ message[''content''] }}<|im_end|>
+
+      {% else %}{% for content in message[''content''] %}{% if content[''type''] == ''image'' or ''image'' in content or ''image_url''
+      in content %}{% set image_count.value = image_count.value + 1 %}{% if add_vision_id %}Picture {{ image_count.value }}:
+      {% endif %}<|vision_start|><|image_pad|><|vision_end|>{% elif content[''type''] == ''video'' or ''video'' in content
+      %}{% set video_count.value = video_count.value + 1 %}{% if add_vision_id %}Video {{ video_count.value }}: {% endif %}<|vision_start|><|video_pad|><|vision_end|>{%
+      elif ''text'' in content %}{{ content[''text''] }}{% endif %}{% endfor %}<|im_end|>
+
+      {% endif %}{% endfor %}{% if add_generation_prompt %}<|im_start|>assistant
+
+      {% endif %}'
+  tokenizer_config:
+    bos_token: null
+    chat_template: '{% set image_count = namespace(value=0) %}{% set video_count = namespace(value=0) %}{% for message in
+      messages %}{% if loop.first and message[''role''] != ''system'' %}<|im_start|>system
+
+      You are a helpful assistant.<|im_end|>
+
+      {% endif %}<|im_start|>{{ message[''role''] }}
+
+      {% if message[''content''] is string %}{{ message[''content''] }}<|im_end|>
+
+      {% else %}{% for content in message[''content''] %}{% if content[''type''] == ''image'' or ''image'' in content or ''image_url''
+      in content %}{% set image_count.value = image_count.value + 1 %}{% if add_vision_id %}Picture {{ image_count.value }}:
+      {% endif %}<|vision_start|><|image_pad|><|vision_end|>{% elif content[''type''] == ''video'' or ''video'' in content
+      %}{% set video_count.value = video_count.value + 1 %}{% if add_vision_id %}Video {{ video_count.value }}: {% endif %}<|vision_start|><|video_pad|><|vision_end|>{%
+      elif ''text'' in content %}{{ content[''text''] }}{% endif %}{% endfor %}<|im_end|>
+
+      {% endif %}{% endfor %}{% if add_generation_prompt %}<|im_start|>assistant
+
+      {% endif %}'
+    eos_token: <|im_end|>
+    pad_token: <|vision_pad|>
+    unk_token: null
+cardData:
+  base_model: unsloth/qwen2-vl-2b-instruct-unsloth-bnb-4bit
+  tags:
+  - text-generation-inference
+  - transformers
+  - unsloth
+  - qwen2_vl
+  license: apache-2.0
+  language:
+  - en
+transformersInfo:
+  auto_model: AutoModelForMultimodalLM
+  pipeline_tag: feature-extraction
+  processor: AutoProcessor
+siblings:
+- rfilename: .gitattributes
+- rfilename: README.md
+- rfilename: added_tokens.json
+- rfilename: chat_template.json
+- rfilename: config.json
+- rfilename: merges.txt
+- rfilename: model.safetensors
+- rfilename: preprocessor_config.json
+- rfilename: special_tokens_map.json
+- rfilename: tokenizer.json
+- rfilename: tokenizer_config.json
+- rfilename: vocab.json
+spaces: []
+createdAt: '2025-05-10T10:02:21.000Z'
+safetensors:
+  parameters:
+    BF16: 2208985600
+  total: 2208985600
+usedStorage: 4440891858
+downloadsAllTime: 48
+inferenceProviderMapping: {}
+configJson:
+  architectures:
+  - Qwen2VLModel
+  attention_dropout: 0.0
+  eos_token_id: 151645
+  hidden_act: silu
+  hidden_size: 1536
+  image_token_id: 151655
+  initializer_range: 0.02
+  intermediate_size: 8960
+  max_position_embeddings: 32768
+  max_window_layers: 28
+  model_type: qwen2_vl
+  num_attention_heads: 12
+  num_hidden_layers: 28
+  num_key_value_heads: 2
+  pad_token_id: 151654
+  rms_norm_eps: 1.0e-06
+  rope_scaling:
+    mrope_section:
+    - 16
+    - 24
+    - 24
+    rope_type: default
+    type: default
+  rope_theta: 1000000.0
+  sliding_window: 32768
+  tie_word_embeddings: true
+  torch_dtype: bfloat16
+  transformers_version: 4.51.3
+  unsloth_fixed: true
+  unsloth_version: 2025.4.8
+  use_cache: true
+  use_sliding_window: false
+  video_token_id: 151656
+  vision_config:
+    depth: 32
+    embed_dim: 1280
+    hidden_act: quick_gelu
+    hidden_size: 1536
+    in_channels: 3
+    in_chans: 3
+    mlp_ratio: 4
+    model_type: qwen2_vl
+    num_heads: 16
+    patch_size: 14
+    spatial_merge_size: 2
+    spatial_patch_size: 14
+    temporal_patch_size: 2
+    torch_dtype: bfloat16
+  vision_end_token_id: 151653
+  vision_start_token_id: 151652
+  vision_token_id: 151654
+  vocab_size: 151936
+onnxFiles: {}
+safetensorsSizeMb: 4418.1
+approxSizeMb: 4418.0
+fetchedAt: '2026-06-12T07:58:51.000Z'

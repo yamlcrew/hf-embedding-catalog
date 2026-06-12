@@ -1,0 +1,86 @@
+_id: 653befa28d25861ec001bc30
+id: ShivamPanwar/finqallama7b
+private: false
+pipeline_tag: feature-extraction
+library_name: transformers
+tags:
+- transformers
+- pytorch
+- llama
+- feature-extraction
+- text-embeddings-inference
+- endpoints_compatible
+- region:us
+downloads: 2
+likes: 0
+modelId: ShivamPanwar/finqallama7b
+author: ShivamPanwar
+sha: 49a4d88a611db817f4877fc59876eeb937465875
+lastModified: '2023-10-27T19:03:38.000Z'
+gated: false
+disabled: false
+config:
+  architectures:
+  - LlamaModel
+  model_type: llama
+  tokenizer_config:
+    bos_token: <s>
+    chat_template: '{% if messages[0][''role''] == ''system'' %}{% set loop_messages = messages[1:] %}{% set system_message
+      = messages[0][''content''] %}{% else %}{% set loop_messages = messages %}{% set system_message = false %}{% endif %}{%
+      for message in loop_messages %}{% if (message[''role''] == ''user'') != (loop.index0 % 2 == 0) %}{{ raise_exception(''Conversation
+      roles must alternate user/assistant/user/assistant/...'') }}{% endif %}{% if loop.index0 == 0 and system_message !=
+      false %}{% set content = ''<<SYS>>\n'' + system_message + ''\n<</SYS>>\n\n'' + message[''content''] %}{% else %}{% set
+      content = message[''content''] %}{% endif %}{% if message[''role''] == ''user'' %}{{ bos_token + ''[INST] '' + content.strip()
+      + '' [/INST]'' }}{% elif message[''role''] == ''assistant'' %}{{ '' ''  + content.strip() + '' '' + eos_token }}{% endif
+      %}{% endfor %}'
+    eos_token: </s>
+    pad_token: null
+    unk_token: <unk>
+    use_default_system_prompt: true
+transformersInfo:
+  auto_model: AutoModel
+  pipeline_tag: feature-extraction
+  processor: AutoTokenizer
+siblings:
+- rfilename: .gitattributes
+- rfilename: config.json
+- rfilename: pytorch_model-00001-of-00002.bin
+- rfilename: pytorch_model-00002-of-00002.bin
+- rfilename: pytorch_model.bin.index.json
+- rfilename: special_tokens_map.json
+- rfilename: tokenizer.json
+- rfilename: tokenizer_config.json
+spaces: []
+createdAt: '2023-10-27T17:13:06.000Z'
+usedStorage: 13214788875
+downloadsAllTime: 8
+inferenceProviderMapping: {}
+configJson:
+  _name_or_path: mynewmergedmodel/
+  architectures:
+  - LlamaModel
+  attention_bias: false
+  bos_token_id: 1
+  eos_token_id: 2
+  hidden_act: silu
+  hidden_size: 4096
+  initializer_range: 0.02
+  intermediate_size: 11008
+  max_position_embeddings: 4096
+  model_type: llama
+  num_attention_heads: 32
+  num_hidden_layers: 32
+  num_key_value_heads: 32
+  pretraining_tp: 1
+  rms_norm_eps: 1.0e-05
+  rope_scaling: null
+  rope_theta: 10000.0
+  tie_word_embeddings: false
+  torch_dtype: bfloat16
+  transformers_version: 4.35.0.dev0
+  use_cache: true
+  vocab_size: 32000
+onnxFiles: {}
+safetensorsSizeMb: 0.0
+approxSizeMb: 0.0
+fetchedAt: '2026-06-12T07:58:51.000Z'

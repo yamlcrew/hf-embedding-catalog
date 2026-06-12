@@ -1,0 +1,99 @@
+_id: 69af46d59573da311dccae9d
+id: vkatg/exposureguard-dcpg-encoder
+private: false
+pipeline_tag: feature-extraction
+library_name: generic
+tags:
+- generic
+- dcpg_encoder
+- phi
+- de-identification
+- healthcare
+- privacy
+- hipaa
+- graph-neural-network
+- gat
+- clinical-nlp
+- multimodal
+- patient-risk
+- embeddings
+- re-identification
+- ehr
+- streaming
+- feature-extraction
+- en
+- dataset:vkatg/streaming-phi-deidentification-benchmark
+- dataset:vkatg/multimodal-phi-masking-benchmark
+- license:mit
+- region:us
+downloads: 2
+likes: 0
+modelId: vkatg/exposureguard-dcpg-encoder
+author: vkatg
+sha: ec1f4db4102a13727f823f1adfc5ae10b2d940a1
+lastModified: '2026-03-17T21:06:59.000Z'
+gated: false
+disabled: false
+model-index: null
+config:
+  model_type: dcpg_encoder
+cardData:
+  license: mit
+  language:
+  - en
+  tags:
+  - phi
+  - de-identification
+  - healthcare
+  - privacy
+  - hipaa
+  - graph-neural-network
+  - gat
+  - clinical-nlp
+  - multimodal
+  - patient-risk
+  - embeddings
+  - re-identification
+  - ehr
+  - streaming
+  pipeline_tag: feature-extraction
+  library_name: generic
+  datasets:
+  - vkatg/streaming-phi-deidentification-benchmark
+  - vkatg/multimodal-phi-masking-benchmark
+siblings:
+- rfilename: .gitattributes
+- rfilename: README.md
+- rfilename: config.json
+- rfilename: dcpg_encoder.py
+- rfilename: inference_dcpg.py
+- rfilename: requirements.txt
+spaces:
+- vkatg/amphi-rl-dpgraph
+createdAt: '2026-03-09T22:16:53.000Z'
+usedStorage: 0
+downloadsAllTime: 53
+inferenceProviderMapping: {}
+configJson:
+  model_type: dcpg_encoder
+  architecture: GAT
+  node_feat_dim: 19
+  hidden_dim: 32
+  embed_dim: 16
+  num_layers: 2
+  pooling: attention
+  attention: single_head
+  edge_weight_formula: 0.30*f_temporal + 0.30*f_semantic + 0.25*f_modality + 0.15*f_trust
+  input_sources:
+  - DCPGAdapter.graph_summary
+  - CRDTGraph.summary
+  output:
+    patient_embedding: 16
+    node_embeddings: per_node
+    risk_score: scalar_sigmoid
+  dependencies: []
+  framework: pure_python
+onnxFiles: {}
+safetensorsSizeMb: 0.0
+approxSizeMb: 0.0
+fetchedAt: '2026-06-12T07:58:51.000Z'

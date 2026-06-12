@@ -1,0 +1,174 @@
+_id: 694e94c10f85c019108386e5
+id: Zack-Z/qwen3_4bi_cotsft_rs0_0_2epo_std_1616_nothink
+private: false
+pipeline_tag: feature-extraction
+library_name: transformers
+tags:
+- transformers
+- qwen3
+- feature-extraction
+- text-generation-inference
+- unsloth
+- en
+- base_model:unsloth/Qwen3-4B-Instruct-2507
+- base_model:finetune:unsloth/Qwen3-4B-Instruct-2507
+- license:apache-2.0
+- text-embeddings-inference
+- endpoints_compatible
+- region:us
+downloads: 2
+likes: 0
+modelId: Zack-Z/qwen3_4bi_cotsft_rs0_0_2epo_std_1616_nothink
+author: Zack-Z
+sha: 8bdeca3055f22eae54302cc73f6e87feefb369b6
+lastModified: '2025-12-26T15:16:41.000Z'
+gated: false
+disabled: false
+model-index: null
+config:
+  architectures:
+  - Qwen3Model
+  model_type: qwen3
+  tokenizer_config:
+    bos_token: null
+    chat_template: "{%- if tools %}\n    {{- '<|im_start|>system\\n' }}\n    {%- if messages[0].role == 'system' %}\n    \
+      \    {{- messages[0].content + '\\n\\n' }}\n    {%- endif %}\n    {{- \"# Tools\\n\\nYou may call one or more functions\
+      \ to assist with the user query.\\n\\nYou are provided with function signatures within <tools></tools> XML tags:\\n<tools>\"\
+      \ }}\n    {%- for tool in tools %}\n        {{- \"\\n\" }}\n        {{- tool | tojson }}\n    {%- endfor %}\n    {{-\
+      \ \"\\n</tools>\\n\\nFor each function call, return a json object with function name and arguments within <tool_call></tool_call>\
+      \ XML tags:\\n<tool_call>\\n{\\\"name\\\": <function-name>, \\\"arguments\\\": <args-json-object>}\\n</tool_call><|im_end|>\\\
+      n\" }}\n{%- else %}\n    {%- if messages[0].role == 'system' %}\n        {{- '<|im_start|>system\\n' + messages[0].content\
+      \ + '<|im_end|>\\n' }}\n    {%- endif %}\n{%- endif %}\n{%- set ns = namespace(multi_step_tool=true, last_query_index=messages|length\
+      \ - 1) %}\n{%- for message in messages[::-1] %}\n    {%- set index = (messages|length - 1) - loop.index0 %}\n    {%-\
+      \ if ns.multi_step_tool and message.role == \"user\" and message.content is string and not(message.content.startswith('<tool_response>')\
+      \ and message.content.endswith('</tool_response>')) %}\n        {%- set ns.multi_step_tool = false %}\n        {%- set\
+      \ ns.last_query_index = index %}\n    {%- endif %}\n{%- endfor %}\n{%- for message in messages %}\n    {%- if message.content\
+      \ is string %}\n        {%- set content = message.content %}\n    {%- else %}\n        {%- set content = '' %}\n   \
+      \ {%- endif %}\n    {%- if (message.role == \"user\") or (message.role == \"system\" and not loop.first) %}\n      \
+      \  {{- '<|im_start|>' + message.role + '\\n' + content + '<|im_end|>' + '\\n' }}\n    {%- elif message.role == \"assistant\"\
+      \ %}\n        {%- set reasoning_content = '' %}\n        {%- if message.reasoning_content is string %}\n           \
+      \ {%- set reasoning_content = message.reasoning_content %}\n        {%- else %}\n            {%- if '</think>' in content\
+      \ %}\n                {%- set reasoning_content = content.split('</think>')[0].rstrip('\\n').split('<think>')[-1].lstrip('\\\
+      n') %}\n                {%- set content = content.split('</think>')[-1].lstrip('\\n') %}\n            {%- endif %}\n\
+      \        {%- endif %}\n        {%- if loop.index0 > ns.last_query_index %}\n            {%- if loop.last or (not loop.last\
+      \ and reasoning_content) %}\n                {{- '<|im_start|>' + message.role + '\\n<think>\\n' + reasoning_content.strip('\\\
+      n') + '\\n</think>\\n\\n' + content.lstrip('\\n') }}\n            {%- else %}\n                {{- '<|im_start|>' +\
+      \ message.role + '\\n' + content }}\n            {%- endif %}\n        {%- else %}\n            {{- '<|im_start|>' +\
+      \ message.role + '\\n' + content }}\n        {%- endif %}\n        {%- if message.tool_calls %}\n            {%- for\
+      \ tool_call in message.tool_calls %}\n                {%- if (loop.first and content) or (not loop.first) %}\n     \
+      \               {{- '\\n' }}\n                {%- endif %}\n                {%- if tool_call.function %}\n         \
+      \           {%- set tool_call = tool_call.function %}\n                {%- endif %}\n                {{- '<tool_call>\\\
+      n{\"name\": \"' }}\n                {{- tool_call.name }}\n                {{- '\", \"arguments\": ' }}\n          \
+      \      {%- if tool_call.arguments is string %}\n                    {{- tool_call.arguments }}\n                {%-\
+      \ else %}\n                    {{- tool_call.arguments | tojson }}\n                {%- endif %}\n                {{-\
+      \ '}\\n</tool_call>' }}\n            {%- endfor %}\n        {%- endif %}\n        {{- '<|im_end|>\\n' }}\n    {%- elif\
+      \ message.role == \"tool\" %}\n        {%- if loop.first or (messages[loop.index0 - 1].role != \"tool\") %}\n      \
+      \      {{- '<|im_start|>user' }}\n        {%- endif %}\n        {{- '\\n<tool_response>\\n' }}\n        {{- content\
+      \ }}\n        {{- '\\n</tool_response>' }}\n        {%- if loop.last or (messages[loop.index0 + 1].role != \"tool\"\
+      ) %}\n            {{- '<|im_end|>\\n' }}\n        {%- endif %}\n    {%- endif %}\n{%- endfor %}\n{%- if add_generation_prompt\
+      \ %}\n    {{- '<|im_start|>assistant\\n' }}\n{%- endif %}"
+    eos_token: <|im_end|>
+    pad_token: <|vision_pad|>
+    unk_token: null
+cardData:
+  base_model: unsloth/Qwen3-4B-Instruct-2507
+  tags:
+  - text-generation-inference
+  - transformers
+  - unsloth
+  - qwen3
+  license: apache-2.0
+  language:
+  - en
+transformersInfo:
+  auto_model: AutoModelForMultimodalLM
+  pipeline_tag: feature-extraction
+  processor: AutoTokenizer
+siblings:
+- rfilename: .gitattributes
+- rfilename: README.md
+- rfilename: added_tokens.json
+- rfilename: config.json
+- rfilename: merges.txt
+- rfilename: model-00001-of-00002.safetensors
+- rfilename: model-00002-of-00002.safetensors
+- rfilename: special_tokens_map.json
+- rfilename: tokenizer.json
+- rfilename: tokenizer_config.json
+- rfilename: vocab.json
+spaces: []
+createdAt: '2025-12-26T13:59:29.000Z'
+usedStorage: 8056404646
+downloadsAllTime: 14
+inferenceProviderMapping: {}
+configJson:
+  architectures:
+  - Qwen3Model
+  attention_bias: false
+  attention_dropout: 0.0
+  eos_token_id: 151645
+  head_dim: 128
+  hidden_act: silu
+  hidden_size: 2560
+  initializer_range: 0.02
+  intermediate_size: 9728
+  layer_types:
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  max_position_embeddings: 262144
+  max_window_layers: 36
+  model_type: qwen3
+  num_attention_heads: 32
+  num_hidden_layers: 36
+  num_key_value_heads: 8
+  pad_token_id: 151654
+  rms_norm_eps: 1.0e-06
+  rope_scaling: null
+  rope_theta: 5000000
+  sliding_window: null
+  tie_word_embeddings: true
+  torch_dtype: bfloat16
+  transformers_version: 4.51.3
+  unsloth_fixed: true
+  unsloth_version: 2025.3.19
+  use_cache: true
+  use_sliding_window: false
+  vocab_size: 151936
+onnxFiles: {}
+safetensorsSizeMb: 8045.0
+approxSizeMb: 0.0
+fetchedAt: '2026-06-12T07:58:51.000Z'

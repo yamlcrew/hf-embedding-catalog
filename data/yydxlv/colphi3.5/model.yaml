@@ -1,0 +1,87 @@
+_id: 67612e8fcfbe22e94d550d66
+id: yydxlv/colphi3.5
+private: false
+pipeline_tag: feature-extraction
+library_name: transformers
+tags:
+- transformers
+- safetensors
+- vidore
+- feature-extraction
+- dataset:vidore/colpali_train_set
+- base_model:microsoft/Phi-3.5-vision-instruct
+- base_model:finetune:microsoft/Phi-3.5-vision-instruct
+- license:mit
+- endpoints_compatible
+- region:us
+downloads: 0
+likes: 1
+modelId: yydxlv/colphi3.5
+author: yydxlv
+sha: 1ccd918a35d7ba574e6fa15533dba66f1fb3bfea
+lastModified: '2024-12-17T08:50:49.000Z'
+gated: false
+disabled: false
+model-index:
+- name: colphi3.5
+  results: []
+config:
+  processor_config:
+    chat_template: '{% for message in messages %}{{''<|'' + message[''role''] + ''|>'' + ''
+
+      '' + message[''content''] + ''<|end|>
+
+      '' }}{% endfor %}{% if add_generation_prompt and messages[-1][''role''] != ''assistant'' %}{{- ''<|assistant|>
+
+      '' -}}{% endif %}'
+  tokenizer_config:
+    bos_token: <s>
+    chat_template: '{% for message in messages %}{{''<|'' + message[''role''] + ''|>'' + ''
+
+      '' + message[''content''] + ''<|end|>
+
+      '' }}{% endfor %}{% if add_generation_prompt and messages[-1][''role''] != ''assistant'' %}{{- ''<|assistant|>
+
+      '' -}}{% endif %}'
+    eos_token: <|endoftext|>
+    pad_token: <|endoftext|>
+    unk_token: <unk>
+    use_default_system_prompt: false
+cardData:
+  library_name: transformers
+  tags:
+  - vidore
+  model-index:
+  - name: colphi3.5
+    results: []
+  datasets:
+  - vidore/colpali_train_set
+  base_model:
+  - microsoft/Phi-3.5-vision-instruct
+  pipeline_tag: feature-extraction
+  license: mit
+transformersInfo:
+  auto_model: AutoModel
+siblings:
+- rfilename: .gitattributes
+- rfilename: README.md
+- rfilename: adapter_config.json
+- rfilename: adapter_model.bin
+- rfilename: adapter_model.safetensors
+- rfilename: chat_template.json
+- rfilename: git_hash.txt
+- rfilename: preprocessor_config.json
+- rfilename: results.json
+- rfilename: special_tokens_map.json
+- rfilename: tokenizer.json
+- rfilename: tokenizer_config.json
+spaces: []
+createdAt: '2024-12-17T07:55:59.000Z'
+usedStorage: 253641610
+downloadsAllTime: 0
+inferenceProviderMapping: {}
+configJson: null
+onnxFiles: {}
+safetensorsSizeMb: 126.8
+approxSizeMb: 0.0
+fetchedAt: '2026-06-12T07:58:51.000Z'

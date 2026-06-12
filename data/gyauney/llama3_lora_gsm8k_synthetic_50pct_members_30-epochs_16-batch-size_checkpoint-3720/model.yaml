@@ -1,0 +1,103 @@
+_id: 685e49ab97aa4c1882d8ab59
+id: gyauney/llama3_lora_gsm8k_synthetic_50pct_members_30-epochs_16-batch-size_checkpoint-3720
+private: false
+pipeline_tag: feature-extraction
+library_name: transformers
+tags:
+- transformers
+- safetensors
+- llama
+- feature-extraction
+- arxiv:1910.09700
+- text-embeddings-inference
+- endpoints_compatible
+- region:us
+downloads: 2
+likes: 0
+modelId: gyauney/llama3_lora_gsm8k_synthetic_50pct_members_30-epochs_16-batch-size_checkpoint-3720
+author: gyauney
+sha: 397ce4e491c8ae121f1d05d04ca376de9c23891c
+lastModified: '2025-06-27T08:07:55.000Z'
+gated: false
+disabled: false
+model-index: null
+config:
+  architectures:
+  - LlamaModel
+  model_type: llama
+  tokenizer_config:
+    bos_token: <|begin_of_text|>
+    eos_token: <|eot_id|>
+    pad_token: <|eot_id|>
+  chat_template_jinja: '{% set loop_messages = messages %}{% for message in loop_messages %}{% set content = ''<|start_header_id|>''
+    + message[''role''] + ''<|end_header_id|>
+
+
+    ''+ message[''content''] | trim + ''<|eot_id|>'' %}{% if loop.index0 == 0 %}{% set content = bos_token + content %}{%
+    endif %}{{ content }}{% endfor %}{% if add_generation_prompt %}{{ ''<|start_header_id|>assistant<|end_header_id|>
+
+
+    '' }}{% endif %}'
+cardData:
+  library_name: transformers
+  tags: []
+transformersInfo:
+  auto_model: AutoModel
+  pipeline_tag: feature-extraction
+  processor: AutoTokenizer
+siblings:
+- rfilename: .gitattributes
+- rfilename: README.md
+- rfilename: chat_template.jinja
+- rfilename: config.json
+- rfilename: model-00001-of-00007.safetensors
+- rfilename: model-00002-of-00007.safetensors
+- rfilename: model-00003-of-00007.safetensors
+- rfilename: model-00004-of-00007.safetensors
+- rfilename: model-00005-of-00007.safetensors
+- rfilename: model-00006-of-00007.safetensors
+- rfilename: model-00007-of-00007.safetensors
+- rfilename: model.safetensors.index.json
+- rfilename: special_tokens_map.json
+- rfilename: tokenizer.json
+- rfilename: tokenizer_config.json
+spaces: []
+createdAt: '2025-06-27T07:35:07.000Z'
+safetensors:
+  parameters:
+    F32: 7504924672
+  total: 7504924672
+usedStorage: 30036940652
+downloadsAllTime: 3
+inferenceProviderMapping: {}
+configJson:
+  architectures:
+  - LlamaModel
+  attention_bias: false
+  attention_dropout: 0.0
+  bos_token_id: 128000
+  eos_token_id: 128009
+  head_dim: 128
+  hidden_act: silu
+  hidden_size: 4096
+  initializer_range: 0.02
+  intermediate_size: 14336
+  max_position_embeddings: 8192
+  mlp_bias: false
+  model_type: llama
+  num_attention_heads: 32
+  num_hidden_layers: 32
+  num_key_value_heads: 8
+  pretraining_tp: 1
+  rms_norm_eps: 1.0e-05
+  rope_scaling: null
+  rope_theta: 500000.0
+  tie_word_embeddings: false
+  torch_dtype: float32
+  transformers_version: 4.52.4
+  use_cache: true
+  vocab_size: 128256
+onnxFiles: {}
+safetensorsSizeMb: 30019.7
+approxSizeMb: 30019.7
+fetchedAt: '2026-06-12T07:58:51.000Z'

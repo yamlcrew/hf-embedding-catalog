@@ -1,0 +1,84 @@
+_id: 68639b7ee31b268cb6daafce
+id: evoreign/sea-lion-8b-mrl-embedding
+private: false
+pipeline_tag: feature-extraction
+library_name: peft
+tags:
+- peft
+- safetensors
+- text-embedding
+- retrieval
+- matryoshka
+- lora
+- sea-lion
+- feature-extraction
+- id
+- en
+- base_model:aisingapore/Llama-SEA-LION-v3.5-8B-R
+- base_model:adapter:aisingapore/Llama-SEA-LION-v3.5-8B-R
+- license:apache-2.0
+- region:us
+downloads: 2
+likes: 0
+modelId: evoreign/sea-lion-8b-mrl-embedding
+author: evoreign
+sha: bea7bcc5f148582304bd616ae617ea8b7ca58f4b
+lastModified: '2025-07-01T09:06:51.000Z'
+gated: false
+disabled: false
+model-index: null
+config:
+  tokenizer_config:
+    bos_token: <|begin_of_text|>
+    eos_token: <|eot_id|>
+    pad_token: <|finetune_right_pad_id|>
+  chat_template_jinja: '{% set thinking_mode = thinking_mode|default(''on'') %}{% set add_generation_prompt = add_generation_prompt|default(false)
+    %}{% if system_prompt is not defined or system_prompt == '''' %}{% set system_prompt = ''detailed thinking '' ~ (''on''
+    if thinking_mode==''on'' else ''off'') %}{% else %}{% set system_prompt = ''detailed thinking '' ~ (''on'' if thinking_mode==''on''
+    else ''off'') ~ ''\n\n'' ~ system_prompt %}{% endif %}{% set messages = (messages|selectattr(''role'',''equalto'',''system'')|list|length
+    > 0) and messages or ([{''role'':''system'',''content'':system_prompt}] + messages) %}{% for message in messages %}{%
+    if message.role==''assistant'' %}{% set reply = (message.content.split(''</think>''))[-1]|trim %}{% else %}{% set reply
+    = message.content|trim %}{% endif %}{% set content = ''<|start_header_id|>'' ~ message.role ~ ''<|end_header_id|>\n\n''
+    ~ reply ~ ''<|eot_id|>'' %}{% if loop.index0 == 0 %}{% set content = bos_token ~ content %}{% endif %}{{ content }}{%
+    endfor %}{% if add_generation_prompt %}{{ ''<|start_header_id|>assistant<|end_header_id|>\n\n'' ~ (''<think>\n'' if thinking_mode==''on''
+    else ''<think>\n\n</think>\n\n'') }}{% endif %}'
+  peft:
+    base_model_name_or_path: aisingapore/Llama-SEA-LION-v3.5-8B-R
+    task_type: CAUSAL_LM
+cardData:
+  license: apache-2.0
+  language:
+  - id
+  - en
+  library_name: peft
+  tags:
+  - text-embedding
+  - retrieval
+  - matryoshka
+  - lora
+  - sea-lion
+  pipeline_tag: feature-extraction
+  base_model:
+  - aisingapore/Llama-SEA-LION-v3.5-8B-R
+siblings:
+- rfilename: .gitattributes
+- rfilename: README.md
+- rfilename: adapter_config.json
+- rfilename: adapter_model.safetensors
+- rfilename: chat_template.jinja
+- rfilename: modeling.py
+- rfilename: pooler.pt
+- rfilename: projection.pt
+- rfilename: special_tokens_map.json
+- rfilename: tokenizer.json
+- rfilename: tokenizer_config.json
+spaces: []
+createdAt: '2025-07-01T08:25:34.000Z'
+usedStorage: 275754505
+downloadsAllTime: 41
+inferenceProviderMapping: {}
+configJson: null
+onnxFiles: {}
+safetensorsSizeMb: 6.8
+approxSizeMb: 0.0
+fetchedAt: '2026-06-12T07:58:51.000Z'

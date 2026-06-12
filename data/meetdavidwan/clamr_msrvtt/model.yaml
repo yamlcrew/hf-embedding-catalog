@@ -1,0 +1,114 @@
+_id: 687bc1738c7d912ca7165151
+id: meetdavidwan/clamr_msrvtt
+private: false
+pipeline_tag: feature-extraction
+library_name: transformers
+tags:
+- transformers
+- safetensors
+- clamr
+- multimodal
+- video-retrieval
+- late-interaction
+- feature-extraction
+- en
+- arxiv:2506.06144
+- base_model:Qwen/Qwen2.5-Omni-3B
+- base_model:finetune:Qwen/Qwen2.5-Omni-3B
+- license:mit
+- endpoints_compatible
+- region:us
+downloads: 0
+likes: 0
+modelId: meetdavidwan/clamr_msrvtt
+author: meetdavidwan
+sha: 5e0c09e1fdde97d620bac96ba6b45ce203682c67
+lastModified: '2025-07-19T16:08:23.000Z'
+gated: false
+disabled: false
+model-index: null
+config:
+  processor_config:
+    chat_template: '{% set image_count = namespace(value=0) %}{% set video_count = namespace(value=0) %}{% for message in
+      messages %}{% if loop.first and message[''role''] != ''system'' %}<|im_start|>system
+
+      You are a helpful assistant.<|im_end|>
+
+      {% endif %}<|im_start|>{{ message[''role''] }}
+
+      {% if message[''content''] is string %}{{ message[''content''] }}<|im_end|>
+
+      {% else %}{% for content in message[''content''] %}{% if content[''type''] == ''image'' or ''image'' in content or ''image_url''
+      in content %}{% set image_count.value = image_count.value + 1 %}{% if add_vision_id %}Picture {{ image_count.value }}:
+      {% endif %}<|vision_start|><|image_pad|><|vision_end|>{% elif content[''type''] == ''video'' or ''video'' in content
+      %}{% set video_count.value = video_count.value + 1 %}{% if add_vision_id %}Video {{ video_count.value }}: {% endif %}<|vision_start|><|video_pad|><|vision_end|>{%
+      elif ''text'' in content %}{{ content[''text''] }}{% endif %}{% endfor %}<|im_end|>
+
+      {% endif %}{% endfor %}{% if add_generation_prompt %}<|im_start|>assistant
+
+      {% endif %}'
+  tokenizer_config:
+    bos_token: null
+    chat_template: '{% set image_count = namespace(value=0) %}{% set video_count = namespace(value=0) %}{% for message in
+      messages %}{% if loop.first and message[''role''] != ''system'' %}<|im_start|>system
+
+      You are a helpful assistant.<|im_end|>
+
+      {% endif %}<|im_start|>{{ message[''role''] }}
+
+      {% if message[''content''] is string %}{{ message[''content''] }}<|im_end|>
+
+      {% else %}{% for content in message[''content''] %}{% if content[''type''] == ''image'' or ''image'' in content or ''image_url''
+      in content %}{% set image_count.value = image_count.value + 1 %}{% if add_vision_id %}Picture {{ image_count.value }}:
+      {% endif %}<|vision_start|><|image_pad|><|vision_end|>{% elif content[''type''] == ''video'' or ''video'' in content
+      %}{% set video_count.value = video_count.value + 1 %}{% if add_vision_id %}Video {{ video_count.value }}: {% endif %}<|vision_start|><|video_pad|><|vision_end|>{%
+      elif ''text'' in content %}{{ content[''text''] }}{% endif %}{% endfor %}<|im_end|>
+
+      {% endif %}{% endfor %}{% if add_generation_prompt %}<|im_start|>assistant
+
+      {% endif %}'
+    eos_token: <|im_end|>
+    pad_token: <|endoftext|>
+    unk_token: null
+cardData:
+  license: mit
+  library_name: transformers
+  base_model: Qwen/Qwen2.5-Omni-3B
+  language:
+  - en
+  tags:
+  - clamr
+  - multimodal
+  - video-retrieval
+  - late-interaction
+  pipeline_tag: feature-extraction
+transformersInfo:
+  auto_model: AutoModel
+siblings:
+- rfilename: .gitattributes
+- rfilename: README.md
+- rfilename: adapter_config.json
+- rfilename: adapter_model.safetensors
+- rfilename: added_tokens.json
+- rfilename: all_results.json
+- rfilename: chat_template.json
+- rfilename: eval_results.json
+- rfilename: merges.txt
+- rfilename: preprocessor_config.json
+- rfilename: special_tokens_map.json
+- rfilename: tokenizer.json
+- rfilename: tokenizer_config.json
+- rfilename: train_results.json
+- rfilename: trainer_state.json
+- rfilename: training_args.json
+- rfilename: vocab.json
+spaces: []
+createdAt: '2025-07-19T16:01:55.000Z'
+usedStorage: 970479008
+downloadsAllTime: 0
+inferenceProviderMapping: {}
+configJson: null
+onnxFiles: {}
+safetensorsSizeMb: 959.1
+approxSizeMb: 0.0
+fetchedAt: '2026-06-12T07:58:51.000Z'

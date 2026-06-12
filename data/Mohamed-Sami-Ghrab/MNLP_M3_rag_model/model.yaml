@@ -1,0 +1,108 @@
+_id: 6848597dfb373cff282337bf
+id: Mohamed-Sami-Ghrab/MNLP_M3_rag_model
+private: false
+pipeline_tag: feature-extraction
+library_name: transformers
+tags:
+- transformers
+- safetensors
+- qwen3
+- feature-extraction
+- text-embeddings-inference
+- endpoints_compatible
+- region:us
+downloads: 2
+likes: 0
+modelId: Mohamed-Sami-Ghrab/MNLP_M3_rag_model
+author: Mohamed-Sami-Ghrab
+sha: 99b2378dc0cfb1d215410f3afacde3dcf9393c25
+lastModified: '2025-06-10T21:57:03.000Z'
+gated: false
+disabled: false
+model-index: null
+config:
+  architectures:
+  - Qwen3Model
+  model_type: qwen3
+  tokenizer_config:
+    bos_token: null
+    chat_template: '{% set system_message = ''Below is an instruction that describes a task. Write a response that appropriately
+      completes the request.
+
+
+      '' %}{% if messages[0][''role''] == ''system'' %}{% set loop_messages = messages[1:] %}{% set system_message = messages[0][''content'']
+      %}{% else %}{% set loop_messages = messages %}{% endif %}{% if system_message is defined %}{{ system_message }}{% endif
+      %}{% for message in loop_messages %}{% set content = message[''content''] %}{% if message[''role''] == ''user'' %}{{
+      ''### Instruction:
+
+      '' + content + ''
+
+
+      ### Response:
+
+      '' }}{% elif message[''role''] == ''assistant'' %}{{ content + ''<|endoftext|>'' + ''
+
+
+      '' }}{% endif %}{% endfor %}'
+    eos_token: <|endoftext|>
+    pad_token: <|endoftext|>
+    unk_token: null
+cardData:
+  library_name: transformers
+  tags: []
+transformersInfo:
+  auto_model: AutoModelForMultimodalLM
+  pipeline_tag: feature-extraction
+  processor: AutoTokenizer
+siblings:
+- rfilename: .gitattributes
+- rfilename: README.md
+- rfilename: added_tokens.json
+- rfilename: config.json
+- rfilename: merges.txt
+- rfilename: model.safetensors
+- rfilename: special_tokens_map.json
+- rfilename: tokenizer.json
+- rfilename: tokenizer_config.json
+- rfilename: vocab.json
+spaces: []
+createdAt: '2025-06-10T16:12:45.000Z'
+safetensors:
+  parameters:
+    F32: 596049920
+  total: 596049920
+usedStorage: 2395655766
+downloadsAllTime: 3
+inferenceProviderMapping: {}
+configJson:
+  architectures:
+  - Qwen3Model
+  attention_bias: false
+  attention_dropout: 0.0
+  bos_token_id: 151643
+  eos_token_id: 151643
+  head_dim: 128
+  hidden_act: silu
+  hidden_size: 1024
+  initializer_range: 0.02
+  intermediate_size: 3072
+  max_position_embeddings: 32768
+  max_window_layers: 28
+  model_type: qwen3
+  num_attention_heads: 16
+  num_hidden_layers: 28
+  num_key_value_heads: 8
+  rms_norm_eps: 1.0e-06
+  rope_scaling: null
+  rope_theta: 1000000
+  sliding_window: null
+  tie_word_embeddings: true
+  torch_dtype: float32
+  transformers_version: 4.51.3
+  use_cache: true
+  use_sliding_window: false
+  vocab_size: 151936
+onnxFiles: {}
+safetensorsSizeMb: 2384.2
+approxSizeMb: 2384.2
+fetchedAt: '2026-06-12T07:58:51.000Z'
