@@ -1,0 +1,340 @@
+_id: 6a2c943e8e258cbed49b241b
+id: MaxDevv/FOF-80M
+private: false
+pipeline_tag: sentence-similarity
+library_name: sentence-transformers
+tags:
+- sentence-transformers
+- safetensors
+- qwen3
+- feature-extraction
+- factuality
+- hallucination-detection
+- style-invariance
+- sentence-similarity
+- en
+- dataset:MaxDevv/FOF-Bench
+- base_model:codefuse-ai/F2LLM-v2-80M
+- base_model:finetune:codefuse-ai/F2LLM-v2-80M
+- license:apache-2.0
+- model-index
+- text-embeddings-inference
+- endpoints_compatible
+- region:us
+downloads: 0
+likes: 0
+modelId: MaxDevv/FOF-80M
+author: MaxDevv
+sha: 1c259794d9582b7b5febbb86e12009c5c9d21842
+lastModified: '2026-06-12T23:56:16.000Z'
+gated: false
+disabled: false
+widgetData:
+- source_sentence: That is a happy person
+  sentences:
+  - That is a happy dog
+  - That is a very happy person
+  - Today is a sunny day
+model-index:
+- name: FOF-80M
+  results:
+  - task:
+      type: sentence-similarity
+      name: Factual Sensitivity
+    dataset:
+      name: FOF-Bench
+      type: MaxDevv/FOF-Bench
+      split: test
+    metrics:
+    - name: Triplet Accuracy
+      type: accuracy
+      value: 29.37
+      verified: false
+config:
+  architectures:
+  - Qwen3Model
+  model_type: qwen3
+  tokenizer_config:
+    bos_token: null
+    eos_token: <|im_end|>
+    pad_token: <|endoftext|>
+    unk_token: null
+  chat_template_jinja: "{%- if tools %}\n    {{- '<|im_start|>system\\n' }}\n    {%- if messages[0].role == 'system' %}\n\
+    \        {{- messages[0].content + '\\n\\n' }}\n    {%- endif %}\n    {{- \"# Tools\\n\\nYou may call one or more functions\
+    \ to assist with the user query.\\n\\nYou are provided with function signatures within <tools></tools> XML tags:\\n<tools>\"\
+    \ }}\n    {%- for tool in tools %}\n        {{- \"\\n\" }}\n        {{- tool | tojson }}\n    {%- endfor %}\n    {{- \"\
+    \\n</tools>\\n\\nFor each function call, return a json object with function name and arguments within <tool_call></tool_call>\
+    \ XML tags:\\n<tool_call>\\n{\\\"name\\\": <function-name>, \\\"arguments\\\": <args-json-object>}\\n</tool_call><|im_end|>\\\
+    n\" }}\n{%- else %}\n    {%- if messages[0].role == 'system' %}\n        {{- '<|im_start|>system\\n' + messages[0].content\
+    \ + '<|im_end|>\\n' }}\n    {%- endif %}\n{%- endif %}\n{%- set ns = namespace(multi_step_tool=true, last_query_index=messages|length\
+    \ - 1) %}\n{%- for message in messages[::-1] %}\n    {%- set index = (messages|length - 1) - loop.index0 %}\n    {%- if\
+    \ ns.multi_step_tool and message.role == \"user\" and message.content is string and not(message.content.startswith('<tool_response>')\
+    \ and message.content.endswith('</tool_response>')) %}\n        {%- set ns.multi_step_tool = false %}\n        {%- set\
+    \ ns.last_query_index = index %}\n    {%- endif %}\n{%- endfor %}\n{%- for message in messages %}\n    {%- if message.content\
+    \ is string %}\n        {%- set content = message.content %}\n    {%- else %}\n        {%- set content = '' %}\n    {%-\
+    \ endif %}\n    {%- if (message.role == \"user\") or (message.role == \"system\" and not loop.first) %}\n        {{- '<|im_start|>'\
+    \ + message.role + '\\n' + content + '<|im_end|>' + '\\n' }}\n    {%- elif message.role == \"assistant\" %}\n        {%-\
+    \ set reasoning_content = '' %}\n        {%- if message.reasoning_content is string %}\n            {%- set reasoning_content\
+    \ = message.reasoning_content %}\n        {%- else %}\n            {%- if '</think>' in content %}\n                {%-\
+    \ set reasoning_content = content.split('</think>')[0].rstrip('\\n').split('<think>')[-1].lstrip('\\n') %}\n         \
+    \       {%- set content = content.split('</think>')[-1].lstrip('\\n') %}\n            {%- endif %}\n        {%- endif\
+    \ %}\n        {%- if loop.index0 > ns.last_query_index %}\n            {%- if loop.last or (not loop.last and reasoning_content)\
+    \ %}\n                {{- '<|im_start|>' + message.role + '\\n<think>\\n' + reasoning_content.strip('\\n') + '\\n</think>\\\
+    n\\n' + content.lstrip('\\n') }}\n            {%- else %}\n                {{- '<|im_start|>' + message.role + '\\n' +\
+    \ content }}\n            {%- endif %}\n        {%- else %}\n            {{- '<|im_start|>' + message.role + '\\n' + content\
+    \ }}\n        {%- endif %}\n        {%- if message.tool_calls %}\n            {%- for tool_call in message.tool_calls\
+    \ %}\n                {%- if (loop.first and content) or (not loop.first) %}\n                    {{- '\\n' }}\n     \
+    \           {%- endif %}\n                {%- if tool_call.function %}\n                    {%- set tool_call = tool_call.function\
+    \ %}\n                {%- endif %}\n                {{- '<tool_call>\\n{\"name\": \"' }}\n                {{- tool_call.name\
+    \ }}\n                {{- '\", \"arguments\": ' }}\n                {%- if tool_call.arguments is string %}\n        \
+    \            {{- tool_call.arguments }}\n                {%- else %}\n                    {{- tool_call.arguments | tojson\
+    \ }}\n                {%- endif %}\n                {{- '}\\n</tool_call>' }}\n            {%- endfor %}\n        {%-\
+    \ endif %}\n        {{- '<|im_end|>\\n' }}\n    {%- elif message.role == \"tool\" %}\n        {%- if loop.first or (messages[loop.index0\
+    \ - 1].role != \"tool\") %}\n            {{- '<|im_start|>user' }}\n        {%- endif %}\n        {{- '\\n<tool_response>\\\
+    n' }}\n        {{- content }}\n        {{- '\\n</tool_response>' }}\n        {%- if loop.last or (messages[loop.index0\
+    \ + 1].role != \"tool\") %}\n            {{- '<|im_end|>\\n' }}\n        {%- endif %}\n    {%- endif %}\n{%- endfor %}\n\
+    {%- if add_generation_prompt %}\n    {{- '<|im_start|>assistant\\n' }}\n    {%- if enable_thinking is defined and enable_thinking\
+    \ is false %}\n        {{- '<think>\\n\\n</think>\\n\\n' }}\n    {%- endif %}\n{%- endif %}"
+cardData:
+  language:
+  - en
+  pipeline_tag: sentence-similarity
+  tags:
+  - sentence-transformers
+  - feature-extraction
+  - factuality
+  - hallucination-detection
+  - style-invariance
+  library_name: sentence-transformers
+  license: apache-2.0
+  datasets:
+  - MaxDevv/FOF-Bench
+  base_model:
+  - codefuse-ai/F2LLM-v2-80M
+  model-index:
+  - name: FOF-80M
+    results:
+    - task:
+        type: sentence-similarity
+        name: Factual Sensitivity
+      dataset:
+        name: FOF-Bench
+        type: MaxDevv/FOF-Bench
+        split: test
+      metrics:
+      - name: Triplet Accuracy
+        type: accuracy
+        value: 29.37
+        verified: false
+siblings:
+- rfilename: .gitattributes
+- rfilename: 1_Pooling/config.json
+- rfilename: README.md
+- rfilename: added_tokens.json
+- rfilename: chat_template.jinja
+- rfilename: checkpoint-10000/1_Pooling/config.json
+- rfilename: checkpoint-10000/README.md
+- rfilename: checkpoint-10000/added_tokens.json
+- rfilename: checkpoint-10000/chat_template.jinja
+- rfilename: checkpoint-10000/config.json
+- rfilename: checkpoint-10000/config_sentence_transformers.json
+- rfilename: checkpoint-10000/merges.txt
+- rfilename: checkpoint-10000/model.safetensors
+- rfilename: checkpoint-10000/modules.json
+- rfilename: checkpoint-10000/sentence_bert_config.json
+- rfilename: checkpoint-10000/special_tokens_map.json
+- rfilename: checkpoint-10000/tokenizer.json
+- rfilename: checkpoint-10000/tokenizer_config.json
+- rfilename: checkpoint-10000/trainer_state.json
+- rfilename: checkpoint-10000/training_args.bin
+- rfilename: checkpoint-10000/vocab.json
+- rfilename: checkpoint-11000/1_Pooling/config.json
+- rfilename: checkpoint-11000/README.md
+- rfilename: checkpoint-11000/added_tokens.json
+- rfilename: checkpoint-11000/chat_template.jinja
+- rfilename: checkpoint-11000/config.json
+- rfilename: checkpoint-11000/config_sentence_transformers.json
+- rfilename: checkpoint-11000/merges.txt
+- rfilename: checkpoint-11000/model.safetensors
+- rfilename: checkpoint-11000/modules.json
+- rfilename: checkpoint-11000/sentence_bert_config.json
+- rfilename: checkpoint-11000/special_tokens_map.json
+- rfilename: checkpoint-11000/tokenizer.json
+- rfilename: checkpoint-11000/tokenizer_config.json
+- rfilename: checkpoint-11000/trainer_state.json
+- rfilename: checkpoint-11000/training_args.bin
+- rfilename: checkpoint-11000/vocab.json
+- rfilename: checkpoint-12000/1_Pooling/config.json
+- rfilename: checkpoint-12000/README.md
+- rfilename: checkpoint-12000/added_tokens.json
+- rfilename: checkpoint-12000/chat_template.jinja
+- rfilename: checkpoint-12000/config.json
+- rfilename: checkpoint-12000/config_sentence_transformers.json
+- rfilename: checkpoint-12000/merges.txt
+- rfilename: checkpoint-12000/model.safetensors
+- rfilename: checkpoint-12000/modules.json
+- rfilename: checkpoint-12000/sentence_bert_config.json
+- rfilename: checkpoint-12000/special_tokens_map.json
+- rfilename: checkpoint-12000/tokenizer.json
+- rfilename: checkpoint-12000/tokenizer_config.json
+- rfilename: checkpoint-12000/trainer_state.json
+- rfilename: checkpoint-12000/training_args.bin
+- rfilename: checkpoint-12000/vocab.json
+- rfilename: checkpoint-4000/1_Pooling/config.json
+- rfilename: checkpoint-4000/README.md
+- rfilename: checkpoint-4000/added_tokens.json
+- rfilename: checkpoint-4000/chat_template.jinja
+- rfilename: checkpoint-4000/config.json
+- rfilename: checkpoint-4000/config_sentence_transformers.json
+- rfilename: checkpoint-4000/merges.txt
+- rfilename: checkpoint-4000/model.safetensors
+- rfilename: checkpoint-4000/modules.json
+- rfilename: checkpoint-4000/sentence_bert_config.json
+- rfilename: checkpoint-4000/special_tokens_map.json
+- rfilename: checkpoint-4000/tokenizer.json
+- rfilename: checkpoint-4000/tokenizer_config.json
+- rfilename: checkpoint-4000/trainer_state.json
+- rfilename: checkpoint-4000/training_args.bin
+- rfilename: checkpoint-4000/vocab.json
+- rfilename: checkpoint-5000/1_Pooling/config.json
+- rfilename: checkpoint-5000/README.md
+- rfilename: checkpoint-5000/added_tokens.json
+- rfilename: checkpoint-5000/chat_template.jinja
+- rfilename: checkpoint-5000/config.json
+- rfilename: checkpoint-5000/config_sentence_transformers.json
+- rfilename: checkpoint-5000/merges.txt
+- rfilename: checkpoint-5000/model.safetensors
+- rfilename: checkpoint-5000/modules.json
+- rfilename: checkpoint-5000/sentence_bert_config.json
+- rfilename: checkpoint-5000/special_tokens_map.json
+- rfilename: checkpoint-5000/tokenizer.json
+- rfilename: checkpoint-5000/tokenizer_config.json
+- rfilename: checkpoint-5000/trainer_state.json
+- rfilename: checkpoint-5000/training_args.bin
+- rfilename: checkpoint-5000/vocab.json
+- rfilename: checkpoint-6000/1_Pooling/config.json
+- rfilename: checkpoint-6000/README.md
+- rfilename: checkpoint-6000/added_tokens.json
+- rfilename: checkpoint-6000/chat_template.jinja
+- rfilename: checkpoint-6000/config.json
+- rfilename: checkpoint-6000/config_sentence_transformers.json
+- rfilename: checkpoint-6000/merges.txt
+- rfilename: checkpoint-6000/model.safetensors
+- rfilename: checkpoint-6000/modules.json
+- rfilename: checkpoint-6000/sentence_bert_config.json
+- rfilename: checkpoint-6000/special_tokens_map.json
+- rfilename: checkpoint-6000/tokenizer.json
+- rfilename: checkpoint-6000/tokenizer_config.json
+- rfilename: checkpoint-6000/trainer_state.json
+- rfilename: checkpoint-6000/training_args.bin
+- rfilename: checkpoint-6000/vocab.json
+- rfilename: checkpoint-7000/1_Pooling/config.json
+- rfilename: checkpoint-7000/README.md
+- rfilename: checkpoint-7000/added_tokens.json
+- rfilename: checkpoint-7000/chat_template.jinja
+- rfilename: checkpoint-7000/config.json
+- rfilename: checkpoint-7000/config_sentence_transformers.json
+- rfilename: checkpoint-7000/merges.txt
+- rfilename: checkpoint-7000/model.safetensors
+- rfilename: checkpoint-7000/modules.json
+- rfilename: checkpoint-7000/sentence_bert_config.json
+- rfilename: checkpoint-7000/special_tokens_map.json
+- rfilename: checkpoint-7000/tokenizer.json
+- rfilename: checkpoint-7000/tokenizer_config.json
+- rfilename: checkpoint-7000/trainer_state.json
+- rfilename: checkpoint-7000/training_args.bin
+- rfilename: checkpoint-7000/vocab.json
+- rfilename: checkpoint-8000/1_Pooling/config.json
+- rfilename: checkpoint-8000/README.md
+- rfilename: checkpoint-8000/added_tokens.json
+- rfilename: checkpoint-8000/chat_template.jinja
+- rfilename: checkpoint-8000/config.json
+- rfilename: checkpoint-8000/config_sentence_transformers.json
+- rfilename: checkpoint-8000/merges.txt
+- rfilename: checkpoint-8000/model.safetensors
+- rfilename: checkpoint-8000/modules.json
+- rfilename: checkpoint-8000/sentence_bert_config.json
+- rfilename: checkpoint-8000/special_tokens_map.json
+- rfilename: checkpoint-8000/tokenizer.json
+- rfilename: checkpoint-8000/tokenizer_config.json
+- rfilename: checkpoint-8000/trainer_state.json
+- rfilename: checkpoint-8000/training_args.bin
+- rfilename: checkpoint-8000/vocab.json
+- rfilename: checkpoint-9000/1_Pooling/config.json
+- rfilename: checkpoint-9000/README.md
+- rfilename: checkpoint-9000/added_tokens.json
+- rfilename: checkpoint-9000/chat_template.jinja
+- rfilename: checkpoint-9000/config.json
+- rfilename: checkpoint-9000/config_sentence_transformers.json
+- rfilename: checkpoint-9000/merges.txt
+- rfilename: checkpoint-9000/model.safetensors
+- rfilename: checkpoint-9000/modules.json
+- rfilename: checkpoint-9000/sentence_bert_config.json
+- rfilename: checkpoint-9000/special_tokens_map.json
+- rfilename: checkpoint-9000/tokenizer.json
+- rfilename: checkpoint-9000/tokenizer_config.json
+- rfilename: checkpoint-9000/trainer_state.json
+- rfilename: checkpoint-9000/training_args.bin
+- rfilename: checkpoint-9000/vocab.json
+- rfilename: config.json
+- rfilename: config_sentence_transformers.json
+- rfilename: merges.txt
+- rfilename: model.safetensors
+- rfilename: modules.json
+- rfilename: sentence_bert_config.json
+- rfilename: special_tokens_map.json
+- rfilename: tokenizer.json
+- rfilename: tokenizer_config.json
+- rfilename: trainer_state.json
+- rfilename: training_args.bin
+- rfilename: vocab.json
+spaces: []
+createdAt: '2026-06-12T23:20:30.000Z'
+safetensors:
+  parameters:
+    F32: 80084288
+  total: 80084288
+usedStorage: 3214901576
+downloadsAllTime: 0
+inferenceProviderMapping: {}
+configJson:
+  architectures:
+  - Qwen3Model
+  attention_bias: false
+  attention_dropout: 0.0
+  dtype: float32
+  eos_token_id: 151645
+  head_dim: 128
+  hidden_act: silu
+  hidden_size: 320
+  initializer_range: 0.02
+  intermediate_size: 2048
+  layer_types:
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  max_position_embeddings: 40960
+  max_window_layers: 8
+  model_type: qwen3
+  num_attention_heads: 16
+  num_hidden_layers: 8
+  num_key_value_heads: 8
+  pad_token_id: 151643
+  rms_norm_eps: 1.0e-06
+  rope_scaling: null
+  rope_theta: 1000000
+  sliding_window: null
+  tie_word_embeddings: true
+  transformers_version: 4.56.2
+  use_cache: false
+  use_sliding_window: false
+  vocab_size: 151936
+onnxFiles: {}
+safetensorsSizeMb: 3203.5
+approxSizeMb: 320.3
+fetchedAt: '2026-06-14T07:54:01.000Z'
