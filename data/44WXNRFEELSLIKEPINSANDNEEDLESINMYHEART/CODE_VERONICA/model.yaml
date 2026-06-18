@@ -1,0 +1,244 @@
+_id: 6a3283ae846496e5dad924fd
+id: 44WXNRFEELSLIKEPINSANDNEEDLESINMYHEART/CODE_VERONICA
+private: false
+pipeline_tag: sentence-similarity
+library_name: sentence-transformers
+tags:
+- sentence-transformers
+- safetensors
+- xlm-roberta
+- sentence-similarity
+- feature-extraction
+- generated_from_trainer
+- dataset_size:778
+- loss:MultipleNegativesRankingLoss
+- arxiv:1908.10084
+- arxiv:1807.03748
+- base_model:intfloat/multilingual-e5-large
+- base_model:finetune:intfloat/multilingual-e5-large
+- text-embeddings-inference
+- endpoints_compatible
+- region:us
+downloads: 0
+likes: 0
+modelId: 44WXNRFEELSLIKEPINSANDNEEDLESINMYHEART/CODE_VERONICA
+author: 44WXNRFEELSLIKEPINSANDNEEDLESINMYHEART
+sha: 48d78b2d46a288494a1f14063b38592b592a8162
+lastModified: '2026-06-17T11:27:59.000Z'
+gated: false
+disabled: false
+mask_token: <mask>
+widgetData:
+- source_sentence: 'Неправильная раскладка: ''асинк асинк асинко_лен тина read'' (response.aread)'
+  sentences:
+  - "@router.post(\"/auth/logout\")\nasync def logout(token: str = Depends(oauth2_scheme), redis: Redis = Depends(get_redis)):\n\
+    \    await redis.setex(f\"blacklist:{token}\", time=3600, value=\"true\")\n    return {\"detail\": \"Successfully logged\
+    \ out\"}"
+  - "@router.get(\"/health/db\")\nasync def check_database_health(db: AsyncSession = Depends(get_db)):\n    try:\n       \
+    \ await db.execute(text(\"SELECT 1\"))\n        return {\"status\": \"healthy\", \"database\": \"online\"}\n    except\
+    \ Exception as e:\n        logger.critical(f\"Database healthcheck failed: {e}\")\n        raise HTTPException(status_code=503,\
+    \ detail=\"Database unavailable\")"
+  - return await response.aread()
+- source_sentence: fubyrwbz nfqvthf fscbyr cjplfyb_ nfqv fyntynf
+  sentences:
+  - "from datetime import datetime, timezone\ndef create_utc_timestamp():\n    return datetime.now(timezone.utc)"
+  - "from fastapi import FastAPI\nimport logging\n\napp = FastAPI()\n\n@app.on_event(\"shutdown\")\nasync def shutdown_event():\n\
+    \    logging.info(\"Application is shutting down...\")\n    # Имитация закрытия пула бд\n    await db_engine.dispose()\n\
+    \    logging.info(\"Database connection pool closed successfully.\")"
+  - "from pydantic import BaseModel\n\nclass DBConnectionConfig(BaseModel):\n    # Конфигурация точки доступа к сетевому сокету\
+    \ хранилища данных\n    host: str = \"localhost\"\n    port: int = 5432"
+- source_sentence: 'Неправильная раскладка: ''корс корс бред анти ксс'' (ошибка CORS на фронтенде)'
+  sentences:
+  - "from fastapi.middleware.cors import CORSMiddleware\n\napp.add_middleware(\n    CORSMiddleware,\n    allow_origins=[\"\
+    *\"],\n    allow_credentials=True,\n    allow_methods=[\"*\"],\n    allow_headers=[\"*\"],\n)"
+  - "def close_local_file_descriptor_manually(file_path: str):\n    # Открытие и явное закрытие указателя на файл без использования\
+    \ with\n    file_stream = open(file_path, \"w\")\n    file_stream.write(\"cleanup\")\n    file_stream.close()\n    return\
+    \ True"
+  - "from fastapi.responses import FileResponse\n\n@router.get(\"/reports/download\")\nasync def download_pdf_report():\n\
+    \    file_path = \"media/static_report.pdf\"\n    return FileResponse(\n        path=file_path,\n        filename=\"user_report.pdf\"\
+    ,\n        media_type=\"application/pdf\"\n    )"
+- source_sentence: Опечатка 'генератор', транслит библиотек 'сикретс' (secrets), 'стринг' (string)
+  sentences:
+  - "from celery import Celery\n\ncelery_broker_app = Celery(\"tasks\", broker=\"redis://localhost:6379/0\")\n\n@celery_broker_app.task\n\
+    def execute_heavy_computation_task(data_payload: dict):\n    # Выполнение изолированной задачи внутри отдельного процесса\
+    \ Celery Worker\n    return len(data_payload)"
+  - "import os\n\ndef get_operating_system_logged_user() -> str:\n    # Чтение имени активного пользователя из дескриптора\
+    \ текущего процесса ОС\n    return os.getlogin()"
+  - "import string\nimport secrets\n\ndef generate_random_strong_password(length: int = 12) -> str:\n    alphabet = string.ascii_letters\
+    \ + string.digits + string.punctuation\n    return \"\".join(secrets.choice(alphabet) for _ in range(length))"
+- source_sentence: how to block brute force spam ip redis incr limit requests 429 status
+  sentences:
+  - "from sqlalchemy import func\nfrom sqlalchemy.future import select\n\nasync def get_popular_levels(db: AsyncSession):\n\
+    \    query = select(Exercise.level_id, func.count(Exercise.id).label(\"total\")).\\\n        group_by(Exercise.level_id).\\\
+    \n        having(func.count(Exercise.id) > 5)\n    result = await db.execute(query)\n    return result.all()"
+  - await task_queue.put(payload)
+  - "@router.get(\"/secure-data\")\nasync def check_rate_limit(request: Request, redis: Redis = Depends(get_redis)):\n   \
+    \ user_ip = request.client.host\n    current_requests = await redis.incr(f\"rate:{user_ip}\")\n    if current_requests\
+    \ == 1:\n        await redis.expire(f\"rate:{user_ip}\", 60)\n    if current_requests > 100:\n        raise HTTPException(status_code=429,\
+    \ detail=\"Too Many Requests, chill out\")\n    return {\"status\": \"allowed\"}"
+model-index: null
+config:
+  architectures:
+  - XLMRobertaModel
+  model_type: xlm-roberta
+  tokenizer_config:
+    bos_token: <s>
+    cls_token: <s>
+    eos_token: </s>
+    mask_token: <mask>
+    pad_token: <pad>
+    sep_token: </s>
+    unk_token: <unk>
+cardData:
+  tags:
+  - sentence-transformers
+  - sentence-similarity
+  - feature-extraction
+  - generated_from_trainer
+  - dataset_size:778
+  - loss:MultipleNegativesRankingLoss
+  base_model: intfloat/multilingual-e5-large
+  widget:
+  - source_sentence: 'Неправильная раскладка: ''асинк асинк асинко_лен тина read'' (response.aread)'
+    sentences:
+    - "@router.post(\"/auth/logout\")\nasync def logout(token: str = Depends(oauth2_scheme), redis: Redis = Depends(get_redis)):\n\
+      \    await redis.setex(f\"blacklist:{token}\", time=3600, value=\"true\")\n    return {\"detail\": \"Successfully logged\
+      \ out\"}"
+    - "@router.get(\"/health/db\")\nasync def check_database_health(db: AsyncSession = Depends(get_db)):\n    try:\n     \
+      \   await db.execute(text(\"SELECT 1\"))\n        return {\"status\": \"healthy\", \"database\": \"online\"}\n    except\
+      \ Exception as e:\n        logger.critical(f\"Database healthcheck failed: {e}\")\n        raise HTTPException(status_code=503,\
+      \ detail=\"Database unavailable\")"
+    - return await response.aread()
+  - source_sentence: fubyrwbz nfqvthf fscbyr cjplfyb_ nfqv fyntynf
+    sentences:
+    - "from datetime import datetime, timezone\ndef create_utc_timestamp():\n    return datetime.now(timezone.utc)"
+    - "from fastapi import FastAPI\nimport logging\n\napp = FastAPI()\n\n@app.on_event(\"shutdown\")\nasync def shutdown_event():\n\
+      \    logging.info(\"Application is shutting down...\")\n    # Имитация закрытия пула бд\n    await db_engine.dispose()\n\
+      \    logging.info(\"Database connection pool closed successfully.\")"
+    - "from pydantic import BaseModel\n\nclass DBConnectionConfig(BaseModel):\n    # Конфигурация точки доступа к сетевому\
+      \ сокету хранилища данных\n    host: str = \"localhost\"\n    port: int = 5432"
+  - source_sentence: 'Неправильная раскладка: ''корс корс бред анти ксс'' (ошибка CORS на фронтенде)'
+    sentences:
+    - "from fastapi.middleware.cors import CORSMiddleware\n\napp.add_middleware(\n    CORSMiddleware,\n    allow_origins=[\"\
+      *\"],\n    allow_credentials=True,\n    allow_methods=[\"*\"],\n    allow_headers=[\"*\"],\n)"
+    - "def close_local_file_descriptor_manually(file_path: str):\n    # Открытие и явное закрытие указателя на файл без использования\
+      \ with\n    file_stream = open(file_path, \"w\")\n    file_stream.write(\"cleanup\")\n    file_stream.close()\n    return\
+      \ True"
+    - "from fastapi.responses import FileResponse\n\n@router.get(\"/reports/download\")\nasync def download_pdf_report():\n\
+      \    file_path = \"media/static_report.pdf\"\n    return FileResponse(\n        path=file_path,\n        filename=\"\
+      user_report.pdf\",\n        media_type=\"application/pdf\"\n    )"
+  - source_sentence: Опечатка 'генератор', транслит библиотек 'сикретс' (secrets), 'стринг' (string)
+    sentences:
+    - "from celery import Celery\n\ncelery_broker_app = Celery(\"tasks\", broker=\"redis://localhost:6379/0\")\n\n@celery_broker_app.task\n\
+      def execute_heavy_computation_task(data_payload: dict):\n    # Выполнение изолированной задачи внутри отдельного процесса\
+      \ Celery Worker\n    return len(data_payload)"
+    - "import os\n\ndef get_operating_system_logged_user() -> str:\n    # Чтение имени активного пользователя из дескриптора\
+      \ текущего процесса ОС\n    return os.getlogin()"
+    - "import string\nimport secrets\n\ndef generate_random_strong_password(length: int = 12) -> str:\n    alphabet = string.ascii_letters\
+      \ + string.digits + string.punctuation\n    return \"\".join(secrets.choice(alphabet) for _ in range(length))"
+  - source_sentence: how to block brute force spam ip redis incr limit requests 429 status
+    sentences:
+    - "from sqlalchemy import func\nfrom sqlalchemy.future import select\n\nasync def get_popular_levels(db: AsyncSession):\n\
+      \    query = select(Exercise.level_id, func.count(Exercise.id).label(\"total\")).\\\n        group_by(Exercise.level_id).\\\
+      \n        having(func.count(Exercise.id) > 5)\n    result = await db.execute(query)\n    return result.all()"
+    - await task_queue.put(payload)
+    - "@router.get(\"/secure-data\")\nasync def check_rate_limit(request: Request, redis: Redis = Depends(get_redis)):\n \
+      \   user_ip = request.client.host\n    current_requests = await redis.incr(f\"rate:{user_ip}\")\n    if current_requests\
+      \ == 1:\n        await redis.expire(f\"rate:{user_ip}\", 60)\n    if current_requests > 100:\n        raise HTTPException(status_code=429,\
+      \ detail=\"Too Many Requests, chill out\")\n    return {\"status\": \"allowed\"}"
+  pipeline_tag: sentence-similarity
+  library_name: sentence-transformers
+siblings:
+- rfilename: .gitattributes
+- rfilename: 1_Pooling/config.json
+- rfilename: README.md
+- rfilename: checkpoints/checkpoint-147/1_Pooling/config.json
+- rfilename: checkpoints/checkpoint-147/README.md
+- rfilename: checkpoints/checkpoint-147/config.json
+- rfilename: checkpoints/checkpoint-147/config_sentence_transformers.json
+- rfilename: checkpoints/checkpoint-147/model.safetensors
+- rfilename: checkpoints/checkpoint-147/modules.json
+- rfilename: checkpoints/checkpoint-147/optimizer.pt
+- rfilename: checkpoints/checkpoint-147/rng_state.pth
+- rfilename: checkpoints/checkpoint-147/scheduler.pt
+- rfilename: checkpoints/checkpoint-147/sentence_bert_config.json
+- rfilename: checkpoints/checkpoint-147/tokenizer.json
+- rfilename: checkpoints/checkpoint-147/tokenizer_config.json
+- rfilename: checkpoints/checkpoint-147/trainer_state.json
+- rfilename: checkpoints/checkpoint-147/training_args.bin
+- rfilename: checkpoints/checkpoint-49/1_Pooling/config.json
+- rfilename: checkpoints/checkpoint-49/README.md
+- rfilename: checkpoints/checkpoint-49/config.json
+- rfilename: checkpoints/checkpoint-49/config_sentence_transformers.json
+- rfilename: checkpoints/checkpoint-49/model.safetensors
+- rfilename: checkpoints/checkpoint-49/modules.json
+- rfilename: checkpoints/checkpoint-49/optimizer.pt
+- rfilename: checkpoints/checkpoint-49/rng_state.pth
+- rfilename: checkpoints/checkpoint-49/scheduler.pt
+- rfilename: checkpoints/checkpoint-49/sentence_bert_config.json
+- rfilename: checkpoints/checkpoint-49/tokenizer.json
+- rfilename: checkpoints/checkpoint-49/tokenizer_config.json
+- rfilename: checkpoints/checkpoint-49/trainer_state.json
+- rfilename: checkpoints/checkpoint-49/training_args.bin
+- rfilename: checkpoints/checkpoint-98/1_Pooling/config.json
+- rfilename: checkpoints/checkpoint-98/README.md
+- rfilename: checkpoints/checkpoint-98/config.json
+- rfilename: checkpoints/checkpoint-98/config_sentence_transformers.json
+- rfilename: checkpoints/checkpoint-98/model.safetensors
+- rfilename: checkpoints/checkpoint-98/modules.json
+- rfilename: checkpoints/checkpoint-98/optimizer.pt
+- rfilename: checkpoints/checkpoint-98/rng_state.pth
+- rfilename: checkpoints/checkpoint-98/scheduler.pt
+- rfilename: checkpoints/checkpoint-98/sentence_bert_config.json
+- rfilename: checkpoints/checkpoint-98/tokenizer.json
+- rfilename: checkpoints/checkpoint-98/tokenizer_config.json
+- rfilename: checkpoints/checkpoint-98/trainer_state.json
+- rfilename: checkpoints/checkpoint-98/training_args.bin
+- rfilename: config.json
+- rfilename: config_sentence_transformers.json
+- rfilename: model.safetensors
+- rfilename: modules.json
+- rfilename: sentence_bert_config.json
+- rfilename: tokenizer.json
+- rfilename: tokenizer_config.json
+spaces: []
+createdAt: '2026-06-17T11:23:26.000Z'
+safetensors:
+  parameters:
+    F32: 559890432
+  total: 559890432
+usedStorage: 20149143408
+downloadsAllTime: 0
+inferenceProviderMapping: {}
+configJson:
+  add_cross_attention: false
+  architectures:
+  - XLMRobertaModel
+  attention_probs_dropout_prob: 0.1
+  bos_token_id: 0
+  classifier_dropout: null
+  dtype: float32
+  eos_token_id: 2
+  hidden_act: gelu
+  hidden_dropout_prob: 0.1
+  hidden_size: 1024
+  initializer_range: 0.02
+  intermediate_size: 4096
+  is_decoder: false
+  layer_norm_eps: 1.0e-05
+  max_position_embeddings: 514
+  model_type: xlm-roberta
+  num_attention_heads: 16
+  num_hidden_layers: 24
+  output_past: true
+  pad_token_id: 1
+  position_embedding_type: absolute
+  tie_word_embeddings: true
+  transformers_version: 5.10.2
+  type_vocab_size: 1
+  use_cache: false
+  vocab_size: 250002
+onnxFiles: {}
+safetensorsSizeMb: 8958.4
+approxSizeMb: 2239.6
+fetchedAt: '2026-06-18T08:15:38.000Z'

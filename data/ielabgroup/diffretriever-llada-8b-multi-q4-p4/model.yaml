@@ -1,0 +1,84 @@
+_id: 6a332d79ce52ab7ebf40ccd6
+id: ielabgroup/diffretriever-llada-8b-multi-q4-p4
+private: false
+pipeline_tag: feature-extraction
+library_name: peft
+tags:
+- peft
+- safetensors
+- information-retrieval
+- dense-retrieval
+- sparse-retrieval
+- colbert
+- diffusion-language-model
+- diffretriever
+- lora
+- feature-extraction
+- en
+- arxiv:2605.07210
+- base_model:GSAI-ML/LLaDA-8B-Instruct
+- base_model:adapter:GSAI-ML/LLaDA-8B-Instruct
+- license:mit
+- region:us
+downloads: 0
+likes: 1
+modelId: ielabgroup/diffretriever-llada-8b-multi-q4-p4
+author: ielabgroup
+sha: 0724865dff007258f9c1a04851ef1b22a17a0c09
+lastModified: '2026-06-17T23:28:10.000Z'
+gated: false
+disabled: false
+model-index: null
+config:
+  tokenizer_config:
+    bos_token: <|startoftext|>
+    cls_token: '[CLS]'
+    eos_token: <|endoftext|>
+    pad_token: <|endoftext|>
+  chat_template_jinja: '{% set loop_messages = messages %}{% for message in loop_messages %}{% set content = ''<|start_header_id|>''
+    + message[''role''] + ''<|end_header_id|>
+
+
+    ''+ message[''content''] | trim + ''<|eot_id|>'' %}{% if loop.index0 == 0 %}{% set content = bos_token + content %}{%
+    endif %}{{ content }}{% endfor %}{{ ''<|start_header_id|>assistant<|end_header_id|>
+
+
+    '' }}'
+  peft:
+    base_model_name_or_path: GSAI-ML/LLaDA-8B-Instruct
+    task_type: CAUSAL_LM
+cardData:
+  license: mit
+  library_name: peft
+  base_model: GSAI-ML/LLaDA-8B-Instruct
+  pipeline_tag: feature-extraction
+  language:
+  - en
+  tags:
+  - information-retrieval
+  - dense-retrieval
+  - sparse-retrieval
+  - colbert
+  - diffusion-language-model
+  - diffretriever
+  - lora
+siblings:
+- rfilename: .gitattributes
+- rfilename: README.md
+- rfilename: adapter_config.json
+- rfilename: adapter_model.safetensors
+- rfilename: chat_template.jinja
+- rfilename: retriever_config.json
+- rfilename: special_tokens_map.json
+- rfilename: tokenizer.json
+- rfilename: tokenizer_config.json
+spaces: []
+createdAt: '2026-06-17T23:27:53.000Z'
+usedStorage: 88126216
+downloadsAllTime: 0
+inferenceProviderMapping: {}
+configJson: null
+onnxFiles: {}
+safetensorsSizeMb: 88.1
+approxSizeMb: 0.0
+fetchedAt: '2026-06-18T08:15:38.000Z'

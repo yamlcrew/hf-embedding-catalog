@@ -1,0 +1,100 @@
+_id: 6a2f8c666667d46eafe011f1
+id: cara-ai/ALM2Vec-FT
+private: false
+pipeline_tag: feature-extraction
+tags:
+- safetensors
+- alm2vec
+- audio-retrieval
+- embedding
+- custom_code
+- multimodal
+- feature-extraction
+- en
+- base_model:mispeech/midashenglm-7b-0804-fp32
+- base_model:finetune:mispeech/midashenglm-7b-0804-fp32
+- license:apache-2.0
+- region:us
+downloads: 17
+likes: 0
+modelId: cara-ai/ALM2Vec-FT
+author: cara-ai
+sha: 5da528866f190907532f579cebd77661bdb202ce
+lastModified: '2026-06-17T11:16:08.000Z'
+gated: false
+disabled: false
+model-index: null
+config:
+  model_type: alm2vec
+  architectures:
+  - ALM2VecModel
+  auto_map:
+    AutoConfig: configuration_alm2vec.ALM2VecConfig
+    AutoModel: modeling_alm2vec.ALM2VecModel
+  tokenizer_config:
+    bos_token: null
+    eos_token: <|im_end|>
+    pad_token: <|endoftext|>
+    unk_token: null
+  chat_template_jinja: "{%- for message in messages -%}\n\t{%- if loop.first and message[\"role\"] != \"system\" -%}\n\t\t\
+    {{- \"<|im_start|>system\\nYou are Qwen, a virtual human developed by the Qwen Team, Alibaba Group, capable of perceiving\
+    \ auditory and visual inputs, as well as generating text and speech.<|im_end|>\\n\" -}}\n\t{%- endif -%}\n\t{{- \"<|im_start|>\"\
+    \ -}}\n\t{{- message[\"role\"] -}}\n\t{{- \"\\n\" -}}\n\t{%- if message[\"content\"] is string -%}\n\t\t{{- message[\"\
+    content\"] -}}\n\t{%- else -%}\n\t\t{%- for content in message[\"content\"] -%}\n\t\t\t{%- if content[\"type\"] == \"\
+    text\" -%}\n                {{- content[\"text\"] -}}\n\t\t\t{%- elif content[\"type\"] == \"audio\" -%}\n\t\t\t\t{{-\
+    \ \"<|audio_bos|><|AUDIO|><|audio_eos|>\" -}}\n\t\t\t{%- endif -%}\n\t\t{%- endfor -%}\n\t{%- endif -%}\n    {%- if not\
+    \ loop.last or loop.last and not continue_final_message -%}\n        {{- \"<|im_end|>\\n\" -}}\n    {%- endif -%}\n{%-\
+    \ endfor -%}\n{%- if add_generation_prompt -%}\n\t{{- \"<|im_start|>assistant\\n\" -}}\n{%- endif -%}\n"
+cardData:
+  license: apache-2.0
+  language:
+  - en
+  pipeline_tag: feature-extraction
+  tags:
+  - audio-retrieval
+  - embedding
+  - custom_code
+  - multimodal
+  base_model: mispeech/midashenglm-7b-0804-fp32
+siblings:
+- rfilename: .gitattributes
+- rfilename: README.md
+- rfilename: chat_template.jinja
+- rfilename: config.json
+- rfilename: configuration_alm2vec.py
+- rfilename: configuration_audio_emb.py
+- rfilename: model-00001-of-00007.safetensors
+- rfilename: model-00002-of-00007.safetensors
+- rfilename: model-00003-of-00007.safetensors
+- rfilename: model-00004-of-00007.safetensors
+- rfilename: model-00005-of-00007.safetensors
+- rfilename: model-00006-of-00007.safetensors
+- rfilename: model-00007-of-00007.safetensors
+- rfilename: model.safetensors.index.json
+- rfilename: modeling_alm2vec.py
+- rfilename: modeling_audio_emb.py
+- rfilename: tokenizer.json
+- rfilename: tokenizer_config.json
+spaces: []
+createdAt: '2026-06-15T05:23:50.000Z'
+safetensors:
+  parameters:
+    I64: 9
+    F32: 7749591169
+  total: 7749591178
+usedStorage: 31009869598
+downloadsAllTime: 17
+inferenceProviderMapping: {}
+configJson:
+  model_type: alm2vec
+  architectures:
+  - ALM2VecModel
+  torch_dtype: float32
+  transformers_version: 5.0.0.dev0
+  auto_map:
+    AutoConfig: configuration_alm2vec.ALM2VecConfig
+    AutoModel: modeling_alm2vec.ALM2VecModel
+onnxFiles: {}
+safetensorsSizeMb: 30998.4
+approxSizeMb: 30998.4
+fetchedAt: '2026-06-18T08:15:38.000Z'
