@@ -1,0 +1,263 @@
+_id: 6a35a302aa2b91c4e1f88863
+id: s-rahma/assistify-recommendation-model
+private: false
+pipeline_tag: sentence-similarity
+library_name: sentence-transformers
+tags:
+- sentence-transformers
+- safetensors
+- bert
+- sentence-similarity
+- feature-extraction
+- generated_from_trainer
+- dataset_size:35910
+- loss:MultipleNegativesRankingLoss
+- arxiv:1908.10084
+- arxiv:1807.03748
+- base_model:sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2
+- base_model:finetune:sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2
+- model-index
+- text-embeddings-inference
+- endpoints_compatible
+- region:us
+downloads: 0
+likes: 0
+modelId: s-rahma/assistify-recommendation-model
+author: s-rahma
+sha: b5bc6d2dc7cc77f85ca3dfd15f1b143ffc1c8660
+lastModified: '2026-06-19T20:42:38.000Z'
+gated: false
+disabled: false
+mask_token: '[MASK]'
+widgetData:
+- source_sentence: Do you remember my name from last time?
+  sentences:
+  - جهاز تركيز الأكسجين المحمول
+  - Nebulizer Machine
+  - Digital Thermometer
+- source_sentence: Where is my Infrared Ear Thermometer order?
+  sentences:
+  - Infrared Ear Thermometer
+  - Infrared Ear Thermometer
+  - Peak Flow Meter
+- source_sentence: اسمي يوسف وعندي صعوبة الحركة.
+  sentences:
+  - كرسي متحرك خفيف الوزن
+  - جهاز قياس السكر في الدم
+  - Inhaler Spacer
+- source_sentence: صباح الخير، تعرف تساعدني أوجد جهاز قياس الكيتون في الدم؟
+  sentences:
+  - جهاز قياس الكيتون في الدم
+  - جهاز قياس الأكسجين في الدم
+  - عصا المشي القابلة للطي
+- source_sentence: Digital Blood Pressure Monitor is not worth the money.
+  sentences:
+  - دعامة الركبة الطبية
+  - Digital Blood Pressure Monitor
+  - جهاز قياس ضغط الدم الرقمي
+model-index:
+- name: SentenceTransformer based on sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2
+  results:
+  - task:
+      type: information-retrieval
+      name: Information Retrieval
+    dataset:
+      name: recommendation eval
+      type: recommendation-eval
+    metrics:
+    - type: cosine_accuracy@1
+      value: 0.9312169312169312
+      name: Cosine Accuracy@1
+      verified: false
+    - type: cosine_accuracy@3
+      value: 0.9603174603174603
+      name: Cosine Accuracy@3
+      verified: false
+    - type: cosine_precision@3
+      value: 0.3201058201058201
+      name: Cosine Precision@3
+      verified: false
+    - type: cosine_recall@3
+      value: 0.9603174603174603
+      name: Cosine Recall@3
+      verified: false
+    - type: cosine_ndcg@3
+      value: 0.9474990708144372
+      name: Cosine Ndcg@3
+      verified: false
+    - type: cosine_ndcg@10
+      value: 0.9563800705755278
+      name: Cosine Ndcg@10
+      verified: false
+    - type: cosine_mrr@3
+      value: 0.9431216931216928
+      name: Cosine Mrr@3
+      verified: false
+    - type: cosine_mrr@10
+      value: 0.9477000923826316
+      name: Cosine Mrr@10
+      verified: false
+    - type: cosine_map@10
+      value: 0.9477000923826321
+      name: Cosine Map@10
+      verified: false
+config:
+  architectures:
+  - BertModel
+  model_type: bert
+  tokenizer_config:
+    bos_token: <s>
+    cls_token: <s>
+    eos_token: </s>
+    mask_token: <mask>
+    pad_token: <pad>
+    sep_token: </s>
+    unk_token: <unk>
+cardData:
+  tags:
+  - sentence-transformers
+  - sentence-similarity
+  - feature-extraction
+  - generated_from_trainer
+  - dataset_size:35910
+  - loss:MultipleNegativesRankingLoss
+  base_model: sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2
+  widget:
+  - source_sentence: Do you remember my name from last time?
+    sentences:
+    - جهاز تركيز الأكسجين المحمول
+    - Nebulizer Machine
+    - Digital Thermometer
+  - source_sentence: Where is my Infrared Ear Thermometer order?
+    sentences:
+    - Infrared Ear Thermometer
+    - Infrared Ear Thermometer
+    - Peak Flow Meter
+  - source_sentence: اسمي يوسف وعندي صعوبة الحركة.
+    sentences:
+    - كرسي متحرك خفيف الوزن
+    - جهاز قياس السكر في الدم
+    - Inhaler Spacer
+  - source_sentence: صباح الخير، تعرف تساعدني أوجد جهاز قياس الكيتون في الدم؟
+    sentences:
+    - جهاز قياس الكيتون في الدم
+    - جهاز قياس الأكسجين في الدم
+    - عصا المشي القابلة للطي
+  - source_sentence: Digital Blood Pressure Monitor is not worth the money.
+    sentences:
+    - دعامة الركبة الطبية
+    - Digital Blood Pressure Monitor
+    - جهاز قياس ضغط الدم الرقمي
+  pipeline_tag: sentence-similarity
+  library_name: sentence-transformers
+  metrics:
+  - cosine_accuracy@1
+  - cosine_accuracy@3
+  - cosine_precision@3
+  - cosine_recall@3
+  - cosine_ndcg@3
+  - cosine_ndcg@10
+  - cosine_mrr@3
+  - cosine_mrr@10
+  - cosine_map@10
+  model-index:
+  - name: SentenceTransformer based on sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2
+    results:
+    - task:
+        type: information-retrieval
+        name: Information Retrieval
+      dataset:
+        name: recommendation eval
+        type: recommendation-eval
+      metrics:
+      - type: cosine_accuracy@1
+        value: 0.9312169312169312
+        name: Cosine Accuracy@1
+        verified: false
+      - type: cosine_accuracy@3
+        value: 0.9603174603174603
+        name: Cosine Accuracy@3
+        verified: false
+      - type: cosine_precision@3
+        value: 0.3201058201058201
+        name: Cosine Precision@3
+        verified: false
+      - type: cosine_recall@3
+        value: 0.9603174603174603
+        name: Cosine Recall@3
+        verified: false
+      - type: cosine_ndcg@3
+        value: 0.9474990708144372
+        name: Cosine Ndcg@3
+        verified: false
+      - type: cosine_ndcg@10
+        value: 0.9563800705755278
+        name: Cosine Ndcg@10
+        verified: false
+      - type: cosine_mrr@3
+        value: 0.9431216931216928
+        name: Cosine Mrr@3
+        verified: false
+      - type: cosine_mrr@10
+        value: 0.9477000923826316
+        name: Cosine Mrr@10
+        verified: false
+      - type: cosine_map@10
+        value: 0.9477000923826321
+        name: Cosine Map@10
+        verified: false
+siblings:
+- rfilename: .gitattributes
+- rfilename: 1_Pooling/config.json
+- rfilename: README.md
+- rfilename: config.json
+- rfilename: config_sentence_transformers.json
+- rfilename: eval_results.json
+- rfilename: model.safetensors
+- rfilename: modules.json
+- rfilename: recommendation_training_dataset.jsonl
+- rfilename: sentence_bert_config.json
+- rfilename: tokenizer.json
+- rfilename: tokenizer_config.json
+- rfilename: training_dashboard.png
+spaces: []
+createdAt: '2026-06-19T20:13:54.000Z'
+safetensors:
+  parameters:
+    F32: 117653760
+  total: 117653760
+usedStorage: 0
+downloadsAllTime: 0
+inferenceProviderMapping: {}
+configJson:
+  add_cross_attention: false
+  architectures:
+  - BertModel
+  attention_probs_dropout_prob: 0.1
+  bos_token_id: null
+  classifier_dropout: null
+  dtype: float32
+  eos_token_id: null
+  gradient_checkpointing: false
+  hidden_act: gelu
+  hidden_dropout_prob: 0.1
+  hidden_size: 384
+  initializer_range: 0.02
+  intermediate_size: 1536
+  is_decoder: false
+  layer_norm_eps: 1.0e-12
+  max_position_embeddings: 512
+  model_type: bert
+  num_attention_heads: 12
+  num_hidden_layers: 12
+  pad_token_id: 0
+  position_embedding_type: absolute
+  tie_word_embeddings: true
+  transformers_version: 5.0.0
+  type_vocab_size: 2
+  use_cache: true
+  vocab_size: 250037
+onnxFiles: {}
+safetensorsSizeMb: 470.6
+approxSizeMb: 470.6
+fetchedAt: '2026-06-20T07:05:59.000Z'

@@ -1,0 +1,226 @@
+_id: 6a35b5585ae47cd0bf34ffe0
+id: Ayzengin/qwen-3.5-4b-v3
+private: false
+pipeline_tag: feature-extraction
+library_name: transformers
+tags:
+- transformers
+- safetensors
+- qwen3_5_text
+- text-generation
+- embeddings
+- qwen3.5
+- turkish-law
+- merged-lora
+- feature-extraction
+- arxiv:1910.09700
+- base_model:unsloth/Qwen3.5-4B
+- base_model:finetune:unsloth/Qwen3.5-4B
+- endpoints_compatible
+- region:us
+downloads: 0
+likes: 0
+modelId: Ayzengin/qwen-3.5-4b-v3
+author: Ayzengin
+sha: 3bf97b38aee760f6385f7d696e12424523c9f015
+lastModified: '2026-06-19T21:34:27.000Z'
+gated: false
+disabled: false
+model-index: null
+config:
+  architectures:
+  - Qwen3_5ForCausalLM
+  model_type: qwen3_5_text
+  tokenizer_config:
+    bos_token: null
+    eos_token: <|im_end|>
+    pad_token: <|vision_pad|>
+    unk_token: null
+  chat_template_jinja: "{%- set image_count = namespace(value=0) %}\n{%- set video_count = namespace(value=0) %}\n{%- macro\
+    \ render_content(content, do_vision_count, is_system_content=false) %}\n    {%- if content is string %}\n        {{- content\
+    \ }}\n    {%- elif content is iterable and content is not mapping %}\n        {%- for item in content %}\n           \
+    \ {%- if 'image' in item or 'image_url' in item or item.type == 'image' %}\n                {%- if is_system_content %}\n\
+    \                    {{- raise_exception('System message cannot contain images.') }}\n                {%- endif %}\n \
+    \               {%- if do_vision_count %}\n                    {%- set image_count.value = image_count.value + 1 %}\n\
+    \                {%- endif %}\n                {%- if add_vision_id %}\n                    {{- 'Picture ' ~ image_count.value\
+    \ ~ ': ' }}\n                {%- endif %}\n                {{- '<|vision_start|><|image_pad|><|vision_end|>' }}\n    \
+    \        {%- elif 'video' in item or item.type == 'video' %}\n                {%- if is_system_content %}\n          \
+    \          {{- raise_exception('System message cannot contain videos.') }}\n                {%- endif %}\n           \
+    \     {%- if do_vision_count %}\n                    {%- set video_count.value = video_count.value + 1 %}\n          \
+    \      {%- endif %}\n                {%- if add_vision_id %}\n                    {{- 'Video ' ~ video_count.value ~ ':\
+    \ ' }}\n                {%- endif %}\n                {{- '<|vision_start|><|video_pad|><|vision_end|>' }}\n         \
+    \   {%- elif 'text' in item %}\n                {{- item.text }}\n            {%- else %}\n                {{- raise_exception('Unexpected\
+    \ item type in content.') }}\n            {%- endif %}\n        {%- endfor %}\n    {%- elif content is none or content\
+    \ is undefined %}\n        {{- '' }}\n    {%- else %}\n        {{- raise_exception('Unexpected content type.') }}\n  \
+    \  {%- endif %}\n{%- endmacro %}\n{%- if not messages %}\n    {{- raise_exception('No messages provided.') }}\n{%- endif\
+    \ %}\n{%- set num_sys = 0 %}\n{%- set merged_system = '' %}\n{%- if messages[0].role == 'system' or messages[0].role ==\
+    \ 'developer' %}\n    {%- set first = render_content(messages[0].content, false, true)|trim %}\n    {%- if messages|length\
+    \ > 1 and (messages[1].role == 'system' or messages[1].role == 'developer') %}\n        {%- set second = render_content(messages[1].content,\
+    \ false, true)|trim %}\n        {%- set merged_system = first + '\\n' + second %}\n        {%- set num_sys = 2 %}\n  \
+    \  {%- else %}\n        {%- set merged_system = first %}\n        {%- set num_sys = 1 %}\n    {%- endif %}\n{%- endif\
+    \ %}\n{%- if tools and tools is iterable and tools is not mapping %}\n    {{- '<|im_start|>system\\n' }}\n    {{- \"#\
+    \ Tools\\n\\nYou have access to the following functions:\\n\\n<tools>\" }}\n    {%- for tool in tools %}\n        {{-\
+    \ \"\\n\" }}\n        {{- tool | tojson }}\n    {%- endfor %}\n    {{- \"\\n</tools>\" }}\n    {{- '\\n\\nIf you choose\
+    \ to call a function ONLY reply in the following format with NO suffix:\\n\\n<tool_call>\\n<function=example_function_name>\\\
+    n<parameter=example_parameter_1>\\nvalue_1\\n</parameter>\\n<parameter=example_parameter_2>\\nThis is the value for the\
+    \ second parameter\\nthat can span\\nmultiple lines\\n</parameter>\\n</function>\\n</tool_call>\\n\\n<IMPORTANT>\\nReminder:\\\
+    n- Function calls MUST follow the specified format: an inner <function=...></function> block must be nested within <tool_call></tool_call>\
+    \ XML tags\\n- Required parameters MUST be specified\\n- You may provide optional reasoning for your function call in\
+    \ natural language BEFORE the function call, but NOT after\\n- If there is no function call available, answer the question\
+    \ like normal with your current knowledge and do not tell the user about function calls\\n</IMPORTANT>' }}\n    {%- if\
+    \ merged_system %}\n        {{- '\\n\\n' + merged_system }}\n    {%- endif %}\n    {{- '<|im_end|>\\n' }}\n{%- else %}\n\
+    \    {%- if merged_system %}\n        {{- '<|im_start|>system\\n' + merged_system + '<|im_end|>\\n' }}\n    {%- endif\
+    \ %}\n{%- endif %}\n{%- set ns = namespace(multi_step_tool=true, last_query_index=messages|length - 1) %}\n{%- for message\
+    \ in messages[::-1] %}\n    {%- set index = (messages|length - 1) - loop.index0 %}\n    {%- if ns.multi_step_tool and\
+    \ message.role == \"user\" %}\n        {%- set content = render_content(message.content, false)|trim %}\n        {%- if\
+    \ not(content.startswith('<tool_response>') and content.endswith('</tool_response>')) %}\n            {%- set ns.multi_step_tool\
+    \ = false %}\n            {%- set ns.last_query_index = index %}\n        {%- endif %}\n    {%- endif %}\n{%- endfor %}\n\
+    {%- for message in messages %}\n    {%- if loop.index0 >= num_sys and message.role != \"system\" and message.role != \"\
+    developer\" %}\n    {%- set content = render_content(message.content, true)|trim %}\n    {%- if message.role == \"user\"\
+    \ %}\n        {{- '<|im_start|>' + message.role + '\\n' + content + '<|im_end|>' + '\\n' }}\n    {%- elif message.role\
+    \ == \"assistant\" %}\n        {%- set reasoning_content = '' %}\n        {%- if message.reasoning_content is string %}\n\
+    \            {%- set reasoning_content = message.reasoning_content %}\n        {%- else %}\n            {%- if '</think>'\
+    \ in content %}\n                {%- set reasoning_content = content.split('</think>')[0].rstrip('\\n').split('<think>')[-1].lstrip('\\\
+    n') %}\n                {%- set content = content.split('</think>')[-1].lstrip('\\n') %}\n            {%- endif %}\n \
+    \       {%- endif %}\n        {%- set reasoning_content = reasoning_content|trim %}\n        {%- if loop.index0 > ns.last_query_index\
+    \ %}\n            {{- '<|im_start|>' + message.role + '\\n<think>\\n' + reasoning_content + '\\n</think>\\n\\n' + content\
+    \ }}\n        {%- else %}\n            {{- '<|im_start|>' + message.role + '\\n' + content }}\n        {%- endif %}\n\
+    \        {%- if message.tool_calls and message.tool_calls is iterable and message.tool_calls is not mapping %}\n     \
+    \       {%- for tool_call in message.tool_calls %}\n                {%- if tool_call.function is defined %}\n        \
+    \            {%- set tool_call = tool_call.function %}\n                {%- endif %}\n                {%- if loop.first\
+    \ %}\n                    {%- if content|trim %}\n                        {{- '\\n\\n<tool_call>\\n<function=' + tool_call.name\
+    \ + '>\\n' }}\n                    {%- else %}\n                        {{- '<tool_call>\\n<function=' + tool_call.name\
+    \ + '>\\n' }}\n                    {%- endif %}\n                {%- else %}\n                    {{- '\\n<tool_call>\\\
+    n<function=' + tool_call.name + '>\\n' }}\n                {%- endif %}\n                {%- if tool_call.arguments is\
+    \ mapping %}\n                    {%- for args_name in tool_call.arguments %}\n                        {%- set args_value\
+    \ = tool_call.arguments[args_name] %}\n                        {{- '<parameter=' + args_name + '>\\n' }}\n           \
+    \             {%- set args_value = args_value | tojson | safe if args_value is mapping or (args_value is sequence and\
+    \ args_value is not string) else args_value | string %}\n                        {{- args_value }}\n                 \
+    \       {{- '\\n</parameter>\\n' }}\n                    {%- endfor %}\n                {%- endif %}\n               \
+    \ {{- '</function>\\n</tool_call>' }}\n            {%- endfor %}\n        {%- endif %}\n        {{- '<|im_end|>\\n' }}\n\
+    \    {%- elif message.role == \"tool\" %}\n        {%- if loop.previtem and loop.previtem.role != \"tool\" %}\n      \
+    \      {{- '<|im_start|>user' }}\n        {%- endif %}\n        {{- '\\n<tool_response>\\n' }}\n        {{- content }}\n\
+    \        {{- '\\n</tool_response>' }}\n        {%- if not loop.last and loop.nextitem.role != \"tool\" %}\n          \
+    \  {{- '<|im_end|>\\n' }}\n        {%- elif loop.last %}\n            {{- '<|im_end|>\\n' }}\n        {%- endif %}\n \
+    \   {%- endif %}\n    {%- endif %}\n{%- endfor %}\n{%- if add_generation_prompt %}\n    {{- '<|im_start|>assistant\\n'\
+    \ }}\n    {%- if enable_thinking is defined and enable_thinking is false %}\n        {{- '<think>\\n\\n</think>\\n\\n'\
+    \ }}\n    {%- else %}\n        {{- '<think>\\n' }}\n    {%- endif %}\n{%- endif %}\n{#- Unsloth fixes - developer role,\
+    \ tool calling #}\n"
+cardData:
+  base_model: unsloth/Qwen3.5-4B
+  library_name: transformers
+  pipeline_tag: feature-extraction
+  tags:
+  - embeddings
+  - qwen3.5
+  - turkish-law
+  - merged-lora
+transformersInfo:
+  auto_model: AutoModelForMultimodalLM
+  pipeline_tag: text-generation
+  processor: AutoTokenizer
+siblings:
+- rfilename: .gitattributes
+- rfilename: README.md
+- rfilename: chat_template.jinja
+- rfilename: config.json
+- rfilename: generation_config.json
+- rfilename: model-00001-of-00003.safetensors
+- rfilename: model-00002-of-00003.safetensors
+- rfilename: model-00003-of-00003.safetensors
+- rfilename: model.safetensors.index.json
+- rfilename: parity_report_ckpt336_cache.json
+- rfilename: processor_config.json
+- rfilename: tokenizer.json
+- rfilename: tokenizer_config.json
+spaces: []
+createdAt: '2026-06-19T21:32:08.000Z'
+safetensors:
+  parameters:
+    BF16: 4205751296
+  total: 4205751296
+usedStorage: 0
+downloadsAllTime: 0
+inferenceProviderMapping: {}
+configJson:
+  architectures:
+  - Qwen3_5ForCausalLM
+  attention_bias: false
+  attention_dropout: 0.0
+  attn_output_gate: true
+  bos_token_id: null
+  dtype: bfloat16
+  eos_token_id: 248044
+  full_attention_interval: 4
+  head_dim: 256
+  hidden_act: silu
+  hidden_size: 2560
+  initializer_range: 0.02
+  intermediate_size: 9216
+  layer_types:
+  - linear_attention
+  - linear_attention
+  - linear_attention
+  - full_attention
+  - linear_attention
+  - linear_attention
+  - linear_attention
+  - full_attention
+  - linear_attention
+  - linear_attention
+  - linear_attention
+  - full_attention
+  - linear_attention
+  - linear_attention
+  - linear_attention
+  - full_attention
+  - linear_attention
+  - linear_attention
+  - linear_attention
+  - full_attention
+  - linear_attention
+  - linear_attention
+  - linear_attention
+  - full_attention
+  - linear_attention
+  - linear_attention
+  - linear_attention
+  - full_attention
+  - linear_attention
+  - linear_attention
+  - linear_attention
+  - full_attention
+  linear_conv_kernel_dim: 4
+  linear_key_head_dim: 128
+  linear_num_key_heads: 16
+  linear_num_value_heads: 32
+  linear_value_head_dim: 128
+  mamba_ssm_dtype: float32
+  max_position_embeddings: 262144
+  mlp_only_layers: []
+  model_type: qwen3_5_text
+  mtp_num_hidden_layers: 1
+  mtp_use_dedicated_embeddings: false
+  num_attention_heads: 16
+  num_hidden_layers: 32
+  num_key_value_heads: 4
+  pad_token_id: null
+  partial_rotary_factor: 0.25
+  rms_norm_eps: 1.0e-06
+  rope_parameters:
+    mrope_interleaved: true
+    mrope_section:
+    - 11
+    - 11
+    - 10
+    partial_rotary_factor: 0.25
+    rope_theta: 10000000
+    rope_type: default
+  tie_word_embeddings: true
+  transformers_version: 5.5.0
+  use_cache: true
+  vocab_size: 248320
+onnxFiles: {}
+safetensorsSizeMb: 8411.6
+approxSizeMb: 8411.5
+fetchedAt: '2026-06-20T07:05:59.000Z'
