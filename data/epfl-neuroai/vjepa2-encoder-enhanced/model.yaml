@@ -1,0 +1,118 @@
+_id: 6a3d3cb04ee72f5bd57c80e3
+id: epfl-neuroai/vjepa2-encoder-enhanced
+private: false
+pipeline_tag: feature-extraction
+library_name: transformers
+tags:
+- transformers
+- pytorch
+- vjepa2_fmri_encoder_enhanced
+- neuroscience
+- fmri
+- video
+- v-jepa
+- brain-alignment
+- feature-extraction
+- custom_code
+- arxiv:2404.08471
+- arxiv:2506.09985
+- endpoints_compatible
+- region:us
+downloads: 0
+likes: 0
+modelId: epfl-neuroai/vjepa2-encoder-enhanced
+author: epfl-neuroai
+sha: 4959a2425e45985170891f407426cad938117a75
+lastModified: '2026-06-25T20:44:07.000Z'
+gated: false
+disabled: false
+model-index: null
+config:
+  model_type: vjepa2_fmri_encoder_enhanced
+  auto_map:
+    AutoConfig: configuration_vjepa2_fmri_encoder.VJEPA2FMRIEncoderConfig
+    AutoModel: modeling_vjepa2_fmri_encoder.VJEPA2FMRIEncoderModel
+cardData:
+  tags:
+  - neuroscience
+  - fmri
+  - video
+  - v-jepa
+  - pytorch
+  - brain-alignment
+  library_name: transformers
+  pipeline_tag: feature-extraction
+transformersInfo:
+  auto_model: AutoModel
+siblings:
+- rfilename: .gitattributes
+- rfilename: README.md
+- rfilename: assets/comparison_metrics.png
+- rfilename: basic_all.pth
+- rfilename: basic_bmd_to_mcmahon.pth
+- rfilename: basic_joint_train_to_joint_val.pth
+- rfilename: basic_mcmahon_to_bmd.pth
+- rfilename: config.json
+- rfilename: configuration_vjepa2_fmri_encoder.py
+- rfilename: enhanced_all.pth
+- rfilename: enhanced_bmd_to_mcmahon.pth
+- rfilename: enhanced_joint_train_to_joint_val.pth
+- rfilename: enhanced_mcmahon_to_bmd.pth
+- rfilename: metrics.json
+- rfilename: modeling_vjepa2_fmri_encoder.py
+- rfilename: pytorch_model.bin
+- rfilename: requirements.txt
+- rfilename: vitl.pt
+- rfilename: vjepa2_offline_encoder_original_basic.pth
+spaces: []
+createdAt: '2026-06-25T14:35:28.000Z'
+usedStorage: 8053796260
+downloadsAllTime: 0
+inferenceProviderMapping: {}
+configJson:
+  model_type: vjepa2_fmri_encoder_enhanced
+  auto_map:
+    AutoConfig: configuration_vjepa2_fmri_encoder.VJEPA2FMRIEncoderConfig
+    AutoModel: modeling_vjepa2_fmri_encoder.VJEPA2FMRIEncoderModel
+  default_variant: enhanced_all
+  vjepa_size: large
+  image_size: 224
+  normalize_input: true
+  backbone_filename: vitl.pt
+  variants:
+    basic_bmd_to_mcmahon:
+      checkpoint_filename: basic_bmd_to_mcmahon.pth
+      decoder_format: ridge_selected_layers
+      label: Basic BMD->McMahon
+    enhanced_bmd_to_mcmahon:
+      checkpoint_filename: enhanced_bmd_to_mcmahon.pth
+      decoder_format: bagged_pls_factorized_select_then_avg
+      label: Enhanced BMD->McMahon
+    basic_mcmahon_to_bmd:
+      checkpoint_filename: basic_mcmahon_to_bmd.pth
+      decoder_format: ridge_selected_layers
+      label: Basic McMahon->BMD
+    enhanced_mcmahon_to_bmd:
+      checkpoint_filename: enhanced_mcmahon_to_bmd.pth
+      decoder_format: bagged_pls_factorized_select_then_avg
+      label: Enhanced McMahon->BMD
+    basic_joint_train_to_joint_val:
+      checkpoint_filename: basic_joint_train_to_joint_val.pth
+      decoder_format: ridge_selected_layers
+      label: Basic joint train->joint val
+    enhanced_joint_train_to_joint_val:
+      checkpoint_filename: enhanced_joint_train_to_joint_val.pth
+      decoder_format: bagged_pls_factorized_select_then_avg
+      label: Enhanced joint train->joint val
+    basic_all:
+      checkpoint_filename: basic_all.pth
+      decoder_format: ridge_selected_layers
+      label: Basic all-data
+    enhanced_all:
+      checkpoint_filename: enhanced_all.pth
+      decoder_format: bagged_pls_factorized_select_then_avg
+      label: Enhanced all-data
+onnxFiles: {}
+safetensorsSizeMb: 0.0
+approxSizeMb: 0.0
+fetchedAt: '2026-06-26T07:00:37.000Z'
