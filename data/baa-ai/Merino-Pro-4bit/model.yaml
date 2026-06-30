@@ -1,0 +1,96 @@
+_id: 6a3b2d785b21f384116ba76f
+id: baa-ai/Merino-Pro-4bit
+private: false
+pipeline_tag: sentence-similarity
+library_name: sentence-transformers
+tags:
+- sentence-transformers
+- baa-embedding-reranker
+- retrieval
+- embeddings
+- reranker
+- cross-encoder
+- rag
+- sentence-similarity
+- license:other
+- endpoints_compatible
+- region:us
+downloads: 14
+likes: 0
+modelId: baa-ai/Merino-Pro-4bit
+author: baa-ai
+sha: 9cd5fcd73d10a4c5ed888f19b7edd6131643a12c
+lastModified: '2026-06-30T00:07:45.000Z'
+gated: false
+disabled: false
+widgetData:
+- source_sentence: That is a happy person
+  sentences:
+  - That is a happy dog
+  - That is a very happy person
+  - Today is a sunny day
+model-index: null
+config:
+  model_type: baa-embedding-reranker
+cardData:
+  license: other
+  license_name: baa-proprietary
+  library_name: sentence-transformers
+  tags:
+  - retrieval
+  - embeddings
+  - reranker
+  - cross-encoder
+  - rag
+  - sentence-similarity
+  pipeline_tag: sentence-similarity
+siblings:
+- rfilename: .gitattributes
+- rfilename: LICENSE
+- rfilename: LICENSE-xlm-roberta-large.txt
+- rfilename: MODEL_CARD.md
+- rfilename: NOTICE
+- rfilename: README.md
+- rfilename: config.json
+- rfilename: embedder/config.json
+- rfilename: embedder/config_sentence_transformers.json
+- rfilename: embedder/modules.json
+- rfilename: embedder/sentence_bert_config.json
+- rfilename: embedder/tokenizer.json
+- rfilename: embedder/tokenizer_config.json
+- rfilename: modeling_baa.py
+- rfilename: quant_config.json
+- rfilename: requirements.txt
+- rfilename: reranker/config.json
+- rfilename: reranker/config_sentence_transformers.json
+- rfilename: reranker/modules.json
+- rfilename: reranker/sentence_bert_config.json
+- rfilename: reranker/tokenizer.json
+- rfilename: reranker/tokenizer_config.json
+- rfilename: weights_q4.safetensors
+spaces: []
+createdAt: '2026-06-24T01:06:00.000Z'
+usedStorage: 909487057
+downloadsAllTime: 14
+inferenceProviderMapping: {}
+configJson:
+  model_type: baa-embedding-reranker
+  name: Merino-Pro-4bit
+  version: '1'
+  license: Proprietary — BAA AI (Black Sheep AI); xlm-roberta-large backbone under MIT
+  architecture: shared-word-embedding MoE (one XLM-R-large word-embedding table shared across the embedder and reranker stacks)
+  roles:
+    embed: '1024-d bi-encoder, CLS-pool, normalized, ''query: '' prefix for queries'
+    rerank: cross-encoder, single relevance logit
+  backbone: xlm-roberta-large (MIT)
+  eval:
+    holdout: 450-q ML-PDF
+    embed_hit@3: 0.9511
+    rerank_pipeline_hit@3: 0.9511
+    footprint_vs_two_models: ~0.77x (shared word-embeddings, ~256M params stored once)
+  loader: 'modeling_baa.py :: BaaEmbeddingReranker'
+  quantization: group-64 int4 (RTN), fp16 compute
+onnxFiles: {}
+safetensorsSizeMb: 875.3
+approxSizeMb: 0.0
+fetchedAt: '2026-06-30T07:00:56.000Z'
