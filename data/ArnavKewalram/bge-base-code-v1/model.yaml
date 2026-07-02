@@ -1,0 +1,419 @@
+_id: 6a45abba603dca93944109ce
+id: ArnavKewalram/bge-base-code-v1
+private: false
+pipeline_tag: sentence-similarity
+library_name: sentence-transformers
+tags:
+- sentence-transformers
+- safetensors
+- bert
+- sentence-similarity
+- feature-extraction
+- generated_from_trainer
+- dataset_size:200000
+- loss:MatryoshkaLoss
+- loss:MultipleNegativesRankingLoss
+- arxiv:1908.10084
+- arxiv:2205.13147
+- arxiv:1807.03748
+- base_model:BAAI/bge-base-en-v1.5
+- base_model:finetune:BAAI/bge-base-en-v1.5
+- model-index
+- text-embeddings-inference
+- endpoints_compatible
+- region:us
+downloads: 0
+likes: 0
+modelId: ArnavKewalram/bge-base-code-v1
+author: ArnavKewalram
+sha: 43f8df7ab8f28e882bb077dbd72d6d125c1ed3e1
+lastModified: '2026-07-02T00:08:20.000Z'
+gated: false
+disabled: false
+mask_token: '[MASK]'
+widgetData:
+- source_sentence: Sets the global variables $rects and $origRectSpecs
+  sentences:
+  - "def modify_ranking(tournament):\n    database = TinyDB('db.json')\n    # recuperation de tous les joueurs du tournoi\n\
+    \    players_table = database.table('players')\n    list_players = get_player_list(tournament)\n    # Modification du\
+    \ rang joueur par joueur\n    for player in list_players:\n        new_ranking = view.modify_ranking_view(player)\n  \
+    \      players_table.update({'Classement': new_ranking}, doc_ids=[player.doc_id])"
+  - "function setConstants() {\n        const wrapItems = \".image-analysis-wrapper .face-wrap, .image-analysis-wrapper .score-wrap,\
+    \ .image-analysis-wrapper .attribute-wrap, .image-analysis-wrapper .region-block, .image-analysis-wrapper .region-block\
+    \ .word-block .word-wrap\";\n\n        $rects = jQuery(\".image-analysis-wrapper .rectangle\");\n\n        // Iterate\
+    \ over each rectangle and save the width, height, top position,\n        // left position, closest stats block element,\
+    \ and position of the closest\n        // stats block element to an object.  Each object is then added to the \n     \
+    \   // $origRectSpecs array for global use.\n        $origRectSpecs = $rects.map(function () {\n            closestWrapItems\
+    \ = jQuery(this).siblings(wrapItems);\n\n            const stats = closestWrapItems.map(function () {\n              \
+    \  return {\n                    origStatTop: jQuery(this).position().top || parseInt(jQuery(this).css(\"top\")),\n  \
+    \                  origStatLeft: jQuery(this).position().left || parseInt(jQuery(this).css(\"left\"))\n              \
+    \  }\n            })\n\n            return {\n                origRectWidth: jQuery(this).width(),\n                origRectHeight:\
+    \ jQuery(this).height(),\n                origRectTop: jQuery(this).position().top || parseInt(jQuery(this).css(\"top\"\
+    )), // if the rect is on a tab that is currently not displayed it has a position of 0, so this check gets the css instead\
+    \ so we don't lose the value\n                origRectLeft: jQuery(this).position().left || parseInt(jQuery(this).css(\"\
+    left\")),\n                statBlock: closestWrapItems[0],\n                statPosition: stats[0]\n            }\n  \
+    \      })\n    }"
+  - "reset() {\n\n        // Set the initial crop to match any given fixed aspect ratio (or\n        // default to a square\
+    \ crop 1:1).\n        let aspectRatio = this._initialAspectRatio\n\n        // Calculate the initial crop size such that\
+    \ it fits within the bounds\n        let width = getWidth(this.bounds)\n        let height = getWidth(this.bounds) / aspectRatio\n\
+    \n        if (aspectRatio < width / getHeight(this.bounds)) {\n            width = getHeight(this.bounds) * aspectRatio\n\
+    \            height = getHeight(this.bounds)\n        }\n\n        // Calculate the initial crop position to be central\
+    \ to the bounds\n        const x = (getWidth(this.bounds) - width) / 2\n        const y = (getHeight(this.bounds) - height)\
+    \ / 2\n\n        // Set the region\n        this.region = [\n            [x, y],\n            [x + width, y + height]\n\
+    \        ]\n    }"
+- source_sentence: Returns true if the motor is at its lower limit.
+  sentences:
+  - "def is_lower_limit(self):\n    is_lower = self.get_raw_status() & self.STATUS_LLIM\n    return bool(is_lower)"
+  - "def testLowerBound(self,time,accel):\n\t\tif (time - self.timestamp) > ParserSettings.TIME_DELTA:#tests lockout threshold\
+    \ of a flick event\n\t\t\tif accel > self.lower:#tests to see if the flick maximum is met yet, relative to the previous\
+    \ magnitude\n\t\t\t\tself.timestamp \t= time#set appropriate values when flick triggered\n\t\t\t\ttoReturn \t\t= self.lower\n\
+    \t\t\t\tself.lower\t \t= 0#reset flick for next magnitude test\n\t\t\t\treturn toReturn\n\t\t\telse:\n\t\t\t\tself.lower\
+    \ = accel#if no flick yet, update most recent flick to test\n\t\t\t\treturn 0\n\t\telse:\n\t\t\treturn 0"
+  - "function checkVisibility(message)\n{\n\t// Scroll the view down a certain amount\n\t$chatlogs.stop().animate({scrollTop:\
+    \ $chatlogs[0].scrollHeight});\n}"
+- source_sentence: Extracts an object of params the given route cares about from the given params object.
+  sentences:
+  - "function getRouteParams(route, params) {\n\t  var routeParams = {};\n\t\n\t  if (!route.path) return routeParams;\n\t\
+    \n\t  (0, _PatternUtils.getParamNames)(route.path).forEach(function (p) {\n\t    if (Object.prototype.hasOwnProperty.call(params,\
+    \ p)) {\n\t      routeParams[p] = params[p];\n\t    }\n\t  });\n\t\n\t  return routeParams;\n\t}"
+  - "public static void initImageLoader(Context context) {\n\t\tFile cacheDir = StorageUtils.getCacheDirectory(context);\n\
+    \t\tImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(context)\n\t\t\t\t.threadPriority(Thread.NORM_PRIORITY\
+    \ - 2)\n\t\t\t\t.denyCacheImageMultipleSizesInMemory() \n//\t\t\t\t.discCache(new UnlimitedDiscCache(cacheDir)) // default\n\
+    \t\t\t\t.discCacheFileNameGenerator(new Md5FileNameGenerator())\n\t\t\t\t.memoryCache(new LruMemoryCache(2 * 1024 * 1024))\n\
+    \t\t\t\t.tasksProcessingOrder(QueueProcessingType.LIFO)\n\t\t\t\t.writeDebugLogs() // Remove for release app\t\t\t\t\n\
+    \t\t\t\t.build();\n\t\t// Initialize ImageLoader with configuration.\n\t\tImageLoader.getInstance().init(config);\n\t}"
+  - "function getRouteParams(route, params) {\n\t  var routeParams = {};\n\n\t  if (!route.path) return routeParams;\n\n\t\
+    \  (0, _PatternUtils.getParamNames)(route.path).forEach(function (p) {\n\t    if (Object.prototype.hasOwnProperty.call(params,\
+    \ p)) {\n\t      routeParams[p] = params[p];\n\t    }\n\t  });\n\n\t  return routeParams;\n\t}"
+- source_sentence: select all as they all have a class of "section" return array of IDs
+  sentences:
+  - "func (o *BookBuyOK) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {\n\n\trw.WriteHeader(200)\n\tif\
+    \ o.Payload != nil {\n\t\tpayload := o.Payload\n\t\tif err := producer.Produce(rw, payload); err != nil {\n\t\t\tpanic(err)\
+    \ // let the recovery middleware deal with this\n\t\t}\n\t}\n}"
+  - "function getMenuCLassesIDs()\n    {\n        let IdsArray = [];\n        const elements = document.querySelectorAll('.banner,.section');\n\
+    \        for(const elm of elements)\n            {\n                IdsArray.push(elm.id);\n            }\n        \n\
+    \        return IdsArray;\n    }"
+  - "getAllSectionsForRegion(region) {\n        if (!region) {\n            return null;\n        }\n        return region.getElementsByClassName(A11yClassNames.SECTION);\n\
+    \    }"
+- source_sentence: For component xyz, returns "xyz[]"
+  sentences:
+  - "public String toString() {\n\t    \tif(size == 0) {\n\t    \t\treturn \"[]\";\n\t    \t}else {\n\t    \t\t\n\t    \t\t\
+    String result = \"[\" + elementData[0];\n\t    \t\tfor(int i = 1; i < size; i++) {\n\t    \t\t\tresult += \", \" + elementData[i];\n\
+    \t    \t\t}\n\t    \t\t\n\t    \t\tresult += \"]\";\n\t    \t\t\n\t    \t\treturn result;\n\t    \t}\n\t    }"
+  - "def masterPath(self):\n\t\treturn fl.File( self._path + '/master.data' )"
+  - "private static final String getArrayTypeName(String typeName) {\n    final String arrayTypeName = builtInArrayComponentName2ArrayTypeName.get(typeName);\n\
+    \    return (null == arrayTypeName) ? typeName + ARRAY_TYPE_SUFFIX : arrayTypeName;\n  }"
+model-index:
+- name: SentenceTransformer based on BAAI/bge-base-en-v1.5
+  results:
+  - task:
+      type: information-retrieval
+      name: Information Retrieval
+    dataset:
+      name: cornstack eval
+      type: cornstack_eval
+    metrics:
+    - type: cosine_accuracy@1
+      value: 0.718
+      name: Cosine Accuracy@1
+      verified: false
+    - type: cosine_accuracy@5
+      value: 0.884
+      name: Cosine Accuracy@5
+      verified: false
+    - type: cosine_accuracy@10
+      value: 0.924
+      name: Cosine Accuracy@10
+      verified: false
+    - type: cosine_precision@1
+      value: 0.718
+      name: Cosine Precision@1
+      verified: false
+    - type: cosine_precision@3
+      value: 0.2866666666666666
+      name: Cosine Precision@3
+      verified: false
+    - type: cosine_precision@5
+      value: 0.1768
+      name: Cosine Precision@5
+      verified: false
+    - type: cosine_precision@10
+      value: 0.09240000000000001
+      name: Cosine Precision@10
+      verified: false
+    - type: cosine_recall@1
+      value: 0.718
+      name: Cosine Recall@1
+      verified: false
+    - type: cosine_recall@3
+      value: 0.86
+      name: Cosine Recall@3
+      verified: false
+    - type: cosine_recall@5
+      value: 0.884
+      name: Cosine Recall@5
+      verified: false
+    - type: cosine_recall@10
+      value: 0.924
+      name: Cosine Recall@10
+      verified: false
+    - type: cosine_ndcg@10
+      value: 0.8259696432548304
+      name: Cosine Ndcg@10
+      verified: false
+    - type: cosine_mrr@1
+      value: 0.718
+      name: Cosine Mrr@1
+      verified: false
+    - type: cosine_mrr@5
+      value: 0.7882666666666666
+      name: Cosine Mrr@5
+      verified: false
+    - type: cosine_mrr@10
+      value: 0.7940396825396825
+      name: Cosine Mrr@10
+      verified: false
+    - type: cosine_map@100
+      value: 0.7967267778119025
+      name: Cosine Map@100
+      verified: false
+config:
+  architectures:
+  - BertModel
+  model_type: bert
+  tokenizer_config:
+    cls_token: '[CLS]'
+    mask_token: '[MASK]'
+    pad_token: '[PAD]'
+    sep_token: '[SEP]'
+    unk_token: '[UNK]'
+cardData:
+  tags:
+  - sentence-transformers
+  - sentence-similarity
+  - feature-extraction
+  - generated_from_trainer
+  - dataset_size:200000
+  - loss:MatryoshkaLoss
+  - loss:MultipleNegativesRankingLoss
+  base_model: BAAI/bge-base-en-v1.5
+  widget:
+  - source_sentence: Sets the global variables $rects and $origRectSpecs
+    sentences:
+    - "def modify_ranking(tournament):\n    database = TinyDB('db.json')\n    # recuperation de tous les joueurs du tournoi\n\
+      \    players_table = database.table('players')\n    list_players = get_player_list(tournament)\n    # Modification du\
+      \ rang joueur par joueur\n    for player in list_players:\n        new_ranking = view.modify_ranking_view(player)\n\
+      \        players_table.update({'Classement': new_ranking}, doc_ids=[player.doc_id])"
+    - "function setConstants() {\n        const wrapItems = \".image-analysis-wrapper .face-wrap, .image-analysis-wrapper\
+      \ .score-wrap, .image-analysis-wrapper .attribute-wrap, .image-analysis-wrapper .region-block, .image-analysis-wrapper\
+      \ .region-block .word-block .word-wrap\";\n\n        $rects = jQuery(\".image-analysis-wrapper .rectangle\");\n\n  \
+      \      // Iterate over each rectangle and save the width, height, top position,\n        // left position, closest stats\
+      \ block element, and position of the closest\n        // stats block element to an object.  Each object is then added\
+      \ to the \n        // $origRectSpecs array for global use.\n        $origRectSpecs = $rects.map(function () {\n    \
+      \        closestWrapItems = jQuery(this).siblings(wrapItems);\n\n            const stats = closestWrapItems.map(function\
+      \ () {\n                return {\n                    origStatTop: jQuery(this).position().top || parseInt(jQuery(this).css(\"\
+      top\")),\n                    origStatLeft: jQuery(this).position().left || parseInt(jQuery(this).css(\"left\"))\n \
+      \               }\n            })\n\n            return {\n                origRectWidth: jQuery(this).width(),\n  \
+      \              origRectHeight: jQuery(this).height(),\n                origRectTop: jQuery(this).position().top || parseInt(jQuery(this).css(\"\
+      top\")), // if the rect is on a tab that is currently not displayed it has a position of 0, so this check gets the css\
+      \ instead so we don't lose the value\n                origRectLeft: jQuery(this).position().left || parseInt(jQuery(this).css(\"\
+      left\")),\n                statBlock: closestWrapItems[0],\n                statPosition: stats[0]\n            }\n\
+      \        })\n    }"
+    - "reset() {\n\n        // Set the initial crop to match any given fixed aspect ratio (or\n        // default to a square\
+      \ crop 1:1).\n        let aspectRatio = this._initialAspectRatio\n\n        // Calculate the initial crop size such\
+      \ that it fits within the bounds\n        let width = getWidth(this.bounds)\n        let height = getWidth(this.bounds)\
+      \ / aspectRatio\n\n        if (aspectRatio < width / getHeight(this.bounds)) {\n            width = getHeight(this.bounds)\
+      \ * aspectRatio\n            height = getHeight(this.bounds)\n        }\n\n        // Calculate the initial crop position\
+      \ to be central to the bounds\n        const x = (getWidth(this.bounds) - width) / 2\n        const y = (getHeight(this.bounds)\
+      \ - height) / 2\n\n        // Set the region\n        this.region = [\n            [x, y],\n            [x + width,\
+      \ y + height]\n        ]\n    }"
+  - source_sentence: Returns true if the motor is at its lower limit.
+    sentences:
+    - "def is_lower_limit(self):\n    is_lower = self.get_raw_status() & self.STATUS_LLIM\n    return bool(is_lower)"
+    - "def testLowerBound(self,time,accel):\n\t\tif (time - self.timestamp) > ParserSettings.TIME_DELTA:#tests lockout threshold\
+      \ of a flick event\n\t\t\tif accel > self.lower:#tests to see if the flick maximum is met yet, relative to the previous\
+      \ magnitude\n\t\t\t\tself.timestamp \t= time#set appropriate values when flick triggered\n\t\t\t\ttoReturn \t\t= self.lower\n\
+      \t\t\t\tself.lower\t \t= 0#reset flick for next magnitude test\n\t\t\t\treturn toReturn\n\t\t\telse:\n\t\t\t\tself.lower\
+      \ = accel#if no flick yet, update most recent flick to test\n\t\t\t\treturn 0\n\t\telse:\n\t\t\treturn 0"
+    - "function checkVisibility(message)\n{\n\t// Scroll the view down a certain amount\n\t$chatlogs.stop().animate({scrollTop:\
+      \ $chatlogs[0].scrollHeight});\n}"
+  - source_sentence: Extracts an object of params the given route cares about from the given params object.
+    sentences:
+    - "function getRouteParams(route, params) {\n\t  var routeParams = {};\n\t\n\t  if (!route.path) return routeParams;\n\
+      \t\n\t  (0, _PatternUtils.getParamNames)(route.path).forEach(function (p) {\n\t    if (Object.prototype.hasOwnProperty.call(params,\
+      \ p)) {\n\t      routeParams[p] = params[p];\n\t    }\n\t  });\n\t\n\t  return routeParams;\n\t}"
+    - "public static void initImageLoader(Context context) {\n\t\tFile cacheDir = StorageUtils.getCacheDirectory(context);\n\
+      \t\tImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(context)\n\t\t\t\t.threadPriority(Thread.NORM_PRIORITY\
+      \ - 2)\n\t\t\t\t.denyCacheImageMultipleSizesInMemory() \n//\t\t\t\t.discCache(new UnlimitedDiscCache(cacheDir)) // default\n\
+      \t\t\t\t.discCacheFileNameGenerator(new Md5FileNameGenerator())\n\t\t\t\t.memoryCache(new LruMemoryCache(2 * 1024 *\
+      \ 1024))\n\t\t\t\t.tasksProcessingOrder(QueueProcessingType.LIFO)\n\t\t\t\t.writeDebugLogs() // Remove for release app\t\
+      \t\t\t\n\t\t\t\t.build();\n\t\t// Initialize ImageLoader with configuration.\n\t\tImageLoader.getInstance().init(config);\n\
+      \t}"
+    - "function getRouteParams(route, params) {\n\t  var routeParams = {};\n\n\t  if (!route.path) return routeParams;\n\n\
+      \t  (0, _PatternUtils.getParamNames)(route.path).forEach(function (p) {\n\t    if (Object.prototype.hasOwnProperty.call(params,\
+      \ p)) {\n\t      routeParams[p] = params[p];\n\t    }\n\t  });\n\n\t  return routeParams;\n\t}"
+  - source_sentence: select all as they all have a class of "section" return array of IDs
+    sentences:
+    - "func (o *BookBuyOK) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {\n\n\trw.WriteHeader(200)\n\t\
+      if o.Payload != nil {\n\t\tpayload := o.Payload\n\t\tif err := producer.Produce(rw, payload); err != nil {\n\t\t\tpanic(err)\
+      \ // let the recovery middleware deal with this\n\t\t}\n\t}\n}"
+    - "function getMenuCLassesIDs()\n    {\n        let IdsArray = [];\n        const elements = document.querySelectorAll('.banner,.section');\n\
+      \        for(const elm of elements)\n            {\n                IdsArray.push(elm.id);\n            }\n        \n\
+      \        return IdsArray;\n    }"
+    - "getAllSectionsForRegion(region) {\n        if (!region) {\n            return null;\n        }\n        return region.getElementsByClassName(A11yClassNames.SECTION);\n\
+      \    }"
+  - source_sentence: For component xyz, returns "xyz[]"
+    sentences:
+    - "public String toString() {\n\t    \tif(size == 0) {\n\t    \t\treturn \"[]\";\n\t    \t}else {\n\t    \t\t\n\t    \t\
+      \tString result = \"[\" + elementData[0];\n\t    \t\tfor(int i = 1; i < size; i++) {\n\t    \t\t\tresult += \", \" +\
+      \ elementData[i];\n\t    \t\t}\n\t    \t\t\n\t    \t\tresult += \"]\";\n\t    \t\t\n\t    \t\treturn result;\n\t   \
+      \ \t}\n\t    }"
+    - "def masterPath(self):\n\t\treturn fl.File( self._path + '/master.data' )"
+    - "private static final String getArrayTypeName(String typeName) {\n    final String arrayTypeName = builtInArrayComponentName2ArrayTypeName.get(typeName);\n\
+      \    return (null == arrayTypeName) ? typeName + ARRAY_TYPE_SUFFIX : arrayTypeName;\n  }"
+  pipeline_tag: sentence-similarity
+  library_name: sentence-transformers
+  metrics:
+  - cosine_accuracy@1
+  - cosine_accuracy@5
+  - cosine_accuracy@10
+  - cosine_precision@1
+  - cosine_precision@3
+  - cosine_precision@5
+  - cosine_precision@10
+  - cosine_recall@1
+  - cosine_recall@3
+  - cosine_recall@5
+  - cosine_recall@10
+  - cosine_ndcg@10
+  - cosine_mrr@1
+  - cosine_mrr@5
+  - cosine_mrr@10
+  - cosine_map@100
+  model-index:
+  - name: SentenceTransformer based on BAAI/bge-base-en-v1.5
+    results:
+    - task:
+        type: information-retrieval
+        name: Information Retrieval
+      dataset:
+        name: cornstack eval
+        type: cornstack_eval
+      metrics:
+      - type: cosine_accuracy@1
+        value: 0.718
+        name: Cosine Accuracy@1
+        verified: false
+      - type: cosine_accuracy@5
+        value: 0.884
+        name: Cosine Accuracy@5
+        verified: false
+      - type: cosine_accuracy@10
+        value: 0.924
+        name: Cosine Accuracy@10
+        verified: false
+      - type: cosine_precision@1
+        value: 0.718
+        name: Cosine Precision@1
+        verified: false
+      - type: cosine_precision@3
+        value: 0.2866666666666666
+        name: Cosine Precision@3
+        verified: false
+      - type: cosine_precision@5
+        value: 0.1768
+        name: Cosine Precision@5
+        verified: false
+      - type: cosine_precision@10
+        value: 0.09240000000000001
+        name: Cosine Precision@10
+        verified: false
+      - type: cosine_recall@1
+        value: 0.718
+        name: Cosine Recall@1
+        verified: false
+      - type: cosine_recall@3
+        value: 0.86
+        name: Cosine Recall@3
+        verified: false
+      - type: cosine_recall@5
+        value: 0.884
+        name: Cosine Recall@5
+        verified: false
+      - type: cosine_recall@10
+        value: 0.924
+        name: Cosine Recall@10
+        verified: false
+      - type: cosine_ndcg@10
+        value: 0.8259696432548304
+        name: Cosine Ndcg@10
+        verified: false
+      - type: cosine_mrr@1
+        value: 0.718
+        name: Cosine Mrr@1
+        verified: false
+      - type: cosine_mrr@5
+        value: 0.7882666666666666
+        name: Cosine Mrr@5
+        verified: false
+      - type: cosine_mrr@10
+        value: 0.7940396825396825
+        name: Cosine Mrr@10
+        verified: false
+      - type: cosine_map@100
+        value: 0.7967267778119025
+        name: Cosine Map@100
+        verified: false
+siblings:
+- rfilename: .gitattributes
+- rfilename: 1_Pooling/config.json
+- rfilename: README.md
+- rfilename: config.json
+- rfilename: config_sentence_transformers.json
+- rfilename: model.safetensors
+- rfilename: modules.json
+- rfilename: sentence_bert_config.json
+- rfilename: special_tokens_map.json
+- rfilename: tokenizer.json
+- rfilename: tokenizer_config.json
+- rfilename: vocab.txt
+spaces: []
+createdAt: '2026-07-02T00:07:22.000Z'
+safetensors:
+  parameters:
+    F32: 109482240
+  total: 109482240
+usedStorage: 437951328
+downloadsAllTime: 0
+inferenceProviderMapping: {}
+configJson:
+  architectures:
+  - BertModel
+  attention_probs_dropout_prob: 0.1
+  classifier_dropout: null
+  dtype: float32
+  gradient_checkpointing: false
+  hidden_act: gelu
+  hidden_dropout_prob: 0.1
+  hidden_size: 768
+  id2label:
+    '0': LABEL_0
+  initializer_range: 0.02
+  intermediate_size: 3072
+  label2id:
+    LABEL_0: 0
+  layer_norm_eps: 1.0e-12
+  max_position_embeddings: 512
+  model_type: bert
+  num_attention_heads: 12
+  num_hidden_layers: 12
+  pad_token_id: 0
+  position_embedding_type: absolute
+  transformers_version: 4.57.6
+  type_vocab_size: 2
+  use_cache: true
+  vocab_size: 30522
+onnxFiles: {}
+safetensorsSizeMb: 438.0
+approxSizeMb: 437.9
+fetchedAt: '2026-07-02T06:48:13.000Z'
