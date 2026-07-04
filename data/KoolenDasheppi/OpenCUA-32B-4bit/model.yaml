@@ -1,0 +1,344 @@
+_id: 68c218b3d34d2f3979bfc330
+id: KoolenDasheppi/OpenCUA-32B-4bit
+private: false
+pipeline_tag: feature-extraction
+library_name: transformers
+tags:
+- transformers
+- safetensors
+- opencua
+- feature-extraction
+- custom_code
+- 4-bit
+- bitsandbytes
+- region:us
+downloads: 6
+likes: 0
+modelId: KoolenDasheppi/OpenCUA-32B-4bit
+author: KoolenDasheppi
+sha: 7865a57bead896df5b7923a22f88d43694d7d381
+lastModified: '2025-09-11T02:59:33.000Z'
+gated: false
+disabled: false
+model-index: null
+config:
+  architectures:
+  - OpenCUAForConditionalGeneration
+  auto_map:
+    AutoConfig: configuration_opencua.OpenCUAConfig
+    AutoModel: modeling_opencua.OpenCUAForConditionalGeneration
+    AutoModelForCausalLM: modeling_opencua.OpenCUAForConditionalGeneration
+  model_type: opencua
+  quantization_config:
+    load_in_4bit: true
+    load_in_8bit: false
+    quant_method: bitsandbytes
+  tokenizer_config:
+    bos_token: '[BOS]'
+    eos_token: '[EOS]'
+    pad_token: '[PAD]'
+    unk_token: '[UNK]'
+  chat_template_jinja: '{%- for message in messages -%}{%- if loop.first and messages[0][''role''] != ''system'' -%}{{''<|im_system|>system<|im_middle|>You
+    are a helpful assistant<|im_end|>''}}{%- endif -%}{%- if message[''role''] == ''system'' -%}{{''<|im_system|>''}}{%- endif
+    -%}{%- if message[''role''] == ''user'' -%}{{''<|im_user|>''}}{%- endif -%}{%- if message[''role''] == ''assistant'' -%}{{''<|im_assistant|>''}}{%-
+    endif -%}{{- message[''role''] -}}{{''<|im_middle|>''}}{%- if message[''content''] is string -%}{{- message[''content'']
+    + ''<|im_end|>'' -}}{%- else -%}{%- for content in message[''content''] -%}{%- if content[''type''] == ''image'' or ''image''
+    in content or ''image_url'' in content -%}{{''<|media_begin|>image<|media_content|><|media_placeholder|><|media_end|>''}}{%-
+    else -%}{{content[''text'']}}{%- endif -%}{%- endfor -%}{{''<|im_end|>''}}{%- endif -%}{%- endfor -%}{%- if add_generation_prompt
+    -%}{{''<|im_assistant|>assistant<|im_middle|>''}}{%- endif -%}'
+cardData:
+  library_name: transformers
+  tags: []
+transformersInfo:
+  auto_model: AutoModel
+  custom_class: modeling_opencua.OpenCUAForConditionalGeneration
+  pipeline_tag: feature-extraction
+siblings:
+- rfilename: .gitattributes
+- rfilename: README.md
+- rfilename: chat_template.jinja
+- rfilename: config.json
+- rfilename: configuration_opencua.py
+- rfilename: generation_config.json
+- rfilename: model-00001-of-00005.safetensors
+- rfilename: model-00002-of-00005.safetensors
+- rfilename: model-00003-of-00005.safetensors
+- rfilename: model-00004-of-00005.safetensors
+- rfilename: model-00005-of-00005.safetensors
+- rfilename: model.safetensors.index.json
+- rfilename: modeling_opencua.py
+- rfilename: special_tokens_map.json
+- rfilename: tiktoken.model
+- rfilename: tokenization_opencua.py
+- rfilename: tokenizer_config.json
+spaces: []
+createdAt: '2025-09-11T00:32:51.000Z'
+safetensors:
+  parameters:
+    F16: 1560279296
+    F32: 498329120
+    U8: 31892538244
+  total: 33452718336
+usedStorage: 21063095764
+downloadsAllTime: 73
+inferenceProviderMapping: {}
+configJson:
+  architectures:
+  - OpenCUAForConditionalGeneration
+  auto_map:
+    AutoConfig: configuration_opencua.OpenCUAConfig
+    AutoModel: modeling_opencua.OpenCUAForConditionalGeneration
+    AutoModelForCausalLM: modeling_opencua.OpenCUAForConditionalGeneration
+  dtype: float16
+  ignore_index: -100
+  media_placeholder_token_id: 151664
+  model_type: opencua
+  pad_token_id: 0
+  quantization_config:
+    _load_in_4bit: true
+    _load_in_8bit: false
+    bnb_4bit_compute_dtype: float32
+    bnb_4bit_quant_storage: uint8
+    bnb_4bit_quant_type: fp4
+    bnb_4bit_use_double_quant: false
+    llm_int8_enable_fp32_cpu_offload: false
+    llm_int8_has_fp16_weight: false
+    llm_int8_skip_modules: null
+    llm_int8_threshold: 6.0
+    load_in_4bit: true
+    load_in_8bit: false
+    quant_method: bitsandbytes
+  text_config:
+    _name_or_path: ''
+    add_cross_attention: false
+    architectures: null
+    attention_dropout: 0.0
+    bad_words_ids: null
+    begin_suppress_tokens: null
+    bos_token_id: 151643
+    chunk_size_feed_forward: 0
+    cross_attention_hidden_size: null
+    decoder_start_token_id: null
+    diversity_penalty: 0.0
+    do_sample: false
+    dtype: bfloat16
+    early_stopping: false
+    encoder_no_repeat_ngram_size: 0
+    eos_token_id: 151644
+    exponential_decay_length_penalty: null
+    finetuning_task: null
+    forced_bos_token_id: null
+    forced_eos_token_id: null
+    head_dim: 128
+    hidden_act: silu
+    hidden_size: 5120
+    id2label:
+      '0': LABEL_0
+      '1': LABEL_1
+    initializer_range: 0.02
+    intermediate_size: 27648
+    is_decoder: false
+    is_encoder_decoder: false
+    k_proj_bias: true
+    label2id:
+      LABEL_0: 0
+      LABEL_1: 1
+    layer_types:
+    - full_attention
+    - full_attention
+    - full_attention
+    - full_attention
+    - full_attention
+    - full_attention
+    - full_attention
+    - full_attention
+    - full_attention
+    - full_attention
+    - full_attention
+    - full_attention
+    - full_attention
+    - full_attention
+    - full_attention
+    - full_attention
+    - full_attention
+    - full_attention
+    - full_attention
+    - full_attention
+    - full_attention
+    - full_attention
+    - full_attention
+    - full_attention
+    - full_attention
+    - full_attention
+    - full_attention
+    - full_attention
+    - full_attention
+    - full_attention
+    - full_attention
+    - full_attention
+    - full_attention
+    - full_attention
+    - full_attention
+    - full_attention
+    - full_attention
+    - full_attention
+    - full_attention
+    - full_attention
+    - full_attention
+    - full_attention
+    - full_attention
+    - full_attention
+    - full_attention
+    - full_attention
+    - full_attention
+    - full_attention
+    - full_attention
+    - full_attention
+    - full_attention
+    - full_attention
+    - full_attention
+    - full_attention
+    - full_attention
+    - full_attention
+    - full_attention
+    - full_attention
+    - full_attention
+    - full_attention
+    - full_attention
+    - full_attention
+    - full_attention
+    - full_attention
+    length_penalty: 1.0
+    max_length: 20
+    max_position_embeddings: 32768
+    max_window_layers: 28
+    min_length: 0
+    model_type: qwen2
+    no_repeat_ngram_size: 0
+    num_attention_heads: 40
+    num_beam_groups: 1
+    num_beams: 1
+    num_hidden_layers: 64
+    num_key_value_heads: 8
+    num_return_sequences: 1
+    output_attentions: false
+    output_hidden_states: false
+    output_scores: false
+    pad_token_id: 152063
+    prefix: null
+    pretraining_sequence_length: 131072
+    problem_type: null
+    pruned_heads: {}
+    q_proj_bias: true
+    remove_invalid_values: false
+    repetition_penalty: 1.0
+    return_dict: true
+    return_dict_in_generate: false
+    rms_norm_eps: 1.0e-05
+    rope_scaling: null
+    rope_theta: 1000000.0
+    sep_token_id: null
+    sliding_window: null
+    suppress_tokens: null
+    task_specific_params: null
+    temperature: 1.0
+    tf_legacy_loss: false
+    tie_encoder_decoder: false
+    tie_word_embeddings: false
+    tokenizer_class: null
+    top_k: 50
+    top_p: 1.0
+    torchscript: false
+    typical_p: 1.0
+    use_bfloat16: false
+    use_cache: true
+    use_sliding_window: false
+    v_proj_bias: true
+    vocab_size: 152064
+  tie_word_embeddings: false
+  transformers_version: 4.56.1
+  vision_config:
+    _name_or_path: ''
+    add_cross_attention: false
+    architectures: null
+    bad_words_ids: null
+    begin_suppress_tokens: null
+    bos_token_id: null
+    chunk_size_feed_forward: 0
+    cross_attention_hidden_size: null
+    decoder_start_token_id: null
+    depth: 32
+    diversity_penalty: 0.0
+    do_sample: false
+    dtype: null
+    early_stopping: false
+    encoder_no_repeat_ngram_size: 0
+    eos_token_id: null
+    exponential_decay_length_penalty: null
+    finetuning_task: null
+    forced_bos_token_id: null
+    forced_eos_token_id: null
+    fullatt_block_indexes:
+    - 7
+    - 15
+    - 23
+    - 31
+    hidden_act: silu
+    hidden_size: 1280
+    id2label:
+      '0': LABEL_0
+      '1': LABEL_1
+    in_channels: 3
+    in_chans: 3
+    initializer_range: 0.02
+    intermediate_size: 3456
+    is_decoder: false
+    is_encoder_decoder: false
+    label2id:
+      LABEL_0: 0
+      LABEL_1: 1
+    length_penalty: 1.0
+    max_length: 20
+    min_length: 0
+    model_type: qwen2_5_vl
+    no_repeat_ngram_size: 0
+    num_beam_groups: 1
+    num_beams: 1
+    num_heads: 16
+    num_return_sequences: 1
+    out_hidden_size: 5120
+    output_attentions: false
+    output_hidden_states: false
+    output_scores: false
+    pad_token_id: null
+    patch_size: 14
+    prefix: null
+    problem_type: null
+    pruned_heads: {}
+    remove_invalid_values: false
+    repetition_penalty: 1.0
+    return_dict: true
+    return_dict_in_generate: false
+    sep_token_id: null
+    spatial_merge_size: 2
+    spatial_patch_size: 14
+    suppress_tokens: null
+    task_specific_params: null
+    temperature: 1.0
+    temporal_patch_size: 2
+    tf_legacy_loss: false
+    tie_encoder_decoder: false
+    tie_word_embeddings: true
+    tokenizer_class: null
+    tokens_per_second: 2
+    top_k: 50
+    top_p: 1.0
+    torchscript: false
+    typical_p: 1.0
+    use_bfloat16: false
+    window_size: 112
+  vocab_size: 152064
+onnxFiles: {}
+safetensorsSizeMb: 21060.5
+approxSizeMb: 37006.4
+fetchedAt: '2026-07-04T06:26:13.000Z'

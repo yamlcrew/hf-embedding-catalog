@@ -1,0 +1,310 @@
+_id: 66a9113a8990fafa62aee448
+id: meetkai/functionary-vision-small-v0.1
+private: false
+pipeline_tag: feature-extraction
+library_name: transformers
+tags:
+- transformers
+- tensorboard
+- safetensors
+- internvl_chat
+- feature-extraction
+- custom_code
+- region:us
+downloads: 19
+likes: 1
+modelId: meetkai/functionary-vision-small-v0.1
+author: meetkai
+sha: 6282a9e5c4c5d576039a7d2018e5a60c16e9f8f9
+lastModified: '2024-09-25T01:05:38.000Z'
+gated: false
+disabled: false
+config:
+  architectures:
+  - InternVLChatModel
+  auto_map:
+    AutoConfig: OpenGVLab/InternVL2-8B--configuration_internvl_chat.InternVLChatConfig
+    AutoModel: OpenGVLab/InternVL2-8B--modeling_internvl_chat.InternVLChatModel
+    AutoModelForCausalLM: OpenGVLab/InternVL2-8B--modeling_internvl_chat.InternVLChatModel
+  model_type: internvl_chat
+  tokenizer_config:
+    bos_token: <s>
+    chat_template: '{# version=internlm2-chat #}{% for message in messages %}
+
+      {% if message[''role''] == ''user'' or message[''role''] == ''system'' %}
+
+      {{ ''<|start_header_id|>'' + message[''role''] + ''<|end_header_id|>
+
+
+      '' + message[''content''] + ''<|eot_id|>'' }}{% elif message[''role''] == ''tool'' %}
+
+      {{ ''<|start_header_id|>'' + message[''role''] + ''<|end_header_id|>
+
+
+      '' + message[''content''] + ''<|eot_id|>'' }}{% else %}
+
+      {{ ''<|start_header_id|>'' + message[''role''] + ''<|end_header_id|>
+
+
+      ''}}{% if message[''content''] is not none %}
+
+      {{ ''>>>all
+
+      '' + message[''content''] }}{% endif %}
+
+      {% if ''tool_calls'' in message and message[''tool_calls''] is not none %}
+
+      {% for tool_call in message[''tool_calls''] %}
+
+      {{ ''>>>'' + tool_call[''function''][''name''] + ''
+
+      '' + tool_call[''function''][''arguments''] }}{% endfor %}
+
+      {% endif %}
+
+      {{ ''<|eot_id|>'' }}{% endif %}
+
+      {% endfor %}
+
+      {% if add_generation_prompt %}{{ ''<|start_header_id|>{role}<|end_header_id|>
+
+
+      '' }}{% endif %}'
+    eos_token: </s>
+    pad_token: </s>
+    unk_token: <unk>
+transformersInfo:
+  auto_model: AutoModel
+  custom_class: OpenGVLab/InternVL2-8B--modeling_internvl_chat.InternVLChatModel
+  pipeline_tag: feature-extraction
+siblings:
+- rfilename: .gitattributes
+- rfilename: added_tokens.json
+- rfilename: config.json
+- rfilename: generation_config.json
+- rfilename: model-00001-of-00004.safetensors
+- rfilename: model-00002-of-00004.safetensors
+- rfilename: model-00003-of-00004.safetensors
+- rfilename: model-00004-of-00004.safetensors
+- rfilename: model.safetensors.index.json
+- rfilename: runs/Jul30_01-59-09_c33eb72502eb/events.out.tfevents.1722304820.c33eb72502eb.3444.0
+- rfilename: runs/Jul30_16-39-05_f48b345459b6/events.out.tfevents.1722357626.f48b345459b6.3428.0
+- rfilename: runs/Jul30_16-47-29_f48b345459b6/events.out.tfevents.1722358070.f48b345459b6.4696.0
+- rfilename: runs/Jul30_16-49-07_f48b345459b6/events.out.tfevents.1722358167.f48b345459b6.5854.0
+- rfilename: runs/Jul30_16-52-57_f48b345459b6/events.out.tfevents.1722358393.f48b345459b6.7428.0
+- rfilename: runs/Jul31_00-48-03_94dd44ad293a/events.out.tfevents.1722386944.94dd44ad293a.1793.0
+- rfilename: runs/Jul31_02-00-12_94dd44ad293a/events.out.tfevents.1722391230.94dd44ad293a.3362.0
+- rfilename: special_tokens_map.json
+- rfilename: tokenization_internlm2.py
+- rfilename: tokenizer.json
+- rfilename: tokenizer.model
+- rfilename: tokenizer/added_tokens.json
+- rfilename: tokenizer/special_tokens_map.json
+- rfilename: tokenizer/tokenization_internlm2.py
+- rfilename: tokenizer/tokenizer.json
+- rfilename: tokenizer/tokenizer.model
+- rfilename: tokenizer/tokenizer_config.json
+- rfilename: tokenizer_config.json
+- rfilename: trainer_state.json
+spaces: []
+createdAt: '2024-07-30T16:13:46.000Z'
+safetensors:
+  parameters:
+    BF16: 8075365376
+  total: 8075365376
+usedStorage: 32864878730
+downloadsAllTime: 342
+inferenceProviderMapping: {}
+configJson:
+  _commit_hash: e110c566fb84929a5a49d5948a3f6d37e4169870
+  _name_or_path: OpenGVLab/InternVL2-8B
+  architectures:
+  - InternVLChatModel
+  auto_map:
+    AutoConfig: OpenGVLab/InternVL2-8B--configuration_internvl_chat.InternVLChatConfig
+    AutoModel: OpenGVLab/InternVL2-8B--modeling_internvl_chat.InternVLChatModel
+    AutoModelForCausalLM: OpenGVLab/InternVL2-8B--modeling_internvl_chat.InternVLChatModel
+  downsample_ratio: 0.5
+  dynamic_image_size: true
+  force_image_size: 448
+  hidden_size: 4096
+  llm_config:
+    _name_or_path: internlm/internlm2_5-7b-chat
+    add_cross_attention: false
+    architectures:
+    - InternLM2ForCausalLM
+    attn_implementation: flash_attention_2
+    auto_map:
+      AutoConfig: configuration_internlm2.InternLM2Config
+      AutoModel: modeling_internlm2.InternLM2ForCausalLM
+      AutoModelForCausalLM: modeling_internlm2.InternLM2ForCausalLM
+    bad_words_ids: null
+    begin_suppress_tokens: null
+    bias: false
+    bos_token_id: 1
+    chunk_size_feed_forward: 0
+    cross_attention_hidden_size: null
+    decoder_start_token_id: null
+    diversity_penalty: 0.0
+    do_sample: false
+    early_stopping: false
+    encoder_no_repeat_ngram_size: 0
+    eos_token_id: 2
+    exponential_decay_length_penalty: null
+    finetuning_task: null
+    forced_bos_token_id: null
+    forced_eos_token_id: null
+    hidden_act: silu
+    hidden_size: 4096
+    id2label:
+      '0': LABEL_0
+      '1': LABEL_1
+    initializer_range: 0.02
+    intermediate_size: 14336
+    is_decoder: false
+    is_encoder_decoder: false
+    label2id:
+      LABEL_0: 0
+      LABEL_1: 1
+    length_penalty: 1.0
+    max_length: 20
+    max_position_embeddings: 32768
+    min_length: 0
+    model_type: internlm2
+    no_repeat_ngram_size: 0
+    num_attention_heads: 32
+    num_beam_groups: 1
+    num_beams: 1
+    num_hidden_layers: 32
+    num_key_value_heads: 8
+    num_return_sequences: 1
+    output_attentions: false
+    output_hidden_states: false
+    output_scores: false
+    pad_token_id: 2
+    prefix: null
+    pretraining_tp: 1
+    problem_type: null
+    pruned_heads: {}
+    remove_invalid_values: false
+    repetition_penalty: 1.0
+    return_dict: true
+    return_dict_in_generate: false
+    rms_norm_eps: 1.0e-05
+    rope_scaling:
+      factor: 2.0
+      type: dynamic
+    rope_theta: 1000000
+    sep_token_id: null
+    suppress_tokens: null
+    task_specific_params: null
+    temperature: 1.0
+    tf_legacy_loss: false
+    tie_encoder_decoder: false
+    tie_word_embeddings: false
+    tokenizer_class: null
+    top_k: 50
+    top_p: 1.0
+    torch_dtype: bfloat16
+    torchscript: false
+    transformers_version: 4.42.3
+    typical_p: 1.0
+    use_bfloat16: true
+    use_cache: true
+    vocab_size: 92553
+  max_dynamic_patch: 12
+  min_dynamic_patch: 1
+  model_type: internvl_chat
+  ps_version: v2
+  select_layer: -1
+  template: internlm2-chat
+  torch_dtype: bfloat16
+  transformers_version: null
+  use_backbone_lora: 0
+  use_cache: false
+  use_llm_lora: 0
+  use_thumbnail: true
+  vision_config:
+    _name_or_path: ''
+    add_cross_attention: false
+    architectures:
+    - InternVisionModel
+    attention_dropout: 0.0
+    bad_words_ids: null
+    begin_suppress_tokens: null
+    bos_token_id: null
+    chunk_size_feed_forward: 0
+    cross_attention_hidden_size: null
+    decoder_start_token_id: null
+    diversity_penalty: 0.0
+    do_sample: false
+    drop_path_rate: 0.0
+    dropout: 0.0
+    early_stopping: false
+    encoder_no_repeat_ngram_size: 0
+    eos_token_id: null
+    exponential_decay_length_penalty: null
+    finetuning_task: null
+    forced_bos_token_id: null
+    forced_eos_token_id: null
+    hidden_act: gelu
+    hidden_size: 1024
+    id2label:
+      '0': LABEL_0
+      '1': LABEL_1
+    image_size: 448
+    initializer_factor: 1.0
+    initializer_range: 0.02
+    intermediate_size: 4096
+    is_decoder: false
+    is_encoder_decoder: false
+    label2id:
+      LABEL_0: 0
+      LABEL_1: 1
+    layer_norm_eps: 1.0e-06
+    length_penalty: 1.0
+    max_length: 20
+    min_length: 0
+    model_type: intern_vit_6b
+    no_repeat_ngram_size: 0
+    norm_type: layer_norm
+    num_attention_heads: 16
+    num_beam_groups: 1
+    num_beams: 1
+    num_channels: 3
+    num_hidden_layers: 24
+    num_return_sequences: 1
+    output_attentions: false
+    output_hidden_states: false
+    output_scores: false
+    pad_token_id: null
+    patch_size: 14
+    prefix: null
+    problem_type: null
+    pruned_heads: {}
+    qk_normalization: false
+    qkv_bias: true
+    remove_invalid_values: false
+    repetition_penalty: 1.0
+    return_dict: true
+    return_dict_in_generate: false
+    sep_token_id: null
+    suppress_tokens: null
+    task_specific_params: null
+    temperature: 1.0
+    tf_legacy_loss: false
+    tie_encoder_decoder: false
+    tie_word_embeddings: true
+    tokenizer_class: null
+    top_k: 50
+    top_p: 1.0
+    torch_dtype: bfloat16
+    torchscript: false
+    transformers_version: 4.42.3
+    typical_p: 1.0
+    use_bfloat16: true
+    use_flash_attn: true
+onnxFiles: {}
+safetensorsSizeMb: 16150.8
+approxSizeMb: 16150.7
+fetchedAt: '2026-07-04T06:26:13.000Z'

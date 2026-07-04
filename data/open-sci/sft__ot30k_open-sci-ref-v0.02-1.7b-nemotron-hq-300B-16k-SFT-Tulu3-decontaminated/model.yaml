@@ -1,0 +1,135 @@
+_id: 69e79586db2d62c234e8d05a
+id: open-sci/sft__ot30k_open-sci-ref-v0.02-1.7b-nemotron-hq-300B-16k-SFT-Tulu3-decontaminated
+private: false
+pipeline_tag: feature-extraction
+library_name: transformers
+tags:
+- transformers
+- tensorboard
+- safetensors
+- opensci
+- feature-extraction
+- llama-factory
+- full
+- generated_from_trainer
+- custom_code
+- dataset:arrow
+- base_model:ali-elganzory/open-sci-ref-v0.02-1.7b-nemotron-hq-300B-16k-SFT-Tulu3-decontaminated
+- base_model:finetune:ali-elganzory/open-sci-ref-v0.02-1.7b-nemotron-hq-300B-16k-SFT-Tulu3-decontaminated
+- license:other
+- region:us
+downloads: 1
+likes: 0
+modelId: open-sci/sft__ot30k_open-sci-ref-v0.02-1.7b-nemotron-hq-300B-16k-SFT-Tulu3-decontaminated
+author: open-sci
+sha: adebd7eb7b9a3977dc2a4220018edd72af8c5b83
+lastModified: '2026-05-03T11:30:03.000Z'
+gated: false
+disabled: false
+model-index:
+- name: sft__f679a5c592c8dffb__65e87578c211aada4b74__sdpa-open-sci-steps
+  results: []
+config:
+  architectures:
+  - OpensciForCausalLM
+  auto_map:
+    AutoConfig: configuration_opensci.OpensciConfig
+    AutoModel: modeling_opensci.OpensciForCausalLM
+    AutoModelForCausalLM: modeling_opensci.OpensciForCausalLM
+  model_type: opensci
+  tokenizer_config:
+    bos_token: <|endoftext|>
+    eos_token: <end_of_turn>
+    pad_token: <end_of_turn>
+    unk_token: <|endoftext|>
+  chat_template_jinja: "\n{%- for message in messages -%}\n\t{%- if message[\"role\"] == \"system\" -%}\n\t\t{{- \"<|system|>\n\
+    \" + message[\"content\"] + \"\n\" -}}\n\t{%- elif message[\"role\"] == \"user\" -%}\n\t\t{{- \"<|user|>\n\" + message[\"\
+    content\"] + \"\n\" -}}\n\t{%- elif message[\"role\"] == \"assistant\" -%}\n\t\t{%- if not loop.last -%}\n\t\t\t{{- \"\
+    <|assistant|>\n\" + message[\"content\"] + eos_token + \"\n\" -}}\n\t\t{%- else -%}\n\t\t\t{{- \"<|assistant|>\n\" + message[\"\
+    content\"] + eos_token -}}\n\t\t{%- endif -%}\n\t{%- endif -%}\n\t{%- if loop.last and add_generation_prompt -%}\n\t\t\
+    {{- \"<|assistant|>\n\" -}}\n\t{%- endif -%}\n{%- endfor -%}\n"
+cardData:
+  library_name: transformers
+  license: other
+  base_model: ali-elganzory/open-sci-ref-v0.02-1.7b-nemotron-hq-300B-16k-SFT-Tulu3-decontaminated
+  tags:
+  - llama-factory
+  - full
+  - generated_from_trainer
+  datasets:
+  - arrow
+  model-index:
+  - name: sft__f679a5c592c8dffb__65e87578c211aada4b74__sdpa-open-sci-steps
+    results: []
+transformersInfo:
+  auto_model: AutoModel
+  custom_class: modeling_opensci.OpensciForCausalLM
+  pipeline_tag: feature-extraction
+siblings:
+- rfilename: .gitattributes
+- rfilename: README.md
+- rfilename: all_results.json
+- rfilename: chat_template.jinja
+- rfilename: config.json
+- rfilename: configuration_opensci.py
+- rfilename: generation_config.json
+- rfilename: model.safetensors
+- rfilename: modeling_opensci.py
+- rfilename: run_summary.json
+- rfilename: runs/Apr20_12-13-48_as02r3b20/events.out.tfevents.1776680529.as02r3b20.3225302.0
+- rfilename: special_tokens_map.json
+- rfilename: tokenizer.json
+- rfilename: tokenizer_config.json
+- rfilename: train_results.json
+- rfilename: trainer_log.jsonl
+- rfilename: trainer_state.json
+- rfilename: training_args.bin
+- rfilename: training_loss.png
+spaces: []
+createdAt: '2026-04-21T15:19:34.000Z'
+safetensors:
+  parameters:
+    BF16: 1714377728
+  total: 1714377728
+usedStorage: 3429352008
+downloadsAllTime: 53
+inferenceProviderMapping: {}
+configJson:
+  architectures:
+  - OpensciForCausalLM
+  attention_bias: true
+  attention_dropout: 0.0
+  auto_map:
+    AutoConfig: configuration_opensci.OpensciConfig
+    AutoModel: modeling_opensci.OpensciForCausalLM
+    AutoModelForCausalLM: modeling_opensci.OpensciForCausalLM
+  bos_token_id: 0
+  dtype: bfloat16
+  eos_token_id: 50277
+  head_dim: 64
+  hidden_act: silu
+  hidden_size: 2048
+  initializer_range: 0.02
+  intermediate_size: 8192
+  layer_norm_eps: 1.0e-05
+  max_position_embeddings: 32768
+  mlp_bias: true
+  model_type: opensci
+  num_attention_heads: 32
+  num_hidden_layers: 24
+  num_key_value_heads: 32
+  pad_token_id: 50277
+  pretraining_tp: 1
+  qk_layernorm: true
+  rms_norm_eps: 1.0e-05
+  rope_scaling: null
+  rope_theta: 1000000
+  tie_word_embeddings: true
+  torch_dtype: bfloat16
+  transformers_version: 4.55.0
+  use_cache: false
+  vocab_size: 50304
+onnxFiles: {}
+safetensorsSizeMb: 3428.8
+approxSizeMb: 3428.8
+fetchedAt: '2026-07-04T06:26:13.000Z'

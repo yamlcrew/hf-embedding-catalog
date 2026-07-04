@@ -1,0 +1,272 @@
+_id: 68f49ddd080584519ebe4f86
+id: TSunm/InternVL2-1B-ViVQA-X
+private: false
+pipeline_tag: feature-extraction
+library_name: transformers
+tags:
+- transformers
+- safetensors
+- internvl_chat
+- feature-extraction
+- generated_from_trainer
+- custom_code
+- arxiv:2402.03300
+- base_model:OpenGVLab/InternVL2-1B
+- base_model:finetune:OpenGVLab/InternVL2-1B
+- region:us
+downloads: 6
+likes: 0
+modelId: TSunm/InternVL2-1B-ViVQA-X
+author: TSunm
+sha: d33114a8d644054ccb4cccb1febc942cf11a673c
+lastModified: '2025-10-19T09:17:47.000Z'
+gated: false
+disabled: false
+model-index: null
+config:
+  architectures:
+  - InternVLChatModel
+  auto_map:
+    AutoConfig: OpenGVLab/InternVL2-1B--configuration_internvl_chat.InternVLChatConfig
+    AutoModel: OpenGVLab/InternVL2-1B--modeling_internvl_chat.InternVLChatModel
+    AutoModelForCausalLM: OpenGVLab/InternVL2-1B--modeling_internvl_chat.InternVLChatModel
+  model_type: internvl_chat
+  tokenizer_config:
+    bos_token: null
+    chat_template: '{% for message in messages %}{% if loop.first and messages[0][''role''] != ''system'' %}{{ ''<|im_start|>system
+
+      You are a helpful assistant.<|im_end|>
+
+      '' }}{% endif %}{{''<|im_start|>'' + message[''role''] + ''
+
+      '' + message[''content''] + ''<|im_end|>'' + ''
+
+      ''}}{% endfor %}{% if add_generation_prompt %}{{ ''<|im_start|>assistant
+
+      '' }}{% endif %}'
+    eos_token: <|im_end|>
+    pad_token: <|endoftext|>
+    unk_token: null
+cardData:
+  base_model: OpenGVLab/InternVL2-1B
+  library_name: transformers
+  model_name: InternVL2-1B-ViVQA-X
+  tags:
+  - generated_from_trainer
+  licence: license
+transformersInfo:
+  auto_model: AutoModel
+  custom_class: OpenGVLab/InternVL2-1B--modeling_internvl_chat.InternVLChatModel
+  pipeline_tag: feature-extraction
+siblings:
+- rfilename: .gitattributes
+- rfilename: README.md
+- rfilename: added_tokens.json
+- rfilename: config.json
+- rfilename: generation_config.json
+- rfilename: merges.txt
+- rfilename: model.safetensors
+- rfilename: special_tokens_map.json
+- rfilename: tokenizer.json
+- rfilename: tokenizer_config.json
+- rfilename: training_args.bin
+- rfilename: vocab.json
+spaces: []
+createdAt: '2025-10-19T08:14:21.000Z'
+safetensors:
+  parameters:
+    BF16: 938158976
+  total: 938158976
+usedStorage: 3764223241
+downloadsAllTime: 18
+inferenceProviderMapping: {}
+configJson:
+  _commit_hash: 0d75ccd166b1d0b79446ae6c5d1a4a667f1e6187
+  _name_or_path: OpenGVLab/InternVL2-1B
+  architectures:
+  - InternVLChatModel
+  auto_map:
+    AutoConfig: OpenGVLab/InternVL2-1B--configuration_internvl_chat.InternVLChatConfig
+    AutoModel: OpenGVLab/InternVL2-1B--modeling_internvl_chat.InternVLChatModel
+    AutoModelForCausalLM: OpenGVLab/InternVL2-1B--modeling_internvl_chat.InternVLChatModel
+  downsample_ratio: 0.5
+  dynamic_image_size: true
+  force_image_size: 448
+  llm_config:
+    _attn_implementation_autoset: true
+    _name_or_path: Qwen/Qwen2-0.5B-Instruct
+    add_cross_attention: false
+    architectures:
+    - Qwen2ForCausalLM
+    attention_dropout: 0.0
+    bad_words_ids: null
+    begin_suppress_tokens: null
+    bos_token_id: 151643
+    chunk_size_feed_forward: 0
+    cross_attention_hidden_size: null
+    decoder_start_token_id: null
+    diversity_penalty: 0.0
+    do_sample: false
+    early_stopping: false
+    encoder_no_repeat_ngram_size: 0
+    eos_token_id: 151645
+    exponential_decay_length_penalty: null
+    finetuning_task: null
+    forced_bos_token_id: null
+    forced_eos_token_id: null
+    hidden_act: silu
+    hidden_size: 896
+    id2label:
+      '0': LABEL_0
+      '1': LABEL_1
+    initializer_range: 0.02
+    intermediate_size: 4864
+    is_decoder: false
+    is_encoder_decoder: false
+    label2id:
+      LABEL_0: 0
+      LABEL_1: 1
+    length_penalty: 1.0
+    max_length: 20
+    max_position_embeddings: 32768
+    max_window_layers: 24
+    min_length: 0
+    model_type: qwen2
+    no_repeat_ngram_size: 0
+    num_attention_heads: 14
+    num_beam_groups: 1
+    num_beams: 1
+    num_hidden_layers: 24
+    num_key_value_heads: 2
+    num_return_sequences: 1
+    output_attentions: false
+    output_hidden_states: false
+    output_scores: false
+    pad_token_id: null
+    prefix: null
+    problem_type: null
+    pruned_heads: {}
+    remove_invalid_values: false
+    repetition_penalty: 1.0
+    return_dict: true
+    return_dict_in_generate: false
+    rms_norm_eps: 1.0e-06
+    rope_scaling: null
+    rope_theta: 1000000.0
+    sep_token_id: null
+    sliding_window: 32768
+    suppress_tokens: null
+    task_specific_params: null
+    temperature: 1.0
+    tf_legacy_loss: false
+    tie_encoder_decoder: false
+    tie_word_embeddings: false
+    tokenizer_class: null
+    top_k: 50
+    top_p: 1.0
+    torch_dtype: bfloat16
+    torchscript: false
+    transformers_version: 4.49.0
+    typical_p: 1.0
+    use_bfloat16: true
+    use_cache: false
+    use_sliding_window: false
+    vocab_size: 151655
+  max_dynamic_patch: 12
+  min_dynamic_patch: 1
+  model_type: internvl_chat
+  ps_version: v2
+  select_layer: -1
+  template: Hermes-2
+  tie_word_embeddings: false
+  torch_dtype: bfloat16
+  transformers_version: null
+  use_backbone_lora: 0
+  use_cache: false
+  use_llm_lora: 0
+  use_thumbnail: true
+  vision_config:
+    _attn_implementation_autoset: true
+    _name_or_path: ''
+    add_cross_attention: false
+    architectures:
+    - InternVisionModel
+    attention_dropout: 0.0
+    bad_words_ids: null
+    begin_suppress_tokens: null
+    bos_token_id: null
+    chunk_size_feed_forward: 0
+    cross_attention_hidden_size: null
+    decoder_start_token_id: null
+    diversity_penalty: 0.0
+    do_sample: false
+    drop_path_rate: 0.0
+    dropout: 0.0
+    early_stopping: false
+    encoder_no_repeat_ngram_size: 0
+    eos_token_id: null
+    exponential_decay_length_penalty: null
+    finetuning_task: null
+    forced_bos_token_id: null
+    forced_eos_token_id: null
+    hidden_act: gelu
+    hidden_size: 1024
+    id2label:
+      '0': LABEL_0
+      '1': LABEL_1
+    image_size: 448
+    initializer_factor: 1.0
+    initializer_range: 0.02
+    intermediate_size: 4096
+    is_decoder: false
+    is_encoder_decoder: false
+    label2id:
+      LABEL_0: 0
+      LABEL_1: 1
+    layer_norm_eps: 1.0e-06
+    length_penalty: 1.0
+    max_length: 20
+    min_length: 0
+    model_type: intern_vit_6b
+    no_repeat_ngram_size: 0
+    norm_type: layer_norm
+    num_attention_heads: 16
+    num_beam_groups: 1
+    num_beams: 1
+    num_channels: 3
+    num_hidden_layers: 24
+    num_return_sequences: 1
+    output_attentions: false
+    output_hidden_states: false
+    output_scores: false
+    pad_token_id: null
+    patch_size: 14
+    prefix: null
+    problem_type: null
+    pruned_heads: {}
+    qk_normalization: false
+    qkv_bias: true
+    remove_invalid_values: false
+    repetition_penalty: 1.0
+    return_dict: true
+    return_dict_in_generate: false
+    sep_token_id: null
+    suppress_tokens: null
+    task_specific_params: null
+    temperature: 1.0
+    tf_legacy_loss: false
+    tie_encoder_decoder: false
+    tie_word_embeddings: true
+    tokenizer_class: null
+    top_k: 50
+    top_p: 1.0
+    torch_dtype: bfloat16
+    torchscript: false
+    transformers_version: 4.49.0
+    typical_p: 1.0
+    use_bfloat16: true
+    use_flash_attn: false
+onnxFiles: {}
+safetensorsSizeMb: 1876.4
+approxSizeMb: 1876.3
+fetchedAt: '2026-07-04T06:26:13.000Z'

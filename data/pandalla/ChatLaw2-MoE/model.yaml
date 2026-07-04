@@ -1,0 +1,111 @@
+_id: 665edcbb8947302aa2b37b58
+id: pandalla/ChatLaw2-MoE
+private: false
+pipeline_tag: feature-extraction
+library_name: transformers
+tags:
+- transformers
+- safetensors
+- internlm2
+- feature-extraction
+- custom_code
+- license:apache-2.0
+- region:us
+downloads: 14
+likes: 17
+modelId: pandalla/ChatLaw2-MoE
+author: pandalla
+sha: f679eb20be90292a034e06bf74a830ed531f229e
+lastModified: '2024-06-04T09:45:01.000Z'
+gated: false
+disabled: false
+model-index: null
+config:
+  architectures:
+  - InternLM2ForCausalLM
+  auto_map:
+    AutoConfig: configuration_internlm.InternLM2Config
+    AutoModel: modeling_internlm.InternLM2ForCausalLM
+    AutoModelForCausalLM: modeling_internlm.InternLM2ForCausalLM
+  model_type: internlm2
+  tokenizer_config:
+    bos_token: <s>
+    chat_template: '{{ bos_token }}{% for message in messages %}{{''<|im_start|>'' + message[''role''] + ''
+
+      '' + message[''content''] + ''<|im_end|>'' + ''
+
+      ''}}{% endfor %}{% if add_generation_prompt %}{{ ''<|im_start|>assistant
+
+      '' }}{% endif %}'
+    eos_token: </s>
+    pad_token: </s>
+    unk_token: <unk>
+cardData:
+  license: apache-2.0
+transformersInfo:
+  auto_model: AutoModel
+  custom_class: modeling_internlm.InternLM2ForCausalLM
+  pipeline_tag: feature-extraction
+siblings:
+- rfilename: .gitattributes
+- rfilename: README.md
+- rfilename: all_results.json
+- rfilename: config.json
+- rfilename: configuration_internlm.py
+- rfilename: generation_config.json
+- rfilename: model.safetensors.index.json
+- rfilename: modeling_internlm.py
+- rfilename: special_tokens_map.json
+- rfilename: tokenization_internlm2.py
+- rfilename: tokenizer.model
+- rfilename: tokenizer_config.json
+- rfilename: train_results.json
+- rfilename: trainer_state.json
+- rfilename: training_args.bin
+spaces: []
+createdAt: '2024-06-04T09:22:03.000Z'
+usedStorage: 261
+downloadsAllTime: 962
+inferenceProviderMapping: {}
+configJson:
+  _name_or_path: /data03/dragon_proj/ChatLaw-MoE/models/moe_chatlaw_4experts-7b
+  architectures:
+  - InternLM2ForCausalLM
+  attn_implementation: flash_attention_2
+  auto_map:
+    AutoConfig: configuration_internlm.InternLM2Config
+    AutoModel: modeling_internlm.InternLM2ForCausalLM
+    AutoModelForCausalLM: modeling_internlm.InternLM2ForCausalLM
+  bias: false
+  bos_token_id: 1
+  cor_loss_coef: 0
+  eos_token_id: 2
+  hidden_act: silu
+  hidden_size: 4096
+  initializer_range: 0.02
+  intermediate_size: 14336
+  max_position_embeddings: 32768
+  model_type: internlm2
+  num_attention_heads: 32
+  num_experts_per_tok: 2
+  num_hidden_layers: 32
+  num_key_value_heads: 8
+  num_local_experts: 4
+  output_expert_opinion: false
+  output_router_logits: false
+  pad_token_id: 2
+  rms_norm_eps: 1.0e-05
+  rope_scaling:
+    factor: 2.0
+    type: dynamic
+  rope_theta: 1000000
+  router_aux_loss_coef: 0.001
+  tie_word_embeddings: false
+  torch_dtype: bfloat16
+  transformers_version: 4.37.2
+  use_cache: true
+  vocab_size: 92544
+onnxFiles: {}
+safetensorsSizeMb: 0.0
+approxSizeMb: 0.0
+fetchedAt: '2026-07-04T06:26:13.000Z'

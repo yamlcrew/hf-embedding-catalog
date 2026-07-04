@@ -1,0 +1,225 @@
+_id: 68400997f26ad0132a36ed20
+id: AlexHung29629/Ojamajo_Doremi
+private: false
+pipeline_tag: feature-extraction
+library_name: transformers
+tags:
+- transformers
+- safetensors
+- gemma3omni
+- feature-extraction
+- custom_code
+- arxiv:1910.09700
+- region:us
+downloads: 4
+likes: 0
+modelId: AlexHung29629/Ojamajo_Doremi
+author: AlexHung29629
+sha: 8cd75bbcc0e250a62d651b6e6f26ea90b65422e9
+lastModified: '2025-06-04T09:38:23.000Z'
+gated: false
+disabled: false
+model-index: null
+config:
+  architectures:
+  - Gemma3OmniForConditionalGeneration
+  auto_map:
+    AutoConfig: modeling_gemma_3_omni.Gemma3OmniConfig
+    AutoFeatureExtractor: processing_gemma3_omni.Gemma3AudioFeatureExtractor
+    AutoModel: modeling_gemma_3_omni.Gemma3OmniForConditionalGeneration
+    AutoModelForCausalLM: modeling_gemma_3_omni.Gemma3OmniForConditionalGeneration
+    AutoProcessor: processing_gemma3_omni.Gemma3OmniProcessor
+  model_type: gemma3omni
+  tokenizer_config:
+    bos_token: <bos>
+    eos_token: <eos>
+    pad_token: <pad>
+    unk_token: <unk>
+    use_default_system_prompt: false
+  chat_template_jinja: '{{ bos_token }}{% if messages[0][''role''] == ''system'' %}{% set first_user_prefix = messages[0][''content''][0][''text'']
+    + ''\n\n'' %}{% set loop_messages = messages[1:] %}{% else %}{% set first_user_prefix = '''' %}{% set loop_messages =
+    messages %}{% endif %}{% for message in loop_messages %}{% if (message[''role''] == ''user'') != (loop.index0 % 2 == 0)
+    %}{{ raise_exception(''Conversation roles must alternate user/assistant/user/assistant/...'') }}{% endif %}{% set role
+    = ''model'' if message[''role''] == ''assistant'' else message[''role''] %}{{ ''<start_of_turn>'' + role + ''\n'' + (first_user_prefix
+    if loop.first else '''') }}{% if role == ''model'' and message.get(''metadata'') %}{% if message[''metadata''][''type'']
+    == ''think'' %}<think>{% if message[''metadata''].get(''range'') %}<range>{{ message[''metadata''][''range''] }}</range>{%
+    endif %}{% if message[''metadata''].get(''content'') %}{{ message[''metadata''][''content''] | trim }}{% endif %}</think>{%
+    elif message[''metadata''][''type''] == ''direct'' %}<direct>{% endif %}{% if message[''metadata''].get(''function'')
+    %}<function>{{ message[''metadata''][''function''] | join('','') }}</function>{% endif %}{% endif %}{% if message[''content'']
+    is string %}{{ message[''content''] | trim }}{% elif message[''content''] is iterable %}{% for item in message[''content'']
+    %}{{ ''<start_of_image>'' if item[''type'']==''image'' else ''<start_of_audio>'' if item[''type'']==''audio'' else item[''text'']
+    | trim if item[''type'']==''text'' else '''' }}{% endfor %}{% else %}{{ raise_exception(''Invalid content type'') }}{%
+    endif %}{{ ''<end_of_turn>\n'' }}{% endfor %}{% if add_generation_prompt %}{{ ''<start_of_turn>model\n'' }}{% endif %}'
+cardData:
+  library_name: transformers
+  tags: []
+transformersInfo:
+  auto_model: AutoModel
+  custom_class: modeling_gemma_3_omni.Gemma3OmniForConditionalGeneration
+  pipeline_tag: feature-extraction
+siblings:
+- rfilename: .gitattributes
+- rfilename: README.md
+- rfilename: chat_template.jinja
+- rfilename: config.json
+- rfilename: generation_config.json
+- rfilename: model-00001-of-00012.safetensors
+- rfilename: model-00002-of-00012.safetensors
+- rfilename: model-00003-of-00012.safetensors
+- rfilename: model-00004-of-00012.safetensors
+- rfilename: model-00005-of-00012.safetensors
+- rfilename: model-00006-of-00012.safetensors
+- rfilename: model-00007-of-00012.safetensors
+- rfilename: model-00008-of-00012.safetensors
+- rfilename: model-00009-of-00012.safetensors
+- rfilename: model-00010-of-00012.safetensors
+- rfilename: model-00011-of-00012.safetensors
+- rfilename: model-00012-of-00012.safetensors
+- rfilename: model.safetensors.index.json
+- rfilename: modeling_gemma_3_omni.py
+- rfilename: preprocessor_config.json
+- rfilename: processing_gemma3_omni.py
+- rfilename: processor_config.json
+- rfilename: special_tokens_map.json
+- rfilename: speech_conformer_encoder.py
+- rfilename: tokenizer.json
+- rfilename: tokenizer_config.json
+spaces:
+- eduagarcia/multilingual-tokenizer-leaderboard
+createdAt: '2025-06-04T08:53:43.000Z'
+safetensors:
+  parameters:
+    BF16: 29288780040
+  total: 29288780040
+usedStorage: 58611238198
+downloadsAllTime: 24
+inferenceProviderMapping: {}
+configJson:
+  architectures:
+  - Gemma3OmniForConditionalGeneration
+  auto_map:
+    AutoConfig: modeling_gemma_3_omni.Gemma3OmniConfig
+    AutoFeatureExtractor: processing_gemma3_omni.Gemma3AudioFeatureExtractor
+    AutoModel: modeling_gemma_3_omni.Gemma3OmniForConditionalGeneration
+    AutoModelForCausalLM: modeling_gemma_3_omni.Gemma3OmniForConditionalGeneration
+    AutoProcessor: processing_gemma3_omni.Gemma3OmniProcessor
+  boi_token_index: 255999
+  eoi_token_index: 256000
+  eos_token_id:
+  - 1
+  - 106
+  image_token_index: 262144
+  initializer_range: 0.02
+  mm_tokens_per_image: 256
+  model_type: gemma3omni
+  text_config:
+    attention_bias: false
+    attention_dropout: 0.0
+    attn_logit_softcapping: null
+    cache_implementation: hybrid
+    final_logit_softcapping: null
+    head_dim: 128
+    hidden_activation: gelu_pytorch_tanh
+    hidden_size: 5376
+    initializer_range: 0.02
+    intermediate_size: 21504
+    layer_types:
+    - sliding_attention
+    - sliding_attention
+    - sliding_attention
+    - sliding_attention
+    - sliding_attention
+    - full_attention
+    - sliding_attention
+    - sliding_attention
+    - sliding_attention
+    - sliding_attention
+    - sliding_attention
+    - full_attention
+    - sliding_attention
+    - sliding_attention
+    - sliding_attention
+    - sliding_attention
+    - sliding_attention
+    - full_attention
+    - sliding_attention
+    - sliding_attention
+    - sliding_attention
+    - sliding_attention
+    - sliding_attention
+    - full_attention
+    - sliding_attention
+    - sliding_attention
+    - sliding_attention
+    - sliding_attention
+    - sliding_attention
+    - full_attention
+    - sliding_attention
+    - sliding_attention
+    - sliding_attention
+    - sliding_attention
+    - sliding_attention
+    - full_attention
+    - sliding_attention
+    - sliding_attention
+    - sliding_attention
+    - sliding_attention
+    - sliding_attention
+    - full_attention
+    - sliding_attention
+    - sliding_attention
+    - sliding_attention
+    - sliding_attention
+    - sliding_attention
+    - full_attention
+    - sliding_attention
+    - sliding_attention
+    - sliding_attention
+    - sliding_attention
+    - sliding_attention
+    - full_attention
+    - sliding_attention
+    - sliding_attention
+    - sliding_attention
+    - sliding_attention
+    - sliding_attention
+    - full_attention
+    - sliding_attention
+    - sliding_attention
+    max_position_embeddings: 131072
+    model_type: gemma3_text
+    num_attention_heads: 32
+    num_hidden_layers: 62
+    num_key_value_heads: 16
+    query_pre_attn_scalar: 168
+    rms_norm_eps: 1.0e-06
+    rope_local_base_freq: 10000.0
+    rope_scaling:
+      factor: 8.0
+      rope_type: linear
+    rope_theta: 1000000.0
+    sliding_window: 1024
+    sliding_window_pattern: 6
+    torch_dtype: float32
+    use_cache: true
+    vocab_size: 262208
+  torch_dtype: bfloat16
+  transformers_version: 4.52.4
+  vision_config:
+    attention_dropout: 0.0
+    hidden_act: gelu_pytorch_tanh
+    hidden_size: 1152
+    image_size: 896
+    intermediate_size: 4304
+    layer_norm_eps: 1.0e-06
+    model_type: siglip_vision_model
+    num_attention_heads: 16
+    num_channels: 3
+    num_hidden_layers: 27
+    patch_size: 14
+    torch_dtype: float32
+    vision_use_head: false
+onnxFiles: {}
+safetensorsSizeMb: 58577.9
+approxSizeMb: 58577.6
+fetchedAt: '2026-07-04T06:26:13.000Z'

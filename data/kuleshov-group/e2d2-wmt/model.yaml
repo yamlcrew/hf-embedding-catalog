@@ -1,0 +1,128 @@
+_id: 68fa528fbb8b1c058777c723
+id: kuleshov-group/e2d2-wmt
+private: false
+pipeline_tag: feature-extraction
+library_name: transformers
+tags:
+- transformers
+- pytorch
+- e2d2
+- feature-extraction
+- custom_code
+- dataset:wmt/wmt14
+- arxiv:2510.22852
+- license:apache-2.0
+- region:us
+downloads: 8
+likes: 0
+modelId: kuleshov-group/e2d2-wmt
+author: kuleshov-group
+sha: 7c65309acc0d6d89049c9aca4ea02f9d10d1da5a
+lastModified: '2025-10-29T19:14:43.000Z'
+gated: false
+disabled: false
+model-index: null
+config:
+  architectures:
+  - E2D2
+  auto_map:
+    AutoConfig: diffusion.E2D2Config
+    AutoModel: diffusion.E2D2
+    AutoModelForMaskedLM: diffusion.E2D2
+  model_type: e2d2
+  tokenizer_config:
+    bos_token: null
+    eos_token: <|endoftext|>
+    pad_token: <|endoftext|>
+    unk_token: null
+cardData:
+  library_name: transformers
+  license: apache-2.0
+  datasets:
+  - wmt/wmt14
+transformersInfo:
+  auto_model: AutoModel
+  custom_class: diffusion.E2D2
+  pipeline_tag: feature-extraction
+siblings:
+- rfilename: .gitattributes
+- rfilename: .gitignore
+- rfilename: README.md
+- rfilename: __init__.py
+- rfilename: added_tokens.json
+- rfilename: backbone_automodel.py
+- rfilename: backbone_custom_modeling_qwen3.py
+- rfilename: backbone_encoder_decoder.py
+- rfilename: config.json
+- rfilename: denoiser_base.py
+- rfilename: diffusion.py
+- rfilename: generation_config.json
+- rfilename: merges.txt
+- rfilename: noise_schedule_noise_schedules.py
+- rfilename: pytorch_model.bin
+- rfilename: special_tokens_map.json
+- rfilename: tokenizer.json
+- rfilename: tokenizer_config.json
+- rfilename: vocab.json
+spaces: []
+createdAt: '2025-10-23T16:06:39.000Z'
+usedStorage: 2043541493
+downloadsAllTime: 1140
+inferenceProviderMapping: {}
+configJson:
+  T: 0
+  architectures:
+  - E2D2
+  attn_backend: sdpa
+  auto_map:
+    AutoConfig: diffusion.E2D2Config
+    AutoModel: diffusion.E2D2
+    AutoModelForMaskedLM: diffusion.E2D2
+  backbone_config:
+    _target_: backbone_encoder_decoder.LLMasEncoderDecoder
+    attn_backend: sdpa
+    freeze_encoder: false
+    hidden_size: 512
+    intermediate_size: 1536
+    keep_top_decoder_layers: false
+    keep_top_encoder_layers: false
+    max_length: 256
+    num_decoder_layers: 4
+    num_encoder_layers: 28
+    pretrained_model_name_or_path: Qwen/Qwen3-0.6B-Base
+    reinit_decoder: true
+    reinit_encoder: true
+    tie_encoder_decoder_weights: false
+    use_encoder_causal_mask: false
+    use_gradient_checkpointing: false
+  block_size: 4
+  bos_token_id: 151643
+  diffusion_type: absorbing
+  eos_token_id: 151643
+  eval_block_size: 4
+  keep_clean_bos: true
+  length: 256
+  mask_token_id: 151660
+  model_type: e2d2
+  noise_config:
+    _target_: noise_schedule_noise_schedules.LinearNoise
+  pad_token_id: 151643
+  pad_vocab_size_multiple: 1
+  shift_logits: false
+  time_conditioned_backbone: false
+  tokenization_config:
+    bos_token_id: 151643
+    eos_token_id: 151643
+    mask_token_id: 151660
+    pad_token_id: 151643
+    pad_vocab_size_multiple: 1
+    vocab_size: 151669
+  tokenizer_name: Qwen/Qwen3-0.6B-Base
+  torch_dtype: float32
+  train_on_context: false
+  transformers_version: 4.52.4
+  vocab_size: 151669
+onnxFiles: {}
+safetensorsSizeMb: 0.0
+approxSizeMb: 0.0
+fetchedAt: '2026-07-04T06:26:13.000Z'

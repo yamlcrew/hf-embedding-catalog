@@ -1,0 +1,144 @@
+_id: 66ab25df83b6065a31282df8
+id: ravikumar101/minicpm_4bit_ravi
+private: false
+pipeline_tag: feature-extraction
+library_name: transformers
+tags:
+- transformers
+- pytorch
+- minicpmv
+- feature-extraction
+- custom_code
+- license:apache-2.0
+- 4-bit
+- awq
+- region:us
+downloads: 4
+likes: 0
+modelId: ravikumar101/minicpm_4bit_ravi
+author: ravikumar101
+sha: 0987e41646b391b608af78bf80a5a476c19755d1
+lastModified: '2024-08-01T07:20:23.000Z'
+gated: false
+disabled: false
+model-index: null
+config:
+  architectures:
+  - MiniCPMV
+  auto_map:
+    AutoConfig: configuration_minicpm.MiniCPMVConfig
+    AutoModel: modeling_minicpmv.MiniCPMV
+    AutoModelForCausalLM: modeling_minicpmv.MiniCPMV
+  model_type: minicpmv
+  quantization_config:
+    bits: 4
+    quant_method: awq
+  tokenizer_config:
+    bos_token: <|begin_of_text|>
+    chat_template: '{% set loop_messages = messages %}{% for message in loop_messages %}{% set content = ''<|start_header_id|>''
+      + message[''role''] + ''<|end_header_id|>
+
+
+      ''+ message[''content''] | trim + ''<|eot_id|>'' %}{% if loop.index0 == 0 %}{% set content = bos_token + content %}{%
+      endif %}{{ content }}{% endfor %}{{ ''<|start_header_id|>assistant<|end_header_id|>
+
+
+      '' }}'
+    eos_token: <|end_of_text|>
+    pad_token: '!'
+    unk_token: <unk>
+cardData:
+  license: apache-2.0
+transformersInfo:
+  auto_model: AutoModel
+  custom_class: modeling_minicpmv.MiniCPMV
+  pipeline_tag: feature-extraction
+siblings:
+- rfilename: .gitattributes
+- rfilename: README.md
+- rfilename: config.json
+- rfilename: configuration_minicpm.py
+- rfilename: generation_config.json
+- rfilename: image_processing_minicpmv.py
+- rfilename: inputs_stats.pth
+- rfilename: key_stats.pth
+- rfilename: modeling_minicpmv.py
+- rfilename: outputs_stats.pth
+- rfilename: preprocessor_config.json
+- rfilename: processing_minicpmv.py
+- rfilename: pytorch_model-00001-of-00004.bin
+- rfilename: pytorch_model-00002-of-00004.bin
+- rfilename: pytorch_model-00003-of-00004.bin
+- rfilename: pytorch_model-00004-of-00004.bin
+- rfilename: pytorch_model.bin.index.json
+- rfilename: resampler.py
+- rfilename: special_tokens_map.json
+- rfilename: tokenization_minicpmv_fast.py
+- rfilename: tokenizer.json
+- rfilename: tokenizer_config.json
+- rfilename: value_stats.pth
+spaces: []
+createdAt: '2024-08-01T06:06:23.000Z'
+usedStorage: 6771968532
+downloadsAllTime: 23
+inferenceProviderMapping: {}
+configJson:
+  _name_or_path: /home/ubuntu/.cache/huggingface/hub/models--openbmb--MiniCPM-Llama3-V-2_5/snapshots/287e3f85192a7c4acf2564fc6bda0637439a9d78
+  architectures:
+  - MiniCPMV
+  attention_bias: false
+  attention_dropout: 0.0
+  auto_map:
+    AutoConfig: configuration_minicpm.MiniCPMVConfig
+    AutoModel: modeling_minicpmv.MiniCPMV
+    AutoModelForCausalLM: modeling_minicpmv.MiniCPMV
+  batch_vision_input: true
+  bos_token_id: 128000
+  drop_vision_last_layer: false
+  eos_token_id: 128001
+  hidden_act: silu
+  hidden_size: 4096
+  image_size: 448
+  initializer_range: 0.02
+  intermediate_size: 14336
+  max_position_embeddings: 8192
+  mlp_bias: false
+  mm_use_im_start_end: true
+  model_type: minicpmv
+  num_attention_heads: 32
+  num_hidden_layers: 32
+  num_key_value_heads: 8
+  patch_size: 14
+  pretraining_tp: 1
+  quantization_config:
+    bits: 4
+    group_size: 128
+    quant_method: awq
+    version: gemm
+    zero_point: true
+  query_num: 96
+  rms_norm_eps: 1.0e-05
+  rope_scaling: null
+  rope_theta: 500000.0
+  slice_config:
+    max_slice_nums: 9
+    model_type: minicpmv
+  slice_mode: true
+  tie_word_embeddings: false
+  torch_dtype: float16
+  transformers_version: 4.43.2
+  use_cache: false
+  version: '2.5'
+  vision_config:
+    hidden_size: 1152
+    image_size: 980
+    intermediate_size: 4304
+    model_type: idefics2
+    num_attention_heads: 16
+    num_hidden_layers: 27
+    patch_size: 14
+  vocab_size: 128256
+onnxFiles: {}
+safetensorsSizeMb: 0.0
+approxSizeMb: 0.0
+fetchedAt: '2026-07-04T06:26:13.000Z'

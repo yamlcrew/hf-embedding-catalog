@@ -1,0 +1,132 @@
+_id: 667b54f891bd7b3e1ee9964c
+id: 4n3mone/glm-4-ko-9b-chat
+private: false
+pipeline_tag: feature-extraction
+library_name: transformers
+tags:
+- transformers
+- safetensors
+- chatglm
+- feature-extraction
+- custom_code
+- ko
+- arxiv:1910.09700
+- region:us
+downloads: 1
+likes: 0
+modelId: 4n3mone/glm-4-ko-9b-chat
+author: 4n3mone
+sha: fd85352b3375f914c5b5d3d4d2723a230a57c140
+lastModified: '2024-07-01T02:03:30.000Z'
+gated: false
+disabled: false
+model-index: null
+config:
+  architectures:
+  - ChatGLMForConditionalGeneration
+  auto_map:
+    AutoConfig: configuration_chatglm.ChatGLMConfig
+    AutoModel: THUDM/glm-4-9b-chat--modeling_chatglm.ChatGLMForConditionalGeneration
+    AutoModelForCausalLM: modeling_chatglm.ChatGLMForConditionalGeneration
+    AutoModelForSeq2SeqLM: THUDM/glm-4-9b-chat--modeling_chatglm.ChatGLMForConditionalGeneration
+    AutoModelForSequenceClassification: THUDM/glm-4-9b-chat--modeling_chatglm.ChatGLMForSequenceClassification
+  model_type: chatglm
+  tokenizer_config:
+    chat_template: '[gMASK]<sop>{% for message in messages %}{% if loop.first and messages[0][''role''] != ''system'' %}{{
+      ''system
+
+      당신은 사용자의 질문에 정확한 답변을 하는 지능형 한국어 어시스턴트 KoGLM-4입니다. 답변은 한국어로만 말해 주세요.除非另有说明，请用韩语回答
+
+      '' }}{% endif %}{{'''' + message[''role''] + ''
+
+      '' + message[''content''] + '''' + ''
+
+      ''}}{% endfor %}{% if add_generation_prompt %}{{ ''assistant
+
+      '' }}{% endif %}'
+    eos_token: <|endoftext|>
+    pad_token: <|endoftext|>
+cardData:
+  language:
+  - ko
+  library_name: transformers
+transformersInfo:
+  auto_model: AutoModel
+  custom_class: THUDM/glm-4-9b-chat--modeling_chatglm.ChatGLMForConditionalGeneration
+  pipeline_tag: feature-extraction
+siblings:
+- rfilename: .gitattributes
+- rfilename: README.md
+- rfilename: added_tokens.json
+- rfilename: config.json
+- rfilename: configuration_chatglm.py
+- rfilename: generation_config.json
+- rfilename: model-00001-of-00004.safetensors
+- rfilename: model-00002-of-00004.safetensors
+- rfilename: model-00003-of-00004.safetensors
+- rfilename: model-00004-of-00004.safetensors
+- rfilename: model.safetensors.index.json
+- rfilename: modeling_chatglm.py
+- rfilename: special_tokens_map.json
+- rfilename: tokenization_chatglm.py
+- rfilename: tokenizer.model
+- rfilename: tokenizer_config.json
+spaces: []
+createdAt: '2024-06-25T23:38:32.000Z'
+safetensors:
+  parameters:
+    BF16: 9399951392
+  total: 9399951392
+usedStorage: 37602506082
+downloadsAllTime: 270
+inferenceProviderMapping: {}
+configJson:
+  _name_or_path: /workspace/new_korean_llama/src/checkpoints/checkpoint-600
+  add_bias_linear: false
+  add_qkv_bias: true
+  apply_query_key_layer_scaling: true
+  apply_residual_connection_post_layernorm: false
+  architectures:
+  - ChatGLMForConditionalGeneration
+  attention_dropout: 0.0
+  attention_softmax_in_fp32: true
+  auto_map:
+    AutoConfig: configuration_chatglm.ChatGLMConfig
+    AutoModel: THUDM/glm-4-9b-chat--modeling_chatglm.ChatGLMForConditionalGeneration
+    AutoModelForCausalLM: modeling_chatglm.ChatGLMForConditionalGeneration
+    AutoModelForSeq2SeqLM: THUDM/glm-4-9b-chat--modeling_chatglm.ChatGLMForConditionalGeneration
+    AutoModelForSequenceClassification: THUDM/glm-4-9b-chat--modeling_chatglm.ChatGLMForSequenceClassification
+  bias_dropout_fusion: true
+  classifier_dropout: null
+  eos_token_id:
+  - 151329
+  - 151336
+  - 151338
+  ffn_hidden_size: 13696
+  fp32_residual_connection: false
+  hidden_dropout: 0.0
+  hidden_size: 4096
+  kv_channels: 128
+  layernorm_epsilon: 1.5625e-07
+  model_type: chatglm
+  multi_query_attention: true
+  multi_query_group_num: 2
+  num_attention_heads: 32
+  num_hidden_layers: 40
+  num_layers: 40
+  original_rope: true
+  pad_token_id: 151329
+  padded_vocab_size: 151552
+  post_layer_norm: true
+  rmsnorm: true
+  rope_ratio: 500
+  seq_length: 131072
+  tie_word_embeddings: false
+  torch_dtype: bfloat16
+  transformers_version: 4.41.2
+  use_cache: false
+  vocab_size: 151552
+onnxFiles: {}
+safetensorsSizeMb: 18799.9
+approxSizeMb: 18799.9
+fetchedAt: '2026-07-04T06:26:13.000Z'

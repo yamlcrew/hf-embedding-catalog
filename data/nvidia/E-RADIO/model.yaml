@@ -1,0 +1,345 @@
+_id: 65805f63035c028f33193283
+id: nvidia/E-RADIO
+private: false
+pipeline_tag: feature-extraction
+library_name: transformers
+tags:
+- transformers
+- pytorch
+- safetensors
+- feature-extraction
+- custom_code
+- arxiv:2312.06709
+- region:us
+downloads: 117
+likes: 14
+modelId: nvidia/E-RADIO
+author: nvidia
+sha: 85588e9f965a8ce70a13cedc62c5e4ced529c9da
+lastModified: '2024-06-10T14:38:07.000Z'
+gated: false
+disabled: false
+model-index: null
+config:
+  architectures:
+  - RADIOModel
+  auto_map:
+    AutoConfig: hf_model.RADIOConfig
+    AutoModel: hf_model.RADIOModel
+cardData: {}
+transformersInfo:
+  auto_model: AutoModel
+  custom_class: hf_model.RADIOModel
+  pipeline_tag: feature-extraction
+siblings:
+- rfilename: .gitattributes
+- rfilename: README.md
+- rfilename: adaptor_base.py
+- rfilename: adaptor_generic.py
+- rfilename: adaptor_mlp.py
+- rfilename: adaptor_registry.py
+- rfilename: block.py
+- rfilename: cls_token.py
+- rfilename: common.py
+- rfilename: config.json
+- rfilename: conv.py
+- rfilename: enable_cpe_support.py
+- rfilename: enable_spectral_reparam.py
+- rfilename: eradio_model.py
+- rfilename: extra_timm_models.py
+- rfilename: hf_model.py
+- rfilename: input_conditioner.py
+- rfilename: model.py
+- rfilename: model.safetensors
+- rfilename: open_clip_adaptor.py
+- rfilename: preprocessor_config.json
+- rfilename: pytorch_model.bin
+- rfilename: radio_model.py
+- rfilename: vit_patch_generator.py
+- rfilename: vitdet.py
+spaces: []
+createdAt: '2023-12-18T15:04:03.000Z'
+safetensors:
+  parameters:
+    I64: 983043
+    F32: 400152676
+  total: 401135719
+usedStorage: 8101239107
+downloadsAllTime: 3410
+inferenceProviderMapping: {}
+configJson:
+  adaptor_names: null
+  architectures:
+  - RADIOModel
+  args:
+    aa: null
+    amp: true
+    amp_dtype: bfloat16
+    amp_impl: native
+    aug_repeats: 0
+    aug_splits: 0
+    auto_loss_balance_mode: manual
+    batch_size: 32
+    bn_eps: null
+    bn_momentum: null
+    cache_dir: null
+    channels_last: false
+    checkpoint_hist: 10
+    chk_keep_forever: 10
+    class_map: ''
+    clip_grad: null
+    clip_mode: norm
+    cls_token_per_teacher: false
+    coco_annotations_file: /datasets/coco2017-adlsa/annotations/captions_val2017.json
+    coco_image_dir: /datasets/coco2017-adlsa/val2017
+    color_jitter: 0.4
+    cooldown_epochs: 0
+    cpe_max_size: null
+    crd_loss: false
+    crd_loss_weight: 0.8
+    crop_pct: null
+    cutmix: 0.0
+    cutmix_minmax: null
+    data_dir:
+    - - /lustre/fsw/portfolios/llmservice/projects/llmservice_nlp_fm/datasets/captioning/datacomp/dc1b/stage2
+      - 0.95
+    - - /lustre/fsw/portfolios/llmservice/projects/llmservice_nlp_fm/datasets/segmentation/sam/stage1
+      - 0.05
+    dataset: nvgpt4
+    dataset_download: false
+    ddp_comm_fp16: false
+    ddp_comm_power_sgd: false
+    debug_full_knn: false
+    decay_epochs: 90
+    decay_milestones:
+    - 90
+    - 180
+    - 270
+    decay_rate: 0.1
+    device: cuda:0
+    dist_bn: ''
+    distributed: true
+    drop: 0.0
+    drop_block: null
+    drop_connect: null
+    drop_path: null
+    dtype: float32
+    epoch_repeats: 0.0
+    epochs: 50
+    eval: false
+    eval_metric: knn_top1
+    eval_teacher: false
+    eval_teacher_only: false
+    eval_throughput: false
+    experiment: checkpoints
+    fast_norm: false
+    feature_summarizer: cls_token
+    feature_upscale_factor: null
+    force_new_wandb_id: false
+    force_spectral_reparam: false
+    freeze_bn: false
+    fuser: ''
+    gp: null
+    grad_accum_steps: 1
+    grad_checkpointing: false
+    head_init_bias: null
+    head_init_scale: null
+    head_warmup: 10
+    hflip: 0.5
+    img_size: null
+    in_chans: null
+    initial_checkpoint: ''
+    input_size: null
+    interpolation: ''
+    layer_decay: null
+    local_rank: 0
+    log_interval: 50
+    log_mlflow: false
+    log_wandb: true
+    loss: cosine
+    loss_auto_balance: false
+    lr: 0.001
+    lr_base: 0.1
+    lr_base_scale: ''
+    lr_base_size: 256
+    lr_cycle_decay: 0.5
+    lr_cycle_limit: 1
+    lr_cycle_mul: 1.0
+    lr_k_decay: 1.0
+    lr_noise: null
+    lr_noise_pct: 0.67
+    lr_noise_std: 1.0
+    mean: null
+    mesa: false
+    min_lr: 0
+    mixup: 0.0
+    mixup_mode: batch
+    mixup_off_epoch: 0
+    mixup_prob: 1.0
+    mixup_switch_prob: 0.5
+    mlp_hidden_size: 1520
+    mlp_num_inner: 1
+    mlp_version: v2
+    model: eradio
+    model_ema:
+      decay: 0.9998
+      force_cpu: false
+      power: false
+      power_stds:
+      - 0.05
+      - 0.1
+      start_epoch: 2
+    model_kwargs:
+      return_full_features: true
+    model_norm: false
+    momentum: 0.9
+    no_aug: false
+    no_ddp_bb: false
+    no_prefetcher: false
+    no_resume_opt: false
+    num_classes: null
+    opt: fusedlamb
+    opt_betas: null
+    opt_eps: null
+    opt_kwargs: {}
+    output: /lustre/fs6/portfolios/llmservice/users/mranzinger/output/evfm/eradio/n8_3-25-24_eradio_stage3-alt_s2ep77
+    patience_epochs: 10
+    pin_mem: false
+    prefetcher: true
+    pretrained: false
+    rank: 0
+    ratio:
+    - 0.75
+    - 1.3333333333333333
+    recount: 1
+    recovery_interval: 0
+    register_multiple: 0
+    remode: pixel
+    reprob: 0.0
+    resplit: false
+    resume: /lustre/fs6/portfolios/llmservice/users/mranzinger/output/evfm/eradio/n8_3-25-24_eradio_stage3-alt_s2ep77/checkpoints/last.pth.tar
+    save_images: false
+    scale:
+    - 0.5
+    - 1.0
+    sched: cosine
+    sched_on_updates: true
+    seed: 42
+    smoothing: 0.1
+    spectral_reparam: false
+    split_bn: false
+    start_epoch: null
+    std: null
+    steps_per_epoch: 2000
+    sync_bn: true
+    synchronize_step: true
+    teachers:
+    - amp: true
+      amp_dtype: bfloat16
+      batch_size: 32
+      data_dir:
+      - - /lustre/fsw/portfolios/llmservice/projects/llmservice_nlp_fm/datasets/captioning/datacomp/dc1b/stage2
+        - 0.95
+      - - /lustre/fsw/portfolios/llmservice/projects/llmservice_nlp_fm/datasets/segmentation/sam/stage1
+        - 0.05
+      fd_loss_weight: 1.0
+      fd_normalize: false
+      feature_distillation: true
+      input_size: 378
+      model: ViT-H-14-378-quickgelu
+      name: clip
+      pretrained: dfn5b
+      sample_rate: 32
+      student_resolution: 512
+      summary_loss_weight: 1.0
+      torchcompile: true
+      type: open_clip
+    - amp: true
+      amp_dtype: bfloat16
+      batch_size: 32
+      fd_loss_weight: 1.5
+      fd_normalize: false
+      feature_distillation: true
+      input_size: 224
+      model: dinov2_vitg14_reg
+      name: dino_v2
+      sample_rate: 32
+      summary_loss_weight: 1.0
+      torchcompile: true
+      type: dino_v2
+    - amp: true
+      amp_dtype: bfloat16
+      batch_size: 2
+      fd_loss_fn: MSE
+      fd_loss_weight: 0.13
+      fd_normalize: false
+      feature_distillation: true
+      input_size: 448
+      model: dinov2_vitl14_reg
+      name: dino_v2_large
+      sample_rate: 2
+      student_resolution: 1024
+      summary_loss_weight: 1.0e-05
+      torchcompile: true
+      type: dino_v2
+      use_summary: true
+    - amp: false
+      batch_size: 2
+      data_dir:
+      - - /lustre/fsw/portfolios/llmservice/projects/llmservice_nlp_fm/datasets/segmentation/sam/stage1
+        - 0.4
+      fd_loss_fn: MSE
+      fd_loss_weight: 0.13
+      fd_normalize: false
+      fd_ohem: false
+      feature_distillation: true
+      input_size: 1024
+      model: vit-h
+      name: sam
+      sample_rate: 2
+      student_resolution: 1024
+      summary_loss_weight: 1.0e-05
+      type: sam
+      use_summary: false
+    torchcompile: null
+    torchscript: false
+    train_interpolation: random
+    train_split: train
+    tta: 0
+    use_coco: false
+    use_multi_epochs_loader: false
+    val_data_dir: /lustre/fsw/portfolios/llmservice/projects/llmservice_nlp_fm/datasets/classification/imagenet-1k/webdataset
+    val_ema_only: false
+    val_img_size: 512
+    val_jobs_script: run_validation_jobs_eradio.sh
+    val_split: val
+    validation_batch_size: 128
+    vflip: 0.0
+    wandb_entity: ''
+    wandb_group: eradio
+    wandb_job_type: ''
+    wandb_name: ''
+    wandb_project: ''
+    warmup_epochs: 0.001
+    warmup_lr: 1.0e-05
+    warmup_prefix: false
+    weight_decay: 0.0002
+    worker_seeding: all
+    workers: 10
+    world_size: 64
+  auto_map:
+    AutoConfig: hf_model.RADIOConfig
+    AutoModel: hf_model.RADIOModel
+  max_resolution: 2048
+  patch_size: 16
+  preferred_resolution:
+  - 512
+  - 512
+  torch_dtype: float32
+  transformers_version: 4.40.1
+  version: e-radio_v2
+  vitdet_window_size: null
+onnxFiles: {}
+safetensorsSizeMb: 1608.5
+approxSizeMb: 1604.5
+fetchedAt: '2026-07-04T06:26:13.000Z'

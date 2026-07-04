@@ -1,0 +1,113 @@
+_id: 6774df048379936c6ec041ff
+id: klaylouis1932/baichuan2-7b-lora-ft-fin
+private: false
+pipeline_tag: feature-extraction
+library_name: transformers
+tags:
+- transformers
+- safetensors
+- baichuan
+- feature-extraction
+- llama-factory
+- custom_code
+- arxiv:1910.09700
+- region:us
+downloads: 1
+likes: 0
+modelId: klaylouis1932/baichuan2-7b-lora-ft-fin
+author: klaylouis1932
+sha: 43bd2a868196093a1c896a23493b0dc02c10ff29
+lastModified: '2025-01-01T06:23:42.000Z'
+gated: false
+disabled: false
+model-index: null
+config:
+  architectures:
+  - BaichuanForCausalLM
+  auto_map:
+    AutoConfig: configuration_baichuan.BaichuanConfig
+    AutoModel: modeling_baichuan.BaichuanForCausalLM
+    AutoModelForCausalLM: baichuan-inc/Baichuan2-7B-Chat--modeling_baichuan.BaichuanForCausalLM
+  model_type: baichuan
+  tokenizer_config:
+    bos_token: <s>
+    chat_template: '{% if messages[0][''role''] == ''system'' %}{% set loop_messages = messages[1:] %}{% set system_message
+      = messages[0][''content''] %}{% else %}{% set loop_messages = messages %}{% endif %}{% if system_message is defined
+      %}{{ system_message }}{% endif %}{% for message in loop_messages %}{% set content = message[''content''] %}{% if message[''role'']
+      == ''user'' %}{{ ''<reserved_106>'' + content + ''<reserved_107>'' }}{% elif message[''role''] == ''assistant'' %}{{
+      content }}{% endif %}{% endfor %}'
+    eos_token: </s>
+    pad_token: <unk>
+    unk_token: <unk>
+cardData:
+  library_name: transformers
+  tags:
+  - llama-factory
+transformersInfo:
+  auto_model: AutoModel
+  custom_class: modeling_baichuan.BaichuanForCausalLM
+  pipeline_tag: feature-extraction
+siblings:
+- rfilename: .gitattributes
+- rfilename: README.md
+- rfilename: config.json
+- rfilename: configuration_baichuan.py
+- rfilename: generation_config.json
+- rfilename: generation_utils.py
+- rfilename: model-00001-of-00008.safetensors
+- rfilename: model-00002-of-00008.safetensors
+- rfilename: model-00003-of-00008.safetensors
+- rfilename: model-00004-of-00008.safetensors
+- rfilename: model-00005-of-00008.safetensors
+- rfilename: model-00006-of-00008.safetensors
+- rfilename: model-00007-of-00008.safetensors
+- rfilename: model-00008-of-00008.safetensors
+- rfilename: model.safetensors.index.json
+- rfilename: modeling_baichuan.py
+- rfilename: quantizer.py
+- rfilename: special_tokens_map.json
+- rfilename: tokenization_baichuan.py
+- rfilename: tokenizer.model
+- rfilename: tokenizer_config.json
+spaces: []
+createdAt: '2025-01-01T06:21:56.000Z'
+safetensors:
+  parameters:
+    BF16: 7505973248
+  total: 7505973248
+usedStorage: 15013973931
+downloadsAllTime: 112
+inferenceProviderMapping: {}
+configJson:
+  _from_model_config: true
+  _name_or_path: baichuan-inc/Baichuan2-7B-Chat
+  architectures:
+  - BaichuanForCausalLM
+  auto_map:
+    AutoConfig: configuration_baichuan.BaichuanConfig
+    AutoModel: modeling_baichuan.BaichuanForCausalLM
+    AutoModelForCausalLM: baichuan-inc/Baichuan2-7B-Chat--modeling_baichuan.BaichuanForCausalLM
+  bos_token_id: 1
+  eos_token_id: 2
+  hidden_act: silu
+  hidden_size: 4096
+  initializer_range: 0.02
+  intermediate_size: 11008
+  max_position_embeddings: 4096
+  model_max_length: 4096
+  model_type: baichuan
+  num_attention_heads: 32
+  num_hidden_layers: 32
+  pad_token_id: 0
+  rms_norm_eps: 1.0e-06
+  tie_word_embeddings: false
+  tokenizer_class: BaichuanTokenizer
+  torch_dtype: bfloat16
+  transformers_version: 4.46.1
+  use_cache: true
+  vocab_size: 125696
+  z_loss_weight: 0
+onnxFiles: {}
+safetensorsSizeMb: 15012.0
+approxSizeMb: 15011.9
+fetchedAt: '2026-07-04T06:26:13.000Z'

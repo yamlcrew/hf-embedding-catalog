@@ -1,0 +1,86 @@
+_id: 67afadcd191e14785c629c07
+id: kcj1n2020/EXA-3.5-2.4B-W
+private: false
+pipeline_tag: feature-extraction
+library_name: transformers
+tags:
+- transformers
+- safetensors
+- exaone
+- feature-extraction
+- llama-factory
+- custom_code
+- arxiv:1910.09700
+- 8-bit
+- gptq
+- region:us
+downloads: 0
+likes: 0
+modelId: kcj1n2020/EXA-3.5-2.4B-W
+author: kcj1n2020
+sha: 0e8b7f9280c765ba5110eb40f036a83b02ef57fa
+lastModified: '2025-02-14T20:57:26.000Z'
+gated: auto
+disabled: false
+model-index: null
+config:
+  architectures:
+  - ExaoneForCausalLM
+  auto_map:
+    AutoConfig: configuration_exaone.ExaoneConfig
+    AutoModel: modeling_exaone.ExaoneForCausalLM
+    AutoModelForCausalLM: LGAI-EXAONE/EXAONE-3.5-2.4B-Instruct--modeling_exaone.ExaoneForCausalLM
+    AutoModelForSequenceClassification: LGAI-EXAONE/EXAONE-3.5-2.4B-Instruct--modeling_exaone.ExaoneForSequenceClassification
+  model_type: exaone
+  quantization_config:
+    bits: 8
+    quant_method: gptq
+  tokenizer_config:
+    bos_token: '[BOS]'
+    chat_template: '{% for message in messages %}{% if loop.first and message[''role''] != ''system'' %}{{ ''[|system|][|endofturn|]
+
+      '' }}{% endif %}{{ ''[|'' + message[''role''] + ''|]'' + message[''content''] }}{% if message[''role''] == ''user''
+      %}{{ ''
+
+      '' }}{% else %}{{ ''[|endofturn|]
+
+      '' }}{% endif %}{% endfor %}{% if add_generation_prompt %}{{ ''[|assistant|]'' }}{% endif %}'
+    eos_token: '[|endofturn|]'
+    pad_token: '[PAD]'
+    unk_token: '[UNK]'
+cardData:
+  library_name: transformers
+  tags:
+  - llama-factory
+transformersInfo:
+  auto_model: AutoModel
+  custom_class: modeling_exaone.ExaoneForCausalLM
+  pipeline_tag: feature-extraction
+siblings:
+- rfilename: .gitattributes
+- rfilename: README.md
+- rfilename: config.json
+- rfilename: configuration_exaone.py
+- rfilename: generation_config.json
+- rfilename: merges.txt
+- rfilename: model.safetensors
+- rfilename: modeling_exaone.py
+- rfilename: special_tokens_map.json
+- rfilename: tokenizer.json
+- rfilename: tokenizer_config.json
+- rfilename: vocab.json
+spaces: []
+createdAt: '2025-02-14T20:55:41.000Z'
+safetensors:
+  parameters:
+    I32: 2143027200
+    F16: 262300160
+  total: 2405327360
+usedStorage: 2720660664
+downloadsAllTime: 0
+inferenceProviderMapping: {}
+configJson: null
+onnxFiles: {}
+safetensorsSizeMb: 2720.7
+approxSizeMb: 9096.7
+fetchedAt: '2026-07-04T06:26:13.000Z'

@@ -1,0 +1,121 @@
+_id: 671f32fd158f8340b0466b92
+id: DianLiI/genbio-model
+private: false
+pipeline_tag: feature-extraction
+library_name: transformers
+tags:
+- transformers
+- safetensors
+- genbio
+- feature-extraction
+- custom_code
+- arxiv:1910.09700
+- region:us
+downloads: 4
+likes: 0
+modelId: DianLiI/genbio-model
+author: DianLiI
+sha: fade19c99a8a0d16053f39243a3ac2b78e9f767a
+lastModified: '2024-10-28T06:55:17.000Z'
+gated: false
+disabled: false
+model-index: null
+config:
+  architectures:
+  - GenBioModel
+  auto_map:
+    AutoConfig: modeling_genbio.GenBioConfig
+    AutoModel: modeling_genbio.GenBioModel
+  model_type: genbio
+cardData:
+  library_name: transformers
+  tags: []
+transformersInfo:
+  auto_model: AutoModel
+  custom_class: modeling_genbio.GenBioModel
+  pipeline_tag: feature-extraction
+siblings:
+- rfilename: .gitattributes
+- rfilename: README.md
+- rfilename: config.json
+- rfilename: model.safetensors
+- rfilename: modeling_genbio.py
+spaces: []
+createdAt: '2024-10-28T06:45:17.000Z'
+safetensors:
+  parameters:
+    F32: 95874
+  total: 95874
+usedStorage: 387864
+downloadsAllTime: 21
+inferenceProviderMapping: {}
+configJson:
+  architectures:
+  - GenBioModel
+  auto_map:
+    AutoConfig: modeling_genbio.GenBioConfig
+    AutoModel: modeling_genbio.GenBioModel
+  hparams:
+    _class_path: genbio_finetune.tasks.SequenceClassification
+    _instantiator: lightning.pytorch.cli.instantiate_module
+    adapter:
+      class_path: genbio_finetune.models.MLPAdapter
+      dict_kwargs:
+        hidden_sizes:
+        - 64
+      init_args:
+        bias: true
+        dropout: 0.0
+    backbone:
+      class_path: genbio_finetune.models._proteinfm_debug
+      init_args:
+        lora_alpha: 32
+        lora_dropout: 0.1
+        lora_modules_to_save: null
+        lora_r: 16
+        lora_target_modules:
+        - query
+        - value
+        - key
+        - dense
+        - router
+        lora_use_rslora: false
+        max_length: null
+        model_init_args:
+          add_pooling_layer: false
+        save_peft_only: true
+        use_peft: false
+    batch_size: 2
+    lr_scheduler:
+      class_path: genbio_finetune.lr_schedulers.CosineWithWarmup
+      init_args:
+        last_epoch: -1
+        num_warmup_steps: null
+        verbose: deprecated
+        warmup_ratio: 0.01
+    n_classes: 2
+    optimizer:
+      class_path: torch.optim.AdamW
+      init_args:
+        amsgrad: false
+        betas:
+        - 0.9
+        - 0.95
+        capturable: false
+        differentiable: false
+        eps: 1.0e-08
+        foreach: null
+        fused: null
+        lr: 0.001
+        maximize: false
+        weight_decay: 0.01
+    reset_optimizer_states: false
+    strict_loading: true
+    use_legacy_adapter: false
+  model_type: genbio
+  torch_dtype: float32
+  transformers_version: 4.38.0.dev0
+onnxFiles: {}
+safetensorsSizeMb: 0.4
+approxSizeMb: 0.4
+fetchedAt: '2026-07-04T06:26:13.000Z'

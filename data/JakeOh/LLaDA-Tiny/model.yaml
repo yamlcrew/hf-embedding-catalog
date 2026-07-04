@@ -1,0 +1,125 @@
+_id: 69380278e526edf8661f9ad8
+id: JakeOh/LLaDA-Tiny
+private: false
+pipeline_tag: feature-extraction
+library_name: transformers
+tags:
+- transformers
+- safetensors
+- llada
+- feature-extraction
+- custom_code
+- arxiv:1910.09700
+- region:us
+downloads: 10
+likes: 0
+modelId: JakeOh/LLaDA-Tiny
+author: JakeOh
+sha: 15bde35e587f10055fa2b21ee3b5d4398592f40c
+lastModified: '2025-12-09T11:53:20.000Z'
+gated: false
+disabled: false
+model-index: null
+config:
+  architectures:
+  - LLaDAModelLM
+  auto_map:
+    AutoConfig: configuration_llada.LLaDAConfig
+    AutoModel: modeling_llada.LLaDAModelLM
+    AutoModelForCausalLM: modeling_llada.LLaDAModelLM
+  model_type: llada
+  tokenizer_config:
+    bos_token: <|startoftext|>
+    eos_token: <|endoftext|>
+    mask_token: <|mdm_mask|>
+    pad_token: <|endoftext|>
+    unk_token: null
+  chat_template_jinja: "{{ bos_token }}\n{%- for message in messages %}\n    {%- if (message['role'] == 'system') -%}\n{{'<|system|>'\
+    \ + '\\n' + message['content'].strip() + '<|end|>' + '\\n'}}\n    {%- elif (message['role'] == 'user') -%}\n{{'<|user|>'\
+    \ + '\\n' + message['content'].strip() + '<|end|>' + '\\n' + '<|assistant|>' + '\\n'}}\n    {%- elif message['role'] ==\
+    \ 'assistant' -%}\n{{message['content'].strip() + '<|end|>' + '\\n'}}\n    {%- endif %}\n{%- endfor %}\n"
+cardData:
+  library_name: transformers
+  tags: []
+transformersInfo:
+  auto_model: AutoModel
+  custom_class: modeling_llada.LLaDAModelLM
+  pipeline_tag: feature-extraction
+siblings:
+- rfilename: .gitattributes
+- rfilename: README.md
+- rfilename: char_tokenizer.py
+- rfilename: chat_template.jinja
+- rfilename: config.json
+- rfilename: configuration_llada.py
+- rfilename: generation_config.json
+- rfilename: model.safetensors
+- rfilename: modeling_llada.py
+- rfilename: special_tokens_map.json
+- rfilename: tokenizer_config.json
+- rfilename: vocab.json
+spaces: []
+createdAt: '2025-12-09T11:05:28.000Z'
+safetensors:
+  parameters:
+    F32: 17719680
+  total: 17719680
+usedStorage: 283518880
+downloadsAllTime: 2950
+inferenceProviderMapping: {}
+configJson:
+  activation_type: silu
+  alibi: false
+  alibi_bias_max: 8.0
+  architectures:
+  - LLaDAModelLM
+  attention_dropout: 0.0
+  attention_layer_norm: false
+  attention_layer_norm_with_affine: true
+  auto_map:
+    AutoConfig: configuration_llada.LLaDAConfig
+    AutoModel: modeling_llada.LLaDAModelLM
+    AutoModelForCausalLM: modeling_llada.LLaDAModelLM
+  bias_for_layer_norm: false
+  block_group_size: 1
+  block_type: llama
+  d_model: 384
+  dtype: float32
+  embedding_dropout: 0.0
+  embedding_size: 26
+  eos_token_id: 3
+  flash_attention: false
+  include_bias: false
+  include_qkv_bias: false
+  init_cutoff_factor: null
+  init_device: meta
+  init_fn: mitchell
+  init_std: 0.02
+  input_emb_norm: false
+  layer_norm_type: rms
+  layer_norm_with_affine: true
+  mask_token_id: 8
+  max_sequence_length: 4096
+  mlp_hidden_size: 2048
+  mlp_ratio: 4
+  model_type: llada
+  multi_query_attention: null
+  n_heads: 8
+  n_kv_heads: 8
+  n_layers: 6
+  pad_token_id: 3
+  precision: amp_bf16
+  residual_dropout: 0.0
+  rms_norm_eps: 1.0e-05
+  rope: true
+  rope_full_precision: true
+  rope_theta: 500000.0
+  scale_logits: false
+  transformers_version: 4.57.3
+  use_cache: false
+  vocab_size: 26
+  weight_tying: false
+onnxFiles: {}
+safetensorsSizeMb: 70.9
+approxSizeMb: 70.9
+fetchedAt: '2026-07-04T06:26:13.000Z'

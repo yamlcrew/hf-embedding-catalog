@@ -1,0 +1,75 @@
+_id: 674c5d45d5b25ac386c3894e
+id: AlexHung29629/v12b-speech-dialogue-40k
+private: false
+pipeline_tag: feature-extraction
+library_name: transformers
+tags:
+- transformers
+- safetensors
+- ultravox
+- feature-extraction
+- custom_code
+- arxiv:1910.09700
+- region:us
+downloads: 0
+likes: 0
+modelId: AlexHung29629/v12b-speech-dialogue-40k
+author: AlexHung29629
+sha: 44a1054fedfda1c76766c8845c322ebe7fcedbc0
+lastModified: '2024-12-01T12:58:06.000Z'
+gated: manual
+disabled: false
+model-index: null
+config:
+  architectures:
+  - UltravoxModel
+  auto_map:
+    AutoConfig: ultravox_config.UltravoxConfig
+    AutoModel: ultravox_model.UltravoxModel
+    AutoProcessor: AlexHung29629/test_mllama_v12b--ultravox_processing.UltravoxProcessor
+  model_type: ultravox
+  tokenizer_config:
+    bos_token: <|begin_of_text|>
+    chat_template: '{% set loop_messages = messages %}{% for message in loop_messages %}{% set content = ''<|start_header_id|>''
+      + message[''role''] + ''<|end_header_id|>
+
+
+      ''+ message[''content''] | trim + ''<|eot_id|>'' %}{% if loop.index0 == 0 %}{% set content = bos_token + content %}{%
+      endif %}{{ content }}{% endfor %}{% if add_generation_prompt %}{{ ''<|start_header_id|>assistant<|end_header_id|>
+
+
+      '' }}{% endif %}'
+    eos_token: <|eot_id|>
+    pad_token: <|finetune_right_pad_id|>
+cardData:
+  library_name: transformers
+  tags: []
+transformersInfo:
+  auto_model: AutoModel
+  custom_class: ultravox_model.UltravoxModel
+  pipeline_tag: feature-extraction
+siblings:
+- rfilename: .gitattributes
+- rfilename: README.md
+- rfilename: config.json
+- rfilename: generation_config.json
+- rfilename: model.safetensors
+- rfilename: special_tokens_map.json
+- rfilename: tokenizer.json
+- rfilename: tokenizer_config.json
+- rfilename: ultravox_config.py
+- rfilename: ultravox_model.py
+spaces: []
+createdAt: '2024-12-01T12:57:41.000Z'
+safetensors:
+  parameters:
+    F16: 50345984
+  total: 50345984
+usedStorage: 117902360
+downloadsAllTime: 0
+inferenceProviderMapping: {}
+configJson: null
+onnxFiles: {}
+safetensorsSizeMb: 100.7
+approxSizeMb: 100.7
+fetchedAt: '2026-07-04T06:26:13.000Z'

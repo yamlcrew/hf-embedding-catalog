@@ -1,0 +1,90 @@
+_id: 6761263a6f884a74235e12ef
+id: AlexHung29629/tp1_mllama_v1
+private: false
+pipeline_tag: feature-extraction
+library_name: transformers
+tags:
+- transformers
+- safetensors
+- ultravox
+- feature-extraction
+- custom_code
+- arxiv:1910.09700
+- region:us
+downloads: 0
+likes: 0
+modelId: AlexHung29629/tp1_mllama_v1
+author: AlexHung29629
+sha: 456c13f4ace97b19671be90acb5ebda6561eea26
+lastModified: '2024-12-25T00:37:57.000Z'
+gated: auto
+disabled: false
+model-index: null
+config:
+  architectures:
+  - UltravoxModel
+  auto_map:
+    AutoConfig: ultravox_config.UltravoxConfig
+    AutoModel: ultravox_model.UltravoxModel
+    AutoProcessor: ultravox_processing.UltravoxProcessor
+  model_type: ultravox
+  tokenizer_config:
+    bos_token: <|begin_of_text|>
+    chat_template: '{% set loop_messages = messages %}{% for message in loop_messages %}{% set content = ''<|start_header_id|>''
+      + message[''role''] + ''<|end_header_id|>
+
+
+      ''+ message[''content''] | trim + ''<|eot_id|>'' %}{% if loop.index0 == 0 %}{% set content = bos_token + content %}{%
+      endif %}{{ content }}{% endfor %}{% if add_generation_prompt %}{{ ''<|start_header_id|>assistant<|end_header_id|>
+
+
+      '' }}{% endif %}'
+    eos_token: <|eot_id|>
+    pad_token: <|finetune_right_pad_id|>
+    unk_token: <unk>
+    use_default_system_prompt: false
+cardData:
+  library_name: transformers
+  tags: []
+transformersInfo:
+  auto_model: AutoModel
+  custom_class: ultravox_model.UltravoxModel
+  pipeline_tag: feature-extraction
+siblings:
+- rfilename: .gitattributes
+- rfilename: README.md
+- rfilename: added_tokens.json
+- rfilename: config.json
+- rfilename: generation_config.json
+- rfilename: merges.txt
+- rfilename: model-00001-of-00005.safetensors
+- rfilename: model-00002-of-00005.safetensors
+- rfilename: model-00003-of-00005.safetensors
+- rfilename: model-00004-of-00005.safetensors
+- rfilename: model-00005-of-00005.safetensors
+- rfilename: model.safetensors.index.json
+- rfilename: normalizer.json
+- rfilename: preprocessor_config.json
+- rfilename: processor_config.json
+- rfilename: special_tokens_map.json
+- rfilename: tokenizer.json
+- rfilename: tokenizer_config.json
+- rfilename: ultravox_config.py
+- rfilename: ultravox_model.py
+- rfilename: ultravox_pipeline.py
+- rfilename: ultravox_processing.py
+- rfilename: vocab.json
+spaces: []
+createdAt: '2024-12-17T07:20:26.000Z'
+safetensors:
+  parameters:
+    BF16: 11355615779
+  total: 11355615779
+usedStorage: 22763048681
+downloadsAllTime: 45
+inferenceProviderMapping: {}
+configJson: null
+onnxFiles: {}
+safetensorsSizeMb: 22711.4
+approxSizeMb: 22711.2
+fetchedAt: '2026-07-04T06:26:13.000Z'

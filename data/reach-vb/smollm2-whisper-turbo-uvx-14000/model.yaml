@@ -1,0 +1,129 @@
+_id: 67a07e151aadc54e22ef746f
+id: reach-vb/smollm2-whisper-turbo-uvx-14000
+private: false
+pipeline_tag: feature-extraction
+library_name: transformers
+tags:
+- transformers
+- safetensors
+- ultravox
+- feature-extraction
+- custom_code
+- region:us
+downloads: 4
+likes: 1
+modelId: reach-vb/smollm2-whisper-turbo-uvx-14000
+author: reach-vb
+sha: 075076fe06cc85d430d32c0a07ebecf984ab242f
+lastModified: '2025-02-05T15:10:16.000Z'
+gated: false
+disabled: false
+model-index: null
+config:
+  architectures:
+  - UltravoxModel
+  auto_map:
+    AutoConfig: ultravox_config.UltravoxConfig
+    AutoModel: ultravox_model.UltravoxModel
+    AutoProcessor: ultravox_processing.UltravoxProcessor
+  model_type: ultravox
+  tokenizer_config:
+    bos_token: <|im_start|>
+    chat_template: '{% for message in messages %}{% if loop.first and messages[0][''role''] != ''system'' %}{{ ''<|im_start|>system
+
+      You are a helpful AI assistant named SmolLM, trained by Hugging Face<|im_end|>
+
+      '' }}{% endif %}{{''<|im_start|>'' + message[''role''] + ''
+
+      '' + message[''content''] + ''<|im_end|>'' + ''
+
+      ''}}{% endfor %}{% if add_generation_prompt %}{{ ''<|im_start|>assistant
+
+      '' }}{% endif %}'
+    eos_token: <|im_end|>
+    pad_token: <|im_end|>
+    unk_token: <|endoftext|>
+cardData:
+  library_name: transformers
+transformersInfo:
+  auto_model: AutoModel
+  custom_class: ultravox_model.UltravoxModel
+  pipeline_tag: feature-extraction
+siblings:
+- rfilename: .gitattributes
+- rfilename: README.md
+- rfilename: config.json
+- rfilename: generation_config.json
+- rfilename: merges.txt
+- rfilename: model.safetensors
+- rfilename: optimizer.pt
+- rfilename: rng_state.pth
+- rfilename: scheduler.pt
+- rfilename: special_tokens_map.json
+- rfilename: tokenizer.json
+- rfilename: tokenizer_config.json
+- rfilename: trainer_state.json
+- rfilename: training_args.bin
+- rfilename: ultravox_config.py
+- rfilename: ultravox_model.py
+- rfilename: ultravox_pipeline.py
+- rfilename: ultravox_processing.py
+- rfilename: vocab.json
+spaces:
+- reach-vb/talk-to-ultravox
+createdAt: '2025-02-03T08:28:05.000Z'
+safetensors:
+  parameters:
+    BF16: 46149632
+  total: 46149632
+usedStorage: 276923694
+downloadsAllTime: 265
+inferenceProviderMapping: {}
+configJson:
+  architectures:
+  - UltravoxModel
+  audio_latency_block_size: null
+  audio_model_id: openai/whisper-large-v3-turbo
+  audio_model_lora_config:
+    lora_alpha: 8
+    r: 0
+    target_modules:
+    - k_proj
+    - q_proj
+    - linear_k
+    - linear_q
+  auto_map:
+    AutoConfig: ultravox_config.UltravoxConfig
+    AutoModel: ultravox_model.UltravoxModel
+    AutoProcessor: ultravox_processing.UltravoxProcessor
+  custom_pipelines:
+    ultravox-pipeline:
+      impl: ultravox_pipeline.UltravoxPipeline
+      pt:
+      - AutoModel
+      tf: []
+      type: multimodal
+  hidden_size: 4096
+  ignore_index: -100
+  initializer_range: 0.02
+  model_type: ultravox
+  norm_init: 0.4
+  pad_token_id: 2
+  projector_act: swiglu
+  stack_factor: 8
+  text_model_id: HuggingFaceTB/SmolLM2-1.7B-Instruct
+  text_model_lora_config:
+    lora_alpha: 8
+    r: 0
+    target_modules:
+    - k_proj
+    - q_proj
+    - linear_k
+    - linear_q
+  torch_dtype: bfloat16
+  transformers_version: 4.47.0
+  vocab_size: 49152
+onnxFiles: {}
+safetensorsSizeMb: 92.3
+approxSizeMb: 92.3
+fetchedAt: '2026-07-04T06:26:13.000Z'

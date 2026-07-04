@@ -1,0 +1,166 @@
+_id: 6723bed93b2437189bcdb6fd
+id: thennal/L3Prune-Qwen2-7B-Instruct-small
+private: false
+pipeline_tag: feature-extraction
+library_name: transformers
+tags:
+- transformers
+- safetensors
+- feature-extraction
+- custom_code
+- arxiv:1910.09700
+- region:us
+downloads: 5
+likes: 0
+modelId: thennal/L3Prune-Qwen2-7B-Instruct-small
+author: thennal
+sha: e986da35b2a8a0a2d313e0321f3a55ed2043bdfe
+lastModified: '2024-10-31T17:34:03.000Z'
+gated: false
+disabled: false
+model-index: null
+config:
+  architectures:
+  - LLMEncoder
+  auto_map:
+    AutoConfig: llmencoder.LLMEncoderConfig
+    AutoModel: llmencoder.LLMEncoder
+  tokenizer_config:
+    bos_token: null
+    chat_template: '{% for message in messages %}{% if loop.first and messages[0][''role''] != ''system'' %}{{ ''<|im_start|>system
+
+      You are a helpful assistant.<|im_end|>
+
+      '' }}{% endif %}{{''<|im_start|>'' + message[''role''] + ''
+
+      '' + message[''content''] + ''<|im_end|>'' + ''
+
+      ''}}{% endfor %}{% if add_generation_prompt %}{{ ''<|im_start|>assistant
+
+      '' }}{% endif %}'
+    eos_token: <|im_end|>
+    pad_token: <|im_end|>
+    unk_token: null
+cardData:
+  library_name: transformers
+  tags: []
+transformersInfo:
+  auto_model: AutoModel
+  custom_class: llmencoder.LLMEncoder
+  pipeline_tag: feature-extraction
+siblings:
+- rfilename: .gitattributes
+- rfilename: README.md
+- rfilename: added_tokens.json
+- rfilename: config.json
+- rfilename: llmencoder.py
+- rfilename: merges.txt
+- rfilename: model-00001-of-00002.safetensors
+- rfilename: model-00002-of-00002.safetensors
+- rfilename: model.safetensors.index.json
+- rfilename: special_tokens_map.json
+- rfilename: tokenizer.json
+- rfilename: tokenizer_config.json
+- rfilename: vocab.json
+spaces: []
+createdAt: '2024-10-31T17:31:05.000Z'
+safetensors:
+  parameters:
+    BF16: 2875578880
+  total: 2875578880
+usedStorage: 5751171664
+downloadsAllTime: 20
+inferenceProviderMapping: {}
+configJson:
+  architectures:
+  - LLMEncoder
+  auto_map:
+    AutoConfig: llmencoder.LLMEncoderConfig
+    AutoModel: llmencoder.LLMEncoder
+  base_model: Qwen/Qwen2-7B-Instruct
+  doc_max_length: 400
+  model_config:
+    _name_or_path: Qwen/Qwen2-7B-Instruct
+    add_cross_attention: false
+    architectures:
+    - Qwen2ForCausalLM
+    attention_dropout: 0.0
+    bad_words_ids: null
+    begin_suppress_tokens: null
+    bos_token_id: 151643
+    chunk_size_feed_forward: 0
+    cross_attention_hidden_size: null
+    decoder_start_token_id: null
+    diversity_penalty: 0.0
+    do_sample: false
+    early_stopping: false
+    encoder_no_repeat_ngram_size: 0
+    eos_token_id: 151645
+    exponential_decay_length_penalty: null
+    finetuning_task: null
+    forced_bos_token_id: null
+    forced_eos_token_id: null
+    hidden_act: silu
+    hidden_size: 3584
+    id2label:
+      '0': LABEL_0
+      '1': LABEL_1
+    initializer_range: 0.02
+    intermediate_size: 18944
+    is_decoder: false
+    is_encoder_decoder: false
+    label2id:
+      LABEL_0: 0
+      LABEL_1: 1
+    length_penalty: 1.0
+    max_length: 20
+    max_position_embeddings: 32768
+    max_window_layers: 28
+    min_length: 0
+    model_type: qwen2
+    no_repeat_ngram_size: 0
+    num_attention_heads: 28
+    num_beam_groups: 1
+    num_beams: 1
+    num_hidden_layers: 10
+    num_key_value_heads: 4
+    num_return_sequences: 1
+    output_attentions: false
+    output_hidden_states: false
+    output_scores: false
+    pad_token_id: null
+    prefix: null
+    problem_type: null
+    pruned_heads: {}
+    remove_invalid_values: false
+    repetition_penalty: 1.0
+    return_dict: true
+    return_dict_in_generate: false
+    rms_norm_eps: 1.0e-06
+    rope_theta: 1000000.0
+    sep_token_id: null
+    sliding_window: null
+    suppress_tokens: null
+    task_specific_params: null
+    temperature: 1.0
+    tf_legacy_loss: false
+    tie_encoder_decoder: false
+    tie_word_embeddings: false
+    tokenizer_class: null
+    top_k: 50
+    top_p: 1.0
+    torch_dtype: bfloat16
+    torchscript: false
+    typical_p: 1.0
+    use_bfloat16: false
+    use_cache: true
+    use_sliding_window: false
+    vocab_size: 152064
+  pooling_mode: weighted_mean
+  skip_instruction: true
+  torch_dtype: bfloat16
+  transformers_version: 4.44.2
+onnxFiles: {}
+safetensorsSizeMb: 5751.2
+approxSizeMb: 5751.2
+fetchedAt: '2026-07-04T06:26:13.000Z'

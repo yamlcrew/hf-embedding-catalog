@@ -1,0 +1,151 @@
+_id: 693ea4a2b2cbe196d9be9d8a
+id: JuyeopDang/KoMiniLLaDA-0.3B-QA
+private: false
+pipeline_tag: feature-extraction
+library_name: transformers
+tags:
+- transformers
+- safetensors
+- mini-llada
+- feature-extraction
+- generated_from_trainer
+- custom_code
+- base_model:JuyeopDang/KoMiniLLaDA-0.3B-QA
+- base_model:finetune:JuyeopDang/KoMiniLLaDA-0.3B-QA
+- region:us
+downloads: 2
+likes: 0
+modelId: JuyeopDang/KoMiniLLaDA-0.3B-QA
+author: JuyeopDang
+sha: 5a75d43f41ff6deca825d604af28de625d037307
+lastModified: '2025-12-14T19:38:06.000Z'
+gated: false
+disabled: false
+model-index:
+- name: KoMiniLLaDA-0.3B-QA
+  results: []
+config:
+  architectures:
+  - MiniLLaDA
+  auto_map:
+    AutoConfig: configuration_mini_llada.MiniLLaDAConfig
+    AutoModel: modeling_mini_llada.MiniLLaDA
+  model_type: mini-llada
+  tokenizer_config:
+    bos_token: '[CLS]'
+    cls_token: '[CLS]'
+    eos_token: '[SEP]'
+    mask_token: '[MASK]'
+    pad_token: '[PAD]'
+    sep_token: '[SEP]'
+    unk_token: '[UNK]'
+  chat_template_jinja: '{{ bos_token }}{% for message in messages %}{% if message[''role''] == ''user'' %}### User:
+
+    {{ message[''content''] + eos_token }}{% endif %}{% if message[''role''] == ''assistant'' %}### Assistant:
+
+    {{ message[''content''] + eos_token }}{% endif %}{% if message[''role''] == ''system'' %}### System:
+
+    {{ message[''content''] + eos_token }}{% endif %}{% endfor %}{% if add_generation_prompt %}### Assistant:
+
+    {% endif %}'
+cardData:
+  library_name: transformers
+  base_model: JuyeopDang/KoMiniLLaDA-0.3B-QA
+  tags:
+  - generated_from_trainer
+  model-index:
+  - name: KoMiniLLaDA-0.3B-QA
+    results: []
+transformersInfo:
+  auto_model: AutoModel
+  custom_class: modeling_mini_llada.MiniLLaDA
+  pipeline_tag: feature-extraction
+siblings:
+- rfilename: .gitattributes
+- rfilename: README.md
+- rfilename: chat_template.jinja
+- rfilename: config.json
+- rfilename: configuration_mini_llada.py
+- rfilename: final/chat_template.jinja
+- rfilename: final/config.json
+- rfilename: final/configuration_mini_llada.py
+- rfilename: final/model.safetensors
+- rfilename: final/modeling_mini_llada.py
+- rfilename: final/special_tokens_map.json
+- rfilename: final/tokenizer.json
+- rfilename: final/tokenizer_config.json
+- rfilename: final/training_args.bin
+- rfilename: final/vocab.txt
+- rfilename: model.safetensors
+- rfilename: modeling_mini_llada.py
+- rfilename: special_tokens_map.json
+- rfilename: tokenizer.json
+- rfilename: tokenizer_config.json
+- rfilename: training_args.bin
+- rfilename: vocab.txt
+spaces: []
+createdAt: '2025-12-14T11:50:58.000Z'
+safetensors:
+  parameters:
+    F32: 336690432
+  total: 336690432
+usedStorage: 2693638210
+downloadsAllTime: 7
+inferenceProviderMapping: {}
+configJson:
+  architectures:
+  - MiniLLaDA
+  attention_probs_dropout_prob: 0.1
+  auto_map:
+    AutoConfig: configuration_mini_llada.MiniLLaDAConfig
+    AutoModel: modeling_mini_llada.MiniLLaDA
+  backbone_config:
+    _name_or_path: klue/roberta-large
+    architectures:
+    - RobertaForMaskedLM
+    attention_probs_dropout_prob: 0.1
+    classifier_dropout: null
+    gradient_checkpointing: false
+    hidden_act: gelu
+    hidden_dropout_prob: 0.1
+    hidden_size: 1024
+    initializer_range: 0.02
+    intermediate_size: 4096
+    layer_norm_eps: 1.0e-05
+    max_position_embeddings: 514
+    model_type: roberta
+    num_attention_heads: 16
+    num_hidden_layers: 24
+    position_embedding_type: absolute
+    tokenizer_class: BertTokenizer
+    type_vocab_size: 1
+    use_cache: true
+    vocab_size: 32000
+  backbone_model_name: klue/roberta-large
+  bos_token_id: 0
+  classifier_dropout: null
+  dtype: float32
+  eos_token_id: 2
+  gradient_checkpointing: false
+  hidden_act: gelu
+  hidden_dropout_prob: 0.1
+  hidden_size: 1024
+  initializer_range: 0.02
+  intermediate_size: 4096
+  layer_norm_eps: 1.0e-05
+  mask_token_id: 4
+  max_position_embeddings: 514
+  model_type: mini-llada
+  num_attention_heads: 16
+  num_hidden_layers: 24
+  pad_token_id: 1
+  position_embedding_type: absolute
+  tokenizer_class: BertTokenizer
+  transformers_version: 4.57.3
+  type_vocab_size: 1
+  use_cache: true
+  vocab_size: 32000
+onnxFiles: {}
+safetensorsSizeMb: 2693.6
+approxSizeMb: 1346.8
+fetchedAt: '2026-07-04T06:26:13.000Z'

@@ -1,0 +1,478 @@
+_id: 6a47ff2d1376eebe688b340b
+id: yjoonjang/reviewsearch-sparse
+private: false
+pipeline_tag: feature-extraction
+library_name: sentence-transformers
+tags:
+- sentence-transformers
+- safetensors
+- sparse-encoder
+- sparse
+- asymmetric
+- inference-free
+- splade
+- generated_from_trainer
+- dataset_size:46954
+- loss:CachedSpladeLoss
+- loss:SparseMultipleNegativesRankingLoss
+- loss:FlopsLoss
+- feature-extraction
+- arxiv:1908.10084
+- arxiv:2101.06983
+- arxiv:2205.04733
+- arxiv:1807.03748
+- arxiv:2004.05665
+- base_model:opensearch-project/opensearch-neural-sparse-encoding-doc-v3-gte
+- base_model:finetune:opensearch-project/opensearch-neural-sparse-encoding-doc-v3-gte
+- model-index
+- endpoints_compatible
+- region:us
+downloads: 0
+likes: 0
+modelId: yjoonjang/reviewsearch-sparse
+author: yjoonjang
+sha: 97c1846f2300d0c1a5f7264311ad7464ffab34c1
+lastModified: '2026-07-03T18:28:52.000Z'
+gated: false
+disabled: false
+widgetData:
+- text: "title: Partial Matrix Completion\n\nsummary: This paper considers a twist on the standard matrix completion problem\
+    \ where one is required to only\ncomplete a subset of entries (not the whole matrix) that includes the entries shown.\
+    \ This allows them to consider\nsubstantially more observation patterns unlike the standard missing-at-random response.\
+    \ In this context\nthe paper makes the following contributions:\n\n1. Propose a computationally-inefficient algorithm\
+    \ that with high probability recovers a subset of entries\nthat is at least as large as the revealed set, with low target\
+    \ accuracy.\n2. Develop a computationally-efficient relaxation of this algorithm that has worse statistical dependence\n\
+    on the target accuracy than the inefficient algorithm.\n3. Provide an online variant of the algorithm that is iterative/gradient\
+    \ based that applies to adversarial\nonline matrix completion.\n\n\nweaknesses and questions: Some weaknesses, though\
+    \ these are better understood as interesting avenues for future work:\n\n1. The proposed algorithms provide noisy completion\
+    \ even when the observations are noiseless (i.e. no obvious notion of completion to the inherent noise level). \nThis\
+    \ does seem inherent to the algorithm/proof techniques used here, it is unclear to me that this can be overcome here.\
+    \ \n2. There is an obvious sample complexity gap between the efficient and inefficient algorithms. Is this inherent, or\
+    \ a result of the proof technique here?\n\n\n\n1. The algorithmic viewpoint here is to separate the coverage computation\
+    \ from the completion method. This is advantageous in some ways (notably the generality and e.g. obtaining an essentially\
+    \ free proof of the risk), but potentially disallows using structure in the completion. E.g. in the causal inference setting\
+    \ of (say) row $1$ being partially revealed from columns $1, 2\\ldots, K \\leq \\text{dim}(M)$.\n2. What is $\\mu_\\max$?\
+    \ It is defined in the appendix (and easy to guess) but is not in the text (unless I missed)\n"
+- text: 'title: IncVGGT: Incremental VGGT for Memory-Bounded Long-Range 3D Reconstruction
+
+
+    summary: This work presents IncVGGT, a training-free incremental variant of VGGT designed to address the quadratic memory
+    growth and excessive computation issues in large-scale visual geometry transformers. The method tackles redundancy from
+    both the input and history sides: on the input side, it performs registration and composition to merge short temporal
+    windows into compact composite views; on the history side, it retains only the top-k historically important slots together
+    with the most recent one for the next step. Experimental results demonstrate notable improvements in both inference time
+    and memory efficiency.
+
+
+    weaknesses and questions: - The registration-based redundancy reduction component has been widely applied in the community
+    (e.g., [1]). Moreover, introducing a separate registration-and-composition preprocessing module somewhat compromises the
+    clean and unified design philosophy of VGGT, which originally aimed to eliminate all explicit priors.
+
+    A more elegant approach would be to integrate the registration and composition mechanism directly into VGGT’s internal
+    architecture, preserving its end-to-end structure.
+
+
+    - Limited Novelty: While the contributions toward improving memory and speed are meaningful for industrial and practical
+    applications, the registration-based redundancy reduction and global-local cache pruning techniques are incremental relative
+    to VGGT. The authors themselves describe IncVGGT as an “incremental variant” of VGGT, suggesting that it contributes less
+    conceptual novelty to academic research, even though it provides clear engineering value.
+
+
+    [1] Xiaoshui Huang, Guofeng Mei, Jian Zhang, and Rana Abbas. A Comprehensive Survey on Point Cloud Registration.
+
+    N/A'
+- text: 'title: Beyond Safe Answers: A Benchmark for Evaluating True Risk Awareness in Large Reasoning Models
+
+
+    summary: This paper investigates an important phenomenon: models produce superficially safe outputs while internal reasoning
+    processes harmful content, and summary this as SSA (Superficial Safety Alignment (SSA)). The authors introduce a novel
+    benchmark: Beyond Safe Answers (BSA) with over 2000 instances and report results on 23 reasoning models. The evaluation
+    results show significant emergency to improve reasoning models'' internal safety as their think process is also open to
+    the public (except some close-source reasoning models like o3).
+
+
+    weaknesses and questions: 1. The presentation could be improved. Line 127-132 has some space that making this page appear
+    somewhat empty.
+
+
+    2. How many GPU hours, total tokens, and dollar cost does one evaluation pipeline consume?
+
+    Please see the weakness.'
+- text: 'title: Physics of Language Models: Part 2.2, How to Learn From Mistakes on Grade-School Math Problems
+
+
+    summary: This paper studies the impact of training language models with "error-then-retry" format data on the reasoning
+    performance. With experiments on a synthetic GSM8k-style math reasoning datasets, the authors conclude that pretraining
+    with such data improves reasoning accuracy than on same amount of "error-free" normal data, and LoRA fine-tuning with
+    such data does not help.
+
+
+    weaknesses and questions: The paper mainly experiments with one type of error: inserting a wrong parameter that cannot
+    be computed next. While this is easy to implement, it would be hard to simulate all kinds of errors that language models
+    can make in real-world reasonings scenarios. This cast doubts on how the suggested approach can be deployed to train LMs
+    on non-synthetic data. If the authors could provide some discussion on how the method can be generalized to different
+    errors (e.g., math calculation error, context misunderstanding, ...) in a scalable and controllable way, that would be
+    very promising.
+
+    I would like to hear the authors'' thoughts on the inference-time scaling properties of model trained with "retry" data:
+    given a fixed inference-time computation budget, is it better for model to produce reasoning chains with retry (more tokens
+    to reach final answer, but average accuracy is higher) or without retry (less tokens to reach final answer, but average
+    accuracy is lower)?'
+- text: 'title: Generalizable Multi-Camera 3D Object Detection from a Single Source via Fourier Cross-View Learning
+
+
+    summary: This paper proposed a Fourier Cross-View Learning (FCVL) framework, which augments the data in the frequency
+    domain and includes a contrastive-style semantic consistency loss to improve the model  generalization ability from a
+    single source.
+
+
+    weaknesses and questions: Pros:
+
+    1. This paper augments the data in frequency domain by jitterring both amplitude and phase, which diversify the dataset.
+    The phase term typically captures high-frequency features that may be more transferable.
+
+    2. The designed contrastive loss, which utilizes the adjacent image regions, is also a good idea.
+
+    3. The proposed method is adaptable to different approaches and achieved SOTA results with various baseline models.
+
+    4. The t-SNE visualization and other visualization results validate that the learned features are domain-invariant and
+    the images become more diverse.
+
+
+    Cons:
+
+    1. There may be some false negative samples for the contrastive loss design since some large vehicles may distribute across
+    several adjacent frames.
+
+    1. Regarding the semantic consistency loss, it appears to work well for small vehicles. But what happens when the vehicle
+    is large? Will the rear part of a large vehicle be treated as a negative sample of the front part?
+
+
+    2. Besides large vehicles, what if there are other vehicles in the background image, will they also be regarded as negative
+    samples?
+
+
+    3. Could you also show some examples where the proposed model still cannot detect correctly? How to further improve the
+    model the future?
+
+
+    4. The idea of augmenting data in the frequency domain is not new and have been tried by previous researchers. What are
+    advantages of the proposed frequency domain augmentation?'
+model-index:
+- name: Asymmetric Inference-free SPLADE Sparse Encoder
+  results:
+  - task:
+      type: sparse-information-retrieval
+      name: Sparse Information Retrieval
+    dataset:
+      name: reviewsearch
+      type: reviewsearch
+    metrics:
+    - type: dot_accuracy@1
+      value: 0.40155296727676093
+      name: Dot Accuracy@1
+      verified: false
+    - type: dot_accuracy@10
+      value: 0.7879796299097463
+      name: Dot Accuracy@10
+      verified: false
+    - type: dot_precision@10
+      value: 0.21599858821156656
+      name: Dot Precision@10
+      verified: false
+    - type: dot_precision@100
+      value: 0.06021781878687037
+      name: Dot Precision@100
+      verified: false
+    - type: dot_recall@10
+      value: 0.19603705746446795
+      name: Dot Recall@10
+      verified: false
+    - type: dot_recall@100
+      value: 0.47140266480788
+      name: Dot Recall@100
+      verified: false
+    - type: dot_ndcg@10
+      value: 0.2849832143549761
+      name: Dot Ndcg@10
+      verified: false
+    - type: dot_mrr@10
+      value: 0.5243879048787551
+      name: Dot Mrr@10
+      verified: false
+    - type: dot_map@100
+      value: 0.18859069597551725
+      name: Dot Map@100
+      verified: false
+    - type: query_active_dims
+      value: 7.151616096496582
+      name: Query Active Dims
+      verified: false
+    - type: query_sparsity_ratio
+      value: 0.9997656897943615
+      name: Query Sparsity Ratio
+      verified: false
+    - type: corpus_active_dims
+      value: 902.127325119251
+      name: Corpus Active Dims
+      verified: false
+    - type: corpus_sparsity_ratio
+      value: 0.9704433744473083
+      name: Corpus Sparsity Ratio
+      verified: false
+    - type: avg_flops
+      value: 1.6038551330566406
+      name: Avg Flops
+      verified: false
+config: {}
+cardData:
+  tags:
+  - sentence-transformers
+  - sparse-encoder
+  - sparse
+  - asymmetric
+  - inference-free
+  - splade
+  - generated_from_trainer
+  - dataset_size:46954
+  - loss:CachedSpladeLoss
+  - loss:SparseMultipleNegativesRankingLoss
+  - loss:FlopsLoss
+  base_model: opensearch-project/opensearch-neural-sparse-encoding-doc-v3-gte
+  widget:
+  - text: "title: Partial Matrix Completion\n\nsummary: This paper considers a twist on the standard matrix completion problem\
+      \ where one is required to only\ncomplete a subset of entries (not the whole matrix) that includes the entries shown.\
+      \ This allows them to consider\nsubstantially more observation patterns unlike the standard missing-at-random response.\
+      \ In this context\nthe paper makes the following contributions:\n\n1. Propose a computationally-inefficient algorithm\
+      \ that with high probability recovers a subset of entries\nthat is at least as large as the revealed set, with low target\
+      \ accuracy.\n2. Develop a computationally-efficient relaxation of this algorithm that has worse statistical dependence\n\
+      on the target accuracy than the inefficient algorithm.\n3. Provide an online variant of the algorithm that is iterative/gradient\
+      \ based that applies to adversarial\nonline matrix completion.\n\n\nweaknesses and questions: Some weaknesses, though\
+      \ these are better understood as interesting avenues for future work:\n\n1. The proposed algorithms provide noisy completion\
+      \ even when the observations are noiseless (i.e. no obvious notion of completion to the inherent noise level). \nThis\
+      \ does seem inherent to the algorithm/proof techniques used here, it is unclear to me that this can be overcome here.\
+      \ \n2. There is an obvious sample complexity gap between the efficient and inefficient algorithms. Is this inherent,\
+      \ or a result of the proof technique here?\n\n\n\n1. The algorithmic viewpoint here is to separate the coverage computation\
+      \ from the completion method. This is advantageous in some ways (notably the generality and e.g. obtaining an essentially\
+      \ free proof of the risk), but potentially disallows using structure in the completion. E.g. in the causal inference\
+      \ setting of (say) row $1$ being partially revealed from columns $1, 2\\ldots, K \\leq \\text{dim}(M)$.\n2. What is\
+      \ $\\mu_\\max$? It is defined in the appendix (and easy to guess) but is not in the text (unless I missed)\n"
+  - text: 'title: IncVGGT: Incremental VGGT for Memory-Bounded Long-Range 3D Reconstruction
+
+
+      summary: This work presents IncVGGT, a training-free incremental variant of VGGT designed to address the quadratic memory
+      growth and excessive computation issues in large-scale visual geometry transformers. The method tackles redundancy from
+      both the input and history sides: on the input side, it performs registration and composition to merge short temporal
+      windows into compact composite views; on the history side, it retains only the top-k historically important slots together
+      with the most recent one for the next step. Experimental results demonstrate notable improvements in both inference
+      time and memory efficiency.
+
+
+      weaknesses and questions: - The registration-based redundancy reduction component has been widely applied in the community
+      (e.g., [1]). Moreover, introducing a separate registration-and-composition preprocessing module somewhat compromises
+      the clean and unified design philosophy of VGGT, which originally aimed to eliminate all explicit priors.
+
+      A more elegant approach would be to integrate the registration and composition mechanism directly into VGGT’s internal
+      architecture, preserving its end-to-end structure.
+
+
+      - Limited Novelty: While the contributions toward improving memory and speed are meaningful for industrial and practical
+      applications, the registration-based redundancy reduction and global-local cache pruning techniques are incremental
+      relative to VGGT. The authors themselves describe IncVGGT as an “incremental variant” of VGGT, suggesting that it contributes
+      less conceptual novelty to academic research, even though it provides clear engineering value.
+
+
+      [1] Xiaoshui Huang, Guofeng Mei, Jian Zhang, and Rana Abbas. A Comprehensive Survey on Point Cloud Registration.
+
+      N/A'
+  - text: 'title: Beyond Safe Answers: A Benchmark for Evaluating True Risk Awareness in Large Reasoning Models
+
+
+      summary: This paper investigates an important phenomenon: models produce superficially safe outputs while internal reasoning
+      processes harmful content, and summary this as SSA (Superficial Safety Alignment (SSA)). The authors introduce a novel
+      benchmark: Beyond Safe Answers (BSA) with over 2000 instances and report results on 23 reasoning models. The evaluation
+      results show significant emergency to improve reasoning models'' internal safety as their think process is also open
+      to the public (except some close-source reasoning models like o3).
+
+
+      weaknesses and questions: 1. The presentation could be improved. Line 127-132 has some space that making this page appear
+      somewhat empty.
+
+
+      2. How many GPU hours, total tokens, and dollar cost does one evaluation pipeline consume?
+
+      Please see the weakness.'
+  - text: 'title: Physics of Language Models: Part 2.2, How to Learn From Mistakes on Grade-School Math Problems
+
+
+      summary: This paper studies the impact of training language models with "error-then-retry" format data on the reasoning
+      performance. With experiments on a synthetic GSM8k-style math reasoning datasets, the authors conclude that pretraining
+      with such data improves reasoning accuracy than on same amount of "error-free" normal data, and LoRA fine-tuning with
+      such data does not help.
+
+
+      weaknesses and questions: The paper mainly experiments with one type of error: inserting a wrong parameter that cannot
+      be computed next. While this is easy to implement, it would be hard to simulate all kinds of errors that language models
+      can make in real-world reasonings scenarios. This cast doubts on how the suggested approach can be deployed to train
+      LMs on non-synthetic data. If the authors could provide some discussion on how the method can be generalized to different
+      errors (e.g., math calculation error, context misunderstanding, ...) in a scalable and controllable way, that would
+      be very promising.
+
+      I would like to hear the authors'' thoughts on the inference-time scaling properties of model trained with "retry" data:
+      given a fixed inference-time computation budget, is it better for model to produce reasoning chains with retry (more
+      tokens to reach final answer, but average accuracy is higher) or without retry (less tokens to reach final answer, but
+      average accuracy is lower)?'
+  - text: 'title: Generalizable Multi-Camera 3D Object Detection from a Single Source via Fourier Cross-View Learning
+
+
+      summary: This paper proposed a Fourier Cross-View Learning (FCVL) framework, which augments the data in the frequency
+      domain and includes a contrastive-style semantic consistency loss to improve the model  generalization ability from
+      a single source.
+
+
+      weaknesses and questions: Pros:
+
+      1. This paper augments the data in frequency domain by jitterring both amplitude and phase, which diversify the dataset.
+      The phase term typically captures high-frequency features that may be more transferable.
+
+      2. The designed contrastive loss, which utilizes the adjacent image regions, is also a good idea.
+
+      3. The proposed method is adaptable to different approaches and achieved SOTA results with various baseline models.
+
+      4. The t-SNE visualization and other visualization results validate that the learned features are domain-invariant and
+      the images become more diverse.
+
+
+      Cons:
+
+      1. There may be some false negative samples for the contrastive loss design since some large vehicles may distribute
+      across several adjacent frames.
+
+      1. Regarding the semantic consistency loss, it appears to work well for small vehicles. But what happens when the vehicle
+      is large? Will the rear part of a large vehicle be treated as a negative sample of the front part?
+
+
+      2. Besides large vehicles, what if there are other vehicles in the background image, will they also be regarded as negative
+      samples?
+
+
+      3. Could you also show some examples where the proposed model still cannot detect correctly? How to further improve
+      the model the future?
+
+
+      4. The idea of augmenting data in the frequency domain is not new and have been tried by previous researchers. What
+      are advantages of the proposed frequency domain augmentation?'
+  pipeline_tag: feature-extraction
+  library_name: sentence-transformers
+  metrics:
+  - dot_accuracy@1
+  - dot_accuracy@10
+  - dot_precision@10
+  - dot_precision@100
+  - dot_recall@10
+  - dot_recall@100
+  - dot_ndcg@10
+  - dot_mrr@10
+  - dot_map@100
+  - query_active_dims
+  - query_sparsity_ratio
+  - corpus_active_dims
+  - corpus_sparsity_ratio
+  - avg_flops
+  model-index:
+  - name: Asymmetric Inference-free SPLADE Sparse Encoder
+    results:
+    - task:
+        type: sparse-information-retrieval
+        name: Sparse Information Retrieval
+      dataset:
+        name: reviewsearch
+        type: reviewsearch
+      metrics:
+      - type: dot_accuracy@1
+        value: 0.40155296727676093
+        name: Dot Accuracy@1
+        verified: false
+      - type: dot_accuracy@10
+        value: 0.7879796299097463
+        name: Dot Accuracy@10
+        verified: false
+      - type: dot_precision@10
+        value: 0.21599858821156656
+        name: Dot Precision@10
+        verified: false
+      - type: dot_precision@100
+        value: 0.06021781878687037
+        name: Dot Precision@100
+        verified: false
+      - type: dot_recall@10
+        value: 0.19603705746446795
+        name: Dot Recall@10
+        verified: false
+      - type: dot_recall@100
+        value: 0.47140266480788
+        name: Dot Recall@100
+        verified: false
+      - type: dot_ndcg@10
+        value: 0.2849832143549761
+        name: Dot Ndcg@10
+        verified: false
+      - type: dot_mrr@10
+        value: 0.5243879048787551
+        name: Dot Mrr@10
+        verified: false
+      - type: dot_map@100
+        value: 0.18859069597551725
+        name: Dot Map@100
+        verified: false
+      - type: query_active_dims
+        value: 7.151616096496582
+        name: Query Active Dims
+        verified: false
+      - type: query_sparsity_ratio
+        value: 0.9997656897943615
+        name: Query Sparsity Ratio
+        verified: false
+      - type: corpus_active_dims
+        value: 902.127325119251
+        name: Corpus Active Dims
+        verified: false
+      - type: corpus_sparsity_ratio
+        value: 0.9704433744473083
+        name: Corpus Sparsity Ratio
+        verified: false
+      - type: avg_flops
+        value: 1.6038551330566406
+        name: Avg Flops
+        verified: false
+siblings:
+- rfilename: .gitattributes
+- rfilename: README.md
+- rfilename: __init__.py
+- rfilename: config_sentence_transformers.json
+- rfilename: configuration.py
+- rfilename: document_0_MLMTransformer/config.json
+- rfilename: document_0_MLMTransformer/configuration.py
+- rfilename: document_0_MLMTransformer/model.safetensors
+- rfilename: document_0_MLMTransformer/modeling.py
+- rfilename: document_0_MLMTransformer/sentence_bert_config.json
+- rfilename: document_0_MLMTransformer/tokenizer.json
+- rfilename: document_0_MLMTransformer/tokenizer_config.json
+- rfilename: document_1_SpladePooling/config.json
+- rfilename: modeling.py
+- rfilename: modules.json
+- rfilename: query_0_SparseStaticEmbedding/config.json
+- rfilename: query_0_SparseStaticEmbedding/model.safetensors
+- rfilename: query_0_SparseStaticEmbedding/tokenizer.json
+- rfilename: query_0_SparseStaticEmbedding/tokenizer_config.json
+- rfilename: router_config.json
+spaces: []
+createdAt: '2026-07-03T18:27:57.000Z'
+usedStorage: 643478144
+downloadsAllTime: 0
+inferenceProviderMapping: {}
+configJson: null
+onnxFiles: {}
+safetensorsSizeMb: 643.5
+approxSizeMb: 0.0
+fetchedAt: '2026-07-04T06:26:13.000Z'

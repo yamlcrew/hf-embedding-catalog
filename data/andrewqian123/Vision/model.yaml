@@ -1,0 +1,157 @@
+_id: 6740df6d2d5278b1c76eb40c
+id: andrewqian123/Vision
+private: false
+pipeline_tag: feature-extraction
+library_name: transformers
+tags:
+- transformers
+- safetensors
+- minicpmv
+- feature-extraction
+- custom_code
+- arxiv:1910.09700
+- 8-bit
+- bitsandbytes
+- region:us
+downloads: 2
+likes: 0
+modelId: andrewqian123/Vision
+author: andrewqian123
+sha: 69daa7f39a2435981392026efeb0b9252936f60e
+lastModified: '2024-11-22T19:57:16.000Z'
+gated: false
+disabled: false
+model-index: null
+config:
+  architectures:
+  - MiniCPMV
+  auto_map:
+    AutoConfig: configuration_minicpm.MiniCPMVConfig
+    AutoModel: modeling_minicpmv.MiniCPMV
+    AutoModelForCausalLM: modeling_minicpmv.MiniCPMV
+  model_type: minicpmv
+  quantization_config:
+    load_in_4bit: false
+    load_in_8bit: true
+    quant_method: bitsandbytes
+  tokenizer_config:
+    bos_token: <|im_start|>
+    chat_template: '{% for message in messages %}{% if loop.first and messages[0][''role''] != ''system'' %}{{ ''<|im_start|>system
+
+      You are a helpful assistant.<|im_end|>
+
+      '' }}{% endif %}{{''<|im_start|>'' + message[''role''] + ''
+
+      '' + message[''content''] + ''<|im_end|>'' + ''
+
+      ''}}{% endfor %}{% if add_generation_prompt %}{{ ''<|im_start|>assistant
+
+      '' }}{% endif %}'
+    eos_token: <|im_end|>
+    pad_token: <|endoftext|>
+    unk_token: <unk>
+cardData:
+  library_name: transformers
+  tags: []
+transformersInfo:
+  auto_model: AutoModel
+  custom_class: modeling_minicpmv.MiniCPMV
+  pipeline_tag: feature-extraction
+siblings:
+- rfilename: .gitattributes
+- rfilename: README.md
+- rfilename: added_tokens.json
+- rfilename: config.json
+- rfilename: configuration_minicpm.py
+- rfilename: generation_config.json
+- rfilename: merges.txt
+- rfilename: model-00001-of-00002.safetensors
+- rfilename: model-00002-of-00002.safetensors
+- rfilename: model.safetensors.index.json
+- rfilename: modeling_navit_siglip.py
+- rfilename: special_tokens_map.json
+- rfilename: tokenization_minicpmv_fast.py
+- rfilename: tokenizer.json
+- rfilename: tokenizer_config.json
+- rfilename: vocab.json
+spaces: []
+createdAt: '2024-11-22T19:45:49.000Z'
+safetensors:
+  parameters:
+    F32: 1669488
+    F16: 1145842416
+    I8: 6953332736
+  total: 8100844640
+usedStorage: 9263288969
+downloadsAllTime: 31
+inferenceProviderMapping: {}
+configJson:
+  _name_or_path: openbmb/MiniCPM-V-2_6
+  architectures:
+  - MiniCPMV
+  attention_dropout: 0.0
+  auto_map:
+    AutoConfig: configuration_minicpm.MiniCPMVConfig
+    AutoModel: modeling_minicpmv.MiniCPMV
+    AutoModelForCausalLM: modeling_minicpmv.MiniCPMV
+  batch_vision_input: true
+  bos_token_id: 151643
+  drop_vision_last_layer: false
+  eos_token_id: 151645
+  hidden_act: silu
+  hidden_size: 3584
+  image_size: 448
+  initializer_range: 0.02
+  intermediate_size: 18944
+  max_position_embeddings: 32768
+  max_window_layers: 28
+  model_type: minicpmv
+  num_attention_heads: 28
+  num_hidden_layers: 28
+  num_key_value_heads: 4
+  patch_size: 14
+  quantization_config:
+    _load_in_4bit: false
+    _load_in_8bit: true
+    bnb_4bit_compute_dtype: float32
+    bnb_4bit_quant_storage: uint8
+    bnb_4bit_quant_type: fp4
+    bnb_4bit_use_double_quant: false
+    llm_int8_enable_fp32_cpu_offload: false
+    llm_int8_has_fp16_weight: false
+    llm_int8_skip_modules: null
+    llm_int8_threshold: 6.0
+    load_in_4bit: false
+    load_in_8bit: true
+    quant_method: bitsandbytes
+  query_num: 64
+  rms_norm_eps: 1.0e-06
+  rope_scaling: null
+  rope_theta: 1000000.0
+  slice_config:
+    max_slice_nums: 9
+    model_type: minicpmv
+  slice_mode: true
+  sliding_window: null
+  tie_word_embeddings: false
+  torch_dtype: float16
+  transformers_version: 4.46.2
+  use_cache: true
+  use_image_id: true
+  use_sliding_window: false
+  version: 2.6
+  vision_batch_size: 16
+  vision_config:
+    _attn_implementation_autoset: true
+    hidden_size: 1152
+    image_size: 980
+    intermediate_size: 4304
+    model_type: siglip_vision_model
+    num_attention_heads: 16
+    num_hidden_layers: 27
+    patch_size: 14
+  vocab_size: 151666
+onnxFiles: {}
+safetensorsSizeMb: 9251.9
+approxSizeMb: 9251.7
+fetchedAt: '2026-07-04T06:26:13.000Z'

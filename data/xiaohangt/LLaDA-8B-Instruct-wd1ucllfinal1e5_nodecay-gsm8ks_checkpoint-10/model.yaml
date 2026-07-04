@@ -1,0 +1,135 @@
+_id: 68e246e2025b4dc28c532216
+id: xiaohangt/LLaDA-8B-Instruct-wd1ucllfinal1e5_nodecay-gsm8ks_checkpoint-10
+private: false
+pipeline_tag: feature-extraction
+library_name: transformers
+tags:
+- transformers
+- safetensors
+- llada
+- feature-extraction
+- custom_code
+- arxiv:1910.09700
+- region:us
+downloads: 3
+likes: 0
+modelId: xiaohangt/LLaDA-8B-Instruct-wd1ucllfinal1e5_nodecay-gsm8ks_checkpoint-10
+author: xiaohangt
+sha: 2f90e2fdee5ccf641975374539cea329b1516108
+lastModified: '2025-10-09T13:06:48.000Z'
+gated: false
+disabled: false
+model-index: null
+config:
+  architectures:
+  - LLaDAModelLM
+  auto_map:
+    AutoConfig: configuration_llada.LLaDAConfig
+    AutoModel: GSAI-ML/LLaDA-8B-Instruct--modeling_llada.LLaDAModelLM
+    AutoModelForCausalLM: GSAI-ML/LLaDA-8B-Instruct--modeling_llada.LLaDAModelLM
+  model_type: llada
+  tokenizer_config:
+    bos_token: <|startoftext|>
+    chat_template: '{% set loop_messages = messages %}{% for message in loop_messages %}{% set content = ''<|start_header_id|>''
+      + message[''role''] + ''<|end_header_id|>
+
+
+      ''+ message[''content''] | trim + ''<|eot_id|>'' %}{% if loop.index0 == 0 %}{% set content = bos_token + content %}{%
+      endif %}{{ content }}{% endfor %}{{ ''<|start_header_id|>assistant<|end_header_id|>
+
+
+      '' }}'
+    cls_token: '[CLS]'
+    eos_token: <|endoftext|>
+    mask_token: <|mdm_mask|>
+    pad_token: <|endoftext|>
+cardData:
+  library_name: transformers
+  tags: []
+transformersInfo:
+  auto_model: AutoModel
+  custom_class: GSAI-ML/LLaDA-8B-Instruct--modeling_llada.LLaDAModelLM
+  pipeline_tag: feature-extraction
+siblings:
+- rfilename: .gitattributes
+- rfilename: README.md
+- rfilename: config.json
+- rfilename: configuration_llada.py
+- rfilename: generation_config.json
+- rfilename: model-00001-of-00007.safetensors
+- rfilename: model-00002-of-00007.safetensors
+- rfilename: model-00003-of-00007.safetensors
+- rfilename: model-00004-of-00007.safetensors
+- rfilename: model-00005-of-00007.safetensors
+- rfilename: model-00006-of-00007.safetensors
+- rfilename: model-00007-of-00007.safetensors
+- rfilename: model.safetensors.index.json
+- rfilename: special_tokens_map.json
+- rfilename: tokenizer.json
+- rfilename: tokenizer_config.json
+spaces: []
+createdAt: '2025-10-05T10:22:26.000Z'
+safetensors:
+  parameters:
+    F32: 8015581184
+  total: 8015581184
+usedStorage: 32062359344
+downloadsAllTime: 9
+inferenceProviderMapping: {}
+configJson:
+  _name_or_path: /media/cheliu/xiaohang/mdpo/checkpoints/LLaDA-8B-Instruct-MDPO-wd1ucllfinal1e5_nodecay-gsm8k-adv-256st-8sample_temp0.4_8gpus/checkpoint-10
+  activation_type: silu
+  alibi: false
+  alibi_bias_max: 8.0
+  architectures:
+  - LLaDAModelLM
+  attention_dropout: 0.0
+  attention_layer_norm: false
+  attention_layer_norm_with_affine: true
+  auto_map:
+    AutoConfig: configuration_llada.LLaDAConfig
+    AutoModel: GSAI-ML/LLaDA-8B-Instruct--modeling_llada.LLaDAModelLM
+    AutoModelForCausalLM: GSAI-ML/LLaDA-8B-Instruct--modeling_llada.LLaDAModelLM
+  bias_for_layer_norm: false
+  block_group_size: 1
+  block_type: llama
+  d_model: 4096
+  embedding_dropout: 0.0
+  embedding_size: 126464
+  eos_token_id: 126081
+  flash_attention: false
+  include_bias: false
+  include_qkv_bias: false
+  init_cutoff_factor: null
+  init_device: meta
+  init_fn: mitchell
+  init_std: 0.02
+  input_emb_norm: false
+  layer_norm_type: rms
+  layer_norm_with_affine: true
+  mask_token_id: 126336
+  max_sequence_length: 4096
+  mlp_hidden_size: 12288
+  mlp_ratio: 4
+  model_type: llada
+  multi_query_attention: null
+  n_heads: 32
+  n_kv_heads: 32
+  n_layers: 32
+  pad_token_id: 126081
+  precision: amp_bf16
+  residual_dropout: 0.0
+  rms_norm_eps: 1.0e-05
+  rope: true
+  rope_full_precision: true
+  rope_theta: 500000.0
+  scale_logits: false
+  torch_dtype: float32
+  transformers_version: 4.49.0
+  use_cache: false
+  vocab_size: 126464
+  weight_tying: false
+onnxFiles: {}
+safetensorsSizeMb: 32062.4
+approxSizeMb: 32062.3
+fetchedAt: '2026-07-04T06:26:13.000Z'

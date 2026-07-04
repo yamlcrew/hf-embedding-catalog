@@ -1,0 +1,133 @@
+_id: 6808cf6a4b45ae841faadbe3
+id: qihoo360/360Zhinao3-7B-Instruct
+private: false
+pipeline_tag: feature-extraction
+library_name: transformers
+tags:
+- transformers
+- safetensors
+- zhinao
+- feature-extraction
+- qihoo360
+- 奇虎360
+- 360Zhinao
+- pretrain
+- custom_code
+- zh
+- en
+- arxiv:2405.13386
+- license:apache-2.0
+- region:us
+downloads: 8
+likes: 2
+modelId: qihoo360/360Zhinao3-7B-Instruct
+author: qihoo360
+sha: c837c9357b1c312685c1d731785ae1457b0aa621
+lastModified: '2025-04-24T08:31:49.000Z'
+gated: false
+disabled: false
+model-index: null
+config:
+  architectures:
+  - ZhinaoForCausalLM
+  auto_map:
+    AutoConfig: configuration_zhinao.ZhinaoConfig
+    AutoModel: modeling_zhinao.ZhinaoForCausalLM
+    AutoModelForCausalLM: modeling_zhinao.ZhinaoForCausalLM
+  model_type: zhinao
+  tokenizer_config:
+    chat_template: '{% for message in messages %}{% if loop.first and messages[0][''role''] != ''system'' %}{{ ''<|im_start|>system
+
+      You are a helpful assistant.<|im_end|>
+
+      '' }}{% endif %}{{''<|im_start|>'' + message[''role''] + ''
+
+      '' + message[''content''] + ''<|im_end|>'' + ''
+
+      ''}}{% endfor %}{% if add_generation_prompt %}{{ ''<|im_start|>assistant
+
+      '' }}{% endif %}'
+    eos_token: <|im_end|>
+    pad_token: <pad>
+cardData:
+  license: apache-2.0
+  language:
+  - zh
+  - en
+  library_name: transformers
+  tags:
+  - qihoo360
+  - 奇虎360
+  - zhinao
+  - 360Zhinao
+  - pretrain
+transformersInfo:
+  auto_model: AutoModel
+  custom_class: modeling_zhinao.ZhinaoForCausalLM
+  pipeline_tag: feature-extraction
+siblings:
+- rfilename: .gitattributes
+- rfilename: README.md
+- rfilename: config.json
+- rfilename: configuration_zhinao.py
+- rfilename: generation_config.json
+- rfilename: model-00001-of-00004.safetensors
+- rfilename: model-00002-of-00004.safetensors
+- rfilename: model-00003-of-00004.safetensors
+- rfilename: model-00004-of-00004.safetensors
+- rfilename: model.safetensors.index.json
+- rfilename: modeling_zhinao.py
+- rfilename: special_tokens_map.json
+- rfilename: tokenization_zhinao.py
+- rfilename: tokenizer_config.json
+- rfilename: vocab/360.tiktoken
+spaces: []
+createdAt: '2025-04-23T11:30:50.000Z'
+safetensors:
+  parameters:
+    BF16: 7774605312
+  total: 7774605312
+usedStorage: 15549240640
+downloadsAllTime: 150
+inferenceProviderMapping: {}
+configJson:
+  _name_or_path: /llm-align/tanglifu/Codes/qyuan/models/ziyan_7b_data_v9_variable_250327/checkpoint-2200
+  architectures:
+  - ZhinaoForCausalLM
+  attention_dropout: 0.1
+  attn_dropout_prob: 0.1
+  auto_map:
+    AutoConfig: configuration_zhinao.ZhinaoConfig
+    AutoModel: modeling_zhinao.ZhinaoForCausalLM
+    AutoModelForCausalLM: modeling_zhinao.ZhinaoForCausalLM
+  emb_dropout_prob: 0.1
+  flah-attn_version: 2.5.5
+  hidden_act: silu
+  hidden_size: 4096
+  initializer_range: 0.01
+  intermediate_size: 13056
+  max_position_embeddings: 32768
+  max_window_layers: 28
+  message:
+    from: /home/common/ckpt/pretrain//qlm_7B-gqa-32k_exp/QLM-zhinao-7B-gqa-const-full-samplea02-1000B-exp6-1000B-sampleb02-500B-exp7-400B-sampleb03-370B-exp8-100B-sampleb04/hf/HF-zhinao-7B-gqa-const-full-samplea02-1000B-exp6-1000B-sampleb02-500B-exp7-400B-sampleb03-370B-exp8-100B-sampleb04-100B
+    model_size: 7B-gqa-32k
+  model_type: zhinao
+  num_attention_heads: 32
+  num_hidden_layers: 32
+  num_key_value_heads: 8
+  rms_norm_eps: 1.0e-05
+  rope_scaling: null
+  rope_theta: 1000000
+  sliding_window: null
+  switch: 0
+  tie_word_embeddings: false
+  torch_dtype: bfloat16
+  transformers_version: 4.43.4
+  use_cache: false
+  use_focal: false
+  use_sliding_window: false
+  vocab_size: 158464
+onnxFiles: {}
+safetensorsSizeMb: 15549.2
+approxSizeMb: 15549.2
+fetchedAt: '2026-07-04T06:26:13.000Z'

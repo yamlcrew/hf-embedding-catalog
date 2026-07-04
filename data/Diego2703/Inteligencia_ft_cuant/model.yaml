@@ -1,0 +1,133 @@
+_id: 6754299baa4b4ac8b86cede8
+id: Diego2703/Inteligencia_ft_cuant
+private: false
+pipeline_tag: feature-extraction
+library_name: transformers
+tags:
+- transformers
+- safetensors
+- internlm2
+- feature-extraction
+- custom_code
+- arxiv:1910.09700
+- 4-bit
+- bitsandbytes
+- region:us
+downloads: 1
+likes: 0
+modelId: Diego2703/Inteligencia_ft_cuant
+author: Diego2703
+sha: e6f81607234f6ec827176c61846168f86a859bf3
+lastModified: '2024-12-07T10:57:23.000Z'
+gated: false
+disabled: false
+model-index: null
+config:
+  architectures:
+  - InternLM2ForCausalLM
+  auto_map:
+    AutoConfig: configuration_internlm2.InternLM2Config
+    AutoModel: internlm/internlm2_5-7b-chat--modeling_internlm2.InternLM2ForCausalLM
+    AutoModelForCausalLM: modeling_internlm2.InternLM2ForCausalLM
+  model_type: internlm2
+  quantization_config:
+    load_in_4bit: true
+    load_in_8bit: false
+    quant_method: bitsandbytes
+  tokenizer_config:
+    bos_token: <s>
+    chat_template: '{{ bos_token }}{% for message in messages %}{{''<|im_start|>'' + message[''role''] + ''
+
+      '' + message[''content''] + ''<|im_end|>'' + ''
+
+      ''}}{% endfor %}{% if add_generation_prompt %}{{ ''<|im_start|>assistant
+
+      '' }}{% endif %}'
+    eos_token: </s>
+    pad_token: </s>
+    unk_token: <unk>
+cardData:
+  library_name: transformers
+  tags: []
+transformersInfo:
+  auto_model: AutoModel
+  custom_class: internlm/internlm2_5-7b-chat--modeling_internlm2.InternLM2ForCausalLM
+  pipeline_tag: feature-extraction
+siblings:
+- rfilename: .gitattributes
+- rfilename: README.md
+- rfilename: config.json
+- rfilename: configuration_internlm2.py
+- rfilename: generation_config.json
+- rfilename: model-00001-of-00002.safetensors
+- rfilename: model-00002-of-00002.safetensors
+- rfilename: model.safetensors.index.json
+- rfilename: modeling_internlm2.py
+- rfilename: special_tokens_map.json
+- rfilename: tokenization_internlm2.py
+- rfilename: tokenization_internlm2_fast.py
+- rfilename: tokenizer.json
+- rfilename: tokenizer.model
+- rfilename: tokenizer_config.json
+spaces: []
+createdAt: '2024-12-07T10:55:23.000Z'
+safetensors:
+  parameters:
+    F32: 469504
+    F16: 758386688
+    U8: 7197480672
+  total: 7956336864
+usedStorage: 5129532239
+downloadsAllTime: 19
+inferenceProviderMapping: {}
+configJson:
+  _name_or_path: Diego2703/inteligencia_ft
+  architectures:
+  - InternLM2ForCausalLM
+  attn_implementation: eager
+  auto_map:
+    AutoConfig: configuration_internlm2.InternLM2Config
+    AutoModel: internlm/internlm2_5-7b-chat--modeling_internlm2.InternLM2ForCausalLM
+    AutoModelForCausalLM: modeling_internlm2.InternLM2ForCausalLM
+  bias: false
+  bos_token_id: 1
+  eos_token_id: 2
+  hidden_act: silu
+  hidden_size: 4096
+  initializer_range: 0.02
+  intermediate_size: 14336
+  max_position_embeddings: 32768
+  model_type: internlm2
+  num_attention_heads: 32
+  num_hidden_layers: 32
+  num_key_value_heads: 8
+  pad_token_id: 2
+  pretraining_tp: 1
+  quantization_config:
+    _load_in_4bit: true
+    _load_in_8bit: false
+    bnb_4bit_compute_dtype: bfloat16
+    bnb_4bit_quant_storage: uint8
+    bnb_4bit_quant_type: nf4
+    bnb_4bit_use_double_quant: true
+    llm_int8_enable_fp32_cpu_offload: false
+    llm_int8_has_fp16_weight: false
+    llm_int8_skip_modules: null
+    llm_int8_threshold: 6.0
+    load_in_4bit: true
+    load_in_8bit: false
+    quant_method: bitsandbytes
+  rms_norm_eps: 1.0e-05
+  rope_scaling:
+    factor: 2.0
+    type: dynamic
+  rope_theta: 1000000
+  tie_word_embeddings: false
+  torch_dtype: float16
+  transformers_version: 4.46.3
+  use_cache: true
+  vocab_size: 92544
+onnxFiles: {}
+safetensorsSizeMb: 5117.5
+approxSizeMb: 8716.1
+fetchedAt: '2026-07-04T06:26:13.000Z'

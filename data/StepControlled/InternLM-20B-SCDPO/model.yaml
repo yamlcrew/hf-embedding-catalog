@@ -1,0 +1,137 @@
+_id: 66aa4d3045f1ee092a981bd1
+id: StepControlled/InternLM-20B-SCDPO
+private: false
+pipeline_tag: feature-extraction
+library_name: transformers
+tags:
+- transformers
+- tensorboard
+- safetensors
+- internlm2
+- feature-extraction
+- custom_code
+- region:us
+downloads: 2
+likes: 0
+modelId: StepControlled/InternLM-20B-SCDPO
+author: StepControlled
+sha: 16e2eac6d34cfe6fcc9bcdd604d400ff90a984c2
+lastModified: '2024-08-01T01:05:48.000Z'
+gated: false
+disabled: false
+config:
+  architectures:
+  - InternLM2ForCausalLM
+  auto_map:
+    AutoConfig: configuration_internlm2.InternLM2Config
+    AutoModel: modeling_internlm2.InternLM2ForCausalLM
+    AutoModelForCausalLM: modeling_internlm2.InternLM2ForCausalLM
+  model_type: internlm2
+  tokenizer_config:
+    bos_token: <s>
+    chat_template: '{% for message in messages %}
+
+      {% if message[''role''] == ''user'' %}
+
+      {{ ''<|user|>'' }}{% elif message[''role''] == ''system'' %}
+
+      {{ ''<|system|>'' }}{% elif message[''role''] == ''assistant_correct'' %}
+
+      {{ ''<|assistant|>'' }}{% endif %}
+
+      {% for block in message[''content''] %}
+
+      {% if block[''type''] == ''text'' %}
+
+      {{ ''<|text|>'' }}{% elif block[''type''] == ''code'' %}
+
+      {{ ''<|code|>'' }}{% elif block[''type''] == ''execution'' %}
+
+      {{ ''<|execution|>'' }}{% endif %}
+
+      {{ block[''content''] + ''<|endofblock|>'' }}{% endfor %}
+
+      {% if message[''role''] != ''assistant_correct'' %}
+
+      {{ ''<|endofmessage|>'' }}{% endif %}{% endfor %}'
+    eos_token: </s>
+    pad_token: </s>
+    unk_token: <unk>
+transformersInfo:
+  auto_model: AutoModel
+  custom_class: modeling_internlm2.InternLM2ForCausalLM
+  pipeline_tag: feature-extraction
+siblings:
+- rfilename: .gitattributes
+- rfilename: README.md
+- rfilename: added_tokens.json
+- rfilename: all_results.json
+- rfilename: config.json
+- rfilename: configuration_internlm2.py
+- rfilename: eval_results.json
+- rfilename: generation_config.json
+- rfilename: model-00001-of-00009.safetensors
+- rfilename: model-00002-of-00009.safetensors
+- rfilename: model-00003-of-00009.safetensors
+- rfilename: model-00004-of-00009.safetensors
+- rfilename: model-00005-of-00009.safetensors
+- rfilename: model-00006-of-00009.safetensors
+- rfilename: model-00007-of-00009.safetensors
+- rfilename: model-00008-of-00009.safetensors
+- rfilename: model-00009-of-00009.safetensors
+- rfilename: model.safetensors.index.json
+- rfilename: modeling_internlm2.py
+- rfilename: runs/May14_07-37-31_pt-p1l1oepj-master-0/events.out.tfevents.1715644019.pt-p1l1oepj-master-0.53.0
+- rfilename: runs/May14_07-37-31_pt-p1l1oepj-master-0/events.out.tfevents.1715693335.pt-p1l1oepj-master-0.53.1
+- rfilename: special_tokens_map.json
+- rfilename: tokenization_internlm2.py
+- rfilename: tokenization_internlm2_fast.py
+- rfilename: tokenizer.json
+- rfilename: tokenizer.model
+- rfilename: tokenizer_config.json
+- rfilename: train_results.json
+- rfilename: trainer_state.json
+- rfilename: training_args.bin
+spaces: []
+createdAt: '2024-07-31T14:41:52.000Z'
+safetensors:
+  parameters:
+    BF16: 19862722560
+  total: 19862722560
+usedStorage: 114497331508
+downloadsAllTime: 95
+inferenceProviderMapping: {}
+configJson:
+  _name_or_path: internlm2-20b_ape_th1_169161_gsm8k_math_81087
+  architectures:
+  - InternLM2ForCausalLM
+  attn_implementation: eager
+  auto_map:
+    AutoConfig: configuration_internlm2.InternLM2Config
+    AutoModel: modeling_internlm2.InternLM2ForCausalLM
+    AutoModelForCausalLM: modeling_internlm2.InternLM2ForCausalLM
+  bias: false
+  bos_token_id: 1
+  eos_token_id: 2
+  hidden_act: silu
+  hidden_size: 6144
+  initializer_range: 0.02
+  intermediate_size: 16384
+  max_position_embeddings: 32768
+  model_type: internlm2
+  num_attention_heads: 48
+  num_hidden_layers: 48
+  num_key_value_heads: 8
+  pad_token_id: 2
+  rms_norm_eps: 1.0e-05
+  rope_scaling: null
+  rope_theta: 1000000
+  tie_word_embeddings: false
+  torch_dtype: bfloat16
+  transformers_version: 4.38.2
+  use_cache: true
+  vocab_size: 92672
+onnxFiles: {}
+safetensorsSizeMb: 39725.5
+approxSizeMb: 39725.4
+fetchedAt: '2026-07-04T06:26:13.000Z'

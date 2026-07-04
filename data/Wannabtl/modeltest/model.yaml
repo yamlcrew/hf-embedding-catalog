@@ -1,0 +1,163 @@
+_id: 6914b09e2a8c5c66d3e4d410
+id: Wannabtl/modeltest
+private: false
+pipeline_tag: feature-extraction
+library_name: transformers
+tags:
+- transformers
+- pytorch
+- qwen2
+- feature-extraction
+- llama-factory
+- full
+- generated_from_trainer
+- custom_code
+- base_model:Wannabtl/modeltest
+- base_model:finetune:Wannabtl/modeltest
+- license:other
+- text-embeddings-inference
+- endpoints_compatible
+- region:us
+downloads: 1
+likes: 0
+modelId: Wannabtl/modeltest
+author: Wannabtl
+sha: c819db682a734af52ecbe6b6f5a153998d4f02ac
+lastModified: '2025-11-12T16:35:50.000Z'
+gated: false
+disabled: false
+model-index:
+- name: ChatTS-14B-timesense
+  results: []
+config:
+  architectures:
+  - Qwen2TSForCausalLM
+  auto_map:
+    AutoConfig: configuration_qwen2.Qwen2TSConfig
+    AutoModel: modeling_qwen2.Qwen2TSForCausalLM
+    AutoModelForCausalLM: modeling_qwen2.Qwen2TSForCausalLM
+    AutoProcessor: processing_qwen2_ts.Qwen2TSProcessor
+  model_type: qwen2
+  tokenizer_config:
+    bos_token: null
+    eos_token: <|im_end|>
+    pad_token: <|endoftext|>
+    unk_token: null
+  chat_template_jinja: '{% set system_message = ''You are a helpful assistant.'' %}{% if messages[0][''role''] == ''system''
+    %}{% set system_message = messages[0][''content''] %}{% endif %}{% if system_message is defined %}{{ ''<|im_start|>system
+
+    '' + system_message + ''<|im_end|>
+
+    '' }}{% endif %}{% for message in messages %}{% set content = message[''content''] %}{% if message[''role''] == ''user''
+    %}{{ ''<|im_start|>user
+
+    '' + content + ''<|im_end|>
+
+    <|im_start|>assistant
+
+    '' }}{% elif message[''role''] == ''assistant'' %}{{ content + ''<|im_end|>'' + ''
+
+    '' }}{% endif %}{% endfor %}'
+cardData:
+  library_name: transformers
+  license: other
+  base_model: Wannabtl/modeltest
+  tags:
+  - llama-factory
+  - full
+  - generated_from_trainer
+  model-index:
+  - name: ChatTS-14B-timesense
+    results: []
+transformersInfo:
+  auto_model: AutoModel
+  custom_class: modeling_qwen2.Qwen2TSForCausalLM
+  pipeline_tag: feature-extraction
+  processor: AutoTokenizer
+siblings:
+- rfilename: .config.json.swp
+- rfilename: .gitattributes
+- rfilename: README.md
+- rfilename: added_tokens.json
+- rfilename: all_results.json
+- rfilename: chat_template.jinja
+- rfilename: config.json
+- rfilename: configuration_qwen2.py
+- rfilename: generation_config.json
+- rfilename: merges.txt
+- rfilename: modeling_qwen2.py
+- rfilename: processing_qwen2_ts.py
+- rfilename: processor_config.json
+- rfilename: pytorch_model-00001-of-00007.bin
+- rfilename: pytorch_model-00002-of-00007.bin
+- rfilename: pytorch_model-00003-of-00007.bin
+- rfilename: pytorch_model-00004-of-00007.bin
+- rfilename: pytorch_model-00005-of-00007.bin
+- rfilename: pytorch_model-00006-of-00007.bin
+- rfilename: pytorch_model-00007-of-00007.bin
+- rfilename: pytorch_model.bin.index.json
+- rfilename: special_tokens_map.json
+- rfilename: tokenizer.json
+- rfilename: tokenizer_config.json
+- rfilename: train_results.json
+- rfilename: train_timesense.sh
+- rfilename: trainer_log.jsonl
+- rfilename: trainer_state.json
+- rfilename: training_args.bin
+- rfilename: training_loss.png
+- rfilename: vocab.json
+spaces: []
+createdAt: '2025-11-12T16:06:54.000Z'
+usedStorage: 29973747999
+downloadsAllTime: 5
+inferenceProviderMapping: {}
+configJson:
+  architectures:
+  - Qwen2TSForCausalLM
+  attention_dropout: 0.0
+  auto_map:
+    AutoConfig: configuration_qwen2.Qwen2TSConfig
+    AutoModel: modeling_qwen2.Qwen2TSForCausalLM
+    AutoModelForCausalLM: modeling_qwen2.Qwen2TSForCausalLM
+    AutoProcessor: processing_qwen2_ts.Qwen2TSProcessor
+  bos_token_id: 151643
+  eos_token_id: 151645
+  hidden_act: silu
+  hidden_size: 5120
+  ignore_index: -100
+  initializer_range: 0.02
+  intermediate_size: 13824
+  max_position_embeddings: 32768
+  max_window_layers: 70
+  model_type: qwen2
+  num_attention_heads: 40
+  num_hidden_layers: 48
+  num_key_value_heads: 8
+  pad_token_id: 151643
+  rms_norm_eps: 1.0e-06
+  rope_theta: 1000000.0
+  sliding_window: 131072
+  tie_word_embeddings: false
+  torch_dtype: bfloat16
+  transformers_version: 4.52.4
+  ts:
+    embedding_dim: 16
+    hidden_size: 5120
+    max_length: 32768
+    max_sequence_length: 32768
+    num_features: 2
+    num_layers: 5
+    patch_size: 8
+    ts_loss_weight: 1.0
+    use_position_embedding: true
+    use_position_idx: false
+  ts_loss_weight: 1.0
+  ts_token_end_index: 151666
+  ts_token_start_index: 151665
+  use_cache: false
+  use_sliding_window: false
+  vocab_size: 152064
+onnxFiles: {}
+safetensorsSizeMb: 0.0
+approxSizeMb: 0.0
+fetchedAt: '2026-07-04T06:26:13.000Z'

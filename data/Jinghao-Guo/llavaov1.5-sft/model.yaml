@@ -1,0 +1,197 @@
+_id: 6943dada26948052d0bb23f4
+id: Jinghao-Guo/llavaov1.5-sft
+private: false
+pipeline_tag: feature-extraction
+library_name: transformers
+tags:
+- transformers
+- safetensors
+- llavaonevision1_5
+- feature-extraction
+- custom_code
+- arxiv:1910.09700
+- region:us
+downloads: 2
+likes: 0
+modelId: Jinghao-Guo/llavaov1.5-sft
+author: Jinghao-Guo
+sha: 80e64f31e0fa5b9969b53e07d50aa2466a236c39
+lastModified: '2025-12-18T10:49:07.000Z'
+gated: false
+disabled: false
+model-index: null
+config:
+  architectures:
+  - LLaVAOneVision1_5_ForConditionalGeneration
+  auto_map:
+    AutoConfig: configuration_llavaonevision1_5.Llavaonevision1_5Config
+    AutoModel: modeling_llavaonevision1_5.LLaVAOneVision1_5_ForConditionalGeneration
+    AutoModelForCausalLM: modeling_llavaonevision1_5.LLaVAOneVision1_5_ForConditionalGeneration
+  model_type: llavaonevision1_5
+  tokenizer_config:
+    bos_token: null
+    eos_token: <|im_end|>
+    pad_token: <|endoftext|>
+    unk_token: null
+  chat_template_jinja: '{% set image_count = namespace(value=0) %}{% set video_count = namespace(value=0) %}{% for message
+    in messages %}{% if loop.first and message[''role''] != ''system'' %}<|im_start|>system
+
+    You are a helpful assistant.<|im_end|>
+
+    {% endif %}<|im_start|>{{ message[''role''] }}
+
+    {% if message[''content''] is string %}{{ message[''content''] }}<|im_end|>
+
+    {% else %}{% for content in message[''content''] %}{% if content[''type''] == ''image'' or ''image'' in content or ''image_url''
+    in content %}{% set image_count.value = image_count.value + 1 %}{% if add_vision_id %}Picture {{ image_count.value }}:
+    {% endif %}<|vision_start|><|image_pad|><|vision_end|>{% elif content[''type''] == ''video'' or ''video'' in content %}{%
+    set video_count.value = video_count.value + 1 %}{% if add_vision_id %}Video {{ video_count.value }}: {% endif %}<|vision_start|><|video_pad|><|vision_end|>{%
+    elif ''text'' in content %}{{ content[''text''] }}{% endif %}{% endfor %}<|im_end|>
+
+    {% endif %}{% endfor %}{% if add_generation_prompt %}<|im_start|>assistant
+
+    {% endif %}'
+cardData:
+  library_name: transformers
+  tags: []
+transformersInfo:
+  auto_model: AutoModel
+  custom_class: modeling_llavaonevision1_5.LLaVAOneVision1_5_ForConditionalGeneration
+  pipeline_tag: feature-extraction
+siblings:
+- rfilename: .gitattributes
+- rfilename: README.md
+- rfilename: added_tokens.json
+- rfilename: chat_template.jinja
+- rfilename: config.json
+- rfilename: configuration_llavaonevision1_5.py
+- rfilename: generation_config.json
+- rfilename: merges.txt
+- rfilename: model-00001-of-00004.safetensors
+- rfilename: model-00002-of-00004.safetensors
+- rfilename: model-00003-of-00004.safetensors
+- rfilename: model-00004-of-00004.safetensors
+- rfilename: model.safetensors.index.json
+- rfilename: modeling_llavaonevision1_5.py
+- rfilename: optimizer.pt
+- rfilename: preprocessor_config.json
+- rfilename: rng_state_0.pth
+- rfilename: rng_state_1.pth
+- rfilename: rng_state_2.pth
+- rfilename: rng_state_3.pth
+- rfilename: rng_state_4.pth
+- rfilename: rng_state_5.pth
+- rfilename: rng_state_6.pth
+- rfilename: rng_state_7.pth
+- rfilename: scheduler.pt
+- rfilename: special_tokens_map.json
+- rfilename: tokenizer.json
+- rfilename: tokenizer_config.json
+- rfilename: trainer_state.json
+- rfilename: training_args.bin
+- rfilename: video_preprocessor_config.json
+- rfilename: vocab.json
+spaces: []
+createdAt: '2025-12-18T10:43:38.000Z'
+safetensors:
+  parameters:
+    F32: 4741610528
+  total: 4741610528
+usedStorage: 54269828522
+downloadsAllTime: 6
+inferenceProviderMapping: {}
+configJson:
+  architectures:
+  - LLaVAOneVision1_5_ForConditionalGeneration
+  auto_map:
+    AutoConfig: configuration_llavaonevision1_5.Llavaonevision1_5Config
+    AutoModel: modeling_llavaonevision1_5.LLaVAOneVision1_5_ForConditionalGeneration
+    AutoModelForCausalLM: modeling_llavaonevision1_5.LLaVAOneVision1_5_ForConditionalGeneration
+  dtype: float32
+  image_token_id: 151655
+  model_type: llavaonevision1_5
+  text_config:
+    attention_bias: false
+    attention_dropout: 0.0
+    dtype: float32
+    head_dim: 128
+    hidden_act: silu
+    hidden_size: 2560
+    image_token_id: null
+    initializer_range: 0.02
+    intermediate_size: 9728
+    layer_types:
+    - full_attention
+    - full_attention
+    - full_attention
+    - full_attention
+    - full_attention
+    - full_attention
+    - full_attention
+    - full_attention
+    - full_attention
+    - full_attention
+    - full_attention
+    - full_attention
+    - full_attention
+    - full_attention
+    - full_attention
+    - full_attention
+    - full_attention
+    - full_attention
+    - full_attention
+    - full_attention
+    - full_attention
+    - full_attention
+    - full_attention
+    - full_attention
+    - full_attention
+    - full_attention
+    - full_attention
+    - full_attention
+    - full_attention
+    - full_attention
+    - full_attention
+    - full_attention
+    - full_attention
+    - full_attention
+    - full_attention
+    - full_attention
+    max_position_embeddings: 262144
+    max_window_layers: 36
+    model_type: LLaVAOneVision1_5_text
+    num_attention_heads: 32
+    num_hidden_layers: 36
+    num_key_value_heads: 8
+    rms_norm_eps: 1.0e-06
+    rope_scaling: null
+    rope_theta: 5000000.0
+    sliding_window: null
+    use_cache: false
+    use_sliding_window: false
+    video_token_id: null
+    vocab_size: 151936
+  transformers_version: 4.57.3
+  use_cache: false
+  video_token_id: 151656
+  vision_config:
+    depth: 24
+    dtype: float32
+    embed_dim: 1024
+    hidden_act: gelu
+    hidden_size: 1024
+    in_channels: 3
+    initializer_range: 0.02
+    intermediate_size: 4096
+    layer_norm_eps: 1.0e-05
+    model_type: rice_vit
+    num_heads: 16
+    patch_size: 14
+    spatial_merge_size: 2
+    temporal_patch_size: 1
+    text_hidden_size: 2560
+  vocab_size: 151936
+onnxFiles: {}
+safetensorsSizeMb: 18966.5
+approxSizeMb: 18966.4
+fetchedAt: '2026-07-04T06:26:13.000Z'

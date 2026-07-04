@@ -1,0 +1,182 @@
+_id: 6900e9d3fd6ecd130697f929
+id: hrezaei/flan-t5la-small
+private: false
+pipeline_tag: feature-extraction
+library_name: transformers
+tags:
+- transformers
+- tensorboard
+- safetensors
+- t5la_adapter
+- feature-extraction
+- generated_from_trainer
+- custom_code
+- dataset:HuggingFaceFW/fineweb
+- base_model:hrezaei/flan-t5la-small
+- base_model:finetune:hrezaei/flan-t5la-small
+- model-index
+- region:us
+downloads: 350
+likes: 0
+modelId: hrezaei/flan-t5la-small
+author: hrezaei
+sha: eeba7bcc97a9b3fc16768a949659c71595a3cc41
+lastModified: '2026-01-16T08:09:02.000Z'
+gated: false
+disabled: false
+model-index:
+- name: flan-t5la-small
+  results:
+  - task:
+      name: Causal Language Modeling
+      type: text-generation
+    dataset:
+      name: HuggingFaceFW/fineweb sample-350BT
+      type: HuggingFaceFW/fineweb
+      config: default
+      split: train
+      args: sample-350BT
+    metrics:
+    - name: Accuracy
+      type: accuracy
+      value: 0.003219765166340509
+      verified: false
+config:
+  architectures:
+  - T5LaAdapterForConditionalGeneration
+  auto_map:
+    AutoConfig: t5la_adapter.T5LaAdapterConfig
+    AutoModel: t5la_adapter.T5LaAdapterForConditionalGeneration
+    AutoModelForSeq2SeqLM: t5la_adapter.T5LaAdapterForConditionalGeneration
+  model_type: t5la_adapter
+  tokenizer_config:
+    eos_token: </s>
+    pad_token: <pad>
+    unk_token: <unk>
+cardData:
+  library_name: transformers
+  base_model: hrezaei/flan-t5la-small
+  tags:
+  - generated_from_trainer
+  datasets:
+  - HuggingFaceFW/fineweb
+  metrics:
+  - accuracy
+  model-index:
+  - name: flan-t5la-small
+    results:
+    - task:
+        name: Causal Language Modeling
+        type: text-generation
+      dataset:
+        name: HuggingFaceFW/fineweb sample-350BT
+        type: HuggingFaceFW/fineweb
+        config: default
+        split: train
+        args: sample-350BT
+      metrics:
+      - name: Accuracy
+        type: accuracy
+        value: 0.003219765166340509
+        verified: false
+transformersInfo:
+  auto_model: AutoModel
+  custom_class: t5la_adapter.T5LaAdapterForConditionalGeneration
+  pipeline_tag: feature-extraction
+siblings:
+- rfilename: .gitattributes
+- rfilename: README.md
+- rfilename: all_results.json
+- rfilename: config.json
+- rfilename: emissions.csv
+- rfilename: eval_results.json
+- rfilename: generation_config.json
+- rfilename: model.safetensors
+- rfilename: runs/Jan14_16-01-26_gpu14.viking2.yor.alces.network/events.out.tfevents.1768406773.gpu14.viking2.yor.alces.network.2901517.0
+- rfilename: runs/Jan14_16-01-26_gpu14.viking2.yor.alces.network/events.out.tfevents.1768550937.gpu14.viking2.yor.alces.network.2901517.1
+- rfilename: special_tokens_map.json
+- rfilename: spiece.model
+- rfilename: t5la_adapter.py
+- rfilename: t5la_modeling.py
+- rfilename: tokenizer.json
+- rfilename: tokenizer_config.json
+- rfilename: train_results.json
+- rfilename: trainer_state.json
+- rfilename: training_args.bin
+spaces: []
+createdAt: '2025-10-28T16:05:39.000Z'
+safetensors:
+  parameters:
+    F32: 93410688
+  total: 93410688
+usedStorage: 40005417496
+downloadsAllTime: 1270
+inferenceProviderMapping: {}
+configJson:
+  architectures:
+  - T5LaAdapterForConditionalGeneration
+  auto_map:
+    AutoConfig: t5la_adapter.T5LaAdapterConfig
+    AutoModel: t5la_adapter.T5LaAdapterForConditionalGeneration
+    AutoModelForSeq2SeqLM: t5la_adapter.T5LaAdapterForConditionalGeneration
+    AutoTokenizer:
+    - transformers.T5TokenizerFast
+    - transformers.T5Tokenizer
+  classifier_dropout: 0.0
+  d_ff: 1024
+  d_kv: 64
+  d_model: 512
+  decoder_start_token_id: 0
+  dense_act_fn: gelu_new
+  dropout_rate: 0.1
+  dtype: float32
+  eos_token_id: 1
+  feed_forward_proj: gated-gelu
+  freeze_base: true
+  initializer_factor: 1.0
+  is_encoder_decoder: true
+  is_gated_act: true
+  layer_norm_epsilon: 1.0e-06
+  lookahead_size: 1
+  lookahead_type: la
+  model_type: t5la_adapter
+  n_positions: 512
+  num_decoder_layers: 8
+  num_heads: 6
+  num_layers: 8
+  output_past: true
+  pad_token_id: 0
+  relative_attention_max_distance: 128
+  relative_attention_num_buckets: 32
+  task_specific_params:
+    summarization:
+      early_stopping: true
+      length_penalty: 2.0
+      max_length: 200
+      min_length: 30
+      no_repeat_ngram_size: 3
+      num_beams: 4
+      prefix: 'summarize: '
+    translation_en_to_de:
+      early_stopping: true
+      max_length: 300
+      num_beams: 4
+      prefix: 'translate English to German: '
+    translation_en_to_fr:
+      early_stopping: true
+      max_length: 300
+      num_beams: 4
+      prefix: 'translate English to French: '
+    translation_en_to_ro:
+      early_stopping: true
+      max_length: 300
+      num_beams: 4
+      prefix: 'translate English to Romanian: '
+  tie_word_embeddings: false
+  transformers_version: 4.57.0.dev0
+  use_cache: true
+  vocab_size: 32128
+onnxFiles: {}
+safetensorsSizeMb: 373.7
+approxSizeMb: 373.6
+fetchedAt: '2026-07-04T06:26:13.000Z'

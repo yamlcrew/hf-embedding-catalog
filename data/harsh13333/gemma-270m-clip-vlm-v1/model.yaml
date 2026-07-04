@@ -1,0 +1,95 @@
+_id: 69763d9b6b42e389b49b2a39
+id: harsh13333/gemma-270m-clip-vlm-v1
+private: false
+pipeline_tag: feature-extraction
+library_name: transformers
+tags:
+- transformers
+- safetensors
+- gemma_clip_vlm
+- feature-extraction
+- custom_code
+- arxiv:1910.09700
+- region:us
+downloads: 4
+likes: 0
+modelId: harsh13333/gemma-270m-clip-vlm-v1
+author: harsh13333
+sha: fdec6e5192e00818055aa54ca5763e9a026130f3
+lastModified: '2026-01-26T13:02:10.000Z'
+gated: false
+disabled: false
+model-index: null
+config:
+  architectures:
+  - GemmaCLIPVLM
+  model_type: gemma_clip_vlm
+  auto_map:
+    AutoConfig: configuration_gemma_clip_vlm.GemmaCLIPVLMConfig
+    AutoModel: modeling_gemma_clip_vlm.GemmaCLIPVLM
+  tokenizer_config:
+    bos_token: <bos>
+    eos_token: <eos>
+    pad_token: <pad>
+    unk_token: <unk>
+    use_default_system_prompt: false
+  chat_template_jinja: "{{ bos_token }}\n{%- if messages[0]['role'] == 'system' -%}\n    {%- if messages[0]['content'] is\
+    \ string -%}\n        {%- set first_user_prefix = messages[0]['content'] + '\n\n' -%}\n    {%- else -%}\n        {%- set\
+    \ first_user_prefix = messages[0]['content'][0]['text'] + '\n\n' -%}\n    {%- endif -%}\n    {%- set loop_messages = messages[1:]\
+    \ -%}\n{%- else -%}\n    {%- set first_user_prefix = \"\" -%}\n    {%- set loop_messages = messages -%}\n{%- endif -%}\n\
+    {%- for message in loop_messages -%}\n    {%- if (message['role'] == 'user') != (loop.index0 % 2 == 0) -%}\n        {{\
+    \ raise_exception(\"Conversation roles must alternate user/assistant/user/assistant/...\") }}\n    {%- endif -%}\n   \
+    \ {%- if (message['role'] == 'assistant') -%}\n        {%- set role = \"model\" -%}\n    {%- else -%}\n        {%- set\
+    \ role = message['role'] -%}\n    {%- endif -%}\n    {{ '<start_of_turn>' + role + '\n' + (first_user_prefix if loop.first\
+    \ else \"\") }}\n    {%- if message['content'] is string -%}\n        {{ message['content'] | trim }}\n    {%- elif message['content']\
+    \ is iterable -%}\n        {%- for item in message['content'] -%}\n            {%- if item['type'] == 'image' -%}\n  \
+    \              {{ '<start_of_image>' }}\n            {%- elif item['type'] == 'text' -%}\n                {{ item['text']\
+    \ | trim }}\n            {%- endif -%}\n        {%- endfor -%}\n    {%- else -%}\n        {{ raise_exception(\"Invalid\
+    \ content type\") }}\n    {%- endif -%}\n    {{ '<end_of_turn>\n' }}\n{%- endfor -%}\n{%- if add_generation_prompt -%}\n\
+    \    {{'<start_of_turn>model\n'}}\n{%- endif -%}\n"
+cardData:
+  library_name: transformers
+  tags: []
+transformersInfo:
+  auto_model: AutoModel
+  custom_class: modeling_gemma_clip_vlm.GemmaCLIPVLM
+  pipeline_tag: feature-extraction
+siblings:
+- rfilename: .gitattributes
+- rfilename: README.md
+- rfilename: added_tokens.json
+- rfilename: chat_template.jinja
+- rfilename: config.json
+- rfilename: configuration_gemma_clip_vlm.py
+- rfilename: model.safetensors
+- rfilename: modeling_gemma_clip_vlm.py
+- rfilename: preprocessor_config.json
+- rfilename: special_tokens_map.json
+- rfilename: tokenizer.json
+- rfilename: tokenizer.model
+- rfilename: tokenizer_config.json
+spaces: []
+createdAt: '2026-01-25T15:58:19.000Z'
+safetensors:
+  parameters:
+    F32: 354389760
+  total: 354389760
+usedStorage: 2873298742
+downloadsAllTime: 72
+inferenceProviderMapping: {}
+configJson:
+  architectures:
+  - GemmaCLIPVLM
+  model_type: gemma_clip_vlm
+  auto_map:
+    AutoConfig: configuration_gemma_clip_vlm.GemmaCLIPVLMConfig
+    AutoModel: modeling_gemma_clip_vlm.GemmaCLIPVLM
+  vision_model_name: openai/clip-vit-base-patch16
+  llm_model_name: google/gemma-3-270m-it
+  num_image_tokens: 197
+  dtype: float32
+  transformers_version: 4.57.6
+onnxFiles: {}
+safetensorsSizeMb: 1417.6
+approxSizeMb: 1417.6
+fetchedAt: '2026-07-04T06:26:13.000Z'

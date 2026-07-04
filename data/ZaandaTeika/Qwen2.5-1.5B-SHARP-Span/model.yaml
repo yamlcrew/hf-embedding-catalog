@@ -1,0 +1,167 @@
+_id: 6a0edf35b643e248178bb17e
+id: ZaandaTeika/Qwen2.5-1.5B-SHARP-Span
+private: false
+pipeline_tag: feature-extraction
+library_name: transformers
+tags:
+- transformers
+- safetensors
+- qwen2
+- feature-extraction
+- prm
+- process-reward-model
+- math
+- custom_code
+- base_model:Qwen/Qwen2.5-Math-1.5B-Instruct
+- base_model:finetune:Qwen/Qwen2.5-Math-1.5B-Instruct
+- license:apache-2.0
+- text-embeddings-inference
+- endpoints_compatible
+- region:us
+downloads: 0
+likes: 0
+modelId: ZaandaTeika/Qwen2.5-1.5B-SHARP-Span
+author: ZaandaTeika
+sha: 0f1259d274688fbefe8a7679e96ffed4b46c4d6f
+lastModified: '2026-05-21T10:33:16.000Z'
+gated: false
+disabled: false
+model-index: null
+config:
+  architectures:
+  - Qwen2ForProcessRewardModel
+  auto_map:
+    AutoConfig: configuration_qwen2_rm.Qwen2RMConfig
+    AutoModel: modeling_qwen2_rm.Qwen2ForProcessRewardModel
+  model_type: qwen2
+  tokenizer_config:
+    bos_token: null
+    eos_token: <|im_end|>
+    pad_token: <|endoftext|>
+    unk_token: null
+  chat_template_jinja: "{%- if tools %}\n    {{- '<|im_start|>system\\n' }}\n    {%- if messages[0]['role'] == 'system' %}\n\
+    \        {{- messages[0]['content'] }}\n    {%- else %}\n        {{- 'Please reason step by step, and put your final answer\
+    \ within \\\\boxed{}.' }}\n    {%- endif %}\n    {{- \"\\n\\n# Tools\\n\\nYou may call one or more functions to assist\
+    \ with the user query.\\n\\nYou are provided with function signatures within <tools></tools> XML tags:\\n<tools>\" }}\n\
+    \    {%- for tool in tools %}\n        {{- \"\\n\" }}\n        {{- tool | tojson }}\n    {%- endfor %}\n    {{- \"\\n</tools>\\\
+    n\\nFor each function call, return a json object with function name and arguments within <tool_call></tool_call> XML tags:\\\
+    n<tool_call>\\n{\\\"name\\\": <function-name>, \\\"arguments\\\": <args-json-object>}\\n</tool_call><|im_end|>\\n\" }}\n\
+    {%- else %}\n    {%- if messages[0]['role'] == 'system' %}\n        {{- '<|im_start|>system\\n' + messages[0]['content']\
+    \ + '<|im_end|>\\n' }}\n    {%- else %}\n        {{- '<|im_start|>system\\nPlease reason step by step, and put your final\
+    \ answer within \\\\boxed{}.<|im_end|>\\n' }}\n    {%- endif %}\n{%- endif %}\n{%- for message in messages %}\n    {%-\
+    \ if (message.role == \"user\") or (message.role == \"system\" and not loop.first) or (message.role == \"assistant\" and\
+    \ not message.tool_calls) %}\n        {{- '<|im_start|>' + message.role + '\\n' + message.content + '<|im_end|>' + '\\\
+    n' }}\n    {%- elif message.role == \"assistant\" %}\n        {{- '<|im_start|>' + message.role }}\n        {%- if message.content\
+    \ %}\n            {{- '\\n' + message.content }}\n        {%- endif %}\n        {%- for tool_call in message.tool_calls\
+    \ %}\n            {%- if tool_call.function is defined %}\n                {%- set tool_call = tool_call.function %}\n\
+    \            {%- endif %}\n            {{- '\\n<tool_call>\\n{\"name\": \"' }}\n            {{- tool_call.name }}\n  \
+    \          {{- '\", \"arguments\": ' }}\n            {{- tool_call.arguments | tojson }}\n            {{- '}\\n</tool_call>'\
+    \ }}\n        {%- endfor %}\n        {{- '<|im_end|>\\n' }}\n    {%- elif message.role == \"tool\" %}\n        {%- if\
+    \ (loop.index0 == 0) or (messages[loop.index0 - 1].role != \"tool\") %}\n            {{- '<|im_start|>user' }}\n     \
+    \   {%- endif %}\n        {{- '\\n<tool_response>\\n' }}\n        {{- message.content }}\n        {{- '\\n</tool_response>'\
+    \ }}\n        {%- if loop.last or (messages[loop.index0 + 1].role != \"tool\") %}\n            {{- '<|im_end|>\\n' }}\n\
+    \        {%- endif %}\n    {%- endif %}\n{%- endfor %}\n{%- if add_generation_prompt %}\n    {{- '<|im_start|>assistant\\\
+    n' }}\n{%- endif %}\n"
+cardData:
+  base_model: Qwen/Qwen2.5-Math-1.5B-Instruct
+  library_name: transformers
+  model_name: Qwen2.5-1.5B-SHARP-GSM8K-proc_30-70-Math-proc_10-90
+  tags:
+  - prm
+  - process-reward-model
+  - math
+  - qwen2
+  license: apache-2.0
+transformersInfo:
+  auto_model: AutoModel
+  custom_class: modeling_qwen2_rm.Qwen2ForProcessRewardModel
+  pipeline_tag: feature-extraction
+  processor: AutoTokenizer
+siblings:
+- rfilename: .gitattributes
+- rfilename: README.md
+- rfilename: added_tokens.json
+- rfilename: chat_template.jinja
+- rfilename: config.json
+- rfilename: configuration_qwen2_rm.py
+- rfilename: merges.txt
+- rfilename: model-00001-of-00002.safetensors
+- rfilename: model-00002-of-00002.safetensors
+- rfilename: model.safetensors.index.json
+- rfilename: modeling_qwen2_rm.py
+- rfilename: special_tokens_map.json
+- rfilename: tokenizer.json
+- rfilename: tokenizer_config.json
+- rfilename: vocab.json
+spaces: []
+createdAt: '2026-05-21T10:32:21.000Z'
+safetensors:
+  parameters:
+    BF16: 1546078210
+  total: 773039105
+usedStorage: 3103617457
+downloadsAllTime: 31
+inferenceProviderMapping: {}
+configJson:
+  architectures:
+  - Qwen2ForProcessRewardModel
+  attention_dropout: 0.0
+  auto_map:
+    AutoConfig: configuration_qwen2_rm.Qwen2RMConfig
+    AutoModel: modeling_qwen2_rm.Qwen2ForProcessRewardModel
+  dtype: bfloat16
+  eos_token_id: 151645
+  hidden_act: silu
+  hidden_size: 1536
+  initializer_range: 0.02
+  intermediate_size: 8960
+  layer_types:
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  max_position_embeddings: 4096
+  max_window_layers: 21
+  model_type: qwen2
+  num_attention_heads: 12
+  num_hidden_layers: 28
+  num_key_value_heads: 2
+  pad_token_id: 151643
+  rms_norm_eps: 1.0e-06
+  rope_scaling: null
+  rope_theta: 10000.0
+  sliding_window: null
+  tie_word_embeddings: true
+  transformers_version: 4.57.6
+  use_cache: false
+  use_sliding_window: false
+  vocab_size: 151936
+  torch_dtype: bfloat16
+onnxFiles: {}
+safetensorsSizeMb: 3092.2
+approxSizeMb: 3092.2
+fetchedAt: '2026-07-04T06:26:13.000Z'

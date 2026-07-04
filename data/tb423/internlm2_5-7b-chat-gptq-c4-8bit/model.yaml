@@ -1,0 +1,138 @@
+_id: 6719dd4733d1a13d3fe7d8fe
+id: tb423/internlm2_5-7b-chat-gptq-c4-8bit
+private: false
+pipeline_tag: feature-extraction
+library_name: transformers
+tags:
+- transformers
+- safetensors
+- internlm2
+- feature-extraction
+- custom_code
+- arxiv:1910.09700
+- 8-bit
+- gptq
+- region:us
+downloads: 5
+likes: 1
+modelId: tb423/internlm2_5-7b-chat-gptq-c4-8bit
+author: tb423
+sha: 1f04fb1ad004126199a21fef8b564f35af20418b
+lastModified: '2024-10-24T05:47:08.000Z'
+gated: false
+disabled: false
+model-index: null
+config:
+  architectures:
+  - InternLM2ForCausalLM
+  auto_map:
+    AutoConfig: configuration_internlm2.InternLM2Config
+    AutoModel: internlm/internlm2_5-7b-chat--modeling_internlm2.InternLM2ForCausalLM
+    AutoModelForCausalLM: modeling_internlm2.InternLM2ForCausalLM
+  model_type: internlm2
+  quantization_config:
+    bits: 8
+    quant_method: gptq
+  tokenizer_config:
+    bos_token: <s>
+    chat_template: '{{ bos_token }}{% for message in messages %}{{''<|im_start|>'' + message[''role''] + ''
+
+      '' + message[''content''] + ''<|im_end|>'' + ''
+
+      ''}}{% endfor %}{% if add_generation_prompt %}{{ ''<|im_start|>assistant
+
+      '' }}{% endif %}'
+    eos_token: </s>
+    pad_token: </s>
+    unk_token: <unk>
+cardData:
+  library_name: transformers
+  tags: []
+transformersInfo:
+  auto_model: AutoModel
+  custom_class: internlm/internlm2_5-7b-chat--modeling_internlm2.InternLM2ForCausalLM
+  pipeline_tag: feature-extraction
+siblings:
+- rfilename: .gitattributes
+- rfilename: README.md
+- rfilename: config.json
+- rfilename: configuration_internlm2.py
+- rfilename: generation_config.json
+- rfilename: model-00001-of-00002.safetensors
+- rfilename: model-00002-of-00002.safetensors
+- rfilename: model.safetensors.index.json
+- rfilename: modeling_internlm2.py
+- rfilename: special_tokens_map.json
+- rfilename: tokenization_internlm2.py
+- rfilename: tokenization_internlm2_fast.py
+- rfilename: tokenizer.json
+- rfilename: tokenizer_config.json
+spaces: []
+createdAt: '2024-10-24T05:38:15.000Z'
+safetensors:
+  parameters:
+    I32: 6979321856
+    F16: 758386688
+  total: 7737708544
+usedStorage: 8674225797
+downloadsAllTime: 33
+inferenceProviderMapping: {}
+configJson:
+  _name_or_path: internlm2_5-7b-chat-gptq-c4-8bit
+  architectures:
+  - InternLM2ForCausalLM
+  attn_implementation: eager
+  auto_map:
+    AutoConfig: configuration_internlm2.InternLM2Config
+    AutoModel: internlm/internlm2_5-7b-chat--modeling_internlm2.InternLM2ForCausalLM
+    AutoModelForCausalLM: modeling_internlm2.InternLM2ForCausalLM
+  bias: false
+  bos_token_id: 1
+  eos_token_id: 2
+  hidden_act: silu
+  hidden_size: 4096
+  initializer_range: 0.02
+  intermediate_size: 14336
+  max_position_embeddings: 32768
+  model_type: internlm2
+  num_attention_heads: 32
+  num_hidden_layers: 32
+  num_key_value_heads: 8
+  pad_token_id: 2
+  pretraining_tp: 1
+  quantization_config:
+    batch_size: 1
+    bits: 8
+    block_name_to_quantize: null
+    cache_block_outputs: true
+    damp_percent: 0.1
+    dataset: c4
+    desc_act: false
+    exllama_config:
+      version: 1
+    group_size: 128
+    max_input_length: null
+    model_seqlen: null
+    module_name_preceding_first_block: null
+    modules_in_block_to_quantize: null
+    pad_token_id: null
+    quant_method: gptq
+    sym: true
+    tokenizer: null
+    true_sequential: true
+    use_cuda_fp16: false
+    use_exllama: true
+  rms_norm_eps: 1.0e-05
+  rope_scaling:
+    factor: 2.0
+    type: dynamic
+  rope_theta: 1000000
+  tie_word_embeddings: false
+  torch_dtype: float16
+  transformers_version: 4.45.2
+  use_cache: true
+  vocab_size: 92544
+onnxFiles: {}
+safetensorsSizeMb: 8663.7
+approxSizeMb: 29434.1
+fetchedAt: '2026-07-04T06:26:13.000Z'

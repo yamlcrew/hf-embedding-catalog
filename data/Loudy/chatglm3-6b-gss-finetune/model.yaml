@@ -1,0 +1,126 @@
+_id: 6613e8de404c903e38ddbfb1
+id: Loudy/chatglm3-6b-gss-finetune
+private: false
+pipeline_tag: feature-extraction
+library_name: transformers
+tags:
+- transformers
+- safetensors
+- chatglm
+- feature-extraction
+- custom_code
+- region:us
+downloads: 4
+likes: 0
+modelId: Loudy/chatglm3-6b-gss-finetune
+author: Loudy
+sha: c5d6110044a8d8e0c3bf87f305605b4a4e400217
+lastModified: '2024-04-08T13:39:14.000Z'
+gated: false
+disabled: false
+config:
+  architectures:
+  - ChatGLMForConditionalGeneration
+  auto_map:
+    AutoConfig: configuration_chatglm.ChatGLMConfig
+    AutoModel: modeling_chatglm.ChatGLMForConditionalGeneration
+    AutoModelForCausalLM: THUDM/chatglm3-6b--modeling_chatglm.ChatGLMForConditionalGeneration
+    AutoModelForSeq2SeqLM: THUDM/chatglm3-6b--modeling_chatglm.ChatGLMForConditionalGeneration
+    AutoModelForSequenceClassification: THUDM/chatglm3-6b--modeling_chatglm.ChatGLMForSequenceClassification
+  model_type: chatglm
+  tokenizer_config:
+    chat_template: "{% for message in messages %}{% if loop.first %}[gMASK]sop<|{{ message['role'] }}|>\n {{ message['content']\
+      \ }}{% else %}<|{{ message['role'] }}|>\n {{ message['content'] }}{% endif %}{% endfor %}{% if add_generation_prompt\
+      \ %}<|assistant|>{% endif %}"
+    eos_token: </s>
+    pad_token: <unk>
+    unk_token: <unk>
+transformersInfo:
+  auto_model: AutoModel
+  custom_class: modeling_chatglm.ChatGLMForConditionalGeneration
+  pipeline_tag: feature-extraction
+siblings:
+- rfilename: .gitattributes
+- rfilename: README.md
+- rfilename: config.json
+- rfilename: configuration_chatglm.py
+- rfilename: generation_config.json
+- rfilename: model-00001-of-00015.safetensors
+- rfilename: model-00002-of-00015.safetensors
+- rfilename: model-00003-of-00015.safetensors
+- rfilename: model-00004-of-00015.safetensors
+- rfilename: model-00005-of-00015.safetensors
+- rfilename: model-00006-of-00015.safetensors
+- rfilename: model-00007-of-00015.safetensors
+- rfilename: model-00008-of-00015.safetensors
+- rfilename: model-00009-of-00015.safetensors
+- rfilename: model-00010-of-00015.safetensors
+- rfilename: model-00011-of-00015.safetensors
+- rfilename: model-00012-of-00015.safetensors
+- rfilename: model-00013-of-00015.safetensors
+- rfilename: model-00014-of-00015.safetensors
+- rfilename: model-00015-of-00015.safetensors
+- rfilename: model.safetensors.index.json
+- rfilename: modeling_chatglm.py
+- rfilename: quantization.py
+- rfilename: special_tokens_map.json
+- rfilename: tokenization_chatglm.py
+- rfilename: tokenizer.model
+- rfilename: tokenizer_config.json
+spaces: []
+createdAt: '2024-04-08T12:53:50.000Z'
+safetensors:
+  parameters:
+    F16: 6243584032
+  total: 6243584032
+usedStorage: 12488213362
+downloadsAllTime: 22
+inferenceProviderMapping: {}
+configJson:
+  _name_or_path: THUDM/chatglm3-6b
+  add_bias_linear: false
+  add_qkv_bias: true
+  apply_query_key_layer_scaling: true
+  apply_residual_connection_post_layernorm: false
+  architectures:
+  - ChatGLMForConditionalGeneration
+  attention_dropout: 0.0
+  attention_softmax_in_fp32: true
+  auto_map:
+    AutoConfig: configuration_chatglm.ChatGLMConfig
+    AutoModel: modeling_chatglm.ChatGLMForConditionalGeneration
+    AutoModelForCausalLM: THUDM/chatglm3-6b--modeling_chatglm.ChatGLMForConditionalGeneration
+    AutoModelForSeq2SeqLM: THUDM/chatglm3-6b--modeling_chatglm.ChatGLMForConditionalGeneration
+    AutoModelForSequenceClassification: THUDM/chatglm3-6b--modeling_chatglm.ChatGLMForSequenceClassification
+  bias_dropout_fusion: true
+  classifier_dropout: null
+  eos_token_id: 2
+  ffn_hidden_size: 13696
+  fp32_residual_connection: false
+  hidden_dropout: 0.0
+  hidden_size: 4096
+  kv_channels: 128
+  layernorm_epsilon: 1.0e-05
+  model_type: chatglm
+  multi_query_attention: true
+  multi_query_group_num: 2
+  num_attention_heads: 32
+  num_layers: 28
+  original_rope: true
+  pad_token_id: 0
+  padded_vocab_size: 65024
+  post_layer_norm: true
+  pre_seq_len: null
+  prefix_projection: false
+  quantization_bit: 0
+  rmsnorm: true
+  seq_length: 8192
+  tie_word_embeddings: false
+  torch_dtype: float16
+  transformers_version: 4.39.3
+  use_cache: true
+  vocab_size: 65024
+onnxFiles: {}
+safetensorsSizeMb: 12487.2
+approxSizeMb: 12487.2
+fetchedAt: '2026-07-04T06:26:13.000Z'

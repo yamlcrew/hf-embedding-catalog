@@ -1,0 +1,73 @@
+_id: 663ea1fcff178bd7ef4a19ba
+id: AICube/ImTheFatedVillainTranslationModel
+private: false
+pipeline_tag: feature-extraction
+library_name: transformers
+tags:
+- transformers
+- safetensors
+- qwen
+- feature-extraction
+- custom_code
+- region:us
+downloads: 0
+likes: 0
+modelId: AICube/ImTheFatedVillainTranslationModel
+author: AICube
+sha: 33a6a59f94a0e31a4a3a63ebef6633f90f45978c
+lastModified: '2024-05-17T22:17:47.000Z'
+gated: auto
+disabled: false
+config:
+  architectures:
+  - QWenLMHeadModel
+  auto_map:
+    AutoConfig: configuration_qwen.QWenConfig
+    AutoModel: modeling_qwen.QWenLMHeadModel
+    AutoModelForCausalLM: Qwen/Qwen-1_8B--modeling_qwen.QWenLMHeadModel
+  model_type: qwen
+  tokenizer_config:
+    chat_template: '{% if messages[0][''role''] == ''system'' %}{% set system_message = messages[0][''content''] %}{% endif
+      %}{% if system_message is defined %}{{ system_message + ''\n'' }}{% endif %}{% for message in messages %}{% set content
+      = message[''content''] %}{% if message[''role''] == ''user'' %}{{ ''Human: '' + content + ''\nAssistant: '' }}{% elif
+      message[''role''] == ''assistant'' %}{{ content + ''<|endoftext|>'' + ''\n'' }}{% endif %}{% endfor %}'
+    eos_token: <|endoftext|>
+    pad_token: <|endoftext|>
+transformersInfo:
+  auto_model: AutoModel
+  custom_class: modeling_qwen.QWenLMHeadModel
+  pipeline_tag: feature-extraction
+siblings:
+- rfilename: .gitattributes
+- rfilename: config.json
+- rfilename: configuration_qwen.py
+- rfilename: cpp_kernels.py
+- rfilename: generation_config.json
+- rfilename: model-00001-of-00007.safetensors
+- rfilename: model-00002-of-00007.safetensors
+- rfilename: model-00003-of-00007.safetensors
+- rfilename: model-00004-of-00007.safetensors
+- rfilename: model-00005-of-00007.safetensors
+- rfilename: model-00006-of-00007.safetensors
+- rfilename: model-00007-of-00007.safetensors
+- rfilename: model.safetensors.index.json
+- rfilename: modeling_qwen.py
+- rfilename: qwen.tiktoken
+- rfilename: qwen_generation_utils.py
+- rfilename: special_tokens_map.json
+- rfilename: tokenization_qwen.py
+- rfilename: tokenizer_config.json
+spaces: []
+createdAt: '2024-05-10T22:38:52.000Z'
+safetensors:
+  parameters:
+    F32: 1836828672
+  total: 1836828672
+usedStorage: 7347335400
+downloadsAllTime: 77
+inferenceProviderMapping: {}
+configJson: null
+onnxFiles: {}
+safetensorsSizeMb: 7347.3
+approxSizeMb: 7347.3
+fetchedAt: '2026-07-04T06:26:13.000Z'

@@ -1,0 +1,101 @@
+_id: 6628cc664de46f474370a0a3
+id: lklimkiewicz/internlm-xcomposer2-4khd-7b-finetune
+private: false
+pipeline_tag: feature-extraction
+library_name: transformers
+tags:
+- transformers
+- pytorch
+- internlm2
+- feature-extraction
+- custom_code
+- region:us
+downloads: 3
+likes: 0
+modelId: lklimkiewicz/internlm-xcomposer2-4khd-7b-finetune
+author: lklimkiewicz
+sha: 12599acc0c3feae4f67e4a1c4ff31437368c7aa7
+lastModified: '2024-04-24T10:04:32.000Z'
+gated: false
+disabled: false
+config:
+  architectures:
+  - InternLMXComposer2ForCausalLM
+  auto_map:
+    AutoConfig: configuration_internlm_xcomposer2.InternLMXcomposer2Config
+    AutoModel: modeling_internlm_xcomposer2.InternLMXComposer2ForCausalLM
+    AutoModelForCausalLM: modeling_internlm_xcomposer2.InternLMXComposer2ForCausalLM
+  model_type: internlm2
+  tokenizer_config:
+    bos_token: <s>
+    chat_template: '{{ bos_token }}{% for message in messages %}{{''<|im_start|>'' + message[''role''] + ''
+
+      '' + message[''content''] + ''<|im_end|>'' + ''
+
+      ''}}{% endfor %}{% if add_generation_prompt %}{{ ''<|im_start|>assistant
+
+      '' }}{% endif %}'
+    eos_token: </s>
+    pad_token: </s>
+    unk_token: <unk>
+transformersInfo:
+  auto_model: AutoModel
+  custom_class: modeling_internlm_xcomposer2.InternLMXComposer2ForCausalLM
+  pipeline_tag: feature-extraction
+siblings:
+- rfilename: .gitattributes
+- rfilename: added_tokens.json
+- rfilename: build_mlp.py
+- rfilename: config.json
+- rfilename: configuration_internlm_xcomposer2.py
+- rfilename: generation_config.json
+- rfilename: ixc_utils.py
+- rfilename: modeling_internlm2.py
+- rfilename: modeling_internlm_xcomposer2.py
+- rfilename: pytorch_model-00001-of-00002.bin
+- rfilename: pytorch_model-00002-of-00002.bin
+- rfilename: pytorch_model.bin.index.json
+- rfilename: special_tokens_map.json
+- rfilename: tokenization_internlm2.py
+- rfilename: tokenizer.model
+- rfilename: tokenizer_config.json
+spaces: []
+createdAt: '2024-04-24T09:09:58.000Z'
+usedStorage: 17196835174
+downloadsAllTime: 34
+inferenceProviderMapping: {}
+configJson:
+  _name_or_path: /home/greg/lukasz/InternLM-XComposer/InternLM-XComposer/finetune/output/finetune/merged
+  architectures:
+  - InternLMXComposer2ForCausalLM
+  attn_implementation: flash_attention_2
+  auto_map:
+    AutoConfig: configuration_internlm_xcomposer2.InternLMXcomposer2Config
+    AutoModel: modeling_internlm_xcomposer2.InternLMXComposer2ForCausalLM
+    AutoModelForCausalLM: modeling_internlm_xcomposer2.InternLMXComposer2ForCausalLM
+  bias: false
+  bos_token_id: 1
+  eos_token_id: 2
+  hidden_act: silu
+  hidden_size: 4096
+  initializer_range: 0.02
+  intermediate_size: 14336
+  max_length: 16384
+  max_position_embeddings: 32768
+  model_type: internlm2
+  num_attention_heads: 32
+  num_hidden_layers: 32
+  num_key_value_heads: 8
+  pad_token_id: 2
+  rms_norm_eps: 1.0e-05
+  rope_scaling: null
+  rope_theta: 1000000
+  tie_word_embeddings: false
+  torch_dtype: bfloat16
+  transformers_version: 4.33.2
+  use_cache: false
+  vocab_size: 92544
+onnxFiles: {}
+safetensorsSizeMb: 0.0
+approxSizeMb: 0.0
+fetchedAt: '2026-07-04T06:26:13.000Z'

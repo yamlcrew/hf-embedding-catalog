@@ -1,0 +1,176 @@
+_id: 6975dae5e6ea028d20c10249
+id: sthui/SimpleSeg-Qwen2.5-VL
+private: false
+pipeline_tag: feature-extraction
+library_name: transformers
+tags:
+- transformers
+- safetensors
+- opencua
+- feature-extraction
+- custom_code
+- arxiv:2601.19228
+- license:mit
+- region:us
+downloads: 20
+likes: 9
+modelId: sthui/SimpleSeg-Qwen2.5-VL
+author: sthui
+sha: 9a197cd936d4969ef380252f9a88cd7fcee6f7f1
+lastModified: '2026-01-28T06:46:35.000Z'
+gated: false
+disabled: false
+model-index: null
+config:
+  architectures:
+  - OpenCUAForConditionalGeneration
+  auto_map:
+    AutoConfig: configuration_opencua.OpenCUAConfig
+    AutoModel: modeling_opencua.OpenCUAForConditionalGeneration
+    AutoModelForCausalLM: modeling_opencua.OpenCUAForConditionalGeneration
+    AutoProcessor: processing_opencua.OpenCUAProcessor
+  model_type: opencua
+  tokenizer_config:
+    bos_token: '[BOS]'
+    eos_token: '[EOS]'
+    chat_template: '{%- for message in messages -%}{%- if loop.first and messages[0][''role''] != ''system'' -%}{{''<|im_system|>system<|im_middle|>You
+      are a helpful assistant<|im_end|>''}}{%- endif -%}{%- if message[''role''] == ''system'' -%}{{''<|im_system|>''}}{%-
+      endif -%}{%- if message[''role''] == ''user'' -%}{{''<|im_user|>''}}{%- endif -%}{%- if message[''role''] == ''assistant''
+      -%}{{''<|im_assistant|>''}}{%- endif -%}{{- message[''role''] -}}{{''<|im_middle|>''}}{%- if message[''content''] is
+      string -%}{{- message[''content''] + ''<|im_end|>'' -}}{%- else -%}{%- for content in message[''content''] -%}{%- if
+      content[''type''] == ''image'' or ''image'' in content or ''image_url'' in content -%}{{''<|media_begin|>image<|media_content|><|media_placeholder|><|media_end|>''}}{%-
+      else -%}{{content[''text'']}}{%- endif -%}{%- endfor -%}{{''<|im_end|>''}}{%- endif -%}{%- endfor -%}{%- if add_generation_prompt
+      -%}{{''<|im_assistant|>assistant<|im_middle|>''}}{%- endif -%}'
+    pad_token: '[PAD]'
+    unk_token: '[UNK]'
+cardData:
+  license: mit
+  library_name: transformers
+transformersInfo:
+  auto_model: AutoModel
+  custom_class: modeling_opencua.OpenCUAForConditionalGeneration
+  pipeline_tag: feature-extraction
+siblings:
+- rfilename: .gitattributes
+- rfilename: README.md
+- rfilename: config.json
+- rfilename: configuration_opencua.py
+- rfilename: generation_config.json
+- rfilename: method.png
+- rfilename: model-1-of-30.safetensors
+- rfilename: model-10-of-30.safetensors
+- rfilename: model-11-of-30.safetensors
+- rfilename: model-12-of-30.safetensors
+- rfilename: model-13-of-30.safetensors
+- rfilename: model-14-of-30.safetensors
+- rfilename: model-15-of-30.safetensors
+- rfilename: model-16-of-30.safetensors
+- rfilename: model-17-of-30.safetensors
+- rfilename: model-18-of-30.safetensors
+- rfilename: model-19-of-30.safetensors
+- rfilename: model-2-of-30.safetensors
+- rfilename: model-20-of-30.safetensors
+- rfilename: model-21-of-30.safetensors
+- rfilename: model-22-of-30.safetensors
+- rfilename: model-23-of-30.safetensors
+- rfilename: model-24-of-30.safetensors
+- rfilename: model-25-of-30.safetensors
+- rfilename: model-26-of-30.safetensors
+- rfilename: model-27-of-30.safetensors
+- rfilename: model-28-of-30.safetensors
+- rfilename: model-29-of-30.safetensors
+- rfilename: model-3-of-30.safetensors
+- rfilename: model-30-of-30.safetensors
+- rfilename: model-4-of-30.safetensors
+- rfilename: model-5-of-30.safetensors
+- rfilename: model-6-of-30.safetensors
+- rfilename: model-7-of-30.safetensors
+- rfilename: model-8-of-30.safetensors
+- rfilename: model-9-of-30.safetensors
+- rfilename: model.safetensors.index.json
+- rfilename: modeling_opencua.py
+- rfilename: octopus.png
+- rfilename: preprocessor_config.json
+- rfilename: processing_opencua.py
+- rfilename: tiktoken.model
+- rfilename: tokenization_opencua.py
+- rfilename: tokenizer_config.json
+spaces: []
+createdAt: '2026-01-25T08:57:09.000Z'
+safetensors:
+  parameters:
+    BF16: 8292166656
+  total: 8292166656
+usedStorage: 16588289336
+downloadsAllTime: 2212
+inferenceProviderMapping: {}
+configJson:
+  architectures:
+  - OpenCUAForConditionalGeneration
+  auto_map:
+    AutoConfig: configuration_opencua.OpenCUAConfig
+    AutoModel: modeling_opencua.OpenCUAForConditionalGeneration
+    AutoModelForCausalLM: modeling_opencua.OpenCUAForConditionalGeneration
+    AutoProcessor: processing_opencua.OpenCUAProcessor
+  ignore_index: -100
+  media_placeholder_token_id: 151664
+  model_type: opencua
+  pad_token_id: 0
+  num_attention_heads: 28
+  max_position_embeddings: 128000
+  text_config:
+    bos_token_id: 151643
+    eos_token_id: 151644
+    head_dim: 128
+    hidden_act: silu
+    hidden_size: 3584
+    initializer_range: 0.02
+    intermediate_size: 18944
+    k_proj_bias: true
+    max_length: 20
+    min_length: 0
+    model_type: qwen2
+    num_attention_heads: 28
+    num_beam_groups: 1
+    num_beams: 1
+    num_hidden_layers: 28
+    num_key_value_heads: 4
+    pad_token_id: 152063
+    max_position_embeddings: 128000
+    pretraining_sequence_length: 128000
+    q_proj_bias: true
+    rms_norm_eps: 1.0e-05
+    rope_theta: 1000000.0
+    tie_word_embeddings: false
+    torch_dtype: bfloat16
+    use_bfloat16: false
+    use_cache: true
+    v_proj_bias: true
+    vocab_size: 152064
+  tie_word_embeddings: false
+  torch_dtype: bfloat16
+  transformers_version: 4.48.3
+  vision_config:
+    depth: 32
+    fullatt_block_indexes:
+    - 7
+    - 15
+    - 23
+    - 31
+    hidden_act: silu
+    hidden_size: 1280
+    num_heads: 16
+    in_chans: 3
+    intermediate_size: 3420
+    patch_size: 14
+    spatial_merge_size: 2
+    spatial_patch_size: 14
+    temporal_patch_size: 2
+    out_hidden_size: 3584
+    tokens_per_second: 2
+    window_size: 112
+  vocab_size: 152064
+onnxFiles: {}
+safetensorsSizeMb: 16584.4
+approxSizeMb: 16584.3
+fetchedAt: '2026-07-04T06:26:13.000Z'

@@ -1,0 +1,139 @@
+_id: 67e36aadcc93cc8c42d73136
+id: Peaceuai/GLM_model4
+private: false
+pipeline_tag: feature-extraction
+library_name: transformers
+tags:
+- transformers
+- safetensors
+- chatglm
+- feature-extraction
+- llama-factory
+- custom_code
+- arxiv:1910.09700
+- region:us
+downloads: 1
+likes: 0
+modelId: Peaceuai/GLM_model4
+author: Peaceuai
+sha: 011acff3d529b77ccfd49353a254b683c9c30682
+lastModified: '2025-03-26T04:05:06.000Z'
+gated: false
+disabled: false
+model-index: null
+config:
+  architectures:
+  - CharacterGLMForConditionalGeneration
+  auto_map:
+    AutoConfig: configuration_chatglm.ChatGLMConfig
+    AutoModel: modeling_characterglm.CharacterGLMForConditionalGeneration
+    AutoModelForCausalLM: thu-coai/CharacterGLM-6B--modeling_characterglm.CharacterGLMForConditionalGeneration
+    AutoModelForSeq2SeqLM: thu-coai/CharacterGLM-6B--modeling_characterglm.CharacterGLMForConditionalGeneration
+    AutoModelForSequenceClassification: thu-coai/CharacterGLM-6B--modeling_chatglm.ChatGLMForSequenceClassification
+  model_type: chatglm
+  tokenizer_config:
+    chat_template: '{% set ns = namespace() %}[gMASK]sop{% for message in messages %}{% if loop.first %}{% set ns.bot_name
+      = message[''bot_name''] %}{% set ns.user_name = message[''user_name''] %}以下是一段{{ message[''bot_name''] }}和{{ message[''user_name'']
+      }}之间的对话。{%+ if message[''bot_profile''] is defined and message[''bot_profile'']|length +%}
+
+      关于{{ message[''bot_name''] }}的信息：{{ message[''bot_profile'']|replace(''
+
+      '', '' '') }}{% endif %}{%+ if message[''user_profile''] is defined and message[''user_profile'']|length +%}
+
+      关于{{ message[''user_name''] }}的信息：{{ message[''user_profile'']|replace(''
+
+      '', '' '') }}{% endif %}{%+ else +%}
+
+      [{% if message[''role''] == ''user'' %}{{ ns.user_name }}{% else %}{{ ns.bot_name }}{% endif %}]{{ message[''content'']|replace(''
+
+      '', '' '') }}{% endif %}{% endfor %}{%+ if add_generation_prompt +%}
+
+      [{{ ns.bot_name }}]{% endif %}'
+    eos_token: </s>
+    pad_token: <unk>
+cardData:
+  library_name: transformers
+  tags:
+  - llama-factory
+transformersInfo:
+  auto_model: AutoModel
+  custom_class: modeling_characterglm.CharacterGLMForConditionalGeneration
+  pipeline_tag: feature-extraction
+siblings:
+- rfilename: .gitattributes
+- rfilename: README.md
+- rfilename: characterglm_generation_utils.py
+- rfilename: config.json
+- rfilename: configuration_chatglm.py
+- rfilename: generation_config.json
+- rfilename: model-00001-of-00007.safetensors
+- rfilename: model-00002-of-00007.safetensors
+- rfilename: model-00003-of-00007.safetensors
+- rfilename: model-00004-of-00007.safetensors
+- rfilename: model-00005-of-00007.safetensors
+- rfilename: model-00006-of-00007.safetensors
+- rfilename: model-00007-of-00007.safetensors
+- rfilename: model.safetensors.index.json
+- rfilename: modeling_characterglm.py
+- rfilename: modeling_chatglm.py
+- rfilename: quantization.py
+- rfilename: special_tokens_map.json
+- rfilename: tokenization_chatglm.py
+- rfilename: tokenizer.model
+- rfilename: tokenizer_config.json
+spaces: []
+createdAt: '2025-03-26T02:47:09.000Z'
+safetensors:
+  parameters:
+    F16: 6243584032
+  total: 6243584032
+usedStorage: 12488213274
+downloadsAllTime: 17
+inferenceProviderMapping: {}
+configJson:
+  add_bias_linear: false
+  add_qkv_bias: true
+  apply_query_key_layer_scaling: true
+  apply_residual_connection_post_layernorm: false
+  architectures:
+  - CharacterGLMForConditionalGeneration
+  attention_dropout: 0.0
+  attention_softmax_in_fp32: true
+  auto_map:
+    AutoConfig: configuration_chatglm.ChatGLMConfig
+    AutoModel: modeling_characterglm.CharacterGLMForConditionalGeneration
+    AutoModelForCausalLM: thu-coai/CharacterGLM-6B--modeling_characterglm.CharacterGLMForConditionalGeneration
+    AutoModelForSeq2SeqLM: thu-coai/CharacterGLM-6B--modeling_characterglm.CharacterGLMForConditionalGeneration
+    AutoModelForSequenceClassification: thu-coai/CharacterGLM-6B--modeling_chatglm.ChatGLMForSequenceClassification
+  bias_dropout_fusion: true
+  classifier_dropout: null
+  eos_token_id: 2
+  ffn_hidden_size: 13696
+  fp32_residual_connection: false
+  hidden_dropout: 0.0
+  hidden_size: 4096
+  kv_channels: 128
+  layernorm_epsilon: 1.0e-05
+  model_type: chatglm
+  multi_query_attention: true
+  multi_query_group_num: 2
+  num_attention_heads: 32
+  num_layers: 28
+  original_rope: true
+  pad_token_id: 0
+  padded_vocab_size: 65024
+  post_layer_norm: true
+  pre_seq_len: null
+  prefix_projection: false
+  quantization_bit: 0
+  rmsnorm: true
+  seq_length: 32768
+  tie_word_embeddings: false
+  torch_dtype: float16
+  transformers_version: 4.50.0
+  use_cache: true
+  vocab_size: 65024
+onnxFiles: {}
+safetensorsSizeMb: 12487.2
+approxSizeMb: 12487.2
+fetchedAt: '2026-07-04T06:26:13.000Z'

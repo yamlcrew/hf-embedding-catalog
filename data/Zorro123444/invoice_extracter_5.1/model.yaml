@@ -1,0 +1,137 @@
+_id: 67f35e5e123401b9c421e71d
+id: Zorro123444/invoice_extracter_5.1
+private: false
+pipeline_tag: feature-extraction
+library_name: transformers
+tags:
+- transformers
+- safetensors
+- minicpmv
+- feature-extraction
+- custom_code
+- arxiv:1910.09700
+- region:us
+downloads: 5
+likes: 0
+modelId: Zorro123444/invoice_extracter_5.1
+author: Zorro123444
+sha: 8011f0baed14b6a02b6d8e6840b32e13aa2c8524
+lastModified: '2025-04-07T06:15:51.000Z'
+gated: false
+disabled: false
+model-index: null
+config:
+  architectures:
+  - MiniCPMV
+  auto_map:
+    AutoConfig: openbmb/MiniCPM-V-2_6--configuration_minicpm.MiniCPMVConfig
+    AutoModel: openbmb/MiniCPM-V-2_6--modeling_minicpmv.MiniCPMV
+    AutoModelForCausalLM: openbmb/MiniCPM-V-2_6--modeling_minicpmv.MiniCPMV
+  model_type: minicpmv
+  tokenizer_config:
+    bos_token: <|im_start|>
+    chat_template: '{% for message in messages %}{% if loop.first and messages[0][''role''] != ''system'' %}{{ ''<|im_start|>system
+
+      You are a helpful assistant.<|im_end|>
+
+      '' }}{% endif %}{{''<|im_start|>'' + message[''role''] + ''
+
+      '' + message[''content''] + ''<|im_end|>'' + ''
+
+      ''}}{% endfor %}{% if add_generation_prompt %}{{ ''<|im_start|>assistant
+
+      '' }}{% endif %}'
+    eos_token: <|im_end|>
+    pad_token: <|endoftext|>
+    unk_token: <unk>
+cardData:
+  library_name: transformers
+  tags: []
+transformersInfo:
+  auto_model: AutoModel
+  custom_class: openbmb/MiniCPM-V-2_6--modeling_minicpmv.MiniCPMV
+  pipeline_tag: feature-extraction
+siblings:
+- rfilename: .gitattributes
+- rfilename: README.md
+- rfilename: adapter_config.json
+- rfilename: adapter_model.safetensors
+- rfilename: added_tokens.json
+- rfilename: config.json
+- rfilename: generation_config.json
+- rfilename: merges.txt
+- rfilename: model-00001-of-00007.safetensors
+- rfilename: model-00002-of-00007.safetensors
+- rfilename: model-00003-of-00007.safetensors
+- rfilename: model-00004-of-00007.safetensors
+- rfilename: model-00005-of-00007.safetensors
+- rfilename: model-00006-of-00007.safetensors
+- rfilename: model-00007-of-00007.safetensors
+- rfilename: model.safetensors.index.json
+- rfilename: special_tokens_map.json
+- rfilename: tokenizer.json
+- rfilename: tokenizer_config.json
+- rfilename: vocab.json
+spaces: []
+createdAt: '2025-04-07T05:10:54.000Z'
+safetensors:
+  parameters:
+    F32: 8099175152
+  total: 8099175152
+usedStorage: 36678293936
+downloadsAllTime: 10
+inferenceProviderMapping: {}
+configJson:
+  _name_or_path: openbmb/MiniCPM-V-2_6
+  architectures:
+  - MiniCPMV
+  attention_dropout: 0.0
+  auto_map:
+    AutoConfig: openbmb/MiniCPM-V-2_6--configuration_minicpm.MiniCPMVConfig
+    AutoModel: openbmb/MiniCPM-V-2_6--modeling_minicpmv.MiniCPMV
+    AutoModelForCausalLM: openbmb/MiniCPM-V-2_6--modeling_minicpmv.MiniCPMV
+  batch_vision_input: true
+  bos_token_id: 151643
+  drop_vision_last_layer: false
+  eos_token_id: 151645
+  hidden_act: silu
+  hidden_size: 3584
+  image_size: 448
+  initializer_range: 0.02
+  intermediate_size: 18944
+  max_position_embeddings: 32768
+  max_window_layers: 28
+  model_type: minicpmv
+  num_attention_heads: 28
+  num_hidden_layers: 28
+  num_key_value_heads: 4
+  patch_size: 14
+  query_num: 64
+  rms_norm_eps: 1.0e-06
+  rope_theta: 1000000.0
+  slice_config:
+    max_slice_nums: 9
+    model_type: minicpmv
+  slice_mode: true
+  sliding_window: null
+  tie_word_embeddings: false
+  torch_dtype: float32
+  transformers_version: 4.44.2
+  use_cache: true
+  use_image_id: true
+  use_sliding_window: false
+  version: 2.6
+  vision_batch_size: 16
+  vision_config:
+    hidden_size: 1152
+    image_size: 980
+    intermediate_size: 4304
+    model_type: siglip_vision_model
+    num_attention_heads: 16
+    num_hidden_layers: 27
+    patch_size: 14
+  vocab_size: 151666
+onnxFiles: {}
+safetensorsSizeMb: 36678.3
+approxSizeMb: 32396.7
+fetchedAt: '2026-07-04T06:26:13.000Z'

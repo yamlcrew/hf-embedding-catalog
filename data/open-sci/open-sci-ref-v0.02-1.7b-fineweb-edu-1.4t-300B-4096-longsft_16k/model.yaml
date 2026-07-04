@@ -1,0 +1,134 @@
+_id: 69d6a9eea7eb8f204350c906
+id: open-sci/open-sci-ref-v0.02-1.7b-fineweb-edu-1.4t-300B-4096-longsft_16k
+private: false
+pipeline_tag: feature-extraction
+library_name: transformers
+tags:
+- transformers
+- safetensors
+- opensci
+- feature-extraction
+- llama-factory
+- full
+- generated_from_trainer
+- custom_code
+- base_model:open-sci/open-sci-ref-v0.02-1.7b-fineweb-edu-1.4t-300B-4096
+- base_model:finetune:open-sci/open-sci-ref-v0.02-1.7b-fineweb-edu-1.4t-300B-4096
+- license:other
+- region:us
+downloads: 2
+likes: 1
+modelId: open-sci/open-sci-ref-v0.02-1.7b-fineweb-edu-1.4t-300B-4096-longsft_16k
+author: open-sci
+sha: 46f7d064c742e30cc26ce6daf7062ef5505136e7
+lastModified: '2026-04-08T19:18:23.000Z'
+gated: false
+disabled: false
+model-index:
+- name: long-context-fineweb
+  results: []
+config:
+  architectures:
+  - OpensciForCausalLM
+  auto_map:
+    AutoConfig: configuration_opensci.OpensciConfig
+    AutoModel: modeling_opensci.OpensciForCausalLM
+    AutoModelForCausalLM: open-sci/open-sci-ref-v0.02-1.7b-fineweb-edu-1.4t-300B-4096--modeling_opensci.OpensciForCausalLM
+  model_type: opensci
+  tokenizer_config:
+    bos_token: <|endoftext|>
+    chat_template: '{{ ''<|endoftext|>'' }}{% if messages[0][''role''] == ''system'' %}{% set loop_messages = messages[1:]
+      %}{% set system_message = messages[0][''content''] %}{% else %}{% set loop_messages = messages %}{% endif %}{% for message
+      in loop_messages %}{% if loop.index0 == 0 and system_message is defined %}{% set content = system_message + ''
+
+
+      '' + message[''content''] %}{% else %}{% set content = message[''content''] %}{% endif %}{% if message[''role''] ==
+      ''user'' %}{{ ''<start_of_turn>user
+
+      '' + content + ''<end_of_turn>
+
+      <start_of_turn>model
+
+      '' }}{% elif message[''role''] == ''assistant'' %}{{ content + ''<end_of_turn>
+
+      '' }}{% endif %}{% endfor %}'
+    eos_token: <end_of_turn>
+    pad_token: <end_of_turn>
+    unk_token: <|endoftext|>
+cardData:
+  library_name: transformers
+  license: other
+  base_model: open-sci/open-sci-ref-v0.02-1.7b-fineweb-edu-1.4t-300B-4096
+  tags:
+  - llama-factory
+  - full
+  - generated_from_trainer
+  model-index:
+  - name: long-context-fineweb
+    results: []
+transformersInfo:
+  auto_model: AutoModel
+  custom_class: modeling_opensci.OpensciForCausalLM
+  pipeline_tag: feature-extraction
+siblings:
+- rfilename: .gitattributes
+- rfilename: README.md
+- rfilename: config.json
+- rfilename: configuration_opensci.py
+- rfilename: generation_config.json
+- rfilename: model.safetensors
+- rfilename: modeling_opensci.py
+- rfilename: special_tokens_map.json
+- rfilename: tokenizer.json
+- rfilename: tokenizer_config.json
+spaces: []
+createdAt: '2026-04-08T19:18:06.000Z'
+safetensors:
+  parameters:
+    BF16: 1714377728
+  total: 1714377728
+usedStorage: 3428804400
+downloadsAllTime: 46
+inferenceProviderMapping: {}
+configJson:
+  architectures:
+  - OpensciForCausalLM
+  attention_bias: true
+  attention_dropout: 0.0
+  auto_map:
+    AutoConfig: configuration_opensci.OpensciConfig
+    AutoModel: modeling_opensci.OpensciForCausalLM
+    AutoModelForCausalLM: open-sci/open-sci-ref-v0.02-1.7b-fineweb-edu-1.4t-300B-4096--modeling_opensci.OpensciForCausalLM
+  bos_token_id: 0
+  dtype: bfloat16
+  eos_token_id: 0
+  head_dim: 64
+  hidden_act: silu
+  hidden_size: 2048
+  initializer_range: 0.02
+  intermediate_size: 8192
+  layer_norm_eps: 1.0e-05
+  max_position_embeddings: 16384.0
+  mlp_bias: true
+  model_type: opensci
+  num_attention_heads: 32
+  num_hidden_layers: 24
+  num_key_value_heads: 32
+  pretraining_tp: 1
+  qk_layernorm: true
+  rms_norm_eps: 1.0e-05
+  rope_parameters: null
+  rope_scaling:
+    factor: 4.0
+    original_max_position_embeddings: 4096
+    rope_type: yarn
+  rope_theta: 100000
+  tie_word_embeddings: true
+  torch_dtype: bfloat16
+  transformers_version: 4.51.3
+  use_cache: false
+  vocab_size: 50304
+onnxFiles: {}
+safetensorsSizeMb: 3428.8
+approxSizeMb: 3428.8
+fetchedAt: '2026-07-04T06:26:13.000Z'

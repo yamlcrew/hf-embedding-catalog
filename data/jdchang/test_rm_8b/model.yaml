@@ -1,0 +1,154 @@
+_id: 66c626fb342a4f0eb35762c1
+id: jdchang/test_rm_8b
+private: false
+pipeline_tag: feature-extraction
+library_name: transformers
+tags:
+- transformers
+- safetensors
+- pairwise_rm
+- feature-extraction
+- custom_code
+- arxiv:1910.09700
+- region:us
+downloads: 1
+likes: 0
+modelId: jdchang/test_rm_8b
+author: jdchang
+sha: 8007f5a991199cdfdd3f400b1f84de2b6d84e1ed
+lastModified: '2025-07-06T19:58:30.000Z'
+gated: false
+disabled: false
+model-index: null
+config:
+  architectures:
+  - AutoModelForCausalLMWithRM
+  auto_map:
+    AutoConfig: hf_utils.RewardModelConfig
+    AutoModel: hf_utils.AutoModelForCausalLMWithRM
+  model_type: pairwise_rm
+  tokenizer_config:
+    bos_token: <|begin_of_text|>
+    chat_template: '{% set loop_messages = messages %}{% for message in loop_messages %}{% set content = ''<|start_header_id|>''
+      + message[''role''] + ''<|end_header_id|>
+
+
+      ''+ message[''content''] | trim + ''<|eot_id|>'' %}{% if loop.index0 == 0 %}{% set content = bos_token + content %}{%
+      endif %}{{ content }}{% endfor %}{% if add_generation_prompt %}{{ ''<|start_header_id|>assistant<|end_header_id|>
+
+
+      '' }}{% endif %}'
+    eos_token: <|eot_id|>
+    pad_token: '[PAD]'
+cardData:
+  library_name: transformers
+  tags: []
+transformersInfo:
+  auto_model: AutoModel
+  custom_class: hf_utils.AutoModelForCausalLMWithRM
+  pipeline_tag: feature-extraction
+siblings:
+- rfilename: .gitattributes
+- rfilename: README.md
+- rfilename: config.json
+- rfilename: generation_config.json
+- rfilename: hf_utils.py
+- rfilename: model-00001-of-00007.safetensors
+- rfilename: model-00002-of-00007.safetensors
+- rfilename: model-00003-of-00007.safetensors
+- rfilename: model-00004-of-00007.safetensors
+- rfilename: model-00005-of-00007.safetensors
+- rfilename: model-00006-of-00007.safetensors
+- rfilename: model-00007-of-00007.safetensors
+- rfilename: model.safetensors.index.json
+- rfilename: special_tokens_map.json
+- rfilename: tokenizer.json
+- rfilename: tokenizer_config.json
+spaces: []
+createdAt: '2024-08-21T17:42:19.000Z'
+safetensors:
+  parameters:
+    F32: 8047054849
+  total: 8047054849
+usedStorage: 32188256940
+downloadsAllTime: 583
+inferenceProviderMapping: {}
+configJson:
+  architectures:
+  - AutoModelForCausalLMWithRM
+  attention_bias: false
+  attention_dropout: 0.0
+  auto_map:
+    AutoConfig: hf_utils.RewardModelConfig
+    AutoModel: hf_utils.AutoModelForCausalLMWithRM
+  base_config:
+    _name_or_path: meta-llama/Llama-3.1-8B-Instruct
+    architectures:
+    - LlamaForCausalLM
+    attention_bias: false
+    attention_dropout: 0.0
+    bos_token_id: 128000
+    eos_token_id:
+    - 128001
+    - 128008
+    - 128009
+    head_dim: 128
+    hidden_act: silu
+    hidden_size: 4096
+    initializer_range: 0.02
+    intermediate_size: 14336
+    max_position_embeddings: 131072
+    mlp_bias: false
+    model_type: llama
+    num_attention_heads: 32
+    num_hidden_layers: 32
+    num_key_value_heads: 8
+    pretraining_tp: 1
+    rms_norm_eps: 1.0e-05
+    rope_scaling:
+      factor: 8.0
+      high_freq_factor: 4.0
+      low_freq_factor: 1.0
+      original_max_position_embeddings: 8192
+      rope_type: llama3
+    rope_theta: 500000.0
+    tie_word_embeddings: false
+    torch_dtype: bfloat16
+    transformers_version: 4.46.0
+    use_cache: true
+    vocab_size: 128257
+  base_model: meta-llama/Meta-Llama-3-8B-Instruct
+  bias: 0.0
+  bos_token_id: 128000
+  eos_token_id: 128009
+  hidden_act: silu
+  hidden_size: 4096
+  initializer_range: 0.02
+  intermediate_size: 14336
+  max_position_embeddings: 8192
+  mlp_bias: false
+  model_type: pairwise_rm
+  n_labels: 1
+  num_attention_heads: 32
+  num_hidden_layers: 32
+  num_key_value_heads: 8
+  p_dropout: 0.0
+  pretrain_cfg:
+    load_in_8bit: false
+    token: true
+    trust_remote_code: null
+  pretrained: true
+  pretraining_tp: 1
+  return_logits: false
+  rms_norm_eps: 1.0e-05
+  rope_scaling: null
+  rope_theta: 500000.0
+  tie_word_embeddings: false
+  torch_dtype: bfloat16
+  transformers_version: 4.43.4
+  use_cache: false
+  vocab_size: 128257
+onnxFiles: {}
+safetensorsSizeMb: 32188.3
+approxSizeMb: 32188.2
+fetchedAt: '2026-07-04T06:26:13.000Z'
