@@ -1,0 +1,147 @@
+_id: 6a48ba944e16b500735ed031
+id: mradermacher/qwen-indic-v1-GGUF
+private: false
+pipeline_tag: feature-extraction
+library_name: transformers
+tags:
+- transformers
+- gguf
+- mteb
+- sentence-transformers
+- feature-extraction
+- embeddings
+- indic
+- multilingual
+- lora
+- as
+- bn
+- gu
+- hi
+- kn
+- ks
+- ml
+- mr
+- ne
+- or
+- pa
+- sa
+- ta
+- te
+- ur
+- mai
+- doi
+- kok
+- sd
+- mni
+- sat
+- brx
+- base_model:LingoIITGN/qwen-indic-v1
+- base_model:adapter:LingoIITGN/qwen-indic-v1
+- license:apache-2.0
+- endpoints_compatible
+- region:us
+- conversational
+downloads: 0
+likes: 0
+modelId: mradermacher/qwen-indic-v1-GGUF
+author: mradermacher
+sha: eae2cc866f8e4c8d8554edd58c00775390ac0c7c
+lastModified: '2026-07-04T09:51:14.000Z'
+gated: false
+disabled: false
+model-index: null
+config: {}
+cardData:
+  base_model: LingoIITGN/qwen-indic-v1
+  language:
+  - as
+  - bn
+  - gu
+  - hi
+  - kn
+  - ks
+  - ml
+  - mr
+  - ne
+  - or
+  - pa
+  - sa
+  - ta
+  - te
+  - ur
+  - mai
+  - doi
+  - kok
+  - sd
+  - mni
+  - sat
+  - brx
+  library_name: transformers
+  license: apache-2.0
+  mradermacher:
+    readme_rev: 1
+  quantized_by: mradermacher
+  tags:
+  - mteb
+  - sentence-transformers
+  - feature-extraction
+  - embeddings
+  - indic
+  - multilingual
+  - lora
+transformersInfo:
+  auto_model: AutoModel
+gguf:
+  total: 7567295488
+  architecture: qwen3
+  context_length: 40960
+  chat_template: "{%- if tools %}\n    {{- '<|im_start|>system\\n' }}\n    {%- if messages[0]['role'] == 'system' %}\n   \
+    \     {{- messages[0]['content'] }}\n    {%- else %}\n        {{- 'You are a helpful assistant.' }}\n    {%- endif %}\n\
+    \    {{- \"\\n\\n# Tools\\n\\nYou may call one or more functions to assist with the user query.\\n\\nYou are provided\
+    \ with function signatures within <tools></tools> XML tags:\\n<tools>\" }}\n    {%- for tool in tools %}\n        {{-\
+    \ \"\\n\" }}\n        {{- tool | tojson }}\n    {%- endfor %}\n    {{- \"\\n</tools>\\n\\nFor each function call, return\
+    \ a json object with function name and arguments within <tool_call></tool_call> XML tags:\\n<tool_call>\\n{\\\"name\\\"\
+    : <function-name>, \\\"arguments\\\": <args-json-object>}\\n</tool_call><|im_end|>\\n\" }}\n{%- else %}\n    {%- if messages[0]['role']\
+    \ == 'system' %}\n        {{- '<|im_start|>system\\n' + messages[0]['content'] + '<|im_end|>\\n' }}\n    {%- else %}\n\
+    \        {{- '<|im_start|>system\\nYou are a helpful assistant.<|im_end|>\\n' }}\n    {%- endif %}\n{%- endif %}\n{%-\
+    \ for message in messages %}\n    {%- if (message.role == \"user\") or (message.role == \"system\" and not loop.first)\
+    \ or (message.role == \"assistant\" and not message.tool_calls) %}\n        {{- '<|im_start|>' + message.role + '\\n'\
+    \ + message.content + '<|im_end|>' + '\\n' }}\n    {%- elif message.role == \"assistant\" %}\n        {{- '<|im_start|>'\
+    \ + message.role }}\n        {%- if message.content %}\n            {{- '\\n' + message.content }}\n        {%- endif\
+    \ %}\n        {%- for tool_call in message.tool_calls %}\n            {%- if tool_call.function is defined %}\n      \
+    \          {%- set tool_call = tool_call.function %}\n            {%- endif %}\n            {{- '\\n<tool_call>\\n{\"\
+    name\": \"' }}\n            {{- tool_call.name }}\n            {{- '\", \"arguments\": ' }}\n            {{- tool_call.arguments\
+    \ | tojson }}\n            {{- '}\\n</tool_call>' }}\n        {%- endfor %}\n        {{- '<|im_end|>\\n' }}\n    {%- elif\
+    \ message.role == \"tool\" %}\n        {%- if (loop.index0 == 0) or (messages[loop.index0 - 1].role != \"tool\") %}\n\
+    \            {{- '<|im_start|>user' }}\n        {%- endif %}\n        {{- '\\n<tool_response>\\n' }}\n        {{- message.content\
+    \ }}\n        {{- '\\n</tool_response>' }}\n        {%- if loop.last or (messages[loop.index0 + 1].role != \"tool\") %}\n\
+    \            {{- '<|im_end|>\\n' }}\n        {%- endif %}\n    {%- endif %}\n{%- endfor %}\n{%- if add_generation_prompt\
+    \ %}\n    {{- '<|im_start|>assistant\\n' }}\n{%- endif %}\n"
+  bos_token: <|endoftext|>
+  eos_token: <|endoftext|>
+  totalFileSize: 15141157120
+siblings:
+- rfilename: .gitattributes
+- rfilename: README.md
+- rfilename: qwen-indic-v1.IQ4_XS.gguf
+- rfilename: qwen-indic-v1.Q2_K.gguf
+- rfilename: qwen-indic-v1.Q3_K_L.gguf
+- rfilename: qwen-indic-v1.Q3_K_M.gguf
+- rfilename: qwen-indic-v1.Q3_K_S.gguf
+- rfilename: qwen-indic-v1.Q4_K_M.gguf
+- rfilename: qwen-indic-v1.Q4_K_S.gguf
+- rfilename: qwen-indic-v1.Q5_K_M.gguf
+- rfilename: qwen-indic-v1.Q5_K_S.gguf
+- rfilename: qwen-indic-v1.Q6_K.gguf
+- rfilename: qwen-indic-v1.Q8_0.gguf
+- rfilename: qwen-indic-v1.f16.gguf
+spaces: []
+createdAt: '2026-07-04T07:47:32.000Z'
+usedStorage: 68103486528
+downloadsAllTime: 0
+inferenceProviderMapping: {}
+configJson: null
+onnxFiles: {}
+safetensorsSizeMb: 0.0
+approxSizeMb: 0.0
+fetchedAt: '2026-07-05T06:48:07.000Z'
