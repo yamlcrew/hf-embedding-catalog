@@ -1,0 +1,123 @@
+_id: 6a4c4c987ec7c713b00140ca
+id: EximiusLabs/fusion-embedding-1-2b-preview
+private: false
+pipeline_tag: feature-extraction
+tags:
+- fusion-embedding-connector
+- embeddings
+- multimodal
+- audio
+- retrieval
+- matryoshka
+- qwen3-vl
+- feature-extraction
+- en
+- base_model:Qwen/Qwen3-VL-Embedding-2B
+- base_model:finetune:Qwen/Qwen3-VL-Embedding-2B
+- license:cc-by-nc-4.0
+- region:us
+downloads: 0
+likes: 3
+modelId: EximiusLabs/fusion-embedding-1-2b-preview
+author: EximiusLabs
+sha: afc6633e5f8fe6c8b35621dd5659d234e09fa5a4
+lastModified: '2026-07-07T03:19:52.000Z'
+gated: false
+disabled: false
+model-index: null
+config:
+  model_type: fusion-embedding-connector
+cardData:
+  license: cc-by-nc-4.0
+  language:
+  - en
+  pipeline_tag: feature-extraction
+  tags:
+  - embeddings
+  - multimodal
+  - audio
+  - retrieval
+  - matryoshka
+  - qwen3-vl
+  base_model: Qwen/Qwen3-VL-Embedding-2B
+siblings:
+- rfilename: .gitattributes
+- rfilename: README.md
+- rfilename: assets/audio_to_image_gallery.png
+- rfilename: config.json
+- rfilename: fusion-embedding-1-2b-preview.pt
+- rfilename: inference.py
+spaces: []
+createdAt: '2026-07-07T00:47:20.000Z'
+usedStorage: 66505701
+downloadsAllTime: 0
+inferenceProviderMapping: {}
+configJson:
+  model_type: fusion-embedding-connector
+  d_resampler: 384
+  n_query: 64
+  d_llm: 2048
+  mrl_dims:
+  - 2048
+  - 1536
+  - 1024
+  - 512
+  - 256
+  - 128
+  - 64
+  trained_params: 16397952
+  protocol:
+    text_query_template: '<|im_start|>system
+
+      {instruction}<|im_end|>
+
+      <|im_start|>user
+
+      {text}<|im_end|>
+
+      <|im_start|>assistant
+
+      '
+    image_doc_template: '<|im_start|>system
+
+      Represent the user''s input.<|im_end|>
+
+      <|im_start|>user
+
+      <|vision_start|><|image_pad|><|vision_end|><|im_end|>
+
+      <|im_start|>assistant
+
+      '
+    default_query_instruction: Retrieve images or text relevant to the user's query.
+    pooling: last non-pad token
+    cross_modal_readout: per-modality mean-centering recommended (see inference.center)
+  benchmarks:
+    audiocaps_883_minrank5:
+      ckpt_shard: audiocaps10k_sharded,fsd50k_train,wavcaps_audioset_sl_full
+      steps: 800
+      run_tag: _a0native_384_800
+      text_whitening_fitted: 1
+      eval_shard: audiocaps_test816
+      n_clips: 883
+      n_captions: 4411
+      dim: 1024
+      n_total_clips: 883
+      split_filtered: false
+      protocol: min-rank-over-refs
+      a2t_R@1: 0.21630804240703583
+      a2t_R@5: 0.4790486991405487
+      a2t_R@10: 0.626274049282074
+      a2t_mAP@10: 0.15859903395175934
+      t2a_R@1: 0.22625255584716797
+      t2a_R@5: 0.5295851230621338
+      t2a_R@10: 0.6803445816040039
+      t2a_mAP@10: 0.35406583547592163
+    in_domain_eval:
+      a2t_R@1: 0.35499998927116394
+      a2t_R@10: 0.8299999833106995
+      a2t_mAP@10: 0.5139980316162109
+onnxFiles: {}
+safetensorsSizeMb: 0.0
+approxSizeMb: 0.0
+fetchedAt: '2026-07-07T06:53:21.000Z'
