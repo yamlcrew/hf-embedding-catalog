@@ -1,0 +1,186 @@
+_id: 6a4f569c1ca9136fff961122
+id: alrolo3/splade-v3-spanish-vllm
+private: false
+pipeline_tag: feature-extraction
+library_name: sentence-transformers
+tags:
+- sentence-transformers
+- safetensors
+- bert
+- sparse-encoder
+- splade
+- sparse
+- spanish
+- english
+- retrieval
+- text-embeddings-inference
+- feature-extraction
+- es
+- en
+- dataset:hotchpotch/mmarco-hard-negatives-reranker-filtered
+- dataset:sentence-transformers/miracl
+- base_model:naver/splade-v3
+- base_model:finetune:naver/splade-v3
+- license:cc-by-nc-sa-4.0
+- model-index
+- endpoints_compatible
+- region:us
+downloads: 0
+likes: 1
+modelId: alrolo3/splade-v3-spanish-vllm
+author: alrolo3
+sha: c1ac1dcb60bc9098921c9ff95de9e08bc17fb101
+lastModified: '2026-07-09T08:12:03.000Z'
+gated: false
+disabled: false
+mask_token: '[MASK]'
+widgetData:
+- text: Que es el Camembert de Normandia?
+- text: Camembert de Normandia is a soft cow's milk cheese from Normandy.
+- text: What is the classic dish from Normandy?
+model-index:
+- name: SPLADE-v3 Spanish
+  results:
+  - task:
+      type: feature-extraction
+      name: Sparse text embeddings
+    dataset:
+      type: msmarco
+      name: MS MARCO dev
+      split: dev
+    metrics:
+    - type: mrr
+      name: MRR@10
+      value: 0.4001
+      verified: false
+  - task:
+      type: feature-extraction
+      name: Sparse text embeddings
+    dataset:
+      type: beir
+      name: BEIR 13-dataset average
+    metrics:
+    - type: ndcg
+      name: nDCG@10
+      value: 0.5206
+      verified: false
+config:
+  architectures:
+  - BertSpladeSparseEmbeddingModel
+  model_type: bert
+  tokenizer_config:
+    cls_token: '[CLS]'
+    mask_token: '[MASK]'
+    pad_token: '[PAD]'
+    sep_token: '[SEP]'
+    unk_token: '[UNK]'
+cardData:
+  language:
+  - es
+  - en
+  license: cc-by-nc-sa-4.0
+  library_name: sentence-transformers
+  pipeline_tag: feature-extraction
+  base_model: naver/splade-v3
+  datasets:
+  - hotchpotch/mmarco-hard-negatives-reranker-filtered
+  - sentence-transformers/miracl
+  metrics:
+  - mrr
+  - ndcg
+  tags:
+  - sentence-transformers
+  - sparse-encoder
+  - splade
+  - sparse
+  - spanish
+  - english
+  - retrieval
+  - text-embeddings-inference
+  widget:
+  - text: Que es el Camembert de Normandia?
+  - text: Camembert de Normandia is a soft cow's milk cheese from Normandy.
+  - text: What is the classic dish from Normandy?
+  model-index:
+  - name: SPLADE-v3 Spanish
+    results:
+    - task:
+        type: feature-extraction
+        name: Sparse text embeddings
+      dataset:
+        type: msmarco
+        name: MS MARCO dev
+        split: dev
+      metrics:
+      - type: mrr
+        name: MRR@10
+        value: 0.4001
+        verified: false
+    - task:
+        type: feature-extraction
+        name: Sparse text embeddings
+      dataset:
+        type: beir
+        name: BEIR 13-dataset average
+      metrics:
+      - type: ndcg
+        name: nDCG@10
+        value: 0.5206
+        verified: false
+siblings:
+- rfilename: .gitattributes
+- rfilename: 1_SpladePooling/config.json
+- rfilename: README.md
+- rfilename: config.json
+- rfilename: config_sentence_transformers.json
+- rfilename: data_args.json
+- rfilename: model.safetensors
+- rfilename: model_args.json
+- rfilename: modules.json
+- rfilename: sentence_bert_config.json
+- rfilename: special_tokens_map.json
+- rfilename: tokenizer.json
+- rfilename: tokenizer_config.json
+- rfilename: training_args.json
+- rfilename: vocab.txt
+spaces: []
+createdAt: '2026-07-09T08:06:52.000Z'
+safetensors:
+  parameters:
+    F32: 157049262
+  total: 157049262
+usedStorage: 628221520
+downloadsAllTime: 0
+inferenceProviderMapping: {}
+configJson:
+  add_cross_attention: false
+  architectures:
+  - BertSpladeSparseEmbeddingModel
+  attention_probs_dropout_prob: 0.1
+  bos_token_id: null
+  classifier_dropout: null
+  dtype: float32
+  eos_token_id: null
+  gradient_checkpointing: false
+  hidden_act: gelu
+  hidden_dropout_prob: 0.1
+  hidden_size: 768
+  initializer_range: 0.02
+  intermediate_size: 3072
+  is_decoder: false
+  layer_norm_eps: 1.0e-12
+  max_position_embeddings: 512
+  model_type: bert
+  num_attention_heads: 12
+  num_hidden_layers: 12
+  pad_token_id: 0
+  position_embedding_type: absolute
+  tie_word_embeddings: true
+  transformers_version: 5.11.0
+  type_vocab_size: 2
+  use_cache: false
+  vocab_size: 30522
+onnxFiles: {}
+safetensorsSizeMb: 628.2
+approxSizeMb: 628.2
+fetchedAt: '2026-07-10T06:52:14.000Z'
