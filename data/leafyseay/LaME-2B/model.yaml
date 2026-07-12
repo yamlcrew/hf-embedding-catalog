@@ -1,0 +1,128 @@
+_id: 6a524fad372ee42b5370a614
+id: leafyseay/LaME-2B
+private: false
+pipeline_tag: feature-extraction
+library_name: transformers
+tags:
+- transformers
+- safetensors
+- openlame
+- feature-extraction
+- arxiv:2606.13061
+- base_model:Qwen/Qwen2-VL-2B-Instruct
+- base_model:finetune:Qwen/Qwen2-VL-2B-Instruct
+- license:apache-2.0
+- endpoints_compatible
+- region:us
+downloads: 0
+likes: 0
+modelId: leafyseay/LaME-2B
+author: leafyseay
+sha: ef5a0760c08329c871db963b4894a8999b8f3564
+lastModified: '2026-07-11T14:15:14.000Z'
+gated: false
+disabled: false
+model-index: null
+config:
+  architectures:
+  - LaMEMultimodal
+  model_type: openlame
+  tokenizer_config:
+    bos_token: null
+    eos_token: <|im_end|>
+    pad_token: <|endoftext|>
+    unk_token: null
+  chat_template_jinja: '{% set image_count = namespace(value=0) %}{% set video_count = namespace(value=0) %}{% for message
+    in messages %}{% if loop.first and message[''role''] != ''system'' %}<|im_start|>system
+
+    You are a helpful assistant.<|im_end|>
+
+    {% endif %}<|im_start|>{{ message[''role''] }}
+
+    {% if message[''content''] is string %}{{ message[''content''] }}<|im_end|>
+
+    {% else %}{% for content in message[''content''] %}{% if content[''type''] == ''image'' or ''image'' in content or ''image_url''
+    in content %}{% set image_count.value = image_count.value + 1 %}{% if add_vision_id %}Picture {{ image_count.value }}:
+    {% endif %}<|vision_start|><|image_pad|><|vision_end|>{% elif content[''type''] == ''video'' or ''video'' in content %}{%
+    set video_count.value = video_count.value + 1 %}{% if add_vision_id %}Video {{ video_count.value }}: {% endif %}<|vision_start|><|video_pad|><|vision_end|>{%
+    elif ''text'' in content %}{{ content[''text''] }}{% endif %}{% endfor %}<|im_end|>
+
+    {% endif %}{% endfor %}{% if add_generation_prompt %}<|im_start|>assistant
+
+    {% endif %}'
+cardData:
+  library_name: transformers
+  license: apache-2.0
+  pipeline_tag: feature-extraction
+  base_model:
+  - Qwen/Qwen2-VL-2B-Instruct
+transformersInfo:
+  auto_model: LaMEMultimodal
+siblings:
+- rfilename: .gitattributes
+- rfilename: README.md
+- rfilename: added_tokens.json
+- rfilename: chat_template.jinja
+- rfilename: config.json
+- rfilename: merges.txt
+- rfilename: model-00001-of-00002.safetensors
+- rfilename: model-00002-of-00002.safetensors
+- rfilename: model.safetensors.index.json
+- rfilename: preprocessor_config.json
+- rfilename: special_tokens_map.json
+- rfilename: tokenizer.json
+- rfilename: tokenizer_config.json
+- rfilename: video_preprocessor_config.json
+- rfilename: vocab.json
+spaces: []
+createdAt: '2026-07-11T14:14:05.000Z'
+safetensors:
+  parameters:
+    BF16: 3201550848
+  total: 2813009408
+usedStorage: 6414660675
+downloadsAllTime: 0
+inferenceProviderMapping: {}
+configJson:
+  architectures:
+  - LaMEMultimodal
+  ctl_loss_weight: 1.0
+  decode_loss_weight: 1.0
+  decode_target: answer
+  decoder_gradient_checkpointing: false
+  decoder_max_think_tokens: 1024
+  decoder_model_path: Qwen/Qwen3-0.6B
+  decoder_projector_hidden_dim: 2048
+  decoder_projector_num_layers: 1
+  diversity_loss_weight: 0.1
+  dtype: bfloat16
+  embedding_token_id: 151665
+  enable_decode: true
+  freeze_backbone: false
+  freeze_decoder: false
+  lora_decoder_enable: false
+  model_type: openlame
+  normalize: true
+  num_new_special_tokens: 9
+  num_reason_tokens: 8
+  pooling_strategy: special_token
+  projection_activation: gelu
+  projection_dim: 3584
+  projection_dropout: 0.0
+  projection_hidden_dim: null
+  projection_num_layers: 1
+  reason_ctl_loss_weight: 1.0
+  reasoning_embedding_type: mean_pooling
+  split_latent: true
+  training_stage: 2
+  transformers_version: 4.57.0
+  trust_remote_code: true
+  use_flash_attn: true
+  use_projection: false
+  vlm_name: Qwen/Qwen2-VL-2B-Instruct
+  vlm_torch_dtype: bfloat16
+  vocab_size: 151666
+onnxFiles: {}
+safetensorsSizeMb: 6403.2
+approxSizeMb: 6403.1
+fetchedAt: '2026-07-12T06:10:01.000Z'
