@@ -1,0 +1,134 @@
+_id: 68af6d5401dad738b98b222e
+id: baseten/DummyGemmaTextModelForEmbedding
+private: false
+pipeline_tag: feature-extraction
+library_name: transformers
+tags:
+- transformers
+- safetensors
+- gemma3_text
+- feature-extraction
+- arxiv:1910.09700
+- text-embeddings-inference
+- endpoints_compatible
+- region:us
+downloads: 0
+likes: 0
+modelId: baseten/DummyGemmaTextModelForEmbedding
+author: baseten
+sha: 399370280014308335736c14a48bf3f4ff3a21ea
+lastModified: '2025-08-27T20:46:11.000Z'
+gated: false
+disabled: false
+model-index: null
+config:
+  architectures:
+  - Gemma3TextModel
+  model_type: gemma3_text
+  tokenizer_config:
+    bos_token: <bos>
+    chat_template: "{# Unsloth Chat template fixes #}\n{{ bos_token }}\n{%- if messages[0]['role'] == 'system' -%}\n    {%-\
+      \ if messages[0]['content'] is string -%}\n        {%- set first_user_prefix = messages[0]['content'] + '\n\n' -%}\n\
+      \    {%- else -%}\n        {%- set first_user_prefix = messages[0]['content'][0]['text'] + '\n\n' -%}\n    {%- endif\
+      \ -%}\n    {%- set loop_messages = messages[1:] -%}\n{%- else -%}\n    {%- set first_user_prefix = \"\" -%}\n    {%-\
+      \ set loop_messages = messages -%}\n{%- endif -%}\n{%- for message in loop_messages -%}\n    {%- if (message['role']\
+      \ == 'user') != (loop.index0 % 2 == 0) -%}\n        {{ raise_exception(\"Conversation roles must alternate user/assistant/user/assistant/...\"\
+      ) }}\n    {%- endif -%}\n    {%- if (message['role'] == 'assistant') -%}\n        {%- set role = \"model\" -%}\n   \
+      \ {%- else -%}\n        {%- set role = message['role'] -%}\n    {%- endif -%}\n    {{ '<start_of_turn>' + role + '\n\
+      ' + (first_user_prefix if loop.first else \"\") }}\n    {%- if message['content'] is string -%}\n        {{ message['content']\
+      \ | trim }}\n    {%- elif message['content'] is iterable -%}\n        {%- for item in message['content'] -%}\n     \
+      \       {%- if item['type'] == 'image' -%}\n                {{ '<start_of_image>' }}\n            {%- elif item['type']\
+      \ == 'text' -%}\n                {{ item['text'] | trim }}\n            {%- endif -%}\n        {%- endfor -%}\n    {%-\
+      \ elif message['content'] is defined -%}\n        {{ raise_exception(\"Invalid content type\") }}\n    {%- endif -%}\n\
+      \    {{ '<end_of_turn>\n' }}\n{%- endfor -%}\n{%- if add_generation_prompt -%}\n    {{'<start_of_turn>model\n'}}\n{%-\
+      \ endif -%}\n\n{# Copyright 2025-present Unsloth. Apache 2.0 License. #}"
+    eos_token: <end_of_turn>
+    pad_token: <pad>
+    unk_token: <unk>
+    use_default_system_prompt: false
+cardData:
+  library_name: transformers
+  tags: []
+transformersInfo:
+  auto_model: AutoModel
+  pipeline_tag: feature-extraction
+  processor: AutoTokenizer
+siblings:
+- rfilename: .gitattributes
+- rfilename: 1_Pooling/config.json
+- rfilename: README.md
+- rfilename: config.json
+- rfilename: model.safetensors
+- rfilename: modules.json
+- rfilename: sentence_bert_config.json
+- rfilename: special_tokens_map.json
+- rfilename: tokenizer.json
+- rfilename: tokenizer.model
+- rfilename: tokenizer_config.json
+spaces: []
+createdAt: '2025-08-27T20:40:52.000Z'
+safetensors:
+  parameters:
+    F32: 268098176
+  total: 268098176
+usedStorage: 1110491482
+downloadsAllTime: 63
+inferenceProviderMapping: {}
+configJson:
+  _sliding_window_pattern: 6
+  architectures:
+  - Gemma3TextModel
+  attention_bias: false
+  attention_dropout: 0.0
+  attn_logit_softcapping: null
+  bos_token_id: 2
+  cache_implementation: hybrid
+  eos_token_id: 106
+  final_logit_softcapping: null
+  head_dim: 256
+  hidden_activation: gelu_pytorch_tanh
+  hidden_size: 640
+  initializer_range: 0.02
+  intermediate_size: 2048
+  layer_types:
+  - sliding_attention
+  - sliding_attention
+  - sliding_attention
+  - sliding_attention
+  - sliding_attention
+  - full_attention
+  - sliding_attention
+  - sliding_attention
+  - sliding_attention
+  - sliding_attention
+  - sliding_attention
+  - full_attention
+  - sliding_attention
+  - sliding_attention
+  - sliding_attention
+  - sliding_attention
+  - sliding_attention
+  - full_attention
+  max_position_embeddings: 32768
+  model_type: gemma3_text
+  num_attention_heads: 4
+  num_hidden_layers: 18
+  num_key_value_heads: 1
+  pad_token_id: 0
+  query_pre_attn_scalar: 256
+  rms_norm_eps: 1.0e-06
+  rope_local_base_freq: 10000.0
+  rope_scaling: null
+  rope_theta: 1000000.0
+  sliding_window: 512
+  sliding_window_pattern: 6
+  torch_dtype: float32
+  transformers_version: 4.51.3
+  unsloth_fixed: true
+  use_bidirectional_attention: false
+  use_cache: true
+  vocab_size: 262144
+onnxFiles: {}
+safetensorsSizeMb: 1072.4
+approxSizeMb: 1072.4
+fetchedAt: '2026-07-18T05:33:35.000Z'
