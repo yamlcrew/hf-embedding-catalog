@@ -1,0 +1,145 @@
+_id: 6a5c6fe620d4f7e0a3ea9333
+id: radgraphIT/Radgraph-IT
+private: false
+pipeline_tag: feature-extraction
+library_name: transformers
+tags:
+- transformers
+- safetensors
+- radgraph_it
+- feature-extraction
+- radiology
+- information-extraction
+- named-entity-recognition
+- relation-extraction
+- medical
+- radgraph
+- custom_code
+- it
+- base_model:IVN-RIN/medBIT-r3-plus
+- base_model:finetune:IVN-RIN/medBIT-r3-plus
+- license:mit
+- region:us
+downloads: 0
+likes: 1
+modelId: radgraphIT/Radgraph-IT
+author: radgraphIT
+sha: 368c01baddbe1bdfb1b439243ae0c224f0e6624d
+lastModified: '2026-07-22T12:28:40.000Z'
+gated: false
+disabled: false
+model-index: null
+config:
+  model_type: radgraph_it
+  architectures:
+  - RadgraphModel
+  auto_map:
+    AutoConfig: configuration_radgraph.RadgraphConfig
+    AutoModel: modeling_radgraph.RadgraphModel
+  tokenizer_config:
+    cls_token: '[CLS]'
+    mask_token: '[MASK]'
+    pad_token: '[PAD]'
+    sep_token: '[SEP]'
+    unk_token: '[UNK]'
+cardData:
+  language:
+  - it
+  license: mit
+  library_name: transformers
+  base_model: IVN-RIN/medBIT-r3-plus
+  tags:
+  - radiology
+  - information-extraction
+  - named-entity-recognition
+  - relation-extraction
+  - medical
+  - radgraph
+transformersInfo:
+  auto_model: AutoModel
+  custom_class: modeling_radgraph.RadgraphModel
+  pipeline_tag: feature-extraction
+siblings:
+- rfilename: .gitattributes
+- rfilename: README.md
+- rfilename: __init__.py
+- rfilename: config.json
+- rfilename: configuration_radgraph.py
+- rfilename: dataset.py
+- rfilename: document.py
+- rfilename: feedforward.py
+- rfilename: metrics.py
+- rfilename: model.py
+- rfilename: model.safetensors
+- rfilename: model/best.pt
+- rfilename: model/config.json
+- rfilename: model/metrics.json
+- rfilename: model/model_manifest.json
+- rfilename: model/vocab.json
+- rfilename: modeling_radgraph.py
+- rfilename: ner_head.py
+- rfilename: predictor.py
+- rfilename: pruner.py
+- rfilename: relation_head.py
+- rfilename: span_extractor.py
+- rfilename: tokenizer.json
+- rfilename: tokenizer_config.json
+- rfilename: tokenizer_embedder.py
+- rfilename: transformer_block.py
+- rfilename: vocab.py
+spaces: []
+createdAt: '2026-07-19T06:34:14.000Z'
+safetensors:
+  parameters:
+    F32: 111164830
+  total: 111164830
+usedStorage: 3557968565
+downloadsAllTime: 0
+inferenceProviderMapping: {}
+configJson:
+  model_type: radgraph_it
+  architectures:
+  - RadgraphModel
+  auto_map:
+    AutoConfig: configuration_radgraph.RadgraphConfig
+    AutoModel: modeling_radgraph.RadgraphModel
+  encoder_name: IVN-RIN/medBIT-r3-plus
+  max_length: 512
+  max_span_width: 12
+  feature_size: 20
+  feedforward_params:
+    hidden_dims:
+    - 150
+    - 150
+    dropout: 0.4
+  loss_weights:
+    ner: 0.2
+    relation: 1.0
+  relation_spans_per_word: 0.5
+  train_encoder: true
+  span_pooling: false
+  transformer_params: null
+  relation_context: false
+  relation_feedforward_params: null
+  dataset: radgraph-it
+  ner_labels:
+    ? ''
+    : 0
+    Anatomy::definitely present: 1
+    Observation::definitely present: 2
+    Observation::definitely absent: 3
+    Observation::uncertain: 4
+    Anatomy::definitely absent: 5
+    Anatomy::uncertain: 6
+  relation_labels:
+    ? ''
+    : 0
+    modify: 1
+    located_at: 2
+    suggestive_of: 3
+  torch_dtype: float32
+  transformers_version: 5.14.1
+onnxFiles: {}
+safetensorsSizeMb: 444.7
+approxSizeMb: 444.7
+fetchedAt: '2026-07-23T06:07:23.000Z'
