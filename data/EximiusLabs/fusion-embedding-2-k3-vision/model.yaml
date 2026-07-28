@@ -1,0 +1,91 @@
+_id: 6a680709aa1559ed09febc6c
+id: EximiusLabs/fusion-embedding-2-k3-vision
+private: false
+pipeline_tag: feature-extraction
+library_name: fusion-embedding
+tags:
+- fusion-embedding
+- safetensors
+- fusion-embedding-2-k3-vision
+- multimodal
+- embeddings
+- retrieval
+- vision
+- kimi-k3
+- moonvit
+- feature-extraction
+- arxiv:2607.18666
+- base_model:moonshotai/Kimi-K3
+- base_model:adapter:moonshotai/Kimi-K3
+- license:cc-by-nc-4.0
+- region:us
+downloads: 0
+likes: 1
+modelId: EximiusLabs/fusion-embedding-2-k3-vision
+author: EximiusLabs
+sha: 7a6e64ccd2fa9c93be323915bc64263305f7ed58
+lastModified: '2026-07-28T04:40:24.000Z'
+gated: false
+disabled: false
+model-index: null
+config:
+  model_type: fusion-embedding-2-k3-vision
+cardData:
+  license: cc-by-nc-4.0
+  base_model: moonshotai/Kimi-K3
+  base_model_relation: adapter
+  library_name: fusion-embedding
+  pipeline_tag: feature-extraction
+  tags:
+  - multimodal
+  - embeddings
+  - retrieval
+  - vision
+  - kimi-k3
+  - moonvit
+siblings:
+- rfilename: .gitattributes
+- rfilename: README.md
+- rfilename: assets/k3-vision-banner.png
+- rfilename: assets/k3-vision-composability-demo.png
+- rfilename: config.json
+- rfilename: inference.py
+- rfilename: model.safetensors
+- rfilename: results.json
+spaces: []
+createdAt: '2026-07-28T01:34:01.000Z'
+safetensors:
+  parameters:
+    F32: 3150848
+  total: 3150848
+usedStorage: 21955401
+downloadsAllTime: 0
+inferenceProviderMapping: {}
+configJson:
+  model_type: fusion-embedding-2-k3-vision
+  description: A trained projector mapping Kimi K3's frozen MoonViT-V2 vision encoder into the fusion-embedding-2 text space,
+    so K3's visual features become language-searchable in the shared multimodal space.
+  backbone: moonshotai/Kimi-K3
+  backbone_component: vision_tower (MoonViT-V2, ~401M params)
+  base_text_model: Qwen/Qwen3-VL-Embedding-2B
+  fusion_embedding_model: EximiusLabs/fusion-embedding-2-2b-preview
+  projector:
+    in_dim: 1024
+    out_dim: 2048
+    arch: LayerNorm(1024)->Linear(1024,1024)->GELU->Dropout(0.2)->Linear(1024,2048)
+    params: 3150848
+    readout: mean over merged patch tokens and 2x2 subpatches
+    weights_file: model.safetensors
+  vision_attn_implementation: eager
+  trained_on: nlphuji/flickr30k
+  training:
+    objective: image-caption InfoNCE
+    temperature: 0.07
+    steps: 4000
+    n_train: 6000
+  license: cc-by-nc-4.0
+  base_license: Kimi K3 License
+onnxFiles: {}
+safetensorsSizeMb: 12.6
+approxSizeMb: 12.6
+fetchedAt: '2026-07-28T05:54:13.000Z'
