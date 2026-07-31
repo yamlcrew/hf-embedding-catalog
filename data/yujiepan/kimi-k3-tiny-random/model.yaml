@@ -1,0 +1,347 @@
+_id: 6a6b2f398558bd78e09f5275
+id: yujiepan/kimi-k3-tiny-random
+private: false
+pipeline_tag: feature-extraction
+library_name: transformers
+tags:
+- transformers
+- safetensors
+- kimi_k3
+- feature-extraction
+- custom_code
+- base_model:moonshotai/Kimi-K3
+- base_model:quantized:moonshotai/Kimi-K3
+- 8-bit
+- compressed-tensors
+- region:us
+downloads: 0
+likes: 0
+modelId: yujiepan/kimi-k3-tiny-random
+author: yujiepan
+sha: 0b028c2303dc745e4e3c56f9985aaca9a519183d
+lastModified: '2026-07-30T11:14:22.000Z'
+gated: false
+disabled: false
+model-index: null
+config:
+  architectures:
+  - KimiK3ForConditionalGeneration
+  auto_map:
+    AutoConfig: configuration_kimi_k3.KimiK3Config
+    AutoModel: modeling_kimi_k3.KimiK3ForConditionalGeneration
+    AutoModelForCausalLM: modeling_kimi_k3.KimiK3ForConditionalGeneration
+  model_type: kimi_k3
+  text_config:
+    quantization_config:
+      config_groups:
+        group_0:
+          format: mxfp4-pack-quantized
+          targets:
+          - re:.*block_sparse_moe\.experts\.\d+\.(w1|w2|w3)$
+          weights:
+            num_bits: 4
+      format: mxfp4-pack-quantized
+      ignore:
+      - re:.*self_attn.*
+      - re:.*shared_experts.*
+      - re:.*mlp\.(gate|up|gate_up|down)_proj.*
+      - re:.*lm_head.*
+      - re:.*vision_tower.*
+      - re:.*mm_projector.*
+      quant_method: compressed-tensors
+  quantization_config:
+    config_groups:
+      group_0:
+        format: mxfp4-pack-quantized
+        targets:
+        - re:.*block_sparse_moe\.experts\.\d+\.(w1|w2|w3)$
+        weights:
+          num_bits: 4
+    format: mxfp4-pack-quantized
+    ignore:
+    - re:.*self_attn.*
+    - re:.*shared_experts.*
+    - re:.*mlp\.(gate|up|gate_up|down)_proj.*
+    - re:.*lm_head.*
+    - re:.*vision_tower.*
+    - re:.*mm_projector.*
+    quant_method: compressed-tensors
+  tokenizer_config:
+    bos_token: '[BOS]'
+    eos_token: '[EOS]'
+    pad_token: '[PAD]'
+    unk_token: '[UNK]'
+cardData:
+  library_name: transformers
+  base_model:
+  - moonshotai/Kimi-K3
+transformersInfo:
+  auto_model: AutoModel
+  custom_class: modeling_kimi_k3.KimiK3ForConditionalGeneration
+  pipeline_tag: feature-extraction
+siblings:
+- rfilename: .gitattributes
+- rfilename: .meta.json
+- rfilename: README.md
+- rfilename: config.json
+- rfilename: configuration_kimi_k3.py
+- rfilename: encoding_k3.py
+- rfilename: generation_config.json
+- rfilename: kimi_k3_processor.py
+- rfilename: kimi_k3_vision_processing.py
+- rfilename: media_utils.py
+- rfilename: model.safetensors
+- rfilename: modeling_kimi_k3.py
+- rfilename: modeling_kimi_linear.py
+- rfilename: preprocessor_config.json
+- rfilename: tiktoken.model
+- rfilename: tokenization_kimi.py
+- rfilename: tokenizer_config.json
+spaces: []
+createdAt: '2026-07-30T11:02:17.000Z'
+safetensors:
+  parameters:
+    F32: 163840
+    BF16: 12478096
+    U8: 201326592
+  total: 213968528
+usedStorage: 136308174
+downloadsAllTime: 0
+inferenceProviderMapping: {}
+configJson:
+  architectures:
+  - KimiK3ForConditionalGeneration
+  auto_map:
+    AutoConfig: configuration_kimi_k3.KimiK3Config
+    AutoModel: modeling_kimi_k3.KimiK3ForConditionalGeneration
+    AutoModelForCausalLM: modeling_kimi_k3.KimiK3ForConditionalGeneration
+  bos_token_id: 163584
+  dtype: bfloat16
+  eos_token_id: 163586
+  ignore_index: -100
+  image_placeholder: <|kimi_image_placeholder|>
+  media_placeholder_token_id: 163605
+  model_type: kimi_k3
+  pad_token_id: 163839
+  text_config:
+    _name_or_path: ''
+    activation_situ_beta: 4.0
+    activation_situ_linear_beta: 25.0
+    add_cross_attention: false
+    architectures:
+    - KimiLinearForCausalLM
+    attn_res_block_size: 8
+    auto_map:
+      AutoConfig: configuration_kimi_k3.KimiLinearConfig
+      AutoModel: modeling_kimi_linear.KimiLinearModel
+      AutoModelForCausalLM: modeling_kimi_linear.KimiLinearForCausalLM
+    bos_token_id: 163584
+    chunk_size_feed_forward: 0
+    cross_attention_hidden_size: null
+    decoder_start_token_id: null
+    dtype: bfloat16
+    eos_token_id: 163586
+    finetuning_task: null
+    first_k_dense_replace: 1
+    head_dim: 1
+    hidden_act: situ
+    hidden_size: 8
+    id2label:
+      '0': LABEL_0
+      '1': LABEL_1
+    initializer_range: 0.02
+    intermediate_size: 32
+    is_decoder: false
+    is_encoder_decoder: false
+    kv_lora_rank: 512
+    label2id:
+      LABEL_0: 0
+      LABEL_1: 1
+    latent_moe_use_norm: true
+    linear_attn_config:
+      full_attn_layers:
+      - 4
+      - 8
+      - 12
+      - 16
+      - 17
+      gate_lower_bound: -5.0
+      head_dim: 128
+      kda_layers:
+      - 1
+      - 2
+      - 3
+      - 5
+      - 6
+      - 7
+      - 9
+      - 10
+      - 11
+      - 13
+      - 14
+      - 15
+      num_heads: 8
+      short_conv_kernel_size: 4
+      use_full_rank_gate: true
+    max_position_embeddings: 1048576
+    mla_use_nope: true
+    mla_use_output_gate: true
+    model_type: kimi_linear
+    moe_intermediate_size: 256
+    moe_layer_freq: 1
+    moe_renormalize: true
+    moe_router_activation_func: sigmoid
+    num_attention_heads: 8
+    num_expert_group: 1
+    num_experts: 64
+    num_experts_per_token: 16
+    num_hidden_layers: 17
+    num_key_value_heads: 8
+    num_nextn_predict_layers: 0
+    num_shared_experts: 2
+    output_attentions: false
+    output_hidden_states: false
+    pad_token_id: 163839
+    prefix: null
+    problem_type: null
+    pruned_heads: {}
+    q_lora_rank: 256
+    qk_nope_head_dim: 128
+    qk_rope_head_dim: 64
+    return_dict: true
+    rms_norm_eps: 1.0e-05
+    rope_parameters:
+      rope_theta: 10000.0
+      rope_type: default
+    rope_theta: 10000.0
+    routed_expert_hidden_size: 256
+    routed_scaling_factor: 1.0
+    sep_token_id: null
+    task_specific_params: null
+    tf_legacy_loss: false
+    tie_encoder_decoder: false
+    tie_word_embeddings: false
+    tokenizer_class: null
+    topk_group: 1
+    topk_method: noaux_tc
+    torchscript: false
+    use_bfloat16: false
+    use_cache: true
+    use_grouped_topk: true
+    v_head_dim: 128
+    vocab_size: 163840
+    quantization_config:
+      config_groups:
+        group_0:
+          format: mxfp4-pack-quantized
+          input_activations: null
+          output_activations: null
+          targets:
+          - re:.*block_sparse_moe\.experts\.\d+\.(w1|w2|w3)$
+          weights:
+            actorder: null
+            block_structure: null
+            dynamic: false
+            group_size: 32
+            num_bits: 4
+            observer: minmax
+            observer_kwargs: {}
+            scale_dtype: torch.uint8
+            strategy: group
+            symmetric: true
+            type: float
+            zp_dtype: null
+      format: mxfp4-pack-quantized
+      global_compression_ratio: null
+      ignore:
+      - re:.*self_attn.*
+      - re:.*shared_experts.*
+      - re:.*mlp\.(gate|up|gate_up|down)_proj.*
+      - re:.*lm_head.*
+      - re:.*vision_tower.*
+      - re:.*mm_projector.*
+      kv_cache_scheme: null
+      quant_method: compressed-tensors
+      quantization_status: compressed
+  tie_word_embeddings: false
+  transformers_version: 5.15.0.dev0
+  vision_config:
+    _name_or_path: ''
+    activation_func: gelu_pytorch_tanh
+    architectures: null
+    attn_bias: false
+    chunk_size_feed_forward: 0
+    dtype: null
+    id2label:
+      '0': LABEL_0
+      '1': LABEL_1
+    init_pos_emb_height: 8
+    init_pos_emb_time: 4
+    init_pos_emb_width: 8
+    is_encoder_decoder: false
+    label2id:
+      LABEL_0: 0
+      LABEL_1: 1
+    linear_bias: false
+    merge_kernel_size:
+    - 2
+    - 2
+    merge_type: sd2_tpool
+    mlp_type: mlp2
+    mm_hidden_size: 64
+    mm_projector_type: patchmergerv2
+    model_type: ''
+    norm_type: rmsnorm
+    output_attentions: false
+    output_hidden_states: false
+    patch_embed_proj_bias: false
+    patch_size: 14
+    pos_emb_interpolation_mode: bilinear
+    pos_emb_type: divided_fixed
+    problem_type: null
+    projector_hidden_act: gelu
+    projector_ln_eps: 1.0e-05
+    qkv_hidden_size: 64
+    return_dict: true
+    text_hidden_size: 8
+    vt_hidden_size: 64
+    vt_intermediate_size: 128
+    vt_num_attention_heads: 2
+    vt_num_hidden_layers: 2
+  quantization_config:
+    config_groups:
+      group_0:
+        format: mxfp4-pack-quantized
+        input_activations: null
+        output_activations: null
+        targets:
+        - re:.*block_sparse_moe\.experts\.\d+\.(w1|w2|w3)$
+        weights:
+          actorder: null
+          block_structure: null
+          dynamic: false
+          group_size: 32
+          num_bits: 4
+          observer: minmax
+          observer_kwargs: {}
+          scale_dtype: torch.uint8
+          strategy: group
+          symmetric: true
+          type: float
+          zp_dtype: null
+    format: mxfp4-pack-quantized
+    global_compression_ratio: null
+    ignore:
+    - re:.*self_attn.*
+    - re:.*shared_experts.*
+    - re:.*mlp\.(gate|up|gate_up|down)_proj.*
+    - re:.*lm_head.*
+    - re:.*vision_tower.*
+    - re:.*mm_projector.*
+    kv_cache_scheme: null
+    quant_method: compressed-tensors
+    quantization_status: compressed
+onnxFiles: {}
+safetensorsSizeMb: 133.5
+approxSizeMb: 226.9
+fetchedAt: '2026-07-31T06:19:38.000Z'

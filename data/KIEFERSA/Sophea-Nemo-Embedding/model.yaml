@@ -1,0 +1,162 @@
+_id: 6a5fd8dd5334c0e594c42255
+id: KIEFERSA/Sophea-Nemo-Embedding
+private: false
+pipeline_tag: sentence-similarity
+library_name: sentence-transformers
+tags:
+- sentence-transformers
+- safetensors
+- ministral3
+- greek
+- english
+- retrieval
+- rag
+- embeddings
+- nemotron
+- sentence-similarity
+- el
+- en
+- base_model:nvidia/Nemotron-3-Embed-1B-BF16
+- base_model:finetune:nvidia/Nemotron-3-Embed-1B-BF16
+- license:other
+- model-index
+- endpoints_compatible
+- region:us
+downloads: 2
+likes: 0
+modelId: KIEFERSA/Sophea-Nemo-Embedding
+author: KIEFERSA
+sha: e5b0973b7aee029b14bbc15ff53d06d66175b556
+lastModified: '2026-07-24T20:04:01.000Z'
+gated: false
+disabled: false
+model-index:
+- name: Sophea-Nemo-Embedding
+  results:
+  - task:
+      type: sentence-similarity
+      name: Greek+English retrieval (5 domains, cosine IR)
+    dataset:
+      type: retrieval
+      name: Internal Greek+English retrieval benchmark
+    metrics:
+    - type: nDCG@10
+      name: nDCG@10 (mean of 5 domains)
+      value: 0.8176
+      verified: false
+    - type: recall@10
+      name: Recall@10 (mean of 5 domains)
+      value: 0.931
+      verified: false
+config:
+  architectures:
+  - Ministral3Model
+  model_type: ministral3
+  tokenizer_config:
+    bos_token: <s>
+    eos_token: </s>
+    pad_token: <pad>
+    unk_token: <unk>
+cardData:
+  language:
+  - el
+  - en
+  license: other
+  license_name: openmdw-1.1
+  base_model: nvidia/Nemotron-3-Embed-1B-BF16
+  pipeline_tag: sentence-similarity
+  library_name: sentence-transformers
+  tags:
+  - greek
+  - english
+  - retrieval
+  - rag
+  - embeddings
+  - sentence-transformers
+  - nemotron
+  model-index:
+  - name: Sophea-Nemo-Embedding
+    results:
+    - task:
+        type: sentence-similarity
+        name: Greek+English retrieval (5 domains, cosine IR)
+      dataset:
+        type: retrieval
+        name: Internal Greek+English retrieval benchmark
+      metrics:
+      - type: nDCG@10
+        name: nDCG@10 (mean of 5 domains)
+        value: 0.8176
+        verified: false
+      - type: recall@10
+        name: Recall@10 (mean of 5 domains)
+        value: 0.931
+        verified: false
+siblings:
+- rfilename: .gitattributes
+- rfilename: 1_Pooling/config.json
+- rfilename: README.md
+- rfilename: base_vs_ft.png
+- rfilename: config.json
+- rfilename: config_sentence_transformers.json
+- rfilename: model.safetensors
+- rfilename: modules.json
+- rfilename: sentence_bert_config.json
+- rfilename: stack.png
+- rfilename: tokenizer.json
+- rfilename: tokenizer_config.json
+spaces: []
+createdAt: '2026-07-21T20:38:53.000Z'
+safetensors:
+  parameters:
+    BF16: 1140918272
+  total: 1140918272
+usedStorage: 2298930428
+downloadsAllTime: 2
+inferenceProviderMapping: {}
+configJson:
+  architectures:
+  - Ministral3Model
+  attention_dropout: 0.0
+  bos_token_id: 1
+  dtype: bfloat16
+  eos_token_id: 2
+  head_dim: 128
+  hidden_act: silu
+  hidden_size: 2048
+  initializer_range: 0.02
+  intermediate_size: 6144
+  is_causal: false
+  llama_4_scaling:
+    beta: 0.1
+    original_max_position_embeddings: 16384
+  max_position_embeddings: 262144
+  model_type: ministral3
+  nemo_version: 0.3.0rc0
+  num_attention_heads: 24
+  num_hidden_layers: 16
+  num_key_value_heads: 8
+  pad_token_id: 11
+  pooling: avg
+  rms_norm_eps: 1.0e-05
+  rope_parameters:
+    apply_yarn_scaling: false
+    beta_fast: 32.0
+    beta_slow: 1.0
+    factor: 16.0
+    llama_4_scaling_beta: 0.1
+    mscale: 1.0
+    mscale_all_dim: 1.0
+    original_max_position_embeddings: 16384
+    rope_theta: 1000000.0
+    rope_type: yarn
+    type: yarn
+  sliding_window: null
+  tie_word_embeddings: true
+  transformers_version: 5.13.0
+  use_cache: false
+  vocab_size: 131072
+onnxFiles: {}
+safetensorsSizeMb: 2281.9
+approxSizeMb: 2281.8
+fetchedAt: '2026-07-31T06:19:38.000Z'
