@@ -1,0 +1,97 @@
+_id: 6a6fbead8b7608ff4f016529
+id: EximiusLabs/fusion-embedding-2-tactus
+private: false
+pipeline_tag: feature-extraction
+tags:
+- safetensors
+- embeddings
+- tactile
+- pressure
+- force
+- fsr
+- taxel
+- sensor
+- robotics
+- qwen3-vl
+- feature-extraction
+- en
+- arxiv:2607.18666
+- base_model:EximiusLabs/fusion-embedding-2-2b-preview
+- base_model:finetune:EximiusLabs/fusion-embedding-2-2b-preview
+- license:cc-by-nc-4.0
+- region:us
+downloads: 0
+likes: 0
+modelId: EximiusLabs/fusion-embedding-2-tactus
+author: EximiusLabs
+sha: 230923eeb857447f9d7e6445f3c01962ddab1d86
+lastModified: '2026-08-03T05:38:23.000Z'
+gated: false
+disabled: false
+model-index: null
+config: {}
+cardData:
+  license: cc-by-nc-4.0
+  language:
+  - en
+  pipeline_tag: feature-extraction
+  tags:
+  - embeddings
+  - tactile
+  - pressure
+  - force
+  - fsr
+  - taxel
+  - sensor
+  - robotics
+  - qwen3-vl
+  base_model: EximiusLabs/fusion-embedding-2-2b-preview
+siblings:
+- rfilename: .gitattributes
+- rfilename: README.md
+- rfilename: assets/tactus-banner.png
+- rfilename: assets/tactus_model_overview.png
+- rfilename: assets/tactus_test_grasps.png
+- rfilename: config.json
+- rfilename: inference.py
+- rfilename: model.safetensors
+- rfilename: package_checkpoint.py
+- rfilename: results.json
+- rfilename: tactile.py
+- rfilename: tactus_head.pt
+spaces: []
+createdAt: '2026-08-02T22:03:25.000Z'
+safetensors:
+  parameters:
+    F32: 16163136
+  total: 16163136
+usedStorage: 132022207
+downloadsAllTime: 0
+inferenceProviderMapping: {}
+configJson:
+  model: fusion-embedding-2-tactus
+  version: v0.1-preview
+  ckpt_file: tactus_head.pt
+  grid: 32
+  window_frames: 8
+  depth: resnet18
+  temporal: conv
+  flow: false
+  feat_dim: 512
+  out_dim: 2048
+  input_normalization: 'stag_affine_500_650: clip((raw-500)/150, 0, 1); pass [0,1] floats or uint8 0-255 maps'
+  text_target: canonical UnifiedEmbedder.embed_text (whitened, 2048-d) from EximiusLabs/fusion-embedding-2-2b-preview
+  mae_init: tactus_mae_resnet18_stagonly_equal_npx (144k STAG-family frames, mask 0.6, norm-pix targets)
+  train_recipe:
+    steps: 16000
+    sampling: cluster
+    extra_data:
+    - blindfolded
+    - weights
+    augment: true
+    schedule: cosine
+    temp: 0.07
+onnxFiles: {}
+safetensorsSizeMb: 64.7
+approxSizeMb: 64.7
+fetchedAt: '2026-08-03T06:31:01.000Z'

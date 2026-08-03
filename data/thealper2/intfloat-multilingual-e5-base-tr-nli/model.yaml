@@ -1,0 +1,236 @@
+_id: 6a6f56ee89eb2c6507d086be
+id: thealper2/intfloat-multilingual-e5-base-tr-nli
+private: false
+pipeline_tag: sentence-similarity
+library_name: sentence-transformers
+tags:
+- sentence-transformers
+- safetensors
+- xlm-roberta
+- sentence-similarity
+- feature-extraction
+- embeddings
+- turkish
+- türkçe
+- e5
+- retrieval
+- semantic-search
+- mteb
+- tr-mteb
+- tr
+- dataset:mertcobanov/all-nli-triplets-turkish
+- dataset:emrecan/stsb-mt-turkish
+- arxiv:2402.05672
+- base_model:intfloat/multilingual-e5-base
+- base_model:finetune:intfloat/multilingual-e5-base
+- license:cc-by-sa-4.0
+- model-index
+- text-embeddings-inference
+- endpoints_compatible
+- region:us
+downloads: 0
+likes: 0
+modelId: thealper2/intfloat-multilingual-e5-base-tr-nli
+author: thealper2
+sha: b525f4590fba37e945d5b4e0950a268cffea715f
+lastModified: '2026-08-02T15:23:53.000Z'
+gated: false
+disabled: false
+mask_token: <mask>
+model-index:
+- name: e5-tr-nli
+  results:
+  - task:
+      type: semantic-textual-similarity
+      name: Semantic Textual Similarity
+    dataset:
+      name: STSb-TR (test)
+      type: trmteb/stsb-tr
+    metrics:
+    - type: spearman_cosine
+      value: 0.7907
+      verified: false
+  - task:
+      type: retrieval
+      name: Retrieval
+    dataset:
+      name: TQuad
+      type: trmteb/tquad
+    metrics:
+    - type: ndcg_at_10
+      value: 0.8222
+      verified: false
+  - task:
+      type: retrieval
+      name: Retrieval
+    dataset:
+      name: Quora-TR
+      type: trmteb/quora-tr
+    metrics:
+    - type: ndcg_at_10
+      value: 0.7323
+      verified: false
+  - task:
+      type: retrieval
+      name: Retrieval
+    dataset:
+      name: MS MARCO-TR
+      type: trmteb/msmarco-tr
+    metrics:
+    - type: ndcg_at_10
+      value: 0.2734
+      verified: false
+  - task:
+      type: classification
+      name: Classification
+    dataset:
+      name: News-Cat
+      type: trmteb/news-cat
+    metrics:
+    - type: accuracy
+      value: 0.96
+      verified: false
+config:
+  architectures:
+  - XLMRobertaModel
+  model_type: xlm-roberta
+  tokenizer_config:
+    bos_token: <s>
+    cls_token: <s>
+    eos_token: </s>
+    mask_token: <mask>
+    pad_token: <pad>
+    sep_token: </s>
+    unk_token: <unk>
+cardData:
+  language:
+  - tr
+  license: cc-by-sa-4.0
+  library_name: sentence-transformers
+  pipeline_tag: sentence-similarity
+  tags:
+  - sentence-transformers
+  - sentence-similarity
+  - feature-extraction
+  - embeddings
+  - turkish
+  - türkçe
+  - e5
+  - retrieval
+  - semantic-search
+  - mteb
+  - tr-mteb
+  base_model: intfloat/multilingual-e5-base
+  datasets:
+  - mertcobanov/all-nli-triplets-turkish
+  - emrecan/stsb-mt-turkish
+  metrics:
+  - spearmanr
+  - ndcg
+  - accuracy
+  - v_measure
+  model-index:
+  - name: e5-tr-nli
+    results:
+    - task:
+        type: semantic-textual-similarity
+        name: Semantic Textual Similarity
+      dataset:
+        name: STSb-TR (test)
+        type: trmteb/stsb-tr
+      metrics:
+      - type: spearman_cosine
+        value: 0.7907
+        verified: false
+    - task:
+        type: retrieval
+        name: Retrieval
+      dataset:
+        name: TQuad
+        type: trmteb/tquad
+      metrics:
+      - type: ndcg_at_10
+        value: 0.8222
+        verified: false
+    - task:
+        type: retrieval
+        name: Retrieval
+      dataset:
+        name: Quora-TR
+        type: trmteb/quora-tr
+      metrics:
+      - type: ndcg_at_10
+        value: 0.7323
+        verified: false
+    - task:
+        type: retrieval
+        name: Retrieval
+      dataset:
+        name: MS MARCO-TR
+        type: trmteb/msmarco-tr
+      metrics:
+      - type: ndcg_at_10
+        value: 0.2734
+        verified: false
+    - task:
+        type: classification
+        name: Classification
+      dataset:
+        name: News-Cat
+        type: trmteb/news-cat
+      metrics:
+      - type: accuracy
+        value: 0.96
+        verified: false
+siblings:
+- rfilename: .gitattributes
+- rfilename: 1_Pooling/config.json
+- rfilename: README.md
+- rfilename: config.json
+- rfilename: config_sentence_transformers.json
+- rfilename: model.safetensors
+- rfilename: modules.json
+- rfilename: sentence_bert_config.json
+- rfilename: tokenizer.json
+- rfilename: tokenizer_config.json
+spaces: []
+createdAt: '2026-08-02T14:40:46.000Z'
+safetensors:
+  parameters:
+    F32: 278043648
+  total: 278043648
+usedStorage: 1128963451
+downloadsAllTime: 0
+inferenceProviderMapping: {}
+configJson:
+  add_cross_attention: false
+  architectures:
+  - XLMRobertaModel
+  attention_probs_dropout_prob: 0.1
+  bos_token_id: 0
+  classifier_dropout: null
+  dtype: float32
+  eos_token_id: 2
+  hidden_act: gelu
+  hidden_dropout_prob: 0.1
+  hidden_size: 768
+  initializer_range: 0.02
+  intermediate_size: 3072
+  is_decoder: false
+  layer_norm_eps: 1.0e-05
+  max_position_embeddings: 514
+  model_type: xlm-roberta
+  num_attention_heads: 12
+  num_hidden_layers: 12
+  output_past: true
+  pad_token_id: 1
+  position_embedding_type: absolute
+  tie_word_embeddings: true
+  transformers_version: 5.0.0
+  type_vocab_size: 1
+  use_cache: true
+  vocab_size: 250002
+onnxFiles: {}
+safetensorsSizeMb: 1112.2
+approxSizeMb: 1112.2
+fetchedAt: '2026-08-03T06:31:01.000Z'

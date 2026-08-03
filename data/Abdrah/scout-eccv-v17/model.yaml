@@ -1,0 +1,86 @@
+_id: 6a525e130786c3c66c9ce187
+id: Abdrah/scout-eccv-v17
+private: false
+pipeline_tag: feature-extraction
+tags:
+- safetensors
+- image-text-retrieval
+- jepa
+- contrastive-learning
+- video-encoder
+- pytorch
+- feature-extraction
+- license:apache-2.0
+- region:us
+downloads: 0
+likes: 0
+modelId: Abdrah/scout-eccv-v17
+author: Abdrah
+sha: ace4aa0d6d1de9260265869d5bb23b42d5058d0e
+lastModified: '2026-07-11T15:15:44.000Z'
+gated: false
+disabled: false
+model-index: null
+config: {}
+cardData:
+  license: apache-2.0
+  tags:
+  - image-text-retrieval
+  - jepa
+  - contrastive-learning
+  - video-encoder
+  - pytorch
+  pipeline_tag: feature-extraction
+siblings:
+- rfilename: .gitattributes
+- rfilename: README.md
+- rfilename: config.json
+- rfilename: model.safetensors
+spaces: []
+createdAt: '2026-07-11T15:15:31.000Z'
+safetensors:
+  parameters:
+    BF16: 549559104
+  total: 549559104
+usedStorage: 1099156000
+downloadsAllTime: 0
+inferenceProviderMapping: {}
+configJson:
+  kind: sft
+  config:
+    model:
+      x_variant: vit_large_384
+      K: 64
+      predictor_layers: 24
+      out_dim: 768
+      readout: concat
+      gradient_checkpointing: true
+    train:
+      steps: 6000
+      warmup_steps: 600
+      lr: 2.0e-05
+      weight_decay: 0.01
+      temperature: 0.07
+      batch_size_per_gpu: 128
+      grad_accum: 1
+      log_every: 50
+      save_every: 1000
+      eval_every: null
+    data:
+      image_size: 384
+      num_workers: 8
+      balance: class
+      split: train
+    wandb:
+      project: eccv-2026
+      run_name: scout_v17_vitL_K64_pred24_concat_batch128
+  trainable_param_count: 549559104
+  total_param_count: 1161821766
+  reported_val_map10: 0.8639
+  reported_val_hit10: 0.9862
+  note: null
+  source_checkpoint: /tank2/eccv-2026/runs/scout_v17/step_00006000_final
+onnxFiles: {}
+safetensorsSizeMb: 1099.2
+approxSizeMb: 1099.1
+fetchedAt: '2026-08-03T06:31:01.000Z'

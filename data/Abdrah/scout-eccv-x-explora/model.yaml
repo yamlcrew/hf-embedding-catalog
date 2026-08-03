@@ -1,0 +1,98 @@
+_id: 6a525e3aa92e117955ef7a5b
+id: Abdrah/scout-eccv-x-explora
+private: false
+pipeline_tag: feature-extraction
+tags:
+- safetensors
+- image-text-retrieval
+- jepa
+- contrastive-learning
+- video-encoder
+- pytorch
+- feature-extraction
+- license:apache-2.0
+- region:us
+downloads: 0
+likes: 0
+modelId: Abdrah/scout-eccv-x-explora
+author: Abdrah
+sha: 0039d31694e3e42a720f1d2a68469626324b5ff9
+lastModified: '2026-07-11T15:16:23.000Z'
+gated: false
+disabled: false
+model-index: null
+config: {}
+cardData:
+  license: apache-2.0
+  tags:
+  - image-text-retrieval
+  - jepa
+  - contrastive-learning
+  - video-encoder
+  - pytorch
+  pipeline_tag: feature-extraction
+siblings:
+- rfilename: .gitattributes
+- rfilename: README.md
+- rfilename: config.json
+- rfilename: model.safetensors
+spaces: []
+createdAt: '2026-07-11T15:16:10.000Z'
+safetensors:
+  parameters:
+    F32: 9437184
+    BF16: 626005824
+  total: 635443008
+usedStorage: 1289829832
+downloadsAllTime: 0
+inferenceProviderMapping: {}
+configJson:
+  kind: sft
+  config:
+    model:
+      x_variant: vit_large_384
+      K: 64
+      predictor_layers: 24
+      out_dim: 768
+      readout: concat
+      gradient_checkpointing: true
+      y_model_id: sentence-transformers/clip-ViT-L-14
+      x_finetune:
+        unfreeze_first_n: 2
+        unfreeze_last_n: 4
+        lora_rank: 32
+        lora_alpha: 64
+        lora_dropout: 0.05
+        unfreeze_norms: true
+        unfreeze_patch_embed: true
+    train:
+      steps: 6000
+      warmup_steps: 600
+      lr: 2.0e-05
+      x_encoder_lr: 5.0e-06
+      x_lora_lr: 0.0002
+      weight_decay: 0.01
+      temperature: 0.07
+      batch_size_per_gpu: 64
+      grad_accum: 1
+      log_every: 50
+      save_every: 1000
+      eval_every: null
+    data:
+      image_size: 384
+      num_workers: 8
+      balance: class
+      split: train
+    wandb:
+      project: eccv-2026
+      run_name: scout_x_explora_yclip_K64_pred24_concat
+  trainable_param_count: 635443008
+  total_param_count: 1291293767
+  reported_val_map10: 0.9297
+  reported_val_hit10: 0.9948
+  note: null
+  source_checkpoint: /tank2/eccv-2026/runs/scout_x_explora_yclip/step_00006000_final
+onnxFiles: {}
+safetensorsSizeMb: 1289.8
+approxSizeMb: 1289.8
+fetchedAt: '2026-08-03T06:31:01.000Z'

@@ -1,0 +1,108 @@
+_id: 6a525e481212173df7f202fa
+id: Abdrah/scout-eccv-itm-v3
+private: false
+pipeline_tag: feature-extraction
+tags:
+- safetensors
+- image-text-retrieval
+- jepa
+- contrastive-learning
+- video-encoder
+- pytorch
+- feature-extraction
+- license:apache-2.0
+- region:us
+downloads: 0
+likes: 0
+modelId: Abdrah/scout-eccv-itm-v3
+author: Abdrah
+sha: 334a48ea8a56294252e6b98c7a88a4deb18f407b
+lastModified: '2026-07-11T15:16:29.000Z'
+gated: false
+disabled: false
+model-index: null
+config: {}
+cardData:
+  license: apache-2.0
+  tags:
+  - image-text-retrieval
+  - jepa
+  - contrastive-learning
+  - video-encoder
+  - pytorch
+  pipeline_tag: feature-extraction
+siblings:
+- rfilename: .gitattributes
+- rfilename: README.md
+- rfilename: config.json
+- rfilename: model.safetensors
+spaces: []
+createdAt: '2026-07-11T15:16:24.000Z'
+safetensors:
+  parameters:
+    F32: 43809025
+    BF16: 76446720
+  total: 120255745
+usedStorage: 328208096
+downloadsAllTime: 0
+inferenceProviderMapping: {}
+configJson:
+  kind: itm
+  config:
+    model:
+      kind: itm
+      x_variant: vit_large_384
+      y_model_id: google/embeddinggemma-300m
+      hidden: 768
+      depth: 4
+      n_heads: 12
+      itc_dim: 256
+      gradient_checkpointing: true
+      x_finetune:
+        unfreeze_first_n: 2
+        unfreeze_last_n: 4
+        lora_rank: 32
+        lora_alpha: 64
+        lora_dropout: 0.05
+        unfreeze_norms: true
+        unfreeze_patch_embed: true
+        activation_checkpointing: true
+      y_finetune:
+        lora_rank: 16
+        lora_alpha: 32
+        lora_dropout: 0.05
+    train:
+      steps: 6000
+      warmup_steps: 600
+      lr: 0.0001
+      x_encoder_lr: 5.0e-06
+      x_lora_lr: 0.0002
+      y_lora_lr: 5.0e-06
+      weight_decay: 0.01
+      batch_size_per_gpu: 12
+      n_random_neg: 1
+      itc_weight: 1.0
+      itc_mined_k: 8
+      mined_neg_k: 0
+      log_every: 50
+      save_every: 1000
+    data:
+      image_size: 384
+      num_workers: 8
+      balance: class
+      split: train
+      use_hard_negs: true
+      hard_neg_annotation_dir: /tank2/eccv-2026/annotation/train
+    wandb:
+      project: eccv-2026
+      run_name: scout_itm_v3_K64_pred24_concat_explora_loraY
+  trainable_param_count: 120255746
+  total_param_count: 656071688
+  reported_val_map10: 0.8858
+  reported_val_hit10: 0.9854
+  note: blend a=0.5 ITC+ITM
+  source_checkpoint: /tank2/eccv-2026/runs/scout_itm_v3/step_00006000_final
+onnxFiles: {}
+safetensorsSizeMb: 328.2
+approxSizeMb: 328.1
+fetchedAt: '2026-08-03T06:31:01.000Z'
