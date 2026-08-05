@@ -1,0 +1,387 @@
+_id: 6a7232a93ccdc888385472be
+id: sanjay920/voyage-4-nano-mlx-6bit
+private: false
+pipeline_tag: feature-extraction
+library_name: mlx
+tags:
+- mlx
+- safetensors
+- apple-silicon
+- feature-extraction
+- retrieval
+- matryoshka
+- multilingual
+- base_model:voyageai/voyage-4-nano
+- base_model:quantized:voyageai/voyage-4-nano
+- license:apache-2.0
+- region:us
+downloads: 0
+likes: 0
+modelId: sanjay920/voyage-4-nano-mlx-6bit
+author: sanjay920
+sha: 11a3bf14b98bdb507fd6124642971e402ecc5594
+lastModified: '2026-08-04T18:53:18.000Z'
+gated: false
+disabled: false
+model-index: null
+config:
+  tokenizer_config:
+    bos_token: null
+    chat_template: "{%- if tools %}\n    {{- '<|im_start|>system\\n' }}\n    {%- if messages[0]['role'] == 'system' %}\n \
+      \       {{- messages[0]['content'] }}\n    {%- else %}\n        {{- 'You are a helpful assistant.' }}\n    {%- endif\
+      \ %}\n    {{- \"\\n\\n# Tools\\n\\nYou may call one or more functions to assist with the user query.\\n\\nYou are provided\
+      \ with function signatures within <tools></tools> XML tags:\\n<tools>\" }}\n    {%- for tool in tools %}\n        {{-\
+      \ \"\\n\" }}\n        {{- tool | tojson }}\n    {%- endfor %}\n    {{- \"\\n</tools>\\n\\nFor each function call, return\
+      \ a json object with function name and arguments within <tool_call></tool_call> XML tags:\\n<tool_call>\\n{\\\"name\\\
+      \": <function-name>, \\\"arguments\\\": <args-json-object>}\\n</tool_call><|im_end|>\\n\" }}\n{%- else %}\n    {%- if\
+      \ messages[0]['role'] == 'system' %}\n        {{- '<|im_start|>system\\n' + messages[0]['content'] + '<|im_end|>\\n'\
+      \ }}\n    {%- else %}\n        {{- '<|im_start|>system\\nYou are a helpful assistant.<|im_end|>\\n' }}\n    {%- endif\
+      \ %}\n{%- endif %}\n{%- for message in messages %}\n    {%- if (message.role == \"user\") or (message.role == \"system\"\
+      \ and not loop.first) or (message.role == \"assistant\" and not message.tool_calls) %}\n        {{- '<|im_start|>' +\
+      \ message.role + '\\n' + message.content + '<|im_end|>' + '\\n' }}\n    {%- elif message.role == \"assistant\" %}\n\
+      \        {{- '<|im_start|>' + message.role }}\n        {%- if message.content %}\n            {{- '\\n' + message.content\
+      \ }}\n        {%- endif %}\n        {%- for tool_call in message.tool_calls %}\n            {%- if tool_call.function\
+      \ is defined %}\n                {%- set tool_call = tool_call.function %}\n            {%- endif %}\n            {{-\
+      \ '\\n<tool_call>\\n{\"name\": \"' }}\n            {{- tool_call.name }}\n            {{- '\", \"arguments\": ' }}\n\
+      \            {{- tool_call.arguments | tojson }}\n            {{- '}\\n</tool_call>' }}\n        {%- endfor %}\n   \
+      \     {{- '<|im_end|>\\n' }}\n    {%- elif message.role == \"tool\" %}\n        {%- if (loop.index0 == 0) or (messages[loop.index0\
+      \ - 1].role != \"tool\") %}\n            {{- '<|im_start|>user' }}\n        {%- endif %}\n        {{- '\\n<tool_response>\\\
+      n' }}\n        {{- message.content }}\n        {{- '\\n</tool_response>' }}\n        {%- if loop.last or (messages[loop.index0\
+      \ + 1].role != \"tool\") %}\n            {{- '<|im_end|>\\n' }}\n        {%- endif %}\n    {%- endif %}\n{%- endfor\
+      \ %}\n{%- if add_generation_prompt %}\n    {{- '<|im_start|>assistant\\n' }}\n{%- endif %}\n"
+    eos_token: <|endoftext|>
+    pad_token: <|endoftext|>
+    unk_token: null
+cardData:
+  license: apache-2.0
+  base_model: voyageai/voyage-4-nano
+  base_model_relation: quantized
+  language:
+  - multilingual
+  library_name: mlx
+  pipeline_tag: feature-extraction
+  tags:
+  - mlx
+  - apple-silicon
+  - feature-extraction
+  - retrieval
+  - matryoshka
+siblings:
+- rfilename: .gitattributes
+- rfilename: 1_Pooling/config.json
+- rfilename: LICENSE.txt
+- rfilename: NOTICE.txt
+- rfilename: README.md
+- rfilename: config.json
+- rfilename: config_sentence_transformers.json
+- rfilename: merges.txt
+- rfilename: model.safetensors
+- rfilename: modules.json
+- rfilename: sentence_bert_config.json
+- rfilename: tokenizer.json
+- rfilename: tokenizer_config.json
+- rfilename: vocab.json
+spaces: []
+createdAt: '2026-08-04T18:42:49.000Z'
+safetensors:
+  parameters:
+    BF16: 10854400
+    U32: 65085440
+  total: 75939840
+usedStorage: 282084346
+downloadsAllTime: 0
+inferenceProviderMapping: {}
+configJson:
+  hidden_size: 1024
+  num_hidden_layers: 12
+  num_attention_heads: 16
+  num_key_value_heads: 8
+  head_dim: 128
+  intermediate_size: 3072
+  vocab_size: 151936
+  rms_norm_eps: 1.0e-06
+  rope_theta: 1000000.0
+  max_position_embeddings: 40960
+  attention_bias: false
+  hidden_act: silu
+  num_labels: 2048
+  qk_layernorm: true
+  causal: false
+  pooling: mean
+  normalize: true
+  max_seq_length: 32768
+  pad_token_id: 151645
+  matryoshka_dims:
+  - 256
+  - 512
+  - 1024
+  - 2048
+  quantization:
+    group_size: 64
+    bits: 6
+    linear:
+      group_size: 64
+      bits: 8
+    model.layers.11.mlp.down_proj:
+      group_size: 64
+      bits: 6
+    model.layers.11.mlp.up_proj:
+      group_size: 64
+      bits: 6
+    model.layers.11.mlp.gate_proj:
+      group_size: 64
+      bits: 6
+    model.layers.11.self_attn.o_proj:
+      group_size: 64
+      bits: 6
+    model.layers.11.self_attn.v_proj:
+      group_size: 64
+      bits: 6
+    model.layers.11.self_attn.k_proj:
+      group_size: 64
+      bits: 6
+    model.layers.11.self_attn.q_proj:
+      group_size: 64
+      bits: 6
+    model.layers.10.mlp.down_proj:
+      group_size: 64
+      bits: 6
+    model.layers.10.mlp.up_proj:
+      group_size: 64
+      bits: 6
+    model.layers.10.mlp.gate_proj:
+      group_size: 64
+      bits: 6
+    model.layers.10.self_attn.o_proj:
+      group_size: 64
+      bits: 6
+    model.layers.10.self_attn.v_proj:
+      group_size: 64
+      bits: 6
+    model.layers.10.self_attn.k_proj:
+      group_size: 64
+      bits: 6
+    model.layers.10.self_attn.q_proj:
+      group_size: 64
+      bits: 6
+    model.layers.9.mlp.down_proj:
+      group_size: 64
+      bits: 6
+    model.layers.9.mlp.up_proj:
+      group_size: 64
+      bits: 6
+    model.layers.9.mlp.gate_proj:
+      group_size: 64
+      bits: 6
+    model.layers.9.self_attn.o_proj:
+      group_size: 64
+      bits: 6
+    model.layers.9.self_attn.v_proj:
+      group_size: 64
+      bits: 6
+    model.layers.9.self_attn.k_proj:
+      group_size: 64
+      bits: 6
+    model.layers.9.self_attn.q_proj:
+      group_size: 64
+      bits: 6
+    model.layers.8.mlp.down_proj:
+      group_size: 64
+      bits: 6
+    model.layers.8.mlp.up_proj:
+      group_size: 64
+      bits: 6
+    model.layers.8.mlp.gate_proj:
+      group_size: 64
+      bits: 6
+    model.layers.8.self_attn.o_proj:
+      group_size: 64
+      bits: 6
+    model.layers.8.self_attn.v_proj:
+      group_size: 64
+      bits: 6
+    model.layers.8.self_attn.k_proj:
+      group_size: 64
+      bits: 6
+    model.layers.8.self_attn.q_proj:
+      group_size: 64
+      bits: 6
+    model.layers.7.mlp.down_proj:
+      group_size: 64
+      bits: 6
+    model.layers.7.mlp.up_proj:
+      group_size: 64
+      bits: 6
+    model.layers.7.mlp.gate_proj:
+      group_size: 64
+      bits: 6
+    model.layers.7.self_attn.o_proj:
+      group_size: 64
+      bits: 6
+    model.layers.7.self_attn.v_proj:
+      group_size: 64
+      bits: 6
+    model.layers.7.self_attn.k_proj:
+      group_size: 64
+      bits: 6
+    model.layers.7.self_attn.q_proj:
+      group_size: 64
+      bits: 6
+    model.layers.6.mlp.down_proj:
+      group_size: 64
+      bits: 6
+    model.layers.6.mlp.up_proj:
+      group_size: 64
+      bits: 6
+    model.layers.6.mlp.gate_proj:
+      group_size: 64
+      bits: 6
+    model.layers.6.self_attn.o_proj:
+      group_size: 64
+      bits: 6
+    model.layers.6.self_attn.v_proj:
+      group_size: 64
+      bits: 6
+    model.layers.6.self_attn.k_proj:
+      group_size: 64
+      bits: 6
+    model.layers.6.self_attn.q_proj:
+      group_size: 64
+      bits: 6
+    model.layers.5.mlp.down_proj:
+      group_size: 64
+      bits: 6
+    model.layers.5.mlp.up_proj:
+      group_size: 64
+      bits: 6
+    model.layers.5.mlp.gate_proj:
+      group_size: 64
+      bits: 6
+    model.layers.5.self_attn.o_proj:
+      group_size: 64
+      bits: 6
+    model.layers.5.self_attn.v_proj:
+      group_size: 64
+      bits: 6
+    model.layers.5.self_attn.k_proj:
+      group_size: 64
+      bits: 6
+    model.layers.5.self_attn.q_proj:
+      group_size: 64
+      bits: 6
+    model.layers.4.mlp.down_proj:
+      group_size: 64
+      bits: 6
+    model.layers.4.mlp.up_proj:
+      group_size: 64
+      bits: 6
+    model.layers.4.mlp.gate_proj:
+      group_size: 64
+      bits: 6
+    model.layers.4.self_attn.o_proj:
+      group_size: 64
+      bits: 6
+    model.layers.4.self_attn.v_proj:
+      group_size: 64
+      bits: 6
+    model.layers.4.self_attn.k_proj:
+      group_size: 64
+      bits: 6
+    model.layers.4.self_attn.q_proj:
+      group_size: 64
+      bits: 6
+    model.layers.3.mlp.down_proj:
+      group_size: 64
+      bits: 6
+    model.layers.3.mlp.up_proj:
+      group_size: 64
+      bits: 6
+    model.layers.3.mlp.gate_proj:
+      group_size: 64
+      bits: 6
+    model.layers.3.self_attn.o_proj:
+      group_size: 64
+      bits: 6
+    model.layers.3.self_attn.v_proj:
+      group_size: 64
+      bits: 6
+    model.layers.3.self_attn.k_proj:
+      group_size: 64
+      bits: 6
+    model.layers.3.self_attn.q_proj:
+      group_size: 64
+      bits: 6
+    model.layers.2.mlp.down_proj:
+      group_size: 64
+      bits: 6
+    model.layers.2.mlp.up_proj:
+      group_size: 64
+      bits: 6
+    model.layers.2.mlp.gate_proj:
+      group_size: 64
+      bits: 6
+    model.layers.2.self_attn.o_proj:
+      group_size: 64
+      bits: 6
+    model.layers.2.self_attn.v_proj:
+      group_size: 64
+      bits: 6
+    model.layers.2.self_attn.k_proj:
+      group_size: 64
+      bits: 6
+    model.layers.2.self_attn.q_proj:
+      group_size: 64
+      bits: 6
+    model.layers.1.mlp.down_proj:
+      group_size: 64
+      bits: 6
+    model.layers.1.mlp.up_proj:
+      group_size: 64
+      bits: 6
+    model.layers.1.mlp.gate_proj:
+      group_size: 64
+      bits: 6
+    model.layers.1.self_attn.o_proj:
+      group_size: 64
+      bits: 6
+    model.layers.1.self_attn.v_proj:
+      group_size: 64
+      bits: 6
+    model.layers.1.self_attn.k_proj:
+      group_size: 64
+      bits: 6
+    model.layers.1.self_attn.q_proj:
+      group_size: 64
+      bits: 6
+    model.layers.0.mlp.down_proj:
+      group_size: 64
+      bits: 6
+    model.layers.0.mlp.up_proj:
+      group_size: 64
+      bits: 6
+    model.layers.0.mlp.gate_proj:
+      group_size: 64
+      bits: 6
+    model.layers.0.self_attn.o_proj:
+      group_size: 64
+      bits: 6
+    model.layers.0.self_attn.v_proj:
+      group_size: 64
+      bits: 6
+    model.layers.0.self_attn.k_proj:
+      group_size: 64
+      bits: 6
+    model.layers.0.self_attn.q_proj:
+      group_size: 64
+      bits: 6
+    model.embed_tokens:
+      group_size: 64
+      bits: 6
+  extra: {}
+  _mlx_voyage_version: 0.1.0
+  _source_repo: hf/voyage-4-nano
+  _dtype: bfloat16
+onnxFiles: {}
+safetensorsSizeMb: 282.1
+approxSizeMb: 282.1
+fetchedAt: '2026-08-05T05:52:18.000Z'
