@@ -1,0 +1,331 @@
+_id: 6a74b8cd5d3ee4a1892ccffc
+id: MaagDeveloper/rust_python_code_embeddings
+private: false
+pipeline_tag: sentence-similarity
+library_name: sentence-transformers
+tags:
+- sentence-transformers
+- safetensors
+- bert
+- sentence-similarity
+- feature-extraction
+- dense
+- generated_from_trainer
+- dataset_size:59250
+- loss:MultipleNegativesRankingLoss
+- arxiv:1908.10084
+- arxiv:1807.03748
+- base_model:MaagDeveloper/rust_python_base
+- base_model:finetune:MaagDeveloper/rust_python_base
+- text-embeddings-inference
+- endpoints_compatible
+- region:us
+downloads: 0
+likes: 0
+modelId: MaagDeveloper/rust_python_code_embeddings
+author: MaagDeveloper
+sha: bb9dd04d5530778f54484a098fd14a5e93b9f42e
+lastModified: '2026-08-06T16:39:46.000Z'
+gated: false
+disabled: false
+mask_token: '[MASK]'
+widgetData:
+- source_sentence: Returns a string with the matrix values in an human readable format.
+  sentences:
+  - "def export_all_raster(self, name, view, size_x, size_y, dpi, bits, dither, format, options):\n        self._export_all_raster(name.encode(),\
+    \ view.encode(), size_x, size_y, dpi, bits, dither, format.encode(), options.encode())"
+  - "def dev_serve(config: Config):\n    os.environ[\"HOST\"] = config.host\n    os.environ[\"PORT\"] = str(config.port)\n\
+    \    simplelog(\"Serve forever:\")\n    print(\n        \"\\n      --- Attention ---\\n\"\n        \"This app is running\
+    \ using a development server.\\n\"\n        \"Do not use for production!\\n\"\n    )\n    cmd_start = [\n        \"yarn\"\
+    ,\n        \"--cwd\",\n        str(ROOT_DIR),\n        \"start\"\n    ]\n    exit_code_start = Popen(cmd_start).wait()\n\
+    \    raise RuntimeError(\n        f\"Serving of app was interupted: {exit_code_start}.\"\n    )"
+  - "pub fn to_str(&self) -> String {\n        let mut s = String::new();\n        s += \"┏━━━━┉\\n┃\\n\";\n        for x\
+    \ in 0..self.rows {\n            s += \"┃  [\";\n            for y in 0..self.columns {\n                s += format!(\"\
+    {:>+5.2}, \", self.get(x, y)).as_str();\n            }\n            s += \"]\\n\";\n        }\n        s += \"┃\\n┗━━━━┉\\\
+    n\";\n        s\n    }"
+- source_sentence: Return sigma_z for mass distribution following tracer population
+  sentences:
+  - "def read_file(fname):\n    try:\n        f = open(fname, 'r')\n        try:\n            s = f.readlines()\n        finally:\n\
+    \            f.close()\n    except IOError:\n        raise ProfileError(\"File not found or unreadable\")\n    return\
+    \ s"
+  - "def sig_disk_dm(self, x, z, h, sgas=13.2):\n        sig2 = 4*np.pi*G*h*u.kpc*(0.5*x[0]*u.Msun*u.pc**-2*(1 - x[1]/(h +\
+    \ x[1])*np.exp(-z.to(u.kpc).value/x[1]))\n                                  + 0.5*sgas*u.Msun*u.pc**-2\n             \
+    \                     + x[2]*u.Msun*u.pc**-3*(h*u.kpc + z))\n        return np.sqrt(sig2).to(u.km*u.s**-1)"
+  - "pub fn add_row(&mut self, row: Row) -> &mut Self {\n        let cells = row.0;\n        assert_eq!(cells.len(), self.n_columns);\n\
+    \        for (width, s) in self.column_widths.iter_mut().zip(cells.iter()) {\n            *width = ::std::cmp::max(*width,\
+    \ s.width());\n        }\n        self.rows.push(InternalRow::Cells(cells));\n        self\n    }"
+- source_sentence: 'Save this window''s workspace
+
+    Keyword Arguments:
+
+    filename        = workspace file to save
+
+    promptOverwrite = indicates if we should prompt before overwriting a file
+
+    promptSave      = indicates if we should prompt before saving a new file'
+  sentences:
+  - "def display_callback(id, interval_ms):\n  while True:\n    oled.fill(0)\n    oled.text(\"[air]\", 0, 0)             \
+    \           \n    oled.text(\"T=\" + bme.values[0],  0, 10)         \n    oled.text(\"H=\" + bme.values[2], 64, 10)  \
+    \       \n    oled.text(\"P=\" + bme.values[1],  0, 20)         \n    oled.text(\"[water]\", 0, 30)                  \
+    \   \n    oled.text(\"W=\" + ds18.values[0],    0, 40)      \n    if wlevel is not None:\n      oled.text(\"L=\" + get_wlevel(),\
+    \ 64, 40)        \n    oled.show()\n    for cnt in range(3600):         \n      utime.sleep_ms(1000)\n      oled.text(\"\
+    .\", 8*cnt, 55)\n      oled.show()\n      waiting = (cnt + 1) * 1000\n      if interval_ms <= waiting:       \n      \
+    \  break\n      cnt += 1"
+  - "fn add_direct_i32s_from_slice(&mut self, i32s: &[i32]) {\n        for value in i32s {\n            self.add_direct_i32(*value);\n\
+    \        }\n    }"
+  - "def run(self, **kwargs):\n        super().run(**kwargs)\n        isNewWorkspace = self.window.id() not in EasyWorkspaceCommand._openWorkspaceFiles\n\
+    \        noFileProvided = kwargs.get('filename', None) == None\n        if isNewWorkspace and noFileProvided:\n      \
+    \      self.window.run_command(\"save_as_easy_workspace\", kwargs)\n        else:\n            self.window.status_message(\"\
+    Saving workspace...\")\n            ws = EasyWorkspace()\n            ws.buildFromWindow(self.window)\n            fullFilePath\
+    \ = self.getWorkspaceFilepath(kwargs.get('filename', EasyWorkspaceCommand._openWorkspaceFiles.get(self.window.id())))\n\
+    \            doSaveDialogResult = sublime.DIALOG_YES\n            if (kwargs.get(\"promptOverwrite\", False) and os.path.isfile(fullFilePath)):\n\
+    \                doSaveDialogResult = sublime.yes_no_cancel_dialog(\"Overwrite Easy Workspace?\\n\\n{}\".format(fullFilePath))\n\
+    \            elif (kwargs.get(\"promptSave\", False)):\n                doSaveDialogResult = sublime.yes_no_cancel_dialog(\"\
+    Save New Workspace?\\n\\n{}\".format(fullFilePath))\n            if doSaveDialogResult != sublime.DIALOG_YES:\n      \
+    \          self.window.status_message(\"Canceled\")\n            else:\n                ws.saveToFile(fullFilePath)\n\
+    \                EasyWorkspaceCommand._openWorkspaceFiles[self.window.id()] = fullFilePath\n                self.window.status_message(\"\
+    Saved \" + fullFilePath)"
+- source_sentence: This function will close the connection.
+  sentences:
+  - "def schema_exists(dbname, name,\n                  db_user=None, db_password=None,\n                  db_host=None, db_port=None):\n\
+    \    return bool(\n        schema_get(dbname, name,\n                   db_user=db_user,\n                   db_host=db_host,\n\
+    \                   db_port=db_port,\n                   db_password=db_password))"
+  - "def disconnect (self):\n    if self.connected:\n      self.__connection.close_session()\n    if self.debug:\n      print\
+    \ \"Connection closed!\""
+  - "pub fn grab_and_store(\n        &self,\n        client: Client<HttpsConnector<HttpConnector>, Body>,\n        db: &Pool<ConnectionManager<PgConnection>>,\n\
+    \        pool: &CpuPool,\n    ) -> Box<Future<Item = (), Error = ()>> {\n        let ad = self.clone();\n        let pool_db\
+    \ = pool.clone();\n        let db = db.clone();\n        let s3hostname = S3_BUCKET_NAME.unwrap_or(DEFAULT_S3_BUCKET_NAME).to_owned()\
+    \ + &(\".s3.amazonaws.com\".to_owned());\n        let s3hostname2 = s3hostname.clone(); // to circumvent some lifecycle\
+    \ thing I don't have time to fix right now.\n        let future = stream::iter_ok(self.image_urls())\n            // filter\
+    \ ones we already have in the db and ones we can verify as\n            // coming from fb, we don't want to become a malware\
+    \ vector :)\n            // currently we redownload images we already have, but ok.\n            .filter(move |u| {\n\
+    \                info!(\"testing {:?}\", u.host());\n                match u.host() {\n                    Some(h) =>\
+    \ (h == s3hostname2 || h.ends_with(\"fbcdn.net\")),\n                    None => false\n                }\n          \
+    \  })\n            // grab image\n            .and_then(move |img| {\n                let real_url = get_real_image_uri(img);\n\
+    \                info!(\"getting {:?}\", real_url.path());\n                client\n                    .get(real_url.clone())\n\
+    \                    .and_then(|res| {\n                        res.body().concat2().and_then(|chunk| Ok((chunk, real_url)))\n\
+    \                    })\n                    .map_err(|e| Error::with_chain(e, \"Could not get image\"))\n           \
+    \ })\n            // upload them to s3\n            .and_then(move |tuple| {\n                    if tuple.1.host().unwrap_or_default()\
+    \ != s3hostname {\n                        let client = S3Client::simple(Region::UsEast1);\n                        let\
+    \ req = PutObjectRequest {\n                            bucket: S3_BUCKET_NAME.unwrap_or(DEFAULT_S3_BUCKET_NAME).to_string(),\n\
+    \                            key: tuple.1.path().trim_left_matches('/').to_string(),\n                            acl:\
+    \ Some(\"public-read\".to_string()),\n                            body: Some(tuple.0.to_vec()),\n                    \
+    \        ..PutObjectRequest::default()\n                        };\n                        Either::A(client.put_object(&req)\n\
+    \                            .map_err(|e| { warn!(\"could not store image {:?}\", e); e.into() })\n                  \
+    \          .and_then(|_| Ok(tuple.1)))\n                    } else {\n                        Either::B(future::ok(tuple.1).and_then(|i|\
+    \ Ok(i)))\n                    }\n            })\n            .collect()\n            // save the new urls to the database.\
+    \ the images variable will\n            // include only those that we've successfully saved to s3, so we\n           \
+    \ // have to do a funky merge here.\n            .and_then(move |images| {\n                let imgs = images.clone();\n\
+    \                pool_db.spawn_fn(move || {\n                    use schema::ads::dsl::*;\n                    let update\
+    \ = Images::from_ad(&ad, &imgs)?;\n                    let connection = db.get()?;\n                    diesel::update(ads.find(&ad.id))\n\
+    \                        .set(&update)\n                        .execute(&*connection)?;\n                    info!(\"\
+    saved {:?}\", ad.id);\n                    Ok(())\n                })\n            })\n            .or_else(|e| {\n  \
+    \              warn!(\"{:?}\", e);\n                Ok(())\n            });\n        Box::new(future)\n    }"
+- source_sentence: Called before data is used to initialize a Guildfile.
+  sentences:
+  - "pub fn default_submod_path(id: ast::Ident, dir_path: &Path, codemap: &CodeMap) -> ModulePath\n    {\n        let mod_name\
+    \ = id.to_string();\n        let default_path_str = format!(\"{}.rs\", mod_name);\n        let secondary_path_str = format!(\"\
+    {}/mod.rs\", mod_name);\n        let default_path = dir_path.join(&default_path_str);\n        let secondary_path = dir_path.join(&secondary_path_str);\n\
+    \        let default_exists = codemap.file_exists(&default_path);\n        let secondary_exists = codemap.file_exists(&secondary_path);\n\
+    \        let result = match (default_exists, secondary_exists) {\n            (true, false) => Ok(ModulePathSuccess {\
+    \ path: default_path, owns_directory: false }),\n            (false, true) => Ok(ModulePathSuccess { path: secondary_path,\
+    \ owns_directory: true }),\n            (false, false) => Err(ModulePathError {\n                err_msg: format!(\"file\
+    \ not found for module `{}`\", mod_name),\n                help_msg: format!(\"name the file either {} or {} inside the\
+    \ directory {:?}\",\n                                  default_path_str,\n                                  secondary_path_str,\n\
+    \                                  dir_path.display()),\n            }),\n            (true, true) => Err(ModulePathError\
+    \ {\n                err_msg: format!(\"file for module `{}` found at both {} and {}\",\n                            \
+    \     mod_name,\n                                 default_path_str,\n                                 secondary_path_str),\n\
+    \                help_msg: \"delete or rename one of them to remove the ambiguity\".to_owned(),\n            }),\n   \
+    \     };\n        ModulePath {\n            name: mod_name,\n            path_exists: default_exists || secondary_exists,\n\
+    \            result: result,\n        }\n    }"
+  - 'def guildfile_data(self, data, src):'
+  - "def check_file(*file_path: typing.Union[str, Path], must_exist: bool = True) -> Path:\n    _file_path = check_path(*file_path,\
+    \ must_exist=must_exist)\n    if _file_path.exists():\n        if not _file_path.is_file():\n            raise TypeError(f'not\
+    \ a file: {str(_file_path.absolute())}')\n    return _file_path"
+model-index: null
+config:
+  architectures:
+  - BertModel
+  model_type: bert
+  tokenizer_config:
+    cls_token: '[CLS]'
+    mask_token: '[MASK]'
+    pad_token: '[PAD]'
+    sep_token: '[SEP]'
+    unk_token: '[UNK]'
+cardData:
+  tags:
+  - sentence-transformers
+  - sentence-similarity
+  - feature-extraction
+  - dense
+  - generated_from_trainer
+  - dataset_size:59250
+  - loss:MultipleNegativesRankingLoss
+  base_model: MaagDeveloper/rust_python_base
+  widget:
+  - source_sentence: Returns a string with the matrix values in an human readable format.
+    sentences:
+    - "def export_all_raster(self, name, view, size_x, size_y, dpi, bits, dither, format, options):\n        self._export_all_raster(name.encode(),\
+      \ view.encode(), size_x, size_y, dpi, bits, dither, format.encode(), options.encode())"
+    - "def dev_serve(config: Config):\n    os.environ[\"HOST\"] = config.host\n    os.environ[\"PORT\"] = str(config.port)\n\
+      \    simplelog(\"Serve forever:\")\n    print(\n        \"\\n      --- Attention ---\\n\"\n        \"This app is running\
+      \ using a development server.\\n\"\n        \"Do not use for production!\\n\"\n    )\n    cmd_start = [\n        \"\
+      yarn\",\n        \"--cwd\",\n        str(ROOT_DIR),\n        \"start\"\n    ]\n    exit_code_start = Popen(cmd_start).wait()\n\
+      \    raise RuntimeError(\n        f\"Serving of app was interupted: {exit_code_start}.\"\n    )"
+    - "pub fn to_str(&self) -> String {\n        let mut s = String::new();\n        s += \"┏━━━━┉\\n┃\\n\";\n        for\
+      \ x in 0..self.rows {\n            s += \"┃  [\";\n            for y in 0..self.columns {\n                s += format!(\"\
+      {:>+5.2}, \", self.get(x, y)).as_str();\n            }\n            s += \"]\\n\";\n        }\n        s += \"┃\\n┗━━━━┉\\\
+      n\";\n        s\n    }"
+  - source_sentence: Return sigma_z for mass distribution following tracer population
+    sentences:
+    - "def read_file(fname):\n    try:\n        f = open(fname, 'r')\n        try:\n            s = f.readlines()\n      \
+      \  finally:\n            f.close()\n    except IOError:\n        raise ProfileError(\"File not found or unreadable\"\
+      )\n    return s"
+    - "def sig_disk_dm(self, x, z, h, sgas=13.2):\n        sig2 = 4*np.pi*G*h*u.kpc*(0.5*x[0]*u.Msun*u.pc**-2*(1 - x[1]/(h\
+      \ + x[1])*np.exp(-z.to(u.kpc).value/x[1]))\n                                  + 0.5*sgas*u.Msun*u.pc**-2\n         \
+      \                         + x[2]*u.Msun*u.pc**-3*(h*u.kpc + z))\n        return np.sqrt(sig2).to(u.km*u.s**-1)"
+    - "pub fn add_row(&mut self, row: Row) -> &mut Self {\n        let cells = row.0;\n        assert_eq!(cells.len(), self.n_columns);\n\
+      \        for (width, s) in self.column_widths.iter_mut().zip(cells.iter()) {\n            *width = ::std::cmp::max(*width,\
+      \ s.width());\n        }\n        self.rows.push(InternalRow::Cells(cells));\n        self\n    }"
+  - source_sentence: 'Save this window''s workspace
+
+      Keyword Arguments:
+
+      filename        = workspace file to save
+
+      promptOverwrite = indicates if we should prompt before overwriting a file
+
+      promptSave      = indicates if we should prompt before saving a new file'
+    sentences:
+    - "def display_callback(id, interval_ms):\n  while True:\n    oled.fill(0)\n    oled.text(\"[air]\", 0, 0)           \
+      \             \n    oled.text(\"T=\" + bme.values[0],  0, 10)         \n    oled.text(\"H=\" + bme.values[2], 64, 10)\
+      \         \n    oled.text(\"P=\" + bme.values[1],  0, 20)         \n    oled.text(\"[water]\", 0, 30)              \
+      \       \n    oled.text(\"W=\" + ds18.values[0],    0, 40)      \n    if wlevel is not None:\n      oled.text(\"L=\"\
+      \ + get_wlevel(), 64, 40)        \n    oled.show()\n    for cnt in range(3600):         \n      utime.sleep_ms(1000)\n\
+      \      oled.text(\".\", 8*cnt, 55)\n      oled.show()\n      waiting = (cnt + 1) * 1000\n      if interval_ms <= waiting:\
+      \       \n        break\n      cnt += 1"
+    - "fn add_direct_i32s_from_slice(&mut self, i32s: &[i32]) {\n        for value in i32s {\n            self.add_direct_i32(*value);\n\
+      \        }\n    }"
+    - "def run(self, **kwargs):\n        super().run(**kwargs)\n        isNewWorkspace = self.window.id() not in EasyWorkspaceCommand._openWorkspaceFiles\n\
+      \        noFileProvided = kwargs.get('filename', None) == None\n        if isNewWorkspace and noFileProvided:\n    \
+      \        self.window.run_command(\"save_as_easy_workspace\", kwargs)\n        else:\n            self.window.status_message(\"\
+      Saving workspace...\")\n            ws = EasyWorkspace()\n            ws.buildFromWindow(self.window)\n            fullFilePath\
+      \ = self.getWorkspaceFilepath(kwargs.get('filename', EasyWorkspaceCommand._openWorkspaceFiles.get(self.window.id())))\n\
+      \            doSaveDialogResult = sublime.DIALOG_YES\n            if (kwargs.get(\"promptOverwrite\", False) and os.path.isfile(fullFilePath)):\n\
+      \                doSaveDialogResult = sublime.yes_no_cancel_dialog(\"Overwrite Easy Workspace?\\n\\n{}\".format(fullFilePath))\n\
+      \            elif (kwargs.get(\"promptSave\", False)):\n                doSaveDialogResult = sublime.yes_no_cancel_dialog(\"\
+      Save New Workspace?\\n\\n{}\".format(fullFilePath))\n            if doSaveDialogResult != sublime.DIALOG_YES:\n    \
+      \            self.window.status_message(\"Canceled\")\n            else:\n                ws.saveToFile(fullFilePath)\n\
+      \                EasyWorkspaceCommand._openWorkspaceFiles[self.window.id()] = fullFilePath\n                self.window.status_message(\"\
+      Saved \" + fullFilePath)"
+  - source_sentence: This function will close the connection.
+    sentences:
+    - "def schema_exists(dbname, name,\n                  db_user=None, db_password=None,\n                  db_host=None,\
+      \ db_port=None):\n    return bool(\n        schema_get(dbname, name,\n                   db_user=db_user,\n        \
+      \           db_host=db_host,\n                   db_port=db_port,\n                   db_password=db_password))"
+    - "def disconnect (self):\n    if self.connected:\n      self.__connection.close_session()\n    if self.debug:\n     \
+      \ print \"Connection closed!\""
+    - "pub fn grab_and_store(\n        &self,\n        client: Client<HttpsConnector<HttpConnector>, Body>,\n        db: &Pool<ConnectionManager<PgConnection>>,\n\
+      \        pool: &CpuPool,\n    ) -> Box<Future<Item = (), Error = ()>> {\n        let ad = self.clone();\n        let\
+      \ pool_db = pool.clone();\n        let db = db.clone();\n        let s3hostname = S3_BUCKET_NAME.unwrap_or(DEFAULT_S3_BUCKET_NAME).to_owned()\
+      \ + &(\".s3.amazonaws.com\".to_owned());\n        let s3hostname2 = s3hostname.clone(); // to circumvent some lifecycle\
+      \ thing I don't have time to fix right now.\n        let future = stream::iter_ok(self.image_urls())\n            //\
+      \ filter ones we already have in the db and ones we can verify as\n            // coming from fb, we don't want to become\
+      \ a malware vector :)\n            // currently we redownload images we already have, but ok.\n            .filter(move\
+      \ |u| {\n                info!(\"testing {:?}\", u.host());\n                match u.host() {\n                    Some(h)\
+      \ => (h == s3hostname2 || h.ends_with(\"fbcdn.net\")),\n                    None => false\n                }\n     \
+      \       })\n            // grab image\n            .and_then(move |img| {\n                let real_url = get_real_image_uri(img);\n\
+      \                info!(\"getting {:?}\", real_url.path());\n                client\n                    .get(real_url.clone())\n\
+      \                    .and_then(|res| {\n                        res.body().concat2().and_then(|chunk| Ok((chunk, real_url)))\n\
+      \                    })\n                    .map_err(|e| Error::with_chain(e, \"Could not get image\"))\n         \
+      \   })\n            // upload them to s3\n            .and_then(move |tuple| {\n                    if tuple.1.host().unwrap_or_default()\
+      \ != s3hostname {\n                        let client = S3Client::simple(Region::UsEast1);\n                       \
+      \ let req = PutObjectRequest {\n                            bucket: S3_BUCKET_NAME.unwrap_or(DEFAULT_S3_BUCKET_NAME).to_string(),\n\
+      \                            key: tuple.1.path().trim_left_matches('/').to_string(),\n                            acl:\
+      \ Some(\"public-read\".to_string()),\n                            body: Some(tuple.0.to_vec()),\n                  \
+      \          ..PutObjectRequest::default()\n                        };\n                        Either::A(client.put_object(&req)\n\
+      \                            .map_err(|e| { warn!(\"could not store image {:?}\", e); e.into() })\n                \
+      \            .and_then(|_| Ok(tuple.1)))\n                    } else {\n                        Either::B(future::ok(tuple.1).and_then(|i|\
+      \ Ok(i)))\n                    }\n            })\n            .collect()\n            // save the new urls to the database.\
+      \ the images variable will\n            // include only those that we've successfully saved to s3, so we\n         \
+      \   // have to do a funky merge here.\n            .and_then(move |images| {\n                let imgs = images.clone();\n\
+      \                pool_db.spawn_fn(move || {\n                    use schema::ads::dsl::*;\n                    let update\
+      \ = Images::from_ad(&ad, &imgs)?;\n                    let connection = db.get()?;\n                    diesel::update(ads.find(&ad.id))\n\
+      \                        .set(&update)\n                        .execute(&*connection)?;\n                    info!(\"\
+      saved {:?}\", ad.id);\n                    Ok(())\n                })\n            })\n            .or_else(|e| {\n\
+      \                warn!(\"{:?}\", e);\n                Ok(())\n            });\n        Box::new(future)\n    }"
+  - source_sentence: Called before data is used to initialize a Guildfile.
+    sentences:
+    - "pub fn default_submod_path(id: ast::Ident, dir_path: &Path, codemap: &CodeMap) -> ModulePath\n    {\n        let mod_name\
+      \ = id.to_string();\n        let default_path_str = format!(\"{}.rs\", mod_name);\n        let secondary_path_str =\
+      \ format!(\"{}/mod.rs\", mod_name);\n        let default_path = dir_path.join(&default_path_str);\n        let secondary_path\
+      \ = dir_path.join(&secondary_path_str);\n        let default_exists = codemap.file_exists(&default_path);\n        let\
+      \ secondary_exists = codemap.file_exists(&secondary_path);\n        let result = match (default_exists, secondary_exists)\
+      \ {\n            (true, false) => Ok(ModulePathSuccess { path: default_path, owns_directory: false }),\n           \
+      \ (false, true) => Ok(ModulePathSuccess { path: secondary_path, owns_directory: true }),\n            (false, false)\
+      \ => Err(ModulePathError {\n                err_msg: format!(\"file not found for module `{}`\", mod_name),\n      \
+      \          help_msg: format!(\"name the file either {} or {} inside the directory {:?}\",\n                        \
+      \          default_path_str,\n                                  secondary_path_str,\n                              \
+      \    dir_path.display()),\n            }),\n            (true, true) => Err(ModulePathError {\n                err_msg:\
+      \ format!(\"file for module `{}` found at both {} and {}\",\n                                 mod_name,\n          \
+      \                       default_path_str,\n                                 secondary_path_str),\n                help_msg:\
+      \ \"delete or rename one of them to remove the ambiguity\".to_owned(),\n            }),\n        };\n        ModulePath\
+      \ {\n            name: mod_name,\n            path_exists: default_exists || secondary_exists,\n            result:\
+      \ result,\n        }\n    }"
+    - 'def guildfile_data(self, data, src):'
+    - "def check_file(*file_path: typing.Union[str, Path], must_exist: bool = True) -> Path:\n    _file_path = check_path(*file_path,\
+      \ must_exist=must_exist)\n    if _file_path.exists():\n        if not _file_path.is_file():\n            raise TypeError(f'not\
+      \ a file: {str(_file_path.absolute())}')\n    return _file_path"
+  pipeline_tag: sentence-similarity
+  library_name: sentence-transformers
+siblings:
+- rfilename: .gitattributes
+- rfilename: 1_Pooling/config.json
+- rfilename: README.md
+- rfilename: config.json
+- rfilename: config_sentence_transformers.json
+- rfilename: model.safetensors
+- rfilename: modules.json
+- rfilename: sentence_bert_config.json
+- rfilename: tokenizer.json
+- rfilename: tokenizer_config.json
+spaces: []
+createdAt: '2026-08-06T16:39:41.000Z'
+safetensors:
+  parameters:
+    F32: 9224064
+  total: 9224064
+usedStorage: 36904024
+downloadsAllTime: 0
+inferenceProviderMapping: {}
+configJson:
+  add_cross_attention: false
+  architectures:
+  - BertModel
+  attention_probs_dropout_prob: 0.1
+  bos_token_id: null
+  classifier_dropout: null
+  dtype: float32
+  eos_token_id: null
+  hidden_act: gelu
+  hidden_dropout_prob: 0.1
+  hidden_size: 192
+  initializer_range: 0.02
+  intermediate_size: 768
+  is_decoder: false
+  layer_norm_eps: 1.0e-12
+  max_position_embeddings: 256
+  model_type: bert
+  num_attention_heads: 4
+  num_hidden_layers: 4
+  pad_token_id: 0
+  tie_word_embeddings: true
+  transformers_version: 5.13.1
+  type_vocab_size: 2
+  use_cache: false
+  vocab_size: 38321
+onnxFiles: {}
+safetensorsSizeMb: 36.9
+approxSizeMb: 36.9
+fetchedAt: '2026-08-07T05:00:08.000Z'
