@@ -1,0 +1,205 @@
+_id: 6a78edcae2f8ec4808445047
+id: as9122/qwen3-embedding-8b-stance-mixed-aug
+private: false
+pipeline_tag: sentence-similarity
+library_name: sentence-transformers
+tags:
+- sentence-transformers
+- safetensors
+- sentence-similarity
+- feature-extraction
+- generated_from_trainer
+- dataset_size:31800
+- loss:MultipleNegativesRankingLoss
+- arxiv:1908.10084
+- arxiv:1807.03748
+- base_model:Qwen/Qwen3-Embedding-8B
+- base_model:finetune:Qwen/Qwen3-Embedding-8B
+- endpoints_compatible
+- region:us
+downloads: 0
+likes: 0
+modelId: as9122/qwen3-embedding-8b-stance-mixed-aug
+author: as9122
+sha: be336917d336f48137a874e8d54c29805e300f20
+lastModified: '2026-08-09T21:15:03.000Z'
+gated: false
+disabled: false
+widgetData:
+- source_sentence: 'Instruct: Search for texts invalidating
+
+    Query: Artificial intelligence will ultimately enhance human creativity rather than replace it.'
+  sentences:
+  - The claim is essentially true because Toyota's brand reputation has become synonymous with quality and dependability,
+    making it the default 'best' choice for the majority of pragmatic car buyers worldwide.
+  - The infinite and effortless generation of content by AI will lead to market saturation and a profound devaluation of all
+    creative work, discouraging humans from engaging in the difficult creative process and thus replacing a vibrant creative
+    culture with one of passive consumption.
+  - Search for texts invalidating
+  - Artificial intelligence will ultimately enhance human creativity rather than replace it.
+- source_sentence: 'Instruct: Gather facts debunking
+
+    Query: Time is considered the best medicine.'
+  sentences:
+  - The claim is dangerously false for progressive diseases like cancer, serious infections, or heart disease, where waiting
+    and allowing time to pass is the opposite of effective medicine and can lead to irreversible harm or death.
+  - Gather facts debunking
+  - Time is considered the best medicine.
+  - The claim is an oversimplification because dismissing the original, highly significant statistical results as 'nothing'
+    may be premature. Even if not precognition, the data presented a statistical anomaly that is not fully explained, meaning
+    something of interest may have been observed, even if it wasn't what was claimed.
+- source_sentence: 'Instruct: Retrieve arguments in favor of
+
+    Query: Bertha von Suttner, a 19th-century peace activist and author, directly influenced Alfred Nobel''s decision to create
+    the Nobel Peace Prize.'
+  sentences:
+  - Retrieve arguments in favor of
+  - The claim is false because Nobel's philosophy on peace was notably different from Suttner's. Nobel held a more cynical
+    and pragmatic view, once remarking that his dynamite factories would end war sooner than her peace congresses. The prize's
+    criteria reflect his practical mindset, not a wholesale adoption of her idealistic pacifism.
+  - The claim is true because Suttner's activism gave Nobel a concrete path to redeem a legacy he worried would be defined
+    by his destructive inventions. While the 'merchant of death' obituary may have provided the motive, Suttner's work provided
+    the specific means and direction for his philanthropic action.
+  - Bertha von Suttner, a 19th-century peace activist and author, directly influenced Alfred Nobel's decision to create the
+    Nobel Peace Prize.
+- source_sentence: 'Instruct: Show literature challenging
+
+    Query: Angkor Wat was fully built during the reign of Suryavarman II.'
+  sentences:
+  - A powerful secret society with ambitions of global influence would require a secure, isolated, and technologically advanced
+    base of operations, and Area 51 provides the perfect location and resources for such a purpose.
+  - Angkor Wat was fully built during the reign of Suryavarman II.
+  - Art historical analysis shows that the style and quality of carving on the bas-reliefs are inconsistent. Sections in the
+    north and east galleries are believed to have been completed after Suryavarman II's death, directly contradicting the
+    claim that the temple was 'fully' built in his time.
+  - Show literature challenging
+- source_sentence: 'Instruct: Find evidence refuting
+
+    Query: Time is considered the best medicine.'
+  sentences:
+  - Find evidence refuting
+  - Time is considered the best medicine.
+  - In many interpersonal conflicts, time acts as a 'cooling off' period, reducing anger and emotional reactivity, which is
+    often the most critical step toward reconciliation and resolution.
+  - The proverb promotes a passive approach to problems that require active intervention. Relying on time can be an excuse
+    for avoiding difficult but necessary actions, from seeking medical help to confronting a personal issue.
+model-index: null
+config:
+  tokenizer_config:
+    bos_token: null
+    eos_token: <|im_end|>
+    pad_token: <|endoftext|>
+    unk_token: null
+  chat_template_jinja: "{%- if tools %}\n    {{- '<|im_start|>system\\n' }}\n    {%- if messages[0]['role'] == 'system' %}\n\
+    \        {{- messages[0]['content'] }}\n    {%- else %}\n        {{- 'You are a helpful assistant.' }}\n    {%- endif\
+    \ %}\n    {{- \"\\n\\n# Tools\\n\\nYou may call one or more functions to assist with the user query.\\n\\nYou are provided\
+    \ with function signatures within <tools></tools> XML tags:\\n<tools>\" }}\n    {%- for tool in tools %}\n        {{-\
+    \ \"\\n\" }}\n        {{- tool | tojson }}\n    {%- endfor %}\n    {{- \"\\n</tools>\\n\\nFor each function call, return\
+    \ a json object with function name and arguments within <tool_call></tool_call> XML tags:\\n<tool_call>\\n{\\\"name\\\"\
+    : <function-name>, \\\"arguments\\\": <args-json-object>}\\n</tool_call><|im_end|>\\n\" }}\n{%- else %}\n    {%- if messages[0]['role']\
+    \ == 'system' %}\n        {{- '<|im_start|>system\\n' + messages[0]['content'] + '<|im_end|>\\n' }}\n    {%- else %}\n\
+    \        {{- '<|im_start|>system\\nYou are a helpful assistant.<|im_end|>\\n' }}\n    {%- endif %}\n{%- endif %}\n{%-\
+    \ for message in messages %}\n    {%- if (message.role == \"user\") or (message.role == \"system\" and not loop.first)\
+    \ or (message.role == \"assistant\" and not message.tool_calls) %}\n        {{- '<|im_start|>' + message.role + '\\n'\
+    \ + message.content + '<|im_end|>' + '\\n' }}\n    {%- elif message.role == \"assistant\" %}\n        {{- '<|im_start|>'\
+    \ + message.role }}\n        {%- if message.content %}\n            {{- '\\n' + message.content }}\n        {%- endif\
+    \ %}\n        {%- for tool_call in message.tool_calls %}\n            {%- if tool_call.function is defined %}\n      \
+    \          {%- set tool_call = tool_call.function %}\n            {%- endif %}\n            {{- '\\n<tool_call>\\n{\"\
+    name\": \"' }}\n            {{- tool_call.name }}\n            {{- '\", \"arguments\": ' }}\n            {{- tool_call.arguments\
+    \ | tojson }}\n            {{- '}\\n</tool_call>' }}\n        {%- endfor %}\n        {{- '<|im_end|>\\n' }}\n    {%- elif\
+    \ message.role == \"tool\" %}\n        {%- if (loop.index0 == 0) or (messages[loop.index0 - 1].role != \"tool\") %}\n\
+    \            {{- '<|im_start|>user' }}\n        {%- endif %}\n        {{- '\\n<tool_response>\\n' }}\n        {{- message.content\
+    \ }}\n        {{- '\\n</tool_response>' }}\n        {%- if loop.last or (messages[loop.index0 + 1].role != \"tool\") %}\n\
+    \            {{- '<|im_end|>\\n' }}\n        {%- endif %}\n    {%- endif %}\n{%- endfor %}\n{%- if add_generation_prompt\
+    \ %}\n    {{- '<|im_start|>assistant\\n' }}\n{%- endif %}\n"
+cardData:
+  tags:
+  - sentence-transformers
+  - sentence-similarity
+  - feature-extraction
+  - generated_from_trainer
+  - dataset_size:31800
+  - loss:MultipleNegativesRankingLoss
+  base_model: Qwen/Qwen3-Embedding-8B
+  widget:
+  - source_sentence: 'Instruct: Search for texts invalidating
+
+      Query: Artificial intelligence will ultimately enhance human creativity rather than replace it.'
+    sentences:
+    - The claim is essentially true because Toyota's brand reputation has become synonymous with quality and dependability,
+      making it the default 'best' choice for the majority of pragmatic car buyers worldwide.
+    - The infinite and effortless generation of content by AI will lead to market saturation and a profound devaluation of
+      all creative work, discouraging humans from engaging in the difficult creative process and thus replacing a vibrant
+      creative culture with one of passive consumption.
+    - Search for texts invalidating
+    - Artificial intelligence will ultimately enhance human creativity rather than replace it.
+  - source_sentence: 'Instruct: Gather facts debunking
+
+      Query: Time is considered the best medicine.'
+    sentences:
+    - The claim is dangerously false for progressive diseases like cancer, serious infections, or heart disease, where waiting
+      and allowing time to pass is the opposite of effective medicine and can lead to irreversible harm or death.
+    - Gather facts debunking
+    - Time is considered the best medicine.
+    - The claim is an oversimplification because dismissing the original, highly significant statistical results as 'nothing'
+      may be premature. Even if not precognition, the data presented a statistical anomaly that is not fully explained, meaning
+      something of interest may have been observed, even if it wasn't what was claimed.
+  - source_sentence: 'Instruct: Retrieve arguments in favor of
+
+      Query: Bertha von Suttner, a 19th-century peace activist and author, directly influenced Alfred Nobel''s decision to
+      create the Nobel Peace Prize.'
+    sentences:
+    - Retrieve arguments in favor of
+    - The claim is false because Nobel's philosophy on peace was notably different from Suttner's. Nobel held a more cynical
+      and pragmatic view, once remarking that his dynamite factories would end war sooner than her peace congresses. The prize's
+      criteria reflect his practical mindset, not a wholesale adoption of her idealistic pacifism.
+    - The claim is true because Suttner's activism gave Nobel a concrete path to redeem a legacy he worried would be defined
+      by his destructive inventions. While the 'merchant of death' obituary may have provided the motive, Suttner's work provided
+      the specific means and direction for his philanthropic action.
+    - Bertha von Suttner, a 19th-century peace activist and author, directly influenced Alfred Nobel's decision to create
+      the Nobel Peace Prize.
+  - source_sentence: 'Instruct: Show literature challenging
+
+      Query: Angkor Wat was fully built during the reign of Suryavarman II.'
+    sentences:
+    - A powerful secret society with ambitions of global influence would require a secure, isolated, and technologically advanced
+      base of operations, and Area 51 provides the perfect location and resources for such a purpose.
+    - Angkor Wat was fully built during the reign of Suryavarman II.
+    - Art historical analysis shows that the style and quality of carving on the bas-reliefs are inconsistent. Sections in
+      the north and east galleries are believed to have been completed after Suryavarman II's death, directly contradicting
+      the claim that the temple was 'fully' built in his time.
+    - Show literature challenging
+  - source_sentence: 'Instruct: Find evidence refuting
+
+      Query: Time is considered the best medicine.'
+    sentences:
+    - Find evidence refuting
+    - Time is considered the best medicine.
+    - In many interpersonal conflicts, time acts as a 'cooling off' period, reducing anger and emotional reactivity, which
+      is often the most critical step toward reconciliation and resolution.
+    - The proverb promotes a passive approach to problems that require active intervention. Relying on time can be an excuse
+      for avoiding difficult but necessary actions, from seeking medical help to confronting a personal issue.
+  pipeline_tag: sentence-similarity
+  library_name: sentence-transformers
+siblings:
+- rfilename: .gitattributes
+- rfilename: 1_Pooling/config.json
+- rfilename: README.md
+- rfilename: adapter_config.json
+- rfilename: adapter_model.safetensors
+- rfilename: chat_template.jinja
+- rfilename: config_sentence_transformers.json
+- rfilename: modules.json
+- rfilename: sentence_bert_config.json
+- rfilename: tokenizer.json
+- rfilename: tokenizer_config.json
+spaces: []
+createdAt: '2026-08-09T21:14:50.000Z'
+usedStorage: 360664443
+downloadsAllTime: 0
+inferenceProviderMapping: {}
+configJson: null
+onnxFiles: {}
+safetensorsSizeMb: 349.2
+approxSizeMb: 0.0
+fetchedAt: '2026-08-10T04:45:55.000Z'
