@@ -1,0 +1,317 @@
+_id: 6a7c155923af3d022a24e01e
+id: kwondw/quora-mnrl
+private: false
+pipeline_tag: sentence-similarity
+library_name: sentence-transformers
+tags:
+- sentence-transformers
+- safetensors
+- distilbert
+- sentence-similarity
+- feature-extraction
+- generated_from_trainer
+- dataset_size:100000
+- loss:MultipleNegativesRankingLoss
+- loss:CachedMultipleNegativesRankingLoss
+- en
+- dataset:sentence-transformers/quora-duplicates
+- arxiv:1908.10084
+- arxiv:2101.06983
+- base_model:sentence-transformers/stsb-distilbert-base
+- base_model:finetune:sentence-transformers/stsb-distilbert-base
+- model-index
+- text-embeddings-inference
+- endpoints_compatible
+- region:us
+downloads: 0
+likes: 0
+modelId: kwondw/quora-mnrl
+author: kwondw
+sha: d591b8386068a1fbc09b2d0abdfc94b7397829a2
+lastModified: '2026-08-12T06:40:35.000Z'
+gated: false
+disabled: false
+mask_token: '[MASK]'
+widgetData:
+- source_sentence: What is the main circuit board of a computer? How is it built and what is its function?
+  sentences:
+  - Information systems are too important to be left to computer specialist. Do you agree?
+  - What is the main circuit board of a computer? What are its functions?
+  - Has reading a book ever changed your life? Which one?
+- source_sentence: How will sales representative of the future use data?
+  sentences:
+  - How will sales representatives of the future use data?
+  - Do we get flight tickets at a cheaper rate when we buy them at the airport?
+  - What is a good website for making a poster?
+- source_sentence: What would you do if given the power to become invisible?
+  sentences:
+  - Is the universe 13.8 thousand million years old or 13.8 million million years?
+  - What is the first thing that comes to your mind, if you given the power of invisibility? What would you do?
+  - What ways can I become a better legal writer?
+- source_sentence: How god Rama died?
+  sentences:
+  - How did rama die?
+  - What are the things an airline pilot carry in their flight bag?
+  - What is a good way to start learning Python and Data Visualization?
+- source_sentence: What are the best car gadgets in 2016?
+  sentences:
+  - Are there any good summer programs for high school students?
+  - What is the origin of saying God Bless You after sneezing?
+  - What are some of the best gadgets of 2016?
+model-index:
+- name: SentenceTransformer based on sentence-transformers/stsb-distilbert-base
+  results:
+  - task:
+      type: information-retrieval
+      name: Information Retrieval
+    dataset:
+      name: quora ir
+      type: quora-ir
+    metrics:
+    - type: cosine_accuracy@1
+      value: 0.9612
+      name: Cosine Accuracy@1
+      verified: false
+    - type: cosine_accuracy@3
+      value: 0.99
+      name: Cosine Accuracy@3
+      verified: false
+    - type: cosine_accuracy@5
+      value: 0.9948
+      name: Cosine Accuracy@5
+      verified: false
+    - type: cosine_accuracy@10
+      value: 0.998
+      name: Cosine Accuracy@10
+      verified: false
+    - type: cosine_precision@1
+      value: 0.9612
+      name: Cosine Precision@1
+      verified: false
+    - type: cosine_precision@3
+      value: 0.4268
+      name: Cosine Precision@3
+      verified: false
+    - type: cosine_precision@5
+      value: 0.27428
+      name: Cosine Precision@5
+      verified: false
+    - type: cosine_precision@10
+      value: 0.14494
+      name: Cosine Precision@10
+      verified: false
+    - type: cosine_recall@1
+      value: 0.8276982901379666
+      name: Cosine Recall@1
+      verified: false
+    - type: cosine_recall@3
+      value: 0.9561827347717641
+      name: Cosine Recall@3
+      verified: false
+    - type: cosine_recall@5
+      value: 0.978750945639328
+      name: Cosine Recall@5
+      verified: false
+    - type: cosine_recall@10
+      value: 0.9925091985139044
+      name: Cosine Recall@10
+      verified: false
+    - type: cosine_ndcg@10
+      value: 0.9767163980558616
+      name: Cosine Ndcg@10
+      verified: false
+    - type: cosine_mrr@10
+      value: 0.9760650793650791
+      name: Cosine Mrr@10
+      verified: false
+    - type: cosine_map@100
+      value: 0.9679574849919099
+      name: Cosine Map@100
+      verified: false
+config:
+  architectures:
+  - DistilBertModel
+  model_type: distilbert
+  tokenizer_config:
+    cls_token: '[CLS]'
+    mask_token: '[MASK]'
+    pad_token: '[PAD]'
+    sep_token: '[SEP]'
+    unk_token: '[UNK]'
+cardData:
+  language:
+  - en
+  tags:
+  - sentence-transformers
+  - sentence-similarity
+  - feature-extraction
+  - generated_from_trainer
+  - dataset_size:100000
+  - loss:MultipleNegativesRankingLoss
+  - loss:CachedMultipleNegativesRankingLoss
+  base_model: sentence-transformers/stsb-distilbert-base
+  widget:
+  - source_sentence: What is the main circuit board of a computer? How is it built and what is its function?
+    sentences:
+    - Information systems are too important to be left to computer specialist. Do you agree?
+    - What is the main circuit board of a computer? What are its functions?
+    - Has reading a book ever changed your life? Which one?
+  - source_sentence: How will sales representative of the future use data?
+    sentences:
+    - How will sales representatives of the future use data?
+    - Do we get flight tickets at a cheaper rate when we buy them at the airport?
+    - What is a good website for making a poster?
+  - source_sentence: What would you do if given the power to become invisible?
+    sentences:
+    - Is the universe 13.8 thousand million years old or 13.8 million million years?
+    - What is the first thing that comes to your mind, if you given the power of invisibility? What would you do?
+    - What ways can I become a better legal writer?
+  - source_sentence: How god Rama died?
+    sentences:
+    - How did rama die?
+    - What are the things an airline pilot carry in their flight bag?
+    - What is a good way to start learning Python and Data Visualization?
+  - source_sentence: What are the best car gadgets in 2016?
+    sentences:
+    - Are there any good summer programs for high school students?
+    - What is the origin of saying God Bless You after sneezing?
+    - What are some of the best gadgets of 2016?
+  datasets:
+  - sentence-transformers/quora-duplicates
+  pipeline_tag: sentence-similarity
+  library_name: sentence-transformers
+  metrics:
+  - cosine_accuracy@1
+  - cosine_accuracy@3
+  - cosine_accuracy@5
+  - cosine_accuracy@10
+  - cosine_precision@1
+  - cosine_precision@3
+  - cosine_precision@5
+  - cosine_precision@10
+  - cosine_recall@1
+  - cosine_recall@3
+  - cosine_recall@5
+  - cosine_recall@10
+  - cosine_ndcg@10
+  - cosine_mrr@10
+  - cosine_map@100
+  model-index:
+  - name: SentenceTransformer based on sentence-transformers/stsb-distilbert-base
+    results:
+    - task:
+        type: information-retrieval
+        name: Information Retrieval
+      dataset:
+        name: quora ir
+        type: quora-ir
+      metrics:
+      - type: cosine_accuracy@1
+        value: 0.9612
+        name: Cosine Accuracy@1
+        verified: false
+      - type: cosine_accuracy@3
+        value: 0.99
+        name: Cosine Accuracy@3
+        verified: false
+      - type: cosine_accuracy@5
+        value: 0.9948
+        name: Cosine Accuracy@5
+        verified: false
+      - type: cosine_accuracy@10
+        value: 0.998
+        name: Cosine Accuracy@10
+        verified: false
+      - type: cosine_precision@1
+        value: 0.9612
+        name: Cosine Precision@1
+        verified: false
+      - type: cosine_precision@3
+        value: 0.4268
+        name: Cosine Precision@3
+        verified: false
+      - type: cosine_precision@5
+        value: 0.27428
+        name: Cosine Precision@5
+        verified: false
+      - type: cosine_precision@10
+        value: 0.14494
+        name: Cosine Precision@10
+        verified: false
+      - type: cosine_recall@1
+        value: 0.8276982901379666
+        name: Cosine Recall@1
+        verified: false
+      - type: cosine_recall@3
+        value: 0.9561827347717641
+        name: Cosine Recall@3
+        verified: false
+      - type: cosine_recall@5
+        value: 0.978750945639328
+        name: Cosine Recall@5
+        verified: false
+      - type: cosine_recall@10
+        value: 0.9925091985139044
+        name: Cosine Recall@10
+        verified: false
+      - type: cosine_ndcg@10
+        value: 0.9767163980558616
+        name: Cosine Ndcg@10
+        verified: false
+      - type: cosine_mrr@10
+        value: 0.9760650793650791
+        name: Cosine Mrr@10
+        verified: false
+      - type: cosine_map@100
+        value: 0.9679574849919099
+        name: Cosine Map@100
+        verified: false
+siblings:
+- rfilename: .gitattributes
+- rfilename: 1_Pooling/config.json
+- rfilename: README.md
+- rfilename: config.json
+- rfilename: config_sentence_transformers.json
+- rfilename: model.safetensors
+- rfilename: modules.json
+- rfilename: sentence_bert_config.json
+- rfilename: tokenizer.json
+- rfilename: tokenizer_config.json
+spaces: []
+createdAt: '2026-08-12T06:40:25.000Z'
+safetensors:
+  parameters:
+    F32: 66362880
+  total: 66362880
+usedStorage: 265462608
+downloadsAllTime: 0
+inferenceProviderMapping: {}
+configJson:
+  activation: gelu
+  architectures:
+  - DistilBertModel
+  attention_dropout: 0.1
+  bos_token_id: null
+  dim: 768
+  dropout: 0.1
+  dtype: float32
+  eos_token_id: null
+  hidden_dim: 3072
+  initializer_range: 0.02
+  max_position_embeddings: 512
+  model_type: distilbert
+  n_heads: 12
+  n_layers: 6
+  pad_token_id: 0
+  qa_dropout: 0.1
+  seq_classif_dropout: 0.2
+  sinusoidal_pos_embds: false
+  tie_weights_: true
+  tie_word_embeddings: true
+  transformers_version: 5.13.1
+  use_cache: false
+  vocab_size: 30522
+onnxFiles: {}
+safetensorsSizeMb: 265.5
+approxSizeMb: 265.5
+fetchedAt: '2026-08-13T04:58:47.000Z'
