@@ -1,0 +1,189 @@
+_id: 6a82e3c28bf4a65b4233b2df
+id: skkut/qwen3-embedding-8b-q4f16_1-MLC
+private: false
+pipeline_tag: feature-extraction
+tags:
+- mlc
+- webgpu
+- web-llm
+- embedding
+- qwen3
+- feature-extraction
+- license:apache-2.0
+- region:us
+downloads: 0
+likes: 0
+modelId: skkut/qwen3-embedding-8b-q4f16_1-MLC
+author: skkut
+sha: 497bdf917c3a52dc93b75bc604f9fb03ee557854
+lastModified: '2026-08-17T11:02:03.000Z'
+gated: false
+disabled: false
+model-index: null
+config:
+  tokenizer_config:
+    bos_token: null
+    chat_template: "{%- if tools %}\n    {{- '<|im_start|>system\\n' }}\n    {%- if messages[0]['role'] == 'system' %}\n \
+      \       {{- messages[0]['content'] }}\n    {%- else %}\n        {{- 'You are a helpful assistant.' }}\n    {%- endif\
+      \ %}\n    {{- \"\\n\\n# Tools\\n\\nYou may call one or more functions to assist with the user query.\\n\\nYou are provided\
+      \ with function signatures within <tools></tools> XML tags:\\n<tools>\" }}\n    {%- for tool in tools %}\n        {{-\
+      \ \"\\n\" }}\n        {{- tool | tojson }}\n    {%- endfor %}\n    {{- \"\\n</tools>\\n\\nFor each function call, return\
+      \ a json object with function name and arguments within <tool_call></tool_call> XML tags:\\n<tool_call>\\n{\\\"name\\\
+      \": <function-name>, \\\"arguments\\\": <args-json-object>}\\n</tool_call><|im_end|>\\n\" }}\n{%- else %}\n    {%- if\
+      \ messages[0]['role'] == 'system' %}\n        {{- '<|im_start|>system\\n' + messages[0]['content'] + '<|im_end|>\\n'\
+      \ }}\n    {%- else %}\n        {{- '<|im_start|>system\\nYou are a helpful assistant.<|im_end|>\\n' }}\n    {%- endif\
+      \ %}\n{%- endif %}\n{%- for message in messages %}\n    {%- if (message.role == \"user\") or (message.role == \"system\"\
+      \ and not loop.first) or (message.role == \"assistant\" and not message.tool_calls) %}\n        {{- '<|im_start|>' +\
+      \ message.role + '\\n' + message.content + '<|im_end|>' + '\\n' }}\n    {%- elif message.role == \"assistant\" %}\n\
+      \        {{- '<|im_start|>' + message.role }}\n        {%- if message.content %}\n            {{- '\\n' + message.content\
+      \ }}\n        {%- endif %}\n        {%- for tool_call in message.tool_calls %}\n            {%- if tool_call.function\
+      \ is defined %}\n                {%- set tool_call = tool_call.function %}\n            {%- endif %}\n            {{-\
+      \ '\\n<tool_call>\\n{\"name\": \"' }}\n            {{- tool_call.name }}\n            {{- '\", \"arguments\": ' }}\n\
+      \            {{- tool_call.arguments | tojson }}\n            {{- '}\\n</tool_call>' }}\n        {%- endfor %}\n   \
+      \     {{- '<|im_end|>\\n' }}\n    {%- elif message.role == \"tool\" %}\n        {%- if (loop.index0 == 0) or (messages[loop.index0\
+      \ - 1].role != \"tool\") %}\n            {{- '<|im_start|>user' }}\n        {%- endif %}\n        {{- '\\n<tool_response>\\\
+      n' }}\n        {{- message.content }}\n        {{- '\\n</tool_response>' }}\n        {%- if loop.last or (messages[loop.index0\
+      \ + 1].role != \"tool\") %}\n            {{- '<|im_end|>\\n' }}\n        {%- endif %}\n    {%- endif %}\n{%- endfor\
+      \ %}\n{%- if add_generation_prompt %}\n    {{- '<|im_start|>assistant\\n' }}\n{%- endif %}\n"
+    eos_token: <|im_end|>
+    pad_token: <|endoftext|>
+    unk_token: null
+cardData:
+  license: apache-2.0
+  tags:
+  - mlc
+  - webgpu
+  - web-llm
+  - embedding
+  - qwen3
+  pipeline_tag: feature-extraction
+siblings:
+- rfilename: .gitattributes
+- rfilename: README.md
+- rfilename: merges.txt
+- rfilename: mlc-chat-config.json
+- rfilename: params_shard_0.bin
+- rfilename: params_shard_1.bin
+- rfilename: params_shard_10.bin
+- rfilename: params_shard_100.bin
+- rfilename: params_shard_101.bin
+- rfilename: params_shard_102.bin
+- rfilename: params_shard_103.bin
+- rfilename: params_shard_104.bin
+- rfilename: params_shard_105.bin
+- rfilename: params_shard_106.bin
+- rfilename: params_shard_107.bin
+- rfilename: params_shard_108.bin
+- rfilename: params_shard_109.bin
+- rfilename: params_shard_11.bin
+- rfilename: params_shard_12.bin
+- rfilename: params_shard_13.bin
+- rfilename: params_shard_14.bin
+- rfilename: params_shard_15.bin
+- rfilename: params_shard_16.bin
+- rfilename: params_shard_17.bin
+- rfilename: params_shard_18.bin
+- rfilename: params_shard_19.bin
+- rfilename: params_shard_2.bin
+- rfilename: params_shard_20.bin
+- rfilename: params_shard_21.bin
+- rfilename: params_shard_22.bin
+- rfilename: params_shard_23.bin
+- rfilename: params_shard_24.bin
+- rfilename: params_shard_25.bin
+- rfilename: params_shard_26.bin
+- rfilename: params_shard_27.bin
+- rfilename: params_shard_28.bin
+- rfilename: params_shard_29.bin
+- rfilename: params_shard_3.bin
+- rfilename: params_shard_30.bin
+- rfilename: params_shard_31.bin
+- rfilename: params_shard_32.bin
+- rfilename: params_shard_33.bin
+- rfilename: params_shard_34.bin
+- rfilename: params_shard_35.bin
+- rfilename: params_shard_36.bin
+- rfilename: params_shard_37.bin
+- rfilename: params_shard_38.bin
+- rfilename: params_shard_39.bin
+- rfilename: params_shard_4.bin
+- rfilename: params_shard_40.bin
+- rfilename: params_shard_41.bin
+- rfilename: params_shard_42.bin
+- rfilename: params_shard_43.bin
+- rfilename: params_shard_44.bin
+- rfilename: params_shard_45.bin
+- rfilename: params_shard_46.bin
+- rfilename: params_shard_47.bin
+- rfilename: params_shard_48.bin
+- rfilename: params_shard_49.bin
+- rfilename: params_shard_5.bin
+- rfilename: params_shard_50.bin
+- rfilename: params_shard_51.bin
+- rfilename: params_shard_52.bin
+- rfilename: params_shard_53.bin
+- rfilename: params_shard_54.bin
+- rfilename: params_shard_55.bin
+- rfilename: params_shard_56.bin
+- rfilename: params_shard_57.bin
+- rfilename: params_shard_58.bin
+- rfilename: params_shard_59.bin
+- rfilename: params_shard_6.bin
+- rfilename: params_shard_60.bin
+- rfilename: params_shard_61.bin
+- rfilename: params_shard_62.bin
+- rfilename: params_shard_63.bin
+- rfilename: params_shard_64.bin
+- rfilename: params_shard_65.bin
+- rfilename: params_shard_66.bin
+- rfilename: params_shard_67.bin
+- rfilename: params_shard_68.bin
+- rfilename: params_shard_69.bin
+- rfilename: params_shard_7.bin
+- rfilename: params_shard_70.bin
+- rfilename: params_shard_71.bin
+- rfilename: params_shard_72.bin
+- rfilename: params_shard_73.bin
+- rfilename: params_shard_74.bin
+- rfilename: params_shard_75.bin
+- rfilename: params_shard_76.bin
+- rfilename: params_shard_77.bin
+- rfilename: params_shard_78.bin
+- rfilename: params_shard_79.bin
+- rfilename: params_shard_8.bin
+- rfilename: params_shard_80.bin
+- rfilename: params_shard_81.bin
+- rfilename: params_shard_82.bin
+- rfilename: params_shard_83.bin
+- rfilename: params_shard_84.bin
+- rfilename: params_shard_85.bin
+- rfilename: params_shard_86.bin
+- rfilename: params_shard_87.bin
+- rfilename: params_shard_88.bin
+- rfilename: params_shard_89.bin
+- rfilename: params_shard_9.bin
+- rfilename: params_shard_90.bin
+- rfilename: params_shard_91.bin
+- rfilename: params_shard_92.bin
+- rfilename: params_shard_93.bin
+- rfilename: params_shard_94.bin
+- rfilename: params_shard_95.bin
+- rfilename: params_shard_96.bin
+- rfilename: params_shard_97.bin
+- rfilename: params_shard_98.bin
+- rfilename: params_shard_99.bin
+- rfilename: qwen3-embedding-8b-q4f16_1-ctx2048_batch2-webgpu.wasm
+- rfilename: tensor-cache.json
+- rfilename: tokenizer.json
+- rfilename: tokenizer_config.json
+- rfilename: vocab.json
+spaces: []
+createdAt: '2026-08-17T10:34:42.000Z'
+usedStorage: 4275295654
+downloadsAllTime: 0
+inferenceProviderMapping: {}
+configJson: null
+onnxFiles: {}
+safetensorsSizeMb: 0.0
+approxSizeMb: 0.0
+fetchedAt: '2026-08-18T03:50:47.000Z'

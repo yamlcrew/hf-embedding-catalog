@@ -1,0 +1,155 @@
+_id: 690489849a307eb72d089705
+id: RahulPi/Email_Text_Formatter
+private: false
+pipeline_tag: feature-extraction
+library_name: transformers
+tags:
+- transformers
+- safetensors
+- llama
+- text-generation
+- text-generation-inference
+- unsloth
+- phi-4
+- information-extraction
+- feature-extraction
+- en
+- base_model:unsloth/phi-4-unsloth-bnb-4bit
+- base_model:quantized:unsloth/phi-4-unsloth-bnb-4bit
+- license:apache-2.0
+- text-embeddings-inference
+- endpoints_compatible
+- 4-bit
+- bitsandbytes
+- region:us
+downloads: 0
+likes: 0
+modelId: RahulPi/Email_Text_Formatter
+author: RahulPi
+sha: ea9e39197ffe7f9a0c58960c13ee63b8f5c3ef0a
+lastModified: '2026-08-17T17:53:57.000Z'
+gated: false
+disabled: false
+model-index: null
+config:
+  architectures:
+  - LlamaForCausalLM
+  model_type: llama
+  quantization_config:
+    load_in_4bit: true
+    load_in_8bit: false
+    quant_method: bitsandbytes
+  tokenizer_config:
+    bos_token: <|endoftext|>
+    eos_token: <|im_end|>
+    pad_token: <|dummy_87|>
+    unk_token: ï¿½
+    chat_template: '{% for message in messages %}{% if (message[''role''] == ''system'') %}{{''<|im_start|>system<|im_sep|>''
+      + message[''content''] + ''<|im_end|>''}}{% elif (message[''role''] == ''user'') %}{{''<|im_start|>user<|im_sep|>''
+      + message[''content''] + ''<|im_end|>''}}{% elif (message[''role''] == ''assistant'') %}{{''<|im_start|>assistant<|im_sep|>''
+      + message[''content''] + ''<|im_end|>''}}{% endif %}{% endfor %}{% if add_generation_prompt %}{{ ''<|im_start|>assistant<|im_sep|>''
+      }}{% endif %}'
+  chat_template_jinja: '{% for message in messages %}{% if (message[''role''] == ''system'') %}{{''<|im_start|>system<|im_sep|>''
+    + message[''content''] + ''<|im_end|>''}}{% elif (message[''role''] == ''user'') %}{{''<|im_start|>user<|im_sep|>'' +
+    message[''content''] + ''<|im_end|>''}}{% elif (message[''role''] == ''assistant'') %}{{''<|im_start|>assistant<|im_sep|>''
+    + message[''content''] + ''<|im_end|>''}}{% endif %}{% endfor %}{% if add_generation_prompt %}{{ ''<|im_start|>assistant<|im_sep|>''
+    }}{% endif %}'
+cardData:
+  base_model: unsloth/phi-4-unsloth-bnb-4bit
+  tags:
+  - text-generation-inference
+  - transformers
+  - unsloth
+  - phi-4
+  - information-extraction
+  license: apache-2.0
+  language:
+  - en
+  pipeline_tag: feature-extraction
+transformersInfo:
+  auto_model: AutoModelForCausalLM
+  pipeline_tag: text-generation
+  processor: AutoTokenizer
+siblings:
+- rfilename: .gitattributes
+- rfilename: README.md
+- rfilename: chat_template.jinja
+- rfilename: config.json
+- rfilename: generation_config.json
+- rfilename: merges.txt
+- rfilename: model-00001-of-00003.safetensors
+- rfilename: model-00002-of-00003.safetensors
+- rfilename: model-00003-of-00003.safetensors
+- rfilename: model.safetensors.index.json
+- rfilename: special_tokens_map.json
+- rfilename: tokenizer.json
+- rfilename: tokenizer_config.json
+- rfilename: vocab.json
+spaces: []
+createdAt: '2025-10-31T10:03:48.000Z'
+safetensors:
+  parameters:
+    F16: 1906201600
+    U8: 12753305600
+  total: 14659507200
+usedStorage: 39711039251
+downloadsAllTime: 6
+inferenceProviderMapping: {}
+configJson:
+  architectures:
+  - LlamaForCausalLM
+  attention_bias: false
+  attention_dropout: 0.0
+  bos_token_id: 100257
+  torch_dtype: float16
+  eos_token_id: 100265
+  head_dim: 128
+  hidden_act: silu
+  hidden_size: 5120
+  initializer_range: 0.02
+  intermediate_size: 17920
+  max_position_embeddings: 16384
+  mlp_bias: false
+  model_type: llama
+  num_attention_heads: 40
+  num_hidden_layers: 40
+  num_key_value_heads: 10
+  original_max_position_embeddings: 16384
+  pad_token_id: 100351
+  pretraining_tp: 1
+  quantization_config:
+    bnb_4bit_compute_dtype: float16
+    bnb_4bit_quant_type: nf4
+    bnb_4bit_use_double_quant: true
+    llm_int8_enable_fp32_cpu_offload: false
+    llm_int8_has_fp16_weight: false
+    llm_int8_skip_modules:
+    - model.layers.1.mlp.gate_proj
+    - model.layers.1.mlp.up_proj
+    - model.layers.1.mlp.down_proj
+    - model.layers.2.mlp.gate_proj
+    - model.layers.2.mlp.up_proj
+    - model.layers.2.mlp.down_proj
+    - model.layers.3.mlp.gate_proj
+    - model.layers.3.mlp.up_proj
+    - model.layers.3.mlp.down_proj
+    - model.layers.37.self_attn.o_proj
+    - model.layers.39.self_attn.o_proj
+    - lm_head
+    llm_int8_threshold: 6.0
+    load_in_4bit: true
+    load_in_8bit: false
+    quant_method: bitsandbytes
+  rms_norm_eps: 1.0e-05
+  rope_scaling: null
+  rope_theta: 250000
+  tie_word_embeddings: false
+  transformers_version: 4.57.1
+  unsloth_fixed: true
+  unsloth_version: 2025.10.12
+  use_cache: true
+  vocab_size: 100352
+onnxFiles: {}
+safetensorsSizeMb: 10392.0
+approxSizeMb: 16565.7
+fetchedAt: '2026-08-18T03:50:47.000Z'
