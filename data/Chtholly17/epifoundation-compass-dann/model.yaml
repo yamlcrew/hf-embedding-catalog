@@ -1,0 +1,116 @@
+_id: 6a84fa3bd69f0f097d6aa7ac
+id: Chtholly17/epifoundation-compass-dann
+private: false
+pipeline_tag: feature-extraction
+library_name: pytorch
+tags:
+- pytorch
+- epifoundation_sctransformer
+- single-cell
+- multi-omics
+- scATAC-seq
+- scRNA-seq
+- foundation-model
+- transformer
+- domain-adversarial
+- biology
+- feature-extraction
+- license:mit
+- region:us
+downloads: 0
+likes: 0
+modelId: Chtholly17/epifoundation-compass-dann
+author: Chtholly17
+sha: aaef5342b218127175b45c0f777d76309ef6bb14
+lastModified: '2026-08-19T00:35:24.000Z'
+gated: false
+disabled: false
+model-index: null
+config:
+  model_type: epifoundation_sctransformer
+  architectures:
+  - scTransformer
+cardData:
+  license: mit
+  library_name: pytorch
+  tags:
+  - single-cell
+  - multi-omics
+  - scATAC-seq
+  - scRNA-seq
+  - foundation-model
+  - transformer
+  - domain-adversarial
+  - biology
+  pipeline_tag: feature-extraction
+siblings:
+- rfilename: .gitattributes
+- rfilename: README.md
+- rfilename: config.json
+- rfilename: config.yml
+- rfilename: epifoundation_dann_pretrain.pth
+spaces: []
+createdAt: '2026-08-19T00:35:07.000Z'
+usedStorage: 1204783776
+downloadsAllTime: 0
+inferenceProviderMapping: {}
+configJson:
+  model_type: epifoundation_sctransformer
+  architectures:
+  - scTransformer
+  encoder: transformer
+  fast_transformer_backend: flash
+  embedding_method: id_only
+  embedding_dim: 512
+  num_layers: 6
+  head_num: 8
+  head_dim: 1024
+  dropout: 0.2
+  atac_max_len: 8000
+  rna_max_len: 8000
+  cell_emb_style: cls
+  mvc_arch_style: concat query
+  use_batch_labels: true
+  use_chr_labels: true
+  use_dann: true
+  dann_lambda: 0.1
+  bin_num: 2
+  append_cls: true
+  vocab_sizes:
+    atac: 524155
+    rna: 36605
+    batch: 212
+    cell_type: 127
+    chr: 44
+  special_tokens:
+    pad:
+      token: <pad>
+      value: 2
+    mask:
+      token: <mask>
+      value: 3
+    cls:
+      token: <cls>
+      value: 0
+  training:
+    objective: masked value/expression reconstruction (MVC, binary) + DANN batch adversary
+    task_weight:
+      cell_type: 0.0
+      mvc: 1.0
+      dann: 0.1
+    optimizer: Adam
+    lr: 0.0001
+    amp: true
+    effective_batch_size: 256
+    epoch: 58
+    global_step: 1715504
+  n_parameters: 301185880
+  n_tensors: 119
+  checkpoint_file: epifoundation_dann_pretrain.pth
+  checkpoint_format:
+    note: torch.save dict; weights under key 'model' (plain state_dict, no DDP 'module.' prefix); 'epoch' also kept. Optimizer/scheduler/scaler
+      states removed.
+onnxFiles: {}
+safetensorsSizeMb: 0.0
+approxSizeMb: 0.0
+fetchedAt: '2026-08-19T03:52:20.000Z'
