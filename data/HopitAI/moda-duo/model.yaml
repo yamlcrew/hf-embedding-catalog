@@ -1,0 +1,113 @@
+_id: 6a8574a494f45f7b5568a93d
+id: HopitAI/moda-duo
+private: false
+pipeline_tag: feature-extraction
+library_name: open_clip
+tags:
+- open_clip
+- fashion
+- retrieval
+- text-to-image
+- routing
+- feature-extraction
+- license:apache-2.0
+- region:us
+downloads: 0
+likes: 0
+modelId: HopitAI/moda-duo
+author: HopitAI
+sha: 70c581038419d23040c02a5b0b809aaecb25411e
+lastModified: '2026-08-19T09:57:12.000Z'
+gated: false
+disabled: false
+model-index: null
+config: {}
+cardData:
+  license: apache-2.0
+  tags:
+  - fashion
+  - retrieval
+  - text-to-image
+  - open_clip
+  - routing
+  pipeline_tag: feature-extraction
+siblings:
+- rfilename: .gitattributes
+- rfilename: README.md
+- rfilename: config.json
+- rfilename: serving_ann.py
+spaces: []
+createdAt: '2026-08-19T09:17:24.000Z'
+usedStorage: 0
+downloadsAllTime: 0
+inferenceProviderMapping: {}
+configJson:
+  name: MODA Duo
+  artifact_type: retrieval_system
+  description: 'Two open constituents, one answer per query. Each query is routed to whichever constituent suits its shape:
+    short catalogue titles to MODA Pro Lite+, longer descriptions to MODA. One text forward and one nearest-neighbour query
+    per search.'
+  additional_learned_parameters: 0
+  constituents:
+    moda:
+      base_model: Marqo/marqo-fashionSigLIP
+      parameters: 203155970
+      embedding_dimension: 768
+      gallery:
+        views:
+          official: 1.0
+          pad_white: 0.25
+          center_crop: 0.25
+        normalize: true
+      query:
+        prompts:
+          raw: 1.0
+          product: 0.25
+        normalize: true
+      prompt_templates:
+        raw: '{query}'
+        product: a fashion product photo of {query}
+    moda_pro_lite_plus:
+      base_model: HopitAI/moda-pro-lite
+      parameters: 213159938
+      embedding_dimension: 768
+      gallery:
+        views:
+          official: 1.0
+          pad: 0.25
+          foreground_pad: 0.25
+        normalize: true
+      query:
+        prompts:
+          raw: 1.0
+          photo: 0.25
+        normalize: true
+      prompt_templates:
+        raw: '{query}'
+        photo: a photo of {query}
+  router:
+    kind: query_word_count
+    rule: words(query) <= threshold -> moda_pro_lite_plus, else moda
+    threshold: 36
+    pluggable: true
+    note: The router is a callable; any policy mapping a query to a constituent name may replace it.
+  serving:
+    stored_vectors_per_item: 2
+    indexes: 2
+    text_forwards_per_query: 2
+    encoders_run_per_query: 1
+    ann_queries_per_search: 1
+    rerank: false
+  selection:
+    criterion: maximin regret against the per-regime oracle (better of the two constituents), tie-break mean regret
+    target_benchmarks_accessed_during_selection: false
+    frozen_before_target_evaluation: true
+    receipt: results/multiview_recipe_rebuild/SELECTION_duo.json
+    threshold_selected_on: development data only (OpenVTON validation 4,989 + GLAMI 2,000 x 3 query views)
+  evaluation:
+    protocol: full corpus, all ground-truth queries, MAP@10, pytrec_eval map_cut.10, paired bootstrap 10000 @ 20260728
+    receipt: results/duo_target_eval.json
+onnxFiles: {}
+safetensorsSizeMb: 0.0
+approxSizeMb: 0.0
+fetchedAt: '2026-08-20T03:52:24.000Z'
