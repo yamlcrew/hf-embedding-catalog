@@ -1,0 +1,198 @@
+_id: 6a8ab6b4d0c17fd02777a4d6
+id: ppokhrel2109/freezeshift-dual-vlm
+private: false
+pipeline_tag: feature-extraction
+library_name: pytorch
+tags:
+- pytorch
+- safetensors
+- vision-language
+- image-text-retrieval
+- frozen-encoders
+- research-only
+- feature-extraction
+- license:other
+- region:us
+downloads: 0
+likes: 0
+modelId: ppokhrel2109/freezeshift-dual-vlm
+author: ppokhrel2109
+sha: b04d697fa11651915672b4e9b4f0bdfc7573bb41
+lastModified: '2026-08-23T09:00:40.000Z'
+gated: false
+disabled: false
+model-index: null
+config: {}
+cardData:
+  license: other
+  license_name: dinov3-license
+  license_link: https://ai.meta.com/resources/models-and-libraries/dinov3-license/
+  library_name: pytorch
+  pipeline_tag: feature-extraction
+  tags:
+  - vision-language
+  - image-text-retrieval
+  - frozen-encoders
+  - research-only
+siblings:
+- rfilename: .gitattributes
+- rfilename: LICENSE-DINOv3.md
+- rfilename: NOTICE
+- rfilename: README.md
+- rfilename: adapter.safetensors
+- rfilename: config.json
+- rfilename: fingerprint.json
+- rfilename: load_model.py
+- rfilename: model.safetensors
+- rfilename: parameter_summary.json
+- rfilename: training_recipe.json
+spaces: []
+createdAt: '2026-08-23T09:00:36.000Z'
+safetensors:
+  parameters:
+    F32: 49162624
+  total: 49162624
+usedStorage: 216154144
+downloadsAllTime: 0
+inferenceProviderMapping: {}
+configJson:
+  seed: 44
+  deterministic: false
+  device: auto
+  data:
+    train_csv: data/splits/alignment_v3_recovery/coco_train_minus_dev.csv
+    val_csv: data/splits/alignment_v3_recovery/coco_dev_5000.csv
+    final_csv: data/val_all_captions.csv
+    full_train_csv: data/splits/coco_train_all_captions.csv
+    image_root: .
+    image_size: 224
+    group_by_image: true
+    train_captions_per_image: null
+    val_captions_per_image: null
+    interpolation: bicubic
+    num_workers: 11
+    prefetch_factor: 4
+    pin_memory: true
+    persistent_workers: true
+  model:
+    vision_encoder: dinov3_vits16
+    text_encoder: all_minilm_l6_v2
+    shared_dim: 384
+    projection_hidden_dim: 768
+    projection_dropout: 0.05
+    text_prefix: null
+  recipe:
+    adapter: false
+    distillation: false
+    lora: false
+    teacher_dim: 512
+    adapter_dim: 128
+    adapter_heads: 4
+    adapter_ff_dim: 256
+    adapter_dropout: 0.1
+    lora_rank: 8
+    lora_alpha: 16
+    lora_dropout: 0.05
+    lora_final_layers: 2
+    loss_type: infonce_no_queue
+    image_token_aggregation: transformer_128
+    token_pooler_dim: 256
+    token_pooler_heads: 8
+    token_pooler_blocks: 2
+    token_pooler_ff_dim: 512
+    token_pooler_native_width_identity: false
+    text_token_aggregation: learned_query_attention
+    text_pooler_dim: 128
+    text_pooler_heads: 4
+    freezeshift_vision_lora: true
+    freezeshift_text_lora: true
+    freezeshift_lora_rank: 128
+    freezeshift_lora_alpha: 256
+    freezeshift_lora_dropout: 0.05
+    freezeshift_lora_final_layers: 4
+    captions_per_image: null
+    memory_queue_size: 0
+    batch_size: 1024
+    sweep_multiplier: 3.0
+  training:
+    batch_size: 1024
+    drop_last: true
+    epochs: 24
+    lr: 0.002545584412271571
+    lr_reference_batch_size: 128
+    lr_scale_rule: sqrt
+    max_lr_scale: 3.0
+    betas:
+    - 0.9
+    - 0.98
+    weight_decay: 0.01
+    warmup_fraction: 0.05
+    memory_queue_size: 0
+    gradient_clip_norm: 1.0
+    early_stopping_patience: 3
+    select_on_dev: true
+    precision: bf16
+    allow_tf32: true
+    contrastive_weight: 1.0
+    save_dir: freezeshift/checkpoints/dual/sensitivity/distill_strength_1p0__seed_44
+    disable_early_stopping: true
+    save_every_epoch: true
+    applied_lr_scale: 2.8284271247461903
+    base_lr: 0.0003
+    sqrt_scale_factor: 2.8284271247461903
+    sweep_multiplier: 3.0
+    lr_scale_cap_hit: false
+  distillation:
+    cache_path: results/alignment_wave1/mobileclip2/teacher_cache/mobileclip2_s0_dfndr2b.pt
+    cache_version: alignment-wave1-mobileclip2-s0-corrected-recipe-v1
+    temperature: 2.0
+    image_cosine_weight: 0.25
+    text_cosine_weight: 0.25
+    kl_weight: 1.0
+    strength: 1.0
+    teacher_id: mobileclip2_s0_dfndr2b
+  budgets:
+    max_total_params: 80000000
+    max_trainable_params: 5000000
+    max_latency_ms: 4.169653
+  evaluation:
+    k_values:
+    - 1
+    - 5
+    - 10
+    rankings_top_k: 100
+    batch_size: 256
+  benchmark:
+    warmup: 20
+    iterations: 100
+    image_batch_size: 1
+    text_batch_size: 1
+  provenance:
+    resolution_guard:
+      configured_image_size: 224
+      patch_size: 16
+      patch_tokens: 196
+      prefix_tokens: 5
+      total_transformer_tokens: 201
+      dataloader_must_match: true
+      report_must_match: true
+    schedule_design:
+      type: single_cosine
+      total_epochs: 24
+      warmup_fraction_retained: true
+      early_stopping: false
+      old_epoch12_comparable: false
+    parameter_contract:
+      params_trainable_inference: 4862469
+      params_trainable_training: 5255685
+      params_training_only: 393216
+    study: freezeshift
+    encoder_status: frozen_base_weights_with_parameter_efficient_adaptation
+    split_manifest: results/alignment_v4_wave0/manifests/split.json
+  experiment_id: distill_strength_1p0
+  run_id: distill_strength_1p0__seed_44
+  _builder: freezeshift.model_adaptation.build_model
+onnxFiles: {}
+safetensorsSizeMb: 216.2
+approxSizeMb: 196.7
+fetchedAt: '2026-08-24T04:00:08.000Z'
