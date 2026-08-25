@@ -1,0 +1,181 @@
+_id: 685bdb944eec0cf520d801d7
+id: citiusLTL/bdi-all-mpnet-base-v2
+private: false
+pipeline_tag: sentence-similarity
+library_name: sentence-transformers
+tags:
+- sentence-transformers
+- safetensors
+- mpnet
+- sentence-similarity
+- feature-extraction
+- depression-detection
+- mental-health
+- clinical
+- contrastive-learning
+- generated_from_trainer
+- dataset_size:21500
+- loss:MultipleNegativesRankingLoss
+- en
+- base_model:sentence-transformers/all-mpnet-base-v2
+- base_model:finetune:sentence-transformers/all-mpnet-base-v2
+- license:apache-2.0
+- model-index
+- text-embeddings-inference
+- endpoints_compatible
+- region:us
+downloads: 534
+likes: 0
+modelId: citiusLTL/bdi-all-mpnet-base-v2
+author: citiusLTL
+sha: 6eb148ba5c95d87a039b1abb8aa734d9109c116a
+lastModified: '2026-08-24T15:55:39.000Z'
+gated: false
+disabled: false
+widgetData:
+- source_sentence: That is a happy person
+  sentences:
+  - That is a happy dog
+  - That is a very happy person
+  - Today is a sunny day
+model-index:
+- name: BDI-batch (sentence-transformers/all-mpnet-base-v2)
+  results:
+  - task:
+      type: semantic-similarity
+      name: Depression Symptom Retrieval
+    dataset:
+      name: eRisk T1 2023-2024 (DepreSym)
+      type: depression-symptom-annotations
+      size: 21500 sentences
+    metrics:
+    - type: pearson_cosine
+      value: 0.8687
+      name: Pearson Cosine
+      verified: false
+    - type: spearman_cosine
+      value: 0.8676
+      name: Spearman Cosine
+      verified: false
+    - type: recall@100
+      value: 0.372
+      name: Recall@100 (eRisk 2023)
+      verified: false
+    - type: ndcg@10
+      value: 0.947
+      name: NDCG@10 (eRisk 2023)
+      verified: false
+    - type: ndcg@1000
+      value: 0.817
+      name: NDCG@1000 (eRisk 2023)
+      verified: false
+config:
+  architectures:
+  - MPNetModel
+  model_type: mpnet
+  tokenizer_config:
+    bos_token: <s>
+    cls_token: <s>
+    eos_token: </s>
+    mask_token: <mask>
+    pad_token: <pad>
+    sep_token: </s>
+    unk_token: '[UNK]'
+cardData:
+  tags:
+  - sentence-transformers
+  - sentence-similarity
+  - feature-extraction
+  - depression-detection
+  - mental-health
+  - clinical
+  - contrastive-learning
+  - generated_from_trainer
+  - dataset_size:21500
+  - loss:MultipleNegativesRankingLoss
+  base_model: sentence-transformers/all-mpnet-base-v2
+  language: en
+  license: apache-2.0
+  pipeline_tag: sentence-similarity
+  library_name: sentence-transformers
+  metrics:
+  - pearson_cosine
+  - spearman_cosine
+  model-index:
+  - name: BDI-batch (sentence-transformers/all-mpnet-base-v2)
+    results:
+    - task:
+        type: semantic-similarity
+        name: Depression Symptom Retrieval
+      dataset:
+        name: eRisk T1 2023-2024 (DepreSym)
+        type: depression-symptom-annotations
+        size: 21500 sentences
+      metrics:
+      - type: pearson_cosine
+        value: 0.8687
+        name: Pearson Cosine
+        verified: false
+      - type: spearman_cosine
+        value: 0.8676
+        name: Spearman Cosine
+        verified: false
+      - type: recall@100
+        value: 0.372
+        name: Recall@100 (eRisk 2023)
+        verified: false
+      - type: ndcg@10
+        value: 0.947
+        name: NDCG@10 (eRisk 2023)
+        verified: false
+      - type: ndcg@1000
+        value: 0.817
+        name: NDCG@1000 (eRisk 2023)
+        verified: false
+siblings:
+- rfilename: .gitattributes
+- rfilename: 1_Pooling/config.json
+- rfilename: README.md
+- rfilename: config.json
+- rfilename: config_sentence_transformers.json
+- rfilename: model.safetensors
+- rfilename: modules.json
+- rfilename: sentence_bert_config.json
+- rfilename: special_tokens_map.json
+- rfilename: tokenizer.json
+- rfilename: tokenizer_config.json
+- rfilename: vocab.txt
+spaces: []
+createdAt: '2025-06-25T11:20:52.000Z'
+safetensors:
+  parameters:
+    F32: 109486464
+  total: 109486464
+usedStorage: 875935344
+downloadsAllTime: 1008
+inferenceProviderMapping: {}
+configJson:
+  architectures:
+  - MPNetModel
+  attention_probs_dropout_prob: 0.1
+  bos_token_id: 0
+  eos_token_id: 2
+  hidden_act: gelu
+  hidden_dropout_prob: 0.1
+  hidden_size: 768
+  initializer_range: 0.02
+  intermediate_size: 3072
+  layer_norm_eps: 1.0e-05
+  max_position_embeddings: 514
+  model_type: mpnet
+  num_attention_heads: 12
+  num_hidden_layers: 12
+  pad_token_id: 1
+  relative_attention_num_buckets: 32
+  torch_dtype: float32
+  transformers_version: 4.53.3
+  vocab_size: 30527
+onnxFiles: {}
+safetensorsSizeMb: 438.0
+approxSizeMb: 437.9
+fetchedAt: '2026-08-25T03:54:07.000Z'
