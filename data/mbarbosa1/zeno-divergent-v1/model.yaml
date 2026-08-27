@@ -1,0 +1,454 @@
+_id: 6a8b606066370adb639403d8
+id: mbarbosa1/zeno-divergent-v1
+private: false
+pipeline_tag: feature-extraction
+library_name: transformers
+tags:
+- transformers
+- safetensors
+- zeno_surprise
+- surprise
+- regime-change
+- model-monitoring
+- calibrated-uncertainty
+- abstention
+- time-series
+- multi-domain
+- feature-extraction
+- license:apache-2.0
+- endpoints_compatible
+- region:us
+downloads: 156
+likes: 2
+modelId: mbarbosa1/zeno-divergent-v1
+author: mbarbosa1
+sha: d1623188f5b88aebb9e5f6345d12abbe866628be
+lastModified: '2026-08-27T13:42:06.000Z'
+gated: false
+disabled: false
+model-index: null
+config:
+  model_type: zeno_surprise
+  architectures:
+  - ZenoSurpriseModel
+cardData:
+  license: apache-2.0
+  library_name: transformers
+  pipeline_tag: feature-extraction
+  tags:
+  - surprise
+  - regime-change
+  - model-monitoring
+  - calibrated-uncertainty
+  - abstention
+  - time-series
+  - multi-domain
+transformersInfo:
+  auto_model: AutoModel
+siblings:
+- rfilename: .gitattributes
+- rfilename: README.md
+- rfilename: SHA256SUMS
+- rfilename: benchmark.json
+- rfilename: calibration_table.json
+- rfilename: config.json
+- rfilename: kind_rules.json
+- rfilename: model.safetensors
+- rfilename: pipeline.py
+- rfilename: reference_implementation/baselines.py
+- rfilename: reference_implementation/data.py
+- rfilename: reference_implementation/evaluate.py
+- rfilename: reference_implementation/losses.py
+- rfilename: reference_implementation/model.py
+- rfilename: reference_implementation/schemas.py
+- rfilename: reference_implementation/train.py
+- rfilename: release.json
+- rfilename: repo_type.json
+- rfilename: report.json
+spaces:
+- mbarbosa1/zeno-divergent
+createdAt: '2026-08-23T21:04:32.000Z'
+safetensors:
+  parameters:
+    F32: 30859
+  total: 30859
+usedStorage: 7403434
+downloadsAllTime: 156
+inferenceProviderMapping: {}
+configJson:
+  model_type: zeno_surprise
+  architectures:
+  - ZenoSurpriseModel
+  arch_version: surprise-arch/0.3.0
+  n_features: 72
+  n_targets: 5
+  hidden: 128
+  latent: 32
+  dropout: 0.1
+  domain_id: seismic
+  schema_hash: 8753db3bb6f6ca11
+  schema:
+    domain_id: seismic
+    version: 0.3.0
+    categories:
+    - micro_shallow
+    - light_shallow
+    - moderate_shallow
+    - strong_event
+    - intermediate_depth
+    - deep_focus
+    - quarry_blast
+    - other_event
+    - unknown
+    family_map:
+      micro_shallow: shallow
+      light_shallow: shallow
+      moderate_shallow: shallow
+      strong_event: energetic
+      intermediate_depth: deep
+      deep_focus: deep
+      quarry_blast: anthropogenic
+      other_event: other
+      unknown: unknown
+    channels:
+    - name: magnitude
+      log_scale: false
+      unit: Mw-equivalent
+    - name: depth_km
+      log_scale: false
+      unit: km
+    - name: azimuthal_gap
+      log_scale: false
+      unit: degrees
+    - name: rms_residual
+      log_scale: false
+      unit: s
+    targets:
+    - name: event_regime_transition
+      kind: category_transition
+      horizon: 4
+      support: 8
+      params: {}
+    - name: cadence_shift
+      kind: cadence_shift
+      horizon: 4
+      support: 8
+      params:
+        factor: 2.0
+    - name: magnitude_regime_shift
+      kind: magnitude_shift
+      horizon: 6
+      support: 10
+      params:
+        channel: magnitude
+        shift: 0.4
+    - name: significant_event_ahead
+      kind: threshold_crossing
+      horizon: 6
+      support: 10
+      params:
+        channel: magnitude
+        level: 4.5
+        direction: above
+    - name: compound_seismic_stress
+      kind: compound
+      horizon: 6
+      support: 10
+      params:
+        over:
+        - cadence_shift
+        - magnitude_regime_shift
+        - significant_event_ahead
+        k: 2
+    context_dims:
+    - network
+    - magnitude_type
+    - depth_class
+    entity_kind: opaque_spatial_cell
+    description: 'Public USGS seismic event catalogue: magnitudes, depths, solution quality and inter-event cadence per opaque
+      2-degree spatial cell.'
+  feature_names:
+  - log_gap_last
+  - gap_ratio_median
+  - log_median_gap
+  - gap_cv
+  - log_gap_prev
+  - log_magnitude_last
+  - magnitude_ratio_median
+  - log_median_magnitude
+  - magnitude_logsd
+  - magnitude_available
+  - magnitude_missing_rate
+  - log_depth_km_last
+  - depth_km_ratio_median
+  - log_median_depth_km
+  - depth_km_logsd
+  - depth_km_available
+  - depth_km_missing_rate
+  - log_azimuthal_gap_last
+  - azimuthal_gap_ratio_median
+  - log_median_azimuthal_gap
+  - azimuthal_gap_logsd
+  - azimuthal_gap_available
+  - azimuthal_gap_missing_rate
+  - log_rms_residual_last
+  - rms_residual_ratio_median
+  - log_median_rms_residual
+  - rms_residual_logsd
+  - rms_residual_available
+  - rms_residual_missing_rate
+  - reference_missing_rate
+  - cat_last__micro_shallow
+  - cat_last__light_shallow
+  - cat_last__moderate_shallow
+  - cat_last__strong_event
+  - cat_last__intermediate_depth
+  - cat_last__deep_focus
+  - cat_last__quarry_blast
+  - cat_last__other_event
+  - cat_last__unknown
+  - cat_rate__micro_shallow
+  - cat_rate__light_shallow
+  - cat_rate__moderate_shallow
+  - cat_rate__strong_event
+  - cat_rate__intermediate_depth
+  - cat_rate__deep_focus
+  - cat_rate__quarry_blast
+  - cat_rate__other_event
+  - cat_rate__unknown
+  - cat_entropy
+  - unknown_cat_rate
+  - cat_switch_rate
+  - source_count_last
+  - source_count_mean
+  - log_confirmations
+  - contradiction_rate
+  - ref_resid_gap
+  - ref_resid_magnitude
+  - ref_resid_category
+  - ref_disagreement
+  - ref_avail_gap
+  - ref_avail_magnitude
+  - ref_avail_category
+  - gap_trend
+  - cat_concentration
+  - recent_vs_old_gap
+  - magnitude_trend
+  - depth_km_trend
+  - azimuthal_gap_trend
+  - rms_residual_trend
+  - log_n_past
+  - is_cold_start
+  - censored_horizon
+  target_names:
+  - event_regime_transition
+  - cadence_shift
+  - magnitude_regime_shift
+  - significant_event_ahead
+  - compound_seismic_stress
+  feature_mean:
+  - 2.8321828842163086
+  - 1.9316551685333252
+  - 2.971397876739502
+  - 0.8019402623176575
+  - 2.7246334552764893
+  - 1.4503623247146606
+  - 0.9424834847450256
+  - 1.4359159469604492
+  - -0.14535966515541077
+  - 1.0
+  - -0.0735103040933609
+  - 3.2893455028533936
+  - 1.135806918144226
+  - 3.258481025695801
+  - 0.33977749943733215
+  - 1.0
+  - -0.0735103040933609
+  - 4.0675578117370605
+  - 0.5158414244651794
+  - 4.1057233810424805
+  - -0.4410928785800934
+  - 0.9374791383743286
+  - -0.011807949282228947
+  - 0.3320237398147583
+  - 0.9686802625656128
+  - 0.32623738050460815
+  - -0.12059910595417023
+  - 1.0
+  - -0.0735103040933609
+  - 0.0
+  - 0.2588082551956177
+  - 0.1635047346353531
+  - 0.30328568816185
+  - 0.009949879720807076
+  - 0.20445516705513
+  - 0.05078893527388573
+  - 0.008798960596323013
+  - 0.0004083905660081655
+  - 0.0
+  - 0.18365447223186493
+  - 0.08983270078897476
+  - 0.2256268858909607
+  - -0.06334531307220459
+  - 0.12839289009571075
+  - -0.022341225296258926
+  - -0.0648757666349411
+  - -0.0731847733259201
+  - -0.0735103040933609
+  - 0.5192617774009705
+  - -0.0735103040933609
+  - 0.2057390660047531
+  - 35.872989654541016
+  - 35.402679443359375
+  - 3.230191707611084
+  - -0.0735103040933609
+  - -0.7186018824577332
+  - -0.07644885778427124
+  - 0.2958351969718933
+  - 0.43714141845703125
+  - 0.9837015271186829
+  - 0.9918321967124939
+  - 0.9918321967124939
+  - -0.30307841300964355
+  - 0.661876380443573
+  - 1.2587676048278809
+  - -0.2198871523141861
+  - -0.2215600162744522
+  - -0.7284576296806335
+  - -0.2197844684123993
+  - 4.320664405822754
+  - 0.0650826096534729
+  - 0.0
+  feature_std:
+  - 2.425950765609741
+  - 3.6359806060791016
+  - 2.1874287128448486
+  - 1.8433761596679688
+  - 2.6403608322143555
+  - 0.9659258127212524
+  - 0.9102761745452881
+  - 0.9623059034347534
+  - 1.4015237092971802
+  - 9.999999974752427e-07
+  - 0.8101915717124939
+  - 1.7100573778152466
+  - 2.355365037918091
+  - 1.973839521408081
+  - 1.5142345428466797
+  - 9.999999974752427e-07
+  - 0.8101915717124939
+  - 3.0568385124206543
+  - 2.2155635356903076
+  - 3.0508830547332764
+  - 2.541995048522949
+  - 0.24209973216056824
+  - 0.8488357067108154
+  - 0.8651086091995239
+  - 0.9878969192504883
+  - 0.8586476445198059
+  - 1.405540943145752
+  - 9.999999974752427e-07
+  - 0.8101915717124939
+  - 9.999999974752427e-07
+  - 0.43792176246643066
+  - 0.3698921203613281
+  - 0.45967164635658264
+  - 0.09923216700553894
+  - 0.403268963098526
+  - 0.2195630818605423
+  - 0.09338707476854324
+  - 0.020201819017529488
+  - 9.999999974752427e-07
+  - 0.8892067670822144
+  - 0.850674033164978
+  - 0.9202415347099304
+  - 0.8116557598114014
+  - 0.8777287602424622
+  - 0.8409691452980042
+  - 0.8158319592475891
+  - 0.8100399374961853
+  - 0.8101915717124939
+  - 0.9217795133590698
+  - 0.8101915717124939
+  - 1.2086602449417114
+  - 35.32761001586914
+  - 20.45085334777832
+  - 0.9419947266578674
+  - 0.8101915717124939
+  - 1.6092549562454224
+  - 0.8122238516807556
+  - 0.8951635360717773
+  - 0.9837686419487
+  - 0.1266259253025055
+  - 0.08999984711408615
+  - 0.08999984711408615
+  - 1.6052299737930298
+  - 0.8967227935791016
+  - 3.0412261486053467
+  - 1.389402151107788
+  - 1.3911422491073608
+  - 2.4537229537963867
+  - 1.38945472240448
+  - 1.3720173835754395
+  - 0.24667783081531525
+  - 9.999999974752427e-07
+  calibrators:
+  - - 0.7929789142480312
+    - -1.615490239170269
+  - - 1.0992027793510095
+    - -0.09963634009012065
+  - - -0.1212781769343175
+    - -975439.6215416335
+  - - 1.0353956806258298
+    - -0.024869718857468713
+  - - 1.0
+    - 0.0
+  risk_selector:
+  - -1.6955254495627385
+  - 0.2051326426219707
+  - 0.05217924804377758
+  - 0.04801034843452098
+  - -0.24887582001036931
+  - 0.3078473838275671
+  - 0.7091971346105185
+  - 0.7162593994214415
+  - 0.7980278565266762
+  - 0.08479056206203034
+  - 0.21067107057782464
+  - 0.23379570333906746
+  - 0.03917219553193181
+  abstention_threshold: 0.18377115935653324
+  corpus:
+    real_corpus: true
+    source: USGS FDSN event web service (public, credential-free)
+    source_url: https://earthquake.usgs.gov/fdsnws/event/1/query
+    licence: USGS public domain; cite USGS Earthquake Hazards Program
+    windows:
+    - - '2023-01-01'
+      - '2023-07-01'
+    - - '2023-07-01'
+      - '2024-01-01'
+    - - '2024-01-01'
+      - '2024-07-01'
+    - - '2024-07-01'
+      - '2025-01-01'
+    - - '2025-01-01'
+      - '2025-07-01'
+    min_magnitude: 2.5
+    cell_size_degrees: 2.0
+    min_events_per_entity: 60
+    n_entities: 224
+    n_events: 47107
+    retrieved_at: '2026-08-26T11:15:50Z'
+    note: Descriptive public event records only. Spatial cells are opaque grouping keys and are never used as features.
+  release:
+    version: 0.3.1
+    checkpoint_version: 0.3.0
+    gate_status: promoted
+    generated_at: '2026-08-26T11:36:57Z'
+  transformers_version: 4.44.0
+  torch_dtype: float32
+onnxFiles: {}
+safetensorsSizeMb: 0.1
+approxSizeMb: 0.1
+fetchedAt: '2026-08-27T14:03:17.000Z'
