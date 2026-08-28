@@ -1,0 +1,117 @@
+_id: 6a8fefe834af7f25c972e27e
+id: ikim-uk-essen/stm_mistral
+private: false
+pipeline_tag: sentence-similarity
+library_name: sentence-transformers
+tags:
+- sentence-transformers
+- safetensors
+- mistral
+- mergekit
+- merge
+- retrieval
+- biomedical
+- sentence-similarity
+- arxiv:2602.04731
+- base_model:mistralai/Mistral-7B-Instruct-v0.2
+- base_model:finetune:mistralai/Mistral-7B-Instruct-v0.2
+- text-embeddings-inference
+- endpoints_compatible
+- region:us
+downloads: 0
+likes: 1
+modelId: ikim-uk-essen/stm_mistral
+author: ikim-uk-essen
+sha: 6aef78b50217baf01399b3b1c600f7ff8afa1e77
+lastModified: '2026-08-28T11:39:49.000Z'
+gated: false
+disabled: false
+widgetData:
+- source_sentence: That is a happy person
+  sentences:
+  - That is a happy dog
+  - That is a very happy person
+  - Today is a sunny day
+model-index: null
+config:
+  architectures:
+  - MistralModel
+  model_type: mistral
+  tokenizer_config:
+    bos_token: <s>
+    eos_token: </s>
+    pad_token: null
+    unk_token: <unk>
+    use_default_system_prompt: false
+  chat_template_jinja: "{%- if messages[0]['role'] == 'system' %}\n    {%- set system_message = messages[0]['content'] %}\n\
+    \    {%- set loop_messages = messages[1:] %}\n{%- else %}\n    {%- set loop_messages = messages %}\n{%- endif %}\n\n{{-\
+    \ bos_token }}\n{%- for message in loop_messages %}\n    {%- if (message['role'] == 'user') != (loop.index0 % 2 == 0)\
+    \ %}\n        {{- raise_exception('After the optional system message, conversation roles must alternate user/assistant/user/assistant/...')\
+    \ }}\n    {%- endif %}\n    {%- if message['role'] == 'user' %}\n        {%- if loop.first and system_message is defined\
+    \ %}\n            {{- ' [INST] ' + system_message + '\\n\\n' + message['content'] + ' [/INST]' }}\n        {%- else %}\n\
+    \            {{- ' [INST] ' + message['content'] + ' [/INST]' }}\n        {%- endif %}\n    {%- elif message['role'] ==\
+    \ 'assistant' %}\n        {{- ' ' + message['content'] + eos_token}}\n    {%- else %}\n        {{- raise_exception('Only\
+    \ user and assistant roles are supported, with the exception of an initial optional system message!') }}\n    {%- endif\
+    \ %}\n{%- endfor %}\n"
+cardData:
+  base_model:
+  - mistralai/Mistral-7B-Instruct-v0.2
+  arxiv: 2602.04731
+  tags:
+  - mergekit
+  - merge
+  - retrieval
+  - biomedical
+  - sentence-transformers
+  - mistral
+  library_name: sentence-transformers
+  pipeline_tag: sentence-similarity
+siblings:
+- rfilename: .gitattributes
+- rfilename: README.md
+- rfilename: chat_template.jinja
+- rfilename: config.json
+- rfilename: model-00001-of-00003.safetensors
+- rfilename: model-00002-of-00003.safetensors
+- rfilename: model-00003-of-00003.safetensors
+- rfilename: model.safetensors.index.json
+- rfilename: special_tokens_map.json
+- rfilename: tokenizer.json
+- rfilename: tokenizer_config.json
+spaces: []
+createdAt: '2026-08-27T08:06:00.000Z'
+safetensors:
+  parameters:
+    F16: 7110660096
+  total: 7110660096
+usedStorage: 14221351888
+downloadsAllTime: 0
+inferenceProviderMapping: {}
+configJson:
+  architectures:
+  - MistralModel
+  attention_dropout: 0.0
+  bos_token_id: 1
+  dtype: float16
+  eos_token_id: 2
+  head_dim: null
+  hidden_act: silu
+  hidden_size: 4096
+  initializer_range: 0.02
+  intermediate_size: 14336
+  max_position_embeddings: 32768
+  model_type: mistral
+  num_attention_heads: 32
+  num_hidden_layers: 32
+  num_key_value_heads: 8
+  rms_norm_eps: 1.0e-05
+  rope_theta: 1000000.0
+  sliding_window: null
+  tie_word_embeddings: false
+  transformers_version: 4.57.1
+  use_cache: true
+  vocab_size: 32000
+onnxFiles: {}
+safetensorsSizeMb: 14221.4
+approxSizeMb: 14221.3
+fetchedAt: '2026-08-28T15:14:22.000Z'

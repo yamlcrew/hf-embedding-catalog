@@ -1,0 +1,162 @@
+_id: 6a907d6e3e97e28cd30a93fe
+id: mbehr90/multilingual-e5-large-instruct-fp8
+private: false
+pipeline_tag: feature-extraction
+library_name: vllm
+tags:
+- vllm
+- safetensors
+- xlm-roberta
+- llmcompressor
+- compressed-tensors
+- quantized
+- fp8
+- feature-extraction
+- base_model:intfloat/multilingual-e5-large-instruct
+- base_model:quantized:intfloat/multilingual-e5-large-instruct
+- license:mit
+- region:us
+downloads: 0
+likes: 0
+modelId: mbehr90/multilingual-e5-large-instruct-fp8
+author: mbehr90
+sha: a3904d91db358ac9fd9b18a392fc58fe3f6ea6f0
+lastModified: '2026-08-27T18:39:37.000Z'
+gated: false
+disabled: false
+mask_token: <mask>
+model-index: null
+config:
+  architectures:
+  - XLMRobertaModel
+  model_type: xlm-roberta
+  quantization_config:
+    config_groups:
+      group_0:
+        format: float-quantized
+        targets:
+        - Linear
+        weights:
+          num_bits: 8
+    format: float-quantized
+    ignore:
+    - pooler.dense
+    quant_method: compressed-tensors
+  tokenizer_config:
+    bos_token: <s>
+    cls_token: <s>
+    eos_token: </s>
+    mask_token: <mask>
+    pad_token: <pad>
+    sep_token: </s>
+    unk_token: <unk>
+cardData:
+  license: mit
+  base_model:
+  - intfloat/multilingual-e5-large-instruct
+  tags:
+  - llmcompressor
+  - compressed-tensors
+  - quantized
+  - fp8
+  - vllm
+  pipeline_tag: feature-extraction
+  library_name: vllm
+siblings:
+- rfilename: .gitattributes
+- rfilename: 1_Pooling/config.json
+- rfilename: README.md
+- rfilename: config.json
+- rfilename: config_sentence_transformers.json
+- rfilename: model.safetensors
+- rfilename: modules.json
+- rfilename: recipe.yaml
+- rfilename: sentence_xlm-roberta_config.json
+- rfilename: sentencepiece.bpe.model
+- rfilename: special_tokens_map.json
+- rfilename: tokenizer.json
+- rfilename: tokenizer_config.json
+spaces: []
+createdAt: '2026-08-27T18:09:50.000Z'
+safetensors:
+  parameters:
+    BF16: 257900544
+    F8_E4M3: 301989888
+  total: 559890432
+usedStorage: 840448275
+downloadsAllTime: 0
+inferenceProviderMapping: {}
+configJson:
+  add_cross_attention: false
+  architectures:
+  - XLMRobertaModel
+  attention_probs_dropout_prob: 0.1
+  bos_token_id: 0
+  classifier_dropout: null
+  dtype: bfloat16
+  eos_token_id: 2
+  hidden_act: gelu
+  hidden_dropout_prob: 0.1
+  hidden_size: 1024
+  initializer_range: 0.02
+  intermediate_size: 4096
+  is_decoder: false
+  layer_norm_eps: 1.0e-05
+  max_position_embeddings: 514
+  model_type: xlm-roberta
+  num_attention_heads: 16
+  num_hidden_layers: 24
+  output_past: true
+  pad_token_id: 1
+  position_embedding_type: absolute
+  quantization_config:
+    config_groups:
+      group_0:
+        format: float-quantized
+        input_activations:
+          actorder: null
+          block_structure: null
+          dynamic: true
+          group_size: null
+          num_bits: 8
+          observer: null
+          observer_kwargs: {}
+          scale_dtype: null
+          strategy: token
+          symmetric: true
+          type: float
+          zp_dtype: null
+        output_activations: null
+        targets:
+        - Linear
+        weights:
+          actorder: null
+          block_structure: null
+          dynamic: false
+          group_size: null
+          num_bits: 8
+          observer: memoryless_minmax
+          observer_kwargs: {}
+          scale_dtype: null
+          strategy: channel
+          symmetric: true
+          type: float
+          zp_dtype: null
+    format: float-quantized
+    global_compression_ratio: null
+    ignore:
+    - pooler.dense
+    kv_cache_scheme: null
+    quant_method: compressed-tensors
+    quantization_status: compressed
+    sparsity_config: {}
+    transform_config: {}
+    version: 0.18.0
+  transformers_version: 5.14.1
+  type_vocab_size: 1
+  use_cache: true
+  vocab_size: 250002
+onnxFiles: {}
+safetensorsSizeMb: 818.3
+approxSizeMb: 1723.8
+fetchedAt: '2026-08-28T15:14:22.000Z'
