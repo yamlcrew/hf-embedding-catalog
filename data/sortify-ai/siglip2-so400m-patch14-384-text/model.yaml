@@ -1,0 +1,94 @@
+_id: 6a969c6bda0caf1063c23b92
+id: sortify-ai/siglip2-so400m-patch14-384-text
+private: false
+pipeline_tag: feature-extraction
+library_name: transformers
+tags:
+- transformers
+- safetensors
+- siglip2_text_model
+- siglip2
+- text-embeddings
+- feature-extraction
+- license:apache-2.0
+- endpoints_compatible
+- region:us
+downloads: 0
+likes: 0
+modelId: sortify-ai/siglip2-so400m-patch14-384-text
+author: sortify-ai
+sha: 504668087acfb80b49005debe649819b0ed4f305
+lastModified: '2026-09-01T10:00:13.000Z'
+gated: false
+disabled: false
+model-index: null
+config:
+  architectures:
+  - Siglip2TextModel
+  model_type: siglip2_text_model
+  tokenizer_config:
+    bos_token: <bos>
+    chat_template: '{{ bos_token }}{% if messages[0][''role''] == ''system'' %}{{ raise_exception(''System role not supported'')
+      }}{% endif %}{% for message in messages %}{% if (message[''role''] == ''user'') != (loop.index0 % 2 == 0) %}{{ raise_exception(''Conversation
+      roles must alternate user/assistant/user/assistant/...'') }}{% endif %}{% if (message[''role''] == ''assistant'') %}{%
+      set role = ''model'' %}{% else %}{% set role = message[''role''] %}{% endif %}{{ ''<start_of_turn>'' + role + ''
+
+      '' + message[''content''] | trim + ''<end_of_turn>
+
+      '' }}{% endfor %}{% if add_generation_prompt %}{{''<start_of_turn>model
+
+      ''}}{% endif %}'
+    eos_token: <eos>
+    pad_token: <pad>
+    unk_token: <unk>
+    use_default_system_prompt: false
+cardData:
+  license: apache-2.0
+  library_name: transformers
+  pipeline_tag: feature-extraction
+  tags:
+  - siglip2
+  - text-embeddings
+transformersInfo:
+  auto_model: AutoModel
+  processor: AutoTokenizer
+siblings:
+- rfilename: .gitattributes
+- rfilename: 1_Pooling/config.json
+- rfilename: README.md
+- rfilename: config.json
+- rfilename: model.safetensors
+- rfilename: special_tokens_map.json
+- rfilename: tokenizer.json
+- rfilename: tokenizer.model
+- rfilename: tokenizer_config.json
+spaces: []
+createdAt: '2026-09-01T09:35:39.000Z'
+safetensors:
+  parameters:
+    F32: 707782898
+  total: 707782898
+usedStorage: 2869789218
+downloadsAllTime: 0
+inferenceProviderMapping: {}
+configJson:
+  architectures:
+  - Siglip2TextModel
+  attention_dropout: 0.0
+  bos_token_id: 49406
+  eos_token_id: 49407
+  hidden_act: gelu_pytorch_tanh
+  hidden_size: 1152
+  intermediate_size: 4304
+  layer_norm_eps: 1.0e-06
+  max_position_embeddings: 64
+  model_type: siglip2_text_model
+  num_attention_heads: 16
+  num_hidden_layers: 27
+  pad_token_id: 0
+  projection_size: 1152
+  vocab_size: 256000
+onnxFiles: {}
+safetensorsSizeMb: 2831.2
+approxSizeMb: 2831.1
+fetchedAt: '2026-09-02T07:49:42.000Z'

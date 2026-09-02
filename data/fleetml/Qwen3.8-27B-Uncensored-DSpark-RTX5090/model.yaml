@@ -1,0 +1,258 @@
+_id: 6a969b0ef6d244a7e2afd63f
+id: fleetml/Qwen3.8-27B-Uncensored-DSpark-RTX5090
+private: false
+pipeline_tag: feature-extraction
+library_name: transformers
+tags:
+- transformers
+- safetensors
+- qwen3
+- feature-extraction
+- qwen3.8
+- dspark
+- speculative-decoding
+- rtx-5090
+- blackwell
+- sglang
+- modelopt
+- nvfp4
+- custom_code
+- en
+- zh
+- base_model:RadixArk/Qwen3.8-27B-DSpark
+- base_model:finetune:RadixArk/Qwen3.8-27B-DSpark
+- license:apache-2.0
+- 8-bit
+- region:us
+downloads: 0
+likes: 0
+modelId: fleetml/Qwen3.8-27B-Uncensored-DSpark-RTX5090
+author: fleetml
+sha: 7747bd75c294a276d3e74a5897cc2cf003183f8a
+lastModified: '2026-09-01T13:09:28.000Z'
+gated: false
+disabled: false
+model-index: null
+config:
+  architectures:
+  - DSparkDraftModel
+  auto_map:
+    AutoModel: dspark.DSparkDraftModel
+  model_type: qwen3
+  quantization_config:
+    config_groups:
+      group_0:
+        weights:
+          num_bits: 4
+        targets:
+        - Linear
+    ignore:
+    - confidence_head*
+    - fc
+    - layers.0.self_attn.k_proj
+    - layers.0.self_attn.q_proj
+    - layers.0.self_attn.v_proj
+    - layers.1.self_attn.k_proj
+    - layers.1.self_attn.q_proj
+    - layers.1.self_attn.v_proj
+    - layers.2.self_attn.k_proj
+    - layers.2.self_attn.q_proj
+    - layers.2.self_attn.v_proj
+    - layers.3.self_attn.k_proj
+    - layers.3.self_attn.q_proj
+    - layers.3.self_attn.v_proj
+    - layers.4.self_attn.k_proj
+    - layers.4.self_attn.q_proj
+    - layers.4.self_attn.v_proj
+    - markov_head*
+    - qkv_proj
+    - '*qkv_proj'
+    quant_method: modelopt
+cardData:
+  license: apache-2.0
+  base_model: RadixArk/Qwen3.8-27B-DSpark
+  base_model_relation: finetune
+  library_name: transformers
+  language:
+  - en
+  - zh
+  tags:
+  - qwen3.8
+  - dspark
+  - speculative-decoding
+  - rtx-5090
+  - blackwell
+  - sglang
+  - modelopt
+  - nvfp4
+transformersInfo:
+  auto_model: AutoModel
+  custom_class: dspark.DSparkDraftModel
+  pipeline_tag: feature-extraction
+  processor: AutoTokenizer
+siblings:
+- rfilename: .gitattributes
+- rfilename: README.md
+- rfilename: benchmarks/benchmark-summary.json
+- rfilename: benchmarks/nvfp4-draft-hermes-results.jsonl
+- rfilename: benchmarks/nvfp4-draft-hermes-summary.json
+- rfilename: config.json
+- rfilename: configs/dspark_train_offline.yaml
+- rfilename: conversion_manifest.json
+- rfilename: dflash.py
+- rfilename: dspark.py
+- rfilename: hf_quant_config.json
+- rfilename: manifests/dspark-export-verification.json
+- rfilename: manifests/dspark-feature-verification.json
+- rfilename: manifests/dspark-nvfp4-verification.json
+- rfilename: model.safetensors
+- rfilename: scripts/export_dspark.sh
+- rfilename: scripts/serve_sglang.sh
+- rfilename: scripts/train_dspark.sh
+- rfilename: training/dspark-training-64.json
+spaces: []
+createdAt: '2026-09-01T09:29:50.000Z'
+safetensors:
+  parameters:
+    BF16: 415566337
+    U8: 720896000
+  total: 1136462337
+usedStorage: 5356876588
+downloadsAllTime: 0
+inferenceProviderMapping: {}
+configJson:
+  architectures:
+  - DSparkDraftModel
+  attention_bias: false
+  attention_dropout: 0.0
+  attention_mode: gqa
+  auto_map:
+    AutoModel: dspark.DSparkDraftModel
+  block_size: 7
+  bos_token_id: null
+  confidence_head_alpha: 1.0
+  confidence_head_with_markov: true
+  dflash_config:
+    attention_mode: gqa
+    confidence_head_alpha: 1.0
+    confidence_head_with_markov: true
+    enable_confidence_head: true
+    markov_head_type: vanilla
+    markov_rank: 256
+    mask_token_id: 248070
+    projector_type: dspark
+    target_layer_ids:
+    - 5
+    - 19
+    - 33
+    - 47
+    - 61
+  draft_vocab_size: 248320
+  dspark_config:
+    attention_mode: gqa
+    confidence_head_alpha: 1.0
+    confidence_head_with_markov: true
+    enable_confidence_head: true
+    markov_head_type: vanilla
+    markov_rank: 256
+    mask_token_id: 248070
+    projector_type: dspark
+    target_layer_ids:
+    - 5
+    - 19
+    - 33
+    - 47
+    - 61
+  dtype: bfloat16
+  enable_confidence_head: true
+  eos_token_id: 248044
+  head_dim: 128
+  hidden_act: silu
+  hidden_size: 5120
+  initializer_range: 0.02
+  intermediate_size: 17408
+  layer_types:
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  markov_head_type: vanilla
+  markov_rank: 256
+  mask_token_id: 248070
+  max_position_embeddings: 262144
+  max_window_layers: 5
+  model_type: qwen3
+  num_attention_heads: 32
+  num_hidden_layers: 5
+  num_key_value_heads: 8
+  num_target_layers: 64
+  pad_token_id: 248044
+  projector_type: dspark
+  rms_norm_eps: 1.0e-06
+  rope_parameters:
+    beta_fast: 32.0
+    beta_slow: 1.0
+    factor: 32.0
+    original_max_position_embeddings: 8192
+    rope_theta: 10000000
+    rope_type: yarn
+  sliding_window: null
+  target_hidden_size: null
+  target_layer_ids:
+  - 5
+  - 19
+  - 33
+  - 47
+  - 61
+  tie_word_embeddings: false
+  training_block_size: 16
+  transformers_version: 5.12.1
+  use_cache: true
+  use_sliding_window: false
+  vocab_size: 248320
+  quantization_config:
+    config_groups:
+      group_0:
+        input_activations:
+          dynamic: false
+          num_bits: 4
+          type: float
+          group_size: 16
+        weights:
+          dynamic: false
+          num_bits: 4
+          type: float
+          group_size: 16
+        targets:
+        - Linear
+    ignore:
+    - confidence_head*
+    - fc
+    - layers.0.self_attn.k_proj
+    - layers.0.self_attn.q_proj
+    - layers.0.self_attn.v_proj
+    - layers.1.self_attn.k_proj
+    - layers.1.self_attn.q_proj
+    - layers.1.self_attn.v_proj
+    - layers.2.self_attn.k_proj
+    - layers.2.self_attn.q_proj
+    - layers.2.self_attn.v_proj
+    - layers.3.self_attn.k_proj
+    - layers.3.self_attn.q_proj
+    - layers.3.self_attn.v_proj
+    - layers.4.self_attn.k_proj
+    - layers.4.self_attn.q_proj
+    - layers.4.self_attn.v_proj
+    - markov_head*
+    - qkv_proj
+    - '*qkv_proj'
+    quant_algo: NVFP4
+    producer:
+      name: modelopt
+      version: 0.47.0.dev70+gc4129b6e0
+    quant_method: modelopt
+onnxFiles: {}
+safetensorsSizeMb: 1642.2
+approxSizeMb: 1552.0
+fetchedAt: '2026-09-02T07:49:42.000Z'
