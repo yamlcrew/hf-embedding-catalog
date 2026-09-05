@@ -1,0 +1,166 @@
+_id: 6a9af19f6587c711b8039ef7
+id: MBZUAI/Omni-Embed-Mini-2.3B
+private: false
+pipeline_tag: feature-extraction
+library_name: transformers
+tags:
+- transformers
+- safetensors
+- omni_embed
+- feature-extraction
+- embeddings
+- multimodal
+- omni-modal
+- retrieval
+- sentence-similarity
+- audio
+- speech
+- image
+- video
+- visual-document-retrieval
+- matryoshka
+- custom_code
+- en
+- license:cc-by-nc-sa-4.0
+- region:us
+downloads: 0
+likes: 1
+modelId: MBZUAI/Omni-Embed-Mini-2.3B
+author: MBZUAI
+sha: 6f3579a8b9cde48fadb529a102facd051e693a4b
+lastModified: '2026-09-04T18:18:00.000Z'
+gated: false
+disabled: false
+model-index: null
+config:
+  model_type: omni_embed
+  architectures:
+  - OmniEmbedForEmbedding
+  auto_map:
+    AutoConfig: configuration_omni_embed.OmniEmbedConfig
+    AutoModel: modeling_omni_embed.OmniEmbedForEmbedding
+    AutoProcessor: processing_omni_embed.OmniEmbedProcessor
+  tokenizer_config:
+    bos_token: null
+    eos_token: <|im_end|>
+    pad_token: <|endoftext|>
+    unk_token: null
+  chat_template_jinja: "{%- set default_system_message = 'Represent the user\\'s input.' -%}\n{%- if tools %}\n    {{- '<|im_start|>system\\\
+    n' }}\n    {%- if messages[0].role == 'system' %}\n        {%- if messages[0].content is string %}\n            {{- messages[0].content\
+    \ }}\n        {%- else %}\n            {%- for content in messages[0].content %}\n                {%- if 'text' in content\
+    \ %}\n                    {{- content.text }}\n                {%- endif %}\n            {%- endfor %}\n        {%- endif\
+    \ %}\n        {{- '\\n\\n' }}\n    {%- else %}\n        {{- default_system_message + '\\n\\n' }}\n    {%- endif %}\n \
+    \   {{- \"# Tools\\n\\nYou may call one or more functions to assist with the user query.\\n\\nYou are provided with function\
+    \ signatures within <tools></tools> XML tags:\\n<tools>\" }}\n    {%- for tool in tools %}\n        {{- \"\\n\" }}\n \
+    \       {{- tool | tojson }}\n    {%- endfor %}\n    {{- \"\\n</tools>\\n\\nFor each function call, return a json object\
+    \ with function name and arguments within <tool_call></tool_call> XML tags:\\n<tool_call>\\n{\\\"name\\\": <function-name>,\
+    \ \\\"arguments\\\": <args-json-object>}\\n</tool_call><|im_end|>\\n\" }}\n{%- else %}\n    {%- if messages[0].role ==\
+    \ 'system' %}\n        {{- '<|im_start|>system\\n' }}\n        {%- if messages[0].content is string %}\n            {{-\
+    \ messages[0].content }}\n        {%- else %}\n            {%- for content in messages[0].content %}\n               \
+    \ {%- if 'text' in content %}\n                    {{- content.text }}\n                {%- endif %}\n            {%-\
+    \ endfor %}\n        {%- endif %}\n        {{- '<|im_end|>\\n' }}\n    {%- else %}\n        {{- '<|im_start|>system\\\
+    n' + default_system_message + '<|im_end|>\\n' }}\n    {%- endif %}\n{%- endif %}\n{%- set image_count = namespace(value=0)\
+    \ %}\n{%- set video_count = namespace(value=0) %}\n{%- for message in messages %}\n    {%- if message.role == \"user\"\
+    \ %}\n        {{- '<|im_start|>' + message.role + '\\n' }}\n        {%- if message.content is string %}\n            {{-\
+    \ message.content }}\n        {%- else %}\n            {%- for content in message.content %}\n                {%- if content.type\
+    \ == 'image' or 'image' in content or 'image_url' in content %}\n                    {%- set image_count.value = image_count.value\
+    \ + 1 %}\n                    {%- if add_vision_id %}Picture {{ image_count.value }}: {% endif -%}\n                 \
+    \   <|vision_start|><|image_pad|><|vision_end|>\n                {%- elif content.type == 'video' or 'video' in content\
+    \ %}\n                    {%- set video_count.value = video_count.value + 1 %}\n                    {%- if add_vision_id\
+    \ %}Video {{ video_count.value }}: {% endif -%}\n                    <|vision_start|><|video_pad|><|vision_end|>\n   \
+    \             {%- elif 'text' in content %}\n                    {{- content.text }}\n                {%- endif %}\n \
+    \           {%- endfor %}\n        {%- endif %}\n        {{- '<|im_end|>\\n' }}\n    {%- elif message.role == \"assistant\"\
+    \ %}\n        {{- '<|im_start|>' + message.role + '\\n' }}\n        {%- if message.content is string %}\n            {{-\
+    \ message.content }}\n        {%- else %}\n            {%- for content_item in message.content %}\n                {%-\
+    \ if 'text' in content_item %}\n                    {{- content_item.text }}\n                {%- endif %}\n         \
+    \   {%- endfor %}\n        {%- endif %}\n        {%- if message.tool_calls %}\n            {%- for tool_call in message.tool_calls\
+    \ %}\n                {%- if (loop.first and message.content) or (not loop.first) %}\n                    {{- '\\n' }}\n\
+    \                {%- endif %}\n                {%- if tool_call.function %}\n                    {%- set tool_call = tool_call.function\
+    \ %}\n                {%- endif %}\n                {{- '<tool_call>\\n{\"name\": \"' }}\n                {{- tool_call.name\
+    \ }}\n                {{- '\", \"arguments\": ' }}\n                {%- if tool_call.arguments is string %}\n        \
+    \            {{- tool_call.arguments }}\n                {%- else %}\n                    {{- tool_call.arguments | tojson\
+    \ }}\n                {%- endif %}\n                {{- '}\\n</tool_call>' }}\n            {%- endfor %}\n        {%-\
+    \ endif %}\n        {{- '<|im_end|>\\n' }}\n    {%- elif message.role == \"tool\" %}\n        {%- if loop.first or (messages[loop.index0\
+    \ - 1].role != \"tool\") %}\n            {{- '<|im_start|>user' }}\n        {%- endif %}\n        {{- '\\n<tool_response>\\\
+    n' }}\n        {%- if message.content is string %}\n            {{- message.content }}\n        {%- else %}\n        \
+    \    {%- for content in message.content %}\n                {%- if content.type == 'image' or 'image' in content or 'image_url'\
+    \ in content %}\n                    {%- set image_count.value = image_count.value + 1 %}\n                    {%- if\
+    \ add_vision_id %}Picture {{ image_count.value }}: {% endif -%}\n                    <|vision_start|><|image_pad|><|vision_end|>\n\
+    \                {%- elif content.type == 'video' or 'video' in content %}\n                    {%- set video_count.value\
+    \ = video_count.value + 1 %}\n                    {%- if add_vision_id %}Video {{ video_count.value }}: {% endif -%}\n\
+    \                    <|vision_start|><|video_pad|><|vision_end|>\n                {%- elif 'text' in content %}\n    \
+    \                {{- content.text }}\n                {%- endif %}\n            {%- endfor %}\n        {%- endif %}\n\
+    \        {{- '\\n</tool_response>' }}\n        {%- if loop.last or (messages[loop.index0 + 1].role != \"tool\") %}\n \
+    \           {{- '<|im_end|>\\n' }}\n        {%- endif %}\n    {%- endif %}\n{%- endfor %}\n{%- if add_generation_prompt\
+    \ %}\n    {{- '<|im_start|>assistant\\n' }}\n{%- endif %}\n"
+cardData:
+  license: cc-by-nc-sa-4.0
+  language:
+  - en
+  library_name: transformers
+  pipeline_tag: feature-extraction
+  tags:
+  - embeddings
+  - multimodal
+  - omni-modal
+  - retrieval
+  - sentence-similarity
+  - audio
+  - speech
+  - image
+  - video
+  - visual-document-retrieval
+  - matryoshka
+transformersInfo:
+  auto_model: AutoModel
+  custom_class: modeling_omni_embed.OmniEmbedForEmbedding
+  pipeline_tag: feature-extraction
+siblings:
+- rfilename: .gitattributes
+- rfilename: README.md
+- rfilename: backbone/config.json
+- rfilename: backbone/model.safetensors
+- rfilename: chat_template.jinja
+- rfilename: config.json
+- rfilename: configuration_omni_embed.py
+- rfilename: dasheng_encoder.pt
+- rfilename: modeling_omni_embed.py
+- rfilename: processing_omni_embed.py
+- rfilename: processor_config.json
+- rfilename: projector_weights.pt
+- rfilename: tokenizer.json
+- rfilename: tokenizer_config.json
+- rfilename: whisper_encoder.pt
+spaces: []
+createdAt: '2026-09-04T16:28:15.000Z'
+usedStorage: 5518536054
+downloadsAllTime: 0
+inferenceProviderMapping: {}
+configJson:
+  model_type: omni_embed
+  architectures:
+  - OmniEmbedForEmbedding
+  vision_mode: native
+  backbone_model: Qwen/Qwen3-VL-Embedding-2B
+  hidden_size: 2048
+  whisper_model: openai/whisper-small
+  dasheng_model: mispeech/dasheng-base
+  whisper_dim: 768
+  dasheng_dim: 768
+  tokens_per_encoder: 128
+  num_video_tokens: 196
+  video_as_images: false
+  mrl_dims:
+  - 128
+  - 256
+  - 512
+  - 1024
+  - 2048
+  auto_map:
+    AutoConfig: configuration_omni_embed.OmniEmbedConfig
+    AutoModel: modeling_omni_embed.OmniEmbedForEmbedding
+    AutoProcessor: processing_omni_embed.OmniEmbedProcessor
+onnxFiles: {}
+safetensorsSizeMb: 4254.1
+approxSizeMb: 0.0
+fetchedAt: '2026-09-05T07:35:33.000Z'
