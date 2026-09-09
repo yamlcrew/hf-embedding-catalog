@@ -1,0 +1,85 @@
+_id: 6a9ffcc6b34ea309d96b2304
+id: ajaysdhillon14/minbert-sts-nli-meanpool
+private: false
+pipeline_tag: sentence-similarity
+tags:
+- safetensors
+- bert
+- sentence-similarity
+- semantic-textual-similarity
+- sts
+- base_model:google-bert/bert-base-uncased
+- base_model:finetune:google-bert/bert-base-uncased
+- license:apache-2.0
+- region:us
+downloads: 0
+likes: 0
+modelId: ajaysdhillon14/minbert-sts-nli-meanpool
+author: ajaysdhillon14
+sha: d5fc77336a79957d8b0bb3404d2f32e415e7ee2f
+lastModified: '2026-09-08T12:19:10.000Z'
+gated: false
+disabled: false
+mask_token: '[MASK]'
+widgetData:
+- source_sentence: That is a happy person
+  sentences:
+  - That is a happy dog
+  - That is a very happy person
+  - Today is a sunny day
+model-index: null
+config:
+  architectures:
+  - BertModel
+  model_type: bert
+cardData:
+  license: apache-2.0
+  base_model: bert-base-uncased
+  tags:
+  - bert
+  - sentence-similarity
+  - semantic-textual-similarity
+  - sts
+siblings:
+- rfilename: .gitattributes
+- rfilename: README.md
+- rfilename: config.json
+- rfilename: model.safetensors
+spaces: []
+createdAt: '2026-09-08T12:17:10.000Z'
+safetensors:
+  parameters:
+    I64: 512
+    F32: 109482240
+  total: 109482752
+usedStorage: 437954368
+downloadsAllTime: 0
+inferenceProviderMapping: {}
+configJson:
+  architectures:
+  - BertModel
+  model_type: bert
+  base_model: bert-base-uncased
+  hidden_size: 768
+  num_hidden_layers: 12
+  hidden_dropout_prob: 0.3
+  sts_pooling: masked mean over last_hidden_state (including [CLS]/[SEP])
+  sts_readout: cosine((pool1, pool2)) rescaled from [-1,1] to [0,5]
+  training_recipe:
+    task: sts
+    option: finetune
+    epochs: 4
+    lr: 5.0e-06
+    batch_size: 32
+    seed: 11711
+    patience: 2
+    warmup_steps: 100
+    weight_decay: 0.05
+    bert_dropout: 0.2
+    freeze_bert_layers: 0
+    readout_layer: null
+    init_from_checkpoint: models/nli-biencoder.pt
+onnxFiles: {}
+safetensorsSizeMb: 438.0
+approxSizeMb: 437.9
+fetchedAt: '2026-09-09T08:02:40.000Z'

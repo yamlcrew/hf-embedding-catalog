@@ -1,0 +1,290 @@
+_id: 6a9fdc3a34bc55a98121f704
+id: lrmbbj/cl_0.8B_t0.07_q8_d256_nt16x16_fr4-16_do0.1_rc0.1_jt0.25_s42-1000step
+private: false
+pipeline_tag: feature-extraction
+library_name: transformers
+tags:
+- transformers
+- safetensors
+- mce
+- feature-extraction
+- world-model
+- custom_code
+- region:us
+downloads: 0
+likes: 0
+modelId: lrmbbj/cl_0.8B_t0.07_q8_d256_nt16x16_fr4-16_do0.1_rc0.1_jt0.25_s42-1000step
+author: lrmbbj
+sha: 6393fa0c7f4910cf5f6616fa5b9006ca5a341ec3
+lastModified: '2026-09-08T14:29:47.000Z'
+gated: false
+disabled: false
+model-index: null
+config:
+  architectures:
+  - MCEPreTrainedModel
+  auto_map:
+    AutoConfig: configuration_mce.MCEConfig
+    AutoModel: modeling_mce.MCEPreTrainedModel
+  model_type: mce
+  tokenizer_config:
+    bos_token: null
+    eos_token: <|im_end|>
+    pad_token: <|endoftext|>
+    unk_token: null
+  chat_template_jinja: "{%- set image_count = namespace(value=0) %}\n{%- set video_count = namespace(value=0) %}\n{%- macro\
+    \ render_content(content, do_vision_count, is_system_content=false) %}\n    {%- if content is string %}\n        {{- content\
+    \ }}\n    {%- elif content is iterable and content is not mapping %}\n        {%- for item in content %}\n           \
+    \ {%- if 'image' in item or 'image_url' in item or item.type == 'image' %}\n                {%- if is_system_content %}\n\
+    \                    {{- raise_exception('System message cannot contain images.') }}\n                {%- endif %}\n \
+    \               {%- if do_vision_count %}\n                    {%- set image_count.value = image_count.value + 1 %}\n\
+    \                {%- endif %}\n                {%- if add_vision_id %}\n                    {{- 'Picture ' ~ image_count.value\
+    \ ~ ': ' }}\n                {%- endif %}\n                {{- '<|vision_start|><|image_pad|><|vision_end|>' }}\n    \
+    \        {%- elif 'video' in item or item.type == 'video' %}\n                {%- if is_system_content %}\n          \
+    \          {{- raise_exception('System message cannot contain videos.') }}\n                {%- endif %}\n           \
+    \     {%- if do_vision_count %}\n                    {%- set video_count.value = video_count.value + 1 %}\n          \
+    \      {%- endif %}\n                {%- if add_vision_id %}\n                    {{- 'Video ' ~ video_count.value ~ ':\
+    \ ' }}\n                {%- endif %}\n                {{- '<|vision_start|><|video_pad|><|vision_end|>' }}\n         \
+    \   {%- elif 'text' in item %}\n                {{- item.text }}\n            {%- else %}\n                {{- raise_exception('Unexpected\
+    \ item type in content.') }}\n            {%- endif %}\n        {%- endfor %}\n    {%- elif content is none or content\
+    \ is undefined %}\n        {{- '' }}\n    {%- else %}\n        {{- raise_exception('Unexpected content type.') }}\n  \
+    \  {%- endif %}\n{%- endmacro %}\n{%- if not messages %}\n    {{- raise_exception('No messages provided.') }}\n{%- endif\
+    \ %}\n{%- if tools and tools is iterable and tools is not mapping %}\n    {{- '<|im_start|>system\\n' }}\n    {{- \"#\
+    \ Tools\\n\\nYou have access to the following functions:\\n\\n<tools>\" }}\n    {%- for tool in tools %}\n        {{-\
+    \ \"\\n\" }}\n        {{- tool | tojson }}\n    {%- endfor %}\n    {{- \"\\n</tools>\" }}\n    {{- '\\n\\nIf you choose\
+    \ to call a function ONLY reply in the following format with NO suffix:\\n\\n<tool_call>\\n<function=example_function_name>\\\
+    n<parameter=example_parameter_1>\\nvalue_1\\n</parameter>\\n<parameter=example_parameter_2>\\nThis is the value for the\
+    \ second parameter\\nthat can span\\nmultiple lines\\n</parameter>\\n</function>\\n</tool_call>\\n\\n<IMPORTANT>\\nReminder:\\\
+    n- Function calls MUST follow the specified format: an inner <function=...></function> block must be nested within <tool_call></tool_call>\
+    \ XML tags\\n- Required parameters MUST be specified\\n- You may provide optional reasoning for your function call in\
+    \ natural language BEFORE the function call, but NOT after\\n- If there is no function call available, answer the question\
+    \ like normal with your current knowledge and do not tell the user about function calls\\n</IMPORTANT>' }}\n    {%- if\
+    \ messages[0].role == 'system' %}\n        {%- set content = render_content(messages[0].content, false, true)|trim %}\n\
+    \        {%- if content %}\n            {{- '\\n\\n' + content }}\n        {%- endif %}\n    {%- endif %}\n    {{- '<|im_end|>\\\
+    n' }}\n{%- else %}\n    {%- if messages[0].role == 'system' %}\n        {%- set content = render_content(messages[0].content,\
+    \ false, true)|trim %}\n        {{- '<|im_start|>system\\n' + content + '<|im_end|>\\n' }}\n    {%- endif %}\n{%- endif\
+    \ %}\n{%- set ns = namespace(multi_step_tool=true, last_query_index=messages|length - 1) %}\n{%- for message in messages[::-1]\
+    \ %}\n    {%- set index = (messages|length - 1) - loop.index0 %}\n    {%- if ns.multi_step_tool and message.role == \"\
+    user\" %}\n        {%- set content = render_content(message.content, false)|trim %}\n        {%- if not(content.startswith('<tool_response>')\
+    \ and content.endswith('</tool_response>')) %}\n            {%- set ns.multi_step_tool = false %}\n            {%- set\
+    \ ns.last_query_index = index %}\n        {%- endif %}\n    {%- endif %}\n{%- endfor %}\n{%- if ns.multi_step_tool %}\n\
+    \    {{- raise_exception('No user query found in messages.') }}\n{%- endif %}\n{%- for message in messages %}\n    {%-\
+    \ set content = render_content(message.content, true)|trim %}\n    {%- if message.role == \"system\" %}\n        {%- if\
+    \ not loop.first %}\n            {{- raise_exception('System message must be at the beginning.') }}\n        {%- endif\
+    \ %}\n    {%- elif message.role == \"user\" %}\n        {{- '<|im_start|>' + message.role + '\\n' + content + '<|im_end|>'\
+    \ + '\\n' }}\n    {%- elif message.role == \"assistant\" %}\n        {%- set reasoning_content = '' %}\n        {%- if\
+    \ message.reasoning_content is string %}\n            {%- set reasoning_content = message.reasoning_content %}\n     \
+    \   {%- else %}\n            {%- if '</think>' in content %}\n                {%- set reasoning_content = content.split('</think>')[0].rstrip('\\\
+    n').split('<think>')[-1].lstrip('\\n') %}\n                {%- set content = content.split('</think>')[-1].lstrip('\\\
+    n') %}\n            {%- endif %}\n        {%- endif %}\n        {%- set reasoning_content = reasoning_content|trim %}\n\
+    \        {%- if loop.index0 > ns.last_query_index %}\n            {{- '<|im_start|>' + message.role + '\\n<think>\\n'\
+    \ + reasoning_content + '\\n</think>\\n\\n' + content }}\n        {%- else %}\n            {{- '<|im_start|>' + message.role\
+    \ + '\\n' + content }}\n        {%- endif %}\n        {%- if message.tool_calls and message.tool_calls is iterable and\
+    \ message.tool_calls is not mapping %}\n            {%- for tool_call in message.tool_calls %}\n                {%- if\
+    \ tool_call.function is defined %}\n                    {%- set tool_call = tool_call.function %}\n                {%-\
+    \ endif %}\n                {%- if loop.first %}\n                    {%- if content|trim %}\n                       \
+    \ {{- '\\n\\n<tool_call>\\n<function=' + tool_call.name + '>\\n' }}\n                    {%- else %}\n               \
+    \         {{- '<tool_call>\\n<function=' + tool_call.name + '>\\n' }}\n                    {%- endif %}\n            \
+    \    {%- else %}\n                    {{- '\\n<tool_call>\\n<function=' + tool_call.name + '>\\n' }}\n               \
+    \ {%- endif %}\n                {%- if tool_call.arguments is defined %}\n                    {%- for args_name, args_value\
+    \ in tool_call.arguments|items %}\n                        {{- '<parameter=' + args_name + '>\\n' }}\n               \
+    \         {%- set args_value = args_value | tojson | safe if args_value is mapping or (args_value is sequence and args_value\
+    \ is not string) else args_value | string %}\n                        {{- args_value }}\n                        {{- '\\\
+    n</parameter>\\n' }}\n                    {%- endfor %}\n                {%- endif %}\n                {{- '</function>\\\
+    n</tool_call>' }}\n            {%- endfor %}\n        {%- endif %}\n        {{- '<|im_end|>\\n' }}\n    {%- elif message.role\
+    \ == \"tool\" %}\n        {%- if loop.previtem and loop.previtem.role != \"tool\" %}\n            {{- '<|im_start|>user'\
+    \ }}\n        {%- endif %}\n        {{- '\\n<tool_response>\\n' }}\n        {{- content }}\n        {{- '\\n</tool_response>'\
+    \ }}\n        {%- if not loop.last and loop.nextitem.role != \"tool\" %}\n            {{- '<|im_end|>\\n' }}\n       \
+    \ {%- elif loop.last %}\n            {{- '<|im_end|>\\n' }}\n        {%- endif %}\n    {%- else %}\n        {{- raise_exception('Unexpected\
+    \ message role.') }}\n    {%- endif %}\n{%- endfor %}\n{%- if add_generation_prompt %}\n    {{- '<|im_start|>assistant\\\
+    n' }}\n    {%- if enable_thinking is defined and enable_thinking is true %}\n        {{- '<think>\\n' }}\n    {%- else\
+    \ %}\n        {{- '<think>\\n\\n</think>\\n\\n' }}\n    {%- endif %}\n{%- endif %}"
+cardData:
+  library_name: transformers
+  tags:
+  - mce
+  - world-model
+  - custom_code
+transformersInfo:
+  auto_model: AutoModel
+  custom_class: modeling_mce.MCEPreTrainedModel
+  pipeline_tag: feature-extraction
+siblings:
+- rfilename: .gitattributes
+- rfilename: README.md
+- rfilename: backbone/config.json
+- rfilename: chat_template.jinja
+- rfilename: config.json
+- rfilename: configuration_mce.py
+- rfilename: mce_heads.py
+- rfilename: mce_model.py
+- rfilename: mce_schema.py
+- rfilename: model.safetensors
+- rfilename: modeling_mce.py
+- rfilename: processor_config.json
+- rfilename: tokenizer.json
+- rfilename: tokenizer_config.json
+spaces: []
+createdAt: '2026-09-08T09:58:18.000Z'
+safetensors:
+  parameters:
+    BF16: 855884480
+  total: 855884480
+usedStorage: 3443667455
+downloadsAllTime: 0
+inferenceProviderMapping: {}
+configJson:
+  architectures:
+  - MCEPreTrainedModel
+  auto_map:
+    AutoConfig: configuration_mce.MCEConfig
+    AutoModel: modeling_mce.MCEPreTrainedModel
+  data:
+    batch_construction:
+      num_episodes_per_task: 16
+      num_tasks_per_batch: 16
+    dataloader:
+      batch_size: 64
+      drop_last: true
+      eval_batch_size: 64
+      num_workers: 8
+      persistent_workers: true
+      pin_memory: true
+      prefetch_factor: 2
+      shuffle: true
+      tensor_transfer: tensor
+    demo_num_frames_range:
+    - 4
+    - 16
+    enabled_modalities:
+    - task_description
+    - robot_demo
+    human:
+      enabled: false
+    image_channels: 3
+    image_size: 224
+    masking:
+      mask_dir: null
+      name: none
+      placeholder_box_ratio: 0.3
+    max_text_length: 32
+    modality_dropout:
+      enabled: true
+      goal_image: 0.1
+      human_demo: 0.1
+      keep_at_least_one: true
+      robot_demo: 0.1
+      task_description: 0.1
+    normalize:
+      mean:
+      - 0.0
+      - 0.0
+      - 0.0
+      std:
+      - 1.0
+      - 1.0
+      - 1.0
+    robot:
+      camera: observation.images.cam_high
+      context_cache:
+        dir: cache/robotwin_context
+        enabled: true
+      decode_max_retries: 8
+      decode_tolerance_s: 0.02
+      demo:
+        exclude_radius: 0
+        jitter: 0.25
+      enabled: true
+      frame_filter:
+        enabled: false
+        max_motion_frac: 0.3
+        stats_path: null
+      frame_gap: 16
+      iid_demo: false
+      index_cache: cache/robotwin_index.json
+      kind: robotwin_lerobot
+      max_open_datasets: 8
+      min_episodes_per_family: 2
+      roots:
+      - data/robotwin-clean-and-aug-lerobot/lerobot_robotwin_eef_clean_50
+      - data/robotwin-clean-and-aug-lerobot/lerobot_robotwin_eef_aug_500
+      samples_per_epoch: 100000
+      seed: 42
+      split:
+        mode: family
+        val_datasets:
+        - stack_blocks_two-aloha-agilex_randomized_500-1000
+        - stack_blocks_two-demo_clean_collect_200-50
+        - place_object_stand-aloha-agilex_randomized_500-1000
+        - place_object_stand-demo_clean_collect_200-50
+        - place_container_plate-aloha-agilex_randomized_500-1000
+        - place_container_plate-demo_clean_collect_200-50
+        - move_pillbottle_pad-aloha-agilex_randomized_500-1000
+        - move_pillbottle_pad-demo_clean_collect_200-50
+        - click_alarmclock-aloha-agilex_randomized_500-1000
+        - click_alarmclock-demo_clean_collect_200-50
+        val_ratio: 0.05
+      synthetic: false
+      val_frames_per_episode: 4
+      val_max_samples: 2000
+      video_backend: torchcodec
+    skip_obs_decode: true
+    supervision:
+      cached: false
+      dcae:
+        image_size:
+        - 256
+        - 256
+        model: mit-han-lab/dc-ae-f64c128-in-1.0-diffusers
+      normalize:
+        enabled: false
+        stats_path: cache/obs_next_latent/latent_stats_256x256.pt
+      residual: false
+      target: obs_next_latent
+    video_num_frames: 16
+  dtype: bfloat16
+  model:
+    backbone:
+      attn_implementation: sdpa
+      auto_class: AutoModelForImageTextToText
+      exclude_obs_from_prompt: true
+      freeze: false
+      freeze_vision_tower: true
+      gradient_checkpointing: true
+      kind: hf_vlm
+      num_query_tokens: 8
+      pretrained_name: Qwen/Qwen3.5-0.8B
+      prompt:
+        system: 'You are a multimodal context encoder inside a world model for embodied manipulation. You will receive the
+          agent''s current observation frame together with an optional subset of context modalities: a natural-language task
+          description, a goal image, a human demonstration video, and a robot demonstration video. Any modality may be absent;
+          rely only on what is provided. Integrate all given inputs into a unified scene understanding.'
+        user_instruction: Encode the observation and all provided context into a compact dynamic embedding that captures the
+          current scene state, the task intent, and how the demonstrations relate to the observation.
+      torch_dtype: bfloat16
+      trust_remote_code: true
+    head:
+      arch: mlp_tokens
+      dropout: 0.0
+      hidden_dim: 1024
+      normalize_output: true
+      num_layers: 2
+      readout: query
+    name: qwen3_5
+    output_shape:
+    - 256
+    recon:
+      dropout: 0.0
+      enabled: true
+      hidden_dim: 1024
+      max_T: 32
+      num_layers: 2
+      out_dim: 384
+      time_dim: 128
+    size: 0.8B
+  model_type: mce
+  transformers_version: 5.4.0
+onnxFiles: {}
+safetensorsSizeMb: 1711.8
+approxSizeMb: 1711.8
+fetchedAt: '2026-09-09T08:02:40.000Z'
