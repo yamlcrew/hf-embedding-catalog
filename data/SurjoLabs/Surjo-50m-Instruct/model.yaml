@@ -1,0 +1,84 @@
+_id: 6aa15def0ae662eeb9f34fb9
+id: SurjoLabs/Surjo-50m-Instruct
+private: false
+pipeline_tag: feature-extraction
+library_name: transformers
+tags:
+- transformers
+- safetensors
+- surjo
+- feature-extraction
+- generated_from_trainer
+- sft
+- trl
+- custom_code
+- base_model:SurjoLabs/Surjo-50m
+- base_model:finetune:SurjoLabs/Surjo-50m
+- region:us
+downloads: 0
+likes: 0
+modelId: SurjoLabs/Surjo-50m-Instruct
+author: SurjoLabs
+sha: ee520616cdc6c49b03e67fd427894a8b53e21fe2
+lastModified: '2026-09-10T04:43:23.000Z'
+gated: manual
+disabled: false
+model-index: null
+config:
+  architectures:
+  - SurjoForCausalLM
+  auto_map:
+    AutoConfig: configuration_surjo.SurjoConfig
+    AutoModel: modeling_surjo.SurjoForCausalLM
+    AutoModelForCausalLM: modeling_surjo.SurjoForCausalLM
+  model_type: surjo
+  tokenizer_config:
+    bos_token: <|bos|>
+    eos_token: <|eos|>
+    mask_token: <|mask|>
+    pad_token: <|pad|>
+    unk_token: <|unk|>
+  chat_template_jinja: '{{ bos_token }}{% for message in messages %}{% if message[''role''] == ''assistant'' %}{{ ''<|im_start|>assistant\n''
+    }}{% generation %}{{ message[''content''] + ''<|im_end|>\n'' }}{% endgeneration %}{% else %}{{ ''<|im_start|>'' + message[''role'']
+    + ''\n'' + message[''content''] + ''<|im_end|>\n'' }}{% endif %}{% endfor %}{% if add_generation_prompt %}{{ ''<|im_start|>assistant\n''
+    }}{% endif %}'
+cardData:
+  base_model: SurjoLabs/Surjo-50m
+  library_name: transformers
+  model_name: Surjo-50m-Instruct
+  tags:
+  - generated_from_trainer
+  - sft
+  - trl
+  licence: license
+transformersInfo:
+  auto_model: AutoModel
+  custom_class: modeling_surjo.SurjoForCausalLM
+  pipeline_tag: feature-extraction
+siblings:
+- rfilename: .gitattributes
+- rfilename: README.md
+- rfilename: chat_template.jinja
+- rfilename: config.json
+- rfilename: configuration_surjo.py
+- rfilename: generation_config.json
+- rfilename: model.safetensors
+- rfilename: modeling_surjo.py
+- rfilename: tokenizer.json
+- rfilename: tokenizer_config.json
+- rfilename: training_args.bin
+spaces: []
+createdAt: '2026-09-09T13:23:59.000Z'
+safetensors:
+  parameters:
+    F32: 3120
+    BF16: 53791104
+  total: 53794224
+usedStorage: 2225155713
+downloadsAllTime: 0
+inferenceProviderMapping: {}
+configJson: null
+onnxFiles: {}
+safetensorsSizeMb: 107.6
+approxSizeMb: 107.6
+fetchedAt: '2026-09-10T08:02:30.000Z'
