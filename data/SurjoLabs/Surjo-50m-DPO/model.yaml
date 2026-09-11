@@ -1,0 +1,142 @@
+_id: 6aa3ae9b11273e3dbafc0abb
+id: SurjoLabs/Surjo-50m-DPO
+private: false
+pipeline_tag: feature-extraction
+library_name: transformers
+tags:
+- transformers
+- safetensors
+- surjo
+- feature-extraction
+- generated_from_trainer
+- trl
+- dpo
+- custom_code
+- arxiv:2305.18290
+- base_model:SurjoLabs/Surjo-50m-SFT-Only
+- base_model:finetune:SurjoLabs/Surjo-50m-SFT-Only
+- region:us
+downloads: 0
+likes: 0
+modelId: SurjoLabs/Surjo-50m-DPO
+author: SurjoLabs
+sha: a3e4a32a3fcbce9dfd03980c2a09f9dfb0d629e5
+lastModified: '2026-09-11T07:52:45.000Z'
+gated: false
+disabled: false
+model-index: null
+config:
+  architectures:
+  - SurjoForCausalLM
+  auto_map:
+    AutoConfig: configuration_surjo.SurjoConfig
+    AutoModel: modeling_surjo.SurjoForCausalLM
+    AutoModelForCausalLM: modeling_surjo.SurjoForCausalLM
+  model_type: surjo
+  tokenizer_config:
+    bos_token: <|bos|>
+    eos_token: <|eos|>
+    mask_token: <|mask|>
+    pad_token: <|pad|>
+    unk_token: <|unk|>
+  chat_template_jinja: '{{ bos_token }}{% for message in messages %}{% if message[''role''] == ''assistant'' %}{{ ''<|im_start|>assistant\n''
+    }}{% generation %}{{ message[''content''] + ''<|im_end|>\n'' }}{% endgeneration %}{% else %}{{ ''<|im_start|>'' + message[''role'']
+    + ''\n'' + message[''content''] + ''<|im_end|>\n'' }}{% endif %}{% endfor %}{% if add_generation_prompt %}{{ ''<|im_start|>assistant\n''
+    }}{% endif %}'
+cardData:
+  base_model: SurjoLabs/Surjo-50m-SFT-Only
+  library_name: transformers
+  model_name: Surjo-50m-DPO
+  tags:
+  - generated_from_trainer
+  - trl
+  - dpo
+  licence: license
+transformersInfo:
+  auto_model: AutoModel
+  custom_class: modeling_surjo.SurjoForCausalLM
+  pipeline_tag: feature-extraction
+siblings:
+- rfilename: .gitattributes
+- rfilename: README.md
+- rfilename: chat_template.jinja
+- rfilename: config.json
+- rfilename: generation_config.json
+- rfilename: model.safetensors
+- rfilename: tokenizer.json
+- rfilename: tokenizer_config.json
+- rfilename: training_args.bin
+spaces: []
+createdAt: '2026-09-11T07:32:43.000Z'
+safetensors:
+  parameters:
+    F32: 3120
+    BF16: 70568320
+  total: 70571440
+usedStorage: 282344033
+downloadsAllTime: 0
+inferenceProviderMapping: {}
+configJson:
+  _use_flash_xsa: true
+  architectures:
+  - SurjoForCausalLM
+  attention_bias: false
+  attention_dropout: 0.0
+  auto_map:
+    AutoConfig: configuration_surjo.SurjoConfig
+    AutoModel: modeling_surjo.SurjoForCausalLM
+    AutoModelForCausalLM: modeling_surjo.SurjoForCausalLM
+  bos_token_id: 2
+  coda_layers: 1
+  dtype: bfloat16
+  eos_token_id: 3
+  gdn_allow_neg_eigval: false
+  gdn_conv_kernel_size: 4
+  gdn_key_dim: 64
+  gdn_num_v_heads: 8
+  gdn_per_xsa: 3
+  gdn_value_dim: 64
+  gradient_checkpointing: false
+  head_dim: 64
+  hidden_act: silu
+  hidden_size: 512
+  initializer_range: 0.02
+  intermediate_size: 1536
+  layer_types:
+  - full_attention
+  - linear_attention
+  - linear_attention
+  - linear_attention
+  - full_attention
+  - linear_attention
+  - linear_attention
+  - linear_attention
+  - full_attention
+  - full_attention
+  loop_noise_std: 0.02
+  max_position_embeddings: 2048
+  model_type: surjo
+  num_attention_heads: 8
+  num_groups: 2
+  num_hidden_layers: 10
+  num_key_value_heads: 4
+  pad_token_id: 1
+  partial_rotary_factor: 1.0
+  prelude_layers: 1
+  recurrent_layers: 8
+  recurrent_passes: 2
+  rms_norm_eps: 1.0e-05
+  rope_parameters:
+    partial_rotary_factor: 1.0
+    rope_theta: 10000.0
+    rope_type: default
+  rope_theta: 10000.0
+  tie_word_embeddings: true
+  transformers_version: 5.17.0
+  use_cache: false
+  vocab_size: 32768
+  xsa_projection: true
+onnxFiles: {}
+safetensorsSizeMb: 141.2
+approxSizeMb: 141.1
+fetchedAt: '2026-09-11T07:57:59.000Z'
