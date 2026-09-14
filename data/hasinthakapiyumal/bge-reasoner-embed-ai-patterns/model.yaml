@@ -1,0 +1,384 @@
+_id: 6aa6f20fb25bd239b9dbf26b
+id: hasinthakapiyumal/bge-reasoner-embed-ai-patterns
+private: false
+pipeline_tag: sentence-similarity
+library_name: sentence-transformers
+tags:
+- sentence-transformers
+- safetensors
+- qwen3
+- sentence-similarity
+- feature-extraction
+- dense
+- generated_from_trainer
+- dataset_size:2333
+- loss:ContrastiveLoss
+- arxiv:1908.10084
+- base_model:BAAI/bge-reasoner-embed-qwen3-8b-0923
+- base_model:finetune:BAAI/bge-reasoner-embed-qwen3-8b-0923
+- text-embeddings-inference
+- endpoints_compatible
+- region:us
+downloads: 0
+likes: 0
+modelId: hasinthakapiyumal/bge-reasoner-embed-ai-patterns
+author: hasinthakapiyumal
+sha: eeedeb585aa6a18461d7de5d070d99aff9c7dceb
+lastModified: '2026-09-14T05:14:10.000Z'
+gated: false
+disabled: false
+widgetData:
+- source_sentence: The code implements several data curation and filtering patterns crucial for autonomous driving AI datasets.
+    It includes filtering scenarios based on the fractional presence of specific LiDAR point cloud tokens, selecting scenarios
+    exhibiting particular ego vehicle dynamics (e.g., non-stationary, starting, stopping), and ensuring contextual relevance
+    by checking for route-intersecting roadblocks. These patterns are essential for preparing targeted and high-quality datasets
+    for training and evaluating perception, prediction, and planning models.
+  sentences:
+  - The code implements the Intelligent Driver Model (IDM) as a reactive car-following policy, dictating longitudinal acceleration
+    based on ego and lead agent states, desired velocity, and safety parameters. This policy is central to an agent-based
+    simulation framework, where `IDMAgent`s dynamically plan and propagate their trajectories by interacting with an `OccupancyMap`
+    that represents other vehicles and traffic light statuses.
+  - The code demonstrates a pattern for building highly customizable AI agents (`CustomizeAgent`) that integrate external
+    tools (e.g., `MCPToolkit`, `ArxivToolkit`) to augment their capabilities. A core AI pattern is the robust handling of
+    structured output through various parsing modes (`json`, `xml`, `title`, `custom`), ensuring precise information extraction.
+    Furthermore, it showcases the orchestration of these agents and tools into complex workflows (`WorkFlowGraph`) for multi-step
+    task execution, representing a multi-agent system pattern.
+  - This code implements a Retrieval Augmented Generation (RAG) pipeline, primarily focusing on the ingestion and embedding
+    of documents. It employs a `DocumentProcessor` for pre-processing, including chunking strategies (`split_by`, `split_length`)
+    and blocklist filtering, before using an `RAGEmbedder` to generate vector embeddings via an external model (e.g., Ollama).
+    These embeddings are then indexed into a vector store like Elasticsearch, with integrated metrics tracking for pipeline
+    observability.
+- source_sentence: The code implements comprehensive Retrieval-Augmented Generation (RAG) patterns, featuring multimodal data
+    ingestion, diverse chunking strategies (semantic, hierarchical, simple), and various embedding models (OpenAI, Azure,
+    HuggingFace, Voyage, Ollama) for vector and graph indexing and retrieval. It also includes an agentic web interaction
+    framework, enabling AI to programmatically navigate and interact with web pages. Furthermore, the system incorporates
+    an evolutionary prompt optimization pattern for automatically improving AI agent instructions through iterative generation
+    and evaluation.
+  sentences:
+  - This code implements an **LLM Provider Abstraction** pattern, dynamically loading specific LLM backend classes like OpenAI
+    or Anthropic based on a given provider name. It incorporates a **Model Selection and Routing** mechanism to choose appropriate
+    models using explicit IDs or `ModelPreferences`, and utilizes an **LLM Factory** pattern to encapsulate the creation and
+    configuration of these augmented LLM instances. This design facilitates interchangeable LLM backends and flexible model
+    management.
+  - This code implements a pattern for automated dataset curation and preprocessing, systematically loading and filtering
+    classification datasets from OpenML and Kaggle based on criteria like missing values, feature count, sample size, and
+    number of classes. It prepares this data for AI model consumption by applying capping mechanisms, handling multiclass/binary
+    scenarios, and transforming it into PyTorch tensors with controlled shuffling or sorting, indicating its use for deep
+    learning benchmarks or training.
+  - The code implements an agent-based architecture, orchestrating interactive, automated workflow, and autonomous agent modes.
+    It integrates a knowledge base for contextual understanding and employs a conversation manager to maintain dialogue history
+    for AI interactions. A prominent autonomous agent pattern is evident through the `AgentModeController`, which manages
+    goal-driven execution, leverages external tools, and generates structured reports from its operational history.
+- source_sentence: This code implements an agentic AI system where an `Assistant` orchestrates various `known_agents` using
+    OpenAI's function calling for dynamic tool use. It features a `GitHubAgentLibraryManager` for discovering, installing,
+    and grouping agents from an external repository, enabling dynamic capability expansion. Furthermore, the system incorporates
+    robust contextual memory management, distinguishing between shared and user-specific memories to maintain personalized
+    and persistent conversation context.
+  sentences:
+  - The code demonstrates a pattern of **dynamic AI model integration and selection**, allowing the `JWTAnalyzer` to dispatch
+    analysis tasks to various AI services like OpenAI, Bard, and Llama based on runtime configuration. It employs a **strategy
+    for abstracting and managing multiple AI backends** through a `model_map` and a dedicated `AI_models` object. This enables
+    the use of AI for advanced interpretation of decoded JWT data, with specific handling for different AI endpoints and API
+    tokens.
+  - This code implements patterns for distributed deep learning, primarily focusing on synchronizing model states across multiple
+    processes. It provides a generic `all_reduce_dict` function for aggregating dictionary values, which is specifically utilized
+    by `SyncNormHook` to periodically average normalization layer statistics (e.g., BatchNorm's running mean/variance) during
+    distributed training. This pattern ensures consistent global statistics for normalization layers, crucial for stable and
+    effective training in multi-GPU environments.
+  - This code outlines a multi-agent AI system, orchestrating specialized `Assistant` agents capable of dynamic tool use and
+    LLM-based planning. It employs an LLM-driven request triage pattern to intelligently route user queries to the most appropriate
+    agent for execution. The architecture further supports conversational context management and includes an evaluation framework
+    for assessing agent performance and planning accuracy.
+- source_sentence: This code implements a pattern for automated dataset curation and preprocessing, systematically loading
+    and filtering classification datasets from OpenML and Kaggle based on criteria like missing values, feature count, sample
+    size, and number of classes. It prepares this data for AI model consumption by applying capping mechanisms, handling multiclass/binary
+    scenarios, and transforming it into PyTorch tensors with controlled shuffling or sorting, indicating its use for deep
+    learning benchmarks or training.
+  sentences:
+  - This code defines core AI patterns for knowledge graph management, including structured representation of entities and
+    relationships, along with mechanisms for querying and editing them. It implements a Retrieval Augmented Generation (RAG)
+    pattern by assembling a rich context from documents, chunks, entities, and relations, complete with relevance scoring
+    and context window truncation. This comprehensive approach facilitates structured query responses by integrating retrieved
+    information with generated content.
+  - The code demonstrates patterns for integrating Large Language Models (LLMs) to process chat data. It utilizes LLM-based
+    text classification to identify questions and performs coreference resolution by leveraging conversational history, including
+    an LLM-driven decision to determine if resolution is needed.
+  - This code implements a Deformable DETR transformer decoder that iteratively refines object queries and bounding box predictions
+    across its layers. It leverages deformable attention by dynamically adjusting sampling points based on reference points
+    and valid ratios, enhancing efficiency for object detection. The integrated head applies multiple classification and regression
+    branches, optionally supporting a two-stage detection pattern for improved proposal generation.
+- source_sentence: This code implements a nearest neighbor distance pattern by calculating the minimum Euclidean distance
+    from query points to a set of sample points. It leverages an optimized pairwise squared Euclidean distance computation,
+    a fundamental metric widely used in machine learning for tasks like clustering, classification, and density estimation,
+    leveraging vectorized operations for efficiency.
+  sentences:
+  - This code establishes a modular AI pipeline, integrating a `VectorDB` and an `embedder` for semantic processing and retrieval-augmented
+    capabilities. It employs a pluggable "scanner" architecture, where various AI-powered modules can be dynamically configured
+    and instantiated, optionally leveraging the vector database and embedder for tasks like input/output analysis or moderation.
+    This design facilitates a flexible and extensible framework for managing AI system interactions.
+  - The code establishes a **World Model** pattern by providing a structured, semantic representation of an autonomous driving
+    environment, organizing map data into distinct vector and raster layers like lanes, roadblocks, and drivable areas. It
+    further implements **Perception and Querying** patterns, offering an AI agent capabilities to perform complex spatial
+    queries such as point-in-polygon checks, proximity searches, and nearest object distance calculations, essential for environmental
+    understanding and navigation.
+  - The code implements an adaptive probabilistic modeling framework, featuring automated univariate distribution selection
+    based on statistical fit (Kolmogorov-Smirnov test) and dynamic candidate filtering. It utilizes a Gaussian copula model
+    for multivariate distributions, separating marginal distribution fitting from dependency modeling via a correlation matrix.
+    This architecture supports conditional inference and sampling by transforming data into a standard normal space.
+model-index: null
+config:
+  architectures:
+  - Qwen3Model
+  model_type: qwen3
+  tokenizer_config:
+    bos_token: null
+    eos_token: <|im_end|>
+    pad_token: <|endoftext|>
+    unk_token: null
+  chat_template_jinja: "{%- if tools %}\n    {{- '<|im_start|>system\\n' }}\n    {%- if messages[0].role == 'system' %}\n\
+    \        {{- messages[0].content + '\\n\\n' }}\n    {%- endif %}\n    {{- \"# Tools\\n\\nYou may call one or more functions\
+    \ to assist with the user query.\\n\\nYou are provided with function signatures within <tools></tools> XML tags:\\n<tools>\"\
+    \ }}\n    {%- for tool in tools %}\n        {{- \"\\n\" }}\n        {{- tool | tojson }}\n    {%- endfor %}\n    {{- \"\
+    \\n</tools>\\n\\nFor each function call, return a json object with function name and arguments within <tool_call></tool_call>\
+    \ XML tags:\\n<tool_call>\\n{\\\"name\\\": <function-name>, \\\"arguments\\\": <args-json-object>}\\n</tool_call><|im_end|>\\\
+    n\" }}\n{%- else %}\n    {%- if messages[0].role == 'system' %}\n        {{- '<|im_start|>system\\n' + messages[0].content\
+    \ + '<|im_end|>\\n' }}\n    {%- endif %}\n{%- endif %}\n{%- set ns = namespace(multi_step_tool=true, last_query_index=messages|length\
+    \ - 1) %}\n{%- for message in messages[::-1] %}\n    {%- set index = (messages|length - 1) - loop.index0 %}\n    {%- if\
+    \ ns.multi_step_tool and message.role == \"user\" and not(message.content.startswith('<tool_response>') and message.content.endswith('</tool_response>'))\
+    \ %}\n        {%- set ns.multi_step_tool = false %}\n        {%- set ns.last_query_index = index %}\n    {%- endif %}\n\
+    {%- endfor %}\n{%- for message in messages %}\n    {%- if (message.role == \"user\") or (message.role == \"system\" and\
+    \ not loop.first) %}\n        {{- '<|im_start|>' + message.role + '\\n' + message.content + '<|im_end|>' + '\\n' }}\n\
+    \    {%- elif message.role == \"assistant\" %}\n        {%- set content = message.content %}\n        {%- set reasoning_content\
+    \ = '' %}\n        {%- if message.reasoning_content is defined and message.reasoning_content is not none %}\n        \
+    \    {%- set reasoning_content = message.reasoning_content %}\n        {%- else %}\n            {%- if '</think>' in message.content\
+    \ %}\n                {%- set content = message.content.split('</think>')[-1].lstrip('\\n') %}\n                {%- set\
+    \ reasoning_content = message.content.split('</think>')[0].rstrip('\\n').split('<think>')[-1].lstrip('\\n') %}\n     \
+    \       {%- endif %}\n        {%- endif %}\n        {%- if loop.index0 > ns.last_query_index %}\n            {%- if loop.last\
+    \ or (not loop.last and reasoning_content) %}\n                {{- '<|im_start|>' + message.role + '\\n<think>\\n' + reasoning_content.strip('\\\
+    n') + '\\n</think>\\n\\n' + content.lstrip('\\n') }}\n            {%- else %}\n                {{- '<|im_start|>' + message.role\
+    \ + '\\n' + content }}\n            {%- endif %}\n        {%- else %}\n            {{- '<|im_start|>' + message.role +\
+    \ '\\n' + content }}\n        {%- endif %}\n        {%- if message.tool_calls %}\n            {%- for tool_call in message.tool_calls\
+    \ %}\n                {%- if (loop.first and content) or (not loop.first) %}\n                    {{- '\\n' }}\n     \
+    \           {%- endif %}\n                {%- if tool_call.function %}\n                    {%- set tool_call = tool_call.function\
+    \ %}\n                {%- endif %}\n                {{- '<tool_call>\\n{\"name\": \"' }}\n                {{- tool_call.name\
+    \ }}\n                {{- '\", \"arguments\": ' }}\n                {%- if tool_call.arguments is string %}\n        \
+    \            {{- tool_call.arguments }}\n                {%- else %}\n                    {{- tool_call.arguments | tojson\
+    \ }}\n                {%- endif %}\n                {{- '}\\n</tool_call>' }}\n            {%- endfor %}\n        {%-\
+    \ endif %}\n        {{- '<|im_end|>\\n' }}\n    {%- elif message.role == \"tool\" %}\n        {%- if loop.first or (messages[loop.index0\
+    \ - 1].role != \"tool\") %}\n            {{- '<|im_start|>user' }}\n        {%- endif %}\n        {{- '\\n<tool_response>\\\
+    n' }}\n        {{- message.content }}\n        {{- '\\n</tool_response>' }}\n        {%- if loop.last or (messages[loop.index0\
+    \ + 1].role != \"tool\") %}\n            {{- '<|im_end|>\\n' }}\n        {%- endif %}\n    {%- endif %}\n{%- endfor %}\n\
+    {%- if add_generation_prompt %}\n    {{- '<|im_start|>assistant\\n' }}\n    {%- if enable_thinking is defined and enable_thinking\
+    \ is false %}\n        {{- '<think>\\n\\n</think>\\n\\n' }}\n    {%- endif %}\n{%- endif %}"
+cardData:
+  tags:
+  - sentence-transformers
+  - sentence-similarity
+  - feature-extraction
+  - dense
+  - generated_from_trainer
+  - dataset_size:2333
+  - loss:ContrastiveLoss
+  base_model: BAAI/bge-reasoner-embed-qwen3-8b-0923
+  widget:
+  - source_sentence: The code implements several data curation and filtering patterns crucial for autonomous driving AI datasets.
+      It includes filtering scenarios based on the fractional presence of specific LiDAR point cloud tokens, selecting scenarios
+      exhibiting particular ego vehicle dynamics (e.g., non-stationary, starting, stopping), and ensuring contextual relevance
+      by checking for route-intersecting roadblocks. These patterns are essential for preparing targeted and high-quality
+      datasets for training and evaluating perception, prediction, and planning models.
+    sentences:
+    - The code implements the Intelligent Driver Model (IDM) as a reactive car-following policy, dictating longitudinal acceleration
+      based on ego and lead agent states, desired velocity, and safety parameters. This policy is central to an agent-based
+      simulation framework, where `IDMAgent`s dynamically plan and propagate their trajectories by interacting with an `OccupancyMap`
+      that represents other vehicles and traffic light statuses.
+    - The code demonstrates a pattern for building highly customizable AI agents (`CustomizeAgent`) that integrate external
+      tools (e.g., `MCPToolkit`, `ArxivToolkit`) to augment their capabilities. A core AI pattern is the robust handling of
+      structured output through various parsing modes (`json`, `xml`, `title`, `custom`), ensuring precise information extraction.
+      Furthermore, it showcases the orchestration of these agents and tools into complex workflows (`WorkFlowGraph`) for multi-step
+      task execution, representing a multi-agent system pattern.
+    - This code implements a Retrieval Augmented Generation (RAG) pipeline, primarily focusing on the ingestion and embedding
+      of documents. It employs a `DocumentProcessor` for pre-processing, including chunking strategies (`split_by`, `split_length`)
+      and blocklist filtering, before using an `RAGEmbedder` to generate vector embeddings via an external model (e.g., Ollama).
+      These embeddings are then indexed into a vector store like Elasticsearch, with integrated metrics tracking for pipeline
+      observability.
+  - source_sentence: The code implements comprehensive Retrieval-Augmented Generation (RAG) patterns, featuring multimodal
+      data ingestion, diverse chunking strategies (semantic, hierarchical, simple), and various embedding models (OpenAI,
+      Azure, HuggingFace, Voyage, Ollama) for vector and graph indexing and retrieval. It also includes an agentic web interaction
+      framework, enabling AI to programmatically navigate and interact with web pages. Furthermore, the system incorporates
+      an evolutionary prompt optimization pattern for automatically improving AI agent instructions through iterative generation
+      and evaluation.
+    sentences:
+    - This code implements an **LLM Provider Abstraction** pattern, dynamically loading specific LLM backend classes like
+      OpenAI or Anthropic based on a given provider name. It incorporates a **Model Selection and Routing** mechanism to choose
+      appropriate models using explicit IDs or `ModelPreferences`, and utilizes an **LLM Factory** pattern to encapsulate
+      the creation and configuration of these augmented LLM instances. This design facilitates interchangeable LLM backends
+      and flexible model management.
+    - This code implements a pattern for automated dataset curation and preprocessing, systematically loading and filtering
+      classification datasets from OpenML and Kaggle based on criteria like missing values, feature count, sample size, and
+      number of classes. It prepares this data for AI model consumption by applying capping mechanisms, handling multiclass/binary
+      scenarios, and transforming it into PyTorch tensors with controlled shuffling or sorting, indicating its use for deep
+      learning benchmarks or training.
+    - The code implements an agent-based architecture, orchestrating interactive, automated workflow, and autonomous agent
+      modes. It integrates a knowledge base for contextual understanding and employs a conversation manager to maintain dialogue
+      history for AI interactions. A prominent autonomous agent pattern is evident through the `AgentModeController`, which
+      manages goal-driven execution, leverages external tools, and generates structured reports from its operational history.
+  - source_sentence: This code implements an agentic AI system where an `Assistant` orchestrates various `known_agents` using
+      OpenAI's function calling for dynamic tool use. It features a `GitHubAgentLibraryManager` for discovering, installing,
+      and grouping agents from an external repository, enabling dynamic capability expansion. Furthermore, the system incorporates
+      robust contextual memory management, distinguishing between shared and user-specific memories to maintain personalized
+      and persistent conversation context.
+    sentences:
+    - The code demonstrates a pattern of **dynamic AI model integration and selection**, allowing the `JWTAnalyzer` to dispatch
+      analysis tasks to various AI services like OpenAI, Bard, and Llama based on runtime configuration. It employs a **strategy
+      for abstracting and managing multiple AI backends** through a `model_map` and a dedicated `AI_models` object. This enables
+      the use of AI for advanced interpretation of decoded JWT data, with specific handling for different AI endpoints and
+      API tokens.
+    - This code implements patterns for distributed deep learning, primarily focusing on synchronizing model states across
+      multiple processes. It provides a generic `all_reduce_dict` function for aggregating dictionary values, which is specifically
+      utilized by `SyncNormHook` to periodically average normalization layer statistics (e.g., BatchNorm's running mean/variance)
+      during distributed training. This pattern ensures consistent global statistics for normalization layers, crucial for
+      stable and effective training in multi-GPU environments.
+    - This code outlines a multi-agent AI system, orchestrating specialized `Assistant` agents capable of dynamic tool use
+      and LLM-based planning. It employs an LLM-driven request triage pattern to intelligently route user queries to the most
+      appropriate agent for execution. The architecture further supports conversational context management and includes an
+      evaluation framework for assessing agent performance and planning accuracy.
+  - source_sentence: This code implements a pattern for automated dataset curation and preprocessing, systematically loading
+      and filtering classification datasets from OpenML and Kaggle based on criteria like missing values, feature count, sample
+      size, and number of classes. It prepares this data for AI model consumption by applying capping mechanisms, handling
+      multiclass/binary scenarios, and transforming it into PyTorch tensors with controlled shuffling or sorting, indicating
+      its use for deep learning benchmarks or training.
+    sentences:
+    - This code defines core AI patterns for knowledge graph management, including structured representation of entities and
+      relationships, along with mechanisms for querying and editing them. It implements a Retrieval Augmented Generation (RAG)
+      pattern by assembling a rich context from documents, chunks, entities, and relations, complete with relevance scoring
+      and context window truncation. This comprehensive approach facilitates structured query responses by integrating retrieved
+      information with generated content.
+    - The code demonstrates patterns for integrating Large Language Models (LLMs) to process chat data. It utilizes LLM-based
+      text classification to identify questions and performs coreference resolution by leveraging conversational history,
+      including an LLM-driven decision to determine if resolution is needed.
+    - This code implements a Deformable DETR transformer decoder that iteratively refines object queries and bounding box
+      predictions across its layers. It leverages deformable attention by dynamically adjusting sampling points based on reference
+      points and valid ratios, enhancing efficiency for object detection. The integrated head applies multiple classification
+      and regression branches, optionally supporting a two-stage detection pattern for improved proposal generation.
+  - source_sentence: This code implements a nearest neighbor distance pattern by calculating the minimum Euclidean distance
+      from query points to a set of sample points. It leverages an optimized pairwise squared Euclidean distance computation,
+      a fundamental metric widely used in machine learning for tasks like clustering, classification, and density estimation,
+      leveraging vectorized operations for efficiency.
+    sentences:
+    - This code establishes a modular AI pipeline, integrating a `VectorDB` and an `embedder` for semantic processing and
+      retrieval-augmented capabilities. It employs a pluggable "scanner" architecture, where various AI-powered modules can
+      be dynamically configured and instantiated, optionally leveraging the vector database and embedder for tasks like input/output
+      analysis or moderation. This design facilitates a flexible and extensible framework for managing AI system interactions.
+    - The code establishes a **World Model** pattern by providing a structured, semantic representation of an autonomous driving
+      environment, organizing map data into distinct vector and raster layers like lanes, roadblocks, and drivable areas.
+      It further implements **Perception and Querying** patterns, offering an AI agent capabilities to perform complex spatial
+      queries such as point-in-polygon checks, proximity searches, and nearest object distance calculations, essential for
+      environmental understanding and navigation.
+    - The code implements an adaptive probabilistic modeling framework, featuring automated univariate distribution selection
+      based on statistical fit (Kolmogorov-Smirnov test) and dynamic candidate filtering. It utilizes a Gaussian copula model
+      for multivariate distributions, separating marginal distribution fitting from dependency modeling via a correlation
+      matrix. This architecture supports conditional inference and sampling by transforming data into a standard normal space.
+  pipeline_tag: sentence-similarity
+  library_name: sentence-transformers
+siblings:
+- rfilename: .gitattributes
+- rfilename: 1_Pooling/config.json
+- rfilename: 2_Dense/config.json
+- rfilename: 2_Dense/model.safetensors
+- rfilename: README.md
+- rfilename: added_tokens.json
+- rfilename: centroids.pt
+- rfilename: chat_template.jinja
+- rfilename: class_names.json
+- rfilename: config.json
+- rfilename: config_sentence_transformers.json
+- rfilename: merges.txt
+- rfilename: model-00001-of-00004.safetensors
+- rfilename: model-00002-of-00004.safetensors
+- rfilename: model-00003-of-00004.safetensors
+- rfilename: model-00004-of-00004.safetensors
+- rfilename: model.safetensors.index.json
+- rfilename: modules.json
+- rfilename: sentence_bert_config.json
+- rfilename: special_tokens_map.json
+- rfilename: tokenizer.json
+- rfilename: tokenizer_config.json
+- rfilename: vocab.json
+spaces: []
+createdAt: '2026-09-13T18:57:19.000Z'
+safetensors:
+  parameters:
+    BF16: 7568405504
+  total: 7568405504
+usedStorage: 30285271388
+downloadsAllTime: 0
+inferenceProviderMapping: {}
+configJson:
+  architectures:
+  - Qwen3Model
+  attention_bias: false
+  attention_dropout: 0.0
+  dtype: bfloat16
+  eos_token_id: 151645
+  head_dim: 128
+  hidden_act: silu
+  hidden_size: 4096
+  initializer_range: 0.02
+  intermediate_size: 12288
+  layer_types:
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  - full_attention
+  max_position_embeddings: 40960
+  max_window_layers: 36
+  model_type: qwen3
+  num_attention_heads: 32
+  num_hidden_layers: 36
+  num_key_value_heads: 8
+  pad_token_id: 151643
+  rms_norm_eps: 1.0e-06
+  rope_scaling: null
+  rope_theta: 1000000
+  sliding_window: null
+  tie_word_embeddings: false
+  transformers_version: 4.57.6
+  use_cache: false
+  use_sliding_window: false
+  vocab_size: 151936
+onnxFiles: {}
+safetensorsSizeMb: 15136.9
+approxSizeMb: 15136.8
+fetchedAt: '2026-09-14T08:47:26.000Z'
