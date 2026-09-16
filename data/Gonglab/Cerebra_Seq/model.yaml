@@ -1,0 +1,229 @@
+_id: 6aa8dfe4c109e2ae8db04b6c
+id: Gonglab/Cerebra_Seq
+private: false
+pipeline_tag: feature-extraction
+library_name: transformers
+tags:
+- transformers
+- cerebra_seq
+- feature-extraction
+- biology
+- protein-structure
+- custom-code
+- custom_code
+- region:us
+downloads: 0
+likes: 0
+modelId: Gonglab/Cerebra_Seq
+author: Gonglab
+sha: aab7318429599d6efc711049e1ef614374102d69
+lastModified: '2026-09-15T08:36:25.000Z'
+gated: false
+disabled: false
+model-index: null
+config:
+  model_type: cerebra_seq
+  architectures:
+  - CerebraSeqModel
+  auto_map:
+    AutoConfig: configuration_cerebra_seq.CerebraSeqConfig
+    AutoModel: modeling_cerebra_seq.CerebraSeqModel
+cardData:
+  library_name: transformers
+  tags:
+  - biology
+  - protein-structure
+  - custom-code
+transformersInfo:
+  auto_model: AutoModel
+  custom_class: modeling_cerebra_seq.CerebraSeqModel
+  pipeline_tag: feature-extraction
+siblings:
+- rfilename: .gitattributes
+- rfilename: Cerebra_Seq_mhc_head.py
+- rfilename: Cerebra_Seq_model_dropout.py
+- rfilename: Cerebra_Seq_model_evoformer.py
+- rfilename: Cerebra_Seq_model_heads.py
+- rfilename: Cerebra_Seq_model_li_ops.py
+- rfilename: Cerebra_Seq_model_model_with_conf.py
+- rfilename: Cerebra_Seq_model_msa.py
+- rfilename: Cerebra_Seq_model_outer_product_mean.py
+- rfilename: Cerebra_Seq_model_pair_transition.py
+- rfilename: Cerebra_Seq_model_primitives.py
+- rfilename: Cerebra_Seq_model_structure_module.py
+- rfilename: Cerebra_Seq_model_triangular_attention.py
+- rfilename: Cerebra_Seq_model_triangular_multiplicative_update.py
+- rfilename: Cerebra_Seq_utils_checkpointing.py
+- rfilename: Cerebra_Seq_utils_chunk_utils.py
+- rfilename: Cerebra_Seq_utils_precision_utils.py
+- rfilename: Cerebra_Seq_utils_tensor_utils.py
+- rfilename: README.md
+- rfilename: VALIDATION.md
+- rfilename: config.json
+- rfilename: configuration_cerebra_seq.py
+- rfilename: environment.json
+- rfilename: model1.safetensors
+- rfilename: model2.safetensors
+- rfilename: model3.safetensors
+- rfilename: model4.safetensors
+- rfilename: model5.safetensors
+- rfilename: modeling_cerebra_seq.py
+- rfilename: report_cpu.json
+- rfilename: report_cuda2.json
+- rfilename: tensor_rearrange.py
+- rfilename: weight_validation.json
+spaces: []
+createdAt: '2026-09-15T06:04:20.000Z'
+usedStorage: 1541832180
+downloadsAllTime: 0
+inferenceProviderMapping: {}
+configJson:
+  model_type: cerebra_seq
+  architectures:
+  - CerebraSeqModel
+  auto_map:
+    AutoConfig: configuration_cerebra_seq.CerebraSeqConfig
+    AutoModel: modeling_cerebra_seq.CerebraSeqModel
+  core_config:
+    globals:
+      blocks_per_ckpt: null
+      c_e: 64
+      c_m: 256
+      c_s: 384
+      c_t: 64
+      c_z: 128
+      chunk_size: 4
+      eps: 0.0001
+      offload_inference: false
+      use_flash: false
+      use_lma: false
+    model:
+      _mask_trans: false
+      evoformer_stack:
+        blocks_per_ckpt: null
+        c_hidden_msa_att: 32
+        c_hidden_mul: 128
+        c_hidden_opm: 32
+        c_hidden_pair_att: 32
+        c_m: 256
+        c_s: 384
+        c_z: 128
+        clear_cache_between_blocks: false
+        eps: 0.0001
+        inf: 10000.0
+        msa_dropout: 0.0
+        no_blocks: 32
+        no_heads_msa: 8
+        no_heads_pair: 4
+        pair_dropout: 0.0
+        transition_n: 4
+        tune_chunk_size: true
+      extra_msa:
+        enabled: true
+        extra_msa_embedder:
+          c_in: 25
+          c_out: 64
+        extra_msa_stack:
+          c_hidden_msa_att: 8
+          c_hidden_mul: 128
+          c_hidden_opm: 32
+          c_hidden_pair_att: 32
+          c_m: 64
+          c_z: 128
+          ckpt: true
+          clear_cache_between_blocks: false
+          eps: 0.0001
+          inf: 10000.0
+          msa_dropout: 0.15
+          no_blocks: 4
+          no_heads_msa: 8
+          no_heads_pair: 4
+          pair_dropout: 0.25
+          transition_n: 4
+          tune_chunk_size: true
+      heads:
+        distogram:
+          c_z: 128
+          no_bins: 64
+        experimentally_resolved:
+          c_out: 37
+          c_s: 384
+        lddt:
+          c_hidden: 128
+          c_in: 384
+          no_bins: 50
+        masked_msa:
+          c_m: 256
+          c_out: 23
+        tm:
+          c_z: 128
+          enabled: false
+          no_bins: 64
+      input_embedder:
+        c_m: 256
+        c_z: 128
+        msa_dim: 49
+        relpos_k: 32
+        tf_dim: 22
+      recycling_embedder:
+        c_m: 256
+        c_z: 128
+        inf: 10000.0
+        max_bin: 20.75
+        min_bin: 3.25
+        no_bins: 15
+      structure_module:
+        c_ipa: 16
+        c_resnet: 128
+        c_s: 384
+        c_z: 128
+        dropout_rate: 0.1
+        epsilon: 0.0001
+        inf: 10000.0
+        no_angles: 7
+        no_blocks: 8
+        no_heads_ipa: 12
+        no_qk_points: 4
+        no_resnet_blocks: 2
+        no_transition_layers: 1
+        no_v_points: 8
+        trans_scale_factor: 10
+      template:
+        average_templates: false
+        distogram:
+          max_bin: 50.75
+          min_bin: 3.25
+          no_bins: 39
+        embed_angles: false
+        enabled: false
+        eps: 0.0001
+        inf: 10000.0
+        offload_templates: false
+        template_angle_embedder:
+          c_in: 57
+          c_out: 256
+        template_pair_embedder:
+          c_in: 88
+          c_out: 64
+        template_pair_stack:
+          blocks_per_ckpt: null
+          c_hidden_tri_att: 16
+          c_hidden_tri_mul: 64
+          c_t: 64
+          dropout_rate: 0.25
+          inf: 10000.0
+          no_blocks: 2
+          no_heads: 4
+          pair_transition_n: 2
+          tune_chunk_size: true
+        template_pointwise_attention:
+          c_hidden: 16
+          c_t: 64
+          c_z: 128
+          inf: 10000.0
+          no_heads: 4
+        use_unit_vector: false
+onnxFiles: {}
+safetensorsSizeMb: 1541.8
+approxSizeMb: 0.0
+fetchedAt: '2026-09-16T08:28:51.000Z'
