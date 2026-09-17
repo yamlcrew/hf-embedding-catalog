@@ -1,0 +1,115 @@
+_id: 6aa85f5a1d9f159824e15ac2
+id: HamSession/stock-embed-mamba3
+private: false
+pipeline_tag: feature-extraction
+library_name: pytorch
+tags:
+- pytorch
+- safetensors
+- time-series
+- finance
+- stocks
+- mamba
+- self-supervised
+- masked-reconstruction
+- embeddings
+- feature-extraction
+- license:apache-2.0
+- region:us
+downloads: 4
+likes: 0
+modelId: HamSession/stock-embed-mamba3
+author: HamSession
+sha: 8230f9806dbb716e2e91a75074992d2b5e2ed402
+lastModified: '2026-09-16T22:03:24.000Z'
+gated: false
+disabled: false
+model-index: null
+config: {}
+cardData:
+  license: apache-2.0
+  library_name: pytorch
+  pipeline_tag: feature-extraction
+  tags:
+  - time-series
+  - finance
+  - stocks
+  - mamba
+  - self-supervised
+  - masked-reconstruction
+  - embeddings
+siblings:
+- rfilename: .gitattributes
+- rfilename: LICENSE
+- rfilename: README.md
+- rfilename: adjust_ohlcv.py
+- rfilename: config.json
+- rfilename: export_receipt.json
+- rfilename: features.py
+- rfilename: model.safetensors
+- rfilename: modeling_stock_mamba.py
+- rfilename: preprocessing_contract.md
+spaces: []
+createdAt: '2026-09-14T20:55:54.000Z'
+safetensors:
+  parameters:
+    F32: 3299245
+  total: 3299245
+usedStorage: 13205364
+downloadsAllTime: 4
+inferenceProviderMapping: {}
+configJson:
+  architecture: MaskedReconstructionModel
+  input_channels:
+  - log_return
+  - hl_range
+  - oc_body
+  - log_vol_ratio
+  - session_flag
+  - tod_sin
+  - tod_cos
+  - dow_sin
+  - dow_cos
+  d_model: 256
+  n_layers: 8
+  d_state: 16
+  expand_factor: 2
+  dropout: 0.0
+  mamba_version: 3
+  patch_size_bars: 5
+  window_length_days: 30
+  max_seq_len_bars: 10000
+  mamba3:
+    headdim: 64
+    ngroups: 1
+    rope_fraction: 0.5
+    chunk_size: 64
+    is_mimo: false
+    mimo_rank: 4
+    is_outproj_norm: false
+    fuse_pregate_headwise_norm: true
+    A_floor: 0.0001
+    dt_min: 0.001
+    dt_max: 0.1
+    dt_init_floor: 0.0001
+  pretraining:
+    objective: masked_patch_reconstruction_mse
+    mask_ratio: 0.15
+    mask_strategy: random
+    channel_loss_weights:
+    - 1.0
+    - 1.0
+    - 1.0
+    - 0.001
+    - 0.1
+    - 1.0
+    - 1.0
+    - 1.0
+    - 1.0
+    train_end: '2023-12-31'
+    validation_end: '2025-08-01'
+    seed: 42
+onnxFiles: {}
+safetensorsSizeMb: 13.2
+approxSizeMb: 13.2
+fetchedAt: '2026-09-17T08:33:47.000Z'
