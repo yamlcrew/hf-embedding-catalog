@@ -1,0 +1,264 @@
+_id: 6ab053722f6c5e4d86904906
+id: Q1z/Pivot
+private: false
+pipeline_tag: feature-extraction
+library_name: transformers
+tags:
+- transformers
+- safetensors
+- pivot
+- feature-extraction
+- custom_code
+- decision-making
+- classification
+- routing
+- scoring
+- en
+- base_model:LiquidAI/LFM2.5-Encoder-350M
+- base_model:finetune:LiquidAI/LFM2.5-Encoder-350M
+- license:apache-2.0
+- region:us
+downloads: 0
+likes: 2
+modelId: Q1z/Pivot
+author: Q1z
+sha: ef9e5beb8160930c6de108f49614f45697210c96
+lastModified: '2026-09-20T22:23:14.000Z'
+gated: false
+disabled: false
+mask_token: <|mask|>
+model-index: null
+config:
+  model_type: pivot
+  architectures:
+  - PivotModel
+  auto_map:
+    AutoConfig: configuration_pivot.PivotConfig
+    AutoModel: modeling_pivot.PivotModel
+  tokenizer_config:
+    bos_token: <|startoftext|>
+    eos_token: <|im_end|>
+    mask_token: <|mask|>
+    pad_token: <|pad|>
+cardData:
+  base_model: LiquidAI/LFM2.5-Encoder-350M
+  base_model_relation: finetune
+  library_name: transformers
+  tags:
+  - safetensors
+  - custom_code
+  - decision-making
+  - classification
+  - routing
+  - scoring
+  license: apache-2.0
+  language:
+  - en
+transformersInfo:
+  auto_model: AutoModel
+  custom_class: modeling_pivot.PivotModel
+  pipeline_tag: feature-extraction
+siblings:
+- rfilename: .gitattributes
+- rfilename: README.md
+- rfilename: config.json
+- rfilename: configuration_pivot.py
+- rfilename: dsbt_config.yaml
+- rfilename: evaluation_status.json
+- rfilename: export_verification.json
+- rfilename: model.safetensors
+- rfilename: modeling_pivot.py
+- rfilename: pivot_data.py
+- rfilename: pivot_infer.py
+- rfilename: pivot_model.py
+- rfilename: pivot_serving_schema.py
+- rfilename: predict_example.py
+- rfilename: provenance.json
+- rfilename: requirements.txt
+- rfilename: run_metrics.json
+- rfilename: serving/example_request.json
+- rfilename: serving/example_response.json
+- rfilename: serving/schema.json
+- rfilename: tokenizer.json
+- rfilename: tokenizer_config.json
+spaces: []
+createdAt: '2026-09-20T21:43:14.000Z'
+safetensors:
+  parameters:
+    F32: 357631745
+  total: 357631745
+usedStorage: 1430546228
+downloadsAllTime: 0
+inferenceProviderMapping: {}
+configJson:
+  model_type: pivot
+  architectures:
+  - PivotModel
+  auto_map:
+    AutoConfig: configuration_pivot.PivotConfig
+    AutoModel: modeling_pivot.PivotModel
+  dsbt_config:
+    backbone:
+      encoder: huggingface
+      model_id: LiquidAI/LFM2.5-Encoder-350M
+      revision: b886781f7c6f10ca9b7096e21b83e30a073c2f39
+      trust_remote_code: true
+      pooling: mean
+      hidden_size: 1024
+      max_position_embeddings: 8192
+      stub_hidden_size: 32
+      stub_vocab_size: 256
+    scorer:
+      type: mlp
+      hidden_size: 1024
+      dropout: 0.0
+    data:
+      k_min: 2
+      k_max: 16
+      max_context_tokens: 512
+      max_option_tokens: 64
+      noul_true: 'true'
+      noul_false: 'false'
+      split_ratios:
+      - 0.8
+      - 0.1
+      - 0.1
+      family_sample_caps:
+        casehold: 0.15
+    train:
+      epochs: 4
+      warmup_epochs: 2
+      batch_size: 32
+      grad_accum: 1
+      lr_encoder: 1.0e-05
+      lr_scorer: 5.0e-05
+      weight_decay: 0.01
+      grad_clip: 1.0
+      precision: bf16
+      gradient_checkpointing: true
+      seed: 42
+      decoupling: pcgrad
+      log_every: 20
+      num_workers: 4
+      early_stop_patience: 2
+      checkpoint_dir: checkpoints
+      log_dir: logs
+      lora:
+        enabled: false
+        r: 16
+        alpha: 32
+        dropout: 0.05
+        target_modules:
+        - q_proj
+        - k_proj
+        - v_proj
+        - out_proj
+        - in_proj
+    eval:
+      k_strata:
+      - 2
+      - 4
+      - 8
+      - 16
+      option_mode: resample_strata
+      ece_bins: 15
+      calibration_epsilon: 0.02
+      temperature_scaling: false
+      jev_baseline: null
+      latency_batches: 20
+      require_latency_vs_jev: true
+      win_on_overall_acc_only: false
+      mid_epoch_max_examples: 4096
+      full_frozen_eval_only_at_end: true
+      frozen_eval_path: null
+    modal_contract:
+      softmax_dtype: fp32
+      casehold_cap: 0.15
+      forbid_jev_softlabel_distill: true
+      win_requires:
+      - k_stratified_acc_brier_ece
+      - latency_p50_p95_vs_jev
+      - live_brier_pcgrad
+      - casehold_sample_cap_le_015
+      gpu: H100
+      expected_steps_batch64: 16878–22504 for 3–4 epochs; early-stop may cut short
+      budget_note: ~$8–16 expected at $3.95/h for 2–4h; keep ≥$8 reserve
+    brier:
+      reduction: mean_over_real_options
+  encoder_config:
+    transformers_version: 5.17.0
+    architectures:
+    - Lfm2BidirectionalForMaskedLM
+    output_hidden_states: false
+    return_dict: true
+    dtype: float32
+    chunk_size_feed_forward: 0
+    is_encoder_decoder: false
+    id2label:
+      '0': LABEL_0
+      '1': LABEL_1
+    label2id:
+      LABEL_0: 0
+      LABEL_1: 1
+    problem_type: null
+    vocab_size: 65536
+    hidden_size: 1024
+    intermediate_size: 6656
+    num_hidden_layers: 16
+    num_attention_heads: 16
+    num_key_value_heads: 8
+    max_position_embeddings: 128000
+    initializer_range: 0.02
+    norm_eps: 1.0e-05
+    use_cache: false
+    pad_token_id: 0
+    bos_token_id: 1
+    eos_token_id: 7
+    tie_word_embeddings: true
+    rope_parameters:
+      rope_theta: 1000000.0
+      rope_type: default
+    conv_bias: false
+    conv_L_cache: 3
+    block_multiple_of: 256
+    block_ffn_dim_multiplier: 1.0
+    block_auto_adjust_ff_dim: true
+    full_attn_idxs: null
+    layer_types:
+    - conv
+    - conv
+    - full_attention
+    - conv
+    - conv
+    - full_attention
+    - conv
+    - conv
+    - full_attention
+    - conv
+    - full_attention
+    - conv
+    - full_attention
+    - conv
+    - full_attention
+    - conv
+    _name_or_path: LiquidAI/LFM2.5-Encoder-350M
+    block_dim: 1024
+    block_mlp_init_scale: 1.0
+    block_norm_eps: 1.0e-05
+    block_out_init_scale: 1.0
+    block_use_swiglu: true
+    block_use_xavier_init: true
+    conv_dim: 1024
+    conv_dim_out: 1024
+    conv_use_xavier_init: true
+    model_type: lfm2
+    num_heads: 16
+    use_pos_enc: true
+    auto_map:
+      AutoModel: modeling_lfm2_bidirectional.Lfm2BidirectionalModel
+      AutoModelForMaskedLM: modeling_lfm2_bidirectional.Lfm2BidirectionalForMaskedLM
+    output_attentions: false
+onnxFiles: {}
+safetensorsSizeMb: 1430.5
+approxSizeMb: 1430.5
+fetchedAt: '2026-09-21T08:49:15.000Z'
