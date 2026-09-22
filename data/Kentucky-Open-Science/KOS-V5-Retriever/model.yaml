@@ -1,0 +1,126 @@
+_id: 6a63f32e1258ef1584e8d895
+id: Kentucky-Open-Science/KOS-V5-Retriever
+private: false
+pipeline_tag: feature-extraction
+library_name: peft
+tags:
+- peft
+- safetensors
+- medical
+- clinical
+- biomedical
+- retrieval
+- embeddings
+- sentence-similarity
+- dense-retriever
+- llm2vec
+- lora
+- from-scratch
+- qwen3
+- KOS-V5
+- university-of-kentucky
+- university-of-louisville
+- ccts
+- feature-extraction
+- en
+- base_model:Kentucky-Open-Science/KOS-V5-Instruct
+- base_model:adapter:Kentucky-Open-Science/KOS-V5-Instruct
+- license:apache-2.0
+- region:us
+downloads: 0
+likes: 0
+modelId: Kentucky-Open-Science/KOS-V5-Retriever
+author: Kentucky-Open-Science
+sha: 563bcd64b88fd64be76f391b14228aa5b5ff0705
+lastModified: '2026-07-24T23:20:22.000Z'
+gated: false
+disabled: false
+model-index: null
+config:
+  tokenizer_config:
+    bos_token: null
+    eos_token: <|im_end|>
+    pad_token: <|im_end|>
+    unk_token: <|im_end|>
+  chat_template_jinja: "{%- if tools %}\n    {{- '<|im_start|>system\\n' }}\n    {%- if messages[0].role == 'system' %}\n\
+    \        {{- messages[0].content + '\\n\\n' }}\n    {%- endif %}\n    {{- \"# Tools\\n\\nYou may call one or more functions\
+    \ to assist with the user query.\\n\\nYou are provided with function signatures within <tools></tools> XML tags:\\n<tools>\"\
+    \ }}\n    {%- for tool in tools %}\n        {{- \"\\n\" }}\n        {{- tool | tojson }}\n    {%- endfor %}\n    {{- \"\
+    \\n</tools>\\n\\nFor each function call, return a json object with function name and arguments within <tool_call></tool_call>\
+    \ XML tags:\\n<tool_call>\\n{\\\"name\\\": <function-name>, \\\"arguments\\\": <args-json-object>}\\n</tool_call><|im_end|>\\\
+    n\" }}\n{%- else %}\n    {%- if messages[0].role == 'system' %}\n        {{- '<|im_start|>system\\n' + messages[0].content\
+    \ + '<|im_end|>\\n' }}\n    {%- endif %}\n{%- endif %}\n{%- for message in messages %}\n    {%- if message.content is\
+    \ string %}\n        {%- set content = message.content %}\n    {%- else %}\n        {%- set content = '' %}\n    {%- endif\
+    \ %}\n    {%- if (message.role == \"user\") or (message.role == \"system\" and not loop.first) %}\n        {{- '<|im_start|>'\
+    \ + message.role + '\\n' + content + '<|im_end|>' + '\\n' }}\n    {%- elif message.role == \"assistant\" %}\n        {{-\
+    \ '<|im_start|>' + message.role + '\\n' + content }}\n        {%- if message.tool_calls %}\n            {%- for tool_call\
+    \ in message.tool_calls %}\n                {%- if (loop.first and content) or (not loop.first) %}\n                 \
+    \   {{- '\\n' }}\n                {%- endif %}\n                {%- if tool_call.function %}\n                    {%-\
+    \ set tool_call = tool_call.function %}\n                {%- endif %}\n                {{- '<tool_call>\\n{\"name\": \"\
+    ' }}\n                {{- tool_call.name }}\n                {{- '\", \"arguments\": ' }}\n                {%- if tool_call.arguments\
+    \ is string %}\n                    {{- tool_call.arguments }}\n                {%- else %}\n                    {{- tool_call.arguments\
+    \ | tojson }}\n                {%- endif %}\n                {{- '}\\n</tool_call>' }}\n            {%- endfor %}\n  \
+    \      {%- endif %}\n        {{- '<|im_end|>\\n' }}\n    {%- elif message.role == \"tool\" %}\n        {%- if loop.first\
+    \ or (messages[loop.index0 - 1].role != \"tool\") %}\n            {{- '<|im_start|>user' }}\n        {%- endif %}\n  \
+    \      {{- '\\n<tool_response>\\n' }}\n        {{- content }}\n        {{- '\\n</tool_response>' }}\n        {%- if loop.last\
+    \ or (messages[loop.index0 + 1].role != \"tool\") %}\n            {{- '<|im_end|>\\n' }}\n        {%- endif %}\n    {%-\
+    \ endif %}\n{%- endfor %}\n{%- if add_generation_prompt %}\n    {{- '<|im_start|>assistant\\n' }}\n{%- endif %}"
+  peft:
+    base_model_name_or_path: Kentucky-Open-Science/KOS-V5-Instruct
+    task_type: FEATURE_EXTRACTION
+cardData:
+  license: apache-2.0
+  library_name: peft
+  pipeline_tag: feature-extraction
+  language:
+  - en
+  developed_by: University of Kentucky (College of Medicine Office for Research; Center for Clinical and Translational Science)
+    and University of Louisville (Kentucky Center for Digital Innovation)
+  affiliations:
+  - name: University of Kentucky, College of Medicine Office for Research
+    url: https://medicine.uky.edu/sites/research
+  - name: University of Kentucky, Center for Clinical and Translational Science (CCTS)
+    url: https://www.ccts.uky.edu/
+  - name: University of Louisville, Kentucky Center for Digital Innovation
+    url: https://centers.louisville.edu/kentucky-center-digital-innovation
+  model_name: KOS-V5-Retriever
+  model_codename: Catbird
+  model_type: qwen3
+  base_model: Kentucky-Open-Science/KOS-V5-Instruct
+  tags:
+  - medical
+  - clinical
+  - biomedical
+  - retrieval
+  - embeddings
+  - sentence-similarity
+  - dense-retriever
+  - llm2vec
+  - lora
+  - peft
+  - from-scratch
+  - qwen3
+  - KOS-V5
+  - university-of-kentucky
+  - university-of-louisville
+  - ccts
+siblings:
+- rfilename: .gitattributes
+- rfilename: README.md
+- rfilename: adapter_config.json
+- rfilename: adapter_model.safetensors
+- rfilename: catbird_llm_logo.png
+- rfilename: chat_template.jinja
+- rfilename: meta.json
+- rfilename: tokenizer.json
+- rfilename: tokenizer_config.json
+spaces: []
+createdAt: '2026-07-24T23:20:14.000Z'
+usedStorage: 271285354
+downloadsAllTime: 0
+inferenceProviderMapping: {}
+configJson: null
+onnxFiles: {}
+safetensorsSizeMb: 264.3
+approxSizeMb: 0.0
+fetchedAt: '2026-09-22T08:26:29.000Z'
