@@ -1,0 +1,732 @@
+_id: 6ab48e56c988a1b1cbaeaf7a
+id: pt810/Ovis-Omni-Embedding-3B-high-low-high-ct
+private: false
+pipeline_tag: feature-extraction
+library_name: transformers
+tags:
+- transformers
+- safetensors
+- qwen2_5_omni
+- text-to-audio
+- multimodal
+- text
+- image
+- video
+- audio
+- embedding
+- retrieval
+- feature-extraction
+- arxiv:2609.25165
+- license:apache-2.0
+- endpoints_compatible
+- compressed-tensors
+- region:us
+downloads: 0
+likes: 0
+modelId: pt810/Ovis-Omni-Embedding-3B-high-low-high-ct
+author: pt810
+sha: 1682e753a705102d6d439269af277261561724f3
+lastModified: '2026-09-24T02:52:22.000Z'
+gated: false
+disabled: false
+model-index: null
+config:
+  architectures:
+  - Qwen2_5OmniForConditionalGeneration
+  model_type: qwen2_5_omni
+  quantization_config:
+    config_groups:
+      W8A16:
+        targets:
+        - re:^(?:thinker\.model\.)?layers\.(?:[0-5])\..*
+        - re:^(?:thinker\.model\.)?layers\.(?:2[2-7])\..*
+        weights:
+          num_bits: 8
+        format: pack-quantized
+      W2A16:
+        targets:
+        - re:^(?:thinker\.model\.)?layers\.(?:[6-9]|1[0-9]|2[0-1])\..*
+        weights:
+          num_bits: 2
+        format: pack-quantized
+    quant_method: compressed-tensors
+    format: mixed-precision
+    ignore:
+    - re:^(thinker\.(audio_tower|visual)|talker|token2wav)\..*
+  tokenizer_config:
+    bos_token: null
+    eos_token: <|im_end|>
+    pad_token: <|endoftext|>
+    unk_token: null
+  chat_template_jinja: '{% set audio_count = namespace(value=0) %}{% set image_count = namespace(value=0) %}{% set video_count
+    = namespace(value=0) %}{% for message in messages %}{% if loop.first and message[''role''] != ''system'' %}<|im_start|>system
+
+    You are a helpful assistant.<|im_end|>
+
+    {% endif %}<|im_start|>{{ message[''role''] }}
+
+    {% if message[''content''] is string %}{{ message[''content''] }}<|im_end|>
+
+    {% else %}{% for content in message[''content''] %}{% if content[''type''] == ''image'' or ''image'' in content or ''image_url''
+    in content %}{% set image_count.value = image_count.value + 1 %}{% if add_vision_id %}Picture {{ image_count.value }}:
+    {% endif %}<|vision_bos|><|IMAGE|><|vision_eos|>{% elif content[''type''] == ''audio'' or ''audio'' in content or ''audio_url''
+    in content %}{% set audio_count.value = audio_count.value + 1 %}{% if add_audio_id %}Audio {{ audio_count.value }}: {%
+    endif %}<|audio_bos|><|AUDIO|><|audio_eos|>{% elif content[''type''] == ''video'' or ''video'' in content %}{% set video_count.value
+    = video_count.value + 1 %}{% if add_vision_id %}Video {{ video_count.value }}: {% endif %}<|vision_bos|><|VIDEO|><|vision_eos|>{%
+    elif ''text'' in content %}{{ content[''text''] }}{% endif %}{% endfor %}<|im_end|>
+
+    {% endif %}{% endfor %}{% if add_generation_prompt %}<|im_start|>assistant
+
+    {% endif %}'
+cardData:
+  license: apache-2.0
+  pipeline_tag: feature-extraction
+  library_name: transformers
+  tags:
+  - multimodal
+  - text
+  - image
+  - video
+  - audio
+  - embedding
+  - retrieval
+transformersInfo:
+  auto_model: AutoModelForMultimodalLM
+  pipeline_tag: text-to-audio
+  processor: AutoProcessor
+siblings:
+- rfilename: .gitattributes
+- rfilename: LICENSE
+- rfilename: README.md
+- rfilename: args.json
+- rfilename: chat_template.jinja
+- rfilename: config.json
+- rfilename: generation_config.json
+- rfilename: model-00001.safetensors
+- rfilename: model-00002.safetensors
+- rfilename: model-00003.safetensors
+- rfilename: model-00004.safetensors
+- rfilename: model-00005.safetensors
+- rfilename: model-00006.safetensors
+- rfilename: model-00007.safetensors
+- rfilename: model-00008.safetensors
+- rfilename: model-00009.safetensors
+- rfilename: model-00010.safetensors
+- rfilename: model-00011.safetensors
+- rfilename: model-00012.safetensors
+- rfilename: model-00013.safetensors
+- rfilename: model-00014.safetensors
+- rfilename: model-00015.safetensors
+- rfilename: model-00016.safetensors
+- rfilename: model-00017.safetensors
+- rfilename: model-00018.safetensors
+- rfilename: model-00019.safetensors
+- rfilename: model-00020.safetensors
+- rfilename: model-00021.safetensors
+- rfilename: model-00022.safetensors
+- rfilename: model-00023.safetensors
+- rfilename: model-00024.safetensors
+- rfilename: model-00025.safetensors
+- rfilename: model-00026.safetensors
+- rfilename: model-00027.safetensors
+- rfilename: model-00028.safetensors
+- rfilename: model-00029.safetensors
+- rfilename: model-00030.safetensors
+- rfilename: model-00031.safetensors
+- rfilename: model-00032.safetensors
+- rfilename: model-00033.safetensors
+- rfilename: model-00034.safetensors
+- rfilename: model-00035.safetensors
+- rfilename: model-00036.safetensors
+- rfilename: model-00037.safetensors
+- rfilename: model-00038.safetensors
+- rfilename: model-00039.safetensors
+- rfilename: model-00040.safetensors
+- rfilename: model-00041.safetensors
+- rfilename: model-00042.safetensors
+- rfilename: model-00043.safetensors
+- rfilename: model-00044.safetensors
+- rfilename: model-00045.safetensors
+- rfilename: model-00046.safetensors
+- rfilename: model-00047.safetensors
+- rfilename: model-00048.safetensors
+- rfilename: model-00049.safetensors
+- rfilename: model-00050.safetensors
+- rfilename: model-00051.safetensors
+- rfilename: model-00052.safetensors
+- rfilename: model-00053.safetensors
+- rfilename: model-00054.safetensors
+- rfilename: model-00055.safetensors
+- rfilename: model-00056.safetensors
+- rfilename: model-00057.safetensors
+- rfilename: model-00058.safetensors
+- rfilename: model-00059.safetensors
+- rfilename: model-00060.safetensors
+- rfilename: model-00061.safetensors
+- rfilename: model-00062.safetensors
+- rfilename: model-00063.safetensors
+- rfilename: model-00064.safetensors
+- rfilename: model-00065.safetensors
+- rfilename: model-00066.safetensors
+- rfilename: model-00067.safetensors
+- rfilename: model-00068.safetensors
+- rfilename: model-00069.safetensors
+- rfilename: model-00070.safetensors
+- rfilename: model-00071.safetensors
+- rfilename: model-00072.safetensors
+- rfilename: model-00073.safetensors
+- rfilename: model-00074.safetensors
+- rfilename: model-00075.safetensors
+- rfilename: model-00076.safetensors
+- rfilename: model-00077.safetensors
+- rfilename: model-00078.safetensors
+- rfilename: model-00079.safetensors
+- rfilename: model-00080.safetensors
+- rfilename: model.safetensors.index.json
+- rfilename: ovis_blog_table1.pdf
+- rfilename: ovis_blog_table1.png
+- rfilename: ovis_embedding_data_centric.png
+- rfilename: ovis_embedding_model_architecture.png
+- rfilename: ovis_embedding_train_inference.png
+- rfilename: ovis_logo.png
+- rfilename: preprocessor_config.json
+- rfilename: processor_config.json
+- rfilename: tokenizer.json
+- rfilename: tokenizer_config.json
+- rfilename: trainer_state.json
+spaces: []
+createdAt: '2026-09-24T02:43:34.000Z'
+safetensors:
+  parameters:
+    BF16: 3379151232
+    I32: 308281344
+  total: 2935
+usedStorage: 8039396949
+downloadsAllTime: 0
+inferenceProviderMapping: {}
+configJson:
+  architectures:
+  - Qwen2_5OmniForConditionalGeneration
+  dtype: bfloat16
+  enable_audio_output: true
+  enable_talker: true
+  eos_token_id: 151645
+  hidden_size: 2048
+  keys_to_ignore_at_inference:
+  - past_key_values
+  - hidden_states
+  - attention_mask
+  - hidden_states
+  - attention_mask
+  - hidden_states
+  - attention_mask
+  model_type: qwen2_5_omni
+  pad_token_id: 151643
+  talker_config:
+    _attn_implementation_autoset: true
+    _name_or_path: Qwen2.5-Omni-3B/talker
+    architectures:
+    - Qwen2OmniTalkerForConditionalGeneration
+    attention_dropout: 0.0
+    audio_end_token_id: 151648
+    audio_start_token_id: 151647
+    audio_token_index: 151646
+    dtype: bfloat16
+    embedding_size: 2048
+    head_dim: 64
+    hidden_act: silu
+    hidden_size: 896
+    image_token_index: 151655
+    init_std: 0.02
+    initializer_range: 0.02
+    intermediate_size: 4864
+    layer_types:
+    - full_attention
+    - full_attention
+    - full_attention
+    - full_attention
+    - full_attention
+    - full_attention
+    - full_attention
+    - full_attention
+    - full_attention
+    - full_attention
+    - full_attention
+    - full_attention
+    - full_attention
+    - full_attention
+    - full_attention
+    - full_attention
+    - full_attention
+    - full_attention
+    - full_attention
+    - full_attention
+    - full_attention
+    - full_attention
+    - full_attention
+    - full_attention
+    max_position_embeddings: 32768
+    max_window_layers: 28
+    model_type: qwen2_5_omni_talker
+    num_attention_heads: 14
+    num_hidden_layers: 24
+    num_key_value_heads: 2
+    pad_token_id: null
+    position_id_per_seconds: 25
+    rms_norm_eps: 1.0e-06
+    rope_parameters:
+      mrope_section:
+      - 16
+      - 16
+      - 0
+      rope_theta: 1000000.0
+      rope_type: default
+      type: default
+    seconds_per_chunk: 2
+    sliding_window: null
+    spatial_merge_size: 2
+    tie_word_embeddings: false
+    tts_codec_end_token_id: 8294
+    tts_codec_mask_token_id: 8296
+    tts_codec_pad_token_id: 8292
+    tts_codec_start_token_id: 8293
+    tts_text_end_token_id: 151861
+    tts_text_pad_token_id: 151859
+    tts_text_start_token_id: 151860
+    use_cache: true
+    use_sliding_window: false
+    video_token_index: 151656
+    vision_end_token_id: 151653
+    vision_start_token_id: 151652
+    vocab_size: 8448
+  thinker_config:
+    _attn_implementation_autoset: true
+    _name_or_path: Qwen2.5-Omni-3B/thinker
+    architectures:
+    - Qwen2OmniNaViTThinkerForConditionalGeneration
+    audio_config:
+      _attn_implementation_autoset: true
+      _name_or_path: ''
+      activation_dropout: 0.0
+      activation_function: gelu
+      add_cross_attention: false
+      architectures: null
+      attention_dropout: 0.0
+      bos_token_id: null
+      chunk_size_feed_forward: 0
+      cross_attention_hidden_size: null
+      d_model: 1280
+      decoder_start_token_id: null
+      dropout: 0.0
+      dtype: bfloat16
+      encoder_attention_heads: 20
+      encoder_ffn_dim: 5120
+      encoder_layerdrop: 0.0
+      encoder_layers: 32
+      eos_token_id: null
+      finetuning_task: null
+      id2label:
+        '0': LABEL_0
+        '1': LABEL_1
+      init_std: 0.02
+      initializer_range: 0.02
+      is_decoder: false
+      is_encoder_decoder: false
+      label2id:
+        LABEL_0: 0
+        LABEL_1: 1
+      max_source_positions: 1500
+      model_type: qwen2_5_omni_audio_encoder
+      n_window: 100
+      num_hidden_layers: 32
+      num_mel_bins: 128
+      output_attentions: false
+      output_dim: 2048
+      output_hidden_states: false
+      pad_token_id: null
+      prefix: null
+      problem_type: null
+      pruned_heads: {}
+      return_dict: true
+      scale_embedding: false
+      sep_token_id: null
+      task_specific_params: null
+      tf_legacy_loss: false
+      tie_encoder_decoder: false
+      tie_word_embeddings: true
+      tokenizer_class: null
+      torchscript: false
+      use_bfloat16: false
+    audio_end_token_id: 151648
+    audio_start_token_id: 151647
+    audio_token_index: 151646
+    bos_token_id: 151644
+    dtype: bfloat16
+    eos_token_id: 151645
+    ignore_index: -100
+    image_token_index: 151655
+    init_std: 0.02
+    initializer_range: 0.02
+    model_type: qwen2_5_omni_thinker
+    pad_token_id: 151643
+    position_id_per_seconds: 25
+    seconds_per_chunk: 2
+    text_config:
+      _name_or_path: ''
+      architectures: null
+      attention_dropout: 0.0
+      bos_token_id: null
+      chunk_size_feed_forward: 0
+      dtype: bfloat16
+      eos_token_id: null
+      hidden_act: silu
+      hidden_size: 2048
+      id2label:
+        '0': LABEL_0
+        '1': LABEL_1
+      init_std: 0.02
+      initializer_range: 0.02
+      intermediate_size: 11008
+      is_encoder_decoder: false
+      label2id:
+        LABEL_0: 0
+        LABEL_1: 1
+      layer_types:
+      - full_attention
+      - full_attention
+      - full_attention
+      - full_attention
+      - full_attention
+      - full_attention
+      - full_attention
+      - full_attention
+      - full_attention
+      - full_attention
+      - full_attention
+      - full_attention
+      - full_attention
+      - full_attention
+      - full_attention
+      - full_attention
+      - full_attention
+      - full_attention
+      - full_attention
+      - full_attention
+      - full_attention
+      - full_attention
+      - full_attention
+      - full_attention
+      - full_attention
+      - full_attention
+      - full_attention
+      - full_attention
+      - full_attention
+      - full_attention
+      - full_attention
+      - full_attention
+      - full_attention
+      - full_attention
+      - full_attention
+      - full_attention
+      max_position_embeddings: 32768
+      max_window_layers: 70
+      model_type: qwen2_5_omni_text
+      num_attention_heads: 16
+      num_hidden_layers: 36
+      num_key_value_heads: 2
+      output_attentions: false
+      output_hidden_states: false
+      pad_token_id: 151643
+      problem_type: null
+      return_dict: true
+      rms_norm_eps: 1.0e-06
+      rope_parameters:
+        mrope_section:
+        - 16
+        - 24
+        - 24
+        rope_theta: 1000000.0
+        rope_type: default
+        type: default
+      sliding_window: null
+      tie_word_embeddings: false
+      use_cache: false
+      use_sliding_window: false
+      vocab_size: 151936
+    tie_word_embeddings: false
+    user_token_id: 872
+    video_token_index: 151656
+    vision_config:
+      _attn_implementation_autoset: true
+      _name_or_path: ''
+      add_cross_attention: false
+      architectures: null
+      bos_token_id: null
+      chunk_size_feed_forward: 0
+      cross_attention_hidden_size: null
+      decoder_start_token_id: null
+      depth: 32
+      dtype: bfloat16
+      embed_dim: 1280
+      eos_token_id: null
+      finetuning_task: null
+      fullatt_block_indexes:
+      - 7
+      - 15
+      - 23
+      - 31
+      hidden_act: silu
+      hidden_size: 1280
+      id2label:
+        '0': LABEL_0
+        '1': LABEL_1
+      in_channels: 3
+      in_chans: 3
+      init_std: 0.02
+      initializer_range: 0.02
+      intermediate_size: 3420
+      is_decoder: false
+      is_encoder_decoder: false
+      label2id:
+        LABEL_0: 0
+        LABEL_1: 1
+      model_type: qwen2_5_omni_vision_encoder
+      num_heads: 16
+      out_hidden_size: 2048
+      output_attentions: false
+      output_hidden_states: false
+      pad_token_id: null
+      patch_size: 14
+      prefix: null
+      problem_type: null
+      pruned_heads: {}
+      return_dict: true
+      sep_token_id: null
+      spatial_merge_size: 2
+      spatial_patch_size: 14
+      task_specific_params: null
+      temporal_patch_size: 2
+      tf_legacy_loss: false
+      tie_encoder_decoder: false
+      tie_word_embeddings: true
+      tokenizer_class: null
+      tokens_per_second: 25
+      torchscript: false
+      use_bfloat16: false
+      window_size: 112
+    vision_end_token_id: 151653
+    vision_start_token_id: 151652
+    vision_token_id: 151654
+  token2wav_config:
+    _attn_implementation_autoset: true
+    bigvgan_config:
+      _attn_implementation_autoset: true
+      _name_or_path: ''
+      add_cross_attention: false
+      architectures: null
+      bos_token_id: null
+      chunk_size_feed_forward: 0
+      cross_attention_hidden_size: null
+      decoder_start_token_id: null
+      dtype: null
+      eos_token_id: null
+      finetuning_task: null
+      id2label:
+        '0': LABEL_0
+        '1': LABEL_1
+      is_decoder: false
+      is_encoder_decoder: false
+      label2id:
+        LABEL_0: 0
+        LABEL_1: 1
+      mel_dim: 80
+      model_type: qwen2_5_omni_bigvgan
+      output_attentions: false
+      output_hidden_states: false
+      pad_token_id: null
+      prefix: null
+      problem_type: null
+      pruned_heads: {}
+      resblock_dilation_sizes:
+      - - 1
+        - 3
+        - 5
+      - - 1
+        - 3
+        - 5
+      - - 1
+        - 3
+        - 5
+      resblock_kernel_sizes:
+      - 3
+      - 7
+      - 11
+      return_dict: true
+      sep_token_id: null
+      task_specific_params: null
+      tf_legacy_loss: false
+      tie_encoder_decoder: false
+      tie_word_embeddings: true
+      tokenizer_class: null
+      torchscript: false
+      upsample_initial_channel: 1536
+      upsample_kernel_sizes:
+      - 11
+      - 7
+      - 4
+      - 4
+      - 4
+      - 4
+      upsample_rates:
+      - 5
+      - 3
+      - 2
+      - 2
+      - 2
+      - 2
+      use_bfloat16: false
+      use_bias_at_final: false
+    dit_config:
+      _attn_implementation_autoset: true
+      _name_or_path: ''
+      add_cross_attention: false
+      architectures: null
+      block_size: 24
+      bos_token_id: null
+      chunk_size_feed_forward: 0
+      cross_attention_hidden_size: null
+      decoder_start_token_id: null
+      depth: 22
+      dim: 1024
+      dropout: 0.1
+      dtype: float32
+      emb_dim: 512
+      enc_attention_channels: 64
+      enc_channels:
+      - 256
+      - 256
+      - 256
+      - 256
+      - 768
+      enc_dilations:
+      - 1
+      - 2
+      - 3
+      - 4
+      - 1
+      enc_dim: 128
+      enc_emb_dim: 192
+      enc_global_context: true
+      enc_kernel_sizes:
+      - 5
+      - 3
+      - 3
+      - 3
+      - 1
+      enc_lin_neurons: 192
+      enc_res2net_scale: 2
+      enc_se_channels: 64
+      eos_token_id: null
+      ff_mult: 2
+      finetuning_task: null
+      head_dim: 64
+      heads: 16
+      hidden_size: 1024
+      id2label:
+        '0': LABEL_0
+        '1': LABEL_1
+      is_decoder: false
+      is_encoder_decoder: false
+      label2id:
+        LABEL_0: 0
+        LABEL_1: 1
+      look_ahead_layers:
+      - 10
+      look_backward_layers:
+      - 0
+      - 20
+      max_position_embeddings: 32768
+      mel_dim: 80
+      model_type: qwen2_5_omni_dit
+      num_attention_heads: 16
+      num_embeds: 8193
+      num_hidden_layers: 22
+      output_attentions: false
+      output_hidden_states: false
+      pad_token_id: null
+      prefix: null
+      problem_type: null
+      pruned_heads: {}
+      repeats: 2
+      return_dict: true
+      rope_parameters:
+        rope_theta: 10000.0
+        rope_type: default
+      sep_token_id: null
+      task_specific_params: null
+      tf_legacy_loss: false
+      tie_encoder_decoder: false
+      tie_word_embeddings: true
+      tokenizer_class: null
+      torchscript: false
+      use_bfloat16: false
+    dtype: bfloat16
+    model_type: qwen2_5_omni_token2wav
+  transformers_version: 5.3.0
+  use_cache: false
+  quantization_config:
+    config_groups:
+      W8A16:
+        targets:
+        - re:^(?:thinker\.model\.)?layers\.(?:[0-5])\..*
+        - re:^(?:thinker\.model\.)?layers\.(?:2[2-7])\..*
+        weights:
+          num_bits: 8
+          type: int
+          symmetric: true
+          group_size: 128
+          strategy: group
+          block_structure: null
+          dynamic: false
+          actorder: null
+          scale_dtype: null
+          zp_dtype: null
+          observer: null
+          observer_kwargs: {}
+        input_activations: null
+        output_activations: null
+        format: pack-quantized
+      W2A16:
+        targets:
+        - re:^(?:thinker\.model\.)?layers\.(?:[6-9]|1[0-9]|2[0-1])\..*
+        weights:
+          num_bits: 2
+          type: int
+          symmetric: true
+          group_size: 128
+          strategy: group
+          block_structure: null
+          dynamic: false
+          actorder: null
+          scale_dtype: null
+          zp_dtype: null
+          observer: null
+          observer_kwargs: {}
+        input_activations: null
+        output_activations: null
+        format: pack-quantized
+    quant_method: compressed-tensors
+    kv_cache_scheme: null
+    format: mixed-precision
+    quantization_status: compressed
+    global_compression_ratio: null
+    ignore:
+    - re:^(thinker\.(audio_tower|visual)|talker|token2wav)\..*
+  is_matryoshka: true
+  matryoshka_dimensions:
+  - 1024
+  - 2048
+onnxFiles: {}
+safetensorsSizeMb: 8025.5
+approxSizeMb: 7991.4
+fetchedAt: '2026-09-24T08:20:52.000Z'
