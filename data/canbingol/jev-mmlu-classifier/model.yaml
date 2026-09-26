@@ -1,0 +1,81 @@
+_id: 6ab663ed02fbd9988da48d9f
+id: canbingol/jev-mmlu-classifier
+private: false
+pipeline_tag: feature-extraction
+library_name: transformers
+tags:
+- transformers
+- safetensors
+- gemma3_text
+- feature-extraction
+- arxiv:1910.09700
+- text-embeddings-inference
+- endpoints_compatible
+- region:us
+downloads: 0
+likes: 0
+modelId: canbingol/jev-mmlu-classifier
+author: canbingol
+sha: 6faf616f227df278be66b7cb7900bd99d8a8c148
+lastModified: '2026-09-25T12:07:22.000Z'
+gated: manual
+disabled: false
+mask_token: <mask>
+model-index: null
+config:
+  architectures:
+  - Gemma3TextModel
+  model_type: gemma3_text
+  tokenizer_config:
+    bos_token: <bos>
+    eos_token: <eos>
+    mask_token: <mask>
+    pad_token: <pad>
+    unk_token: <unk>
+    use_default_system_prompt: false
+  chat_template_jinja: "{{ bos_token }}\n{%- if messages[0]['role'] == 'system' -%}\n    {%- if messages[0]['content'] is\
+    \ string -%}\n        {%- set first_user_prefix = messages[0]['content'] + '\n\n' -%}\n    {%- else -%}\n        {%- set\
+    \ first_user_prefix = messages[0]['content'][0]['text'] + '\n\n' -%}\n    {%- endif -%}\n    {%- set loop_messages = messages[1:]\
+    \ -%}\n{%- else -%}\n    {%- set first_user_prefix = \"\" -%}\n    {%- set loop_messages = messages -%}\n{%- endif -%}\n\
+    {%- for message in loop_messages -%}\n    {%- if (message['role'] == 'user') != (loop.index0 % 2 == 0) -%}\n        {{\
+    \ raise_exception(\"Conversation roles must alternate user/assistant/user/assistant/...\") }}\n    {%- endif -%}\n   \
+    \ {%- if (message['role'] == 'assistant') -%}\n        {%- set role = \"model\" -%}\n    {%- else -%}\n        {%- set\
+    \ role = message['role'] -%}\n    {%- endif -%}\n    {{ '<start_of_turn>' + role + '\n' + (first_user_prefix if loop.first\
+    \ else \"\") }}\n    {%- if message['content'] is string -%}\n        {{ message['content'] | trim }}\n    {%- elif message['content']\
+    \ is iterable -%}\n        {%- for item in message['content'] -%}\n            {%- if item['type'] == 'image' -%}\n  \
+    \              {{ '<start_of_image>' }}\n            {%- elif item['type'] == 'text' -%}\n                {{ item['text']\
+    \ | trim }}\n            {%- endif -%}\n        {%- endfor -%}\n    {%- else -%}\n        {{ raise_exception(\"Invalid\
+    \ content type\") }}\n    {%- endif -%}\n    {{ '<end_of_turn>\n' }}\n{%- endfor -%}\n{%- if add_generation_prompt -%}\n\
+    \    {{'<start_of_turn>model\n'}}\n{%- endif -%}\n"
+cardData:
+  library_name: transformers
+  tags: []
+transformersInfo:
+  auto_model: AutoModel
+  pipeline_tag: feature-extraction
+  processor: AutoTokenizer
+siblings:
+- rfilename: .gitattributes
+- rfilename: README.md
+- rfilename: chat_template.jinja
+- rfilename: config.json
+- rfilename: jev_custom_layer.pth
+- rfilename: logs/eval_logs.txt
+- rfilename: logs/train_logs.txt
+- rfilename: model.safetensors
+- rfilename: tokenizer.json
+- rfilename: tokenizer_config.json
+spaces: []
+createdAt: '2026-09-25T12:07:09.000Z'
+safetensors:
+  parameters:
+    BF16: 202199808
+  total: 202199808
+usedStorage: 420540022
+downloadsAllTime: 0
+inferenceProviderMapping: {}
+configJson: null
+onnxFiles: {}
+safetensorsSizeMb: 404.4
+approxSizeMb: 404.4
+fetchedAt: '2026-09-26T08:30:04.000Z'

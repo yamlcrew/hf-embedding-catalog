@@ -1,0 +1,517 @@
+_id: 6ab64a07523bc89cc3e43ff9
+id: Akshayram1/embeddinggemma-300m-v2
+private: false
+pipeline_tag: sentence-similarity
+library_name: sentence-transformers
+tags:
+- sentence-transformers
+- safetensors
+- gemma3_text
+- unsloth
+- sentence-similarity
+- feature-extraction
+- dense
+- generated_from_trainer
+- dataset_size:200
+- loss:MultipleNegativesRankingLoss
+- arxiv:1908.10084
+- arxiv:1807.03748
+- base_model:Akshayram1/embeddinggemma-300m
+- base_model:finetune:Akshayram1/embeddinggemma-300m
+- text-embeddings-inference
+- endpoints_compatible
+- region:us
+downloads: 0
+likes: 0
+modelId: Akshayram1/embeddinggemma-300m-v2
+author: Akshayram1
+sha: 0ae5a8efd0c42bd35ca281badaa4ad0bc39d175a
+lastModified: '2026-09-25T10:17:52.000Z'
+gated: false
+disabled: false
+widgetData:
+- source_sentence: what is still blocking dead letter replay tooling
+  sentences:
+  - 'Dead Letter Queue replay tooling
+
+
+    Operators need a safe way to replay events out of the Dead Letter Queue after a fix ships. Add atlasctl dlq replay backed
+    by api/pipelines.py with filters on pipeline, failure class and time window, a dry-run mode that prints counts only, and
+    a rate limit so replay never starves live traffic. Acceptance criteria: replayed events keep their original event_id so
+    downstream deduplication still holds, every replay writes an audit record, and the runbook contains a worked example from
+    the 2026-08-26 regression. Status history: todo 2026-08-25, in_progress 2026-09-02, in_review 2026-09-09 with two open
+    review comments from Vikram Joshi about rate limiting. Depends on ATLAS-107, ATLAS-108 and ATLAS-116. Reporter Vikram
+    Joshi, assignee Neha Kapoor.'
+  - 'INC-002 Staging Ingestion Outage from SSL Verification Failure
+
+
+    Document kind: incident. Author: Vikram Joshi. Reviewers: Rohan Mehta, Maya Rao, Akshay Sharma. Status: active, written
+    2026-08-19, reviewed at the postmortem on 2026-08-21. Impact: all staging CDC ingestion down for 4 hours 11 minutes, 2026-08-19T06:12Z
+    to 10:23Z. No customer data was affected; the pilot demo scheduled for that afternoon was postponed. Timeline: 06:12Z
+    connector pods begin crash-looping with certificate verify failed; 06:40Z Vikram Joshi opens ATLAS-110 and states on the
+    bridge that the staging PostgreSQL server certificate has expired; 07:20Z a certificate renewal request is filed with
+    the platform team, which is the wrong remediation; 09:05Z Rohan Mehta checks openssl output and finds the server certificate
+    valid until 2027-01-14; 09:30Z he execs into a pod and finds /etc/ssl/certs/aster-internal-ca.pem absent; 09:40Z ATLAS-111
+    is opened, tracing the loss to the slim base image adopted on 2026-08-14; 10:23Z a rebuilt image restores ingestion. CONTRADICTION
+    RESOLVED: the expired-server-certificate claim recorded in the first version of ATLAS-110 is incorrect and superseded
+    by ATLAS-111. Corrective actions: CA bundle baked in with a build-time fingerprint assertion and a start-up self-check,
+    per the SSL hardening decision, shipped in PR-004 with commit e42a7f0c3b91; the SSL certificate runbook now mandates checking
+    the client side before the server. 90 minutes of the outage are directly attributable to diagnosing in the wrong order.'
+  - 'ADR-004 Retry Budget and Backoff Policy
+
+
+    Document kind: decision. Author: Vikram Joshi. Approvers: Neha Kapoor, Rohan Mehta, Maya Rao. Status: approved 2026-08-26,
+    implemented 2026-09-01 under ATLAS-108. Context: the first draft of the DLQ replay runbook stated a retry budget of five
+    attempts with a 30 second ceiling. During the retry and DLQ design review Vikram Joshi pointed out that Aster Labs broker
+    maintenance routinely takes eight to twelve minutes, so a 30 second ceiling would exhaust every retry and dump an entire
+    maintenance window into the Dead Letter Queue, turning a self-healing event into a manual replay of tens of thousands
+    of records. Neha Kapoor countered that a long ceiling delays the visibility of genuinely broken pipelines. Decision: eight
+    attempts with exponential backoff and full jitter, base 2 seconds, ceiling 15 minutes, giving roughly 45 minutes of tolerance;
+    and, to answer the visibility concern, a pipeline with any event past attempt four for more than five minutes raises a
+    warning on the Observability Dashboard under ATLAS-119. The earlier five-attempt, 30-second text in the runbook is superseded
+    and the runbook was corrected on 2026-08-27. Implemented in workers/retry_worker.py through PR-005 and commit b8740e2fd1a3,
+    with ceilings configurable in deploy/helm/atlas/values.yaml.'
+- source_sentence: what did sprint 1 planning commit to
+  sentences:
+  - 'Atlas Sprint 3 planning and release scoping
+
+
+    Agenda: plan the final sprint, 2026-08-31 to 2026-09-11, and set a release date for Atlas 1.0. Committed: ATLAS-109 and
+    ATLAS-119 for the Observability Dashboard, ATLAS-123 for the 10k events per second load test, ATLAS-118 for Dead Letter
+    Queue replay tooling, ATLAS-113 once the load test quantifies the checkpoint cost, and ATLAS-124 to run the release gates.
+    Sara Khan proposed 2026-09-04 as the release date so the pilot could be onboarded the following week; Maya Rao and Vikram
+    Joshi both argued that a release date before the load test result is a guess. The date was set to 2026-09-04 anyway and
+    moved to 2026-09-11 four days later once the first load test run failed on latency. Rohan Mehta reported FalkorDB capacity
+    had not materialised, so ATLAS-117 is descoped from 1.0 and continues read-only; Maya Rao accepted this as a documented
+    risk rather than a blocker. Akshay Sharma raised that ATLAS-121, the pilot backfill cutover, depends on a customer maintenance
+    window nobody controls. Decisions: four scope items are the release bar, everything else is optional, and every gate needs
+    a passing test and an owned runbook.'
+  - 'Atlas Sprint 1 planning
+
+
+    Agenda: scope Atlas Sprint 1, confirm the four Project Atlas commitments for the six week run, and name the risks. Maya
+    Rao opened with the shape of the release: PostgreSQL CDC, schema-evolution handling, retry and Dead Letter Queue processing,
+    and an Observability Dashboard. Sara Khan pushed for a pilot customer demo inside three weeks; Maya Rao pushed back because
+    staging still runs PostgreSQL 13 and cannot exercise logical replication at all. That became ATLAS-120, immediately the
+    top risk and, within a day, blocked on a platform maintenance window. Committed to the sprint: ATLAS-101 for the CDC reader,
+    ATLAS-102 for the canonical event envelope, ATLAS-105 for Schema Registry integration, ATLAS-114 for the integration harness
+    and ATLAS-120 for the staging upgrade. Akshay Sharma argued that the envelope has to carry a deterministic event_id from
+    day one, because without it no duplicate or loss claim is measurable; Sara Khan accepted this over a simpler UUID. That
+    argument is written up in the Atlas Event Envelope and Schema Registry Design page and later proved decisive during the
+    duplicate delivery investigation. Neha Kapoor raised that acknowledgement ordering in the reader is unspecified, and it
+    was deferred rather than resolved. Decisions: one replication slot per pipeline, Avro on the wire, and no customer demo
+    until staging runs PostgreSQL 16.'
+  - 'Add PostgreSQL logical replication CDC reader
+
+
+    Repository atlas-connectors, branch feature/ATLAS-101-cdc-reader, author Akshay Sharma, reviewers Maya Rao and Neha Kapoor.
+    Implements ATLAS-101 as agreed in the CDC reader design review on 2026-08-04 and documented in the Atlas PostgreSQL CDC
+    Reader Design page. Adds connectors/postgres/cdc_reader.py with pgoutput decoding, one slot per pipeline named atlas_slot_<pipeline>,
+    bounded reconnect backoff and a slot lag gauge in monitoring/metrics.py. Chart defaults for slot naming and backoff go
+    into deploy/helm/atlas/values.yaml. Review findings: Neha Kapoor flagged that the slot position is acknowledged immediately
+    after the producer call returns; Akshay Sharma noted this as acceptable for the first cut and opened a follow-up, which
+    became the duplicate delivery problem in ATLAS-103. Merged 2026-08-10 after staging soak against the newly upgraded PostgreSQL
+    16 from ATLAS-120.'
+- source_sentence: which commits changed acknowledgement order and ssl startup in the reader
+  sentences:
+  - 'dashboards/atlas-overview.json
+
+
+    Dashboard definition in the atlas-observability repository on main, the Observability Dashboard the Atlas on-call rotation
+    works from. Three rows: health with replication slot lag, slot_retained_bytes and pod readiness; throughput with events
+    per second per pipeline and commit-to-Kafka p50, p95 and p99; failure with retry attempts by class, Dead Letter Queue
+    depth and oldest unreplayed DLQ age. Created by Vikram Joshi in commit f0d3a87b52c4 through PR-007 under ATLAS-109 and
+    ATLAS-119, sourced from monitoring/metrics.py. It briefly carried two contradictory latency annotations, p95 under 5 seconds
+    and p99 under 10 seconds, between 2026-09-02 and 2026-09-04; ADR-005 replaced both with p95 under 3 seconds and p99 under
+    10 seconds. Every failure panel links to the matching runbook, and the slot alert threshold comes from ATLAS-115.'
+  - 'connectors/postgres/cdc_reader.py
+
+
+    Code file in the atlas-connectors repository on main, the entry point for PostgreSQL CDC in Project Atlas. Opens a logical
+    replication slot per pipeline, decodes pgoutput messages, builds envelopes through schemas/event_envelope.py and publishes
+    to Kafka. Change history: created by Akshay Sharma in commit a1f3c9d20e84 under ATLAS-101; acknowledgement ordering reversed
+    by commit 3f8a6c1b7e52 so the checkpoint commits first, fixing ATLAS-103; SSL start-up self-check added by commit e42a7f0c3b91
+    under ATLAS-111 after the staging outage; relation handling reworked by commit 2e6c95a1b07f under ATLAS-112 so a schema
+    generation change no longer shifts field positions. Primary reviewers over the six weeks: Neha Kapoor and Rohan Mehta.
+    Covered by tests/integration/test_postgres_cdc.py. Operational behaviour is documented in the CDC operations runbook.'
+  - 'Map envelope fields by name across schema generations
+
+
+    Repository atlas-connectors, branch fix/ATLAS-112-name-based-mapping, author Akshay Sharma, reviewers Neha Kapoor, Lina
+    Thomas and Sara Khan. Fixes ATLAS-112 and completes ATLAS-106, implementing the correction recorded in the Atlas Schema
+    Evolution Handling Design after the war room on 2026-08-26. Replaces positional tuple mapping in schemas/event_envelope.py
+    with name-based mapping keyed by relation OID plus a new required schema_generation field, and routes unmappable envelopes
+    to the Dead Letter Queue instead of halting the pipeline. Adds ADD COLUMN and DROP COLUMN under-load cases to tests/integration/test_postgres_cdc.py.
+    Because schema_generation is required, the Schema Registry could no longer stay on FULL compatibility, which is what forced
+    ADR-002 and ATLAS-122; the mode assertion moves into deploy/helm/atlas/values.yaml. Review findings: Lina Thomas required
+    the DROP COLUMN test to run with events flowing rather than paused. Merged 2026-08-31.'
+- source_sentence: what should a table-to-consumer impact query return
+  sentences:
+  - 'FalkorDB lineage graph for Atlas pipeline topology
+
+
+    Persist pipeline topology in FalkorDB so Nilus can answer questions such as which downstream consumers are affected when
+    a source table changes. Nodes are source tables, pipelines, topics and consumers; edges carry schema_version and last_seen_lsn.
+    Acceptance criteria: the graph is rebuilt from the control plane on boot, a table-to-consumer impact query returns in
+    under 200 ms, and the graph is updated on every registration from api/pipelines.py. Status history: todo 2026-08-17, blocked
+    2026-08-24 waiting on FalkorDB capacity from the platform team, in_progress 2026-09-08 with a reduced scope of read-only
+    lineage. Not in the Atlas 1.0 scope; carried as an accepted risk in the post-release risk register. Depends on ATLAS-116.
+    Reporter Akshay Sharma, assignee Akshay Sharma.'
+  - 'Project Atlas program retrospective and lessons learned
+
+
+    Agenda: close out six weeks of Project Atlas, ATLAS-101 through ATLAS-125, on the day Atlas 1.0 released. Maya Rao facilitated
+    with the whole team and framed it around what generalises beyond this project. Akshay Sharma offered the first lesson:
+    the deterministic event_id decided at Sprint 1 planning under ATLAS-102 is the only reason the duplicate delivery problem
+    was a number rather than a suspicion, so design for observability of correctness, not just health. Neha Kapoor offered
+    the second: both the duplicate events in ATLAS-103 and the latency regression in ATLAS-113 came from where a write sits
+    relative to an acknowledgement rather than from the write itself. Vikram Joshi and Lina Thomas returned to the falsification
+    lesson from the Sprint 2 retrospective, now embedded in the runbooks. Rohan Mehta added that a slim base image is a supply
+    chain change, which is what ATLAS-111 actually was. Sara Khan closed on documentation: the FULL versus BACKWARD dispute
+    in ATLAS-122 and the two competing latency SLOs each cost days purely because two documents disagreed and neither said
+    superseded. Carried forward: the risks in the post-release risk register and the thirty-day monitoring plan in ATLAS-125.'
+  - 'Atlas 1.0 release readiness checklist and go or no-go
+
+
+    Track every gate for the Atlas 1.0 release: CDC reader, schema evolution, retry and Dead Letter Queue processing, and
+    the Observability Dashboard, each with a passing test and an owned runbook. The original target of 2026-09-04 was set
+    at Sprint 3 planning; the date moved to 2026-09-11 after the load test rerun and the DLQ replay tooling in ATLAS-118 stayed
+    in review. Acceptance criteria: all four scope items demonstrated, four runbooks published, SLOs agreed, and remaining
+    risks explicitly accepted by Sara Khan and Maya Rao. Status history: todo 2026-08-31, in_progress 2026-09-04, done 2026-09-11
+    with a go decision and DLQ replay shipped as a manual procedure. Reporter Sara Khan, assignee Maya Rao.'
+- source_sentence: what retry policy replaced five attempts at 30 seconds
+  sentences:
+  - 'Retry Worker with jittered exponential backoff
+
+
+    Build workers/retry_worker.py to consume atlas.retry.v1, re-attempt delivery with exponential backoff and full jitter,
+    and hand exhausted events to the Dead Letter Queue. Acceptance criteria: transient Kafka or sink failures recover without
+    operator action, retry attempts are labelled by failure class in monitoring/metrics.py, and the backoff ceiling is configurable
+    through deploy/helm/atlas/values.yaml. Status history: todo 2026-08-17, in_progress 2026-08-25, in_review 2026-08-28,
+    done 2026-09-01. The first runbook draft documented five attempts capped at 30 seconds; the retry policy decision of 2026-08-26
+    replaced that with eight attempts and a 15 minute ceiling, and the runbook was updated. Depends on ATLAS-107. Reporter
+    Vikram Joshi, assignee Neha Kapoor. Evidence: PR-005 and commit b8740e2fd1a3.'
+  - 'Runbook: Dead Letter Queue Triage and Replay
+
+
+    Document kind: runbook. Owner: Neha Kapoor. Contributors: Vikram Joshi, Rohan Mehta. Status: active, first draft 2026-08-25,
+    corrected 2026-08-27, updated 2026-09-10. Scope: what to do when Dead Letter Queue depth alerts on the Observability Dashboard
+    under ATLAS-119. Step 1, classify: group atlas.dlq.v1 records by failure class. Decode failures usually mean a schema
+    change, so read the schema migration runbook next. Sink failures usually mean a downstream outage and often clear themselves
+    through the Retry Worker. Step 2, fix forward, never replay into a broken pipeline. Step 3, replay with atlasctl dlq replay,
+    filtered by pipeline and time window, always with --dry-run first. Replayed events keep their original event_id, so downstream
+    deduplication still holds, which is the property established by the checkpoint decision and ATLAS-103. Correction 2026-08-27:
+    the first draft of this runbook stated a retry budget of five attempts capped at 30 seconds. That is superseded by the
+    retry policy decision of eight attempts with a 15 minute ceiling under ATLAS-108. Update 2026-09-10: the replay CLI in
+    ATLAS-118 is still in review with open rate-limiting comments, so for Atlas 1.0 replay is performed manually using the
+    worked example from the 2026-08-26 regression, where 312 malformed envelopes were replayed in three batches of 104.'
+  - 'Alert on replication slot growth before disk pressure
+
+
+    A stalled Atlas consumer holds the PostgreSQL replication slot open and retained WAL grows until the primary runs out
+    of disk. Add a slot_retained_bytes gauge to monitoring/metrics.py and page SRE at 20 GB retained or 30 minutes of no slot
+    advance, whichever comes first. Acceptance criteria: the alert fired correctly during the 2026-08-19 SSL outage rehearsal,
+    the on-call runbook documents the drain procedure, and the gauge is visible on the Observability Dashboard. Status history:
+    todo 2026-08-17, in_progress 2026-08-20, done 2026-08-24. Depends on ATLAS-101; feeds ATLAS-109. Reporter Vikram Joshi,
+    assignee Vikram Joshi. Evidence: PR-007 panels and the dashboard on-call runbook.'
+model-index: null
+config:
+  architectures:
+  - Gemma3TextModel
+  model_type: gemma3_text
+  tokenizer_config:
+    bos_token: <bos>
+    eos_token: <eos>
+    pad_token: <pad>
+    unk_token: <unk>
+    use_default_system_prompt: false
+cardData:
+  tags:
+  - unsloth
+  - sentence-transformers
+  - sentence-similarity
+  - feature-extraction
+  - dense
+  - generated_from_trainer
+  - dataset_size:200
+  - loss:MultipleNegativesRankingLoss
+  base_model: Akshayram1/embeddinggemma-300m
+  widget:
+  - source_sentence: what is still blocking dead letter replay tooling
+    sentences:
+    - 'Dead Letter Queue replay tooling
+
+
+      Operators need a safe way to replay events out of the Dead Letter Queue after a fix ships. Add atlasctl dlq replay backed
+      by api/pipelines.py with filters on pipeline, failure class and time window, a dry-run mode that prints counts only,
+      and a rate limit so replay never starves live traffic. Acceptance criteria: replayed events keep their original event_id
+      so downstream deduplication still holds, every replay writes an audit record, and the runbook contains a worked example
+      from the 2026-08-26 regression. Status history: todo 2026-08-25, in_progress 2026-09-02, in_review 2026-09-09 with two
+      open review comments from Vikram Joshi about rate limiting. Depends on ATLAS-107, ATLAS-108 and ATLAS-116. Reporter
+      Vikram Joshi, assignee Neha Kapoor.'
+    - 'INC-002 Staging Ingestion Outage from SSL Verification Failure
+
+
+      Document kind: incident. Author: Vikram Joshi. Reviewers: Rohan Mehta, Maya Rao, Akshay Sharma. Status: active, written
+      2026-08-19, reviewed at the postmortem on 2026-08-21. Impact: all staging CDC ingestion down for 4 hours 11 minutes,
+      2026-08-19T06:12Z to 10:23Z. No customer data was affected; the pilot demo scheduled for that afternoon was postponed.
+      Timeline: 06:12Z connector pods begin crash-looping with certificate verify failed; 06:40Z Vikram Joshi opens ATLAS-110
+      and states on the bridge that the staging PostgreSQL server certificate has expired; 07:20Z a certificate renewal request
+      is filed with the platform team, which is the wrong remediation; 09:05Z Rohan Mehta checks openssl output and finds
+      the server certificate valid until 2027-01-14; 09:30Z he execs into a pod and finds /etc/ssl/certs/aster-internal-ca.pem
+      absent; 09:40Z ATLAS-111 is opened, tracing the loss to the slim base image adopted on 2026-08-14; 10:23Z a rebuilt
+      image restores ingestion. CONTRADICTION RESOLVED: the expired-server-certificate claim recorded in the first version
+      of ATLAS-110 is incorrect and superseded by ATLAS-111. Corrective actions: CA bundle baked in with a build-time fingerprint
+      assertion and a start-up self-check, per the SSL hardening decision, shipped in PR-004 with commit e42a7f0c3b91; the
+      SSL certificate runbook now mandates checking the client side before the server. 90 minutes of the outage are directly
+      attributable to diagnosing in the wrong order.'
+    - 'ADR-004 Retry Budget and Backoff Policy
+
+
+      Document kind: decision. Author: Vikram Joshi. Approvers: Neha Kapoor, Rohan Mehta, Maya Rao. Status: approved 2026-08-26,
+      implemented 2026-09-01 under ATLAS-108. Context: the first draft of the DLQ replay runbook stated a retry budget of
+      five attempts with a 30 second ceiling. During the retry and DLQ design review Vikram Joshi pointed out that Aster Labs
+      broker maintenance routinely takes eight to twelve minutes, so a 30 second ceiling would exhaust every retry and dump
+      an entire maintenance window into the Dead Letter Queue, turning a self-healing event into a manual replay of tens of
+      thousands of records. Neha Kapoor countered that a long ceiling delays the visibility of genuinely broken pipelines.
+      Decision: eight attempts with exponential backoff and full jitter, base 2 seconds, ceiling 15 minutes, giving roughly
+      45 minutes of tolerance; and, to answer the visibility concern, a pipeline with any event past attempt four for more
+      than five minutes raises a warning on the Observability Dashboard under ATLAS-119. The earlier five-attempt, 30-second
+      text in the runbook is superseded and the runbook was corrected on 2026-08-27. Implemented in workers/retry_worker.py
+      through PR-005 and commit b8740e2fd1a3, with ceilings configurable in deploy/helm/atlas/values.yaml.'
+  - source_sentence: what did sprint 1 planning commit to
+    sentences:
+    - 'Atlas Sprint 3 planning and release scoping
+
+
+      Agenda: plan the final sprint, 2026-08-31 to 2026-09-11, and set a release date for Atlas 1.0. Committed: ATLAS-109
+      and ATLAS-119 for the Observability Dashboard, ATLAS-123 for the 10k events per second load test, ATLAS-118 for Dead
+      Letter Queue replay tooling, ATLAS-113 once the load test quantifies the checkpoint cost, and ATLAS-124 to run the release
+      gates. Sara Khan proposed 2026-09-04 as the release date so the pilot could be onboarded the following week; Maya Rao
+      and Vikram Joshi both argued that a release date before the load test result is a guess. The date was set to 2026-09-04
+      anyway and moved to 2026-09-11 four days later once the first load test run failed on latency. Rohan Mehta reported
+      FalkorDB capacity had not materialised, so ATLAS-117 is descoped from 1.0 and continues read-only; Maya Rao accepted
+      this as a documented risk rather than a blocker. Akshay Sharma raised that ATLAS-121, the pilot backfill cutover, depends
+      on a customer maintenance window nobody controls. Decisions: four scope items are the release bar, everything else is
+      optional, and every gate needs a passing test and an owned runbook.'
+    - 'Atlas Sprint 1 planning
+
+
+      Agenda: scope Atlas Sprint 1, confirm the four Project Atlas commitments for the six week run, and name the risks. Maya
+      Rao opened with the shape of the release: PostgreSQL CDC, schema-evolution handling, retry and Dead Letter Queue processing,
+      and an Observability Dashboard. Sara Khan pushed for a pilot customer demo inside three weeks; Maya Rao pushed back
+      because staging still runs PostgreSQL 13 and cannot exercise logical replication at all. That became ATLAS-120, immediately
+      the top risk and, within a day, blocked on a platform maintenance window. Committed to the sprint: ATLAS-101 for the
+      CDC reader, ATLAS-102 for the canonical event envelope, ATLAS-105 for Schema Registry integration, ATLAS-114 for the
+      integration harness and ATLAS-120 for the staging upgrade. Akshay Sharma argued that the envelope has to carry a deterministic
+      event_id from day one, because without it no duplicate or loss claim is measurable; Sara Khan accepted this over a simpler
+      UUID. That argument is written up in the Atlas Event Envelope and Schema Registry Design page and later proved decisive
+      during the duplicate delivery investigation. Neha Kapoor raised that acknowledgement ordering in the reader is unspecified,
+      and it was deferred rather than resolved. Decisions: one replication slot per pipeline, Avro on the wire, and no customer
+      demo until staging runs PostgreSQL 16.'
+    - 'Add PostgreSQL logical replication CDC reader
+
+
+      Repository atlas-connectors, branch feature/ATLAS-101-cdc-reader, author Akshay Sharma, reviewers Maya Rao and Neha
+      Kapoor. Implements ATLAS-101 as agreed in the CDC reader design review on 2026-08-04 and documented in the Atlas PostgreSQL
+      CDC Reader Design page. Adds connectors/postgres/cdc_reader.py with pgoutput decoding, one slot per pipeline named atlas_slot_<pipeline>,
+      bounded reconnect backoff and a slot lag gauge in monitoring/metrics.py. Chart defaults for slot naming and backoff
+      go into deploy/helm/atlas/values.yaml. Review findings: Neha Kapoor flagged that the slot position is acknowledged immediately
+      after the producer call returns; Akshay Sharma noted this as acceptable for the first cut and opened a follow-up, which
+      became the duplicate delivery problem in ATLAS-103. Merged 2026-08-10 after staging soak against the newly upgraded
+      PostgreSQL 16 from ATLAS-120.'
+  - source_sentence: which commits changed acknowledgement order and ssl startup in the reader
+    sentences:
+    - 'dashboards/atlas-overview.json
+
+
+      Dashboard definition in the atlas-observability repository on main, the Observability Dashboard the Atlas on-call rotation
+      works from. Three rows: health with replication slot lag, slot_retained_bytes and pod readiness; throughput with events
+      per second per pipeline and commit-to-Kafka p50, p95 and p99; failure with retry attempts by class, Dead Letter Queue
+      depth and oldest unreplayed DLQ age. Created by Vikram Joshi in commit f0d3a87b52c4 through PR-007 under ATLAS-109 and
+      ATLAS-119, sourced from monitoring/metrics.py. It briefly carried two contradictory latency annotations, p95 under 5
+      seconds and p99 under 10 seconds, between 2026-09-02 and 2026-09-04; ADR-005 replaced both with p95 under 3 seconds
+      and p99 under 10 seconds. Every failure panel links to the matching runbook, and the slot alert threshold comes from
+      ATLAS-115.'
+    - 'connectors/postgres/cdc_reader.py
+
+
+      Code file in the atlas-connectors repository on main, the entry point for PostgreSQL CDC in Project Atlas. Opens a logical
+      replication slot per pipeline, decodes pgoutput messages, builds envelopes through schemas/event_envelope.py and publishes
+      to Kafka. Change history: created by Akshay Sharma in commit a1f3c9d20e84 under ATLAS-101; acknowledgement ordering
+      reversed by commit 3f8a6c1b7e52 so the checkpoint commits first, fixing ATLAS-103; SSL start-up self-check added by
+      commit e42a7f0c3b91 under ATLAS-111 after the staging outage; relation handling reworked by commit 2e6c95a1b07f under
+      ATLAS-112 so a schema generation change no longer shifts field positions. Primary reviewers over the six weeks: Neha
+      Kapoor and Rohan Mehta. Covered by tests/integration/test_postgres_cdc.py. Operational behaviour is documented in the
+      CDC operations runbook.'
+    - 'Map envelope fields by name across schema generations
+
+
+      Repository atlas-connectors, branch fix/ATLAS-112-name-based-mapping, author Akshay Sharma, reviewers Neha Kapoor, Lina
+      Thomas and Sara Khan. Fixes ATLAS-112 and completes ATLAS-106, implementing the correction recorded in the Atlas Schema
+      Evolution Handling Design after the war room on 2026-08-26. Replaces positional tuple mapping in schemas/event_envelope.py
+      with name-based mapping keyed by relation OID plus a new required schema_generation field, and routes unmappable envelopes
+      to the Dead Letter Queue instead of halting the pipeline. Adds ADD COLUMN and DROP COLUMN under-load cases to tests/integration/test_postgres_cdc.py.
+      Because schema_generation is required, the Schema Registry could no longer stay on FULL compatibility, which is what
+      forced ADR-002 and ATLAS-122; the mode assertion moves into deploy/helm/atlas/values.yaml. Review findings: Lina Thomas
+      required the DROP COLUMN test to run with events flowing rather than paused. Merged 2026-08-31.'
+  - source_sentence: what should a table-to-consumer impact query return
+    sentences:
+    - 'FalkorDB lineage graph for Atlas pipeline topology
+
+
+      Persist pipeline topology in FalkorDB so Nilus can answer questions such as which downstream consumers are affected
+      when a source table changes. Nodes are source tables, pipelines, topics and consumers; edges carry schema_version and
+      last_seen_lsn. Acceptance criteria: the graph is rebuilt from the control plane on boot, a table-to-consumer impact
+      query returns in under 200 ms, and the graph is updated on every registration from api/pipelines.py. Status history:
+      todo 2026-08-17, blocked 2026-08-24 waiting on FalkorDB capacity from the platform team, in_progress 2026-09-08 with
+      a reduced scope of read-only lineage. Not in the Atlas 1.0 scope; carried as an accepted risk in the post-release risk
+      register. Depends on ATLAS-116. Reporter Akshay Sharma, assignee Akshay Sharma.'
+    - 'Project Atlas program retrospective and lessons learned
+
+
+      Agenda: close out six weeks of Project Atlas, ATLAS-101 through ATLAS-125, on the day Atlas 1.0 released. Maya Rao facilitated
+      with the whole team and framed it around what generalises beyond this project. Akshay Sharma offered the first lesson:
+      the deterministic event_id decided at Sprint 1 planning under ATLAS-102 is the only reason the duplicate delivery problem
+      was a number rather than a suspicion, so design for observability of correctness, not just health. Neha Kapoor offered
+      the second: both the duplicate events in ATLAS-103 and the latency regression in ATLAS-113 came from where a write sits
+      relative to an acknowledgement rather than from the write itself. Vikram Joshi and Lina Thomas returned to the falsification
+      lesson from the Sprint 2 retrospective, now embedded in the runbooks. Rohan Mehta added that a slim base image is a
+      supply chain change, which is what ATLAS-111 actually was. Sara Khan closed on documentation: the FULL versus BACKWARD
+      dispute in ATLAS-122 and the two competing latency SLOs each cost days purely because two documents disagreed and neither
+      said superseded. Carried forward: the risks in the post-release risk register and the thirty-day monitoring plan in
+      ATLAS-125.'
+    - 'Atlas 1.0 release readiness checklist and go or no-go
+
+
+      Track every gate for the Atlas 1.0 release: CDC reader, schema evolution, retry and Dead Letter Queue processing, and
+      the Observability Dashboard, each with a passing test and an owned runbook. The original target of 2026-09-04 was set
+      at Sprint 3 planning; the date moved to 2026-09-11 after the load test rerun and the DLQ replay tooling in ATLAS-118
+      stayed in review. Acceptance criteria: all four scope items demonstrated, four runbooks published, SLOs agreed, and
+      remaining risks explicitly accepted by Sara Khan and Maya Rao. Status history: todo 2026-08-31, in_progress 2026-09-04,
+      done 2026-09-11 with a go decision and DLQ replay shipped as a manual procedure. Reporter Sara Khan, assignee Maya Rao.'
+  - source_sentence: what retry policy replaced five attempts at 30 seconds
+    sentences:
+    - 'Retry Worker with jittered exponential backoff
+
+
+      Build workers/retry_worker.py to consume atlas.retry.v1, re-attempt delivery with exponential backoff and full jitter,
+      and hand exhausted events to the Dead Letter Queue. Acceptance criteria: transient Kafka or sink failures recover without
+      operator action, retry attempts are labelled by failure class in monitoring/metrics.py, and the backoff ceiling is configurable
+      through deploy/helm/atlas/values.yaml. Status history: todo 2026-08-17, in_progress 2026-08-25, in_review 2026-08-28,
+      done 2026-09-01. The first runbook draft documented five attempts capped at 30 seconds; the retry policy decision of
+      2026-08-26 replaced that with eight attempts and a 15 minute ceiling, and the runbook was updated. Depends on ATLAS-107.
+      Reporter Vikram Joshi, assignee Neha Kapoor. Evidence: PR-005 and commit b8740e2fd1a3.'
+    - 'Runbook: Dead Letter Queue Triage and Replay
+
+
+      Document kind: runbook. Owner: Neha Kapoor. Contributors: Vikram Joshi, Rohan Mehta. Status: active, first draft 2026-08-25,
+      corrected 2026-08-27, updated 2026-09-10. Scope: what to do when Dead Letter Queue depth alerts on the Observability
+      Dashboard under ATLAS-119. Step 1, classify: group atlas.dlq.v1 records by failure class. Decode failures usually mean
+      a schema change, so read the schema migration runbook next. Sink failures usually mean a downstream outage and often
+      clear themselves through the Retry Worker. Step 2, fix forward, never replay into a broken pipeline. Step 3, replay
+      with atlasctl dlq replay, filtered by pipeline and time window, always with --dry-run first. Replayed events keep their
+      original event_id, so downstream deduplication still holds, which is the property established by the checkpoint decision
+      and ATLAS-103. Correction 2026-08-27: the first draft of this runbook stated a retry budget of five attempts capped
+      at 30 seconds. That is superseded by the retry policy decision of eight attempts with a 15 minute ceiling under ATLAS-108.
+      Update 2026-09-10: the replay CLI in ATLAS-118 is still in review with open rate-limiting comments, so for Atlas 1.0
+      replay is performed manually using the worked example from the 2026-08-26 regression, where 312 malformed envelopes
+      were replayed in three batches of 104.'
+    - 'Alert on replication slot growth before disk pressure
+
+
+      A stalled Atlas consumer holds the PostgreSQL replication slot open and retained WAL grows until the primary runs out
+      of disk. Add a slot_retained_bytes gauge to monitoring/metrics.py and page SRE at 20 GB retained or 30 minutes of no
+      slot advance, whichever comes first. Acceptance criteria: the alert fired correctly during the 2026-08-19 SSL outage
+      rehearsal, the on-call runbook documents the drain procedure, and the gauge is visible on the Observability Dashboard.
+      Status history: todo 2026-08-17, in_progress 2026-08-20, done 2026-08-24. Depends on ATLAS-101; feeds ATLAS-109. Reporter
+      Vikram Joshi, assignee Vikram Joshi. Evidence: PR-007 panels and the dashboard on-call runbook.'
+  pipeline_tag: sentence-similarity
+  library_name: sentence-transformers
+siblings:
+- rfilename: .gitattributes
+- rfilename: 1_Pooling/config.json
+- rfilename: 2_Dense/config.json
+- rfilename: 2_Dense/model.safetensors
+- rfilename: 3_Dense/config.json
+- rfilename: 3_Dense/model.safetensors
+- rfilename: README.md
+- rfilename: added_tokens.json
+- rfilename: config.json
+- rfilename: config_sentence_transformers.json
+- rfilename: model.safetensors
+- rfilename: modules.json
+- rfilename: sentence_bert_config.json
+- rfilename: special_tokens_map.json
+- rfilename: tokenizer.json
+- rfilename: tokenizer.model
+- rfilename: tokenizer_config.json
+spaces: []
+createdAt: '2026-09-25T10:16:39.000Z'
+safetensors:
+  parameters:
+    F32: 302863104
+  total: 302863104
+usedStorage: 1258997766
+downloadsAllTime: 0
+inferenceProviderMapping: {}
+configJson:
+  _sliding_window_pattern: 6
+  architectures:
+  - Gemma3TextModel
+  attention_bias: false
+  attention_dropout: 0.0
+  attn_logit_softcapping: null
+  bos_token_id: 2
+  torch_dtype: float32
+  eos_token_id: 1
+  final_logit_softcapping: null
+  head_dim: 256
+  hidden_activation: gelu_pytorch_tanh
+  hidden_size: 768
+  initializer_range: 0.02
+  intermediate_size: 1152
+  layer_types:
+  - sliding_attention
+  - sliding_attention
+  - sliding_attention
+  - sliding_attention
+  - sliding_attention
+  - full_attention
+  - sliding_attention
+  - sliding_attention
+  - sliding_attention
+  - sliding_attention
+  - sliding_attention
+  - full_attention
+  - sliding_attention
+  - sliding_attention
+  - sliding_attention
+  - sliding_attention
+  - sliding_attention
+  - full_attention
+  - sliding_attention
+  - sliding_attention
+  - sliding_attention
+  - sliding_attention
+  - sliding_attention
+  - full_attention
+  max_position_embeddings: 2048
+  model_type: gemma3_text
+  num_attention_heads: 3
+  num_hidden_layers: 24
+  num_key_value_heads: 1
+  pad_token_id: 0
+  query_pre_attn_scalar: 256
+  rms_norm_eps: 1.0e-06
+  rope_local_base_freq: 10000.0
+  rope_scaling: null
+  rope_theta: 1000000.0
+  sliding_window: 512
+  use_bidirectional_attention: true
+  use_cache: true
+  vocab_size: 262144
+onnxFiles: {}
+safetensorsSizeMb: 1220.9
+approxSizeMb: 1211.5
+fetchedAt: '2026-09-26T08:30:04.000Z'
